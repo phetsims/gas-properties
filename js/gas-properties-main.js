@@ -31,7 +31,7 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var screens = [ new IntroScreen(), new KMTScreen(), new WorkScreen() ];
+    var screens = [ new IntroScreen(), new WorkScreen(), new KMTScreen() ];
     var sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();
   } );
