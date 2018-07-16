@@ -11,12 +11,26 @@ define( function( require ) {
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var StringProperty = require( 'AXON/StringProperty' );
+
+  // constants
+  var HOLD_CONSTANT_VALUES = [
+    'nothing',
+    'volume',
+    'temperature',
+    'pressureT', // change temperature (T) to maintain constant pressure
+    'pressureV' // change volume (V) to maintain constant pressure
+  ];
 
   /**
    * @constructor
    */
   function IntroModel() {
-    //TODO
+
+    // @public
+    this.holdConstantProperty = new StringProperty( 'nothing', {
+      validValues: HOLD_CONSTANT_VALUES
+    } );
   }
 
   gasProperties.register( 'IntroModel', IntroModel );
@@ -25,10 +39,9 @@ define( function( require ) {
 
     // @public resets the model
     reset: function() {
-      //TODO reset things here
+      this.holdConstantProperty.reset();
     },
 
-    //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.
     // @public
     step: function( dt ) {
       //TODO Handle model animation here.

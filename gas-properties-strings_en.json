@@ -10,5 +10,23 @@
   },
   "screen.kmt": {
     "value": "KMT"
+  },
+  "holdConstant": {
+    "value": "Hold Constant"
+  },
+  "holdConstant.nothing": {
+    "value": "Nothing"
+  },
+  "holdConstant.volume": {
+    "value": "Volume (V)"
+  },
+  "holdConstant.temperature": {
+    "value": "Temperature (T)"
+  },
+  "holdConstant.pressureT": {
+    "value": "Pressure (\u2195T)"
+  },
+  "holdConstant.pressureV": {
+    "value": "Pressure (\u2191\u2193V)"
   }
 }

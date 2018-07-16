@@ -10,11 +10,11 @@ define( function( require ) {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  var HoldConstantPanel = require( 'GAS_PROPERTIES/intro/view/HoldConstantPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   /**
    * @param {IntroModel} model
@@ -24,20 +24,19 @@ define( function( require ) {
 
     ScreenView.call( this );
 
-    //TODO delete this
-    var underConstruction = new Text( 'Intro: under construction', {
-      font: new PhetFont( 35 ),
-      center: this.layoutBounds.center
+    var holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
+      right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
-    this.addChild( underConstruction );
+    this.addChild( holdConstantPanel );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
       },
-      right: this.layoutBounds.maxX - 10,
-      bottom: this.layoutBounds.maxY - 10
+      right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+      bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
     this.addChild( resetAllButton );
   }

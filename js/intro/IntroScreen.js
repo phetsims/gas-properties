@@ -26,7 +26,7 @@ define( function( require ) {
 
     var options = {
       name: screenIntroString,
-      backgroundColorProperty: new Property( 'white' )
+      backgroundColorProperty: new Property( 'black' )
     };
 
     Screen.call( this,

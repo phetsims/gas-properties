@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -36,8 +37,8 @@ define( function( require ) {
       listener: function() {
         model.reset();
       },
-      right:  this.layoutBounds.maxX - 10,
-      bottom: this.layoutBounds.maxY - 10
+      right:  this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+      bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
     this.addChild( resetAllButton );
   }
