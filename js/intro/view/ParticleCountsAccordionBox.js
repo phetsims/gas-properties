@@ -17,6 +17,7 @@ define( function( require ) {
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
@@ -73,7 +74,11 @@ define( function( require ) {
             value: numberOfHeavyParticlesProperty.range.max,
             label: new Text( numberOfHeavyParticlesProperty.range.max, majorTickOptions )
           }
-        ]
+        ],
+        constrainValue: function( value ) {
+          // constrain to multiples of a specific interval
+          return Util.roundToInterval( value, GasPropertiesConstants.HEAVY_PARTICLES_THUMB_INTERVAL );
+        }
       } ) );
 
     var lightControl = new NumberControl( lightString,
@@ -90,7 +95,11 @@ define( function( require ) {
             value: numberOfLightParticlesProperty.range.max,
             label: new Text( numberOfLightParticlesProperty.range.max, majorTickOptions )
           }
-        ]
+        ],
+        constrainValue: function( value ) {
+          // constrain to multiples of a specific interval
+          return Util.roundToInterval( value, GasPropertiesConstants.LIGHT_PARTICLES_THUMB_INTERVAL );
+        }
       } ));
 
     var content = new VBox( {

@@ -20,6 +20,8 @@ define( function( require ) {
 
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 100, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 100, 0 ),
+    HEAVY_PARTICLES_THUMB_INTERVAL: 10,
+    LIGHT_PARTICLES_THUMB_INTERVAL: 10,
 
     TITLE_FONT: new PhetFont( { size: 22, weight: 'bold' } )
   };
