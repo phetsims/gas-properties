@@ -31,12 +31,14 @@ define( function( require ) {
     var particleCountsExpandedProperty = new BooleanProperty( false );
     var sizeVisibleProperty = new BooleanProperty( false );
 
+    // Hold Constant panel
     var holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
     this.addChild( holdConstantPanel );
 
+    // Particle Counts accordion box
     var particleCountsAccordionBox = new ParticleCountsAccordionBox(
       model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
         expandedProperty: particleCountsExpandedProperty,
@@ -45,14 +47,15 @@ define( function( require ) {
       } );
     this.addChild( particleCountsAccordionBox );
 
-    var particleCountsExpanded = particleCountsExpandedProperty.value;
-    particleCountsExpandedProperty.value = true;
+    // Size checkbox, positioned below the *expanded* Particle Counts accordion box
+    var particleCountsExpanded = particleCountsExpandedProperty.value; // save state
+    particleCountsExpandedProperty.value = true; // expand for positioning
     var sizeCheckbox = new SizeCheckbox( sizeVisibleProperty, {
       left: particleCountsAccordionBox.left,
       top: particleCountsAccordionBox.bottom + 15
     } );
     this.addChild( sizeCheckbox );
-    particleCountsExpandedProperty.value = particleCountsExpanded;
+    particleCountsExpandedProperty.value = particleCountsExpanded; // restore state
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
