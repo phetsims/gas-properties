@@ -17,6 +17,7 @@ define( function( require ) {
   var ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/intro/view/ParticleCountsAccordionBox' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SizeCheckbox = require( 'GAS_PROPERTIES/intro/view/SizeCheckbox' );
 
   /**
    * @param {IntroModel} model
@@ -28,6 +29,7 @@ define( function( require ) {
 
     // view-specific Properties
     var particleCountsExpandedProperty = new BooleanProperty( false );
+    var sizeVisibleProperty = new BooleanProperty( false );
 
     var holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
@@ -42,6 +44,15 @@ define( function( require ) {
         top: holdConstantPanel.bottom + 15
       } );
     this.addChild( particleCountsAccordionBox );
+
+    var particleCountsExpanded = particleCountsExpandedProperty.value;
+    particleCountsExpandedProperty.value = true;
+    var sizeCheckbox = new SizeCheckbox( sizeVisibleProperty, {
+      left: particleCountsAccordionBox.left,
+      top: particleCountsAccordionBox.bottom + 15
+    } );
+    this.addChild( sizeCheckbox );
+    particleCountsExpandedProperty.value = particleCountsExpanded;
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
