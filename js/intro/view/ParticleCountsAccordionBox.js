@@ -51,8 +51,8 @@ define( function( require ) {
       titleFont: new PhetFont( 20 ),
       titleFill: 'white',
       valueFont: new PhetFont( 20 ),
-      majorTickStroke: GasPropertiesColors.FOREGROUND_COLOR
-      //TODO Design doc specifies yet-another layoutFunction. Is it needed? This one is closest.
+      majorTickStroke: GasPropertiesColors.FOREGROUND_COLOR,
+      layoutFunction: NumberControl.createLayoutFunction4()
     };
 
     var majorTickOptions = {
