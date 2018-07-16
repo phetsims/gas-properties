@@ -12,6 +12,8 @@ define( function( require ) {
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var IntroScreen = require( 'GAS_PROPERTIES/intro/IntroScreen' );
+  var KMTScreen = require( 'GAS_PROPERTIES/kmt/KMTScreen' );
+  var WorkScreen = require( 'GAS_PROPERTIES/work/WorkScreen' );
 
   // strings
   var gasPropertiesTitleString = require( 'string!GAS_PROPERTIES/gas-properties.title' );
@@ -29,7 +31,8 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var sim = new Sim( gasPropertiesTitleString, [ new IntroScreen() ], simOptions );
+    var screens = [ new IntroScreen(), new KMTScreen(), new WorkScreen() ];
+    var sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();
   } );
 } );

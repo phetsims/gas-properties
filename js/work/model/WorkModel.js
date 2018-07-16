@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Model for the 'Intro' screen.
+ * Model for the 'Work' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,19 +9,19 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
   /**
    * @constructor
    */
-  function IntroModel() {
+  function WorkModel() {
     //TODO
   }
 
-  gasProperties.register( 'IntroModel', IntroModel );
+  gasProperties.register( 'WorkModel', WorkModel );
 
-  return inherit( Object, IntroModel, {
+  return inherit( Object, WorkModel, {
 
     // @public resets the model
     reset: function() {

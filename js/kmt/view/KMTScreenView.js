@@ -1,8 +1,8 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * The view for the 'Intro' screen.
- *
+ * The view for the 'KMT' screen.
+ * 
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
@@ -17,15 +17,15 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   /**
-   * @param {IntroModel} model
+   * @param {KMTModel} model
    * @constructor
    */
-  function IntroScreenView( model ) {
+  function KMTScreenView( model ) {
 
     ScreenView.call( this );
 
     //TODO delete this
-    var underConstruction = new Text( 'Intro: under construction', {
+    var underConstruction = new Text( 'KMT: under construction', {
       font: new PhetFont( 35 ),
       center: this.layoutBounds.center
     } );
@@ -36,15 +36,15 @@ define( function( require ) {
       listener: function() {
         model.reset();
       },
-      right: this.layoutBounds.maxX - 10,
+      right:  this.layoutBounds.maxX - 10,
       bottom: this.layoutBounds.maxY - 10
     } );
     this.addChild( resetAllButton );
   }
 
-  gasProperties.register( 'IntroScreenView', IntroScreenView );
+  gasProperties.register( 'KMTScreenView', KMTScreenView );
 
-  return inherit( ScreenView, IntroScreenView, {
+  return inherit( ScreenView, KMTScreenView, {
 
     //TODO Called by the animation loop. Optional, so if your view has no animation, please delete this.
     // @public

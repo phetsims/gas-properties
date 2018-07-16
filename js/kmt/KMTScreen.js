@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * The 'Intro' screen.
+ * The 'Work' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -11,32 +11,32 @@ define( function( require ) {
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var IntroModel = require( 'GAS_PROPERTIES/intro/model/IntroModel' );
-  var IntroScreenView = require( 'GAS_PROPERTIES/intro/view/IntroScreenView' );
+  var KMTModel = require( 'GAS_PROPERTIES/kmt/model/KMTModel' );
+  var KMTScreenView = require( 'GAS_PROPERTIES/kmt/view/KMTScreenView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenIntroString = require( 'string!GAS_PROPERTIES/screen.intro' );
+  var screenKmtString = require( 'string!GAS_PROPERTIES/screen.kmt' );
 
   /**
    * @constructor
    */
-  function IntroScreen() {
+  function KMTScreen() {
 
     var options = {
-      name: screenIntroString,
+      name: screenKmtString,
       backgroundColorProperty: new Property( 'white' )
     };
 
     Screen.call( this,
-      function() { return new IntroModel(); },
-      function( model ) { return new IntroScreenView( model ); },
+      function() { return new KMTModel(); },
+      function( model ) { return new KMTScreenView( model ); },
       options
     );
   }
 
-  gasProperties.register( 'IntroScreen', IntroScreen );
+  gasProperties.register( 'KMTScreen', KMTScreen );
 
-  return inherit( Screen, IntroScreen );
+  return inherit( Screen, KMTScreen );
 } );

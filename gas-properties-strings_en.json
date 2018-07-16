@@ -1,5 +1,14 @@
 {
   "gas-properties.title": {
     "value": "Gas Properties"
+  },
+  "screen.intro": {
+    "value": "Intro"
+  },
+  "screen.work": {
+    "value": "Work"
+  },
+  "screen.kmt": {
+    "value": "KMT"
   }
 }
