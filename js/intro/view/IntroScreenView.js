@@ -57,12 +57,5 @@ define( function( require ) {
 
   gasProperties.register( 'IntroScreenView', IntroScreenView );
 
-  return inherit( ScreenView, IntroScreenView, {
-
-    //TODO Called by the animation loop. Optional, so if your view has no animation, please delete this.
-    // @public
-    step: function( dt ) {
-      //TODO Handle view animation here.
-    }
-  } );
+  return inherit( ScreenView, IntroScreenView );
 } );
