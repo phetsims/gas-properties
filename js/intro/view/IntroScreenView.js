@@ -62,6 +62,7 @@ define( function( require ) {
       listener: function() {
         model.reset();
         particleCountsExpandedProperty.reset();
+        sizeVisibleProperty.reset();
       },
       right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
