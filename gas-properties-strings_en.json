@@ -28,5 +28,17 @@
   },
   "holdConstant.pressureV": {
     "value": "Pressure (\u2191\u2193V)"
+  },
+  "particleCounts": {
+    "value": "Particle Counts"
+  },
+  "heavy": {
+    "value": "Heavy:"
+  },
+  "light": {
+    "value": "Light:"
+  },
+  "size": {
+    "value": "Size"
   }
 }

@@ -11,6 +11,8 @@ define( function( require ) {
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
+  var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -35,10 +37,11 @@ define( function( require ) {
     options = _.extend( {
 
       // Panel options
+      align: 'left',
       xMargin: 30,
       yMargin: 20,
-      fill: 'black',
-      stroke: 'white'
+      fill: GasPropertiesColors.BACKGROUND_COLOR,
+      stroke: GasPropertiesColors.FOREGROUND_COLOR
 
     }, options );
 
@@ -49,12 +52,12 @@ define( function( require ) {
 
     var textOptions = {
       font: new PhetFont( 20 ),
-      fill: 'white'
+      fill: GasPropertiesColors.FOREGROUND_COLOR
     };
 
     var titleNode = new Text( holdConstantString, {
-      font: new PhetFont( { size: 22, weight: 'bold' } ),
-      fill: 'white'
+      font: GasPropertiesConstants.TITLE_FONT,
+      fill: GasPropertiesColors.FOREGROUND_COLOR
     } );
 
     var nothingRadioButton = new AquaRadioButton( holdConstantProperty, 'nothing',

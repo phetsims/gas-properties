@@ -10,7 +10,9 @@ define( function( require ) {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var StringProperty = require( 'AXON/StringProperty' );
 
   // constants
@@ -27,9 +29,21 @@ define( function( require ) {
    */
   function IntroModel() {
 
-    // @public
+    // @public the quantity to hold constant
     this.holdConstantProperty = new StringProperty( 'nothing', {
       validValues: HOLD_CONSTANT_VALUES
+    } );
+
+    // @public the number of heavy particles in the box
+    this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
+      numberType: 'Integer',
+      range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE
+    } );
+
+    // @public the number of light particles in the box
+    this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
+      numberType: 'Integer',
+      range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
     } );
   }
 
@@ -40,6 +54,8 @@ define( function( require ) {
     // @public resets the model
     reset: function() {
       this.holdConstantProperty.reset();
+      this.numberOfHeavyParticlesProperty.reset();
+      this.numberOfLightParticlesProperty.reset();
     },
 
     // @public
