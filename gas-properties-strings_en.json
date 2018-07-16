@@ -27,7 +27,7 @@
     "value": "Pressure (\u2195T)"
   },
   "holdConstant.pressureV": {
-    "value": "Pressure (\u2191\u2193V)"
+    "value": "Pressure (\u2195V)"
   },
   "particleCounts": {
     "value": "Particle Counts"
