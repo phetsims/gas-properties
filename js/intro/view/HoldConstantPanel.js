@@ -13,7 +13,9 @@ define( function( require ) {
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -36,10 +38,13 @@ define( function( require ) {
 
     options = _.extend( {
 
+      fixedWidth: 300,
+
       // Panel options
       align: 'left',
-      xMargin: 30,
-      yMargin: 20,
+      xMargin: GasPropertiesConstants.PANEL_X_MARGIN,
+      yMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
+      cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
       fill: GasPropertiesColors.BACKGROUND_COLOR,
       stroke: GasPropertiesColors.FOREGROUND_COLOR
 
@@ -93,7 +98,9 @@ define( function( require ) {
       ]
     } );
 
-    Panel.call( this, content, options );
+    var strut = new HStrut( options.fixedWidth - ( 2 * options.xMargin ) );
+
+    Panel.call( this, new Node( { children: [ strut, content ] } ), options );
   }
 
   gasProperties.register( 'HoldConstantPanel', HoldConstantPanel );

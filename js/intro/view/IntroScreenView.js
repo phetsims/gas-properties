@@ -19,6 +19,9 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SizeCheckbox = require( 'GAS_PROPERTIES/intro/view/SizeCheckbox' );
 
+  // constants
+  var PANEL_WIDTH = 300;
+
   /**
    * @param {IntroModel} model
    * @constructor
@@ -33,6 +36,7 @@ define( function( require ) {
 
     // Hold Constant panel
     var holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
+      fixedWidth: PANEL_WIDTH,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
@@ -41,6 +45,7 @@ define( function( require ) {
     // Particle Counts accordion box
     var particleCountsAccordionBox = new ParticleCountsAccordionBox(
       model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
+        fixedWidth: PANEL_WIDTH,
         expandedProperty: particleCountsExpandedProperty,
         right: holdConstantPanel.right,
         top: holdConstantPanel.bottom + 15

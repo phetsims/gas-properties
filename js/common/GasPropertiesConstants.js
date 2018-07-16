@@ -23,7 +23,10 @@ define( function( require ) {
     HEAVY_PARTICLES_THUMB_INTERVAL: 10,
     LIGHT_PARTICLES_THUMB_INTERVAL: 10,
 
-    TITLE_FONT: new PhetFont( { size: 22, weight: 'bold' } )
+    TITLE_FONT: new PhetFont( { size: 22, weight: 'bold' } ),
+    PANEL_CORNER_RADIUS: 5,
+    PANEL_X_MARGIN: 20,
+    PANEL_Y_MARGIN: 15
   };
 
   gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );

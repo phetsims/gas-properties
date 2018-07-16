@@ -13,7 +13,9 @@ define( function( require ) {
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -35,7 +37,14 @@ define( function( require ) {
 
     options = _.extend( {
 
+      fixedWidth: 300,
+
       // AccordionBox options
+      contentXMargin: GasPropertiesConstants.PANEL_X_MARGIN,
+      contentYMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
+      buttonXMargin: 10,
+      buttonYMargin: 10,
+      cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
       titleNode: new Text( particleCountsString, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.FOREGROUND_COLOR
@@ -46,6 +55,9 @@ define( function( require ) {
       stroke: GasPropertiesColors.FOREGROUND_COLOR
 
     }, options );
+
+    assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
+    options.maxWidth = options.fixedWidth;
 
     var numberControlOptions = {
       titleFont: new PhetFont( 20 ),
@@ -108,7 +120,9 @@ define( function( require ) {
       children: [ heavyControl, lightControl ]
     } );
 
-    AccordionBox.call( this, content, options );
+    var strut = new HStrut( options.fixedWidth - ( 2 * options.contentXMargin ) );
+
+    AccordionBox.call( this, new Node( { children: [ strut, content ] }), options );
   }
 
   gasProperties.register( 'ParticleCountsAccordionBox', ParticleCountsAccordionBox );
