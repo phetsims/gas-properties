@@ -34,13 +34,13 @@ define( function( require ) {
       validValues: HOLD_CONSTANT_VALUES
     } );
 
-    // @public the number of heavy particles in the box
+    // @public the number of heavy particles in the container
     this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE
     } );
 
-    // @public the number of light particles in the box
+    // @public the number of light particles in the container
     this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
