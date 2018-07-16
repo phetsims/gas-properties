@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var KMTModel = require( 'GAS_PROPERTIES/kmt/model/KMTModel' );
   var KMTScreenView = require( 'GAS_PROPERTIES/kmt/view/KMTScreenView' );
@@ -26,7 +27,7 @@ define( function( require ) {
 
     var options = {
       name: screenKmtString,
-      backgroundColorProperty: new Property( 'white' )
+      backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
     };
 
     Screen.call( this,

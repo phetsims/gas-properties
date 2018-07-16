@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -28,6 +29,7 @@ define( function( require ) {
     //TODO delete this
     var underConstruction = new Text( 'KMT: under construction', {
       font: new PhetFont( 35 ),
+      fill: GasPropertiesColors.FOREGROUND_COLOR,
       center: this.layoutBounds.center
     } );
     this.addChild( underConstruction );

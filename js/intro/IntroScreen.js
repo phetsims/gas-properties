@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var IntroModel = require( 'GAS_PROPERTIES/intro/model/IntroModel' );
   var IntroScreenView = require( 'GAS_PROPERTIES/intro/view/IntroScreenView' );
@@ -26,7 +27,7 @@ define( function( require ) {
 
     var options = {
       name: screenIntroString,
-      backgroundColorProperty: new Property( 'black' )
+      backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
     };
 
     Screen.call( this,

@@ -9,10 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var WorkModel = require( 'GAS_PROPERTIES/work/model/WorkModel' );
   var WorkScreenView = require( 'GAS_PROPERTIES/work/view/WorkScreenView' );
 
@@ -26,7 +27,7 @@ define( function( require ) {
 
     var options = {
       name: screenWorkString,
-      backgroundColorProperty: new Property( 'white' )
+      backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
     };
 
     Screen.call( this,
