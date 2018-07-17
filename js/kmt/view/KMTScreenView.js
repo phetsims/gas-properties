@@ -27,7 +27,7 @@ define( function( require ) {
     ScreenView.call( this );
 
     //TODO delete this
-    var underConstruction = new Text( 'KMT: under construction', {
+    var underConstruction = new Text( 'KMT - under construction', {
       font: new PhetFont( 35 ),
       fill: GasPropertiesColors.FOREGROUND_COLOR,
       center: this.layoutBounds.center
