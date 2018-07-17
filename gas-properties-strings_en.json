@@ -23,11 +23,11 @@
   "holdConstant.temperature": {
     "value": "Temperature (T)"
   },
-  "holdConstant.pressureT": {
-    "value": "Pressure \u2014 \u2195T"
-  },
   "holdConstant.pressureV": {
     "value": "Pressure \u2014 \u2195V"
+  },
+  "holdConstant.pressureT": {
+    "value": "Pressure \u2014 \u2195T"
   },
   "particleCounts": {
     "value": "Particle Counts"

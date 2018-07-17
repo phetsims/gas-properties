@@ -77,12 +77,12 @@ define( function( require ) {
       new Text( holdConstantTemperatureString, textOptions ),
       radioButtonOptions );
 
-    var pressureTRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureT',
-      new Text( holdConstantPressureTString, textOptions ),
-      radioButtonOptions );
-
     var pressureVRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureV',
       new Text( holdConstantPressureVString, textOptions ),
+      radioButtonOptions );
+
+    var pressureTRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureT',
+      new Text( holdConstantPressureTString, textOptions ),
       radioButtonOptions );
 
     var content = new VBox( {
@@ -93,8 +93,8 @@ define( function( require ) {
         nothingRadioButton,
         volumeRadioButton,
         temperatureRadioButton,
-        pressureTRadioButton,
-        pressureVRadioButton
+        pressureVRadioButton,
+        pressureTRadioButton
       ]
     } );
 
