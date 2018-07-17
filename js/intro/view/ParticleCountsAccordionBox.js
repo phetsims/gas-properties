@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var AccordionBox = require( 'SUN/AccordionBox' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -37,7 +38,7 @@ define( function( require ) {
 
     options = _.extend( {
 
-      fixedWidth: 300,
+      fixedWidth: 250,
 
       // AccordionBox options
       contentXMargin: GasPropertiesConstants.PANEL_X_MARGIN,
@@ -65,7 +66,8 @@ define( function( require ) {
       titleFill: 'white',
       valueFont: new PhetFont( 20 ),
       majorTickStroke: GasPropertiesColors.FOREGROUND_COLOR,
-      layoutFunction: NumberControl.createLayoutFunction4()
+      layoutFunction: NumberControl.createLayoutFunction4(),
+      trackSize: new Dimension2( 130, 3 )
     };
 
     var majorTickOptions = {

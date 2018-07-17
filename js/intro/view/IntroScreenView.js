@@ -20,7 +20,7 @@ define( function( require ) {
   var SizeCheckbox = require( 'GAS_PROPERTIES/intro/view/SizeCheckbox' );
 
   // constants
-  var PANEL_WIDTH = 300;
+  var PANEL_WIDTH = 250;
 
   /**
    * @param {IntroModel} model

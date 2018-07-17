@@ -38,7 +38,7 @@ define( function( require ) {
 
     options = _.extend( {
 
-      fixedWidth: 300,
+      fixedWidth: 250,
 
       // Panel options
       align: 'left',
