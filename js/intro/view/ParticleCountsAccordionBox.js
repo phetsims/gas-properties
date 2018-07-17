@@ -44,6 +44,7 @@ define( function( require ) {
       contentYMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
       buttonXMargin: 10,
       buttonYMargin: 10,
+      titleXSpacing: 10,
       cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
       titleNode: new Text( particleCountsString, {
         font: GasPropertiesConstants.TITLE_FONT,
