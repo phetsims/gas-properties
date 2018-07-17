@@ -15,12 +15,15 @@ define( function( require ) {
   var HoldConstantPanel = require( 'GAS_PROPERTIES/intro/view/HoldConstantPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/intro/view/ParticleCountsAccordionBox' );
+  var ParticleTypeControl = require( 'GAS_PROPERTIES/intro/view/ParticleTypeControl' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SizeCheckbox = require( 'GAS_PROPERTIES/intro/view/SizeCheckbox' );
+  var StringProperty = require( 'AXON/StringProperty' );
 
   // constants
   var PANEL_WIDTH = 250;
+  var PARTICLE_TYPE_VALUES = [ 'heavy', 'light' ];
 
   /**
    * @param {IntroModel} model
@@ -31,8 +34,17 @@ define( function( require ) {
     ScreenView.call( this );
 
     // view-specific Properties
+    var particleTypeProperty = new StringProperty( 'heavy', {
+      validValues: PARTICLE_TYPE_VALUES
+    } );
     var particleCountsExpandedProperty = new BooleanProperty( false );
     var sizeVisibleProperty = new BooleanProperty( false );
+
+    // Radio buttons for selecting particle type
+    var particleTypeControl = new ParticleTypeControl( particleTypeProperty, {
+       center: this.layoutBounds.center //TODO
+    } );
+    this.addChild( particleTypeControl );
 
     // Hold Constant panel
     var holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
