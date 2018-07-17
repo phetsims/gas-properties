@@ -49,13 +49,14 @@ define( function( require ) {
         model.runningProperty.value = false;
       }, {
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.bottom + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
     this.addChild( timeControls );
 
     // Radio buttons for selecting particle type
     var particleTypeControl = new ParticleTypeControl( particleTypeProperty, {
-       center: this.layoutBounds.center
+      centerX: this.layoutBounds.centerX,
+      bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
     this.addChild( particleTypeControl );
 
