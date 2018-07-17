@@ -20,6 +20,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SizeCheckbox = require( 'GAS_PROPERTIES/intro/view/SizeCheckbox' );
   var StringProperty = require( 'AXON/StringProperty' );
+  var TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
 
   // constants
   var PANEL_WIDTH = 250;
@@ -40,9 +41,21 @@ define( function( require ) {
     var particleCountsExpandedProperty = new BooleanProperty( false );
     var sizeVisibleProperty = new BooleanProperty( false );
 
+    // Time controls
+    var timeControls = new TimeControls( model.runningProperty,
+      function() {
+        model.runningProperty.value = true;
+        model.step();
+        model.runningProperty.value = false;
+      }, {
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.bottom + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+    this.addChild( timeControls );
+
     // Radio buttons for selecting particle type
     var particleTypeControl = new ParticleTypeControl( particleTypeProperty, {
-       center: this.layoutBounds.center //TODO
+       center: this.layoutBounds.center
     } );
     this.addChild( particleTypeControl );
 

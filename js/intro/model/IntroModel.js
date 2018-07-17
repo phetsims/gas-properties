@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -28,6 +29,9 @@ define( function( require ) {
    * @constructor
    */
   function IntroModel() {
+
+    // @public is the model running?
+    this.runningProperty = new BooleanProperty( true );
 
     // @public the quantity to hold constant
     this.holdConstantProperty = new StringProperty( 'nothing', {
@@ -60,7 +64,9 @@ define( function( require ) {
 
     // @public
     step: function( dt ) {
-      //TODO Handle model animation here.
+      if ( this.runningProperty.value ) {
+        //TODO
+      }
     }
   } );
 } );
