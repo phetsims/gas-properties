@@ -50,6 +50,9 @@ define( function( require ) {
 
     }, options );
 
+    assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
+    options.maxWidth = options.fixedWidth;
+
     var radioButtonOptions = {
       radius: 10,
       xSpacing: 10

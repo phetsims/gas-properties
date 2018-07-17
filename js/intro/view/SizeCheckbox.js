@@ -30,7 +30,8 @@ define( function( require ) {
 
     var textNode = new Text( sizeString, {
       font: new PhetFont( 20 ),
-      fill: GasPropertiesColors.FOREGROUND_COLOR
+      fill: GasPropertiesColors.FOREGROUND_COLOR,
+      maxWidth: 150 // determined empirically
     } );
 
     //TODO use dimensional arrow here
