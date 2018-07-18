@@ -64,6 +64,7 @@ define( function( require ) {
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
+      this.container.reset();
     },
 
     // @public

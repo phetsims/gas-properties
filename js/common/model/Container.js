@@ -15,7 +15,7 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   // constants
-  var CONTAINER_WIDTH_RANGE = new RangeWithValue( 100, 500, 300 );
+  var CONTAINER_WIDTH_RANGE = new RangeWithValue( 100, 500, 500 );
   var CONTAINER_HEIGHT = 400;
 
   /**
@@ -36,5 +36,11 @@ define( function( require ) {
 
   gasProperties.register( 'Container', Container );
 
-  return inherit( Object, Container );
+  return inherit( Object, Container, {
+
+    // @public
+    reset: function() {
+      this.widthProperty.reset();
+    }
+  } );
 } );
