@@ -30,6 +30,7 @@ define( function( require ) {
 
     Rectangle.call( this, 0, 0, 120, 240, options );
 
+    // Change color of the pump to match the type of particle
     particleTypeProperty.link( function( particleType ) {
       self.stroke = ( particleType === 'heavy' ) ? GasPropertiesColors.HEAVY_PARTICLE : GasPropertiesColors.LIGHT_PARTICLE;
     } );
