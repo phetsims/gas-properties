@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var Container = require( 'GAS_PROPERTIES/common/model/Container' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -49,6 +50,9 @@ define( function( require ) {
       numberType: 'Integer',
       range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
     } );
+
+    // @public width of the container, in nm
+    this.container = new Container();
   }
 
   gasProperties.register( 'IntroModel', IntroModel );

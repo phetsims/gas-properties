@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   var HoldConstantPanel = require( 'GAS_PROPERTIES/intro/view/HoldConstantPanel' );
@@ -42,6 +43,13 @@ define( function( require ) {
     var particleCountsExpandedProperty = new BooleanProperty( false );
     var sizeVisibleProperty = new BooleanProperty( false );
 
+    // Container
+    var containerNode = new ContainerNode( model.container, {
+      left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+      centerY: this.layoutBounds.centerY
+    } );
+    this.addChild( containerNode );
+
     // Time controls
     var timeControls = new TimeControls( model.runningProperty,
       function() {
@@ -56,7 +64,7 @@ define( function( require ) {
 
     // Radio buttons for selecting particle type
     var particleTypeControl = new ParticleTypeControl( particleTypeProperty, {
-      centerX: this.layoutBounds.centerX,
+      left: containerNode.right + 60,
       bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
     this.addChild( particleTypeControl );
