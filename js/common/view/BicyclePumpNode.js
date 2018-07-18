@@ -13,7 +13,9 @@ define( function( require ) {
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
 
   /**
    * @param {String} particleTypeProperty
@@ -22,22 +24,30 @@ define( function( require ) {
    */
   function BicyclePumpNode( particleTypeProperty, options ) {
 
-    options = _.extend( {
+    var rectangle = new Rectangle( 0, 0, 120, 240, {
       lineWidth: 2
-    }, options );
+    } );
 
-    var self = this;
+    var text = new RichText( 'bicycle pump', {
+      maxWidth: 0.85 * rectangle.width,
+      fill: GasPropertiesColors.FOREGROUND_COLOR,
+      centerX: rectangle.centerX,
+      top: rectangle.top + 5
+    } );
 
-    Rectangle.call( this, 0, 0, 120, 240, options );
+    assert && assert( !options.children, 'BicyclePumpNode sets children' );
+    options.children = [ rectangle, text ];
+
+    Node.call( this, options );
 
     // Change color of the pump to match the type of particle
     particleTypeProperty.link( function( particleType ) {
-      self.stroke = ( particleType === 'heavy' ) ? GasPropertiesColors.HEAVY_PARTICLE : GasPropertiesColors.LIGHT_PARTICLE;
+      rectangle.fill = ( particleType === 'heavy' ) ? GasPropertiesColors.HEAVY_PARTICLE : GasPropertiesColors.LIGHT_PARTICLE;
     } );
   }
 
   gasProperties.register( 'BicyclePumpNode', BicyclePumpNode );
 
-  return inherit( Rectangle, BicyclePumpNode );
+  return inherit( Node, BicyclePumpNode );
 } );
  
