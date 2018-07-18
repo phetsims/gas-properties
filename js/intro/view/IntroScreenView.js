@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -59,6 +60,13 @@ define( function( require ) {
       bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
     this.addChild( particleTypeControl );
+
+    // Bicycle pump
+    var bicyclePumpNode = new BicyclePumpNode( particleTypeProperty, {
+      centerX: particleTypeControl.centerX,
+      bottom: particleTypeControl.top - 15
+    } );
+    this.addChild( bicyclePumpNode );
 
     // Hold Constant panel
     var holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
