@@ -51,11 +51,11 @@ define( function( require ) {
     this.addChild( containerNode );
 
     // Time controls
-    var timeControls = new TimeControls( model.runningProperty,
+    var timeControls = new TimeControls( model.isPlayingProperty,
       function() {
-        model.runningProperty.value = true;
+        model.isPlayingProperty.value = true;
         model.step();
-        model.runningProperty.value = false;
+        model.isPlayingProperty.value = false;
       }, {
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

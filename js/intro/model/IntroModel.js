@@ -31,8 +31,8 @@ define( function( require ) {
    */
   function IntroModel() {
 
-    // @public is the model running?
-    this.runningProperty = new BooleanProperty( true );
+    // @public is the sim playing?
+    this.isPlayingProperty = new BooleanProperty( true );
 
     // @public the quantity to hold constant
     this.holdConstantProperty = new StringProperty( 'nothing', {
@@ -61,6 +61,7 @@ define( function( require ) {
 
     // @public resets the model
     reset: function() {
+      this.isPlayingProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
@@ -69,7 +70,7 @@ define( function( require ) {
 
     // @public
     step: function( dt ) {
-      if ( this.runningProperty.value ) {
+      if ( this.isPlayingProperty.value ) {
         //TODO
       }
     }

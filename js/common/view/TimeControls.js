@@ -16,22 +16,22 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
 
   /**
-   * @param {BooleanProperty} playingProperty
+   * @param {BooleanProperty} isPlayingProperty
    * @param {function} stepCallback - called when the step button is pressed
    * @param {Object} [options]
    * @constructor
    */
-  function TimeControls( playingProperty, stepCallback, options ) {
+  function TimeControls( isPlayingProperty, stepCallback, options ) {
 
     options = _.extend( {
       // HBox options
       spacing: 10
     }, options );
 
-    var playPauseButton = new PlayPauseButton( playingProperty );
+    var playPauseButton = new PlayPauseButton( isPlayingProperty );
 
     var stepButton = new StepButton( {
-      playingProperty: playingProperty,
+      isPlayingProperty: isPlayingProperty,
       listener: stepCallback
     });
 
