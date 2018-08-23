@@ -1,9 +1,9 @@
 TODO model description
 
-PV = nRT
+PV = NkT
 
 P = pressure
 V = volume
-n = number of moles of gas
-R = ideal gas constant
+N = number of gas molecules
+k = Boltzman constant
 T = temperature
