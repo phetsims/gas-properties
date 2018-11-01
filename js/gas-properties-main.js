@@ -9,10 +9,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
   var IntroScreen = require( 'GAS_PROPERTIES/intro/IntroScreen' );
   var KMTScreen = require( 'GAS_PROPERTIES/kmt/KMTScreen' );
+  var Sim = require( 'JOIST/Sim' );
+  var SimLauncher = require( 'JOIST/SimLauncher' );
   var WorkScreen = require( 'GAS_PROPERTIES/work/WorkScreen' );
 
   // strings

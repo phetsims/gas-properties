@@ -9,8 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  var inherit = require( 'PHET_CORE/inherit' );
 
   /**
    * @constructor

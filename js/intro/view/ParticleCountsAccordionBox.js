@@ -24,9 +24,9 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var particleCountsString = require( 'string!GAS_PROPERTIES/particleCounts' );
   var heavyString = require( 'string!GAS_PROPERTIES/heavy' );
   var lightString = require( 'string!GAS_PROPERTIES/light' );
+  var particleCountsString = require( 'string!GAS_PROPERTIES/particleCounts' );
 
   /**
    * @param {NumberProperty} numberOfHeavyParticlesProperty

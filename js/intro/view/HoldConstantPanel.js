@@ -22,12 +22,12 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var holdConstantString = require( 'string!GAS_PROPERTIES/holdConstant' );
   var holdConstantNothingString = require( 'string!GAS_PROPERTIES/holdConstant.nothing' );
-  var holdConstantVolumeString = require( 'string!GAS_PROPERTIES/holdConstant.volume' );
-  var holdConstantTemperatureString = require( 'string!GAS_PROPERTIES/holdConstant.temperature' );
   var holdConstantPressureTString = require( 'string!GAS_PROPERTIES/holdConstant.pressureT' );
   var holdConstantPressureVString = require( 'string!GAS_PROPERTIES/holdConstant.pressureV' );
+  var holdConstantString = require( 'string!GAS_PROPERTIES/holdConstant' );
+  var holdConstantTemperatureString = require( 'string!GAS_PROPERTIES/holdConstant.temperature' );
+  var holdConstantVolumeString = require( 'string!GAS_PROPERTIES/holdConstant.volume' );
 
   /**
    * @param {StringProperty} holdConstantProperty
