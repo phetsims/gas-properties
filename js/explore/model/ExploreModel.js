@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Model for the 'Work' screen.
+ * Model for the 'Explore' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,13 +15,13 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function WorkModel() {
+  function ExploreModel() {
     //TODO
   }
 
-  gasProperties.register( 'WorkModel', WorkModel );
+  gasProperties.register( 'ExploreModel', ExploreModel );
 
-  return inherit( Object, WorkModel, {
+  return inherit( Object, ExploreModel, {
 
     // @public resets the model
     reset: function() {

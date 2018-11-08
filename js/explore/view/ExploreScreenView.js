@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * The view for the 'Work' screen.
+ * The view for the 'Explore' screen.
  * 
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -19,15 +19,15 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   /**
-   * @param {WorkModel} model
+   * @param {ExploreModel} model
    * @constructor
    */
-  function WorkScreenView( model ) {
+  function ExploreScreenView( model ) {
 
     ScreenView.call( this );
 
     //TODO delete this
-    var underConstruction = new Text( 'Work - under construction', {
+    var underConstruction = new Text( 'Explore - under construction', {
       font: new PhetFont( 35 ),
       fill: GasPropertiesColors.FOREGROUND_COLOR,
       center: this.layoutBounds.center
@@ -45,7 +45,7 @@ define( function( require ) {
     this.addChild( resetAllButton );
   }
 
-  gasProperties.register( 'WorkScreenView', WorkScreenView );
+  gasProperties.register( 'ExploreScreenView', ExploreScreenView );
 
-  return inherit( ScreenView, WorkScreenView );
+  return inherit( ScreenView, ExploreScreenView );
 } );
