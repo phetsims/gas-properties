@@ -5,39 +5,36 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ExploreModel = require( 'GAS_PROPERTIES/explore/model/ExploreModel' );
-  var ExploreScreenView = require( 'GAS_PROPERTIES/explore/view/ExploreScreenView' );
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
+  const ExploreModel = require( 'GAS_PROPERTIES/explore/model/ExploreModel' );
+  const ExploreScreenView = require( 'GAS_PROPERTIES/explore/view/ExploreScreenView' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
+  const Property = require( 'AXON/Property' );
+  const Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenExploreString = require( 'string!GAS_PROPERTIES/screen.explore' );
+  const screenExploreString = require( 'string!GAS_PROPERTIES/screen.explore' );
 
-  /**
-   * @constructor
-   */
-  function ExploreScreen() {
+  class ExploreScreen extends Screen {
 
-    var options = {
-      name: screenExploreString,
-      backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
-    };
+    constructor() {
 
-    Screen.call( this,
-      function() { return new ExploreModel(); },
-      function( model ) { return new ExploreScreenView( model ); },
-      options
-    );
+      const options = {
+        name: screenExploreString,
+        backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
+      };
+
+      super(
+        () => new ExploreModel(),
+        model => new ExploreScreenView( model ),
+        options
+      );
+    }
   }
 
-  gasProperties.register( 'ExploreScreen', ExploreScreen );
-
-  return inherit( Screen, ExploreScreen );
+  return gasProperties.register( 'ExploreScreen', ExploreScreen );
 } );

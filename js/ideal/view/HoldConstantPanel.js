@@ -5,109 +5,108 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
-  var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var holdConstantNothingString = require( 'string!GAS_PROPERTIES/holdConstant.nothing' );
-  var holdConstantPressureTString = require( 'string!GAS_PROPERTIES/holdConstant.pressureT' );
-  var holdConstantPressureVString = require( 'string!GAS_PROPERTIES/holdConstant.pressureV' );
-  var holdConstantString = require( 'string!GAS_PROPERTIES/holdConstant' );
-  var holdConstantTemperatureString = require( 'string!GAS_PROPERTIES/holdConstant.temperature' );
-  var holdConstantVolumeString = require( 'string!GAS_PROPERTIES/holdConstant.volume' );
+  const holdConstantNothingString = require( 'string!GAS_PROPERTIES/holdConstant.nothing' );
+  const holdConstantPressureTString = require( 'string!GAS_PROPERTIES/holdConstant.pressureT' );
+  const holdConstantPressureVString = require( 'string!GAS_PROPERTIES/holdConstant.pressureV' );
+  const holdConstantString = require( 'string!GAS_PROPERTIES/holdConstant' );
+  const holdConstantTemperatureString = require( 'string!GAS_PROPERTIES/holdConstant.temperature' );
+  const holdConstantVolumeString = require( 'string!GAS_PROPERTIES/holdConstant.volume' );
 
-  /**
-   * @param {StringProperty} holdConstantProperty
-   * @param {Object} [options]
-   * @constructor
-   */
-  function HoldConstantPanel( holdConstantProperty, options ) {
+  class HoldConstantPanel extends Panel {
 
-    options = _.extend( {
+    /**
+     * @param {StringProperty} holdConstantProperty
+     * @param {Object} [options]
+     */
+    constructor( holdConstantProperty, options ) {
 
-      fixedWidth: 250,
+      options = _.extend( {
 
-      // Panel options
-      align: 'left',
-      xMargin: GasPropertiesConstants.PANEL_X_MARGIN,
-      yMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
-      cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
-      fill: GasPropertiesColors.BACKGROUND_COLOR,
-      stroke: GasPropertiesColors.FOREGROUND_COLOR
+        fixedWidth: 250,
 
-    }, options );
+        // Panel options
+        align: 'left',
+        xMargin: GasPropertiesConstants.PANEL_X_MARGIN,
+        yMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
+        cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
+        fill: GasPropertiesColors.BACKGROUND_COLOR,
+        stroke: GasPropertiesColors.FOREGROUND_COLOR
 
-    assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
-    options.maxWidth = options.fixedWidth;
+      }, options );
 
-    var radioButtonOptions = {
-      radius: 10,
-      xSpacing: 10
-    };
+      assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
+      options.maxWidth = options.fixedWidth;
 
-    var textOptions = {
-      font: new PhetFont( 20 ),
-      fill: GasPropertiesColors.FOREGROUND_COLOR
-    };
+      const radioButtonOptions = {
+        radius: 10,
+        xSpacing: 10
+      };
 
-    var titleNode = new Text( holdConstantString, {
-      font: GasPropertiesConstants.TITLE_FONT,
-      fill: GasPropertiesColors.FOREGROUND_COLOR
-    } );
+      const textOptions = {
+        font: new PhetFont( 20 ),
+        fill: GasPropertiesColors.FOREGROUND_COLOR
+      };
 
-    var nothingRadioButton = new AquaRadioButton( holdConstantProperty, 'nothing',
-      new Text( holdConstantNothingString, textOptions ),
-      radioButtonOptions );
+      const titleNode = new Text( holdConstantString, {
+        font: GasPropertiesConstants.TITLE_FONT,
+        fill: GasPropertiesColors.FOREGROUND_COLOR
+      } );
 
-    var volumeRadioButton = new AquaRadioButton( holdConstantProperty, 'volume',
-      new Text( holdConstantVolumeString, textOptions ),
-      radioButtonOptions );
+      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, 'nothing',
+        new Text( holdConstantNothingString, textOptions ),
+        radioButtonOptions );
 
-    var temperatureRadioButton = new AquaRadioButton( holdConstantProperty, 'temperature',
-      new Text( holdConstantTemperatureString, textOptions ),
-      radioButtonOptions );
+      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, 'volume',
+        new Text( holdConstantVolumeString, textOptions ),
+        radioButtonOptions );
 
-    var pressureVRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureV',
-      new Text( holdConstantPressureVString, textOptions ),
-      radioButtonOptions );
+      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, 'temperature',
+        new Text( holdConstantTemperatureString, textOptions ),
+        radioButtonOptions );
 
-    var pressureTRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureT',
-      new Text( holdConstantPressureTString, textOptions ),
-      radioButtonOptions );
+      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureV',
+        new Text( holdConstantPressureVString, textOptions ),
+        radioButtonOptions );
 
-    var content = new VBox( {
-      align: 'left',
-      spacing: 10,
-      children: [
-        titleNode,
-        nothingRadioButton,
-        volumeRadioButton,
-        temperatureRadioButton,
-        pressureVRadioButton,
-        pressureTRadioButton
-      ]
-    } );
+      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureT',
+        new Text( holdConstantPressureTString, textOptions ),
+        radioButtonOptions );
 
-    var strut = new HStrut( options.fixedWidth - ( 2 * options.xMargin ) );
+      const content = new VBox( {
+        align: 'left',
+        spacing: 10,
+        children: [
+          titleNode,
+          nothingRadioButton,
+          volumeRadioButton,
+          temperatureRadioButton,
+          pressureVRadioButton,
+          pressureTRadioButton
+        ]
+      } );
 
-    Panel.call( this, new Node( { children: [ strut, content ] } ), options );
+      const strut = new HStrut( options.fixedWidth - ( 2 * options.xMargin ) );
+
+      super( new Node( { children: [ strut, content ] } ), options );
+    }
   }
 
-  gasProperties.register( 'HoldConstantPanel', HoldConstantPanel );
-
-  return inherit( Panel, HoldConstantPanel );
+  return gasProperties.register( 'HoldConstantPanel', HoldConstantPanel );
 } );
  

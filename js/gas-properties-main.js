@@ -5,21 +5,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DiffusionScreen = require( 'GAS_PROPERTIES/diffusion/DiffusionScreen' );
-  var ExploreScreen = require( 'GAS_PROPERTIES/explore/ExploreScreen' );
-  var IdealScreen = require( 'GAS_PROPERTIES/ideal/IdealScreen' );
-  var EnergyScreen = require( 'GAS_PROPERTIES/energy/EnergyScreen' );
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
+  const DiffusionScreen = require( 'GAS_PROPERTIES/diffusion/DiffusionScreen' );
+  const ExploreScreen = require( 'GAS_PROPERTIES/explore/ExploreScreen' );
+  const IdealScreen = require( 'GAS_PROPERTIES/ideal/IdealScreen' );
+  const EnergyScreen = require( 'GAS_PROPERTIES/energy/EnergyScreen' );
+  const Sim = require( 'JOIST/Sim' );
+  const SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings
-  var gasPropertiesTitleString = require( 'string!GAS_PROPERTIES/gas-properties.title' );
+  const gasPropertiesTitleString = require( 'string!GAS_PROPERTIES/gas-properties.title' );
 
-  var simOptions = {
+  const simOptions = {
     credits: {
       //TODO #28 complete the credits
       leadDesign: 'Amy Rouinfar',
@@ -33,8 +33,8 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var screens = [ new IdealScreen(), new ExploreScreen(), new EnergyScreen(), new DiffusionScreen() ];
-    var sim = new Sim( gasPropertiesTitleString, screens, simOptions );
+    const screens = [ new IdealScreen(), new ExploreScreen(), new EnergyScreen(), new DiffusionScreen() ];
+    const sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();
   } );
 } );

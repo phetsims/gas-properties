@@ -5,13 +5,13 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  var GasPropertiesColors = {
+  const GasPropertiesColors = {
 
     FOREGROUND_COLOR: 'white',
     BACKGROUND_COLOR: 'black',
@@ -20,7 +20,5 @@ define( function( require ) {
     LIGHT_PARTICLE: 'rgb( 232, 78, 32 )'
   };
 
-  gasProperties.register( 'GasPropertiesColors', GasPropertiesColors );
-
-  return GasPropertiesColors;
+  return gasProperties.register( 'GasPropertiesColors', GasPropertiesColors );
 } );

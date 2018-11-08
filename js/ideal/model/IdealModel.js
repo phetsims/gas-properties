@@ -5,20 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var Container = require( 'GAS_PROPERTIES/common/model/Container' );
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var StringProperty = require( 'AXON/StringProperty' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Container = require( 'GAS_PROPERTIES/common/model/Container' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const StringProperty = require( 'AXON/StringProperty' );
 
   // constants
-  var HOLD_CONSTANT_VALUES = [
+  const HOLD_CONSTANT_VALUES = [
     'nothing',
     'volume',
     'temperature',
@@ -26,53 +25,50 @@ define( function( require ) {
     'pressureV' // change volume (V) to maintain constant pressure
   ];
 
-  /**
-   * @constructor
-   */
-  function IdealModel() {
+  class IdealModel {
 
-    // @public is the sim playing?
-    this.isPlayingProperty = new BooleanProperty( true );
+    constructor() {
 
-    // @public the quantity to hold constant
-    this.holdConstantProperty = new StringProperty( 'nothing', {
-      validValues: HOLD_CONSTANT_VALUES
-    } );
+      // @public is the sim playing?
+      this.isPlayingProperty = new BooleanProperty( true );
 
-    // @public the number of heavy particles in the container
-    this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
-      numberType: 'Integer',
-      range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE
-    } );
+      // @public the quantity to hold constant
+      this.holdConstantProperty = new StringProperty( 'nothing', {
+        validValues: HOLD_CONSTANT_VALUES
+      } );
 
-    // @public the number of light particles in the container
-    this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
-      numberType: 'Integer',
-      range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
-    } );
+      // @public the number of heavy particles in the container
+      this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
+        numberType: 'Integer',
+        range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE
+      } );
 
-    // @public width of the container, in nm
-    this.container = new Container();
-  }
+      // @public the number of light particles in the container
+      this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
+        numberType: 'Integer',
+        range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
+      } );
 
-  gasProperties.register( 'IdealModel', IdealModel );
-
-  return inherit( Object, IdealModel, {
+      // @public width of the container, in nm
+      this.container = new Container();
+    }
 
     // @public resets the model
-    reset: function() {
+    reset() {
       this.isPlayingProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
       this.container.reset();
-    },
+    }
 
     // @public
-    step: function( dt ) {
+    step( dt ) {
       if ( this.isPlayingProperty.value ) {
         //TODO
       }
     }
-  } );
+  }
+
+  return gasProperties.register( 'IdealModel', IdealModel );
 } );

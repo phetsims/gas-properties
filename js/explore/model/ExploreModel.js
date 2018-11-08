@@ -5,33 +5,26 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var inherit = require( 'PHET_CORE/inherit' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  /**
-   * @constructor
-   */
-  function ExploreModel() {
-    //TODO
+  class ExploreModel {
+
+    constructor() {
+      //TODO
+    }
+
+    reset() {
+      //TODO reset things here
+    }
+
+    step() {
+      //TODO
+    }
   }
 
-  gasProperties.register( 'ExploreModel', ExploreModel );
-
-  return inherit( Object, ExploreModel, {
-
-    // @public resets the model
-    reset: function() {
-      //TODO reset things here
-    },
-
-    //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.
-    // @public
-    step: function( dt ) {
-      //TODO Handle model animation here.
-    }
-  } );
+  return gasProperties.register( 'ExploreModel', ExploreModel );
 } );

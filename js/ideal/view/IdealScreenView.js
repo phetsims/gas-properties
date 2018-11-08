@@ -5,119 +5,118 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  var HoldConstantPanel = require( 'GAS_PROPERTIES/ideal/view/HoldConstantPanel' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/ideal/view/ParticleCountsAccordionBox' );
-  var ParticleTypeControl = require( 'GAS_PROPERTIES/ideal/view/ParticleTypeControl' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var SizeCheckbox = require( 'GAS_PROPERTIES/ideal/view/SizeCheckbox' );
-  var StringProperty = require( 'AXON/StringProperty' );
-  var TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
+  const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const HoldConstantPanel = require( 'GAS_PROPERTIES/ideal/view/HoldConstantPanel' );
+  const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/ideal/view/ParticleCountsAccordionBox' );
+  const ParticleTypeControl = require( 'GAS_PROPERTIES/ideal/view/ParticleTypeControl' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const SizeCheckbox = require( 'GAS_PROPERTIES/ideal/view/SizeCheckbox' );
+  const StringProperty = require( 'AXON/StringProperty' );
+  const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
 
   // constants
-  var PANEL_WIDTH = 250;
-  var PARTICLE_TYPE_VALUES = [ 'heavy', 'light' ];
+  const PANEL_WIDTH = 250;
+  const PARTICLE_TYPE_VALUES = [ 'heavy', 'light' ];
 
-  /**
-   * @param {IntroModel} model
-   * @constructor
-   */
-  function IdealScreenView( model ) {
+  class IdealScreenView extends ScreenView {
 
-    ScreenView.call( this );
+    /**
+     * @param {IntroModel} model
+     */
+    constructor( model ) {
 
-    // view-specific Properties
-    var particleTypeProperty = new StringProperty( 'heavy', {
-      validValues: PARTICLE_TYPE_VALUES
-    } );
-    var particleCountsExpandedProperty = new BooleanProperty( false );
-    var sizeVisibleProperty = new BooleanProperty( false );
+      super();
 
-    // Container
-    var containerNode = new ContainerNode( model.container, {
-      left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-      centerY: this.layoutBounds.centerY
-    } );
-    this.addChild( containerNode );
+      // view-specific Properties
+      const particleTypeProperty = new StringProperty( 'heavy', {
+        validValues: PARTICLE_TYPE_VALUES
+      } );
+      const particleCountsExpandedProperty = new BooleanProperty( false );
+      const sizeVisibleProperty = new BooleanProperty( false );
 
-    // Time controls
-    var timeControls = new TimeControls( model.isPlayingProperty,
-      function() {
-        model.isPlayingProperty.value = true;
-        model.step();
-        model.isPlayingProperty.value = false;
-      }, {
+      // Container
+      const containerNode = new ContainerNode( model.container, {
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        centerY: this.layoutBounds.centerY
+      } );
+      this.addChild( containerNode );
+
+      // Time controls
+      const timeControls = new TimeControls( model.isPlayingProperty,
+        function() {
+          model.isPlayingProperty.value = true;
+          model.step();
+          model.isPlayingProperty.value = false;
+        }, {
+          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
+      this.addChild( timeControls );
+
+      // Radio buttons for selecting particle type
+      const particleTypeControl = new ParticleTypeControl( particleTypeProperty, {
+        left: containerNode.right + 60,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-    this.addChild( timeControls );
+      this.addChild( particleTypeControl );
 
-    // Radio buttons for selecting particle type
-    var particleTypeControl = new ParticleTypeControl( particleTypeProperty, {
-      left: containerNode.right + 60,
-      bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-    } );
-    this.addChild( particleTypeControl );
-
-    // Bicycle pump
-    var bicyclePumpNode = new BicyclePumpNode( particleTypeProperty, {
-      centerX: particleTypeControl.centerX,
-      bottom: particleTypeControl.top - 15
-    } );
-    this.addChild( bicyclePumpNode );
-
-    // Hold Constant panel
-    var holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
-      fixedWidth: PANEL_WIDTH,
-      right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-    } );
-    this.addChild( holdConstantPanel );
-
-    // Particle Counts accordion box
-    var particleCountsAccordionBox = new ParticleCountsAccordionBox(
-      model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
-        fixedWidth: PANEL_WIDTH,
-        expandedProperty: particleCountsExpandedProperty,
-        right: holdConstantPanel.right,
-        top: holdConstantPanel.bottom + 15
+      // Bicycle pump
+      const bicyclePumpNode = new BicyclePumpNode( particleTypeProperty, {
+        centerX: particleTypeControl.centerX,
+        bottom: particleTypeControl.top - 15
       } );
-    this.addChild( particleCountsAccordionBox );
+      this.addChild( bicyclePumpNode );
 
-    // Size checkbox, positioned below the *expanded* Particle Counts accordion box
-    var particleCountsExpanded = particleCountsExpandedProperty.value; // save state
-    particleCountsExpandedProperty.value = true; // expand for positioning
-    var sizeCheckbox = new SizeCheckbox( sizeVisibleProperty, {
-      left: particleCountsAccordionBox.left,
-      top: particleCountsAccordionBox.bottom + 15
-    } );
-    this.addChild( sizeCheckbox );
-    particleCountsExpandedProperty.value = particleCountsExpanded; // restore state
+      // Hold Constant panel
+      const holdConstantPanel = new HoldConstantPanel( model.holdConstantProperty, {
+        fixedWidth: PANEL_WIDTH,
+        right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+      this.addChild( holdConstantPanel );
 
-    // Reset All button
-    var resetAllButton = new ResetAllButton( {
-      listener: function() {
-        model.reset();
-        particleCountsExpandedProperty.reset();
-        sizeVisibleProperty.reset();
-      },
-      right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-      bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-    } );
-    this.addChild( resetAllButton );
+      // Particle Counts accordion box
+      const particleCountsAccordionBox = new ParticleCountsAccordionBox(
+        model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
+          fixedWidth: PANEL_WIDTH,
+          expandedProperty: particleCountsExpandedProperty,
+          right: holdConstantPanel.right,
+          top: holdConstantPanel.bottom + 15
+        } );
+      this.addChild( particleCountsAccordionBox );
+
+      // Size checkbox, positioned below the *expanded* Particle Counts accordion box
+      const particleCountsExpanded = particleCountsExpandedProperty.value; // save state
+      particleCountsExpandedProperty.value = true; // expand for positioning
+      const sizeCheckbox = new SizeCheckbox( sizeVisibleProperty, {
+        left: particleCountsAccordionBox.left,
+        top: particleCountsAccordionBox.bottom + 15
+      } );
+      this.addChild( sizeCheckbox );
+      particleCountsExpandedProperty.value = particleCountsExpanded; // restore state
+
+      // Reset All button
+      const resetAllButton = new ResetAllButton( {
+        listener: function() {
+          model.reset();
+          particleCountsExpandedProperty.reset();
+          sizeVisibleProperty.reset();
+        },
+        right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+      this.addChild( resetAllButton );
+    }
   }
 
-  gasProperties.register( 'IdealScreenView', IdealScreenView );
-
-  return inherit( ScreenView, IdealScreenView );
+  return gasProperties.register( 'IdealScreenView', IdealScreenView );
 } );

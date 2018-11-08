@@ -5,15 +5,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RangeWithValue = require( 'DOT/RangeWithValue' );
 
-  var GasPropertiesConstants = {
+  const GasPropertiesConstants = {
 
     SCREEN_VIEW_X_MARGIN: 20,
     SCREEN_VIEW_Y_MARGIN: 20,
@@ -29,7 +29,5 @@ define( function( require ) {
     PANEL_Y_MARGIN: 15
   };
 
-  gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );
-
-  return GasPropertiesConstants;
+  return gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );
 } );

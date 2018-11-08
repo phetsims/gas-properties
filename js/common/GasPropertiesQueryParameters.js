@@ -10,13 +10,13 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  var GasPropertiesQueryParameters = QueryStringMachine.getAll( {
+  const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
     //TODO
   } );
 

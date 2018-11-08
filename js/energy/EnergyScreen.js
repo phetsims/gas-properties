@@ -5,39 +5,36 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
-  var EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
+  const EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
+  const EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
+  const Property = require( 'AXON/Property' );
+  const Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenEnergyString = require( 'string!GAS_PROPERTIES/screen.energy' );
+  const screenEnergyString = require( 'string!GAS_PROPERTIES/screen.energy' );
 
-  /**
-   * @constructor
-   */
-  function EnergyScreen() {
+  class EnergyScreen extends Screen {
 
-    var options = {
-      name: screenEnergyString,
-      backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
-    };
+    constructor() {
 
-    Screen.call( this,
-      function() { return new EnergyModel(); },
-      function( model ) { return new EnergyScreenView( model ); },
-      options
-    );
+      const options = {
+        name: screenEnergyString,
+        backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
+      };
+
+      super(
+        () => new EnergyModel(),
+        model => new EnergyScreenView( model ),
+        options
+      );
+    }
   }
 
-  gasProperties.register( 'EnergyScreen', EnergyScreen );
-
-  return inherit( Screen, EnergyScreen );
+  return gasProperties.register( 'EnergyScreen', EnergyScreen );
 } );

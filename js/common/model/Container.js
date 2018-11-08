@@ -5,42 +5,38 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const RangeWithValue = require( 'DOT/RangeWithValue' );
 
   // constants
-  var CONTAINER_WIDTH_RANGE = new RangeWithValue( 100, 500, 500 );
-  var CONTAINER_HEIGHT = 400;
+  const CONTAINER_WIDTH_RANGE = new RangeWithValue( 100, 500, 500 );
+  const CONTAINER_HEIGHT = 400;
 
-  /**
-   * @constructor
-   */
-  function Container() {
-    
-    // @public width of the container, in nm
-    this.widthProperty = new NumberProperty( CONTAINER_WIDTH_RANGE.defaultValue, {
-      numberType: 'FloatingPoint',
-      range: CONTAINER_WIDTH_RANGE,
-      units: 'nanometers'
-    } );
+  class Container {
 
-    // @public (read-only) height of the container, in nm
-    this.height = CONTAINER_HEIGHT;
-  }
+    constructor() {
 
-  gasProperties.register( 'Container', Container );
+      // @public width of the container, in nm
+      this.widthProperty = new NumberProperty( CONTAINER_WIDTH_RANGE.defaultValue, {
+        numberType: 'FloatingPoint',
+        range: CONTAINER_WIDTH_RANGE,
+        units: 'nanometers'
+      } );
 
-  return inherit( Object, Container, {
+      // @public (read-only) height of the container, in nm
+      this.height = CONTAINER_HEIGHT;
+    }
 
     // @public
-    reset: function() {
+    reset() {
       this.widthProperty.reset();
     }
-  } );
+  }
+
+  return gasProperties.register( 'Container', Container );
 } );
