@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
+  var EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
-  var EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
 
