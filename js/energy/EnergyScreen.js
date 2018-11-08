@@ -12,32 +12,32 @@ define( function( require ) {
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var KMTModel = require( 'GAS_PROPERTIES/kmt/model/KMTModel' );
-  var KMTScreenView = require( 'GAS_PROPERTIES/kmt/view/KMTScreenView' );
+  var EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
+  var EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenKmtString = require( 'string!GAS_PROPERTIES/screen.kmt' );
+  var screenEnergyString = require( 'string!GAS_PROPERTIES/screen.energy' );
 
   /**
    * @constructor
    */
-  function KMTScreen() {
+  function EnergyScreen() {
 
     var options = {
-      name: screenKmtString,
+      name: screenEnergyString,
       backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
     };
 
     Screen.call( this,
-      function() { return new KMTModel(); },
-      function( model ) { return new KMTScreenView( model ); },
+      function() { return new EnergyModel(); },
+      function( model ) { return new EnergyScreenView( model ); },
       options
     );
   }
 
-  gasProperties.register( 'KMTScreen', KMTScreen );
+  gasProperties.register( 'EnergyScreen', EnergyScreen );
 
-  return inherit( Screen, KMTScreen );
+  return inherit( Screen, EnergyScreen );
 } );

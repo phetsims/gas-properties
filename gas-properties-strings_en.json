@@ -8,8 +8,8 @@
   "screen.explore": {
     "value": "Explore"
   },
-  "screen.kmt": {
-    "value": "KMT"
+  "screen.energy": {
+    "value": "Energy"
   },
   "holdConstant": {
     "value": "Hold Constant"

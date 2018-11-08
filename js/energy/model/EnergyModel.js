@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Model for the 'KMT' screen.
+ * Model for the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,13 +15,13 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function KMTModel() {
+  function EnergyModel() {
     //TODO
   }
 
-  gasProperties.register( 'KMTModel', KMTModel );
+  gasProperties.register( 'EnergyModel', EnergyModel );
 
-  return inherit( Object, KMTModel, {
+  return inherit( Object, EnergyModel, {
 
     // @public resets the model
     reset: function() {

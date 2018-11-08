@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * The view for the 'KMT' screen.
+ * The view for the 'Energy' screen.
  * 
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -19,15 +19,15 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   /**
-   * @param {KMTModel} model
+   * @param {EnergyModel} model
    * @constructor
    */
-  function KMTScreenView( model ) {
+  function EnergyScreenView( model ) {
 
     ScreenView.call( this );
 
     //TODO delete this
-    var underConstruction = new Text( 'KMT - under construction', {
+    var underConstruction = new Text( 'Energy - under construction', {
       font: new PhetFont( 35 ),
       fill: GasPropertiesColors.FOREGROUND_COLOR,
       center: this.layoutBounds.center
@@ -45,7 +45,7 @@ define( function( require ) {
     this.addChild( resetAllButton );
   }
 
-  gasProperties.register( 'KMTScreenView', KMTScreenView );
+  gasProperties.register( 'EnergyScreenView', EnergyScreenView );
 
-  return inherit( ScreenView, KMTScreenView );
+  return inherit( ScreenView, EnergyScreenView );
 } );
