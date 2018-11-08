@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var IntroScreen = require( 'GAS_PROPERTIES/intro/IntroScreen' );
+  var IdealScreen = require( 'GAS_PROPERTIES/ideal/IdealScreen' );
   var KMTScreen = require( 'GAS_PROPERTIES/kmt/KMTScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
@@ -31,7 +31,7 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var screens = [ new IntroScreen(), new WorkScreen(), new KMTScreen() ];
+    var screens = [ new IdealScreen(), new WorkScreen(), new KMTScreen() ];
     var sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();
   } );

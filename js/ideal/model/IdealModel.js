@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Model for the 'Intro' screen.
+ * Model for the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -29,7 +29,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function IntroModel() {
+  function IdealModel() {
 
     // @public is the sim playing?
     this.isPlayingProperty = new BooleanProperty( true );
@@ -55,9 +55,9 @@ define( function( require ) {
     this.container = new Container();
   }
 
-  gasProperties.register( 'IntroModel', IntroModel );
+  gasProperties.register( 'IdealModel', IdealModel );
 
-  return inherit( Object, IntroModel, {
+  return inherit( Object, IdealModel, {
 
     // @public resets the model
     reset: function() {

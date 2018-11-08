@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * The view for the 'Intro' screen.
+ * The view for the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,13 +14,13 @@ define( function( require ) {
   var ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  var HoldConstantPanel = require( 'GAS_PROPERTIES/intro/view/HoldConstantPanel' );
+  var HoldConstantPanel = require( 'GAS_PROPERTIES/ideal/view/HoldConstantPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/intro/view/ParticleCountsAccordionBox' );
-  var ParticleTypeControl = require( 'GAS_PROPERTIES/intro/view/ParticleTypeControl' );
+  var ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/ideal/view/ParticleCountsAccordionBox' );
+  var ParticleTypeControl = require( 'GAS_PROPERTIES/ideal/view/ParticleTypeControl' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SizeCheckbox = require( 'GAS_PROPERTIES/intro/view/SizeCheckbox' );
+  var SizeCheckbox = require( 'GAS_PROPERTIES/ideal/view/SizeCheckbox' );
   var StringProperty = require( 'AXON/StringProperty' );
   var TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
 
@@ -32,7 +32,7 @@ define( function( require ) {
    * @param {IntroModel} model
    * @constructor
    */
-  function IntroScreenView( model ) {
+  function IdealScreenView( model ) {
 
     ScreenView.call( this );
 
@@ -117,7 +117,7 @@ define( function( require ) {
     this.addChild( resetAllButton );
   }
 
-  gasProperties.register( 'IntroScreenView', IntroScreenView );
+  gasProperties.register( 'IdealScreenView', IdealScreenView );
 
-  return inherit( ScreenView, IntroScreenView );
+  return inherit( ScreenView, IdealScreenView );
 } );

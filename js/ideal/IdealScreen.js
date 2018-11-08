@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * The 'Intro' screen.
+ * The 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,32 +12,32 @@ define( function( require ) {
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var IntroModel = require( 'GAS_PROPERTIES/intro/model/IntroModel' );
-  var IntroScreenView = require( 'GAS_PROPERTIES/intro/view/IntroScreenView' );
+  var IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
+  var IdealScreenView = require( 'GAS_PROPERTIES/ideal/view/IdealScreenView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenIntroString = require( 'string!GAS_PROPERTIES/screen.intro' );
+  var screenIdealString = require( 'string!GAS_PROPERTIES/screen.ideal' );
 
   /**
    * @constructor
    */
-  function IntroScreen() {
+  function IdealScreen() {
 
     var options = {
-      name: screenIntroString,
+      name: screenIdealString,
       backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
     };
 
     Screen.call( this,
-      function() { return new IntroModel(); },
-      function( model ) { return new IntroScreenView( model ); },
+      function() { return new IdealModel(); },
+      function( model ) { return new IdealScreenView( model ); },
       options
     );
   }
 
-  gasProperties.register( 'IntroScreen', IntroScreen );
+  gasProperties.register( 'IdealScreen', IdealScreen );
 
-  return inherit( Screen, IntroScreen );
+  return inherit( Screen, IdealScreen );
 } );
