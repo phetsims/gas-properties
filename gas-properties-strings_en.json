@@ -11,6 +11,9 @@
   "screen.energy": {
     "value": "Energy"
   },
+  "screen.diffusion": {
+    "value": "Diffusion"
+  },
   "holdConstant": {
     "value": "Hold Constant"
   },

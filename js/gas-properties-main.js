@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var DiffusionScreen = require( 'GAS_PROPERTIES/diffusion/DiffusionScreen' );
   var ExploreScreen = require( 'GAS_PROPERTIES/explore/ExploreScreen' );
   var IdealScreen = require( 'GAS_PROPERTIES/ideal/IdealScreen' );
   var EnergyScreen = require( 'GAS_PROPERTIES/energy/EnergyScreen' );
@@ -31,7 +32,7 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var screens = [ new IdealScreen(), new ExploreScreen(), new EnergyScreen() ];
+    var screens = [ new IdealScreen(), new ExploreScreen(), new EnergyScreen(), new DiffusionScreen() ];
     var sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();
   } );
