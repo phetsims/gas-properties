@@ -43,5 +43,11 @@
   },
   "size": {
     "value": "Size"
+  },
+  "stopwatch": {
+    "value": "Stopwatch"
+  },
+  "collisionCounter": {
+    "value": "Collision Counter"
   }
 }

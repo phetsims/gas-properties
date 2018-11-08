@@ -13,8 +13,8 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -29,7 +29,7 @@ define( require => {
     constructor( sizeVisibleProperty, options ) {
 
       const textNode = new Text( sizeString, {
-        font: new PhetFont( 20 ),
+        font: GasPropertiesConstants.CONTROL_FONT,
         fill: GasPropertiesColors.FOREGROUND_COLOR,
         maxWidth: 150 // determined empirically
       } );
