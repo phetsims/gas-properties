@@ -18,8 +18,8 @@ define( require => {
     SCREEN_VIEW_X_MARGIN: 20,
     SCREEN_VIEW_Y_MARGIN: 20,
 
-    HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 250, 0 ),
-    LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 250, 0 ),
+    HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
+    LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     HEAVY_PARTICLES_THUMB_INTERVAL: 10,
     LIGHT_PARTICLES_THUMB_INTERVAL: 10,
 
