@@ -33,6 +33,8 @@ define( require => {
     reset() {
       this.particleTypeProperty.reset();
       this.sizeVisibleProperty.reset();
+      this.stopwatchVisibleProperty.reset();
+      this.collisionCounterVisibleProperty.reset();
       this.particleCountsExpandedProperty.reset();
     }
   }
