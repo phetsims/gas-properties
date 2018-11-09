@@ -22,7 +22,7 @@ define( require => {
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
 
   // constants
-  const PANEL_WIDTH = 250; // determined empirically
+  const PANEL_WIDTH = 225; // determined empirically
 
   class IdealScreenView extends ScreenView {
 

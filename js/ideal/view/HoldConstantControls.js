@@ -42,12 +42,7 @@ define( require => {
      */
     constructor( holdConstantProperty, options ) {
 
-      options = _.extend( {
-
-        // VBox options
-        align: 'left',
-        spacing: 15
-      }, options );
+      options = _.extend( {}, GasPropertiesConstants.VBOX_OPTIONS, options );
 
       const titleNode = new Text( holdConstantString, {
         font: GasPropertiesConstants.TITLE_FONT,

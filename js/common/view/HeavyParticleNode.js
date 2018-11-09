@@ -21,7 +21,7 @@ define( require => {
   function HeavyParticleNode( options ) {
 
     options = _.extend( {
-      diameter: 25
+      diameter: 15
     }, options );
 
     assert && assert( !options.mainColor, 'HeavyParticleNode sets mainColor' );

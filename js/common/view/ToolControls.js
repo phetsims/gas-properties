@@ -36,12 +36,7 @@ define( require => {
      */
     constructor( sizeVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
-      options = _.extend( {
-
-        // VBox options
-        align: 'left',
-        spacing: 15
-      }, options );
+      options = _.extend( {}, GasPropertiesConstants.VBOX_OPTIONS, options );
 
       const sizeCheckbox = new SizeCheckbox( sizeVisibleProperty );
 

@@ -21,7 +21,7 @@ define( require => {
   function LightParticleNode( options ) {
 
     options = _.extend( {
-      diameter: 20
+      diameter: 10
     }, options );
 
     assert && assert( !options.mainColor, 'LightParticleNode sets mainColor' );
