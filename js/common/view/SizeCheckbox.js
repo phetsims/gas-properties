@@ -9,8 +9,8 @@ define( require => {
   'use strict';
 
   // modules
-  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Checkbox = require( 'SUN/Checkbox' );
+  const DimensionalArrowNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -34,18 +34,13 @@ define( require => {
         maxWidth: 150 // determined empirically
       } );
 
-      //TODO use dimensional arrow here
-      const arrowNode = new ArrowNode( 0, 0, 50, 0, {
-        doubleHead: true,
-        headHeight: 12,
-        headWidth: 12,
-        tailWidth: 3,
-        fill: GasPropertiesColors.FOREGROUND_COLOR
+      const dimensionalArrowNode = new DimensionalArrowNode( 44, {
+        color: GasPropertiesColors.FOREGROUND_COLOR
       } );
 
       const content = new HBox( {
-        spacing: 5,
-        children: [ textNode, arrowNode ]
+        spacing: 10,
+        children: [ textNode, dimensionalArrowNode ]
       } );
 
       super( content, sizeVisibleProperty, options );
