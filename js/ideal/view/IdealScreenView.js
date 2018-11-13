@@ -107,7 +107,7 @@ define( require => {
       const timeControls = new TimeControls( model.isPlayingProperty,
         () => {
           model.isPlayingProperty.value = true;
-          model.step();
+          model.step( 1 ); //TODO what is the desired step?
           model.isPlayingProperty.value = false;
         }, {
           left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
