@@ -119,11 +119,19 @@ define( require => {
       } );
       this.addChild( collisionCounterNode );
 
+      // Parent for combo box popup list
+      const comboBoxListParent = new Node();
+      this.addChild( comboBoxListParent );
+
       // Thermometer
-      const thermometerNode = new GasPropertiesThermometerNode( model.temperatureProperty, model.thermometerRange, {
-        right: containerNode.right - 50,
-        centerY: containerNode.top
-      } );
+      const thermometerNode = new GasPropertiesThermometerNode(
+        model.temperatureProperty,
+        model.thermometerRange,
+        viewProperties.temperatureUnitsProperty,
+        comboBoxListParent, {
+          right: containerNode.right - 50,
+          centerY: containerNode.top
+        } );
       this.addChild( thermometerNode );
 
       // Stopwatch
@@ -143,6 +151,9 @@ define( require => {
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( resetAllButton );
+
+      // This should be in front of everything else.
+      comboBoxListParent.moveToFront();
 
       viewProperties.particleTypeProperty.link( particleType => {
 

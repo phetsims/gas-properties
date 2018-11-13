@@ -10,18 +10,30 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const TemperatureComboBox = require( 'GAS_PROPERTIES/common/view/TemperatureComboBox' );
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
-  class GasPropertiesThermometerNode extends ThermometerNode {
+  class GasPropertiesThermometerNode extends VBox {
 
     /**
      * @param {NumberProperty} temperatureProperty
      * @param {Range} thermometerRange
+     * @param {StringProperty} temperatureUnitsProperty
+     * @param {Node} listParent - parent for the combo box list
      * @param {Object} [options]
      */
-    constructor( temperatureProperty, thermometerRange, options ) {
+    constructor( temperatureProperty, thermometerRange, temperatureUnitsProperty, listParent, options ) {
 
       options = _.extend( {
+        spacing: 5,
+        align: 'center'
+      }, options );
+
+      // Combo box that displays temperature for various units, centered above the thermometer
+      const comboBox = new TemperatureComboBox( temperatureProperty, temperatureUnitsProperty, listParent );
+
+      const thermometerNode = new ThermometerNode( thermometerRange.min, thermometerRange.max, temperatureProperty, {
         backgroundFill: 'white',
         bulbDiameter: 30,
         tubeHeight: 100,
@@ -31,12 +43,11 @@ define( require => {
         majorTickLength: 10,
         minorTickLength: 6,
         lineWidth: 1
-      }, options );
+      } );
 
-      super( thermometerRange.min, thermometerRange.max, temperatureProperty, options );
+      options.children = [ comboBox, thermometerNode ];
 
-      //TODO add temperature value display
-      //TODO add temperature units combo box
+      super( options );
     }
   }
 

@@ -58,5 +58,14 @@
   },
   "averagingTime": {
     "value": "Averaging Time"
+  },
+  "kelvin": {
+    "value": "K"
+  },
+  "celsius": {
+    "value": "\u00B0C"
+  },
+  "temperatureUnits": {
+    "value": "{{temperature}} {{units}}"
   }
 }

@@ -81,9 +81,7 @@ define( require => {
       } );
 
       // @public the temperature in the container, in K
-      this.temperatureProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 )
-      } );
+      this.temperatureProperty = new NumberProperty( 0 );
 
       // @public range of thermometer, in K. temperatureProperty is expected to exceed this.
       this.thermometerRange = new Range( 0, 1000 );

@@ -16,27 +16,33 @@ define( require => {
   // constants
   //TODO use Enumeration when https://github.com/phetsims/phet-core/issues/42 is resolved
   const PARTICLE_TYPE_VALUES = [ 'heavy', 'light' ];
+  const TEMPERATURE_UNITS_VALUES = [ 'kelvin', 'celsius' ];
 
   class IdealViewProperties {
 
     constructor() {
 
-      // the particle type that will be dispensed by the bicycle pump
+      // @public the particle type that will be dispensed by the bicycle pump
       this.particleTypeProperty = new StringProperty( 'heavy', {
         validValues: PARTICLE_TYPE_VALUES
       } );
 
-      // whether dimensional arrows are visible for the width of the container
+      // @public whether dimensional arrows are visible for the width of the container
       this.sizeVisibleProperty = new BooleanProperty( false );
 
-      // whether the stopwatch is visible
+      // @public whether the stopwatch is visible
       this.stopwatchVisibleProperty = new BooleanProperty( false );
 
-      // whether the collision counter is visible
+      // @public whether the collision counter is visible
       this.collisionCounterVisibleProperty = new BooleanProperty( false );
 
-      // whether the 'Particles Counts' accordion box is expaned
+      // @public whether the 'Particles Counts' accordion box is expaned
       this.particleCountsExpandedProperty = new BooleanProperty( true );
+
+      // @public temperature units displayed by the thermometer
+      this.temperatureUnitsProperty = new StringProperty( 'kelvin', {
+        validValues: TEMPERATURE_UNITS_VALUES
+      } );
     }
 
     reset() {
@@ -45,6 +51,7 @@ define( require => {
       this.stopwatchVisibleProperty.reset();
       this.collisionCounterVisibleProperty.reset();
       this.particleCountsExpandedProperty.reset();
+      this.temperatureUnitsProperty.reset();
     }
   }
 
