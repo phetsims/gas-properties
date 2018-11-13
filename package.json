@@ -12,6 +12,7 @@
   "phet": {
     "requirejsNamespace": "GAS_PROPERTIES",
     "runnable": true,
+    "colorProfile": true,
     "supportedBrands": [
       "phet",
       "adapted-from-phet"
