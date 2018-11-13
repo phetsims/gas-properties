@@ -25,7 +25,8 @@ define( require => {
 
       options = _.extend( {
         // HBox options
-        spacing: 10
+        spacing: 15,
+        scale: 0.75
       }, options );
 
       const playPauseButton = new PlayPauseButton( isPlayingProperty );

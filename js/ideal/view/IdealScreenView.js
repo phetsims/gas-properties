@@ -17,11 +17,13 @@ define( require => {
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
   const PANEL_WIDTH = 225; // determined empirically
@@ -37,68 +39,6 @@ define( require => {
 
       // view-specific Properties
       const viewProperties = new IdealViewProperties();
-
-      // Container
-      const containerNode = new ContainerNode( model.container, {
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        centerY: this.layoutBounds.centerY
-      } );
-      this.addChild( containerNode );
-
-      //TODO HeaterCoolerNode is a mess, see https://github.com/phetsims/scenery-phet/issues/423
-      // Device to heat/cool the contents of the container
-      const heaterCoolerNode = new HeaterCoolerNode( {
-        heatCoolAmountProperty: model.heatCoolAmountProperty,
-        centerX: containerNode.centerX,
-        top: containerNode.bottom + 20,
-        scale: 0.9
-      } );
-      this.addChild( heaterCoolerNode );
-
-      // Time controls
-      const timeControls = new TimeControls( model.isPlayingProperty,
-        () => {
-          model.isPlayingProperty.value = true;
-          model.step();
-          model.isPlayingProperty.value = false;
-        }, {
-          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-        } );
-      this.addChild( timeControls );
-
-      // Radio buttons for selecting particle type
-      const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty, {
-        left: containerNode.right + 60,
-        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
-      this.addChild( particleTypeRadioButtonGroup );
-
-      // Bicycle pump for heavy particles
-      const heavyPumpNode = new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
-        color: gasPropertiesColorProfile.heavyParticleColorProperty,
-        centerX: particleTypeRadioButtonGroup.centerX,
-        bottom: particleTypeRadioButtonGroup.top - 15
-      } );
-      this.addChild( heavyPumpNode );
-
-      // Bicycle pump for light particles
-      const lightPumpNode = new BicyclePumpNode( model.numberOfLightParticlesProperty, {
-        color: gasPropertiesColorProfile.lightParticleColorProperty,
-        center: heavyPumpNode.center
-      } );
-      this.addChild( lightPumpNode );
-
-      viewProperties.particleTypeProperty.link( particleType => {
-
-        // interrupt input with the visible pump
-        heavyPumpNode && heavyPumpNode.interruptSubtreeInput();
-        lightPumpNode.visible && lightPumpNode.interruptSubtreeInput();
-
-        // make the appropriate pump visible
-        heavyPumpNode.visible = ( particleType === 'heavy' );
-        lightPumpNode.visible = ( particleType === 'light' );
-      });
 
       // Control panel at upper right
       const controlPanel = new IdealControlPanel( model.holdConstantProperty, viewProperties.sizeVisibleProperty,
@@ -118,6 +58,72 @@ define( require => {
           top: controlPanel.bottom + 15
         } );
       this.addChild( particleCountsAccordionBox );
+
+      // Bicycle pump for heavy particles
+      const heavyPumpNode = new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
+        color: gasPropertiesColorProfile.heavyParticleColorProperty
+      } );
+
+      // Bicycle pump for light particles
+      const lightPumpNode = new BicyclePumpNode( model.numberOfLightParticlesProperty, {
+        color: gasPropertiesColorProfile.lightParticleColorProperty
+      } );
+
+      // Radio buttons for selecting particle type
+      const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty );
+
+      // Pumps + radio buttons
+      const pumpBox = new VBox( {
+        align: 'center',
+        spacing: 15,
+        children: [
+          new Node( { children: [ heavyPumpNode, lightPumpNode ] } ),
+          particleTypeRadioButtonGroup
+        ],
+        right: controlPanel.left - 40,
+        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+      this.addChild( pumpBox );
+
+      // Container
+      const containerNode = new ContainerNode( model.container, {
+        right: pumpBox.left - 40,
+        centerY: this.layoutBounds.centerY - 40
+      } );
+      this.addChild( containerNode );
+
+      //TODO HeaterCoolerNode is a mess, see https://github.com/phetsims/scenery-phet/issues/423
+      // Device to heat/cool the contents of the container
+      const heaterCoolerNode = new HeaterCoolerNode( {
+        heatCoolAmountProperty: model.heatCoolAmountProperty,
+        centerX: containerNode.centerX,
+        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+        scale: 0.9
+      } );
+      this.addChild( heaterCoolerNode );
+
+      // Time controls
+      const timeControls = new TimeControls( model.isPlayingProperty,
+        () => {
+          model.isPlayingProperty.value = true;
+          model.step();
+          model.isPlayingProperty.value = false;
+        }, {
+          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
+      this.addChild( timeControls );
+
+      viewProperties.particleTypeProperty.link( particleType => {
+
+        // interrupt input with the visible pump
+        heavyPumpNode && heavyPumpNode.interruptSubtreeInput();
+        lightPumpNode.visible && lightPumpNode.interruptSubtreeInput();
+
+        // make the appropriate pump visible
+        heavyPumpNode.visible = ( particleType === 'heavy' );
+        lightPumpNode.visible = ( particleType === 'light' );
+      } );
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
