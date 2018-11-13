@@ -84,7 +84,8 @@ define( require => {
 
       // disable the multiplier button when pressing it would exceed range
       numberOfParticlesProperty.link( numberOfParticles => {
-        multiplierButton.enabled = ( numberOfParticles * MULTIPLIER <= numberOfParticlesProperty.range.max );
+        multiplierButton.enabled = ( numberOfParticles > 0 ) &&
+                                   ( numberOfParticles * MULTIPLIER <= numberOfParticlesProperty.range.max );
       } );
     }
   }
