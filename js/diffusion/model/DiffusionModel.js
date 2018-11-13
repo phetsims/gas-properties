@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
   class DiffusionModel {
 

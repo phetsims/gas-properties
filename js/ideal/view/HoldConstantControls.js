@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Text = require( 'SCENERY/nodes/Text' );

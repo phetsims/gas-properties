@@ -11,7 +11,7 @@ define( require => {
   'use strict';
 
   // modules
-  var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
+  const ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
   const gasPropertiesColorProfile = new ColorProfile( {

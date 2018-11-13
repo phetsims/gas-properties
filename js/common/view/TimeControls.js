@@ -9,11 +9,11 @@ define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
+  const StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
 
   /**
    * @param {BooleanProperty} isPlayingProperty
@@ -28,9 +28,9 @@ define( require => {
       spacing: 10
     }, options );
 
-    var playPauseButton = new PlayPauseButton( isPlayingProperty );
+    const playPauseButton = new PlayPauseButton( isPlayingProperty );
 
-    var stepButton = new StepButton( {
+    const stepButton = new StepButton( {
       isPlayingProperty: isPlayingProperty,
       listener: stepCallback
     });

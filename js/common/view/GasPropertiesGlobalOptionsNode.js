@@ -22,7 +22,7 @@ define( require => {
     constructor( globalOptions ) {
 
       // Projector Mode
-      var projectorModeCheckbox = new ProjectorModeCheckbox( {
+      const projectorModeCheckbox = new ProjectorModeCheckbox( {
         projectorModeEnabledProperty: globalOptions.projectorModeEnabledProperty
       } );
 

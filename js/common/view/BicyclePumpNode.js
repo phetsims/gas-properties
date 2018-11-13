@@ -10,12 +10,12 @@ define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RichText = require( 'SCENERY/nodes/RichText' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
 
   /**
    * @param {String} particleTypeProperty
@@ -24,11 +24,11 @@ define( require => {
    */
   function BicyclePumpNode( particleTypeProperty, options ) {
 
-    var rectangle = new Rectangle( 0, 0, 120, 240, {
+    const rectangle = new Rectangle( 0, 0, 120, 240, {
       lineWidth: 2
     } );
 
-    var text = new RichText( 'bicycle pump', {
+    const text = new RichText( 'bicycle pump', {
       maxWidth: 0.85 * rectangle.width,
       fill: 'white',
       centerX: rectangle.centerX,
