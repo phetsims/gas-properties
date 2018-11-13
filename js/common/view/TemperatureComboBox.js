@@ -2,7 +2,8 @@
 
 /**
  * Combo box for choosing temperature units, and displaying temperature values in those units.
- * Using a combo box to display a dynamic value is generally not recommended, but here we are.
+ * A combo box typically displays a static list of choices, and is not recommended for displaying
+ * dynamic values. But here we are.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
