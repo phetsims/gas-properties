@@ -12,6 +12,7 @@ define( require => {
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
@@ -73,15 +74,31 @@ define( require => {
       } );
       this.addChild( particleTypeRadioButtonGroup );
 
-      // Bicycle pump
-      const bicyclePumpNode = new BicyclePumpNode(
-        viewProperties.particleTypeProperty,
-        model.numberOfHeavyParticlesProperty,
-        model.numberOfLightParticlesProperty, {
-          centerX: particleTypeRadioButtonGroup.centerX,
-          bottom: particleTypeRadioButtonGroup.top - 15
-        } );
-      this.addChild( bicyclePumpNode );
+      // Bicycle pump for heavy particles
+      const heavyPumpNode = new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
+        color: gasPropertiesColorProfile.heavyParticleColorProperty,
+        centerX: particleTypeRadioButtonGroup.centerX,
+        bottom: particleTypeRadioButtonGroup.top - 15
+      } );
+      this.addChild( heavyPumpNode );
+
+      // Bicycle pump for light particles
+      const lightPumpNode = new BicyclePumpNode( model.numberOfLightParticlesProperty, {
+        color: gasPropertiesColorProfile.lightParticleColorProperty,
+        center: heavyPumpNode.center
+      } );
+      this.addChild( lightPumpNode );
+
+      viewProperties.particleTypeProperty.link( particleType => {
+
+        // interrupt input with the visible pump
+        heavyPumpNode && heavyPumpNode.interruptSubtreeInput();
+        lightPumpNode.visible && lightPumpNode.interruptSubtreeInput();
+
+        // make the appropriate pump visible
+        heavyPumpNode.visible = ( particleType === 'heavy' );
+        lightPumpNode.visible = ( particleType === 'light' );
+      });
 
       // Control panel at upper right
       const controlPanel = new IdealControlPanel( model.holdConstantProperty, viewProperties.sizeVisibleProperty,

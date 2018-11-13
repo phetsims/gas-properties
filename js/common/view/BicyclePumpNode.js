@@ -3,7 +3,7 @@
 //TODO placeholder, see https://github.com/phetsims/states-of-matter/issues/217
 /**
  * Bicycle pump, used to add particles to the container.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -11,7 +11,6 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -23,21 +22,23 @@ define( require => {
   const PARTICLES_PER_PUMP = 20;
 
   class BicyclePumpNode extends Node {
-    
+
     /**
-     * @param {String} particleTypeProperty
-     * @param {NumberProperty} numberOfHeavyParticlesProperty
-     * @param {NumberProperty} numberOfLightParticlesProperty
+     * @param {NumberProperty} numberOfParticlesProperty
      * @param {Object} [options]
      * @constructor
      */
-    constructor( particleTypeProperty, numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, options ) {
+    constructor( numberOfParticlesProperty, options ) {
 
-      assert && assert( numberOfHeavyParticlesProperty.range, 'missing numberOfHeavyParticlesProperty.range' );
-      assert && assert( numberOfLightParticlesProperty.range, 'missing numberOfLightParticlesProperty.range' );
+      options = _.extend( {
+        color: 'white'
+      }, options );
 
-      const rectangle = new Rectangle( 0, 0, 120, 240, {
-        lineWidth: 2
+      assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
+
+      const rectangle = new Rectangle( 0, 0, 100, 200, {
+        fill: options.color,
+        stroke: 'black'
       } );
 
       const pumpButton = new RectangularPushButton( {
@@ -46,14 +47,8 @@ define( require => {
           font: new PhetFont( 18 )
         } ),
         listener: () => {
-          if ( particleTypeProperty.value === 'heavy' ) {
-            numberOfHeavyParticlesProperty.value += Math.min( PARTICLES_PER_PUMP,
-              numberOfHeavyParticlesProperty.range.max - numberOfHeavyParticlesProperty.value );
-          }
-          else {
-            numberOfLightParticlesProperty.value += Math.min( PARTICLES_PER_PUMP,
-              numberOfLightParticlesProperty.range.max - numberOfLightParticlesProperty.value );
-          }
+          numberOfParticlesProperty.value += Math.min( PARTICLES_PER_PUMP,
+            numberOfParticlesProperty.range.max - numberOfParticlesProperty.value );
         },
         centerX: rectangle.centerX,
         top: rectangle.top + 10
@@ -69,36 +64,10 @@ define( require => {
 
       super( options );
 
-      // Change color of the pump to match the type of particle
-      particleTypeProperty.link( particleType => {
-
-        if ( particleType === 'heavy' ) {
-          rectangle.fill = gasPropertiesColorProfile.heavyParticleColorProperty;
-          pumpButton.enabled = ( numberOfHeavyParticlesProperty.value < numberOfHeavyParticlesProperty.range.max );
-          particleCountNode.text = numberOfHeavyParticlesProperty.value;
-        }
-        else {
-          rectangle.fill = gasPropertiesColorProfile.lightParticleColorProperty;
-          pumpButton.enabled = ( numberOfLightParticlesProperty.value < numberOfLightParticlesProperty.range.max );
-          particleCountNode.text = numberOfLightParticlesProperty.value;
-        }
+      numberOfParticlesProperty.link( numberOfParticles => {
+        pumpButton.enabled = ( numberOfParticles < numberOfParticlesProperty.range.max );
+        particleCountNode.text = numberOfParticles;
         particleCountNode.center = rectangle.center;
-      } );
-
-      numberOfHeavyParticlesProperty.link( numberOfHeavyParticles => {
-        if ( particleTypeProperty.value === 'heavy' ) {
-          pumpButton.enabled = ( numberOfHeavyParticles < numberOfHeavyParticlesProperty.range.max );
-          particleCountNode.text = numberOfHeavyParticles;
-          particleCountNode.center = rectangle.center;
-        }
-      } );
-
-      numberOfLightParticlesProperty.link( numberOfLightParticles => {
-        if ( particleTypeProperty.value === 'light' ) {
-          pumpButton.enabled = ( numberOfLightParticles < numberOfLightParticlesProperty.range.max );
-          particleCountNode.text = numberOfLightParticles;
-          particleCountNode.center = rectangle.center;
-        }
       } );
     }
   }
