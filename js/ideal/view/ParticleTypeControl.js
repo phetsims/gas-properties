@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const HeavyParticleNode = require( 'GAS_PROPERTIES/common/view/HeavyParticleNode' );
   const LightParticleNode = require( 'GAS_PROPERTIES/common/view/LightParticleNode' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -27,12 +28,12 @@ define( require => {
 
         // RadioButtonGroup options
         orientation: 'horizontal',
-        baseColor: 'black',
-        disabledBaseColor: 'black',
-        selectedStroke: 'yellow',
-        deselectedStroke: 'white',
+        baseColor: gasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
+        disabledBaseColor: gasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
+        selectedStroke: gasPropertiesColorProfile.radioButtonGroupSelectedStrokeProperty,
+        deselectedStroke: gasPropertiesColorProfile.radioButtonGroupDeselectedStrokeProperty,
         selectedLineWidth: 3,
-        deselectedLineWidth: 3,
+        deselectedLineWidth: 1.5,
         spacing: 8,
         buttonContentXMargin: 15,
         buttonContentYMargin: 12

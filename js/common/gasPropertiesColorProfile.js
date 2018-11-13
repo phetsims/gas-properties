@@ -28,6 +28,18 @@ define( require => {
     textFill: {
       default: 'white',
       projector: 'black'
+    },
+    radioButtonGroupBaseColor: {
+      default: 'black',
+      projector: 'white'
+    },
+    radioButtonGroupSelectedStroke: {
+      default: 'yellow',
+      projector: 'rgb( 105, 195, 231 )' // blue
+    },
+    radioButtonGroupDeselectedStroke: {
+      default: 'rgb( 240, 240, 240 )',
+      projector: 'rgb( 180, 180, 180 )'
     }
   }, [ 'default', 'projector' ] );
 
