@@ -18,6 +18,7 @@ define( require => {
   const StringProperty = require( 'AXON/StringProperty' );
 
   // constants
+  //TODO use Enumeration when https://github.com/phetsims/phet-core/issues/42 is resolved
   const HOLD_CONSTANT_VALUES = [
     'nothing',
     'volume',

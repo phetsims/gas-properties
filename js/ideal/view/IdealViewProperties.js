@@ -13,12 +13,16 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const StringProperty = require( 'AXON/StringProperty' );
 
+  // constants
+  //TODO use Enumeration when https://github.com/phetsims/phet-core/issues/42 is resolved
+  const PARTICLE_TYPE_VALUES = [ 'heavy', 'light' ];
+
   class IdealViewProperties {
 
     constructor() {
 
       this.particleTypeProperty = new StringProperty( 'heavy', {
-        validValues: [ 'heavy', 'light' ]
+        validValues: PARTICLE_TYPE_VALUES
       } );
 
       this.sizeVisibleProperty = new BooleanProperty( false );
