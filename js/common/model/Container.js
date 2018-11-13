@@ -15,7 +15,7 @@ define( require => {
 
   // constants
   const CONTAINER_WIDTH_RANGE = new RangeWithValue( 100, 500, 500 );
-  const CONTAINER_HEIGHT = 400;
+  const CONTAINER_HEIGHT = 350;
 
   class Container {
 

@@ -79,6 +79,14 @@ define( require => {
       this.numberOfCollisionsProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 )
       } );
+
+      // @public the temperature in the container, in K
+      this.temperatureProperty = new NumberProperty( 0, {
+        isValidValue: value => ( value >= 0 )
+      } );
+
+      // @public range of thermometer, in K. temperatureProperty is expected to exceed this.
+      this.thermometerRange = new Range( 0, 1000 );
     }
 
     // @public resets the model
@@ -93,6 +101,7 @@ define( require => {
       this.stopwatchTimeProperty.reset();
       this.collisionCounterIsRunningProperty.reset();
       this.numberOfCollisionsProperty.reset();
+      this.temperatureProperty.reset();
     }
 
     // @public

@@ -15,6 +15,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
@@ -118,6 +119,13 @@ define( require => {
       } );
       this.addChild( collisionCounterNode );
 
+      // Thermometer
+      const thermometerNode = new GasPropertiesThermometerNode( model.temperatureProperty, model.thermometerRange, {
+        right: containerNode.right - 50,
+        centerY: containerNode.top
+      } );
+      this.addChild( thermometerNode );
+
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatchTimeProperty, model.stopwatchIsRunningProperty, {
         left: collisionCounterNode.right + 20,
@@ -150,8 +158,8 @@ define( require => {
       viewProperties.collisionCounterVisibleProperty.link( collisionCounterVisible => {
         collisionCounterNode.visible = collisionCounterVisible;
         if ( !collisionCounterVisible ) {
-           model.collisionCounterIsRunningProperty.value = false;
-           model.numberOfCollisionsProperty.value = 0;
+          model.collisionCounterIsRunningProperty.value = false;
+          model.numberOfCollisionsProperty.value = 0;
         }
       } );
 
