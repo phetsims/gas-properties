@@ -9,10 +9,10 @@ define( require => {
   'use strict';
 
   // modules
-  var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   /**
    * @param {Object} [options]
@@ -25,7 +25,7 @@ define( require => {
     }, options );
 
     assert && assert( !options.mainColor, 'HeavyParticleNode sets mainColor' );
-    options.mainColor = GasPropertiesColors.HEAVY_PARTICLE;
+    options.mainColor = gasPropertiesColorProfile.heavyParticleColorProperty;
 
     ShadedSphereNode.call( this, options.diameter, options );
   }

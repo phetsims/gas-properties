@@ -11,7 +11,7 @@ define( require => {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
+  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -30,7 +30,7 @@ define( require => {
 
     var text = new RichText( 'bicycle pump', {
       maxWidth: 0.85 * rectangle.width,
-      fill: GasPropertiesColors.FOREGROUND_COLOR,
+      fill: 'white',
       centerX: rectangle.centerX,
       top: rectangle.top + 5
     } );
@@ -42,7 +42,9 @@ define( require => {
 
     // Change color of the pump to match the type of particle
     particleTypeProperty.link( function( particleType ) {
-      rectangle.fill = ( particleType === 'heavy' ) ? GasPropertiesColors.HEAVY_PARTICLE : GasPropertiesColors.LIGHT_PARTICLE;
+      rectangle.fill = ( particleType === 'heavy' ) ?
+                       gasPropertiesColorProfile.heavyParticleColorProperty :
+                       gasPropertiesColorProfile.lightParticleColorProperty;
     } );
   }
 

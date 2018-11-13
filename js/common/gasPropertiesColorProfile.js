@@ -1,7 +1,9 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Color profile for this simulation, supports default and 'projector mode'.  This is a singleton.
+ * Singleton color profile for this simulation.
+ * Default colors are required. Colors for other profiles are optional.
+ * Profile 'projector' is used for Projector Mode.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -44,6 +46,12 @@ define( require => {
     containerStroke: {
       default: 'white',
       projector: 'black'
+    },
+    heavyParticleColor: {
+      default: 'rgb( 119, 114, 244 )'
+    },
+    lightParticleColor: {
+      default: 'rgb( 232, 78, 32 )'
     }
   }, [ 'default', 'projector' ] );
 
