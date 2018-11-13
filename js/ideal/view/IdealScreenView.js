@@ -16,7 +16,7 @@ define( require => {
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/ideal/view/ParticleCountsAccordionBox' );
-  const ParticleTypeControl = require( 'GAS_PROPERTIES/ideal/view/ParticleTypeControl' );
+  const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/ideal/view/ParticleTypeRadioButtonGroup' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
@@ -56,16 +56,16 @@ define( require => {
       this.addChild( timeControls );
 
       // Radio buttons for selecting particle type
-      const particleTypeControl = new ParticleTypeControl( viewProperties.particleTypeProperty, {
+      const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty, {
         left: containerNode.right + 60,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      this.addChild( particleTypeControl );
+      this.addChild( particleTypeRadioButtonGroup );
 
       // Bicycle pump
       const bicyclePumpNode = new BicyclePumpNode( viewProperties.particleTypeProperty, {
-        centerX: particleTypeControl.centerX,
-        bottom: particleTypeControl.top - 15
+        centerX: particleTypeRadioButtonGroup.centerX,
+        bottom: particleTypeRadioButtonGroup.top - 15
       } );
       this.addChild( bicyclePumpNode );
 

@@ -1,6 +1,5 @@
 // Copyright 2018, University of Colorado Boulder
 
-//TODO rename to ParticleTypeRadioButtonGroup
 /**
  * Control for selecting between heavy and light particle types.
  *
@@ -16,7 +15,7 @@ define( require => {
   const LightParticleNode = require( 'GAS_PROPERTIES/common/view/LightParticleNode' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
-  class ParticleTypeControl extends RadioButtonGroup {
+  class ParticleTypeRadioButtonGroup extends RadioButtonGroup {
 
     /**
      * @param {StringProperty} particleTypeProperty
@@ -48,6 +47,6 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ParticleTypeControl', ParticleTypeControl );
+  return gasProperties.register( 'ParticleTypeRadioButtonGroup', ParticleTypeRadioButtonGroup );
 } );
  
