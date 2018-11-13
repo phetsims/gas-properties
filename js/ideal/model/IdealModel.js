@@ -30,6 +30,9 @@ define( require => {
 
     constructor() {
 
+      // @public width of the container, in nm
+      this.container = new Container();
+
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
 
@@ -55,23 +58,35 @@ define( require => {
         range: new Range( -1, 1 )
       } );
 
-      // @public width of the container, in nm
-      this.container = new Container();
+      // @public time displayed on the stopwatch, in ps
+      this.stopwatchTimeProperty = new NumberProperty( 0, {
+        isValidValue: value => ( value >= 0 )
+      } );
+
+      // @public whether the stopwatch is running
+      this.stopwatchIsRunningProperty = new BooleanProperty( false );
     }
 
     // @public resets the model
     reset() {
+      this.container.reset();
       this.isPlayingProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
-      this.container.reset();
+      this.heatCoolAmountProperty.reset();
+      this.stopwatchTimeProperty.reset();
+      this.stopwatchIsRunningProperty.reset();
     }
 
     // @public
     step( dt ) {
       if ( this.isPlayingProperty.value ) {
-        //TODO
+
+        // Update the stopwatch. 1 second of real time is displayed as 2.5 picoseconds
+        if ( this.stopwatchIsRunningProperty.value ) {
+          this.stopwatchTimeProperty.value += ( 2.5 * dt );
+        }
       }
     }
   }

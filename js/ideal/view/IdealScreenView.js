@@ -22,6 +22,7 @@ define( require => {
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -114,16 +115,12 @@ define( require => {
         } );
       this.addChild( timeControls );
 
-      viewProperties.particleTypeProperty.link( particleType => {
-
-        // interrupt input with the visible pump
-        heavyPumpNode && heavyPumpNode.interruptSubtreeInput();
-        lightPumpNode.visible && lightPumpNode.interruptSubtreeInput();
-
-        // make the appropriate pump visible
-        heavyPumpNode.visible = ( particleType === 'heavy' );
-        lightPumpNode.visible = ( particleType === 'light' );
+      // Stopwatch
+      const stopwatchNode = new StopwatchNode( model.stopwatchTimeProperty, model.stopwatchIsRunningProperty, {
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
+      this.addChild( stopwatchNode );
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
@@ -135,6 +132,19 @@ define( require => {
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( resetAllButton );
+
+      viewProperties.particleTypeProperty.link( particleType => {
+
+        // interrupt input with the visible pump
+        heavyPumpNode && heavyPumpNode.interruptSubtreeInput();
+        lightPumpNode.visible && lightPumpNode.interruptSubtreeInput();
+
+        // make the appropriate pump visible
+        heavyPumpNode.visible = ( particleType === 'heavy' );
+        lightPumpNode.visible = ( particleType === 'light' );
+      } );
+
+      viewProperties.stopwatchVisibleProperty.linkAttribute( stopwatchNode, 'visible' );
     }
   }
 

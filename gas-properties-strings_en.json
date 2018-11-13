@@ -49,5 +49,8 @@
   },
   "collisionCounter": {
     "value": "Collision Counter"
+  },
+  "picoseconds": {
+    "value": "ps"
   }
 }
