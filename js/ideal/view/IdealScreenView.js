@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
+  const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
@@ -115,9 +116,16 @@ define( require => {
         } );
       this.addChild( timeControls );
 
+      // Collision Counter
+      const collisionCounterNode = new CollisionCounterNode( {
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+      this.addChild( collisionCounterNode );
+
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatchTimeProperty, model.stopwatchIsRunningProperty, {
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        left: collisionCounterNode.right + 20,
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( stopwatchNode );
@@ -144,7 +152,21 @@ define( require => {
         lightPumpNode.visible = ( particleType === 'light' );
       } );
 
-      viewProperties.stopwatchVisibleProperty.linkAttribute( stopwatchNode, 'visible' );
+      viewProperties.collisionCounterVisibleProperty.link( collisionCounterVisible => {
+        collisionCounterNode.visible = collisionCounterVisible;
+        if ( !collisionCounterVisible ) {
+           model.collisionCounterIsRunningProperty.value = false;
+           model.numberOfCollisionsProperty.value = 0;
+        }
+      } );
+
+      viewProperties.stopwatchVisibleProperty.link( stopwatchVisible => {
+        stopwatchNode.visible = stopwatchVisible;
+        if ( !stopwatchVisible ) {
+          model.stopwatchIsRunningProperty.value = false;
+          model.stopwatchTimeProperty.value = 0;
+        }
+      } );
     }
   }
 

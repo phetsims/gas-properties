@@ -48,10 +48,13 @@ define( require => {
       projector: 'black'
     },
     heavyParticleColor: {
-      default: 'rgb( 119, 114, 244 )'
+      default: 'rgb( 119, 114, 244 )' // purple
     },
     lightParticleColor: {
-      default: 'rgb( 232, 78, 32 )'
+      default: 'rgb( 232, 78, 32 )' // red
+    },
+    collisionCounterBackgroundColor: {
+      default: 'rgb( 254, 212, 131 )' // yellowish
     }
   }, [ 'default', 'projector' ] );
 

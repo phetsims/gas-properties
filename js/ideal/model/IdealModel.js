@@ -67,6 +67,14 @@ define( require => {
       this.stopwatchTimeProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 )
       } );
+
+      // @public whether the collision counter is running
+      this.collisionCounterIsRunningProperty = new BooleanProperty( false );
+
+      // @public the number of collisions between the particles and the container walls
+      this.numberOfCollisionsProperty = new NumberProperty( 0, {
+        isValidValue: value => ( value >= 0 )
+      } );
     }
 
     // @public resets the model
@@ -77,8 +85,10 @@ define( require => {
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
       this.heatCoolAmountProperty.reset();
-      this.stopwatchTimeProperty.reset();
       this.stopwatchIsRunningProperty.reset();
+      this.stopwatchTimeProperty.reset();
+      this.collisionCounterIsRunningProperty.reset();
+      this.numberOfCollisionsProperty.reset();
     }
 
     // @public

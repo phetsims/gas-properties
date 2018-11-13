@@ -52,5 +52,11 @@
   },
   "picoseconds": {
     "value": "ps"
+  },
+  "wallCollisions": {
+    "value": "Wall Collisions"
+  },
+  "averagingTime": {
+    "value": "Averaging Time"
   }
 }
