@@ -2,7 +2,7 @@
 
 /**
  * Combo box for choosing temperature units, and displaying temperature values in those units.
- * This is a non-standard use of a combo box, not generally recommended, but here we are.
+ * Using a combo box to display a dynamic value is generally not recommended, but here we are.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -27,7 +27,7 @@ define( require => {
   const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 );
   const NUMBER_DISPLAY_OPTIONS = {
     backgroundStroke: null,
-    font: new PhetFont( 12 ),
+    font: new PhetFont( 14 ),
     align: 'right',
     xMargin: 0,
     yMargin: 0
