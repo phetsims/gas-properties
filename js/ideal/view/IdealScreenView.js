@@ -105,15 +105,10 @@ define( require => {
       this.addChild( heaterCoolerNode );
 
       // Time controls
-      const timeControls = new TimeControls( model.isPlayingProperty,
-        () => {
-          model.isPlayingProperty.value = true;
-          model.step( 1 ); //TODO what is the desired step?
-          model.isPlayingProperty.value = false;
-        }, {
-          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-        } );
+      const timeControls = new TimeControls( model, {
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
       this.addChild( timeControls );
 
       // Collision Counter

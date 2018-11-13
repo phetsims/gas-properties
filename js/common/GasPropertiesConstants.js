@@ -18,6 +18,8 @@ define( require => {
     SCREEN_VIEW_X_MARGIN: 20,
     SCREEN_VIEW_Y_MARGIN: 20,
 
+    SIM_TIME_STEP: 0.2, // ps
+
     VBOX_OPTIONS: {
       align: 'left',
       spacing: 12

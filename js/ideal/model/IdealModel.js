@@ -13,6 +13,7 @@ define( require => {
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Range = require( 'DOT/Range' );
   const StringProperty = require( 'AXON/StringProperty' );
@@ -30,6 +31,10 @@ define( require => {
   class IdealModel {
 
     constructor() {
+
+      // @public transform between real time and sim time.
+      // 1 second of real time is 2.5 picoseconds of sim time.
+      this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
 
       // @public width of the container, in nm
       this.container = new Container();
@@ -62,7 +67,6 @@ define( require => {
       // @public whether the stopwatch is running
       this.stopwatchIsRunningProperty = new BooleanProperty( false );
 
-      //TODO I'd prefer to keep time in seconds and handle scaling in view, but see https://github.com/phetsims/scenery-phet/issues/426
       // @public time displayed on the stopwatch, in ps
       this.stopwatchTimeProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 )
@@ -97,7 +101,7 @@ define( require => {
 
         // Update the stopwatch. 1 second of real time is displayed as 2.5 picoseconds
         if ( this.stopwatchIsRunningProperty.value ) {
-          this.stopwatchTimeProperty.value += ( 2.5 * dt );
+          this.stopwatchTimeProperty.value += this.timeTransform( dt );
         }
       }
     }
