@@ -1,5 +1,6 @@
 // Copyright 2018, University of Colorado Boulder
 
+//TODO show '-' for temperature value when container is empty, e.g. '- K'
 /**
  * Combo box for choosing temperature units, and displaying temperature values in those units.
  * A combo box typically displays a static list of choices, and is not recommended for displaying
