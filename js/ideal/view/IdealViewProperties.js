@@ -21,16 +21,21 @@ define( require => {
 
     constructor() {
 
+      // the particle type that will be dispensed by the bicycle pump
       this.particleTypeProperty = new StringProperty( 'heavy', {
         validValues: PARTICLE_TYPE_VALUES
       } );
 
+      // whether dimensional arrows are visible for the width of the container
       this.sizeVisibleProperty = new BooleanProperty( false );
 
+      // whether the stopwatch is visible
       this.stopwatchVisibleProperty = new BooleanProperty( false );
 
+      // whether the collision counter is visible
       this.collisionCounterVisibleProperty = new BooleanProperty( false );
 
+      // whether the 'Particles Counts' accordion box is expaned
       this.particleCountsExpandedProperty = new BooleanProperty( true );
     }
 
