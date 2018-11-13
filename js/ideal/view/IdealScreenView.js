@@ -74,19 +74,22 @@ define( require => {
       this.addChild( particleTypeRadioButtonGroup );
 
       // Bicycle pump
-      const bicyclePumpNode = new BicyclePumpNode( viewProperties.particleTypeProperty, {
-        centerX: particleTypeRadioButtonGroup.centerX,
-        bottom: particleTypeRadioButtonGroup.top - 15
-      } );
+      const bicyclePumpNode = new BicyclePumpNode(
+        viewProperties.particleTypeProperty,
+        model.numberOfHeavyParticlesProperty,
+        model.numberOfLightParticlesProperty, {
+          centerX: particleTypeRadioButtonGroup.centerX,
+          bottom: particleTypeRadioButtonGroup.top - 15
+        } );
       this.addChild( bicyclePumpNode );
 
       // Control panel at upper right
       const controlPanel = new IdealControlPanel( model.holdConstantProperty, viewProperties.sizeVisibleProperty,
         viewProperties.stopwatchVisibleProperty, viewProperties.collisionCounterVisibleProperty, {
-        fixedWidth: PANEL_WIDTH,
-        right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+          fixedWidth: PANEL_WIDTH,
+          right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
       this.addChild( controlPanel );
 
       // Particle Counts accordion box
