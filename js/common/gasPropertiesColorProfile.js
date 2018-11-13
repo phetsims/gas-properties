@@ -36,8 +36,8 @@ define( require => {
       projector: 'white'
     },
     radioButtonGroupSelectedStroke: {
-      default: 'yellow',
-      projector: 'rgb( 105, 195, 231 )' // blue
+      //TODO not digging this color
+      default: 'rgb( 105, 195, 231 )' // blue
     },
     radioButtonGroupDeselectedStroke: {
       default: 'rgb( 240, 240, 240 )',
