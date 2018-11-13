@@ -13,6 +13,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
 
   // strings
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
@@ -28,7 +29,7 @@ define( require => {
 
       options = _.extend( {
         unitsNode: new Text( picosecondsString, {
-          font: new PhetFont( 15 )
+          font: TimerReadoutNode.DEFAULT_SMALL_FONT
         } )
       }, options );
 
