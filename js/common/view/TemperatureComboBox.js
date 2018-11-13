@@ -1,7 +1,8 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Combo box that shows temperature in the container in Kelvin or Celsius.
+ * Combo box for choosing temperature units, and displaying temperature values in those units.
+ * This is a non-standard use of a combo box, not generally recommended, but here we are.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -73,7 +74,8 @@ define( require => {
           } )
         } ) );
 
-      // Set the same maxWidth for both item Nodes, since their values will change dynamically.
+      // Set the same maxWidth for both item Nodes, since their values will change dynamically. Values outside of
+      // NUMBER_DISPLAY_RANGE will cause the NumberDisplay instances (and hence the visible values) to be scaled down.
       const maxWidth = Math.max( kelvinNode.width, celsiusNode.width );
       kelvinNode.maxWidth = maxWidth;
       celsiusNode.maxWidth = maxWidth;
