@@ -17,13 +17,13 @@ define( require => {
       default: 'black',
       projector: 'white'
     },
-    accordionBoxFill: {
-      default: 'black',
-      projector: 'white'
-    },
     panelFill: {
       default: 'black',
       projector: 'white'
+    },
+    panelStroke: {
+      default: 'white',
+      projector: 'black'
     },
     textFill: {
       default: 'white',
