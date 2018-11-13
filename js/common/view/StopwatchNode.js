@@ -27,6 +27,7 @@ define( require => {
     constructor( stopwatchTimeProperty, stopwatchIsRunningProperty, options ) {
 
       options = _.extend( {
+        maxValue: 999.99,
         unitsNode: new Text( picosecondsString, {
           font: TimerReadoutNode.DEFAULT_SMALL_FONT
         } )
