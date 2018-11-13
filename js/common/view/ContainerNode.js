@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   var gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   var GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -23,7 +24,7 @@ define( require => {
   function ContainerNode( container, options ) {
 
     var rectangle = new Rectangle( 0, 0, container.widthProperty.value, container.height, {
-      stroke: GasPropertiesColors.FOREGROUND_COLOR,
+      stroke: gasPropertiesColorProfile.containerStrokeProperty,
       lineWidth: 2
     } );
 

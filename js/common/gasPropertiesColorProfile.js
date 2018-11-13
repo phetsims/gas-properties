@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Color profile for this simulation, supports default and 'projector mode'.
+ * Color profile for this simulation, supports default and 'projector mode'.  This is a singleton.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -40,6 +40,10 @@ define( require => {
     radioButtonGroupDeselectedStroke: {
       default: 'rgb( 240, 240, 240 )',
       projector: 'rgb( 180, 180, 180 )'
+    },
+    containerStroke: {
+      default: 'white',
+      projector: 'black'
     }
   }, [ 'default', 'projector' ] );
 
