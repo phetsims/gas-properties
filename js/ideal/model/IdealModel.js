@@ -58,14 +58,14 @@ define( require => {
         range: new Range( -1, 1 )
       } );
 
+      // @public whether the stopwatch is running
+      this.stopwatchIsRunningProperty = new BooleanProperty( false );
+
       //TODO I'd prefer to keep time in seconds and handle scaling in view, but see https://github.com/phetsims/scenery-phet/issues/426
       // @public time displayed on the stopwatch, in ps
       this.stopwatchTimeProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 )
       } );
-
-      // @public whether the stopwatch is running
-      this.stopwatchIsRunningProperty = new BooleanProperty( false );
     }
 
     // @public resets the model
