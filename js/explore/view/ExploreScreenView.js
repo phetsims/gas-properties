@@ -36,7 +36,7 @@ define( require => {
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
-        listener: function() {
+        listener: () => {
           model.reset();
         },
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,

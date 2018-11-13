@@ -39,7 +39,7 @@ define( require => {
     }
   };
 
-  SimLauncher.launch( function() {
+  SimLauncher.launch( () => {
     const screens = [ new IdealScreen(), new ExploreScreen(), new EnergyScreen(), new DiffusionScreen() ];
     const sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();

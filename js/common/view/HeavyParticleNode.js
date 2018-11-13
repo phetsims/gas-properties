@@ -11,26 +11,26 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
-  /**
-   * @param {Object} [options]
-   * @constructor
-   */
-  function HeavyParticleNode( options ) {
+  class HeavyParticleNode extends ShadedSphereNode {
 
-    options = _.extend( {
-      diameter: 15
-    }, options );
+    /**
+     * @param {Object} [options]
+     * @constructor
+     */
+    constructor( options ) {
 
-    assert && assert( !options.mainColor, 'HeavyParticleNode sets mainColor' );
-    options.mainColor = gasPropertiesColorProfile.heavyParticleColorProperty;
+      options = _.extend( {
+        diameter: 15
+      }, options );
 
-    ShadedSphereNode.call( this, options.diameter, options );
+      assert && assert( !options.mainColor, 'HeavyParticleNode sets mainColor' );
+      options.mainColor = gasPropertiesColorProfile.heavyParticleColorProperty;
+
+      super( options.diameter, options );
+    }
   }
 
-  gasProperties.register( 'HeavyParticleNode', HeavyParticleNode );
-
-  return inherit( ShadedSphereNode, HeavyParticleNode );
+  return gasProperties.register( 'HeavyParticleNode', HeavyParticleNode );
 } );

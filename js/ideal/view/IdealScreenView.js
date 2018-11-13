@@ -56,7 +56,7 @@ define( require => {
 
       // Time controls
       const timeControls = new TimeControls( model.isPlayingProperty,
-        function() {
+        () => {
           model.isPlayingProperty.value = true;
           model.step();
           model.isPlayingProperty.value = false;
@@ -104,7 +104,7 @@ define( require => {
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
-        listener: function() {
+        listener: () => {
           model.reset();
           viewProperties.reset();
         },
