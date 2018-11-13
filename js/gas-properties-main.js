@@ -11,6 +11,8 @@ define( require => {
   // modules
   const DiffusionScreen = require( 'GAS_PROPERTIES/diffusion/DiffusionScreen' );
   const ExploreScreen = require( 'GAS_PROPERTIES/explore/ExploreScreen' );
+  const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
+  const GasPropertiesGlobalOptionsNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesGlobalOptionsNode' );
   const IdealScreen = require( 'GAS_PROPERTIES/ideal/IdealScreen' );
   const EnergyScreen = require( 'GAS_PROPERTIES/energy/EnergyScreen' );
   const Sim = require( 'JOIST/Sim' );
@@ -19,7 +21,12 @@ define( require => {
   // strings
   const gasPropertiesTitleString = require( 'string!GAS_PROPERTIES/gas-properties.title' );
 
+  // constants
+  const GLOBAL_OPTIONS = new GasPropertiesGlobalOptions();
+
   const simOptions = {
+    showSmallHomeScreenIconFrame: true, // put a border around unselected home screen icons
+    optionsNode: new GasPropertiesGlobalOptionsNode( GLOBAL_OPTIONS ),
     credits: {
       //TODO #28 complete the credits
       leadDesign: 'Amy Rouinfar',
