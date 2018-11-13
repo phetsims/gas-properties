@@ -11,8 +11,8 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const TimerNode = require( 'SCENERY_PHET/TimerNode' );
 
   // strings
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );

@@ -66,7 +66,7 @@ define( require => {
         cornerRadius: 3
       });
 
-      var content = new VBox( {
+      const content = new VBox( {
         align: 'center',
         spacing: Y_SPACING,
         children: [
