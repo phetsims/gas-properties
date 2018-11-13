@@ -14,6 +14,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Range = require( 'DOT/Range' );
   const StringProperty = require( 'AXON/StringProperty' );
 
   // constants
@@ -47,6 +48,11 @@ define( require => {
       this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
+      } );
+
+      // @public the amount to heat (positive value) or cool (negative value) the contents of the container
+      this.heatCoolAmountProperty = new NumberProperty( 0, {
+        range: new Range( -1, 1 )
       } );
 
       // @public width of the container, in nm

@@ -13,6 +13,7 @@ define( require => {
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
@@ -27,7 +28,7 @@ define( require => {
   class IdealScreenView extends ScreenView {
 
     /**
-     * @param {IntroModel} model
+     * @param {IdealModel} model
      */
     constructor( model ) {
 
@@ -42,6 +43,16 @@ define( require => {
         centerY: this.layoutBounds.centerY
       } );
       this.addChild( containerNode );
+
+      //TODO HeaterCoolerNode is a mess, see https://github.com/phetsims/scenery-phet/issues/423
+      // Device to heat/cool the contents of the container
+      const heaterCoolerNode = new HeaterCoolerNode( {
+        heatCoolAmountProperty: model.heatCoolAmountProperty,
+        centerX: containerNode.centerX,
+        top: containerNode.bottom + 20,
+        scale: 0.9
+      } );
+      this.addChild( heaterCoolerNode );
 
       // Time controls
       const timeControls = new TimeControls( model.isPlayingProperty,
