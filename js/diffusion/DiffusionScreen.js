@@ -12,27 +12,17 @@ define( require => {
   const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
   const DiffusionScreenView = require( 'GAS_PROPERTIES/diffusion/view/DiffusionScreenView' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColors = require( 'GAS_PROPERTIES/common/GasPropertiesColors' );
-  const Property = require( 'AXON/Property' );
-  const Screen = require( 'JOIST/Screen' );
+  const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
 
   // strings
   const screenDiffusionString = require( 'string!GAS_PROPERTIES/screen.diffusion' );
 
-  class DiffusionScreen extends Screen {
+  class DiffusionScreen extends GasPropertiesScreen {
 
     constructor() {
-
-      const options = {
-        name: screenDiffusionString,
-        backgroundColorProperty: new Property( GasPropertiesColors.BACKGROUND_COLOR )
-      };
-
-      super(
-        () => new DiffusionModel(),
-        model => new DiffusionScreenView( model ),
-        options
-      );
+      super( () => new DiffusionModel(), model => new DiffusionScreenView( model ), {
+        name: screenDiffusionString
+      } );
     }
   }
 

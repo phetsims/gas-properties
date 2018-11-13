@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
 
@@ -21,10 +22,17 @@ define( require => {
     constructor( globalOptions ) {
 
       // Projector Mode
-      var projectorModeCheckbox = new ProjectorModeCheckbox( globalOptions.projectorModeEnabledProperty );
+      var projectorModeCheckbox = new ProjectorModeCheckbox( {
+        projectorModeEnabledProperty: globalOptions.projectorModeEnabledProperty
+      } );
 
       super( {
         children: [ projectorModeCheckbox ]
+      } );
+
+      // Switch between default and projector color profiles.
+      globalOptions.projectorModeEnabledProperty.link( projectorModeEnabled => {
+        gasPropertiesColorProfile.profileNameProperty.set( projectorModeEnabled ? 'projector' : 'default' );
       } );
     }
   }
