@@ -26,6 +26,7 @@ define( require => {
   const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
+  const ToggleNode = require( 'SUN/ToggleNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
@@ -62,15 +63,25 @@ define( require => {
         } );
       this.addChild( particleCountsAccordionBox );
 
-      // Bicycle pump for heavy particles
-      const heavyPumpNode = new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
-        color: gasPropertiesColorProfile.heavyParticleColorProperty
-      } );
+      // Bicycle pumps, one of which is visible depending on the selected particle type
+      const bicyclePumpsToggleNode = new ToggleNode( [
 
-      // Bicycle pump for light particles
-      const lightPumpNode = new BicyclePumpNode( model.numberOfLightParticlesProperty, {
-        color: gasPropertiesColorProfile.lightParticleColorProperty
-      } );
+        // Bicycle pump for heavy particles
+        {
+          value: 'heavy',
+          node: new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
+            color: gasPropertiesColorProfile.heavyParticleColorProperty
+          } )
+        },
+
+        // Bicycle pump for light particles
+        {
+          value: 'light',
+          node: new BicyclePumpNode( model.numberOfLightParticlesProperty, {
+            color: gasPropertiesColorProfile.lightParticleColorProperty
+          } )
+        }
+      ], viewProperties.particleTypeProperty );
 
       // Radio buttons for selecting particle type
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty );
@@ -80,7 +91,7 @@ define( require => {
         align: 'center',
         spacing: 15,
         children: [
-          new Node( { children: [ heavyPumpNode, lightPumpNode ] } ),
+          bicyclePumpsToggleNode,
           particleTypeRadioButtonGroup
         ],
         right: controlPanel.left - 40,
@@ -154,17 +165,6 @@ define( require => {
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
-
-      viewProperties.particleTypeProperty.link( particleType => {
-
-        // interrupt input with the visible pump
-        heavyPumpNode && heavyPumpNode.interruptSubtreeInput();
-        lightPumpNode.visible && lightPumpNode.interruptSubtreeInput();
-
-        // make the appropriate pump visible
-        heavyPumpNode.visible = ( particleType === 'heavy' );
-        lightPumpNode.visible = ( particleType === 'light' );
-      } );
 
       viewProperties.collisionCounterVisibleProperty.link( collisionCounterVisible => {
         collisionCounterNode.visible = collisionCounterVisible;
