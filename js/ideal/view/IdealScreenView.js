@@ -64,7 +64,7 @@ define( require => {
       this.addChild( particleCountsAccordionBox );
 
       // Bicycle pumps, one of which is visible depending on the selected particle type
-      const bicyclePumpsToggleNode = new ToggleNode( [
+      const bicyclePumpsToggleNode = new ToggleNode( viewProperties.particleTypeProperty, [
 
         // Bicycle pump for heavy particles
         {
@@ -81,7 +81,7 @@ define( require => {
             color: gasPropertiesColorProfile.lightParticleColorProperty
           } )
         }
-      ], viewProperties.particleTypeProperty );
+      ] );
 
       // Radio buttons for selecting particle type
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty );
