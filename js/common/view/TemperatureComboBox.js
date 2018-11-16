@@ -19,6 +19,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const TemperatureUnitsEnum = require( 'GAS_PROPERTIES/common/model/TemperatureUnitsEnum' );
 
   // strings
   var celsiusString = require( 'string!GAS_PROPERTIES/celsius' );
@@ -84,8 +85,8 @@ define( require => {
 
       // Items to be displayed in the combo box
       const items = [
-        ComboBox.createItem( kelvinNode, 'kelvin' ),
-        ComboBox.createItem( celsiusNode, 'celsius' )
+        ComboBox.createItem( kelvinNode, TemperatureUnitsEnum.KELVIN ),
+        ComboBox.createItem( celsiusNode, TemperatureUnitsEnum.CELSIUS )
       ];
 
       super( items, temperatureUnitsProperty, listParent, options );

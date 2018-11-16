@@ -13,6 +13,7 @@ define( require => {
   const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const HeavyParticleNode = require( 'GAS_PROPERTIES/common/view/HeavyParticleNode' );
   const LightParticleNode = require( 'GAS_PROPERTIES/common/view/LightParticleNode' );
+  const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
   class ParticleTypeRadioButtonGroup extends RadioButtonGroup {
@@ -39,8 +40,8 @@ define( require => {
       }, options );
 
       const content = [
-        { value: 'heavy', node: new HeavyParticleNode() },
-        { value: 'light', node: new LightParticleNode() }
+        { value: ParticleTypeEnum.HEAVY, node: new HeavyParticleNode() },
+        { value: ParticleTypeEnum.LIGHT, node: new LightParticleNode() }
       ];
 
       super( particleTypeProperty, content, options );

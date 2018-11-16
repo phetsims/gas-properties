@@ -13,20 +13,11 @@ define( require => {
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
-  const StringProperty = require( 'AXON/StringProperty' );
-
-  // constants
-  //TODO use Enumeration when https://github.com/phetsims/phet-core/issues/42 is resolved
-  const HOLD_CONSTANT_VALUES = [
-    'nothing',
-    'volume',
-    'temperature',
-    'pressureT', // change temperature (T) to maintain constant pressure
-    'pressureV' // change volume (V) to maintain constant pressure
-  ];
 
   class IdealModel {
 
@@ -43,8 +34,8 @@ define( require => {
       this.isPlayingProperty = new BooleanProperty( true );
 
       // @public the quantity to hold constant
-      this.holdConstantProperty = new StringProperty( 'nothing', {
-        validValues: HOLD_CONSTANT_VALUES
+      this.holdConstantProperty = new Property( HoldConstantEnum.NOTHING, {
+        isValidValue: value =>  HoldConstantEnum.includes( value )
       } );
 
       // @public the number of heavy particles in the container

@@ -21,6 +21,7 @@ define( require => {
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
+  const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -68,7 +69,7 @@ define( require => {
 
         // Bicycle pump for heavy particles
         {
-          value: 'heavy',
+          value: ParticleTypeEnum.HEAVY,
           node: new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
             color: gasPropertiesColorProfile.heavyParticleColorProperty
           } )
@@ -76,7 +77,7 @@ define( require => {
 
         // Bicycle pump for light particles
         {
-          value: 'light',
+          value: ParticleTypeEnum.LIGHT,
           node: new BicyclePumpNode( model.numberOfLightParticlesProperty, {
             color: gasPropertiesColorProfile.lightParticleColorProperty
           } )

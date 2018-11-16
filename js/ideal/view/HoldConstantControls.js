@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -49,23 +50,23 @@ define( require => {
         fill: gasPropertiesColorProfile.textFillProperty
       } );
 
-      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, 'nothing',
+      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.NOTHING,
         new Text( holdConstantNothingString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, 'volume',
+      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.VOLUME,
         new Text( holdConstantVolumeString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, 'temperature',
+      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.TEMPERATURE,
         new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureV',
+      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_V,
         new Text( holdConstantPressureVString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, 'pressureT',
+      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_T,
         new Text( holdConstantPressureTString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
