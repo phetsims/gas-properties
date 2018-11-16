@@ -1,6 +1,5 @@
 // Copyright 2018, University of Colorado Boulder
 
-//TODO show '-' for temperature value when container is empty, e.g. '- K'
 /**
  * Combo box for choosing temperature units, and displaying temperature values in those units.
  * A combo box typically displays a static list of choices, and is not recommended for displaying
@@ -66,7 +65,7 @@ define( require => {
 
       // temperature in C
       const temperatureCelsiusProperty = new DerivedProperty( [ temperatureKelvinProperty ],
-        temperature => temperature - 273.15 );
+        temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15 );
 
       // displays the temperature in C
       const celsiusNode = new NumberDisplay( temperatureCelsiusProperty, NUMBER_DISPLAY_RANGE,

@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const TemperatureComboBox = require( 'GAS_PROPERTIES/common/view/TemperatureComboBox' );
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
@@ -17,7 +18,7 @@ define( require => {
   class GasPropertiesThermometerNode extends VBox {
 
     /**
-     * @param {NumberProperty} temperatureProperty
+     * @param {Property.<number|null>} temperatureProperty
      * @param {Range} thermometerRange
      * @param {StringProperty} temperatureUnitsProperty
      * @param {Node} listParent - parent for the combo box list
@@ -33,17 +34,23 @@ define( require => {
       // Combo box that displays temperature for various units, centered above the thermometer
       const comboBox = new TemperatureComboBox( temperatureProperty, temperatureUnitsProperty, listParent );
 
-      const thermometerNode = new ThermometerNode( thermometerRange.min, thermometerRange.max, temperatureProperty, {
-        backgroundFill: 'white',
-        bulbDiameter: 30,
-        tubeHeight: 100,
-        tubeWidth: 20,
-        glassThickness: 3,
-        tickSpacing: 6,
-        majorTickLength: 10,
-        minorTickLength: 6,
-        lineWidth: 1
-      } );
+      // temperatureProperty is null when there are no particles in the container.
+      // Map null to zero, since ThermometerNode doesn't support null values.
+      const temperatureNumberProperty = new DerivedProperty( [ temperatureProperty ],
+        temperature => ( temperature === null ) ? 0 : temperature );
+
+      const thermometerNode = new ThermometerNode(
+        thermometerRange.min, thermometerRange.max, temperatureNumberProperty, {
+          backgroundFill: 'white',
+          bulbDiameter: 30,
+          tubeHeight: 100,
+          tubeWidth: 20,
+          glassThickness: 3,
+          tickSpacing: 6,
+          majorTickLength: 10,
+          minorTickLength: 6,
+          lineWidth: 1
+        } );
 
       options.children = [ comboBox, thermometerNode ];
 
