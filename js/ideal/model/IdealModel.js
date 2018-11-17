@@ -71,7 +71,8 @@ define( require => {
         isValidValue: value => ( value >= 0 )
       } );
 
-      // @public {Property.<number|null>} the temperature in the container, in K. null means 'no temperature'
+      // @public {Property.<number|null>} the temperature in the container, in K.
+      // Temperature value is null when the container is empty.
       this.temperatureProperty = new Property( null, {
         isValidValue: value => ( value === null || typeof value === 'number' )
       } );
