@@ -51,7 +51,7 @@ define( require => {
 
       // Control panel at upper right
       const controlPanel = new IdealControlPanel( model.holdConstantProperty, viewProperties.sizeVisibleProperty,
-        viewProperties.stopwatchVisibleProperty, viewProperties.collisionCounterVisibleProperty, {
+        viewProperties.stopwatchVisibleProperty, model.collisionCounter.visibleProperty, {
           fixedWidth: PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
@@ -129,10 +129,7 @@ define( require => {
       this.addChild( timeControls );
 
       // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
-          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-        } );
+      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent );
       this.addChild( collisionCounterNode );
 
       // Thermometer
@@ -167,23 +164,16 @@ define( require => {
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
 
-      viewProperties.collisionCounterVisibleProperty.link( collisionCounterVisible => {
-        collisionCounterNode.visible = collisionCounterVisible;
-        if ( !collisionCounterVisible ) {
-          collisionCounterNode.interruptSubtreeInput(); // interrupt user interactions
-          model.collisionCounter.isRunningProperty.value = false;
-          model.collisionCounter.numberOfCollisionsProperty.value = 0;
-        }
-      } );
-
-      viewProperties.stopwatchVisibleProperty.link( stopwatchVisible => {
-        stopwatchNode.visible = stopwatchVisible;
-        if ( !stopwatchVisible ) {
+      viewProperties.stopwatchVisibleProperty.link( visible => {
+        stopwatchNode.visible = visible;
+        if ( !visible ) {
           stopwatchNode.interruptSubtreeInput(); // interrupt user interactions
           model.stopwatchIsRunningProperty.value = false;
           model.stopwatchTimeProperty.value = 0;
         }
       } );
+      console.log( 'stopwatch: ' + stopwatchNode.x + ',' + stopwatchNode.y );
+      console.log( 'collisionCounter: ' + collisionCounterNode.x + ',' + collisionCounterNode.y );
     }
   }
 

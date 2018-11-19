@@ -12,10 +12,25 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   class CollisionCounter {
 
-    constructor() {
+    constructor( options ) {
+
+      options = _.extend( {
+        location: new Vector2( 40, 40 ),
+        visible: false
+      }, options );
+
+      // @public location of the collision counter
+      this.locationProperty = new Property( options.location, {
+        valueType: Vector2
+      } );
+
+      // @public whether the collision counter is visible
+      this.visibleProperty = new BooleanProperty( options.visible );
 
       // @public the number of collisions between the particles and the container walls
       this.numberOfCollisionsProperty = new NumberProperty( 0, {
@@ -39,9 +54,19 @@ define( require => {
       this.averagingTimeProperty = new NumberProperty( 10, {
         validValues: this.averagingTimes
       } );
+
+      // When the counter becomes invisible, stop the counter and reset its value.
+      this.visibleProperty.link( visible => {
+        if ( !visible ) {
+          this.isRunningProperty.value = false;
+          this.numberOfCollisionsProperty.value = 0;
+        }
+      } );
     }
 
     reset() {
+      this.locationProperty.reset();
+      this.visibleProperty.reset();
       this.numberOfCollisionsProperty.reset();
       this.isRunningProperty.reset();
       this.averagingTimeProperty.reset();

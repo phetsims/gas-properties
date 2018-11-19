@@ -51,6 +51,8 @@ define( require => {
      */
     constructor( collisionCounter, comboBoxListParent, options ) {
 
+      options = options || {};
+
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
         font: TITLE_FONT
       } );
@@ -124,12 +126,23 @@ define( require => {
       const bezelNode = new ShadedRectangle( bezelBounds, {
         baseColor: 'rgb( 90, 90, 90 )',
         center: backgroundNode.center
-        } );
+      } );
 
       assert && assert( !options.children, 'CollisionCounterNode sets children' );
       options.children = [ bezelNode, backgroundNode, content ];
 
       super( options );
+
+      // move the counter
+      collisionCounter.locationProperty.linkAttribute( this, 'translation' );
+
+      // show/hide the counter
+      collisionCounter.visibleProperty.link( visible => {
+        this.visible = visible;
+        if ( !visible ) {
+          this.interruptSubtreeInput(); // interrupt user interactions
+        }
+      } );
     }
   }
 

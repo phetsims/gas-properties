@@ -30,9 +30,6 @@ define( require => {
       // @public whether the stopwatch is visible
       this.stopwatchVisibleProperty = new BooleanProperty( false );
 
-      // @public whether the collision counter is visible
-      this.collisionCounterVisibleProperty = new BooleanProperty( false );
-
       // @public whether the 'Particles Counts' accordion box is expanded
       this.particleCountsExpandedProperty = new BooleanProperty( true );
 
