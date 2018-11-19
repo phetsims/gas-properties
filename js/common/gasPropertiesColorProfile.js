@@ -14,7 +14,7 @@ define( require => {
   const ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  const gasPropertiesColorProfile = new ColorProfile( {
+  const gasPropertiesColorProfile = new ColorProfile( [ 'default', 'projector' ], {
     screenBackgroundColor: {
       default: 'black',
       projector: 'white'
@@ -56,7 +56,7 @@ define( require => {
     collisionCounterBackgroundColor: {
       default: 'rgb( 254, 212, 131 )' // yellowish
     }
-  }, [ 'default', 'projector' ] );
+  } );
 
   return gasProperties.register( 'gasPropertiesColorProfile', gasPropertiesColorProfile );
 } );
