@@ -11,7 +11,7 @@ define( require => {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HeavyParticleNode = require( 'GAS_PROPERTIES/common/view/HeavyParticleNode' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -48,12 +48,12 @@ define( require => {
         cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
         titleNode: new Text( particleCountsString, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: gasPropertiesColorProfile.textFillProperty
+          fill: GasPropertiesColorProfile.textFillProperty
         } ),
         titleAlignX: 'left',
         buttonLength: 20,
-        fill: gasPropertiesColorProfile.panelFillProperty,
-        stroke: gasPropertiesColorProfile.panelStrokeProperty
+        fill: GasPropertiesColorProfile.panelFillProperty,
+        stroke: GasPropertiesColorProfile.panelStrokeProperty
 
       }, options );
 

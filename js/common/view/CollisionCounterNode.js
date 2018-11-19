@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -82,7 +82,7 @@ define( require => {
 
       const backgroundNode = new Rectangle( 0, 0, content.width + ( 2 * X_MARGIN ), content.height + ( 2 * Y_MARGIN ), {
         cornerRadius: 6,
-        fill: gasPropertiesColorProfile.collisionCounterBackgroundColorProperty,
+        fill: GasPropertiesColorProfile.collisionCounterBackgroundColorProperty,
         stroke: 'black',
         center: content.center
       } );

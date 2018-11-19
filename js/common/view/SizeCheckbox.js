@@ -12,7 +12,7 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const DimensionalArrowNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -30,12 +30,12 @@ define( require => {
 
       const textNode = new Text( sizeString, {
         font: GasPropertiesConstants.CONTROL_FONT,
-        fill: gasPropertiesColorProfile.textFillProperty,
+        fill: GasPropertiesColorProfile.textFillProperty,
         maxWidth: 150 // determined empirically
       } );
 
       const dimensionalArrowNode = new DimensionalArrowNode( 44, {
-        color: gasPropertiesColorProfile.textFillProperty
+        color: GasPropertiesColorProfile.textFillProperty
       } );
 
       const content = new HBox( {

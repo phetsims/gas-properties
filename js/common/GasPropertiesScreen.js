@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Screen = require( 'JOIST/Screen' );
 
   class GasPropertiesScreen extends Screen {
@@ -23,7 +23,7 @@ define( require => {
     constructor( createModel, createView, options ) {
 
       options = _.extend( {
-        backgroundColorProperty: gasPropertiesColorProfile.screenBackgroundColorProperty
+        backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty
       }, options );
 
       super( createModel, createView, options );

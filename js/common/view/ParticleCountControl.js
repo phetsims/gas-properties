@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -48,7 +48,7 @@ define( require => {
 
       const titleNode = new Text( title, {
         font: GasPropertiesConstants.CONTROL_FONT,
-        fill: gasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColorProfile.textFillProperty
       } );
 
       const titleBox = new HBox( {

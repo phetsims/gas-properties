@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -29,7 +29,7 @@ define( require => {
       //TODO delete this
       const underConstruction = new Text( 'Explore - under construction', {
         font: new PhetFont( 35 ),
-        fill: gasPropertiesColorProfile.textFillProperty,
+        fill: GasPropertiesColorProfile.textFillProperty,
         center: this.layoutBounds.center
       } );
       this.addChild( underConstruction );

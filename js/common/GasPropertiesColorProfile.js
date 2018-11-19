@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Singleton color profile for this simulation.
+ * Color profiles for this simulation.
  * Default colors are required. Colors for other profiles are optional.
  * Profile 'projector' is used for Projector Mode.
  *
@@ -14,7 +14,7 @@ define( require => {
   const ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  const gasPropertiesColorProfile = new ColorProfile( [ 'default', 'projector' ], {
+  const GasPropertiesColorProfile = new ColorProfile( [ 'default', 'projector' ], {
     screenBackgroundColor: {
       default: 'black',
       projector: 'white'
@@ -58,5 +58,5 @@ define( require => {
     }
   } );
 
-  return gasProperties.register( 'gasPropertiesColorProfile', gasPropertiesColorProfile );
+  return gasProperties.register( 'GasPropertiesColorProfile', GasPropertiesColorProfile );
 } );

@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantControls = require( 'GAS_PROPERTIES/ideal/view/HoldConstantControls' );
   const HSeparator = require( 'SUN/HSeparator' );
@@ -39,8 +39,8 @@ define( require => {
         xMargin: GasPropertiesConstants.PANEL_X_MARGIN,
         yMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
         cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
-        fill: gasPropertiesColorProfile.panelFillProperty,
-        stroke: gasPropertiesColorProfile.panelStrokeProperty
+        fill: GasPropertiesColorProfile.panelFillProperty,
+        stroke: GasPropertiesColorProfile.panelStrokeProperty
 
       }, options );
 

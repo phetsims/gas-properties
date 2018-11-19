@@ -13,7 +13,7 @@ define( require => {
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
@@ -71,7 +71,7 @@ define( require => {
         {
           value: ParticleTypeEnum.HEAVY,
           node: new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
-            color: gasPropertiesColorProfile.heavyParticleColorProperty
+            color: GasPropertiesColorProfile.heavyParticleColorProperty
           } )
         },
 
@@ -79,7 +79,7 @@ define( require => {
         {
           value: ParticleTypeEnum.LIGHT,
           node: new BicyclePumpNode( model.numberOfLightParticlesProperty, {
-            color: gasPropertiesColorProfile.lightParticleColorProperty
+            color: GasPropertiesColorProfile.lightParticleColorProperty
           } )
         }
       ] );

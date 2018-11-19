@@ -11,7 +11,7 @@ define( require => {
   // modules
   const AquaRadioButton = require( 'SUN/AquaRadioButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -32,7 +32,7 @@ define( require => {
   };
   const TEXT_OPTIONS = {
     font: GasPropertiesConstants.CONTROL_FONT,
-    fill: gasPropertiesColorProfile.textFillProperty
+    fill: GasPropertiesColorProfile.textFillProperty
   };
   
   class HoldConstantControls extends VBox {
@@ -47,7 +47,7 @@ define( require => {
 
       const titleNode = new Text( holdConstantString, {
         font: GasPropertiesConstants.TITLE_FONT,
-        fill: gasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColorProfile.textFillProperty
       } );
 
       const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.NOTHING,

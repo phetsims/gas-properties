@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   class LightParticleNode extends ShadedSphereNode {
@@ -25,7 +25,7 @@ define( require => {
       }, options );
 
       assert && assert( !options.mainColor, 'LightParticleNode sets mainColor' );
-      options.mainColor = gasPropertiesColorProfile.lightParticleColorProperty;
+      options.mainColor = GasPropertiesColorProfile.lightParticleColorProperty;
 
       super( options.diameter, options );
     }

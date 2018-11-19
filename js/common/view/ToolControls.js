@@ -10,7 +10,7 @@ define( require => {
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const SizeCheckbox = require( 'GAS_PROPERTIES/common/view/SizeCheckbox' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -23,7 +23,7 @@ define( require => {
   // constants
   const TEXT_OPTIONS = {
     font: GasPropertiesConstants.CONTROL_FONT,
-    fill: gasPropertiesColorProfile.textFillProperty
+    fill: GasPropertiesColorProfile.textFillProperty
   };
 
   class ToolControls extends VBox {

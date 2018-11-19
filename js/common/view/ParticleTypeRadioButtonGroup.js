@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HeavyParticleNode = require( 'GAS_PROPERTIES/common/view/HeavyParticleNode' );
   const LightParticleNode = require( 'GAS_PROPERTIES/common/view/LightParticleNode' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
@@ -28,10 +28,10 @@ define( require => {
 
         // RadioButtonGroup options
         orientation: 'horizontal',
-        baseColor: gasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
-        disabledBaseColor: gasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
-        selectedStroke: gasPropertiesColorProfile.radioButtonGroupSelectedStrokeProperty,
-        deselectedStroke: gasPropertiesColorProfile.radioButtonGroupDeselectedStrokeProperty,
+        baseColor: GasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
+        disabledBaseColor: GasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
+        selectedStroke: GasPropertiesColorProfile.radioButtonGroupSelectedStrokeProperty,
+        deselectedStroke: GasPropertiesColorProfile.radioButtonGroupDeselectedStrokeProperty,
         selectedLineWidth: 3,
         deselectedLineWidth: 1.5,
         spacing: 8,

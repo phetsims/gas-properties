@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const gasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/gasPropertiesColorProfile' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -24,7 +24,7 @@ define( require => {
     constructor( container, options ) {
 
       const rectangle = new Rectangle( 0, 0, container.widthProperty.value, container.height, {
-        stroke: gasPropertiesColorProfile.containerStrokeProperty,
+        stroke: GasPropertiesColorProfile.containerStrokeProperty,
         lineWidth: 2
       } );
 
