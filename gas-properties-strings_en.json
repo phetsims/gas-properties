@@ -65,6 +65,9 @@
   "celsius": {
     "value": "\u00B0C"
   },
+  "averagingTimeUnits": {
+    "value": "{{averagingTime}} {{units}}"
+  },
   "temperatureUnits": {
     "value": "{{temperature}} {{units}}"
   }

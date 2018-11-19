@@ -45,6 +45,10 @@ define( require => {
       // view-specific Properties
       const viewProperties = new IdealViewProperties();
 
+      // Parent for combo box popup lists
+      const comboBoxListParent = new Node();
+      this.addChild( comboBoxListParent );
+
       // Control panel at upper right
       const controlPanel = new IdealControlPanel( model.holdConstantProperty, viewProperties.sizeVisibleProperty,
         viewProperties.stopwatchVisibleProperty, viewProperties.collisionCounterVisibleProperty, {
@@ -125,15 +129,11 @@ define( require => {
       this.addChild( timeControls );
 
       // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( {
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
+          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
       this.addChild( collisionCounterNode );
-
-      // Parent for combo box popup list
-      const comboBoxListParent = new Node();
-      this.addChild( comboBoxListParent );
 
       // Thermometer
       const thermometerNode = new GasPropertiesThermometerNode(
@@ -170,14 +170,16 @@ define( require => {
       viewProperties.collisionCounterVisibleProperty.link( collisionCounterVisible => {
         collisionCounterNode.visible = collisionCounterVisible;
         if ( !collisionCounterVisible ) {
-          model.collisionCounterIsRunningProperty.value = false;
-          model.numberOfCollisionsProperty.value = 0;
+          collisionCounterNode.interruptSubtreeInput(); // interrupt user interactions
+          model.collisionCounter.isRunningProperty.value = false;
+          model.collisionCounter.numberOfCollisionsProperty.value = 0;
         }
       } );
 
       viewProperties.stopwatchVisibleProperty.link( stopwatchVisible => {
         stopwatchNode.visible = stopwatchVisible;
         if ( !stopwatchVisible ) {
+          stopwatchNode.interruptSubtreeInput(); // interrupt user interactions
           model.stopwatchIsRunningProperty.value = false;
           model.stopwatchTimeProperty.value = 0;
         }

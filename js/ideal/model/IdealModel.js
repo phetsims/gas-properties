@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -63,13 +64,8 @@ define( require => {
         isValidValue: value => ( value >= 0 )
       } );
 
-      // @public whether the collision counter is running
-      this.collisionCounterIsRunningProperty = new BooleanProperty( false );
-
-      // @public the number of collisions between the particles and the container walls
-      this.numberOfCollisionsProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 )
-      } );
+      // @public collision counter
+      this.collisionCounter = new CollisionCounter();
 
       // @public {Property.<number|null>} the temperature in the container, in K.
       // Temperature value is null when the container is empty.
