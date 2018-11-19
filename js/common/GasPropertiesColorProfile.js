@@ -11,10 +11,10 @@ define( require => {
   'use strict';
 
   // modules
-  const ColorProfiles = require( 'SCENERY_PHET/ColorProfile' );
+  const ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  const GasPropertiesColorProfile = new ColorProfiles( [ 'default', 'projector' ], {
+  const GasPropertiesColorProfile = new ColorProfile( [ 'default', 'projector' ], {
     screenBackgroundColor: {
       default: 'black',
       projector: 'white'
