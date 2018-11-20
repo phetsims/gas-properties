@@ -43,12 +43,20 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
-      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
       let adjustedDragBoundsProperty = null;
       if ( options.dragBoundsProperty ) {
+
+        // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
         adjustedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty ],
           dragBounds => new Bounds2( dragBounds.minX, dragBounds.minY,
             dragBounds.maxX - this.width, dragBounds.maxY - this.height ) );
+
+        // Ensure that the stopwatch remains inside the drag bounds.
+        adjustedDragBoundsProperty.link( adjustedDragBounds => {
+          if ( adjustedDragBounds && !adjustedDragBounds.containsBounds( this.bounds ) ) {
+            stopwatch.locationProperty.value = adjustedDragBounds.closestPointTo( stopwatch.locationProperty.value );
+          }
+        } );
       }
 
       // dragging
