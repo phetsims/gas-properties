@@ -20,7 +20,6 @@ define( require => {
 
     constructor() {
 
-      //TODO probably should be DerivedProperty
       // @public pressure in kilopascals (kPa)
       this.pressureKilopascalsProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 )
