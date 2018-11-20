@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
+  const Bounds2 = require( 'DOT/Bounds2' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -24,6 +25,7 @@ define( require => {
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
+  const Property = require( 'AXON/Property' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
@@ -45,6 +47,12 @@ define( require => {
 
       // view-specific Properties
       const viewProperties = new IdealViewProperties();
+
+      //TODO sync with window bounds
+      // drag bounds
+      const dragBoundsProperty = new Property( this.layoutBounds, {
+        valueType: Bounds2
+      } );
 
       // Parent for combo box popup lists
       const comboBoxListParent = new Node();
@@ -158,11 +166,15 @@ define( require => {
       this.addChild( resetAllButton );
 
       // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent );
+      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
+        dragBoundsProperty: dragBoundsProperty
+      } );
       this.addChild( collisionCounterNode );
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch );
+      const stopwatchNode = new StopwatchNode( model.stopwatch, {
+        dragBoundsProperty: dragBoundsProperty
+      } );
       this.addChild( stopwatchNode );
 
       // This should be in front of everything else.

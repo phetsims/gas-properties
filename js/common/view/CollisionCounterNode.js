@@ -12,6 +12,8 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
   const ComboBox = require( 'SUN/ComboBox' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -52,7 +54,9 @@ define( require => {
      */
     constructor( collisionCounter, comboBoxListParent, options ) {
 
-      options = options || {};
+      options = _.extend( {
+        dragBoundsProperty: null // {Property.<Bounds2>|null}
+      }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
         font: TITLE_FONT
@@ -135,7 +139,19 @@ define( require => {
 
       super( options );
 
-      //TODO add bounded DragListener
+      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
+      let adjustedDragBoundsProperty = null;
+      if ( options.dragBoundsProperty ) {
+        adjustedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty ],
+          dragBounds => new Bounds2( dragBounds.minX, dragBounds.minY,
+            dragBounds.maxX - this.width, dragBounds.maxY - this.height ) );
+      }
+
+      // dragging
+      this.addInputListener( new DragListener( {
+        locationProperty: collisionCounter.locationProperty,
+        dragBoundsProperty: adjustedDragBoundsProperty
+      } ) );
 
       // Put a red dot at the origin, for debugging layout.
       if ( phet.chipper.queryParameters.dev ) {
