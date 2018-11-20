@@ -17,6 +17,7 @@ define( require => {
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
@@ -31,23 +32,18 @@ define( require => {
       // 1 second of real time is 2.5 picoseconds of sim time.
       this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
 
-      // @public width of the container, in nm
+      // @public model elements
       this.container = new Container();
-
-      // @public collision counter
       this.collisionCounter = new CollisionCounter( {
         //TODO use model coordinates
         location: new Vector2( 20, 20 ) // determined empirically
       } );
-
-      // @public stopwatch
       this.stopwatch = new Stopwatch( this.timeTransform, {
         //TODO use model coordinates
         location: new Vector2( 200, 20 ) // determined empirically
       } );
-
-      // @public thermometer
       this.thermometer = new Thermometer();
+      this.pressureGauge = new PressureGauge();
 
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
@@ -83,6 +79,7 @@ define( require => {
       this.collisionCounter.reset();
       this.stopwatch.reset();
       this.thermometer.reset();
+      this.pressureGauge.reset();
 
       // Properties
       this.isPlayingProperty.reset();

@@ -23,6 +23,7 @@ define( require => {
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
+  const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
@@ -131,20 +132,18 @@ define( require => {
       } );
       this.addChild( timeControls );
 
-      // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent );
-      this.addChild( collisionCounterNode );
-
       // Thermometer
       const thermometerNode = new GasPropertiesThermometerNode( model.thermometer, comboBoxListParent, {
-          right: containerNode.right - 50,
-          centerY: containerNode.top
-        } );
+        right: containerNode.right - 50,
+        centerY: containerNode.top
+      } );
       this.addChild( thermometerNode );
 
-      // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch );
-      this.addChild( stopwatchNode );
+      const pressureGaugeNode = new PressureGaugeNode( model.pressureGauge, comboBoxListParent, {
+        left: containerNode.right + 2,
+        centerY: containerNode.top + 30
+      } );
+      this.addChild( pressureGaugeNode );
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
@@ -156,6 +155,14 @@ define( require => {
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( resetAllButton );
+
+      // Collision Counter
+      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent );
+      this.addChild( collisionCounterNode );
+
+      // Stopwatch
+      const stopwatchNode = new StopwatchNode( model.stopwatch );
+      this.addChild( stopwatchNode );
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
