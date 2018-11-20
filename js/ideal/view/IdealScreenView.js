@@ -136,11 +136,7 @@ define( require => {
       this.addChild( collisionCounterNode );
 
       // Thermometer
-      const thermometerNode = new GasPropertiesThermometerNode(
-        model.temperatureProperty,
-        model.thermometerRange,
-        viewProperties.temperatureUnitsProperty,
-        comboBoxListParent, {
+      const thermometerNode = new GasPropertiesThermometerNode( model.thermometer, comboBoxListParent, {
           right: containerNode.right - 50,
           centerY: containerNode.top
         } );

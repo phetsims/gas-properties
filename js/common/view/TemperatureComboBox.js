@@ -12,7 +12,6 @@ define( require => {
 
   // modules
   const ComboBox = require( 'SUN/ComboBox' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -38,12 +37,11 @@ define( require => {
   class TemperatureComboBox extends ComboBox {
 
     /**
-     * @param {NumberProperty} temperatureKelvinProperty
-     * @param {StringProperty} temperatureUnitsProperty
+     * @param {Thermometer} thermometer
      * @param {Node} listParent - parent for the combo box list
      * @param {Object} [options]
      */
-    constructor( temperatureKelvinProperty, temperatureUnitsProperty, listParent, options ) {
+    constructor( thermometer, listParent, options ) {
 
       options = _.extend( {
         buttonXMargin: 5,
@@ -54,8 +52,8 @@ define( require => {
         buttonLineWidth: 0.4
       }, options );
 
-      // displays the temperature in K
-      const kelvinNode = new NumberDisplay( temperatureKelvinProperty, NUMBER_DISPLAY_RANGE,
+      // displays the temperature in Kelvin
+      const kelvinNode = new NumberDisplay( thermometer.temperatureKelvinProperty, NUMBER_DISPLAY_RANGE,
         _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
           valuePattern: StringUtils.fillIn( temperatureUnitsString, {
             temperature: '{0}',
@@ -63,12 +61,8 @@ define( require => {
           } )
         } ) );
 
-      // temperature in C
-      const temperatureCelsiusProperty = new DerivedProperty( [ temperatureKelvinProperty ],
-        temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15 );
-
-      // displays the temperature in C
-      const celsiusNode = new NumberDisplay( temperatureCelsiusProperty, NUMBER_DISPLAY_RANGE,
+      // displays the temperature in Celsius
+      const celsiusNode = new NumberDisplay( thermometer.temperatureCelsiusProperty, NUMBER_DISPLAY_RANGE,
         _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
           valuePattern: StringUtils.fillIn( temperatureUnitsString, {
             temperature: '{0}',
@@ -88,7 +82,7 @@ define( require => {
         ComboBox.createItem( celsiusNode, TemperatureUnitsEnum.CELSIUS )
       ];
 
-      super( items, temperatureUnitsProperty, listParent, options );
+      super( items, thermometer.unitsProperty, listParent, options );
     }
   }
 

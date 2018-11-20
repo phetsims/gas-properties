@@ -18,13 +18,11 @@ define( require => {
   class GasPropertiesThermometerNode extends VBox {
 
     /**
-     * @param {Property.<number|null>} temperatureProperty
-     * @param {Range} thermometerRange
-     * @param {StringProperty} temperatureUnitsProperty
-     * @param {Node} listParent - parent for the combo box list
+     * @param {Thermometer} thermometer
+     * @param {Node} comboBoxListParent - parent for the combo box list
      * @param {Object} [options]
      */
-    constructor( temperatureProperty, thermometerRange, temperatureUnitsProperty, listParent, options ) {
+    constructor( thermometer, comboBoxListParent, options ) {
 
       options = _.extend( {
         spacing: 5,
@@ -32,15 +30,15 @@ define( require => {
       }, options );
 
       // Combo box that displays temperature for various units, centered above the thermometer
-      const comboBox = new TemperatureComboBox( temperatureProperty, temperatureUnitsProperty, listParent );
+      const comboBox = new TemperatureComboBox( thermometer, comboBoxListParent );
 
       // temperatureProperty is null when there are no particles in the container.
       // Map null to zero, since ThermometerNode doesn't support null values.
-      const temperatureNumberProperty = new DerivedProperty( [ temperatureProperty ],
+      const temperatureNumberProperty = new DerivedProperty( [ thermometer.temperatureKelvinProperty ],
         temperature => ( temperature === null ) ? 0 : temperature );
 
       const thermometerNode = new ThermometerNode(
-        thermometerRange.min, thermometerRange.max, temperatureNumberProperty, {
+        thermometer.range.min, thermometer.range.max, temperatureNumberProperty, {
           backgroundFill: 'white',
           bulbDiameter: 30,
           tubeHeight: 100,

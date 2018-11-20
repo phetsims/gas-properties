@@ -69,6 +69,7 @@ define( require => {
       } );
     }
 
+    // @public
     reset() {
       this.locationProperty.reset();
       this.visibleProperty.reset();

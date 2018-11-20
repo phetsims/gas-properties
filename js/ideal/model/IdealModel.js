@@ -20,6 +20,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
+  const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class IdealModel {
@@ -45,6 +46,9 @@ define( require => {
         location: new Vector2( 200, 20 ) // determined empirically
       } );
 
+      // @public thermometer
+      this.thermometer = new Thermometer();
+
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
 
@@ -69,15 +73,6 @@ define( require => {
       this.heatCoolAmountProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 )
       } );
-
-      // @public {Property.<number|null>} the temperature in the container, in K.
-      // Temperature value is null when the container is empty.
-      this.temperatureProperty = new Property( null, {
-        isValidValue: value => ( value === null || typeof value === 'number' )
-      } );
-
-      // @public range of thermometer, in K. temperatureProperty is expected to exceed this.
-      this.thermometerRange = new Range( 0, 1000 );
     }
 
     // @public resets the model
@@ -87,6 +82,7 @@ define( require => {
       this.container.reset();
       this.collisionCounter.reset();
       this.stopwatch.reset();
+      this.thermometer.reset();
 
       // Properties
       this.isPlayingProperty.reset();
@@ -94,7 +90,6 @@ define( require => {
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
       this.heatCoolAmountProperty.reset();
-      this.temperatureProperty.reset();
     }
 
     // @public

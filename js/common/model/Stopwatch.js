@@ -56,6 +56,14 @@ define( require => {
       } );
     }
 
+    // @public
+    reset() {
+      this.locationProperty.reset();
+      this.visibleProperty.reset();
+      this.isRunningProperty.reset();
+      this.timeProperty.reset();
+    }
+
     /**
      * Update the stopwatch. 1 second of real time is displayed as 2.5 picoseconds
      * @param {number} dt - time delta, in seconds

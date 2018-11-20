@@ -13,7 +13,6 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const Property = require( 'AXON/Property' );
-  const TemperatureUnitsEnum = require( 'GAS_PROPERTIES/common/model/TemperatureUnitsEnum' );
 
   class IdealViewProperties {
 
@@ -29,18 +28,12 @@ define( require => {
 
       // @public whether the 'Particles Counts' accordion box is expanded
       this.particleCountsExpandedProperty = new BooleanProperty( true );
-
-      // @public temperature units displayed by the thermometer
-      this.temperatureUnitsProperty = new Property( TemperatureUnitsEnum.KELVIN, {
-        isValidValue: value => TemperatureUnitsEnum.includes( value )
-      } );
     }
 
     reset() {
       this.particleTypeProperty.reset();
       this.sizeVisibleProperty.reset();
       this.particleCountsExpandedProperty.reset();
-      this.temperatureUnitsProperty.reset();
     }
   }
 
