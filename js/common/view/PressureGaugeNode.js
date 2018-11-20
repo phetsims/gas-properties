@@ -70,7 +70,7 @@ define( require => {
 
       // Red dot at the origin, for debugging layout
       if ( phet.chipper.queryParameters.dev ) {
-        this.addChild( new Circle( 3, 'red' ) );
+        this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
     }
   }
