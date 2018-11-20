@@ -25,7 +25,7 @@ define( require => {
   const pressureUnitsString = require( 'string!GAS_PROPERTIES/pressureUnits' );
 
   // constants
-  const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 );
+  const NUMBER_DISPLAY_RANGE = new Range( -99, 99 );
   const NUMBER_DISPLAY_OPTIONS = {
     backgroundStroke: null,
     font: new PhetFont( 14 ),
