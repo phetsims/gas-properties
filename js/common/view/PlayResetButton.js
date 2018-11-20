@@ -27,6 +27,7 @@ define( require => {
         baseColor: '#DFE0E1'
       }, options );
 
+      //TODO this doesn't match StopwatchNode, see https://github.com/phetsims/scenery-phet/issues/428
       // play icon
       const playSize = 12;
       const playShape = new Shape()
