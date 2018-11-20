@@ -25,7 +25,7 @@ define( require => {
   var temperatureUnitsString = require( 'string!GAS_PROPERTIES/temperatureUnits' );
 
   // constants
-  const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 );
+  const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 ); // determines how wide NumberDisplays will be
   const NUMBER_DISPLAY_OPTIONS = {
     backgroundStroke: null,
     font: new PhetFont( 14 ),
