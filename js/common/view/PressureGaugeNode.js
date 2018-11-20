@@ -1,7 +1,8 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- *
+ * View component for the pressure gauge.
+ * 
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -10,7 +11,24 @@ define( require => {
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
+  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+
+  // strings
+  const pressureString = require( 'string!GAS_PROPERTIES/pressure' );
+
+  // constants
+  const DIAL_RADIUS = 50;
+  const POST_HEIGHT = 0.6 * DIAL_RADIUS;
+
+  // lit from above
+  const POST_GRADIENT = new LinearGradient( 0, 0, 0, POST_HEIGHT )
+            .addColorStop( 0, 'rgb( 120, 120, 120 )' )
+            .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
+            .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
+            .addColorStop( 1, 'rgb( 100, 100, 100 )' );
 
   class PressureGaugeNode extends Node {
 
@@ -23,16 +41,28 @@ define( require => {
 
       options = options || {};
 
-      //TODO placeholder
-      var circle = new Circle( 50, {
-        fill: 'white',
-        stroke: 'black'
-      });
+      // circular dial with needle
+      const dialNode = new GaugeNode( pressureGauge.pressureProperty, pressureString, pressureGauge.pressureRange, {
+        radius: DIAL_RADIUS
+      } );
+
+      // horizontal post the sticks out of the left side of the gauge
+      const postHeight = 0.6 * DIAL_RADIUS;
+      const postNode = new Rectangle( 0, 0, DIAL_RADIUS + 15, postHeight, {
+        fill: POST_GRADIENT,
+        right: dialNode.centerX,
+        centerY: dialNode.centerY
+      } );
 
       assert && assert( !options.children, 'PressureGaugeNode sets children' );
-      options.children = [ circle ];
+      options.children = [ postNode, dialNode ];
 
       super( options );
+
+      // Red dot at the origin, for debugging layout
+      if ( phet.chipper.queryParameters.dev ) {
+        this.addChild( new Circle( 3, 'red' ) );
+      }
     }
   }
 

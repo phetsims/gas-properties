@@ -140,10 +140,11 @@ define( require => {
       this.addChild( thermometerNode );
 
       const pressureGaugeNode = new PressureGaugeNode( model.pressureGauge, comboBoxListParent, {
-        left: containerNode.right + 2,
+        left: containerNode.right - 2,
         centerY: containerNode.top + 30
       } );
       this.addChild( pressureGaugeNode );
+      pressureGaugeNode.moveToBack(); // to hide overlap with container
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {

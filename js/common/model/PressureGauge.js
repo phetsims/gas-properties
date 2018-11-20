@@ -10,16 +10,25 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Range = require( 'DOT/Range' );
 
   class PressureGauge {
 
     constructor() {
-      //TODO
+
+      // @public TODO units, probably should be DerivedProperty
+      this.pressureProperty = new NumberProperty( 0, {
+        isValidValue: value => ( value >= 0 )
+      } );
+
+      // @public (read-only)
+      this.pressureRange = new Range( 0, 1000 ); //TODO values, units
     }
 
     // @public
     reset() {
-      //TODO
+      this.pressureProperty.reset();
     }
   }
 

@@ -70,5 +70,8 @@
   },
   "temperatureUnits": {
     "value": "{{temperature}} {{units}}"
+  },
+  "pressure": {
+    "value": "Pressure"
   }
 }
