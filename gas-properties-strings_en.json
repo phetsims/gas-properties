@@ -71,7 +71,16 @@
   "temperatureUnits": {
     "value": "{{temperature}} {{units}}"
   },
+  "pressureUnits": {
+    "value": "{{pressure}} {{units}}"
+  },
   "pressure": {
     "value": "Pressure"
+  },
+  "kilopascals": {
+    "value": "kPa"
+  },
+  "atmospheres": {
+    "value": "atm"
   }
 }

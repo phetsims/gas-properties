@@ -2,7 +2,7 @@
 
 /**
  * View component for the pressure gauge.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -14,6 +14,7 @@ define( require => {
   const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PressureComboBox = require( 'GAS_PROPERTIES/common/view/PressureComboBox' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // strings
@@ -25,10 +26,10 @@ define( require => {
 
   // lit from above
   const POST_GRADIENT = new LinearGradient( 0, 0, 0, POST_HEIGHT )
-            .addColorStop( 0, 'rgb( 120, 120, 120 )' )
-            .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
-            .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
-            .addColorStop( 1, 'rgb( 100, 100, 100 )' );
+    .addColorStop( 0, 'rgb( 120, 120, 120 )' )
+    .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
+    .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
+    .addColorStop( 1, 'rgb( 100, 100, 100 )' );
 
   class PressureGaugeNode extends Node {
 
@@ -42,9 +43,10 @@ define( require => {
       options = options || {};
 
       // circular dial with needle
-      const dialNode = new GaugeNode( pressureGauge.pressureProperty, pressureString, pressureGauge.pressureRange, {
-        radius: DIAL_RADIUS
-      } );
+      const dialNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,
+        pressureGauge.pressureRange, {
+          radius: DIAL_RADIUS
+        } );
 
       // horizontal post the sticks out of the left side of the gauge
       const postHeight = 0.6 * DIAL_RADIUS;
@@ -54,8 +56,15 @@ define( require => {
         centerY: dialNode.centerY
       } );
 
+      // combo box to display value and choose units
+      const comboBox = new PressureComboBox( pressureGauge, comboBoxListParent, {
+        centerX: dialNode.centerX,
+        bottom: dialNode.bottom,
+        maxWidth: dialNode.width
+      } );
+
       assert && assert( !options.children, 'PressureGaugeNode sets children' );
-      options.children = [ postNode, dialNode ];
+      options.children = [ postNode, dialNode, comboBox ];
 
       super( options );
 
