@@ -118,16 +118,17 @@ define( require => {
       const backgroundNode = new Rectangle( 0, 0, content.width + ( 2 * X_MARGIN ), content.height + ( 2 * Y_MARGIN ), {
         cornerRadius: 6,
         fill: GasPropertiesColorProfile.collisionCounterBackgroundColorProperty,
-        stroke: 'black',
-        center: content.center
+        stroke: 'black'
       } );
 
       // Pseudo-3D bezel around the outside edge of the counter
       const bezelBounds = new Bounds2( 0, 0, backgroundNode.width + ( 2 * BEZEL_WIDTH ), backgroundNode.height + ( 2 * BEZEL_WIDTH ) );
       const bezelNode = new ShadedRectangle( bezelBounds, {
-        baseColor: 'rgb( 90, 90, 90 )',
-        center: backgroundNode.center
+        baseColor: 'rgb( 90, 90, 90 )'
       } );
+
+      backgroundNode.center = bezelNode.center;
+      content.center = backgroundNode.center;
 
       assert && assert( !options.children, 'CollisionCounterNode sets children' );
       options.children = [ bezelNode, backgroundNode, content ];
