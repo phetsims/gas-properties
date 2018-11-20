@@ -23,7 +23,7 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        location: new Vector2( 40, 40 ),
+        location: Vector2.ZERO,
         visible: false
       }, options );
 

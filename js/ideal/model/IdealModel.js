@@ -20,6 +20,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   class IdealModel {
 
@@ -33,10 +34,16 @@ define( require => {
       this.container = new Container();
 
       // @public collision counter
-      this.collisionCounter = new CollisionCounter();
+      this.collisionCounter = new CollisionCounter( {
+        //TODO use model coordinates
+        location: new Vector2( 20, 20 ) // determined empirically
+      } );
 
       // @public stopwatch
-      this.stopwatch = new Stopwatch( this.timeTransform );
+      this.stopwatch = new Stopwatch( this.timeTransform, {
+        //TODO use model coordinates
+        location: new Vector2( 200, 20 ) // determined empirically
+      } );
 
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );

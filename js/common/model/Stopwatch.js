@@ -24,7 +24,7 @@ define( require => {
     constructor( timeTransform, options ) {
 
       options = _.extend( {
-        location: new Vector2( 40, 40 ),
+        location: Vector2.ZERO,
         visible: false
       }, options );
 
