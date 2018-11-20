@@ -55,6 +55,7 @@ define( require => {
       // displays the pressure in kilopascals (kPa)
       const kilopascalsNode = new NumberDisplay( pressureGauge.pressureKilopascalsProperty, NUMBER_DISPLAY_RANGE,
         _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
+          decimalPlaces: 1,
           valuePattern: StringUtils.fillIn( pressureUnitsString, {
             pressure: '{0}',
             units: kilopascalsString
@@ -64,6 +65,7 @@ define( require => {
       // displays the pressure in atmospheres (atm)
       const atmospheresNode = new NumberDisplay( pressureGauge.pressureAtmospheresProperty, NUMBER_DISPLAY_RANGE,
         _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
+          decimalPlaces: 2,
           valuePattern: StringUtils.fillIn( pressureUnitsString, {
             pressure: '{0}',
             units: atmospheresString
