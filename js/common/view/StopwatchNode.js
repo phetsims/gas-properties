@@ -9,7 +9,10 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
@@ -40,7 +43,19 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
-      //TODO add bounded DragListener
+      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
+      let adjustedDragBoundsProperty = null;
+      if ( options.dragBoundsProperty ) {
+        adjustedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty ],
+          dragBounds => new Bounds2( dragBounds.minX, dragBounds.minY,
+            dragBounds.maxX - this.width, dragBounds.maxY - this.height ) );
+      }
+
+      // dragging
+      this.addInputListener( new DragListener( {
+        locationProperty: stopwatch.locationProperty,
+        dragBoundsProperty: adjustedDragBoundsProperty
+      } ) );
 
       // move the stopwatch
       stopwatch.locationProperty.linkAttribute( this, 'translation' );
