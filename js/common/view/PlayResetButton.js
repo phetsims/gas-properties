@@ -28,15 +28,14 @@ define( require => {
       }, options );
 
       // play icon
-      const playSize = 10;
+      const playSize = 12;
       const playShape = new Shape()
         .moveTo( 0, 0 )
         .lineTo( playSize, playSize / 2 )
         .lineTo( 0, playSize )
         .close();
       const playIconNode = new Path( playShape, {
-        fill: 'white',
-        stroke: 'black'
+        fill: 'black'
       } );
 
       // reset icon
