@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
@@ -20,11 +21,10 @@ define( require => {
   class StopwatchNode extends TimerNode {
 
     /**
-     * @param {NumberProperty} stopwatchTimeProperty
-     * @param {BooleanProperty} stopwatchIsRunningProperty
+     * @param {Stopwatch} stopwatch
      * @param {Object} [options]
      */
-    constructor( stopwatchTimeProperty, stopwatchIsRunningProperty, options ) {
+    constructor( stopwatch, options ) {
 
       options = _.extend( {
         maxValue: 999.99,
@@ -33,7 +33,23 @@ define( require => {
         } )
       }, options );
 
-      super( stopwatchTimeProperty, stopwatchIsRunningProperty, options );
+      super( stopwatch.timeProperty, stopwatch.isRunningProperty, options );
+
+      // Put a red dot at the origin, for debugging layout.
+      if ( phet.chipper.queryParameters.dev ) {
+        this.addChild( new Circle( 3, { fill: 'red' } ) );
+      }
+
+      // move the stopwatch
+      stopwatch.locationProperty.linkAttribute( this, 'translation' );
+
+      // show/hide the stopwatch
+      stopwatch.visibleProperty.link( visible => {
+        this.visible = visible;
+        if ( !visible ) {
+          this.interruptSubtreeInput(); // interrupt user interactions
+        }
+      } );
     }
   }
 

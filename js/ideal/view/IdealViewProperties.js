@@ -27,9 +27,6 @@ define( require => {
       // @public whether dimensional arrows are visible for the width of the container
       this.sizeVisibleProperty = new BooleanProperty( false );
 
-      // @public whether the stopwatch is visible
-      this.stopwatchVisibleProperty = new BooleanProperty( false );
-
       // @public whether the 'Particles Counts' accordion box is expanded
       this.particleCountsExpandedProperty = new BooleanProperty( true );
 
@@ -42,8 +39,6 @@ define( require => {
     reset() {
       this.particleTypeProperty.reset();
       this.sizeVisibleProperty.reset();
-      this.stopwatchVisibleProperty.reset();
-      this.collisionCounterVisibleProperty.reset();
       this.particleCountsExpandedProperty.reset();
       this.temperatureUnitsProperty.reset();
     }

@@ -19,6 +19,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
+  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
 
   class IdealModel {
 
@@ -30,6 +31,12 @@ define( require => {
 
       // @public width of the container, in nm
       this.container = new Container();
+
+      // @public collision counter
+      this.collisionCounter = new CollisionCounter();
+
+      // @public stopwatch
+      this.stopwatch = new Stopwatch( this.timeTransform );
 
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
@@ -56,17 +63,6 @@ define( require => {
         range: new Range( -1, 1 )
       } );
 
-      // @public whether the stopwatch is running
-      this.stopwatchIsRunningProperty = new BooleanProperty( false );
-
-      // @public time displayed on the stopwatch, in ps
-      this.stopwatchTimeProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 )
-      } );
-
-      // @public collision counter
-      this.collisionCounter = new CollisionCounter();
-
       // @public {Property.<number|null>} the temperature in the container, in K.
       // Temperature value is null when the container is empty.
       this.temperatureProperty = new Property( null, {
@@ -79,27 +75,25 @@ define( require => {
 
     // @public resets the model
     reset() {
+
+      // model elements
       this.container.reset();
+      this.collisionCounter.reset();
+      this.stopwatch.reset();
+
+      // Properties
       this.isPlayingProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
       this.heatCoolAmountProperty.reset();
-      this.stopwatchIsRunningProperty.reset();
-      this.stopwatchTimeProperty.reset();
-      this.collisionCounterIsRunningProperty.reset();
-      this.numberOfCollisionsProperty.reset();
       this.temperatureProperty.reset();
     }
 
     // @public
     step( dt ) {
       if ( this.isPlayingProperty.value ) {
-
-        // Update the stopwatch. 1 second of real time is displayed as 2.5 picoseconds
-        if ( this.stopwatchIsRunningProperty.value ) {
-          this.stopwatchTimeProperty.value += this.timeTransform( dt );
-        }
+        this.stopwatch.step( dt );
       }
     }
   }

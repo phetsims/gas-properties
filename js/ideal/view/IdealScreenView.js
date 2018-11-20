@@ -50,8 +50,11 @@ define( require => {
       this.addChild( comboBoxListParent );
 
       // Control panel at upper right
-      const controlPanel = new IdealControlPanel( model.holdConstantProperty, viewProperties.sizeVisibleProperty,
-        viewProperties.stopwatchVisibleProperty, model.collisionCounter.visibleProperty, {
+      const controlPanel = new IdealControlPanel(
+        model.holdConstantProperty,
+        viewProperties.sizeVisibleProperty,
+        model.stopwatch.visibleProperty,
+        model.collisionCounter.visibleProperty, {
           fixedWidth: PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
@@ -144,10 +147,7 @@ define( require => {
       this.addChild( thermometerNode );
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatchTimeProperty, model.stopwatchIsRunningProperty, {
-        left: collisionCounterNode.right + 20,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+      const stopwatchNode = new StopwatchNode( model.stopwatch );
       this.addChild( stopwatchNode );
 
       // Reset All button
@@ -163,17 +163,6 @@ define( require => {
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
-
-      viewProperties.stopwatchVisibleProperty.link( visible => {
-        stopwatchNode.visible = visible;
-        if ( !visible ) {
-          stopwatchNode.interruptSubtreeInput(); // interrupt user interactions
-          model.stopwatchIsRunningProperty.value = false;
-          model.stopwatchTimeProperty.value = 0;
-        }
-      } );
-      console.log( 'stopwatch: ' + stopwatchNode.x + ',' + stopwatchNode.y );
-      console.log( 'collisionCounter: ' + collisionCounterNode.x + ',' + collisionCounterNode.y );
     }
   }
 

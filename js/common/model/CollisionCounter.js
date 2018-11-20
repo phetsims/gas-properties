@@ -17,6 +17,9 @@ define( require => {
 
   class CollisionCounter {
 
+    /**
+     * @param {Object} [options]
+     */
     constructor( options ) {
 
       options = _.extend( {
@@ -34,6 +37,7 @@ define( require => {
 
       // @public the number of collisions between the particles and the container walls
       this.numberOfCollisionsProperty = new NumberProperty( 0, {
+        numberType: 'Integer',
         isValidValue: value => ( value >= 0 )
       } );
 
@@ -52,6 +56,7 @@ define( require => {
 
       // @public collision averaging time, in ps
       this.averagingTimeProperty = new NumberProperty( 10, {
+        numberType: 'Integer',
         validValues: this.averagingTimes
       } );
 

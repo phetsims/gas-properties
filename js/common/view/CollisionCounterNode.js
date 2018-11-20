@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
   const ComboBox = require( 'SUN/ComboBox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -132,6 +133,11 @@ define( require => {
       options.children = [ bezelNode, backgroundNode, content ];
 
       super( options );
+
+      // Put a red dot at the origin, for debugging layout.
+      if ( phet.chipper.queryParameters.dev ) {
+        this.addChild( new Circle( 3, { fill: 'red' } ) );
+      }
 
       // move the counter
       collisionCounter.locationProperty.linkAttribute( this, 'translation' );
