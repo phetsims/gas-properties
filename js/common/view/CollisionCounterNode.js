@@ -135,6 +135,8 @@ define( require => {
 
       super( options );
 
+      //TODO add bounded DragListener
+
       // Put a red dot at the origin, for debugging layout.
       if ( phet.chipper.queryParameters.dev ) {
         this.addChild( new Circle( 3, { fill: 'red' } ) );

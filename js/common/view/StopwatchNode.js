@@ -40,6 +40,8 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
+      //TODO add bounded DragListener
+
       // move the stopwatch
       stopwatch.locationProperty.linkAttribute( this, 'translation' );
 
