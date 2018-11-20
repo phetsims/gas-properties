@@ -1,5 +1,8 @@
 // Copyright 2018, University of Colorado Boulder
 
+//TODO add resize handle
+//TODO add lid
+//TODO add size dimensional arrows
 /**
  * View of the Container. Location of the right edge of the container remains fixed.
  *
