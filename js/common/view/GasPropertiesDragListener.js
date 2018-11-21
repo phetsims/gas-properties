@@ -1,5 +1,6 @@
 // Copyright 2018, University of Colorado Boulder
 
+//TODO too many responsibilities? misplaced responsibilities?
 /**
  * DragListener subclass that adds the following features:
  *
