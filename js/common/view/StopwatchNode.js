@@ -2,18 +2,16 @@
 
 /**
  * A digital stopwatch
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
   'use strict';
 
   // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesDragListener = require( 'GAS_PROPERTIES/common/view/GasPropertiesDragListener' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
@@ -25,11 +23,14 @@ define( require => {
 
     /**
      * @param {Stopwatch} stopwatch
+     * @param {Property.<Bounds2|null>} dragBoundsProperty
      * @param {Object} [options]
      */
-    constructor( stopwatch, options ) {
+    constructor( stopwatch, dragBoundsProperty, options ) {
 
       options = _.extend( {
+
+        // TimerNode options
         maxValue: 999.99,
         unitsNode: new Text( picosecondsString, {
           font: TimerReadoutNode.DEFAULT_SMALL_FONT
@@ -43,38 +44,9 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
-      let adjustedDragBoundsProperty = null;
-      if ( options.dragBoundsProperty ) {
-
-        // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
-        adjustedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty ],
-          dragBounds => new Bounds2( dragBounds.minX, dragBounds.minY,
-            dragBounds.maxX - this.width, dragBounds.maxY - this.height ) );
-
-        // Ensure that the stopwatch remains inside the drag bounds.
-        adjustedDragBoundsProperty.link( adjustedDragBounds => {
-          if ( adjustedDragBounds && !adjustedDragBounds.containsBounds( this.bounds ) ) {
-            stopwatch.locationProperty.value = adjustedDragBounds.closestPointTo( stopwatch.locationProperty.value );
-          }
-        } );
-      }
-
       // dragging
-      this.addInputListener( new DragListener( {
-        locationProperty: stopwatch.locationProperty,
-        dragBoundsProperty: adjustedDragBoundsProperty
-      } ) );
-
-      // move the stopwatch
-      stopwatch.locationProperty.linkAttribute( this, 'translation' );
-
-      // show/hide the stopwatch
-      stopwatch.visibleProperty.link( visible => {
-        this.visible = visible;
-        if ( !visible ) {
-          this.interruptSubtreeInput(); // interrupt user interactions
-        }
-      } );
+      this.addInputListener( new GasPropertiesDragListener( this, stopwatch.locationProperty,
+        stopwatch.visibleProperty, dragBoundsProperty ) );
     }
   }
 

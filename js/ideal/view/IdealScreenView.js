@@ -158,15 +158,12 @@ define( require => {
       this.addChild( resetAllButton );
 
       // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
+      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, this.visibleBoundsProperty,
+        comboBoxListParent );
       this.addChild( collisionCounterNode );
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
+      const stopwatchNode = new StopwatchNode( model.stopwatch, this.visibleBoundsProperty );
       this.addChild( stopwatchNode );
 
       // This should be in front of everything else.

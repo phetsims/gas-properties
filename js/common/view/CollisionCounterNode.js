@@ -12,10 +12,9 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
   const ComboBox = require( 'SUN/ComboBox' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesDragListener = require( 'GAS_PROPERTIES/common/view/GasPropertiesDragListener' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
@@ -49,14 +48,13 @@ define( require => {
 
     /**
      * @param {CollisionCounter} collisionCounter
+     * @param {Property.<Bounds2|null>} dragBoundsProperty
      * @param {Node} comboBoxListParent
      * @param {Object} [options]
      */
-    constructor( collisionCounter, comboBoxListParent, options ) {
+    constructor( collisionCounter, dragBoundsProperty, comboBoxListParent, options ) {
 
-      options = _.extend( {
-        dragBoundsProperty: null // {Property.<Bounds2>|null}
-      }, options );
+      options = options || {};
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
         font: TITLE_FONT
@@ -139,43 +137,14 @@ define( require => {
 
       super( options );
 
-      let adjustedDragBoundsProperty = null;
-      if ( options.dragBoundsProperty ) {
-
-        // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
-        adjustedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty ],
-          dragBounds => new Bounds2( dragBounds.minX, dragBounds.minY,
-            dragBounds.maxX - this.width, dragBounds.maxY - this.height ) );
-
-        // Ensure that the collision counter remains inside the drag bounds.
-        adjustedDragBoundsProperty.link( adjustedDragBounds => {
-          if ( adjustedDragBounds && !adjustedDragBounds.containsBounds( this.bounds ) ) {
-            collisionCounter.locationProperty.value = adjustedDragBounds.closestPointTo( collisionCounter.locationProperty.value );
-          }
-        } );
-      }
-
-      // dragging
-      this.addInputListener( new DragListener( {
-        locationProperty: collisionCounter.locationProperty,
-        dragBoundsProperty: adjustedDragBoundsProperty
-      } ) );
-
       // Put a red dot at the origin, for debugging layout.
       if ( phet.chipper.queryParameters.dev ) {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
-      // move the counter
-      collisionCounter.locationProperty.linkAttribute( this, 'translation' );
-
-      // show/hide the counter
-      collisionCounter.visibleProperty.link( visible => {
-        this.visible = visible;
-        if ( !visible ) {
-          this.interruptSubtreeInput(); // interrupt user interactions
-        }
-      } );
+      // dragging
+      this.addInputListener( new GasPropertiesDragListener( this, collisionCounter.locationProperty,
+        collisionCounter.visibleProperty, dragBoundsProperty ) );
     }
   }
 
