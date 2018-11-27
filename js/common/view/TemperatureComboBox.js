@@ -44,6 +44,7 @@ define( require => {
     constructor( thermometer, listParent, options ) {
 
       options = _.extend( {
+        align: 'right',
         buttonXMargin: 5,
         buttonYMargin: 2,
         buttonCornerRadius: 5,

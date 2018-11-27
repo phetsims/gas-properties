@@ -44,6 +44,7 @@ define( require => {
     constructor( pressureGauge, listParent, options ) {
 
       options = _.extend( {
+        align: 'right',
         buttonXMargin: 5,
         buttonYMargin: 2,
         buttonCornerRadius: 5,

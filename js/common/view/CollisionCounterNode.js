@@ -93,6 +93,7 @@ define( require => {
       // Combo box
       const comboBox = new ComboBox( comboBoxItems, collisionCounter.averagingTimeProperty, comboBoxListParent, {
         listPosition: 'below',
+        align: 'right',
         buttonXMargin: 5,
         buttonYMargin: 2,
         buttonCornerRadius: 5,
