@@ -12,7 +12,7 @@ define( require => {
   const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
-  const Shape = require( 'KITE/Shape' );
+  const PlayIconShape = require( 'SCENERY_PHET/PlayIconShape' );
   const UTurnArrowShape = require( 'SCENERY_PHET/UTurnArrowShape' );
 
   class PlayResetButton extends BooleanRectangularToggleButton {
@@ -27,20 +27,13 @@ define( require => {
         baseColor: '#DFE0E1'
       }, options );
 
-      //TODO this doesn't match StopwatchNode, see https://github.com/phetsims/scenery-phet/issues/428
-      // play icon
-      const playSize = 12;
-      const playShape = new Shape()
-        .moveTo( 0, 0 )
-        .lineTo( playSize, playSize / 2 )
-        .lineTo( 0, playSize )
-        .close();
-      const playIconNode = new Path( playShape, {
+      // reset icon
+      const resetIconNode = new Path( new UTurnArrowShape( 10 ), {
         fill: 'black'
       } );
 
-      // reset icon
-      const resetIconNode = new Path( new UTurnArrowShape( 10 ), {
+      // play icon
+      const playIconNode = new Path( new PlayIconShape( 0.8 * resetIconNode.height, resetIconNode.height ), {
         fill: 'black'
       } );
 
