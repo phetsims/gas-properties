@@ -26,6 +26,7 @@ define( require => {
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const SizeNode = require( 'GAS_PROPERTIES/common/view/SizeNode' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
@@ -114,6 +115,11 @@ define( require => {
         centerY: this.layoutBounds.centerY - 40
       } );
       this.addChild( containerNode );
+
+      // Dimensional arrows that indicate container size
+      const sizeNode = new SizeNode( model.container.location, model.container.widthProperty,
+        model.modelViewTransform, viewProperties.sizeVisibleProperty );
+      this.addChild( sizeNode );
 
       //TODO HeaterCoolerNode is a mess, see https://github.com/phetsims/scenery-phet/issues/423
       // Device to heat/cool the contents of the container

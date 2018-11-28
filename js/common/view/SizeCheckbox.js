@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
 
   // strings
   const sizeString = require( 'string!GAS_PROPERTIES/size' );
@@ -28,8 +29,9 @@ define( require => {
       options = options || {};
 
       assert && assert( !options.icon, 'SizeCheckbox sets icon' );
-      options.icon = new DimensionalArrowNode( 44, {
-        color: GasPropertiesColorProfile.textFillProperty
+      options.icon = new DimensionalArrowNode( new NumberProperty( 44 ), {
+        color: GasPropertiesColorProfile.textFillProperty,
+        pickable: false
       } );
 
       super( sizeString, sizeVisibleProperty, options );

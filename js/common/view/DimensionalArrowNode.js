@@ -1,5 +1,6 @@
 // Copyright 2018, University of Colorado Boulder
 
+//TODO rename to DimensionalArrowsNode (plural)
 /**
  * A horizontal dimensional arrow, looks like this, but with solid arrow heads:  |<- - - ->|
  *
@@ -24,10 +25,10 @@ define( require => {
   class DimensionalArrowNode extends Node {
 
     /**
-     * @param {number} length
+     * @param {NumberProperty} lengthProperty
      * @param {Object} [options]
      */
-    constructor( length, options ) {
+    constructor( lengthProperty, options ) {
 
       options = _.extend( {
         color: 'black',
@@ -39,18 +40,16 @@ define( require => {
       }, options );
 
       // horizontal line in center
-      const horizontalLine = new Line( 0, 0, length, 0, {
+      const horizontalLine = new Line( 0, 0, lengthProperty.value, 0, {
         stroke: options.color,
         lineWidth: options.horizontalLineWidth,
-        lineDash: options.horizontalLineDash,
-        maxWidth: length
+        lineDash: options.horizontalLineDash
       } );
 
       // vertical line at left end
       const leftVerticalLine = new Line( 0, 0, 0, options.verticalLineLength, {
         stroke: options.color,
         lineWidth: options.verticalLineWidth,
-        centerX: 0,
         centerY: horizontalLine.centerY
       } );
 
@@ -58,7 +57,6 @@ define( require => {
       const rightVerticalLine = new Line( 0, 0, 0, options.verticalLineLength, {
         stroke: options.color,
         lineWidth: options.verticalLineWidth,
-        centerX: length,
         centerY: horizontalLine.centerY
       } );
 
@@ -69,21 +67,27 @@ define( require => {
         new Vector2( options.arrowHeadDimensions.width, options.arrowHeadDimensions.height / 2 )
       ] );
       const leftArrowHead = new Path( leftArrowHeadShape, {
-        fill: options.color,
-        left: leftVerticalLine.right
+        fill: options.color
       } );
 
       // arrow head that points right
       const rightArrowHeadShape = leftArrowHeadShape.transformed( Matrix3.scaling( -1, 1 ) );
       const rightArrowHead = new Path( rightArrowHeadShape, {
-        fill: options.color,
-        right: rightVerticalLine.left
+        fill: options.color
       } );
 
       assert && assert( !options.children, 'DimensionalArrowNode sets children' );
       options.children = [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ];
 
       super( options );
+
+      lengthProperty.link( length => {
+        horizontalLine.setLine( 0, 0, length, 0 );
+        leftVerticalLine.centerX = 0;
+        rightVerticalLine.right = length;
+        leftArrowHead.left = 0;
+        rightArrowHead.right = length;
+      } );
     }
   }
 

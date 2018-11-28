@@ -16,6 +16,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LinearFunction = require( 'DOT/LinearFunction' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Property = require( 'AXON/Property' );
@@ -31,6 +32,12 @@ define( require => {
       // @public transform between real time and sim time.
       // 1 second of real time is 2.5 picoseconds of sim time.
       this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
+
+      this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+        new Vector2( 0, 0 ), // the origin in model coordinates
+        new Vector2( 595, 455 ), // location of the model origin in view coordinates
+        1 // 1 nm is this many pixels, y is inverted
+      );
 
       // @public model elements
       this.container = new Container();
