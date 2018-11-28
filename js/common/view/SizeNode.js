@@ -66,12 +66,11 @@ define( require => {
 
       visibleProperty.linkAttribute( this, 'visible' );
 
+      // right justify with the container location
       const rightJustify = () => {
         this.right = modelViewTransform.modelToViewX( location.x );
         this.top = modelViewTransform.modelToViewY( location.y ) + 5;
       };
-              
-      // right justify with the container location
       rightJustify();
       dimensionalArrowNode.on( 'bounds', () => { rightJustify(); } );
     }
