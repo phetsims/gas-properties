@@ -10,7 +10,7 @@ define( require => {
   'use strict';
 
   // modules
-  const DimensionalArrowNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowNode' );
+  const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -39,7 +39,7 @@ define( require => {
 
       options = options || {};
 
-      const dimensionalArrowNode = new DimensionalArrowNode( widthProperty, {
+      const dimensionalArrowNode = new DimensionalArrowsNode( widthProperty, {
         color: GasPropertiesColorProfile.textFillProperty
       } );
 

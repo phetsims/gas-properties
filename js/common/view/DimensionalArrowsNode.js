@@ -1,6 +1,5 @@
 // Copyright 2018, University of Colorado Boulder
 
-//TODO rename to DimensionalArrowsNode (plural)
 /**
  * A horizontal dimensional arrow, looks like this, but with solid arrow heads:  |<- - - ->|
  *
@@ -22,7 +21,7 @@ define( require => {
   // constants
   const DEFAULT_ARROW_HEAD_DIMENSIONS = new Dimension2( 8, 8 );
 
-  class DimensionalArrowNode extends Node {
+  class DimensionalArrowsNode extends Node {
 
     /**
      * @param {NumberProperty} lengthProperty
@@ -76,7 +75,7 @@ define( require => {
         fill: options.color
       } );
 
-      assert && assert( !options.children, 'DimensionalArrowNode sets children' );
+      assert && assert( !options.children, 'DimensionalArrowsNode sets children' );
       options.children = [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ];
 
       super( options );
@@ -91,5 +90,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'DimensionalArrowNode', DimensionalArrowNode );
+  return gasProperties.register( 'DimensionalArrowsNode', DimensionalArrowsNode );
 } ); 

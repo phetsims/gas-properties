@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const DimensionalArrowNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowNode' );
+  const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -29,7 +29,7 @@ define( require => {
       options = options || {};
 
       assert && assert( !options.icon, 'SizeCheckbox sets icon' );
-      options.icon = new DimensionalArrowNode( new NumberProperty( 44 ), {
+      options.icon = new DimensionalArrowsNode( new NumberProperty( 44 ), {
         color: GasPropertiesColorProfile.textFillProperty,
         pickable: false
       } );
