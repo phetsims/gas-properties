@@ -34,9 +34,15 @@ define( require => {
     constructor( targetNode, locationProperty, visibleProperty, dragBoundsProperty, options ) {
 
       // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
-      const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds =>
-        new Bounds2( dragBounds.minX, dragBounds.minY,
-          dragBounds.maxX - targetNode.width, dragBounds.maxY - targetNode.height )
+      const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {
+          if ( dragBounds ) {
+            return new Bounds2( dragBounds.minX, dragBounds.minY,
+              dragBounds.maxX - targetNode.width, dragBounds.maxY - targetNode.height );
+          }
+          else {
+            return null;
+          }
+        }
       );
 
       super( {
