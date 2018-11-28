@@ -134,7 +134,7 @@ define( require => {
 
       // Thermometer
       const thermometerNode = new GasPropertiesThermometerNode( model.thermometer, comboBoxListParent, {
-        right: containerNode.right - 50,
+        right: containerNode.right,
         centerY: containerNode.top
       } );
       this.addChild( thermometerNode );
