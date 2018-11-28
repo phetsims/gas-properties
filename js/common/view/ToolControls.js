@@ -1,6 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
+ * Controls for making various tools visible.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -8,23 +9,12 @@ define( require => {
   'use strict';
 
   // modules
-  const Checkbox = require( 'SUN/Checkbox' );
+  const CollisionCounterCheckbox = require( 'GAS_PROPERTIES/common/view/CollisionCounterCheckbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const SizeCheckbox = require( 'GAS_PROPERTIES/common/view/SizeCheckbox' );
-  const Text = require( 'SCENERY/nodes/Text' );
+  const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
-
-  // strings
-  const collisionCounterString = require( 'string!GAS_PROPERTIES/collisionCounter' );
-  const stopwatchString = require( 'string!GAS_PROPERTIES/stopwatch' );
-
-  // constants
-  const TEXT_OPTIONS = {
-    font: GasPropertiesConstants.CONTROL_FONT,
-    fill: GasPropertiesColorProfile.textFillProperty
-  };
 
   class ToolControls extends VBox {
 
@@ -40,11 +30,9 @@ define( require => {
 
       const sizeCheckbox = new SizeCheckbox( sizeVisibleProperty );
 
-      const stopwatchCheckbox = new Checkbox( new Text( stopwatchString, TEXT_OPTIONS ),
-        stopwatchVisibleProperty );
+      const stopwatchCheckbox = new StopwatchCheckbox( stopwatchVisibleProperty );
 
-      const collisionControlCheckbox = new Checkbox( new Text( collisionCounterString, TEXT_OPTIONS ),
-        collisionCounterVisibleProperty );
+      const collisionControlCheckbox = new CollisionCounterCheckbox( collisionCounterVisibleProperty );
 
       assert && assert( !options.children, 'ToolControls sets children' );
       options.children = [ sizeCheckbox, stopwatchCheckbox, collisionControlCheckbox ];

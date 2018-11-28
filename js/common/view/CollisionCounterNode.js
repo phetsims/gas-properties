@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
+  const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const ComboBox = require( 'SUN/ComboBox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -20,6 +21,7 @@ define( require => {
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayResetButton = require( 'GAS_PROPERTIES/common/view/PlayResetButton' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
@@ -148,6 +150,27 @@ define( require => {
         collisionCounter.visibleProperty, dragBoundsProperty ) );
     }
   }
+
+  /**
+   * Creates an icon for the collision counter, used to label check boxes.
+   * @param {Object} [options]
+   * @returns {Node}
+   * @public
+   * @static
+   */
+  CollisionCounterNode.createIcon = ( options ) => {
+
+    options = options || {};
+
+    assert && assert( !options.children, 'CollisionCounterNode.createIcon sets children' );
+    options.children = [
+      new CollisionCounterNode( new CollisionCounter( { visible: true } ), new Property( null ), new Node(), {
+        pickable: false
+      } )
+    ];
+
+    return new Node( options );
+  };
 
   return gasProperties.register( 'CollisionCounterNode', CollisionCounterNode );
 } );

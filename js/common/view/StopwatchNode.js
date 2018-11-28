@@ -9,9 +9,12 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesDragListener = require( 'GAS_PROPERTIES/common/view/GasPropertiesDragListener' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
@@ -49,6 +52,27 @@ define( require => {
         stopwatch.visibleProperty, dragBoundsProperty ) );
     }
   }
+
+  /**
+   * Creates an icon for the stopwatch, used to label check boxes.
+   * @param {Object} [options]
+   * @returns {Node}
+   * @public
+   * @static
+   */
+  StopwatchNode.createIcon = ( options ) => {
+
+    options = options || {};
+
+    assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
+    options.children = [
+      new TimerNode( new NumberProperty( 0 ), new BooleanProperty( false ), {
+        pickable: false
+      } )
+    ];
+
+    return new Node( options );
+  };
 
   return gasProperties.register( 'StopwatchNode', StopwatchNode );
 } );
