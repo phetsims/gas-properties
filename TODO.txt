@@ -1,3 +1,5 @@
 TODO list for gas-properties
 
-
+Use modelViewTransform where appropriate
+Move Stopwatch locationProperty to view
+Move CollisionCounter locationProperty to view
