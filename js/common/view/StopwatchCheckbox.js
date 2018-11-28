@@ -38,7 +38,7 @@ define( require => {
       } );
 
       const content = new HBox( {
-        spacing: 10,
+        spacing: 8,
         children: [ textNode, iconNode ]
       });
 
