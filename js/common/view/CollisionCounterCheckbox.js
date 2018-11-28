@@ -9,18 +9,14 @@ define( require => {
   'use strict';
 
   // modules
-  const Checkbox = require( 'SUN/Checkbox' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const Text = require( 'SCENERY/nodes/Text' );
+  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
 
   // strings
   const collisionCounterString = require( 'string!GAS_PROPERTIES/collisionCounter' );
 
-  class CollisionCounterCheckbox extends Checkbox {
+  class CollisionCounterCheckbox extends GasPropertiesCheckbox {
 
     /**
      * @param {BooleanProperty} collisionCounterVisibleProperty
@@ -28,21 +24,12 @@ define( require => {
      */
     constructor( collisionCounterVisibleProperty, options ) {
 
-      const textNode = new Text( collisionCounterString, {
-          font: GasPropertiesConstants.CONTROL_FONT,
-          fill: GasPropertiesColorProfile.textFillProperty
-        } );
+      options = options || {};
 
-      const iconNode = CollisionCounterNode.createIcon( {
-        scale: 0.2
-      } );
+      assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
+      options.icon = CollisionCounterNode.createIcon( { scale: 0.2 } );
 
-      const content = new HBox( {
-        spacing: 8,
-        children: [ textNode, iconNode ]
-      });
-
-      super( content, collisionCounterVisibleProperty, options );
+      super( collisionCounterString, collisionCounterVisibleProperty, options );
     }
   }
 

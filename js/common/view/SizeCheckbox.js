@@ -9,18 +9,15 @@ define( require => {
   'use strict';
 
   // modules
-  const Checkbox = require( 'SUN/Checkbox' );
   const DimensionalArrowNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   const sizeString = require( 'string!GAS_PROPERTIES/size' );
 
-  class SizeCheckbox extends Checkbox {
+  class SizeCheckbox extends GasPropertiesCheckbox {
 
     /**
      * @param {BooleanProperty} sizeVisibleProperty
@@ -28,22 +25,14 @@ define( require => {
      */
     constructor( sizeVisibleProperty, options ) {
 
-      const textNode = new Text( sizeString, {
-        font: GasPropertiesConstants.CONTROL_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty,
-        maxWidth: 150 // determined empirically
-      } );
+      options = options || {};
 
-      const dimensionalArrowNode = new DimensionalArrowNode( 44, {
+      assert && assert( !options.icon, 'SizeCheckbox sets icon' );
+      options.icon = new DimensionalArrowNode( 44, {
         color: GasPropertiesColorProfile.textFillProperty
       } );
 
-      const content = new HBox( {
-        spacing: 10,
-        children: [ textNode, dimensionalArrowNode ]
-      } );
-
-      super( content, sizeVisibleProperty, options );
+      super( sizeString, sizeVisibleProperty, options );
     }
   }
 

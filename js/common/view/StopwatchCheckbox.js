@@ -9,18 +9,14 @@ define( require => {
   'use strict';
 
   // modules
-  const Checkbox = require( 'SUN/Checkbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
+  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
-  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   const stopwatchString = require( 'string!GAS_PROPERTIES/stopwatch' );
 
-  class StopwatchCheckbox extends Checkbox {
+  class StopwatchCheckbox extends GasPropertiesCheckbox {
 
     /**
      * @param {BooleanProperty} stopwatchVisibleProperty
@@ -28,21 +24,12 @@ define( require => {
      */
     constructor( stopwatchVisibleProperty, options ) {
 
-      const textNode = new Text( stopwatchString, {
-          font: GasPropertiesConstants.CONTROL_FONT,
-          fill: GasPropertiesColorProfile.textFillProperty
-        } );
+      options = options || {};
 
-      const iconNode = StopwatchNode.createIcon( {
-        scale: 0.25
-      } );
+      assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
+      options.icon = StopwatchNode.createIcon( { scale: 0.25 } );
 
-      const content = new HBox( {
-        spacing: 8,
-        children: [ textNode, iconNode ]
-      });
-
-      super( content, stopwatchVisibleProperty, options );
+      super( stopwatchString, stopwatchVisibleProperty, options );
     }
   }
 
