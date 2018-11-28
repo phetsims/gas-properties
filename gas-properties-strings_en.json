@@ -74,6 +74,9 @@
   "pressureUnits": {
     "value": "{{pressure}} {{units}}"
   },
+  "sizeUnits": {
+    "value": "{{size}} {{units}}"
+  },
   "pressure": {
     "value": "Pressure"
   },
@@ -82,5 +85,8 @@
   },
   "atmospheres": {
     "value": "atm"
+  },
+  "nanometers": {
+    "value": "nm"
   }
 }

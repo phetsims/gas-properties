@@ -14,6 +14,17 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Range = require( 'DOT/Range' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+
+  // strings
+  const nanometersString = require( 'string!GAS_PROPERTIES/nanometers' );
+  const sizeUnitsString = require( 'string!GAS_PROPERTIES/sizeUnits' );
+
+  // constants
+  const NUMBER_DISPLAY_RANGE = new Range( 0, 999 ); // determines the width of the NumberDisplay
 
   class SizeNode extends Node {
 
@@ -32,18 +43,37 @@ define( require => {
         color: GasPropertiesColorProfile.textFillProperty
       } );
 
+      const widthDisplay = new NumberDisplay( widthProperty, NUMBER_DISPLAY_RANGE, {
+        decimalPlaces: 1,
+        valuePattern: StringUtils.fillIn( sizeUnitsString, {
+          size: '{0}',
+          units: nanometersString
+        } ),
+        font: new PhetFont( 14 ),
+        cornerRadius: 3,
+        numberFill: 'black',
+        backgroundFill: 'white',
+        backgroundStroke: 'black',
+        backgroundLineWidth: 0.5,
+        right: dimensionalArrowNode.right - 35,
+        centerY: dimensionalArrowNode.centerY
+      } );
+
       assert && assert( !options.children, 'SizeNode sets children' );
-      options.children = [ dimensionalArrowNode ];
+      options.children = [ dimensionalArrowNode, widthDisplay ];
 
       super( options );
 
       visibleProperty.linkAttribute( this, 'visible' );
 
-      // right justify with the container location
-      dimensionalArrowNode.on( 'bounds', () => {
+      const rightJustify = () => {
         this.right = modelViewTransform.modelToViewX( location.x );
-        this.top =  modelViewTransform.modelToViewY( location.y ) + 5;
-      } );
+        this.top = modelViewTransform.modelToViewY( location.y ) + 5;
+      };
+              
+      // right justify with the container location
+      rightJustify();
+      dimensionalArrowNode.on( 'bounds', () => { rightJustify(); } );
     }
   }
 
