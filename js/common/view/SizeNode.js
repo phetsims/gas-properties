@@ -69,7 +69,7 @@ define( require => {
       // right justify with the container location
       const rightJustify = () => {
         this.right = modelViewTransform.modelToViewX( location.x );
-        this.top = modelViewTransform.modelToViewY( location.y ) + 5;
+        this.top = modelViewTransform.modelToViewY( location.y ) + 8;
       };
       rightJustify();
       dimensionalArrowNode.on( 'bounds', () => { rightJustify(); } );
