@@ -164,9 +164,11 @@ define( require => {
 
     assert && assert( !options.children, 'CollisionCounterNode.createIcon sets children' );
     options.children = [
-      new CollisionCounterNode( new CollisionCounter( { visible: true } ), new Property( null ), new Node(), {
-        pickable: false
-      } )
+      new CollisionCounterNode(
+        new CollisionCounter( { visible: true } ), // model element
+        new Property( null ), // dragBoundsProperty
+        new Node(), // comboBoxListParent
+        { pickable: false } )
     ];
 
     return new Node( options );
