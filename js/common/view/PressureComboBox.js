@@ -13,8 +13,8 @@ define( require => {
   // modules
   const ComboBox = require( 'SUN/ComboBox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PressureUnitsEnum = require( 'GAS_PROPERTIES/common/model/PressureUnitsEnum' );
   const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -26,13 +26,6 @@ define( require => {
 
   // constants
   const NUMBER_DISPLAY_RANGE = new Range( 0, 99 ); // determines how wide NumberDisplays will be
-  const NUMBER_DISPLAY_OPTIONS = {
-    backgroundStroke: null,
-    font: new PhetFont( 14 ),
-    align: 'right',
-    xMargin: 0,
-    yMargin: 0
-  };
 
   class PressureComboBox extends ComboBox {
 
@@ -43,19 +36,11 @@ define( require => {
      */
     constructor( pressureGauge, listParent, options ) {
 
-      options = _.extend( {
-        align: 'right',
-        buttonXMargin: 5,
-        buttonYMargin: 2,
-        buttonCornerRadius: 5,
-        itemXMargin: 2,
-        itemYMargin: 2,
-        buttonLineWidth: 0.4
-      }, options );
+      options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_OPTIONS, options );
 
       // displays the pressure in kilopascals (kPa)
       const kilopascalsNode = new NumberDisplay( pressureGauge.pressureKilopascalsProperty, NUMBER_DISPLAY_RANGE,
-        _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
+        _.extend( {}, GasPropertiesConstants.COMBO_BOX_NUMBER_DISPLAY_OPTIONS, {
           decimalPlaces: 1,
           valuePattern: StringUtils.fillIn( pressureUnitsString, {
             pressure: '{0}',
@@ -65,7 +50,7 @@ define( require => {
 
       // displays the pressure in atmospheres (atm)
       const atmospheresNode = new NumberDisplay( pressureGauge.pressureAtmospheresProperty, NUMBER_DISPLAY_RANGE,
-        _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
+        _.extend( {}, GasPropertiesConstants.COMBO_BOX_NUMBER_DISPLAY_OPTIONS, {
           decimalPlaces: 2,
           valuePattern: StringUtils.fillIn( pressureUnitsString, {
             pressure: '{0}',

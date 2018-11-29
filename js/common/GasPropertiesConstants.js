@@ -20,6 +20,27 @@ define( require => {
 
     SIM_TIME_STEP: 0.2, // ps
 
+    COMBO_BOX_OPTIONS: {
+      itemHighlightFill: 'rgba( 255, 0, 0, 0.1 )',
+      align: 'right',
+      buttonXMargin: 5,
+      buttonYMargin: 2,
+      buttonCornerRadius: 5,
+      itemXMargin: 2,
+      itemYMargin: 2,
+      buttonLineWidth: 0.4
+    },
+
+    // Options common to all NumberDisplay items that are used in ComboBoxes
+    COMBO_BOX_NUMBER_DISPLAY_OPTIONS: {
+      backgroundFill: null,
+      backgroundStroke: null,
+      font: new PhetFont( 14 ),
+      align: 'right',
+      xMargin: 0,
+      yMargin: 0
+    },
+
     VBOX_OPTIONS: {
       align: 'left',
       spacing: 12

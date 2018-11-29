@@ -13,8 +13,8 @@ define( require => {
   // modules
   const ComboBox = require( 'SUN/ComboBox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const TemperatureUnitsEnum = require( 'GAS_PROPERTIES/common/model/TemperatureUnitsEnum' );
@@ -26,13 +26,6 @@ define( require => {
 
   // constants
   const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 ); // determines how wide NumberDisplays will be
-  const NUMBER_DISPLAY_OPTIONS = {
-    backgroundStroke: null,
-    font: new PhetFont( 14 ),
-    align: 'right',
-    xMargin: 0,
-    yMargin: 0
-  };
 
   class TemperatureComboBox extends ComboBox {
 
@@ -43,19 +36,11 @@ define( require => {
      */
     constructor( thermometer, listParent, options ) {
 
-      options = _.extend( {
-        align: 'right',
-        buttonXMargin: 5,
-        buttonYMargin: 2,
-        buttonCornerRadius: 5,
-        itemXMargin: 2,
-        itemYMargin: 2,
-        buttonLineWidth: 0.4
-      }, options );
+      options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_OPTIONS, options );
 
       // displays the temperature in Kelvin
       const kelvinNode = new NumberDisplay( thermometer.temperatureKelvinProperty, NUMBER_DISPLAY_RANGE,
-        _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
+        _.extend( {}, GasPropertiesConstants.COMBO_BOX_NUMBER_DISPLAY_OPTIONS, {
           valuePattern: StringUtils.fillIn( temperatureUnitsString, {
             temperature: '{0}',
             units: kelvinString
@@ -64,7 +49,7 @@ define( require => {
 
       // displays the temperature in Celsius
       const celsiusNode = new NumberDisplay( thermometer.temperatureCelsiusProperty, NUMBER_DISPLAY_RANGE,
-        _.extend( {}, NUMBER_DISPLAY_OPTIONS, {
+        _.extend( {}, GasPropertiesConstants.COMBO_BOX_NUMBER_DISPLAY_OPTIONS, {
           valuePattern: StringUtils.fillIn( temperatureUnitsString, {
             temperature: '{0}',
             units: celsiusString
