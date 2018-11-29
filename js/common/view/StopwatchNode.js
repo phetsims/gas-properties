@@ -63,7 +63,9 @@ define( require => {
    */
   StopwatchNode.createIcon = ( options ) => {
 
-    options = options || {};
+    options = _.extend( {
+      scale: 0.25
+    }, options );
 
     assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
     options.children = [

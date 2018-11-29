@@ -27,7 +27,7 @@ define( require => {
       options = options || {};
 
       assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
-      options.icon = CollisionCounterNode.createIcon( { scale: 0.2 } );
+      options.icon = CollisionCounterNode.createIcon();
 
       super( collisionCounterString, collisionCounterVisibleProperty, options );
     }

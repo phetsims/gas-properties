@@ -160,7 +160,9 @@ define( require => {
    */
   CollisionCounterNode.createIcon = ( options ) => {
 
-    options = options || {};
+    options = _.extend( {
+      scale: 0.2
+    }, options );
 
     assert && assert( !options.children, 'CollisionCounterNode.createIcon sets children' );
     options.children = [

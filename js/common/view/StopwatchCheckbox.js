@@ -27,7 +27,7 @@ define( require => {
       options = options || {};
 
       assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
-      options.icon = StopwatchNode.createIcon( { scale: 0.25 } );
+      options.icon = StopwatchNode.createIcon();
 
       super( stopwatchString, stopwatchVisibleProperty, options );
     }
