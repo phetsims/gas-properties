@@ -1,5 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
+//TODO add range for widthProperty
+//TODO add info about hole in top of box
 /**
  * Container for particles.
  *
@@ -50,12 +52,28 @@ define( require => {
     get left() { return this.getLeft(); }
 
     /**
-     * Gets the y coordinate of the containers top side.
+     * Gets the x coordinate of the container's right side.
+     * @returns {number}
+     */
+    getRight() { return this.location.x; }
+
+    get right() { return this.getRight(); }
+
+    /**
+     * Gets the y coordinate of the container's top side.
      * @returns {number}
      */
     getTop() { return this.location.y + this.height; }
 
     get top() { return this.getTop(); }
+
+    /**
+     * Gets the y coordinate of the container's bottom side.
+     * @returns {number}
+     */
+    getBottom() { return this.location.y; }
+
+    get bottom() { return this.getBottom(); }
   }
 
   return gasProperties.register( 'Container', Container );
