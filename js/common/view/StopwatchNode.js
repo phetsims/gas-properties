@@ -9,12 +9,13 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesDragListener = require( 'GAS_PROPERTIES/common/view/GasPropertiesDragListener' );
+  const LinearFunction = require( 'DOT/LinearFunction' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
+  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
@@ -66,9 +67,10 @@ define( require => {
 
     assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
     options.children = [
-      new TimerNode( new NumberProperty( 0 ), new BooleanProperty( false ), {
-        pickable: false
-      } )
+      new StopwatchNode(
+        new Stopwatch( new LinearFunction( 0, 0, 0, 0 ), { visible: true } ), // model element
+        new Property( null ), // dragBoundsProperty
+        { pickable: false } )
     ];
 
     return new Node( options );
