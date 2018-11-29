@@ -14,6 +14,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
+  const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -29,6 +30,8 @@ define( require => {
      */
     constructor( container, options ) {
 
+      options = options || {};
+
       const rectangle = new Rectangle( 0, 0, container.widthProperty.value, container.height, {
         stroke: GasPropertiesColorProfile.containerStrokeProperty,
         lineWidth: 2
@@ -38,13 +41,18 @@ define( require => {
         gripFillBaseColor: 'rgb( 187, 154, 86 )',
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         rotation: -Math.PI / 2,
-        scale: 0.5,
+        scale: 0.4,
         right: rectangle.left + HANDLE_ATTACHMENT_LINE_WIDTH, // hide the overlap
         centerY: rectangle.centerY
       } );
 
+      const lidNode = new LidNode( {
+        right: rectangle.right - 100,
+        bottom: rectangle.top + 1
+      } );
+
       assert && assert( !options.children, 'ContainerNode sets children' );
-      options.children = [ handleNode, rectangle ];
+      options.children = [ handleNode, lidNode, rectangle ];
 
       super( options );
 
