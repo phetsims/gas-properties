@@ -1,8 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
-//TODO add resize handle
+//TODO add drag listener for resize handle
 //TODO add lid
-//TODO add size dimensional arrows
 /**
  * View of the Container. Location of the right edge of the container remains fixed.
  *
@@ -14,8 +13,12 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+
+  // constants
+  const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 
   class ContainerNode extends Node {
 
@@ -31,8 +34,17 @@ define( require => {
         lineWidth: 2
       } );
 
+      const handleNode = new HandleNode( {
+        gripFillBaseColor: 'rgb( 187, 154, 86 )',
+        attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
+        rotation: -Math.PI / 2,
+        scale: 0.5,
+        right: rectangle.left + HANDLE_ATTACHMENT_LINE_WIDTH, // hide the overlap
+        centerY: rectangle.centerY
+      } );
+
       assert && assert( !options.children, 'ContainerNode sets children' );
-      options.children = [ rectangle ];
+      options.children = [ handleNode, rectangle ];
 
       super( options );
 
