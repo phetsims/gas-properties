@@ -96,7 +96,7 @@ define( require => {
       // Radio buttons for selecting particle type
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty );
 
-      // Pumps + radio buttons
+      // Bicycle pumps + radio buttons
       const pumpBox = new VBox( {
         align: 'center',
         spacing: 15,
@@ -110,10 +110,7 @@ define( require => {
       this.addChild( pumpBox );
 
       // Container
-      const containerNode = new ContainerNode( model.container, {
-        right: pumpBox.left - 40,
-        centerY: this.layoutBounds.centerY - 40
-      } );
+      const containerNode = new ContainerNode( model.container, model.modelViewTransform );
       this.addChild( containerNode );
 
       // Dimensional arrows that indicate container size
@@ -121,7 +118,6 @@ define( require => {
         model.modelViewTransform, viewProperties.sizeVisibleProperty );
       this.addChild( sizeNode );
 
-      //TODO HeaterCoolerNode is a mess, see https://github.com/phetsims/scenery-phet/issues/423
       // Device to heat/cool the contents of the container
       const heaterCoolerNode = new HeaterCoolerNode( {
         heatCoolAmountProperty: model.heatCoolAmountProperty,
@@ -141,13 +137,14 @@ define( require => {
       // Thermometer
       const thermometerNode = new GasPropertiesThermometerNode( model.thermometer, comboBoxListParent, {
         right: containerNode.right,
-        centerY: containerNode.top
+        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( thermometerNode );
 
+      // Pressure Gauge
       const pressureGaugeNode = new PressureGaugeNode( model.pressureGauge, comboBoxListParent, {
         left: containerNode.right - 2,
-        centerY: containerNode.top + 30
+        centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30
       } );
       this.addChild( pressureGaugeNode );
       pressureGaugeNode.moveToBack(); // to hide overlap with container

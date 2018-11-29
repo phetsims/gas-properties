@@ -40,6 +40,22 @@ define( require => {
     reset() {
       this.widthProperty.reset();
     }
+
+    /**
+     * Gets the x coordinate of the container's left side.
+     * @returns {number}
+     */
+    getLeft() { return this.location.x - this.widthProperty.value; }
+
+    get left() { return this.getLeft(); }
+
+    /**
+     * Gets the y coordinate of the containers top side.
+     * @returns {number}
+     */
+    getTop() { return this.location.y + this.height; }
+
+    get top() { return this.getTop(); }
   }
 
   return gasProperties.register( 'Container', Container );

@@ -25,10 +25,11 @@ define( require => {
 
     /**
      * @param {Container} container
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      * @constructor
      */
-    constructor( container, options ) {
+    constructor( container, modelViewTransform, options ) {
 
       options = options || {};
 
@@ -55,6 +56,11 @@ define( require => {
       options.children = [ handleNode, lidNode, rectangle ];
 
       super( options );
+
+      // convert position to view coordinates, location is bottom-right of container
+      const viewLocation = modelViewTransform.modelToViewPosition( container.location );
+      this.right = viewLocation.x;
+      this.bottom = viewLocation.y;
 
       container.widthProperty.lazyLink( width => {
         rectangle.setRect( 0, 0, width, container.height );
