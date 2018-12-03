@@ -149,32 +149,32 @@ define( require => {
       this.addInputListener( new GasPropertiesDragListener( this, collisionCounter.locationProperty,
         collisionCounter.visibleProperty, dragBoundsProperty ) );
     }
+
+    /**
+     * Creates an icon for the collision counter, used to label check boxes.
+     * @param {Object} [options]
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    static createIcon( options ) {
+
+      options = _.extend( {
+        scale: 0.2
+      }, options );
+
+      assert && assert( !options.children, 'CollisionCounterNode.createIcon sets children' );
+      options.children = [
+        new CollisionCounterNode(
+          new CollisionCounter( { visible: true } ), // model element
+          new Property( null ), // dragBoundsProperty
+          new Node(), // comboBoxListParent
+          { pickable: false } )
+      ];
+
+      return new Node( options );
+    }
   }
-
-  /**
-   * Creates an icon for the collision counter, used to label check boxes.
-   * @param {Object} [options]
-   * @returns {Node}
-   * @public
-   * @static
-   */
-  CollisionCounterNode.createIcon = ( options ) => {
-
-    options = _.extend( {
-      scale: 0.2
-    }, options );
-
-    assert && assert( !options.children, 'CollisionCounterNode.createIcon sets children' );
-    options.children = [
-      new CollisionCounterNode(
-        new CollisionCounter( { visible: true } ), // model element
-        new Property( null ), // dragBoundsProperty
-        new Node(), // comboBoxListParent
-        { pickable: false } )
-    ];
-
-    return new Node( options );
-  };
 
   return gasProperties.register( 'CollisionCounterNode', CollisionCounterNode );
 } );

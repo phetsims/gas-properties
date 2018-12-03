@@ -52,31 +52,31 @@ define( require => {
       this.addInputListener( new GasPropertiesDragListener( this, stopwatch.locationProperty,
         stopwatch.visibleProperty, dragBoundsProperty ) );
     }
+
+    /**
+     * Creates an icon for the stopwatch, used to label check boxes.
+     * @param {Object} [options]
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    static createIcon( options ) {
+
+      options = _.extend( {
+        scale: 0.25
+      }, options );
+
+      assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
+      options.children = [
+        new StopwatchNode(
+          new Stopwatch( new LinearFunction( 0, 0, 0, 0 ), { visible: true } ), // model element
+          new Property( null ), // dragBoundsProperty
+          { pickable: false } )
+      ];
+
+      return new Node( options );
+    }
   }
-
-  /**
-   * Creates an icon for the stopwatch, used to label check boxes.
-   * @param {Object} [options]
-   * @returns {Node}
-   * @public
-   * @static
-   */
-  StopwatchNode.createIcon = ( options ) => {
-
-    options = _.extend( {
-      scale: 0.25
-    }, options );
-
-    assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
-    options.children = [
-      new StopwatchNode(
-        new Stopwatch( new LinearFunction( 0, 0, 0, 0 ), { visible: true } ), // model element
-        new Property( null ), // dragBoundsProperty
-        { pickable: false } )
-    ];
-
-    return new Node( options );
-  };
 
   return gasProperties.register( 'StopwatchNode', StopwatchNode );
 } );
