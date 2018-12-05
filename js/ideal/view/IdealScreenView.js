@@ -119,8 +119,7 @@ define( require => {
       this.addChild( sizeNode );
 
       // Device to heat/cool the contents of the container
-      const heaterCoolerNode = new HeaterCoolerNode( {
-        heatCoolAmountProperty: model.heatCoolAmountProperty,
+      const heaterCoolerNode = new HeaterCoolerNode( model.heatCoolAmountProperty, {
         centerX: containerNode.centerX,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
         scale: 0.9
