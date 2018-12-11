@@ -76,7 +76,7 @@ define( require => {
       } );
 
       //TODO position of container is wrong when you quickly drag the cursor outside the right side of the browser window
-      //TODO pointer gets disconnected from handle, probably an incorrect transform here
+      //TODO account for offset of where we start the drag on the handle
       // Dragging the handle horizontally changes the container width
       handleNode.addInputListener( new DragListener( {
         drag: ( event, listener ) => {
