@@ -80,7 +80,7 @@ define( require => {
       // Dragging the handle horizontally changes the container width
       handleNode.addInputListener( new DragListener( {
         drag: ( event, listener ) => {
-          const viewX = event.pointer.point.x;
+          const viewX = this.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX );
           const dx = container.location.x - modelX;
           container.widthProperty.value = container.widthProperty.range.constrainValue( dx );
