@@ -17,7 +17,7 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  const CONTAINER_WIDTH_RANGE = new RangeWithValue( 100, 550, 550 ); // nm
+  const CONTAINER_WIDTH_RANGE = new RangeWithValue( 250, 550, 550 ); // nm
   const CONTAINER_HEIGHT = 350; // nm
 
   class Container {
@@ -33,6 +33,7 @@ define( require => {
         range: CONTAINER_WIDTH_RANGE,
         units: 'nanometers'
       } );
+      this.widthProperty.link( width => { phet.log && phet.log( 'Container width=' + width ); } );
 
       // @public (read-only) height of the container, in nm
       this.height = CONTAINER_HEIGHT;
