@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -31,6 +32,7 @@ define( require => {
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   const PANEL_WIDTH = 225; // determined empirically
@@ -167,6 +169,14 @@ define( require => {
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatch, this.visibleBoundsProperty );
       this.addChild( stopwatchNode );
+
+      // show model origin
+      if ( phet.chipper.queryParameters.dev ) {
+        this.addChild( new Circle( 3, {
+          fill: 'red',
+          center: model.modelViewTransform.modelToViewPosition( Vector2.ZERO )
+        } ) );
+      }
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
