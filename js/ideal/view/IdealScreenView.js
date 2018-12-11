@@ -124,7 +124,7 @@ define( require => {
       const heaterCoolerNode = new HeaterCoolerNode( model.heatCoolAmountProperty, {
         centerX: containerNode.centerX,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-        scale: 0.9
+        scale: .81
       } );
       this.addChild( heaterCoolerNode );
 
