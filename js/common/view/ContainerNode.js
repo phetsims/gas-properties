@@ -70,7 +70,7 @@ define( require => {
         resizeHandleNode.right = rectangle.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
         lidNode.right = rectangle.right - 85; //TODO this won't be appropriate when lid is movable
 
-        // position the container, origin at bottom-right
+        // reposition the container, origin at bottom-right
         this.right = viewLocation.x;
         this.bottom = viewLocation.y;
       } );
