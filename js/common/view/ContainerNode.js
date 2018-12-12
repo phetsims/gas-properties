@@ -51,28 +51,31 @@ define( require => {
         centerY: rectangle.centerY
       } );
 
-      const lidNode = new LidNode( {
-        bottom: rectangle.top + 1
-      } );
+      const lidNode = new LidNode();
 
       assert && assert( !options.children, 'ContainerNode sets children' );
       options.children = [ resizeHandleNode, lidNode, rectangle ];
 
       super( options );
 
+      // position this Node with its origin at the container's location
+      this.translation = viewLocation;
+
       container.widthProperty.link( width => {
 
-        // resize the container
+        // resize & reposition the rectangle, origin at bottom right
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
         rectangle.setRect( 0, 0, viewWidth, viewHeight );
+        rectangle.right = 0;
+        rectangle.bottom = 0;
 
-        // reposition the resize handle and lid
+        // reposition the resize handle
         resizeHandleNode.right = rectangle.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
-        lidNode.right = rectangle.right - 85; //TODO this won't be appropriate when lid is movable
+        resizeHandleNode.centerY = rectangle.centerY;
 
-        // reposition the container, origin at bottom-right
-        this.right = viewLocation.x;
-        this.bottom = viewLocation.y;
+        // reposition the lid
+        lidNode.right = rectangle.right - 85; //TODO this won't be appropriate when lid is movable
+        lidNode.bottom = rectangle.top + 1;
       } );
 
       // Dragging the resize handle horizontally changes the container's width
