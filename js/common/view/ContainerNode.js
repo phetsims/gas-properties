@@ -42,7 +42,7 @@ define( require => {
         lineWidth: 2
       } );
 
-      const handleNode = new HandleNode( {
+      const resizeHandleNode = new HandleNode( {
         cursor: 'pointer',
         gripFillBaseColor: 'rgb( 187, 154, 86 )',
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
@@ -56,7 +56,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'ContainerNode sets children' );
-      options.children = [ handleNode, lidNode, rectangle ];
+      options.children = [ resizeHandleNode, lidNode, rectangle ];
 
       super( options );
 
@@ -66,28 +66,57 @@ define( require => {
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
         rectangle.setRect( 0, 0, viewWidth, viewHeight );
 
+        // reposition the resize handle and lid
+        resizeHandleNode.right = rectangle.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
+        lidNode.right = rectangle.right - 85; //TODO this won't be appropriate when lid is movable
+
         // position the container, origin at bottom-right
         this.right = viewLocation.x;
         this.bottom = viewLocation.y;
-
-        // reposition the handle and lid
-        handleNode.right = rectangle.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
-        lidNode.right = rectangle.right - 85; //TODO this won't be appropriate when lid is movable
       } );
 
-      //TODO position of container is wrong when you quickly drag the cursor outside the right side of the browser window
-      //TODO account for offset of where we start the drag on the handle
-      // Dragging the handle horizontally changes the container width
-      handleNode.addInputListener( new DragListener( {
-        drag: ( event, listener ) => {
-          const viewX = this.globalToParentPoint( event.pointer.point ).x;
-          const modelX = modelViewTransform.viewToModelX( viewX );
-          const dx = container.location.x - modelX;
-          container.widthProperty.value = container.widthProperty.range.constrainValue( dx );
-        }
-      } ) );
+      // Dragging the resize handle horizontally changes the container's width
+      resizeHandleNode.addInputListener( new ResizeHandleDragListener( container, modelViewTransform, this ) );
     }
   }
 
-  return gasProperties.register( 'ContainerNode', ContainerNode );
+  gasProperties.register( 'ContainerNode', ContainerNode );
+
+  /**
+   * Drag listener for the container's resize handle, changes the container's width.
+   */
+  class ResizeHandleDragListener extends DragListener {
+
+    /**
+     * @param {Container} container
+     * @param {ModelViewTransform2} modelViewTransform
+     * @param {Node} parentNode
+     */
+    constructor( container, modelViewTransform, parentNode ) {
+
+      const viewLocation = modelViewTransform.modelToViewPosition( container.location );
+
+      // pointer's x offset from the left edge of the container, when a drag starts
+      let startXOffset = 0;
+
+      super( {
+
+        start: ( event, listener ) => {
+          const viewWidth = modelViewTransform.modelToViewDeltaX( container.widthProperty.value );
+          startXOffset = viewLocation.x - parentNode.globalToParentPoint( event.pointer.point ).x - viewWidth;
+        },
+
+        drag: ( event, listener ) => {
+          const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
+          const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
+          const width = container.location.x - modelX;
+          container.widthProperty.value = container.widthProperty.range.constrainValue( width );
+        }
+      } );
+    }
+  }
+
+  gasProperties.register( 'ContainerNode.ResizeHandleDragListener', ResizeHandleDragListener );
+
+  return ContainerNode;
 } );
