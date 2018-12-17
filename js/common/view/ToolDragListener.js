@@ -7,6 +7,7 @@
  * - moves targetNode when location changes
  * - keeps the entire targetNode inside dragBounds while dragging
  * - keeps the entire targetNode inside dragBounds when dragBounds changes
+ * - controls visibility of targetNode
  * - interrupts interaction when visibility or dragBounds changes
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -31,6 +32,9 @@ define( require => {
      */
     constructor( targetNode, locationProperty, dragBoundsProperty, visibleProperty, options ) {
 
+      // move targetNode
+      locationProperty.linkAttribute( targetNode, 'translation' );
+
       // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
       const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {
           if ( dragBounds ) {
@@ -43,11 +47,6 @@ define( require => {
         }
       );
 
-      super( {
-        locationProperty: locationProperty,
-        dragBoundsProperty: adjustedDragBoundsProperty
-      } );
-
       adjustedDragBoundsProperty.link( adjustedDragBounds => {
 
         // interrupt user interactions
@@ -59,13 +58,15 @@ define( require => {
         }
       } );
 
-      // move targetNode
-      locationProperty.linkAttribute( targetNode, 'translation' );
-
       // show/hide targetNode
       visibleProperty.link( visible => {
         targetNode.interruptSubtreeInput(); // interrupt user interactions
         targetNode.visible = visible;
+      } );
+
+      super( {
+        locationProperty: locationProperty,
+        dragBoundsProperty: adjustedDragBoundsProperty
       } );
     }
   }
