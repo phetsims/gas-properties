@@ -33,10 +33,11 @@ define( require => {
       // 1 second of real time is 2.5 picoseconds of sim time.
       this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
 
-      this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
-        new Vector2( 0, 0 ), // the origin in model coordinates
-        new Vector2( 595, 455 ), // location of the model origin in view coordinates
-        1 // 1 nm is this many pixels, y is inverted
+      const modelViewScale = 40; // number of pixels per nm
+      this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
+        new Vector2( 645, 475  ), // offset of the model's origin, in view coordinates
+        modelViewScale,
+        -modelViewScale // y is inverted
       );
 
       // @public model elements
