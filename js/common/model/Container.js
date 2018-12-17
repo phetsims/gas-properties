@@ -16,10 +16,6 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  // constants
-  const CONTAINER_WIDTH_RANGE = new RangeWithValue( 5, 15, 10 ); // nm
-  const CONTAINER_HEIGHT = 8.75; // nm
-
   class Container {
 
     constructor() {
@@ -27,16 +23,19 @@ define( require => {
       // @public (read-only) location of the container's bottom right corner, in nm
       this.location = Vector2.ZERO;
 
+      // @public (read-only) height of the container, in nm
+      this.height = 8.75;
+
+      // @public (read-only)
+      this.widthRange = new RangeWithValue( 5, 15, 10 ); // nm
+
       // @public width of the container, in nm
-      this.widthProperty = new NumberProperty( CONTAINER_WIDTH_RANGE.defaultValue, {
+      this.widthProperty = new NumberProperty( this.widthRange.defaultValue, {
         numberType: 'FloatingPoint',
-        range: CONTAINER_WIDTH_RANGE,
+        range: this.widthRange,
         units: 'nanometers'
       } );
       this.widthProperty.link( width => { phet.log && phet.log( 'Container width=' + width ); } );
-
-      // @public (read-only) height of the container, in nm
-      this.height = CONTAINER_HEIGHT;
     }
 
     // @public

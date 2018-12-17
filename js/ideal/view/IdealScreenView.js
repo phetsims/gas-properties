@@ -46,6 +46,8 @@ define( require => {
 
       super();
 
+      const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
+
       // view-specific Properties
       const viewProperties = new IdealViewProperties();
 
@@ -99,6 +101,7 @@ define( require => {
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty );
 
       // Bicycle pumps + radio buttons
+      const pumpBoxCenterX = containerViewLocation.x + ( particleCountsAccordionBox.left - containerViewLocation.x ) / 2;
       const pumpBox = new VBox( {
         align: 'center',
         spacing: 15,
@@ -106,7 +109,7 @@ define( require => {
           bicyclePumpsToggleNode,
           particleTypeRadioButtonGroup
         ],
-        right: controlPanel.left - 40,
+        centerX: pumpBoxCenterX,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( pumpBox );
@@ -121,16 +124,20 @@ define( require => {
       this.addChild( sizeNode );
 
       // Device to heat/cool the contents of the container
+      const heaterCoolerNodeLeft = containerViewLocation.x -
+                                   model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new HeaterCoolerNode( model.heatCoolAmountProperty, {
-        centerX: containerNode.centerX,
+        left: heaterCoolerNodeLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
         scale: .81
       } );
       this.addChild( heaterCoolerNode );
 
       // Time controls
+      const timeControlsLeft = containerViewLocation.x -
+                               model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
       const timeControls = new TimeControls( model, {
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        left: timeControlsLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( timeControls );
