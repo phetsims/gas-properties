@@ -43,9 +43,17 @@ define( require => {
       const viewLocation = modelViewTransform.modelToViewPosition( container.location );
       const viewHeight = Math.abs( modelViewTransform.modelToViewDeltaY( container.height ) );
 
-      const rectangle = new Rectangle( 0, 0, 1, viewHeight, {
-        stroke: GasPropertiesColorProfile.containerStrokeProperty,
+      // Displays the bounds of the container
+      const boundsNode = new Rectangle( 0, 0, 1, viewHeight, {
+        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
         lineWidth: 2
+      } );
+
+      // Displays the previous bounds of the container, visible while dragging
+      const previousBoundsNode = new Rectangle( 0, 0, 1, viewHeight, {
+        stroke: GasPropertiesColorProfile.containerPreviousBoundsStrokeProperty,
+        lineWidth: 2,
+        visible: false
       } );
 
       const resizeHandleNode = new HandleNode( {
@@ -54,7 +62,7 @@ define( require => {
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         rotation: -Math.PI / 2,
         scale: 0.4,
-        centerY: rectangle.centerY
+        centerY: boundsNode.centerY
       } );
 
       const lidNode = new LidNode( {
@@ -62,7 +70,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'ContainerNode sets children' );
-      options.children = [ resizeHandleNode, lidNode, rectangle ];
+      options.children = [ previousBoundsNode, resizeHandleNode, lidNode, boundsNode ];
 
       super( options );
 
@@ -71,19 +79,19 @@ define( require => {
 
       container.widthProperty.link( width => {
 
-        // resize & reposition the rectangle, origin at bottom right
+        // resize & reposition the boundsNode, origin at bottom right
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
-        rectangle.setRect( 0, 0, viewWidth, viewHeight );
-        rectangle.right = 0;
-        rectangle.bottom = 0;
+        boundsNode.setRect( 0, 0, viewWidth, viewHeight );
+        boundsNode.right = 0;
+        boundsNode.bottom = 0;
 
         // reposition the resize handle
-        resizeHandleNode.right = rectangle.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
-        resizeHandleNode.centerY = rectangle.centerY;
+        resizeHandleNode.right = boundsNode.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
+        resizeHandleNode.centerY = boundsNode.centerY;
 
         // reposition the lid
-        lidNode.right = rectangle.right - 85; //TODO this won't be appropriate when lid is movable
-        lidNode.bottom = rectangle.top + 1;
+        lidNode.right = boundsNode.right - 85; //TODO this won't be appropriate when lid is movable
+        lidNode.bottom = boundsNode.top + 1;
       } );
 
       // Hide the handle when volume is held constant
@@ -98,7 +106,20 @@ define( require => {
       } );
 
       // Dragging the resize handle horizontally changes the container's width
-      resizeHandleNode.addInputListener( new ResizeHandleDragListener( container, modelViewTransform, this ) );
+      const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this );
+      resizeHandleNode.addInputListener( resizeHandleDragListener );
+
+      //TODO pause animation, disable particles
+      // While interacting with the resize handle, display the previous bounds of the container
+      resizeHandleDragListener.isPressedProperty.link( isPressed => {
+        previousBoundsNode.visible = isPressed;
+        if ( isPressed ) {
+          const viewWidth = modelViewTransform.modelToViewDeltaX( container.widthProperty.value );
+          previousBoundsNode.setRect( 0, 0, viewWidth, viewHeight );
+          previousBoundsNode.right = 0;
+          previousBoundsNode.bottom = 0;
+        }
+      } );
     }
   }
 

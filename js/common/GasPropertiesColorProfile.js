@@ -43,9 +43,13 @@ define( require => {
       default: 'rgb( 240, 240, 240 )',
       projector: 'rgb( 180, 180, 180 )'
     },
-    containerStroke: {
+    containerBoundsStroke: {
       default: 'white',
       projector: 'black'
+    },
+    containerPreviousBoundsStroke: {
+      default: 'rgb( 120, 120, 120 )',
+      projector: 'rgb( 200, 200, 200 )'
     },
     heavyParticleColor: {
       default: 'rgb( 119, 114, 244 )' // purple
