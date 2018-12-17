@@ -42,12 +42,10 @@ define( require => {
       // @public model elements
       this.container = new Container();
       this.collisionCounter = new CollisionCounter( {
-        //TODO use model coordinates
-        location: new Vector2( 20, 20 ) // determined empirically
+        location: new Vector2( 20, 20 ) // view coordinate! determined empirically
       } );
       this.stopwatch = new Stopwatch( this.timeTransform, {
-        //TODO use model coordinates
-        location: new Vector2( 200, 20 ) // determined empirically
+        location: new Vector2( 200, 20 ) // view coordinates! determined empirically
       } );
       this.thermometer = new Thermometer();
       this.pressureGauge = new PressureGauge();

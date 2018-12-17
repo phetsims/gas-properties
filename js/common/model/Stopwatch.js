@@ -31,7 +31,7 @@ define( require => {
       // @private
       this.timeTransform = timeTransform;
 
-      // @public location of the stopwatch
+      // @public location of the stopwatch, in view coordinates
       this.locationProperty = new Property( options.location, {
         valueType: Vector2
       } );

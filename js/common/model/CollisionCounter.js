@@ -27,7 +27,7 @@ define( require => {
         visible: false
       }, options );
 
-      // @public location of the collision counter
+      // @public location of the collision counter, in view coordinates
       this.locationProperty = new Property( options.location, {
         valueType: Vector2
       } );
