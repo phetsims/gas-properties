@@ -10,40 +10,42 @@ define( require => {
   'use strict';
 
   // modules
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // strings
   const nanometersString = require( 'string!GAS_PROPERTIES/nanometers' );
   const sizeUnitsString = require( 'string!GAS_PROPERTIES/sizeUnits' );
 
-  // constants
-  const NUMBER_DISPLAY_RANGE = new Range( 0, 999 ); // determines the width of the NumberDisplay
-
   class SizeNode extends Node {
 
     /**
-     * @param {Vector2} location - location of the container's origin, in model coordinates
+     * @param {Vector2} containerLocation - location of the container, in model coordinates
      * @param {NumberProperty} widthProperty - width of the container, in model coordinates
      * @param {ModelViewTransform2} modelViewTransform
      * @param {BooleanProperty} visibleProperty
      * @param {Object} [options]
      */
-    constructor( location, widthProperty, modelViewTransform, visibleProperty, options ) {
+    constructor( containerLocation, widthProperty, modelViewTransform, visibleProperty, options ) {
+
+      assert && assert( widthProperty.range, 'widthProperty must have range' );
 
       options = options || {};
 
-      const dimensionalArrowNode = new DimensionalArrowsNode( widthProperty, {
+      const viewWidthProperty = new DerivedProperty( [ widthProperty ],
+        width => modelViewTransform.modelToViewDeltaX( width ) );
+
+      const dimensionalArrowNode = new DimensionalArrowsNode( viewWidthProperty, {
         color: GasPropertiesColorProfile.textFillProperty
       } );
 
-      const widthDisplay = new NumberDisplay( widthProperty, NUMBER_DISPLAY_RANGE, {
+      const widthDisplay = new NumberDisplay( widthProperty, widthProperty.range, {
         decimalPlaces: 1,
         valuePattern: StringUtils.fillIn( sizeUnitsString, {
           size: '{0}',
@@ -54,9 +56,7 @@ define( require => {
         numberFill: 'black',
         backgroundFill: 'white',
         backgroundStroke: 'black',
-        backgroundLineWidth: 0.5,
-        right: dimensionalArrowNode.right - 25,
-        centerY: dimensionalArrowNode.centerY
+        backgroundLineWidth: 0.5
       } );
 
       assert && assert( !options.children, 'SizeNode sets children' );
@@ -66,13 +66,16 @@ define( require => {
 
       visibleProperty.linkAttribute( this, 'visible' );
 
-      // right justify with the container location
-      const rightJustify = () => {
-        this.right = modelViewTransform.modelToViewX( location.x );
-        this.top = modelViewTransform.modelToViewY( location.y ) + 8;
+      // right justify with the container
+      const containerViewLocation =  modelViewTransform.modelToViewPosition( containerLocation );
+      const updateLayout = () => {
+        widthDisplay.right = dimensionalArrowNode.right - 25;
+        widthDisplay.centerY = dimensionalArrowNode.centerY;
+        this.right = containerViewLocation.x;
+        this.top = containerViewLocation.y + 8;
       };
-      rightJustify();
-      dimensionalArrowNode.on( 'bounds', () => { rightJustify(); } );
+      updateLayout();
+      dimensionalArrowNode.on( 'bounds', () => { updateLayout(); } );
     }
   }
 

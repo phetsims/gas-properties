@@ -24,7 +24,7 @@ define( require => {
   class DimensionalArrowsNode extends Node {
 
     /**
-     * @param {NumberProperty} lengthProperty
+     * @param {NumberProperty} lengthProperty - length in view coordinates
      * @param {Object} [options]
      */
     constructor( lengthProperty, options ) {
