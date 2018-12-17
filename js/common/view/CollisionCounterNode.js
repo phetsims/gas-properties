@@ -15,7 +15,6 @@ define( require => {
   const ComboBox = require( 'SUN/ComboBox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesDragListener = require( 'GAS_PROPERTIES/common/view/GasPropertiesDragListener' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
@@ -27,6 +26,7 @@ define( require => {
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
+  const ToolDragListener = require( 'GAS_PROPERTIES/common/view/ToolDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
@@ -146,7 +146,7 @@ define( require => {
       }
 
       // dragging
-      this.addInputListener( new GasPropertiesDragListener( this, collisionCounter.locationProperty,
+      this.addInputListener( new ToolDragListener( this, collisionCounter.locationProperty,
         dragBoundsProperty, collisionCounter.visibleProperty ) );
     }
 

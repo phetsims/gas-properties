@@ -1,15 +1,13 @@
 // Copyright 2018, University of Colorado Boulder
 
-//TODO too many responsibilities? misplaced responsibilities?
 /**
- * DragListener subclass that adds the following features:
+ * DragListener for the 'tools' (Stopwatch, CollisionCounter) in this sim.
+ * It adds the following features to DragListener:
  *
+ * - moves targetNode when location changes
  * - keeps the entire targetNode inside dragBounds while dragging
  * - keeps the entire targetNode inside dragBounds when dragBounds changes
- * - moves targetNode when location changes
  * - interrupts interaction when visibility or dragBounds changes
- *
- * This is code that was common to CollisionCounterNode and StopwatchNode.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,7 +20,7 @@ define( require => {
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  class GasPropertiesDragListener extends DragListener {
+  class ToolDragListener extends DragListener {
 
     /**
      * @param {Node} targetNode
@@ -72,5 +70,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesDragListener', GasPropertiesDragListener );
+  return gasProperties.register( 'ToolDragListener', ToolDragListener );
 } );

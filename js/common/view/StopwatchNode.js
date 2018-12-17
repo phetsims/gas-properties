@@ -11,7 +11,6 @@ define( require => {
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesDragListener = require( 'GAS_PROPERTIES/common/view/GasPropertiesDragListener' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Property = require( 'AXON/Property' );
@@ -19,6 +18,7 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
+  const ToolDragListener = require( 'GAS_PROPERTIES/common/view/ToolDragListener' );
 
   // strings
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
@@ -49,7 +49,7 @@ define( require => {
       }
 
       // dragging
-      this.addInputListener( new GasPropertiesDragListener( this, stopwatch.locationProperty,
+      this.addInputListener( new ToolDragListener( this, stopwatch.locationProperty,
         dragBoundsProperty, stopwatch.visibleProperty ) );
     }
 
