@@ -1,6 +1,7 @@
 TODO list for gas-properties
 
 Fix MVT, 400-600 px => 50-15 nm, default 10 nm
+Size indicator is broken when resizing container
 Ghost image for previous container size
 Hide HeaterCoolerNode when temperature is held constant
 Add option for ContainerNode resize handle color
