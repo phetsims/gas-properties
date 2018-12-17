@@ -1,7 +1,6 @@
 TODO list for gas-properties
 
 Ghost image for previous container size
-Add option for ContainerNode resize handle color
 Add hole for lid to Container
 Add DragListener for ContainerNode lid
 

@@ -21,6 +21,7 @@ define( require => {
 
   // constants
   const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
+  const HANDLE_COLOR = 'rgb( 160, 160, 160 )';
 
   class ContainerNode extends Node {
 
@@ -33,7 +34,10 @@ define( require => {
      */
     constructor( container, modelViewTransform, holdConstantProperty, options ) {
 
-      options = options || {};
+      options = _.extend( {
+        resizeHandleColor: HANDLE_COLOR,
+        lidHandleColor: HANDLE_COLOR
+      }, options );
 
       // Constant aspects of the container, in view coordinates
       const viewLocation = modelViewTransform.modelToViewPosition( container.location );
@@ -46,14 +50,16 @@ define( require => {
 
       const resizeHandleNode = new HandleNode( {
         cursor: 'pointer',
-        gripFillBaseColor: 'rgb( 187, 154, 86 )',
+        gripFillBaseColor: options.resizeHandleColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         rotation: -Math.PI / 2,
         scale: 0.4,
         centerY: rectangle.centerY
       } );
 
-      const lidNode = new LidNode();
+      const lidNode = new LidNode( {
+        handleColor: options.lidHandleColor
+      } );
 
       assert && assert( !options.children, 'ContainerNode sets children' );
       options.children = [ resizeHandleNode, lidNode, rectangle ];

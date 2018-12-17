@@ -25,14 +25,16 @@ define( require => {
      */
     constructor( options ) {
 
-      options = options || {};
+      options = _.extend( {
+        handleColor: 'grey'
+      }, options );
 
       const baseNode = new Rectangle( 0, 0, 150, 4, {
         fill: GasPropertiesColorProfile.containerStrokeProperty
       } );
 
       const handleNode = new HandleNode( {
-        gripFillBaseColor: 'rgb( 160, 160, 160 )',
+        gripFillBaseColor: options.handleColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         scale: 0.4,
         centerX: baseNode.centerX,
