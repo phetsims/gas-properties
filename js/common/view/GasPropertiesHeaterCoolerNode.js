@@ -37,6 +37,7 @@ define( require => {
           this.opacity = 1;
         }
         else {
+          this.interruptSubtreeInput(); // cancel any interaction
           this.pickable = false;
           this.opacity = 0.3; // same as other common-code UI components
         }
