@@ -50,7 +50,7 @@ define( require => {
 
       // dragging
       this.addInputListener( new GasPropertiesDragListener( this, stopwatch.locationProperty,
-        stopwatch.visibleProperty, dragBoundsProperty ) );
+        dragBoundsProperty, stopwatch.visibleProperty ) );
     }
 
     /**

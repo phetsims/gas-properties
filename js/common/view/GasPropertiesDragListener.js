@@ -26,12 +26,12 @@ define( require => {
 
     /**
      * @param {Node} targetNode
-     * @param {Property.<Vector2>} locationProperty
+     * @param {Property.<Vector2>} locationProperty - location, in view coordinates
+     * @param {Property.<Bounds2|null>} dragBoundsProperty - drag bounds, in view coordinates
      * @param {BooleanProperty} visibleProperty
-     * @param {Property.<Bounds2|null>} dragBoundsProperty
      * @param {Object} [options]
      */
-    constructor( targetNode, locationProperty, visibleProperty, dragBoundsProperty, options ) {
+    constructor( targetNode, locationProperty, dragBoundsProperty, visibleProperty, options ) {
 
       // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
       const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {

@@ -147,7 +147,7 @@ define( require => {
 
       // dragging
       this.addInputListener( new GasPropertiesDragListener( this, collisionCounter.locationProperty,
-        collisionCounter.visibleProperty, dragBoundsProperty ) );
+        dragBoundsProperty, collisionCounter.visibleProperty ) );
     }
 
     /**
