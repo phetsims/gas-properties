@@ -1,6 +1,5 @@
 // Copyright 2018, University of Colorado Boulder
 
-//TODO add range for widthProperty
 //TODO add info about hole in top of box
 /**
  * Container for particles.
