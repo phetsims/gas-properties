@@ -110,6 +110,7 @@ define( require => {
       resizeHandleNode.addInputListener( resizeHandleDragListener );
 
       //TODO pause animation, disable particles
+      //TODO verify that isPressedProperty is set to false when interrupSubtreeInput is called
       // While interacting with the resize handle, display the previous bounds of the container
       resizeHandleDragListener.isPressedProperty.link( isPressed => {
         previousBoundsNode.visible = isPressed;
