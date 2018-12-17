@@ -30,7 +30,7 @@ define( require => {
       }, options );
 
       const baseNode = new Rectangle( 0, 0, 150, 4, {
-        fill: GasPropertiesColorProfile.containerStrokeProperty
+        fill: GasPropertiesColorProfile.containerBoundsStrokeProperty
       } );
 
       const handleNode = new HandleNode( {
