@@ -26,7 +26,7 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        handleColor: 'grey'
+        handleColor: 'grey' // {Color|string} color of the handle
       }, options );
 
       const baseNode = new Rectangle( 0, 0, 150, 4, {

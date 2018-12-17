@@ -35,8 +35,8 @@ define( require => {
     constructor( container, modelViewTransform, holdConstantProperty, options ) {
 
       options = _.extend( {
-        resizeHandleColor: HANDLE_COLOR,
-        lidHandleColor: HANDLE_COLOR
+        resizeHandleColor: HANDLE_COLOR, // {Color|string} color of the resize handle
+        lidHandleColor: HANDLE_COLOR // {Color|string} color of the lid's handle
       }, options );
 
       // Constant aspects of the container, in view coordinates
