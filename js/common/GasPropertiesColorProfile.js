@@ -51,6 +51,10 @@ define( require => {
       default: 'rgb( 120, 120, 120 )',
       projector: 'rgb( 200, 200, 200 )'
     },
+    lidBaseFill: {
+      default: 'white',
+      projector: 'black'
+    },
     heavyParticleColor: {
       default: 'rgb( 119, 114, 244 )' // purple
     },
