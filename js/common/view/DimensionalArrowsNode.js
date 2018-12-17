@@ -39,7 +39,7 @@ define( require => {
       }, options );
 
       // horizontal line in center
-      const horizontalLine = new Line( 0, 0, lengthProperty.value, 0, {
+      const horizontalLine = new Line( 0, 0, 1, 0, {
         stroke: options.color,
         lineWidth: options.horizontalLineWidth,
         lineDash: options.horizontalLineDash
@@ -56,6 +56,7 @@ define( require => {
       const rightVerticalLine = new Line( 0, 0, 0, options.verticalLineLength, {
         stroke: options.color,
         lineWidth: options.verticalLineWidth,
+        centerX: 0,
         centerY: horizontalLine.centerY
       } );
 
@@ -72,7 +73,8 @@ define( require => {
       // arrow head that points right
       const rightArrowHeadShape = leftArrowHeadShape.transformed( Matrix3.scaling( -1, 1 ) );
       const rightArrowHead = new Path( rightArrowHeadShape, {
-        fill: options.color
+        fill: options.color,
+        right: 0
       } );
 
       assert && assert( !options.children, 'DimensionalArrowsNode sets children' );
@@ -80,12 +82,11 @@ define( require => {
 
       super( options );
 
+      // Make line grow to the left, and reposition left arrow and vertical line
       lengthProperty.link( length => {
-        horizontalLine.setLine( 0, 0, length, 0 );
-        leftVerticalLine.centerX = 0;
-        rightVerticalLine.right = length;
-        leftArrowHead.left = 0;
-        rightArrowHead.right = length;
+        horizontalLine.setLine( 0, 0, -length, 0 );
+        leftVerticalLine.centerX = -length;
+        leftArrowHead.left = -length;
       } );
     }
   }
