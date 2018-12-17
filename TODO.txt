@@ -1,7 +1,7 @@
 TODO list for gas-properties
 
 Ghost image for previous container size
-Hide HeaterCoolerNode when temperature is held constant
+Disable resize handle when volume is held constant
 Add option for ContainerNode resize handle color
 Add hole for lid to Container
 Add DragListener for ContainerNode lid
