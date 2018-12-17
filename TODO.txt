@@ -1,8 +1,8 @@
 TODO list for gas-properties
 
-Fix DragListener for ContainerNode handle
 Add hole for lid to Container
 Add DragListener for ContainerNode lid
-Use modelViewTransform where appropriate
-Move Stopwatch locationProperty to view
-Move CollisionCounter locationProperty to view
+
+Model
+port Java model
+keep gravity, but turn it off
