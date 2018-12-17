@@ -17,7 +17,8 @@ define( require => {
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Shape = require( 'KITE/Shape' );
 
   // constants
   const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
@@ -42,15 +43,17 @@ define( require => {
       // Constant aspects of the container, in view coordinates
       const viewLocation = modelViewTransform.modelToViewPosition( container.location );
       const viewHeight = Math.abs( modelViewTransform.modelToViewDeltaY( container.height ) );
+      const viewOpeningXOffset = modelViewTransform.modelToViewDeltaX( container.openingXOffset );
+      const viewOpeningMaxWidth = modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max );
 
       // Displays the bounds of the container
-      const boundsNode = new Rectangle( 0, 0, 1, viewHeight, {
+      const boundsNode = new Path( null, {
         stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
         lineWidth: 2
       } );
 
       // Displays the previous bounds of the container, visible while dragging
-      const previousBoundsNode = new Rectangle( 0, 0, 1, viewHeight, {
+      const previousBoundsNode = new Path( null, {
         stroke: GasPropertiesColorProfile.containerPreviousBoundsStrokeProperty,
         lineWidth: 2,
         visible: false
@@ -61,11 +64,11 @@ define( require => {
         gripFillBaseColor: options.resizeHandleColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         rotation: -Math.PI / 2,
-        scale: 0.4,
-        centerY: boundsNode.centerY
+        scale: 0.4
       } );
 
       const lidNode = new LidNode( {
+        cursor: 'pointer',
         baseWidth: modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max ),
         handleColor: options.lidHandleColor
       } );
@@ -80,19 +83,26 @@ define( require => {
 
       container.widthProperty.link( width => {
 
-        // resize & reposition the boundsNode, origin at bottom right
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
-        boundsNode.setRect( 0, 0, viewWidth, viewHeight );
-        boundsNode.right = 0;
-        boundsNode.bottom = 0;
+
+        // resize & reposition the boundsNode, origin at bottom right
+        boundsNode.shape = new Shape()
+          .moveTo( -viewOpeningXOffset, -viewHeight )
+          .lineTo( 0, -viewHeight )
+          .lineTo( 0, 0 )
+          .lineTo( -viewWidth, 0 )
+          .lineTo( -viewWidth, -viewHeight )
+          .lineTo( -( viewOpeningXOffset + viewOpeningMaxWidth ), -viewHeight );
 
         // reposition the resize handle
         resizeHandleNode.right = boundsNode.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
         resizeHandleNode.centerY = boundsNode.centerY;
+      } );
 
-        // reposition the lid
-        lidNode.right = boundsNode.right -
-                        modelViewTransform.modelToViewDeltaX( container.openingXOffset + container.openingWidthProperty.value );
+      // move the lid to expose the opening in the top of the container
+      container.openingWidthProperty.link( openingWidth => {
+        lidNode.right = boundsNode.x -
+                        modelViewTransform.modelToViewDeltaX( container.openingXOffset + openingWidth );
         lidNode.bottom = boundsNode.top + 1;
       } );
 
@@ -117,12 +127,12 @@ define( require => {
       resizeHandleDragListener.isPressedProperty.link( isPressed => {
         previousBoundsNode.visible = isPressed;
         if ( isPressed ) {
-          const viewWidth = modelViewTransform.modelToViewDeltaX( container.widthProperty.value );
-          previousBoundsNode.setRect( 0, 0, viewWidth, viewHeight );
-          previousBoundsNode.right = 0;
-          previousBoundsNode.bottom = 0;
+          previousBoundsNode.shape = boundsNode.shape;
         }
       } );
+
+      // Dragging the lid horizontally changes the size of the opening in the top of the container
+      lidNode.addInputListener( new LidDragListener( container, modelViewTransform, this ) );
     }
   }
 
@@ -163,6 +173,43 @@ define( require => {
   }
 
   gasProperties.register( 'ContainerNode.ResizeHandleDragListener', ResizeHandleDragListener );
+
+  /**
+   * Drag listener for the container's lid, which determines the size of the opening in the top of the container.
+   */
+  class LidDragListener extends DragListener {
+
+    /**
+     * @param {Container} container
+     * @param {ModelViewTransform2} modelViewTransform
+     * @param {Node} parentNode
+     */
+    constructor( container, modelViewTransform, parentNode ) {
+
+      const viewOpeningMaxX = modelViewTransform.modelToViewX( container.openingMaxX );
+
+      // pointer's x offset from the right edge of the lid, when a drag starts
+      let startXOffset = 0;
+
+      super( {
+
+        start: ( event, listener ) => {
+          startXOffset = viewOpeningMaxX -
+                         modelViewTransform.modelToViewDeltaX( container.openingWidthProperty.value ) -
+                         parentNode.globalToParentPoint( event.pointer.point ).x;
+        },
+
+        drag: ( event, listener ) => {
+          const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
+          const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
+          const openingWidth = container.openingMaxX - modelX;
+          container.openingWidthProperty.value = container.openingWidthRange.constrainValue( openingWidth );
+        }
+      } );
+    }
+  }
+
+  gasProperties.register( 'ContainerNode.LidDragListener', LidDragListener );
 
   return ContainerNode;
 } );

@@ -90,6 +90,22 @@ define( require => {
     getBottom() { return this.location.y; }
 
     get bottom() { return this.getBottom(); }
+
+    /**
+     * Gets the min x coordinate of the opening in the top of the container.
+     * @returns number
+     */
+    getOpeningMinX() { return this.openingMaxX - this.openingWidthRange.max; }
+
+    get openingMinX() { return this.getOpeningMinX(); }
+
+    /**
+     * Gets the max x coordinate of the opening in the top of the container.
+     * @returns number
+     */
+    getOpeningMaxX() { return this.location.x - this.openingXOffset; }
+
+    get openingMaxX() { return this.getOpeningMaxX(); }
   }
 
   return gasProperties.register( 'Container', Container );

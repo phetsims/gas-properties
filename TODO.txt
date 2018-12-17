@@ -1,7 +1,5 @@
 TODO list for gas-properties
 
-Add  lid to Container
-
 Model
 port Java model
 keep gravity, but turn it off
