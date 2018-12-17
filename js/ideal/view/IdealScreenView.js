@@ -115,7 +115,7 @@ define( require => {
       this.addChild( pumpBox );
 
       // Container
-      const containerNode = new ContainerNode( model.container, model.modelViewTransform );
+      const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty );
       this.addChild( containerNode );
 
       // Dimensional arrows that indicate container size

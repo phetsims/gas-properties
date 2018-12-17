@@ -14,6 +14,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
+  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -26,10 +27,11 @@ define( require => {
     /**
      * @param {Container} container
      * @param {ModelViewTransform2} modelViewTransform
+     * @param {Property.<HoldConstantEnum>} holdConstantProperty
      * @param {Object} [options]
      * @constructor
      */
-    constructor( container, modelViewTransform, options ) {
+    constructor( container, modelViewTransform, holdConstantProperty, options ) {
 
       options = options || {};
 
@@ -76,6 +78,17 @@ define( require => {
         // reposition the lid
         lidNode.right = rectangle.right - 85; //TODO this won't be appropriate when lid is movable
         lidNode.bottom = rectangle.top + 1;
+      } );
+
+      // Hide the handle when volume is held constant
+      holdConstantProperty.link( holdConstant => {
+        const resizeHandleVisible = ( holdConstant !== HoldConstantEnum.VOLUME );
+
+        // Cancel interaction when the handle becomes invisible
+        if ( resizeHandleNode.visible && !resizeHandleVisible ) {
+          resizeHandleNode.interruptSubtreeInput();
+        }
+        resizeHandleNode.visible = resizeHandleVisible;
       } );
 
       // Dragging the resize handle horizontally changes the container's width
