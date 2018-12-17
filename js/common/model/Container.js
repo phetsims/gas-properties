@@ -35,11 +35,28 @@ define( require => {
         units: 'nanometers'
       } );
       this.widthProperty.link( width => { phet.log && phet.log( 'Container width=' + width ); } );
+
+      // @public (read-only)
+      this.openingWidthRange = new RangeWithValue( 0, 2.5, 0 );
+
+      // @public width of the opening in the top of the container, in nm
+      this.openingWidthProperty = new NumberProperty( this.openingWidthRange.defaultValue, {
+        numberType: 'FloatingPoint',
+        range: this.openingWidthRange,
+        units: 'nanometers'
+      } );
+
+      // @public (read-only) absolute x offset of the opening from the container's origin, in nm
+      this.openingXOffset = 2;
+      assert && assert( this.openingXOffset > 0, 'invalid openingXOffset: ' + this.openingXOffset );
+      assert && assert( this.widthRange.min - this.openingWidthRange.max - this.openingXOffset  > 0,
+        'opening extends beyond the top of the container' );
     }
 
     // @public
     reset() {
       this.widthProperty.reset();
+      this.openingWidthProperty.reset();
     }
 
     /**

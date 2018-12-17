@@ -66,6 +66,7 @@ define( require => {
       } );
 
       const lidNode = new LidNode( {
+        baseWidth: modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max ),
         handleColor: options.lidHandleColor
       } );
 
@@ -90,7 +91,8 @@ define( require => {
         resizeHandleNode.centerY = boundsNode.centerY;
 
         // reposition the lid
-        lidNode.right = boundsNode.right - 85; //TODO this won't be appropriate when lid is movable
+        lidNode.right = boundsNode.right -
+                        modelViewTransform.modelToViewDeltaX( container.openingXOffset + container.openingWidthProperty.value );
         lidNode.bottom = boundsNode.top + 1;
       } );
 

@@ -26,10 +26,11 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
+        baseWidth: 1,
         handleColor: 'grey' // {Color|string} color of the handle
       }, options );
 
-      const baseNode = new Rectangle( 0, 0, 150, 4, {
+      const baseNode = new Rectangle( 0, 0, options.baseWidth, 5, {
         fill: GasPropertiesColorProfile.containerBoundsStrokeProperty
       } );
 
@@ -40,6 +41,7 @@ define( require => {
         centerX: baseNode.centerX,
         bottom: baseNode.top + 1
       } );
+      assert && assert( handleNode.width <= baseNode.width, 'handle is wider than base' );
 
       assert && assert( !options.children, 'LidNode sets children' );
       options.children = [ handleNode, baseNode ];
