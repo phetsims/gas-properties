@@ -1,5 +1,6 @@
 TODO list for gas-properties
 
+Ghost image for previous container size
 Add hole for lid to Container
 Add DragListener for ContainerNode lid
 
