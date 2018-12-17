@@ -16,8 +16,8 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
-  const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -126,11 +126,11 @@ define( require => {
       // Device to heat/cool the contents of the container
       const heaterCoolerNodeLeft = containerViewLocation.x -
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
-      const heaterCoolerNode = new HeaterCoolerNode( model.heatCoolAmountProperty, {
-        left: heaterCoolerNodeLeft,
-        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-        scale: .81
-      } );
+      const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
+        model.heatCoolAmountProperty, model.holdConstantProperty, {
+          left: heaterCoolerNodeLeft,
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
       this.addChild( heaterCoolerNode );
 
       // Time controls
