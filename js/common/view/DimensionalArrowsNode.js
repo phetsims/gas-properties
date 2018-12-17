@@ -32,7 +32,7 @@ define( require => {
       options = _.extend( {
         color: 'black',
         horizontalLineWidth: 2,
-        horizontalLineDash: [ 4, 4 ],
+        horizontalLineDash: [ 5, 5 ],
         verticalLineWidth: 1,
         verticalLineLength: 12,
         arrowHeadDimensions: DEFAULT_ARROW_HEAD_DIMENSIONS

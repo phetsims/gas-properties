@@ -69,7 +69,7 @@ define( require => {
       // right justify with the container
       const containerViewLocation =  modelViewTransform.modelToViewPosition( containerLocation );
       const updateLayout = () => {
-        widthDisplay.right = dimensionalArrowNode.right - 25;
+        widthDisplay.right = dimensionalArrowNode.right - 28;
         widthDisplay.centerY = dimensionalArrowNode.centerY;
         this.right = containerViewLocation.x;
         this.top = containerViewLocation.y + 8;
