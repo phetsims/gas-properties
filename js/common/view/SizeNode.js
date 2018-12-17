@@ -49,13 +49,13 @@ define( require => {
           size: '{0}',
           units: nanometersString
         } ),
-        font: new PhetFont( 14 ),
+        font: new PhetFont( 12 ),
         cornerRadius: 3,
         numberFill: 'black',
         backgroundFill: 'white',
         backgroundStroke: 'black',
         backgroundLineWidth: 0.5,
-        right: dimensionalArrowNode.right - 35,
+        right: dimensionalArrowNode.right - 25,
         centerY: dimensionalArrowNode.centerY
       } );
 
