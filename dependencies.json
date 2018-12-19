@@ -1,0 +1,91 @@
+{
+  "comment": "# gas-properties 1.0.0-dev.1 Wed Dec 19 2018 15:24:50 GMT-0700 (MST)",
+  "assert": {
+    "sha": "69088d35b9e1971aee675d1aec7f413f4d0bef19",
+    "branch": "master"
+  },
+  "axon": {
+    "sha": "dd2910811f92b9aa07af3e426fe470308a099934",
+    "branch": "master"
+  },
+  "brand": {
+    "sha": "b2f1706dd966f19787235c56c141075090e2cfb8",
+    "branch": "master"
+  },
+  "chipper": {
+    "sha": "e95d808cd89ad977241a593d3b4bd1ba1826b9ed",
+    "branch": "master"
+  },
+  "dot": {
+    "sha": "8d95f26a755cbef2695bf02731b385da746dca86",
+    "branch": "master"
+  },
+  "gas-properties": {
+    "sha": "839314f8942ed7ab1affe5c7ac688114582aca82",
+    "branch": "master"
+  },
+  "joist": {
+    "sha": "437a08a421541df3400cf7f7f6b4cc72a13a47b6",
+    "branch": "master"
+  },
+  "kite": {
+    "sha": "6c78a24fdf01ba21cb7037e7554d2aa81717d94a",
+    "branch": "master"
+  },
+  "phet-core": {
+    "sha": "9d80d6a8b1cece6a70fcd691fb35e7478023002c",
+    "branch": "master"
+  },
+  "phet-io": {
+    "sha": "8d5f39421a3b74adb06c790cc316df4fa28a1dbc",
+    "branch": "master"
+  },
+  "phet-io-wrapper-classroom-activity": {
+    "sha": "a066df3371699a038941caa3f8961f77455cfea4",
+    "branch": "master"
+  },
+  "phet-io-wrapper-hookes-law-energy": {
+    "sha": "b19f66891bb47d7c284e10d79e09f828760c7d1c",
+    "branch": "master"
+  },
+  "phet-io-wrapper-lab-book": {
+    "sha": "6f3a9e13562b423fc1576446d21e26ba03c66d92",
+    "branch": "master"
+  },
+  "phet-io-wrappers": {
+    "sha": "3f7306790eb549f0a56ff413147b9c7923d9d437",
+    "branch": "master"
+  },
+  "phetcommon": {
+    "sha": "f8c5396f2e624b09a230f7dd09c1b57f19ac83e4",
+    "branch": "master"
+  },
+  "query-string-machine": {
+    "sha": "96ab0c2b8258e18ab04a5f6dfbee16968699d92a",
+    "branch": "master"
+  },
+  "scenery": {
+    "sha": "030cb4c5915a0000aacea7c270e99564d24a1f81",
+    "branch": "master"
+  },
+  "scenery-phet": {
+    "sha": "09afbe3bbc82576c6c9f5badf6f741d7a47d47b0",
+    "branch": "master"
+  },
+  "sherpa": {
+    "sha": "a1f5e867c286fd118550fd49e5838cde140860b6",
+    "branch": "master"
+  },
+  "sun": {
+    "sha": "1f456d91ba1ae5102984020ce6a25aeff91f1f96",
+    "branch": "master"
+  },
+  "tambo": {
+    "sha": "e6ea10d9d842dcef3abbd9fcce3edb86b10aff7a",
+    "branch": "master"
+  },
+  "tandem": {
+    "sha": "eb385888828274bd79c28425c6efd051e1c4369e",
+    "branch": "master"
+  }
+}
