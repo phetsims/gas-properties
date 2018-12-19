@@ -61,7 +61,7 @@ define( require => {
 
       const resizeHandleNode = new HandleNode( {
         cursor: 'pointer',
-        gripFillBaseColor: options.resizeHandleColor,
+        gripBaseColor: options.resizeHandleColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         rotation: -Math.PI / 2,
         scale: 0.4
