@@ -1,5 +1,9 @@
 TODO list for gas-properties
 
+Hole in top of container needs to have dynamic size
+Pause sim and disable while dragging resize handle, restore play state after releasing resize handle
+Replace the lid with 'roll back' 
+
 Model
 port Java model
 keep gravity, but turn it off
