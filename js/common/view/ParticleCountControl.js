@@ -48,7 +48,7 @@ define( require => {
         children: [ titleNode, icon ]
       } );
 
-      const display = new FineCoarseSpinner( numberOfParticlesProperty, numberOfParticlesProperty.range, {
+      const display = new FineCoarseSpinner( numberOfParticlesProperty, {
         deltaFine: 1,
         deltaCoarse: 50,
         numberDisplayOptions: {
