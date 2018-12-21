@@ -28,19 +28,9 @@ define( require => {
 
       super( heatCoolAmountProperty, options );
 
-      //TODO hide or disable the slider? See https://github.com/phetsims/scenery-phet/issues/442
-      // Disable when temperature is held constant
+      // Hide the slider when temperature is held constant
       holdConstantProperty.link( holdConstant => {
-        const enabled = ( holdConstant !== HoldConstantEnum.TEMPERATURE );
-        if ( enabled ) {
-          this.pickable = true;
-          this.opacity = 1;
-        }
-        else {
-          this.interruptSubtreeInput(); // cancel any interaction
-          this.pickable = false;
-          this.opacity = 0.7;
-        }
+        this.slider.visible = ( holdConstant !== HoldConstantEnum.TEMPERATURE );
       } );
     }
   }
