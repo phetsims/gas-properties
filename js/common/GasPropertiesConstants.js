@@ -53,7 +53,7 @@ define( require => {
 
     TITLE_FONT: new PhetFont( { size: 20, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),
-    SPINNER_FONT: new PhetFont( 22 ),
+    PARTICLE_COUNT_CONTROL_FONT: new PhetFont( 20 ),
     PANEL_CORNER_RADIUS: 5,
     PANEL_X_MARGIN: 20,
     PANEL_Y_MARGIN: 15

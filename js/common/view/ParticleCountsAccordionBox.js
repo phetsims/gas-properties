@@ -70,7 +70,7 @@ define( require => {
 
       const content = new VBox( {
         align: 'left',
-        spacing: 10,
+        spacing: 15,
         children: [ heavyParticleCountControl, lightParticleCountControl ]
       } );
 
