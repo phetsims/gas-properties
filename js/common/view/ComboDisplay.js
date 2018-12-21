@@ -25,7 +25,7 @@ define( require => {
      * @param {Object[]} items - describes items in the ComboBox, each Object has these fields:
      *   {*} choice - a value of choiceProperty that corresponds to the item
      *   {NumberProperty} numberProperty - the value of the item
-     *   {Range} range - the range of the item's value
+     *   {Range} [range] - the range of the item's value, required if numberProperty.range is null
      *   {string} units - the units used to label the item's value
      *   {Object} [numberDisplayOptions] - options passed to this item's NumberDisplay
      * @param {Property} choiceProperty - determines which item is currently selected
@@ -69,12 +69,12 @@ define( require => {
 
         assert && assert( item.choice, 'missing item.choice' );
         assert && assert( item.numberProperty, 'missing item.numberProperty' );
-        assert && assert( item.range, 'missing item.range' );
+        assert && assert( item.range || item.numberProperty.range, 'range or numberProperty.range must be provided' );
         assert && assert( item.units, 'missing item.units' );
         assert && assert( !item.numberDisplayOptions || !item.numberDisplayOptions.valuePattern,
           'ComboDisplay sets item.numberDisplayOptions.valuePattern' );
 
-        const itemNode = new NumberDisplay( item.numberProperty, item.range,
+        const itemNode = new NumberDisplay( item.numberProperty, item.range || item.numberProperty.range,
           _.extend( {}, options.numberDisplayOptions, item.numberDisplayOptions, {
             valuePattern: StringUtils.fillIn( valueUnitsString, {
               value: '{0}',
