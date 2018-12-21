@@ -65,17 +65,8 @@
   "celsius": {
     "value": "\u00B0C"
   },
-  "averagingTimeUnits": {
-    "value": "{{averagingTime}} {{units}}"
-  },
-  "temperatureUnits": {
-    "value": "{{temperature}} {{units}}"
-  },
-  "pressureUnits": {
-    "value": "{{pressure}} {{units}}"
-  },
-  "sizeUnits": {
-    "value": "{{size}} {{units}}"
+  "valueUnits": {
+    "value": "{{value}} {{units}}"
   },
   "pressure": {
     "value": "Pressure"

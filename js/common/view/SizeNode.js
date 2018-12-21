@@ -21,7 +21,7 @@ define( require => {
 
   // strings
   const nanometersString = require( 'string!GAS_PROPERTIES/nanometers' );
-  const sizeUnitsString = require( 'string!GAS_PROPERTIES/sizeUnits' );
+  const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
 
   class SizeNode extends Node {
 
@@ -47,8 +47,8 @@ define( require => {
 
       const widthDisplay = new NumberDisplay( widthProperty, widthProperty.range, {
         decimalPlaces: 1,
-        valuePattern: StringUtils.fillIn( sizeUnitsString, {
-          size: '{0}',
+        valuePattern: StringUtils.fillIn( valueUnitsString, {
+          value: '{0}',
           units: nanometersString
         } ),
         font: new PhetFont( 12 ),

@@ -32,8 +32,8 @@ define( require => {
 
   // strings
   const averagingTimeString = require( 'string!GAS_PROPERTIES/averagingTime' );
-  const averagingTimeUnitsString = require( 'string!GAS_PROPERTIES/averagingTimeUnits' );
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
+  const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
   const wallCollisionsString = require( 'string!GAS_PROPERTIES/wallCollisions' );
 
   // constants
@@ -82,8 +82,8 @@ define( require => {
       const comboBoxItems = collisionCounter.averagingTimes.map( averagingTime => {
 
         // e.g. '10 ps'
-        const averagingTimeString = StringUtils.fillIn( averagingTimeUnitsString, {
-          averagingTime: averagingTime,
+        const averagingTimeString = StringUtils.fillIn( valueUnitsString, {
+          value: averagingTime,
           units: picosecondsString
         } );
         const node = new Text( averagingTimeString, {

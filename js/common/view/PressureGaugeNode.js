@@ -14,7 +14,7 @@ define( require => {
   const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const PressureComboBox = require( 'GAS_PROPERTIES/common/view/PressureComboBox' );
+  const PressureComboDisplay = require( 'GAS_PROPERTIES/common/view/PressureComboDisplay' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // strings
@@ -57,7 +57,7 @@ define( require => {
       } );
 
       // combo box to display value and choose units
-      const comboBox = new PressureComboBox( pressureGauge, comboBoxListParent, {
+      const comboBox = new PressureComboDisplay( pressureGauge, comboBoxListParent, {
         centerX: dialNode.centerX,
         bottom: dialNode.bottom,
         maxWidth: dialNode.width
