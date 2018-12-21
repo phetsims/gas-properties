@@ -42,7 +42,7 @@ define( require => {
       assert && assert( options.deltaFine > 0, 'invalid deltaFine: ' + options.deltaFine );
       assert && assert( options.deltaCoarse > 0, 'invalid deltaCoarse: ' + options.deltaCoarse );
       assert && assert( !options.arrowButtonOptions || options.arrowButtonOptions.numberOfArrows === undefined,
-        'FineCoarseSpinner sets numberOfArrows' );
+        'FineCoarseSpinner sets arrowButtonOptions.numberOfArrows' );
 
       // options for the 'fine' arrow buttons, which show 1 arrow
       const fineButtonOptions = _.extend( {
