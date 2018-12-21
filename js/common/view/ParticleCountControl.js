@@ -49,6 +49,8 @@ define( require => {
       } );
 
       const display = new FineCoarseSpinner( numberOfParticlesProperty, numberOfParticlesProperty.range, {
+        deltaFine: 1,
+        deltaCoarse: 50,
         numberDisplayOptions: {
           font: GasPropertiesConstants.PARTICLE_COUNT_CONTROL_FONT
         }
