@@ -17,7 +17,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
 
-  class FineCoarseNumberDisplay extends Node {
+  class FineCoarseSpinner extends Node {
 
     /**
      * @param {NumberProperty} valueProperty
@@ -42,7 +42,7 @@ define( require => {
       assert && assert( options.deltaFine > 0, 'invalid deltaFine: ' + options.deltaFine );
       assert && assert( options.deltaCoarse > 0, 'invalid deltaCoarse: ' + options.deltaCoarse );
       assert && assert( !options.arrowButtonOptions || options.arrowButtonOptions.numberOfArrows === undefined,
-        'FineCoarseNumberDisplay sets numberOfArrows' );
+        'FineCoarseSpinner sets numberOfArrows' );
 
       // options for the 'fine' arrow buttons, which show 1 arrow
       const fineButtonOptions = _.extend( {
@@ -89,7 +89,7 @@ define( require => {
       } );
 
       // Wrap in Node to hide HBox API.
-      assert && assert( !options.children, 'FineCoarseNumberDisplay sets children' );
+      assert && assert( !options.children, 'FineCoarseSpinner sets children' );
       options.children = [ layoutBox ];
 
       super( options );
@@ -106,17 +106,17 @@ define( require => {
       valueProperty.link( valuePropertyListener ); // unlink required in dispose
 
       // @private
-      this.disposeFineCoarseNumberDisplay = () => {
+      this.disposeFineCoarseSpinner = () => {
         valueProperty.unlink( valuePropertyListener );
       };
     }
 
     // @public
     dispose() {
-      this.disposeFineCoarseNumberDisplay();
+      this.disposeFineCoarseSpinner();
       super.dispose();
     }
   }
 
-  return gasProperties.register( 'FineCoarseNumberDisplay', FineCoarseNumberDisplay );
+  return gasProperties.register( 'FineCoarseSpinner', FineCoarseSpinner );
 } ); 
