@@ -60,18 +60,21 @@ define( require => {
       // force the accordion box to be a fixedWidth
       assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
       options.maxWidth = options.fixedWidth;
-      const strut = new HStrut( options.fixedWidth - ( 2 * options.contentXMargin ) );
-
-      const heavyParticleCountControl = new ParticleCountControl( heavyString, new HeavyParticleNode(),
-        numberOfHeavyParticlesProperty );
-
-      const lightParticleCountControl = new ParticleCountControl( lightString, new LightParticleNode(),
-        numberOfLightParticlesProperty );
+      const maxContentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
+      const strut = new HStrut( maxContentWidth );
 
       const content = new VBox( {
+        maxWidth: maxContentWidth,
         align: 'left',
         spacing: 15,
-        children: [ heavyParticleCountControl, lightParticleCountControl ]
+        children: [
+
+          // Heavy
+          new ParticleCountControl( heavyString, new HeavyParticleNode(), numberOfHeavyParticlesProperty ),
+
+          // Light
+          new ParticleCountControl( lightString, new LightParticleNode(), numberOfLightParticlesProperty )
+        ]
       } );
 
       super( new Node( { children: [ strut, content ] } ), options );
