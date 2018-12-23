@@ -21,12 +21,12 @@ define( require => {
   class ParticleCountControl extends VBox {
 
     /**
-     * @param {string} title
      * @param {Node} icon
+     * @param {string} title
      * @param {NumberProperty} numberOfParticlesProperty
      * @param {Object} [options]
      */
-    constructor( title, icon, numberOfParticlesProperty, options ) {
+    constructor( icon, title, numberOfParticlesProperty, options ) {
 
       options = _.extend( {
         align: 'left',
@@ -45,7 +45,7 @@ define( require => {
 
       const titleBox = new HBox( {
         spacing: 8,
-        children: [ titleNode, icon ]
+        children: [ icon, titleNode ]
       } );
 
       const display = new FineCoarseSpinner( numberOfParticlesProperty, {

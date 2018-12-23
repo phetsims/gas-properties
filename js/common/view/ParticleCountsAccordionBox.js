@@ -70,10 +70,10 @@ define( require => {
         children: [
 
           // Heavy
-          new ParticleCountControl( heavyString, new HeavyParticleNode(), numberOfHeavyParticlesProperty ),
+          new ParticleCountControl( new HeavyParticleNode(), heavyString, numberOfHeavyParticlesProperty ),
 
           // Light
-          new ParticleCountControl( lightString, new LightParticleNode(), numberOfLightParticlesProperty )
+          new ParticleCountControl( new LightParticleNode(), lightString, numberOfLightParticlesProperty )
         ]
       } );
 
