@@ -2,6 +2,7 @@ TODO list for gas-properties
 
 DESIGN
 Does resizing the container have any affect on the collision counter? does it need to reset or anything?
+If particle count is decreased while resizing the container, are particles removed immediately, or queued for removal?
 
 MODEL
 Hole in top of container needs to have dynamic size
