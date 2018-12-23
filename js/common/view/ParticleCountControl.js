@@ -18,6 +18,9 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
+  // const
+  const X_SPACING = 8;
+
   class ParticleCountControl extends VBox {
 
     /**
@@ -44,11 +47,11 @@ define( require => {
       } );
 
       const titleBox = new HBox( {
-        spacing: 8,
+        spacing: X_SPACING,
         children: [ icon, titleNode ]
       } );
 
-      const display = new FineCoarseSpinner( numberOfParticlesProperty, {
+      const spinner = new FineCoarseSpinner( numberOfParticlesProperty, {
         deltaFine: 1,
         deltaCoarse: 50,
         numberDisplayOptions: {
@@ -56,8 +59,11 @@ define( require => {
         }
       } );
 
+      // Limit width of text
+      titleNode.maxWidth = spinner.width - icon.width - X_SPACING;
+
       assert && assert( !options.children, 'ParticleCountControl sets children' );
-      options.children = [ titleBox, display ];
+      options.children = [ titleBox, spinner ];
 
       super( options );
     }
