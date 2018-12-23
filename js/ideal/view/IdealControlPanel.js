@@ -47,8 +47,8 @@ define( require => {
       // force the Panel to be a fixed width
       assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
       options.maxWidth = options.fixedWidth;
-
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
+      
       const content = new VBox( {
         align: 'left',
         spacing: 10,                      
