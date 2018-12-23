@@ -57,6 +57,9 @@ define( require => {
 
       }, options );
 
+      // Limit width of title
+      options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
+
       // force the accordion box to be a fixedWidth
       assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
       options.maxWidth = options.fixedWidth;
