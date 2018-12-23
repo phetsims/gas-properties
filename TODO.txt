@@ -7,6 +7,9 @@ MODEL
 port Java model
 keep gravity, but turn it off
 
+VIEW
+simplified icons for stopwatch and collision counter
+
 COMMON CODE
 PlayPauseButton: rename runningListener to isPlayingListener
 StepButton: if you explicitly set enabled = false, then set isPlayingProperty.value = true, StepButton will enable itself
