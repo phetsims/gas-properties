@@ -27,7 +27,19 @@ define( require => {
       default: 'white',
       projector: 'black'
     },
-    textFill: {
+    titleTextFill: {
+      default: 'white',
+      projector: 'black'
+    },
+    checkboxTextFill: {
+      default: 'white',
+      projector: 'black'
+    },
+    radioButtonTextFill: {
+      default: 'white',
+      projector: 'black'
+    },
+    sizeArrowColor: {
       default: 'white',
       projector: 'black'
     },
@@ -42,6 +54,9 @@ define( require => {
     radioButtonGroupDeselectedStroke: {
       default: 'rgb( 240, 240, 240 )',
       projector: 'rgb( 180, 180, 180 )'
+    },
+    separatorColor: {
+      default: 'rgb( 100, 100, 100)'
     },
     containerBoundsStroke: {
       default: 'white',

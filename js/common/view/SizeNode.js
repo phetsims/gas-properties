@@ -42,7 +42,7 @@ define( require => {
         width => modelViewTransform.modelToViewDeltaX( width ) );
 
       const dimensionalArrowNode = new DimensionalArrowsNode( viewWidthProperty, {
-        color: GasPropertiesColorProfile.textFillProperty
+        color: GasPropertiesColorProfile.sizeArrowColorProperty
       } );
 
       const widthDisplay = new NumberDisplay( widthProperty, widthProperty.range, {

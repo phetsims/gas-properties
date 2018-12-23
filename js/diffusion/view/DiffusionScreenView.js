@@ -29,7 +29,7 @@ define( require => {
       //TODO delete underConstruction
       const underConstruction = new Text( 'Diffusion - under construction', {
         font: new PhetFont( 35 ),
-        fill: GasPropertiesColorProfile.textFillProperty,
+        fill: GasPropertiesColorProfile.titleTextFillProperty,
         center: this.layoutBounds.center
       } );
       this.addChild( underConstruction );

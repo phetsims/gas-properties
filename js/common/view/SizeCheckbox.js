@@ -30,7 +30,7 @@ define( require => {
 
       assert && assert( !options.icon, 'SizeCheckbox sets icon' );
       options.icon = new DimensionalArrowsNode( new NumberProperty( 44 ), {
-        color: GasPropertiesColorProfile.textFillProperty,
+        color: GasPropertiesColorProfile.sizeArrowColorProperty,
         pickable: false
       } );
 

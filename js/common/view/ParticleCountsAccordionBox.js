@@ -48,7 +48,7 @@ define( require => {
         cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
         titleNode: new Text( particleCountsString, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColorProfile.textFillProperty
+          fill: GasPropertiesColorProfile.titleTextFillProperty
         } ),
         titleAlignX: 'left',
         buttonLength: 20,
