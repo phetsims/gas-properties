@@ -6,7 +6,7 @@
  * Running with ?log will print these query parameters and their values to the console.
  *
  * Running with ?dev shows the following things that are specific to this sim:
- * TODO
+ * TODO describe what ?dev shows
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,7 +17,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
   const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
-    //TODO
+    //TODO add sim-specific query parameters
   } );
 
   gasProperties.register( 'GasPropertiesQueryParameters', GasPropertiesQueryParameters );

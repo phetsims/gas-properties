@@ -14,15 +14,15 @@ define( require => {
   class DiffusionModel {
 
     constructor() {
-      //TODO
+      //TODO constructor
     }
 
     reset() {
-      //TODO reset things here
+      //TODO reset
     }
 
     step() {
-      //TODO
+      //TODO step
     }
   }
 

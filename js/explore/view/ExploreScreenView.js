@@ -26,7 +26,7 @@ define( require => {
 
       super();
 
-      //TODO delete this
+      //TODO delete underConstruction
       const underConstruction = new Text( 'Explore - under construction', {
         font: new PhetFont( 35 ),
         fill: GasPropertiesColorProfile.textFillProperty,
