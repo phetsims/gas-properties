@@ -54,6 +54,9 @@ define( require => {
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
 
+      // @public are the time controls (play, pause, step) enabled?
+      this.isTimeControlsEnabled = new BooleanProperty( true );
+
       // @public the quantity to hold constant
       this.holdConstantProperty = new Property( HoldConstantEnum.NOTHING, {
         isValidValue: value =>  HoldConstantEnum.includes( value )

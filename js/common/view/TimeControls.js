@@ -44,6 +44,12 @@ define( require => {
       options.children = [ playPauseButton, stepButton ];
 
       super( options );
+
+      // Disable time controls
+      model.isTimeControlsEnabled.link( enabled => {
+        playPauseButton.enabled = enabled;
+        stepButton.enabled = enabled;
+      } );
     }
   }
 

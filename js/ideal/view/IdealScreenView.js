@@ -115,9 +115,10 @@ define( require => {
       this.addChild( pumpBox );
 
       // Container
-      const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty, {
-        resizeHandleColor: 'rgb( 187, 154, 86 )'
-      } );
+      const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty,
+        model.isPlayingProperty, model.isTimeControlsEnabled, {
+          resizeHandleColor: 'rgb( 187, 154, 86 )'
+        } );
       this.addChild( containerNode );
 
       // Dimensional arrows that indicate container size

@@ -29,10 +29,12 @@ define( require => {
      * @param {Container} container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Property.<HoldConstantEnum>} holdConstantProperty
+     * @param {BooleanProperty} isPlayingProperty
+     * @param {BooleanProperty} isTimeControlsEnabledProperty
      * @param {Object} [options]
      * @constructor
      */
-    constructor( container, modelViewTransform, holdConstantProperty, options ) {
+    constructor( container, modelViewTransform, holdConstantProperty, isPlayingProperty, isTimeControlsEnabledProperty, options ) {
 
       options = _.extend( {
         resizeHandleColor: HANDLE_COLOR, // {Color|string} color of the resize handle
@@ -120,13 +122,26 @@ define( require => {
       const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this );
       resizeHandleNode.addInputListener( resizeHandleDragListener );
 
-      //TODO pause animation, disable particles
       //TODO verify that isPressedProperty is set to false when interruptSubtreeInput is called
       // While interacting with the resize handle, display the previous bounds of the container
-      resizeHandleDragListener.isPressedProperty.link( isPressed => {
+      let wasPlaying = isPlayingProperty.value;
+      resizeHandleDragListener.isPressedProperty.lazyLink( isPressed => {
         previousBoundsNode.visible = isPressed;
         if ( isPressed ) {
+
+          // show the previous bounds of the container
           previousBoundsNode.shape = boundsNode.shape;
+          
+          // save playing state, pause the sim, and disable time controls
+          wasPlaying = isPlayingProperty.value;
+          isPlayingProperty.value = false;
+          isTimeControlsEnabledProperty.value = false; //TODO this has to be done last or StepButton with enable itself
+        }
+        else {
+
+          // enable time controls and restore playing state
+          isTimeControlsEnabledProperty.value = true;
+          isPlayingProperty.value = wasPlaying;
         }
       } );
 
