@@ -8,6 +8,7 @@ port Java model
 keep gravity, but turn it off
 
 VIEW
+for a fine/coarse control, are fine buttons typically on the inside or outside?
 particle count control: -1, -50, +50, +1 buttons?
 redesign collision counter
 simplified icons for stopwatch and collision counter
