@@ -48,7 +48,8 @@ define( require => {
       assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
       options.maxWidth = options.fixedWidth;
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
-      
+
+      // constrain all parts of content to separatorWidth
       const content = new VBox( {
         align: 'left',
         spacing: 10,                      
