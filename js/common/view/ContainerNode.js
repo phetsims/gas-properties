@@ -1,6 +1,5 @@
 // Copyright 2018, University of Colorado Boulder
 
-//TODO add drag handler for lid
 /**
  * View of the Container. Location of the right edge of the container remains fixed.
  *
