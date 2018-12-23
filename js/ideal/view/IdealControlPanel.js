@@ -47,17 +47,20 @@ define( require => {
       // force the Panel to be a fixed width
       assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
       options.maxWidth = options.fixedWidth;
-      const separator = new HSeparator( options.fixedWidth - ( 2 * options.xMargin ), {
-        stroke: GasPropertiesColorProfile.separatorColorProperty
-      } );
 
+      const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
       const content = new VBox( {
         align: 'left',
         spacing: 10,                      
         children: [
-          new HoldConstantControls( holdConstantProperty ),
-          separator,
-          new ToolControls( sizeVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty )
+          new HoldConstantControls( holdConstantProperty, { maxWidth: separatorWidth } ),
+          new HSeparator( separatorWidth, {
+            stroke: GasPropertiesColorProfile.separatorColorProperty,
+            maxWidth: separatorWidth
+          } ),
+          new ToolControls( sizeVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, {
+            maxWidth: separatorWidth
+          } )
         ]
       } );
 
