@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Control panel labeled that appears in the upper-right corner of the 'Ideal' screen.
+ * Control panel that appears in the upper-right corner of the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
