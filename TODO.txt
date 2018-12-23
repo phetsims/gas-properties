@@ -1,13 +1,15 @@
 TODO list for gas-properties
 
-Hole in top of container needs to have dynamic size
-Replace the lid with 'roll back'
+DESIGN
+Does resizing the container have any affect on the collision counter? does it need to reset or anything?
 
 MODEL
+Hole in top of container needs to have dynamic size
 port Java model
 keep gravity, but turn it off
 
 VIEW
+Replace the lid with 'roll back'
 for a fine/coarse control, are fine buttons typically on the inside or outside?
 particle count control: -1, -50, +50, +1 buttons?
 redesign collision counter
