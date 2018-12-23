@@ -10,6 +10,7 @@ port Java model
 keep gravity, but turn it off
 
 VIEW
+ParticleCountsAccordionBox behaves badly with stringTest=double
 Replace the lid with 'roll back'
 for a fine/coarse control, are fine buttons typically on the inside or outside?
 particle count control: -1, -50, +50, +1 buttons?
