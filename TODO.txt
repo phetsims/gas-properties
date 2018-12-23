@@ -3,9 +3,10 @@ TODO list for gas-properties
 Hole in top of container needs to have dynamic size
 Replace the lid with 'roll back'
 
-PlayPauseButton: rename runningListener to isPlayingListener
-StepButton: if you explicitly set enabled = false, then set isPlayingProperty.value = true, StepButton will enable itself
-
-Model
+MODEL
 port Java model
 keep gravity, but turn it off
+
+COMMON CODE
+PlayPauseButton: rename runningListener to isPlayingListener
+StepButton: if you explicitly set enabled = false, then set isPlayingProperty.value = true, StepButton will enable itself
