@@ -76,10 +76,7 @@ define( require => {
 
         const itemNode = new NumberDisplay( item.numberProperty, item.range || item.numberProperty.range,
           _.extend( {}, options.numberDisplayOptions, item.numberDisplayOptions, {
-            valuePattern: StringUtils.fillIn( valueUnitsString, {
-              value: '{0}',
-              units: item.units
-            } )
+            valuePattern: StringUtils.fillIn( valueUnitsString, { units: item.units } )
           } ) );
 
         // Don't allow the NumberDisplay to grow, since it's in a ComboBox

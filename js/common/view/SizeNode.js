@@ -47,10 +47,7 @@ define( require => {
 
       const widthDisplay = new NumberDisplay( widthProperty, widthProperty.range, {
         decimalPlaces: 1,
-        valuePattern: StringUtils.fillIn( valueUnitsString, {
-          value: '{0}',
-          units: nanometersString
-        } ),
+        valuePattern: StringUtils.fillIn( valueUnitsString, { units: nanometersString } ),
         font: new PhetFont( 12 ),
         cornerRadius: 3,
         numberFill: 'black',
