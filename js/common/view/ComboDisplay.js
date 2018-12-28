@@ -2,7 +2,8 @@
 
 /**
  * The lovechild of a ComboBox and a NumberDisplay. Allows the user to choose one of N dynamic numeric values.
- * The choices in a ComboBox are typically static, not recommended for displaying dynamic values. But here we are.
+ * ComboBox was designed to display static choices, so this component ensures that none of its items grow wider/taller
+ * than the their initial size.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -81,6 +82,7 @@ define( require => {
 
         // Don't allow the NumberDisplay to grow, since it's in a ComboBox
         itemNode.maxWidth = itemNode.width;
+        itemNode.maxHeight = itemNode.height;
 
         comboBoxItems.push( ComboBox.createItem( itemNode, item.choice ) );
       } );
