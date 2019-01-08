@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * ComboBox for choosing dynamic temperature values in specific units.
+ * Displays dynamic temperature values, with the ability to switch units via a combo box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const ComboDisplay = require( 'GAS_PROPERTIES/common/view/ComboDisplay' );
+  const ComboBoxDisplay = require( 'GAS_PROPERTIES/common/view/ComboBoxDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Range = require( 'DOT/Range' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
@@ -19,9 +19,9 @@ define( require => {
   const kelvinString = require( 'string!GAS_PROPERTIES/kelvin' );
 
   // constants
-  const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 ); // determines how wide items in the ComboDisplay will be
+  const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 ); // determines how wide items in the ComboBoxDisplay will be
 
-  class TemperatureComboDisplay extends ComboDisplay {
+  class TemperatureDisplay extends ComboBoxDisplay {
 
     /**
      * @param {Thermometer} thermometer
@@ -49,5 +49,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'TemperatureComboDisplay', TemperatureComboDisplay );
+  return gasProperties.register( 'TemperatureDisplay', TemperatureDisplay );
 } );

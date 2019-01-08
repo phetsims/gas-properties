@@ -14,7 +14,7 @@ define( require => {
   const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const PressureComboDisplay = require( 'GAS_PROPERTIES/common/view/PressureComboDisplay' );
+  const PressureDisplay = require( 'GAS_PROPERTIES/common/view/PressureDisplay' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // strings
@@ -35,10 +35,10 @@ define( require => {
 
     /**
      * @param {PressureGauge} pressureGauge
-     * @param {Node} comboBoxListParent - parent for the combo box popup list
+     * @param {Node} listParent - parent for the combo box popup list
      * @param {Object} [options]
      */
-    constructor( pressureGauge, comboBoxListParent, options ) {
+    constructor( pressureGauge, listParent, options ) {
 
       options = options || {};
 
@@ -57,14 +57,14 @@ define( require => {
       } );
 
       // combo box to display value and choose units
-      const comboBox = new PressureComboDisplay( pressureGauge, comboBoxListParent, {
+      const pressureDisplay = new PressureDisplay( pressureGauge, listParent, {
         centerX: dialNode.centerX,
         bottom: dialNode.bottom,
         maxWidth: dialNode.width
       } );
 
       assert && assert( !options.children, 'PressureGaugeNode sets children' );
-      options.children = [ postNode, dialNode, comboBox ];
+      options.children = [ postNode, dialNode, pressureDisplay ];
 
       super( options );
 

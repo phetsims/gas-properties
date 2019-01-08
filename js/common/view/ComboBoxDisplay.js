@@ -20,7 +20,7 @@ define( require => {
   // constants
   const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
 
-  class ComboDisplay extends ComboBox {
+  class ComboBoxDisplay extends ComboBox {
 
     /**
      * @param {Object[]} items - describes items in the ComboBox, each Object has these fields:
@@ -62,9 +62,9 @@ define( require => {
       }, options.numberDisplayOptions );
 
       assert && assert( !options.numberDisplayOptions.valuePattern,
-        'ComboDisplay sets numberDisplayOptions.valuePattern' );
+        'ComboBoxDisplay sets numberDisplayOptions.valuePattern' );
 
-      // Convert ComboDisplay items to ComboBox items
+      // Convert ComboBoxDisplay items to ComboBox items
       const comboBoxItems = [];
       items.forEach( item => {
 
@@ -73,7 +73,7 @@ define( require => {
         assert && assert( item.range || item.numberProperty.range, 'range or numberProperty.range must be provided' );
         assert && assert( item.units, 'missing item.units' );
         assert && assert( !item.numberDisplayOptions || !item.numberDisplayOptions.valuePattern,
-          'ComboDisplay sets item.numberDisplayOptions.valuePattern' );
+          'ComboBoxDisplay sets item.numberDisplayOptions.valuePattern' );
 
         const itemNode = new NumberDisplay( item.numberProperty, item.range || item.numberProperty.range,
           _.extend( {}, options.numberDisplayOptions, item.numberDisplayOptions, {
@@ -91,5 +91,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ComboDisplay', ComboDisplay );
+  return gasProperties.register( 'ComboBoxDisplay', ComboBoxDisplay );
 } );

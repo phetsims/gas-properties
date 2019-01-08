@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Combo box for choosing dynamic pressure values in specific units.
+ * Displays dynamic pressure values, with the ability to switch units via a combo box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const ComboDisplay = require( 'GAS_PROPERTIES/common/view/ComboDisplay' );
+  const ComboBoxDisplay = require( 'GAS_PROPERTIES/common/view/ComboBoxDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Range = require( 'DOT/Range' );
@@ -19,9 +19,9 @@ define( require => {
   const kilopascalsString = require( 'string!GAS_PROPERTIES/kilopascals' );
 
   // constants
-  const NUMBER_DISPLAY_RANGE = new Range( 0, 99 ); // determines how wide items in the ComboDisplay will be
+  const NUMBER_DISPLAY_RANGE = new Range( 0, 99 ); // determines how wide items in the ComboBoxDisplay will be
 
-  class PressureComboDisplay extends ComboDisplay {
+  class PressureDisplay extends ComboBoxDisplay {
 
     /**
      * @param {PressureGauge} pressureGauge
@@ -55,5 +55,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'PressureComboDisplay', PressureComboDisplay );
+  return gasProperties.register( 'PressureDisplay', PressureDisplay );
 } );

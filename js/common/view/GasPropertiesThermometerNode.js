@@ -11,7 +11,7 @@ define( require => {
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const TemperatureComboDisplay = require( 'GAS_PROPERTIES/common/view/TemperatureComboDisplay' );
+  const TemperatureDisplay = require( 'GAS_PROPERTIES/common/view/TemperatureDisplay' );
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -19,10 +19,10 @@ define( require => {
 
     /**
      * @param {Thermometer} thermometer
-     * @param {Node} comboDisplayListParent - parent for the combo box list
+     * @param {Node} listParent - parent for the combo box list
      * @param {Object} [options]
      */
-    constructor( thermometer, comboDisplayListParent, options ) {
+    constructor( thermometer, listParent, options ) {
 
       options = _.extend( {
         spacing: 5,
@@ -30,7 +30,7 @@ define( require => {
       }, options );
 
       // ComboBox that displays dynamic temperature for various units, centered above the thermometer
-      const comboDisplay = new TemperatureComboDisplay( thermometer, comboDisplayListParent );
+      const temperatureDisplay = new TemperatureDisplay( thermometer, listParent );
 
       // temperatureProperty is null when there are no particles in the container.
       // Map null to zero, since ThermometerNode doesn't support null values.
@@ -50,7 +50,7 @@ define( require => {
           lineWidth: 1
         } );
 
-      options.children = [ comboDisplay, thermometerNode ];
+      options.children = [ temperatureDisplay, thermometerNode ];
 
       super( options );
     }
