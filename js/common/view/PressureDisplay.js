@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const ComboBoxDisplay = require( 'GAS_PROPERTIES/common/view/ComboBoxDisplay' );
+  const ComboBoxDisplay = require( 'SCENERY_PHET/ComboBoxDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Range = require( 'DOT/Range' );
