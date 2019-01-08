@@ -3,7 +3,7 @@
 /**
  * The lovechild of a ComboBox and a NumberDisplay. Allows the user to choose one of N dynamic numeric values.
  * ComboBox was designed to display static choices, so this component ensures that none of its items grow wider/taller
- * than the their initial size.
+ * than their initial size.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const ComboBox = require( 'SUN/ComboBox' );
+  const ComboBoxItem = require( 'SUN/ComboBoxItem' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -84,7 +85,7 @@ define( require => {
         itemNode.maxWidth = itemNode.width;
         itemNode.maxHeight = itemNode.height;
 
-        comboBoxItems.push( ComboBox.createItem( itemNode, item.choice ) );
+        comboBoxItems.push( new ComboBoxItem( itemNode, item.choice ) );
       } );
 
       super( comboBoxItems, choiceProperty, listParent, options );
