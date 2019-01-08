@@ -12,7 +12,7 @@ define( require => {
   const ComboDisplay = require( 'GAS_PROPERTIES/common/view/ComboDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Range = require( 'DOT/Range' );
-  const TemperatureUnitsEnum = require( 'GAS_PROPERTIES/common/model/TemperatureUnitsEnum' );
+  const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
 
   // strings
   const celsiusString = require( 'string!GAS_PROPERTIES/celsius' );
@@ -32,13 +32,13 @@ define( require => {
 
       const items = [
         {
-          choice: TemperatureUnitsEnum.KELVIN,
+          choice: Thermometer.Units.KELVIN,
           numberProperty: thermometer.temperatureKelvinProperty,
           range: NUMBER_DISPLAY_RANGE,
           units: kelvinString
         },
         {
-          choice: TemperatureUnitsEnum.CELSIUS,
+          choice: Thermometer.Units.CELSIUS,
           numberProperty: thermometer.temperatureCelsiusProperty,
           range: NUMBER_DISPLAY_RANGE,
           units: celsiusString

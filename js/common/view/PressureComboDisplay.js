@@ -11,7 +11,7 @@ define( require => {
   // modules
   const ComboDisplay = require( 'GAS_PROPERTIES/common/view/ComboDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const PressureUnitsEnum = require( 'GAS_PROPERTIES/common/model/PressureUnitsEnum' );
+  const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Range = require( 'DOT/Range' );
 
   // strings
@@ -32,7 +32,7 @@ define( require => {
 
       const items = [
         {
-          choice: PressureUnitsEnum.KILOPASCALS,
+          choice: PressureGauge.Units.KILOPASCALS,
           numberProperty: pressureGauge.pressureKilopascalsProperty,
           range: NUMBER_DISPLAY_RANGE,
           units: kilopascalsString,
@@ -41,7 +41,7 @@ define( require => {
           }
         },
         {
-          choice: PressureUnitsEnum.ATMOSPHERES,
+          choice: PressureGauge.Units.ATMOSPHERES,
           numberProperty: pressureGauge.pressureAtmospheresProperty,
           range: NUMBER_DISPLAY_RANGE,
           units: atmospheresString,

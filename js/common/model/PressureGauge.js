@@ -10,10 +10,10 @@ define( require => {
 
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Enumeration = require( 'PHET_CORE/Enumeration' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
-  const PressureUnitsEnum = require( 'GAS_PROPERTIES/common/model/PressureUnitsEnum' );
   const Range = require( 'DOT/Range' );
 
   class PressureGauge {
@@ -32,9 +32,9 @@ define( require => {
       // @public (read-only) pressure range in kilopascals (kPa)
       this.pressureRange = new Range( 0, 1000 ); //TODO values
 
-      // @public {Property.<PressureUnitsEnum>} pressure units displayed by the pressure gauge
-      this.unitsProperty = new Property( PressureUnitsEnum.KILOPASCALS, {
-        isValidValue: value => PressureUnitsEnum.includes( value )
+      // @public {Property.<PressureGauge.Units>} pressure units displayed by the pressure gauge
+      this.unitsProperty = new Property( PressureGauge.Units.KILOPASCALS, {
+        isValidValue: value => PressureGauge.Units.includes( value )
       } );
     }
 
@@ -44,6 +44,9 @@ define( require => {
       this.unitsProperty.reset();
     }
   }
+
+  // Choice of pressure units that the gauge can display
+  PressureGauge.Units = new Enumeration( [ 'KILOPASCALS', 'ATMOSPHERES' ] );
 
   return gasProperties.register( 'PressureGauge', PressureGauge );
 } );

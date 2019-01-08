@@ -10,10 +10,10 @@ define( require => {
 
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Enumeration = require( 'PHET_CORE/Enumeration' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
-  const TemperatureUnitsEnum = require( 'GAS_PROPERTIES/common/model/TemperatureUnitsEnum' );
 
   // constants
   const DEFAULT_RANGE = new Range( 0, 1000 );
@@ -43,9 +43,9 @@ define( require => {
       this.temperatureCelsiusProperty = new DerivedProperty( [ this.temperatureKelvinProperty ],
         temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15 );
 
-      // @public {Property.<TemperatureUnitsEnum>} temperature units displayed by the thermometer
-      this.unitsProperty = new Property( TemperatureUnitsEnum.KELVIN, {
-        isValidValue: value => TemperatureUnitsEnum.includes( value )
+      // @public {Property.<Thermometer.Units>} temperature units displayed by the thermometer
+      this.unitsProperty = new Property( Thermometer.Units.KELVIN, {
+        isValidValue: value => Thermometer.Units.includes( value )
       } );
     }
 
@@ -55,6 +55,9 @@ define( require => {
       this.unitsProperty.reset();
     }
   }
+
+  // Choice of temperature units that the thermometer can display
+  Thermometer.Units = new Enumeration( [ 'KELVIN', 'CELSIUS' ] );
 
   return gasProperties.register( 'Thermometer', Thermometer );
 } );
