@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const FineCoarseSpinner = require( 'GAS_PROPERTIES/common/view/FineCoarseSpinner' );
+  const FineCoarseSpinner = require( 'SCENERY_PHET/FineCoarseSpinner' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
