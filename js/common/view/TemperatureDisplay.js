@@ -11,6 +11,7 @@ define( require => {
   // modules
   const ComboBoxDisplay = require( 'SCENERY_PHET/ComboBoxDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Range = require( 'DOT/Range' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
 
@@ -29,6 +30,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( thermometer, listParent, options ) {
+
+      options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_OPTIONS, options );
 
       const items = [
         {

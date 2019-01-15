@@ -21,14 +21,11 @@ define( require => {
     SIM_TIME_STEP: 0.2, // ps
 
     COMBO_BOX_OPTIONS: {
-      itemHighlightFill: 'rgba( 255, 0, 0, 0.1 )',
+      highlightFill: 'rgba( 255, 0, 0, 0.1 )',
       align: 'right',
-      buttonXMargin: 5,
-      buttonYMargin: 2,
-      buttonCornerRadius: 5,
-      itemXMargin: 2,
-      itemYMargin: 2,
-      buttonLineWidth: 0.4
+      cornerRadius: 5,
+      xMargin: 5,
+      yMargin: 4
     },
 
     // Options common to all NumberDisplay items that are used in ComboBoxes

@@ -96,11 +96,9 @@ define( require => {
       const comboBox = new ComboBox( comboBoxItems, collisionCounter.averagingTimeProperty, comboBoxListParent, {
         listPosition: 'below',
         align: 'right',
-        buttonXMargin: 5,
-        buttonYMargin: 2,
-        buttonCornerRadius: 5,
-        itemXMargin: 2,
-        itemYMargin: 2
+        xMargin: 6,
+        yMargin: 3,
+        cornerRadius: 5
       } );
 
       // all of the stuff that appear on the counter

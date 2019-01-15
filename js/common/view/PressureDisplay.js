@@ -11,6 +11,7 @@ define( require => {
   // modules
   const ComboBoxDisplay = require( 'SCENERY_PHET/ComboBoxDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Range = require( 'DOT/Range' );
 
@@ -30,6 +31,8 @@ define( require => {
      */
     constructor( pressureGauge, listParent, options ) {
 
+      options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_OPTIONS, options );
+      
       const items = [
         {
           choice: PressureGauge.Units.KILOPASCALS,
