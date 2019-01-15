@@ -21,7 +21,8 @@ define( require => {
 
     constructor() {
       super( () => new DiffusionModel(), model => new DiffusionScreenView( model ), {
-        name: screenDiffusionString
+        name: screenDiffusionString,
+        showUnselectedHomeScreenIconFrame: true
       } );
     }
   }

@@ -21,7 +21,8 @@ define( require => {
 
     constructor() {
       super( () => new ExploreModel(), model => new ExploreScreenView( model ), {
-        name: screenExploreString
+        name: screenExploreString,
+        showUnselectedHomeScreenIconFrame: true
       } );
     }
   }

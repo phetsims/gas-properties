@@ -25,7 +25,6 @@ define( require => {
   const GLOBAL_OPTIONS = new GasPropertiesGlobalOptions();
 
   const simOptions = {
-    showSmallHomeScreenIconFrame: true, // put a border around unselected home screen icons
     optionsNode: new GasPropertiesGlobalOptionsNode( GLOBAL_OPTIONS ),
     credits: {
       //TODO #28 complete the credits
