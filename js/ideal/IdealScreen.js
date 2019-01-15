@@ -21,8 +21,7 @@ define( require => {
 
     constructor() {
       super( () => new IdealModel(), model => new IdealScreenView( model ), {
-        name: screenIdealString,
-        showUnselectedHomeScreenIconFrame: true
+        name: screenIdealString
       } );
     }
   }

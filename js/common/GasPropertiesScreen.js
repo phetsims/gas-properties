@@ -23,7 +23,9 @@ define( require => {
     constructor( createModel, createView, options ) {
 
       options = _.extend( {
-        backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty
+        backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
+        showUnselectedHomeScreenIconFrame: true,
+        showScreenIconFrameForNavigationBarFill: 'black'
       }, options );
 
       super( createModel, createView, options );

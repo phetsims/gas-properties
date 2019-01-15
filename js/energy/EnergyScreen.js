@@ -21,8 +21,7 @@ define( require => {
 
     constructor() {
       super( () => new EnergyModel(), model => new EnergyScreenView( model ), {
-        name: screenEnergyString,
-        showUnselectedHomeScreenIconFrame: true
+        name: screenEnergyString
       } );
     }
   }
