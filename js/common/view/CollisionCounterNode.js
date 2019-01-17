@@ -13,6 +13,7 @@ define( require => {
   const Circle = require( 'SCENERY/nodes/Circle' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const ComboBox = require( 'SUN/ComboBox' );
+  const ComboBoxItem = require( 'SUN/ComboBoxItem' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -89,7 +90,7 @@ define( require => {
         const node = new Text( averagingTimeString, {
           font: FONT
         } );
-        return ComboBox.createItem( node, averagingTime );
+        return new ComboBoxItem( node, averagingTime );
       } );
 
       // Combo box
