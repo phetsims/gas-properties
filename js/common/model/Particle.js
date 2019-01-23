@@ -41,10 +41,6 @@ define( require => {
       this.previousAcceleration = this.accelerationProperty.value;
 
       //JAVA java.Body
-      this.orientation = 0; //JAVA theta
-      this.angularVelocity = 0; //JAVA omega
-      this.angularAcceleration = 0; //JAVA alpha
-      this.previousAngularAcceleration = this.angularAcceleration; //JAVA prevAlpha
       this.momentum = Vector2.ZERO;
       this.mass = options.mass;
       this.lastCollidedBody = null;  //TODO Body? Particle?
@@ -79,16 +75,6 @@ define( require => {
         // Save the location and velocity before they are updated. This information is used in collision calculations.
         this.previousLocation = new Vector2( this.locationProperty.x, this.locationProperty.y );
         this.previousVelocity = new Vector2( this.velocityProperty.x, this.velocityProperty.y );
-      }
-
-      // java.Body
-      {
-        this.orientation = this.orientation + dt * this.angularVelocity + dt * dt * this.angularAcceleration / 2;
-        this.angularVelocity = this.angularVelocity + dt * ( this.angularAcceleration + this.previousAngularAcceleration ) / 2;
-        this.previousAngularAcceleration = this.angularAcceleration.value;
-        //TODO JAVA why are we never setting angularAcceleration?
-        //TODO JAVA why is previousAngularAcceleration set to something that never changes?
-        this.previousAngularAcceleration = this.angularAcceleration;
       }
 
       // java.Particle
