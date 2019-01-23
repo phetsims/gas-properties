@@ -1,6 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO #37 JAVA hierarchy is HeavySpecies, LightSpecies > GasMolecule > SolidSphere > SphericalBody > CollidableBody > Body > Particle > SimpleObservable, ModelElement
+//TODO #37 JAVA hierarchy is SimpleObservable, ModelElement > Particle > Body > CollidableBody > SphericalBody > SolidSphere > GasMolecule > HeavySpecies, LightSpecies
 //TODO JAVA delete stuff that isn't used in Gas Properties
 /**
  * Model for all types of particles.
@@ -12,16 +12,14 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class Particle {
 
     /**
-     * @param {NumberProperty} gravityProperty
      * @param {Object} [options]
      */
-    constructor( gravityProperty, options ) {
+    constructor( options ) {
 
       //TODO units, proper defaults
       options = _.extend( {
@@ -32,27 +30,25 @@ define( require => {
         radius: 1
       }, options );
 
-      this.gravityProperty = gravityProperty;
+      //JAVA from java.Particle
+      this.location = options.location;
+      this.velocity = options.velocity;
+      this.acceleration = options.acceleration;
+      this.previousAcceleration = this.acceleration;
 
-      //JAVA java.Particle
-      this.locationProperty = new Property( options.location );
-      this.velocityProperty = new Property( options.velocity );
-      this.accelerationProperty = new Property( options.acceleration );
-      this.previousAcceleration = this.accelerationProperty.value;
-
-      //JAVA java.Body
+      //JAVA from java.Body
       this.momentum = Vector2.ZERO;
       this.mass = options.mass;
-      this.lastCollidedBody = null;  //TODO Body? Particle?
+      this.lastCollidedBody = null;  //TODO what is this? Body? Particle?
 
-      //JAVA java.CollidableBody
+      //JAVA from java.CollidableBody
       this.collidable = true;
-      this.containedBodies = []; //TODO Body[]? Particle[]? what are these?
+      this.containedBodies = []; //TODO what is this? Body[]? Particle[]?
       this.constraints = []; // {Constraint[]} constraints applied to the particle's state at the end of each step
       this.previousLocation = null;
       this.previousVelocity = null;
 
-      //JAVA java.SphericalBody
+      //JAVA from java.SphericalBody
       this.radius = options.radius;
       this.momentOfInertia = this.mass * this.radius * this.radius * 2 / 5;
     }
@@ -79,21 +75,19 @@ define( require => {
 
       // java.Particle
       {
-        const location = this.locationProperty.value;
-        const velocity = this.velocityProperty.value;
-        const acceleration = this.accelerationProperty.value;
-
-        this.locationProperty.value = new Vector2(
-          location.x + dt * velocity.x + dt * dt * acceleration.x / 2,
-          location.y + dt * velocity.y + dt * dt * acceleration.y / 2
+        this.location = new Vector2(
+          this.location.x + dt * this.velocity.x + dt * dt * this.acceleration.x / 2,
+          this.location.y + dt * this.velocity.y + dt * dt * this.acceleration.y / 2
         );
 
-        this.velocityProperty.value = new Vector2(
-          velocity.x + dt * ( acceleration.x + this.previousAcceleration.x ) / 2,
-          velocity.y + dt * ( acceleration.y + this.previousAcceleration.y ) / 2
+        this.velocity = new Vector2(
+          this.velocity.x + dt * ( this.acceleration.x + this.previousAcceleration.x ) / 2,
+          this.velocity.y + dt * ( this.acceleration.y + this.previousAcceleration.y ) / 2
         );
 
-        this.previousAcceleration = new Vector2( acceleration.x, acceleration.y );
+        // Acceleration is due to gravity, and will be changed if gravity is changed.
+
+        this.previousAcceleration = new Vector2( this.acceleration.x, this.acceleration.y );
       }
 
       // java.Body
