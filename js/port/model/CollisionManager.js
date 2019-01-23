@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * TODO Port of Java class
+ * TODO Port of Java class CollisionGod
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,55 +14,57 @@ define( require => {
   const Region = require( 'GAS_PROPERTIES/port/model/Region' );
   const Util = require( 'DOT/Util' );
 
-  // constants
-  const GAS_MOLECULE_RADIUS = 5;
-
-  class CollisionGod {
+  class CollisionManager {
 
     /**
      * @param {IdealGasModel} model
-     * @param {number} dt
+     * @param {CollisionExpert[]} collisionExperts
      * @param {Bounds2} bounds
-     * @param {number} numberOfRegionsX
-     * @param {number} numberOfRegionsY
+     * @param {Object} [options]
      */
-    constructor( model, dt, bounds, numberOfRegionsX, numberOfRegionsY ) {
+    constructor( model, collisionExperts, bounds, options ) {
 
-      assert && assert( Util.isInteger( numberOfRegionsX ), 'invalid numberOfRegionsX: ' + numberOfRegionsX );
-      assert && assert( Util.isInteger( numberOfRegionsY ), 'invalid numberOfRegionsY: ' + numberOfRegionsY );
+      options = _.extend( {
+        numberOfRegionsX: 10,
+        numberOfRegionsY: 10,
+        regionOverlap: 10  //TODO JAVA is this value appropriate for HTML5? units?
+      }, options );
 
-      // @private
-      this.model = model;
-      this.dt = dt;
-      this.bounds = bounds;
-      this.numberOfRegionsX = numberOfRegionsX;
-      this.numberOfRegionsY = numberOfRegionsY;
+      assert && assert( Util.isInteger( options.numberOfRegionsX ),
+        'invalid numberOfRegionsX: ' + options.numberOfRegionsX );
+      assert && assert( Util.isInteger( options.numberOfRegionsY ),
+        'invalid numberOfRegionsY: ' + options.numberOfRegionsY );
+      assert && assert( options.regionOverlap > 0,
+        'invalid regionOverlap: ' + options.regionOverlap );
 
       // Divide the total bounds into overlapping regions
-      const regionWidth = bounds.getWidth() / numberOfRegionsX;
-      const regionHeight = bounds.getHeight() / numberOfRegionsY;
-      const regionOverlap = 2 * GAS_MOLECULE_RADIUS;
-      this.regions = new Region[ numberOfRegionsX ][ numberOfRegionsY ];
-      for ( let i = 0; i < numberOfRegionsX; i++ ) {
-        for ( let j = 0; j < numberOfRegionsY; j++ ) {
+      const regionWidth = bounds.getWidth() / options.numberOfRegionsX;
+      const regionHeight = bounds.getHeight() / options.numberOfRegionsY;
+      this.regions = new Region[ options.numberOfRegionsX ][ options.numberOfRegionsY ];
+      for ( let i = 0; i < options.numberOfRegionsX; i++ ) {
+        for ( let j = 0; j < options.numberOfRegionsY; j++ ) {
           const minX = bounds.minX + ( i * regionWidth );
           const minY = bounds.minY + ( j * regionHeight );
-          const maxX = minX + regionWidth + regionOverlap;
-          const maxY = minY + regionHeight + regionOverlap;
+          const maxX = minX + regionWidth + options.regionOverlap;
+          const maxY = minY + regionHeight + options.regionOverlap;
           const regionBounds = new Bounds2( minX, minY, maxX, maxY );
           this.regions[ i ][ j ] = new Region( regionBounds );
         }
       }
+
+      // @private fields needed by methods
+      this.model = model;
+      this.collisionExperts = collisionExperts;
+      this.bounds = bounds;
+      this.numberOfRegionsX = options.numberOfRegionsX;
+      this.numberOfRegionsY = options.numberOfRegionsY;
     }
 
     /**
-     * @param {number} dt
-     * @param {CollisionExpert[]} collisionExperts
+     * @param {number} dt - time delta in seconds
      * @public
      */
-    doYourThing( dt, collisionExperts ) {
-
-      this.collisionExperts = collisionExperts;
+    step( dt ) {
 
       const particles = this.model.getParticles();
       this.adjustRegionMembership( particles );
@@ -168,5 +170,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'CollisionGod', CollisionGod );
+  return gasProperties.register( 'CollisionManager', CollisionManager );
 } );
