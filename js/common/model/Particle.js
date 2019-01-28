@@ -26,19 +26,21 @@ define( require => {
         location: Vector2.ZERO,
         velocity: Vector2.ZERO,
         acceleration: Vector2.ZERO,
-        mass: 1, // u, atomic mass unit
+
+        //TODO should mass be in kg, since other quantities are in kg?
+        mass: 1, // u, atomic mass unit, 1 u === 1.66 x 10-27 kg
         radius: 1
       }, options );
 
       //JAVA from java.Particle
-      this.location = options.location;
-      this.velocity = options.velocity;
-      this.acceleration = options.acceleration;
-      this.previousAcceleration = this.acceleration;
+      this.location = options.location; // {Vector2} m
+      this.velocity = options.velocity; // {Vector2} m/s
+      this.acceleration = options.acceleration; // {Vector2} m/s^2
+      this.previousAcceleration = this.acceleration; // {Vector2} m/s^2
 
       //JAVA from java.Body
-      this.momentum = Vector2.ZERO;
-      this.mass = options.mass;
+      this.momentum = Vector2.ZERO; // kg * m/s
+      this.mass = options.mass; // u
       this.lastCollidedBody = null;  //TODO what is this? Body? Particle?
 
       //JAVA from java.CollidableBody
@@ -49,8 +51,8 @@ define( require => {
       this.previousVelocity = null;
 
       //JAVA from java.SphericalBody
-      this.radius = options.radius;
-      this.momentOfInertia = this.mass * this.radius * this.radius * 2 / 5;
+      this.radius = options.radius; // m
+      this.momentOfInertia = this.mass * this.radius * this.radius * 2 / 5;  // kg * m^2
     }
 
     /**
@@ -60,20 +62,28 @@ define( require => {
     getSpeed() { this.velocity.magnitude(); }
 
     /**
+     * Gets the particle's kinetic energy. This is due to translation only, no rotation.
+     * @returns {number}
+     */
+    getKineticEnergy() {
+      return 0.5 * this.mass * this.velocity.magnitudeSquared();
+    }
+
+    /**
      * Determines the new state of the particle using the Verlet method
      *
      * @param {number} dt - time delta in seconds
      */
     step( dt ) {
 
-      // java.CollidableBody
+      //TODO JAVA java.CollidableBody
       {
         // Save the location and velocity before they are updated. This information is used in collision calculations.
         this.previousLocation = new Vector2( this.locationProperty.x, this.locationProperty.y );
         this.previousVelocity = new Vector2( this.velocityProperty.x, this.velocityProperty.y );
       }
 
-      // java.Particle
+      //TODO JAVA java.Particle
       {
         this.location = new Vector2(
           this.location.x + dt * this.velocity.x + dt * dt * this.acceleration.x / 2,
@@ -90,7 +100,7 @@ define( require => {
         this.previousAcceleration = new Vector2( this.acceleration.x, this.acceleration.y );
       }
 
-      // java.Body
+      //TODO JAVA java.Body
       {
         this.momentum = this.velocityProperty.value.times( this.mass );
       }
