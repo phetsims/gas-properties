@@ -52,7 +52,6 @@ define( require => {
 
       //JAVA from java.SphericalBody
       this.radius = options.radius; // m
-      this.momentOfInertia = this.mass * this.radius * this.radius * 2 / 5;  // kg * m^2
     }
 
     /**
