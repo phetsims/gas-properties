@@ -1,5 +1,10 @@
 TODO model description
 
+Constraints:
+* hard sphere collision model
+* rotational kinematics are ignored
+* no gravity
+ 
 PV = NkT
 
 * P = pressure
