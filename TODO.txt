@@ -1,5 +1,12 @@
 TODO list for gas-properties
 
+
+References
+collision detection: https://en.wikipedia.org/wiki/Collision_detection
+collision response: https://en.wikipedia.org/wiki/Collision_response
+
+Is Java collision detection algorithm, a priori or a posteriori? (see https://en.wikipedia.org/wiki/Collision_detection)
+
 DESIGN
 Does resizing the container have any affect on the collision counter? does it need to reset or anything?
 If particle count is decreased while resizing the container, are particles removed immediately, or queued for removal?
