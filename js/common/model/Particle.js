@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 //TODO #37 JAVA hierarchy is SimpleObservable, ModelElement > Particle > Body > CollidableBody > SphericalBody > SolidSphere > GasMolecule > HeavySpecies, LightSpecies
-//TODO JAVA delete stuff that isn't used in Gas Properties
+//TODO optimize by making all Vector2 herein mutable
 /**
  * Model for all types of particles.
  *
