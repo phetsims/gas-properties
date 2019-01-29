@@ -18,7 +18,6 @@ define( require => {
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Range = require( 'DOT/Range' );
-  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   const BOUNDS = new Bounds2( 0, 0, 600, 600 ); //TODO JAVA what is this? are values appropriate for HTML5 ?
@@ -32,30 +31,14 @@ define( require => {
 
       this.container = new Container();
 
-      this.heaterCoolerProperty = new NumberProperty( 0, {
+      this.heaterScaleProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 )
-      } );
-
-      //TODO this is not used in Gas Properties, but is desirable to include in the model for future
-      // @public acceleration due to gravity, m/s
-      this.accelerationDueToGravityProperty = new NumberProperty( 0, {
-        range: new Range( 0, 40 ),
-        validValue: value => ( value.x === 0 )
-      } );
-      this.accelerationDueToGravityProperty.link( accelerationDueToGravity => {
-        //TODO set acceleration of all particles
       } );
 
       this.collisionManager = new CollisionManager( this, collisionExperts, BOUNDS );
 
-      // {boolean} true if we're in the step method
-      this.stepping = false;
-
       this.heavyParticles = []; // {HeavyParticle[]}
       this.lightParticles = []; // {LightParticle[]}
-
-      //TODO doc
-      this.deltaKineticEnergy = 0;
 
       // @public emit() when step method has completed
       this.steppedEmitter = new Emitter();
@@ -103,40 +86,38 @@ define( require => {
      */
     step( dt ) {
 
-      this.stepping = true;
-
-      // Get the total energy in the system before anything happens.
-      const totalEnergyBefore = this.getTotalEnergy();
-
+      // Put all particles in one array.
       const particles = this.heavyParticles.concat( this.lightParticles );
 
-      this.applyExternalForces( particles );
-      this.applyHeaterCooler( particles );
-      this.stepParticles( dt, particles );
+      // Get the kinetic energy in the system before anything happens.
+      const preKE = getKineticEnergy( particles );
 
+      // Determine how heat/cold contributes to kinetic energy.
+      const heaterKE = getKineticEnergyDueToHeater( particles, this.heaterScaleProperty.value );
+
+      // Step all particles.
+      stepParticles( particles, dt );
+
+      // Do collision detection.
       this.collisionManager.step( dt );
 
-      // Get the total energy in the system, and adjust it if necessary.
-      const totalEnergyAfter = this.getTotalEnergy( particles );
-      const totalKineticEnergyAfter = this.getTotalKineticEnergy( particles );
-      const dE = totalEnergyAfter - ( totalEnergyBefore + this.deltaKineticEnergy );
-      const r0 = dE / totalKineticEnergyAfter;
-      const ratio = Math.sqrt( 1 - r0 );
+      //TODO what is going on here?
+      const postKE = getKineticEnergy( particles );
+      if ( postKE !== 0 ) {
 
-      // Clear the added-energy accumulator
-      this.deltaKineticEnergy = 0;
+        const deltaKE = postKE - ( preKE + heaterKE );
+        const r0 = deltaKE / postKE;
+        const ratio = Math.sqrt( 1 - r0 );
 
-      // Adjust the energy of all particles
-      if ( totalEnergyBefore !== 0 && ratio !== 1 && !isNaN( ratio ) ) {
-        for ( let i = 0; i < particles.length; i++ ) {
-          const particle = particles[ i ];
-          if ( particle.getKineticEnergy() > 0 ) {
-            particle.velocity = particle.velocity.times( ratio );
+        // Adjust the energy of all particles
+        if ( preKE !== 0 && ratio !== 1 && !isNaN( ratio ) ) {
+          for ( let i = 0; i < particles.length; i++ ) {
+            particles[ i ].velocity.times( ratio );
           }
         }
       }
 
-      // Remove any molecules from the system that have escaped the box
+      // Remove any molecules from the system that have escaped from the box
       this.removeEscapedMolecules();
 
       // Compute some useful statistics
@@ -145,111 +126,8 @@ define( require => {
       // Update either pressure or volume
       this.updateFreeParameter();
 
-      this.stepping = false;
-
       // Notify observers
       this.steppedEmitter.emit();
-    }
-
-    /**
-     * Applies external forces (e.g. gravity) to a collection of particles.
-     * @param {Particle[]} particles
-     * @private
-     */
-    applyExternalForces( particles ) {
-
-      // Clear the acceleration for all particles
-      for ( let i = 0; i < particles.length; i++ ) {
-        particles[ i ].acceleration = Vector2.ZERO;
-      }
-
-      // Apply external forces to all particles, which currently includes only gravity.
-      for ( let i = 0; i < particles.length; i++ ) {
-        particles[ i ].acceleration.add( this.accelerationDueToGravityProperty.value );
-      }
-    }
-
-    /**
-     * Heats or cools a collection of particles, adding kinetic energy to the system.
-     * @param {Particle[]} particles
-     * @private
-     */
-    applyHeaterCooler( particles ) {
-      assert && assert( this.stepping, 'should only be called from step' );
-      const heaterCoolerValue = this.heaterCoolerProperty.value;
-      if ( heaterCoolerValue !== 0 ) {
-        for ( let i = 0; i < particles.length; i++ ) {
-          const particle = particles[ i ];
-          const preKE = particle.getKineticEnergy();
-          particle.velocity.times( 1.1 * heaterCoolerValue ); //TODO magic number
-          this.deltaKineticEnergy += particle.getKineticEnergy() - preKE;
-        }
-      }
-    }
-
-    /**
-     * Moves a collection of particles forward one time step.
-     * @param {number} dt - time delta in seconds
-     * @param {Particle[]} particles
-     * @private
-     */
-    stepParticles( dt, particles ) {
-      for ( let i = 0; i < particles.length; i++ ) {
-        particles[ i ].step( dt );
-      }
-    }
-
-    /**
-     * Gets the total energy in the system.
-     * @param {Particle[]} particles
-     * @returns {number}
-     * @private
-     */
-    getTotalEnergy( particles ) {
-      let total = 0;
-      for ( let i = 0; i < particles.length; i++ ) {
-        total += this.getParticleTotalEnergy( particles[ i ] );
-      }
-      return total;
-    }
-
-    /**
-     * Gets the total energy of one particle.
-     * @param {Particle} particle
-     * @returns {number}
-     * @private
-     */
-    getParticleTotalEnergy( particle ) {
-      return particle.getKineticEnergy() + this.getParticlePotentialEnergy( particle );
-    }
-
-    /**
-     * Gets the potential energy of one particle.
-     * @param particle
-     * @returns {number}
-     * @private
-     */
-    getParticlePotentialEnergy( particle ) {
-      let potentialEnergy = 0;
-      if ( this.accelerationDueToGravityProperty.value !== 0 ) {
-        const distanceFromBottomOfContainer = particle.locationProperty.value.y - this.container.locationProperty.value.y;
-        potentialEnergy = distanceFromBottomOfContainer * this.accelerationDueToGravityProperty.value * particle.mass;
-      }
-      return potentialEnergy;
-    }
-
-    /**
-     * Gets the total kinetic energy for a collection of particles.
-     * @param {Particle[]} particles
-     * @returns {number}
-     * @private
-     */
-    getTotalKineticEnergy( particles ) {
-      let total = 0;
-      for ( let i = 0; i < particles.length; i++ ) {
-        total += particles[ i ].getKineticEnergy();
-      }
-      return total;
     }
 
     /**
@@ -274,6 +152,49 @@ define( require => {
     updateFreeParameter() {
       //TODO
     }
+  }
+
+  /**
+   * Steps a collection of particles.
+   * @param {Particle} particles
+   * @param {number} dt - time in seconds
+   */
+  function stepParticles( particles, dt ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      particles[ i ].step( dt );
+    }
+  }
+
+  /**
+   * Gets the kinetic total energy for a collection of particles.
+   * @param {Particle[]} particles
+   * @returns {number}
+   */
+  function getKineticEnergy( particles ) {
+    let total = 0;
+    for ( let i = 0; i < particles.length; i++ ) {
+      total += particles[ i ].getKineticEnergy();
+    }
+    return total;
+  }
+
+  /**
+   * Gets the change in kinetic energy that is due to applying heat or cold to the system.
+   * @param {Particle[]} particles
+   * @param {number} heatScale [-1,1]
+   * @returns {number}
+   */
+  function getKineticEnergyDueToHeater( particles, heatScale ) {
+    let kineticEnergy = 0;
+    if ( heatScale !== 0 ) {
+      for ( let i = 0; i < particles.length; i++ ) {
+        const particle = particles[ i ];
+        const preKE = particle.getKineticEnergy();
+        particle.velocity.times( 1.1 * heatScale ); //TODO magic number
+        kineticEnergy += particle.getKineticEnergy() - preKE;
+      }
+    }
+    return kineticEnergy;
   }
 
   return gasProperties.register( 'IdealGasModel', IdealGasModel );
