@@ -1,7 +1,7 @@
 TODO model description
 
 Constraints: 
-* rigid body collision model, with bounding box pruning
+* rigid body collision model
 * rotational kinematics are ignored
 * no gravity
  
