@@ -1,7 +1,7 @@
 TODO model description
 
-Constraints:
-* hard sphere collision model
+Constraints: 
+* rigid body collision model
 * rotational kinematics are ignored
 * no gravity
  
