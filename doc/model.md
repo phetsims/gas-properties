@@ -1,35 +1,33 @@
 TODO model description
 
-Constraints: 
-* rigid body collision model
-* rotational kinematics are ignored
-* no gravity
+Constraints:
  
-PV = NkT
+* rigid body collision model
+* no rotational kinematics
+* no gravity
 
-* P = pressure
-* V = volume
-* N = number of gas molecules
-* k = Boltzman constant
-* T = temperature
-
-KE = 0.5 * mass * velocity^2 (translation only, no rotation)
-
-PE = distanceFromBottomOfContainer * gravity * mass
-
-TE = KE + PE
-
-* TE = Total Energy
+Symbols:
+ 
+* k = Boltzman constant (1.38064852 × 10^-23 m^2 kg s^-2 K^-1)
 * KE = Kinetic Energy
-* PE = Potential Energy
+* N = number of gas molecules
+* P = pressure
+* T = temperature
+* v = velocity magnitude
+* V = volume
+ 
+Equations:
+
+PV = NkT
+KE = 0.5 * mass * v^2
 
 Units:
 
-* time = seconds
-* distance = m
-* velocity = m/s
-* acceleration = m/s^2
-* energy = J (kg * m^2 / s^2)
-* mass = kg
-* momentum = mass * velocity = kg * m/s
-* moment of inertia = kg * m^2
+* acceleration = nm / s^2
+* distance = nm
+* energy = u * nm^2 / s^2
+* mass = u
+* moment of inertia = u * nm^2
+* momentum = mass * velocity = u * nm/s
+* time = s
+* velocity = nm / s
