@@ -18,8 +18,8 @@ Symbols:
  
 Equations:
 
-PV = NkT
-KE = 0.5 * mass * v^2
+* PV = NkT
+* KE = 0.5 * mass * v^2
 
 Units:
 
