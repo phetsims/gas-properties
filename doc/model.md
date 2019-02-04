@@ -8,13 +8,14 @@ Constraints:
 
 Symbols:
  
-* k = Boltzman constant (1.38064852 × 10^-23 m^2 kg s^-2 K^-1)
+* k = Boltzman constant, 1.38064852 × 10^-23 m^2 kg s^-2 K^-1
 * KE = Kinetic Energy
 * N = number of gas molecules
 * P = pressure
 * T = temperature
 * v = velocity magnitude
 * V = volume
+* u = unified atomic mass, 1 u === 1.66 x 10^-27 kg
  
 Equations:
 
