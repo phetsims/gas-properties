@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
@@ -36,9 +37,10 @@ define( require => {
 
       assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
 
-      const rectangle = new Rectangle( 0, 0, 100, 200, {
-        fill: options.color,
-        stroke: 'black'
+      const background = new Rectangle( 0, 0, 100, 200, {
+        fill: 'grey',
+        stroke: 'black',
+        cornerRadius: 3
       } );
 
       const pumpButton = new RectangularPushButton( {
@@ -50,24 +52,34 @@ define( require => {
           numberOfParticlesProperty.value += Math.min( PARTICLES_PER_PUMP,
             numberOfParticlesProperty.range.max - numberOfParticlesProperty.value );
         },
-        centerX: rectangle.centerX,
-        top: rectangle.top + 10
+        centerX: background.centerX,
+        top: background.top + 10
       } );
 
-      const particleCountNode = new Text( '', {
-        font: new PhetFont( 18 ),
-        center: rectangle.center
+      const progressBarSize = new Dimension2( 18, 130 );
+      const progressBar = new Rectangle( 0, 0, progressBarSize.width, progressBarSize.height, {
+        fill: 'white',
+        stroke: 'black',
+        centerX: background.centerX,
+        centerY: pumpButton.bottom + ( background.bottom - pumpButton.bottom ) / 2
+      } );
+
+      const fillBarMargin = 3;
+      const fillBarSize = new Dimension2( progressBarSize.width - 2 * fillBarMargin, progressBarSize.height - 2 * fillBarMargin );
+      const fillBar = new Rectangle( 0, 0, fillBarSize.width, fillBarSize.height, {
+        fill: options.color,
+        center: progressBar.center
       } );
 
       assert && assert( !options.children, 'BicyclePumpNode sets children' );
-      options.children = [ rectangle, pumpButton, particleCountNode ];
+      options.children = [ background, pumpButton, progressBar, fillBar ];
 
       super( options );
 
       numberOfParticlesProperty.link( numberOfParticles => {
-        pumpButton.enabled = ( numberOfParticles < numberOfParticlesProperty.range.max );
-        particleCountNode.text = numberOfParticles;
-        particleCountNode.center = rectangle.center;
+        const fillBarHeight = fillBarSize.height * ( 1 - numberOfParticles / numberOfParticlesProperty.range.max );
+        fillBar.setRect( 0, 0, fillBarSize.width, fillBarHeight );
+        fillBar.bottom = progressBar.bottom - fillBarMargin;
       } );
     }
   }
