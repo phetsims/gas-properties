@@ -1,7 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
 //TODO #37 JAVA hierarchy is SimpleObservable, ModelElement > Particle > Body > CollidableBody > SphericalBody > SolidSphere > GasMolecule > HeavySpecies, LightSpecies
-//TODO optimize by making all Vector2 herein mutable?
 /**
  * Model for all types of particles.
  *
@@ -33,11 +32,13 @@ define( require => {
         colorProperty: null
       }, options );
 
+      // @public vectors will be mutated!
+      this.location = options.location.copy(); // {Vector2} m
+      this.velocity = options.velocity.copy(); // {Vector2} m/s
+      this.acceleration = options.acceleration.copy(); // {Vector2} m/s^2
+      this.momentum = Vector2.ZERO.copy(); // kg * m/s
+
       // @public (read-only)
-      this.location = options.location; // {Vector2} m
-      this.velocity = options.velocity; // {Vector2} m/s
-      this.acceleration = options.acceleration; // {Vector2} m/s^2
-      this.momentum = Vector2.ZERO; // kg * m/s
       this.mass = options.mass; // u
       this.radius = options.radius; // m
       this.colorProperty = options.colorProperty || new Property( 'white' );
@@ -52,7 +53,7 @@ define( require => {
     }
 
     /**
-     * Sets the particle's speed.
+     * Gets the particle's speed.
      * @returns {number}
      */
     getSpeed() { this.velocity.magnitude(); }
@@ -70,23 +71,22 @@ define( require => {
     get kineticEnergy() { return this.getKineticEnergy(); }
 
     /**
-     * Determines the new state of the particle using the Verlet method
-     *
+     * Moves the particle by one time step.
      * @param {number} dt - time delta in seconds
      */
     step( dt ) {
 
-      this.location = new Vector2(
+      this.location.setXY(
         this.location.x + dt * this.velocity.x + dt * dt * this.acceleration.x / 2,
         this.location.y + dt * this.velocity.y + dt * dt * this.acceleration.y / 2
       );
 
-      this.velocity = new Vector2(
+      this.velocity.setXY(
         this.velocity.x + dt * this.acceleration.x,
         this.velocity.y + dt * this.acceleration.y
       );
 
-      this.momentum = this.velocity.times( this.mass );
+      this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
     }
 
     /**
