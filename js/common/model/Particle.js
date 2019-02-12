@@ -61,7 +61,7 @@ define( require => {
     get speed() { return this.getSpeed(); }
 
     /**
-     * Gets the particle's kinetic energy. This is due to translation only, no rotation.
+     * Gets the particle's kinetic energy. This is due to translation only, there is no rotation.
      * @returns {number}
      */
     getKineticEnergy() {
