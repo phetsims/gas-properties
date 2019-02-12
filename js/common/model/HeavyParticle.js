@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   class HeavyParticle extends Particle {
@@ -21,7 +22,8 @@ define( require => {
 
       options = _.extend( {
         mass: 28, // N2, rounded to the closest integer
-        radius: 5
+        radius: 5,
+        colorProperty: GasPropertiesColorProfile.heavyParticleColorProperty
       }, options );
 
       super( options );

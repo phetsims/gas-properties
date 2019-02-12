@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   class LightParticle extends Particle {
@@ -21,7 +22,8 @@ define( require => {
 
       options = _.extend( {
         mass: 4, // He, rounded to the closest integer
-        radius: 3.5
+        radius: 3.5,
+        colorProperty: GasPropertiesColorProfile.lightParticleColorProperty
       }, options );
 
       super( options );

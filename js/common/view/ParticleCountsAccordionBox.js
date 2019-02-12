@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * The accordion box titled 'Particle Counts'.
@@ -13,11 +13,12 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HeavyParticleNode = require( 'GAS_PROPERTIES/common/view/HeavyParticleNode' );
+  const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const LightParticleNode = require( 'GAS_PROPERTIES/common/view/LightParticleNode' );
+  const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountControl = require( 'GAS_PROPERTIES/common/view/ParticleCountControl' );
+  const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -73,10 +74,10 @@ define( require => {
         children: [
 
           // Heavy
-          new ParticleCountControl( new HeavyParticleNode(), heavyString, numberOfHeavyParticlesProperty ),
+          new ParticleCountControl( new ParticleNode( new HeavyParticle() ), heavyString, numberOfHeavyParticlesProperty ),
 
           // Light
-          new ParticleCountControl( new LightParticleNode(), lightString, numberOfLightParticlesProperty )
+          new ParticleCountControl( new ParticleNode( new LightParticle() ), lightString, numberOfLightParticlesProperty )
         ]
       } );
 

@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class Particle {
@@ -29,7 +30,8 @@ define( require => {
 
         //TODO should mass be in kg, since other quantities are in kg?
         mass: 1, // u, atomic mass unit, 1 u === 1.66 x 10-27 kg
-        radius: 1
+        radius: 1,
+        colorProperty: null
       }, options );
 
       //JAVA from java.Particle
@@ -52,6 +54,8 @@ define( require => {
 
       //JAVA from java.SphericalBody
       this.radius = options.radius; // m
+
+      this.colorProperty = options.colorProperty || new Property( 'white' );
     }
 
     /**
