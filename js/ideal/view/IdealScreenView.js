@@ -22,6 +22,7 @@ define( require => {
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
+  const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
@@ -171,6 +172,10 @@ define( require => {
       } );
       this.addChild( resetAllButton );
 
+      // @private
+      this.particlesNode = new ParticlesNode( model, this.layoutBounds );
+      this.addChild( this.particlesNode );
+
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, this.visibleBoundsProperty,
         comboBoxListParent );
@@ -190,6 +195,14 @@ define( require => {
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
+    }
+
+    /**
+     * Called on each step of the simulation's timer.
+     * @param {number} dt - delta time, in seconds
+     */
+    step( dt ) {
+      this.particlesNode.step( dt );
     }
   }
 

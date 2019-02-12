@@ -28,6 +28,16 @@ define( require => {
 
       super( 2 * particle.radius, options );
     }
+
+    /**
+     * Create an HTMLCanvasElement for a specified Particle, to be drawn with CanvasNode.
+     * @param {Particle} particle
+     * @param {function} callback, see Node.toCanvas for signature
+     * @returns {HTMLCanvasElement}
+     */
+    static particleToImage( particle, callback ) {
+      return new ParticleNode( particle ).toCanvas( callback );
+    }
   }
 
   return gasProperties.register( 'ParticleNode', ParticleNode );

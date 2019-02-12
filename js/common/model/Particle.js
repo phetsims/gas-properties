@@ -11,6 +11,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -56,6 +57,16 @@ define( require => {
       this.radius = options.radius; // m
 
       this.colorProperty = options.colorProperty || new Property( 'white' );
+
+      // @public emit is called with no args when Particle has been disposed.
+      this.disposedEmitter = new Emitter();
+      this.isDisposed = false;
+    }
+
+    dispose() {
+      assert && assert( !this.isDisposed, 'attempted to dispose again' );
+      this.disposedEmitter.emit();
+      this.isDisposed = true;
     }
 
     /**
@@ -82,8 +93,8 @@ define( require => {
       //TODO JAVA java.CollidableBody
       {
         // Save the location and velocity before they are updated. This information is used in collision calculations.
-        this.previousLocation = new Vector2( this.locationProperty.x, this.locationProperty.y );
-        this.previousVelocity = new Vector2( this.velocityProperty.x, this.velocityProperty.y );
+        this.previousLocation = this.location.copy();
+        this.previousVelocity = this.velocity.copy();
       }
 
       //TODO JAVA java.Particle
@@ -100,12 +111,12 @@ define( require => {
 
         // Acceleration is due to gravity, and will be changed if gravity is changed.
 
-        this.previousAcceleration = new Vector2( this.acceleration.x, this.acceleration.y );
+        this.previousAcceleration = this.acceleration.copy();
       }
 
       //TODO JAVA java.Body
       {
-        this.momentum = this.velocityProperty.value.times( this.mass );
+        this.momentum = this.velocity.times( this.mass );
       }
     }
 
