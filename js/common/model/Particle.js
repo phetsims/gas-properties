@@ -32,7 +32,7 @@ define( require => {
         colorProperty: null
       }, options );
 
-      // @public vectors will be mutated!
+      // @public Vector2 fields will be mutated!
       this.location = options.location.copy(); // {Vector2} m
       this.velocity = options.velocity.copy(); // {Vector2} m/s
       this.acceleration = options.acceleration.copy(); // {Vector2} m/s^2
