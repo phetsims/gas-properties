@@ -27,6 +27,9 @@ define( require => {
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
   const Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  const PUMP_DISPERSION_ANGLE = Math.PI / 2;
+
   class IdealModel {
 
     constructor() {
@@ -87,47 +90,56 @@ define( require => {
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         const delta = newValue - oldValue;
         if ( delta > 0 ) {
-
-          // add particles
-          for ( let i = 0; i < delta; i++ ) {
-            this.heavyParticles.push( new HeavyParticle( {
-              
-              //TODO set proper initial state
-              velocity: new Vector2( -( 1 + phet.joist.random.nextDouble() ), ( 1 + phet.joist.random.nextDouble() ) )
-            } ) );
-          }
+          this.addParticles( delta, this.heavyParticles, HeavyParticle );
         }
         else if ( delta < 0 ) {
-
-          // remove the last particles that were added
-          assert && assert( this.heavyParticles.length >= delta, 'not enough particles to delete' );
-          const removedParticles = this.heavyParticles.splice( delta, this.heavyParticles.length - delta - 1 );
-          removedParticles.forEach( particle => particle.dispose() );
+          this.disposeParticles( -delta, this.heavyParticles );
         }
       } );
 
-      //TODO lots of duplication with numberOfHeavyParticlesProperty listener
+      //TODO duplication with numberOfHeavyParticlesProperty listener
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
         const delta = newValue - oldValue;
         if ( delta > 0 ) {
-
-          // add particles
-          for ( let i = 0; i < delta; i++ ) {
-            this.lightParticles.push( new LightParticle( {
-
-              //TODO set proper initial state
-              velocity: new Vector2( -( 1 + phet.joist.random.nextDouble() ), ( 1 + phet.joist.random.nextDouble() ) )
-            } ) );
-          }
+          this.addParticles( delta, this.lightParticles, LightParticle );
         }
         else if ( delta < 0 ) {
-
-          // remove the last particles that were added
-          assert && assert( this.lightParticles.length >= delta, 'not enough particles to delete' );
-          const removedParticles = this.lightParticles.splice( delta, this.lightParticles.length - delta - 1 );
-          removedParticles.forEach( particle => particle.dispose() );
+          this.disposeParticles( -delta, this.lightParticles );
         }
       } );
+    }
+
+    /**
+     * Adds n particles to the end of the specified array.
+     * @param {number} n
+     * @param {Particle[]} particles
+     * @param {constructor} Constructor - a Particle subclass constructor
+     * @private
+     */
+    addParticles( n, particles, Constructor ) {
+      for ( let i = 0; i < n; i++ ) {
+
+        const magnitude = 1 + phet.joist.random.nextDouble();
+        const angle = Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE;
+
+        //TODO set proper initial state
+        particles.push( new Constructor( {
+          location: this.container.location.plusXY( 0, this.container.height / 2 ),
+          velocity: Vector2.createPolar( magnitude, angle )
+        } ) );
+      }
+    }
+
+    /**
+     * Removes and disposes the last n particles from the specified array.
+     * @param {number} n
+     * @param {Particle[]} particles
+     * @private
+     */
+    disposeParticles( n, particles ) {
+      assert && assert( n <= particles.length, 'not enough particles in the array' );
+      const removedParticles = particles.splice( particles.length - n, n );
+      removedParticles.forEach( particle => particle.dispose() );
     }
 
     // @public resets the model
