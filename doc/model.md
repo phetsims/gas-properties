@@ -8,7 +8,7 @@ Constraints:
 
 Constants:
 
-* k = Boltzmann constant, 1.38E-23 (m^2 * kg)/(s^2 * K) => 8.316E-3 (nm^2 * AMU)/(ps^2 * K)
+* k = Boltzmann constant, 1.38E-23 (m^2 * kg)/(s^2 * K) → 8.316E-3 (nm^2 * AMU)/(ps^2 * K)
 
 Symbols:
 
