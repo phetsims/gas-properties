@@ -93,7 +93,7 @@ define( require => {
           this.addParticles( delta, this.heavyParticles, HeavyParticle );
         }
         else if ( delta < 0 ) {
-          this.disposeParticles( -delta, this.heavyParticles );
+          this.removeParticles( -delta, this.heavyParticles );
         }
       } );
 
@@ -104,7 +104,7 @@ define( require => {
           this.addParticles( delta, this.lightParticles, LightParticle );
         }
         else if ( delta < 0 ) {
-          this.disposeParticles( -delta, this.lightParticles );
+          this.removeParticles( -delta, this.lightParticles );
         }
       } );
     }
@@ -136,7 +136,7 @@ define( require => {
      * @param {Particle[]} particles
      * @private
      */
-    disposeParticles( n, particles ) {
+    removeParticles( n, particles ) {
       assert && assert( n <= particles.length, 'not enough particles in the array' );
       const removedParticles = particles.splice( particles.length - n, n );
       removedParticles.forEach( particle => particle.dispose() );
@@ -159,15 +159,9 @@ define( require => {
       this.numberOfLightParticlesProperty.reset();
       this.heatCoolAmountProperty.reset();
 
-      // dispose of all particles
-      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-        this.heavyParticles[i].dispose();
-      }
-      this.heavyParticles.length = 0;
-      for ( let i = 0; i < this.lightParticles.length; i++ ) {
-        this.lightParticles[i].dispose();
-      }
-      this.lightParticles.length = 0;
+      // remove all particles
+      this.removeParticles( this.heavyParticles.length, this.heavyParticles );
+      this.removeParticles( this.lightParticles.length, this.lightParticles );
     }
 
     // @public
