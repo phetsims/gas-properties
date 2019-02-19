@@ -32,13 +32,13 @@ Equations:
 
 Units:
 
-* distance = nm
-* kinetic energy = AMU * nm^2 / ps^2
-* location = (nm, nm)
-* mass = AMU (unified atomic mass unit, 1 AMU === 1.66E-27 kg)
-* momentum = AMU * nm / ps
-* pressure = kPa (and atm in view)
-* temperature = K (and C in view)
-* time = ps
-* velocity = nm / ps
-* volume = nm^3
+* distance: nm
+* kinetic energy: AMU * nm^2 / ps^2
+* location: (nm, nm)
+* mass: AMU (unified atomic mass unit, 1 AMU === 1.66E-27 kg)
+* momentum: AMU * nm / ps
+* pressure: kPa (and atm in view)
+* temperature: K (and C in view)
+* time: ps
+* velocity: nm / ps
+* volume: nm^3
