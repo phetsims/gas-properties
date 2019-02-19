@@ -25,8 +25,8 @@ define( require => {
       // @public (read-only) height of the container, in nm
       this.height = 8.75;
 
-      // @public (read-only)
-      this.widthRange = new RangeWithValue( 5, 15, 10 ); // nm
+      // @public (read-only) range of the container's width, in nm
+      this.widthRange = new RangeWithValue( 5, 15, 10 );
 
       // @public width of the container, in nm
       this.widthProperty = new NumberProperty( this.widthRange.defaultValue, {
@@ -36,7 +36,7 @@ define( require => {
       } );
       this.widthProperty.link( width => { phet.log && phet.log( 'Container width=' + width ); } );
 
-      // @public (read-only)
+      // @public (read-only) range of the width of the opening in the top of the container, in nm
       this.openingWidthRange = new RangeWithValue( 0, 2.5, 0 );
 
       // @public width of the opening in the top of the container, in nm
