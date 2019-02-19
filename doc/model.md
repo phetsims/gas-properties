@@ -26,7 +26,7 @@ Symbols:
 Equations:
 
 * PV = NkT
-* KE = (3/2)kT = 0.5 * m * |v|<sup>2</sup>
+* KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
 * |v| = sqrt( 3kT / m )
 * p = m * v
 
