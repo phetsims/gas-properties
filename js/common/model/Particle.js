@@ -11,37 +11,45 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
+
+  // constants
+  const INITIAL_TEMPERATURE = 300; // K
 
   class Particle {
 
     /**
+     * @param {Vector2} location - initial location, will be mutated!
+     * @param {number} angle
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( location, angle, options ) {
 
       //TODO units, proper defaults
       options = _.extend( {
-        location: Vector2.ZERO,
-        velocity: Vector2.ZERO,
-        acceleration: Vector2.ZERO,
-        mass: 1, // u, atomic mass unit, 1 u === 1.66 x 10-27 kg
-        radius: 1,
-        colorProperty: null
+        mass: 1, // AMU
+        radius: 1, // nm
+        colorProperty: null // {null|Property.<Color|string>}
       }, options );
 
-      //TODO can we get rid of these copy operations?
+      // @public (read-only)
+      this.mass = options.mass;
+      this.radius = options.radius;
+      this.colorProperty = options.colorProperty || new Property( 'white' );
+
+      // The initial velocity magnitude corresponds to INITIAL_TEMPERATURE.
+      // KE = (3/2)kT = (1/2) * m * v^2, so v = sqrt( 3kT / m )
+      const velocityMagnitude = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * INITIAL_TEMPERATURE / this.mass );
+
       // @public Vector2 fields will be mutated!
-      this.location = options.location.copy(); // {Vector2} m
-      this.velocity = options.velocity.copy(); // {Vector2} m/s
-      this.acceleration = options.acceleration.copy(); // {Vector2} m/s^2
-      this.momentum = Vector2.ZERO.copy(); // kg * m/s
+      this.location = location;
+      this.velocity = Vector2.createPolar( velocityMagnitude, angle );
+      this.acceleration = new Vector2( 0, 0 );
+      this.momentum = this.velocity.times( this.mass );
 
       // @public (read-only)
-      this.mass = options.mass; // u
-      this.radius = options.radius; // m
-      this.colorProperty = options.colorProperty || new Property( 'white' );
       this.isDisposed = false;
     }
 
@@ -61,7 +69,7 @@ define( require => {
 
     /**
      * Gets the particle's kinetic energy. This is due to translation only, there is no rotation.
-     * @returns {number}
+     * @returns {number} AMU * nm^2 / ps^2
      */
     getKineticEnergy() {
       return 0.5 * this.mass * this.velocity.magnitudeSquared();
@@ -85,6 +93,7 @@ define( require => {
         this.velocity.y + dt * this.acceleration.y
       );
 
+      // P = m * v
       this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
     }
 

@@ -18,7 +18,7 @@ define( require => {
     SCREEN_VIEW_X_MARGIN: 20,
     SCREEN_VIEW_Y_MARGIN: 20,
 
-    SIM_TIME_STEP: 0.2, // ps
+    MODEL_TIME_STEP: 0.2, // ps
 
     COMBO_BOX_OPTIONS: {
       highlightFill: 'rgba( 255, 0, 0, 0.1 )',
@@ -53,7 +53,12 @@ define( require => {
     PARTICLE_COUNT_CONTROL_FONT: new PhetFont( 20 ),
     PANEL_CORNER_RADIUS: 5,
     PANEL_X_MARGIN: 20,
-    PANEL_Y_MARGIN: 15
+    PANEL_Y_MARGIN: 15,
+
+    // physics quantities
+    BOLTZMANN: 8.316E-3, // Boltzmann's constant k, converted to (nm^2 * AMU)/(ps^2 * K) by @arouinfar
+    KG_PER_AMU: 1.66E-27, // mass conversion: kg per 1 AMU (atomic mass unit)
+    ATM_PER_KPA: 0.00986923 // pressure conversion: atm (atmospheres) per 1 kPa (kilopascal)
   };
 
   return gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );

@@ -16,9 +16,11 @@ define( require => {
   class LightParticle extends Particle {
 
     /**
+     * @param {Vector2} location
+     * @param {number} angle
      * @param {Object} [options] see Particle
      */
-    constructor( options ) {
+    constructor( location, angle, options ) {
 
       options = _.extend( {
         mass: 4, // He, rounded to the closest integer
@@ -26,7 +28,7 @@ define( require => {
         colorProperty: GasPropertiesColorProfile.lightParticleColorProperty
       }, options );
 
-      super( options );
+      super( location, angle, options );
     }
   }
 

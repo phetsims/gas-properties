@@ -16,9 +16,11 @@ define( require => {
   class HeavyParticle extends Particle {
 
     /**
+     * @param {Vector2} location
+     * @param {number} angle
      * @param {Object} [options] see Particle
      */
-    constructor( options ) {
+    constructor( location, angle, options ) {
 
       options = _.extend( {
         mass: 28, // N2, rounded to the closest integer
@@ -26,7 +28,7 @@ define( require => {
         colorProperty: GasPropertiesColorProfile.heavyParticleColorProperty
       }, options );
 
-      super( options );
+      super( location, angle, options );
     }
   }
 

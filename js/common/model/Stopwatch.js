@@ -18,18 +18,14 @@ define( require => {
   class Stopwatch {
 
     /**
-     * @param {LinearFunction} timeTransform
      * @param {Object} options
      */
-    constructor( timeTransform, options ) {
+    constructor( options ) {
 
       options = _.extend( {
         location: Vector2.ZERO,
         visible: false
       }, options );
-
-      // @private
-      this.timeTransform = timeTransform;
 
       // @public location of the stopwatch, in view coordinates
       this.locationProperty = new Property( options.location, {
@@ -66,11 +62,11 @@ define( require => {
 
     /**
      * Update the stopwatch. 1 second of real time is displayed as 2.5 picoseconds
-     * @param {number} dt - time delta, in seconds
+     * @param {number} dt - time delta, in ps
      */
     step( dt ) {
       if ( this.isRunningProperty.value ) {
-        this.timeProperty.value += this.timeTransform( dt );
+        this.timeProperty.value += dt;
       }
     }
   }

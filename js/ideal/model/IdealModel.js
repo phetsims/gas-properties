@@ -51,7 +51,7 @@ define( require => {
       this.collisionCounter = new CollisionCounter( {
         location: new Vector2( 20, 20 ) // view coordinate! determined empirically
       } );
-      this.stopwatch = new Stopwatch( this.timeTransform, {
+      this.stopwatch = new Stopwatch( {
         location: new Vector2( 200, 20 ) // view coordinates! determined empirically
       } );
       this.thermometer = new Thermometer();
@@ -120,14 +120,13 @@ define( require => {
     addParticles( n, particles, Constructor ) {
       for ( let i = 0; i < n; i++ ) {
 
-        const magnitude = 1 + phet.joist.random.nextDouble();
+        // from the place where the pump is connected to the container
+        const location = this.container.location.plusXY( 0, this.container.height / 2 );
+
+        // directed towards the right, into the container
         const angle = Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE;
 
-        //TODO set proper initial state
-        particles.push( new Constructor( {
-          location: this.container.location.plusXY( 0, this.container.height / 2 ),
-          velocity: Vector2.createPolar( magnitude, angle )
-        } ) );
+        particles.push( new Constructor( location, angle ) );
       }
     }
 
@@ -166,8 +165,19 @@ define( require => {
       this.removeParticles( this.lightParticles.length, this.lightParticles );
     }
 
-    // @public
+    /**
+     * Steps the model using real time units.
+     * @param {number} dt - time delta in seconds
+     */
     step( dt ) {
+      this.stepModelTime( this.timeTransform( dt ) );
+    }
+
+    /**
+     * Steps the model using model time units.
+     * @param {number} dt - time delta in ps
+     */
+    stepModelTime( dt ) {
       if ( this.isPlayingProperty.value ) {
 
         // advance the stopwatch
@@ -175,10 +185,10 @@ define( require => {
 
         // step particles
         for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-          this.heavyParticles[i].step( dt );
+          this.heavyParticles[ i ].step( dt );
         }
         for ( let i = 0; i < this.lightParticles.length; i++ ) {
-          this.lightParticles[i].step( dt );
+          this.lightParticles[ i ].step( dt );
         }
       }
     }

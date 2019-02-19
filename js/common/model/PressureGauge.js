@@ -12,6 +12,7 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
@@ -27,7 +28,7 @@ define( require => {
 
       // @public pressure in atmospheres (atm)
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
-        pressureKilopascals => 0.00986923 * pressureKilopascals );
+        pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA );
 
       // @public (read-only) pressure range in kilopascals (kPa)
       this.pressureRange = new Range( 0, 1000 ); //TODO values
