@@ -20,7 +20,7 @@ Symbols:
 * t = time
 * T = temperature
 * **v** = velocity
-* _v_ = speed
+* _v_ = velocity magnitude
 * V = volume
  
 Equations:
