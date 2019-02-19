@@ -8,7 +8,7 @@ Constraints:
 
 Symbols:
  
-* k = Boltzman constant, 1.38064852 × 10^-23 m^2 kg s^-2 K^-1
+* k = Boltzmann constant, 1.38064852 × 10^-23 m^2 kg s^-2 K^-1
 * KE = Kinetic Energy
 * N = number of gas molecules
 * P = pressure
