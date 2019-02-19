@@ -21,7 +21,7 @@ define( require => {
       //TODO reset
     }
 
-    step() {
+    step( dt ) {
       //TODO step
     }
   }

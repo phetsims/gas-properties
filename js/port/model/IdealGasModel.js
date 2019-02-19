@@ -82,7 +82,7 @@ define( require => {
 
     /**
      * Moves the model forward one time step.
-     * @param {number} dt - time delta in seconds
+     * @param {number} dt - time delta, in seconds
      */
     step( dt ) {
 

@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO #37 JAVA hierarchy is SimpleObservable, ModelElement > Particle > Body > CollidableBody > SphericalBody > SolidSphere > GasMolecule > HeavySpecies, LightSpecies
 /**
  * Model for all types of particles.
  *
@@ -25,7 +24,6 @@ define( require => {
      */
     constructor( options ) {
 
-      //TODO units, proper defaults
       options = _.extend( {
         mass: 1, // AMU
         radius: 1, // nm
@@ -79,7 +77,7 @@ define( require => {
 
     /**
      * Moves the particle by one time step.
-     * @param {number} dt - time delta in seconds
+     * @param {number} dt - time delta, in ps
      */
     step( dt ) {
 

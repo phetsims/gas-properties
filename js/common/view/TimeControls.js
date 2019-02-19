@@ -35,7 +35,7 @@ define( require => {
         isPlayingProperty: model.isPlayingProperty,
         listener: () => {
           model.isPlayingProperty.value = true;
-          model.step( GasPropertiesConstants.MODEL_TIME_STEP );
+          model.stepModelTime( GasPropertiesConstants.MODEL_TIME_STEP );
           model.isPlayingProperty.value = false;
         }
       } );
