@@ -20,9 +20,14 @@ define( require => {
   class ExploreScreen extends GasPropertiesScreen {
 
     constructor() {
-      super( () => new ExploreModel(), model => new ExploreScreenView( model ), {
-        name: screenExploreString
-      } );
+      super(
+        // createModel
+        () => new ExploreModel(),
+
+        // createView
+        model => new ExploreScreenView( model ), {
+          name: screenExploreString
+        } );
     }
   }
 

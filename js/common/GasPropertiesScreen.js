@@ -24,7 +24,11 @@ define( require => {
 
       options = _.extend( {
         backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
+
+        // put a gray border around unselected icons on the home screen
         showUnselectedHomeScreenIconFrame: true,
+
+        // put a gray border around screen icons when the navigation bar is black
         showScreenIconFrameForNavigationBarFill: 'black'
       }, options );
 

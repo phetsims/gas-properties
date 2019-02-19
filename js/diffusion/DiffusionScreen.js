@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The 'Work' screen.
+ * The 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,9 +20,14 @@ define( require => {
   class DiffusionScreen extends GasPropertiesScreen {
 
     constructor() {
-      super( () => new DiffusionModel(), model => new DiffusionScreenView( model ), {
-        name: screenDiffusionString
-      } );
+      super(
+        // createModel
+        () => new DiffusionModel(),
+
+        // createView
+        model => new DiffusionScreenView( model ), {
+          name: screenDiffusionString
+        } );
     }
   }
 

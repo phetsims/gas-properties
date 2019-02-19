@@ -37,10 +37,10 @@ define( require => {
       assert && assert( options.regionOverlap > 0,
         'invalid regionOverlap: ' + options.regionOverlap );
 
-      // Divide the total bounds into overlapping regions
+      // @private Divide the total bounds into overlapping regions
+      this.regions = new Region[ options.numberOfRegionsX ][ options.numberOfRegionsY ];
       const regionWidth = bounds.getWidth() / options.numberOfRegionsX;
       const regionHeight = bounds.getHeight() / options.numberOfRegionsY;
-      this.regions = new Region[ options.numberOfRegionsX ][ options.numberOfRegionsY ];
       for ( let i = 0; i < options.numberOfRegionsX; i++ ) {
         for ( let j = 0; j < options.numberOfRegionsY; j++ ) {
           const minX = bounds.minX + ( i * regionWidth );

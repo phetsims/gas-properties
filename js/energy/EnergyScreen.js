@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The 'Work' screen.
+ * The 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,9 +20,14 @@ define( require => {
   class EnergyScreen extends GasPropertiesScreen {
 
     constructor() {
-      super( () => new EnergyModel(), model => new EnergyScreenView( model ), {
-        name: screenEnergyString
-      } );
+      super(
+        //createModel
+        () => new EnergyModel(),
+
+        // createView
+        model => new EnergyScreenView( model ), {
+          name: screenEnergyString
+        } );
     }
   }
 

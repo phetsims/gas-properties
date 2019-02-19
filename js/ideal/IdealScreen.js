@@ -20,9 +20,14 @@ define( require => {
   class IdealScreen extends GasPropertiesScreen {
 
     constructor() {
-      super( () => new IdealModel(), model => new IdealScreenView( model ), {
-        name: screenIdealString
-      } );
+      super(
+        // createModel
+        () => new IdealModel(),
+
+        // createView
+        model => new IdealScreenView( model ), {
+          name: screenIdealString
+        } );
     }
   }
 
