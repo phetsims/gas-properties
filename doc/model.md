@@ -25,13 +25,14 @@ Symbols:
 Equations:
 
 * PV = NkT
-* KE = (3/2)kT = 0.5 * m * v^2
+* KE = (3/2) * k * T = 0.5 * m * v^2
+* v = sqrt( 3 * k * T / m )
 * p = m * v
 
 Units:
 
 * distance = nm
-* energy = AMU * nm^2 / ps^2
+* kinetic energy = AMU * nm^2 / ps^2
 * location = (nm, nm)
 * mass = AMU (unified atomic mass unit, 1 AMU === 1.66E-27 kg)
 * momentum = AMU * nm / ps
