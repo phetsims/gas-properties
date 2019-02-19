@@ -22,7 +22,3 @@ Replace the lid with 'roll back'
 for a fine/coarse control, are fine buttons typically on the inside or outside?
 redesign collision counter
 simplified icons for stopwatch and collision counter
-
-COMMON CODE
-PlayPauseButton: rename runningListener to isPlayingListener
-StepButton: if you explicitly set enabled = false, then set isPlayingProperty.value = true, StepButton will enable itself
