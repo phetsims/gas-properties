@@ -10,7 +10,6 @@ define( require => {
   'use strict';
 
   // modules
-  const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -43,14 +42,13 @@ define( require => {
       this.mass = options.mass; // u
       this.radius = options.radius; // m
       this.colorProperty = options.colorProperty || new Property( 'white' );
-      this.disposedEmitter = new Emitter(); // emit is called with no args when Particle has been disposed.
       this.isDisposed = false;
     }
 
+    //TODO can we get rid of this?
     dispose() {
       assert && assert( !this.isDisposed, 'attempted to dispose again' );
       this.isDisposed = true;
-      this.disposedEmitter.emit();
     }
 
     /**
