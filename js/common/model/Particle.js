@@ -56,7 +56,7 @@ define( require => {
      * Gets the particle's speed.
      * @returns {number}
      */
-    getSpeed() { this.velocity.magnitude(); }
+    getSpeed() { this.velocity.magnitude; }
 
     get speed() { return this.getSpeed(); }
 
