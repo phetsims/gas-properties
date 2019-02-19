@@ -14,7 +14,7 @@ Symbols:
 
 * KE = Kinetic Energy
 * m = mass
-* N = number of gas molecules
+* N = number of gas molecules (aka particles)
 * p = momentum
 * P = pressure
 * t = time
