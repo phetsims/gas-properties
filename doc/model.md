@@ -6,29 +6,37 @@ Constraints:
 * no rotational kinematics
 * no gravity
 
+Constants:
+
+* k = Boltzmann constant, 1.38E-23 (m^2 * kg)/(s^2 * K) => 8.316E-3 (nm^2 * AMU)/(ps^2 * K)
+
 Symbols:
- 
-* k = Boltzmann constant, 1.38064852 × 10^-23 m^2 kg s^-2 K^-1
+
 * KE = Kinetic Energy
+* m = mass
 * N = number of gas molecules
+* p = momentum
 * P = pressure
+* t = time
 * T = temperature
-* v = velocity magnitude
+* v = velocity
 * V = volume
-* u = unified atomic mass, 1 u === 1.66 x 10^-27 kg
  
 Equations:
 
 * PV = NkT
-* KE = 0.5 * mass * v^2
+* KE = (3/2)kT = 0.5 * m * v^2
+* p = m * v
 
 Units:
 
-* acceleration = nm / s^2
 * distance = nm
-* energy = u * nm^2 / s^2
-* mass = u
-* moment of inertia = u * nm^2
-* momentum = mass * velocity = u * nm/s
-* time = s
-* velocity = nm / s
+* energy = AMU * nm^2 / ps^2
+* location = (nm, nm)
+* mass = AMU (unified atomic mass unit, 1 AMU === 1.66E-27 kg)
+* momentum = AMU * nm / ps
+* pressure = kPa (and atm in view)
+* temperature = K (and C in view)
+* time = ps
+* velocity = nm / ps
+* volume = nm^3
