@@ -34,10 +34,11 @@ define( require => {
 
     constructor() {
 
-      // @public transform between real time and sim time.
+      // @public transform between real time and sim time
       // 1 second of real time is 2.5 picoseconds of sim time.
       this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
 
+      // @public transform between model and view coordinate frames
       const modelViewScale = 40; // number of pixels per nm
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
         new Vector2( 645, 475  ), // offset of the model's origin, in view coordinates
