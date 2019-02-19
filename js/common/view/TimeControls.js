@@ -34,10 +34,10 @@ define( require => {
       const stepButton = new StepButton( {
         isPlayingProperty: model.isPlayingProperty,
         listener: () => {
-                  model.isPlayingProperty.value = true;
+          model.isPlayingProperty.value = true;
           model.step( GasPropertiesConstants.MODEL_TIME_STEP );
-                  model.isPlayingProperty.value = false;
-                }
+          model.isPlayingProperty.value = false;
+        }
       } );
 
       assert && assert( !options.children, 'TimeControls sets children' );
