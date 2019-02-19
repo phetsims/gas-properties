@@ -117,7 +117,7 @@ define( require => {
 
       // Container
       const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty,
-        model.isPlayingProperty, model.isTimeControlsEnabled, {
+        model.isPlayingProperty, model.isTimeControlsEnabledProperty, {
           resizeHandleColor: 'rgb( 187, 154, 86 )'
         } );
       this.addChild( containerNode );

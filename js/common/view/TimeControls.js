@@ -46,9 +46,9 @@ define( require => {
       super( options );
 
       // Disable time controls
-      model.isTimeControlsEnabled.link( enabled => {
+      model.isTimeControlsEnabledProperty.link( enabled => {
         playPauseButton.enabled = enabled;
-        stepButton.enabled = enabled;
+        stepButton.enabled = enabled && !model.isPlayingProperty.value;
       } );
     }
   }

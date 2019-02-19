@@ -61,7 +61,7 @@ define( require => {
       this.isPlayingProperty = new BooleanProperty( true );
 
       // @public are the time controls (play, pause, step) enabled?
-      this.isTimeControlsEnabled = new BooleanProperty( true );
+      this.isTimeControlsEnabledProperty = new BooleanProperty( true );
 
       // @public the quantity to hold constant
       this.holdConstantProperty = new Property( HoldConstantEnum.NOTHING, {
@@ -155,6 +155,7 @@ define( require => {
 
       // Properties
       this.isPlayingProperty.reset();
+      this.isTimeControlsEnabledProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
