@@ -32,6 +32,7 @@ define( require => {
         colorProperty: null
       }, options );
 
+      //TODO can we get rid of these copy operations?
       // @public Vector2 fields will be mutated!
       this.location = options.location.copy(); // {Vector2} m
       this.velocity = options.velocity.copy(); // {Vector2} m/s
