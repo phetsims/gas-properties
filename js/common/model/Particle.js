@@ -21,17 +21,17 @@ define( require => {
   class Particle {
 
     /**
-     * @param {Vector2} location - initial location, will be mutated!
-     * @param {number} angle
      * @param {Object} [options]
      */
-    constructor( location, angle, options ) {
+    constructor( options ) {
 
       //TODO units, proper defaults
       options = _.extend( {
         mass: 1, // AMU
         radius: 1, // nm
-        colorProperty: null // {null|Property.<Color|string>}
+        colorProperty: null, // {null|Property.<Color|string>}
+        location: Vector2.ZERO,
+        velocityAngle: 0 // initial velocity angle, in radians
       }, options );
 
       // @public (read-only)
@@ -44,8 +44,8 @@ define( require => {
       const velocityMagnitude = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * INITIAL_TEMPERATURE / this.mass );
 
       // @public Vector2 fields will be mutated!
-      this.location = location;
-      this.velocity = Vector2.createPolar( velocityMagnitude, angle );
+      this.location = options.location.copy();
+      this.velocity = Vector2.createPolar( velocityMagnitude, options.velocityAngle );
       this.acceleration = new Vector2( 0, 0 );
       this.momentum = this.velocity.times( this.mass );
 

@@ -51,6 +51,9 @@ define( require => {
       assert && assert( this.openingXOffset > 0, 'invalid openingXOffset: ' + this.openingXOffset );
       assert && assert( this.widthRange.min - this.openingWidthRange.max - this.openingXOffset  > 0,
         'opening extends beyond the top of the container' );
+
+      // @public (read-only) bicycle pump hose is connected to the right side of the container
+      this.hoseLocation = new Vector2( this.location.x, this.location.y + this.height / 2 );
     }
 
     // @public

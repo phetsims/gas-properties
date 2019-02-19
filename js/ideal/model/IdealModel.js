@@ -119,14 +119,14 @@ define( require => {
      */
     addParticles( n, particles, Constructor ) {
       for ( let i = 0; i < n; i++ ) {
+        particles.push( new Constructor( {
 
-        // from the place where the pump is connected to the container
-        const location = this.container.location.plusXY( 0, this.container.height / 2 );
+          // where the hose connects to the container
+          location: this.container.hoseLocation,
 
-        // directed towards the right, into the container
-        const angle = Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE;
-
-        particles.push( new Constructor( location, angle ) );
+          // directed towards the right, into the container
+          velocityAngle: Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE
+        } ) );
       }
     }
 
