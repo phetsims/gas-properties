@@ -32,6 +32,7 @@ Equations:
 
 Units:
 
+* angle: radians
 * distance: nm
 * kinetic energy: AMU * nm<sup>2</sup> / ps<sup>2</sup>
 * location: (nm, nm)
