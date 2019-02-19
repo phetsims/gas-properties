@@ -19,16 +19,16 @@ Symbols:
 * P = pressure
 * t = time
 * T = temperature
-* **v** = velocity
-* _v_ = velocity magnitude
+* v = velocity
+* |v| = velocity magnitude
 * V = volume
  
 Equations:
 
 * PV = NkT
-* KE = (3/2)kT = 0.5 * m * _v_ <sup>2</sup>
-* _v_ = sqrt( 3kT / m )
-* p = m * **v**
+* KE = (3/2)kT = 0.5 * m * |v|<sup>2</sup>
+* |v| = sqrt( 3kT / m )
+* p = m * v
 
 Units:
 
