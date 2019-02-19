@@ -8,7 +8,7 @@ Constraints:
 
 Constants:
 
-* k = Boltzmann constant, 1.38E-23 (m^2 * kg)/(s^2 * K) === 8.316E-3 (nm^2 * AMU)/(ps^2 * K)
+* k = Boltzmann constant, 1.38E-23 (m<sup>2</sup> * kg)/(s<sup>2</sup> * K) === 8.316E-3 (nm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K)
 
 Symbols:
 
@@ -26,14 +26,14 @@ Symbols:
 Equations:
 
 * PV = NkT
-* KE = (3/2) * k * T = 0.5 * m * _v_ ^2
-* _v_ = sqrt( 3 * k * T / m )
+* KE = (3/2)kT = 0.5 * m * _v_ <sup>2</sup>
+* _v_ = sqrt( 3kT / m )
 * p = m * **v**
 
 Units:
 
 * distance: nm
-* kinetic energy: AMU * nm^2 / ps^2
+* kinetic energy: AMU * nm<sup>2</sup> / ps<sup>2</sup>
 * location: (nm, nm)
 * mass: AMU (unified atomic mass unit, 1 AMU === 1.66E-27 kg)
 * momentum: AMU * nm / ps
@@ -41,4 +41,4 @@ Units:
 * temperature: K (and C in view)
 * time: ps
 * velocity: nm / ps
-* volume: nm^3
+* volume: nm<sup>3</sup>
