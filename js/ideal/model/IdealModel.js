@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Model for the 'Ideal' screen.
@@ -34,10 +34,11 @@ define( require => {
 
     constructor() {
 
-      // @public transform between real time and sim time.
+      // @public transform between real time and sim time
       // 1 second of real time is 2.5 picoseconds of sim time.
       this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
 
+      // @public transform between model and view coordinate frames
       const modelViewScale = 40; // number of pixels per nm
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
         new Vector2( 645, 475  ), // offset of the model's origin, in view coordinates
@@ -60,7 +61,7 @@ define( require => {
       this.isPlayingProperty = new BooleanProperty( true );
 
       // @public are the time controls (play, pause, step) enabled?
-      this.isTimeControlsEnabled = new BooleanProperty( true );
+      this.isTimeControlsEnabledProperty = new BooleanProperty( true );
 
       // @public the quantity to hold constant
       this.holdConstantProperty = new Property( HoldConstantEnum.NOTHING, {
@@ -93,7 +94,7 @@ define( require => {
           this.addParticles( delta, this.heavyParticles, HeavyParticle );
         }
         else if ( delta < 0 ) {
-          this.disposeParticles( -delta, this.heavyParticles );
+          this.removeParticles( -delta, this.heavyParticles );
         }
       } );
 
@@ -104,7 +105,7 @@ define( require => {
           this.addParticles( delta, this.lightParticles, LightParticle );
         }
         else if ( delta < 0 ) {
-          this.disposeParticles( -delta, this.lightParticles );
+          this.removeParticles( -delta, this.lightParticles );
         }
       } );
     }
@@ -136,7 +137,7 @@ define( require => {
      * @param {Particle[]} particles
      * @private
      */
-    disposeParticles( n, particles ) {
+    removeParticles( n, particles ) {
       assert && assert( n <= particles.length, 'not enough particles in the array' );
       const removedParticles = particles.splice( particles.length - n, n );
       removedParticles.forEach( particle => particle.dispose() );
@@ -154,20 +155,15 @@ define( require => {
 
       // Properties
       this.isPlayingProperty.reset();
+      this.isTimeControlsEnabledProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
       this.heatCoolAmountProperty.reset();
 
-      // dispose of all particles
-      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-        this.heavyParticles[i].dispose();
-      }
-      this.heavyParticles.length = 0;
-      for ( let i = 0; i < this.lightParticles.length; i++ ) {
-        this.lightParticles[i].dispose();
-      }
-      this.lightParticles.length = 0;
+      // remove all particles
+      this.removeParticles( this.heavyParticles.length, this.heavyParticles );
+      this.removeParticles( this.lightParticles.length, this.lightParticles );
     }
 
     // @public

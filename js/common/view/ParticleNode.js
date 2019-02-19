@@ -1,4 +1,4 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2019, University of Colorado Boulder
 
 /**
  * Particle view.
@@ -30,7 +30,7 @@ define( require => {
     }
 
     /**
-     * Create an HTMLCanvasElement for a specified Particle, to be drawn with CanvasNode.
+     * Creates an HTMLCanvasElement for a specified Particle, to be drawn with CanvasNode.
      * @param {Particle} particle
      * @param {function} callback, see Node.toCanvas for signature
      * @returns {HTMLCanvasElement}

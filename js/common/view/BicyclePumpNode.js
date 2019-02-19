@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 //TODO placeholder, see https://github.com/phetsims/states-of-matter/issues/217
 /**
