@@ -17,6 +17,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
@@ -58,7 +59,7 @@ define( require => {
       this.addChild( comboBoxListParent );
 
       // show spatial partitioning of collision detection space
-      if ( phet.chipper.queryParameters.dev ) {
+      if ( GasPropertiesQueryParameters.regions ) {
         this.regionsNode = new RegionsNode( model.getRegions(), model.getCollisionBounds(), model.modelViewTransform );
         this.addChild( this.regionsNode );
       }

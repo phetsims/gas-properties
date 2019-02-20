@@ -17,7 +17,11 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
   const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
-    //TODO add sim-specific query parameters
+
+    // Shows the 2D grid of regions that spatially partition the collision detection space.
+    // For internal use only, not public facing.
+    regions: { type: 'flag' }
+
   } );
 
   gasProperties.register( 'GasPropertiesQueryParameters', GasPropertiesQueryParameters );
