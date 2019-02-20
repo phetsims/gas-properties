@@ -173,14 +173,14 @@ define( require => {
       } );
       this.addChild( resetAllButton );
 
-      // @private
-      this.particlesNode = new ParticlesNode( model, this.layoutBounds );
-      this.addChild( this.particlesNode );
-
       // show spatial partitioning of collision detection space
       if ( phet.chipper.queryParameters.dev ) {
         this.addChild( new RegionsNode( model.getRegions(), model.modelViewTransform ) );
       }
+
+      // @private
+      this.particlesNode = new ParticlesNode( model, this.layoutBounds );
+      this.addChild( this.particlesNode );
 
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, this.visibleBoundsProperty,

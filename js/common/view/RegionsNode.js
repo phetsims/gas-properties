@@ -11,10 +11,10 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const Shape = require( 'KITE/Shape' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  class RegionsNode extends Path {
+  class RegionsNode extends Node {
 
     /**
      * @param {Region[][]} regions
@@ -24,20 +24,25 @@ define( require => {
     constructor( regions, modelViewTransform, options ) {
 
       options = _.extend( {
-        stroke: 'green',
-        lineWidth: 1
+        pickable: false
       }, options );
 
-      const shape = new Shape();
+      const children = [];
       for ( let i = 0; i < regions.length; i++ ) {
         const row = regions[ i ]; // {Region[]}
         for ( let j = 0; j < row.length; j++ ) {
           const viewBounds = modelViewTransform.modelToViewBounds( row[ j ].bounds );
-          shape.rect( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height );
+          children.push( new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
+            fill: 'rgba( 0, 255, 0, 0.1 )',
+            stroke: ( i === 0 && j === 0 ) ? 'green' : null // stroke lower-left Region, so we can see cell size in grid
+          } ) );
         }
       }
 
-      super( shape, options );
+      assert && assert( !options.children, 'RegionsNode sets children' );
+      options.children = children;
+
+      super( options );
     }
   }
 

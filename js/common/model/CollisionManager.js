@@ -24,9 +24,9 @@ define( require => {
     constructor( model, bounds, options ) {
 
       options = _.extend( {
-        numberOfRegionsX: 10,
-        numberOfRegionsY: 10,
-        regionOverlap: 1 // overlap of Regions, in nm
+        numberOfRegionsX: 8,
+        numberOfRegionsY: 5,
+        regionOverlap: 0.5 // overlap of Regions, in nm
       }, options );
 
       assert && assert( Util.isInteger( options.numberOfRegionsX ),

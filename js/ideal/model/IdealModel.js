@@ -113,7 +113,7 @@ define( require => {
 
       //TODO these bounds are temporary, what should they be based on? should they be dynamic?
       // @private
-      this.collisionManager = new CollisionManager( this, new Bounds2( -15, -3, 1, 10 ) );
+      this.collisionManager = new CollisionManager( this, new Bounds2( -15, 0, 0, 10 ) );
     }
 
     /**
