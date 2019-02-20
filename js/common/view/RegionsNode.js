@@ -48,7 +48,7 @@ define( require => {
       // Stroke the bounds of the collision detection space, to verify that the grid fills it.
       const viewBounds = modelViewTransform.modelToViewBounds( bounds );
       children.push( new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
-        stroke: 'yellow'
+        stroke: 'green'
       } ) );
 
       assert && assert( !options.children, 'RegionsNode sets children' );

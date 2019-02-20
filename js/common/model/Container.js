@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -61,6 +62,20 @@ define( require => {
       this.widthProperty.reset();
       this.openingWidthProperty.reset();
     }
+
+    /**
+     * Gets the max bounds of the container, when it is expanded to its full width.
+     * @returns {Bounds2}
+     * @public
+     */
+    getMaxBounds() {
+      return new Bounds2(
+        this.location.x - this.widthRange.max, this.location.y,
+        this.location.x, this.location.y + this.height
+      );
+    }
+
+    get maxBounds() { return this.getMaxBounds(); }
 
     /**
      * Gets the x coordinate of the container's left side.

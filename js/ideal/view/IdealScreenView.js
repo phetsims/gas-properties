@@ -57,6 +57,11 @@ define( require => {
       const comboBoxListParent = new Node();
       this.addChild( comboBoxListParent );
 
+      // show spatial partitioning of collision detection space
+      if ( phet.chipper.queryParameters.dev ) {
+        this.addChild( new RegionsNode( model.getRegions(), model.getCollisionBounds(), model.modelViewTransform ) );
+      }
+
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
         model.holdConstantProperty,
@@ -172,11 +177,6 @@ define( require => {
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( resetAllButton );
-
-      // show spatial partitioning of collision detection space
-      if ( phet.chipper.queryParameters.dev ) {
-        this.addChild( new RegionsNode( model.getRegions(), model.getCollisionBounds(), model.modelViewTransform ) );
-      }
 
       // @private
       this.particlesNode = new ParticlesNode( model, this.layoutBounds );

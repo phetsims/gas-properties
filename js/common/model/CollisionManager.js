@@ -24,8 +24,8 @@ define( require => {
     constructor( model, bounds, options ) {
 
       options = _.extend( {
-        numberOfRegionsX: 8,
-        numberOfRegionsY: 5,
+        numberOfRegionsX: 6,
+        numberOfRegionsY: 4,
         regionOverlap: 0.5 // overlap of Regions, in nm
       }, options );
 
