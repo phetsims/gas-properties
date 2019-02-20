@@ -76,7 +76,7 @@ define( require => {
     }
 
     /**
-     * Puts each particle in the Region (or Regions) that bound its location.
+     * Puts each particle in the Region (or Regions) that contain its location.
      * @param {Particle[]} particles
      * @private
      */
@@ -85,7 +85,13 @@ define( require => {
       this.clearRegions();
 
       for ( let i = 0; i < particles.length; i++ ) {
-        //TODO
+        for ( let j = 0; j < this.regions.length; j++ ) {
+          for ( let k = 0; k < this.regions[ j ].length; k++ ) {
+            if ( this.regions[ j ][ k ].containsPoint( particles[ i ].location ) ) {
+              this.regions[ j ][ k ].addParticle( particles[ i ] );
+            }
+          }
+        }
       }
     }
 

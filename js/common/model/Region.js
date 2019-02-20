@@ -40,16 +40,6 @@ define( require => {
     }
 
     /**
-     * Is the specified particle in this Region?
-     * @param {Particle} particle
-     * @returns {boolean}
-     * @public
-     */
-    containsParticle( particle ) {
-      return ( this.particles.indexOf( particle ) !== -1 );
-    }
-
-    /**
      * Adds a particle to this Region.
      * @param {Particle} particle
      * @public
@@ -60,13 +50,13 @@ define( require => {
     }
 
     /**
-     * Removes a particle from this Region.
+     * Is the specified particle in this Region?
      * @param {Particle} particle
-     * @public
+     * @returns {boolean}
+     * @private
      */
-    removeParticle( particle ) {
-      assert && assert( this.containsParticle( particle ), 'particle is not in this Region' );
-      this.particles.splice( this.particles.indexOf( particle ), 1 );
+    containsParticle( particle ) {
+      return ( this.particles.indexOf( particle ) !== -1 );
     }
 
     /**
