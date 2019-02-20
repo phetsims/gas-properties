@@ -31,10 +31,13 @@ define( require => {
       for ( let i = 0; i < regions.length; i++ ) {
         const row = regions[ i ]; // {Region[]}
         for ( let j = 0; j < row.length; j++ ) {
+
           const viewBounds = modelViewTransform.modelToViewBounds( row[ j ].bounds );
+          const isCorner = ( i === 0 || i === regions.length - 1 ) && ( j === 0 || j === row.length - 1 );
+
           children.push( new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
             fill: 'rgba( 0, 255, 0, 0.1 )',
-            stroke: ( i === 0 && j === 0 ) ? 'green' : null // stroke lower-left Region, so we can see cell size in grid
+            stroke: isCorner ? 'green' : null // stroke cells in the corners of the grid
           } ) );
         }
       }
