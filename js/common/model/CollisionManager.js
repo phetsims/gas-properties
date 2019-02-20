@@ -37,7 +37,7 @@ define( require => {
         'invalid regionOverlap: ' + options.regionOverlap );
 
       // @public (read-only) {Region[][]}
-      // 2D grid that spatially partitions the collision detection space. Row-major order.
+      // Spatially partition the collision detection space into a 2D grid of Regions, in row-major order.
       this.regions = [];
       const regionWidth = bounds.getWidth() / options.numberOfRegionsX;
       const regionHeight = bounds.getHeight() / options.numberOfRegionsY;
