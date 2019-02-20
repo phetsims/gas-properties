@@ -30,12 +30,6 @@ define( require => {
 
       const children = [];
 
-      // Stroke the bounds of the collision detection space, to verify that the grid fills it.
-      const viewBounds = modelViewTransform.modelToViewBounds( bounds );
-      children.push( new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
-        stroke: 'yellow'
-      } ) );
-
       // Draw each cell in the grid.  Use additive opacity to show overlap.
       for ( let i = 0; i < regions.length; i++ ) {
         const row = regions[ i ]; // {Region[]}
@@ -50,6 +44,12 @@ define( require => {
           } ) );
         }
       }
+
+      // Stroke the bounds of the collision detection space, to verify that the grid fills it.
+      const viewBounds = modelViewTransform.modelToViewBounds( bounds );
+      children.push( new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
+        stroke: 'yellow'
+      } ) );
 
       assert && assert( !options.children, 'RegionsNode sets children' );
       options.children = children;
