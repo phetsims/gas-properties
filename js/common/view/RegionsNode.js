@@ -18,7 +18,7 @@ define( require => {
 
     /**
      * @param {Region[][]} regions
-     * @param {Bounds} bounds
+     * @param {Bounds2} bounds
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
