@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
-  const CollisionManager = require( 'GAS_PROPERTIES/port/model/CollisionManager' );
+  const CollisionManager = require( 'GAS_PROPERTIES/common/model/CollisionManager' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );

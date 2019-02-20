@@ -9,8 +9,10 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
+  const CollisionManager = require( 'GAS_PROPERTIES/common/model/CollisionManager' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -108,6 +110,19 @@ define( require => {
           this.removeParticles( -delta, this.lightParticles );
         }
       } );
+
+      //TODO these bounds are temporary, what should they be based on? should they be dynamic?
+      // @private
+      this.collisionManager = new CollisionManager( this, new Bounds2( -15, -4, 8, 11 ) );
+    }
+
+    /**
+     * Gets all particles.
+     * @returns {Particle[]}
+     * @public
+     */
+    getParticles() {
+      return this.heavyParticles.concat( this.lightParticles );
     }
 
     /**
@@ -190,6 +205,9 @@ define( require => {
         for ( let i = 0; i < this.lightParticles.length; i++ ) {
           this.lightParticles[ i ].step( dt );
         }
+
+        // collision detection and response
+        this.collisionManager.step( dt );
       }
     }
   }

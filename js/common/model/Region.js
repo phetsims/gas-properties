@@ -1,7 +1,11 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * TODO port of Java class
+ * Spatial partitioning is a technique for improving the performance of collision detection.
+ * The model bounds are partitioning into a grid of overlapping Regions. Particles are
+ * members of one or more Regions based on their location.  And rather than having to consider
+ * collisions between a particle and every other particle, only particles within the same
+ * Region need be considered.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,8 +22,10 @@ define( require => {
      */
     constructor( bounds ) {
 
-      // @private
+      // @public (read-only)
       this.bounds = bounds;
+
+      // @private
       this.particles = [];
     }
 
@@ -36,6 +42,7 @@ define( require => {
     /**
      * Is the specified particle in this Region?
      * @param {Particle} particle
+     * @returns {boolean}
      * @public
      */
     containsParticle( particle ) {
@@ -74,7 +81,7 @@ define( require => {
     get numberOfParticles() { return this.getNumberOfParticles(); }
 
     /**
-     * Removes all particles from this Region.
+     * Removes all particles from this Region. Does not affect existence of particles in the model.
      * @public
      */
     clear() {

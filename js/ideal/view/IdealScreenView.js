@@ -26,6 +26,7 @@ define( require => {
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
+  const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const SizeNode = require( 'GAS_PROPERTIES/common/view/SizeNode' );
@@ -175,6 +176,11 @@ define( require => {
       // @private
       this.particlesNode = new ParticlesNode( model, this.layoutBounds );
       this.addChild( this.particlesNode );
+
+      // if ?dev, show spatial partitioning of collision detection bounds
+      if ( phet.chipper.queryParameters.dev ) {
+        this.addChild( new RegionsNode( model.collisionManager.regions, model.modelViewTransform ) );
+      }
 
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, this.visibleBoundsProperty,
