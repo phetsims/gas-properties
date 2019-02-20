@@ -39,8 +39,8 @@ define( require => {
       // Spatially partition the collision detection space into a 2D grid of Regions, in row-major order.
       // @public (read-only) {Region[][]}
       this.regions = [];
-      const regionWidth = bounds.getWidth() / options.numberOfRegionsX;
-      const regionHeight = bounds.getHeight() / options.numberOfRegionsY;
+      const regionWidth = ( bounds.getWidth() - options.regionOverlap ) / options.numberOfRegionsX;
+      const regionHeight = ( bounds.getHeight() - options.regionOverlap ) / options.numberOfRegionsY;
       for ( let i = 0; i < options.numberOfRegionsX; i++ ) {
         const row = [];
         for ( let j = 0; j < options.numberOfRegionsY; j++ ) {
