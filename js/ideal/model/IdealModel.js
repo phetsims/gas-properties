@@ -134,6 +134,14 @@ define( require => {
     }
 
     /**
+     * Gets the bounds of the collision detection space.
+     * @returns {Bounds2}
+     */
+    getCollisionBounds() {
+      return this.collisionManager.bounds;
+    }
+
+    /**
      * Adds n particles to the end of the specified array.
      * @param {number} n
      * @param {Particle[]} particles

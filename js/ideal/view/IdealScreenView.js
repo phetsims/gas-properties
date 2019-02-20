@@ -175,7 +175,7 @@ define( require => {
 
       // show spatial partitioning of collision detection space
       if ( phet.chipper.queryParameters.dev ) {
-        this.addChild( new RegionsNode( model.getRegions(), model.modelViewTransform ) );
+        this.addChild( new RegionsNode( model.getRegions(), model.getCollisionBounds(), model.modelViewTransform ) );
       }
 
       // @private
