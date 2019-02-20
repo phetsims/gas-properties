@@ -8,7 +8,10 @@ collision response: https://en.wikipedia.org/wiki/Collision_response
 Is Java collision detection algorithm, a priori or a posteriori? (see https://en.wikipedia.org/wiki/Collision_detection)
 
 DESIGN
-Initial velocity magnitude of particles?
+What is the bounds for the collision detection space? Is it dynamic?
+When are particles removed?  When they leave the collision detection space?
+Does particle count include all particles that exist, or only those in container?
+
 Does resizing the container have any affect on the collision counter? does it need to reset or anything?
 If particle count is decreased while resizing the container, are particles removed immediately, or queued for removal?
 
