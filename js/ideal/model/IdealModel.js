@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionManager = require( 'GAS_PROPERTIES/common/model/CollisionManager' );
