@@ -36,8 +36,8 @@ define( require => {
       assert && assert( options.regionOverlap > 0,
         'invalid regionOverlap: ' + options.regionOverlap );
 
-      // @public (read-only) {Region[][]}
       // Spatially partition the collision detection space into a 2D grid of Regions, in row-major order.
+      // @public (read-only) {Region[][]}
       this.regions = [];
       const regionWidth = bounds.getWidth() / options.numberOfRegionsX;
       const regionHeight = bounds.getHeight() / options.numberOfRegionsY;
