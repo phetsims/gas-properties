@@ -113,7 +113,7 @@ define( require => {
 
       //TODO these bounds are temporary, what should they be based on? should they be dynamic?
       // @private
-      this.collisionManager = new CollisionManager( this, new Bounds2( -15, -4, 8, 11 ) );
+      this.collisionManager = new CollisionManager( this, new Bounds2( -15, -3, 1, 10 ) );
     }
 
     /**
@@ -123,6 +123,14 @@ define( require => {
      */
     getParticles() {
       return this.heavyParticles.concat( this.lightParticles );
+    }
+
+    /**
+     * Gets the 2D grid of Regions that spatially partitions the collision detection space.
+     * @returns {Region[][]}
+     */
+    getRegions() {
+      return this.collisionManager.regions;
     }
 
     /**

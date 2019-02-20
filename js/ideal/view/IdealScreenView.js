@@ -177,9 +177,9 @@ define( require => {
       this.particlesNode = new ParticlesNode( model, this.layoutBounds );
       this.addChild( this.particlesNode );
 
-      // if ?dev, show spatial partitioning of collision detection bounds
+      // show spatial partitioning of collision detection space
       if ( phet.chipper.queryParameters.dev ) {
-        this.addChild( new RegionsNode( model.collisionManager.regions, model.modelViewTransform ) );
+        this.addChild( new RegionsNode( model.getRegions(), model.modelViewTransform ) );
       }
 
       // Collision Counter
