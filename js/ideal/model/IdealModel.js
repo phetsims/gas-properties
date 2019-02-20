@@ -111,7 +111,7 @@ define( require => {
         }
       } );
 
-      //TODO these bounds are temporary, what should they be based on? should they be dynamic?
+      //TODO what are the bounds of the collision detection space? should they be dynamic?
       // @private
       this.collisionManager = new CollisionManager( this, this.container.maxBounds );
     }
