@@ -49,6 +49,11 @@ define( require => {
 
       super();
 
+      // The model's world bounds are equivalent to the entire bounds of ScreenView, as fills the browser window.
+      this.visibleBoundsProperty.link( visibleBounds => {
+        model.worldBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
+      } );
+
       const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
 
       // view-specific Properties

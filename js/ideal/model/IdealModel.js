@@ -10,9 +10,11 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Bounds2 = require( 'DOT/Bounds2' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionManager = require( 'GAS_PROPERTIES/common/model/CollisionManager' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
@@ -34,6 +36,9 @@ define( require => {
   class IdealModel {
 
     constructor() {
+
+      // @public bounds of the entire space that the model knows about
+      this.worldBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
 
       // @public transform between real time and sim time
       // 1 second of real time is 2.5 picoseconds of sim time.
@@ -84,6 +89,19 @@ define( require => {
       // @public the amount to heat (positive value) or cool (negative value) the contents of the container
       this.heatCoolAmountProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 )
+      } );
+
+      // @public {Property.<Bounds2>} bounds in which particles exist. Particles that leave these bounds are deleted.
+      // This includes everything in the world that is to the right of and above the container's origin.
+      // This is sufficient because there is no gravity, so any particles that leave the box via the opening
+      // in its top will continue to move upward.
+      this.particleBoundsProperty = new DerivedProperty( [ this.worldBoundsProperty ], ( worldBounds ) => {
+        return new Bounds2(
+          worldBounds.minX, this.container.location.y,
+          this.container.location.x, worldBounds.maxY );
+      } );
+      phet.log && this.particleBoundsProperty.link( particleBounds => {
+        phet.log( 'particleBounds=' + particleBounds.toString() );
       } );
 
       this.heavyParticles = []; // {HeavyParticle[]}
