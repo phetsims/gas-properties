@@ -8,12 +8,20 @@ collision response: https://en.wikipedia.org/wiki/Collision_response
 Is Java collision detection algorithm, a priori or a posteriori? (see https://en.wikipedia.org/wiki/Collision_detection)
 
 DESIGN
-What is the bounds for the collision detection space? Is it dynamic?
-When are particles removed?  When they leave the collision detection space?
-Does particle count include all particles that exist, or only those in container?
+Q: What is the bounds for the collision detection space? Is it dynamic?
+A: based on activeBounds of browser window, to left and above container origin.
 
-Does resizing the container have any affect on the collision counter? does it need to reset or anything?
-If particle count is decreased while resizing the container, are particles removed immediately, or queued for removal?
+Q: When are particles removed?
+A: When they leave the collision detection space.
+
+Q: Does particle count include all particles that exist, or only those in container?
+A: all particles
+
+Q: Does resizing the container have any affect on the collision counter?
+A: stops the counter
+
+Q: If particle count is decreased while resizing the container, are particles removed immediately, or queued for removal?
+A: Remove immediately, add immediately at initial location (hose connection point)
 
 MODEL
 Hole in top of container needs to have dynamic size
