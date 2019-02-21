@@ -2,7 +2,7 @@
 
 /**
  * Displays the 2D grid of Regions that spatially partitions the model bounds for collision detection.
- * This is intended for use in debugging, and is not visible to the user.
+ * Used for debugging, not visible to the user, see GasPropertiesQueryParameters.regions.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

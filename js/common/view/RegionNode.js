@@ -2,6 +2,7 @@
 
 /**
  * Displays a region in the 2D grid that spatially partitions the collision detection space.
+ * Used for debugging, not visible to the user, see GasPropertiesQueryParameters.regions.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
