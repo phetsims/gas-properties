@@ -38,7 +38,7 @@ define( require => {
     constructor() {
 
       // @public bounds of the entire space that the model knows about
-      this.worldBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
+      this.worldBoundsProperty = new Property( new Bounds2( 0, 0, 2, 2 ) );
 
       // @public transform between real time and sim time
       // 1 second of real time is 2.5 picoseconds of sim time.
@@ -96,9 +96,7 @@ define( require => {
       // This is sufficient because there is no gravity, so any particles that leave the box via the opening
       // in its top will continue to move upward.
       this.particleBoundsProperty = new DerivedProperty( [ this.worldBoundsProperty ], ( worldBounds ) => {
-        return new Bounds2(
-          worldBounds.minX, this.container.location.y,
-          this.container.location.x, worldBounds.maxY );
+        return new Bounds2( worldBounds.minX, this.container.location.y, this.container.location.x, worldBounds.maxY );
       } );
       phet.log && this.particleBoundsProperty.link( particleBounds => {
         phet.log( 'particleBounds=' + particleBounds.toString() );
@@ -128,9 +126,8 @@ define( require => {
         }
       } );
 
-      //TODO what are the bounds of the collision detection space? should they be dynamic?
       // @private
-      this.collisionManager = new CollisionManager( this, this.container.maxBounds );
+      this.collisionManager = new CollisionManager( this );
     }
 
     /**

@@ -18,7 +18,7 @@ define( require => {
 
   const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 
-    // Shows the 2D grid of regions that spatially partition the collision detection space.
+    // Shows how the collision detection space is partitioned into a 2D grid of regions.
     // For internal use only, not public facing.
     regions: { type: 'flag' }
 

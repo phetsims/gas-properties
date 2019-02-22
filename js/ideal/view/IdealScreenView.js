@@ -63,9 +63,9 @@ define( require => {
       const comboBoxListParent = new Node();
       this.addChild( comboBoxListParent );
 
-      // show spatial partitioning of collision detection space
+      // Show how the collision detection space is partitioned into regions
       if ( GasPropertiesQueryParameters.regions ) {
-        this.regionsNode = new RegionsNode( model.getRegions(), model.getCollisionBounds(), model.modelViewTransform );
+        this.regionsNode = new RegionsNode( model.collisionManager, model.modelViewTransform );
         this.addChild( this.regionsNode );
       }
 

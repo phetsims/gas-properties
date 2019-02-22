@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Displays the 2D grid of Regions that spatially partitions the model bounds for collision detection.
+ *
+ * Shows how the collision detection space is partitioned into a 2D grid of Regions.
  * Used for debugging, not visible to the user, see GasPropertiesQueryParameters.regions.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -18,42 +19,44 @@ define( require => {
   class RegionsNode extends Node {
 
     /**
-     * @param {Region[][]} regions
-     * @param {Bounds2} bounds
+     * @param {CollisionManager} collisionManager
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( regions, bounds, modelViewTransform, options ) {
+    constructor( collisionManager, modelViewTransform, options ) {
 
       options = _.extend( {
         pickable: false
       }, options );
 
-      let children = [];
+      // The complete collision detection bounds
+      const boundsNode = new Rectangle( 0, 0, 1, 1, {
+        stroke: 'red'
+      } );
 
-      // @private {RegionNode[]} Draw each region in the grid.  Use additive opacity to show overlap.
-      const regionNodes = [];
-      for ( let i = 0; i < regions.length; i++ ) {
-        const row = regions[ i ]; // {Region[]}
-        for ( let j = 0; j < row.length; j++ ) {
-          regionNodes.push( new RegionNode( row[ j ], modelViewTransform ) );
-        }
-      }
-      children = children.concat( regionNodes );
-
-      // Stroke the bounds of the collision detection space, to verify that the grid fills it.
-      const viewBounds = modelViewTransform.modelToViewBounds( bounds );
-      children.push( new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
-        stroke: 'green'
-      } ) );
+      // The regions that fill the collision detection bounds.
+      const regionsParent = new Node();
 
       assert && assert( !options.children, 'RegionsNode sets children' );
-      options.children = children;
+      options.children = [ regionsParent, boundsNode ];
 
       super( options );
 
-      // @private
-      this.regionNodes = regionNodes;
+      // Stroke the collision detection bounds, to verify that the grid fills it.
+      collisionManager.boundsProperty.link( bounds => {
+        const viewBounds = modelViewTransform.modelToViewBounds( bounds );
+        boundsNode.setRect( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height );
+      } );
+
+      // @private {RegionNode[]} Draw each region in the grid.  Additive opacity shows overlap.
+      this.regionNodes = [];
+      collisionManager.regionsProperty.link( regions => {
+        this.regionNodes.length = 0;
+        for ( let i = 0; i < regions.length; i++ ) {
+          this.regionNodes.push( new RegionNode( regions[ i ], modelViewTransform ) );
+        }
+        regionsParent.children = this.regionNodes;
+      } );
     }
 
     /**
