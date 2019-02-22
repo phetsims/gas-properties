@@ -43,21 +43,16 @@ define( require => {
 
         this.clearRegions();
 
-        const rows = Math.ceil( bounds.getHeight() / options.regionLength );
-        const columns = Math.ceil( bounds.getWidth() / options.regionLength );
-
         const regions = [];
-        for ( let i = 0; i < rows; i++ ) {
-          for ( let j = 0; j < columns; j++ ) {
-
-            const minX = bounds.minX + ( j * options.regionLength );
-            const minY = bounds.minY + ( i * options.regionLength );
-            const maxX = minX + options.regionLength + options.regionOverlap;
-            const maxY = minY + options.regionLength + options.regionOverlap;
-            const regionBounds = new Bounds2( minX, minY, maxX, maxY );
-
+        let minX = bounds.minX;
+        while ( minX < bounds.maxX ) {
+          let minY = bounds.minY;
+          while ( minY < bounds.maxY ) {
+            const regionBounds = new Bounds2( minX, minY, minX + options.regionLength, minY + options.regionLength );
             regions.push( new Region( regionBounds ) );
+            minY = minY + options.regionLength - options.regionOverlap;
           }
+          minX = minX + options.regionLength - options.regionOverlap;
         }
 
         this.regionsProperty.value = regions;
