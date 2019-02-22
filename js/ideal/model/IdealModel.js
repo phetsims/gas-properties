@@ -182,7 +182,8 @@ define( require => {
      * @private
      */
     removeParticles( n, particles ) {
-      assert && assert( n <= particles.length, 'not enough particles in the array' );
+      assert && assert( n <= particles.length,
+        `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
       const removedParticles = particles.splice( particles.length - n, n );
       removedParticles.forEach( particle => particle.dispose() );
     }

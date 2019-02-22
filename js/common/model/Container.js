@@ -49,7 +49,7 @@ define( require => {
 
       // @public (read-only) x offset (absolute) of the opening from the container's origin, in nm
       this.openingXOffset = 2;
-      assert && assert( this.openingXOffset > 0, 'invalid openingXOffset: ' + this.openingXOffset );
+      assert && assert( this.openingXOffset > 0, `invalid openingXOffset: ${this.openingXOffset}` );
       assert && assert( this.widthRange.min - this.openingWidthRange.max - this.openingXOffset  > 0,
         'opening extends beyond the top of the container' );
 

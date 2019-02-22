@@ -41,7 +41,8 @@ define( require => {
         centerX: baseNode.centerX,
         bottom: baseNode.top + 1
       } );
-      assert && assert( handleNode.width <= baseNode.width, 'handle is wider than base' );
+      assert && assert( handleNode.width <= baseNode.width,
+        `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );
 
       assert && assert( !options.children, 'LidNode sets children' );
       options.children = [ handleNode, baseNode ];
