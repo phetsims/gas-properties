@@ -35,24 +35,28 @@ define( require => {
       // @public {Property.<Bounds2>} collision detection bounds
       this.boundsProperty = model.particleBoundsProperty;
 
+      //TODO do we need separate grids for inside vs outside the container?
       // @public (read-only) {Property.<Region[]>}
       this.regionsProperty = new Property( [] );
 
-      // Partition the collision detection bounds into overlapping Regions
+      // Partition the collision detection bounds into overlapping Regions.
+      // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
+      // edges of the container.
+      //TODO generalize this or add assertions for assumptions.
       this.boundsProperty.link( bounds => {
 
         this.clearRegions();
 
         const regions = [];
-        let minX = bounds.minX;
-        while ( minX < bounds.maxX ) {
+        let maxX = bounds.maxX;
+        while ( maxX > bounds.minX ) {
           let minY = bounds.minY;
           while ( minY < bounds.maxY ) {
-            const regionBounds = new Bounds2( minX, minY, minX + options.regionLength, minY + options.regionLength );
+            const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
             regions.push( new Region( regionBounds ) );
             minY = minY + options.regionLength - options.regionOverlap;
           }
-          minX = minX + options.regionLength - options.regionOverlap;
+          maxX = maxX - options.regionLength + options.regionOverlap;
         }
 
         this.regionsProperty.value = regions;
