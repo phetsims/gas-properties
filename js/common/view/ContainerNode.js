@@ -131,7 +131,8 @@ define( require => {
 
           // show the previous bounds of the container
           previousBoundsNode.shape = boundsNode.shape;
-          
+
+          //TODO handled isPlayingProperty, isTimeControlsEnabledProperty, and CollisionCounter.isRunningProperty elsewhere, by observing DragListener.pressedProperty
           // save playing state, pause the sim, and disable time controls
           wasPlaying = isPlayingProperty.value;
           isPlayingProperty.value = false;
