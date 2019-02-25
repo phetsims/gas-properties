@@ -1,6 +1,8 @@
 TODO list for gas-properties
 
 UP NEXT
+particle-particle collisions
+particle-container collisions
 
 DESIGN
 
