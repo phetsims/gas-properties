@@ -106,23 +106,27 @@ define( require => {
       this.lightParticles = []; // {LightParticle[]}
 
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
-        const delta = newValue - oldValue;
-        if ( delta > 0 ) {
-          this.addParticles( delta, this.heavyParticles, HeavyParticle );
-        }
-        else if ( delta < 0 ) {
-          this.removeParticles( -delta, this.heavyParticles );
+        if ( this.heavyParticles.length !== newValue ) {
+          const delta = newValue - oldValue;
+          if ( delta > 0 ) {
+            this.addParticles( delta, this.heavyParticles, HeavyParticle );
+          }
+          else if ( delta < 0 ) {
+            this.removeParticles( -delta, this.heavyParticles );
+          }
         }
       } );
 
       //TODO duplication with numberOfHeavyParticlesProperty listener
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
-        const delta = newValue - oldValue;
-        if ( delta > 0 ) {
-          this.addParticles( delta, this.lightParticles, LightParticle );
-        }
-        else if ( delta < 0 ) {
-          this.removeParticles( -delta, this.lightParticles );
+        if ( this.lightParticles.length !== newValue ) {
+          const delta = newValue - oldValue;
+          if ( delta > 0 ) {
+            this.addParticles( delta, this.lightParticles, LightParticle );
+          }
+          else if ( delta < 0 ) {
+            this.removeParticles( -delta, this.lightParticles );
+          }
         }
       } );
 
@@ -176,7 +180,7 @@ define( require => {
     }
 
     /**
-     * Removes and disposes the last n particles from the specified array.
+     * Removes the last n particles from an array.
      * @param {number} n
      * @param {Particle[]} particles
      * @private
@@ -184,8 +188,21 @@ define( require => {
     removeParticles( n, particles ) {
       assert && assert( n <= particles.length,
         `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
-      const removedParticles = particles.splice( particles.length - n, n );
-      removedParticles.forEach( particle => particle.dispose() );
+      const particlesToRemove = particles.slice( particles.length - n, particles.length );
+      particlesToRemove.forEach( particle => this.removeParticle( particle, particles ) );
+    }
+
+    /**
+     * Removes a particle from an array.
+     * @param {Particle} particle
+     * @param {Particle[]} particles
+     * @private
+     */
+    removeParticle( particle, particles ) {
+      const index = particles.indexOf( particle );
+      assert && assert( index !== -1, 'particle not found' );
+      particles.splice( index, 1 );
+      particle.dispose && particle.dispose();
     }
 
     // @public resets the model
@@ -241,6 +258,21 @@ define( require => {
 
         // collision detection and response
         this.collisionManager.step( dt );
+
+        // remove particles that have left the bounds
+        const particleBounds = this.particleBoundsProperty.value;
+        for ( let i = 0; i < this.heavyParticles.length; i++ ) {
+          if ( !particleBounds.containsPoint( this.heavyParticles[ i ].location ) ) {
+            this.removeParticle( this.heavyParticles[ i ], this.heavyParticles );
+            this.numberOfHeavyParticlesProperty.value--;
+          }
+        }
+        for ( let i = 0; i < this.lightParticles.length; i++ ) {
+          if ( !particleBounds.containsPoint( this.lightParticles[ i ].location ) ) {
+            this.removeParticle( this.lightParticles[ i ], this.lightParticles );
+            this.numberOfLightParticlesProperty.value--;
+          }
+        }
       }
     }
   }

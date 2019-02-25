@@ -1,7 +1,7 @@
 TODO list for gas-properties
 
 UP NEXT
-Remove particles when they leave collision detection bounds.
+Dynamically resize ParticlesNode canvas
 
 References
 collision detection: https://en.wikipedia.org/wiki/Collision_detection

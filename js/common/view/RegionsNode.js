@@ -43,7 +43,7 @@ define( require => {
       super( options );
 
       // Stroke the collision detection bounds, to verify that the grid fills it.
-      collisionManager.boundsProperty.link( bounds => {
+      collisionManager.particleBoundsProperty.link( bounds => {
         const viewBounds = modelViewTransform.modelToViewBounds( bounds );
         boundsNode.setRect( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height );
       } );

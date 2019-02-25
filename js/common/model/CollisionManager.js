@@ -33,7 +33,7 @@ define( require => {
         `regionOverlap ${options.regionOverlap} is incompatible with regionLength ${options.regionLength}` );
 
       // @public {Property.<Bounds2>} collision detection bounds
-      this.boundsProperty = model.particleBoundsProperty;
+      this.particleBoundsProperty = model.particleBoundsProperty;
 
       //TODO do we need separate grids for inside vs outside the container?
       // @public (read-only) {Property.<Region[]>}
@@ -43,7 +43,7 @@ define( require => {
       // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
       // edges of the container.
       //TODO generalize this or add assertions for assumptions.
-      this.boundsProperty.link( bounds => {
+      this.particleBoundsProperty.link( bounds => {
 
         this.clearRegions();
 
