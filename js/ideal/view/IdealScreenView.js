@@ -204,7 +204,7 @@ define( require => {
       this.addChild( resetAllButton );
 
       // @private
-      this.particlesNode = new ParticlesNode( model, this.layoutBounds );
+      this.particlesNode = new ParticlesNode( model );
       this.addChild( this.particlesNode );
 
       // Collision Counter

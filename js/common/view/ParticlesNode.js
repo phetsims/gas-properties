@@ -20,14 +20,10 @@ define( require => {
 
     /**
      * @param {IdealModel} model TODO type expression, interface too wide
-     * @param {Bounds2} bounds
      */
-    constructor( model, bounds ) {
+    constructor( model ) {
 
-      super( {
-        canvasBounds: bounds
-        //layerSplit: true TODO
-      } );
+      super();
       
       // @private
       this.model = model;
@@ -48,6 +44,12 @@ define( require => {
         ParticleNode.particleToImage( this.lightParticle, canvas => {
           this.lightParticleImage = canvas;
         } );
+      } );
+
+      // Size the canvas to match the bounds where particles can exist.
+      // This changes dynamically as the browser window is resized.
+      model.particleBoundsProperty.link( particleBounds => {
+        this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( particleBounds ) );
       } );
     }
 

@@ -1,7 +1,6 @@
 TODO list for gas-properties
 
 UP NEXT
-Dynamically resize ParticlesNode canvas
 
 References
 collision detection: https://en.wikipedia.org/wiki/Collision_detection
