@@ -20,43 +20,53 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   class ToolDragListener extends DragListener {
 
     /**
      * @param {Node} targetNode
-     * @param {Property.<Vector2>} locationProperty - location, in view coordinates
-     * @param {Property.<Bounds2|null>} dragBoundsProperty - drag bounds, in view coordinates
      * @param {BooleanProperty} visibleProperty
      * @param {Object} [options]
      */
-    constructor( targetNode, locationProperty, dragBoundsProperty, visibleProperty, options ) {
+    constructor( targetNode, visibleProperty, options ) {
+
+      options = _.extend( {
+        locationProperty: new Property( Vector2.ZERO ),
+        dragBoundsProperty: null // {Property.<Bounds2>|null}
+      }, options );
 
       // move targetNode
-      locationProperty.linkAttribute( targetNode, 'translation' );
+      options.locationProperty.linkAttribute( targetNode, 'translation' );
 
-      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
-      const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {
-          if ( dragBounds ) {
-            return new Bounds2( dragBounds.minX, dragBounds.minY,
-              dragBounds.maxX - targetNode.width, dragBounds.maxY - targetNode.height );
+      if ( options.dragBoundsProperty ) {
+
+        const originalDragBounds = options.dragBoundsProperty;
+
+        // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
+        options.dragBoundsProperty = new DerivedProperty( [ originalDragBounds ], dragBounds => {
+            if ( dragBounds ) {
+              return new Bounds2( dragBounds.minX, dragBounds.minY,
+                dragBounds.maxX - targetNode.width, dragBounds.maxY - targetNode.height );
+            }
+            else {
+              return null;
+            }
           }
-          else {
-            return null;
+        );
+
+        options.dragBoundsProperty.link( dragBounds => {
+
+          // interrupt user interactions
+          targetNode.interruptSubtreeInput();
+
+          // Ensure that location remains inside the drag bounds.
+          if ( !dragBounds.containsBounds( targetNode.bounds ) ) {
+            options.locationProperty.value = dragBounds.closestPointTo( options.locationProperty.value );
           }
-        }
-      );
-
-      adjustedDragBoundsProperty.link( adjustedDragBounds => {
-
-        // interrupt user interactions
-        targetNode.interruptSubtreeInput();
-
-        // Ensure that location remains inside the drag bounds.
-        if ( adjustedDragBounds && !adjustedDragBounds.containsBounds( targetNode.bounds ) ) {
-          locationProperty.value = adjustedDragBounds.closestPointTo( locationProperty.value );
-        }
-      } );
+        } );
+      }
 
       // show/hide targetNode
       visibleProperty.link( visible => {
@@ -64,10 +74,7 @@ define( require => {
         targetNode.visible = visible;
       } );
 
-      super( {
-        locationProperty: locationProperty,
-        dragBoundsProperty: adjustedDragBoundsProperty
-      } );
+      super( options );
     }
   }
 

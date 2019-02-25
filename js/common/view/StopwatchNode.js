@@ -11,9 +11,7 @@ define( require => {
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const LinearFunction = require( 'DOT/LinearFunction' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const Property = require( 'AXON/Property' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
@@ -30,9 +28,11 @@ define( require => {
      * @param {Property.<Bounds2|null>} dragBoundsProperty
      * @param {Object} [options]
      */
-    constructor( stopwatch, dragBoundsProperty, options ) {
+    constructor( stopwatch, options ) {
 
       options = _.extend( {
+
+        dragBoundsProperty: null, // {Property.<Bounds2>|null}
 
         // TimerNode options
         maxValue: 999.99,
@@ -49,8 +49,10 @@ define( require => {
       }
 
       // dragging
-      this.addInputListener( new ToolDragListener( this, stopwatch.locationProperty,
-        dragBoundsProperty, stopwatch.visibleProperty ) );
+      this.addInputListener( new ToolDragListener( this, stopwatch.visibleProperty, {
+        locationProperty: stopwatch.locationProperty,
+        dragBoundsProperty: options.dragBoundsProperty
+      } ) );
     }
 
     /**
@@ -66,10 +68,9 @@ define( require => {
         scale: 0.25
       }, options );
 
-      const stopwatchNode = new StopwatchNode(
-        new Stopwatch( { visible: true } ), // model element
-        new Property( null ), // dragBoundsProperty
-        { pickable: false } );
+      const stopwatchNode = new StopwatchNode( new Stopwatch( { visible: true } ), {
+        pickable: false
+      } );
 
       assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
       options.children = [ stopwatchNode ];

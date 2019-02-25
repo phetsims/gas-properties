@@ -21,7 +21,6 @@ define( require => {
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayResetButton = require( 'GAS_PROPERTIES/common/view/PlayResetButton' );
-  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
@@ -51,13 +50,14 @@ define( require => {
 
     /**
      * @param {CollisionCounter} collisionCounter
-     * @param {Property.<Bounds2|null>} dragBoundsProperty
      * @param {Node} comboBoxListParent
      * @param {Object} [options]
      */
-    constructor( collisionCounter, dragBoundsProperty, comboBoxListParent, options ) {
+    constructor( collisionCounter, comboBoxListParent, options ) {
 
-      options = options || {};
+      options = _.extend( {
+        dragBoundsProperty: null // {Property.<Bounds2>|null}
+      }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
         font: TITLE_FONT
@@ -145,8 +145,10 @@ define( require => {
       }
 
       // dragging
-      this.addInputListener( new ToolDragListener( this, collisionCounter.locationProperty,
-        dragBoundsProperty, collisionCounter.visibleProperty ) );
+      this.addInputListener( new ToolDragListener( this, collisionCounter.visibleProperty, {
+        locationProperty: collisionCounter.locationProperty,
+        dragBoundsProperty: options.dragBoundsProperty
+      } ) );
     }
 
     /**
@@ -163,8 +165,7 @@ define( require => {
       }, options );
 
       const collisionCounterNode = new CollisionCounterNode(
-        new CollisionCounter( { visible: true } ), // model element
-        new Property( null ), // dragBoundsProperty
+        new CollisionCounter( { visible: true } ),
         new Node(), // comboBoxListParent
         { pickable: false } );
 

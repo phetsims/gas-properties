@@ -208,12 +208,15 @@ define( require => {
       this.addChild( this.particlesNode );
 
       // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, this.visibleBoundsProperty,
-        comboBoxListParent );
+      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
+        dragBoundsProperty: this.visibleBoundsProperty
+      } );
       this.addChild( collisionCounterNode );
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, this.visibleBoundsProperty );
+      const stopwatchNode = new StopwatchNode( model.stopwatch, {
+        dragBoundsProperty: this.visibleBoundsProperty
+      } );
       this.addChild( stopwatchNode );
 
       // show model origin
