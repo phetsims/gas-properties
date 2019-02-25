@@ -2,22 +2,13 @@ TODO list for gas-properties
 
 UP NEXT
 
-References
-collision detection: https://en.wikipedia.org/wiki/Collision_detection
-collision response: https://en.wikipedia.org/wiki/Collision_response
-
-Is Java collision detection algorithm, a priori or a posteriori? (see https://en.wikipedia.org/wiki/Collision_detection)
-
 DESIGN
 
 
 MODEL
 Hole in top of container needs to have dynamic size
-port Java model
-keep gravity, but turn it off
 
 VIEW
 Replace the lid with 'roll back'
-for a fine/coarse control, are fine buttons typically on the inside or outside?
 redesign collision counter
 simplified icons for stopwatch and collision counter
