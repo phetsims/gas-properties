@@ -162,14 +162,14 @@ define( require => {
         scale: 0.2
       }, options );
 
+      const collisionCounterNode = new CollisionCounterNode(
+        new CollisionCounter( { visible: true } ), // model element
+        new Property( null ), // dragBoundsProperty
+        new Node(), // comboBoxListParent
+        { pickable: false } );
+
       assert && assert( !options.children, 'CollisionCounterNode.createIcon sets children' );
-      options.children = [
-        new CollisionCounterNode(
-          new CollisionCounter( { visible: true } ), // model element
-          new Property( null ), // dragBoundsProperty
-          new Node(), // comboBoxListParent
-          { pickable: false } )
-      ];
+      options.children = [ collisionCounterNode ];
 
       return new Node( options );
     }
