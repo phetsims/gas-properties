@@ -66,13 +66,13 @@ define( require => {
         scale: 0.25
       }, options );
 
+      const stopwatchNode = new StopwatchNode(
+        new Stopwatch( { visible: true } ), // model element
+        new Property( null ), // dragBoundsProperty
+        { pickable: false } );
+
       assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
-      options.children = [
-        new StopwatchNode(
-          new Stopwatch( new LinearFunction( 0, 0, 0, 0 ), { visible: true } ), // model element
-          new Property( null ), // dragBoundsProperty
-          { pickable: false } )
-      ];
+      options.children = [ stopwatchNode ];
 
       return new Node( options );
     }
