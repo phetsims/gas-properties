@@ -32,9 +32,6 @@ define( require => {
         valueType: Vector2
       } );
 
-      // @public whether the collision counter is visible
-      this.visibleProperty = new BooleanProperty( options.visible );
-
       // @public the number of collisions between the particles and the container walls
       this.numberOfCollisionsProperty = new NumberProperty( 0, {
         numberType: 'Integer',
@@ -44,9 +41,13 @@ define( require => {
       // @public whether the collision counter is running
       this.isRunningProperty = new BooleanProperty( false );
 
-      // When the collision counter stops running, reset the number of collisions.
-      this.isRunningProperty.link( isRunning => {
-        if ( !isRunning ) {
+      // @public whether the collision counter is visible
+      this.visibleProperty = new BooleanProperty( options.visible );
+
+      // When the counter becomes invisible, stop the counter and reset its value.
+      this.visibleProperty.link( visible => {
+        if ( !visible ) {
+          this.isRunningProperty.value = false;
           this.numberOfCollisionsProperty.value = 0;
         }
       } );
@@ -60,21 +61,19 @@ define( require => {
         validValues: this.averagingTimes
       } );
 
-      // When the counter becomes invisible, stop the counter and reset its value.
-      this.visibleProperty.link( visible => {
-        if ( !visible ) {
-          this.isRunningProperty.value = false;
-          this.numberOfCollisionsProperty.value = 0;
-        }
+      // Changing the averaging time stops the counter and sets the count to zero.
+      this.averagingTimeProperty.link( averagingTimeProperty => {
+        this.isRunningProperty.value = false;
+        this.numberOfCollisionsProperty.value = 0;
       } );
     }
 
     // @public
     reset() {
       this.locationProperty.reset();
-      this.visibleProperty.reset();
       this.numberOfCollisionsProperty.reset();
       this.isRunningProperty.reset();
+      this.visibleProperty.reset();
       this.averagingTimeProperty.reset();
     }
   }

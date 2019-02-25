@@ -1,8 +1,6 @@
 TODO list for gas-properties
 
 UP NEXT
-Move control of isPlayingProperty, isTimeControlsEnabledProperty, CollisionCounter.isRunningProperty out of ContainerNode
-Stop CollisionCounter when container resize handle is grabbed.
 Remove particles when they leave collision detection bounds.
 
 References

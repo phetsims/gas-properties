@@ -128,11 +128,29 @@ define( require => {
       } );
       this.addChild( pumpBox );
 
+      // Whether the sim was playing before it was programmatically paused.
+      let wasPlaying = model.isPlayingProperty.value;
+
       // Container
-      const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty,
-        model.isPlayingProperty, model.isTimeControlsEnabledProperty, {
-          resizeHandleColor: 'rgb( 187, 154, 86 )'
-        } );
+      const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty, {
+        resizeHandleColor: 'rgb( 187, 154, 86 )',
+        resizeHandleIsPressedListener: isPressed => {
+          if ( isPressed ) {
+
+            // save playing state, pause the sim, and disable time controls
+            wasPlaying = model.isPlayingProperty.value;
+            model.isPlayingProperty.value = false;
+            model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
+            model.collisionCounter.isRunningProperty.value = false;
+          }
+          else {
+
+            // enable time controls and restore playing state
+            model.isTimeControlsEnabledProperty.value = true;
+            model.isPlayingProperty.value = wasPlaying;
+          }
+        }
+      } );
       this.addChild( containerNode );
 
       // Dimensional arrows that indicate container size
