@@ -102,7 +102,7 @@ define( require => {
     },
 
     radioButtonGroupSelectedStroke: {
-      //TODO not digging this color
+      //TODO DESIGN not digging this color
       default: 'rgb( 105, 195, 231 )' // blue
     }
   } );

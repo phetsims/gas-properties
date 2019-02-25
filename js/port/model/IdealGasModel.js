@@ -135,7 +135,7 @@ define( require => {
      * @private
      */
     removeEscapedMolecules() {
-      //TODO
+      //TODO implement removeEscapedMolecules
     }
 
     /**
@@ -143,14 +143,14 @@ define( require => {
      * @private
      */
     computeStatistics() {
-      //TODO
+      //TODO implemente computeStatistics
     }
 
     /**
      * Updates either pressure or volume.
      */
     updateFreeParameter() {
-      //TODO
+      //TODO implement updateFreeParameter
     }
   }
 
@@ -190,7 +190,7 @@ define( require => {
       for ( let i = 0; i < particles.length; i++ ) {
         const particle = particles[ i ];
         const preKE = particle.getKineticEnergy();
-        particle.velocity.times( 1.1 * heatScale ); //TODO magic number
+        particle.velocity.times( 1.1 * heatScale ); //TODO magic number, probably not appropriate for HTML5
         kineticEnergy += particle.getKineticEnergy() - preKE;
       }
     }

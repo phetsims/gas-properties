@@ -1,5 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
+//TODO DESIGN: When should collision counter stop?
+//TODO DESIGN: When should collision counter reset time to zero?
 /**
  * Model for the collision counter.
  *

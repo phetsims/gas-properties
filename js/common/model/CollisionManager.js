@@ -83,7 +83,7 @@ define( require => {
 
       this.assignParticlesToRegions( particles );
 
-      //TODO
+      //TODO more to do in step
     }
 
     /**

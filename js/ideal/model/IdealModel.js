@@ -254,8 +254,6 @@ define( require => {
           this.lightParticles[ i ].step( dt );
         }
 
-        //TODO delete particles that are outside particleBoundsProperty.value
-
         // collision detection and response
         this.collisionManager.step( dt );
 

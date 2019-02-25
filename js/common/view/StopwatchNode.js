@@ -55,6 +55,7 @@ define( require => {
       } ) );
     }
 
+    //TODO DESIGN create a less detailed icon for the stopwatch
     /**
      * Creates an icon for the stopwatch, used to label check boxes.
      * @param {Object} [options]

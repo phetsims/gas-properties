@@ -1,5 +1,6 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
+//TODO DESIGN redesign collision counter UX
 /**
  * Collision Counter, displays the number of collisions between particles and the container walls.
  *
@@ -151,6 +152,7 @@ define( require => {
       } ) );
     }
 
+    //TODO DESIGN create a less detailed icon for the collision counter
     /**
      * Creates an icon for the collision counter, used to label check boxes.
      * @param {Object} [options]

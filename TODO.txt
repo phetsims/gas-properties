@@ -5,16 +5,9 @@ particle-particle collisions
 particle-container collisions
 
 DESIGN
-Why do we want to show stopwatch time to NN.nn ps?
-When should stopwatch reset time to zero?
-What is the max time at which stopwatch should stop?
-When should collision counter stop?
-When should collision counter reset time to zero?
 
 MODEL
 Hole in top of container needs to have dynamic size
 
 VIEW
 Replace the lid with 'roll back'
-redesign collision counter
-simplified icons for stopwatch and collision counter
