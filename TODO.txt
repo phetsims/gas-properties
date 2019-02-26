@@ -5,6 +5,7 @@ particle-particle collisions
 particle-container collisions
 
 DESIGN
+Is initial velocity magnitude based on 300K or the temperature in the box?
 
 MODEL
 Hole in top of container needs to have dynamic size
