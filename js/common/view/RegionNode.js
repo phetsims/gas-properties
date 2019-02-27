@@ -38,7 +38,7 @@ define( require => {
       } );
 
       // Displays the number of particles in the Region
-      const countNode = new Text( region.numberOfParticles, {
+      const countNode = new Text( region.particles.length, {
         fill: 'green',
         font: FONT,
         center: cellNode.center
@@ -60,7 +60,7 @@ define( require => {
      * @param {number} dt
      */
     step( dt ) {
-      this.countNode.text = this.region.numberOfParticles;
+      this.countNode.text = this.region.particles.length;
       this.countNode.center = this.cellNode.center;
     }
   }

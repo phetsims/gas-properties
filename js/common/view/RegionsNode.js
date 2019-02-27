@@ -51,11 +51,9 @@ define( require => {
       // @private {RegionNode[]} Draw each region in the grid.  Additive opacity shows overlap.
       this.regionNodes = [];
       collisionManager.regionsProperty.link( regions => {
-        this.regionNodes.length = 0;
-        for ( let row = 0; row < regions.length; row++ ) {
-          for ( let column = 0; column < regions[ row ].length; column++ ) {
-            this.regionNodes.push( new RegionNode( regions[ row ][ column ], modelViewTransform ) );
-          }
+        this.regionNodes.length = 0; // clear array
+        for ( let i = 0; i < regions.length; i++ ) {
+          this.regionNodes.push( new RegionNode( regions[ i ], modelViewTransform ) );
         }
         regionsParent.children = this.regionNodes;
       } );

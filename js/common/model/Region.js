@@ -2,9 +2,10 @@
 
 /**
  * Spatial partitioning is a technique for improving the performance of collision detection.
- * The collision detection bounds are partitioning into a grid of overlapping Regions. Particles are
- * members of one or more Regions based on their location. Rather than having to consider collisions
- * between a particle and every other particle, only particles within the same Region need be considered.
+ * The collision detection bounds are partitioning into a grid of overlapping Regions. Objects (particles and
+ * containers) are members of one or more regions based on whether they intersect the bounds of the region.
+ * Rather than having to consider collisions between an object and every other object, only objects within the
+ * same region need be considered.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -25,17 +26,19 @@ define( require => {
       this.bounds = bounds;
 
       // @public (read-only)
-      this.particles = [];
+      this.particles = []; // {Particle[]}
+      this.containers = []; // {Container[]}
     }
 
+    //TODO include particle's radius?
     /**
-     * Is the specified point in this Region?
-     * @param {Vector2} point
+     * Does this region and a particle intersect?
+     * @param {Particle} particle
      * @returns {boolean}
      * @public
      */
-    containsPoint( point ) {
-      return this.bounds.containsPoint( point );
+    intersectsParticle( particle ) {
+      return this.bounds.containsPoint( particle.location );
     }
 
     /**
@@ -44,37 +47,38 @@ define( require => {
      * @public
      */
     addParticle( particle ) {
-      assert && assert( !this.containsParticle( particle ), 'particle is already in this Region' );
+      assert && assert( this.particles.indexOf( particle ) === -1, 'particle is already in this Region' );
       this.particles.push( particle );
     }
 
+    //TODO include container's wall thickness?
     /**
-     * Is the specified particle in this Region?
-     * @param {Particle} particle
+     * Does this region and a container intersect?
+     * @param {Container} container
      * @returns {boolean}
-     * @private
-     */
-    containsParticle( particle ) {
-      return ( this.particles.indexOf( particle ) !== -1 );
-    }
-
-    /**
-     * Gets the number of particles in this Region.
-     * @returns {number}
      * @public
      */
-    getNumberOfParticles() {
-      return this.particles.length;
+    intersectsContainer( container ) {
+      return true;  //TODO
     }
 
-    get numberOfParticles() { return this.getNumberOfParticles(); }
+    /**
+     * Adds a container to this Region.
+     * @param {Container} container
+     * @public
+     */
+    addContainer( container ) {
+      assert && assert( this.containers.indexOf( container ) === -1, 'container is already in this Region' );
+      this.containers.push( container );
+    }
 
     /**
-     * Removes all particles from this Region. Does not affect existence of particles in the model.
+     * Removes all objects from this Region. Does not affect existence of objects in the model.
      * @public
      */
     clear() {
       this.particles.length = 0;
+      this.containers.length = 0;
     }
   }
 
