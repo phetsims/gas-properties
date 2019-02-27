@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO see Java SphereBoxExpert, SphereBoxCollision
 /**
  * Detects and handles particle-container collisions.
  *
@@ -24,7 +25,7 @@ define( require => {
      * @returns {boolean} true if the particle and container collided, false otherwise
      */
     doCollision( particle, container ) {
-      return false;
+      return false; //TODO
     }
   }
 

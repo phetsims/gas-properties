@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO see Java SphereSphereExpert, SphereSphereContactDetector, SphereSphereCollision
 /**
  * Detects and handles particle-particle collisions.
  *
@@ -25,7 +26,7 @@ define( require => {
      */
     doCollision( particle1, particle2 ) {
       assert && assert( particle1 !== particle2, 'particles are the same instance' );
-      return false;
+      return false; //TODO
     }
   }
 
