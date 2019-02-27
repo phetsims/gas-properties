@@ -11,9 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
-  const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
-  const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
@@ -41,8 +39,8 @@ define( require => {
       }, options );
 
       const content = [
-        { value: ParticleTypeEnum.HEAVY, node: new ParticleNode( new HeavyParticle() ) },
-        { value: ParticleTypeEnum.LIGHT, node: new ParticleNode( new LightParticle() ) }
+        { value: ParticleTypeEnum.HEAVY, node: GasPropertiesIconFactory.createHeavyParticleIcon() },
+        { value: ParticleTypeEnum.LIGHT, node: GasPropertiesIconFactory.createLightParticleIcon() }
       ];
 
       super( particleTypeProperty, content, options );

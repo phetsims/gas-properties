@@ -11,7 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
 
   // strings
   const stopwatchString = require( 'string!GAS_PROPERTIES/stopwatch' );
@@ -27,7 +27,7 @@ define( require => {
       options = options || {};
 
       assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
-      options.icon = StopwatchNode.createIcon();
+      options.icon = GasPropertiesIconFactory.createStopwatchIcon();
 
       super( stopwatchString, stopwatchVisibleProperty, options );
     }

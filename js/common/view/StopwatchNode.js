@@ -11,8 +11,6 @@ define( require => {
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const ToolDragListener = require( 'GAS_PROPERTIES/common/view/ToolDragListener' );
@@ -54,30 +52,6 @@ define( require => {
         locationProperty: stopwatch.locationProperty,
         dragBoundsProperty: options.dragBoundsProperty
       } ) );
-    }
-
-    //TODO DESIGN create a less detailed icon for the stopwatch
-    /**
-     * Creates an icon for the stopwatch, used to label check boxes.
-     * @param {Object} [options]
-     * @returns {Node}
-     * @public
-     * @static
-     */
-    static createIcon( options ) {
-
-      options = _.extend( {
-        scale: 0.25
-      }, options );
-
-      const stopwatchNode = new StopwatchNode( new Stopwatch( { visible: true } ), {
-        pickable: false
-      } );
-
-      assert && assert( !options.children, 'StopwatchNode.createIcon sets children' );
-      options.children = [ stopwatchNode ];
-
-      return new Node( options );
     }
   }
 

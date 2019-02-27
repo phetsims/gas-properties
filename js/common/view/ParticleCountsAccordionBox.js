@@ -13,12 +13,10 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountControl = require( 'GAS_PROPERTIES/common/view/ParticleCountControl' );
-  const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -74,10 +72,10 @@ define( require => {
         children: [
 
           // Heavy
-          new ParticleCountControl( new ParticleNode( new HeavyParticle() ), heavyString, numberOfHeavyParticlesProperty ),
+          new ParticleCountControl( GasPropertiesIconFactory.createHeavyParticleIcon(), heavyString, numberOfHeavyParticlesProperty ),
 
           // Light
-          new ParticleCountControl( new ParticleNode( new LightParticle() ), lightString, numberOfLightParticlesProperty )
+          new ParticleCountControl( GasPropertiesIconFactory.createLightParticleIcon(), lightString, numberOfLightParticlesProperty )
         ]
       } );
 

@@ -9,9 +9,9 @@ define( require => {
   'use strict';
 
   // modules
-  const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
 
   // strings
   const collisionCounterString = require( 'string!GAS_PROPERTIES/collisionCounter' );
@@ -27,7 +27,7 @@ define( require => {
       options = options || {};
 
       assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
-      options.icon = CollisionCounterNode.createIcon();
+      options.icon = GasPropertiesIconFactory.createCollisionCounterIcon();
 
       super( collisionCounterString, collisionCounterVisibleProperty, options );
     }

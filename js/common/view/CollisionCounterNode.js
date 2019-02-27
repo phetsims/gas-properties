@@ -12,7 +12,6 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
-  const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const ComboBox = require( 'SUN/ComboBox' );
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -150,31 +149,6 @@ define( require => {
         locationProperty: collisionCounter.locationProperty,
         dragBoundsProperty: options.dragBoundsProperty
       } ) );
-    }
-
-    //TODO DESIGN create a less detailed icon for the collision counter
-    /**
-     * Creates an icon for the collision counter, used to label check boxes.
-     * @param {Object} [options]
-     * @returns {Node}
-     * @public
-     * @static
-     */
-    static createIcon( options ) {
-
-      options = _.extend( {
-        scale: 0.2
-      }, options );
-
-      const collisionCounterNode = new CollisionCounterNode(
-        new CollisionCounter( { visible: true } ),
-        new Node(), // comboBoxListParent
-        { pickable: false } );
-
-      assert && assert( !options.children, 'CollisionCounterNode.createIcon sets children' );
-      options.children = [ collisionCounterNode ];
-
-      return new Node( options );
     }
   }
 
