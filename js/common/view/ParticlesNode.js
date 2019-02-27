@@ -32,7 +32,7 @@ define( require => {
       this.heavyParticleImage = null; // {HTMLCanvasElement} initialized below
       this.lightParticleImage = null; // {HTMLCanvasElement} initialized below
 
-      // Create canvas element for heavy particles, re-created if color profile changes.
+      // Create heavy particle image, re-created if color profile changes.
       this.heavyParticle.colorProperty.link( color => {
         const particle = new ParticleNode( this.heavyParticle );
         particle.toCanvas( canvas => {
@@ -40,7 +40,7 @@ define( require => {
         } );
       } );
 
-      // Create canvas element for light particles, re-created if color profile changes.
+      // Create light particle image, re-created if color profile changes.
       this.lightParticle.colorProperty.link( color => {
         const particle = new ParticleNode( this.lightParticle );
         particle.toCanvas( canvas => {
