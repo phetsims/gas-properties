@@ -64,7 +64,6 @@ define( require => {
 
       // @private fields needed by methods
       this.model = model;
-      this.collisionExperts = []; //TODO populate collisionExperts
     }
 
     /**
