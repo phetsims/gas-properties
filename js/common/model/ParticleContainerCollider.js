@@ -15,7 +15,7 @@ define( require => {
   class ParticleContainerCollider {
 
     constructor() {
-      //TODO
+      //TODO does this need to be a class?
     }
 
     /**
