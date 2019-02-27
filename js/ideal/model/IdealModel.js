@@ -135,22 +135,12 @@ define( require => {
       this.collisionManager = new CollisionManager( this );
     }
 
-    //TODO this is called in CollisionManager.step, is there any performance impact?
-    /**
-     * Gets all particles.
-     * @returns {Particle[]}
-     * @public
-     */
-    getParticles() {
-      return this.heavyParticles.concat( this.lightParticles );
-    }
-
     /**
      * Gets the 2D grid of Regions that spatially partitions the collision detection space.
      * @returns {Region[][]}
      */
     getRegions() {
-      return this.collisionManager.regions;
+      return this.collisionManager.regionsProperty.value;
     }
 
     /**

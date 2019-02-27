@@ -24,7 +24,7 @@ define( require => {
       // @public (read-only)
       this.bounds = bounds;
 
-      // @private
+      // @public (read-only)
       this.particles = [];
     }
 

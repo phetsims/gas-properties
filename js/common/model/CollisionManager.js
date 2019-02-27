@@ -11,6 +11,8 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const ParticleContainerCollider = require( 'GAS_PROPERTIES/common/model/ParticleContainerCollider' );
+  const ParticleParticleCollider = require( 'GAS_PROPERTIES/common/model/ParticleParticleCollider' );
   const Property = require( 'AXON/Property' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
 
@@ -35,6 +37,7 @@ define( require => {
       // @public {Property.<Bounds2>} collision detection bounds
       this.particleBoundsProperty = model.particleBoundsProperty;
 
+      //TODO flatten this array if we don't need to compare adjacent Regions
       //TODO do we need separate grids for inside vs outside the container?
       // @public (read-only) {Property.<Region[][]>} 2D grid of Regions, in row-major order
       this.regionsProperty = new Property( [] );
@@ -64,15 +67,13 @@ define( require => {
         this.regionsProperty.value = regions;
       } );
 
+      // @private
+      this.particleParticleCollider = new ParticleParticleCollider();
+      this.particleContainerCollider = new ParticleContainerCollider();
+
       // @private fields needed by methods
       this.model = model;
     }
-
-    /**
-     * Gets the Regions that partition the collision detection bounds.
-     * @returns {Region[][]} in row-major order
-     */
-    get regions() { return this.regionsProperty.value; }
 
     /**
      * @param {number} dt - time delta, in seconds
@@ -80,11 +81,19 @@ define( require => {
      */
     step( dt ) {
 
-      const particles = this.model.getParticles();
+      // put particles in region(s)
+      this.clearRegions();
+      this.assignParticlesToRegions( this.model.heavyParticles );
+      this.assignParticlesToRegions( this.model.lightParticles );
 
-      this.assignParticlesToRegions( particles );
+      //TODO determine which regions are intersected by the container walls
 
-      //TODO more to do in step
+      // detect and handle particle-particle collisions within each region
+      this.doParticleParticleCollisions();
+
+      // detect and handle particle-container collisions
+      this.doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
+      this.doParticleContainerCollisions( this.model.lightParticles, this.model.container );
     }
 
     /**
@@ -93,11 +102,7 @@ define( require => {
      * @private
      */
     assignParticlesToRegions( particles ) {
-
-      this.clearRegions();
-
       const regions = this.regionsProperty.value;
-
       for ( let i = 0; i < particles.length; i++ ) {
         for ( let row = 0; row < regions.length; row++ ) {
           for ( let column = 0; column < regions[ row ].length; column++ ) {
@@ -119,6 +124,38 @@ define( require => {
         for ( let column = 0; column < regions[ row ].length; column++ ) {
           regions[ row ][ column ].clear();
         }
+      }
+    }
+
+    /**
+     * Detects and handles particle-particle collisions within a Region.
+     * @private
+     */
+    doParticleParticleCollisions() {
+      const regions = this.regionsProperty.value;
+      for ( let row = 0; row < regions.length; row++ ) {
+        for ( let column = 0; column < regions[ row ].length; column++ ) {
+          const region = regions[ row ][ column ];
+          const particles = region.particles;
+          for ( let i = 0; i < particles.length - 1; i++ ) {
+            for ( let j = i + 1; j < particles.length; j++ ) {
+              this.particleParticleCollider.doCollision( particles[ i ], particles[ j ] );
+            }
+          }
+        }
+      }
+    }
+
+    //TODO leverage Regions here, compare only with particles that are intersected by the container walls
+    /**
+     * Detects and handles particle-container collisions.
+     * @param {Particle[]} particles
+     * @param {Container} container
+     * @private
+     */
+    doParticleContainerCollisions( particles, container ) {
+      for ( let i = 0; i < particles.length - 1; i++ ) {
+        this.particleContainerCollider.doCollision( particles[ i ], container );
       }
     }
   }
