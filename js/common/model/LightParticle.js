@@ -19,14 +19,11 @@ define( require => {
      * @param {Object} [options] see Particle
      */
     constructor( options ) {
-
-      options = _.extend( {
+      super( _.extend( {
         mass: 4, // He, rounded to the closest integer
         radius: 3.5,
         colorProperty: GasPropertiesColorProfile.lightParticleColorProperty
-      }, options );
-
-      super( options );
+      }, options ) );
     }
   }
 

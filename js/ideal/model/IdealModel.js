@@ -31,7 +31,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  const PUMP_DISPERSION_ANGLE = Math.PI / 2;
+  const PUMP_DISPERSION_ANGLE = Math.PI / 2; // radians
+  const INITIAL_TEMPERATURE = 300; // K
 
   class IdealModel {
 
@@ -168,14 +169,24 @@ define( require => {
      */
     addParticles( n, particles, Constructor ) {
       for ( let i = 0; i < n; i++ ) {
-        particles.push( new Constructor( {
 
-          // where the hose connects to the container
-          location: this.container.hoseLocation,
+        // Create a particle
+        const particle = new Constructor( {
+          location: this.container.hoseLocation
+        } );
 
-          // directed towards the right, into the container
-          velocityAngle: Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE
-        } ) );
+        // Set the particle's velocity.
+        // We can't do this in the constructor because initial velocity is a function of the particle's mass.
+        particle.setVelocity(
+          // Velocity magnitude corresponds to INITIAL_TEMPERATURE.
+          // KE = (3/2)kT = (1/2) * m * |v|^2, so v = sqrt( 3kT / m )
+          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * INITIAL_TEMPERATURE / particle.mass ),
+
+          // Velocity angle is randomly chosen, based on the pump's dispersion angle.
+          Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE
+        );
+
+        particles.push( particle );
       }
     }
 

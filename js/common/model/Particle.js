@@ -2,6 +2,7 @@
 
 /**
  * Model for all types of particles.
+ * NOTE: Since there can be a large number of Particles, all Vector2 fields herein are mutated for performance reasons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,12 +11,8 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
-
-  // constants
-  const INITIAL_TEMPERATURE = 300; // K
 
   class Particle {
 
@@ -25,28 +22,26 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
+        location: null, // {Vector2|null} initial location in nm, null defaults to (0,0)
         mass: 1, // AMU
         radius: 1, // nm
-        colorProperty: null, // {null|Property.<Color|string>}
-        location: Vector2.ZERO,
-        velocityAngle: 0 // initial velocity angle, in radians
+        colorProperty: null // {Property.<Color|string>|null}
       }, options );
 
-      // @public (read-only)
-      this.mass = options.mass;
-      this.radius = options.radius;
-      this.colorProperty = options.colorProperty || new Property( 'white' );
-
-      // The initial velocity magnitude corresponds to INITIAL_TEMPERATURE.
-      // KE = (3/2)kT = (1/2) * m * v^2, so v = sqrt( 3kT / m )
-      const velocityMagnitude = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * INITIAL_TEMPERATURE / this.mass );
+      options.location = options.location || new Vector2( 0, 0 );
 
       // @public
-      this.location = options.location.copy();
+      this.location = options.location.copy(); // make a copy because we'll be mutating this.location
 
       // @public (read-only)
-      this.velocity = Vector2.createPolar( velocityMagnitude, options.velocityAngle );
-      this.momentum = this.velocity.times( this.mass );
+      this.mass = options.mass; // AMU
+      this.radius = options.radius; // radians
+      this.colorProperty = options.colorProperty || new Property( 'white' );
+
+      // @public (read-only) the particle is initially at rest
+      this.velocity = new Vector2( 0, 0 ); // nm / ps
+      this.momentum = new Vector2( 0, 0 ); // AMU * nm / ps
+      this.kineticEnergy = 0; // AMU * nm^2 / ps^2
 
       // @public (read-only)
       this.isDisposed = false;
@@ -59,26 +54,6 @@ define( require => {
     }
 
     /**
-     * Gets the particle's speed.
-     * @returns {number}
-     * @public
-     */
-    getSpeed() { this.velocity.magnitude; }
-
-    get speed() { return this.getSpeed(); }
-
-    /**
-     * Gets the particle's kinetic energy. This is due to translation only, there is no rotation.
-     * @returns {number} AMU * nm^2 / ps^2
-     * @public
-     */
-    getKineticEnergy() {
-      return 0.5 * this.mass * this.velocity.magnitudeSquared();
-    }
-
-    get kineticEnergy() { return this.getKineticEnergy(); }
-
-    /**
      * Moves the particle by one time step.
      * @param {number} dt - time delta, in ps
      * @public
@@ -89,7 +64,9 @@ define( require => {
 
     /**
      * Sets the velocity in polar coordinates.
-     * @param {number} magnitude
+     * As a side effect, updates everything that is a function of velocity.
+     *
+     * @param {number} magnitude - nm / ps
      * @param {number} angle - in radians
      * @public
      */
@@ -97,7 +74,10 @@ define( require => {
       this.velocity.setPolar( magnitude, angle );
 
       // P = m * v
-      this.momentum.setX( this.velocity.x * this.mass, this.velocity.y * this.mass );
+      this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
+
+      // KE = (1/2) * m * |v|^2
+      this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared();
     }
 
     /**
