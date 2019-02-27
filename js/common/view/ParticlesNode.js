@@ -34,14 +34,16 @@ define( require => {
 
       // Create canvas element for heavy particles, re-created if color profile changes.
       this.heavyParticle.colorProperty.link( color => {
-        ParticleNode.particleToImage( this.heavyParticle, canvas => {
+        const particle = new ParticleNode( this.heavyParticle );
+        particle.toCanvas( canvas => {
           this.heavyParticleImage = canvas;
         } );
       } );
 
       // Create canvas element for light particles, re-created if color profile changes.
       this.lightParticle.colorProperty.link( color => {
-        ParticleNode.particleToImage( this.lightParticle, canvas => {
+        const particle = new ParticleNode( this.lightParticle );
+        particle.toCanvas( canvas => {
           this.lightParticleImage = canvas;
         } );
       } );
