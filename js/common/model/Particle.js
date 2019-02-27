@@ -41,10 +41,11 @@ define( require => {
       // KE = (3/2)kT = (1/2) * m * v^2, so v = sqrt( 3kT / m )
       const velocityMagnitude = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * INITIAL_TEMPERATURE / this.mass );
 
-      // @public Vector2 fields will be mutated!
+      // @public
       this.location = options.location.copy();
+
+      // @public (read-only)
       this.velocity = Vector2.createPolar( velocityMagnitude, options.velocityAngle );
-      this.acceleration = new Vector2( 0, 0 );
       this.momentum = this.velocity.times( this.mass );
 
       // @public (read-only)
@@ -60,6 +61,7 @@ define( require => {
     /**
      * Gets the particle's speed.
      * @returns {number}
+     * @public
      */
     getSpeed() { this.velocity.magnitude; }
 
@@ -68,6 +70,7 @@ define( require => {
     /**
      * Gets the particle's kinetic energy. This is due to translation only, there is no rotation.
      * @returns {number} AMU * nm^2 / ps^2
+     * @public
      */
     getKineticEnergy() {
       return 0.5 * this.mass * this.velocity.magnitudeSquared();
@@ -78,27 +81,30 @@ define( require => {
     /**
      * Moves the particle by one time step.
      * @param {number} dt - time delta, in ps
+     * @public
      */
     step( dt ) {
+      this.location.setXY( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
+    }
 
-      this.location.setXY(
-        this.location.x + dt * this.velocity.x + dt * dt * this.acceleration.x / 2,
-        this.location.y + dt * this.velocity.y + dt * dt * this.acceleration.y / 2
-      );
-
-      this.velocity.setXY(
-        this.velocity.x + dt * this.acceleration.x,
-        this.velocity.y + dt * this.acceleration.y
-      );
+    /**
+     * Sets the velocity in polar coordinates.
+     * @param {number} magnitude
+     * @param {number} angle - in radians
+     * @public
+     */
+    setVelocity( magnitude, angle ) {
+      this.velocity.setPolar( magnitude, angle );
 
       // P = m * v
-      this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
+      this.momentum.setX( this.velocity.x * this.mass, this.velocity.y * this.mass );
     }
 
     /**
      * Gets the center of mass of a collection of particles.
      * @param {Particle[]} particles
      * @returns {Vector2|null} null if there are no particles and therefore no center of mass
+     * @public
      */
     static getCenterOfMass( particles ) {
       let centerOfMass = null;
