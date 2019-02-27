@@ -52,8 +52,10 @@ define( require => {
       this.regionNodes = [];
       collisionManager.regionsProperty.link( regions => {
         this.regionNodes.length = 0;
-        for ( let i = 0; i < regions.length; i++ ) {
-          this.regionNodes.push( new RegionNode( regions[ i ], modelViewTransform ) );
+        for ( let row = 0; row < regions.length; row++ ) {
+          for ( let column = 0; column < regions[ row ].length; column++ ) {
+            this.regionNodes.push( new RegionNode( regions[ row ][ column ], modelViewTransform ) );
+          }
         }
         regionsParent.children = this.regionNodes;
       } );

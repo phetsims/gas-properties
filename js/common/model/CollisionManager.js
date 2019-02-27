@@ -36,7 +36,7 @@ define( require => {
       this.particleBoundsProperty = model.particleBoundsProperty;
 
       //TODO do we need separate grids for inside vs outside the container?
-      // @public (read-only) {Property.<Region[]>}
+      // @public (read-only) {Property.<Region[][]>} 2D grid of Regions, in row-major order
       this.regionsProperty = new Property( [] );
 
       // Partition the collision detection bounds into overlapping Regions.
@@ -47,16 +47,18 @@ define( require => {
 
         this.clearRegions();
 
-        const regions = [];
+        const regions = []; // {Region[][]} in row-major order
         let maxX = bounds.maxX;
         while ( maxX > bounds.minX ) {
+          const row = []; // {Region[]}
           let minY = bounds.minY;
           while ( minY < bounds.maxY ) {
             const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
-            regions.push( new Region( regionBounds ) );
+            row.push( new Region( regionBounds ) );
             minY = minY + options.regionLength - options.regionOverlap;
           }
           maxX = maxX - options.regionLength + options.regionOverlap;
+          regions.push( row );
         }
 
         this.regionsProperty.value = regions;
@@ -68,7 +70,7 @@ define( require => {
 
     /**
      * Gets the Regions that partition the collision detection bounds.
-     * @returns {Region[]}
+     * @returns {Region[][]} in row-major order
      */
     get regions() { return this.regionsProperty.value; }
 
@@ -94,10 +96,14 @@ define( require => {
 
       this.clearRegions();
 
+      const regions = this.regionsProperty.value;
+
       for ( let i = 0; i < particles.length; i++ ) {
-        for ( let j = 0; j < this.regions.length; j++ ) {
-          if ( this.regions[ j ].containsPoint( particles[ i ].location ) ) {
-            this.regions[ j ].addParticle( particles[ i ] );
+        for ( let row = 0; row < regions.length; row++ ) {
+          for ( let column = 0; column < regions[ row ].length; column++ ) {
+            if ( regions[ row ][ column ].containsPoint( particles[ i ].location ) ) {
+              regions[ row ][ column ].addParticle( particles[ i ] );
+            }
           }
         }
       }
@@ -108,8 +114,11 @@ define( require => {
      * @private
      */
     clearRegions() {
-      for ( let i = 0; i < this.regions.length; i++ ) {
-        this.regions[ i ].clear();
+      const regions = this.regionsProperty.value;
+      for ( let row = 0; row < regions.length; row++ ) {
+        for ( let column = 0; column < regions[ row ].length; column++ ) {
+          regions[ row ][ column ].clear();
+        }
       }
     }
   }
