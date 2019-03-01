@@ -34,6 +34,7 @@ define( require => {
       this.location = options.location.copy(); // make a copy because we'll be mutating this.location
 
       // @public (read-only)
+      this.previousLocation = this.location.copy(); // location on previous time step
       this.mass = options.mass; // AMU
       this.radius = options.radius; // radians
       this.colorProperty = options.colorProperty || new Property( 'white' );
@@ -59,6 +60,7 @@ define( require => {
      * @public
      */
     step( dt ) {
+      this.previousLocation.setXY( this.location.x, this.location.y );
       this.location.setXY( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
     }
 
@@ -78,6 +80,27 @@ define( require => {
 
       // KE = (1/2) * m * |v|^2
       this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared();
+    }
+
+    /**
+     * Does this particle contact another particle now?
+     * @param {Particle} particle
+     * @returns {boolean}
+     */
+    contacts( particle ) {
+      return this.location.distance( particle.location ) <= ( this.radius + particle.radius );
+    }
+
+    //TODO does this do what Java implementation claims?
+    /**
+     * Did this particle contact another particle on the previous time step?
+     * According to the Java implementation, using this check to prevent a collision in such cases makes
+     * the behavior of collisions much more natural looking.
+     * @param {Particle} particle
+     * @returns {boolean}
+     */
+    contacted( particle ) {
+      return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
     }
 
     /**
