@@ -50,9 +50,11 @@ define( require => {
           fill: GasPropertiesColorProfile.titleTextFillProperty
         } ),
         titleAlignX: 'left',
-        buttonLength: 20,
         fill: GasPropertiesColorProfile.panelFillProperty,
-        stroke: GasPropertiesColorProfile.panelStrokeProperty
+        stroke: GasPropertiesColorProfile.panelStrokeProperty,
+        expandCollapseButtonOptions: {
+          sideLength: 20
+        }
 
       }, options );
 
