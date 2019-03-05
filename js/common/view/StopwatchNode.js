@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
   const ToolDragListener = require( 'GAS_PROPERTIES/common/view/ToolDragListener' );
 
   // strings
@@ -35,7 +36,7 @@ define( require => {
         maxValue: 999.99,
         timerReadoutNodeOptions: {
           unitsNode: new Text( picosecondsString, {
-            font: TimerNode.DEFAULT_SMALL_FONT
+            font: TimerReadoutNode.DEFAULT_SMALL_FONT
           } )
         }
       }, options );
