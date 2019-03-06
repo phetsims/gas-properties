@@ -31,7 +31,7 @@ define( require => {
 
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
       assert && assert( options.regionOverlap > 0, `invalid regionOverlap: ${options.regionOverlap}` );
-      assert && assert( options.regionOverlap < options.regionLength / 2,
+       assert && assert( options.regionOverlap < options.regionLength / 2,
         `regionOverlap ${options.regionOverlap} is incompatible with regionLength ${options.regionLength}` );
 
       // @public {Property.<Bounds2>} collision detection bounds

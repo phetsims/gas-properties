@@ -38,8 +38,12 @@ define( require => {
 
     constructor() {
 
-      // @public bounds of the entire space that the model knows about
-      this.worldBoundsProperty = new Property( new Bounds2( 0, 0, 2, 2 ) );
+      // @public bounds of the entire space that the model knows about.
+      // This doesn't have a valid value until the view is created.
+      this.worldBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
+      phet.log && this.worldBoundsProperty.link( worldBounds => {
+        phet.log( `worldBounds: ${worldBounds.toString()} nm` );
+      } );
 
       // @public transform between real time and sim time
       // 1 second of real time is 2.5 picoseconds of sim time.
@@ -96,11 +100,12 @@ define( require => {
       // This includes everything in the world that is to the right of and above the container's origin.
       // This is sufficient because there is no gravity, so any particles that leave the box via the opening
       // in its top will continue to move upward.
+      // This doesn't have a valid value until the view is created.
       this.particleBoundsProperty = new DerivedProperty( [ this.worldBoundsProperty ], ( worldBounds ) => {
         return new Bounds2( worldBounds.minX, this.container.location.y, this.container.location.x, worldBounds.maxY );
       } );
       phet.log && this.particleBoundsProperty.link( particleBounds => {
-        phet.log( 'particleBounds=' + particleBounds.toString() );
+        phet.log( `particleBounds: ${particleBounds.toString()} nm` );
       } );
 
       this.heavyParticles = []; // {HeavyParticle[]}
