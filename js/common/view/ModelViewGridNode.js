@@ -17,8 +17,8 @@ define( require => {
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
   const Shape = require( 'KITE/Shape' );
-  const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -36,18 +36,22 @@ define( require => {
      */
     constructor( visibleBoundsProperty, modelViewTransform, options ) {
 
-      const coordinatesNode = new Text( '', {
+      // model and view coordinates that correspond to the pointer location
+      const coordinatesNode = new RichText( '', {
         font: FONT,
+        align: 'center',
         fill: COLOR,
         pickable: false
       } );
 
+      // 2D grid for model coordinate frame
       const gridNode = new Path( null, {
         stroke: COLOR,
         opacity: 0.3,
         pickable: false
       } );
 
+      // Cover the entire bounds with an invisible Rectangle, so that we get input events.
       const boundsRectangle = new Rectangle( 0, 0, 1, 1, {
         fill: 'transparent'
       } );
@@ -91,6 +95,9 @@ define( require => {
       } );
 
       // Update the coordinates to match the pointer location.
+      // Add the input listener to the Display, so that things behind the grid will received events.
+      // Scenery does not support having one event sent through two different trails.
+      // Note that this will continue to receive events when the current screen is inactive.
       phet.joist.display.addInputListener( {
          move: event => {
 
@@ -105,7 +112,7 @@ define( require => {
            const yModel = Util.toFixed( modelPoint.y, 1 );
 
            // Update coordinates display.
-           coordinatesNode.text = `(${xView},${yView}) \u2192 (${xModel},${yModel}) nm`;
+           coordinatesNode.text = `(${xView},${yView})<br>(${xModel},${yModel}) nm`;
 
            // Center the coordinates above the cursor.
            coordinatesNode.centerX = viewPoint.x;
