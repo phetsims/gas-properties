@@ -1,8 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO port of Java class, integrate bits into HTML5, then delete
 /**
- * TODO Port of Java class
- *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
