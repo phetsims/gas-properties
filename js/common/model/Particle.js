@@ -89,7 +89,7 @@ define( require => {
       this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
 
       // KE = (1/2) * m * |v|^2
-      this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared();
+      this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared;
     }
 
     /**
