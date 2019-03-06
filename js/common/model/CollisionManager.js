@@ -63,7 +63,7 @@ define( require => {
 
         this.regionsProperty.value = regions;
 
-        phet.log && phet.log( `${regions.length} regions of ${options.regionLength}nm each, overlap=${options.regionOverlap}nm` );
+        phet.log && phet.log( `created ${regions.length} regions of ${options.regionLength}nm each, with ${options.regionOverlap}nm overlap` );
       } );
 
       // @private
