@@ -25,6 +25,11 @@ define( require => {
       projector: 'white'
     },
 
+    gridColor: {
+      default: 'white',
+      projector: 'black'
+    },
+
     panelFill: {
       default: 'black',
       projector: 'white'

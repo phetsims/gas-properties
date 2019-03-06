@@ -10,7 +10,6 @@ define( require => {
 
   // modules
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
-  const Circle = require( 'SCENERY/nodes/Circle' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -21,6 +20,7 @@ define( require => {
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
+  const ModelViewGridNode = require( 'GAS_PROPERTIES/common/view/ModelViewGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
@@ -35,7 +35,6 @@ define( require => {
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
-  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   const PANEL_WIDTH = 225; // determined empirically
@@ -219,12 +218,9 @@ define( require => {
       } );
       this.addChild( stopwatchNode );
 
-      // show model origin
-      if ( phet.chipper.queryParameters.dev ) {
-        this.addChild( new Circle( 3, {
-          fill: 'red',
-          center: model.modelViewTransform.modelToViewPosition( Vector2.ZERO )
-        } ) );
+      // 2D grid for model coordinate frame
+      if ( GasPropertiesQueryParameters.grid ) {
+        this.addChild( new ModelViewGridNode( this.visibleBoundsProperty, model.modelViewTransform ) );
       }
 
       // This should be in front of everything else.

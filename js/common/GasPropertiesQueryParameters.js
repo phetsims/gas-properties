@@ -20,7 +20,11 @@ define( require => {
 
     // Shows how the collision detection space is partitioned into a 2D grid of regions.
     // For internal use only, not public facing.
-    regions: { type: 'flag' }
+    regions: { type: 'flag' },
+
+    // Shows a 2D grid for the model coordinate frame.
+    // For internal use only, not public facing.
+    grid: { type: 'flag' }
 
   } );
 
