@@ -48,6 +48,16 @@ define( require => {
       this.isDisposed = false;
     }
 
+    /**
+     * String representation of a Particle.
+     * For debugging only, do not rely on format.
+     * @returns {string}
+     * @public
+     */
+    toString() {
+      return `Particle[location:(${this.location.x},${this.location.y}) mass:${this.mass} radius:${this.radius}]`;
+    }
+
     //TODO can we get rid of this?
     dispose() {
       assert && assert( !this.isDisposed, 'attempted to dispose again' );

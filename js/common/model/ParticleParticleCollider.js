@@ -30,7 +30,7 @@ define( require => {
 
       //TODO particle-particle collision is not working
       if ( !particle1.contacted( particle2 ) && particle1.contacts( particle2 ) ) {
-        phet.log && phet.log( 'collision!' );//XXX
+        phet.log && phet.log( `collision: particle1=${particle1} particle2=${particle2}` );//XXX
         collided = true;
 
         //TODO temporary, to do something
