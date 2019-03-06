@@ -14,8 +14,8 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   class CollisionCounter {
 
@@ -30,9 +30,7 @@ define( require => {
       }, options );
 
       // @public location of the collision counter, in view coordinates
-      this.locationProperty = new Property( options.location, {
-        valueType: Vector2
-      } );
+      this.locationProperty = new Vector2Property( options.location );
 
       // @public the number of collisions between the particles and the container walls
       this.numberOfCollisionsProperty = new NumberProperty( 0, {

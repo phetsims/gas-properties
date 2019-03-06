@@ -15,8 +15,8 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   class Stopwatch {
 
@@ -31,9 +31,7 @@ define( require => {
       }, options );
 
       // @public location of the stopwatch, in view coordinates
-      this.locationProperty = new Property( options.location, {
-        valueType: Vector2
-      } );
+      this.locationProperty = new Vector2Property( options.location );
 
       // @public whether the stopwatch is visible
       this.visibleProperty = new BooleanProperty( options.visible );
