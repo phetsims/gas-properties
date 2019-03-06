@@ -35,7 +35,9 @@ define( require => {
         range: this.widthRange,
         units: 'nanometers'
       } );
-      this.widthProperty.link( width => { phet.log && phet.log( 'Container width=' + width ); } );
+      this.widthProperty.link( width => {
+        phet.log && phet.log( `Container width:${width}nm` );
+      } );
 
       // @public (read-only) range of the width of the opening in the top of the container, in nm
       this.openingWidthRange = new RangeWithValue( 0, 2.5, 0 );
