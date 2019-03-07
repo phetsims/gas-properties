@@ -20,8 +20,8 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   class ToolDragListener extends DragListener {
 
@@ -33,7 +33,7 @@ define( require => {
     constructor( targetNode, visibleProperty, options ) {
 
       options = _.extend( {
-        locationProperty: new Property( Vector2.ZERO ),
+        locationProperty: new Vector2Property( Vector2.ZERO ),
         dragBoundsProperty: null // {Property.<Bounds2>|null}
       }, options );
 
