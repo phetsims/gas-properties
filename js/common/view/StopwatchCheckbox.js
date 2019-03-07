@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * 'Stopwatch' check box, used to control visibility of the stopwatch.
@@ -24,10 +24,10 @@ define( require => {
      */
     constructor( stopwatchVisibleProperty, options ) {
 
-      options = options || {};
-
-      assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
-      options.icon = GasPropertiesIconFactory.createStopwatchIcon();
+      assert && assert( !options || !options.hasOwnProperty( 'icon' ), 'StopwatchCheckbox sets icon' );
+      options = _.extend( {
+        icon: GasPropertiesIconFactory.createStopwatchIcon()
+      }, options );
 
       super( stopwatchString, stopwatchVisibleProperty, options );
     }

@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Checkbox to show/hide the size of the container.
@@ -26,12 +26,12 @@ define( require => {
      */
     constructor( sizeVisibleProperty, options ) {
 
-      options = options || {};
-
-      assert && assert( !options.icon, 'SizeCheckbox sets icon' );
-      options.icon = new DimensionalArrowsNode( new NumberProperty( 44 ), {
-        color: GasPropertiesColorProfile.sizeArrowColorProperty,
-        pickable: false
+      assert && assert( !options || !options.hasOwnProperty( 'icon' ), 'SizeCheckbox sets icon' );
+      options = _.extend( {
+        icon: new DimensionalArrowsNode( new NumberProperty( 44 ), {
+          color: GasPropertiesColorProfile.sizeArrowColorProperty,
+          pickable: false
+        }, options )
       } );
 
       super( sizeString, sizeVisibleProperty, options );

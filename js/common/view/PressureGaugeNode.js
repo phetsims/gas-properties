@@ -40,8 +40,6 @@ define( require => {
      */
     constructor( pressureGauge, listParent, options ) {
 
-      options = options || {};
-
       // circular dial with needle
       const dialNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,
         pressureGauge.pressureRange, {
@@ -63,8 +61,10 @@ define( require => {
         maxWidth: dialNode.width
       } );
 
-      assert && assert( !options.children, 'PressureGaugeNode sets children' );
-      options.children = [ postNode, dialNode, pressureDisplay ];
+      assert && assert( !options || !options.hasOwnProperty( 'children' ), 'PressureGaugeNode sets children' );
+      options = _.extend( {
+        children: [ postNode, dialNode, pressureDisplay ]
+      }, options );
 
       super( options );
 

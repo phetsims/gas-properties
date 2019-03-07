@@ -28,8 +28,6 @@ define( require => {
      */
     constructor( region, modelViewTransform, options ) {
 
-      options = options || {};
-
       const viewBounds = modelViewTransform.modelToViewBounds( region.bounds );
 
       // Cell in the 2D grid
@@ -44,8 +42,10 @@ define( require => {
         center: cellNode.center
       } );
 
-      assert && assert( !options.children, 'RegionNode sets children' );
-      options.children = [ cellNode, countNode ];
+      assert && assert( !options || !options.hasOwnProperty( 'children' ), 'RegionNode sets children' );
+      options = _.extend( {
+        children: [ cellNode, countNode ]
+      }, options );
 
       super( options );
 

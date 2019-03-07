@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Controls for making various tools visible.
@@ -29,13 +29,13 @@ define( require => {
       options = _.extend( {}, GasPropertiesConstants.VBOX_OPTIONS, options );
 
       const sizeCheckbox = new SizeCheckbox( sizeVisibleProperty );
-
       const stopwatchCheckbox = new StopwatchCheckbox( stopwatchVisibleProperty );
-
       const collisionControlCheckbox = new CollisionCounterCheckbox( collisionCounterVisibleProperty );
 
-      assert && assert( !options.children, 'ToolControls sets children' );
-      options.children = [ sizeCheckbox, stopwatchCheckbox, collisionControlCheckbox ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'ToolControls sets children' );
+      options = _.extend( {
+        children: [ sizeCheckbox, stopwatchCheckbox, collisionControlCheckbox ]
+      }, options );
 
       super( options );
     }

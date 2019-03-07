@@ -62,8 +62,10 @@ define( require => {
       options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
 
       // force the accordion box to be a fixedWidth
-      assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
-      options.maxWidth = options.fixedWidth;
+      assert && assert( !options.hasOwnProperty( 'maxWidth' ), 'ParticleCountsAccordionBox sets maxWidth' );
+      options = _.extend( {
+        maxWidth: options.fixedWidth
+      }, options );
       const maxContentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
       const strut = new HStrut( maxContentWidth );
 
