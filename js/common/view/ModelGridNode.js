@@ -27,7 +27,7 @@ define( require => {
   const FONT = new PhetFont( 14 );
   const CELL_LENGTH = 1; // length of a square cell in the grid, in nm
 
-  class ModelViewGridNode extends Node {
+  class ModelGridNode extends Node {
 
     /**
      * @param {Property.<Bounds2>} visibleBoundsProperty - visible bounds of the parent ScreenView
@@ -122,5 +122,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ModelViewGridNode', ModelViewGridNode );
+  return gasProperties.register( 'ModelGridNode', ModelGridNode );
 } );

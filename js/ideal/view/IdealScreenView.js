@@ -20,7 +20,7 @@ define( require => {
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
-  const ModelViewGridNode = require( 'GAS_PROPERTIES/common/view/ModelViewGridNode' );
+  const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
@@ -220,7 +220,7 @@ define( require => {
 
       // 2D grid for model coordinate frame
       if ( GasPropertiesQueryParameters.grid ) {
-        this.addChild( new ModelViewGridNode( this.visibleBoundsProperty, model.modelViewTransform ) );
+        this.addChild( new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform ) );
       }
 
       // This should be in front of everything else.
