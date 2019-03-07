@@ -83,7 +83,7 @@ define( require => {
           gridShape.moveTo( viewPosition.x, visibleBounds.minY );
           gridShape.lineTo( viewPosition.x, visibleBounds.maxY, );
         }
-        
+
         // horizontal grid lines
         for ( let y = minY; y < maxY; y += CELL_LENGTH ) {
           const viewPosition = modelViewTransform.modelToViewXY( 0, y );
@@ -99,25 +99,25 @@ define( require => {
       // Scenery does not support having one event sent through two different trails.
       // Note that this will continue to receive events when the current screen is inactive.
       phet.joist.display.addInputListener( {
-         move: event => {
+        move: event => {
 
-           // (x,y) in view coordinates
-           const viewPoint = this.globalToLocalPoint( event.pointer.point );
-           const xView = Util.toFixed( viewPoint.x, 0 );
-           const yView = Util.toFixed( viewPoint.y, 0 );
+          // (x,y) in view coordinates
+          const viewPoint = this.globalToLocalPoint( event.pointer.point );
+          const xView = Util.toFixed( viewPoint.x, 0 );
+          const yView = Util.toFixed( viewPoint.y, 0 );
 
-           // (x,y) in model coordinates
-           const modelPoint = modelViewTransform.viewToModelPosition( viewPoint );
-           const xModel = Util.toFixed( modelPoint.x, 1 );
-           const yModel = Util.toFixed( modelPoint.y, 1 );
+          // (x,y) in model coordinates
+          const modelPoint = modelViewTransform.viewToModelPosition( viewPoint );
+          const xModel = Util.toFixed( modelPoint.x, 1 );
+          const yModel = Util.toFixed( modelPoint.y, 1 );
 
-           // Update coordinates display.
-           coordinatesNode.text = `(${xView},${yView})<br>(${xModel},${yModel}) nm`;
+          // Update coordinates display.
+          coordinatesNode.text = `(${xView},${yView})<br>(${xModel},${yModel}) nm`;
 
-           // Center the coordinates above the cursor.
-           coordinatesNode.centerX = viewPoint.x;
-           coordinatesNode.bottom = viewPoint.y - 3;
-         }
+          // Center the coordinates above the cursor.
+          coordinatesNode.centerX = viewPoint.x;
+          coordinatesNode.bottom = viewPoint.y - 3;
+        }
       } );
     }
   }
