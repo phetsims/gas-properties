@@ -70,7 +70,7 @@ define( require => {
         new Text( holdConstantPressureTString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      assert && assert( !options.children, 'HoldConstantControls sets children' );
+      assert && assert( !options.hasOwnProperty( 'children' ), 'HoldConstantControls sets children' );
       options = _.extend( {
         children: [
           titleNode,
