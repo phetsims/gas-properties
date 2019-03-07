@@ -70,15 +70,17 @@ define( require => {
         new Text( holdConstantPressureTString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      assert && assert( !options.children, 'sets children' );
-      options.children = [
-        titleNode,
-        nothingRadioButton,
-        volumeRadioButton,
-        temperatureRadioButton,
-        pressureVRadioButton,
-        pressureTRadioButton
-      ];
+      assert && assert( !options.children, 'HoldConstantControls sets children' );
+      options = _.extend( {
+        children: [
+          titleNode,
+          nothingRadioButton,
+          volumeRadioButton,
+          temperatureRadioButton,
+          pressureVRadioButton,
+          pressureTRadioButton
+        ]
+      }, options );
 
       super( options );
     }
