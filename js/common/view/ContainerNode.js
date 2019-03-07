@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * View of the Container. Location of the right edge of the container remains fixed.
@@ -73,8 +73,10 @@ define( require => {
         handleColor: options.lidHandleColor
       } );
 
-      assert && assert( !options.children, 'ContainerNode sets children' );
-      options.children = [ previousBoundsNode, resizeHandleNode, lidNode, boundsNode ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'ContainerNode sets children' );
+      options = _.extend( {
+        children: [ previousBoundsNode, resizeHandleNode, lidNode, boundsNode ]
+      }, options );
 
       super( options );
 

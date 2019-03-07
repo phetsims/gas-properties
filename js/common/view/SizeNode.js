@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Dimensional arrows that show the width of the container.
@@ -36,8 +36,6 @@ define( require => {
 
       assert && assert( widthProperty.range, 'widthProperty must have range' );
 
-      options = options || {};
-
       const viewWidthProperty = new DerivedProperty( [ widthProperty ],
         width => modelViewTransform.modelToViewDeltaX( width ) );
 
@@ -56,15 +54,17 @@ define( require => {
         backgroundLineWidth: 0.5
       } );
 
-      assert && assert( !options.children, 'SizeNode sets children' );
-      options.children = [ dimensionalArrowNode, widthDisplay ];
+      assert && assert( !options || !options.hasOwnProperty( 'children' ), 'SizeNode sets children' );
+      options = _.extend( {}, options, {
+        children: [ dimensionalArrowNode, widthDisplay ]
+      } );
 
       super( options );
 
       visibleProperty.linkAttribute( this, 'visible' );
 
       // right justify with the container
-      const containerViewLocation =  modelViewTransform.modelToViewPosition( containerLocation );
+      const containerViewLocation = modelViewTransform.modelToViewPosition( containerLocation );
       const updateLayout = () => {
         widthDisplay.right = dimensionalArrowNode.right - 28;
         widthDisplay.centerY = dimensionalArrowNode.centerY;

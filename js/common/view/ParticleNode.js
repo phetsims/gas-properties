@@ -21,10 +21,10 @@ define( require => {
      */
     constructor( particle, options ) {
 
-      options = options || {};
-
-      assert && assert( !options.mainColor, 'ParticleNode sets mainColor' );
-      options.mainColor = particle.colorProperty;
+      assert && assert( !options || !options.hasOwnProperty( 'mainColor' ), 'ParticleNode sets mainColor' );
+      options = _.extend( {
+        mainColor: particle.colorProperty
+      }, options );
 
       super( 2 * particle.radius, options );
     }

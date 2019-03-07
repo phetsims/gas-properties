@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Controls related to time: play, pause and step.
@@ -40,8 +40,10 @@ define( require => {
         }
       } );
 
-      assert && assert( !options.children, 'TimeControls sets children' );
-      options.children = [ playPauseButton, stepButton ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'TimeControls sets children' );
+      options = _.extend( {
+        children: [ playPauseButton, stepButton ]
+      }, options );
 
       super( options );
 

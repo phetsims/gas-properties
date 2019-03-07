@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * 'Collision Counter' check box, used to control visibility of the collision counter.
@@ -24,10 +24,10 @@ define( require => {
      */
     constructor( collisionCounterVisibleProperty, options ) {
 
-      options = options || {};
-
-      assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
-      options.icon = GasPropertiesIconFactory.createCollisionCounterIcon();
+      assert && assert( !options || !options.hasOwnProperty( 'icon' ), 'StopwatchCheckbox sets icon' );
+      options = _.extend( {
+        icon: GasPropertiesIconFactory.createCollisionCounterIcon()
+      }, options );
 
       super( collisionCounterString, collisionCounterVisibleProperty, options );
     }

@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * A horizontal dimensional arrow, looks like this, but with solid arrow heads:  |<- - - ->|
@@ -77,8 +77,10 @@ define( require => {
         right: 0
       } );
 
-      assert && assert( !options.children, 'DimensionalArrowsNode sets children' );
-      options.children = [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'DimensionalArrowsNode sets children' );
+      options = _.extend( {
+        children: [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ]
+      }, options );
 
       super( options );
 

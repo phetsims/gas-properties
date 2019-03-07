@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * The lid on the top of the container.
@@ -44,8 +44,10 @@ define( require => {
       assert && assert( handleNode.width <= baseNode.width,
         `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );
 
-      assert && assert( !options.children, 'LidNode sets children' );
-      options.children = [ handleNode, baseNode ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'LidNode sets children' );
+      options = _.extend( {
+        children: [ handleNode, baseNode ]
+      }, options );
 
       super( options );
     }

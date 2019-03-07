@@ -62,8 +62,10 @@ define( require => {
       // Limit width of text
       titleNode.maxWidth = spinner.width - icon.width - X_SPACING;
 
-      assert && assert( !options.children, 'ParticleCountControl sets children' );
-      options.children = [ titleBox, spinner ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'ParticleCountControl sets children' );
+      options = _.extend( {
+        children: [ titleBox, spinner ]
+      }, options );
 
       super( options );
     }

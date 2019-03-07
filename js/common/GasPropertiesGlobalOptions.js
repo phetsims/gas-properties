@@ -17,7 +17,7 @@ define( require => {
     constructor() {
 
       // Projector Mode is a color profile that is suitable for displaying on a classroom projector
-      this.projectorModeEnabledProperty = new BooleanProperty( false );
+      this.projectorModeEnabledProperty = new BooleanProperty( phet.chipper.queryParameters.colorProfile === 'projector' );
     }
   }
 

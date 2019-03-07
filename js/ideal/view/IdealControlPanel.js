@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Control panel that appears in the upper-right corner of the 'Ideal' screen.
@@ -45,8 +45,10 @@ define( require => {
       }, options );
 
       // force the Panel to be a fixed width
-      assert && assert( options.maxWidth === undefined, 'ParticleCountsAccordionBox sets maxWidth' );
-      options.maxWidth = options.fixedWidth;
+      assert && assert( !options.hasOwnProperty( 'maxWidth' ), 'ParticleCountsAccordionBox sets maxWidth' );
+      options = _.extend( {
+        maxWidth: options.fixedWidth
+      }, options );
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
       // constrain all parts of content to separatorWidth

@@ -134,8 +134,10 @@ define( require => {
       backgroundNode.center = bezelNode.center;
       content.center = backgroundNode.center;
 
-      assert && assert( !options.children, 'CollisionCounterNode sets children' );
-      options.children = [ bezelNode, backgroundNode, content ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'CollisionCounterNode sets children' );
+      options = _.extend( {
+        children: [ bezelNode, backgroundNode, content ]
+      }, options );
 
       super( options );
 

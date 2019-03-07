@@ -37,8 +37,10 @@ define( require => {
       // The regions that fill the collision detection bounds.
       const regionsParent = new Node();
 
-      assert && assert( !options.children, 'RegionsNode sets children' );
-      options.children = [ regionsParent, boundsNode ];
+      assert && assert( !options.hasOwnProperty( 'children' ), 'RegionsNode sets children' );
+      options = _.extend( {
+        children: [ regionsParent, boundsNode ]
+      }, options );
 
       super( options );
 
