@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for all types of particles.
+ * Model for all types of particles. A particle is a perfect sphere.
  * NOTE: Since there can be a large number of Particles, all Vector2 fields herein are mutated for performance reasons.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -111,6 +111,16 @@ define( require => {
     contacted( particle ) {
       return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
     }
+
+    /**
+     * Convenience methods that define bounds.
+     * @returns {number}
+     * @public
+     */
+    get left() { return this.location.x - this.radius; }
+    get right() { return this.location.x + this.radius; }
+    get top() { return this.location.y + this.radius; }
+    get bottom() { return this.location.y - this.radius; }
 
     /**
      * Gets the center of mass of a collection of particles.

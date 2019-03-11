@@ -82,13 +82,11 @@ define( require => {
      * @private
      */
     drawParticles( context, particles, image ) {
-      const radius = image.width / 2;
       for ( let i = 0; i < particles.length; i++ ) {
-
-        //TODO this occurs in step, reuse Vector2 here
-        const location = this.model.modelViewTransform.modelToViewPosition( particles[ i ].location )
-          .subtractScalar( radius );
-        context.drawImage( image, location.x, location.y );
+        context.drawImage( image, 
+          this.model.modelViewTransform.modelToViewX( particles[ i ].left ),
+          this.model.modelViewTransform.modelToViewY( particles[ i ].top )
+        );
       }
     }
   }
