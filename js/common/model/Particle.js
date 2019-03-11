@@ -101,11 +101,10 @@ define( require => {
       return this.location.distance( particle.location ) <= ( this.radius + particle.radius );
     }
 
-    //TODO does this do what Java implementation claims?
     /**
-     * Did this particle contact another particle on the previous time step?
-     * According to the Java implementation, using this check to prevent a collision in such cases makes
-     * the behavior of collisions much more natural looking.
+     * Did this particle contact another particle on the previous time step? Prevents collections of particles
+     * that are emitted from the pump from colliding until they spread out.  This was borrowed from the Java
+     * implementation, and makes the collision behavior more natural looking.
      * @param {Particle} particle
      * @returns {boolean}
      */

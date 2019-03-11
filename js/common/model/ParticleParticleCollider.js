@@ -28,14 +28,12 @@ define( require => {
       assert && assert( particle1 !== particle2, 'particles are the same instance' );
       let collided = false;
 
-      //TODO particle-particle collision is not working
       if ( !particle1.contacted( particle2 ) && particle1.contacts( particle2 ) ) {
-        phet.log && phet.log( `collision: particle1=${particle1} particle2=${particle2}` );//XXX
         collided = true;
 
         //TODO temporary, to do something
-        particle1.setVelocity( particle1.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
-        particle2.setVelocity( particle2.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
+        particle1.setVelocity( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
+        particle2.setVelocity( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
       }
 
       return collided;
