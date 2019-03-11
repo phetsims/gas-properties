@@ -49,6 +49,16 @@ define( require => {
     }
 
     /**
+     * Convenience methods that define bounds.
+     * @returns {number}
+     * @public
+     */
+    get left() { return this.location.x - this.radius; }
+    get right() { return this.location.x + this.radius; }
+    get top() { return this.location.y + this.radius; }
+    get bottom() { return this.location.y - this.radius; }
+
+    /**
      * String representation of a Particle.
      * For debugging only, do not rely on format.
      * @returns {string}
@@ -111,16 +121,6 @@ define( require => {
     contacted( particle ) {
       return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
     }
-
-    /**
-     * Convenience methods that define bounds.
-     * @returns {number}
-     * @public
-     */
-    get left() { return this.location.x - this.radius; }
-    get right() { return this.location.x + this.radius; }
-    get top() { return this.location.y + this.radius; }
-    get bottom() { return this.location.y - this.radius; }
 
     /**
      * Gets the center of mass of a collection of particles.
