@@ -22,18 +22,13 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        location: null, // {Vector2|null} initial location in nm, null defaults to (0,0)
         mass: 1, // AMU
         radius: 1, // nm
         colorProperty: null // {Property.<Color|string>|null}
       }, options );
 
-      options.location = options.location || new Vector2( 0, 0 );
-
-      // @public
-      this.location = options.location.copy(); // make a copy because we'll be mutating this.location
-
       // @public (read-only)
+      this.location = new Vector2( 0, 0 ); // nm
       this.previousLocation = this.location.copy(); // location on previous time step
       this.mass = options.mass; // AMU
       this.radius = options.radius; // radians
@@ -81,8 +76,17 @@ define( require => {
      * @public
      */
     step( dt ) {
+      this.setLocation( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
+    }
+
+    /**
+     * Sets the location.
+     * @param {number} x
+     * @param {number} y
+     */
+    setLocation( x, y ) {
       this.previousLocation.setXY( this.location.x, this.location.y );
-      this.location.setXY( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
+      this.location.setXY( x, y );
     }
 
     /**

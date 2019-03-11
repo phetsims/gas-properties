@@ -167,9 +167,8 @@ define( require => {
       for ( let i = 0; i < n; i++ ) {
 
         // Create a particle
-        const particle = new Constructor( {
-          location: this.container.hoseLocation.minusXY( 0.25, 0 ) //TODO move this location inside the container based on radius
-        } );
+        const particle = new Constructor();
+        particle.setLocation( this.container.hoseLocation.x - particle.radius,this.container.hoseLocation.y );
 
         // Set the particle's velocity.
         // We can't do this in the constructor because initial velocity is a function of the particle's mass.
