@@ -23,22 +23,24 @@ define( require => {
 
     /**
      * Creates an icon for a heavy particle.
+     * @param {ModelViewTransform2} modelViewTransform
      * @returns {Node}
      * @public
      * @static
      */
-    createHeavyParticleIcon() {
-      return new ParticleNode( new HeavyParticle() );
+    createHeavyParticleIcon( modelViewTransform ) {
+      return new ParticleNode( new HeavyParticle(), modelViewTransform );
     },
 
     /**
      * Creates an icon for a light particle.
+     * @param {ModelViewTransform2} modelViewTransform
      * @returns {Node}
      * @public
      * @static
      */
-    createLightParticleIcon() {
-      return new ParticleNode( new LightParticle() );
+    createLightParticleIcon( modelViewTransform ) {
+      return new ParticleNode( new LightParticle(), modelViewTransform );
     },
 
     //TODO DESIGN create a less detailed icon for the stopwatch

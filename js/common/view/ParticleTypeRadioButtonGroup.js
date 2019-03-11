@@ -19,9 +19,10 @@ define( require => {
 
     /**
      * @param {StringProperty} particleTypeProperty
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( particleTypeProperty, options ) {
+    constructor( particleTypeProperty, modelViewTransform, options ) {
 
       options = _.extend( {
 
@@ -39,8 +40,8 @@ define( require => {
       }, options );
 
       const content = [
-        { value: ParticleTypeEnum.HEAVY, node: GasPropertiesIconFactory.createHeavyParticleIcon() },
-        { value: ParticleTypeEnum.LIGHT, node: GasPropertiesIconFactory.createLightParticleIcon() }
+        { value: ParticleTypeEnum.HEAVY, node: GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ) },
+        { value: ParticleTypeEnum.LIGHT, node: GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ) }
       ];
 
       super( particleTypeProperty, content, options );

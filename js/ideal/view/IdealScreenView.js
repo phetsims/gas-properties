@@ -82,7 +82,9 @@ define( require => {
 
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
-        model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
+        model.numberOfHeavyParticlesProperty,
+        model.numberOfLightParticlesProperty,
+        model.modelViewTransform, {
           fixedWidth: PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
           right: controlPanel.right,
@@ -111,7 +113,8 @@ define( require => {
       ] );
 
       // Radio buttons for selecting particle type
-      const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty );
+      const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty,
+        model.modelViewTransform );
 
       // Bicycle pumps + radio buttons
       const pumpBoxCenterX = containerViewLocation.x + ( particleCountsAccordionBox.left - containerViewLocation.x ) / 2;

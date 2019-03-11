@@ -30,9 +30,10 @@ define( require => {
     /**
      * @param {NumberProperty} numberOfHeavyParticlesProperty
      * @param {NumberProperty} numberOfLightParticlesProperty
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, options ) {
+    constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, modelViewTransform, options ) {
 
       options = _.extend( {
 
@@ -76,10 +77,12 @@ define( require => {
         children: [
 
           // Heavy
-          new ParticleCountControl( GasPropertiesIconFactory.createHeavyParticleIcon(), heavyString, numberOfHeavyParticlesProperty ),
+          new ParticleCountControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform),
+            heavyString, numberOfHeavyParticlesProperty ),
 
           // Light
-          new ParticleCountControl( GasPropertiesIconFactory.createLightParticleIcon(), lightString, numberOfLightParticlesProperty )
+          new ParticleCountControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
+            lightString, numberOfLightParticlesProperty )
         ]
       } );
 

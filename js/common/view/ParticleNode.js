@@ -16,17 +16,20 @@ define( require => {
 
     /**
      * @param {Particle} particle
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      * @constructor
      */
-    constructor( particle, options ) {
+    constructor( particle, modelViewTransform, options ) {
 
       assert && assert( !options || !options.hasOwnProperty( 'mainColor' ), 'ParticleNode sets mainColor' );
       options = _.extend( {
         mainColor: particle.colorProperty
       }, options );
 
-      super( 2 * particle.radius, options );
+      const diameter = 2 * modelViewTransform.modelToViewDeltaX( particle.radius );
+
+      super( diameter, options );
     }
   }
 

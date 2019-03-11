@@ -34,7 +34,7 @@ define( require => {
 
       // Create heavy particle image, re-created if color profile changes.
       this.heavyParticle.colorProperty.link( color => {
-        const particle = new ParticleNode( this.heavyParticle );
+        const particle = new ParticleNode( this.heavyParticle, model.modelViewTransform );
         particle.toCanvas( canvas => {
           this.heavyParticleImage = canvas;
         } );
@@ -42,7 +42,7 @@ define( require => {
 
       // Create light particle image, re-created if color profile changes.
       this.lightParticle.colorProperty.link( color => {
-        const particle = new ParticleNode( this.lightParticle );
+        const particle = new ParticleNode( this.lightParticle, model.modelViewTransform );
         particle.toCanvas( canvas => {
           this.lightParticleImage = canvas;
         } );
