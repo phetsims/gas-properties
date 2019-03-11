@@ -18,6 +18,7 @@ define( require => {
       //TODO does this need to be a class?
     }
 
+    //TODO particles escape through container walls
     /**
      * Detects and handles collision between 2 particles.
      * @param {Particle} particle
@@ -25,7 +26,14 @@ define( require => {
      * @returns {boolean} true if the particle and container collided, false otherwise
      */
     doCollision( particle, container ) {
-      return false; //TODO
+      let collided = false;
+      if ( particle.contactsContainer( container ) ) {
+        collided = true;
+
+        //TODO temporary, to do something
+        particle.setVelocity( particle.velocity.magnitude, particle.velocity.angle + Math.PI );
+      }
+      return collided;
     }
   }
 

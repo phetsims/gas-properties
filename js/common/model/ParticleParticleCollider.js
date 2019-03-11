@@ -28,7 +28,7 @@ define( require => {
       assert && assert( particle1 !== particle2, 'particles are the same instance' );
       let collided = false;
 
-      if ( !particle1.contacted( particle2 ) && particle1.contacts( particle2 ) ) {
+      if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
         collided = true;
 
         //TODO temporary, to do something

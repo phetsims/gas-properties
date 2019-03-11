@@ -69,6 +69,7 @@ define( require => {
     }
 
     //TODO can we get rid of this?
+    // @public
     dispose() {
       assert && assert( !this.isDisposed, 'attempted to dispose again' );
       this.isDisposed = true;
@@ -106,8 +107,9 @@ define( require => {
      * Does this particle contact another particle now?
      * @param {Particle} particle
      * @returns {boolean}
+     * @public
      */
-    contacts( particle ) {
+    contactsParticle( particle ) {
       return this.location.distance( particle.location ) <= ( this.radius + particle.radius );
     }
 
@@ -117,9 +119,45 @@ define( require => {
      * implementation, and makes the collision behavior more natural looking.
      * @param {Particle} particle
      * @returns {boolean}
+     * @public
      */
-    contacted( particle ) {
+    contactedParticle( particle ) {
       return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
+    }
+
+    /**
+     * Does this particle contact a container?
+     * @param {Container} container
+     * @returns {boolean}
+     * @public
+     */
+    contactsContainer( container ) {
+
+      // Hitting left wall?
+      let dx = this.location.x - this.radius - container.left;
+      if ( dx <= 0 ) {
+        return true;
+      }
+
+      // Hitting right wall?
+      dx = this.location.x + this.radius - container.right;
+      if ( dx >= 0 && this.velocity.x > 0 ) {
+        return true;
+      }
+
+      // Hitting bottom wall?
+      let dy = this.location.y - this.radius - container.bottom;
+      if ( dy <= 0 && this.velocity.y < 0 ) {
+        return true;
+      }
+
+      // Hitting top wall?
+      dy = this.location.y + this.radius - container.top;
+      if ( dy >= 0 && this.velocity.y > 0 ) {
+        return true;
+      }
+
+      return false;
     }
 
     /**
