@@ -91,6 +91,9 @@ define( require => {
 
       // detect and handle particle-container collisions
       this.doParticleContainerCollisions();
+
+      this.keepParticlesInBox( this.model.heavyParticles );
+      this.keepParticlesInBox( this.model.lightParticles );
     }
 
     /**
@@ -163,6 +166,30 @@ define( require => {
           for ( let j = 0; j < particles.length - 1; j++ ) {
             this.particleContainerCollider.doCollision( particles[ j ], container );
           }
+        }
+      }
+    }
+
+    //TODO hack from the Java version, is there a better way?
+    keepParticlesInBox( particles ) {
+      const container = this.model.container;
+      for ( let i = 0; i < particles.length; i++ ) {
+        const particle = particles[ i ];
+
+        // adjust x
+        if ( particle.location.x - particle.radius < container.left ) {
+          particle.setLocation( container.left + particle.radius, particle.location.y );
+        }
+        else if ( particle.location.x + particle.radius > container.right) {
+          particle.setLocation( container.right - particle.radius, particle.location.y );
+        }
+
+        // adjust y
+        if ( particle.location.y + particle.radius > container.top ) {
+          particle.setLocation( particle.location.x, container.top - particle.radius );
+        }
+        else if ( particle.location.y - particle.radius < container.bottom) {
+          particle.setLocation( particle.location.x, container.bottom + particle.radius );
         }
       }
     }
