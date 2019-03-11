@@ -14,27 +14,29 @@ define( require => {
   const GasPropertiesUtils = {
 
     /**
-     * Determines whether a line segment intersects a bounds. First test if either endpoint is inside the bounds.
-     * If not, then test whether the line segment intersects any of the 4 line segments that make up the bounds.
+     * Determines whether a line segment intersects a rectangle (bounds).
      * @param {number} x1
      * @param {number} y1
      * @param {number} x2
      * @param {number} y2
-     * @param {Bounds2} bounds
+     * @param {Bounds2} b
      * @returns {boolean}
      * @public
      */
-    lineSegmentIntersectsBounds( x1, y1, x2, y2, bounds ) {
-      return bounds.containsCoordinates( x1, y1 ) ||
-             bounds.containsCoordinates( x2, y2 ) ||
+    lineSegmentIntersectsBounds( x1, y1, x2, y2, b ) {
+
+      // First test if either endpoint is inside the rectangle.
+      // If not, then test whether the line segment intersects any of the 4 line segments that make up the rectangle.
+      return b.containsCoordinates( x1, y1 ) ||
+             b.containsCoordinates( x2, y2 ) ||
              // left edge
-             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, bounds.left, bounds.top, bounds.left, bounds.bottom ) ||
+             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, b.left, b.top, b.left, b.bottom ) ||
              // right edge
-             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, bounds.right, bounds.top, bounds.right, bounds.bottom ) ||
+             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, b.right, b.top, b.right, b.bottom ) ||
              // top edge
-             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, bounds.left, bounds.top, bounds.right, bounds.top ) ||
+             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, b.left, b.top, b.right, b.top ) ||
              // bottom edge
-             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, bounds.left, bounds.bottom, bounds.right, bounds.bottom );
+             GasPropertiesUtils.lineSegmentIntersectsLineSegment( x1, y1, x2, y2, b.left, b.bottom, b.right, b.bottom );
     },
 
     //TODO address this in DOT/Util
