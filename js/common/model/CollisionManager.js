@@ -118,7 +118,7 @@ define( require => {
       const regions = this.regionsProperty.value;
       for ( let i = 0; i < regions.length; i++ ) {
         if ( regions[ i ].intersectsContainer( container ) ) {
-          regions[ i ].addContainer( container );
+          regions[ i ].setContainer( container );
         }
       }
     }
@@ -157,11 +157,11 @@ define( require => {
     doParticleContainerCollisions() {
       const regions = this.regionsProperty.value;
       for ( let i = 0; i < regions.length; i++ ) {
-        const particles = regions[ i ].particles;
-        const containers = regions[ i ].containers;
-        for ( let j = 0; j < particles.length - 1; j++ ) {
-          for ( let k = 0; k < containers.length; k++ ) {
-            this.particleContainerCollider.doCollision( particles[ j ], containers[ k ] );
+        const container = regions[ i ].container;
+        if ( container ) {
+          const particles = regions[ i ].particles;
+          for ( let j = 0; j < particles.length - 1; j++ ) {
+            this.particleContainerCollider.doCollision( particles[ j ], container );
           }
         }
       }

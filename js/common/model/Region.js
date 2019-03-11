@@ -27,7 +27,7 @@ define( require => {
 
       // @public (read-only)
       this.particles = []; // {Particle[]}
-      this.containers = []; // {Container[]}
+      this.container = null; // {Container}
     }
 
     //TODO include particle's radius?
@@ -63,13 +63,13 @@ define( require => {
     }
 
     /**
-     * Adds a container to this Region.
+     * Assigns a container to this Region.
      * @param {Container} container
      * @public
      */
-    addContainer( container ) {
-      assert && assert( this.containers.indexOf( container ) === -1, 'container is already in this Region' );
-      this.containers.push( container );
+    setContainer( container ) {
+      assert && assert( !this.container, 'Region already has a container' );
+      this.container = container;
     }
 
     /**
@@ -78,7 +78,7 @@ define( require => {
      */
     clear() {
       this.particles.length = 0;
-      this.containers.length = 0;
+      this.container = null;
     }
   }
 
