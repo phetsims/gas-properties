@@ -129,39 +129,18 @@ define( require => {
       return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
     }
 
+    //TODO why the velocity checks here?
     /**
-     * Does this particle contact a container?
+     * Does this particle contact the container?
      * @param {Container} container
      * @returns {boolean}
      * @public
      */
     contactsContainer( container ) {
-
-      // Hitting left wall?
-      let dx = this.location.x - this.radius - container.left;
-      if ( dx <= 0 ) {
-        return true;
-      }
-
-      // Hitting right wall?
-      dx = this.location.x + this.radius - container.right;
-      if ( dx >= 0 && this.velocity.x > 0 ) {
-        return true;
-      }
-
-      // Hitting bottom wall?
-      let dy = this.location.y - this.radius - container.bottom;
-      if ( dy <= 0 && this.velocity.y < 0 ) {
-        return true;
-      }
-
-      // Hitting top wall?
-      dy = this.location.y + this.radius - container.top;
-      if ( dy >= 0 && this.velocity.y > 0 ) {
-        return true;
-      }
-
-      return false;
+      return ( this.location.x - this.radius <= container.left ) || // left wall
+             ( this.location.x + this.radius >= container.right && this.velocity.x > 0 ) || // right wall
+             ( this.location.y + this.radius >= container.top && this.velocity.y > 0 ) || // top wall
+             ( this.location.y - this.radius <= container.bottom && this.velocity.y < 0 ); // bottom wall
     }
 
     /**
