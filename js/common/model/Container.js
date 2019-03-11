@@ -2,7 +2,7 @@
 
 //TODO add info about hole in top of box
 /**
- * Container for particles.
+ * A rectangular container for particles. Origin is at the bottom-right corner. Width increases to the left.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -80,52 +80,28 @@ define( require => {
     get maxBounds() { return this.getMaxBounds(); }
 
     /**
-     * Gets the x coordinate of the container's left side.
+     * Convenience methods that define bounds.
      * @returns {number}
+     * @public
      */
-    getLeft() { return this.location.x - this.widthProperty.value; }
-
-    get left() { return this.getLeft(); }
-
-    /**
-     * Gets the x coordinate of the container's right side.
-     * @returns {number}
-     */
-    getRight() { return this.location.x; }
-
-    get right() { return this.getRight(); }
-
-    /**
-     * Gets the y coordinate of the container's top side.
-     * @returns {number}
-     */
-    getTop() { return this.location.y + this.height; }
-
-    get top() { return this.getTop(); }
-
-    /**
-     * Gets the y coordinate of the container's bottom side.
-     * @returns {number}
-     */
-    getBottom() { return this.location.y; }
-
-    get bottom() { return this.getBottom(); }
+    get left() { return this.location.x - this.widthProperty.value; }
+    get right() { return this.location.x; }
+    get top() { return this.location.y + this.height; }
+    get bottom() { return this.location.y; }
 
     /**
      * Gets the min x coordinate of the opening in the top of the container.
      * @returns number
+     * @public
      */
-    getOpeningMinX() { return this.openingMaxX - this.openingWidthRange.max; }
-
-    get openingMinX() { return this.getOpeningMinX(); }
+    get openingMinX() { return this.openingMaxX - this.openingWidthRange.max; }
 
     /**
      * Gets the max x coordinate of the opening in the top of the container.
      * @returns number
+     * @public
      */
-    getOpeningMaxX() { return this.location.x - this.openingXOffset; }
-
-    get openingMaxX() { return this.getOpeningMaxX(); }
+    get openingMaxX() { return this.location.x - this.openingXOffset; }
   }
 
   return gasProperties.register( 'Container', Container );
