@@ -31,7 +31,7 @@ define( require => {
         collided = true;
 
         //TODO temporary, to do something
-        particle.setVelocity( particle.velocity.magnitude, particle.velocity.angle + Math.PI );
+        particle.setVelocityPolar( particle.velocity.magnitude, particle.velocity.angle + Math.PI );
       }
       return collided;
     }

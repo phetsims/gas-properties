@@ -32,8 +32,8 @@ define( require => {
         collided = true;
 
         //TODO temporary, to do something
-        particle1.setVelocity( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
-        particle2.setVelocity( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
+        particle1.setVelocityPolar( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
+        particle2.setVelocityPolar( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
       }
 
       return collided;

@@ -168,12 +168,13 @@ define( require => {
 
         // Create a particle
         const particle = new Constructor( {
-          location: this.container.hoseLocation
+          location: this.container.hoseLocation.minusXY( 0.25, 0 ) //TODO move this location inside the container based on radius
         } );
 
         // Set the particle's velocity.
         // We can't do this in the constructor because initial velocity is a function of the particle's mass.
-        particle.setVelocity(
+        particle.setVelocityPolar(
+
           // Velocity magnitude corresponds to INITIAL_TEMPERATURE.
           // KE = (3/2)kT = (1/2) * m * |v|^2, so v = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * INITIAL_TEMPERATURE / particle.mass ),

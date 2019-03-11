@@ -93,7 +93,7 @@ define( require => {
      * @param {number} angle - in radians
      * @public
      */
-    setVelocity( magnitude, angle ) {
+    setVelocityPolar( magnitude, angle ) {
       this.velocity.setPolar( magnitude, angle );
 
       // P = m * v
