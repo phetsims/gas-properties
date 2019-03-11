@@ -18,6 +18,8 @@ define( require => {
 
   // constants
   const FONT = new PhetFont( 14 );
+  const GREEN = 'rgba( 0, 255, 0, 0.1 )';
+  const RED = 'rgba( 255, 0, 0, 0.1 )';
 
   class RegionNode extends Node {
 
@@ -32,7 +34,7 @@ define( require => {
 
       // Cell in the 2D grid
       const cellNode = new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
-        fill: 'rgba( 0, 255, 0, 0.1 )' // use translucent color so that additive opacity shows overlap of Regions
+        fill: GREEN
       } );
 
       // Displays the number of particles in the Region
@@ -62,6 +64,7 @@ define( require => {
     step( dt ) {
       this.countNode.text = this.region.particles.length;
       this.countNode.center = this.cellNode.center;
+      this.cellNode.fill = this.region.container ? RED : GREEN;
     }
   }
 

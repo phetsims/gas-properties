@@ -14,6 +14,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Util = require( 'DOT/Util' );
 
   class Region {
 
@@ -53,13 +54,35 @@ define( require => {
 
     //TODO include container's wall thickness?
     /**
-     * Does this region and a container intersect?
+     * Does a wall of the container intersect this region?
      * @param {Container} container
      * @returns {boolean}
      * @public
      */
     intersectsContainer( container ) {
-      return true;  //TODO
+      return this.lineSegmentIntersectsBounds( container.left, container.top, container.left, container.bottom, this.bounds ) || // left wall
+             this.lineSegmentIntersectsBounds( container.right, container.top, container.right, container.bottom, this.bounds ) || // right wall
+             this.lineSegmentIntersectsBounds( container.left, container.top, container.right, container.top, this.bounds ) || // top wall
+             this.lineSegmentIntersectsBounds( container.left, container.bottom, container.right, container.bottom, this.bounds ); // bottom wall
+    }
+
+    /**
+     * Determines whether a line segment intersects a bounds.
+     * @param {number} x1
+     * @param {number} y1
+     * @param {number} x2
+     * @param {number} y2
+     * @param {Bounds2} bounds
+     * @returns {boolean}
+     * @private
+     */
+    lineSegmentIntersectsBounds( x1, y1, x2, y2, bounds ) {
+      return bounds.containsCoordinates( x1, y1 ) ||
+             bounds.containsCoordinates( x2, y2 ) ||
+             Util.lineSegmentIntersection( x1, y1, x2, y2, bounds.left, bounds.top, bounds.left, bounds.bottom ) ||
+             Util.lineSegmentIntersection( x1, y1, x2, y2, bounds.right, bounds.top, bounds.right, bounds.bottom ) ||
+             Util.lineSegmentIntersection( x1, y1, x2, y2, bounds.left, bounds.top, bounds.right, bounds.top ) ||
+             Util.lineSegmentIntersection( x1, y1, x2, y2, bounds.left, bounds.bottom, bounds.right, bounds.bottom );
     }
 
     /**

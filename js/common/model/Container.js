@@ -26,6 +26,11 @@ define( require => {
       // @public (read-only) height of the container, in nm
       this.height = 8.75;
 
+      // @public (read-only) this.left is dynamic, see ES5 getter
+      this.right = this.location.x;
+      this.top = this.location.y + this.height;
+      this.bottom = this.location.y;
+
       // @public (read-only) range of the container's width, in nm
       this.widthRange = new RangeWithValue( 5, 15, 10 );
 
@@ -57,6 +62,12 @@ define( require => {
 
       // @public (read-only) bicycle pump hose is connected to the right side of the container
       this.hoseLocation = new Vector2( this.location.x, this.location.y + this.height / 2 );
+
+      // @public (read-only) max bounds of the container, when it is expanded to its full width.
+      this.maxBounds = new Bounds2(
+        this.location.x - this.widthRange.max, this.location.y,
+        this.location.x, this.location.y + this.height
+      );
     }
 
     // @public
@@ -66,28 +77,11 @@ define( require => {
     }
 
     /**
-     * Gets the max bounds of the container, when it is expanded to its full width.
-     * @returns {Bounds2}
-     * @public
-     */
-    getMaxBounds() {
-      return new Bounds2(
-        this.location.x - this.widthRange.max, this.location.y,
-        this.location.x, this.location.y + this.height
-      );
-    }
-
-    get maxBounds() { return this.getMaxBounds(); }
-
-    /**
-     * Convenience methods that define bounds.
+     * Left edge of the container's bounds.
      * @returns {number}
      * @public
      */
     get left() { return this.location.x - this.widthProperty.value; }
-    get right() { return this.location.x; }
-    get top() { return this.location.y + this.height; }
-    get bottom() { return this.location.y; }
 
     /**
      * Gets the min x coordinate of the opening in the top of the container.
