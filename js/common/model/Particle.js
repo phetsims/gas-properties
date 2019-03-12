@@ -63,7 +63,6 @@ define( require => {
       return `Particle[location:(${this.location.x},${this.location.y}) mass:${this.mass} radius:${this.radius}]`;
     }
 
-    //TODO can we get rid of this?
     // @public
     dispose() {
       assert && assert( !this.isDisposed, 'attempted to dispose again' );
@@ -76,6 +75,7 @@ define( require => {
      * @public
      */
     step( dt ) {
+      assert && assert( !this.isDisposed, 'attempted to step a disposed Particle' );
       this.setLocation( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
     }
 
