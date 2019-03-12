@@ -29,8 +29,8 @@ define( require => {
       if ( particle.left <= container.left ) {
 
         // particle collided with left wall
-        const dx = Math.abs( container.left - particle.left );
-        const newX = particle.location.x + ( 2 * dx );
+        const dx = 2 * Math.abs( container.left - particle.left );
+        const newX = particle.location.x + dx;
         particle.setLocation( newX, particle.location.y );
         particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
 
@@ -39,8 +39,8 @@ define( require => {
       else if ( particle.right >= container.right ) {
 
         // particle collided with right wall
-        const dx = Math.abs( container.right - particle.right );
-        const newX = particle.location.x - ( 2 * dx );
+        const dx = 2 * Math.abs( container.right - particle.right );
+        const newX = particle.location.x - dx;
         particle.setLocation( newX, particle.location.y );
         particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
       }
@@ -49,16 +49,16 @@ define( require => {
         //TODO handle opening in top
 
         // particle collided with top wall
-        const dy = Math.abs( container.top - particle.top );
-        const newY = particle.location.y - ( 2 * dy );
+        const dy = 2 * Math.abs( container.top - particle.top );
+        const newY = particle.location.y - dy;
         particle.setLocation( particle.location.x, newY );
         particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
       }
       else if ( particle.bottom <= container.bottom ) {
 
         // particle collided with bottom wall
-        const dy = Math.abs( container.bottom - particle.bottom );
-        const newY = particle.location.y + ( 2 * dy );
+        const dy = 2 * Math.abs( container.bottom - particle.bottom );
+        const newY = particle.location.y + dy;
         particle.setLocation( particle.location.x, newY );
         particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
       }
