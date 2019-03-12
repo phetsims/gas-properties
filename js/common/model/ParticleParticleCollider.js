@@ -22,6 +22,7 @@ define( require => {
      * Detects and handles collision between 2 particles.
      * @param particle1
      * @param particle2
+     * @public
      */
     doCollision( particle1, particle2 ) {
       assert && assert( particle1 !== particle2, 'particles are the same instance' );

@@ -22,6 +22,7 @@ define( require => {
      * Detects and handles collision between a particle and a container.
      * @param {Particle} particle
      * @param {Container} container
+     * @public
      */
     doCollision( particle, container ) {
 

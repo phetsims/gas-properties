@@ -19,7 +19,7 @@ define( require => {
   class CollisionManager {
 
     /**
-     * @param {IdealModel} model
+     * @param {IdealModel} model TODO more general type
      * @param {Object} [options]
      */
     constructor( model, options ) {

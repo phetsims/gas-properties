@@ -19,7 +19,7 @@ define( require => {
   class ParticlesNode extends CanvasNode {
 
     /**
-     * @param {IdealModel} model TODO type expression, interface too wide
+     * @param {IdealModel} model TODO more general type, narrower interface
      */
     constructor( model ) {
 
