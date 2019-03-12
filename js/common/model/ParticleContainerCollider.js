@@ -22,17 +22,45 @@ define( require => {
      * Detects and handles collision between a particle and a container.
      * @param {Particle} particle
      * @param {Container} container
-     * @returns {boolean} true if the particle and container collided, false otherwise
      */
     doCollision( particle, container ) {
-      let collided = false;
-      if ( particle.contactsContainer( container ) ) {
-        collided = true;
 
-        //TODO temporary, to do something
-        particle.setVelocityPolar( particle.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
+      if ( particle.left <= container.left ) {
+
+        // particle collided with left wall
+        const dx = Math.abs( container.left - particle.left );
+        const newX = particle.location.x + ( 2 * dx );
+        particle.setLocation( newX, particle.location.y );
+        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
+
+        //TODO adjust kinetic energy due to moving left wall of container
       }
-      return collided;
+      else if ( particle.right >= container.right ) {
+
+        // particle collided with right wall
+        const dx = Math.abs( container.right - particle.right );
+        const newX = particle.location.x - ( 2 * dx );
+        particle.setLocation( newX, particle.location.y );
+        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
+      }
+      else if ( particle.top >= container.top ) {
+
+        //TODO handle opening in top
+
+        // particle collided with top wall
+        const dy = Math.abs( container.top - particle.top );
+        const newY = particle.location.y - ( 2 * dy );
+        particle.setLocation( particle.location.x, newY );
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+      }
+      else if ( particle.bottom <= container.bottom ) {
+
+        // particle collided with bottom wall
+        const dy = Math.abs( container.bottom - particle.bottom );
+        const newY = particle.location.y + ( 2 * dy );
+        particle.setLocation( particle.location.x, newY );
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+      }
     }
   }
 

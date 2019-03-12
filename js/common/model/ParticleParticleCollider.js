@@ -22,21 +22,16 @@ define( require => {
      * Detects and handles collision between 2 particles.
      * @param particle1
      * @param particle2
-     * @returns {boolean} true if the particles collided, false otherwise
      */
     doCollision( particle1, particle2 ) {
       assert && assert( particle1 !== particle2, 'particles are the same instance' );
-      let collided = false;
 
       if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
-        collided = true;
 
         //TODO temporary, to do something
         particle1.setVelocityPolar( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
         particle2.setVelocityPolar( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
       }
-
-      return collided;
     }
   }
 

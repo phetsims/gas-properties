@@ -90,6 +90,25 @@ define( require => {
     }
 
     /**
+     * Sets the velocity in Cartesian coordinates.
+     * As a side effect, updates everything that is a function of velocity.
+     * @param {number} x
+     * @param {number} y
+     * @public
+     */
+    setVelocityXY( x, y ) {
+
+      // mutate velocity vector
+      this.velocity.setXY( x, y );
+
+      // P = m * v
+      this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
+
+      // KE = (1/2) * m * |v|^2
+      this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared;
+    }
+
+    /**
      * Sets the velocity in polar coordinates.
      * As a side effect, updates everything that is a function of velocity.
      *
@@ -98,13 +117,7 @@ define( require => {
      * @public
      */
     setVelocityPolar( magnitude, angle ) {
-      this.velocity.setPolar( magnitude, angle );
-
-      // P = m * v
-      this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
-
-      // KE = (1/2) * m * |v|^2
-      this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared;
+      this.setVelocityXY( magnitude * Math.cos( angle ), magnitude * Math.sin( angle ) );
     }
 
     /**
@@ -127,20 +140,6 @@ define( require => {
      */
     contactedParticle( particle ) {
       return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
-    }
-
-    //TODO why the velocity checks here?
-    /**
-     * Does this particle contact the container?
-     * @param {Container} container
-     * @returns {boolean}
-     * @public
-     */
-    contactsContainer( container ) {
-      return ( this.location.x - this.radius <= container.left ) || // left wall
-             ( this.location.x + this.radius >= container.right && this.velocity.x > 0 ) || // right wall
-             ( this.location.y + this.radius >= container.top && this.velocity.y > 0 ) || // top wall
-             ( this.location.y - this.radius <= container.bottom && this.velocity.y < 0 ); // bottom wall
     }
 
     /**
