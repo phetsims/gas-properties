@@ -26,6 +26,7 @@ define( require => {
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
+  const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -224,6 +225,11 @@ define( require => {
       // 2D grid for model coordinate frame
       if ( GasPropertiesQueryParameters.grid ) {
         this.addChild( new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform ) );
+      }
+
+      // model and view coordinates for pointer location
+      if ( GasPropertiesQueryParameters.pointerCoordinates ) {
+        this.addChild( new PointerCoordinatesNode( model.modelViewTransform ) );
       }
 
       // This should be in front of everything else.
