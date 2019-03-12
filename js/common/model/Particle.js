@@ -80,9 +80,10 @@ define( require => {
     }
 
     /**
-     * Sets the location.
+     * Sets the location and remembers the previous location.
      * @param {number} x
      * @param {number} y
+     * @public
      */
     setLocation( x, y ) {
       this.previousLocation.setXY( this.location.x, this.location.y );
