@@ -20,7 +20,7 @@ define( require => {
 
     //TODO particles escape through container walls
     /**
-     * Detects and handles collision between 2 particles.
+     * Detects and handles collision between a particle and a container.
      * @param {Particle} particle
      * @param {Container} container
      * @returns {boolean} true if the particle and container collided, false otherwise
