@@ -64,6 +64,7 @@ define( require => {
     /**
      * Update the stopwatch. 1 second of real time is displayed as 2.5 picoseconds
      * @param {number} dt - time delta, in ps
+     * @public
      */
     step( dt ) {
       if ( this.isRunningProperty.value ) {

@@ -46,7 +46,7 @@ define( require => {
     }
   }
 
-  // Choice of pressure units that the gauge can display
+  // @public Choice of pressure units that the gauge can display
   PressureGauge.Units = new Enumeration( [ 'KILOPASCALS', 'ATMOSPHERES' ] );
 
   return gasProperties.register( 'PressureGauge', PressureGauge );
