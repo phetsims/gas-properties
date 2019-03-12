@@ -18,7 +18,6 @@ define( require => {
       //TODO does this need to be a class?
     }
 
-    //TODO particles escape through container walls
     /**
      * Detects and handles collision between a particle and a container.
      * @param {Particle} particle
