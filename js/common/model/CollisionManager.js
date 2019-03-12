@@ -92,8 +92,8 @@ define( require => {
       // detect and handle particle-container collisions
       this.doParticleContainerCollisions();
 
-      this.keepParticlesInBox( this.model.heavyParticles );
-      this.keepParticlesInBox( this.model.lightParticles );
+      this.keepParticlesInContainer( this.model.heavyParticles );
+      this.keepParticlesInContainer( this.model.lightParticles );
     }
 
     /**
@@ -170,8 +170,13 @@ define( require => {
       }
     }
 
-    //TODO hack from the Java version, is there a better way?
-    keepParticlesInBox( particles ) {
+    //TODO CollisionGod.keepMoleculesdInBox hack from the Java version, is there a better way?
+    /**
+     * Prevents particles from overshooting the walls of the container, which effectively makes the container leak.
+     * @param {Particle[]} particles
+     * @private
+     */
+    keepParticlesInContainer( particles ) {
       const container = this.model.container;
       for ( let i = 0; i < particles.length; i++ ) {
         const particle = particles[ i ];
