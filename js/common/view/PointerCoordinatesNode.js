@@ -1,6 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
+ * Shows the model and view coordinates that correspond to the cursor location.
+ * Used exclusively for debugging, see GasPropertiesQueryParameters.pointerCoordinates.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
