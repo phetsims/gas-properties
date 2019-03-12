@@ -170,7 +170,7 @@ define( require => {
       }
     }
 
-    //TODO CollisionGod.keepMoleculesdInBox hack from the Java version, is there a better way?
+    //TODO CollisionGod.keepMoleculesInBox hack from the Java version, is there a better way?
     /**
      * Prevents particles from overshooting the walls of the container, which effectively makes the container leak.
      * @param {Particle[]} particles
