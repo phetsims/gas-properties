@@ -1,9 +1,12 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- *
  * Shows how the collision detection space is partitioned into a 2D grid of Regions.
  * Used for debugging, not visible to the user, see GasPropertiesQueryParameters.regions.
+ *
+ * Regions that the container walls intersect are filled with red, other regions are filled with green.
+ * Fill colors are translucent, so that additive opacity shows overlaps.
+ * A number in the center of the region indicates how many particles are in that region.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
