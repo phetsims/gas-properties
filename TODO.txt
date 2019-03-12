@@ -1,8 +1,8 @@
 TODO list for gas-properties
 
 UP NEXT
-particle-particle collisions
-particle-container collisions
+particles get stuck along inside edges of container
+left and top of particles don't touch container, right and bottom of particles overlap container
 
 DESIGN
 Is initial velocity magnitude based on 300K or the temperature in the box?
