@@ -32,7 +32,7 @@ define( require => {
         const dx = 2 * Math.abs( container.left - particle.left );
         const newX = particle.location.x + dx;
         particle.setLocation( newX, particle.location.y );
-        particle.invertHorizontalDirection();
+        particle.invertDirectionX();
 
         //TODO adjust kinetic energy due to moving left wall of container
       }
@@ -42,7 +42,7 @@ define( require => {
         const dx = 2 * Math.abs( container.right - particle.right );
         const newX = particle.location.x - dx;
         particle.setLocation( newX, particle.location.y );
-        particle.invertHorizontalDirection();
+        particle.invertDirectionX();
       }
       else if ( particle.top >= container.top ) {
 
@@ -52,7 +52,7 @@ define( require => {
         const dy = 2 * Math.abs( container.top - particle.top );
         const newY = particle.location.y - dy;
         particle.setLocation( particle.location.x, newY );
-        particle.invertVerticalDirection();
+        particle.invertDirectionY();
       }
       else if ( particle.bottom <= container.bottom ) {
 
@@ -60,7 +60,7 @@ define( require => {
         const dy = 2 * Math.abs( container.bottom - particle.bottom );
         const newY = particle.location.y + dy;
         particle.setLocation( particle.location.x, newY );
-        particle.invertVerticalDirection();
+        particle.invertDirectionY();
       }
     }
   }

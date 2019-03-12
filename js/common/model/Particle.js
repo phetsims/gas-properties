@@ -125,7 +125,7 @@ define( require => {
      * This is called when a particle hits a vertical wall.
      * @public
      */
-    invertHorizontalDirection() {
+    invertDirectionX() {
       this.setVelocityXY( -this.velocity.x, this.velocity.y );
     }
 
@@ -134,7 +134,7 @@ define( require => {
      * This is called when a particle hits a horizontal wall.
      * @public
      */
-    invertVerticalDirection() {
+    invertDirectionY() {
       this.setVelocityXY( this.velocity.x, -this.velocity.y );
     }
 
