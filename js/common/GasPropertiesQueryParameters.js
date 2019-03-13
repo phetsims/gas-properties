@@ -32,12 +32,12 @@ define( require => {
     
     //TODO eliminate this query parameter and one of these choices
     // Chooses the method of rendering particles.
-    // 'image' uses Canvas2D drawImage(), 'arc' uses Canvas2D arc().
+    // 'drawImage' uses CanvasRenderingContext2D.drawImage(), 'arc' uses CanvasRenderingContext2D.arc()
     // For internal use only, not public facing.
     renderParticles: {
       type: 'string',
-      validValues: [ 'image', 'arc' ],
-      defaultValue: 'image'
+      validValues: [ 'drawImage', 'arc' ],
+      defaultValue: 'drawImage'
     }
 
   } );
