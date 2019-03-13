@@ -44,7 +44,7 @@ define( require => {
     }
 
     /**
-     * ES5 getters for location of particle.
+     * ES5 getters for particle location.
      * @returns {number}
      * @public
      */
@@ -57,7 +57,7 @@ define( require => {
     get bottom() { return this.location.y - this.radius; }
 
     /**
-     * ES5 setters for location of particle.
+     * ES5 setters for particle location.
      * @param {number} value
      * @public
      */
