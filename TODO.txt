@@ -1,7 +1,6 @@
 TODO list for gas-properties
 
 UP NEXT
-left and top of particles don't touch container, right and bottom of particles overlap container
 implement physically correct particle-particle collisions
 
 DESIGN
