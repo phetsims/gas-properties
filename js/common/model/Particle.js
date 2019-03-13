@@ -61,13 +61,13 @@ define( require => {
      * @param {number} value
      * @public
      */
-    set left( value ) { this.setLocationX( value + this.radius ); }
+    set left( value ) { this.setLocation( value + this.radius, this.location.y ); }
 
-    set right( value ) { this.setLocationX( value - this.radius ); }
+    set right( value ) { this.setLocation( value - this.radius, this.location.y ); }
 
-    set top( value ) { this.setLocationY( value - this.radius ); }
+    set top( value ) { this.setLocation( this.location.x, value - this.radius ); }
 
-    set bottom( value ) { this.setLocationY( value + this.radius ); }
+    set bottom( value ) { this.setLocation( this.location.x, value + this.radius ); }
 
     /**
      * String representation of a Particle.
@@ -104,24 +104,6 @@ define( require => {
     setLocation( x, y ) {
       this.previousLocation.setXY( this.location.x, this.location.y );
       this.location.setXY( x, y );
-    }
-
-    /**
-     * Sets the x coordinate of the particle's location.
-     * @param {number} x
-     * @private
-     */
-    setLocationX( x ) {
-      this.setLocation( x, this.location.y );
-    }
-
-    /**
-     * Sets the y coordinate of the particle's location.
-     * @param {number} y
-     * @private
-     */
-    setLocationY( y ) {
-      this.setLocation( this.location.x, y );
     }
 
     /**
