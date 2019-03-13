@@ -121,6 +121,8 @@ define( require => {
           else if ( delta < 0 ) {
             removeParticles( -delta, this.heavyParticles );
           }
+          assert( this.heavyParticles.length === newValue,
+            'heavyParticles and numberOfHeavyParticlesProperty are out of sync' );
         }
       } );
 
@@ -134,6 +136,8 @@ define( require => {
           else if ( delta < 0 ) {
             removeParticles( -delta, this.lightParticles );
           }
+          assert( this.lightParticles.length === newValue,
+            'lightParticles and numberOfLightParticlesProperty are out of sync' );
         }
       } );
 
