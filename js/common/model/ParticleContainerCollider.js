@@ -10,7 +10,9 @@ define( require => {
   'use strict';
 
   // modules
+  const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   class ParticleContainerCollider {
 
@@ -25,41 +27,26 @@ define( require => {
      * @public
      */
     doCollision( particle, container ) {
+      assert && assert( particle instanceof Particle, 'particle is not a Particle' );
+      assert && assert( container instanceof Container, 'container is not a Container' );
 
-      if ( particle.left <= container.left ) {
-
-        // particle collided with left wall
-        const dx = 2 * Math.abs( container.left - particle.left );
-        const newX = particle.location.x + dx;
-        particle.setLocation( newX, particle.location.y );
-        particle.invertDirectionX();
-
-        //TODO adjust kinetic energy due to moving left wall of container
-      }
-      else if ( particle.right >= container.right ) {
-
-        // particle collided with right wall
-        const dx = 2 * Math.abs( container.right - particle.right );
-        const newX = particle.location.x - dx;
-        particle.setLocation( newX, particle.location.y );
+      // adjust x
+      if ( particle.location.x - particle.radius < container.left ) {
+        particle.setLocation( container.left + particle.radius, particle.location.y );
         particle.invertDirectionX();
       }
-      else if ( particle.top >= container.top ) {
+      else if ( particle.location.x + particle.radius > container.right ) {
+        particle.setLocation( container.right - particle.radius, particle.location.y );
+        particle.invertDirectionX();
+      }
 
-        //TODO handle opening in top
-
-        // particle collided with top wall
-        const dy = 2 * Math.abs( container.top - particle.top );
-        const newY = particle.location.y - dy;
-        particle.setLocation( particle.location.x, newY );
+      // adjust y
+      if ( particle.location.y + particle.radius > container.top ) {
+        particle.setLocation( particle.location.x, container.top - particle.radius );
         particle.invertDirectionY();
       }
-      else if ( particle.bottom <= container.bottom ) {
-
-        // particle collided with bottom wall
-        const dy = 2 * Math.abs( container.bottom - particle.bottom );
-        const newY = particle.location.y + dy;
-        particle.setLocation( particle.location.x, newY );
+      else if ( particle.location.y - particle.radius < container.bottom ) {
+        particle.setLocation( particle.location.x, container.bottom + particle.radius );
         particle.invertDirectionY();
       }
     }

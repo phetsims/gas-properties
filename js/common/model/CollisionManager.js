@@ -26,12 +26,12 @@ define( require => {
 
       options = _.extend( {
         regionLength: 2, // Regions are square, length of one side, nm
-        regionOverlap: 0.5 // overlap of Regions, in nm
+        regionOverlap: 0 // overlap of Regions, in nm
       }, options );
 
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
-      assert && assert( options.regionOverlap > 0, `invalid regionOverlap: ${options.regionOverlap}` );
-       assert && assert( options.regionOverlap < options.regionLength / 2,
+      assert && assert( options.regionOverlap >= 0, `invalid regionOverlap: ${options.regionOverlap}` );
+      assert && assert( options.regionOverlap < options.regionLength / 2,
         `regionOverlap ${options.regionOverlap} is incompatible with regionLength ${options.regionLength}` );
 
       // @public {Property.<Bounds2>} collision detection bounds
@@ -90,10 +90,8 @@ define( require => {
       this.doParticleParticleCollisions();
 
       // detect and handle particle-container collisions
-      this.doParticleContainerCollisions();
-
-      this.keepParticlesInContainer( this.model.heavyParticles );
-      this.keepParticlesInContainer( this.model.lightParticles );
+      this.doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
+      this.doParticleContainerCollisions( this.model.lightParticles, this.model.container );
     }
 
     /**
@@ -154,53 +152,14 @@ define( require => {
     }
 
     /**
-     * Detects and handles particle-container collisions within a Region.
-     * @private
-     */
-    doParticleContainerCollisions() {
-      const regions = this.regionsProperty.value;
-      for ( let i = 0; i < regions.length; i++ ) {
-        const container = regions[ i ].container;
-        if ( container ) {
-          const particles = regions[ i ].particles;
-          for ( let j = 0; j < particles.length - 1; j++ ) {
-            this.particleContainerCollider.doCollision( particles[ j ], container );
-          }
-        }
-      }
-    }
-
-    //TODO I don't understand why this is necessary, ParticleContainerCollider.doCollision seems to do the same thing.
-    //TODO CollisionGod.keepMoleculesInBox hack from the Java version, is there a better way?
-    /**
-     * Prevents particles from overshooting the walls of the container, which effectively makes the container leak.
+     * Detects and handles particle-container collisions.
      * @param {Particle[]} particles
+     * @param {Container} container
      * @private
      */
-    keepParticlesInContainer( particles ) {
-      const container = this.model.container;
+    doParticleContainerCollisions( particles, container ) {
       for ( let i = 0; i < particles.length; i++ ) {
-        const particle = particles[ i ];
-
-        // adjust x
-        if ( particle.location.x - particle.radius < container.left ) {
-          particle.setLocation( container.left + particle.radius, particle.location.y );
-          particle.invertDirectionX();
-        }
-        else if ( particle.location.x + particle.radius > container.right) {
-          particle.setLocation( container.right - particle.radius, particle.location.y );
-          particle.invertDirectionX();
-        }
-
-        // adjust y
-        if ( particle.location.y + particle.radius > container.top ) {
-          particle.setLocation( particle.location.x, container.top - particle.radius );
-          particle.invertDirectionY();
-        }
-        else if ( particle.location.y - particle.radius < container.bottom) {
-          particle.setLocation( particle.location.x, container.bottom + particle.radius );
-          particle.invertDirectionY();
-        }
+        this.particleContainerCollider.doCollision( particles[ i ], container );
       }
     }
   }

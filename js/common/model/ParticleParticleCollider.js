@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   class ParticleParticleCollider {
 
@@ -25,6 +26,8 @@ define( require => {
      * @public
      */
     doCollision( particle1, particle2 ) {
+      assert && assert( particle1 instanceof Particle, 'particle1 is not a Particle' );
+      assert && assert( particle2 instanceof Particle, 'particle2 is not a Particle' );
       assert && assert( particle1 !== particle2, 'particles are the same instance' );
 
       if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
