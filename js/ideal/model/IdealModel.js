@@ -142,22 +142,6 @@ define( require => {
     }
 
     /**
-     * Gets the 2D grid of Regions that spatially partitions the collision detection space.
-     * @returns {Region[][]}
-     */
-    getRegions() {
-      return this.collisionManager.regionsProperty.value;
-    }
-
-    /**
-     * Gets the bounds of the collision detection space.
-     * @returns {Bounds2}
-     */
-    getCollisionBounds() {
-      return this.collisionManager.bounds;
-    }
-
-    /**
      * Adds n particles to the end of the specified array.
      * @param {number} n
      * @param {Particle[]} particles
@@ -201,14 +185,18 @@ define( require => {
       this.isPlayingProperty.reset();
       this.isTimeControlsEnabledProperty.reset();
       this.holdConstantProperty.reset();
-      this.numberOfHeavyParticlesProperty.reset();
-      this.numberOfLightParticlesProperty.reset();
+      this.numberOfHeavyParticlesProperty.reset(); // clears this.heavyParticles
+      this.numberOfLightParticlesProperty.reset(); // clears this.lightParticles
       this.heatCoolAmountProperty.reset();
+
+      assert && assert( this.heavyParticles.length === 0, 'there should be no heavyParticles' );
+      assert && assert( this.lightParticles.length === 0, 'there should be no lightParticles' );
     }
 
     /**
      * Steps the model using real time units.
      * @param {number} dt - time delta in seconds
+     * @public
      */
     step( dt ) {
       this.stepModelTime( this.timeTransform( dt ) );
@@ -217,6 +205,7 @@ define( require => {
     /**
      * Steps the model using model time units.
      * @param {number} dt - time delta in ps
+     * @public
      */
     stepModelTime( dt ) {
       if ( this.isPlayingProperty.value ) {
