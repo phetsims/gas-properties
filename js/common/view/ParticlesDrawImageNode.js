@@ -28,7 +28,7 @@ define( require => {
       // @private
       this.model = model;
       
-      // @private {HTMLCanvasElement} Create heavy particle image top match color profile.
+      // @private {HTMLCanvasElement} Create heavy particle image to match color profile.
       this.heavyParticleImage = null;
       const heavyParticle = new HeavyParticle();
       heavyParticle.colorProperty.link( color => {
