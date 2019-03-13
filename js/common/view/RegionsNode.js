@@ -34,7 +34,8 @@ define( require => {
 
       // The complete collision detection bounds
       const boundsNode = new Rectangle( 0, 0, 1, 1, {
-        stroke: 'red'
+        stroke: 'yellow',
+        lineWidth: 2
       } );
 
       // The regions that fill the collision detection bounds.
