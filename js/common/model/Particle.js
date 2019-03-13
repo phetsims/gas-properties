@@ -28,7 +28,7 @@ define( require => {
       }, options );
 
       // @public (read-only)
-      this.location = new Vector2( 0, 0 ); // nm
+      this.location = new Vector2( 0, 0 ); // center of the particle, nm
       this.previousLocation = this.location.copy(); // location on previous time step
       this.mass = options.mass; // AMU
       this.radius = options.radius; // radians
@@ -44,14 +44,30 @@ define( require => {
     }
 
     /**
-     * Convenience methods that define bounds.
+     * ES5 getters for location of particle.
      * @returns {number}
      * @public
      */
     get left() { return this.location.x - this.radius; }
+
     get right() { return this.location.x + this.radius; }
+
     get top() { return this.location.y + this.radius; }
+
     get bottom() { return this.location.y - this.radius; }
+
+    /**
+     * ES5 setters for location of particle.
+     * @param {number} value
+     * @public
+     */
+    set left( value ) { this.setLocationX( value + this.radius ); }
+
+    set right( value ) { this.setLocationX( value - this.radius ); }
+
+    set top( value ) { this.setLocationY( value - this.radius ); }
+
+    set bottom( value ) { this.setLocationY( value + this.radius ); }
 
     /**
      * String representation of a Particle.
@@ -88,6 +104,24 @@ define( require => {
     setLocation( x, y ) {
       this.previousLocation.setXY( this.location.x, this.location.y );
       this.location.setXY( x, y );
+    }
+
+    /**
+     * Sets the x coordinate of the particle's location.
+     * @param {number} x
+     * @private
+     */
+    setLocationX( x ) {
+      this.setLocation( x, this.location.y );
+    }
+
+    /**
+     * Sets the y coordinate of the particle's location.
+     * @param {number} y
+     * @private
+     */
+    setLocationY( y ) {
+      this.setLocation( this.location.x, y );
     }
 
     /**

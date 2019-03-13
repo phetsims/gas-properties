@@ -151,22 +151,22 @@ define( require => {
       const particle = particles[ i ];
 
       // adjust x
-      if ( particle.location.x - particle.radius < container.left ) {
-        particle.setLocation( container.left + particle.radius, particle.location.y );
+      if ( particle.left < container.left ) {
+        particle.left = container.left;
         particle.invertDirectionX();
       }
-      else if ( particle.location.x + particle.radius > container.right ) {
-        particle.setLocation( container.right - particle.radius, particle.location.y );
+      else if ( particle.right > container.right ) {
+        particle.right = container.right;
         particle.invertDirectionX();
       }
 
       // adjust y
-      if ( particle.location.y + particle.radius > container.top ) {
-        particle.setLocation( particle.location.x, container.top - particle.radius );
+      if ( particle.top > container.top ) {
+        particle.top = container.top;
         particle.invertDirectionY();
       }
-      else if ( particle.location.y - particle.radius < container.bottom ) {
-        particle.setLocation( particle.location.x, container.bottom + particle.radius );
+      else if ( particle.bottom < container.bottom ) {
+        particle.bottom = container.bottom;
         particle.invertDirectionY();
       }
     }
