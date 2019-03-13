@@ -130,7 +130,7 @@ define( require => {
           const particle2 = particles[ k ];
           if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
 
-            //TODO temporary, to do something
+            //TODO temporary, see Java SphereSphereCollision.doCollision
             particle1.setVelocityPolar( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
             particle2.setVelocityPolar( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
           }
