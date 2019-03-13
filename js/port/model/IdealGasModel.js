@@ -8,25 +8,16 @@ define( require => {
   'use strict';
 
   // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
   const CollisionManager = require( 'GAS_PROPERTIES/common/model/CollisionManager' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
-  const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Range = require( 'DOT/Range' );
 
-  // constants
-  const BOUNDS = new Bounds2( 0, 0, 600, 600 ); //TODO JAVA what is this? are values appropriate for HTML5 ?
-
   class IdealGasModel {
 
-    /**
-     * @param {CollisionExpert[]} collisionExperts
-     */
-    constructor( collisionExperts ) {
+    constructor() {
 
       this.container = new Container();
 
@@ -34,49 +25,13 @@ define( require => {
         range: new Range( -1, 1 )
       } );
 
-      this.collisionManager = new CollisionManager( this, collisionExperts, BOUNDS );
+      this.collisionManager = new CollisionManager( this );
 
       this.heavyParticles = []; // {HeavyParticle[]}
       this.lightParticles = []; // {LightParticle[]}
 
       // @public emit() when step method has completed
       this.steppedEmitter = new Emitter();
-    }
-
-    /**
-     * Adds a particle.
-     * @param {Particle} particle
-     */
-    addParticle( particle ) {
-      if ( particle instanceof HeavyParticle ) {
-        assert && assert( this.heavyParticles.indexOf( particle ) === -1, 'particle already exists' );
-        this.heavyParticles.push( particle );
-      }
-      else if ( particle instanceof LightParticle ) {
-        assert && assert( this.lightParticles.indexOf( particle ) === -1, 'particle already exists' );
-        this.lightParticles.push( particle );
-      }
-      else {
-        throw new Error( 'unsupported particle type: ' + particle );
-      }
-    }
-
-    /**
-     * Removes a particle.
-     * @param {Particle} particle
-     */
-    removeParticle( particle ) {
-      if ( particle instanceof HeavyParticle ) {
-        assert && assert( this.heavyParticles.indexOf( particle ) !== -1, 'particle not found' );
-        this.heavyParticles.splice( this.heavyParticles.indexOf( particle ), 1 );
-      }
-      else if ( particle instanceof LightParticle ) {
-        assert && assert( this.lightParticles.indexOf( particle ) !== -1, 'particle not found' );
-        this.lightParticles.splice( this.lightParticles.indexOf( particle ), 1 );
-      }
-      else {
-        throw new Error( 'unsupported particle type: ' + particle );
-      }
     }
 
     /**
@@ -142,7 +97,7 @@ define( require => {
      * @private
      */
     computeStatistics() {
-      //TODO implemente computeStatistics
+      //TODO implement computeStatistics
     }
 
     /**
