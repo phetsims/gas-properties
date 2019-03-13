@@ -185,17 +185,21 @@ define( require => {
         // adjust x
         if ( particle.location.x - particle.radius < container.left ) {
           particle.setLocation( container.left + particle.radius, particle.location.y );
+          particle.invertDirectionX();
         }
         else if ( particle.location.x + particle.radius > container.right) {
           particle.setLocation( container.right - particle.radius, particle.location.y );
+          particle.invertDirectionX();
         }
 
         // adjust y
         if ( particle.location.y + particle.radius > container.top ) {
           particle.setLocation( particle.location.x, container.top - particle.radius );
+          particle.invertDirectionY();
         }
         else if ( particle.location.y - particle.radius < container.bottom) {
           particle.setLocation( particle.location.x, container.bottom + particle.radius );
+          particle.invertDirectionY();
         }
       }
     }
