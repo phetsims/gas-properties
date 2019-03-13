@@ -151,21 +151,21 @@ define( require => {
       const particle = particles[ i ];
 
       // adjust x
-      if ( particle.left < container.left ) {
+      if ( particle.left <= container.left ) {
         particle.left = container.left;
         particle.invertDirectionX();
       }
-      else if ( particle.right > container.right ) {
+      else if ( particle.right >= container.right ) {
         particle.right = container.right;
         particle.invertDirectionX();
       }
 
       // adjust y
-      if ( particle.top > container.top ) {
+      if ( particle.top >= container.top ) {
         particle.top = container.top;
         particle.invertDirectionY();
       }
-      else if ( particle.bottom < container.bottom ) {
+      else if ( particle.bottom <= container.bottom ) {
         particle.bottom = container.bottom;
         particle.invertDirectionY();
       }
