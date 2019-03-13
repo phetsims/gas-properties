@@ -11,8 +11,6 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const ParticleContainerCollider = require( 'GAS_PROPERTIES/common/model/ParticleContainerCollider' );
-  const ParticleParticleCollider = require( 'GAS_PROPERTIES/common/model/ParticleParticleCollider' );
   const Property = require( 'AXON/Property' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
 
@@ -49,7 +47,7 @@ define( require => {
       //TODO generalize this or add assertions for assumptions.
       this.particleBoundsProperty.link( bounds => {
 
-        this.clearRegions();
+        clearRegions( this.regionsProperty.value );
 
         const regions = []; // {Region[]}
         let maxX = bounds.maxX;
@@ -68,10 +66,6 @@ define( require => {
         phet.log && phet.log( `created ${regions.length} regions of ${options.regionLength}nm each, with ${options.regionOverlap}nm overlap` );
       } );
 
-      // @private
-      this.particleParticleCollider = new ParticleParticleCollider();
-      this.particleContainerCollider = new ParticleContainerCollider();
-
       // @private fields needed by methods
       this.model = model;
     }
@@ -82,71 +76,97 @@ define( require => {
      */
     step( dt ) {
 
-      // put particles and container in regions
-      this.clearRegions();
-      this.assignParticlesToRegions( this.model.heavyParticles );
-      this.assignParticlesToRegions( this.model.lightParticles );
+      const regions = this.regionsProperty.value;
+
+      // put particles in regions
+      clearRegions( regions );
+      assignParticlesToRegions( this.model.heavyParticles, regions );
+      assignParticlesToRegions( this.model.lightParticles, regions );
 
       // detect and handle particle-particle collisions within each region
-      this.doParticleParticleCollisions();
+      doParticleParticleCollisions( regions );
 
       // detect and handle particle-container collisions
-      this.doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
-      this.doParticleContainerCollisions( this.model.lightParticles, this.model.container );
+      doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
+      doParticleContainerCollisions( this.model.lightParticles, this.model.container );
     }
+  }
 
-    /**
-     * Assigns each particle to the Regions that it intersects.
-     * @param {Particle[]} particles
-     * @private
-     */
-    assignParticlesToRegions( particles ) {
-      const regions = this.regionsProperty.value;
-      for ( let i = 0; i < particles.length; i++ ) {
-        for ( let j = 0; j < regions.length; j++ ) {
-          if ( regions[ j ].intersectsParticle( particles[ i ] ) ) {
-            regions[ j ].addParticle( particles[ i ] );
+  /**
+   * Clears objects from all regions.
+   * @param {Region[]} regions
+   */
+  function clearRegions( regions ) {
+    for ( let i = 0; i < regions.length; i++ ) {
+      regions[ i ].clear();
+    }
+  }
+
+  /**
+   * Assigns each particle to the Regions that it intersects.
+   * @param {Particle[]} particles
+   * @param {Region[]} regions
+   */
+  function assignParticlesToRegions( particles, regions ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      for ( let j = 0; j < regions.length; j++ ) {
+        if ( regions[ j ].intersectsParticle( particles[ i ] ) ) {
+          regions[ j ].addParticle( particles[ i ] );
+        }
+      }
+    }
+  }
+
+  /**
+   * Detects and handles particle-particle collisions within each Region.
+   * @param {Region[]} regions
+   */
+  function doParticleParticleCollisions( regions ) {
+    for ( let i = 0; i < regions.length; i++ ) {
+      const particles = regions[ i ].particles;
+      for ( let j = 0; j < particles.length - 1; j++ ) {
+        const particle1 = particles[ j ];
+        for ( let k = j + 1; k < particles.length; k++ ) {
+          const particle2 = particles[ k ];
+          if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
+
+            //TODO temporary, to do something
+            particle1.setVelocityPolar( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
+            particle2.setVelocityPolar( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
           }
         }
       }
     }
+  }
 
-    /**
-     * Clears objects from all regions.
-     * @private
-     */
-    clearRegions() {
-      const regions = this.regionsProperty.value;
-      for ( let i = 0; i < regions.length; i++ ) {
-        regions[ i ].clear();
+  /**
+   * Detects and handles particle-container collisions.
+   * @param {Particle[]} particles
+   * @param {Container} container
+   */
+  function doParticleContainerCollisions( particles, container ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+
+      const particle = particles[ i ];
+
+      // adjust x
+      if ( particle.location.x - particle.radius < container.left ) {
+        particle.setLocation( container.left + particle.radius, particle.location.y );
+        particle.invertDirectionX();
       }
-    }
-
-    /**
-     * Detects and handles particle-particle collisions within a Region.
-     * @private
-     */
-    doParticleParticleCollisions() {
-      const regions = this.regionsProperty.value;
-      for ( let i = 0; i < regions.length; i++ ) {
-        const particles = regions[ i ].particles;
-        for ( let j = 0; j < particles.length - 1; j++ ) {
-          for ( let k = j + 1; k < particles.length; k++ ) {
-            this.particleParticleCollider.doCollision( particles[ j ], particles[ k ] );
-          }
-        }
+      else if ( particle.location.x + particle.radius > container.right ) {
+        particle.setLocation( container.right - particle.radius, particle.location.y );
+        particle.invertDirectionX();
       }
-    }
 
-    /**
-     * Detects and handles particle-container collisions.
-     * @param {Particle[]} particles
-     * @param {Container} container
-     * @private
-     */
-    doParticleContainerCollisions( particles, container ) {
-      for ( let i = 0; i < particles.length; i++ ) {
-        this.particleContainerCollider.doCollision( particles[ i ], container );
+      // adjust y
+      if ( particle.location.y + particle.radius > container.top ) {
+        particle.setLocation( particle.location.x, container.top - particle.radius );
+        particle.invertDirectionY();
+      }
+      else if ( particle.location.y - particle.radius < container.bottom ) {
+        particle.setLocation( particle.location.x, container.bottom + particle.radius );
+        particle.invertDirectionY();
       }
     }
   }
