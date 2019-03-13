@@ -29,15 +29,19 @@ define( require => {
       this.particles = [];
     }
 
-    //TODO if we consider particle radius (bounding box?), then do we need regionOverlap?
     /**
-     * Does this region and a particle intersect?
+     * Determines whether this region and a particle's bounding box have any points of intersection,
+     * including touching boundaries. Adapted from Bounds2.intersectsBounds
      * @param {Particle} particle
      * @returns {boolean}
      * @public
      */
     intersectsParticle( particle ) {
-      return this.bounds.containsPoint( particle.location );
+      const minX = Math.max( particle.left, this.bounds.minX );
+      const maxX = Math.min( particle.right, this.bounds.maxX );
+      const minY = Math.max( particle.bottom, this.bounds.minY );
+      const maxY = Math.min( particle.top, this.bounds.maxY );
+      return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
     }
 
     /**
