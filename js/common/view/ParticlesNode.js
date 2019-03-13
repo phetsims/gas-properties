@@ -12,6 +12,7 @@ define( require => {
   // modules
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
@@ -24,7 +25,7 @@ define( require => {
     constructor( model ) {
 
       super();
-      
+
       // @private
       this.model = model;
       this.heavyParticle = new HeavyParticle();
@@ -70,24 +71,61 @@ define( require => {
      * @override
      */
     paintCanvas( context ) {
-      this.drawParticles( context, this.model.heavyParticles, this.heavyParticleImage );
-      this.drawParticles( context, this.model.lightParticles, this.lightParticleImage );
-    }
-
-    /**
-     * Draws a collection of particles that are represented by the same image.
-     * @param {CanvasRenderingContext2D} context
-     * @param {Particle[]} particles
-     * @param {HTMLCanvasElement} image
-     * @private
-     */
-    drawParticles( context, particles, image ) {
-      for ( let i = 0; i < particles.length; i++ ) {
-        context.drawImage( image, 
-          this.model.modelViewTransform.modelToViewX( particles[ i ].left ),
-          this.model.modelViewTransform.modelToViewY( particles[ i ].top )
-        );
+      if ( GasPropertiesQueryParameters.renderParticles === 'image' ) {
+        drawParticlesImage( context, this.model.modelViewTransform, this.model.heavyParticles, this.heavyParticleImage );
+        drawParticlesImage( context, this.model.modelViewTransform, this.model.lightParticles, this.lightParticleImage );
       }
+      else {
+        drawParticlesCircles( context, this.model.modelViewTransform, this.model.heavyParticles );
+        drawParticlesCircles( context, this.model.modelViewTransform, this.model.lightParticles );
+      }
+    }
+  }
+
+  /**
+   * Draws a collection of particles using Canvas2D drawImage.
+   * @param {CanvasRenderingContext2D} context
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Particle[]} particles
+   * @param {HTMLCanvasElement} image
+   * @private
+   */
+  function drawParticlesImage( context, modelViewTransform, particles, image ) {
+
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+
+    for ( let i = 0; i < particles.length; i++ ) {
+      context.drawImage( image,
+        modelViewTransform.modelToViewX( particles[ i ].left ),
+        modelViewTransform.modelToViewY( particles[ i ].top )
+      );
+    }
+  }
+
+  /**
+   * Draws a collection of particles using Canvas2D arc.
+   * @param {CanvasRenderingContext2D} context
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Particle[]} particles
+   * @private
+   */
+  function drawParticlesCircles( context, modelViewTransform, particles ) {
+
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+
+    for ( let i = 0; i < particles.length; i++ ) {
+      context.beginPath();
+      context.arc(
+        modelViewTransform.modelToViewX( particles[ i ].location.x ),
+        modelViewTransform.modelToViewY( particles[ i ].location.y ),
+        modelViewTransform.modelToViewDeltaX( particles[ i ].radius ),
+        0, 2 * Math.PI, false );
+      context.closePath();
+      context.stroke();
+      context.fillStyle = particles[ i ].colorProperty.value.toCSS();
+      context.fill();
     }
   }
 
