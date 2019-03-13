@@ -31,16 +31,17 @@ define( require => {
 
     /**
      * Determines whether this region and a particle's bounding box have any points of intersection,
-     * including touching boundaries. Adapted from Bounds2.intersectsBounds
+     * including touching boundaries. Adapted from Bounds2.intersectsBounds, removed Math.max and Math.min
+     * calls because this will be called thousands of times in step.
      * @param {Particle} particle
      * @returns {boolean}
      * @public
      */
     intersectsParticle( particle ) {
-      const minX = Math.max( particle.left, this.bounds.minX );
-      const maxX = Math.min( particle.right, this.bounds.maxX );
-      const minY = Math.max( particle.bottom, this.bounds.minY );
-      const maxY = Math.min( particle.top, this.bounds.maxY );
+      const minX = ( particle.left > this.bounds.minX ) ? particle.left : this.bounds.minX;
+      const minY = ( particle.bottom > this.bounds.minY ) ? particle.bottom : this.bounds.minY;
+      const maxX = ( particle.right < this.bounds.maxX ) ? particle.right : this.bounds.maxX;
+      const maxY = ( particle.top < this.bounds.maxY ) ? particle.top : this.bounds.maxY;
       return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
     }
 
