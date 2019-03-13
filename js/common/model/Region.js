@@ -51,7 +51,7 @@ define( require => {
     }
 
     /**
-     * Removes all objects from this Region. Does not affect existence of objects in the model.
+     * Removes all particles from this Region. Does not affect existence of particles in the model.
      * @public
      */
     clear() {
