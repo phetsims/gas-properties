@@ -84,7 +84,9 @@ define( require => {
       assignParticlesToRegions( this.model.lightParticles, regions );
 
       // detect and handle particle-particle collisions within each region
-      doParticleParticleCollisions( regions );
+      for ( let i = 0; i < regions.length; i++ ) {
+        doParticleParticleCollisions( regions[ i ].particles );
+      }
 
       // detect and handle particle-container collisions
       doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
@@ -118,22 +120,19 @@ define( require => {
   }
 
   /**
-   * Detects and handles particle-particle collisions within each Region.
-   * @param {Region[]} regions
+   * Detects and handles particle-particle collisions.
+   * @param {Particle[]} particles
    */
-  function doParticleParticleCollisions( regions ) {
-    for ( let i = 0; i < regions.length; i++ ) {
-      const particles = regions[ i ].particles;
-      for ( let j = 0; j < particles.length - 1; j++ ) {
-        const particle1 = particles[ j ];
-        for ( let k = j + 1; k < particles.length; k++ ) {
-          const particle2 = particles[ k ];
-          if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
+  function doParticleParticleCollisions( particles ) {
+    for ( let i = 0; i < particles.length - 1; i++ ) {
+      const particle1 = particles[ i ];
+      for ( let j = i + 1; j < particles.length; j++ ) {
+        const particle2 = particles[ j ];
+        if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
 
-            //TODO temporary, see Java SphereSphereCollision.doCollision
-            particle1.setVelocityPolar( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
-            particle2.setVelocityPolar( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
-          }
+          //TODO temporary, see Java SphereSphereCollision.doCollision
+          particle1.setVelocityPolar( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
+          particle2.setVelocityPolar( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
         }
       }
     }
