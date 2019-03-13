@@ -22,11 +22,11 @@ define( require => {
   class RegionsNode extends Node {
 
     /**
-     * @param {CollisionManager} collisionManager
+     * @param {CollisionDetector} collisionDetector
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( collisionManager, modelViewTransform, options ) {
+    constructor( collisionDetector, modelViewTransform, options ) {
 
       options = _.extend( {
         pickable: false
@@ -48,14 +48,14 @@ define( require => {
       super( options );
 
       // Stroke the collision detection bounds, to verify that the grid fills it.
-      collisionManager.particleBoundsProperty.link( bounds => {
+      collisionDetector.particleBoundsProperty.link( bounds => {
         const viewBounds = modelViewTransform.modelToViewBounds( bounds );
         boundsNode.setRect( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height );
       } );
 
       // @private {RegionNode[]} Draw each region in the grid.  Additive opacity shows overlap.
       this.regionNodes = [];
-      collisionManager.regionsProperty.link( regions => {
+      collisionDetector.regionsProperty.link( regions => {
         this.regionNodes.length = 0; // clear array
         for ( let i = 0; i < regions.length; i++ ) {
           this.regionNodes.push( new RegionNode( regions[ i ], modelViewTransform ) );

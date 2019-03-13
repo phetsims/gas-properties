@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Manages collision detection and response.
+ * Handles collision detection and response.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,7 +14,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
 
-  class CollisionManager {
+  class CollisionDetector {
 
     /**
      * @param {IdealModel} model TODO more general type
@@ -171,5 +171,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'CollisionManager', CollisionManager );
+  return gasProperties.register( 'CollisionDetector', CollisionDetector );
 } );

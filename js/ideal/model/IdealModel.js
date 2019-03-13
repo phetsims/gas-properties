@@ -12,7 +12,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
-  const CollisionManager = require( 'GAS_PROPERTIES/common/model/CollisionManager' );
+  const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -142,7 +142,7 @@ define( require => {
       } );
 
       // @private
-      this.collisionManager = new CollisionManager( this );
+      this.collisionDetector = new CollisionDetector( this );
     }
 
     /**
@@ -227,7 +227,7 @@ define( require => {
         }
 
         // collision detection and response
-        this.collisionManager.step( dt );
+        this.collisionDetector.step( dt );
 
         // remove particles that are out of bounds
         removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.particleBoundsProperty.value );

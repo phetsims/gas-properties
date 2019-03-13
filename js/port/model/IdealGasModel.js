@@ -8,7 +8,7 @@ define( require => {
   'use strict';
 
   // modules
-  const CollisionManager = require( 'GAS_PROPERTIES/common/model/CollisionManager' );
+  const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -25,7 +25,7 @@ define( require => {
         range: new Range( -1, 1 )
       } );
 
-      this.collisionManager = new CollisionManager( this );
+      this.collisionDetector = new CollisionDetector( this );
 
       this.heavyParticles = []; // {HeavyParticle[]}
       this.lightParticles = []; // {LightParticle[]}
@@ -53,7 +53,7 @@ define( require => {
       stepParticles( particles, dt );
 
       // Do collision detection.
-      this.collisionManager.step( dt );
+      this.collisionDetector.step( dt );
 
       //TODO what is going on here?
       const postKE = getKineticEnergy( particles );

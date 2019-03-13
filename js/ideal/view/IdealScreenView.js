@@ -65,7 +65,7 @@ define( require => {
 
       // Show how the collision detection space is partitioned into regions
       if ( GasPropertiesQueryParameters.regions ) {
-        this.regionsNode = new RegionsNode( model.collisionManager, model.modelViewTransform );
+        this.regionsNode = new RegionsNode( model.collisionDetector, model.modelViewTransform );
         this.addChild( this.regionsNode );
       }
 
