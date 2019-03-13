@@ -288,7 +288,7 @@ define( require => {
    */
   function assertParticlesInsideContainer( particles, container ) {
     for ( let i = 0; i < particles.length; i++ ) {
-      assert && assert( container.containsParticle( particles[ i ] ),
+      assert && assert( container.enclosesParticle( particles[ i ] ),
         `particle is not fully inside container: ${particles[ i ].toString()}` );
     }
   }

@@ -98,12 +98,12 @@ define( require => {
     get openingMaxX() { return this.location.x - this.openingXOffset; }
 
     /**
-     * Determines whether a particle is fully inside the container.
+     * Determines whether the container surrounds a particle on all sides. Accounts for the particle's radius.
      * @param {Particle} particle
      * @returns {boolean}
      * @public
      */
-    containsParticle( particle ) {
+    enclosesParticle( particle ) {
       return particle.left >= this.left &&
              particle.right <= this.right &&
              particle.top <= this.top &&
