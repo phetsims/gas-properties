@@ -170,6 +170,7 @@ define( require => {
       }
     }
 
+    //TODO I don't understand why this is necessary, ParticleContainerCollider.doCollision seems to do the same thing.
     //TODO CollisionGod.keepMoleculesInBox hack from the Java version, is there a better way?
     /**
      * Prevents particles from overshooting the walls of the container, which effectively makes the container leak.
