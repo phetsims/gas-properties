@@ -141,7 +141,7 @@ define( require => {
         }
       } );
 
-      // @private
+      // @public (read-only)
       this.collisionDetector = new CollisionDetector( this );
     }
 
