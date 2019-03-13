@@ -141,6 +141,7 @@ define( require => {
 
   /**
    * Detects and handles particle-container collisions.
+   * Handles x and y directions separately in case a particle exits the container diagonally at a corner.
    * @param {Particle[]} particles
    * @param {Container} container
    */
