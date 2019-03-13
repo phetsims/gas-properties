@@ -96,6 +96,19 @@ define( require => {
      * @public
      */
     get openingMaxX() { return this.location.x - this.openingXOffset; }
+
+    /**
+     * Determines whether a particle is fully inside the container.
+     * @param {Particle} particle
+     * @returns {boolean}
+     * @public
+     */
+    containsParticle( particle ) {
+      return particle.left >= this.left &&
+             particle.right <= this.right &&
+             particle.top <= this.top &&
+             particle.bottom >= this.bottom;
+    }
   }
 
   return gasProperties.register( 'Container', Container );

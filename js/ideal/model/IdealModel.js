@@ -232,6 +232,9 @@ define( require => {
         // remove particles that are out of bounds
         removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.particleBoundsProperty.value );
         removeParticlesOutOfBounds( this.lightParticles, this.numberOfLightParticlesProperty, this.particleBoundsProperty.value );
+
+        assert && assertParticlesInsideContainer( this.heavyParticles, this.container );
+        assert && assertParticlesInsideContainer( this.lightParticles, this.container );
       }
     }
   }
@@ -275,6 +278,18 @@ define( require => {
         removeParticle( particles[ i ], particles );
         numberOfParticlesProperty.value--;
       }
+    }
+  }
+
+  /**
+   * Verifies that all particles are fully inside the container.
+   * @param {Particle[]} particles
+   * @param {Container} container
+   */
+  function assertParticlesInsideContainer( particles, container ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      assert && assert( container.containsParticle( particles[ i ] ),
+        `particle is not fully inside container: ${particles[ i ].toString()}` );
     }
   }
 
