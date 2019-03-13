@@ -23,6 +23,7 @@ define( require => {
   const LinearFunction = require( 'DOT/LinearFunction' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
@@ -118,7 +119,7 @@ define( require => {
             this.addParticles( delta, this.heavyParticles, HeavyParticle );
           }
           else if ( delta < 0 ) {
-            this.removeParticles( -delta, this.heavyParticles );
+            removeParticles( -delta, this.heavyParticles );
           }
         }
       } );
@@ -131,7 +132,7 @@ define( require => {
             this.addParticles( delta, this.lightParticles, LightParticle );
           }
           else if ( delta < 0 ) {
-            this.removeParticles( -delta, this.lightParticles );
+            removeParticles( -delta, this.lightParticles );
           }
         }
       } );
@@ -186,32 +187,6 @@ define( require => {
       }
     }
 
-    /**
-     * Removes the last n particles from an array.
-     * @param {number} n
-     * @param {Particle[]} particles
-     * @private
-     */
-    removeParticles( n, particles ) {
-      assert && assert( n <= particles.length,
-        `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
-      const particlesToRemove = particles.slice( particles.length - n, particles.length );
-      particlesToRemove.forEach( particle => this.removeParticle( particle, particles ) );
-    }
-
-    /**
-     * Removes a particle from an array.
-     * @param {Particle} particle
-     * @param {Particle[]} particles
-     * @private
-     */
-    removeParticle( particle, particles ) {
-      const index = particles.indexOf( particle );
-      assert && assert( index !== -1, 'particle not found' );
-      particles.splice( index, 1 );
-      particle.dispose && particle.dispose();
-    }
-
     // @public resets the model
     reset() {
 
@@ -229,10 +204,6 @@ define( require => {
       this.numberOfHeavyParticlesProperty.reset();
       this.numberOfLightParticlesProperty.reset();
       this.heatCoolAmountProperty.reset();
-
-      // remove all particles
-      this.removeParticles( this.heavyParticles.length, this.heavyParticles );
-      this.removeParticles( this.lightParticles.length, this.lightParticles );
     }
 
     /**
@@ -261,23 +232,54 @@ define( require => {
           this.lightParticles[ i ].step( dt );
         }
 
+        // remove particles that are out of bounds
+        removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.particleBoundsProperty.value );
+        removeParticlesOutOfBounds( this.lightParticles, this.numberOfLightParticlesProperty, this.particleBoundsProperty.value );
+
         // collision detection and response
         this.collisionManager.step( dt );
+      }
+    }
+  }
 
-        // remove particles that have left the bounds
-        const particleBounds = this.particleBoundsProperty.value;
-        for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-          if ( !particleBounds.containsPoint( this.heavyParticles[ i ].location ) ) {
-            this.removeParticle( this.heavyParticles[ i ], this.heavyParticles );
-            this.numberOfHeavyParticlesProperty.value--;
-          }
-        }
-        for ( let i = 0; i < this.lightParticles.length; i++ ) {
-          if ( !particleBounds.containsPoint( this.lightParticles[ i ].location ) ) {
-            this.removeParticle( this.lightParticles[ i ], this.lightParticles );
-            this.numberOfLightParticlesProperty.value--;
-          }
-        }
+  /**
+   * Removes a particle from an array.
+   * @param {Particle} particle
+   * @param {Particle[]} particles
+   */
+  function removeParticle( particle, particles ) {
+    assert && assert( particle instanceof Particle, 'not a Particle: ' + particle );
+    const index = particles.indexOf( particle );
+    assert && assert( index !== -1, 'particle not found' );
+    particles.splice( index, 1 );
+    particle.dispose();
+  }
+
+  /**
+   * Removes the last n particles from an array.
+   * @param {number} n
+   * @param {Particle[]} particles
+   */
+  function removeParticles( n, particles ) {
+    assert && assert( n <= particles.length,
+      `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
+    const particlesToRemove = particles.slice( particles.length - n, particles.length );
+    for ( let i = 0; i < particlesToRemove.length; i++ ) {
+      removeParticle( particlesToRemove[ i ], particles );
+    }
+  }
+
+  /**
+   * Removes particles that are out of bounds.
+   * @param {Particle[]} particles
+   * @param {NumberProperty} numberOfParticlesProperty
+   * @param {Bounds2} bounds
+   */
+  function removeParticlesOutOfBounds( particles, numberOfParticlesProperty, bounds ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      if ( !bounds.containsPoint( particles[ i ].location ) ) {
+        removeParticle( particles[ i ], particles );
+        numberOfParticlesProperty.value--;
       }
     }
   }
