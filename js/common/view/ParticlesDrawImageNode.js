@@ -29,22 +29,28 @@ define( require => {
       this.model = model;
       
       // @private {HTMLCanvasElement} Create heavy particle image to match color profile.
+      // The content is centered in the HTMLCanvasElement, and may have uniform padding around it.
       this.heavyParticleImage = null;
       const heavyParticle = new HeavyParticle();
       heavyParticle.colorProperty.link( color => {
-        const particle = new ParticleNode( heavyParticle, model.modelViewTransform );
-        particle.toCanvas( canvas => {
+        const particleNode = new ParticleNode( heavyParticle, model.modelViewTransform );
+        console.log( `heavyParticleNode width=${particleNode.width} height=${particleNode.height}` );
+        particleNode.toCanvas( canvas => {
           this.heavyParticleImage = canvas;
+          console.log( `heavyParticleImage width=${this.heavyParticleImage.width} height=${this.heavyParticleImage.height}` );
         } );
       } );
 
       // @private {HTMLCanvasElement} Create light particle image to match color profile changes.
+      // The content is centered in the HTMLCanvasElement, and may have uniform padding around it.
       this.lightParticleImage = null;
       const lightParticle = new LightParticle();
       lightParticle.colorProperty.link( color => {
-        const particle = new ParticleNode( lightParticle, model.modelViewTransform );
-        particle.toCanvas( canvas => {
+        const particleNode = new ParticleNode( lightParticle, model.modelViewTransform );
+        console.log( `lightParticleNode width=${particleNode.width} height=${particleNode.height}` );
+        particleNode.toCanvas( canvas => {
           this.lightParticleImage = canvas;
+          console.log( `lightParticleImage width=${this.lightParticleImage.width} height=${this.lightParticleImage.height}` );
         } );
       } );
 
@@ -86,8 +92,10 @@ define( require => {
   function drawParticles( context, modelViewTransform, particles, image ) {
     for ( let i = 0; i < particles.length; i++ ) {
       context.drawImage( image,
-        modelViewTransform.modelToViewX( particles[ i ].left ),
-        modelViewTransform.modelToViewY( particles[ i ].top )
+
+        // content is centered and padded in HTMLCanvasElement, so be careful about how x,y args are computed.
+        modelViewTransform.modelToViewX( particles[ i ].location.x ) - image.width / 2,
+        modelViewTransform.modelToViewY( particles[ i ].location.y ) - image.height / 2
       );
     }
   }
