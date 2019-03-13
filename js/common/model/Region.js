@@ -29,7 +29,7 @@ define( require => {
       this.particles = [];
     }
 
-    //TODO include particle's radius?
+    //TODO if we consider particle radius (bounding box?), then do we need regionOverlap?
     /**
      * Does this region and a particle intersect?
      * @param {Particle} particle
