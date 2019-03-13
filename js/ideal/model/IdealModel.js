@@ -226,12 +226,12 @@ define( require => {
           this.lightParticles[ i ].step( dt );
         }
 
+        // collision detection and response
+        this.collisionManager.step( dt );
+
         // remove particles that are out of bounds
         removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.particleBoundsProperty.value );
         removeParticlesOutOfBounds( this.lightParticles, this.numberOfLightParticlesProperty, this.particleBoundsProperty.value );
-
-        // collision detection and response
-        this.collisionManager.step( dt );
       }
     }
   }
