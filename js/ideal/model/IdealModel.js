@@ -155,7 +155,7 @@ define( require => {
     addParticles( n, particles, Constructor ) {
       for ( let i = 0; i < n; i++ ) {
 
-        // Create a particle
+        // Create a particle, just inside the container where the bicycle pump hose attaches.
         const particle = new Constructor();
         particle.setLocation( this.container.hoseLocation.x - particle.radius, this.container.hoseLocation.y );
 
