@@ -27,18 +27,14 @@ define( require => {
 
       // @private
       this.model = model;
-      
+
       // @private {HTMLCanvasElement} Create heavy particle image to match color profile.
       // The content is centered in the HTMLCanvasElement, and may have uniform padding around it.
       this.heavyParticleImage = null;
       const heavyParticle = new HeavyParticle();
       heavyParticle.colorProperty.link( color => {
         const particleNode = new ParticleNode( heavyParticle, model.modelViewTransform );
-        console.log( `heavyParticleNode width=${particleNode.width} height=${particleNode.height}` );
-        particleNode.toCanvas( canvas => {
-          this.heavyParticleImage = canvas;
-          console.log( `heavyParticleImage width=${this.heavyParticleImage.width} height=${this.heavyParticleImage.height}` );
-        } );
+        particleNode.toCanvas( canvas => { this.heavyParticleImage = canvas; } );
       } );
 
       // @private {HTMLCanvasElement} Create light particle image to match color profile changes.
@@ -47,11 +43,7 @@ define( require => {
       const lightParticle = new LightParticle();
       lightParticle.colorProperty.link( color => {
         const particleNode = new ParticleNode( lightParticle, model.modelViewTransform );
-        console.log( `lightParticleNode width=${particleNode.width} height=${particleNode.height}` );
-        particleNode.toCanvas( canvas => {
-          this.lightParticleImage = canvas;
-          console.log( `lightParticleImage width=${this.lightParticleImage.width} height=${this.lightParticleImage.height}` );
-        } );
+        particleNode.toCanvas( canvas => { this.lightParticleImage = canvas; } );
       } );
 
       // Size the canvas to match the bounds where particles can exist.
