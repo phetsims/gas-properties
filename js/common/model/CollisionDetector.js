@@ -154,6 +154,7 @@ define( require => {
       if ( particle.left <= container.left ) {
         particle.left = container.left;
         particle.invertDirectionX();
+        //TODO handle kinetic energy if the left wall is moving
       }
       else if ( particle.right >= container.right ) {
         particle.right = container.right;
@@ -162,6 +163,7 @@ define( require => {
 
       // adjust y
       if ( particle.top >= container.top ) {
+        //TODO handle opening in top of container
         particle.top = container.top;
         particle.invertDirectionY();
       }
