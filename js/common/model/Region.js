@@ -14,7 +14,6 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
 
   class Region {
 
@@ -23,12 +22,11 @@ define( require => {
      */
     constructor( bounds ) {
 
-      // @public (read-only)
+      // @public (read-only) {Bounds2}
       this.bounds = bounds;
 
-      // @public (read-only)
-      this.particles = []; // {Particle[]}
-      this.container = null; // {Container}
+      // @public (read-only) {Particle[]}
+      this.particles = [];
     }
 
     //TODO include particle's radius?
@@ -52,37 +50,12 @@ define( require => {
       this.particles.push( particle );
     }
 
-    //TODO include container's wall thickness?
-    /**
-     * Does a wall of the container intersect this region?
-     * @param {Container} container
-     * @returns {boolean}
-     * @public
-     */
-    intersectsContainer( container ) {
-      return GasPropertiesUtils.lineSegmentIntersectsBounds( container.left, container.top, container.left, container.bottom, this.bounds ) || // left wall
-             GasPropertiesUtils.lineSegmentIntersectsBounds( container.right, container.top, container.right, container.bottom, this.bounds ) || // right wall
-             GasPropertiesUtils.lineSegmentIntersectsBounds( container.left, container.top, container.right, container.top, this.bounds ) || // top wall
-             GasPropertiesUtils.lineSegmentIntersectsBounds( container.left, container.bottom, container.right, container.bottom, this.bounds ); // bottom wall
-    }
-
-    /**
-     * Assigns a container to this Region.
-     * @param {Container} container
-     * @public
-     */
-    setContainer( container ) {
-      assert && assert( !this.container, 'Region already has a container' );
-      this.container = container;
-    }
-
     /**
      * Removes all objects from this Region. Does not affect existence of objects in the model.
      * @public
      */
     clear() {
       this.particles.length = 0;
-      this.container = null;
     }
   }
 
