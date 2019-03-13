@@ -32,8 +32,7 @@ define( require => {
 
       // Cell in the 2D grid
       const cellNode = new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
-        fill: 'rgba( 0, 255, 0, 0.1 )',
-        stroke: 'rgba( 0, 255, 0, 0.3 )'
+        fill: 'rgba( 0, 255, 0, 0.1 )' // additive opacity shows overlap of Regions
       } );
 
       // Displays the number of particles in the Region

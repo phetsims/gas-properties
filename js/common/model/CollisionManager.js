@@ -25,10 +25,16 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
-        regionLength: 2 // Regions are square, length of one side, nm
+        regionLength: 2, // Regions are square, length of one side, nm
+
+        //TODO this should probably be max particle radius
+        regionOverlap: 0.125 // overlap of Regions, in nm
       }, options );
 
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
+      assert && assert( options.regionOverlap >= 0, `invalid regionOverlap: ${options.regionOverlap}` );
+      assert && assert( options.regionOverlap < options.regionLength / 2,
+        `regionOverlap ${options.regionOverlap} is incompatible with regionLength ${options.regionLength}` );
 
       // @public {Property.<Bounds2>} collision detection bounds
       this.particleBoundsProperty = model.particleBoundsProperty;
@@ -37,8 +43,9 @@ define( require => {
       // @public (read-only) {Property.<Region[]>} 2D grid of Regions
       this.regionsProperty = new Property( [] );
 
-      // Partition the collision detection bounds into Regions. This algorithm builds the grid right-to-left,
-      // bottom-to-top, so that it's aligned with the right and bottom edges of the container.
+      // Partition the collision detection bounds into overlapping Regions.
+      // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
+      // edges of the container.
       //TODO generalize this or add assertions for assumptions.
       this.particleBoundsProperty.link( bounds => {
 
@@ -51,14 +58,14 @@ define( require => {
           while ( minY < bounds.maxY ) {
             const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
             regions.push( new Region( regionBounds ) );
-            minY = minY + options.regionLength;
+            minY = minY + options.regionLength - options.regionOverlap;
           }
-          maxX = maxX - options.regionLength;
+          maxX = maxX - options.regionLength + options.regionOverlap;
         }
 
         this.regionsProperty.value = regions;
 
-        phet.log && phet.log( `created ${regions.length} regions of ${options.regionLength}nm each` );
+        phet.log && phet.log( `created ${regions.length} regions of ${options.regionLength}nm each, with ${options.regionOverlap}nm overlap` );
       } );
 
       // @private
@@ -89,17 +96,6 @@ define( require => {
     }
 
     /**
-     * Clears objects from all regions.
-     * @private
-     */
-    clearRegions() {
-      const regions = this.regionsProperty.value;
-      for ( let i = 0; i < regions.length; i++ ) {
-        regions[ i ].clear();
-      }
-    }
-
-    /**
      * Assigns each particle to the Regions that it intersects.
      * @param {Particle[]} particles
      * @private
@@ -112,6 +108,17 @@ define( require => {
             regions[ j ].addParticle( particles[ i ] );
           }
         }
+      }
+    }
+
+    /**
+     * Clears objects from all regions.
+     * @private
+     */
+    clearRegions() {
+      const regions = this.regionsProperty.value;
+      for ( let i = 0; i < regions.length; i++ ) {
+        regions[ i ].clear();
       }
     }
 
