@@ -93,7 +93,7 @@ define( require => {
   }
 
   /**
-   * Clears objects from all regions.
+   * Clears all regions.
    * @param {Region[]} regions
    */
   function clearRegions( regions ) {
