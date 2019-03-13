@@ -85,7 +85,7 @@ define( require => {
     for ( let i = 0; i < particles.length; i++ ) {
       context.drawImage( image,
 
-        // content is centered and padded in HTMLCanvasElement, so be careful about how x,y args are computed.
+        // content is centered and padded in HTMLCanvasElement, so be careful about how dx, dy args are computed.
         modelViewTransform.modelToViewX( particles[ i ].location.x ) - image.width / 2,
         modelViewTransform.modelToViewY( particles[ i ].location.y ) - image.height / 2
       );
