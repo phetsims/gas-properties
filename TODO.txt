@@ -1,6 +1,8 @@
 TODO list for gas-properties
 
 UP NEXT
+tone down specular highlight on particles
+change particle count to be number in container
 understand and document particle-particle collisions
 heat/cool
 
