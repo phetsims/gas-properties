@@ -24,7 +24,8 @@ define( require => {
 
       assert && assert( !options || !options.hasOwnProperty( 'mainColor' ), 'ParticleNode sets mainColor' );
       options = _.extend( {
-        mainColor: particle.colorProperty
+        mainColor: particle.colorProperty,
+        highlightColor: particle.highlightColorProperty
       }, options );
 
       const diameter = 2 * modelViewTransform.modelToViewDeltaX( particle.radius );

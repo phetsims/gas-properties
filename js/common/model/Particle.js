@@ -24,7 +24,8 @@ define( require => {
       options = _.extend( {
         mass: 1, // AMU
         radius: 1, // nm
-        colorProperty: null // {Property.<Color|string>|null}
+        colorProperty: null, // {Property.<Color|string>|null}
+        highlightColorProperty: null // {Property.<Color|string>|null} color for specular highlight
       }, options );
 
       // @public (read-only)
@@ -33,6 +34,7 @@ define( require => {
       this.mass = options.mass; // AMU
       this.radius = options.radius; // radians
       this.colorProperty = options.colorProperty || new Property( 'white' );
+      this.highlightColorProperty = options.highlightColorProperty || new Property( 'white' );
 
       // @public (read-only) the particle is initially at rest
       this.velocity = new Vector2( 0, 0 ); // nm / ps

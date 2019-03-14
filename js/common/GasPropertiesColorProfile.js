@@ -104,8 +104,16 @@ define( require => {
       default: 'rgb( 119, 114, 244 )' // purple
     },
 
+    heavyParticleHighlightColor: {
+      default: 'rgb( 220, 220, 255 )' // lighter purple
+    },
+
     lightParticleColor: {
       default: 'rgb( 232, 78, 32 )' // red
+    },
+
+    lightParticleHighlightColor: {
+      default: 'rgb( 255, 200, 100 )' // lighter red
     },
 
     collisionCounterBackgroundColor: {

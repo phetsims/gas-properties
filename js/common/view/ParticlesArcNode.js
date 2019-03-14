@@ -73,7 +73,7 @@ define( require => {
         0, 2 * Math.PI, false );
       context.closePath();
       context.stroke();
-      context.fillStyle = particles[ i ].colorProperty.value.toCSS();
+      context.fillStyle = particles[ i ].mainColorProperty.value.toCSS();
       context.fill();
     }
   }
