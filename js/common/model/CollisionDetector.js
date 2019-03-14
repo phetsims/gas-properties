@@ -71,10 +71,10 @@ define( require => {
       this.model = model;
 
       // @private reusable (mutated) vectors
-      this.normalVector = new Vector2( 0, 0 );
+      this.unitVector = new Vector2( 0, 0 );
       this.relativeVelocity = new Vector2( 0, 0 );
       this.tangentVector = new Vector2( 0, 0 );
-      this.linePoint = new Vector2( 0, 0 );
+      this.pointOnLine = new Vector2( 0, 0 );
       this.relectedPoint = new Vector2( 0, 0 );
     }
 
@@ -102,7 +102,7 @@ define( require => {
     }
 
     //TODO Java - understand this, document it, clean it up
-    //TODO Java - what do abbreviations stand for? s1, s2, linePoint, CM
+    //TODO Java - what do abbreviations stand for? s1, s2, linePoint, CM, line of action
     /**
      * Detects and handles particle-particle collisions.
      * @param {Particle[]} particles
@@ -116,53 +116,70 @@ define( require => {
         for ( let j = i + 1; j < particles.length; j++ ) {
 
           const particle2 = particles[ j ];
+          assert && assert( particle1 !== particle2, 'particle cannot collide with itself' );
 
+          // Ignore collisions if the particles were in contact on the previous step.
+          // This results in more natural behavior, and was adopted from the Java version.
           if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
 
+            //-----------------------------------------------------------------------------------------
+            // Determine where the particles made contact.
+            //-----------------------------------------------------------------------------------------
+
+            // Vector from center of particle2 to center of particle1
             const dx = particle1.location.x - particle2.location.x;
             const dy = particle1.location.y - particle2.location.y;
-            const distance = Math.sqrt( dx * dx + dy * dy );
+            const magnitude = Math.sqrt( dx * dx + dy * dy );
 
-            const ratio = particle1.radius / distance;
-            const contactPointX = particle1.location.x + ( particle2.location.x - particle1.location.x ) * ratio;
-            const contactPointY = particle1.location.y + ( particle2.location.y - particle1.location.y ) * ratio;
+            // Unit vector along the line of action
+            this.unitVector.setXY( dx, dy ).normalize();
 
-            // Get the unit vector along the line of action
-            this.normalVector.setXY( dx, dy ).normalize();
-
-            // If the relative velocity show the points moving apart, then there is no collision.
-            // This is a key check to solve otherwise sticky collision problems
-            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
-
-            // Compute correct position of the bodies following the collision
             this.tangentVector.setXY( dy, -dx );
 
-            // Determine the proper positions of the bodies following the collision
+            //TODO comment copied from Java, is it correct? 
+            // If the relative velocity shows the points moving apart, then there is no collision.
+            // This is a key check to solve otherwise sticky collision problems.
+            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
+
+            const contactRatio = particle1.radius / magnitude;
+            const contactPointX = particle1.location.x + ( particle2.location.x - particle1.location.x ) * contactRatio;
+            const contactPointY = particle1.location.y + ( particle2.location.y - particle1.location.y ) * contactRatio;
+
+            //-----------------------------------------------------------------------------------------
+            // Adjust particle locations
+            //-----------------------------------------------------------------------------------------
+
             const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
                             -particle2.radius : particle2.radius;
-            const offsetX2 = this.normalVector.x * offset2;
-            const offsetY2 = this.normalVector.y * offset2;
-            this.linePoint.setXY( contactPointX - offsetX2, contactPointY - offsetY2 );
+            const offsetX2 = this.unitVector.x * offset2;
+            const offsetY2 = this.unitVector.y * offset2;
+            this.pointOnLine.setXY( contactPointX - offsetX2, contactPointY - offsetY2 );
 
             const lineAngle = Math.atan2( this.tangentVector.y, this.tangentVector.x );
-            reflectPointAcrossLine( particle2.location, this.linePoint, lineAngle, this.relectedPoint );
+            reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle2.setLocation( this.relectedPoint.x, this.relectedPoint.y );
 
             // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact
             // tangent the CM was on in its previous position
             const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
             const s1 = particle1.radius / previousDistance1;
-            this.linePoint.setXY(
+            this.pointOnLine.setXY(
               contactPointX - ( contactPointX - particle1.previousLocation.x ) * s1,
               contactPointY - ( contactPointY - particle1.previousLocation.y ) * s1
             );
-            reflectPointAcrossLine( particle1.location, this.linePoint, lineAngle, this.relectedPoint );
+            reflectPointAcrossLine( particle1.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle1.setLocation( this.relectedPoint.x, this.relectedPoint.y );
 
-            // Compute the relative velocities of the contact points
-            const vr = this.relativeVelocity.dot( this.normalVector );
+            //-----------------------------------------------------------------------------------------
+            // Adjust particle velocities
+            //-----------------------------------------------------------------------------------------
 
-            // Assume the coefficient of restitution is 1
+            //TODO say what?
+            // Compute the relative velocities of the contact points
+            const vr = this.relativeVelocity.dot( this.unitVector );
+
+            //TODO what is this?
+            // Coefficient of restitution, the ratio of the final to initial relative velocity between two objects after they collide
             const e = 1;
 
             //TODO show general form of this equation, add to model.md
@@ -171,15 +188,14 @@ define( require => {
             const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
             const j = numerator / denominator;
 
-            // Compute the new velocities, based on the impulse
             const vScale1 = j / particle1.mass;
-            const vx1 = this.normalVector.x * vScale1;
-            const vy1 = this.normalVector.y * vScale1;
+            const vx1 = this.unitVector.x * vScale1;
+            const vy1 = this.unitVector.y * vScale1;
             particle1.setVelocityXY( particle1.velocity.x + vx1, particle1.velocity.y + vy1 );
 
             const vScale2 = -j / particle2.mass;
-            const vx2 = this.normalVector.x * vScale2;
-            const vy2 = this.normalVector.y * vScale2;
+            const vx2 = this.unitVector.x * vScale2;
+            const vy2 = this.unitVector.y * vScale2;
             particle2.setVelocityXY( particle2.velocity.x + vx2, particle2.velocity.y + vy2 );
           }
         }
@@ -214,19 +230,19 @@ define( require => {
 
   /**
    * Determines the position of a point that is the reflection of a specified point across a line.
-   * @param {Vector2} p
-   * @param {Vector2} pointOnLine
-   * @param {number} lineAngle angle of line in radians
-   * @param {Vector2} returnPoint the point to be mutated with the return value
-   * @returns {Vector2} returnPoint mutated
+   * @param {Vector2} p - the point to reflect
+   * @param {Vector2} pointOnLine - point on the line
+   * @param {number} lineAngle - angle of the line, in radians
+   * @param {Vector2} reflectedPoint - the point to be mutated with the return value
+   * @returns {Vector2} reflectedPoint mutated
    */
-  function reflectPointAcrossLine( p, pointOnLine, lineAngle, returnPoint ) {
+  function reflectPointAcrossLine( p, pointOnLine, lineAngle, reflectedPoint ) {
     const alpha = lineAngle % ( Math.PI * 2 );
     const gamma = Math.atan2( ( p.y - pointOnLine.y ), ( p.x - pointOnLine.x ) ) % ( Math.PI * 2 );
     const theta = ( 2 * alpha - gamma ) % ( Math.PI * 2 );
     const d = p.distance( pointOnLine );
-    returnPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
-    return returnPoint;
+    reflectedPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
+    return reflectedPoint;
   }
 
   /**
