@@ -139,7 +139,7 @@ define( require => {
             //TODO move this down where it's used, and this.relativeVelocity is not needed
             //TODO comment copied from Java, is it correct? 
             // If the relative velocity shows the points moving apart, then there is no collision.
-            // This is a key check to solve otherwise sticky collision problems.
+            // This is a key check to solving otherwise sticky collision problems.
             this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
 
             const contactRatio = particle1.radius / magnitude;
