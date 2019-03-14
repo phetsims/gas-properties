@@ -157,7 +157,10 @@ define( require => {
 
         // Create a particle, just inside the container where the bicycle pump hose attaches.
         const particle = new Constructor();
-        particle.setLocation( this.container.hoseLocation.x - particle.radius, this.container.hoseLocation.y );
+        particle.setLocation(
+          this.container.hoseLocation.x - this.container.wallThickness / 2 - particle.radius,
+          this.container.hoseLocation.y
+        );
 
         // Set the particle's velocity.
         // We can't do this in the constructor because initial velocity is a function of the particle's mass.
@@ -233,8 +236,9 @@ define( require => {
         removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.particleBoundsProperty.value );
         removeParticlesOutOfBounds( this.lightParticles, this.numberOfLightParticlesProperty, this.particleBoundsProperty.value );
 
-        assert && assertParticlesInsideContainer( this.heavyParticles, this.container );
-        assert && assertParticlesInsideContainer( this.lightParticles, this.container );
+        // verify that all particles are fully enclosed in the container
+        assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
+        assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
       }
     }
   }
@@ -282,14 +286,14 @@ define( require => {
   }
 
   /**
-   * Verifies that all particles are fully inside the container.
+   * Verifies that the container encloses all particles, surrounding them on all sides.
    * @param {Particle[]} particles
    * @param {Container} container
    */
-  function assertParticlesInsideContainer( particles, container ) {
+  function assertContainerEnclosesParticles( container, particles ) {
     for ( let i = 0; i < particles.length; i++ ) {
       assert && assert( container.enclosesParticle( particles[ i ] ),
-        `particle is not fully inside container: ${particles[ i ].toString()}` );
+        `container does not enclose particle: ${particles[ i ].toString()}` );
     }
   }
 

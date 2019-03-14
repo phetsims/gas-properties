@@ -14,6 +14,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
+  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class Container {
@@ -26,10 +27,13 @@ define( require => {
       // @public (read-only) height of the container, in nm
       this.height = 8.75;
 
-      // @public (read-only) this.left is dynamic, see ES5 getter
-      this.right = this.location.x;
-      this.top = this.location.y + this.height;
-      this.bottom = this.location.y;
+      // @public (read-only) wall thickness, in nm
+      this.wallThickness = 0.05;
+
+      // @public (read-only) locations of the container's inside bounds. this.left is dynamic, see ES5 getter
+      this.right = this.location.x - this.wallThickness / 2;
+      this.top = this.location.y + this.height - this.wallThickness / 2;
+      this.bottom = this.location.y + this.wallThickness / 2;
 
       // @public (read-only) range of the container's width, in nm
       this.widthRange = new RangeWithValue( 5, 15, 10 );
@@ -57,7 +61,7 @@ define( require => {
       // @public (read-only) x offset (absolute) of the opening from the container's origin, in nm
       this.openingXOffset = 2;
       assert && assert( this.openingXOffset > 0, `invalid openingXOffset: ${this.openingXOffset}` );
-      assert && assert( this.widthRange.min - this.openingWidthRange.max - this.openingXOffset  > 0,
+      assert && assert( this.widthRange.min - this.openingWidthRange.max - this.openingXOffset > 0,
         'opening extends beyond the top of the container' );
 
       // @public (read-only) bicycle pump hose is connected to the right side of the container
@@ -77,11 +81,11 @@ define( require => {
     }
 
     /**
-     * Left edge of the container's bounds.
+     * Left edge of the container's inside bounds.
      * @returns {number}
      * @public
      */
-    get left() { return this.location.x - this.widthProperty.value; }
+    get left() { return this.location.x - this.widthProperty.value + this.wallThickness / 2; }
 
     /**
      * Gets the min x coordinate of the opening in the top of the container.
@@ -104,10 +108,13 @@ define( require => {
      * @public
      */
     enclosesParticle( particle ) {
-      return particle.left >= this.left &&
-             particle.right <= this.right &&
-             particle.top <= this.top &&
-             particle.bottom >= this.bottom;
+
+      // Util.toFixedNumber is a threshold comparison, necessary due to floating-point error.
+      const decimalPlaces = 3;
+      return Util.toFixedNumber( particle.left, decimalPlaces ) >= Util.toFixedNumber( this.left, decimalPlaces ) &&
+             Util.toFixedNumber( particle.right, decimalPlaces ) <= Util.toFixedNumber( this.right, decimalPlaces ) &&
+             Util.toFixedNumber( particle.top, decimalPlaces ) <= Util.toFixedNumber( this.top, decimalPlaces ) &&
+             Util.toFixedNumber( particle.bottom, decimalPlaces ) >= Util.toFixedNumber( this.bottom, decimalPlaces );
     }
   }
 

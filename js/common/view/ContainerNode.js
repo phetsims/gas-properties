@@ -43,19 +43,20 @@ define( require => {
       // Constant aspects of the container, in view coordinates
       const viewLocation = modelViewTransform.modelToViewPosition( container.location );
       const viewHeight = Math.abs( modelViewTransform.modelToViewDeltaY( container.height ) );
+      const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
       const viewOpeningXOffset = modelViewTransform.modelToViewDeltaX( container.openingXOffset );
       const viewOpeningMaxWidth = modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max );
 
       // Displays the bounds of the container
       const boundsNode = new Path( null, {
         stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
-        lineWidth: 2
+        lineWidth: viewWallThickness
       } );
 
       // Displays the previous bounds of the container, visible while dragging
       const previousBoundsNode = new Path( null, {
         stroke: GasPropertiesColorProfile.containerPreviousBoundsStrokeProperty,
-        lineWidth: 2,
+        lineWidth: viewWallThickness,
         visible: false
       } );
 

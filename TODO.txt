@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 understand and document particle-particle collisions
-account for thickness of container walls
 
 DESIGN
 Is initial velocity magnitude based on 300K or the temperature in the box?
