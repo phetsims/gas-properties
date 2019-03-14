@@ -157,7 +157,7 @@ define( require => {
 
             const lineAngle = Math.atan2( this.tangentVector.y, this.tangentVector.x );
             reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
-            particle2.setLocation( this.relectedPoint.x, this.relectedPoint.y );
+            particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
             // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact
             // tangent the CM was on in its previous position
@@ -168,7 +168,7 @@ define( require => {
               contactPointY - ( contactPointY - particle1.previousLocation.y ) * s1
             );
             reflectPointAcrossLine( particle1.location, this.pointOnLine, lineAngle, this.relectedPoint );
-            particle1.setLocation( this.relectedPoint.x, this.relectedPoint.y );
+            particle1.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
             //-----------------------------------------------------------------------------------------
             // Adjust particle velocities

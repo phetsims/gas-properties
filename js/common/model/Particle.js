@@ -61,13 +61,13 @@ define( require => {
      * @param {number} value
      * @public
      */
-    set left( value ) { this.setLocation( value + this.radius, this.location.y ); }
+    set left( value ) { this.setLocationXY( value + this.radius, this.location.y ); }
 
-    set right( value ) { this.setLocation( value - this.radius, this.location.y ); }
+    set right( value ) { this.setLocationXY( value - this.radius, this.location.y ); }
 
-    set top( value ) { this.setLocation( this.location.x, value - this.radius ); }
+    set top( value ) { this.setLocationXY( this.location.x, value - this.radius ); }
 
-    set bottom( value ) { this.setLocation( this.location.x, value + this.radius ); }
+    set bottom( value ) { this.setLocationXY( this.location.x, value + this.radius ); }
 
     /**
      * String representation of a Particle.
@@ -92,17 +92,16 @@ define( require => {
      */
     step( dt ) {
       assert && assert( !this.isDisposed, 'attempted to step a disposed Particle' );
-      this.setLocation( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
+      this.setLocationXY( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
     }
 
-    //TODO rename to setLocationXY
     /**
      * Sets the location and remembers the previous location.
      * @param {number} x
      * @param {number} y
      * @public
      */
-    setLocation( x, y ) {
+    setLocationXY( x, y ) {
       this.previousLocation.setXY( this.location.x, this.location.y );
       this.location.setXY( x, y );
     }
