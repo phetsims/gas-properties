@@ -7,6 +7,7 @@ heat/cool
 DESIGN
 Is initial velocity magnitude based on 300K or the temperature in the box?
 Do we need collision detection outside the container? Could particles just float up until they disappear?
+Shaded or flat particles?
 
 MODEL
 Hole in top of container needs to have dynamic size
