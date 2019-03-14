@@ -95,6 +95,7 @@ define( require => {
       this.setLocation( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
     }
 
+    //TODO rename to setLocationXY
     /**
      * Sets the location and remembers the previous location.
      * @param {number} x
