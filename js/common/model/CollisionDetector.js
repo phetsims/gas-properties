@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Property = require( 'AXON/Property' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   class CollisionDetector {
 
@@ -68,6 +69,13 @@ define( require => {
 
       // @private fields needed by methods
       this.model = model;
+
+      // @private reusable (mutated) vectors
+      this.normalVector = new Vector2( 0, 0 );
+      this.relativeVelocity = new Vector2( 0, 0 );
+      this.tangentVector = new Vector2( 0, 0 );
+      this.linePoint = new Vector2( 0, 0 );
+      this.relectedPoint = new Vector2( 0, 0 );
     }
 
     /**
@@ -85,12 +93,97 @@ define( require => {
 
       // detect and handle particle-particle collisions within each region
       for ( let i = 0; i < regions.length; i++ ) {
-        doParticleParticleCollisions( regions[ i ].particles );
+        this.doParticleParticleCollisions( regions[ i ].particles );
       }
 
       // detect and handle particle-container collisions
       doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
       doParticleContainerCollisions( this.model.lightParticles, this.model.container );
+    }
+
+    //TODO Java - understand this, document it, clean it up
+    //TODO Java - what do abbreviations stand for? s1, s2, linePoint, CM
+    /**
+     * Detects and handles particle-particle collisions.
+     * @param {Particle[]} particles
+     * @private
+     */
+    doParticleParticleCollisions( particles ) {
+      for ( let i = 0; i < particles.length - 1; i++ ) {
+
+        const particle1 = particles[ i ];
+
+        for ( let j = i + 1; j < particles.length; j++ ) {
+
+          const particle2 = particles[ j ];
+
+          if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
+
+            const dx = particle1.location.x - particle2.location.x;
+            const dy = particle1.location.y - particle2.location.y;
+            const distance = Math.sqrt( dx * dx + dy * dy );
+
+            const ratio = particle1.radius / distance;
+            const contactPointX = particle1.location.x + ( particle2.location.x - particle1.location.x ) * ratio;
+            const contactPointY = particle1.location.y + ( particle2.location.y - particle1.location.y ) * ratio;
+
+            // Get the unit vector along the line of action
+            this.normalVector.setXY( dx, dy ).normalize();
+
+            // If the relative velocity show the points moving apart, then there is no collision.
+            // This is a key check to solve otherwise sticky collision problems
+            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
+
+            // Compute correct position of the bodies following the collision
+            this.tangentVector.setXY( dy, -dx );
+
+            // Determine the proper positions of the bodies following the collision
+            const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
+                            -particle2.radius : particle2.radius;
+            const offsetX2 = this.normalVector.x * offset2;
+            const offsetY2 = this.normalVector.y * offset2;
+            this.linePoint.setXY( contactPointX - offsetX2, contactPointY - offsetY2 );
+
+            const lineAngle = Math.atan2( this.tangentVector.y, this.tangentVector.x );
+            reflectPointAcrossLine( particle2.location, this.linePoint, lineAngle, this.relectedPoint );
+            particle2.setLocation( this.relectedPoint.x, this.relectedPoint.y );
+
+            // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact
+            // tangent the CM was on in its previous position
+            const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
+            const s1 = particle1.radius / previousDistance1;
+            this.linePoint.setXY(
+              contactPointX - ( contactPointX - particle1.previousLocation.x ) * s1,
+              contactPointY - ( contactPointY - particle1.previousLocation.y ) * s1
+            );
+            reflectPointAcrossLine( particle1.location, this.linePoint, lineAngle, this.relectedPoint );
+            particle1.setLocation( this.relectedPoint.x, this.relectedPoint.y );
+
+            // Compute the relative velocities of the contact points
+            const vr = this.relativeVelocity.dot( this.normalVector );
+
+            // Assume the coefficient of restitution is 1
+            const e = 1;
+
+            //TODO show general form of this equation, add to model.md
+            // Compute the impulse, j
+            const numerator = -vr * ( 1 + e );
+            const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
+            const j = numerator / denominator;
+
+            // Compute the new velocities, based on the impulse
+            const vScale1 = j / particle1.mass;
+            const vx1 = this.normalVector.x * vScale1;
+            const vy1 = this.normalVector.y * vScale1;
+            particle1.setVelocityXY( particle1.velocity.x + vx1, particle1.velocity.y + vy1 );
+
+            const vScale2 = -j / particle2.mass;
+            const vx2 = this.normalVector.x * vScale2;
+            const vy2 = this.normalVector.y * vScale2;
+            particle2.setVelocityXY( particle2.velocity.x + vx2, particle2.velocity.y + vy2 );
+          }
+        }
+      }
     }
   }
 
@@ -120,22 +213,20 @@ define( require => {
   }
 
   /**
-   * Detects and handles particle-particle collisions.
-   * @param {Particle[]} particles
+   * Determines the position of a point that is the reflection of a specified point across a line.
+   * @param {Vector2} p
+   * @param {Vector2} pointOnLine
+   * @param {number} lineAngle angle of line in radians
+   * @param {Vector2} returnPoint the point to be mutated with the return value
+   * @returns {Vector2} returnPoint mutated
    */
-  function doParticleParticleCollisions( particles ) {
-    for ( let i = 0; i < particles.length - 1; i++ ) {
-      const particle1 = particles[ i ];
-      for ( let j = i + 1; j < particles.length; j++ ) {
-        const particle2 = particles[ j ];
-        if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
-
-          //TODO temporary, see Java SphereSphereCollision.doCollision
-          particle1.setVelocityPolar( particle1.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
-          particle2.setVelocityPolar( particle2.velocity.magnitude, phet.joist.random.nextDouble() * 2 * Math.PI );
-        }
-      }
-    }
+  function reflectPointAcrossLine( p, pointOnLine, lineAngle, returnPoint ) {
+    const alpha = lineAngle % ( Math.PI * 2 );
+    const gamma = Math.atan2( ( p.y - pointOnLine.y ), ( p.x - pointOnLine.x ) ) % ( Math.PI * 2 );
+    const theta = ( 2 * alpha - gamma ) % ( Math.PI * 2 );
+    const d = p.distance( pointOnLine );
+    returnPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
+    return returnPoint;
   }
 
   /**
