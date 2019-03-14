@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO migrate to scenery-phet
 /**
  * Shows a 2D grid for the model coordinate frame.
  * Moving the pointer over the grid displays the location of the pointer in model & view coordinates.
