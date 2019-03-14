@@ -17,22 +17,23 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  // constants
-  const CELL_LENGTH = 1; // length of a square cell in the grid, in nm
-
   class ModelGridNode extends Path {
 
     /**
      * @param {Property.<Bounds2>} visibleBoundsProperty - visible bounds of the parent ScreenView
      * @param {ModelViewTransform2} modelViewTransform
+     * @param {Object} [options]
      */
-    constructor( visibleBoundsProperty, modelViewTransform ) {
+    constructor( visibleBoundsProperty, modelViewTransform, options ) {
 
-      super( null, {
+      options = _.extend( {
+        cellLength: 1, // length of each cell in the grid, in model units
         stroke: GasPropertiesColorProfile.gridColorProperty,
         opacity: 0.3,
         pickable: false
-      } );
+      }, options );
+
+      super( null, options );
 
       // Update the grid when the visibleBounds change.
       visibleBoundsProperty.link( visibleBounds => {
@@ -50,14 +51,14 @@ define( require => {
         const gridShape = new Shape();
 
         // vertical grid lines
-        for ( let x = minX; x < maxX; x += CELL_LENGTH ) {
+        for ( let x = minX; x < maxX; x += options.cellLength ) {
           const viewPosition = modelViewTransform.modelToViewXY( x, 0 );
           gridShape.moveTo( viewPosition.x, visibleBounds.minY );
           gridShape.lineTo( viewPosition.x, visibleBounds.maxY, );
         }
 
         // horizontal grid lines
-        for ( let y = minY; y < maxY; y += CELL_LENGTH ) {
+        for ( let y = minY; y < maxY; y += options.cellLength ) {
           const viewPosition = modelViewTransform.modelToViewXY( 0, y );
           gridShape.moveTo( visibleBounds.minX, viewPosition.y );
           gridShape.lineTo( visibleBounds.maxX, viewPosition.y, );
