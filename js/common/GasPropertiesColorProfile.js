@@ -113,7 +113,7 @@ define( require => {
     },
 
     lightParticleHighlightColor: {
-      default: 'rgb( 255, 200, 100 )' // lighter red
+      default: 'rgb( 255, 170, 170 )' // lighter red
     },
 
     collisionCounterBackgroundColor: {
