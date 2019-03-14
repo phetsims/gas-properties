@@ -136,6 +136,7 @@ define( require => {
 
             this.tangentVector.setXY( dy, -dx );
 
+            //TODO move this down where it's used, and this.relativeVelocity is not needed
             //TODO comment copied from Java, is it correct? 
             // If the relative velocity shows the points moving apart, then there is no collision.
             // This is a key check to solve otherwise sticky collision problems.
