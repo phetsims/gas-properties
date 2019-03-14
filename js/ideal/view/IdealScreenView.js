@@ -226,12 +226,17 @@ define( require => {
 
       // 2D grid for model coordinate frame
       if ( GasPropertiesQueryParameters.grid ) {
-        this.addChild( new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform ) );
+        this.addChild( new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform, {
+          stroke: GasPropertiesColorProfile.gridColorProperty
+        } ) );
       }
 
       // model and view coordinates for pointer location
       if ( GasPropertiesQueryParameters.pointerCoordinates ) {
-        this.addChild( new PointerCoordinatesNode( model.modelViewTransform ) );
+        this.addChild( new PointerCoordinatesNode( model.modelViewTransform, {
+          textColor: GasPropertiesColorProfile.pointerCoordinatesTextColorProperty,
+          backgroundColor: GasPropertiesColorProfile.pointerCoordinatesBackgroundColorProperty
+        } ) );
       }
 
       // This should be in front of everything else.

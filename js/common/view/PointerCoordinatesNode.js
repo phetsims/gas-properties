@@ -11,7 +11,6 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -27,8 +26,8 @@ define( require => {
     constructor( modelViewTransform, options) {
 
       options = _.extend( {
-        textColor: GasPropertiesColorProfile.pointerCoordinatesTextColorProperty,
-        backgroundColor: GasPropertiesColorProfile.pointerCoordinatesBackgroundColorProperty,
+        textColor: 'black',
+        backgroundColor: 'rgba( 255, 255, 255, 0.5 )',
         font: new PhetFont( 14 ),
         modelDecimalPlaces: 1,
         viewDecimalPlaces: 0,

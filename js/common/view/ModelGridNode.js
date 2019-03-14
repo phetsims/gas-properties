@@ -12,7 +12,6 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Shape = require( 'KITE/Shape' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -28,7 +27,7 @@ define( require => {
 
       options = _.extend( {
         cellLength: 1, // length of each cell in the grid, in model units
-        stroke: GasPropertiesColorProfile.gridColorProperty,
+        stroke: 'black',
         opacity: 0.3,
         pickable: false
       }, options );
