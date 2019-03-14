@@ -131,17 +131,6 @@ define( require => {
             const dy = particle1.location.y - particle2.location.y;
             const magnitude = Math.sqrt( dx * dx + dy * dy );
 
-            // Unit vector along the line of action
-            this.unitVector.setXY( dx, dy ).normalize();
-
-            this.tangentVector.setXY( dy, -dx );
-
-            //TODO move this down where it's used, and this.relativeVelocity is not needed
-            //TODO comment copied from Java, is it correct? 
-            // If the relative velocity shows the points moving apart, then there is no collision.
-            // This is a key check to solving otherwise sticky collision problems.
-            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
-
             const contactRatio = particle1.radius / magnitude;
             const contactPointX = particle1.location.x + ( particle2.location.x - particle1.location.x ) * contactRatio;
             const contactPointY = particle1.location.y + ( particle2.location.y - particle1.location.y ) * contactRatio;
@@ -149,6 +138,13 @@ define( require => {
             //-----------------------------------------------------------------------------------------
             // Adjust particle locations
             //-----------------------------------------------------------------------------------------
+
+            //TODO what is a 'line of action'?
+            // Unit vector along the line of action
+            this.unitVector.setXY( dx, dy ).normalize();
+
+            //TODO document
+            this.tangentVector.setXY( dy, -dx );
 
             const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
                             -particle2.radius : particle2.radius;
@@ -160,8 +156,7 @@ define( require => {
             reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
-            // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact
-            // tangent the CM was on in its previous position
+            // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact tangent the CM was on in its previous position
             const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
             const s1 = particle1.radius / previousDistance1;
             this.pointOnLine.setXY(
@@ -174,6 +169,11 @@ define( require => {
             //-----------------------------------------------------------------------------------------
             // Adjust particle velocities
             //-----------------------------------------------------------------------------------------
+
+            //TODO comment copied from Java, is it correct?
+            // If the relative velocity shows the points moving apart, then there is no collision.
+            // This avoids sticky collision problems.
+            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
 
             //TODO say what?
             // Compute the relative velocities of the contact points
