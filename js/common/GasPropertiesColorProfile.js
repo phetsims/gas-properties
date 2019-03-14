@@ -30,9 +30,14 @@ define( require => {
       projector: 'black'
     },
 
-    pointerCoordinatesColor: {
+    pointerCoordinatesTextColor: {
       default: 'white',
       projector: 'black'
+    },
+
+    pointerCoordinatesBackgroundColor: {
+      default: 'rgba( 0, 0, 0, 0.5 )',
+      projector: 'rgba( 255, 255, 255, 0.5 )'
     },
 
     panelFill: {

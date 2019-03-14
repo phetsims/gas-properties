@@ -12,21 +12,42 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RichText = require( 'SCENERY/nodes/RichText' );
   const Util = require( 'DOT/Util' );
 
-  class PointerCoordinatesNode extends RichText {
+  class PointerCoordinatesNode extends Node {
 
     /**
      * @param {ModelViewTransform2} modelViewTransform
+     * @param {Object} [options] - not propagated to super
      */
-    constructor( modelViewTransform ) {
+    constructor( modelViewTransform, options) {
 
-      super( '', {
+      options = _.extend( {
+        textColor: GasPropertiesColorProfile.pointerCoordinatesTextColorProperty,
+        backgroundColor: GasPropertiesColorProfile.pointerCoordinatesBackgroundColorProperty,
         font: new PhetFont( 14 ),
+        modelDecimalPlaces: 1,
+        viewDecimalPlaces: 0,
         align: 'center',
-        fill: GasPropertiesColorProfile.pointerCoordinatesColorProperty,
+        pickable: false
+      }, options );
+
+      const textNode = new RichText( '', {
+        font: options.font,
+        fill: options.textColor,
+        align: options.align
+      } );
+
+      const backgroundNode = new Rectangle( 0, 0, 1, 1, {
+        fill: options.backgroundColor
+      } );
+
+      super( {
+        children: [ backgroundNode, textNode ],
         pickable: false
       } );
 
@@ -39,18 +60,22 @@ define( require => {
 
           // (x,y) in view coordinates
           const viewPoint = this.globalToParentPoint( event.pointer.point );
-          const xView = Util.toFixed( viewPoint.x, 0 );
-          const yView = Util.toFixed( viewPoint.y, 0 );
+          const xView = Util.toFixed( viewPoint.x, options.viewDecimalPlaces );
+          const yView = Util.toFixed( viewPoint.y, options.viewDecimalPlaces );
 
           // (x,y) in model coordinates
           const modelPoint = modelViewTransform.viewToModelPosition( viewPoint );
-          const xModel = Util.toFixed( modelPoint.x, 1 );
-          const yModel = Util.toFixed( modelPoint.y, 1 );
+          const xModel = Util.toFixed( modelPoint.x, options.modelDecimalPlaces );
+          const yModel = Util.toFixed( modelPoint.y, options.modelDecimalPlaces );
 
           // Update coordinates display.
-          this.text = `(${xView},${yView})<br>(${xModel},${yModel}) nm`;
+          textNode.text = `(${xView},${yView})<br>(${xModel},${yModel}) nm`;
 
-          // Center the coordinates above the cursor.
+          // Resize background
+          backgroundNode.setRect( 0, 0, textNode.width + 4, textNode.height + 4 );
+          textNode.center = backgroundNode.center;
+
+          // Center above the cursor.
           this.centerX = viewPoint.x;
           this.bottom = viewPoint.y - 3;
         }
