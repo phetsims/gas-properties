@@ -138,7 +138,7 @@ define( require => {
             const contactPointY = particle1.location.y - dy * contactRatio;
 
             //-----------------------------------------------------------------------------------------
-            // Adjust particle locations
+            // Adjust particle locations by reflecting across the line of impact.
             //-----------------------------------------------------------------------------------------
 
             // Normal vector, aka 'line of impact'
@@ -172,7 +172,8 @@ define( require => {
             particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
             //-----------------------------------------------------------------------------------------
-            // Adjust particle velocities
+            // Adjust particle velocities using impulse-based contact model.
+            // See https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model
             //-----------------------------------------------------------------------------------------
 
             // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
@@ -182,7 +183,6 @@ define( require => {
 
             // Compute the impulse, j.
             // There is no angular velocity in our model, so the denominator involves only mass.
-            // See https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model
             this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
             const vr = this.relativeVelocity.dot( this.normalVector );
             const numerator = -vr * ( 1 + e );
