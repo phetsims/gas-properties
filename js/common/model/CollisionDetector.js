@@ -137,8 +137,8 @@ define( require => {
             const dy = particle1.location.y - particle2.location.y;
             const magnitude = Math.sqrt( dx * dx + dy * dy );
             const contactRatio = particle1.radius / magnitude;
-            const contactPointX = particle1.location.x + ( particle2.location.x - particle1.location.x ) * contactRatio;
-            const contactPointY = particle1.location.y + ( particle2.location.y - particle1.location.y ) * contactRatio;
+            const contactPointX = particle1.location.x - dx * contactRatio;
+            const contactPointY = particle1.location.y - dy * contactRatio;
 
             //-----------------------------------------------------------------------------------------
             // Adjust particle locations
@@ -153,7 +153,7 @@ define( require => {
             // Angle of the plane of contact
             const lineAngle =  Math.atan2( this.tangentVector.y, this.tangentVector.x );
 
-            // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact tangent the CM was on in its previous position
+            // Adjust location of particle1
             const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
             const s1 = particle1.radius / previousDistance1;
             this.pointOnLine.setXY(
@@ -163,7 +163,7 @@ define( require => {
             reflectPointAcrossLine( particle1.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle1.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
-            //TODO why are the algorithms for particle1 and particle2 so different?
+            // Adjust location of particle2
             const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
                             -particle2.radius : particle2.radius;
             this.pointOnLine.setXY( 
