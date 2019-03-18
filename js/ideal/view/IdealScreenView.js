@@ -146,12 +146,16 @@ define( require => {
             model.isPlayingProperty.value = false;
             model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
             model.collisionCounter.isRunningProperty.value = false;
+
+            // gray out the particles
+            this.particlesNode.opacity = 0.6;
           }
           else {
 
             // enable time controls and restore playing state
             model.isTimeControlsEnabledProperty.value = true;
             model.isPlayingProperty.value = wasPlaying;
+            this.particlesNode.opacity = 1;
           }
         }
       } );

@@ -143,6 +143,17 @@ define( require => {
 
       // @public (read-only)
       this.collisionDetector = new CollisionDetector( this );
+
+      // Redistribute particles when the container width changes.
+      this.container.widthProperty.link( ( newWidth, oldWidth ) => {
+         const ratio = newWidth / oldWidth;
+         for ( let i = 0; i < this.heavyParticles.length; i++ ) {
+           this.heavyParticles[ i ].location.setX( ratio * this.heavyParticles[ i ].location.x );
+         }
+        for ( let i = 0; i < this.lightParticles.length; i++ ) {
+          this.lightParticles[ i ].location.setX( ratio * this.lightParticles[ i ].location.x );
+        }
+      } );
     }
 
     /**

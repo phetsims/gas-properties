@@ -1,8 +1,6 @@
 TODO list for gas-properties
 
 UP NEXT
-understand and document particle-particle collisions
-redistribute particles when container is resized
 change particle count to be number in container
 heat/cool
 remove lid
