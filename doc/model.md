@@ -29,6 +29,7 @@ Equations:
 
 * PV = NkT
 * KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
+* T = (2/3)KE/k
 * |v| = sqrt( 3kT / m )
 * p = m * v
 

@@ -252,6 +252,35 @@ define( require => {
         // verify that all particles are fully enclosed in the container
         assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
         assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
+
+        this.updateTemperature();
+      }
+    }
+
+    //TODO is temperature computation correct?
+    /**
+     * Updates the thermometer's temperature.
+     * @private
+     */
+    updateTemperature() {
+      const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;
+      if ( numberOfParticles === 0 ) {
+        this.thermometer.temperatureKelvinProperty.value = null;
+      }
+      else {
+
+        // Compute the average kinetic energy
+        let averageKineticEnergy = 0;
+        for ( let i = 0; i < this.heavyParticles.length; i++ ) {
+          averageKineticEnergy += this.heavyParticles[ i ].averageKineticEnergy;
+        }
+        for ( let i = 0; i < this.lightParticles.length; i++ ) {
+          averageKineticEnergy += this.lightParticles[ i ].averageKineticEnergy;
+        }
+        averageKineticEnergy /= numberOfParticles;
+
+        // T = (2/3)KE/k
+        this.thermometer.temperatureKelvinProperty.value = (2/3) * averageKineticEnergy / GasPropertiesConstants.BOLTZMANN;
       }
     }
   }
