@@ -1,11 +1,11 @@
 TODO list for gas-properties
 
 UP NEXT
+initial velocity should be based on temperature in container, 300K if container is empty
 change particle count to be number in container
 remove lid
 particles outside container do not collide, continue up with unchanged velocity
-initial velocity should be based on temperature in container, 300K if container is empty
-pressure
+pressure - see Java PressureSensingBox.getPressure
 
 DESIGN
 
