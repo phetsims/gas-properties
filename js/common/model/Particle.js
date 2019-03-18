@@ -140,6 +140,14 @@ define( require => {
     }
 
     /**
+     * Scales the velocity.
+     * @param {number} scale
+     */
+    scaleVelocity( scale ) {
+      this.velocity.multiply( scale );
+    }
+
+    /**
      * Makes the particle travel with the same speed, but in the opposite horizontal direction.
      * This is called when a particle hits a vertical wall.
      * @public

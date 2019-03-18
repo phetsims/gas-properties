@@ -92,8 +92,8 @@ define( require => {
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
       } );
 
-      // @public the amount to heat (positive value) or cool (negative value) the contents of the container
-      this.heatCoolAmountProperty = new NumberProperty( 0, {
+      // @public the factor to heat (positive value) or cool (negative value) the contents of the container
+      this.heatCoolFactorProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 )
       } );
 
@@ -206,7 +206,7 @@ define( require => {
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset(); // clears this.heavyParticles
       this.numberOfLightParticlesProperty.reset(); // clears this.lightParticles
-      this.heatCoolAmountProperty.reset();
+      this.heatCoolFactorProperty.reset();
 
       assert && assert( this.heavyParticles.length === 0, 'there should be no heavyParticles' );
       assert && assert( this.lightParticles.length === 0, 'there should be no lightParticles' );
@@ -232,13 +232,15 @@ define( require => {
         // advance the stopwatch
         this.stopwatch.step( dt );
 
+        // apply heat/cool
+        if ( this.heatCoolFactorProperty.value !== 0 ) {
+          heatCoolParticles( this.heavyParticles, this.heatCoolFactorProperty.value );
+          heatCoolParticles( this.lightParticles, this.heatCoolFactorProperty.value );
+        }
+
         // step particles
-        for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-          this.heavyParticles[ i ].step( dt );
-        }
-        for ( let i = 0; i < this.lightParticles.length; i++ ) {
-          this.lightParticles[ i ].step( dt );
-        }
+        stepParticles( this.heavyParticles, dt );
+        stepParticles( this.lightParticles, dt );
 
         // collision detection and response
         this.collisionDetector.step( dt );
@@ -251,6 +253,30 @@ define( require => {
         assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
         assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
       }
+    }
+  }
+
+  /**
+   * Steps a collection of particles.
+   * @param {Particle[]} particles
+   * @param {number} dt - time step in ps
+   */
+  function stepParticles( particles, dt ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      particles[ i ].step( dt );
+    }
+  }
+
+  /**
+   * Heats or cools a collection of particles.
+   * @param {Particle[]} particles
+   * @param {number} heatCoolFactor - (-1,1), heat=[0,1), cool=(-1,0]
+   */
+  function heatCoolParticles( particles, heatCoolFactor ) {
+    assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, 'invalid heatCoolFactor: ' + heatCoolFactor );
+    const velocityScale = 1 + heatCoolFactor / 1000; //TODO tune this
+    for ( let i = 0; i < particles.length; i++ ) {
+      particles[i].scaleVelocity( velocityScale );
     }
   }
 

@@ -170,7 +170,7 @@ define( require => {
       const heaterCoolerNodeLeft = containerViewLocation.x -
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
-        model.heatCoolAmountProperty, model.holdConstantProperty, {
+        model.heatCoolFactorProperty, model.holdConstantProperty, {
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
