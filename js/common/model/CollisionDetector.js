@@ -38,7 +38,6 @@ define( require => {
       // @public {Property.<Bounds2>} collision detection bounds
       this.particleBoundsProperty = model.particleBoundsProperty;
 
-      //TODO do we need separate grids for inside vs outside the container?
       // @public (read-only) {Property.<Region[]>} 2D grid of Regions
       this.regionsProperty = new Property( [] );
 
@@ -73,7 +72,6 @@ define( require => {
       // @private reusable (mutated) vectors
       this.unitVector = new Vector2( 0, 0 );
       this.relativeVelocity = new Vector2( 0, 0 );
-      this.tangentVector = new Vector2( 0, 0 );
       this.pointOnLine = new Vector2( 0, 0 );
       this.relectedPoint = new Vector2( 0, 0 );
     }
@@ -126,11 +124,9 @@ define( require => {
             // Determine where the particles made contact.
             //-----------------------------------------------------------------------------------------
 
-            // Vector from center of particle2 to center of particle1
             const dx = particle1.location.x - particle2.location.x;
             const dy = particle1.location.y - particle2.location.y;
             const magnitude = Math.sqrt( dx * dx + dy * dy );
-
             const contactRatio = particle1.radius / magnitude;
             const contactPointX = particle1.location.x + ( particle2.location.x - particle1.location.x ) * contactRatio;
             const contactPointY = particle1.location.y + ( particle2.location.y - particle1.location.y ) * contactRatio;
@@ -140,21 +136,11 @@ define( require => {
             //-----------------------------------------------------------------------------------------
 
             //TODO what is a 'line of action'?
-            // Unit vector along the line of action
+            // Unit vector (magnitude === 1) along the line of action
             this.unitVector.setXY( dx, dy ).normalize();
 
-            //TODO document
-            this.tangentVector.setXY( dy, -dx );
-
-            const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
-                            -particle2.radius : particle2.radius;
-            const offsetX2 = this.unitVector.x * offset2;
-            const offsetY2 = this.unitVector.y * offset2;
-            this.pointOnLine.setXY( contactPointX - offsetX2, contactPointY - offsetY2 );
-
-            const lineAngle = Math.atan2( this.tangentVector.y, this.tangentVector.x );
-            reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
-            particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
+            // Angle of the vector (dy,-dx) that is perpendicular to unitVector
+            const lineAngle = Math.atan2( -dx, dy );
 
             // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact tangent the CM was on in its previous position
             const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
@@ -166,11 +152,20 @@ define( require => {
             reflectPointAcrossLine( particle1.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle1.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
+            const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
+                            -particle2.radius : particle2.radius;
+            this.pointOnLine.setXY( 
+              contactPointX - this.unitVector.x * offset2,
+              contactPointY - this.unitVector.y * offset2
+            );
+            reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
+            particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
+
             //-----------------------------------------------------------------------------------------
             // Adjust particle velocities
             //-----------------------------------------------------------------------------------------
 
-            //TODO comment copied from Java, is it correct?
+            //TODO comment copied from Java, is it correct? where are we checking for 'moving apart'?
             // If the relative velocity shows the points moving apart, then there is no collision.
             // This avoids sticky collision problems.
             this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
