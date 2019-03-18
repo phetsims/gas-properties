@@ -1,7 +1,15 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Handles collision detection and response.
+ * Handles collision detection and response. Our collision model involves rigid bodies. It is a perfectly elastic
+ * collision model, where there is no net loss of kinetic energy.
+ *
+ * References:
+ * https://en.wikipedia.org/wiki/Collision_detection
+ * https://en.wikipedia.org/wiki/Collision_response
+ * https://en.wikipedia.org/wiki/Elastic_collision
+ * https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model
+ * https://en.wikipedia.org/wiki/Coefficient_of_restitution
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -70,7 +78,8 @@ define( require => {
       this.model = model;
 
       // @private reusable (mutated) vectors
-      this.unitVector = new Vector2( 0, 0 );
+      this.normalVector = new Vector2( 0, 0 );
+      this.tangentVector = new Vector2( 0, 0 );
       this.relativeVelocity = new Vector2( 0, 0 );
       this.pointOnLine = new Vector2( 0, 0 );
       this.relectedPoint = new Vector2( 0, 0 );
@@ -135,12 +144,14 @@ define( require => {
             // Adjust particle locations
             //-----------------------------------------------------------------------------------------
 
-            //TODO what is a 'line of action'?
-            // Unit vector (magnitude === 1) along the line of action
-            this.unitVector.setXY( dx, dy ).normalize();
+            // Normal vector, aka 'line of impact'
+            this.normalVector.setXY( dx, dy ).normalize();
 
-            // Angle of the vector (dy,-dx) that is perpendicular to unitVector
-            const lineAngle = Math.atan2( -dx, dy );
+            // Tangent vector, perpendicular to the line of impact, aka 'plane of contact'
+            this.tangentVector.setXY( dy, -dx );
+
+            // Angle of the plane of contact
+            const lineAngle =  Math.atan2( this.tangentVector.y, this.tangentVector.x );
 
             // TODO Java says: The determination of the sign of the offset is wrong. It should be based on which side of the contact tangent the CM was on in its previous position
             const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
@@ -152,11 +163,12 @@ define( require => {
             reflectPointAcrossLine( particle1.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle1.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
+            //TODO why are the algorithms for particle1 and particle2 so different?
             const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
                             -particle2.radius : particle2.radius;
             this.pointOnLine.setXY( 
-              contactPointX - this.unitVector.x * offset2,
-              contactPointY - this.unitVector.y * offset2
+              contactPointX - this.normalVector.x * offset2,
+              contactPointY - this.normalVector.y * offset2
             );
             reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
@@ -165,33 +177,28 @@ define( require => {
             // Adjust particle velocities
             //-----------------------------------------------------------------------------------------
 
-            //TODO comment copied from Java, is it correct? where are we checking for 'moving apart'?
-            // If the relative velocity shows the points moving apart, then there is no collision.
-            // This avoids sticky collision problems.
-            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
-
-            //TODO say what?
-            // Compute the relative velocities of the contact points
-            const vr = this.relativeVelocity.dot( this.unitVector );
-
-            //TODO what is this?
-            // Coefficient of restitution, the ratio of the final to initial relative velocity between two objects after they collide
+            // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
+            // after they collide. It normally ranges from 0 to 1 where 1 is a perfectly elastic collision.
+            // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
             const e = 1;
 
-            //TODO show general form of this equation, add to model.md
-            // Compute the impulse, j
+            // Compute the impulse, j.
+            // There is no angular velocity in our model, so the denominator involves only mass.
+            // See https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model
+            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
+            const vr = this.relativeVelocity.dot( this.normalVector );
             const numerator = -vr * ( 1 + e );
             const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
             const j = numerator / denominator;
 
             const vScale1 = j / particle1.mass;
-            const vx1 = this.unitVector.x * vScale1;
-            const vy1 = this.unitVector.y * vScale1;
+            const vx1 = this.normalVector.x * vScale1;
+            const vy1 = this.normalVector.y * vScale1;
             particle1.setVelocityXY( particle1.velocity.x + vx1, particle1.velocity.y + vy1 );
 
             const vScale2 = -j / particle2.mass;
-            const vx2 = this.unitVector.x * vScale2;
-            const vy2 = this.unitVector.y * vScale2;
+            const vx2 = this.normalVector.x * vScale2;
+            const vy2 = this.normalVector.y * vScale2;
             particle2.setVelocityXY( particle2.velocity.x + vx2, particle2.velocity.y + vy2 );
           }
         }

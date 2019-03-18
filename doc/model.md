@@ -3,6 +3,8 @@ TODO model description
 Constraints:
  
 * rigid body collision model
+* perfectly elastic (no net loss of KE)
+* particle-particle collisions use an impulse-based contact model
 * no rotational kinematics
 * no gravity
 
