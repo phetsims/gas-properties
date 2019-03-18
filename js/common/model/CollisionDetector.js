@@ -135,8 +135,7 @@ define( require => {
 
             const dx = particle1.location.x - particle2.location.x;
             const dy = particle1.location.y - particle2.location.y;
-            const magnitude = Math.sqrt( dx * dx + dy * dy );
-            const contactRatio = particle1.radius / magnitude;
+            const contactRatio = particle1.radius / particle1.location.distance( particle2.location );
             const contactPointX = particle1.location.x - dx * contactRatio;
             const contactPointY = particle1.location.y - dy * contactRatio;
 
