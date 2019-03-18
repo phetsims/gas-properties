@@ -108,8 +108,6 @@ define( require => {
       doParticleContainerCollisions( this.model.lightParticles, this.model.container );
     }
 
-    //TODO Java - understand this, document it, clean it up
-    //TODO Java - what do abbreviations stand for? s1, s2, linePoint, CM, line of action
     /**
      * Detects and handles particle-particle collisions.
      * @param {Particle[]} particles
@@ -154,20 +152,21 @@ define( require => {
 
             // Adjust location of particle1
             const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
-            const s1 = particle1.radius / previousDistance1;
+            const locationRatio1 = particle1.radius / previousDistance1;
             this.pointOnLine.setXY(
-              contactPointX - ( contactPointX - particle1.previousLocation.x ) * s1,
-              contactPointY - ( contactPointY - particle1.previousLocation.y ) * s1
+              contactPointX - ( contactPointX - particle1.previousLocation.x ) * locationRatio1,
+              contactPointY - ( contactPointY - particle1.previousLocation.y ) * locationRatio1
             );
             reflectPointAcrossLine( particle1.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle1.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
 
+            //TODO in Java version, particle2 algorithm was very different than particle1. Does making them same cause any problems?
             // Adjust location of particle2
-            const offset2 = ( particle2.previousLocation.distance( particle1.previousLocation ) < particle1.radius ) ?
-                            -particle2.radius : particle2.radius;
-            this.pointOnLine.setXY( 
-              contactPointX - this.normalVector.x * offset2,
-              contactPointY - this.normalVector.y * offset2
+            const previousDistance2 = particle2.previousLocation.distanceXY( contactPointX, contactPointY );
+            const locationRatio2 = particle2.radius / previousDistance2;
+            this.pointOnLine.setXY(
+              contactPointX - ( contactPointX - particle2.previousLocation.x ) * locationRatio2,
+              contactPointY - ( contactPointY - particle2.previousLocation.y ) * locationRatio2
             );
             reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
             particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
