@@ -35,6 +35,7 @@ define( require => {
       } );
 
       const handleNode = new HandleNode( {
+        hasLeftAttachment: false,
         gripBaseColor: options.handleColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         scale: 0.4,
