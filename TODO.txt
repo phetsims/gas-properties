@@ -10,6 +10,7 @@ pressure - see Java PressureSensingBox.getPressure
 DESIGN
 * Temperature on thermometer is T = (2/3)KE/k, where KE is the average KE of all particles
 * Heat/Cool is a number from (-1,1), and is used to uniformly scale velocity of each particle by 1 + heatCoolFactor / 1000. How should this behave?
+* Why are we showing time to 0.01 ps in the stopwatch?
 
 MODEL
 Hole in top of container needs to have dynamic size
