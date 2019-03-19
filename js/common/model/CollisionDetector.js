@@ -74,6 +74,9 @@ define( require => {
         phet.log && phet.log( `created ${regions.length} regions of ${options.regionLength}nm each, with ${options.regionOverlap}nm overlap` );
       } );
 
+      // @public (read-only) numebr of wall collisions on the most recent call to step
+      this.numberOfParticleContainerCollisions = 0;
+
       // @private fields needed by methods
       this.model = model;
 
@@ -104,8 +107,9 @@ define( require => {
       }
 
       // detect and handle particle-container collisions
-      doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
-      doParticleContainerCollisions( this.model.lightParticles, this.model.container );
+      this.numberOfParticleContainerCollisions = 0;
+      this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
+      this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.lightParticles, this.model.container );
     }
 
     /**
@@ -251,21 +255,26 @@ define( require => {
    * Handles x and y directions separately in case a particle hits the container diagonally at a corner.
    * @param {Particle[]} particles
    * @param {Container} container
+   * @returns {number} number of collisions
    */
   function doParticleContainerCollisions( particles, container ) {
+    let numberOfCollisions = 0;
     for ( let i = 0; i < particles.length; i++ ) {
 
       const particle = particles[ i ];
+      let collided = false;
 
       // adjust x
       if ( particle.left <= container.left ) {
         particle.left = container.left;
         particle.invertDirectionX();
+        collided = true;
         //TODO handle kinetic energy if the left wall is moving
       }
       else if ( particle.right >= container.right ) {
         particle.right = container.right;
         particle.invertDirectionX();
+        collided = true;
       }
 
       // adjust y
@@ -273,12 +282,19 @@ define( require => {
         //TODO handle opening in top of container
         particle.top = container.top;
         particle.invertDirectionY();
+        collided = true;
       }
       else if ( particle.bottom <= container.bottom ) {
         particle.bottom = container.bottom;
         particle.invertDirectionY();
+        collided = true;
+      }
+
+      if ( collided ) {
+        numberOfCollisions++;
       }
     }
+    return numberOfCollisions;
   }
 
   return gasProperties.register( 'CollisionDetector', CollisionDetector );

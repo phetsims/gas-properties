@@ -137,7 +137,7 @@ define( require => {
       this.collisionDetector = new CollisionDetector( this );
 
       // @public (read-only) tools and read-outs
-      this.collisionCounter = new CollisionCounter( {
+      this.collisionCounter = new CollisionCounter( this.collisionDetector, {
         location: new Vector2( 20, 20 ) // view coordinates! determined empirically
       } );
       this.stopwatch = new Stopwatch( {
@@ -259,6 +259,9 @@ define( require => {
         assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
 
         this.updateTemperature();
+
+        // Do this after collision detection, so that the number of collisions detected is recorded.
+        this.collisionCounter.step( dt );
       }
     }
 

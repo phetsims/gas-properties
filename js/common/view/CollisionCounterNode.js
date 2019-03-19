@@ -31,7 +31,7 @@ define( require => {
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  const averagingTimeString = require( 'string!GAS_PROPERTIES/averagingTime' );
+  const averagingTimeString = require( 'string!GAS_PROPERTIES/averagingTime' ); //TODO rename 'sample period'?
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
   const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
   const wallCollisionsString = require( 'string!GAS_PROPERTIES/wallCollisions' );
@@ -74,27 +74,27 @@ define( require => {
 
       const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty );
 
-      const averagingTimeTextNode = new Text( averagingTimeString, {
+      const samplePeriodTextNode = new Text( averagingTimeString, {
         font: TITLE_FONT,
         left: X_MARGIN
       } );
 
       // Combo box items
-      const comboBoxItems = collisionCounter.averagingTimes.map( averagingTime => {
+      const comboBoxItems = collisionCounter.samplePeriods.map( samplePeriod => {
 
         // e.g. '10 ps'
-        const averagingTimeString = StringUtils.fillIn( valueUnitsString, {
-          value: averagingTime,
+        const samplePeriodString = StringUtils.fillIn( valueUnitsString, {
+          value: samplePeriod,
           units: picosecondsString
         } );
-        const node = new Text( averagingTimeString, {
+        const node = new Text( samplePeriodString, {
           font: FONT
         } );
-        return new ComboBoxItem( node, averagingTime );
+        return new ComboBoxItem( node, samplePeriod );
       } );
 
       // Combo box
-      const comboBox = new ComboBox( comboBoxItems, collisionCounter.averagingTimeProperty, comboBoxListParent, {
+      const comboBox = new ComboBox( comboBoxItems, collisionCounter.samplePeriodProperty, comboBoxListParent, {
         listPosition: 'below',
         align: 'right',
         xMargin: 6,
@@ -113,7 +113,7 @@ define( require => {
             children: [ valueDisplay, playResetButton ]
           } ),
           new VStrut( 2 ),
-          averagingTimeTextNode,
+          samplePeriodTextNode,
           comboBox
         ]
       } );

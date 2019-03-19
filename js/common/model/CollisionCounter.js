@@ -20,14 +20,18 @@ define( require => {
   class CollisionCounter {
 
     /**
+     * @param {CollisionDetector} collisionDetector
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( collisionDetector, options ) {
 
       options = _.extend( {
         location: Vector2.ZERO,
         visible: false
       }, options );
+
+      // @private
+      this.collisionDetector = collisionDetector;
 
       // @public location of the collision counter, in view coordinates
       this.locationProperty = new Vector2Property( options.location );
@@ -41,28 +45,37 @@ define( require => {
       // @public whether the collision counter is running
       this.isRunningProperty = new BooleanProperty( false );
 
-      // @public whether the collision counter is visible
-      this.visibleProperty = new BooleanProperty( options.visible );
+      // @private time that the counter has been running
+      this.timeRunning = 0;
 
-      // When the counter becomes invisible, stop the counter and reset its value.
-      this.visibleProperty.link( visible => {
-        if ( !visible ) {
-          this.isRunningProperty.value = false;
+      // Reset when the counter starts
+      this.isRunningProperty.link( isRunning => {
+        if ( isRunning ) {
+          this.timeRunning = 0;
           this.numberOfCollisionsProperty.value = 0;
         }
       } );
 
-      // @public (read-only) valid values for averagingTimeProperty, in ps
-      this.averagingTimes = [ 10, 25, 50, 100 ];
+      // @public whether the collision counter is visible
+      this.visibleProperty = new BooleanProperty( options.visible );
 
-      // @public collision averaging time, in ps
-      this.averagingTimeProperty = new NumberProperty( 10, {
-        numberType: 'Integer',
-        validValues: this.averagingTimes
+      // When the counter visibility changes, stop the counter and reset its value.
+      this.visibleProperty.link( visible => {
+        this.isRunningProperty.value = false;
+        this.numberOfCollisionsProperty.value = 0;
       } );
 
-      // Changing the averaging time stops the counter and sets the count to zero.
-      this.averagingTimeProperty.link( averagingTimeProperty => {
+      // @public (read-only) valid values for samplePeriodProperty, in ps
+      this.samplePeriods = [ 10, 25, 50, 100 ];
+
+      // @public collision averaging time, in ps
+      this.samplePeriodProperty = new NumberProperty( 10, {
+        numberType: 'Integer',
+        validValues: this.samplePeriods
+      } );
+
+      // Changing the sample period stops the counter and sets the count to zero.
+      this.samplePeriodProperty.link( samplePeriodProperty => {
         this.isRunningProperty.value = false;
         this.numberOfCollisionsProperty.value = 0;
       } );
@@ -74,7 +87,18 @@ define( require => {
       this.numberOfCollisionsProperty.reset();
       this.isRunningProperty.reset();
       this.visibleProperty.reset();
-      this.averagingTimeProperty.reset();
+      this.samplePeriodProperty.reset();
+    }
+
+    step( dt ) {
+      if ( this.isRunningProperty.value ) {
+        this.numberOfCollisionsProperty.value += this.collisionDetector.numberOfParticleContainerCollisions;
+        this.timeRunning += dt;
+        if ( this.timeRunning >= this.samplePeriodProperty.value ) {
+          this.isRunningProperty.value = false;
+          phet.log && phet.log( `CollisionCounter: actual sample period was ${this.timeRunning} ps` );
+        }
+      }
     }
   }
 
