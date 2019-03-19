@@ -99,7 +99,7 @@ define( require => {
         this.timeRunning += dt;
         if ( this.timeRunning >= this.samplePeriodProperty.value ) {
           this.isRunningProperty.value = false;
-          phet.log && phet.log( `CollisionCounter: actual sample period was ${this.timeRunning} ps` );
+          phet.log && phet.log( `CollisionCounter sample period, desired=${this.samplePeriodProperty.value} actual=${this.timeRunning}` );
         }
       }
     }
