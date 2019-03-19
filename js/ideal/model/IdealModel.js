@@ -58,17 +58,6 @@ define( require => {
         -modelViewScale // y is inverted
       );
 
-      // @public model elements
-      this.container = new Container();
-      this.collisionCounter = new CollisionCounter( {
-        location: new Vector2( 20, 20 ) // view coordinate! determined empirically
-      } );
-      this.stopwatch = new Stopwatch( {
-        location: new Vector2( 200, 20 ) // view coordinates! determined empirically
-      } );
-      this.thermometer = new Thermometer();
-      this.pressureGauge = new PressureGauge();
-
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
 
@@ -96,6 +85,9 @@ define( require => {
       this.heatCoolFactorProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 )
       } );
+
+      // @public (read-only)
+      this.container = new Container();
 
       // @public {Property.<Bounds2>} bounds in which particles exist. Particles that leave these bounds are deleted.
       // This includes everything in the world that is to the right of and above the container's origin.
@@ -140,9 +132,19 @@ define( require => {
             'lightParticles and numberOfLightParticlesProperty are out of sync' );
         }
       } );
-
+      
       // @public (read-only)
       this.collisionDetector = new CollisionDetector( this );
+
+      // @public (read-only) tools and read-outs
+      this.collisionCounter = new CollisionCounter( {
+        location: new Vector2( 20, 20 ) // view coordinate! determined empirically
+      } );
+      this.stopwatch = new Stopwatch( {
+        location: new Vector2( 200, 20 ) // view coordinates! determined empirically
+      } );
+      this.thermometer = new Thermometer();
+      this.pressureGauge = new PressureGauge();
 
       // Redistribute particles when the container width changes.
       this.container.widthProperty.link( ( newWidth, oldWidth ) => {
