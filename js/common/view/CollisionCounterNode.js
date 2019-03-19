@@ -31,8 +31,8 @@ define( require => {
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  const averagingTimeString = require( 'string!GAS_PROPERTIES/averagingTime' ); //TODO rename 'sample period'?
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
+  const samplePeriodString = require( 'string!GAS_PROPERTIES/samplePeriod' );
   const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
   const wallCollisionsString = require( 'string!GAS_PROPERTIES/wallCollisions' );
 
@@ -74,7 +74,7 @@ define( require => {
 
       const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty );
 
-      const samplePeriodTextNode = new Text( averagingTimeString, {
+      const samplePeriodTextNode = new Text( samplePeriodString, {
         font: TITLE_FONT,
         left: X_MARGIN
       } );

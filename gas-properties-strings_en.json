@@ -56,8 +56,8 @@
   "wallCollisions": {
     "value": "Wall Collisions"
   },
-  "averagingTime": {
-    "value": "Averaging Time"
+  "samplePeriod": {
+    "value": "Sample Period"
   },
   "kelvin": {
     "value": "K"
