@@ -47,8 +47,8 @@ define( require => {
       const viewOpeningXOffset = modelViewTransform.modelToViewDeltaX( container.openingXOffset );
       const viewOpeningMaxWidth = modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max );
 
-      // Displays the bounds of the container
-      const boundsNode = new Path( null, {
+      // Displays the walls of the container
+      const wallsNode = new Path( null, {
         stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
         lineWidth: viewWallThickness
       } );
@@ -70,14 +70,14 @@ define( require => {
 
       const lidNode = new LidNode( {
         cursor: 'pointer',
-        lidWidth: modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max ),
-        thickness: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
+        baseWidth: modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max ),
+        baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
         handleColor: options.lidHandleColor
       } );
 
       assert && assert( !options.hasOwnProperty( 'children' ), 'ContainerNode sets children' );
       options = _.extend( {
-        children: [ previousBoundsNode, resizeHandleNode, boundsNode, lidNode ]
+        children: [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ]
       }, options );
 
       super( options );
@@ -89,8 +89,8 @@ define( require => {
 
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
 
-        // resize & reposition the boundsNode, origin at bottom right
-        boundsNode.shape = new Shape()
+        // resize & reposition the wallsNode, origin at bottom right
+        wallsNode.shape = new Shape()
           .moveTo( -viewOpeningXOffset, -viewHeight )
           .lineTo( 0, -viewHeight )
           .lineTo( 0, 0 )
@@ -99,15 +99,15 @@ define( require => {
           .lineTo( -( viewOpeningXOffset + viewOpeningMaxWidth ), -viewHeight );
 
         // reposition the resize handle
-        resizeHandleNode.right = boundsNode.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
-        resizeHandleNode.centerY = boundsNode.centerY;
+        resizeHandleNode.right = wallsNode.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
+        resizeHandleNode.centerY = wallsNode.centerY;
       } );
 
       // move the lid to expose the opening in the top of the container
       container.openingWidthProperty.link( openingWidth => {
-        lidNode.right = boundsNode.x -
+        lidNode.right = wallsNode.x -
                         modelViewTransform.modelToViewDeltaX( container.openingXOffset + openingWidth );
-        lidNode.bottom = boundsNode.top + viewWallThickness;
+        lidNode.bottom = wallsNode.top + viewWallThickness;
       } );
 
       // Hide the handle when volume is held constant
@@ -129,7 +129,7 @@ define( require => {
       //TODO verify that isPressedProperty is set to false when interruptSubtreeInput is called
       resizeHandleDragListener.isPressedProperty.lazyLink( isPressed => {
         previousBoundsNode.visible = isPressed;
-        previousBoundsNode.shape = boundsNode.shape;
+        previousBoundsNode.shape = wallsNode.shape;
         options.resizeHandleIsPressedListener( isPressed );
       } );
 
