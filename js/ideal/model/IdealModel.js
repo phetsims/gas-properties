@@ -272,10 +272,10 @@ define( require => {
         // Compute the average kinetic energy
         let averageKineticEnergy = 0;
         for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-          averageKineticEnergy += this.heavyParticles[ i ].averageKineticEnergy;
+          averageKineticEnergy += this.heavyParticles[ i ].kineticEnergy;
         }
         for ( let i = 0; i < this.lightParticles.length; i++ ) {
-          averageKineticEnergy += this.lightParticles[ i ].averageKineticEnergy;
+          averageKineticEnergy += this.lightParticles[ i ].kineticEnergy;
         }
         averageKineticEnergy /= numberOfParticles;
 
