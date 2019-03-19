@@ -1,7 +1,5 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-20189, University of Colorado Boulder
 
-//TODO DESIGN: When should collision counter stop?
-//TODO DESIGN: When should collision counter reset time to zero?
 /**
  * Model for the collision counter.
  *
@@ -48,22 +46,8 @@ define( require => {
       // @private time that the counter has been running
       this.timeRunning = 0;
 
-      // Reset when the counter starts
-      this.isRunningProperty.link( isRunning => {
-        if ( isRunning ) {
-          this.timeRunning = 0;
-          this.numberOfCollisionsProperty.value = 0;
-        }
-      } );
-
       // @public whether the collision counter is visible
       this.visibleProperty = new BooleanProperty( options.visible );
-
-      // When the counter visibility changes, stop the counter and reset its value.
-      this.visibleProperty.link( visible => {
-        this.isRunningProperty.value = false;
-        this.numberOfCollisionsProperty.value = 0;
-      } );
 
       // @public (read-only) valid values for samplePeriodProperty, in ps
       this.samplePeriods = [ 10, 25, 50, 100 ];
@@ -74,11 +58,16 @@ define( require => {
         validValues: this.samplePeriods
       } );
 
-      // Changing the sample period stops the counter and sets the count to zero.
-      this.samplePeriodProperty.link( samplePeriodProperty => {
-        this.isRunningProperty.value = false;
-        this.numberOfCollisionsProperty.value = 0;
+      this.isRunningProperty.link( isRunning => {
+        if ( isRunning ) {
+          this.timeRunning = 0;
+          this.numberOfCollisionsProperty.value = 0;
+        }
       } );
+
+      // Changing visibility or sample period stops the counter and resets the count.
+      this.visibleProperty.link( visible => this.stopAndResetCount() );
+      this.samplePeriodProperty.link( samplePeriodProperty => this.stopAndResetCount() );
     }
 
     // @public
@@ -90,9 +79,23 @@ define( require => {
       this.samplePeriodProperty.reset();
     }
 
+    // @private
+    stopAndResetCount() {
+      this.isRunningProperty.value = false;
+      this.numberOfCollisionsProperty.value = 0;
+    }
+
+    /**
+     * Steps the collision counter.
+     * @param {number} dt - time step, in ps
+     */
     step( dt ) {
       if ( this.isRunningProperty.value ) {
+
+        // record the number of collisions for this time step
         this.numberOfCollisionsProperty.value += this.collisionDetector.numberOfParticleContainerCollisions;
+
+        // if we've come to the end of the sample period, stop the counter
         this.timeRunning += dt;
         if ( this.timeRunning >= this.samplePeriodProperty.value ) {
           this.isRunningProperty.value = false;
