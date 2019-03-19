@@ -24,17 +24,6 @@ define( require => {
       // @public (read-only) location of the container's bottom right corner, in nm
       this.location = Vector2.ZERO;
 
-      // @public (read-only) height of the container, in nm
-      this.height = 8.75;
-
-      // @public (read-only) wall thickness, in nm
-      this.wallThickness = 0.05;
-
-      // @public (read-only) locations of the container's inside bounds. this.left is dynamic, see ES5 getter
-      this.right = this.location.x - this.wallThickness / 2;
-      this.top = this.location.y + this.height - this.wallThickness / 2;
-      this.bottom = this.location.y + this.wallThickness / 2;
-
       // @public (read-only) range of the container's width, in nm
       this.widthRange = new RangeWithValue( 5, 15, 10 );
 
@@ -47,6 +36,17 @@ define( require => {
       this.widthProperty.link( width => {
         phet.log && phet.log( `Container width:${width}nm` );
       } );
+
+      // @public (read-only) height of the container, in nm
+      this.height = 8.75;
+
+      // @public (read-only) wall thickness, in nm
+      this.wallThickness = 0.05;
+
+      // @public (read-only) locations of the container's inside bounds. this.left is dynamic, see ES5 getter
+      this.right = this.location.x - this.wallThickness / 2;
+      this.top = this.location.y + this.height - this.wallThickness / 2;
+      this.bottom = this.location.y + this.wallThickness / 2;
 
       // @public (read-only) range of the width of the opening in the top of the container, in nm
       this.openingWidthRange = new RangeWithValue( 0, 2.5, 0 );
