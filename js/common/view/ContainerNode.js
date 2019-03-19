@@ -70,13 +70,14 @@ define( require => {
 
       const lidNode = new LidNode( {
         cursor: 'pointer',
-        baseWidth: modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max ),
+        lidWidth: modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max ),
+        thickness: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
         handleColor: options.lidHandleColor
       } );
 
       assert && assert( !options.hasOwnProperty( 'children' ), 'ContainerNode sets children' );
       options = _.extend( {
-        children: [ previousBoundsNode, resizeHandleNode, lidNode, boundsNode ]
+        children: [ previousBoundsNode, resizeHandleNode, boundsNode, lidNode ]
       }, options );
 
       super( options );
@@ -106,7 +107,7 @@ define( require => {
       container.openingWidthProperty.link( openingWidth => {
         lidNode.right = boundsNode.x -
                         modelViewTransform.modelToViewDeltaX( container.openingXOffset + openingWidth );
-        lidNode.bottom = boundsNode.top + 1;
+        lidNode.bottom = boundsNode.top + viewWallThickness;
       } );
 
       // Hide the handle when volume is held constant

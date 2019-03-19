@@ -48,6 +48,9 @@ define( require => {
       this.top = this.location.y + this.height - this.wallThickness / 2;
       this.bottom = this.location.y + this.wallThickness / 2;
 
+      // @public (read-only) lid thickness, in nm
+      this.lidThickness = 3 * this.wallThickness;
+
       // @public (read-only) range of the width of the opening in the top of the container, in nm
       this.openingWidthRange = new RangeWithValue( 0, 2.5, 0 );
 

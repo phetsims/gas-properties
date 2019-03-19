@@ -26,11 +26,12 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        baseWidth: 1,
+        lidWidth: 1,
+        thickness: 1,
         handleColor: 'grey' // {Color|string} color of the handle
       }, options );
 
-      const baseNode = new Rectangle( 0, 0, options.baseWidth, 5, {
+      const baseNode = new Rectangle( 0, 0, options.lidWidth, options.thickness, {
         fill: GasPropertiesColorProfile.lidBaseFillProperty
       } );
 
