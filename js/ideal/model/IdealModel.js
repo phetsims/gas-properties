@@ -138,7 +138,7 @@ define( require => {
 
       // @public (read-only) tools and read-outs
       this.collisionCounter = new CollisionCounter( {
-        location: new Vector2( 20, 20 ) // view coordinate! determined empirically
+        location: new Vector2( 20, 20 ) // view coordinates! determined empirically
       } );
       this.stopwatch = new Stopwatch( {
         location: new Vector2( 200, 20 ) // view coordinates! determined empirically
