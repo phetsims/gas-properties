@@ -34,7 +34,7 @@ define( require => {
       // @public location of the collision counter, in view coordinates
       this.locationProperty = new Vector2Property( options.location );
 
-      // @public the number of collisions between the particles and the container walls
+      // @public the number of particle-container collisions
       this.numberOfCollisionsProperty = new NumberProperty( 0, {
         numberType: 'Integer',
         isValidValue: value => ( value >= 0 )
@@ -43,7 +43,7 @@ define( require => {
       // @public whether the collision counter is running
       this.isRunningProperty = new BooleanProperty( false );
 
-      // @private time that the counter has been running
+      // @private time that the counter has been running, in ps
       this.timeRunning = 0;
 
       // @public whether the collision counter is visible
@@ -52,7 +52,7 @@ define( require => {
       // @public (read-only) valid values for samplePeriodProperty, in ps
       this.samplePeriods = [ 10, 25, 50, 100 ];
 
-      // @public collision averaging time, in ps
+      // @public sample period for counting collisions, in ps
       this.samplePeriodProperty = new NumberProperty( 10, {
         numberType: 'Integer',
         validValues: this.samplePeriods
