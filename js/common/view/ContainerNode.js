@@ -17,6 +17,7 @@ define( require => {
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
 
   // constants
@@ -44,8 +45,7 @@ define( require => {
       const viewLocation = modelViewTransform.modelToViewPosition( container.location );
       const viewHeight = Math.abs( modelViewTransform.modelToViewDeltaY( container.height ) );
       const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
-      const viewOpeningXOffset = modelViewTransform.modelToViewDeltaX( container.openingXOffset );
-      const viewOpeningMaxWidth = modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max );
+      const viewOpeningRightInset = modelViewTransform.modelToViewDeltaX( container.openingRightInset );
 
       // Displays the walls of the container
       const wallsNode = new Path( null, {
@@ -54,7 +54,7 @@ define( require => {
       } );
 
       // Displays the previous bounds of the container, visible while dragging
-      const previousBoundsNode = new Path( null, {
+      const previousBoundsNode = new Rectangle( 0, 0, 1, 1, {
         stroke: GasPropertiesColorProfile.containerPreviousBoundsStrokeProperty,
         lineWidth: viewWallThickness,
         visible: false
@@ -70,7 +70,7 @@ define( require => {
 
       const lidNode = new LidNode( {
         cursor: 'pointer',
-        baseWidth: modelViewTransform.modelToViewDeltaX( container.openingWidthRange.max ),
+        baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
         baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
         handleColor: options.lidHandleColor
       } );
@@ -89,24 +89,20 @@ define( require => {
 
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
 
-        // resize & reposition the wallsNode, origin at bottom right
+        // resize & reposition the wallsNode, start at top-left, origin at bottom-right
         wallsNode.shape = new Shape()
-          .moveTo( -viewOpeningXOffset, -viewHeight )
-          .lineTo( 0, -viewHeight )
-          .lineTo( 0, 0 )
+          .moveTo( -viewWidth, -viewHeight )
           .lineTo( -viewWidth, 0 )
-          .lineTo( -viewWidth, -viewHeight )
-          .lineTo( -( viewOpeningXOffset + viewOpeningMaxWidth ), -viewHeight );
+          .lineTo( 0, 0 )
+          .lineTo( 0, -viewHeight )
+          .lineTo( -viewOpeningRightInset, -viewHeight );
 
         // reposition the resize handle
         resizeHandleNode.right = wallsNode.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
         resizeHandleNode.centerY = wallsNode.centerY;
-      } );
-
-      // move the lid to expose the opening in the top of the container
-      container.openingWidthProperty.link( openingWidth => {
-        lidNode.right = wallsNode.x -
-                        modelViewTransform.modelToViewDeltaX( container.openingXOffset + openingWidth );
+        
+        // resize and reposition the lid
+        lidNode.left = wallsNode.left;
         lidNode.bottom = wallsNode.top + viewWallThickness;
       } );
 
@@ -129,7 +125,7 @@ define( require => {
       //TODO verify that isPressedProperty is set to false when interruptSubtreeInput is called
       resizeHandleDragListener.isPressedProperty.lazyLink( isPressed => {
         previousBoundsNode.visible = isPressed;
-        previousBoundsNode.shape = wallsNode.shape;
+        previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
         options.resizeHandleIsPressedListener( isPressed );
       } );
 
@@ -188,24 +184,14 @@ define( require => {
      */
     constructor( container, modelViewTransform, parentNode ) {
 
-      const viewOpeningMaxX = modelViewTransform.modelToViewX( container.openingMaxX );
-
-      // pointer's x offset from the right edge of the lid, when a drag starts
-      let startXOffset = 0;
-
       super( {
 
         start: ( event, listener ) => {
-          startXOffset = viewOpeningMaxX -
-                         modelViewTransform.modelToViewDeltaX( container.openingWidthProperty.value ) -
-                         parentNode.globalToParentPoint( event.pointer.point ).x;
+          //TODO
         },
 
         drag: ( event, listener ) => {
-          const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
-          const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          const openingWidth = container.openingMaxX - modelX;
-          container.openingWidthProperty.value = container.openingWidthRange.constrainValue( openingWidth );
+          //TODO
         }
       } );
     }

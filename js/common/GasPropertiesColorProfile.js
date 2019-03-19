@@ -86,8 +86,8 @@ define( require => {
     },
 
     containerPreviousBoundsStroke: {
-      default: 'rgb( 120, 120, 120 )',
-      projector: 'rgb( 200, 200, 200 )'
+      default: 'rgb( 100, 100, 100 )',
+      projector: 'rgb( 220, 220, 220 )'
     },
 
     lidBaseFill: {

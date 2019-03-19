@@ -51,21 +51,15 @@ define( require => {
       // @public (read-only) lid thickness, in nm
       this.lidThickness = 3 * this.wallThickness;
 
-      // @public (read-only) range of the width of the opening in the top of the container, in nm
-      this.openingWidthRange = new RangeWithValue( 0, 2.5, 0 );
+      //TODO is this inside or outside?
+      // @public (read-only) insets of the opening in the top, in nm
+      this.openingLeftInset = 0.5;
+      this.openingRightInset = 2;
 
-      // @public width of the opening in the top of the container, in nm
-      this.openingWidthProperty = new NumberProperty( this.openingWidthRange.defaultValue, {
-        numberType: 'FloatingPoint',
-        range: this.openingWidthRange,
-        units: 'nanometers'
-      } );
+      // @public width of the lid, in nm
+      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset + this.wallThickness );
 
-      // @public (read-only) x offset (absolute) of the opening from the container's origin, in nm
-      this.openingXOffset = 2;
-      assert && assert( this.openingXOffset > 0, `invalid openingXOffset: ${this.openingXOffset}` );
-      assert && assert( this.widthRange.min - this.openingWidthRange.max - this.openingXOffset > 0,
-        'opening extends beyond the top of the container' );
+      //TODO add openingRangeProperty
 
       // @public (read-only) bicycle pump hose is connected to the right side of the container
       this.hoseLocation = new Vector2( this.location.x, this.location.y + this.height / 2 );
@@ -80,7 +74,7 @@ define( require => {
     // @public
     reset() {
       this.widthProperty.reset();
-      this.openingWidthProperty.reset();
+      this.lidWidthProperty.reset();
     }
 
     /**
@@ -89,20 +83,6 @@ define( require => {
      * @public
      */
     get left() { return this.location.x - this.widthProperty.value + this.wallThickness / 2; }
-
-    /**
-     * Gets the min x coordinate of the opening in the top of the container.
-     * @returns number
-     * @public
-     */
-    get openingMinX() { return this.openingMaxX - this.openingWidthRange.max; }
-
-    /**
-     * Gets the max x coordinate of the opening in the top of the container.
-     * @returns number
-     * @public
-     */
-    get openingMaxX() { return this.location.x - this.openingXOffset; }
 
     /**
      * Determines whether the container surrounds a particle on all sides. Accounts for the particle's radius.

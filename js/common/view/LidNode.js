@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The lid on the top of the container.
+ * The lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,6 +17,7 @@ define( require => {
 
   // constants
   const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
+  const HANDLE_RIGHT_INSET = 5;
 
   class LidNode extends Node {
 
@@ -40,7 +41,7 @@ define( require => {
         gripBaseColor: options.handleColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         scale: 0.4,
-        centerX: baseNode.centerX,
+        right: baseNode.right - HANDLE_RIGHT_INSET,
         bottom: baseNode.top + 1
       } );
       assert && assert( handleNode.width <= baseNode.width,
@@ -52,6 +53,19 @@ define( require => {
       }, options );
 
       super( options );
+
+      // @private
+      this.baseNode = baseNode;
+      this.handleNode = handleNode;
+    }
+
+    /**
+     * Sets the width of the lid's base.
+     * @param {number} baseWidth
+     */
+    setBaseWidth( baseWidth ) {
+      this.baseNode.setRectWidth( baseWidth );
+      this.handleNode.right = this.baseNode.right - HANDLE_RIGHT_INSET;
     }
   }
 
