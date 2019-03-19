@@ -2,8 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
+Intro: reimplement lid and handle
 Intro: change particle count to be number in container
-Intro: remove lid
 Intro: particles outside container do not collide, continue up with unchanged velocity
 Intro: change regions to cover only inside of container
 Intro: pressure - see Java PressureSensingBox.getPressure
