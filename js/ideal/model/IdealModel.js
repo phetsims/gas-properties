@@ -33,7 +33,7 @@ define( require => {
 
   // constants
   const PUMP_DISPERSION_ANGLE = Math.PI / 2; // radians
-  const INITIAL_TEMPERATURE = 300; // K
+  const EMPTY_INITIAL_TEMPERATURE = 300; // K
 
   class IdealModel {
 
@@ -173,14 +173,17 @@ define( require => {
           this.container.hoseLocation.y
         );
 
+        // Initial velocity is based on temperature in the container.
+        let temperature = this.thermometer.temperatureKelvinProperty.value;
+        if ( temperature === null ) {
+          temperature = EMPTY_INITIAL_TEMPERATURE;
+        }
+
         // Set the particle's velocity.
-        // We can't do this in the constructor because initial velocity is a function of the particle's mass.
         particle.setVelocityPolar(
 
-          //TODO or should this be the same as the current contents of the container, and 300K for empty container?
-          // Velocity magnitude corresponds to INITIAL_TEMPERATURE.
           // KE = (3/2)kT = (1/2) * m * |v|^2, so v = sqrt( 3kT / m )
-          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * INITIAL_TEMPERATURE / particle.mass ),
+          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / particle.mass ),
 
           // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
           Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE
