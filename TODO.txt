@@ -1,16 +1,30 @@
 TODO list for gas-properties
 
 UP NEXT
-change particle count to be number in container
-remove lid
-particles outside container do not collide, continue up with unchanged velocity
-change regions to cover only inside of container
-pressure - see Java PressureSensingBox.getPressure
+
+Intro: change particle count to be number in container
+Intro: remove lid
+Intro: particles outside container do not collide, continue up with unchanged velocity
+Intro: change regions to cover only inside of container
+Intro: pressure - see Java PressureSensingBox.getPressure
+Intro: hold constant
+
+Explore: moving wall does not pause animation and does work on particles
+
+Energy: fixed container width
+Energy: average speed checkbox and readout
+Energy: speed accordion box and histogram
+Energy: KE accordion box and histogram
+Energy: turn particle collisions on/off
+Energy: control temperature of particles that are added
+
+Diffusion: lots of new/different features
 
 DESIGN
 * Temperature on thermometer is T = (2/3)KE/k, where KE is the average KE of all particles
 * Heat/Cool is a number from (-1,1), and is used to uniformly scale velocity of each particle by 1 + heatCoolFactor / 1000. How should this behave?
 * Why are we showing time to 0.01 ps in the stopwatch?
+* "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
 
 MODEL
 Hole in top of container needs to have dynamic size
