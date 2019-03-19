@@ -58,12 +58,8 @@ define( require => {
         validValues: this.samplePeriods
       } );
 
-      this.isRunningProperty.link( isRunning => {
-        if ( isRunning ) {
-          this.timeRunning = 0;
-          this.numberOfCollisionsProperty.value = 0;
-        }
-      } );
+      // Changing the running state resets the count.
+      this.isRunningProperty.link( isRunning => this.resetCount() );
 
       // Changing visibility or sample period stops the counter and resets the count.
       this.visibleProperty.link( visible => this.stopAndResetCount() );
@@ -80,9 +76,15 @@ define( require => {
     }
 
     // @private
+    resetCount() {
+      this.numberOfCollisionsProperty.value = 0;
+      this.timeRunning = 0;
+    }
+
+    // @private
     stopAndResetCount() {
       this.isRunningProperty.value = false;
-      this.numberOfCollisionsProperty.value = 0;
+      this.resetCount();
     }
 
     /**
@@ -95,11 +97,16 @@ define( require => {
         // record the number of collisions for this time step
         this.numberOfCollisionsProperty.value += this.collisionDetector.numberOfParticleContainerCollisions;
 
-        // if we've come to the end of the sample period, stop the counter
+        // If we've come to the end of the sample period, stop the counter.
+        // isRunningProperty is used by the Play/Reset toggle button, and changing its state resets the count.
+        // So we need to save and restore the count here when modifying isRunningProperty.  This was simpler
+        // than other solutions that were investigated.
         this.timeRunning += dt;
         if ( this.timeRunning >= this.samplePeriodProperty.value ) {
+          phet.log && phet.log( `CollisionCounter sample period: desired=${this.samplePeriodProperty.value} actual=${this.timeRunning}` );
+          const numberOfCollisions = this.numberOfCollisionsProperty.value;
           this.isRunningProperty.value = false;
-          phet.log && phet.log( `CollisionCounter sample period, desired=${this.samplePeriodProperty.value} actual=${this.timeRunning}` );
+          this.numberOfCollisionsProperty.value = numberOfCollisions;
         }
       }
     }
