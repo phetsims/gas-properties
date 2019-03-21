@@ -34,13 +34,10 @@ define( require => {
         regionLength: 2, // Regions are square, length of one side, nm
 
         //TODO this is currently max particle radius, is it needed at all since Region membership considers radius?
-        regionOverlap: 0.125 // overlap of Regions, in nm
+        regionOverlap: 0 // overlap of Regions, in nm
       }, options );
 
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
-      assert && assert( options.regionOverlap >= 0, `invalid regionOverlap: ${options.regionOverlap}` );
-      assert && assert( options.regionOverlap < options.regionLength / 2,
-        `regionOverlap ${options.regionOverlap} is incompatible with regionLength ${options.regionLength}` );
 
       // @public (read-only) {Region[]} 2D grid of Regions
       // Partition the collision detection bounds into overlapping Regions.
@@ -54,11 +51,11 @@ define( require => {
         while ( minY < model.container.top ) {
           const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
           this.regions.push( new Region( regionBounds ) );
-          minY = minY + options.regionLength - options.regionOverlap;
+          minY = minY + options.regionLength;
         }
-        maxX = maxX - options.regionLength + options.regionOverlap;
+        maxX = maxX - options.regionLength;
       }
-      phet.log && phet.log( `created ${this.regions.length} regions of ${options.regionLength}nm each, with ${options.regionOverlap}nm overlap` );
+      phet.log && phet.log( `created ${this.regions.length} regions of ${options.regionLength}nm each` );
 
       // @public (read-only) number of wall collisions on the most recent call to step
       this.numberOfParticleContainerCollisions = 0;
