@@ -23,7 +23,6 @@ define( require => {
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
-  const ParticlesArcNode = require( 'GAS_PROPERTIES/common/view/ParticlesArcNode' );
   const ParticlesDrawImageNode = require( 'GAS_PROPERTIES/common/view/ParticlesDrawImageNode' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
@@ -212,8 +211,7 @@ define( require => {
       this.addChild( resetAllButton );
 
       // @private
-      this.particlesNode = GasPropertiesQueryParameters.renderParticles === 'drawImage' ?
-                           new ParticlesDrawImageNode( model ) : new ParticlesArcNode( model );
+      this.particlesNode = new ParticlesDrawImageNode( model );
       this.addChild( this.particlesNode );
 
       // Collision Counter

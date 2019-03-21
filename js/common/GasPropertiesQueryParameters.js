@@ -28,18 +28,8 @@ define( require => {
 
     // Shows the model and view coordinates that correspond to the cursor location.
     // For internal use only, not public facing.
-    pointerCoordinates: { type: 'flag' },
+    pointerCoordinates: { type: 'flag' }
     
-    //TODO eliminate this query parameter and one of these choices
-    // Chooses the method of rendering particles.
-    // 'drawImage' uses CanvasRenderingContext2D.drawImage(), 'arc' uses CanvasRenderingContext2D.arc()
-    // For internal use only, not public facing.
-    renderParticles: {
-      type: 'string',
-      validValues: [ 'drawImage', 'arc' ],
-      defaultValue: 'drawImage'
-    }
-
   } );
 
   gasProperties.register( 'GasPropertiesQueryParameters', GasPropertiesQueryParameters );
