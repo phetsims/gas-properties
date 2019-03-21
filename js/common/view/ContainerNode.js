@@ -130,9 +130,14 @@ define( require => {
       const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this );
       resizeHandleNode.addInputListener( resizeHandleDragListener );
 
-      // While interacting with the resize handle, display the previous bounds of the container.
-      //TODO verify that isPressedProperty is set to false when interruptSubtreeInput is called
+      // While interacting with the resize handle...
       resizeHandleDragListener.isPressedProperty.lazyLink( isPressed => {
+
+        // disable interaction with the lid, to simplify implementation
+        lidNode.interruptSubtreeInput();
+        lidNode.pickable = !isPressed;
+
+        // display the previous bounds of the container
         previousBoundsNode.visible = isPressed;
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
         options.resizeHandleIsPressedListener( isPressed );
