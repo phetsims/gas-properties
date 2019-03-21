@@ -135,13 +135,9 @@ define( require => {
 
       // Redistribute particles when the container width changes.
       this.container.widthProperty.link( ( newWidth, oldWidth ) => {
-         const ratio = newWidth / oldWidth;
-         for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-           this.heavyParticles[ i ].location.setX( ratio * this.heavyParticles[ i ].location.x );
-         }
-        for ( let i = 0; i < this.lightParticles.length; i++ ) {
-          this.lightParticles[ i ].location.setX( ratio * this.lightParticles[ i ].location.x );
-        }
+        const ratio = newWidth / oldWidth;
+        redistributeParticles( this.heavyParticles, ratio );
+        redistributeParticles( this.lightParticles, ratio );
       } );
     }
 
@@ -343,6 +339,18 @@ define( require => {
         removeParticle( particles[ i ], particles );
         numberOfParticlesProperty.value--;
       }
+    }
+  }
+
+  /**
+   * Redistributes particles in the horizontal dimension
+   * @param {Particle[]} particles
+   * @param {number} ratio
+   */
+  function redistributeParticles( particles, ratio ) {
+    assert && assert( ratio > 0, 'invalid ration: ' + ratio );
+    for ( let i = 0; i < particles.length; i++ ) {
+      particles[ i ].location.setX( ratio * particles[ i ].location.x );
     }
   }
 
