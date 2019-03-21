@@ -30,6 +30,7 @@ DESIGN
 * "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
 * Sample period for collision counter will not be exact, but should be close enough.
 * Should container size indicator be the inside dimension?
+* Redistributing particles as container is resized looks better than waiting until handle is released
 
 MODEL
 Hole in top of container needs to have dynamic size
