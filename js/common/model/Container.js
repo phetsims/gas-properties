@@ -34,7 +34,7 @@ define( require => {
         units: 'nanometers'
       } );
       this.widthProperty.link( width => {
-        phet.log && phet.log( `Container width:${width}nm` );
+        phet.log && phet.log( `Container width: ${width} nm` );
       } );
 
       // @public (read-only) height of the container, in nm
