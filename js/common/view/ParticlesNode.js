@@ -16,7 +16,7 @@ define( require => {
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
 
-  class ParticlesDrawImageNode extends CanvasNode {
+  class ParticlesNode extends CanvasNode {
 
     /**
      * @param {IdealModel} model TODO more general type, narrower interface
@@ -91,5 +91,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ParticlesDrawImageNode', ParticlesDrawImageNode );
+  return gasProperties.register( 'ParticlesNode', ParticlesNode );
 } );
