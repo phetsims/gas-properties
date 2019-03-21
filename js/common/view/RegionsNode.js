@@ -16,7 +16,6 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RegionNode = require( 'GAS_PROPERTIES/common/view/RegionNode' );
 
   class RegionsNode extends Node {
@@ -32,27 +31,15 @@ define( require => {
         pickable: false
       }, options );
 
-      // The complete collision detection bounds
-      const boundsNode = new Rectangle( 0, 0, 1, 1, {
-        stroke: 'yellow',
-        lineWidth: 2
-      } );
-
       // The regions that fill the collision detection bounds.
       const regionsParent = new Node();
 
       assert && assert( !options.hasOwnProperty( 'children' ), 'RegionsNode sets children' );
       options = _.extend( {
-        children: [ regionsParent, boundsNode ]
+        children: [ regionsParent ]
       }, options );
 
       super( options );
-
-      // Stroke the collision detection bounds, to verify that the grid fills it.
-      collisionDetector.particleBoundsProperty.link( bounds => {
-        const viewBounds = modelViewTransform.modelToViewBounds( bounds );
-        boundsNode.setRect( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height );
-      } );
 
       // @private {RegionNode[]} Draw each region in the grid.  Additive opacity shows overlap.
       this.regionNodes = [];

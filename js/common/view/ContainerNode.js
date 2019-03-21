@@ -21,8 +21,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
-  const HANDLE_COLOR = 'rgb( 160, 160, 160 )';
+  const HANDLE_COLOR = 'rgb( 160, 160, 160 )'; //TODO can't use color profile because HandleNode doesn't support it
 
   class ContainerNode extends Node {
 
@@ -63,7 +62,7 @@ define( require => {
       const resizeHandleNode = new HandleNode( {
         cursor: 'pointer',
         gripBaseColor: options.resizeHandleColor,
-        attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
+        attachmentLineWidth: 1,
         rotation: -Math.PI / 2,
         scale: 0.4
       } );
@@ -82,25 +81,35 @@ define( require => {
 
       super( options );
 
-      // position this Node with its origin at the container's location
-      this.translation = viewLocation;
-
       container.widthProperty.link( width => {
 
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
 
-        // resize & reposition the wallsNode, start at top-left, origin at bottom-right
+        // Account for wall thickness, so that container walls are drawn around the container's model bounds.
+        const wallOffset = viewWallThickness / 2;
+        const left = viewLocation.x - viewWidth - wallOffset;
+        const right = viewLocation.x + wallOffset;
+        const top = viewLocation.y - viewHeight - wallOffset;
+        const bottom = viewLocation.y + wallOffset;
+
+        // Resize & reposition the walls, start at top-left, origin at bottom-right. Shape looks like:
+        //                   ___
+        // |                    |
+        // |                    |
+        // |                    |
+        // |____________________|
+        //
         wallsNode.shape = new Shape()
-          .moveTo( -viewWidth, -viewHeight )
-          .lineTo( -viewWidth, 0 )
-          .lineTo( 0, 0 )
-          .lineTo( 0, -viewHeight )
-          .lineTo( -viewOpeningRightInset, -viewHeight );
+          .moveTo( left, top )
+          .lineTo( left, bottom  )
+          .lineTo( right, bottom )
+          .lineTo( right, top )
+          .lineTo( right - viewOpeningRightInset, top );
 
         // reposition the resize handle
-        resizeHandleNode.right = wallsNode.left + HANDLE_ATTACHMENT_LINE_WIDTH; // hide the overlap
+        resizeHandleNode.right = wallsNode.left + 1; // hide the overlap
         resizeHandleNode.centerY = wallsNode.centerY;
-        
+
         // resize and reposition the lid
         lidNode.left = wallsNode.left;
         lidNode.bottom = wallsNode.top + viewWallThickness;

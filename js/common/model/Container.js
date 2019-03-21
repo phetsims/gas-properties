@@ -44,9 +44,9 @@ define( require => {
       this.wallThickness = 0.05;
 
       // @public (read-only) locations of the container's inside bounds. this.left is dynamic, see ES5 getter
-      this.right = this.location.x - this.wallThickness / 2;
-      this.top = this.location.y + this.height - this.wallThickness / 2;
-      this.bottom = this.location.y + this.wallThickness / 2;
+      this.right = this.location.x;
+      this.top = this.location.y + this.height;
+      this.bottom = this.location.y;
 
       // @public (read-only) lid thickness, in nm
       this.lidThickness = 3 * this.wallThickness;
@@ -57,12 +57,12 @@ define( require => {
       this.openingRightInset = 2;
 
       // @public width of the lid, in nm
-      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset + this.wallThickness );
+      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset );
 
       //TODO add openingRangeProperty
 
-      // @public (read-only) bicycle pump hose is connected to the right side of the container
-      this.hoseLocation = new Vector2( this.location.x, this.location.y + this.height / 2 );
+      // @public (read-only) bicycle pump hose is connected to the outside right side of the container
+      this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 2 );
 
       // @public (read-only) max bounds of the container, when it is expanded to its full width.
       this.maxBounds = new Bounds2(
@@ -82,7 +82,7 @@ define( require => {
      * @returns {number}
      * @public
      */
-    get left() { return this.location.x - this.widthProperty.value + this.wallThickness / 2; }
+    get left() { return this.location.x - this.widthProperty.value; }
 
     /**
      * Determines whether the container surrounds a particle on all sides. Accounts for the particle's radius.

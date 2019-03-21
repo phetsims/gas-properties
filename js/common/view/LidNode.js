@@ -18,6 +18,7 @@ define( require => {
   // constants
   const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
   const HANDLE_RIGHT_INSET = 5;
+  const HANDLE_COLOR = 'gray'; //TODO can't use color profile because HandleNode doesn't support it
 
   class LidNode extends Node {
 
@@ -29,7 +30,7 @@ define( require => {
       options = _.extend( {
         baseWidth: 1,
         baseHeight: 1,
-        handleColor: 'grey' // {Color|string} color of the handle
+        handleColor: HANDLE_COLOR
       }, options );
 
       const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {

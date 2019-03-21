@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Intro: model inside of container, draw view around it
 Intro: resize handle cancels lid interaction
 Intro: reimplement lid
 Intro: allow particles to escape through opening in top of container
