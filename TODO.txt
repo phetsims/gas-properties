@@ -31,6 +31,7 @@ DESIGN
 * Sample period for collision counter will not be exact, but should be close enough.
 * Should container size indicator be the inside dimension?
 * Redistributing particles as container is resized looks better than waiting until handle is released
+* Interaction with resize handle and lid are mutually exclusive; resize handle cancels and disables lid
 
 REFERENCES
 Is this a better collision model?
