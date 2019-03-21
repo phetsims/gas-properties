@@ -46,6 +46,7 @@ define( require => {
         particleNode.toCanvas( canvas => { this.lightParticleImage = canvas; } );
       } );
 
+      //TODO canvas size could be considerably smaller, does it matter?
       // Size the canvas to match the model bounds. This changes dynamically as the browser window is resized.
       model.modelBoundsProperty.link( modelBounds => {
         this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( modelBounds ) );
