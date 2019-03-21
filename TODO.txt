@@ -26,7 +26,7 @@ DESIGN
 * Why are we showing time to 0.01 ps in the stopwatch?
 * "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
 * Sample period for collision counter will not be exact, but should be close enough.
-* Should container size indicator be the inside dimension?
+* Container size indicator is now the inside dimension
 * Choose a strategy for redistributing particles as container is resized, see GasPropertiesQueryParameters.redistribute
 * Interaction with resize handle and lid are mutually exclusive; resize handle cancels and disables lid
 
