@@ -30,14 +30,24 @@ define( require => {
     // For internal use only, not public facing.
     pointerCoordinates: { type: 'flag' },
 
-    //TODO delete redistribute when we choose one
+    //TODO choose a value and delete
     // Determines when particles will be redistributed as the result of resizing the container in the Ideal screen.
     // 'drag' redistributes as the resize handle is being dragged.
     // 'endDrag' redistributes when the user releases the resize handle, on end drag.
+    // For internal use only, not public facing.
     redistribute: {
       type: 'string',
       validValues: [ 'drag', 'end' ],
       defaultValue: 'drag'
+    },
+
+    //TODO choose a value and delete
+    // Determines how fast particles are heated or cooled. Smaller number is faster.
+    // For internal use only, not public facing.
+    heatCool: {
+      type: 'number',
+      isValidValue: value => ( value >= 100 && value <= 100000 ),
+      defaultValue: 1000
     }
     
   } );

@@ -304,7 +304,7 @@ define( require => {
    */
   function heatCoolParticles( particles, heatCoolFactor ) {
     assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, 'invalid heatCoolFactor: ' + heatCoolFactor );
-    const velocityScale = 1 + heatCoolFactor / 1000; //TODO tune this
+    const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
     for ( let i = 0; i < particles.length; i++ ) {
       particles[i].scaleVelocity( velocityScale );
     }
