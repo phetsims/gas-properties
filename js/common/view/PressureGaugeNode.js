@@ -24,6 +24,7 @@ define( require => {
   const DIAL_RADIUS = 50;
   const POST_HEIGHT = 0.6 * DIAL_RADIUS;
 
+  //TODO use color profile?
   // lit from above
   const POST_GRADIENT = new LinearGradient( 0, 0, 0, POST_HEIGHT )
     .addColorStop( 0, 'rgb( 120, 120, 120 )' )

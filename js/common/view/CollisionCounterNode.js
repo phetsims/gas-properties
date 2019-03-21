@@ -128,7 +128,7 @@ define( require => {
       // Pseudo-3D bezel around the outside edge of the counter
       const bezelBounds = new Bounds2( 0, 0, backgroundNode.width + ( 2 * BEZEL_WIDTH ), backgroundNode.height + ( 2 * BEZEL_WIDTH ) );
       const bezelNode = new ShadedRectangle( bezelBounds, {
-        baseColor: 'rgb( 90, 90, 90 )'
+        baseColor: 'rgb( 90, 90, 90 )' //TODO color profile?
       } );
 
       backgroundNode.center = bezelNode.center;

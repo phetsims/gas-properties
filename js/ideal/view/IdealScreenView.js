@@ -140,7 +140,7 @@ define( require => {
 
       // Container
       const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty, {
-        resizeHandleColor: 'rgb( 187, 154, 86 )',
+        resizeHandleColor: 'rgb( 187, 154, 86 )', //TODO HandleNode does not support color profile
         resizeHandleIsPressedListener: isPressed => {
           if ( isPressed ) {
 
