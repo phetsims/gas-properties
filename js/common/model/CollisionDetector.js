@@ -33,7 +33,7 @@ define( require => {
       options = _.extend( {
         regionLength: 2, // Regions are square, length of one side, nm
 
-        //TODO this should probably be max particle radius
+        //TODO this is currently max particle radius, is it needed at all since Region membership considers radius?
         regionOverlap: 0.125 // overlap of Regions, in nm
       }, options );
 
