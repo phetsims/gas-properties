@@ -25,10 +25,9 @@ define( require => {
       // @private
       this.model = model;
 
-      // Size the canvas to match the bounds where particles can exist.
-      // This changes dynamically as the browser window is resized.
-      model.particleBoundsProperty.link( particleBounds => {
-        this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( particleBounds ) );
+      // Size the canvas to match the model bounds. This changes dynamically as the browser window is resized.
+      model.modelBoundsProperty.link( modelBounds => {
+        this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( modelBounds ) );
       } );
     }
 

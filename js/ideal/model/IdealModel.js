@@ -14,7 +14,6 @@ define( require => {
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
@@ -40,10 +39,10 @@ define( require => {
     constructor() {
 
       // @public bounds of the entire space that the model knows about.
-      // This doesn't have a valid value until the view is created.
-      this.worldBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
-      phet.log && this.worldBoundsProperty.link( worldBounds => {
-        phet.log( `worldBounds: ${worldBounds.toString()} nm` );
+      // This corresponds to the browser window, and doesn't have a valid value until the view is created.
+      this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
+      phet.log && this.modelBoundsProperty.link( modelBounds => {
+        phet.log( `modelBounds: ${modelBounds.toString()} nm` );
       } );
 
       // @public transform between real time and sim time
@@ -88,18 +87,6 @@ define( require => {
 
       // @public (read-only)
       this.container = new Container();
-
-      // @public {Property.<Bounds2>} bounds in which particles exist. Particles that leave these bounds are deleted.
-      // This includes everything in the world that is to the right of and above the container's origin.
-      // This is sufficient because there is no gravity, so any particles that leave the box via the opening
-      // in its top will continue to move upward.
-      // This doesn't have a valid value until the view is created.
-      this.particleBoundsProperty = new DerivedProperty( [ this.worldBoundsProperty ], ( worldBounds ) => {
-        return new Bounds2( worldBounds.minX, this.container.location.y, this.container.location.x, worldBounds.maxY );
-      } );
-      phet.log && this.particleBoundsProperty.link( particleBounds => {
-        phet.log( `particleBounds: ${particleBounds.toString()} nm` );
-      } );
 
       this.heavyParticles = []; // {HeavyParticle[]}
       this.lightParticles = []; // {LightParticle[]}
@@ -250,9 +237,9 @@ define( require => {
         // collision detection and response
         this.collisionDetector.step( dt );
 
-        // remove particles that are out of bounds
-        removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.particleBoundsProperty.value );
-        removeParticlesOutOfBounds( this.lightParticles, this.numberOfLightParticlesProperty, this.particleBoundsProperty.value );
+        // remove particles that have left the model bounds
+        removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.modelBoundsProperty.value );
+        removeParticlesOutOfBounds( this.lightParticles, this.numberOfLightParticlesProperty, this.modelBoundsProperty.value );
 
         // verify that all particles are fully enclosed in the container
         assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );

@@ -21,35 +21,32 @@ define( require => {
   class RegionsNode extends Node {
 
     /**
-     * @param {CollisionDetector} collisionDetector
+     * @param {Region[]} regions
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( collisionDetector, modelViewTransform, options ) {
+    constructor( regions, modelViewTransform, options ) {
 
       options = _.extend( {
         pickable: false
       }, options );
 
-      // The regions that fill the collision detection bounds.
-      const regionsParent = new Node();
+      // {RegionNode[]} Draw each region in the grid.  Additive opacity shows overlap.
+      const regionNodes = [];
+      for ( let i = 0; i < regions.length; i++ ) {
+        const regionNode = new RegionNode( regions[ i ], modelViewTransform );
+        regionNodes.push( regionNode );
+      }
 
       assert && assert( !options.hasOwnProperty( 'children' ), 'RegionsNode sets children' );
       options = _.extend( {
-        children: [ regionsParent ]
+        children: regionNodes
       }, options );
 
       super( options );
 
-      // @private {RegionNode[]} Draw each region in the grid.  Additive opacity shows overlap.
-      this.regionNodes = [];
-      collisionDetector.regionsProperty.link( regions => {
-        this.regionNodes.length = 0; // clear array
-        for ( let i = 0; i < regions.length; i++ ) {
-          this.regionNodes.push( new RegionNode( regions[ i ], modelViewTransform ) );
-        }
-        regionsParent.children = this.regionNodes;
-      } );
+      // @private
+      this.regionNodes = regionNodes;
     }
 
     /**

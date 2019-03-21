@@ -50,9 +50,9 @@ define( require => {
 
       super();
 
-      // The model's world bounds are equivalent to the entire bounds of ScreenView, as fills the browser window.
+      // The model bounds are equivalent to the visible bounds of ScreenView, as fills the browser window.
       this.visibleBoundsProperty.link( visibleBounds => {
-        model.worldBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
+        model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
       } );
 
       const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
@@ -66,7 +66,7 @@ define( require => {
 
       // Show how the collision detection space is partitioned into regions
       if ( GasPropertiesQueryParameters.regions ) {
-        this.regionsNode = new RegionsNode( model.collisionDetector, model.modelViewTransform );
+        this.regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
         this.addChild( this.regionsNode );
       }
 

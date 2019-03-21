@@ -19,7 +19,6 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Property = require( 'AXON/Property' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -43,38 +42,25 @@ define( require => {
       assert && assert( options.regionOverlap < options.regionLength / 2,
         `regionOverlap ${options.regionOverlap} is incompatible with regionLength ${options.regionLength}` );
 
-      // @public {Property.<Bounds2>} collision detection bounds
-      this.particleBoundsProperty = model.particleBoundsProperty;
-
-      // @public (read-only) {Property.<Region[]>} 2D grid of Regions
-      this.regionsProperty = new Property( [] );
-
+      // @public (read-only) {Region[]} 2D grid of Regions
       // Partition the collision detection bounds into overlapping Regions.
       // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
       // edges of the container.
       //TODO generalize this or add assertions for assumptions.
-      this.particleBoundsProperty.link( bounds => {
-
-        clearRegions( this.regionsProperty.value );
-
-        const regions = []; // {Region[]}
-        let maxX = bounds.maxX;
-        while ( maxX > bounds.minX ) {
-          let minY = bounds.minY;
-          while ( minY < bounds.maxY ) {
-            const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
-            regions.push( new Region( regionBounds ) );
-            minY = minY + options.regionLength - options.regionOverlap;
-          }
-          maxX = maxX - options.regionLength + options.regionOverlap;
+      this.regions = [];
+      let maxX = model.container.right;
+      while ( maxX > model.container.right - model.container.widthRange.max  ) {
+        let minY = model.container.bottom;
+        while ( minY < model.container.top ) {
+          const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
+          this.regions.push( new Region( regionBounds ) );
+          minY = minY + options.regionLength - options.regionOverlap;
         }
+        maxX = maxX - options.regionLength + options.regionOverlap;
+      }
+      phet.log && phet.log( `created ${this.regions.length} regions of ${options.regionLength}nm each, with ${options.regionOverlap}nm overlap` );
 
-        this.regionsProperty.value = regions;
-
-        phet.log && phet.log( `created ${regions.length} regions of ${options.regionLength}nm each, with ${options.regionOverlap}nm overlap` );
-      } );
-
-      // @public (read-only) numebr of wall collisions on the most recent call to step
+      // @public (read-only) number of wall collisions on the most recent call to step
       this.numberOfParticleContainerCollisions = 0;
 
       // @private fields needed by methods
@@ -94,16 +80,14 @@ define( require => {
      */
     step( dt ) {
 
-      const regions = this.regionsProperty.value;
-
       // put particles in regions
-      clearRegions( regions );
-      assignParticlesToRegions( this.model.heavyParticles, regions );
-      assignParticlesToRegions( this.model.lightParticles, regions );
+      clearRegions( this.regions );
+      assignParticlesToRegions( this.model.heavyParticles, this.regions );
+      assignParticlesToRegions( this.model.lightParticles, this.regions );
 
       // detect and handle particle-particle collisions within each region
-      for ( let i = 0; i < regions.length; i++ ) {
-        this.doParticleParticleCollisions( regions[ i ].particles );
+      for ( let i = 0; i < this.regions.length; i++ ) {
+        this.doParticleParticleCollisions( this.regions[ i ].particles );
       }
 
       // detect and handle particle-container collisions
