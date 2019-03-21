@@ -16,6 +16,7 @@ define( require => {
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
@@ -133,12 +134,12 @@ define( require => {
       this.thermometer = new Thermometer();
       this.pressureGauge = new PressureGauge();
 
-      // Redistribute particles when the container width changes.
-      this.container.widthProperty.link( ( newWidth, oldWidth ) => {
-        const ratio = newWidth / oldWidth;
-        redistributeParticles( this.heavyParticles, ratio );
-        redistributeParticles( this.lightParticles, ratio );
-      } );
+      // Redistribute particles as the container width changes.
+      if ( GasPropertiesQueryParameters.redistribute === 'drag' ) {
+        this.container.widthProperty.link( ( newWidth, oldWidth ) => {
+          this.redistributeParticles( newWidth / oldWidth );
+        } );
+      }
     }
 
     /**
@@ -176,6 +177,15 @@ define( require => {
 
         particles.push( particle );
       }
+    }
+
+    /**
+     * Redistributes the particles in the container, called in response to changing the container width.
+     * @param {number} ratio
+     */
+    redistributeParticles( ratio ) {
+      redistributeParticles( this.heavyParticles, ratio );
+      redistributeParticles( this.lightParticles, ratio );
     }
 
     // @public resets the model

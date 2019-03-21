@@ -28,7 +28,17 @@ define( require => {
 
     // Shows the model and view coordinates that correspond to the cursor location.
     // For internal use only, not public facing.
-    pointerCoordinates: { type: 'flag' }
+    pointerCoordinates: { type: 'flag' },
+
+    //TODO delete redistribute when we choose one
+    // Determines when particles will be redistributed as the result of resizing the container in the Ideal screen.
+    // 'drag' redistributes as the resize handle is being dragged.
+    // 'endDrag' redistributes when the user releases the resize handle, on end drag.
+    redistribute: {
+      type: 'string',
+      validValues: [ 'drag', 'end' ],
+      defaultValue: 'drag'
+    }
     
   } );
 

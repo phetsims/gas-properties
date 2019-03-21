@@ -134,6 +134,10 @@ define( require => {
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
 
+      //TODO delete this if we choose GasPropertiesQueryParameters.redistribute === 'drag' strategy
+      // Width of the container when interaction with resize handle started.
+      let containerWidth = model.container.widthProperty.value;
+
       // Container
       const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty, {
         resizeHandleColor: 'rgb( 187, 154, 86 )',
@@ -148,13 +152,22 @@ define( require => {
 
             // gray out the particles
             this.particlesNode.opacity = 0.6;
+
+            // remember width of container
+            containerWidth = model.container.widthProperty.value;
           }
           else {
 
             // enable time controls and restore playing state
             model.isTimeControlsEnabledProperty.value = true;
             model.isPlayingProperty.value = wasPlaying;
+
+            // make particles opaque
             this.particlesNode.opacity = 1;
+
+            if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
+              model.redistributeParticles( model.container.widthProperty.value / containerWidth );
+            }
           }
         }
       } );
