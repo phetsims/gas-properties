@@ -2,7 +2,7 @@
 
 /**
  * Spatial partitioning is a technique for improving the performance of collision detection.
- * The collision detection bounds are partitioning into a grid of overlapping Regions. Objects (particles and
+ * The collision detection bounds are partitioning into a 2D grid of Regions. Objects (particles and
  * containers) are members of one or more regions based on whether they intersect the bounds of the region.
  * Rather than having to consider collisions between an object and every other object, only objects within the
  * same region need be considered.

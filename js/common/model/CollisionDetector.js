@@ -31,16 +31,13 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
-        regionLength: 2, // Regions are square, length of one side, nm
-
-        //TODO this is currently max particle radius, is it needed at all since Region membership considers radius?
-        regionOverlap: 0 // overlap of Regions, in nm
+        regionLength: 2 // Regions are square, length of one side, nm
       }, options );
 
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
 
       // @public (read-only) {Region[]} 2D grid of Regions
-      // Partition the collision detection bounds into overlapping Regions.
+      // Partition the collision detection bounds into Regions.
       // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
       // edges of the container.
       //TODO generalize this or add assertions for assumptions.
