@@ -201,15 +201,10 @@ define( require => {
 
           // resize the container
           const containerWidthRange = container.widthProperty.range;
-          const containerWidth = containerWidthRange.constrainValue( container.right - modelX );
-          container.widthProperty.value = containerWidth;
+          container.widthProperty.value = containerWidthRange.constrainValue( container.right - modelX );
 
           // resize the lid, maintaining the opening width if possible
-          let lidWidth = containerWidth - ( container.openingRightInset + startOpeningWidth ) + container.wallThickness;
-          lidWidth = Math.max( lidWidth, container.minLidWidth );
-          assert && assert( lidWidth >= container.minLidWidth && lidWidth <= container.maxLidWidth,
-            'invalid lidWidth: ' + lidWidth );
-          container.lidWidthProperty.value = lidWidth;
+          container.lidWidthProperty.value = Math.max( container.maxLidWidth - startOpeningWidth, container.minLidWidth );
         }
       } );
     }
@@ -242,20 +237,17 @@ define( require => {
         drag: ( event, listener ) => {
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          let lidWidth = 0;
           if ( modelX >= container.openingRight ) {
 
             // the lid is fully closed
-            lidWidth = container.maxLidWidth;
+            container.lidWidthProperty.value = container.maxLidWidth;
           }
           else {
+
+            // the lid is open
             const openingWidth = container.openingRight - modelX;
-            lidWidth = container.maxLidWidth - openingWidth;
-            lidWidth = Math.max( lidWidth, container.minLidWidth );
+            container.lidWidthProperty.value = Math.max( container.maxLidWidth - openingWidth, container.minLidWidth );
           }
-          assert && assert( lidWidth >= container.minLidWidth && lidWidth <= container.maxLidWidth,
-            'invalid lidWidth: ' + lidWidth );
-          container.lidWidthProperty.value = lidWidth;
         },
 
         // when the lid handle is released, log the opening

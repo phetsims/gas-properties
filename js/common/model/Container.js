@@ -75,6 +75,12 @@ define( require => {
         this.location.x - this.widthRange.max, this.location.y,
         this.location.x, this.location.y + this.height
       );
+
+      // Validate lidWidth, whose range changes dynamically.
+      assert && this.lidWidthProperty.link( lidWidth => {
+        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.maxLidWidth,
+          'invalid lidWidth: ' + lidWidth );
+      } );
     }
 
     // @public
