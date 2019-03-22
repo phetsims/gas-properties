@@ -180,8 +180,6 @@ define( require => {
      */
     constructor( container, modelViewTransform, parentNode ) {
 
-      const viewLocation = modelViewTransform.modelToViewPosition( container.location );
-
       // pointer's x offset from the left edge of the container, when a drag starts
       let startXOffset = 0;
 
@@ -191,8 +189,8 @@ define( require => {
       super( {
 
         start: ( event, listener ) => {
-          const viewWidth = modelViewTransform.modelToViewDeltaX( container.widthProperty.value );
-          startXOffset = viewLocation.x - parentNode.globalToParentPoint( event.pointer.point ).x - viewWidth;
+          const viewWidth = modelViewTransform.modelToViewX( container.left );
+          startXOffset = viewWidth - parentNode.globalToParentPoint( event.pointer.point ).x;
           startOpeningWidth = container.openingWidth;
         },
 
