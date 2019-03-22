@@ -169,7 +169,7 @@ define( require => {
 
   /**
    * Drag listener for the container's resize handle, changes the container's width.
-   * Maintain a constant opening size in the top of the container, if possible.
+   * Maintains a constant opening size in the top of the container, if possible.
    */
   class ResizeHandleDragListener extends DragListener {
 
@@ -216,7 +216,7 @@ define( require => {
   gasProperties.register( 'ContainerNode.ResizeHandleDragListener', ResizeHandleDragListener );
 
   /**
-   * Drag listener for the container's lid, which determines the size of the opening in the top of the container.
+   * Drag listener for the container's lid, determines the size of the opening in the top of the container.
    */
   class LidDragListener extends DragListener {
 
