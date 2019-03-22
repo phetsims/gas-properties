@@ -131,16 +131,13 @@ define( require => {
         updateLidPosition();
       } );
 
-      // Hide the handle when volume is held constant
+      // Hide the resize handle when volume is held constant
       holdConstantProperty.link( holdConstant => {
-        const resizeHandleVisible = ( holdConstant !== HoldConstantEnum.VOLUME );
-
-        // Cancel interaction when the handle becomes invisible
-        if ( resizeHandleNode.visible && !resizeHandleVisible ) {
-          resizeHandleNode.interruptSubtreeInput();
-        }
-        resizeHandleNode.visible = resizeHandleVisible;
+        resizeHandleNode.visible = ( holdConstant !== HoldConstantEnum.VOLUME );
       } );
+
+      // Cancel interaction when visibility of the resize handle changes.
+      resizeHandleNode.on( 'visibility', () => { resizeHandleNode.interruptSubtreeInput() } );
 
       // Dragging the resize handle horizontally changes the container's width
       const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this );
@@ -153,6 +150,7 @@ define( require => {
         lidNode.interruptSubtreeInput();
         lidNode.pickable = !isPressed;
 
+        //TODO is simple rectangle OK, or does this need to show opening?
         // display the previous bounds of the container
         previousBoundsNode.visible = isPressed;
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
