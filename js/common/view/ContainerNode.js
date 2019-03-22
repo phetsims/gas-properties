@@ -137,7 +137,7 @@ define( require => {
       } );
 
       // Cancel interaction when visibility of the resize handle changes.
-      resizeHandleNode.on( 'visibility', () => { resizeHandleNode.interruptSubtreeInput() } );
+      resizeHandleNode.on( 'visibility', () => resizeHandleNode.interruptSubtreeInput() );
 
       // Dragging the resize handle horizontally changes the container's width
       const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this );
