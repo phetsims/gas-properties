@@ -156,7 +156,7 @@ define( require => {
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
         options.resizeHandleIsPressedListener( isPressed );
 
-        // when the handle is releases, log minX and maxX for the opening
+        // when the handle is released, log minX and maxX for the opening
         !isPressed && phet.log && phet.log( `Container opening from ${container.openingMinX} to ${container.openingMaxX} nm` );
       } );
 
