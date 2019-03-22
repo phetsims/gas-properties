@@ -53,9 +53,9 @@ define( require => {
       assert && assert( this.widthRange.min > this.openingLeftInset + this.openingRightInset,
         'widthRange.min is too small to accommodate insets' );
 
-      // @public (read-only) the max x coordinate of the opening in the top of the container, in nm
-      // openingMinX is dynamic, see ES5 getter
-      this.openingMaxX = this.right - this.openingRightInset;
+      // @public (read-only) the right coordinate of the opening in the top of the container, in nm
+      // openingLeft is dynamic, see ES5 getter
+      this.openingRight = this.right - this.openingRightInset;
 
       // @public width of the lid, in nm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
@@ -89,22 +89,30 @@ define( require => {
     get left() { return this.location.x - this.widthProperty.value; }
 
     /**
-     * Gets the min x coordinate of the opening in the top of the container.
+     * Gets the maximum lid width, when the lid is fully closed.
      * @returns {number} in nm
      * @public
      */
-    get openingMinX() {
-      const openingMinX = this.left - this.wallThickness + this.lidWidthProperty.value;
-      assert && assert( openingMinX <= this.openingMaxX, 'openingMinX must be <= openingMaxX' );
-      return openingMinX;
+    get maxLidWidth() { return this.widthProperty.value - this.openingRightInset + this.wallThickness; }
+
+    /**
+     * Gets the left coordinate of the opening in the top of the container.
+     * @returns {number} in nm
+     * @public
+     */
+    get openingLeft() {
+      const openingLeft = this.left - this.wallThickness + this.lidWidthProperty.value;
+      assert && assert( openingLeft <= this.openingRight, 'openingLeft must be <= openingRight' );
+      return openingLeft;
     }
 
     /**
      * Gets the width of the opening in the top of the container.
      * @returns {number} in nm
+     * @public
      */
     get openingWidth() {
-      const openingWidth = this.openingMaxX - this.openingMinX;
+      const openingWidth = this.openingRight - this.openingLeft;
       assert && assert( openingWidth >= 0, 'invalid openingWidth: ' + openingWidth );
       return openingWidth;
     }

@@ -156,8 +156,8 @@ define( require => {
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
         options.resizeHandleIsPressedListener( isPressed );
 
-        // when the handle is released, log minX and maxX for the opening
-        !isPressed && phet.log && phet.log( `Container opening from ${container.openingMinX} to ${container.openingMaxX} nm` );
+        // when the handle is released, log the opening
+        !isPressed && phet.log && phet.log( `Container opening from ${container.openingLeft} to ${container.openingRight} nm` );
       } );
 
       // Dragging the lid horizontally changes the size of the opening in the top of the container
@@ -207,6 +207,8 @@ define( require => {
           // resize the lid, maintaining the opening width if possible
           let lidWidth = containerWidth - ( container.openingRightInset + startOpeningWidth ) + container.wallThickness;
           lidWidth = Math.max( lidWidth, container.minLidWidth );
+          assert && assert( lidWidth >= container.minLidWidth && lidWidth <= container.maxLidWidth,
+            'invalid lidWidth: ' + lidWidth );
           container.lidWidthProperty.value = lidWidth;
         }
       } );
@@ -227,26 +229,38 @@ define( require => {
      */
     constructor( container, modelViewTransform, parentNode ) {
 
-      // pointer's x offset from opening minX, when a drag starts
+      // pointer's x offset from openingLeft, when a drag starts
       let startXOffset = 0;
 
       super( {
 
         start: ( event, listener ) => {
-          startXOffset = modelViewTransform.modelToViewX( container.openingMinX ) -
+          startXOffset = modelViewTransform.modelToViewX( container.openingLeft ) -
                          parentNode.globalToParentPoint( event.pointer.point ).x;
         },
 
         drag: ( event, listener ) => {
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          let lidWidth = container.widthProperty.value - container.openingRightInset + container.wallThickness;
-          if ( modelX < container.openingMaxX ) {
-            const openingWidth = container.openingMaxX - modelX;
-            lidWidth = container.widthProperty.value - openingWidth - container.openingRightInset + container.wallThickness;
-            lidWidth = Math.max( lidWidth, container.openingLeftInset + container.wallThickness );
+          let lidWidth = 0;
+          if ( modelX >= container.openingRight ) {
+
+            // the lid is fully closed
+            lidWidth = container.maxLidWidth;
           }
+          else {
+            const openingWidth = container.openingRight - modelX;
+            lidWidth = container.maxLidWidth - openingWidth;
+            lidWidth = Math.max( lidWidth, container.minLidWidth );
+          }
+          assert && assert( lidWidth >= container.minLidWidth && lidWidth <= container.maxLidWidth,
+            'invalid lidWidth: ' + lidWidth );
           container.lidWidthProperty.value = lidWidth;
+        },
+
+        // when the lid handle is released, log the opening
+        end: ( listener ) => {
+          phet.log && phet.log( `Container opening from ${container.openingLeft} to ${container.openingRight} nm` );
         }
       } );
     }
