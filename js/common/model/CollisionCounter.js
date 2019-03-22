@@ -53,7 +53,7 @@ define( require => {
       this.samplePeriods = [ 10, 25, 50, 100 ];
 
       // @public sample period for counting collisions, in ps
-      this.samplePeriodProperty = new NumberProperty( 10, {
+      this.samplePeriodProperty = new NumberProperty( this.samplePeriods[ 0 ], {
         numberType: 'Integer',
         validValues: this.samplePeriods,
         units: 'ps'
