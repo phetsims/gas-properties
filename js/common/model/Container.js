@@ -48,10 +48,11 @@ define( require => {
       // @public (read-only) lid thickness, in nm
       this.lidThickness = 3 * this.wallThickness;
 
-      //TODO is this inside or outside?
-      // @public (read-only) insets of the opening in the top, in nm
+      // @public (read-only) insets of the opening in the top, from the inside edges of the container, in nm
       this.openingLeftInset = 0.5;
       this.openingRightInset = 2;
+      assert && assert( this.widthRange.min > this.openingLeftInset + this.openingRightInset,
+        'widthRange.min is too small to accommodate insets' );
 
       // @public width of the lid, in nm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset );
