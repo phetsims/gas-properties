@@ -45,12 +45,10 @@ define( require => {
         units: 'ps'
       } );
 
-      // When the stopwatch becomes invisible, stop it and reset its value.
+      // When the stopwatch visibility changes, stop it and reset its value.
       this.visibleProperty.link( visible => {
-        if ( !visible ) {
-          this.isRunningProperty.value = false;
-          this.timeProperty.value = 0;
-        }
+        this.isRunningProperty.value = false;
+        this.timeProperty.value = 0;
       } );
     }
 
