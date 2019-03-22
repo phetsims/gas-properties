@@ -4,6 +4,7 @@ UP NEXT
 
 Intro: simplify ResizeHandleDragListener and LidDragListener, factor out common/complicated computations
 Intro: clean up particle arrays in IdealModel
+Intro: optimize number of iterations over particle arrays
 Intro: pressure - see Java PressureSensingBox.getPressure
 Intro: hold constant
 
