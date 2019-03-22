@@ -39,7 +39,7 @@ define( require => {
       // @public (read-only) wall thickness, in nm
       this.wallThickness = 0.05;
 
-      // @public (read-only) locations of the container's inside bounds. this.left is dynamic, see ES5 getter
+      // @public (read-only) locations of the container's inside bounds in nm. this.left is dynamic, see ES5 getter
       this.right = this.location.x;
       this.top = this.location.y + this.height;
       this.bottom = this.location.y;
@@ -54,16 +54,16 @@ define( require => {
         'widthRange.min is too small to accommodate insets' );
 
       // @public width of the lid, in nm
-      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset, {
+      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
         units: 'nm'
       } );
 
       //TODO add openingRangeProperty
 
-      // @public (read-only) bicycle pump hose is connected to the outside right side of the container
+      // @public (read-only) bicycle pump hose is connected to the outside right side of the container, in nm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 2 );
 
-      // @public (read-only) max bounds of the container, when it is expanded to its full width.
+      // @public (read-only) max bounds of the container, when it is expanded to its full width, in nm
       this.maxBounds = new Bounds2(
         this.location.x - this.widthRange.max, this.location.y,
         this.location.x, this.location.y + this.height
