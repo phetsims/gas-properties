@@ -102,7 +102,7 @@ define( require => {
         //
         wallsNode.shape = new Shape()
           .moveTo( left, top )
-          .lineTo( left, bottom  )
+          .lineTo( left, bottom )
           .lineTo( right, bottom )
           .lineTo( right, top )
           .lineTo( right - viewOpeningRightInset, top );
@@ -228,14 +228,26 @@ define( require => {
      */
     constructor( container, modelViewTransform, parentNode ) {
 
+      // pointer's x offset from opening minX, when a drag starts
+      let startXOffset = 0;
+
       super( {
 
         start: ( event, listener ) => {
-          //TODO
+          startXOffset = modelViewTransform.modelToViewX( container.openingMinX ) -
+                         parentNode.globalToParentPoint( event.pointer.point ).x;
         },
 
         drag: ( event, listener ) => {
-          //TODO
+          const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
+          const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
+          let lidWidth = container.widthProperty.value - container.openingRightInset + container.wallThickness;
+          if ( modelX < container.openingMaxX ) {
+            const openingWidth = container.openingMaxX - modelX;
+            lidWidth = container.widthProperty.value - openingWidth - container.openingRightInset + container.wallThickness;
+            lidWidth = Math.max( lidWidth, container.openingLeftInset + container.wallThickness );
+          }
+          container.lidWidthProperty.value = lidWidth;
         }
       } );
     }
