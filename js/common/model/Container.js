@@ -22,7 +22,7 @@ define( require => {
     constructor() {
 
       // @public (read-only) location of the container's bottom right corner, in nm
-      this.location = Vector2.ZERO;
+      this.location = new Vector2( 0, 0 );
 
       // @public (read-only) range of the container's width, in nm
       this.widthRange = new RangeWithValue( 5, 15, 10 );
