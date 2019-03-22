@@ -200,8 +200,8 @@ define( require => {
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
 
           // resize the container
-          let containerWidth = container.right - modelX;
-          containerWidth = container.widthProperty.range.constrainValue( containerWidth );
+          const containerWidthRange = container.widthProperty.range;
+          const containerWidth = containerWidthRange.constrainValue( container.right - modelX );
           container.widthProperty.value = containerWidth;
 
           // resize the lid, maintaining the opening width if possible
