@@ -101,6 +101,7 @@ define( require => {
      * Move them to the outsideParticles list.
      * @param {Particle[]} particles
      * @param {NumberProperty} numberOfParticlesProperty
+     * @param {Particle[]} outsideParticles
      * @private
      */
     escapeParticles( particles, numberOfParticlesProperty, outsideParticles ) {
