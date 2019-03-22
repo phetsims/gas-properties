@@ -80,7 +80,7 @@ define( require => {
 
     /**
      * Gets the left edge of the container's inside bounds.
-     * @returns {number}
+     * @returns {number} in nm
      * @public
      */
     get left() { return this.location.x - this.widthProperty.value; }
@@ -90,7 +90,21 @@ define( require => {
      * @returns {number} in nm
      * @public
      */
-    get openingMinX() { return this.left - this.wallThickness + this.lidWidthProperty.value; }
+    get openingMinX() {
+      const openingMinX = this.left - this.wallThickness + this.lidWidthProperty.value;
+      assert && assert( openingMinX <= this.openingMaxX, 'openingMinX must be <= openingMaxX' );
+      return openingMinX;
+    }
+
+    /**
+     * Gets the width of the opening in the top of the container.
+     * @returns {number} in nm
+     */
+    get openingWidth() {
+      const openingWidth = this.openingMaxX - this.openingMinX;
+      assert && assert( openingWidth >= 0, 'invalid openingWidth: ' + openingWidth );
+      return openingWidth;
+    }
 
     /**
      * Determines whether the container surrounds a particle on all sides. Accounts for the particle's radius.

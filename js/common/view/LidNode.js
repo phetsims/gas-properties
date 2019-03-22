@@ -2,6 +2,7 @@
 
 /**
  * The lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.
+ * Origin is at bottom-left of base.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,7 +18,7 @@ define( require => {
 
   // constants
   const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
-  const HANDLE_RIGHT_INSET = 5;
+  const HANDLE_RIGHT_INSET = 3;
   const HANDLE_COLOR = 'gray'; //TODO can't use color profile because HandleNode doesn't support it
 
   class LidNode extends Node {
@@ -34,7 +35,9 @@ define( require => {
       }, options );
 
       const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {
-        fill: GasPropertiesColorProfile.lidBaseFillProperty
+        fill: GasPropertiesColorProfile.lidBaseFillProperty,
+        left: 0,
+        bottom: 0
       } );
 
       const handleNode = new HandleNode( {
@@ -66,6 +69,8 @@ define( require => {
      */
     setBaseWidth( baseWidth ) {
       this.baseNode.setRectWidth( baseWidth );
+      this.baseNode.left = 0;
+      this.baseNode.bottom = 0;
       this.handleNode.right = this.baseNode.right - HANDLE_RIGHT_INSET;
     }
   }

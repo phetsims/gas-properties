@@ -81,6 +81,7 @@ define( require => {
 
       super( options );
 
+      // Update the container width
       container.widthProperty.link( width => {
 
         const viewWidth = modelViewTransform.modelToViewDeltaX( width );
@@ -110,14 +111,21 @@ define( require => {
         resizeHandleNode.right = wallsNode.left + 1; // hide the overlap
         resizeHandleNode.centerY = wallsNode.centerY;
 
-        // resize and reposition the lid
-        lidNode.left = wallsNode.left;
-        lidNode.bottom = wallsNode.top + viewWallThickness;
+        // reposition the bottom-left corner of the lid's base, handle may extend past this to the left
+        lidNode.x = wallsNode.left;
+        lidNode.y = wallsNode.top + viewWallThickness;
       } );
 
       // Update the lid width
       container.lidWidthProperty.link( lidWidth => {
+
+        // resize the base
         lidNode.setBaseWidth( modelViewTransform.modelToViewDeltaX( lidWidth ) + 1 );  // +1 to cover seam
+
+        //TODO duplicated in container.widthProperty listener above
+        // reposition the bottom-left corner of the lid's base, handle may extend past this to the left
+        lidNode.x = wallsNode.left;
+        lidNode.y = wallsNode.top + viewWallThickness;
       } );
 
       // Hide the handle when volume is held constant
@@ -160,6 +168,7 @@ define( require => {
 
   /**
    * Drag listener for the container's resize handle, changes the container's width.
+   * Maintain a constant opening size in the top of the container, if possible.
    */
   class ResizeHandleDragListener extends DragListener {
 
@@ -175,18 +184,31 @@ define( require => {
       // pointer's x offset from the left edge of the container, when a drag starts
       let startXOffset = 0;
 
+      // width of the opening in the top of the container, when a drag starts
+      let startOpeningWidth = 0;
+
       super( {
 
         start: ( event, listener ) => {
           const viewWidth = modelViewTransform.modelToViewDeltaX( container.widthProperty.value );
           startXOffset = viewLocation.x - parentNode.globalToParentPoint( event.pointer.point ).x - viewWidth;
+          startOpeningWidth = container.openingWidth;
         },
 
         drag: ( event, listener ) => {
+
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          const width = container.location.x - modelX;
-          container.widthProperty.value = container.widthProperty.range.constrainValue( width );
+
+          // resize the container
+          let containerWidth = container.right - modelX;
+          containerWidth = container.widthProperty.range.constrainValue( containerWidth );
+          container.widthProperty.value = containerWidth;
+
+          // resize the lid, maintaining the opening width if possible
+          let lidWidth = containerWidth - ( container.openingRightInset + startOpeningWidth ) + container.wallThickness;
+          lidWidth = Math.max( lidWidth, container.openingLeftInset + container.wallThickness );
+          container.lidWidthProperty.value = lidWidth;
         }
       } );
     }
