@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 //TODO DESIGN Why do we want to show stopwatch time to NN.nn ps?
 //TODO DESIGN When should stopwatch reset time to zero?
