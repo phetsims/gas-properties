@@ -108,8 +108,8 @@ define( require => {
       for ( let i = 0; i < particles.length; i++ ) {
         const particle = particles[ i ];
         if ( particle.top > container.top &&
-             particle.left > container.openingMinX &&
-             particle.right < container.openingMaxX ) {
+             particle.left > container.openingLeft &&
+             particle.right < container.openingRight ) {
           particles.splice( particles.indexOf( particle ), 1 );
           numberOfParticlesProperty.value--;
           outsideParticles.push( particle );
