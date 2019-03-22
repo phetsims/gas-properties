@@ -30,7 +30,7 @@ define( require => {
       // @public width of the container, in nm
       this.widthProperty = new NumberProperty( this.widthRange.defaultValue, {
         range: this.widthRange,
-        units: 'nanometers'
+        units: 'nm'
       } );
 
       // @public (read-only) height of the container, in nm
@@ -55,7 +55,7 @@ define( require => {
 
       // @public width of the lid, in nm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset, {
-        units: 'nanometers'
+        units: 'nm'
       } );
 
       //TODO add openingRangeProperty

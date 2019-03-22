@@ -56,7 +56,7 @@ define( require => {
       this.samplePeriodProperty = new NumberProperty( 10, {
         numberType: 'Integer',
         validValues: this.samplePeriods,
-        units: 'picoseconds'
+        units: 'ps'
       } );
 
       // Changing the running state resets the count.

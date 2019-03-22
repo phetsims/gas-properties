@@ -42,7 +42,7 @@ define( require => {
       // @public time displayed on the stopwatch, in ps
       this.timeProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 ),
-        units: 'picoseconds'
+        units: 'ps'
       } );
 
       // When the stopwatch becomes invisible, stop it and reset its value.
