@@ -188,17 +188,17 @@ define( require => {
     }
 
     /**
-     * Does this particle intersect the specified bounds, including edges?
+     * Does this particle intersect the specified bounds, including edges? This implementation was adapted
+     * from Bounds2.intersectsBounds, removed Math.max and Math.min calls because this will be called thousands
+     * of times per step.
      * @param {Bounds2} bounds
      * @returns {boolean}
      */
     intersectsBounds( bounds ) {
-
-      //TODO adapted from Bounds2.intersectsBounds, see https://github.com/phetsims/dot/issues/92
-      const minX = Math.max( this.left, bounds.minX );
-      const minY = Math.max( this.bottom, bounds.minY );
-      const maxX = Math.min( this.right, bounds.maxX );
-      const maxY = Math.min( this.top, bounds.maxY );
+      const minX = ( this.left > bounds.minX ) ? this.left : bounds.minX;
+      const minY = ( this.bottom > bounds.minY ) ? this.bottom : bounds.minY;
+      const maxX = ( this.right < bounds.maxX ) ? this.right : bounds.maxX;
+      const maxY = ( this.top < bounds.maxY ) ? this.top : bounds.maxY;
       return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
     }
 

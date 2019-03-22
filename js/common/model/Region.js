@@ -30,24 +30,6 @@ define( require => {
     }
 
     /**
-     * Determines whether this region and a particle's bounding box have any points of intersection,
-     * including touching boundaries. Adapted from Bounds2.intersectsBounds, removed Math.max and Math.min
-     * calls because this will be called thousands of times in step.
-     * @param {Particle} particle
-     * @returns {boolean}
-     * @public
-     */
-    intersectsParticle( particle ) {
-
-      //TODO adapted from Bounds2.intersectsBounds, see https://github.com/phetsims/dot/issues/92
-      const minX = ( particle.left > this.bounds.minX ) ? particle.left : this.bounds.minX;
-      const minY = ( particle.bottom > this.bounds.minY ) ? particle.bottom : this.bounds.minY;
-      const maxX = ( particle.right < this.bounds.maxX ) ? particle.right : this.bounds.maxX;
-      const maxY = ( particle.top < this.bounds.maxY ) ? particle.top : this.bounds.maxY;
-      return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
-    }
-
-    /**
      * Adds a particle to this Region.
      * @param {Particle} particle
      * @public

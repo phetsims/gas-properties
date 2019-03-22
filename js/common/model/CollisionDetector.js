@@ -231,7 +231,7 @@ define( require => {
   function assignParticlesToRegions( particles, regions ) {
     for ( let i = 0; i < particles.length; i++ ) {
       for ( let j = 0; j < regions.length; j++ ) {
-        if ( regions[ j ].intersectsParticle( particles[ i ] ) ) {
+        if ( particles[ i ].intersectsBounds( regions[ j ].bounds ) ) {
           regions[ j ].addParticle( particles[ i ] );
         }
       }
