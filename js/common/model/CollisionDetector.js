@@ -69,7 +69,8 @@ define( require => {
     }
 
     /**
-     * @param {number} dt - time delta, in seconds
+     * Handles collision detection and response for one time step.
+     * @param {number} dt - time step, in ps
      * @public
      */
     step( dt ) {
