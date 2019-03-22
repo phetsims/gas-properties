@@ -39,7 +39,7 @@ define( require => {
       // @public (read-only) wall thickness, in nm
       this.wallThickness = 0.05;
 
-      // @public (read-only) locations of the container's inside bounds in nm. this.left is dynamic, see ES5 getter
+      // @public (read-only) locations of the container's inside bounds in nm. left is dynamic, see ES5 getter
       this.right = this.location.x;
       this.top = this.location.y + this.height;
       this.bottom = this.location.y;
@@ -53,12 +53,14 @@ define( require => {
       assert && assert( this.widthRange.min > this.openingLeftInset + this.openingRightInset,
         'widthRange.min is too small to accommodate insets' );
 
+      // @public (read-only) the max x coordinate of the opening in the top of the container, in nm
+      // openingMinX is dynamic, see ES5 getter
+      this.openingMaxX = this.right - this.openingRightInset;
+
       // @public width of the lid, in nm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
         units: 'nm'
       } );
-
-      //TODO add openingRangeProperty
 
       // @public (read-only) bicycle pump hose is connected to the outside right side of the container, in nm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 2 );
@@ -77,11 +79,18 @@ define( require => {
     }
 
     /**
-     * Left edge of the container's inside bounds.
+     * Gets the left edge of the container's inside bounds.
      * @returns {number}
      * @public
      */
     get left() { return this.location.x - this.widthProperty.value; }
+
+    /**
+     * Gets the min x coordinate of the opening in the top of the container.
+     * @returns {number} in nm
+     * @public
+     */
+    get openingMinX() { return this.left - this.wallThickness + this.lidWidthProperty.value; }
 
     /**
      * Determines whether the container surrounds a particle on all sides. Accounts for the particle's radius.

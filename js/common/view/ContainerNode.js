@@ -115,6 +115,11 @@ define( require => {
         lidNode.bottom = wallsNode.top + viewWallThickness;
       } );
 
+      // Update the lid width
+      container.lidWidthProperty.link( lidWidth => {
+        lidNode.setBaseWidth( modelViewTransform.modelToViewDeltaX( lidWidth ) + 1 );  // +1 to cover seam
+      } );
+
       // Hide the handle when volume is held constant
       holdConstantProperty.link( holdConstant => {
         const resizeHandleVisible = ( holdConstant !== HoldConstantEnum.VOLUME );
@@ -141,6 +146,9 @@ define( require => {
         previousBoundsNode.visible = isPressed;
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
         options.resizeHandleIsPressedListener( isPressed );
+
+        // when the handle is releases, log minX and maxX for the opening
+        !isPressed && phet.log && phet.log( `opening from ${container.openingMinX} to ${container.openingMaxX} nm` );
       } );
 
       // Dragging the lid horizontally changes the size of the opening in the top of the container
