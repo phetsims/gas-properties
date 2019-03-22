@@ -3,6 +3,7 @@ TODO list for gas-properties
 UP NEXT
 
 Intro: simplify ResizeHandleDragListener and LidDragListener
+Intro: clean up particle arrays in IdealModel
 Intro: pressure - see Java PressureSensingBox.getPressure
 Intro: hold constant
 
