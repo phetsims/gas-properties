@@ -34,7 +34,7 @@ define( require => {
       // @public location of the collision counter, in view coordinates
       this.locationProperty = new Vector2Property( options.location );
 
-      // @public the number of particle-container collisions
+      // @public (read-only) the number of particle-container collisions
       this.numberOfCollisionsProperty = new NumberProperty( 0, {
         numberType: 'Integer',
         isValidValue: value => ( value >= 0 )
