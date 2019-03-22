@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO add info about hole in top of box
 /**
  * A rectangular container for particles. Origin is at the bottom-right corner. Width increases to the left.
  *
