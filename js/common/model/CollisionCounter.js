@@ -55,7 +55,8 @@ define( require => {
       // @public sample period for counting collisions, in ps
       this.samplePeriodProperty = new NumberProperty( 10, {
         numberType: 'Integer',
-        validValues: this.samplePeriods
+        validValues: this.samplePeriods,
+        units: 'picoseconds'
       } );
 
       // Changing the running state resets the count.

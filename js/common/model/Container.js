@@ -29,7 +29,6 @@ define( require => {
 
       // @public width of the container, in nm
       this.widthProperty = new NumberProperty( this.widthRange.defaultValue, {
-        numberType: 'FloatingPoint',
         range: this.widthRange,
         units: 'nanometers'
       } );
@@ -55,7 +54,9 @@ define( require => {
         'widthRange.min is too small to accommodate insets' );
 
       // @public width of the lid, in nm
-      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset );
+      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingLeftInset - this.openingRightInset, {
+        units: 'nanometers'
+      } );
 
       //TODO add openingRangeProperty
 

@@ -23,12 +23,15 @@ define( require => {
 
       // @public pressure in kilopascals (kPa)
       this.pressureKilopascalsProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 )
+        isValidValue: value => ( value >= 0 ),
+        units: 'kilopascals'
       } );
 
       // @public pressure in atmospheres (atm)
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
-        pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA );
+        pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
+        units: 'atmospheres'
+        } );
 
       // @public (read-only) pressure range in kilopascals (kPa)
       this.pressureRange = new Range( 0, 1000 ); //TODO values
