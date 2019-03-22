@@ -188,6 +188,22 @@ define( require => {
     }
 
     /**
+     * Does this particle intersect the specified bounds, including edges?
+     * @param {Bounds2} bounds
+     * @returns {boolean}
+     */
+    intersectsBounds( bounds ) {
+
+      //TODO add Bounds2.intersectsMinMax
+      // adapted from Bounds2.intersectsBounds, because we can't afford to allocate a Bounds2
+      const minX = Math.max( this.left, bounds.minX );
+      const minY = Math.max( this.bottom, bounds.minY );
+      const maxX = Math.min( this.right, bounds.maxX );
+      const maxY = Math.min( this.top, bounds.maxY );
+      return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
+    }
+
+    /**
      * Gets the center of mass of a collection of particles.
      * @param {Particle[]} particles
      * @returns {Vector2|null} null if there are no particles and therefore no center of mass

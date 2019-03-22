@@ -352,7 +352,7 @@ define( require => {
    */
   function removeParticlesOutOfBounds( particles, bounds ) {
     for ( let i = 0; i < particles.length; i++ ) {
-      if ( !bounds.containsPoint( particles[ i ].location ) ) {
+      if ( !particles[ i ].intersectsBounds( bounds ) ) {
         removeParticle( particles[ i ], particles );
       }
     }
