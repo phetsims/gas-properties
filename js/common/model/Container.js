@@ -90,7 +90,7 @@ define( require => {
     }
 
     /**
-     * Gets the left edge of the container's inside bounds.
+     * Gets the location of the left edge of the container's inside bounds.
      * @returns {number} in nm
      * @public
      */
