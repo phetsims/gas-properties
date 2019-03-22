@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Intro: BUG Collision Counter registers 2 collisions for each heavy particle added
 Intro: class Lid
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
