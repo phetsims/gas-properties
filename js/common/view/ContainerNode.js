@@ -81,6 +81,12 @@ define( require => {
 
       super( options );
 
+      // reposition the bottom-left corner of the lid's base, handle may extend past this to the left
+      function updateLidPosition() {
+        lidNode.x = wallsNode.left;
+        lidNode.y = wallsNode.top + viewWallThickness;
+      }
+
       // Update the container width
       container.widthProperty.link( width => {
 
@@ -93,7 +99,7 @@ define( require => {
         const top = viewLocation.y - viewHeight - wallOffset;
         const bottom = viewLocation.y + wallOffset;
 
-        // Resize & reposition the walls, start at top-left, origin at bottom-right. Shape looks like:
+        // Update the walls, start at top-left, origin at bottom-right. Shape looks like:
         //                   ___
         // |                    |
         // |                    |
@@ -111,9 +117,8 @@ define( require => {
         resizeHandleNode.right = wallsNode.left + 1; // hide the overlap
         resizeHandleNode.centerY = wallsNode.centerY;
 
-        // reposition the bottom-left corner of the lid's base, handle may extend past this to the left
-        lidNode.x = wallsNode.left;
-        lidNode.y = wallsNode.top + viewWallThickness;
+        // reposition the lid
+        updateLidPosition();
       } );
 
       // Update the lid width
@@ -122,10 +127,8 @@ define( require => {
         // resize the base
         lidNode.setBaseWidth( modelViewTransform.modelToViewDeltaX( lidWidth ) + 1 );  // +1 to cover seam
 
-        //TODO duplicated in container.widthProperty listener above
-        // reposition the bottom-left corner of the lid's base, handle may extend past this to the left
-        lidNode.x = wallsNode.left;
-        lidNode.y = wallsNode.top + viewWallThickness;
+        // reposition the lid
+        updateLidPosition();
       } );
 
       // Hide the handle when volume is held constant
@@ -156,7 +159,7 @@ define( require => {
         options.resizeHandleIsPressedListener( isPressed );
 
         // when the handle is releases, log minX and maxX for the opening
-        !isPressed && phet.log && phet.log( `opening from ${container.openingMinX} to ${container.openingMaxX} nm` );
+        !isPressed && phet.log && phet.log( `Container opening from ${container.openingMinX} to ${container.openingMaxX} nm` );
       } );
 
       // Dragging the lid horizontally changes the size of the opening in the top of the container
