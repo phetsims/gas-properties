@@ -38,6 +38,8 @@ define( require => {
      * @public
      */
     intersectsParticle( particle ) {
+
+      //TODO adapted from Bounds2.intersectsBounds, see https://github.com/phetsims/dot/issues/92
       const minX = ( particle.left > this.bounds.minX ) ? particle.left : this.bounds.minX;
       const minY = ( particle.bottom > this.bounds.minY ) ? particle.bottom : this.bounds.minY;
       const maxX = ( particle.right < this.bounds.maxX ) ? particle.right : this.bounds.maxX;

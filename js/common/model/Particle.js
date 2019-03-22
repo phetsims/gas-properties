@@ -194,8 +194,7 @@ define( require => {
      */
     intersectsBounds( bounds ) {
 
-      //TODO add Bounds2.intersectsMinMax
-      // adapted from Bounds2.intersectsBounds, because we can't afford to allocate a Bounds2
+      //TODO adapted from Bounds2.intersectsBounds, see https://github.com/phetsims/dot/issues/92
       const minX = Math.max( this.left, bounds.minX );
       const minY = Math.max( this.bottom, bounds.minY );
       const maxX = Math.min( this.right, bounds.maxX );
