@@ -206,7 +206,7 @@ define( require => {
 
           // resize the lid, maintaining the opening width if possible
           let lidWidth = containerWidth - ( container.openingRightInset + startOpeningWidth ) + container.wallThickness;
-          lidWidth = Math.max( lidWidth, container.openingLeftInset + container.wallThickness );
+          lidWidth = Math.max( lidWidth, container.minLidWidth );
           container.lidWidthProperty.value = lidWidth;
         }
       } );

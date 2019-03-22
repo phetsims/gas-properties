@@ -62,6 +62,9 @@ define( require => {
         units: 'nm'
       } );
 
+      // @public minimum width of the lid, overlaps the left wall, in nm
+      this.minLidWidth = this.openingLeftInset + this.wallThickness;
+
       // @public (read-only) bicycle pump hose is connected to the outside right side of the container, in nm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 2 );
 
