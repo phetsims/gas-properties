@@ -39,7 +39,8 @@ define( require => {
       // @public (read-only) wall thickness, in nm
       this.wallThickness = 0.05;
 
-      // @public (read-only) locations of the container's inside bounds in nm. left is dynamic, see ES5 getter
+      // @public (read-only) locations of the container's inside bounds in nm.
+      // left is dynamic, see ES5 getter.
       this.right = this.location.x;
       this.top = this.location.y + this.height;
       this.bottom = this.location.y;
@@ -62,7 +63,8 @@ define( require => {
         units: 'nm'
       } );
 
-      // @public minimum width of the lid, overlaps the left wall, in nm
+      // @public minimum width of the lid, overlaps the left wall, in nm.
+      // maxLidWidth is dynamic, see ES5 getter.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
       // @public (read-only) bicycle pump hose is connected to the outside right side of the container, in nm
