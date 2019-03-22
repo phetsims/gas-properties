@@ -152,6 +152,13 @@ define( require => {
      * @private
      */
     addParticles( n, particles, Constructor ) {
+
+      // Initial velocity is based on temperature in the container.
+      let temperature = this.thermometer.temperatureKelvinProperty.value;
+      if ( temperature === null ) {
+        temperature = EMPTY_INITIAL_TEMPERATURE;
+      }
+
       for ( let i = 0; i < n; i++ ) {
 
         // Create a particle, just inside the container where the bicycle pump hose attaches.
@@ -160,12 +167,6 @@ define( require => {
           this.container.hoseLocation.x - this.container.wallThickness - particle.radius,
           this.container.hoseLocation.y
         );
-
-        // Initial velocity is based on temperature in the container.
-        let temperature = this.thermometer.temperatureKelvinProperty.value;
-        if ( temperature === null ) {
-          temperature = EMPTY_INITIAL_TEMPERATURE;
-        }
 
         // Set the particle's velocity.
         particle.setVelocityPolar(
