@@ -43,7 +43,7 @@ define( require => {
       return new ParticleNode( new LightParticle(), modelViewTransform );
     },
 
-    //TODO DESIGN create a less detailed icon for the stopwatch
+    //TODO DESIGN create a less detailed icon for the stopwatch, that doesn't need stopwatch
     /**
      * Creates an icon for the stopwatch.
      * @returns {Node}
@@ -51,13 +51,14 @@ define( require => {
      * @static
      */
     createStopwatchIcon() {
-      return new StopwatchNode( new Stopwatch( { visible: true } ), {
+      const stopwatch = new Stopwatch( { visible: true } );
+      return new StopwatchNode( stopwatch, {
         scale: 0.25,
         pickable: false
       } );
     },
 
-    //TODO DESIGN create a less detailed icon for the collision counter
+    //TODO DESIGN create a less detailed icon for the collision counter, that doesn't need collisionCounter or comboBoxListParent
     /**
      * Creates an icon for the collision counter.
      * @returns {Node}
@@ -65,7 +66,9 @@ define( require => {
      * @static
      */
     createCollisionCounterIcon() {
-      return new CollisionCounterNode( new CollisionCounter( { visible: true } ), new Node(), {
+      const collisionCounter = new CollisionCounter( null /* CollisionDetector */, { visible: true } );
+      const comboBoxListParent = new Node();
+      return new CollisionCounterNode( collisionCounter, comboBoxListParent, {
         scale: 0.2,
         pickable: false
       } );

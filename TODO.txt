@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Intro: icon on Collision Counter checkbox is missing
 Intro: class Lid
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
