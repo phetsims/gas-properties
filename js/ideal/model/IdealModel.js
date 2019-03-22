@@ -69,13 +69,13 @@ define( require => {
         isValidValue: value =>  HoldConstantEnum.includes( value )
       } );
 
-      // @public the number of heavy particles in the container
+      // @public the number of heavy particles inside the container
       this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
         range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE
       } );
 
-      // @public the number of light particles in the container
+      // @public the number of light particles inside the container
       this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
@@ -89,8 +89,10 @@ define( require => {
       // @public (read-only)
       this.container = new Container();
 
-      this.heavyParticles = []; // {HeavyParticle[]}
-      this.lightParticles = []; // {LightParticle[]}
+      this.heavyParticles = []; // {HeavyParticle[]} inside the container
+      this.lightParticles = []; // {LightParticle[]} inside the container
+      this.heavyOutsideParticles = []; // {HeavyParticle[]} outside the container
+      this.lightOutsideParticles = []; // {LightParticle[]} outside the container
 
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         if ( this.heavyParticles.length !== newValue ) {
@@ -208,6 +210,10 @@ define( require => {
 
       assert && assert( this.heavyParticles.length === 0, 'there should be no heavyParticles' );
       assert && assert( this.lightParticles.length === 0, 'there should be no lightParticles' );
+
+      // Dispose of particles that are outside the container
+      removeParticles( this.heavyOutsideParticles.length, this.heavyOutsideParticles );
+      removeParticles( this.lightOutsideParticles.length, this.lightOutsideParticles );
     }
 
     /**
@@ -239,15 +245,17 @@ define( require => {
         // step particles
         stepParticles( this.heavyParticles, dt );
         stepParticles( this.lightParticles, dt );
+        stepParticles( this.heavyOutsideParticles, dt );
+        stepParticles( this.lightOutsideParticles, dt );
 
         // collision detection and response
         this.collisionDetector.step( dt );
 
         // remove particles that have left the model bounds
-        removeParticlesOutOfBounds( this.heavyParticles, this.numberOfHeavyParticlesProperty, this.modelBoundsProperty.value );
-        removeParticlesOutOfBounds( this.lightParticles, this.numberOfLightParticlesProperty, this.modelBoundsProperty.value );
+        removeParticlesOutOfBounds( this.heavyOutsideParticles, this.modelBoundsProperty.value );
+        removeParticlesOutOfBounds( this.lightOutsideParticles, this.modelBoundsProperty.value );
 
-        // verify that all particles are fully enclosed in the container
+        // verify that these particles are fully enclosed in the container
         assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
         assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
 
@@ -340,14 +348,12 @@ define( require => {
   /**
    * Removes particles that are out of bounds.
    * @param {Particle[]} particles
-   * @param {NumberProperty} numberOfParticlesProperty
    * @param {Bounds2} bounds
    */
-  function removeParticlesOutOfBounds( particles, numberOfParticlesProperty, bounds ) {
+  function removeParticlesOutOfBounds( particles, bounds ) {
     for ( let i = 0; i < particles.length; i++ ) {
       if ( !bounds.containsPoint( particles[ i ].location ) ) {
         removeParticle( particles[ i ], particles );
-        numberOfParticlesProperty.value--;
       }
     }
   }

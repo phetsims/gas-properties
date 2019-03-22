@@ -74,6 +74,12 @@ define( require => {
      */
     step( dt ) {
 
+      // allow particles to escape from the opening in the top of the container
+      if ( this.model.container.openingWidth > 0 ) {
+        this.escapeParticles( this.model.heavyParticles, this.model.numberOfHeavyParticlesProperty, this.model.heavyOutsideParticles );
+        this.escapeParticles( this.model.lightParticles, this.model.numberOfLightParticlesProperty, this.model.lightOutsideParticles );
+      }
+
       // put particles in regions
       clearRegions( this.regions );
       assignParticlesToRegions( this.model.heavyParticles, this.regions );
@@ -88,6 +94,27 @@ define( require => {
       this.numberOfParticleContainerCollisions = 0;
       this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
       this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.lightParticles, this.model.container );
+    }
+
+    /**
+     * Identify particles that have escaped via the opening in the top of the container.
+     * Move them to the outsideParticles list.
+     * @param {Particle[]} particles
+     * @param {NumberProperty} numberOfParticlesProperty
+     * @private
+     */
+    escapeParticles( particles, numberOfParticlesProperty, outsideParticles ) {
+      const container = this.model.container;
+      for ( let i = 0; i < particles.length; i++ ) {
+        const particle = particles[ i ];
+        if ( particle.top > container.top &&
+             particle.left > container.openingMinX &&
+             particle.right < container.openingMaxX ) {
+          particles.splice( particles.indexOf( particle ), 1 );
+          numberOfParticlesProperty.value--;
+          outsideParticles.push( particle );
+        }
+      }
     }
 
     /**
