@@ -13,7 +13,6 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -50,23 +49,23 @@ define( require => {
         fill: GasPropertiesColorProfile.titleTextFillProperty
       } );
 
-      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.NOTHING,
+      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.NOTHING,
         new Text( holdConstantNothingString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.VOLUME,
+      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.VOLUME,
         new Text( holdConstantVolumeString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.TEMPERATURE,
+      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.TEMPERATURE,
         new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_V,
+      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.PRESSURE_V,
         new Text( holdConstantPressureVString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_T,
+      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.PRESSURE_T,
         new Text( holdConstantPressureTString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 

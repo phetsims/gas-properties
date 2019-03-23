@@ -14,11 +14,12 @@ define( require => {
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
+  const Enumeration = require( 'PHET_CORE/Enumeration' );
+  const EnumerationProperty = require( 'GAS_PROPERTIES/common/model/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -34,6 +35,16 @@ define( require => {
   // constants
   const PUMP_DISPERSION_ANGLE = Math.PI / 2; // radians
   const EMPTY_INITIAL_TEMPERATURE = 300; // K
+
+  // Enumeration for which quantity to hold constant
+  const HoldConstantEnum = new Enumeration( [
+      'NOTHING',
+      'VOLUME',
+      'TEMPERATURE',
+      'PRESSURE_T', // change temperature (T) to maintain constant pressure
+      'PRESSURE_V' // change volume (V) to maintain constant pressure
+    ]
+  );
 
   class IdealModel {
 
@@ -65,9 +76,7 @@ define( require => {
       this.isTimeControlsEnabledProperty = new BooleanProperty( true );
 
       // @public the quantity to hold constant
-      this.holdConstantProperty = new Property( HoldConstantEnum.NOTHING, {
-        isValidValue: value =>  HoldConstantEnum.includes( value )
-      } );
+      this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, HoldConstantEnum.NOTHING );
 
       // @public the number of heavy particles inside the container
       this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {

@@ -13,7 +13,6 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -28,7 +27,7 @@ define( require => {
     /**
      * @param {Container} container
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {Property.<HoldConstantEnum>} holdConstantProperty
+     * @param {EnumerationProperty} holdConstantProperty
      * @param {Object} [options]
      * @constructor
      */
@@ -133,7 +132,7 @@ define( require => {
 
       // Hide the resize handle when volume is held constant
       holdConstantProperty.link( holdConstant => {
-        resizeHandleNode.visible = ( holdConstant !== HoldConstantEnum.VOLUME );
+        resizeHandleNode.visible = ( holdConstant !== holdConstantProperty.enumeration.VOLUME );
       } );
 
       // Cancel interaction when visibility of the resize handle changes.
