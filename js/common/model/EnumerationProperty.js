@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO move to a common-code repo, see https://github.com/phetsims/axon/issues/239
 /**
  * Property whose value is a member of an Enumeration.
  *
