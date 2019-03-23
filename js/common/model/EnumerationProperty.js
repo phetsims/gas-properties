@@ -16,6 +16,11 @@ define( require => {
 
   class EnumerationProperty extends Property {
 
+    /**
+     * @param {Enumeration} enumeration
+     * @param {*} initialValue - one of the values from enumeration
+     * @param {Object} [options]
+     */
     constructor( enumeration, initialValue, options ) {
 
       if ( options ) {
