@@ -70,8 +70,8 @@ define( require => {
     paintCanvas( context ) {
       drawParticles( context, this.model.modelViewTransform, this.model.heavyParticles, this.heavyParticleImage );
       drawParticles( context, this.model.modelViewTransform, this.model.lightParticles, this.lightParticleImage );
-      drawParticles( context, this.model.modelViewTransform, this.model.heavyOutsideParticles, this.heavyParticleImage );
-      drawParticles( context, this.model.modelViewTransform, this.model.lightOutsideParticles, this.lightParticleImage );
+      drawParticles( context, this.model.modelViewTransform, this.model.heavyParticlesOutside, this.heavyParticleImage );
+      drawParticles( context, this.model.modelViewTransform, this.model.lightParticlesOutside, this.lightParticleImage );
     }
   }
 

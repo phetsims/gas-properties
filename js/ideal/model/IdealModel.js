@@ -100,8 +100,8 @@ define( require => {
 
       this.heavyParticles = []; // {HeavyParticle[]} inside the container
       this.lightParticles = []; // {LightParticle[]} inside the container
-      this.heavyOutsideParticles = []; // {HeavyParticle[]} outside the container
-      this.lightOutsideParticles = []; // {LightParticle[]} outside the container
+      this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
+      this.lightParticlesOutside = []; // {LightParticle[]} outside the container
 
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         if ( this.heavyParticles.length !== newValue ) {
@@ -222,8 +222,8 @@ define( require => {
       assert && assert( this.lightParticles.length === 0, 'there should be no lightParticles' );
 
       // Dispose of particles that are outside the container
-      removeParticles( this.heavyOutsideParticles.length, this.heavyOutsideParticles );
-      removeParticles( this.lightOutsideParticles.length, this.lightOutsideParticles );
+      removeParticles( this.heavyParticlesOutside.length, this.heavyParticlesOutside );
+      removeParticles( this.lightParticlesOutside.length, this.lightParticlesOutside );
     }
 
     /**
@@ -255,15 +255,15 @@ define( require => {
         // step particles
         stepParticles( this.heavyParticles, dt );
         stepParticles( this.lightParticles, dt );
-        stepParticles( this.heavyOutsideParticles, dt );
-        stepParticles( this.lightOutsideParticles, dt );
+        stepParticles( this.heavyParticlesOutside, dt );
+        stepParticles( this.lightParticlesOutside, dt );
 
         // collision detection and response
         this.collisionDetector.step( dt );
 
         // remove particles that have left the model bounds
-        removeParticlesOutOfBounds( this.heavyOutsideParticles, this.modelBoundsProperty.value );
-        removeParticlesOutOfBounds( this.lightOutsideParticles, this.modelBoundsProperty.value );
+        removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );
+        removeParticlesOutOfBounds( this.lightParticlesOutside, this.modelBoundsProperty.value );
 
         // verify that these particles are fully enclosed in the container
         assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );

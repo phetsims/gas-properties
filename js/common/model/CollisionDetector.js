@@ -77,8 +77,8 @@ define( require => {
 
       // allow particles to escape from the opening in the top of the container
       if ( this.model.container.openingWidth > 0 ) {
-        this.escapeParticles( this.model.heavyParticles, this.model.numberOfHeavyParticlesProperty, this.model.heavyOutsideParticles );
-        this.escapeParticles( this.model.lightParticles, this.model.numberOfLightParticlesProperty, this.model.lightOutsideParticles );
+        this.escapeParticles( this.model.heavyParticles, this.model.numberOfHeavyParticlesProperty, this.model.heavyParticlesOutside );
+        this.escapeParticles( this.model.lightParticles, this.model.numberOfLightParticlesProperty, this.model.lightParticlesOutside );
       }
 
       // put particles in regions
