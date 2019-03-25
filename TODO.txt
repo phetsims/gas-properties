@@ -30,6 +30,7 @@ DESIGN
 * Is a simple rectangle OK for showing previous bounds of the container?
 * Why are we showing time to 0.01 ps in the stopwatch?
 * "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
+* when the lid blows off, how large should the opening be?
 
 REFERENCES
 Is this a better collision model?
