@@ -78,6 +78,11 @@ define( require => {
       // @public the quantity to hold constant
       this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, HoldConstantEnum.NOTHING );
 
+      this.heavyParticles = []; // {HeavyParticle[]} inside the container
+      this.lightParticles = []; // {LightParticle[]} inside the container
+      this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
+      this.lightParticlesOutside = []; // {LightParticle[]} outside the container
+
       // @public the number of heavy particles inside the container
       this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
@@ -90,39 +95,40 @@ define( require => {
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
       } );
 
+      // Synchronize particle counts and arrays
+      this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
+        this.numberOfParticlesListener( newValue, oldValue, this.heavyParticles, HeavyParticle );
+      } );
+      this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
+        this.numberOfParticlesListener( newValue, oldValue, this.lightParticles, LightParticle );
+      } );
+
+      // @public (read-only)
+      this.container = new Container();
+      
+      // @public (read-only)
+      this.collisionDetector = new CollisionDetector( this );
+
       // @public the factor to heat (positive value) or cool (negative value) the contents of the container
       this.heatCoolFactorProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 )
       } );
 
       // @public (read-only)
-      this.container = new Container();
+      this.thermometer = new Thermometer();
 
-      this.heavyParticles = []; // {HeavyParticle[]} inside the container
-      this.lightParticles = []; // {LightParticle[]} inside the container
-      this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
-      this.lightParticlesOutside = []; // {LightParticle[]} outside the container
-
-      this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
-        this.numberOfParticlesListener( newValue, oldValue, this.heavyParticles, HeavyParticle );
-      } );
-
-      this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
-        this.numberOfParticlesListener( newValue, oldValue, this.lightParticles, LightParticle );
-      } );
-      
       // @public (read-only)
-      this.collisionDetector = new CollisionDetector( this );
+      this.pressureGauge = new PressureGauge();
 
-      // @public (read-only) tools and read-outs
+      // @public (read-only)
       this.collisionCounter = new CollisionCounter( this.collisionDetector, {
         location: new Vector2( 20, 20 ) // view coordinates! determined empirically
       } );
+
+      // @public (read-only)
       this.stopwatch = new Stopwatch( {
         location: new Vector2( 200, 20 ) // view coordinates! determined empirically
       } );
-      this.thermometer = new Thermometer();
-      this.pressureGauge = new PressureGauge();
 
       // Redistribute particles as the container width changes.
       if ( GasPropertiesQueryParameters.redistribute === 'drag' ) {
@@ -194,6 +200,7 @@ define( require => {
     /**
      * Redistributes the particles in the container, called in response to changing the container width.
      * @param {number} ratio
+     * @public
      */
     redistributeParticles( ratio ) {
       redistributeParticles( this.heavyParticles, ratio );
