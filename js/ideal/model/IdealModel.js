@@ -50,18 +50,18 @@ define( require => {
 
     constructor() {
 
-      // @public bounds of the entire space that the model knows about.
+      // @public (read-only) bounds of the entire space that the model knows about.
       // This corresponds to the browser window, and doesn't have a valid value until the view is created.
       this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
       phet.log && this.modelBoundsProperty.link( modelBounds => {
         phet.log( `modelBounds: ${modelBounds.toString()} nm` );
       } );
 
-      // @public transform between real time and sim time
+      // @public (read-only) transform between real time and sim time
       // 1 second of real time is 2.5 picoseconds of sim time.
       this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
 
-      // @public transform between model and view coordinate frames
+      // @public (read-only) transform between model and view coordinate frames
       const modelViewScale = 40; // number of pixels per nm
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
         new Vector2( 645, 475  ), // offset of the model's origin, in view coordinates
@@ -78,6 +78,7 @@ define( require => {
       // @public the quantity to hold constant
       this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, HoldConstantEnum.NOTHING );
 
+      // @public (read-only)
       this.heavyParticles = []; // {HeavyParticle[]} inside the container
       this.lightParticles = []; // {LightParticle[]} inside the container
       this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
