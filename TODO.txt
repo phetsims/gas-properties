@@ -2,6 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
+Intro: move CollisionCounter and StopWatch locations to view?
 Intro: class Lid
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
