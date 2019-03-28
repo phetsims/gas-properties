@@ -104,32 +104,11 @@ define( require => {
       this.lightParticlesOutside = []; // {LightParticle[]} outside the container
 
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
-        if ( this.heavyParticles.length !== newValue ) {
-          const delta = newValue - oldValue;
-          if ( delta > 0 ) {
-            this.addParticles( delta, this.heavyParticles, HeavyParticle );
-          }
-          else if ( delta < 0 ) {
-            removeParticles( -delta, this.heavyParticles );
-          }
-          assert && assert( this.heavyParticles.length === newValue,
-            'heavyParticles and numberOfHeavyParticlesProperty are out of sync' );
-        }
+        this.numberOfParticlesListener( newValue, oldValue, this.heavyParticles, HeavyParticle );
       } );
 
-      //TODO duplication with numberOfHeavyParticlesProperty listener
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
-        if ( this.lightParticles.length !== newValue ) {
-          const delta = newValue - oldValue;
-          if ( delta > 0 ) {
-            this.addParticles( delta, this.lightParticles, LightParticle );
-          }
-          else if ( delta < 0 ) {
-            removeParticles( -delta, this.lightParticles );
-          }
-          assert && assert( this.lightParticles.length === newValue,
-            'lightParticles and numberOfLightParticlesProperty are out of sync' );
-        }
+        this.numberOfParticlesListener( newValue, oldValue, this.lightParticles, LightParticle );
       } );
       
       // @public (read-only)
@@ -150,6 +129,27 @@ define( require => {
         this.container.widthProperty.link( ( newWidth, oldWidth ) => {
           this.redistributeParticles( newWidth / oldWidth );
         } );
+      }
+    }
+
+    /**
+     * Adjusts an array of particles to have the desired number of elements.
+     * @param {number} newValue - new number of particles
+     * @param {number} oldValue - old number of particles
+     * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
+     * @param particleConstructor - constructor for elements in particles array
+     * @private
+     */
+    numberOfParticlesListener( newValue, oldValue, particles, particleConstructor ) {
+      if ( particles.length !== newValue ) {
+        const delta = newValue - oldValue;
+        if ( delta > 0 ) {
+          this.addParticles( delta, particles, particleConstructor );
+        }
+        else if ( delta < 0 ) {
+          removeParticles( -delta, particles );
+        }
+        assert && assert( particles.length === newValue, 'particles array is out of sync' );
       }
     }
 
