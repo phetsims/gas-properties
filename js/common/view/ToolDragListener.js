@@ -33,8 +33,8 @@ define( require => {
     constructor( targetNode, visibleProperty, options ) {
 
       options = _.extend( {
-        locationProperty: new Vector2Property( Vector2.ZERO ),
-        dragBoundsProperty: null // {Property.<Bounds2>|null}
+        locationProperty: new Vector2Property( Vector2.ZERO ), // in view coordinates
+        dragBoundsProperty: null // {Property.<Bounds2>|null} in view coordinates
       }, options );
 
       // move targetNode

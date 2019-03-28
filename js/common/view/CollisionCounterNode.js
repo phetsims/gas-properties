@@ -56,7 +56,7 @@ define( require => {
     constructor( collisionCounter, comboBoxListParent, options ) {
 
       options = _.extend( {
-        dragBoundsProperty: null // {Property.<Bounds2>|null}
+        dragBoundsProperty: null // {Property.<Bounds2>|null} in view coordinates
       }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {

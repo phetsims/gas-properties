@@ -23,14 +23,13 @@ define( require => {
 
     /**
      * @param {Stopwatch} stopwatch
-     * @param {Property.<Bounds2|null>} dragBoundsProperty
      * @param {Object} [options]
      */
     constructor( stopwatch, options ) {
 
       options = _.extend( {
 
-        dragBoundsProperty: null, // {Property.<Bounds2>|null}
+        dragBoundsProperty: null, // {Property.<Bounds2>|null} in view coordinates
 
         // TimerNode options
         maxValue: 999.99,
