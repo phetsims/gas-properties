@@ -33,8 +33,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  const PUMP_DISPERSION_ANGLE = Math.PI / 2; // radians
-  const EMPTY_INITIAL_TEMPERATURE = 300; // K
+  const PUMP_DISPERSION_ANGLE = Math.PI / 2; // radians, used to compute initial velocity angle for particles
+  const EMPTY_INITIAL_TEMPERATURE = 300; // K, uses to compute velocity magnitude for particles added to empty container
 
   // Enumeration for which quantity to hold constant
   const HoldConstantEnum = new Enumeration( [
