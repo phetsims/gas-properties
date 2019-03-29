@@ -37,9 +37,8 @@ define( require => {
 
       assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
 
+      // transparent background
       const background = new Rectangle( 0, 0, 100, 200, {
-        fill: 'grey',
-        stroke: 'black',
         cornerRadius: 3
       } );
 
