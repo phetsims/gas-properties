@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AverageSpeedNode = require( 'GAS_PROPERTIES/energy/view/AverageSpeedNode' );
+  const AverageSpeedPanel = require( 'GAS_PROPERTIES/energy/view/AverageSpeedPanel' );
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
@@ -221,18 +221,18 @@ define( require => {
 
       //TODO move to EnergyScreenView
       // Average Speed
-      const averageSpeedNode = new AverageSpeedNode( viewProperties.averageSpeedVisibleProperty,
+      const averageSpeedPanel = new AverageSpeedPanel( viewProperties.averageSpeedVisibleProperty,
         model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
           left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: 10
         } );
-      this.addChild( averageSpeedNode );
+      this.addChild( averageSpeedPanel );
 
       //TODO move to EnergyScreenView
       // Speed accordion box with histogram and related controls
       const speedAccordionBox = new SpeedAccordionBox( model, {
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: averageSpeedNode.bottom + 10
+        top: averageSpeedPanel.bottom + 10
       } );
       this.addChild( speedAccordionBox );
 

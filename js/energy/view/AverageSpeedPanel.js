@@ -2,7 +2,7 @@
 
 /**
  * Displays the average speed (in m/s) for each type of particle in the container.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -17,6 +17,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
+  const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
@@ -28,7 +29,7 @@ define( require => {
   const averageSpeedString = require( 'string!GAS_PROPERTIES/averageSpeed' );
   const valueMetersPerSecondString = require( 'string!GAS_PROPERTIES/valueMetersPerSecond' );
 
-  class AverageSpeedNode extends VBox {
+  class AverageSpeedPanel extends Panel {
 
     /**
      * @param {BooleanProperty} averageSpeedVisibleProperty
@@ -42,6 +43,11 @@ define( require => {
       options = _.extend( {
         spacing: 10,
         align: 'center'
+      }, GasPropertiesConstants.PANEL_OPTIONS, {
+
+        // this is a disembodied panel
+        fill: null,
+        stroke: null
       }, options );
 
       const checkboxLabel = new Text( averageSpeedString, {
@@ -104,12 +110,12 @@ define( require => {
         align: 'left'
       } );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'AverageSpeedNode sets children' );
-      options = _.extend( {
+      // panel content
+      const contentNode = new VBox( {
         children: [ checkbox, vBox ]
-      }, options );
-      
-      super( options );
+      } );
+
+      super( contentNode, options );
 
       averageSpeedVisibleProperty.link( averageSpeedSelected => { vBox.visible = averageSpeedSelected; } );
     }
@@ -129,5 +135,5 @@ define( require => {
     }
   };
 
-  return gasProperties.register( 'AverageSpeedNode', AverageSpeedNode );
+  return gasProperties.register( 'AverageSpeedPanel', AverageSpeedPanel );
 } );
