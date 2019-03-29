@@ -34,6 +34,7 @@ DESIGN
 * OK to right-align Average Speed?
 * On the speed histogram, can we use particle icons instead of 'Heavy' and 'Light', ala Average Speed?
 * Is P = NkT/V sufficient for computing pressure? Why does Java version use a complicated 'slice' model?
+* How to convert pressure to kPa?
 
 REFERENCES
 Is this a better collision model?
