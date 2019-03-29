@@ -11,23 +11,13 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Text = require( 'SCENERY/nodes/Text' );
+  const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
 
   // strings
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
   const speedString = require( 'string!GAS_PROPERTIES/speed' );
 
-  // constants
-  const AXIS_LABEL_OPTIONS = {
-    fill: GasPropertiesColorProfile.titleTextFillProperty,
-    font: GasPropertiesConstants.AXIS_LABEL_FONT
-  };
-
-  class SpeedHistogram extends Node {
+  class SpeedHistogram extends Histogram {
 
     /**
      * @param {IdealModel} model
@@ -38,34 +28,11 @@ define( require => {
     constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
 
       options = _.extend( {
-        //TODO
+        xAxisString: speedString,
+        yAxisString: numberOfParticlesString
       }, options );
 
-      const rectangle = new Rectangle( 0, 0, 150, 130, {
-        fill: 'black',
-        stroke: 'white',
-        lineWidth: 1
-      } );
-      
-      const xAxisLabel = new Text( speedString, _.extend( {}, AXIS_LABEL_OPTIONS, {
-        maxWidth: 0.75 * rectangle.width,
-        centerX: rectangle.centerX,
-        top: rectangle.bottom + 5
-      } ) );
-
-      const yAxisLabel = new Text( numberOfParticlesString, _.extend( {}, AXIS_LABEL_OPTIONS, {
-        rotation: -Math.PI / 2,
-        maxWidth: rectangle.height,
-        right: rectangle.left - 8,
-        centerY: rectangle.centerY
-      } ) );
-
-      assert && assert( !options.hasOwnProperty( 'children' ), 'SpeedHistogram sets children' );
-      options = _.extend( {
-        children: [ rectangle, xAxisLabel, yAxisLabel ]
-      }, options );
-
-      super( options );
+      super( model, options );
     }
   }
 
