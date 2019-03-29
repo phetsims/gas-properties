@@ -91,5 +91,8 @@
   },
   "numberOfParticles": {
     "value": "Number of Particles"
+  },
+  "kineticEnergy": {
+    "value": "Kinetic Energy"
   }
 }

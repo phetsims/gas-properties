@@ -21,6 +21,7 @@ define( require => {
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
+  const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
@@ -234,7 +235,15 @@ define( require => {
         top: averageSpeedNode.bottom + 10
       } );
       this.addChild( speedAccordionBox );
-      
+
+      //TODO move to EnergyScreenView
+      // Kinetic Energy accordion box with histogram
+      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
+        left: averageSpeedNode.left,
+        top: speedAccordionBox.bottom + 10
+      } );
+      this.addChild( kineticEnergyAccordionBox );
+
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
         dragBoundsProperty: this.visibleBoundsProperty
@@ -268,6 +277,7 @@ define( require => {
           model.reset();
           viewProperties.reset();
           speedAccordionBox.reset(); //TODO move to Energy screen
+          kineticEnergyAccordionBox.reset(); //TODO move to Energy screen
         },
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
