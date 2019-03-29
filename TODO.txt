@@ -18,7 +18,7 @@ Energy: control temperature of particles that are added
 Diffusion: lots of new/different features
 
 DESIGN
-* Temperature model is T = (2/3)KE/k, where KE is the average KE of all particles in the container.
+* Temperature model is T = (2/3)KE/k, where KE is the average KE of all particles in the container. Java is scale * KE / N.
 * How to convert temperature to K?
 * Sample period for collision counter will not be exact, but should be close enough, see ?log
 * Container size indicator is now the inside dimension
