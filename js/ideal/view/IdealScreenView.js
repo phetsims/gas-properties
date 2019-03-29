@@ -223,7 +223,7 @@ define( require => {
       // Average Speed
       const averageSpeedNode = new AverageSpeedNode( viewProperties.averageSpeedVisibleProperty,
         model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
-          left: 10,
+          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: 10
         } );
       this.addChild( averageSpeedNode );
@@ -231,7 +231,7 @@ define( require => {
       //TODO move to EnergyScreenView
       // Speed accordion box with histogram and related controls
       const speedAccordionBox = new SpeedAccordionBox( model, {
-        left: averageSpeedNode.left,
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: averageSpeedNode.bottom + 10
       } );
       this.addChild( speedAccordionBox );
@@ -239,7 +239,7 @@ define( require => {
       //TODO move to EnergyScreenView
       // Kinetic Energy accordion box with histogram
       const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
-        left: averageSpeedNode.left,
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: speedAccordionBox.bottom + 10
       } );
       this.addChild( kineticEnergyAccordionBox );

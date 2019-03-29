@@ -80,6 +80,7 @@ define( require => {
 
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),
+    AXIS_LABEL_FONT: new PhetFont( 14 ),
 
     // physics quantities
     BOLTZMANN: 8.316E-3, // Boltzmann constant k, converted to (nm^2 * AMU)/(ps^2 * K) by @arouinfar

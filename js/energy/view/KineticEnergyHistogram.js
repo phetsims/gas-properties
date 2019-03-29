@@ -12,8 +12,8 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -24,7 +24,7 @@ define( require => {
   // constants
   const AXIS_LABEL_OPTIONS = {
     fill: GasPropertiesColorProfile.titleTextFillProperty,
-    font: new PhetFont( 14 )
+    font: GasPropertiesConstants.AXIS_LABEL_FONT
   };
 
   class KineticEnergyHistogram extends Node {
@@ -39,7 +39,7 @@ define( require => {
         //TODO
       }, options );
 
-      const rectangle = new Rectangle( 0, 0, 120, 130, {
+      const rectangle = new Rectangle( 0, 0, 150, 130, {
         fill: 'black',
         stroke: 'white',
         lineWidth: 1
