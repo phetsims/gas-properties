@@ -10,8 +10,8 @@ Intro: hold constant
 Explore: moving wall does not pause animation and does work on particles
 
 Energy: fixed container width
-Energy: speed accordion box and histogram
-Energy: KE accordion box and histogram
+Energy: Speed histogram
+Energy: KE histogram
 Energy: turn particle collisions on/off, CollisionDetector.particleCollisionsEnabledProperty
 Energy: control temperature of particles that are added
 
