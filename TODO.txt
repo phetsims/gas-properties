@@ -43,8 +43,8 @@ DESIGN QUESTIONS (VIEW)
 * On the speed histogram, can we use particle icons instead of 'Heavy' and 'Light', ala Average Speed?
 * Swap order of bottom 2 'Hold Constant' radio buttons?
 * Average Speed display updates like crazy, do we need to smooth this out like the Speed histogram?
-* Speed histogram: bin width, axis scaling
-* KE histogram: bin width, axis scaling
+* Speed histogram: bin width, range of axes, scaling of axes
+* KE histogram: bin width, range of axes, scaling of axes
 * What is constrainValue for Control Temperature control?
 
 REFERENCES
