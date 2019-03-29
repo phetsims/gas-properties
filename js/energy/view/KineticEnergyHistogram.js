@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO flesh out
 /**
  * Kinetic Energy histogram, shows the distribution of kinetic energy of the particles in the container.
  *

@@ -31,6 +31,7 @@ define( require => {
       options = _.extend( {
         expandedProperty: new BooleanProperty( true ), //TODO default false
         titleNode: new Text( kineticEnergyString, {
+          //TODO maxWidth
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.titleTextFillProperty
         } )

@@ -35,6 +35,7 @@ define( require => {
       options = _.extend( {
         expandedProperty: new BooleanProperty( true ),
         titleNode: new Text( speedString, {
+          //TODO maxWidth
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.titleTextFillProperty
         } )
