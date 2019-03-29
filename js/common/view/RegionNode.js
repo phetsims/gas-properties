@@ -33,7 +33,7 @@ define( require => {
       // Cell in the 2D grid
       const cellNode = new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
         fill: 'rgba( 0, 255, 0, 0.1 )',
-        stroke: 'rgba( 0, 255, 0, 0.2 )',
+        stroke: 'rgba( 0, 255, 0, 0.4 )',
         lineWidth: 0.25
       } );
 
