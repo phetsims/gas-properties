@@ -28,7 +28,7 @@ DESIGN
 * Is a simple rectangle OK for showing previous bounds of the container?
 * Why are we showing time to 0.01 ps in the stopwatch?
 * "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
-* Describe 'blow lid off' for new lid design
+* Describe 'blow lid off' for new lid design. When? How?
 * What does Average Speed show when the container is empty?
 * Why do we need a decimal place for Average Speed?
 * OK to right-align Average Speed?
