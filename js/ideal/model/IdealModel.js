@@ -104,6 +104,14 @@ define( require => {
         this.numberOfParticlesListener( newValue, oldValue, this.lightParticles, LightParticle );
       } );
 
+      const averageSpeedPropertyOptions = {
+        isValidValue: value => ( value === null || typeof value === 'number' )
+      };
+
+      // @public (read-only) average speed of heavy particles in the container, null when container is empty, m/s
+      this.heavyAverageSpeedProperty = new Property( null, averageSpeedPropertyOptions );
+      this.lightAverageSpeedProperty = new Property( null, averageSpeedPropertyOptions );
+
       // @public (read-only)
       this.container = new Container();
       
@@ -279,6 +287,10 @@ define( require => {
 
         this.updateTemperature();
 
+        // compute the average speed for each particle type
+        this.heavyAverageSpeedProperty.value = getAverageSpeed( this.heavyParticles );
+        this.lightAverageSpeedProperty.value = getAverageSpeed( this.lightParticles );
+
         // Do this after collision detection, so that the number of collisions detected is recorded.
         this.collisionCounter.step( dt );
       }
@@ -398,6 +410,23 @@ define( require => {
       assert && assert( container.enclosesParticle( particles[ i ] ),
         `container does not enclose particle: ${particles[ i ].toString()}` );
     }
+  }
+
+  /**
+   * Gets the average speed of a set of particles, in nm/ps.
+   * @param {Particle[]} particles
+   * @returns {number|null} null if there are no particles
+   */
+  function getAverageSpeed( particles ) {
+    let averageSpeed = null;
+    if ( particles.length > 0 ) {
+      let totalSpeed = 0;
+      for ( let i = 0; i < particles.length; i++ ) {
+        totalSpeed += particles[ i ].velocity.magnitude;
+      }
+      averageSpeed = totalSpeed / particles.length;
+    }
+    return averageSpeed;
   }
 
   return gasProperties.register( 'IdealModel', IdealModel );

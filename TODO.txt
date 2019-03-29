@@ -11,7 +11,6 @@ Intro: hold constant
 Explore: moving wall does not pause animation and does work on particles
 
 Energy: fixed container width
-Energy: average speed checkbox and readout
 Energy: speed accordion box and histogram
 Energy: KE accordion box and histogram
 Energy: turn particle collisions on/off, CollisionDetector.particleCollisionsEnabledProperty
@@ -31,6 +30,9 @@ DESIGN
 * Why are we showing time to 0.01 ps in the stopwatch?
 * "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
 * Describe 'blow lid off' for new lid design
+* What does Average Speed show when the container is empty?
+* Why do we need a decimal place for Average Speed?
+* OK to right-align Average Speed?
 
 REFERENCES
 Is this a better collision model?

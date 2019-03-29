@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const AverageSpeedNode = require( 'GAS_PROPERTIES/energy/view/AverageSpeedNode' );
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
@@ -238,6 +239,15 @@ define( require => {
         dragBoundsProperty: this.visibleBoundsProperty
       } );
       this.addChild( stopwatchNode );
+
+      //TODO move to EnergyScreenView
+      // Average Speed
+      const averageSpeedNode = new AverageSpeedNode( viewProperties.averageSpeedVisibleProperty,
+        model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
+          left: 10,
+          top: 10
+        } ); 
+      this.addChild( averageSpeedNode );
 
       // 2D grid for model coordinate frame
       if ( GasPropertiesQueryParameters.grid ) {

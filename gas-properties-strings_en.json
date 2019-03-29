@@ -79,5 +79,11 @@
   },
   "nanometers": {
     "value": "nm"
+  },
+  "averageSpeed": {
+    "value": "Average Speed"
+  },
+  "valueMetersPerSecond": {
+    "value": "{{value}} m/s"
   }
 }
