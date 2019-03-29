@@ -56,7 +56,7 @@ define( require => {
     PANEL_Y_MARGIN: 15,
 
     // physics quantities
-    BOLTZMANN: 8.316E-3, // Boltzmann's constant k, converted to (nm^2 * AMU)/(ps^2 * K) by @arouinfar
+    BOLTZMANN: 8.316E-3, // Boltzmann constant k, converted to (nm^2 * AMU)/(ps^2 * K) by @arouinfar
     KG_PER_AMU: 1.66E-27, // mass conversion: kg per 1 AMU (atomic mass unit)
     ATM_PER_KPA: 0.00986923 // pressure conversion: atm (atmospheres) per 1 kPa (kilopascal)
   };

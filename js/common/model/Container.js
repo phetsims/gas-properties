@@ -35,6 +35,10 @@ define( require => {
       // @public (read-only) height of the container, in nm
       this.height = 8.75;
 
+      //TODO is this OK?
+      // @private depth of the container, in nm
+      this.depth = 1;
+
       // @public (read-only) wall thickness, in nm
       this.wallThickness = 0.05;
 
@@ -87,6 +91,12 @@ define( require => {
       this.widthProperty.reset();
       this.lidWidthProperty.reset();
     }
+
+    /**
+     * Gets the volume of the container.
+     * @returns {number} in nm^3
+     */
+    get volume() { return this.widthProperty.value * this.height * this.depth; }
 
     /**
      * Gets the location of the left edge of the container's inside bounds.

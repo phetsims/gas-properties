@@ -5,7 +5,6 @@ UP NEXT
 Intro: class Lid
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
-Intro: pressure - see Java PressureSensingBox.getPressure
 Intro: hold constant
 
 Explore: moving wall does not pause animation and does work on particles
@@ -34,6 +33,7 @@ DESIGN
 * Why do we need a decimal place for Average Speed?
 * OK to right-align Average Speed?
 * On the speed histogram, can we use particle icons instead of 'Heavy' and 'Light', ala Average Speed?
+* Is P = NkT/V sufficient for computing pressure? Why does Java version use a complicated 'slice' model?
 
 REFERENCES
 Is this a better collision model?

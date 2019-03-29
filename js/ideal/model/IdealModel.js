@@ -287,6 +287,8 @@ define( require => {
 
         this.updateTemperature();
 
+        this.updatePressure();
+
         // compute the average speed for each particle type
         this.heavyAverageSpeedProperty.value = getAverageSpeed( this.heavyParticles );
         this.lightAverageSpeedProperty.value = getAverageSpeed( this.lightParticles );
@@ -321,6 +323,20 @@ define( require => {
         // T = (2/3)KE/k
         this.thermometer.temperatureKelvinProperty.value = (2/3) * averageKineticEnergy / GasPropertiesConstants.BOLTZMANN;
       }
+    }
+
+    /**
+     * Updates pressure. P = NkT/V
+     * @private
+     */
+    updatePressure() {
+      const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;
+      const temperature = this.thermometer.temperatureKelvinProperty.value; // K
+      const volume = this.container.volume; // nm^3
+      const k = GasPropertiesConstants.BOLTZMANN; // (nm^2 * AMU)/(ps^2 * K)
+
+      //TODO convert to kPa, 1 Pa = 1 kg/(m * s^2)
+      this.pressureGauge.pressureKilopascalsProperty.value = numberOfParticles * k * temperature / volume;
     }
   }
 
