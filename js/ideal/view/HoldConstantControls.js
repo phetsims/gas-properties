@@ -61,12 +61,12 @@ define( require => {
         new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
-      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.PRESSURE_V,
-        new Text( holdConstantPressureVString, TEXT_OPTIONS ),
-        RADIO_BUTTON_OPTIONS );
-
       const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.PRESSURE_T,
         new Text( holdConstantPressureTString, TEXT_OPTIONS ),
+        RADIO_BUTTON_OPTIONS );
+
+      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.PRESSURE_V,
+        new Text( holdConstantPressureVString, TEXT_OPTIONS ),
         RADIO_BUTTON_OPTIONS );
 
       assert && assert( !options.hasOwnProperty( 'children' ), 'HoldConstantControls sets children' );
@@ -76,8 +76,8 @@ define( require => {
           nothingRadioButton,
           volumeRadioButton,
           temperatureRadioButton,
-          pressureVRadioButton,
-          pressureTRadioButton
+          pressureTRadioButton,
+          pressureVRadioButton
         ]
       }, options );
 
