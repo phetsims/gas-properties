@@ -132,7 +132,8 @@ define( require => {
 
       // Hide the resize handle when volume is held constant
       holdConstantProperty.link( holdConstant => {
-        resizeHandleNode.visible = ( holdConstant !== holdConstantProperty.enumeration.VOLUME );
+        resizeHandleNode.visible = ( holdConstant !== holdConstantProperty.enumeration.VOLUME &&
+                                     holdConstant !== holdConstantProperty.enumeration.PRESSURE_V );
       } );
 
       // Cancel interaction when visibility of the resize handle changes.
