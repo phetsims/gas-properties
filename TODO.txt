@@ -41,6 +41,8 @@ DESIGN
 * Speed histogram: width of bins, horizontal and vertical scaling
 * KE histogram: width of bins, horizontal and vertical scaling
 * What is constrainValue for Control Temperature control?
+* Is it reasonable to treat the Explore screen like holdConstant=None? 
+* Is it reasonable to treat the Energy screen like holdConstant=Volume?
 
 REFERENCES
 Is this a better collision model?
