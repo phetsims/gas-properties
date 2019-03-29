@@ -11,6 +11,6 @@ Collision response:
 
 To avoid working with very small numbers and encountering potential 
 float-point errors, we are not using SI units in the model.  For example,
-KE is typically in J, which is _kg * m<sup>2</sup> / s<sup>2</sup>_.
+KE (Kinetic Energy) is typically in J, which is _kg * m<sup>2</sup> / s<sup>2</sup>_.
 We're using _AMU * nm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) 
 for the full list of units used in the model.
