@@ -45,6 +45,7 @@ DESIGN QUESTIONS (VIEW)
 * Average Speed display updates like crazy, do we need to smooth this out like the Speed histogram?
 * Histograms: bin width, range of axes, scaling of axes, 'data out of range' indicator in Java
 * What is constrainValue for Control Temperature control?
+* Consider making Average Speed an AccordionBox, it won't take any more space, and will provide consistent show/hide
 
 REFERENCES
 Is this a better collision model?
