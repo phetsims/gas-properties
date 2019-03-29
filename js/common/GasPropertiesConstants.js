@@ -16,8 +16,8 @@ define( require => {
 
   // for all panel-like containers
   const PANEL_CORNER_RADIUS = 5;
-  const PANEL_X_MARGIN = 20;
-  const PANEL_Y_MARGIN = 15;
+  const PANEL_X_MARGIN = 15;
+  const PANEL_Y_MARGIN = 10;
 
   const GasPropertiesConstants = {
 
