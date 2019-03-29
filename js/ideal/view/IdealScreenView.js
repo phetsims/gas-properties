@@ -179,16 +179,6 @@ define( require => {
         model.modelViewTransform, viewProperties.sizeVisibleProperty );
       this.addChild( sizeNode );
 
-      // Device to heat/cool the contents of the container
-      const heaterCoolerNodeLeft = containerViewLocation.x -
-                                   model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
-      const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
-        model.heatCoolFactorProperty, model.holdConstantProperty, {
-          left: heaterCoolerNodeLeft,
-          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-        } );
-      this.addChild( heaterCoolerNode );
-
       // Time controls
       const timeControlsLeft = containerViewLocation.x -
                                model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
@@ -227,6 +217,16 @@ define( require => {
       // @private
       this.particlesNode = new ParticlesNode( model );
       this.addChild( this.particlesNode );
+
+      // Device to heat/cool the contents of the container
+      const heaterCoolerNodeLeft = containerViewLocation.x -
+                                   model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
+      const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
+        model.heatCoolFactorProperty, model.holdConstantProperty, {
+          left: heaterCoolerNodeLeft,
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
+      this.addChild( heaterCoolerNode );
 
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
