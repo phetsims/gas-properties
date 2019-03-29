@@ -228,6 +228,15 @@ define( require => {
         } );
       this.addChild( heaterCoolerNode );
 
+      //TODO move to EnergyScreenView
+      // Average Speed
+      const averageSpeedNode = new AverageSpeedNode( viewProperties.averageSpeedVisibleProperty,
+        model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
+          left: 10,
+          top: 10
+        } );
+      this.addChild( averageSpeedNode );
+      
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
         dragBoundsProperty: this.visibleBoundsProperty
@@ -239,15 +248,6 @@ define( require => {
         dragBoundsProperty: this.visibleBoundsProperty
       } );
       this.addChild( stopwatchNode );
-
-      //TODO move to EnergyScreenView
-      // Average Speed
-      const averageSpeedNode = new AverageSpeedNode( viewProperties.averageSpeedVisibleProperty,
-        model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
-          left: 10,
-          top: 10
-        } ); 
-      this.addChild( averageSpeedNode );
 
       // 2D grid for model coordinate frame
       if ( GasPropertiesQueryParameters.grid ) {
