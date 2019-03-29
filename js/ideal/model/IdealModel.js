@@ -259,35 +259,37 @@ define( require => {
     stepModelTime( dt ) {
       if ( this.isPlayingProperty.value ) {
 
-        // advance the stopwatch
+        // Advance the stopwatch
         this.stopwatch.step( dt );
 
-        // apply heat/cool
+        // Apply heat/cool
         if ( this.heatCoolFactorProperty.value !== 0 ) {
           heatCoolParticles( this.heavyParticles, this.heatCoolFactorProperty.value );
           heatCoolParticles( this.lightParticles, this.heatCoolFactorProperty.value );
         }
 
-        // step particles
+        // Step particles
         stepParticles( this.heavyParticles, dt );
         stepParticles( this.lightParticles, dt );
         stepParticles( this.heavyParticlesOutside, dt );
         stepParticles( this.lightParticlesOutside, dt );
 
-        // collision detection and response
+        // Collision detection and response
         this.collisionDetector.step( dt );
 
-        // remove particles that have left the model bounds
+        // Remove particles that have left the model bounds
         removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );
         removeParticlesOutOfBounds( this.lightParticlesOutside, this.modelBoundsProperty.value );
 
-        // verify that these particles are fully enclosed in the container
+        // Verify that these particles are fully enclosed in the container
         assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
         assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
 
-        this.updateTemperature();
+        // Compute temperature. Do this before pressure, because pressure depends on temperature.
+        this.thermometer.temperatureKelvinProperty.value = this.computeTemperature();
 
-        this.updatePressure();
+        // Compute pressure
+        this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
 
         // compute the average speed for each particle type
         this.heavyAverageSpeedProperty.value = getAverageSpeed( this.heavyParticles );
@@ -298,19 +300,17 @@ define( require => {
       }
     }
 
-    //TODO is temperature computation correct?
     /**
-     * Updates the thermometer's temperature.
+     * Gets the temperature in the container.
+     * @returns {number|null} in K, null if the container is empty
      * @private
      */
-    updateTemperature() {
+    computeTemperature() {
+      let temperature = null;
       const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;
-      if ( numberOfParticles === 0 ) {
-        this.thermometer.temperatureKelvinProperty.value = null;
-      }
-      else {
+      if ( numberOfParticles > 0 ) {
 
-        // Compute the average kinetic energy
+        // Compute the average kinetic energy, AMU * nm^2 / ps^2
         let averageKineticEnergy = 0;
         for ( let i = 0; i < this.heavyParticles.length; i++ ) {
           averageKineticEnergy += this.heavyParticles[ i ].kineticEnergy;
@@ -320,23 +320,27 @@ define( require => {
         }
         averageKineticEnergy /= numberOfParticles;
 
+        const k = GasPropertiesConstants.BOLTZMANN; // (nm^2 * AMU)/(ps^2 * K)
+
         // T = (2/3)KE/k
-        this.thermometer.temperatureKelvinProperty.value = (2/3) * averageKineticEnergy / GasPropertiesConstants.BOLTZMANN;
+        temperature = (2/3) * averageKineticEnergy / k; // TODO convert to K
       }
+      return temperature;
     }
 
     /**
-     * Updates pressure. P = NkT/V
+     * Gets the pressure in the container.
+     * @returns {number} in kPa
      * @private
      */
-    updatePressure() {
+    computePressure() {
       const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;
       const temperature = this.thermometer.temperatureKelvinProperty.value; // K
       const volume = this.container.volume; // nm^3
       const k = GasPropertiesConstants.BOLTZMANN; // (nm^2 * AMU)/(ps^2 * K)
 
-      //TODO convert to kPa, 1 Pa = 1 kg/(m * s^2)
-      this.pressureGauge.pressureKilopascalsProperty.value = numberOfParticles * k * temperature / volume;
+      // P = NkT/V
+      return numberOfParticles * k * temperature / volume; //TODO convert to kPa, 1 Pa = 1 kg/(m * s^2)
     }
   }
 
