@@ -31,7 +31,7 @@ define( require => {
   };
   const TEXT_OPTIONS = {
     font: GasPropertiesConstants.CONTROL_FONT,
-    fill: GasPropertiesColorProfile.radioButtonTextFillProperty
+    fill: GasPropertiesColorProfile.controlTextFillProperty
   };
   
   class HoldConstantControls extends VBox {

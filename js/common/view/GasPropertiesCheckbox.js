@@ -26,7 +26,7 @@ define( require => {
     constructor( text, booleanProperty, options ) {
 
       options = _.extend( {
-        textFill: GasPropertiesColorProfile.checkboxTextFillProperty,
+        textFill: GasPropertiesColorProfile.controlTextFillProperty,
         font: GasPropertiesConstants.CONTROL_FONT,
         icon: null // {Node|null} optional icon, to the right of text
       }, options );

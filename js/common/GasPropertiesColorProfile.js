@@ -61,20 +61,6 @@ define( require => {
       projector: 'black'
     },
 
-    //TODO delete this, use controlTextFill
-    // fill for checkbox text
-    checkboxTextFill: {
-      default: 'white',
-      projector: 'black'
-    },
-
-    //TODO delete this, use controlTextFill
-    // fill for radio button text
-    radioButtonTextFill: {
-      default: 'white',
-      projector: 'black'
-    },
-
     // fill for text on UI controls (checkboxes, radio buttons, etc.)
     controlTextFill: {
       default: 'white',
