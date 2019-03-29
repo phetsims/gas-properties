@@ -85,5 +85,11 @@
   },
   "valueMetersPerSecond": {
     "value": "{{value}} m/s"
+  },
+  "speed": {
+    "value": "Speed"
+  },
+  "numberOfParticles": {
+    "value": "Number of Particles"
   }
 }

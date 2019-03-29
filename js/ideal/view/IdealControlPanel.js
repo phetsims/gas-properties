@@ -31,18 +31,9 @@ define( require => {
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
       options = _.extend( {
-
         fixedWidth: 250,
-
-        // Panel options
-        align: 'left',
-        xMargin: GasPropertiesConstants.PANEL_X_MARGIN,
-        yMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
-        cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
-        fill: GasPropertiesColorProfile.panelFillProperty,
-        stroke: GasPropertiesColorProfile.panelStrokeProperty
-
-      }, options );
+        xMargin: 0 // set by GasPropertiesConstants.PANEL_OPTIONS
+      }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       // force the Panel to be a fixed width
       assert && assert( !options.hasOwnProperty( 'maxWidth' ), 'ParticleCountsAccordionBox sets maxWidth' );

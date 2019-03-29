@@ -40,24 +40,11 @@ define( require => {
         fixedWidth: 250,
 
         // AccordionBox options
-        contentXMargin: GasPropertiesConstants.PANEL_X_MARGIN,
-        contentYMargin: GasPropertiesConstants.PANEL_Y_MARGIN,
-        buttonXMargin: 10,
-        buttonYMargin: 10,
-        titleXSpacing: 10,
-        cornerRadius: GasPropertiesConstants.PANEL_CORNER_RADIUS,
         titleNode: new Text( particleCountsString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.titleTextFillProperty
-        } ),
-        titleAlignX: 'left',
-        fill: GasPropertiesColorProfile.panelFillProperty,
-        stroke: GasPropertiesColorProfile.panelStrokeProperty,
-        expandCollapseButtonOptions: {
-          sideLength: 20
-        }
-
-      }, options );
+        } )
+      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
 
       // Limit width of title
       options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;

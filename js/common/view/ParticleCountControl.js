@@ -15,6 +15,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -55,7 +56,7 @@ define( require => {
         deltaFine: 1,
         deltaCoarse: 50,
         numberDisplayOptions: {
-          font: GasPropertiesConstants.PARTICLE_COUNT_CONTROL_FONT
+          font: new PhetFont( 20 )
         }
       } );
 

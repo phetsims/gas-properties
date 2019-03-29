@@ -33,6 +33,7 @@ define( require => {
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const SizeNode = require( 'GAS_PROPERTIES/common/view/SizeNode' );
+  const SpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/SpeedAccordionBox' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
@@ -203,17 +204,6 @@ define( require => {
       this.addChild( pressureGaugeNode );
       pressureGaugeNode.moveToBack(); // to hide overlap with container
 
-      // Reset All button
-      const resetAllButton = new ResetAllButton( {
-        listener: () => {
-          model.reset();
-          viewProperties.reset();
-        },
-        right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
-      this.addChild( resetAllButton );
-
       // @private
       this.particlesNode = new ParticlesNode( model );
       this.addChild( this.particlesNode );
@@ -236,6 +226,14 @@ define( require => {
           top: 10
         } );
       this.addChild( averageSpeedNode );
+
+      //TODO move to EnergyScreenView
+      // Speed accordion box with histogram and related controls
+      const speedAccordionBox = new SpeedAccordionBox( model, {
+        left: averageSpeedNode.left,
+        top: averageSpeedNode.bottom + 10
+      } );
+      this.addChild( speedAccordionBox );
       
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
@@ -263,6 +261,18 @@ define( require => {
           backgroundColor: GasPropertiesColorProfile.pointerCoordinatesBackgroundColorProperty
         } ) );
       }
+
+      // Reset All button
+      const resetAllButton = new ResetAllButton( {
+        listener: () => {
+          model.reset();
+          viewProperties.reset();
+          speedAccordionBox.reset(); //TODO move to Energy screen
+        },
+        right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+      this.addChild( resetAllButton );
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();

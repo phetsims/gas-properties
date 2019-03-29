@@ -14,8 +14,11 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
+  const Matrix3 = require( 'DOT/Matrix3' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
+  const Shape = require( 'KITE/Shape' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
 
@@ -71,6 +74,34 @@ define( require => {
       return new CollisionCounterNode( collisionCounter, comboBoxListParent, {
         scale: 0.2,
         pickable: false
+      } );
+    },
+
+    /**
+     * Creates an icon for a histogram shape, used for the checkboxes on the Speed histogram.
+     * @param {Property.<Color|null>} strokeProperty
+     * @public
+     * @static
+     */
+    createHistogramIcon( strokeProperty ) {
+
+      // unit shape
+      const shape = new Shape()
+        .moveTo( 0, 1 )
+        .lineTo( 0, 0.25 )
+        .lineTo( 0.25, 0.25 )
+        .lineTo( 0.25, 0 )
+        .lineTo( 0.5, 0 )
+        .lineTo( 0.5, 0.5 )
+        .lineTo( 0.75, 0.5 )
+        .lineTo( 0.75, 0.75 )
+        .lineTo( 1, 0.75 )
+        .lineTo( 1, 1 )
+        .transformed( Matrix3.scaling( 12, 12 ) );
+
+      return new Path( shape, {
+        stroke: strokeProperty,
+        lineWidth: 1.5
       } );
     }
   };
