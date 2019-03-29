@@ -56,7 +56,7 @@ define( require => {
         deltaFine: 1,
         deltaCoarse: 50,
         numberDisplayOptions: {
-          font: new PhetFont( 20 )
+          font: new PhetFont( 18 )
         }
       } );
 

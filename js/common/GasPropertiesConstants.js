@@ -78,7 +78,7 @@ define( require => {
     HEAVY_PARTICLES_THUMB_INTERVAL: 10,
     LIGHT_PARTICLES_THUMB_INTERVAL: 10,
 
-    TITLE_FONT: new PhetFont( { size: 20, weight: 'bold' } ),
+    TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),
 
     // physics quantities
