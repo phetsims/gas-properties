@@ -37,6 +37,7 @@ DESIGN
 * Is P = NkT/V sufficient for computing pressure? Why does Java version use a complicated 'slice' model?
 * How to convert pressure to kPa?
 * Swap order of bottom 2 'Hold Constant' radio buttons?
+* Average Speed display updates like crazy, do we need to smooth this out like the Speed histogram?
 
 REFERENCES
 Is this a better collision model?
