@@ -21,29 +21,31 @@ DESIGN FYI
 * Sample period for collision counter will not be exact, but should be close enough, see ?log
 * Container size indicator is now the inside dimension
 * Interaction with resize handle and lid are mutually exclusive; resize handle cancels and disables lid
+* Confirm that how opening size changes during a drag cycle is as desired.
+* Confirm that a simple rectangle is OK for showing previous bounds of the container.
+* Confirm that what Average Speed shows for empty container is as desired.
 * Choose a value for ?redistribute
 * Choose a value for ?heatCool
 
-DESIGN QUESTIONS
+DESIGN QUESTIONS (MODEL)
 * Temperature model is T = (2/3)KE/k, where KE is the average KE of all particles in the container. Java is scale * KE / N.
 * How to convert temperature to K?
-* Confirm that how opening size changes during a drag cycle is OK.
-* Is a simple rectangle OK for showing previous bounds of the container? Or do we need to show previous opening?
-* Why are we showing time to 0.01 ps in the stopwatch?
-* "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
-* Describe 'blow lid off' for new lid design. When? How?
-* What does Average Speed show when the container is empty?
-* Why do we need a decimal place for Average Speed?
-* On the speed histogram, can we use particle icons instead of 'Heavy' and 'Light', ala Average Speed?
 * Is P = NkT/V sufficient for computing pressure? Why does Java version use a complicated 'slice' model?
 * How to convert pressure to kPa?
+* Is it reasonable to treat the Explore screen like holdConstant=None?
+* Is it reasonable to treat the Energy screen like holdConstant=Volume?
+
+DESIGN QUESTIONS (VIEW)
+* Describe 'blow lid off' for new lid design. When? How?
+* Why are we showing time to 0.01 ps in the stopwatch?
+* "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
+* Why do we need a decimal place for Average Speed?
+* On the speed histogram, can we use particle icons instead of 'Heavy' and 'Light', ala Average Speed?
 * Swap order of bottom 2 'Hold Constant' radio buttons?
 * Average Speed display updates like crazy, do we need to smooth this out like the Speed histogram?
 * Speed histogram: width of bins, horizontal and vertical scaling
 * KE histogram: width of bins, horizontal and vertical scaling
 * What is constrainValue for Control Temperature control?
-* Is it reasonable to treat the Explore screen like holdConstant=None? 
-* Is it reasonable to treat the Energy screen like holdConstant=Volume?
 
 REFERENCES
 Is this a better collision model?
