@@ -9,13 +9,16 @@ define( require => {
   'use strict';
 
   // modules
+  const CollisionCounterCheckbox = require( 'GAS_PROPERTIES/common/view/CollisionCounterCheckbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantControls = require( 'GAS_PROPERTIES/ideal/view/HoldConstantControls' );
   const HSeparator = require( 'SUN/HSeparator' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
-  const ToolControls = require( 'GAS_PROPERTIES/common/view/ToolControls' );
+  const SizeCheckbox = require( 'GAS_PROPERTIES/common/view/SizeCheckbox' );
+  const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   class IdealControlPanel extends Panel {
@@ -43,20 +46,21 @@ define( require => {
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
       // constrain all parts of content to separatorWidth
-      const content = new VBox( {
+      const content = new Node();
+      content.addChild( new VBox( {
         align: 'left',
-        spacing: 10,                      
+        spacing: 10,
         children: [
           new HoldConstantControls( holdConstantProperty, { maxWidth: separatorWidth } ),
           new HSeparator( separatorWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: separatorWidth
           } ),
-          new ToolControls( sizeVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, {
-            maxWidth: separatorWidth
-          } )
+          new SizeCheckbox( sizeVisibleProperty ),
+          new StopwatchCheckbox( stopwatchVisibleProperty ),
+          new CollisionCounterCheckbox( collisionCounterVisibleProperty )
         ]
-      } );
+      } ) );
 
       super( content, options );
     }

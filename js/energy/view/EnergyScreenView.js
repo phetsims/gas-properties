@@ -75,8 +75,7 @@ define( require => {
       // Control panel at upper right
       const controlPanel = new EnergyControlPanel(
         viewProperties.sizeVisibleProperty,
-        model.stopwatch.visibleProperty,
-        model.collisionCounter.visibleProperty, {
+        model.stopwatch.visibleProperty, {
           fixedWidth: PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
