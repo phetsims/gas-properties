@@ -11,7 +11,6 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -30,7 +29,6 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
-        expandedProperty: new BooleanProperty( false ),
         titleNode: new Text( kineticEnergyString, {
           //TODO maxWidth
           font: GasPropertiesConstants.TITLE_FONT,

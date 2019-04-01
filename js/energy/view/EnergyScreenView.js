@@ -241,6 +241,7 @@ define( require => {
 
       // Speed accordion box with histogram and related controls
       const speedAccordionBox = new SpeedAccordionBox( model, {
+        expandedProperty: viewProperties.speedExpandedProperty,
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: averageSpeedPanel.bottom + 10
       } );
@@ -248,6 +249,7 @@ define( require => {
 
       // Kinetic Energy accordion box with histogram
       const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
+        expandedProperty: viewProperties.kineticEnergyExpandedProperty,
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: speedAccordionBox.bottom + 10
       } );

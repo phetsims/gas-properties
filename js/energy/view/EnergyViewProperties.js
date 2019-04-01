@@ -18,10 +18,14 @@ define( require => {
 
     constructor() {
 
-      // @public the particle type that will be dispensed by the bicycle pump
-      this.particleTypeProperty = new Property( ParticleTypeEnum.HEAVY, {
-        isValidValue: value => ParticleTypeEnum.includes( value )
-      } );
+      // @public whether the Average Speed display is visible
+      this.averageSpeedVisibleProperty = new BooleanProperty( true );
+
+      // @public whether the Speed accordion box is expanded
+      this.speedExpandedProperty = new BooleanProperty( true );
+
+      // @public whether the Kinetic Energy accordion box is expanded
+      this.kineticEnergyExpandedProperty = new BooleanProperty( false );
 
       // @public whether dimensional arrows are visible for the width of the container
       this.sizeVisibleProperty = new BooleanProperty( false );
@@ -32,15 +36,20 @@ define( require => {
       // @public whether the 'Particles Tools' accordion box is expanded
       this.particleToolsExpandedProperty = new BooleanProperty( false );
 
-      // @public whether average speed is visible
-      this.averageSpeedVisibleProperty = new BooleanProperty( true );
+      // @public the particle type that will be dispensed by the bicycle pump
+      this.particleTypeProperty = new Property( ParticleTypeEnum.HEAVY, {
+        isValidValue: value => ParticleTypeEnum.includes( value )
+      } );
     }
 
     reset() {
-      this.particleTypeProperty.reset();
+      this.averageSpeedVisibleProperty.reset();
+      this.speedExpandedProperty.reset();
+      this.kineticEnergyExpandedProperty.reset();
       this.sizeVisibleProperty.reset();
       this.particleCountsExpandedProperty.reset();
       this.particleToolsExpandedProperty.reset();
+      this.particleTypeProperty.reset();
     }
   }
 
