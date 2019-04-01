@@ -53,6 +53,11 @@ define( require => {
         spacing: 5
       };
 
+      const checkboxOptions = {
+        checkboxColor: GasPropertiesColorProfile.textFillProperty,
+        checkboxColorBackground: GasPropertiesColorProfile.panelFillProperty
+      };
+
       // Heavy particles checkbox
       const heavyIcon = new HBox( _.extend( {
         children: [
@@ -60,7 +65,7 @@ define( require => {
           GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.heavyParticleColorProperty )
         ]
       }, iconOptions ) );
-      const heavyCheckbox = new Checkbox( heavyIcon, heavyVisibleProperty );
+      const heavyCheckbox = new Checkbox( heavyIcon, heavyVisibleProperty, checkboxOptions );
 
       // Light particles checkbox
       const lightIcon = new HBox( _.extend( {
@@ -69,7 +74,7 @@ define( require => {
           GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.lightParticleColorProperty )
         ]
       }, iconOptions ) );
-      const lightCheckbox = new Checkbox( lightIcon, lightVisibleProperty );
+      const lightCheckbox = new Checkbox( lightIcon, lightVisibleProperty, checkboxOptions );
 
       const checkboxes = new HBox( {
         children: [ heavyCheckbox, lightCheckbox ],
