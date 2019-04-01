@@ -220,6 +220,7 @@ define( require => {
       this.stopwatch.reset();
       this.thermometer.reset();
       this.pressureGauge.reset();
+      this.collisionDetector.reset();
 
       // Properties
       this.isPlayingProperty.reset();

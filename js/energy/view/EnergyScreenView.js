@@ -88,8 +88,7 @@ define( require => {
 
       // Particle Tools accordion box
       const particleToolsAccordionBox = new ParticleToolsAccordionBox(
-        //TODO move collisionsEnabledProperty to model
-        new BooleanProperty( true ),
+        model.collisionDetector.particleParticleCollisionsEnabledProperty,
         //TODO move controlTemperatureEnabledProperty to model
         new BooleanProperty( true ),
         //TODO move initialTemperatureProperty to model

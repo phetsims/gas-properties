@@ -17,6 +17,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
@@ -57,6 +58,9 @@ define( require => {
       // @public (read-only) number of wall collisions on the most recent call to step
       this.numberOfParticleContainerCollisions = 0;
 
+      // @public determines whether particle-particle collisions occur
+      this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true );
+
       // @private fields needed by methods
       this.model = model;
 
@@ -66,6 +70,11 @@ define( require => {
       this.relativeVelocity = new Vector2( 0, 0 );
       this.pointOnLine = new Vector2( 0, 0 );
       this.relectedPoint = new Vector2( 0, 0 );
+    }
+
+    // @public
+    reset() {
+      this.particleParticleCollisionsEnabledProperty.reset();
     }
 
     /**
@@ -87,8 +96,10 @@ define( require => {
       assignParticlesToRegions( this.model.lightParticles, this.regions );
 
       // detect and handle particle-particle collisions within each region
-      for ( let i = 0; i < this.regions.length; i++ ) {
-        this.doParticleParticleCollisions( this.regions[ i ].particles );
+      if ( this.particleParticleCollisionsEnabledProperty.value ) {
+        for ( let i = 0; i < this.regions.length; i++ ) {
+          this.doParticleParticleCollisions( this.regions[ i ].particles );
+        }
       }
 
       // detect and handle particle-container collisions
