@@ -4,7 +4,6 @@ UP NEXT
 
 Factor out ScreenView base class for screens 1-3
 
-Energy: control temperature of particles that are added
 Energy: Speed histogram
 Energy: KE histogram
 

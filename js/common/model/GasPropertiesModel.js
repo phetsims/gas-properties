@@ -28,13 +28,16 @@ define( require => {
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
+  const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  const PUMP_DISPERSION_ANGLE = Math.PI / 2; // radians, used to compute initial velocity angle for particles
-  const EMPTY_INITIAL_TEMPERATURE = 300; // K, uses to compute velocity magnitude for particles added to empty container
+  // radians, used to compute initial velocity angle for particles
+  const PUMP_DISPERSION_ANGLE = Math.PI / 2;
+  // K, temperature used to compute initial velocity of particles
+  const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
   class GasPropertiesModel {
 
@@ -104,8 +107,8 @@ define( require => {
 
       // @public initial temperature of particles added to the container, in K.
       // Ignored if !controlTemperatureEnabledProperty.value
-      this.initialTemperatureProperty = new NumberProperty( 300, {
-        range: new Range( 50, 1000 )
+      this.initialTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
+        range: INITIAL_TEMPERATURE_RANGE
       } );
 
       const averageSpeedPropertyOptions = {
@@ -181,10 +184,17 @@ define( require => {
      */
     addParticles( n, particles, Constructor ) {
 
-      // Initial velocity is based on temperature in the container.
-      let temperature = this.thermometer.temperatureKelvinProperty.value;
-      if ( temperature === null ) {
-        temperature = EMPTY_INITIAL_TEMPERATURE;
+      // Get the temperature that will be used to compute initial velocity magnitude.
+      let temperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
+      if ( this.controlTemperatureEnabledProperty.value ) {
+
+        // User's setting
+        temperature = this.initialTemperatureProperty.value;
+      }
+      else if ( this.heavyParticles.length + this.lightParticles.length > 0 ) {
+
+        // Current temperature in the non-empty container
+        temperature = this.thermometer.temperatureKelvinProperty.value;
       }
 
       for ( let i = 0; i < n; i++ ) {
