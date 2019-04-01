@@ -24,12 +24,17 @@ define( require => {
      */
     constructor( stopwatchVisibleProperty, options ) {
 
-      assert && assert( !options || !options.hasOwnProperty( 'icon' ), 'StopwatchCheckbox sets icon' );
+      if ( options ) {
+        assert && assert( !options.hasOwnProperty( 'text' ), 'StopwatchCheckbox sets text' );
+        assert && assert( !options.hasOwnProperty( 'icon' ), 'StopwatchCheckbox sets icon' );
+      }
+
       options = _.extend( {
+        text: stopwatchString,
         icon: GasPropertiesIconFactory.createStopwatchIcon()
       }, options );
 
-      super( stopwatchString, stopwatchVisibleProperty, options );
+      super( stopwatchVisibleProperty, options );
     }
   }
 

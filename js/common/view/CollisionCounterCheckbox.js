@@ -24,12 +24,17 @@ define( require => {
      */
     constructor( collisionCounterVisibleProperty, options ) {
 
-      assert && assert( !options || !options.hasOwnProperty( 'icon' ), 'StopwatchCheckbox sets icon' );
+      if ( options ) {
+        assert && assert( !options.hasOwnProperty( 'text' ), 'StopwatchCheckbox sets text' );
+        assert && assert( !options.hasOwnProperty( 'icon' ), 'StopwatchCheckbox sets icon' );
+      }
+
       options = _.extend( {
+        text: collisionCounterString,
         icon: GasPropertiesIconFactory.createCollisionCounterIcon()
       }, options );
 
-      super( collisionCounterString, collisionCounterVisibleProperty, options );
+      super( collisionCounterVisibleProperty, options );
     }
   }
 

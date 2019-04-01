@@ -49,7 +49,9 @@ define( require => {
         stroke: null
       }, options );
 
-      const checkbox = new GasPropertiesCheckbox( averageSpeedString, averageSpeedVisibleProperty );
+      const checkbox = new GasPropertiesCheckbox( averageSpeedVisibleProperty, {
+        text: averageSpeedString
+      } );
 
       // icons for the particles
       const heavyParticleNode = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );

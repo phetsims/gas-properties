@@ -64,10 +64,14 @@ define( require => {
       options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
 
       // Collisions checkbox
-      const collisionsCheckbox = new GasPropertiesCheckbox( collisionsString, collisionsEnabledProperty );
+      const collisionsCheckbox = new GasPropertiesCheckbox( collisionsEnabledProperty, {
+        text: collisionsString
+      } );
 
       // Control Temperature checkbox
-      const controlTemperatureCheckbox = new GasPropertiesCheckbox( controlTemperatureString, controlTemperatureEnabledProperty );
+      const controlTemperatureCheckbox = new GasPropertiesCheckbox( controlTemperatureEnabledProperty, {
+        text: controlTemperatureString
+      } );
 
       // Major ticks for temperature slider
       const tickTextOptions = {

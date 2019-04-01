@@ -3,7 +3,7 @@
 //TODO maintain fixed width
 /**
  * SpeedAccordionBox contains the speed histogram and related controls.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -12,8 +12,8 @@ define( require => {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const Checkbox = require( 'SUN/Checkbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
@@ -53,28 +53,25 @@ define( require => {
         spacing: 5
       };
 
-      const checkboxOptions = {
-        checkboxColor: GasPropertiesColorProfile.textFillProperty,
-        checkboxColorBackground: GasPropertiesColorProfile.panelFillProperty
-      };
-
       // Heavy particles checkbox
-      const heavyIcon = new HBox( _.extend( {
-        children: [
-          GasPropertiesIconFactory.createHeavyParticleIcon( model.modelViewTransform ),
-          GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.heavyParticleColorProperty )
-        ]
-      }, iconOptions ) );
-      const heavyCheckbox = new Checkbox( heavyIcon, heavyVisibleProperty, checkboxOptions );
+      const heavyCheckbox = new GasPropertiesCheckbox( heavyVisibleProperty, {
+        icon: new HBox( _.extend( {
+          children: [
+            GasPropertiesIconFactory.createHeavyParticleIcon( model.modelViewTransform ),
+            GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.heavyParticleColorProperty )
+          ]
+        }, iconOptions ) )
+      } );
 
       // Light particles checkbox
-      const lightIcon = new HBox( _.extend( {
-        children: [
-          GasPropertiesIconFactory.createLightParticleIcon( model.modelViewTransform ),
-          GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.lightParticleColorProperty )
-        ]
-      }, iconOptions ) );
-      const lightCheckbox = new Checkbox( lightIcon, lightVisibleProperty, checkboxOptions );
+      const lightCheckbox = new GasPropertiesCheckbox( lightVisibleProperty, {
+        icon: new HBox( _.extend( {
+          children: [
+            GasPropertiesIconFactory.createLightParticleIcon( model.modelViewTransform ),
+            GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.lightParticleColorProperty )
+          ]
+        }, iconOptions ) )
+      } );
 
       const checkboxes = new HBox( {
         children: [ heavyCheckbox, lightCheckbox ],

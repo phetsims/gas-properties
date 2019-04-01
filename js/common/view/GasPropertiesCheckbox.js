@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * A checkbox that is labeled with text, with an optional icon to the right of the text.
+ * A checkbox that is labeled with text and/or and icon, and has the correct color profiling for this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -19,36 +19,47 @@ define( require => {
   class GasPropertiesCheckbox extends Checkbox {
 
     /**
-     * @param {string} text
      * @param {BooleanProperty} booleanProperty
      * @param {Object} [options]
      */
-    constructor( text, booleanProperty, options ) {
+    constructor( booleanProperty, options ) {
 
       options = _.extend( {
+        text: null, // {string|null} optional text label
+        icon: null, // {Node|null} optional icon, to the right of text
         textFill: GasPropertiesColorProfile.textFillProperty,
+        textMaxWidth: 250,
         font: GasPropertiesConstants.CONTROL_FONT,
         checkboxColor: GasPropertiesColorProfile.textFillProperty,
-        checkboxColorBackground: GasPropertiesColorProfile.panelFillProperty,
-        icon: null // {Node|null} optional icon, to the right of text
+        checkboxColorBackground: GasPropertiesColorProfile.panelFillProperty
       }, options );
 
-      const textNode = new RichText( text, {
-        fill: options.textFill,
-        font: options.font,
-        maxWidth: 250 // determined empirically
-      } );
+      assert && assert( options.text || options.icon, 'text or icon is required' );
+
+      const contentChildren = [];
+
+      if ( options.text ) {
+        contentChildren.push( new RichText( options.text, {
+          fill: options.textFill,
+          font: options.font,
+          maxWidth: options.textMaxWidth
+        } ) );
+      }
+
+      if ( options.icon ) {
+        contentChildren.push( options.icon );
+      }
 
       let content = null;
-      if ( options.icon ) {
+      if ( contentChildren.length === 1 ) {
+        content = contentChildren[ 0 ];
+      }
+      else {
         content = new HBox( {
           align: 'center',
           spacing: 8,
-          children: [ textNode, options.icon ]
+          children: contentChildren
         } );
-      }
-      else {
-        content = textNode;
       }
 
       super( content, booleanProperty, options );

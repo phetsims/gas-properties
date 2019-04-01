@@ -26,15 +26,20 @@ define( require => {
      */
     constructor( sizeVisibleProperty, options ) {
 
-      assert && assert( !options || !options.hasOwnProperty( 'icon' ), 'SizeCheckbox sets icon' );
+      if ( options ) {
+        assert && assert( !options.hasOwnProperty( 'text' ), 'SizeCheckbox sets text' );
+        assert && assert( !options.hasOwnProperty( 'icon' ), 'SizeCheckbox sets icon' );
+      }
+
       options = _.extend( {
+        text: sizeString,
         icon: new DimensionalArrowsNode( new NumberProperty( 44 ), {
           color: GasPropertiesColorProfile.sizeArrowColorProperty,
           pickable: false
         }, options )
       } );
 
-      super( sizeString, sizeVisibleProperty, options );
+      super( sizeVisibleProperty, options );
     }
   }
 
