@@ -17,7 +17,7 @@ define( require => {
 
   class TimeControls extends HBox {
     /**
-     * @param {IdealModel} model TODO more general type
+     * @param {GasPropertiesModel} model TODO narrower interface?
      * @param {Object} [options]
      * @constructor
      */

@@ -27,7 +27,7 @@ define( require => {
       this.sizeVisibleProperty = new BooleanProperty( false );
 
       // @public whether the 'Particles Counts' accordion box is expanded
-      this.particleCountsExpandedProperty = new BooleanProperty( true ); //TODO default should be false
+      this.particleCountsExpandedProperty = new BooleanProperty( false );
     }
 
     reset() {

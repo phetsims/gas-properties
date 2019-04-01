@@ -27,17 +27,13 @@ define( require => {
       this.sizeVisibleProperty = new BooleanProperty( false );
 
       // @public whether the 'Particles Counts' accordion box is expanded
-      this.particleCountsExpandedProperty = new BooleanProperty( true ); //TODO default should be false
-
-      // @public whether average speed is shown for particle types
-      this.averageSpeedVisibleProperty = new BooleanProperty( true );
+      this.particleCountsExpandedProperty = new BooleanProperty( false );
     }
 
     reset() {
       this.particleTypeProperty.reset();
       this.sizeVisibleProperty.reset();
       this.particleCountsExpandedProperty.reset();
-      this.averageSpeedVisibleProperty.reset();
     }
   }
 

@@ -30,7 +30,7 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
-        expandedProperty: new BooleanProperty( true ), //TODO default false
+        expandedProperty: new BooleanProperty( false ),
         titleNode: new Text( kineticEnergyString, {
           //TODO maxWidth
           font: GasPropertiesConstants.TITLE_FONT,

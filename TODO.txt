@@ -37,7 +37,7 @@ DESIGN QUESTIONS (MODEL)
 
 DESIGN QUESTIONS (VIEW)
 * Describe 'blow lid off' for new lid design. When? How?
-* Why are we showing time to 0.01 ps in the stopwatch?
+* Why are we showing time to 0.01 ps in the stopwatch? What is the max time?
 * "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
 * Why do we need a decimal place for Average Speed?
 * Swap order of bottom 2 'Hold Constant' radio buttons?
@@ -47,6 +47,8 @@ DESIGN QUESTIONS (VIEW)
 * Consider making Average Speed an AccordionBox, it won't take any more space, and will provide consistent show/hide
 * Consider a different color scheme for controls and panels, there's too much 'black' negative space
 * Energy: lid handle collides with Speed accordion box
+* What is the max of the pressure gauge?
+* What is the max of the thermometer?
 
 REFERENCES
 Is this a better collision model?
