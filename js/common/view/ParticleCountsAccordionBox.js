@@ -40,6 +40,9 @@ define( require => {
         fixedWidth: 250,
 
         // AccordionBox options
+        buttonXMargin: 0,
+        titleXSpacing: 0,
+        contentXMargin: 0,
         titleNode: new Text( particleCountsString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.titleTextFillProperty

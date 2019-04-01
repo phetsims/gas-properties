@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Properties that are specific to the view in the 'Ideal' screen.
+ * Properties that are specific to the view in the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,7 +14,7 @@ define( require => {
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const Property = require( 'AXON/Property' );
 
-  class IdealViewProperties {
+  class EnergyViewProperties {
 
     constructor() {
 
@@ -28,14 +28,21 @@ define( require => {
 
       // @public whether the 'Particles Counts' accordion box is expanded
       this.particleCountsExpandedProperty = new BooleanProperty( true ); //TODO default should be false
+
+      // @public whether the 'Particles Tools' accordion box is expanded
+      this.particleToolsExpandedProperty = new BooleanProperty( true ); //TODO default should be false
+
+      // @public whether average speed is visible
+      this.averageSpeedVisibleProperty = new BooleanProperty( true );
     }
 
     reset() {
       this.particleTypeProperty.reset();
       this.sizeVisibleProperty.reset();
       this.particleCountsExpandedProperty.reset();
+      this.particleToolsExpandedProperty.reset();
     }
   }
 
-  return gasProperties.register( 'IdealViewProperties', IdealViewProperties );
+  return gasProperties.register( 'EnergyViewProperties', EnergyViewProperties );
 } );

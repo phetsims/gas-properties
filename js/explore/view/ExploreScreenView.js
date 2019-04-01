@@ -13,13 +13,13 @@ define( require => {
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const ExploreControlPanel = require( 'GAS_PROPERTIES/explore/view/ExploreControlPanel' );
+  const ExploreViewProperties = require( 'GAS_PROPERTIES/explore/view/ExploreViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
-  const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
@@ -57,7 +57,7 @@ define( require => {
       const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
 
       // view-specific Properties
-      const viewProperties = new IdealViewProperties();
+      const viewProperties = new ExploreViewProperties();
 
       // Parent for combo box popup lists
       const comboBoxListParent = new Node();

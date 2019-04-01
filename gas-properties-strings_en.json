@@ -94,5 +94,17 @@
   },
   "kineticEnergy": {
     "value": "Kinetic Energy"
+  },
+  "particleTools": {
+    "value": "ParticleTools"
+  },
+  "collisions": {
+    "value": "Collisions"
+  },
+  "controlTemperature": {
+    "value": "Control Temperature"
+  },
+  "temperature": {
+    "value": "Temperature"
   }
 }

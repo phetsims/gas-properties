@@ -9,8 +9,8 @@ define( require => {
   'use strict';
 
   // modules
-  const Checkbox = require( 'SUN/Checkbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
@@ -22,7 +22,6 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const SunConstants = require( 'SUN/SunConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
@@ -50,11 +49,7 @@ define( require => {
         stroke: null
       }, options );
 
-      const checkboxLabel = new Text( averageSpeedString, {
-        font: GasPropertiesConstants.CONTROL_FONT,
-        fill: GasPropertiesColorProfile.controlTextFillProperty
-      } );
-      const checkbox = new Checkbox( checkboxLabel, averageSpeedVisibleProperty );
+      const checkbox = new GasPropertiesCheckbox( averageSpeedString, averageSpeedVisibleProperty );
 
       // icons for the particles
       const heavyParticleNode = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );

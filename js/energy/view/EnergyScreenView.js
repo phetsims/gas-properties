@@ -11,25 +11,29 @@ define( require => {
   // modules
   const AverageSpeedPanel = require( 'GAS_PROPERTIES/energy/view/AverageSpeedPanel' );
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const EnergyControlPanel = require( 'GAS_PROPERTIES/energy/view/EnergyControlPanel' );
+  const EnergyViewProperties = require( 'GAS_PROPERTIES/energy/view/EnergyViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
-  const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
+  const ParticleToolsAccordionBox = require( 'GAS_PROPERTIES/energy/view/ParticleToolsAccordionBox' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
+  const Range = require( 'DOT/Range' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -60,7 +64,7 @@ define( require => {
       const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
 
       // view-specific Properties
-      const viewProperties = new IdealViewProperties();
+      const viewProperties = new EnergyViewProperties();
 
       // Parent for combo box popup lists
       const comboBoxListParent = new Node();
@@ -82,6 +86,22 @@ define( require => {
         } );
       this.addChild( controlPanel );
 
+      // Particle Tools accordion box
+      const particleToolsAccordionBox = new ParticleToolsAccordionBox(
+        //TODO move collisionsEnabledProperty to model
+        new BooleanProperty( true ),
+        //TODO move controlTemperatureEnabledProperty to model
+        new BooleanProperty( true ),
+        //TODO move initialTemperatureProperty to model
+        new NumberProperty( 50, { range: new Range( 50, 1000 ) } ), {
+          fixedWidth: PANEL_WIDTH,
+          expandedProperty: viewProperties.particleToolsExpandedProperty,
+          right: controlPanel.right,
+          top: controlPanel.bottom + 15
+        }
+      );
+      this.addChild( particleToolsAccordionBox );
+
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
         model.numberOfHeavyParticlesProperty,
@@ -89,8 +109,8 @@ define( require => {
         model.modelViewTransform, {
           fixedWidth: PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
-          right: controlPanel.right,
-          top: controlPanel.bottom + 15
+          right: particleToolsAccordionBox.right,
+          top: particleToolsAccordionBox.bottom + 15
         } );
       this.addChild( particleCountsAccordionBox );
 
