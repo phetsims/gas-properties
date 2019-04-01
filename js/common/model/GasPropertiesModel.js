@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Ideal' screen.
+ * Base class for models in the Intro, Explore, and Energy screens.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -46,7 +46,7 @@ define( require => {
     ]
   );
 
-  class IdealModel {
+  class GasPropertiesModel {
 
     constructor() {
 
@@ -449,5 +449,5 @@ define( require => {
     return averageSpeed;
   }
 
-  return gasProperties.register( 'IdealModel', IdealModel );
+  return gasProperties.register( 'GasPropertiesModel', GasPropertiesModel );
 } );
