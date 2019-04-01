@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO should this Enumeration be a static field of some class?
 /**
  * Enumeration for which particle type.
  *
