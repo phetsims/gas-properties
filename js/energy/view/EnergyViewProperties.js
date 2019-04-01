@@ -11,6 +11,7 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
   const Property = require( 'AXON/Property' );
 
@@ -19,22 +20,22 @@ define( require => {
     constructor() {
 
       // @public whether the Average Speed display is visible
-      this.averageSpeedVisibleProperty = new BooleanProperty( true );
+      this.averageSpeedVisibleProperty = new BooleanProperty( true || GasPropertiesQueryParameters.checked );
 
       // @public whether the Speed accordion box is expanded
-      this.speedExpandedProperty = new BooleanProperty( true );
+      this.speedExpandedProperty = new BooleanProperty( true || GasPropertiesQueryParameters.expanded );
 
       // @public whether the Kinetic Energy accordion box is expanded
-      this.kineticEnergyExpandedProperty = new BooleanProperty( false );
+      this.kineticEnergyExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded ) ;
 
       // @public whether dimensional arrows are visible for the width of the container
-      this.sizeVisibleProperty = new BooleanProperty( false );
+      this.sizeVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
 
       // @public whether the 'Particles Counts' accordion box is expanded
-      this.particleCountsExpandedProperty = new BooleanProperty( false );
+      this.particleCountsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
 
       // @public whether the 'Particles Tools' accordion box is expanded
-      this.particleToolsExpandedProperty = new BooleanProperty( false );
+      this.particleToolsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
 
       // @public the particle type that will be dispensed by the bicycle pump
       this.particleTypeProperty = new Property( ParticleTypeEnum.HEAVY, {

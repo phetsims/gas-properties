@@ -17,6 +17,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const SpeedHistogram = require( 'GAS_PROPERTIES/energy/view/SpeedHistogram' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -42,8 +43,8 @@ define( require => {
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
 
       // @private
-      const heavyVisibleProperty = new BooleanProperty( false );
-      const lightVisibleProperty = new BooleanProperty( false );
+      const heavyVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
+      const lightVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
 
       const histogram = new SpeedHistogram( model, heavyVisibleProperty, lightVisibleProperty );
 
