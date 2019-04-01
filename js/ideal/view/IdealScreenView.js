@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const AverageSpeedPanel = require( 'GAS_PROPERTIES/energy/view/AverageSpeedPanel' );
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
@@ -21,7 +20,6 @@ define( require => {
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
-  const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
@@ -34,7 +32,6 @@ define( require => {
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const SizeNode = require( 'GAS_PROPERTIES/common/view/SizeNode' );
-  const SpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/SpeedAccordionBox' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
@@ -219,31 +216,6 @@ define( require => {
         } );
       this.addChild( heaterCoolerNode );
 
-      //TODO move to EnergyScreenView
-      // Average Speed
-      const averageSpeedPanel = new AverageSpeedPanel( viewProperties.averageSpeedVisibleProperty,
-        model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
-          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: 10
-        } );
-      this.addChild( averageSpeedPanel );
-
-      //TODO move to EnergyScreenView
-      // Speed accordion box with histogram and related controls
-      const speedAccordionBox = new SpeedAccordionBox( model, {
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: averageSpeedPanel.bottom + 10
-      } );
-      this.addChild( speedAccordionBox );
-
-      //TODO move to EnergyScreenView
-      // Kinetic Energy accordion box with histogram
-      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: speedAccordionBox.bottom + 10
-      } );
-      this.addChild( kineticEnergyAccordionBox );
-
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
         dragBoundsProperty: this.visibleBoundsProperty
@@ -276,8 +248,6 @@ define( require => {
         listener: () => {
           model.reset();
           viewProperties.reset();
-          speedAccordionBox.reset(); //TODO move to Energy screen
-          kineticEnergyAccordionBox.reset(); //TODO move to Energy screen
         },
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

@@ -10,19 +10,16 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
 
-  class ExploreModel {
+  class ExploreModel extends GasPropertiesModel {
 
     constructor() {
-      //TODO constructor
-    }
+      super();
 
-    reset() {
-      //TODO reset
-    }
-
-    step( dt ) {
-      //TODO step
+      this.holdConstantProperty.lazyLink( holdConstant => {
+         throw new Error( 'holdConstant is fixed in Explore screen' );
+      } );
     }
   }
 

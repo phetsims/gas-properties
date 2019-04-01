@@ -10,19 +10,19 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
+  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
 
-  class EnergyModel {
+  class EnergyModel extends GasPropertiesModel {
 
     constructor() {
-      //TODO constructor
-    }
+      super( {
+        holdConstant: HoldConstantEnum.VOLUME
+      } );
 
-    reset() {
-      //TODO reset
-    }
-
-    step( dt ) {
-      //TODO step
+      this.holdConstantProperty.lazyLink( holdConstant => {
+         throw new Error( 'holdConstant is fixed in Energy screen' );
+      } );
     }
   }
 

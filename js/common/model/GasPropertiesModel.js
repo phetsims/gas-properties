@@ -14,12 +14,12 @@ define( require => {
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
+  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -36,19 +36,13 @@ define( require => {
   const PUMP_DISPERSION_ANGLE = Math.PI / 2; // radians, used to compute initial velocity angle for particles
   const EMPTY_INITIAL_TEMPERATURE = 300; // K, uses to compute velocity magnitude for particles added to empty container
 
-  // Enumeration for which quantity to hold constant
-  const HoldConstantEnum = new Enumeration( [
-      'NOTHING',
-      'VOLUME',
-      'TEMPERATURE',
-      'PRESSURE_T', // change temperature (T) to maintain constant pressure
-      'PRESSURE_V' // change volume (V) to maintain constant pressure
-    ]
-  );
-
   class GasPropertiesModel {
 
-    constructor() {
+    constructor( options ) {
+
+      options = _.extend( {
+        holdConstant: HoldConstantEnum.NOTHING
+      }, options );
 
       // @public (read-only) bounds of the entire space that the model knows about.
       // This corresponds to the browser window, and doesn't have a valid value until the view is created.
@@ -77,7 +71,7 @@ define( require => {
 
       //TODO holdConstantProperty is exposed only in the Intro screen. How to handle for other screen?
       // @public the quantity to hold constant
-      this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, HoldConstantEnum.NOTHING );
+      this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, options.holdConstant );
 
       // @public (read-only)
       this.heavyParticles = []; // {HeavyParticle[]} inside the container
