@@ -45,7 +45,7 @@ define( require => {
         contentXMargin: 0,
         titleNode: new Text( particleCountsString, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColorProfile.titleTextFillProperty
+          fill: GasPropertiesColorProfile.textFillProperty
         } )
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
 

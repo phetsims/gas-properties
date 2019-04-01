@@ -54,7 +54,7 @@ define( require => {
         contentXMargin: 0,
         titleNode: new Text( particleToolsString, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColorProfile.titleTextFillProperty
+          fill: GasPropertiesColorProfile.textFillProperty
         } )
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
 
@@ -71,7 +71,7 @@ define( require => {
 
       // Major ticks for temperature slider
       const tickTextOptions = {
-        fill: GasPropertiesColorProfile.titleTextFillProperty,
+        fill: GasPropertiesColorProfile.textFillProperty,
         font: GasPropertiesConstants.CONTROL_FONT
       };
       const majorTicks = [
@@ -89,7 +89,7 @@ define( require => {
       const temperatureControl = new NumberControl( temperatureString, initialTemperatureProperty, initialTemperatureProperty.range, {
         layoutFunction: NumberControl.createLayoutFunction4(),
         titleNodeOptions: {
-          fill: GasPropertiesColorProfile.titleTextFillProperty,
+          fill: GasPropertiesColorProfile.textFillProperty,
           font: GasPropertiesConstants.CONTROL_FONT
         },
         numberDisplayOptions: {
@@ -100,9 +100,9 @@ define( require => {
         },
         sliderOptions: {
           trackSize: new Dimension2( 120, 5 ),
-          trackStroke: GasPropertiesColorProfile.titleTextFillProperty,
+          trackStroke: GasPropertiesColorProfile.textFillProperty,
           majorTicks: majorTicks,
-          majorTickStroke: GasPropertiesColorProfile.titleTextFillProperty
+          majorTickStroke: GasPropertiesColorProfile.textFillProperty
         },
         maxWidth: maxContentWidth
       } );

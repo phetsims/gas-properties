@@ -55,14 +55,8 @@ define( require => {
       projector: 'black'
     },
 
-    // fill for title text on control panels and accordion boxes
-    titleTextFill: {
-      default: 'white',
-      projector: 'black'
-    },
-
-    // fill for text on UI controls (checkboxes, radio buttons, etc.)
-    controlTextFill: {
+    // default fill for text
+    textFill: {
       default: 'white',
       projector: 'black'
     },

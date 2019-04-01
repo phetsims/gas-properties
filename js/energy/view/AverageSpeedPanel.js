@@ -88,7 +88,7 @@ define( require => {
         align: 'right',
         noValueAlign: 'left',
         font: new PhetFont( 16 ),
-        numberFill: GasPropertiesColorProfile.controlTextFillProperty,
+        numberFill: GasPropertiesColorProfile.textFillProperty,
         backgroundFill: null,
         backgroundStroke: null
       };

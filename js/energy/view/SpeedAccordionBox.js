@@ -38,7 +38,7 @@ define( require => {
         titleNode: new Text( speedString, {
           //TODO maxWidth
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColorProfile.titleTextFillProperty
+          fill: GasPropertiesColorProfile.textFillProperty
         } )
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
 

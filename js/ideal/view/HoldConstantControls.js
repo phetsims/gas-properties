@@ -31,7 +31,7 @@ define( require => {
   };
   const TEXT_OPTIONS = {
     font: GasPropertiesConstants.CONTROL_FONT,
-    fill: GasPropertiesColorProfile.controlTextFillProperty
+    fill: GasPropertiesColorProfile.textFillProperty
   };
   
   class HoldConstantControls extends VBox {
@@ -46,7 +46,7 @@ define( require => {
 
       const titleNode = new Text( holdConstantString, {
         font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColorProfile.titleTextFillProperty
+        fill: GasPropertiesColorProfile.textFillProperty
       } );
 
       const nothingRadioButton = new AquaRadioButton( holdConstantProperty, holdConstantProperty.enumeration.NOTHING,

@@ -43,7 +43,7 @@ define( require => {
 
         // options for the RichText nodes that label the axes
         axisTextOptions: {
-          fill: GasPropertiesColorProfile.titleTextFillProperty,
+          fill: GasPropertiesColorProfile.textFillProperty,
           font: GasPropertiesConstants.AXIS_LABEL_FONT
         }
       }, options );
