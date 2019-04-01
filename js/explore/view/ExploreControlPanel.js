@@ -10,14 +10,15 @@ define( require => {
 
   // modules
   const CollisionCounterCheckbox = require( 'GAS_PROPERTIES/common/view/CollisionCounterCheckbox' );
-  const FixedWidthPanel = require( 'GAS_PROPERTIES/common/view/FixedWidthPanel' );
+  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const Panel = require( 'SUN/Panel' );
   const SizeCheckbox = require( 'GAS_PROPERTIES/common/view/SizeCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
-  class ExploreControlPanel extends FixedWidthPanel {
+  class ExploreControlPanel extends Panel {
 
     /**
      * @param {BooleanProperty} sizeVisibleProperty
@@ -41,7 +42,11 @@ define( require => {
         ]
       } );
 
-      super( content, options );
+      const fixedWidthNode = new FixedWidthNode( content, {
+        fixedWidth: options.fixedWidth - ( 2 * options.xMargin )
+      } );
+
+      super( fixedWidthNode, options );
     }
   }
 
