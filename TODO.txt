@@ -47,6 +47,7 @@ DESIGN QUESTIONS (VIEW)
 * What is constrainValue for Control Temperature control?
 * Consider making Average Speed an AccordionBox, it won't take any more space, and will provide consistent show/hide
 * Consider a different color scheme for controls and panels, there's too much 'black' negative space
+* Energy: lid handle collides with Speed accordion box
 
 REFERENCES
 Is this a better collision model?
