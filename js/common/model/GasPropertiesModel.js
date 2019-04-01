@@ -75,6 +75,7 @@ define( require => {
       // @public are the time controls (play, pause, step) enabled?
       this.isTimeControlsEnabledProperty = new BooleanProperty( true );
 
+      //TODO holdConstantProperty is exposed only in the Intro screen. How to handle for other screen?
       // @public the quantity to hold constant
       this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, HoldConstantEnum.NOTHING );
 
