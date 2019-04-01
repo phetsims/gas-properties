@@ -32,6 +32,7 @@ define( require => {
         fixedWidth: 250
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
+      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       const content = new VBox( {
         align: 'left',
         spacing: 10,

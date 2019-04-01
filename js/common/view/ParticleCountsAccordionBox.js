@@ -60,6 +60,7 @@ define( require => {
       const maxContentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
       const strut = new HStrut( maxContentWidth );
 
+      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       const content = new VBox( {
         maxWidth: maxContentWidth,
         align: 'left',

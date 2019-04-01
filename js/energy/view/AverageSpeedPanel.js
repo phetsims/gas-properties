@@ -98,6 +98,7 @@ define( require => {
       const heavyNumberDisplay = new NumberDisplay( heavyMetersPerSecondProperty, numberDisplayRange, numberDisplayOptions );
       const lightNumberDisplay = new NumberDisplay( lightMetersPerSecondProperty, numberDisplayRange, numberDisplayOptions );
 
+      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       // layout icons and NumberDisplays in a grid
       const vBox = new VBox( {
         children: [
@@ -107,6 +108,7 @@ define( require => {
         align: 'left'
       } );
 
+      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       // panel content
       const contentNode = new VBox( {
         children: [ checkbox, vBox ]
