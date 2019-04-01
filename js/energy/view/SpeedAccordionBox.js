@@ -42,6 +42,7 @@ define( require => {
         } )
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
 
+      //TODO should these Properties live somewhere else?
       // @private
       const heavyVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
       const lightVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
