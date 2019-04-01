@@ -79,7 +79,9 @@ define( require => {
         spacing: 25
       } );
 
+      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       const contentNode = new VBox( _.extend( {}, GasPropertiesConstants.VBOX_OPTIONS, {
+        align: 'center',
         children: [ histogram, checkboxes ]
       } ) );
 
