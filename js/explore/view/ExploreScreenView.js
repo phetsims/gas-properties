@@ -112,6 +112,11 @@ define( require => {
         }
       ] );
 
+      // Cancel interaction with the pump when particle type changes.
+      viewProperties.particleTypeProperty.link( particleType => {
+        bicyclePumpsToggleNode.interruptSubtreeInput();
+      } );
+
       // Radio buttons for selecting particle type
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( viewProperties.particleTypeProperty,
         model.modelViewTransform );
