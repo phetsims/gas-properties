@@ -17,7 +17,7 @@ define( require => {
 
     constructor() {
       super( {
-        holdConstant: HoldConstantEnum.VOLUME //TODO is this correct/sufficient?
+        holdConstant: HoldConstantEnum.NOTHING //TODO is this correct/sufficient?
       } );
 
       this.holdConstantProperty.lazyLink( holdConstant => {
