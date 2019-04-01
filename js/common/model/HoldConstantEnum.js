@@ -13,13 +13,12 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
   const HoldConstantEnum = new Enumeration( [
-        'NOTHING',
-        'VOLUME',
-        'TEMPERATURE',
-        'PRESSURE_T', // change temperature (T) to maintain constant pressure
-        'PRESSURE_V' // change volume (V) to maintain constant pressure
-      ]
-    );
+    'NOTHING',
+    'VOLUME',
+    'TEMPERATURE',
+    'PRESSURE_T', // change temperature (T) to maintain constant pressure
+    'PRESSURE_V' // change volume (V) to maintain constant pressure
+  ] );
 
   return gasProperties.register( 'HoldConstantEnum', HoldConstantEnum );
 } );
