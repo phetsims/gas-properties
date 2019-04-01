@@ -11,7 +11,6 @@ define( require => {
   // modules
   const AverageSpeedPanel = require( 'GAS_PROPERTIES/energy/view/AverageSpeedPanel' );
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const EnergyControlPanel = require( 'GAS_PROPERTIES/energy/view/EnergyControlPanel' );
@@ -25,7 +24,6 @@ define( require => {
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const ParticleToolsAccordionBox = require( 'GAS_PROPERTIES/energy/view/ParticleToolsAccordionBox' );
@@ -33,7 +31,6 @@ define( require => {
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
-  const Range = require( 'DOT/Range' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -89,10 +86,8 @@ define( require => {
       // Particle Tools accordion box
       const particleToolsAccordionBox = new ParticleToolsAccordionBox(
         model.collisionDetector.particleParticleCollisionsEnabledProperty,
-        //TODO move controlTemperatureEnabledProperty to model
-        new BooleanProperty( true ),
-        //TODO move initialTemperatureProperty to model
-        new NumberProperty( 50, { range: new Range( 50, 1000 ) } ), {
+        model.controlTemperatureEnabledProperty,
+        model.initialTemperatureProperty, {
           fixedWidth: PANEL_WIDTH,
           expandedProperty: viewProperties.particleToolsExpandedProperty,
           right: controlPanel.right,

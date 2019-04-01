@@ -99,6 +99,15 @@ define( require => {
         this.numberOfParticlesListener( newValue, oldValue, this.lightParticles, LightParticle );
       } );
 
+      // @public whether initial temperature is controlled by the user or determined by what's in the container
+      this.controlTemperatureEnabledProperty = new BooleanProperty( false );
+
+      // @public initial temperature of particles added to the container, in K.
+      // Ignored if !controlTemperatureEnabledProperty.value
+      this.initialTemperatureProperty = new NumberProperty( 300, {
+        range: new Range( 50, 1000 )
+      } );
+
       const averageSpeedPropertyOptions = {
         isValidValue: value => ( value === null || typeof value === 'number' )
       };
