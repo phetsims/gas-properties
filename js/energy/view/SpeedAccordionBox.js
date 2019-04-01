@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO maintain fixed width
 /**
  * SpeedAccordionBox contains the speed histogram and related controls.
  * 

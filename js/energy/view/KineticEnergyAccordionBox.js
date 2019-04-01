@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO maintain fixed width
 /**
  * KineticEnergyAccordionBox contains the kinetic energy histogram.
  *
