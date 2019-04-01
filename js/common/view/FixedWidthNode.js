@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO investigate a better way to ensure a fixed size for Panels and AccordionBoxes
 /**
  * A Node that has a fixed width.
  *
