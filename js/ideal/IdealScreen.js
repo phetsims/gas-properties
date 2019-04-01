@@ -11,7 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
+  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealScreenView = require( 'GAS_PROPERTIES/ideal/view/IdealScreenView' );
 
   // strings
@@ -22,7 +22,7 @@ define( require => {
     constructor() {
       super(
         // createModel
-        () => new GasPropertiesModel(),
+        () => new IdealModel(),
 
         // createView
         model => new IdealScreenView( model ), {
