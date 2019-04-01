@@ -28,6 +28,8 @@ define( require => {
       options = _.extend( {
         textFill: GasPropertiesColorProfile.textFillProperty,
         font: GasPropertiesConstants.CONTROL_FONT,
+        checkboxColor: GasPropertiesColorProfile.textFillProperty,
+        checkboxColorBackground: GasPropertiesColorProfile.panelFillProperty,
         icon: null // {Node|null} optional icon, to the right of text
       }, options );
 
