@@ -10,18 +10,17 @@ define( require => {
 
   // modules
   const CollisionCounterCheckbox = require( 'GAS_PROPERTIES/common/view/CollisionCounterCheckbox' );
+  const FixedWidthPanel = require( 'GAS_PROPERTIES/common/view/FixedWidthPanel' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantControls = require( 'GAS_PROPERTIES/ideal/view/HoldConstantControls' );
   const HSeparator = require( 'SUN/HSeparator' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Panel = require( 'SUN/Panel' );
   const SizeCheckbox = require( 'GAS_PROPERTIES/common/view/SizeCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
-  class IdealControlPanel extends Panel {
+  class IdealControlPanel extends FixedWidthPanel {
 
     /**
      * @param {StringProperty} holdConstantProperty
@@ -34,20 +33,12 @@ define( require => {
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
       options = _.extend( {
-        fixedWidth: 250,
-        xMargin: 0 // set by GasPropertiesConstants.PANEL_OPTIONS
+        fixedWidth: 250
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
-      // force the Panel to be a fixed width
-      assert && assert( !options.hasOwnProperty( 'maxWidth' ), 'ParticleCountsAccordionBox sets maxWidth' );
-      options = _.extend( {
-        maxWidth: options.fixedWidth
-      }, options );
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      // constrain all parts of content to separatorWidth
-      const content = new Node();
-      content.addChild( new VBox( {
+      const content = new VBox( {
         align: 'left',
         spacing: 10,
         children: [
@@ -60,7 +51,7 @@ define( require => {
           new StopwatchCheckbox( stopwatchVisibleProperty ),
           new CollisionCounterCheckbox( collisionCounterVisibleProperty )
         ]
-      } ) );
+      } );
 
       super( content, options );
     }
