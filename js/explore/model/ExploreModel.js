@@ -11,14 +11,17 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
+  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
 
   class ExploreModel extends GasPropertiesModel {
 
     constructor() {
-      super();
+      super( {
+        holdConstant: HoldConstantEnum.VOLUME //TODO is this correct/sufficient?
+      } );
 
       this.holdConstantProperty.lazyLink( holdConstant => {
-         throw new Error( 'holdConstant is fixed in Explore screen' );
+        throw new Error( 'holdConstant is fixed in Explore screen' );
       } );
     }
   }
