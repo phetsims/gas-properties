@@ -29,6 +29,7 @@ define( require => {
 
       // Hide the slider when temperature is held constant
       holdConstantProperty.link( holdConstant => {
+        this.interruptSubtreeInput(); // cancel interaction
         this.slider.visible = ( holdConstant !== holdConstantProperty.enumeration.TEMPERATURE &&
                                 holdConstant !== holdConstantProperty.enumeration.PRESSURE_T );
       } );
