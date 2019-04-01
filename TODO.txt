@@ -4,18 +4,17 @@ UP NEXT
 
 Factor out ScreenView base class for screens 1-3
 
-Intro: class Lid
-Intro: clean up particle arrays in IdealModel
-Intro: optimize number of iterations over particle arrays
-Intro: hold constant
-
-Explore: moving wall does not pause animation and does work on particles
-
-Energy: fixed container width
 Energy: Speed histogram
 Energy: KE histogram
 Energy: turn particle collisions on/off, CollisionDetector.particleCollisionsEnabledProperty
 Energy: control temperature of particles that are added
+
+Intro: hold constant
+Intro: class Lid
+Intro: clean up particle arrays in IdealModel
+Intro: optimize number of iterations over particle arrays
+
+Explore: moving wall does not pause animation and does work on particles
 
 Diffusion: lots of new/different features
 
