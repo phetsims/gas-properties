@@ -86,7 +86,7 @@ define( require => {
       const numberDisplayOptions = {
         valuePattern: valueMetersPerSecondString,
         noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
-        decimalPlaces: 1,
+        decimalPlaces: 0,
         align: 'right',
         noValueAlign: 'left',
         font: new PhetFont( 16 ),
