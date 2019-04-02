@@ -43,8 +43,8 @@ define( require => {
   const Y_SPACING = 5;
   const BEZEL_WIDTH = 6;
   const NUMBER_DISPLAY_RANGE = new Range( 0, 1E6 );
-  const FONT = new PhetFont( 14 );
-  const TITLE_FONT = new PhetFont( 16 );
+  const CONTROL_FONT = new PhetFont( 14 );
+  const LABEL_FONT = new PhetFont( 16 );
 
   class CollisionCounterNode extends Node {
 
@@ -60,13 +60,13 @@ define( require => {
       }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
-        font: TITLE_FONT
+        font: LABEL_FONT
       } );
 
       const valueDisplay = new NumberDisplay( collisionCounter.numberOfCollisionsProperty, NUMBER_DISPLAY_RANGE, {
         backgroundFill: 'white',
         backgroundStroke: 'black',
-        font: FONT,
+        font: CONTROL_FONT,
         xMargin: 8,
         yMargin: 4,
         cornerRadius: 3
@@ -75,7 +75,7 @@ define( require => {
       const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty );
 
       const samplePeriodTextNode = new Text( samplePeriodString, {
-        font: TITLE_FONT,
+        font: LABEL_FONT,
         left: X_MARGIN
       } );
 
@@ -88,7 +88,7 @@ define( require => {
           units: picosecondsString
         } );
         const node = new Text( samplePeriodString, {
-          font: FONT
+          font: CONTROL_FONT
         } );
         return new ComboBoxItem( node, samplePeriod );
       } );
