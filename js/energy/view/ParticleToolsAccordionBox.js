@@ -115,7 +115,7 @@ define( require => {
 
       const vBox = new VBox( {
         align: 'left',
-        spacing: 15,
+        spacing: 12,
         children: [ collisionsCheckbox, controlTemperatureCheckbox, temperatureControl ]
       } );
 

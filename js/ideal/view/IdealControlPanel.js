@@ -39,10 +39,9 @@ define( require => {
 
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       const content = new VBox( {
         align: 'left',
-        spacing: 10,
+        spacing: 12,
         children: [
           new HoldConstantControls( holdConstantProperty, { maxWidth: separatorWidth } ),
           new HSeparator( separatorWidth, {

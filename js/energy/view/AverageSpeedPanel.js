@@ -98,19 +98,19 @@ define( require => {
       const heavyNumberDisplay = new NumberDisplay( heavyMetersPerSecondProperty, numberDisplayRange, numberDisplayOptions );
       const lightNumberDisplay = new NumberDisplay( lightMetersPerSecondProperty, numberDisplayRange, numberDisplayOptions );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       // layout icons and NumberDisplays in a grid
       const vBox = new VBox( {
+        align: 'left',
         children: [
           new HBox( { children: [ heavyParticleNode, heavyNumberDisplay ] } ),
           new HBox( { children: [ lightParticleNode, lightNumberDisplay ] } )
-        ],
-        align: 'left'
+        ]
       } );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       // panel content
       const contentNode = new VBox( {
+        align: 'center',
+        spacing: 5,
         children: [ checkbox, vBox ]
       } );
 

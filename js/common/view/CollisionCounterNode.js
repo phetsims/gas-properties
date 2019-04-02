@@ -102,7 +102,6 @@ define( require => {
         cornerRadius: 5
       } );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       // all of the stuff that appear on the counter
       const content = new VBox( {
         align: 'center',

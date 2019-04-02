@@ -32,10 +32,9 @@ define( require => {
         fixedWidth: 100
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
       const content = new VBox( {
         align: 'left',
-        spacing: 10,
+        spacing: 12,
         children: [
           new SizeCheckbox( sizeVisibleProperty ),
           new StopwatchCheckbox( stopwatchVisibleProperty ),
