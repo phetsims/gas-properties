@@ -27,7 +27,7 @@ define( require => {
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const ParticleToolsAccordionBox = require( 'GAS_PROPERTIES/energy/view/ParticleToolsAccordionBox' );
-  const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
+  const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
@@ -113,7 +113,7 @@ define( require => {
 
         // Bicycle pump for heavy particles
         {
-          value: ParticleTypeEnum.HEAVY,
+          value: ParticleType.HEAVY,
           node: new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
             color: GasPropertiesColorProfile.heavyParticleColorProperty
           } )
@@ -121,7 +121,7 @@ define( require => {
 
         // Bicycle pump for light particles
         {
-          value: ParticleTypeEnum.LIGHT,
+          value: ParticleType.LIGHT,
           node: new BicyclePumpNode( model.numberOfLightParticlesProperty, {
             color: GasPropertiesColorProfile.lightParticleColorProperty
           } )

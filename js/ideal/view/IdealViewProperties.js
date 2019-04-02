@@ -12,7 +12,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const ParticleTypeEnum = require( 'GAS_PROPERTIES/common/model/ParticleTypeEnum' );
+  const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const Property = require( 'AXON/Property' );
 
   class IdealViewProperties {
@@ -26,8 +26,8 @@ define( require => {
       this.particleCountsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
 
       // @public the particle type that will be dispensed by the bicycle pump
-      this.particleTypeProperty = new Property( ParticleTypeEnum.HEAVY, {
-        isValidValue: value => ParticleTypeEnum.includes( value )
+      this.particleTypeProperty = new Property( ParticleType.HEAVY, {
+        isValidValue: value => ParticleType.includes( value )
       } );
     }
 
