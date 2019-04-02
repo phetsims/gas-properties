@@ -12,7 +12,7 @@ define( require => {
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
-  const ExploreControlPanel = require( 'GAS_PROPERTIES/explore/view/ExploreControlPanel' );
+  const ExploreToolsPanel = require( 'GAS_PROPERTIES/explore/view/ExploreToolsPanel' );
   const ExploreViewProperties = require( 'GAS_PROPERTIES/explore/view/ExploreViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -69,8 +69,8 @@ define( require => {
         this.addChild( this.regionsNode );
       }
 
-      // Control panel at upper right
-      const controlPanel = new ExploreControlPanel(
+      // Panel at upper right
+      const toolsPanel = new ExploreToolsPanel(
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
@@ -78,7 +78,7 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      this.addChild( controlPanel );
+      this.addChild( toolsPanel );
 
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
@@ -87,8 +87,8 @@ define( require => {
         model.modelViewTransform, {
           fixedWidth: PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
-          right: controlPanel.right,
-          top: controlPanel.bottom + 15
+          right: toolsPanel.right,
+          top: toolsPanel.bottom + 15
         } );
       this.addChild( particleCountsAccordionBox );
 

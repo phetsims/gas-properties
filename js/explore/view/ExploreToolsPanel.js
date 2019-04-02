@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Control panel that appears in the upper-right corner of the 'Energy' screen.
+ * Panel that appears in the upper-right corner of the 'Explore' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const CollisionCounterCheckbox = require( 'GAS_PROPERTIES/common/view/CollisionCounterCheckbox' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -17,18 +18,18 @@ define( require => {
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
-  class EnergyControlPanel extends Panel {
+  class ExploreToolsPanel extends Panel {
 
     /**
      * @param {BooleanProperty} sizeVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
+     * @param {BooleanProperty} collisionCounterVisibleProperty
      * @param {Object} [options]
      */
-    constructor( sizeVisibleProperty, stopwatchVisibleProperty, options ) {
+    constructor( sizeVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
       options = _.extend( {
-        fixedWidth: 250,
-        xMargin: 0
+        fixedWidth: 250
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
@@ -37,7 +38,8 @@ define( require => {
         spacing: 10,
         children: [
           new SizeCheckbox( sizeVisibleProperty ),
-          new StopwatchCheckbox( stopwatchVisibleProperty )
+          new StopwatchCheckbox( stopwatchVisibleProperty ),
+          new CollisionCounterCheckbox( collisionCounterVisibleProperty )
         ]
       } );
 
@@ -49,6 +51,6 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'EnergyControlPanel', EnergyControlPanel );
+  return gasProperties.register( 'ExploreToolsPanel', ExploreToolsPanel );
 } );
  
