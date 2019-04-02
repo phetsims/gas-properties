@@ -14,6 +14,9 @@ define( require => {
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Node = require( 'SCENERY/nodes/Node' );
 
+  // constants
+  const ALIGN_VALUES = [ 'left', 'right', 'center' ];
+
   class FixedWidthNode extends Node {
 
     /**
@@ -27,6 +30,8 @@ define( require => {
         align: 'left'
       }, options );
 
+      assert && assert( ALIGN_VALUES.includes( options.align ), `invalid align: ${options.align}` );
+
       child.maxWidth = options.fixedWidth;
       const strut = new HStrut( options.fixedWidth, { pickable: false } );
 
@@ -34,6 +39,16 @@ define( require => {
       options = _.extend( {
         children: [ strut, child ]
       }, options );
+
+      if ( options.align === 'left' ) {
+        child.left = strut.left;
+      }
+      else if ( options.align === 'right' ) {
+        child.right = strut.right;
+      }
+      else {
+        child.centerX = strut.centerX;
+      }
 
       super( options );
     }
