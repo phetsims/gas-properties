@@ -2,6 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
+ComboBoxDisplay is buggy when number initially exceeds range
 Factor out ScreenView base class for screens 1-3
 
 Energy: Speed histogram
@@ -18,37 +19,65 @@ Diffusion: lots of new/different features
 
 DESIGN FYI
 * Sample period for collision counter will not be exact, but should be close enough, see ?log
+FINE
 * Container size indicator is now the inside dimension
+GOOD
 * Interaction with resize handle and lid are mutually exclusive; resize handle cancels and disables lid
+FINE
 * On the speed histogram, I used icons and horizontal layout for the checkboxes
+OK
 * Confirm that how opening size changes during a drag cycle is as desired.
+OK
 * Confirm that a simple rectangle is OK for showing previous bounds of the container.
+OK
 * Confirm that what Average Speed shows for empty container is as desired.
+OK
 * Choose a value for ?redistribute
+LIKES DEFAULT, LEAVE QUERY PARAM
 * Choose a value for ?heatCool
+MAKE AN ISSUE, ASSIGN TO AR
 
 DESIGN QUESTIONS (MODEL)
 * Temperature model is T = (2/3)KE/k, where KE is the average KE of all particles in the container. Java is scale * KE / N.
+GOOD
 * How to convert temperature to K?
+ALREADY IN K
 * Is P = NkT/V sufficient for computing pressure? Why does Java version use a complicated 'slice' model?
+STICK WITH THIS FOR NOW, NOT SURE ABOUT JAVA VERSION
 * How to convert pressure to kPa?
+>>>>>>> WE WORKED OUT THE CONVERSION FACTOR, BUT PRESSURE IS WAY TOO LARGE. SHOULD BE ZERO UNTIL PARTICLES HIT WALLS. REVISIT JAVA.
 * Is it reasonable to treat the Explore screen like holdConstant=None?
+YES
 * Is it reasonable to treat the Energy screen like holdConstant=Volume?
+YES
 
 DESIGN QUESTIONS (VIEW)
 * Describe 'blow lid off' for new lid design. When? How?
+START WITH STRAIGHT UP, FULL OPENING IN TOP OF CONTAINER. RETURN LID FULLY CLOSED.
 * Why are we showing time to 0.01 ps in the stopwatch? What is the max time?
+TO GIVE THE FEELING THAT'S IT'S DOING SOMETHING, 999.99 max is OK.
 * "Control Temperature" checkbox doesn't make it clear that we're controlling temperature of particles added. Maybe "Initial Temperature"?
+YES "Initial Temperature"
 * Why do we need a decimal place for Average Speed?
+DROP DECIMAL
 * Swap order of bottom 2 'Hold Constant' radio buttons?
+OK
 * Average Speed display updates like crazy, do we need to smooth this out like the Speed histogram?
+
 * Histograms: bin width, range of axes, scaling of axes, 'data out of range' indicator in Java
+VERTICAL SCALE WITH INDICATOR LINES, FIXED NUMBER OF BINS, TEMPORARY OUT OF RANGE INDICATOR
 * What is constrainValue for Control Temperature control?
+THUMB SNAPS TO 50K INCREMENTS
 * Consider making Average Speed an AccordionBox, it won't take any more space, and will provide consistent show/hide
+TRY IT
 * Consider a different color scheme for controls and panels, there's too much 'black' negative space
+WILL DO
 * Energy: lid handle collides with Speed accordion box
+LEFT EDGE OF HANDLE CONSTRAINED TO LEFT EDGE OF CONTAINER
 * What is the max of the pressure gauge?
+TBD
 * What is the max of the thermometer?
+TBD
 
 REFERENCES
 Is this a better collision model?
