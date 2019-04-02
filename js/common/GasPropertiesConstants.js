@@ -26,6 +26,7 @@ define( require => {
 
     MODEL_TIME_STEP: 0.2, // ps
 
+    // Defaults for all AccordionBox instances
     ACCORDION_BOX_OPTIONS: {
       cornerRadius: PANEL_CORNER_RADIUS,
       contentXMargin: PANEL_X_MARGIN,
@@ -41,6 +42,7 @@ define( require => {
       }
     },
 
+    // Defaults for all Panel instances
     PANEL_OPTIONS: {
       align: 'left',
       cornerRadius: PANEL_CORNER_RADIUS,
@@ -50,7 +52,8 @@ define( require => {
       stroke: GasPropertiesColorProfile.panelStrokeProperty
     },
 
-    COMBO_BOX_OPTIONS: {
+    // Defaults for all ComboBoxDisplay instances
+    COMBO_BOX_DISPLAY_OPTIONS: {
       highlightFill: 'rgba( 255, 0, 0, 0.1 )',
       align: 'right',
       cornerRadius: 5,
@@ -58,20 +61,8 @@ define( require => {
       yMargin: 4
     },
 
-    // Options common to all NumberDisplay items that are used in ComboBoxes
-    COMBO_BOX_NUMBER_DISPLAY_OPTIONS: {
-      backgroundFill: null,
-      backgroundStroke: null,
-      font: new PhetFont( 14 ),
-      align: 'right',
-      xMargin: 0,
-      yMargin: 0
-    },
-
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
-    HEAVY_PARTICLES_THUMB_INTERVAL: 10,
-    LIGHT_PARTICLES_THUMB_INTERVAL: 10,
 
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),

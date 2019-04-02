@@ -31,7 +31,7 @@ define( require => {
      */
     constructor( thermometer, listParent, options ) {
 
-      options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_OPTIONS, options );
+      options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
 
       const items = [
         {
