@@ -338,7 +338,7 @@ define( require => {
         const k = GasPropertiesConstants.BOLTZMANN; // (nm^2 * AMU)/(ps^2 * K)
 
         // T = (2/3)KE/k
-        temperature = (2/3) * averageKineticEnergy / k; // TODO convert to K
+        temperature = (2/3) * averageKineticEnergy / k; // K
       }
       return temperature;
     }
