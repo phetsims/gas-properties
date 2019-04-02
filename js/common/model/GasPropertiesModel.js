@@ -378,7 +378,7 @@ define( require => {
    * @param {number} heatCoolFactor - (-1,1), heat=[0,1), cool=(-1,0]
    */
   function heatCoolParticles( particles, heatCoolFactor ) {
-    assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, 'invalid heatCoolFactor: ' + heatCoolFactor );
+    assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
     const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
     for ( let i = 0; i < particles.length; i++ ) {
       particles[i].scaleVelocity( velocityScale );
@@ -391,7 +391,7 @@ define( require => {
    * @param {Particle[]} particles
    */
   function removeParticle( particle, particles ) {
-    assert && assert( particle instanceof Particle, 'not a Particle: ' + particle );
+    assert && assert( particle instanceof Particle, `not a Particle: ${particle}` );
     const index = particles.indexOf( particle );
     assert && assert( index !== -1, 'particle not found' );
     particles.splice( index, 1 );
@@ -431,7 +431,7 @@ define( require => {
    * @param {number} ratio
    */
   function redistributeParticles( particles, ratio ) {
-    assert && assert( ratio > 0, 'invalid ration: ' + ratio );
+    assert && assert( ratio > 0, `invalid ratio: ${ratio}` );
     for ( let i = 0; i < particles.length; i++ ) {
       particles[ i ].location.setX( ratio * particles[ i ].location.x );
     }

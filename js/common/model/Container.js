@@ -81,8 +81,7 @@ define( require => {
 
       // Validate lidWidth, whose range changes dynamically.
       assert && this.lidWidthProperty.link( lidWidth => {
-        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.maxLidWidth,
-          'invalid lidWidth: ' + lidWidth );
+        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.maxLidWidth, `invalid lidWidth: ${lidWidth}` );
       } );
     }
 
@@ -130,7 +129,7 @@ define( require => {
      */
     get openingWidth() {
       const openingWidth = this.openingRight - this.openingLeft;
-      assert && assert( openingWidth >= 0, 'invalid openingWidth: ' + openingWidth );
+      assert && assert( openingWidth >= 0, `invalid openingWidth: ${openingWidth}` );
       return openingWidth;
     }
 
