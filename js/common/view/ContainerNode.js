@@ -44,6 +44,7 @@ define( require => {
       const viewLocation = modelViewTransform.modelToViewPosition( container.location );
       const viewHeight = Math.abs( modelViewTransform.modelToViewDeltaY( container.height ) );
       const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
+      const viewOpeningLeftInset = modelViewTransform.modelToViewDeltaX( container.openingLeftInset );
       const viewOpeningRightInset = modelViewTransform.modelToViewDeltaX( container.openingRightInset );
 
       // Displays the walls of the container
@@ -100,14 +101,15 @@ define( require => {
         const bottom = viewLocation.y + wallOffset;
 
         // Update the walls, start at top-left, origin at bottom-right. Shape looks like:
-        //                   ___
+        //  __               ___
         // |                    |
         // |                    |
         // |                    |
         // |____________________|
         //
         wallsNode.shape = new Shape()
-          .moveTo( left, top )
+          .moveTo( left + viewOpeningLeftInset, top )
+          .lineTo( left, top )
           .lineTo( left, bottom )
           .lineTo( right, bottom )
           .lineTo( right, top )
