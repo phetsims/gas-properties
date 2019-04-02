@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO delete if we decide to go with AverageSpeedAccordionBox
 /**
  * Displays the average speed (in m/s) for each type of particle in the container.
  *
@@ -10,26 +9,27 @@ define( require => {
   'use strict';
 
   // modules
+  const AccordionBox = require( 'SUN/AccordionBox' );
+  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
-  const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const SunConstants = require( 'SUN/SunConstants' );
+  const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   const averageSpeedString = require( 'string!GAS_PROPERTIES/averageSpeed' );
   const valueMetersPerSecondString = require( 'string!GAS_PROPERTIES/valueMetersPerSecond' );
 
-  class AverageSpeedPanel extends Panel {
+  class AverageSpeedAccordionBox extends AccordionBox {
 
     /**
      * @param {BooleanProperty} averageSpeedVisibleProperty
@@ -41,18 +41,23 @@ define( require => {
     constructor( averageSpeedVisibleProperty, heavyAverageSpeedProperty, lightAverageSpeedProperty, modelViewTransform, options ) {
 
       options = _.extend( {
-        spacing: 10,
-        align: 'center'
-      }, GasPropertiesConstants.PANEL_OPTIONS, {
 
-        // this is a disembodied panel
-        fill: null,
-        stroke: null
-      }, options );
+        fixedWidth: 100,
 
-      const checkbox = new GasPropertiesCheckbox( averageSpeedVisibleProperty, {
-        text: averageSpeedString
-      } );
+        // AccordionBox options
+        buttonXMargin: 0,
+        titleXSpacing: 0,
+        contentXMargin: 0,
+        contentYSpacing: 4,
+        titleNode: new Text( averageSpeedString, {
+          font: GasPropertiesConstants.TITLE_FONT,
+          fill: GasPropertiesColorProfile.textFillProperty
+        } )
+
+      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
+
+      // Limit width of title
+      options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
 
       // icons for the particles
       const heavyParticleNode = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
@@ -108,16 +113,12 @@ define( require => {
         ]
       } );
 
-      // panel content
-      const contentNode = new VBox( {
-        align: 'center',
-        spacing: 5,
-        children: [ checkbox, vBox ]
+      const content = new FixedWidthNode( vBox, {
+        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
+        align: 'center'
       } );
 
-      super( contentNode, options );
-
-      averageSpeedVisibleProperty.link( averageSpeedSelected => { vBox.visible = averageSpeedSelected; } );
+      super( content, options );
     }
   }
 
@@ -135,5 +136,5 @@ define( require => {
     }
   };
 
-  return gasProperties.register( 'AverageSpeedPanel', AverageSpeedPanel );
+  return gasProperties.register( 'AverageSpeedAccordionBox', AverageSpeedAccordionBox );
 } );
