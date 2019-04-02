@@ -30,8 +30,8 @@ define( require => {
         textFill: GasPropertiesColorProfile.textFillProperty,
         textMaxWidth: 250,
         font: GasPropertiesConstants.CONTROL_FONT,
-        checkboxColor: GasPropertiesColorProfile.textFillProperty,
-        checkboxColorBackground: GasPropertiesColorProfile.panelFillProperty
+        checkboxColor: GasPropertiesColorProfile.checkBoxStrokeProperty,
+        checkboxColorBackground: GasPropertiesColorProfile.checkBoxFillProperty
       }, options );
 
       assert && assert( options.text || options.icon, 'text or icon is required' );

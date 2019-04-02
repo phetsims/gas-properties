@@ -25,24 +25,6 @@ define( require => {
       projector: 'white'
     },
 
-    // enabled with ?grid query parameter
-    gridColor: {
-      default: 'white',
-      projector: 'black'
-    },
-
-    // enabled with ?pointerCoordinates query parameter
-    pointerCoordinatesTextColor: {
-      default: 'white',
-      projector: 'black'
-    },
-
-    // enabled with ?pointerCoordinates query parameter
-    pointerCoordinatesBackgroundColor: {
-      default: 'rgba( 0, 0, 0, 0.5 )',
-      projector: 'rgba( 255, 255, 255, 0.5 )'
-    },
-
     // fill for control panels
     panelFill: {
       default: 'black',
@@ -61,8 +43,14 @@ define( require => {
       projector: 'black'
     },
 
-    // dimensional arrow, shown using the 'Size' checkbox
-    sizeArrowColor: {
+    // fill for check boxes
+    checkBoxFill: {
+      default: 'black',
+      projector: 'white'
+    },
+
+    // stroke for check boxes
+    checkBoxStroke: {
       default: 'white',
       projector: 'black'
     },
@@ -95,6 +83,30 @@ define( require => {
     lidBaseFill: {
       default: 'rgb( 180, 180, 180 )',
       projector: 'rgb( 128, 128, 128 )'
+    },
+
+    // dimensional arrow, shown using the 'Size' checkbox
+    sizeArrowColor: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    // enabled with ?grid query parameter
+    gridColor: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    // enabled with ?pointerCoordinates query parameter
+    pointerCoordinatesTextColor: {
+      default: 'white',
+      projector: 'black'
+    },
+
+    // enabled with ?pointerCoordinates query parameter
+    pointerCoordinatesBackgroundColor: {
+      default: 'rgba( 0, 0, 0, 0.5 )',
+      projector: 'rgba( 255, 255, 255, 0.5 )'
     },
 
     //------------------------------------------------------------------------------------------------------------------
