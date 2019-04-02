@@ -38,7 +38,7 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
-  const PANEL_WIDTH = 225; // determined empirically
+  const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
 
   class ExploreScreenView extends ScreenView {
 
@@ -74,7 +74,7 @@ define( require => {
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
-          fixedWidth: PANEL_WIDTH,
+          fixedWidth: RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
@@ -85,7 +85,7 @@ define( require => {
         model.numberOfHeavyParticlesProperty,
         model.numberOfLightParticlesProperty,
         model.modelViewTransform, {
-          fixedWidth: PANEL_WIDTH,
+          fixedWidth: RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
           right: toolsPanel.right,
           top: toolsPanel.bottom + 15
