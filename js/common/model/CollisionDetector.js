@@ -26,7 +26,7 @@ define( require => {
   class CollisionDetector {
 
     /**
-     * @param {IdealModel} model TODO more general type
+     * @param {GasPropertiesModel} model
      * @param {Object} [options]
      */
     constructor( model, options ) {

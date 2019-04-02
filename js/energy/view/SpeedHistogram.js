@@ -20,7 +20,7 @@ define( require => {
   class SpeedHistogram extends Histogram {
 
     /**
-     * @param {IdealModel} model
+     * @param {GasPropertiesModel} model
      * @param {BooleanProperty} heavyVisibleProperty
      * @param {BooleanProperty} lightVisibleProperty
      * @param {Object} [options]

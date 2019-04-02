@@ -48,7 +48,7 @@ define( require => {
   class EnergyScreenView extends ScreenView {
 
     /**
-     * @param {ExploreModel} model
+     * @param {EnergyModel} model
      */
     constructor( model ) {
 

@@ -21,7 +21,7 @@ define( require => {
   class Histogram extends Node {
 
     /**
-     * @param {IdealModel} model
+     * @param {GasPropertiesModel} model
      * @param {Object} [options]
      */
     constructor( model, options ) {
