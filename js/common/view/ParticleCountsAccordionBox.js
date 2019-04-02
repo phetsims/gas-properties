@@ -10,12 +10,11 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
+  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountControl = require( 'GAS_PROPERTIES/common/view/ParticleCountControl' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -57,12 +56,8 @@ define( require => {
       options = _.extend( {
         maxWidth: options.fixedWidth
       }, options );
-      const maxContentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
-      const strut = new HStrut( maxContentWidth );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
-      const content = new VBox( {
-        maxWidth: maxContentWidth,
+      const vBox = new VBox( {
         align: 'left',
         spacing: 15,
         children: [
@@ -77,7 +72,11 @@ define( require => {
         ]
       } );
 
-      super( new Node( { children: [ strut, content ] } ), options );
+      const content = new FixedWidthNode( vBox, {
+        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
+      } );
+
+      super( content, options );
     }
   }
 

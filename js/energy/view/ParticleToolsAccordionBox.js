@@ -10,12 +10,11 @@ define( require => {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -57,8 +56,6 @@ define( require => {
           fill: GasPropertiesColorProfile.textFillProperty
         } )
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
-
-      const maxContentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
 
       // Limit width of title
       options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
@@ -107,8 +104,7 @@ define( require => {
           trackStroke: GasPropertiesColorProfile.textFillProperty,
           majorTicks: majorTicks,
           majorTickStroke: GasPropertiesColorProfile.textFillProperty
-        },
-        maxWidth: maxContentWidth
+        }
       } );
 
       // force the accordion box to be a fixedWidth
@@ -116,17 +112,18 @@ define( require => {
       options = _.extend( {
         maxWidth: options.fixedWidth
       }, options );
-      const strut = new HStrut( maxContentWidth );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
-      const content = new VBox( {
-        maxWidth: maxContentWidth,
+      const vBox = new VBox( {
         align: 'left',
         spacing: 15,
         children: [ collisionsCheckbox, controlTemperatureCheckbox, temperatureControl ]
       } );
 
-      super( new Node( { children: [ strut, content ] } ), options );
+      const content = new FixedWidthNode( vBox, {
+        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
+      } );
+
+      super( content, options );
 
       controlTemperatureEnabledProperty.link( controlTemperatureEnabled => {
         temperatureControl.enabled = controlTemperatureEnabled;
