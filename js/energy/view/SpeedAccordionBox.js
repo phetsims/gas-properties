@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO maintain fixed width
 /**
  * SpeedAccordionBox contains the speed histogram and related controls.
  *
@@ -12,6 +11,7 @@ define( require => {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -35,12 +35,22 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
+
+        fixedWidth: 100,
+
+        // AccordionBox options
+        buttonXMargin: 0,
+        titleXSpacing: 0,
+        contentXMargin: 0,
         titleNode: new Text( speedString, {
-          //TODO maxWidth
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         } )
+
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
+
+      // Limit width of title
+      options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
 
       //TODO should these Properties live somewhere else?
       // @private
@@ -80,23 +90,25 @@ define( require => {
         spacing: 25
       } );
 
-      //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
-      const contentNode = new VBox( _.extend( {}, GasPropertiesConstants.VBOX_OPTIONS, {
+      const vBox = new VBox( {
         align: 'center',
+        spacing: 15,
         children: [ histogram, checkboxes ]
-      } ) );
+      } );
 
-      super( contentNode, options );
+      const content = new FixedWidthNode( vBox, {
+        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
+      });
+
+      super( content, options );
 
       // @private
-      this.expandedProperty = options.expandedProperty;
       this.heavyVisibleProperty = heavyVisibleProperty;
       this.lightVisibleProperty = lightVisibleProperty;
     }
 
     // @public
     reset() {
-      this.expandedProperty.reset();
       this.heavyVisibleProperty.reset();
       this.lightVisibleProperty.reset();
     }

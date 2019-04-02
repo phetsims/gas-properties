@@ -27,7 +27,7 @@ define( require => {
     constructor( sizeVisibleProperty, stopwatchVisibleProperty, options ) {
 
       options = _.extend( {
-        fixedWidth: 250,
+        fixedWidth: 100,
         xMargin: 0
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 

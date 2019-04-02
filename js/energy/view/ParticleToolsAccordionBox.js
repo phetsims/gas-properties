@@ -45,7 +45,7 @@ define( require => {
 
       options = _.extend( {
 
-        fixedWidth: 250,
+        fixedWidth: 100,
 
         // AccordionBox options
         buttonXMargin: 0,

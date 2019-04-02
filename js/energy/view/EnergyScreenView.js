@@ -42,7 +42,8 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
-  const PANEL_WIDTH = 225; // determined empirically
+  const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
+  const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
 
   class EnergyScreenView extends ScreenView {
 
@@ -77,7 +78,7 @@ define( require => {
       const toolsPanel = new EnergyToolsPanel(
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty, {
-          fixedWidth: PANEL_WIDTH,
+          fixedWidth: RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
@@ -88,7 +89,7 @@ define( require => {
         model.collisionDetector.particleParticleCollisionsEnabledProperty,
         model.controlTemperatureEnabledProperty,
         model.initialTemperatureProperty, {
-          fixedWidth: PANEL_WIDTH,
+          fixedWidth: RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleToolsExpandedProperty,
           right: toolsPanel.right,
           top: toolsPanel.bottom + 15
@@ -101,7 +102,7 @@ define( require => {
         model.numberOfHeavyParticlesProperty,
         model.numberOfLightParticlesProperty,
         model.modelViewTransform, {
-          fixedWidth: PANEL_WIDTH,
+          fixedWidth: RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
           right: particleToolsAccordionBox.right,
           top: particleToolsAccordionBox.bottom + 15
@@ -246,6 +247,7 @@ define( require => {
 
       // Speed accordion box with histogram and related controls
       const speedAccordionBox = new SpeedAccordionBox( model, {
+        fixedWidth: LEFT_PANEL_WIDTH,
         expandedProperty: viewProperties.speedExpandedProperty,
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: averageSpeedPanel.bottom + 10
@@ -254,6 +256,7 @@ define( require => {
 
       // Kinetic Energy accordion box with histogram
       const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
+        fixedWidth: LEFT_PANEL_WIDTH,
         expandedProperty: viewProperties.kineticEnergyExpandedProperty,
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: speedAccordionBox.bottom + 10
@@ -293,7 +296,6 @@ define( require => {
           model.reset();
           viewProperties.reset();
           speedAccordionBox.reset();
-          kineticEnergyAccordionBox.reset();
         },
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

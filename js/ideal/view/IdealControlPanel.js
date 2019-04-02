@@ -34,7 +34,7 @@ define( require => {
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
       options = _.extend( {
-        fixedWidth: 250
+        fixedWidth: 100
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );

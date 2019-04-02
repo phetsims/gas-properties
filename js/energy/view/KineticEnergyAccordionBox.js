@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO maintain fixed width
 /**
  * KineticEnergyAccordionBox contains the kinetic energy histogram.
  *
@@ -11,6 +10,7 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
+  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -29,24 +29,30 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
+
+        fixedWidth: 100,
+
+        // AccordionBox options
+        buttonXMargin: 0,
+        titleXSpacing: 0,
+        contentXMargin: 0,
         titleNode: new Text( kineticEnergyString, {
-          //TODO maxWidth
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         } )
+
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
+
+      // Limit width of title
+      options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
 
       const histogram = new KineticEnergyHistogram( model );
 
-      super( histogram, options );
+      const content = new FixedWidthNode( histogram, {
+        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
+      } );
 
-      // @private
-      this.expandedProperty = options.expandedProperty;
-    }
-
-    // @public
-    reset() {
-      this.expandedProperty.reset();
+      super( content, options );
     }
   }
 

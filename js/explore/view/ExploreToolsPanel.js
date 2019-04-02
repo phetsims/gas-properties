@@ -29,7 +29,7 @@ define( require => {
     constructor( sizeVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
       options = _.extend( {
-        fixedWidth: 250
+        fixedWidth: 100
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       //TODO use GasPropertiesConstants.VBOX_OPTIONS ?
