@@ -44,13 +44,13 @@ define( require => {
     },
 
     // fill for check boxes
-    checkBoxFill: {
+    checkboxFill: {
       default: 'black',
       projector: 'white'
     },
 
     // stroke for check boxes
-    checkBoxStroke: {
+    checkboxStroke: {
       default: 'white',
       projector: 'black'
     },
