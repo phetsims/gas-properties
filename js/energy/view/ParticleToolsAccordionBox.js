@@ -18,6 +18,7 @@ define( require => {
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
@@ -103,7 +104,10 @@ define( require => {
           trackSize: new Dimension2( 120, 5 ),
           trackStroke: GasPropertiesColorProfile.textFillProperty,
           majorTicks: majorTicks,
-          majorTickStroke: GasPropertiesColorProfile.textFillProperty
+          majorTickStroke: GasPropertiesColorProfile.textFillProperty,
+          constrainValue: value => {
+            return Util.roundToInterval( value, 50 );
+          }
         }
       } );
 
