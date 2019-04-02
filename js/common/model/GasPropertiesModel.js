@@ -209,7 +209,7 @@ define( require => {
         // Set the particle's velocity.
         particle.setVelocityPolar(
 
-          // KE = (3/2)kT = (1/2) * m * |v|^2, so v = sqrt( 3kT / m )
+          // KE = (3/2)kT = (1/2) * m * |v|^2, so |v| = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / particle.mass ),
 
           // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
