@@ -68,11 +68,6 @@ define( require => {
       yMargin: 0
     },
 
-    VBOX_OPTIONS: {
-      align: 'left',
-      spacing: 12
-    },
-
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     HEAVY_PARTICLES_THUMB_INTERVAL: 10,
