@@ -34,7 +34,7 @@ define( require => {
         } );
 
       // @public (read-only) pressure range in kilopascals (kPa)
-      this.pressureRange = new Range( 0, 1000 ); //TODO values
+      this.pressureRange = new Range( 0, 10000 ); //TODO values
 
       // @public {Property.<PressureGauge.Units>} pressure units displayed by the pressure gauge
       this.unitsProperty = new Property( PressureGauge.Units.KILOPASCALS, {
