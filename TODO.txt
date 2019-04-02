@@ -6,7 +6,11 @@ Factor out ScreenView base class for screens 1-3
 GitHub issue to consider different color profile for panels
 Investigate pressure model in Java version
 
-Histogram base class: fixed number of bins, scale y-axis based on #particles, horizontal lines to denote vertical scale, temp 'out of range' indicator for x-axis
+Histogram base class:
+- fixed number of bins
+- scale y-axis based on #particles-
+- horizontal lines to denote vertical scale, increments of 100?
+- temp 'out of range' indicator for x-axis
 
 Energy: Speed histogram
 Energy: KE histogram
