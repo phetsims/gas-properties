@@ -18,18 +18,6 @@ Explore: moving wall does not pause animation and does work on particles
 Diffusion: lots of new/different features
 
 DESIGN FYI
-* Container size indicator is now the inside dimension
-GOOD
-* Interaction with resize handle and lid are mutually exclusive; resize handle cancels and disables lid
-FINE
-* On the speed histogram, I used icons and horizontal layout for the checkboxes
-OK
-* Confirm that how opening size changes during a drag cycle is as desired.
-OK
-* Confirm that a simple rectangle is OK for showing previous bounds of the container.
-OK
-* Confirm that what Average Speed shows for empty container is as desired.
-OK
 * Choose a value for ?redistribute
 LIKES DEFAULT, LEAVE QUERY PARAM
 * Choose a value for ?heatCool
