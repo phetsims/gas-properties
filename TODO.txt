@@ -23,12 +23,12 @@ Explore: moving wall does not pause animation and does work on particles
 Diffusion: lots of new/different features
 
 DESIGN QUESTIONS (MODEL)
-* Is P = NkT/V sufficient for computing pressure? Why does Java version use a complicated 'slice' model?
-STICK WITH THIS FOR NOW, NOT SURE ABOUT JAVA VERSION
-* How to convert pressure to kPa?
->>>>>>> WE WORKED OUT THE CONVERSION FACTOR, BUT PRESSURE IS WAY TOO LARGE. SHOULD BE ZERO UNTIL PARTICLES HIT WALLS. REVISIT JAVA.
-* What is the max of the pressure gauge?
-* What is the max of the thermometer?
+* Problems with pressure model:
+  - Why is P = NkT/V yielding a much larger value than Java version?
+  - Is our conversion factor to kPa correct?
+  - Are values in the Java version correct?
+  - Why does Java version use a complicated 'slice' model?
+  - How to address the fact that pressure should be zero until particles collide with walls?
 
 DESIGN QUESTIONS (VIEW)
 * smoothing of Average Speed display
