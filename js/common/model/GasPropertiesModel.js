@@ -138,12 +138,12 @@ define( require => {
 
       // @public (read-only)
       this.collisionCounter = new CollisionCounter( this.collisionDetector, {
-        location: new Vector2( 40, 20 ) // view coordinates! determined empirically
+        location: new Vector2( 40, 15 ) // view coordinates! determined empirically
       } );
 
       // @public (read-only)
       this.stopwatch = new Stopwatch( {
-        location: new Vector2( 250, 20 ) // view coordinates! determined empirically
+        location: new Vector2( 250, 15 ) // view coordinates! determined empirically
       } );
 
       // Redistribute particles as the container width changes.
