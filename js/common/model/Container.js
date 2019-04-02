@@ -52,7 +52,7 @@ define( require => {
       this.lidThickness = 3 * this.wallThickness;
 
       // @public (read-only) insets of the opening in the top, from the inside edges of the container, in nm
-      this.openingLeftInset = 0.5;
+      this.openingLeftInset = 1.25;
       this.openingRightInset = 2;
       assert && assert( this.widthRange.min > this.openingLeftInset + this.openingRightInset,
         'widthRange.min is too small to accommodate insets' );

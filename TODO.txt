@@ -3,7 +3,6 @@ TODO list for gas-properties
 UP NEXT
 
 AverageSpeedAccordionBox
-Constrain lid.handle.left to container.left
 Temperature slider thumb should snap to increments of 50K
 ComboBoxDisplay is buggy when number initially exceeds range
 Factor out ScreenView base class for screens 1-3
