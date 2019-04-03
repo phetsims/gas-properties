@@ -249,8 +249,8 @@ define( require => {
       gridNode && this.addChild( gridNode );
       this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );
+      this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
-      this.addChild( comboBoxListParent );
 
       // @private used in methods
       this.model = model;
