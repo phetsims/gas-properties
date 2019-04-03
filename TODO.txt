@@ -7,7 +7,7 @@ Investigate pressure model in Java version
 
 Histogram base class:
 - fixed number of bins
-- scale y-axis based on #particles-
+- scale y-axis based on #particles
 - horizontal lines to denote vertical scale, increments of 100?
 - temp 'out of range' indicator for x-axis
 
