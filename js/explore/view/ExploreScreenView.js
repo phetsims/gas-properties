@@ -32,9 +32,6 @@ define( require => {
 
       super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty );
 
-      const parent = new Node();
-      this.addChild( parent );
-
       // Panel at upper right
       const toolsPanel = new ExploreToolsPanel(
         viewProperties.sizeVisibleProperty,
@@ -44,7 +41,6 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      parent.addChild( toolsPanel );
 
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
@@ -56,9 +52,12 @@ define( require => {
           right: toolsPanel.right,
           top: toolsPanel.bottom + 15
         } );
-      parent.addChild( particleCountsAccordionBox );
 
-      // Everything we've added should be behind what is created by super
+      // Rendering order. Everything we add should be behind what is created by super.
+      const parent = new Node();
+      parent.addChild( toolsPanel );
+      parent.addChild( particleCountsAccordionBox );
+      this.addChild( parent );
       parent.moveToBack();
 
       // @private used in methods

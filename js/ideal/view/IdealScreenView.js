@@ -34,9 +34,6 @@ define( require => {
         resizeHandleColor: 'rgb( 187, 154, 86 )' //TODO HandleNode doesn't support ColorDef
       } );
 
-      const parent = new Node();
-      this.addChild( parent );
-
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
         model.holdConstantProperty,
@@ -47,7 +44,6 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      parent.addChild( controlPanel );
 
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
@@ -59,9 +55,12 @@ define( require => {
           right: controlPanel.right,
           top: controlPanel.bottom + 15
         } );
-      parent.addChild( particleCountsAccordionBox );
 
-      // Everything we've added should be behind what is created by super
+      // Rendering order. Everything we add should be behind what is created by super.
+      const parent = new Node();
+      parent.addChild( controlPanel );
+      parent.addChild( particleCountsAccordionBox );
+      this.addChild( parent );
       parent.moveToBack();
 
       // @private used in methods

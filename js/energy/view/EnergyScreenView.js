@@ -37,8 +37,30 @@ define( require => {
 
       super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty );
 
-      const parent = new Node();
-      this.addChild( parent );
+      // Average Speed
+      const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
+        model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
+          expandedProperty: viewProperties.averageSpeedExpandedProperty,
+          fixedWidth: LEFT_PANEL_WIDTH,
+          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+          top: 10
+        } );
+
+      // Speed accordion box with histogram and related controls
+      const speedAccordionBox = new SpeedAccordionBox( model, {
+        fixedWidth: LEFT_PANEL_WIDTH,
+        expandedProperty: viewProperties.speedExpandedProperty,
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        top: averageSpeedAccordionBox.bottom + 10
+      } );
+
+      // Kinetic Energy accordion box with histogram
+      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
+        fixedWidth: LEFT_PANEL_WIDTH,
+        expandedProperty: viewProperties.kineticEnergyExpandedProperty,
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        top: speedAccordionBox.bottom + 10
+      } );
 
       // Panel at upper right
       const toolsPanel = new EnergyToolsPanel(
@@ -48,7 +70,6 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      parent.addChild( toolsPanel );
 
       // Particle Tools accordion box
       const particleToolsAccordionBox = new ParticleToolsAccordionBox(
@@ -61,7 +82,6 @@ define( require => {
           top: toolsPanel.bottom + 15
         }
       );
-      parent.addChild( particleToolsAccordionBox );
 
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
@@ -73,37 +93,16 @@ define( require => {
           right: particleToolsAccordionBox.right,
           top: particleToolsAccordionBox.bottom + 15
         } );
-      parent.addChild( particleCountsAccordionBox );
 
-      // Average Speed
-      const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
-        model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
-          expandedProperty: viewProperties.averageSpeedExpandedProperty,
-          fixedWidth: LEFT_PANEL_WIDTH,
-          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: 10
-        } );
+      // Rendering order. Everything we add should be behind what is created by super.
+      const parent = new Node();
       parent.addChild( averageSpeedAccordionBox );
-
-      // Speed accordion box with histogram and related controls
-      const speedAccordionBox = new SpeedAccordionBox( model, {
-        fixedWidth: LEFT_PANEL_WIDTH,
-        expandedProperty: viewProperties.speedExpandedProperty,
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: averageSpeedAccordionBox.bottom + 10
-      } );
       parent.addChild( speedAccordionBox );
-
-      // Kinetic Energy accordion box with histogram
-      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
-        fixedWidth: LEFT_PANEL_WIDTH,
-        expandedProperty: viewProperties.kineticEnergyExpandedProperty,
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: speedAccordionBox.bottom + 10
-      } );
       parent.addChild( kineticEnergyAccordionBox );
-
-      // Everything we've added should be behind what is created by super
+      parent.addChild( toolsPanel );
+      parent.addChild( particleToolsAccordionBox );
+      parent.addChild( particleCountsAccordionBox );
+      this.addChild( parent );
       parent.moveToBack();
 
       // @private used in methods
