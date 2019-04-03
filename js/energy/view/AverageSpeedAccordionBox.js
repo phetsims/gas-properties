@@ -32,13 +32,12 @@ define( require => {
   class AverageSpeedAccordionBox extends AccordionBox {
 
     /**
-     * @param {BooleanProperty} averageSpeedVisibleProperty
      * @param {NumberProperty} heavyAverageSpeedProperty - average speed of heavy particles, in nm/ps
      * @param {NumberProperty} lightAverageSpeedProperty - average speed of light particles, in nm/ps
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( averageSpeedVisibleProperty, heavyAverageSpeedProperty, lightAverageSpeedProperty, modelViewTransform, options ) {
+    constructor( heavyAverageSpeedProperty, lightAverageSpeedProperty, modelViewTransform, options ) {
 
       options = _.extend( {
 
@@ -72,22 +71,6 @@ define( require => {
       const heavyMetersPerSecondProperty = new Property( null );
       const lightMetersPerSecondProperty = new Property( null );
 
-      // Update only when visible.
-      Property.multilink(
-        [ averageSpeedVisibleProperty, heavyAverageSpeedProperty ],
-        ( averageSpeedVisible, heavyAverageSpeed ) => {
-          if ( averageSpeedVisible ) {
-            heavyMetersPerSecondProperty.value = convertAverageSpeed( heavyAverageSpeed );
-          }
-        } );
-      Property.multilink(
-        [ averageSpeedVisibleProperty, lightAverageSpeedProperty ],
-        ( averageSpeedVisible, lightAverageSpeed ) => {
-          if ( averageSpeedVisible ) {
-            lightMetersPerSecondProperty.value = convertAverageSpeed( lightAverageSpeed );
-          }
-        } );
-
       const numberDisplayRange = new Range( 0, 9999 );
       const numberDisplayOptions = {
         valuePattern: valueMetersPerSecondString,
@@ -119,6 +102,22 @@ define( require => {
       } );
 
       super( content, options );
+
+      // Update only when visible.
+      Property.multilink(
+        [ this.expandedProperty, heavyAverageSpeedProperty ],
+        ( expanded, heavyAverageSpeed ) => {
+          if ( expanded ) {
+            heavyMetersPerSecondProperty.value = convertAverageSpeed( heavyAverageSpeed );
+          }
+        } );
+      Property.multilink(
+        [ this.expandedProperty, lightAverageSpeedProperty ],
+        ( expanded, lightAverageSpeed ) => {
+          if ( expanded ) {
+            lightMetersPerSecondProperty.value = convertAverageSpeed( lightAverageSpeed );
+          }
+        } );
     }
   }
 

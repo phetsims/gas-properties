@@ -19,8 +19,8 @@ define( require => {
 
     constructor() {
 
-      // @public whether the Average Speed display is visible
-      this.averageSpeedVisibleProperty = new BooleanProperty( true || GasPropertiesQueryParameters.checked );
+      // @public whether the Average Speed accordion box is expanded
+      this.averageSpeedExpandedProperty = new BooleanProperty( true || GasPropertiesQueryParameters.checked );
 
       // @public whether the Speed accordion box is expanded
       this.speedExpandedProperty = new BooleanProperty( true || GasPropertiesQueryParameters.expanded );
@@ -44,7 +44,7 @@ define( require => {
     }
 
     reset() {
-      this.averageSpeedVisibleProperty.reset();
+      this.averageSpeedExpandedProperty.reset();
       this.speedExpandedProperty.reset();
       this.kineticEnergyExpandedProperty.reset();
       this.sizeVisibleProperty.reset();

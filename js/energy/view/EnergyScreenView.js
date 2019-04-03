@@ -238,8 +238,9 @@ define( require => {
       this.addChild( heaterCoolerNode );
 
       // Average Speed
-      const averageSpeedAccordionBox = new AverageSpeedAccordionBox( viewProperties.averageSpeedVisibleProperty,
+      const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
         model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
+          expandedProperty: viewProperties.averageSpeedExpandedProperty,
           fixedWidth: LEFT_PANEL_WIDTH,
           left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: 10
