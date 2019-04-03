@@ -25,6 +25,7 @@ define( require => {
       // @public whether the 'Particles Counts' accordion box is expanded
       this.particleCountsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
 
+      //TODO use EnumerationProperty
       // @public the particle type that will be dispensed by the bicycle pump
       this.particleTypeProperty = new Property( ParticleType.HEAVY, {
         isValidValue: value => ParticleType.includes( value )

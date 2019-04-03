@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Factor out ScreenView base class for screens 1-3
 Fix pressure model, investigate Java implementation
 
 Histogram base class:
