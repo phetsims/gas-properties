@@ -9,6 +9,9 @@ Collision response:
 * reference: https://en.wikipedia.org/wiki/Collision_response
 * impulse-based contact model
 
+The `dt` for all top-level ScreenView and Model classes is in seconds, because that's what is 
+provided by `Sim` when it steps the simulation. All other `dt` values are in picoseconds.
+
 To avoid working with very small numbers and encountering potential 
 float-point errors, we are not using SI units in the model.  For example,
 KE (Kinetic Energy) is typically in J, which is _kg * m<sup>2</sup> / s<sup>2</sup>_.
