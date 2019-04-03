@@ -43,7 +43,7 @@ define( require => {
         }
       } );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'TimeControls sets children' );
+      assert && assert( !options.children, 'TimeControls sets children' );
       options = _.extend( {
         children: [ playPauseButton, stepButton ]
       }, options );

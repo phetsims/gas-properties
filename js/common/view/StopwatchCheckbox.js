@@ -25,8 +25,8 @@ define( require => {
     constructor( stopwatchVisibleProperty, options ) {
 
       if ( options ) {
-        assert && assert( !options.hasOwnProperty( 'text' ), 'StopwatchCheckbox sets text' );
-        assert && assert( !options.hasOwnProperty( 'icon' ), 'StopwatchCheckbox sets icon' );
+        assert && assert( !options.text, 'StopwatchCheckbox sets text' );
+        assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
       }
 
       options = _.extend( {

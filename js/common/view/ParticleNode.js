@@ -22,7 +22,7 @@ define( require => {
      */
     constructor( particle, modelViewTransform, options ) {
 
-      assert && assert( !options || !options.hasOwnProperty( 'mainColor' ), 'ParticleNode sets mainColor' );
+      assert && assert( !options || !options.mainColor, 'ParticleNode sets mainColor' );
       options = _.extend( {
         mainColor: particle.colorProperty,
         highlightColor: particle.highlightColorProperty

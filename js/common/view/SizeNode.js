@@ -54,7 +54,7 @@ define( require => {
         backgroundLineWidth: 0.5
       } );
 
-      assert && assert( !options || !options.hasOwnProperty( 'children' ), 'SizeNode sets children' );
+      assert && assert( !options || !options.children, 'SizeNode sets children' );
       options = _.extend( {}, options, {
         children: [ dimensionalArrowNode, widthDisplay ]
       } );

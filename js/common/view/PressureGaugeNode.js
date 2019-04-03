@@ -62,7 +62,7 @@ define( require => {
         maxWidth: dialNode.width
       } );
 
-      assert && assert( !options || !options.hasOwnProperty( 'children' ), 'PressureGaugeNode sets children' );
+      assert && assert( !options || !options.children, 'PressureGaugeNode sets children' );
       options = _.extend( {
         children: [ postNode, dialNode, pressureDisplay ]
       }, options );

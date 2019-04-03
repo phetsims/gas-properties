@@ -35,7 +35,7 @@ define( require => {
         regionNodes.push( regionNode );
       }
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'RegionsNode sets children' );
+      assert && assert( !options.children, 'RegionsNode sets children' );
       options = _.extend( {
         children: regionNodes
       }, options );

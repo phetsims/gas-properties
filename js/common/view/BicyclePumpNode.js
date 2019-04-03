@@ -70,7 +70,7 @@ define( require => {
         center: progressBar.center
       } );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'BicyclePumpNode sets children' );
+      assert && assert( !options.children, 'BicyclePumpNode sets children' );
       options = _.extend( {
         children: [ background, pumpButton, progressBar, fillBar ]
       }, options );

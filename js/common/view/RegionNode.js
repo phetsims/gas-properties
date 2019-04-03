@@ -44,7 +44,7 @@ define( require => {
         center: cellNode.center
       } );
 
-      assert && assert( !options || !options.hasOwnProperty( 'children' ), 'RegionNode sets children' );
+      assert && assert( !options || !options.children, 'RegionNode sets children' );
       options = _.extend( {
         children: [ cellNode, countNode ]
       }, options );

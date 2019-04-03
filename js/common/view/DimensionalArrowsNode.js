@@ -77,7 +77,7 @@ define( require => {
         right: 0
       } );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'DimensionalArrowsNode sets children' );
+      assert && assert( !options.children, 'DimensionalArrowsNode sets children' );
       options = _.extend( {
         children: [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ]
       }, options );

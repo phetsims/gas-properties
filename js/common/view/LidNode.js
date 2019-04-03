@@ -51,7 +51,7 @@ define( require => {
       assert && assert( handleNode.width <= baseNode.width,
         `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'LidNode sets children' );
+      assert && assert( !options.children, 'LidNode sets children' );
       options = _.extend( {
         children: [ handleNode, baseNode ]
       }, options );

@@ -75,7 +75,7 @@ define( require => {
         handleColor: options.lidHandleColor
       } );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'ContainerNode sets children' );
+      assert && assert( !options.children, 'ContainerNode sets children' );
       options = _.extend( {
         children: [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ]
       }, options );

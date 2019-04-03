@@ -27,8 +27,8 @@ define( require => {
     constructor( sizeVisibleProperty, options ) {
 
       if ( options ) {
-        assert && assert( !options.hasOwnProperty( 'text' ), 'SizeCheckbox sets text' );
-        assert && assert( !options.hasOwnProperty( 'icon' ), 'SizeCheckbox sets icon' );
+        assert && assert( !options.text, 'SizeCheckbox sets text' );
+        assert && assert( !options.icon, 'SizeCheckbox sets icon' );
       }
 
       options = _.extend( {

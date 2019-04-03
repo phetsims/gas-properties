@@ -64,7 +64,7 @@ define( require => {
         centerY: backgroundRectangle.centerY
       } ) );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'Histogram sets children' );
+      assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
         children: [ backgroundRectangle, xAxisText, yAxisText ]
       }, options );

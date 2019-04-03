@@ -35,7 +35,7 @@ define( require => {
       child.maxWidth = options.fixedWidth;
       const strut = new HStrut( options.fixedWidth, { pickable: false } );
 
-      assert && assert( !options.hasOwnProperty( 'children' ), 'FixedWidthNode sets children' );
+      assert && assert( !options.children, 'FixedWidthNode sets children' );
       options = _.extend( {
         children: [ strut, child ]
       }, options );
