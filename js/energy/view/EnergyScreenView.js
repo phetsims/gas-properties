@@ -10,17 +10,16 @@ define( require => {
 
   // modules
   const AverageSpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/AverageSpeedAccordionBox' );
-  const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const EnergyToolsPanel = require( 'GAS_PROPERTIES/energy/view/EnergyToolsPanel' );
   const EnergyViewProperties = require( 'GAS_PROPERTIES/energy/view/EnergyViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticleToolsAccordionBox = require( 'GAS_PROPERTIES/energy/view/ParticleToolsAccordionBox' );
   const SpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/SpeedAccordionBox' );
-  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
 
   // constants
   const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
@@ -38,6 +37,9 @@ define( require => {
 
       super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty );
 
+      const parent = new Node();
+      this.addChild( parent );
+
       // Panel at upper right
       const toolsPanel = new EnergyToolsPanel(
         viewProperties.sizeVisibleProperty,
@@ -46,7 +48,7 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      this.addChild( toolsPanel );
+      parent.addChild( toolsPanel );
 
       // Particle Tools accordion box
       const particleToolsAccordionBox = new ParticleToolsAccordionBox(
@@ -59,7 +61,7 @@ define( require => {
           top: toolsPanel.bottom + 15
         }
       );
-      this.addChild( particleToolsAccordionBox );
+      parent.addChild( particleToolsAccordionBox );
 
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
@@ -71,7 +73,7 @@ define( require => {
           right: particleToolsAccordionBox.right,
           top: particleToolsAccordionBox.bottom + 15
         } );
-      this.addChild( particleCountsAccordionBox );
+      parent.addChild( particleCountsAccordionBox );
 
       // Average Speed
       const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
@@ -81,7 +83,7 @@ define( require => {
           left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: 10
         } );
-      this.addChild( averageSpeedAccordionBox );
+      parent.addChild( averageSpeedAccordionBox );
 
       // Speed accordion box with histogram and related controls
       const speedAccordionBox = new SpeedAccordionBox( model, {
@@ -90,7 +92,7 @@ define( require => {
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: averageSpeedAccordionBox.bottom + 10
       } );
-      this.addChild( speedAccordionBox );
+      parent.addChild( speedAccordionBox );
 
       // Kinetic Energy accordion box with histogram
       const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
@@ -99,24 +101,12 @@ define( require => {
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: speedAccordionBox.bottom + 10
       } );
-      this.addChild( kineticEnergyAccordionBox );
+      parent.addChild( kineticEnergyAccordionBox );
 
-      // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, this.comboBoxListParent, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
-      this.addChild( collisionCounterNode );
+      // Everything we've added should be behind what is created by super
+      parent.moveToBack();
 
-      // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
-      this.addChild( stopwatchNode );
-
-      // This should be in front of everything else.
-      this.comboBoxListParent.moveToFront();
-
-      // @private
+      // @private used in methods
       this.viewProperties = viewProperties;
       this.speedAccordionBox = speedAccordionBox;
       this.kineticEnergyAccordionBox = kineticEnergyAccordionBox;

@@ -27,6 +27,7 @@ define( require => {
 
   // modules
   const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
+  const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -45,6 +46,7 @@ define( require => {
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const SizeNode = require( 'GAS_PROPERTIES/common/view/SizeNode' );
+  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -74,13 +76,6 @@ define( require => {
 
       // Parent for combo box popup lists
       const comboBoxListParent = new Node();
-      this.addChild( comboBoxListParent );
-
-      // Show how the collision detection space is partitioned into regions
-      if ( GasPropertiesQueryParameters.regions ) {
-        this.regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
-        this.addChild( this.regionsNode );
-      }
 
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
@@ -102,7 +97,7 @@ define( require => {
             model.collisionCounter.isRunningProperty.value = false;
 
             // gray out the particles
-            this.particlesNode.opacity = 0.6;
+            particlesNode.opacity = 0.6;
 
             // remember width of container
             containerWidth = model.container.widthProperty.value;
@@ -114,7 +109,7 @@ define( require => {
             model.isPlayingProperty.value = wasPlaying;
 
             // make particles opaque
-            this.particlesNode.opacity = 1;
+            particlesNode.opacity = 1;
 
             if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
               model.redistributeParticles( model.container.widthProperty.value / containerWidth );
@@ -122,12 +117,10 @@ define( require => {
           }
         }
       } );
-      this.addChild( containerNode );
 
       // Dimensional arrows that indicate container size
       const sizeNode = new SizeNode( model.container.location, model.container.widthProperty,
         model.modelViewTransform, sizeVisibleProperty );
-      this.addChild( sizeNode );
 
       // Bicycle pumps, one of which is visible depending on the selected particle type
       const bicyclePumpsToggleNode = new ToggleNode( particleTypeProperty, [
@@ -169,7 +162,6 @@ define( require => {
         left: containerNode.right + 20,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      this.addChild( pumpBox );
 
       // Time controls
       const timeControlsLeft = containerViewLocation.x -
@@ -178,26 +170,21 @@ define( require => {
         left: timeControlsLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      this.addChild( timeControls );
 
       // Thermometer
       const thermometerNode = new GasPropertiesThermometerNode( model.thermometer, comboBoxListParent, {
         right: containerNode.right,
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      this.addChild( thermometerNode );
 
       // Pressure Gauge
       const pressureGaugeNode = new PressureGaugeNode( model.pressureGauge, comboBoxListParent, {
         left: containerNode.right - 2,
         centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30
       } );
-      this.addChild( pressureGaugeNode );
-      pressureGaugeNode.moveToBack(); // to hide overlap with container
 
       // @private
-      this.particlesNode = new ParticlesNode( model );
-      this.addChild( this.particlesNode );
+      const particlesNode = new ParticlesNode( model );
 
       // Device to heat/cool the contents of the container
       const heaterCoolerNodeLeft = containerViewLocation.x -
@@ -207,22 +194,6 @@ define( require => {
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      this.addChild( heaterCoolerNode );
-
-      // 2D grid for model coordinate frame
-      if ( GasPropertiesQueryParameters.grid ) {
-        this.addChild( new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform, {
-          stroke: GasPropertiesColorProfile.gridColorProperty
-        } ) );
-      }
-
-      // model and view coordinates for pointer location
-      if ( GasPropertiesQueryParameters.pointerCoordinates ) {
-        this.addChild( new PointerCoordinatesNode( model.modelViewTransform, {
-          textColor: GasPropertiesColorProfile.pointerCoordinatesTextColorProperty,
-          backgroundColor: GasPropertiesColorProfile.pointerCoordinatesBackgroundColorProperty
-        } ) );
-      }
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
@@ -230,14 +201,62 @@ define( require => {
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
+
+      // Collision Counter
+      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
+        dragBoundsProperty: this.visibleBoundsProperty
+      } );
+
+      // Stopwatch
+      const stopwatchNode = new StopwatchNode( model.stopwatch, {
+        dragBoundsProperty: this.visibleBoundsProperty
+      } );
+
+      // Show how the collision detection space is partitioned into regions
+      let regionsNode =  null;
+      if ( GasPropertiesQueryParameters.regions ) {
+        regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
+        this.addChild( regionsNode );
+      }
+
+      // 2D grid for model coordinate frame
+      let gridNode = null;
+      if ( GasPropertiesQueryParameters.grid ) {
+        gridNode = new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform, {
+          stroke: GasPropertiesColorProfile.gridColorProperty
+        } );
+      }
+
+      // model and view coordinates for pointer location
+      let pointerCoordinatesNode = null;
+      if ( GasPropertiesQueryParameters.pointerCoordinates ) {
+        pointerCoordinatesNode = new PointerCoordinatesNode( model.modelViewTransform, {
+          textColor: GasPropertiesColorProfile.pointerCoordinatesTextColorProperty,
+          backgroundColor: GasPropertiesColorProfile.pointerCoordinatesBackgroundColorProperty
+        } );
+      }
+
+      // rendering order
+      regionsNode && this.addChild( regionsNode );
+      this.addChild( pumpBox );
+      this.addChild( pressureGaugeNode );
+      this.addChild( containerNode );
+      this.addChild( thermometerNode );
+      this.addChild( sizeNode );
+      this.addChild( particlesNode );
+      this.addChild( heaterCoolerNode );
+      this.addChild( timeControls );
       this.addChild( resetAllButton );
+      gridNode && this.addChild( gridNode );
+      this.addChild( collisionCounterNode );
+      this.addChild( stopwatchNode );
+      pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
+      this.addChild( comboBoxListParent );
 
-      // This should be in front of everything else.
-      comboBoxListParent.moveToFront();
-
-      // @protected
+      // @private used in methods
       this.model = model;
-      this.comboBoxListParent = comboBoxListParent;
+      this.particlesNode = particlesNode;
+      this.regionsNode = regionsNode;
     }
 
     // @protected

@@ -9,14 +9,13 @@ define( require => {
   'use strict';
 
   // modules
-  const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
-  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
 
   // constants
   const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
@@ -35,6 +34,9 @@ define( require => {
         resizeHandleColor: 'rgb( 187, 154, 86 )' //TODO HandleNode doesn't support ColorDef
       } );
 
+      const parent = new Node();
+      this.addChild( parent );
+
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
         model.holdConstantProperty,
@@ -45,7 +47,7 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      this.addChild( controlPanel );
+      parent.addChild( controlPanel );
 
       // Particle Counts accordion box
       const particleCountsAccordionBox = new ParticleCountsAccordionBox(
@@ -57,24 +59,12 @@ define( require => {
           right: controlPanel.right,
           top: controlPanel.bottom + 15
         } );
-      this.addChild( particleCountsAccordionBox );
+      parent.addChild( particleCountsAccordionBox );
 
-      // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, this.comboBoxListParent, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
-      this.addChild( collisionCounterNode );
+      // Everything we've added should be behind what is created by super
+      parent.moveToBack();
 
-      // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
-      this.addChild( stopwatchNode );
-
-      // This should be in front of everything else.
-      this.comboBoxListParent.moveToFront();
-
-      // @private
+      // @private used in methods
       this.viewProperties = viewProperties;
     }
 
