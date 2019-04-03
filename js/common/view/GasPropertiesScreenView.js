@@ -216,7 +216,6 @@ define( require => {
       let regionsNode =  null;
       if ( GasPropertiesQueryParameters.regions ) {
         regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
-        this.addChild( regionsNode );
       }
 
       // 2D grid for model coordinate frame
