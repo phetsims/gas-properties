@@ -10,7 +10,6 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
-  const AccordionBox2 = require( 'SUN/AccordionBox2' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
