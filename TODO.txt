@@ -3,7 +3,6 @@ TODO list for gas-properties
 UP NEXT
 
 Hierarchy for ViewProperties
-CollisionCounter and CollisionCounterNode should not be present in Energy screen
 Fix pressure model, investigate Java implementation
 
 Histogram base class:

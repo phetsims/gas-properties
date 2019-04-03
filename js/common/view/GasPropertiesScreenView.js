@@ -203,9 +203,12 @@ define( require => {
       } );
 
       // Collision Counter
-      const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
+      let collisionCounterNode = null;
+      if ( model.collisionCounter ) {
+        collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
+          dragBoundsProperty: this.visibleBoundsProperty
+        } );
+      }
 
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatch, {
@@ -247,7 +250,7 @@ define( require => {
       this.addChild( timeControls );
       this.addChild( resetAllButton );
       gridNode && this.addChild( gridNode );
-      this.addChild( collisionCounterNode );
+      collisionCounterNode && this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );
       this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );

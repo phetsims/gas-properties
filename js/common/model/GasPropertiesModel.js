@@ -11,7 +11,6 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
-  const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
@@ -137,11 +136,6 @@ define( require => {
       this.pressureGauge = new PressureGauge();
 
       // @public (read-only)
-      this.collisionCounter = new CollisionCounter( this.collisionDetector, {
-        location: new Vector2( 40, 15 ) // view coordinates! determined empirically
-      } );
-
-      // @public (read-only)
       this.stopwatch = new Stopwatch( {
         location: new Vector2( 250, 15 ) // view coordinates! determined empirically
       } );
@@ -235,7 +229,6 @@ define( require => {
 
       // model elements
       this.container.reset();
-      this.collisionCounter.reset();
       this.stopwatch.reset();
       this.thermometer.reset();
       this.pressureGauge.reset();
@@ -311,9 +304,6 @@ define( require => {
         // compute the average speed for each particle type
         this.heavyAverageSpeedProperty.value = getAverageSpeed( this.heavyParticles );
         this.lightAverageSpeedProperty.value = getAverageSpeed( this.lightParticles );
-
-        // Do this after collision detection, so that the number of collisions detected is recorded.
-        this.collisionCounter.step( dt );
       }
     }
 
