@@ -10,10 +10,10 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
-  const Property = require( 'AXON/Property' );
 
   class GasPropertiesViewProperties {
 
@@ -25,11 +25,8 @@ define( require => {
       // @public whether the 'Particles Counts' accordion box is expanded
       this.particleCountsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
 
-      //TODO use EnumerationProperty
       // @public the particle type that will be dispensed by the bicycle pump
-      this.particleTypeProperty = new Property( ParticleType.HEAVY, {
-        isValidValue: value => ParticleType.includes( value )
-      } );
+      this.particleTypeProperty = new EnumerationProperty( ParticleType, ParticleType.HEAVY );
     }
 
     // @public
