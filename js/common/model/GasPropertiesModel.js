@@ -259,17 +259,19 @@ define( require => {
 
     /**
      * Steps the model using real time units.
-     * @param {number} dt - time delta in seconds
+     * @param {number} dt - time delta, in seconds
      * @public
      */
     step( dt ) {
-      this.stepModelTime( this.timeTransform( dt ) );
+      if ( this.isPlayingProperty.value ) {
+        this.stepModelTime( this.timeTransform( dt ) );
+      }
     }
 
     /**
      * Steps the model using model time units.
-     * @param {number} dt - time delta in ps
-     * @public
+     * @param {number} dt - time delta, in ps
+     * @private
      */
     stepModelTime( dt ) {
       if ( this.isPlayingProperty.value ) {

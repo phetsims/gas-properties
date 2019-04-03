@@ -62,7 +62,7 @@ define( require => {
 
     /**
      * Steps the stopwatch.
-     * @param {number} dt - time step, in ps
+     * @param {number} dt - time delta, in ps
      * @public
      */
     step( dt ) {

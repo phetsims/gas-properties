@@ -246,23 +246,23 @@ define( require => {
         } );
       this.addChild( averageSpeedAccordionBox );
 
-      // Speed accordion box with histogram and related controls
-      const speedAccordionBox = new SpeedAccordionBox( model, {
+      // @private Speed accordion box with histogram and related controls
+      this.speedAccordionBox = new SpeedAccordionBox( model, {
         fixedWidth: LEFT_PANEL_WIDTH,
         expandedProperty: viewProperties.speedExpandedProperty,
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: averageSpeedAccordionBox.bottom + 10
       } );
-      this.addChild( speedAccordionBox );
+      this.addChild( this.speedAccordionBox );
 
       // Kinetic Energy accordion box with histogram
-      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
+      this.kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
         fixedWidth: LEFT_PANEL_WIDTH,
         expandedProperty: viewProperties.kineticEnergyExpandedProperty,
         left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: speedAccordionBox.bottom + 10
+        top: this.speedAccordionBox.bottom + 10
       } );
-      this.addChild( kineticEnergyAccordionBox );
+      this.addChild( this.kineticEnergyAccordionBox );
 
       // Collision Counter
       const collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
@@ -296,7 +296,7 @@ define( require => {
         listener: () => {
           model.reset();
           viewProperties.reset();
-          speedAccordionBox.reset();
+          this.speedAccordionBox.reset();
         },
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
@@ -305,15 +305,25 @@ define( require => {
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
+
+      // @private
+      this.model = model;
     }
 
     /**
      * Called on each step of the simulation's timer.
-     * @param {number} dt - delta time, in seconds
+     * @param {number} dt - time delta, in seconds
      */
     step( dt ) {
-      this.particlesNode.step( dt );
-      this.regionsNode && this.regionsNode.step( dt );
+
+      // convert s to ps
+      const ps = this.model.timeTransform( dt );
+
+      // step elements that are specific to the view
+      this.particlesNode.step( ps );
+      this.regionsNode && this.regionsNode.step( ps );
+      this.speedAccordionBox.step( ps );
+      this.kineticEnergyAccordionBox.step( ps );
     }
   }
 

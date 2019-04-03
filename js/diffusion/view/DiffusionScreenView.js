@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * The view for the 'Diffusion' screen.
@@ -43,6 +43,22 @@ define( require => {
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       this.addChild( resetAllButton );
+
+      // @private
+      this.model = model;
+    }
+
+    /**
+     * Called on each step of the simulation's timer.
+     * @param {number} dt - time delta, in seconds
+     */
+    step( dt ) {
+
+      // convert s to ps
+      //TODO
+
+      // step elements that are specific to the view
+      //TODO
     }
   }
 

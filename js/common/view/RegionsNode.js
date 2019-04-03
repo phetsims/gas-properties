@@ -48,7 +48,7 @@ define( require => {
 
     /**
      * Updates each RegionNode.
-     * @param {number} dt
+     * @param {number} dt - time delta, in ps
      */
     step( dt ) {
       for ( let i = 0; i < this.regionNodes.length; i++ ) {

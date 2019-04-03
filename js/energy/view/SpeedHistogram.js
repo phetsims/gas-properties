@@ -34,6 +34,14 @@ define( require => {
 
       super( model, options );
     }
+
+    /**
+     * Steps the histogram.
+     * @param {number} dt - time delta, in ps
+     */
+    step( dt ) {
+      //TODO
+    }
   }
 
   return gasProperties.register( 'SpeedHistogram', SpeedHistogram );

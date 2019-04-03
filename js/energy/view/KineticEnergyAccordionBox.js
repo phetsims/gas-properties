@@ -53,6 +53,19 @@ define( require => {
       } );
 
       super( content, options );
+
+      // @private
+      this.histogram = histogram;
+    }
+
+    /**
+     * Steps the histogram.
+     * @param {number} dt - time delta, in ps
+     */
+    step( dt ) {
+      if ( this.expandedProperty.value ) {
+        this.histogram.step( dt );
+      }
     }
   }
 

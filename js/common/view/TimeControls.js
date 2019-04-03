@@ -31,11 +31,14 @@ define( require => {
 
       const playPauseButton = new PlayPauseButton( model.isPlayingProperty );
 
+      // time step, in seconds
+      const dt = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
+
       const stepButton = new StepButton( {
         isPlayingProperty: model.isPlayingProperty,
         listener: () => {
           model.isPlayingProperty.value = true;
-          model.stepModelTime( GasPropertiesConstants.MODEL_TIME_STEP );
+          model.step( dt );
           model.isPlayingProperty.value = false;
         }
       } );

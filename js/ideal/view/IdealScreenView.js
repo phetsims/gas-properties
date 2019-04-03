@@ -261,6 +261,9 @@ define( require => {
 
       // This should be in front of everything else.
       comboBoxListParent.moveToFront();
+
+      // @private
+      this.model = model;
     }
 
     /**
@@ -268,8 +271,13 @@ define( require => {
      * @param {number} dt - delta time, in seconds
      */
     step( dt ) {
-      this.particlesNode.step( dt );
-      this.regionsNode && this.regionsNode.step( dt );
+
+      // convert s to ps
+      const ps = this.model.timeTransform( dt );
+
+      // step elements that are specific to the view
+      this.particlesNode.step( ps );
+      this.regionsNode && this.regionsNode.step( ps );
     }
   }
 

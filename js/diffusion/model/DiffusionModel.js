@@ -21,8 +21,22 @@ define( require => {
       //TODO reset
     }
 
+    /**
+     * Steps the model using real time units.
+     * @param {number} dt - time delta, in seconds
+     * @public
+     */
     step( dt ) {
       //TODO step
+    }
+
+    /**
+     * Steps the model using model time units.
+     * @param {number} dt - time delta, in ps
+     * @private
+     */
+    stepModelTime( dt ) {
+      //TODO
     }
   }
 

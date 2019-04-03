@@ -55,7 +55,7 @@ define( require => {
 
     /**
      * Called on each step of the simulation's timer.
-     * @param {number} dt - time delta, in seconds
+     * @param {number} dt - time delta, in ps
      */
     step( dt ) {
       this.invalidatePaint(); // results in a call to paintCanvas

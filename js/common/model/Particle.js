@@ -89,7 +89,7 @@ define( require => {
 
     /**
      * Moves the particle by one time step.
-     * @param {number} dt - time step, in ps
+     * @param {number} dt - time delta, in ps
      * @public
      */
     step( dt ) {
