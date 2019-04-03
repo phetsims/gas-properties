@@ -42,7 +42,7 @@ Units:
 * mass: AMU (unified atomic mass unit, 1 AMU === 1.66E-27 kg)
 * momentum: AMU * nm / ps
 * pressure: kPa (and atm in view)
-* temperature: K (and C in view)
+* temperature: K (and °C in view)
 * time: ps
 * velocity: nm / ps
 * volume: nm<sup>3</sup>
