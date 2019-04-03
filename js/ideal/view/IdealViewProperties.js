@@ -9,33 +9,13 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
-  const Property = require( 'AXON/Property' );
+  const GasPropertiesViewProperties = require( 'GAS_PROPERTIES/common/view/GasPropertiesViewProperties' );
 
-  class IdealViewProperties {
+  class IdealViewProperties extends GasPropertiesViewProperties {
 
     constructor() {
-
-      // @public whether dimensional arrows are visible for the width of the container
-      this.sizeVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
-
-      // @public whether the 'Particles Counts' accordion box is expanded
-      this.particleCountsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
-
-      //TODO use EnumerationProperty
-      // @public the particle type that will be dispensed by the bicycle pump
-      this.particleTypeProperty = new Property( ParticleType.HEAVY, {
-        isValidValue: value => ParticleType.includes( value )
-      } );
-    }
-
-    reset() {
-      this.particleTypeProperty.reset();
-      this.sizeVisibleProperty.reset();
-      this.particleCountsExpandedProperty.reset();
+      super();
     }
   }
 

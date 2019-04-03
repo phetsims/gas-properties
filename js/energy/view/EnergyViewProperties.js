@@ -11,13 +11,13 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesViewProperties = require( 'GAS_PROPERTIES/common/view/GasPropertiesViewProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
-  const Property = require( 'AXON/Property' );
 
-  class EnergyViewProperties {
+  class EnergyViewProperties extends GasPropertiesViewProperties {
 
     constructor() {
+      super();
 
       // @public whether the Average Speed accordion box is expanded
       this.averageSpeedExpandedProperty = new BooleanProperty( true || GasPropertiesQueryParameters.checked );
@@ -28,30 +28,17 @@ define( require => {
       // @public whether the Kinetic Energy accordion box is expanded
       this.kineticEnergyExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded ) ;
 
-      // @public whether dimensional arrows are visible for the width of the container
-      this.sizeVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
-
-      // @public whether the 'Particles Counts' accordion box is expanded
-      this.particleCountsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
-
       // @public whether the 'Particles Tools' accordion box is expanded
       this.particleToolsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
-
-      //TODO use EnumerationProperty
-      // @public the particle type that will be dispensed by the bicycle pump
-      this.particleTypeProperty = new Property( ParticleType.HEAVY, {
-        isValidValue: value => ParticleType.includes( value )
-      } );
     }
 
+    // @public @override
     reset() {
       this.averageSpeedExpandedProperty.reset();
       this.speedExpandedProperty.reset();
       this.kineticEnergyExpandedProperty.reset();
-      this.sizeVisibleProperty.reset();
-      this.particleCountsExpandedProperty.reset();
       this.particleToolsExpandedProperty.reset();
-      this.particleTypeProperty.reset();
+      super.reset();
     }
   }
 

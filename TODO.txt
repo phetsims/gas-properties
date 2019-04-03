@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Hierarchy for ViewProperties
 Fix pressure model, investigate Java implementation
 
 Histogram base class:
