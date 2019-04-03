@@ -17,7 +17,8 @@ define( require => {
 
     constructor() {
       super( {
-        holdConstant: HoldConstantEnum.VOLUME
+        holdConstant: HoldConstantEnum.VOLUME,
+        hasCollisionCounter: false
       } );
 
       this.holdConstantProperty.lazyLink( holdConstant => {
