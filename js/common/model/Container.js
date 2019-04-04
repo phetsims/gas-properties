@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -47,6 +48,9 @@ define( require => {
       this.right = this.location.x;
       this.top = this.location.y + this.height;
       this.bottom = this.location.y;
+
+      // @public whether the lid is on the container
+      this.lidIsOnProperty = new BooleanProperty( true );
 
       // @public (read-only) lid thickness, in nm
       this.lidThickness = 3 * this.wallThickness;
@@ -88,6 +92,7 @@ define( require => {
     // @public
     reset() {
       this.widthProperty.reset();
+      this.lidIsOnProperty.reset();
       this.lidWidthProperty.reset();
     }
 
@@ -117,7 +122,13 @@ define( require => {
      * @public
      */
     get openingLeft() {
-      const openingLeft = this.left - this.wallThickness + this.lidWidthProperty.value;
+      let openingLeft = null;
+      if ( this.lidIsOnProperty.value ) {
+        openingLeft = this.left - this.wallThickness + this.lidWidthProperty.value;
+      }
+      else {
+        openingLeft = this.left + this.openingLeftInset;
+      }
       assert && assert( openingLeft <= this.openingRight, 'openingLeft must be <= openingRight' );
       return openingLeft;
     }
