@@ -13,8 +13,12 @@ Histogram base class:
 Energy: Speed histogram
 Energy: KE histogram
 
+Intro: blow off lid
+  ContainerNode, this.container.lidIsOnProperty.link, false starts animation
+  straight up, reveal max opening
+  'Return Lid' puts lid back on fully closed
+
 Intro: hold constant
-Intro: blow off lid, straight up, reveal max opening, 'Return Lid' fully closed
 Intro: class Lid
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
