@@ -46,11 +46,11 @@ define( require => {
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
-  const SizeNode = require( 'GAS_PROPERTIES/common/view/SizeNode' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
 
   class GasPropertiesScreenView extends ScreenView {
 
@@ -126,7 +126,7 @@ define( require => {
      } );
 
       // Dimensional arrows that indicate container size
-      const sizeNode = new SizeNode( model.container.location, model.container.widthProperty,
+      const containerContainerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
         model.modelViewTransform, sizeVisibleProperty );
 
       // Bicycle pumps, one of which is visible depending on the selected particle type
@@ -252,7 +252,7 @@ define( require => {
       this.addChild( containerNode );
       this.addChild( returnLidButton );
       this.addChild( thermometerNode );
-      this.addChild( sizeNode );
+      this.addChild( containerContainerWidthNode );
       this.addChild( particlesNode );
       this.addChild( heaterCoolerNode );
       this.addChild( timeControls );

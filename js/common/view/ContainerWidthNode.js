@@ -23,7 +23,7 @@ define( require => {
   const nanometersString = require( 'string!GAS_PROPERTIES/nanometers' );
   const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
 
-  class SizeNode extends Node {
+  class ContainerWidthNode extends Node {
 
     /**
      * @param {Vector2} containerLocation - location of the container, in model coordinates
@@ -54,7 +54,7 @@ define( require => {
         backgroundLineWidth: 0.5
       } );
 
-      assert && assert( !options || !options.children, 'SizeNode sets children' );
+      assert && assert( !options || !options.children, 'ContainerWidthNode sets children' );
       options = _.extend( {}, options, {
         children: [ dimensionalArrowNode, widthDisplay ]
       } );
@@ -76,5 +76,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'SizeNode', SizeNode );
+  return gasProperties.register( 'ContainerWidthNode', ContainerWidthNode );
 } );

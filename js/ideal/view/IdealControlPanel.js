@@ -17,9 +17,9 @@ define( require => {
   const HoldConstantControls = require( 'GAS_PROPERTIES/ideal/view/HoldConstantControls' );
   const HSeparator = require( 'SUN/HSeparator' );
   const Panel = require( 'SUN/Panel' );
-  const SizeCheckbox = require( 'GAS_PROPERTIES/common/view/SizeCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const WidthCheckbox = require( 'GAS_PROPERTIES/common/view/WidthCheckbox' );
 
   class IdealControlPanel extends Panel {
 
@@ -48,7 +48,7 @@ define( require => {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: separatorWidth
           } ),
-          new SizeCheckbox( sizeVisibleProperty ),
+          new WidthCheckbox( sizeVisibleProperty ),
           new StopwatchCheckbox( stopwatchVisibleProperty ),
           new CollisionCounterCheckbox( collisionCounterVisibleProperty )
         ]

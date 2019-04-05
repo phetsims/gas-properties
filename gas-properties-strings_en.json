@@ -41,8 +41,8 @@
   "light": {
     "value": "Light"
   },
-  "size": {
-    "value": "Size"
+  "width": {
+    "value": "Width"
   },
   "stopwatch": {
     "value": "Stopwatch"

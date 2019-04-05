@@ -14,9 +14,9 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Panel = require( 'SUN/Panel' );
-  const SizeCheckbox = require( 'GAS_PROPERTIES/common/view/SizeCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const WidthCheckbox = require( 'GAS_PROPERTIES/common/view/WidthCheckbox' );
 
   class ExploreToolsPanel extends Panel {
 
@@ -36,7 +36,7 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
-          new SizeCheckbox( sizeVisibleProperty ),
+          new WidthCheckbox( sizeVisibleProperty ),
           new StopwatchCheckbox( stopwatchVisibleProperty ),
           new CollisionCounterCheckbox( collisionCounterVisibleProperty )
         ]
