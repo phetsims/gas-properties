@@ -73,7 +73,6 @@ define( require => {
       // @public are the time controls (play, pause, step) enabled?
       this.isTimeControlsEnabledProperty = new BooleanProperty( true );
 
-      //TODO holdConstantProperty is exposed only in the Intro screen. How to handle for other screen?
       // @public the quantity to hold constant
       this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, options.holdConstant );
 
@@ -318,6 +317,11 @@ define( require => {
 
         // Do this after collision detection, so that the number of collisions detected has been recorded.
         this.collisionCounter && this.collisionCounter.step( dt );
+
+        //TODO this is temporary
+        if ( this.pressureGauge.pressureKilopascalsProperty.value > 8000 ) {
+          this.container.lidIsOnProperty.value = false;
+        }
       }
     }
 
