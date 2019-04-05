@@ -165,6 +165,12 @@ define( require => {
 
       // Dragging the lid horizontally changes the size of the opening in the top of the container
       lidNode.addInputListener( new LidDragListener( container, modelViewTransform, this ) );
+
+      //TODO false: animation to blow lid off, make it invisible when it leaves model bounds
+      //TODO true: make the lid completely cover the opening and make it visible
+      container.lidIsOnProperty.link( lidIsOn => {
+        lidNode.visible = lidIsOn;
+      } );
     }
   }
 

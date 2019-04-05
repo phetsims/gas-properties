@@ -27,6 +27,9 @@ Explore: moving wall does not pause animation and does work on particles
 
 Diffusion: lots of new/different features
 
+DESIGN FYI
+* I changed the location of the Return Lid button, because left edge of container is mutable.
+
 DESIGN QUESTIONS (MODEL)
 * Problems with pressure model:
   - Why is P = NkT/V yielding a much larger value than Java version?

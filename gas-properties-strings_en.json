@@ -106,5 +106,8 @@
   },
   "temperature": {
     "value": "Temperature"
+  },
+  "returnLid": {
+    "value": "Return Lid"
   }
 }

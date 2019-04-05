@@ -44,6 +44,7 @@ define( require => {
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const SizeNode = require( 'GAS_PROPERTIES/common/view/SizeNode' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
@@ -117,6 +118,12 @@ define( require => {
           }
         }
       } );
+
+     // Return Lid button
+     const returnLidButton = new ReturnLidButton( model.container, {
+       right:  model.modelViewTransform.modelToViewX( model.container.right - model.container.openingRightInset ) - 30,
+       bottom: model.modelViewTransform.modelToViewY( model.container.top ) - 15
+     } );
 
       // Dimensional arrows that indicate container size
       const sizeNode = new SizeNode( model.container.location, model.container.widthProperty,
@@ -243,6 +250,7 @@ define( require => {
       this.addChild( pumpBox );
       this.addChild( pressureGaugeNode );
       this.addChild( containerNode );
+      this.addChild( returnLidButton );
       this.addChild( thermometerNode );
       this.addChild( sizeNode );
       this.addChild( particlesNode );
