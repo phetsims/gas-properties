@@ -59,7 +59,7 @@ define( require => {
       defaultValue: 800
     },
 
-    //TODO choose a value and delete
+    //TODO #49 choose a value and delete
     // Average Speed is smoothed over this interval, in ps
     // For internal use only, not public facing.
     averageSpeedSmoothingInterval: {
