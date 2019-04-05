@@ -159,10 +159,10 @@ define( require => {
       }
       
       // @private used internally to smooth the average speed computation
-      this.numberOfAverageSpeedSamples = 0;
-      this.averageSpeedSmoothingTime = 0;
-      this.heavyAverageSpeedSum = 0;
-      this.lightAverageSpeedSum = 0;
+      this.numberOfAverageSpeedSamples = 0; // number of samples we've taken
+      this.averageSpeedSmoothingTime = 0; // accumulated dts while samples were taken
+      this.heavyAverageSpeedSum = 0; // sum of samples for heavy particles
+      this.lightAverageSpeedSum = 0; // sum of samples for light particles
     }
 
     /**
