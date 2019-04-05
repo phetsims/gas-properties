@@ -13,10 +13,8 @@ Histogram base class:
 Energy: Speed histogram
 Energy: KE histogram
 
-Intro: blow off lid
-  ContainerNode, this.container.lidIsOnProperty.link, false starts animation
-  straight up, reveal max opening
-  'Return Lid' puts lid back on fully closed
+Intro: animation of lid blowing off
+Intro: make Return Lid button visible when pressure drops below threshold
 
 Intro: hold constant
 Intro: class Lid
