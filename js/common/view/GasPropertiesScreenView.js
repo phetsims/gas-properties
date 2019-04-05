@@ -250,10 +250,10 @@ define( require => {
       this.addChild( pumpBox );
       this.addChild( pressureGaugeNode );
       this.addChild( containerNode );
-      this.addChild( returnLidButton );
       this.addChild( thermometerNode );
       this.addChild( containerContainerWidthNode );
       this.addChild( particlesNode );
+      this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
       this.addChild( timeControls );
       this.addChild( resetAllButton );
