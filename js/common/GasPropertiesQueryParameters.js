@@ -69,7 +69,7 @@ define( require => {
     },
 
     //TODO choose a value and delete
-    // Pressure a which the lid blows off of the container.
+    // Pressure at which the lid blows off of the container, in kPa.
     // For internal use only, not public facing.
     maxPressure: {
       type: 'number',
