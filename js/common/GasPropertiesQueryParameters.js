@@ -66,6 +66,15 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 0.5
+    },
+
+    //TODO choose a value and delete
+    // Pressure a which the lid blows off of the container.
+    // For internal use only, not public facing.
+    maxPressure: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 50000
     }
   } );
 

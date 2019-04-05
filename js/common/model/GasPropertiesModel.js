@@ -347,7 +347,7 @@ define( require => {
         this.collisionCounter && this.collisionCounter.step( dt );
 
         //TODO this is temporary
-        if ( this.pressureGauge.pressureKilopascalsProperty.value > 20000 ) {
+        if ( this.pressureGauge.pressureKilopascalsProperty.value > GasPropertiesQueryParameters.maxPressure ) {
           this.container.lidIsOnProperty.value = false;
         }
       }
