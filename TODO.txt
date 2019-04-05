@@ -22,7 +22,7 @@ Intro: class Lid
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
 
-Explore: moving wall does not pause animation and does work on particles
+Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 
 Diffusion: lots of new/different features
 
