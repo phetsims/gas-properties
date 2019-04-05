@@ -2,6 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
+Smooth the Average Speed display
 Fix pressure model, investigate Java implementation
 Move pressure and temperature Properties to Container, delete Thermometer and PressureGauge model elements?
 
@@ -38,7 +39,7 @@ DESIGN QUESTIONS (MODEL)
   - How to address the fact that pressure should be zero until particles collide with walls?
 
 DESIGN QUESTIONS (VIEW)
-* smoothing of Average Speed display
+
 
 REFERENCES
 Is this a better collision model?
