@@ -38,6 +38,8 @@ define( require => {
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
   // K, temperature used to compute initial velocity of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
+  // average speed computation is averaged over this time window
+  const AVERAGE_SPEED_SMOOTHING_INTERVAL = GasPropertiesQueryParameters.averageSpeedSmoothingInterval; // ps
 
   class GasPropertiesModel {
 
@@ -155,6 +157,12 @@ define( require => {
           this.redistributeParticles( newWidth / oldWidth );
         } );
       }
+      
+      // @private used internally to smooth the average speed computation
+      this.numberOfAverageSpeedSamples = 0;
+      this.averageSpeedSmoothingTime = 0;
+      this.heavyAverageSpeedSum = 0;
+      this.lightAverageSpeedSum = 0;
     }
 
     /**
@@ -311,15 +319,35 @@ define( require => {
         // Compute pressure
         this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
 
-        // compute the average speed for each particle type
-        this.heavyAverageSpeedProperty.value = getAverageSpeed( this.heavyParticles );
-        this.lightAverageSpeedProperty.value = getAverageSpeed( this.lightParticles );
+        // compute the average speed for each particle type, smooth the values over an interval
+        this.heavyAverageSpeedSum += getAverageSpeed( this.heavyParticles );
+        this.lightAverageSpeedSum += getAverageSpeed( this.lightParticles );
+        this.numberOfAverageSpeedSamples++;
+        this.averageSpeedSmoothingTime += dt;
+        if ( this.averageSpeedSmoothingTime >= AVERAGE_SPEED_SMOOTHING_INTERVAL ) {
+
+          // update the average speed Properties
+          this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
+          this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
+
+          // reset the smoothing variables
+          this.numberOfAverageSpeedSamples = 0;
+          this.averageSpeedSmoothingTime = 0;
+          this.heavyAverageSpeedSum = 0;
+          this.lightAverageSpeedSum = 0;
+        }
+        if ( this.heavyParticles.length === 0 ) {
+          this.heavyAverageSpeedProperty.value = null;
+        }
+        if ( this.lightParticles.length === 0 ) {
+          this.lightAverageSpeedProperty.value = null;
+        }
 
         // Do this after collision detection, so that the number of collisions detected has been recorded.
         this.collisionCounter && this.collisionCounter.step( dt );
 
         //TODO this is temporary
-        if ( this.pressureGauge.pressureKilopascalsProperty.value > 8000 ) {
+        if ( this.pressureGauge.pressureKilopascalsProperty.value > 20000 ) {
           this.container.lidIsOnProperty.value = false;
         }
       }

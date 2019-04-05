@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Smooth the Average Speed display
 Fix pressure model, investigate Java implementation
 Move pressure and temperature Properties to Container, delete Thermometer and PressureGauge model elements?
 

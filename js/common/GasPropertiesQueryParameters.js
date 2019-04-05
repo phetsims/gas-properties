@@ -57,8 +57,16 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value >= 100 && value <= 100000 ),
       defaultValue: 800
+    },
+
+    //TODO choose a value and delete
+    // Average Speed is smoothed over this interval, in ps
+    // For internal use only, not public facing.
+    averageSpeedSmoothingInterval: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 0.5
     }
-    
   } );
 
   gasProperties.register( 'GasPropertiesQueryParameters', GasPropertiesQueryParameters );
