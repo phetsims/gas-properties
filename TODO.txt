@@ -18,7 +18,6 @@ Intro: animation of lid blowing off
 Intro: make Return Lid button visible when pressure drops below threshold
 
 Intro: hold constant
-Intro: class Lid
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
 
