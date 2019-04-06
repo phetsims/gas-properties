@@ -26,7 +26,7 @@ Explore: moving wall does not pause animation and does work on particles, do not
 Diffusion: lots of new/different features
 
 DESIGN FYI
-* I changed the location of the Return Lid button, because left edge of container is mutable.
+* I changed the location of the Return Lid button, because container.left is mutable.
 
 DESIGN QUESTIONS (MODEL)
 * Problems with pressure model:
