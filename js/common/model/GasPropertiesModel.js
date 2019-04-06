@@ -347,6 +347,7 @@ define( require => {
         this.collisionCounter && this.collisionCounter.step( dt );
 
         //TODO this is temporary
+        // If pressure exceeds the maximum, blow the lid off of the container.
         if ( this.pressureGauge.pressureKilopascalsProperty.value > GasPropertiesQueryParameters.maxPressure ) {
           this.container.lidIsOnProperty.value = false;
         }
