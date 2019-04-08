@@ -25,7 +25,7 @@ Diffusion: lots of new/different features
 DESIGN FYI
 * I changed the location of the Return Lid button, because container.left is mutable.
 
-DESIGN QUESTIONS (MODEL).
+DESIGN QUESTIONS (MODEL)
 * Problems with pressure model:
   - Why is P = NkT/V yielding a much larger value than Java version?
   - Is our conversion factor to kPa correct?
