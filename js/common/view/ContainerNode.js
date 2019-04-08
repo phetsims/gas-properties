@@ -29,12 +29,12 @@ define( require => {
     /**
      * @param {Container} container
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {Property.<Bounds2>} modelBoundsProperty
      * @param {EnumerationProperty} holdConstantProperty
+     * @param {Property.<Bounds2>} visibleBoundsProperty
      * @param {Object} [options]
      * @constructor
      */
-    constructor( container, modelViewTransform, modelBoundsProperty, holdConstantProperty, options ) {
+    constructor( container, modelViewTransform, holdConstantProperty, visibleBoundsProperty, options ) {
 
       options = _.extend( {
         resizeHandleColor: HANDLE_COLOR, // {Color|string} color of the resize handle
@@ -179,8 +179,8 @@ define( require => {
         }
         else {
 
-          // animation to blow lid off, make it invisible when it leaves model bounds
-          const animation = new LidAnimation( lidNode, modelBoundsProperty );
+          // animation to blow the lid off of the container
+          const animation = new LidAnimation( lidNode, visibleBoundsProperty );
           animation.endedEmitter.addListener( () => {
             lidNode.visible = false;
           } );
