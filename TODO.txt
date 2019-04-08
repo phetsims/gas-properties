@@ -2,6 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
+Intro: refine lid animation
 Fix pressure model, investigate Java implementation
 
 Histogram base class:
@@ -12,9 +13,6 @@ Histogram base class:
 
 Energy: Speed histogram
 Energy: KE histogram
-
-Intro: animation of lid blowing off
-Intro: make Return Lid button visible when pressure drops below threshold
 
 Intro: hold constant
 Intro: clean up particle arrays in IdealModel
@@ -36,6 +34,7 @@ DESIGN QUESTIONS (MODEL).
   - How to address the fact that pressure should be zero until particles collide with walls?
 
 DESIGN QUESTIONS (VIEW)
+* Should Return Lid button appear immediately, or when pressure drops below threshold?
 
 
 REFERENCES
