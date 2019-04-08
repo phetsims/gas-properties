@@ -3,7 +3,6 @@ TODO list for gas-properties
 UP NEXT
 
 Fix pressure model, investigate Java implementation
-Move pressure and temperature Properties to Container, delete Thermometer and PressureGauge model elements?
 
 Histogram base class:
 - fixed number of bins
