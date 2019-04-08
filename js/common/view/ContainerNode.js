@@ -168,9 +168,15 @@ define( require => {
       // Dragging the lid horizontally changes the size of the opening in the top of the container
       lidNode.addInputListener( new LidDragListener( container, modelViewTransform, this ) );
 
-      //TODO finish this
+      let lidAnimation = null;
       container.lidIsOnProperty.link( lidIsOn => {
         if ( lidIsOn ) {
+
+          // cancel any animation that is in progress
+          if ( lidAnimation ) {
+            lidAnimation.stop();
+            lidAnimation = null;
+          }
 
           // restore the lid in the fully-closed position
           container.lidWidthProperty.value = container.maxLidWidth;
@@ -179,12 +185,12 @@ define( require => {
         }
         else {
 
-          // animation to blow the lid off of the container
-          const animation = new LidAnimation( lidNode, visibleBoundsProperty );
-          animation.endedEmitter.addListener( () => {
+          // blow the lid off of the container
+          lidAnimation = new LidAnimation( lidNode, visibleBoundsProperty );
+          lidAnimation.endedEmitter.addListener( () => {
             lidNode.visible = false;
           } );
-          animation.start();
+          lidAnimation.start();
         }
       } );
     }
