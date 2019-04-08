@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const LidAnimation = require( 'GAS_PROPERTIES/common/view/LidAnimation' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -28,11 +29,12 @@ define( require => {
     /**
      * @param {Container} container
      * @param {ModelViewTransform2} modelViewTransform
+     * @param {Property.<Bounds2>} modelBoundsProperty
      * @param {EnumerationProperty} holdConstantProperty
      * @param {Object} [options]
      * @constructor
      */
-    constructor( container, modelViewTransform, holdConstantProperty, options ) {
+    constructor( container, modelViewTransform, modelBoundsProperty, holdConstantProperty, options ) {
 
       options = _.extend( {
         resizeHandleColor: HANDLE_COLOR, // {Color|string} color of the resize handle
@@ -172,11 +174,18 @@ define( require => {
 
           // restore the lid in the fully-closed position
           container.lidWidthProperty.value = container.maxLidWidth;
+          updateLidPosition();
+          lidNode.visible = true;
         }
         else {
+
           // animation to blow lid off, make it invisible when it leaves model bounds
+          const animation = new LidAnimation( lidNode, modelBoundsProperty );
+          animation.endedEmitter.addListener( () => {
+            lidNode.visible = false;
+          } );
+          animation.start();
         }
-        lidNode.visible = lidIsOn;
       } );
     }
   }

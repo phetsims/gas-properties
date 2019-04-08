@@ -86,7 +86,8 @@ define( require => {
       let containerWidth = model.container.widthProperty.value;
 
       // Container
-      const containerNode = new ContainerNode( model.container, model.modelViewTransform, model.holdConstantProperty, {
+      const containerNode = new ContainerNode( model.container, model.modelViewTransform,
+        model.modelBoundsProperty, model.holdConstantProperty, {
         resizeHandleColor: options.resizeHandleColor,
         resizeHandleIsPressedListener: isPressed => {
           if ( isPressed ) {
