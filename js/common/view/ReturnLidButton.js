@@ -46,6 +46,7 @@ define( require => {
 
       super( options );
 
+      // Button is visible immediately, so it's possible to push it and repeatedly blow the lid off.
       container.lidIsOnProperty.link( lidIsOn => {
         this.visible = !lidIsOn;
       } );
