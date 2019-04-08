@@ -2,6 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
+Return Lid button should cancel animation
 Intro: refine lid animation
 Fix pressure model, investigate Java implementation
 
