@@ -47,8 +47,6 @@ define( require => {
       super( options );
 
       container.lidIsOnProperty.link( lidIsOn => {
-
-        //TODO the button shouldn't be made visible until the pressure drops below the threshold that blows the lid off
         this.visible = !lidIsOn;
       } );
     }

@@ -55,7 +55,8 @@ define( require => {
         lineWidth: viewWallThickness
       } );
 
-      // Displays the previous bounds of the container, visible while dragging
+      // Displays the previous bounds of the container, visible while dragging.
+      // This is a simple rectangle, and does not need to show the previous opening in the top.
       const previousBoundsNode = new Rectangle( 0, 0, 1, 1, {
         stroke: GasPropertiesColorProfile.containerPreviousBoundsStrokeProperty,
         lineWidth: viewWallThickness,
@@ -155,7 +156,6 @@ define( require => {
         lidNode.interruptSubtreeInput();
         lidNode.pickable = !isPressed;
 
-        //TODO is simple rectangle OK, or does this need to show opening?
         // display the previous bounds of the container
         previousBoundsNode.visible = isPressed;
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );

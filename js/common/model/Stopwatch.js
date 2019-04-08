@@ -1,8 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO DESIGN Why do we want to show stopwatch time to NN.nn ps?
-//TODO DESIGN When should stopwatch reset time to zero?
-//TODO DESIGN What is the max time at which stopwatch should stop?
 /**
  * Model for the stopwatch.
  *
