@@ -180,6 +180,7 @@ define( require => {
 
           // restore the lid in the fully-closed position
           container.lidWidthProperty.value = container.maxLidWidth;
+          lidNode.setRotation( 0 );
           updateLidPosition();
           lidNode.visible = true;
         }

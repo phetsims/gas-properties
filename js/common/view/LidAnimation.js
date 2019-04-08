@@ -30,6 +30,16 @@ define( require => {
         attribute: 'y',
         to: visibleBoundsProperty.value.top
       } );
+
+      // Randomly rotate 1 degree about the center of the lid.
+      let numberOfSteps = 0;
+      this.updateEmitter.addListener( () => {
+        numberOfSteps++;
+        if ( numberOfSteps % 10 === 0 ) {
+          lidNode.setRotation( 0 );
+          lidNode.rotateAround( lidNode.center, phet.joist.random.nextIntBetween( -1, 1 ) * Math.PI / 180 )
+        }
+      } );
     }
   }
 
