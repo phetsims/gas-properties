@@ -37,7 +37,7 @@ define( require => {
   // constants
   // radians, used to compute initial velocity angle for particles
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
-  // K, temperature used to compute initial velocity of particles
+  // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
   // average speed computation is averaged over this time window
   const AVERAGE_SPEED_SMOOTHING_INTERVAL = GasPropertiesQueryParameters.averageSpeedSmoothingInterval; // ps
