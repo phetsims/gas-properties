@@ -18,6 +18,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
@@ -31,7 +32,6 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
-  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -218,7 +218,7 @@ define( require => {
         // of particles look less wave-like. We do this for temperature instead of speed because temperature
         // in the container is T = (2/3)KE/k, and KE is a function of speed^2, so deviation in speed would
         // change the desired temperature.
-        temperatures = getGaussianValues( n, meanTemperature, 0.2 * meanTemperature, 1E-10 );
+        temperatures = GasPropertiesUtils.getGaussianValues( n, meanTemperature, 0.2 * meanTemperature, 1E-10 );
       }
       else {
 
@@ -526,46 +526,6 @@ define( require => {
       averageSpeed = totalSpeed / particles.length;
     }
     return averageSpeed;
-  }
-
-  //TODO this is very general, move somewhere else?
-  /**
-   * Generates n values with some mean and deviation.
-   * @param {number} n - number of values to generate
-   * @param {number} mean - mean of the Gaussian
-   * @param {number} deviation - standard deviation of the Gaussian
-   * @param {number} threshold - acceptable difference between the desired and actual mean
-   * @returns {number[]}
-   */
-  function getGaussianValues( n, mean, deviation, threshold ) {
-
-    const values = [];
-    let sum = 0;
-
-    // Generate a random Gaussian sample whose values have the desired mean and standard deviation.
-    for ( let i = 0; i < n; i++ ) {
-      const speed = Util.boxMullerTransform( mean, deviation, phet.joist.random );
-      values.push( speed );
-      sum += speed;
-    }
-    assert && assert( values.length === n, 'wrong number of values' );
-
-    // Adjust values so that the actual mean matches the desired mean.
-    const emergentMean = sum / n;
-    const deltaMean = mean - emergentMean;
-    sum = 0;
-    for ( let i = 0; i < values.length; i++ ) {
-      const speed = values[ i ] + deltaMean;
-      values[ i ] = speed;
-      sum += speed;
-    }
-
-    // Verify that the actual mean is within the tolerance.
-    const actualMean = sum / n;
-    assert && assert( Math.abs( actualMean - mean ) < threshold,
-      `mean: ${mean}, actualMean: ${actualMean}` );
-
-    return values;
   }
 
   return gasProperties.register( 'GasPropertiesModel', GasPropertiesModel );
