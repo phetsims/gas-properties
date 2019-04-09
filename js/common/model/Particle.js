@@ -38,7 +38,7 @@ define( require => {
 
       // @public (read-only) the particle is initially at rest
       this.velocity = new Vector2( 0, 0 ); // nm / ps
-      this.momentum = new Vector2( 0, 0 ); // AMU * nm / ps
+      this.momentum = new Vector2( 0, 0 ); // AMU * nm / ps //TODO delete if not used
       this.kineticEnergy = 0; // AMU * nm^2 / ps^2
 
       // @public (read-only)
