@@ -313,12 +313,6 @@ define( require => {
         assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
         assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
 
-        // Compute temperature. Do this before pressure, because pressure depends on temperature.
-        this.thermometer.temperatureKelvinProperty.value = this.computeTemperature();
-
-        // Compute pressure
-        this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
-
         // compute the average speed for each particle type, smooth the values over an interval
         this.heavyAverageSpeedSum += getAverageSpeed( this.heavyParticles );
         this.lightAverageSpeedSum += getAverageSpeed( this.lightParticles );
@@ -346,7 +340,12 @@ define( require => {
         // Do this after collision detection, so that the number of collisions detected has been recorded.
         this.collisionCounter && this.collisionCounter.step( dt );
 
-        //TODO this is temporary
+        // Compute temperature. Do this before pressure, because pressure depends on temperature.
+        this.thermometer.temperatureKelvinProperty.value = this.computeTemperature();
+
+        // Compute pressure
+        this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
+
         // If pressure exceeds the maximum, blow the lid off of the container.
         if ( this.pressureGauge.pressureKilopascalsProperty.value > GasPropertiesQueryParameters.maxPressure ) {
           this.container.lidIsOnProperty.value = false;
