@@ -2,6 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
+Change ?redistribute default to 'end', #45
+If collision are on, randomize initial velocity; if off, wave-like
 Pressure model
 
 Histogram base class:
