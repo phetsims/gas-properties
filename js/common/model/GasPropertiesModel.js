@@ -64,7 +64,7 @@ define( require => {
       // @public (read-only) transform between model and view coordinate frames
       const modelViewScale = 40; // number of pixels per nm
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
-        new Vector2( 645, 475  ), // offset of the model's origin, in view coordinates
+        new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
         modelViewScale,
         -modelViewScale // y is inverted
       );
@@ -123,7 +123,7 @@ define( require => {
 
       // @public (read-only)
       this.container = new Container();
-      
+
       // @public (read-only)
       this.collisionDetector = new CollisionDetector( this );
 
@@ -157,7 +157,7 @@ define( require => {
           this.redistributeParticles( newWidth / oldWidth );
         } );
       }
-      
+
       // @private used internally to smooth the average speed computation
       this.numberOfAverageSpeedSamples = 0; // number of samples we've taken
       this.averageSpeedSmoothingTime = 0; // accumulated dts while samples were taken
@@ -217,15 +217,13 @@ define( require => {
           this.container.hoseLocation.y
         );
 
-        // Set the particle's velocity.
-        particle.setVelocityPolar(
+        // |v| = sqrt( 3kT / m )
+        const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / particle.mass );
 
-          // Velocity magnitude, |v| = sqrt( 3kT / m )
-          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / particle.mass ),
+        // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
+        const angle = Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE;
 
-          // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
-          Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE
-        );
+        particle.setVelocityPolar( speed, angle );
 
         particles.push( particle );
       }
@@ -377,7 +375,7 @@ define( require => {
         const k = GasPropertiesConstants.BOLTZMANN; // (nm^2 * AMU)/(ps^2 * K)
 
         // T = (2/3)KE/k
-        temperature = (2/3) * averageKineticEnergy / k; // K
+        temperature = ( 2 / 3 ) * averageKineticEnergy / k; // K
       }
       return temperature;
     }
@@ -419,7 +417,7 @@ define( require => {
     assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
     const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
     for ( let i = 0; i < particles.length; i++ ) {
-      particles[i].scaleVelocity( velocityScale );
+      particles[ i ].scaleVelocity( velocityScale );
     }
   }
 
