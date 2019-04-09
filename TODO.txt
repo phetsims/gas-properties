@@ -14,6 +14,12 @@ Energy: Speed histogram
 Energy: KE histogram
 
 Intro: hold constant
+- None: change N, T, or V => change P
+- Volume: change N or T => change P
+- Temperature: change N or V => change P
+- Pressure T: change N or V => change T
+- Pressure V: change N or T => change V
+
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
 
