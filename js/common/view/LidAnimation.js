@@ -37,7 +37,7 @@ define( require => {
         numberOfSteps++;
         if ( numberOfSteps % 10 === 0 ) {
           lidNode.setRotation( 0 );
-          lidNode.rotateAround( lidNode.center, phet.joist.random.nextIntBetween( -1, 1 ) * Math.PI / 180 )
+          lidNode.rotateAround( lidNode.center, phet.joist.random.nextIntBetween( -1, 1 ) * Math.PI / 180 );
         }
       } );
     }
