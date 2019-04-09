@@ -2,8 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
-Intro: refine lid animation
-Fix pressure model
+Pressure model
 
 Histogram base class:
 - fixed number of bins
