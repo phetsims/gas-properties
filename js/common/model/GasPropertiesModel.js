@@ -31,6 +31,7 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
+  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -208,22 +209,47 @@ define( require => {
         temperature = this.thermometer.temperatureKelvinProperty.value;
       }
 
-      for ( let i = 0; i < n; i++ ) {
+      // sacrificial instance to determine the mass
+      const mass = new Constructor().mass;
 
-        // Create a particle, just inside the container where the bicycle pump hose attaches.
+      // |v| = sqrt( 3kT / m )
+      const desiredMeanSpeed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass );
+
+      let speeds = null;
+      if ( n === 1 || !this.collisionDetector.particleParticleCollisionsEnabledProperty.value ) {
+
+        // For single particles, or if particle-particle collisions are disabled, use the mean speed value.
+        // For groups of particles, this yields wave-like motion.
+        speeds = [];
+        for ( let i = 0; i < n; i++ ) {
+          speeds.push( desiredMeanSpeed );
+        }
+      }
+      else {
+
+        // If particle-particle collisions are enabled, create some deviation in the speeds, but maintain the
+        // desired mean.  This makes the motion of a group of particles look less wave-like.
+        const deviation = 0.2 * desiredMeanSpeed; // determined empirically
+        speeds = getGaussianValues( n, desiredMeanSpeed, deviation, 1E-10 );
+      }
+
+      // Create n particles
+      for ( let i = 0; i < n; i++ ) {
+        assert && assert( i < speeds.length, `index out of range, i: ${i}` );
+
         const particle = new Constructor();
+        assert && assert( particle.mass === mass, `unexpected mass: ${mass}` );
+
+        // Position the particle just inside the container where the bicycle pump hose attaches.
         particle.setLocationXY(
           this.container.hoseLocation.x - this.container.wallThickness - particle.radius,
           this.container.hoseLocation.y
         );
 
-        // |v| = sqrt( 3kT / m )
-        const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / particle.mass );
-
         // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
         const angle = Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE;
 
-        particle.setVelocityPolar( speed, angle );
+        particle.setVelocityPolar( speeds[ i ], angle );
 
         particles.push( particle );
       }
@@ -500,6 +526,46 @@ define( require => {
       averageSpeed = totalSpeed / particles.length;
     }
     return averageSpeed;
+  }
+
+  //TODO this is very general, move somewhere else?
+  /**
+   * Generates n values with some mean and deviation.
+   * @param {number} n - number of values to generate
+   * @param {number} mean - mean of the Gaussian
+   * @param {number} deviation - standard deviation of the Gaussian
+   * @param {number} threshold - acceptable difference between the desired and actual mean
+   * @returns {number[]}
+   */
+  function getGaussianValues( n, mean, deviation, threshold ) {
+
+    const values = [];
+    let sum = 0;
+    
+    // Generate a random Gaussian sample whose values have the desired mean and standard deviation.
+    for ( let i = 0; i < n; i++ ) {
+      const speed = Util.boxMullerTransform( mean, deviation, phet.joist.random );
+      values.push( speed );
+      sum += speed;
+    }
+    assert && assert( values.length === n, 'wrong number of values' );
+
+    // Adjust values so that the actual mean matches the desired mean.
+    const emergentMean = sum / n;
+    const deltaMean = mean - emergentMean;
+    sum = 0;
+    for ( let i = 0; i < values.length; i++ ) {
+      const speed = values[ i ] + deltaMean;
+      values[ i ] = speed;
+      sum += speed;
+    }
+
+    // Verify that the actual mean is within the tolerance.
+    const actualMean = sum / n;
+    assert && assert( Math.abs( actualMean - mean ) < threshold,
+      `mean: ${mean}, actualMean: ${actualMean}` );
+
+    return values;
   }
 
   return gasProperties.register( 'GasPropertiesModel', GasPropertiesModel );
