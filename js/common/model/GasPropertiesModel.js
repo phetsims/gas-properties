@@ -197,59 +197,59 @@ define( require => {
     addParticles( n, particles, Constructor ) {
 
       // Get the temperature that will be used to compute initial velocity magnitude.
-      let temperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
+      let meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
       if ( this.controlTemperatureEnabledProperty.value ) {
 
         // User's setting
-        temperature = this.initialTemperatureProperty.value;
+        meanTemperature = this.initialTemperatureProperty.value;
       }
       else if ( this.heavyParticles.length + this.lightParticles.length > 0 ) {
 
         // Current temperature in the non-empty container
-        temperature = this.thermometer.temperatureKelvinProperty.value;
+        meanTemperature = this.thermometer.temperatureKelvinProperty.value;
       }
 
-      // sacrificial instance to determine the mass
-      const mass = new Constructor().mass;
+      // Create a set of temperature values that will be used to compute initial speed.
+      let temperatures = null;
+      if ( n !== 1 && this.collisionDetector.particleParticleCollisionsEnabledProperty.value ) {
 
-      // |v| = sqrt( 3kT / m )
-      const desiredMeanSpeed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass );
-
-      let speeds = null;
-      if ( n === 1 || !this.collisionDetector.particleParticleCollisionsEnabledProperty.value ) {
-
-        // For single particles, or if particle-particle collisions are disabled, use the mean speed value.
-        // For groups of particles, this yields wave-like motion.
-        speeds = [];
-        for ( let i = 0; i < n; i++ ) {
-          speeds.push( desiredMeanSpeed );
-        }
+        // For groups of particles with particle-particle collisions enabled, create some deviation in the
+        // temperature used to compute speed, but maintain the desired mean.  This makes the motion of a group
+        // of particles look less wave-like. We do this for temperature instead of speed because temperature
+        // in the container is T = (2/3)KE/k, and KE is a function of speed^2, so deviation in speed would
+        // change the desired temperature.
+        temperatures = getGaussianValues( n, meanTemperature, 0.2 * meanTemperature, 1E-10 );
       }
       else {
 
-        // If particle-particle collisions are enabled, create some deviation in the speeds, but maintain the
-        // desired mean.  This makes the motion of a group of particles look less wave-like.
-        const deviation = 0.2 * desiredMeanSpeed; // determined empirically
-        speeds = getGaussianValues( n, desiredMeanSpeed, deviation, 1E-10 );
+        // For single particles, or if particle-particle collisions are disabled, use the mean temperature
+        // for all particles. For groups of particles, this yields wave-like motion.
+        temperatures = [];
+        for ( let i = 0; i < n; i++ ) {
+          temperatures[ i ] = meanTemperature;
+        }
       }
 
       // Create n particles
       for ( let i = 0; i < n; i++ ) {
-        assert && assert( i < speeds.length, `index out of range, i: ${i}` );
+        assert && assert( i < temperatures.length, `index out of range, i: ${i}` );
 
         const particle = new Constructor();
-        assert && assert( particle.mass === mass, `unexpected mass: ${mass}` );
 
-        // Position the particle just inside the container where the bicycle pump hose attaches.
+        // Position the particle just inside the container, where the bicycle pump hose attaches to the right wall.
         particle.setLocationXY(
           this.container.hoseLocation.x - this.container.wallThickness - particle.radius,
           this.container.hoseLocation.y
         );
 
-        // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
-        const angle = Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE;
+        // Set the initial velocity
+        particle.setVelocityPolar(
+          // |v| = sqrt( 3kT / m )
+          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
 
-        particle.setVelocityPolar( speeds[ i ], angle );
+          // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
+          Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE
+        );
 
         particles.push( particle );
       }
@@ -541,7 +541,7 @@ define( require => {
 
     const values = [];
     let sum = 0;
-    
+
     // Generate a random Gaussian sample whose values have the desired mean and standard deviation.
     for ( let i = 0; i < n; i++ ) {
       const speed = Util.boxMullerTransform( mean, deviation, phet.joist.random );

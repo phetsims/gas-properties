@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Use a Gaussian distribution of temperatures to compute initial speeds of particles
 Pressure model
 
 Histogram base class:
