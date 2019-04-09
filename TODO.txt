@@ -2,7 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
-If collision are on, randomize initial velocity; if off, wave-like
+Use a Gaussian distribution of temperatures to compute initial speeds of particles
 Pressure model
 
 Histogram base class:
