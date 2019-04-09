@@ -3,7 +3,7 @@ TODO list for gas-properties
 UP NEXT
 
 Intro: refine lid animation
-Fix pressure model, investigate Java implementation
+Fix pressure model
 
 Histogram base class:
 - fixed number of bins
