@@ -41,12 +41,12 @@ define( require => {
     //TODO #45 choose a value and delete
     // Determines when particles will be redistributed as the result of resizing the container in the Ideal screen.
     // 'drag' redistributes as the resize handle is being dragged.
-    // 'endDrag' redistributes when the user releases the resize handle, on end drag.
+    // 'end' redistributes when the user releases the resize handle, on end drag.
     // For internal use only, not public facing.
     redistribute: {
       type: 'string',
       validValues: [ 'drag', 'end' ],
-      defaultValue: 'drag'
+      defaultValue: 'end'
     },
 
     //TODO #44 choose a value and delete
