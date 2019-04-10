@@ -40,7 +40,7 @@ define( require => {
           range: NUMBER_DISPLAY_RANGE,
           units: kilopascalsString,
           numberDisplayOptions: {
-            decimalPlaces: 1
+            decimalPlaces: 0
           }
         },
         {
@@ -49,7 +49,7 @@ define( require => {
           range: NUMBER_DISPLAY_RANGE,
           units: atmospheresString,
           numberDisplayOptions: {
-            decimalPlaces: 2
+            decimalPlaces: 0
           }
         }
       ];
