@@ -166,6 +166,11 @@ define( require => {
     // Ideal screen, grip on the container's resize handle
     idealResizeGripColor: {
       default: 'rgb( 187, 154, 86 )'
+    },
+
+    // bars in the histograms
+    histogramBarColor: {
+      default: 'green'
     }
   } );
 

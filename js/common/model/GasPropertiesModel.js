@@ -421,6 +421,48 @@ define( require => {
       // P = NkT/V, converted to kPa
       return 1.66E3 * ( numberOfParticles * k * temperature / volume );
     }
+
+    /**
+     * Gets kinetic energy values for all particles in the container. Used by the Kinetic Energy histogram.
+     * @returns {number[]}
+     * @public
+     */
+    getKineticEnergyValues() {
+      const values = [];
+      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
+        values.push( this.heavyParticles[ i ].kineticEnergy );
+      }
+      for ( let i = 0; i < this.lightParticles.length; i++ ) {
+        values.push( this.lightParticles[ i ].kineticEnergy );
+      }
+      return values;
+    }
+
+    /**
+     * Gets speed values for all heavy particles in the container. Used by the Speed histogram.
+     * @returns {number[]}
+     * @public
+     */
+    getHeavyParticleSpeedValues() {
+      const values = [];
+      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
+        values.push( this.heavyParticles[ i ].velocity.magnitude );
+      }
+      return values;
+    }
+
+    /**
+     * Gets speed values for all light particles in the container. Used by the Speed histogram.
+     * @returns {number[]}
+     * @public
+     */
+    getLightParticleSpeedValues() {
+      const values = [];
+      for ( let i = 0; i < this.lightParticles.length; i++ ) {
+        values.push( this.lightParticles[ i ].velocity.magnitude );
+      }
+      return values;
+    }
   }
 
   /**

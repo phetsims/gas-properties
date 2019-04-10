@@ -14,29 +14,23 @@ define( require => {
   class HistogramDataSet {
 
     /**
-     * @param {string} debugName - used internally for debugging, not visible to the user
      * @param {number[]} values
-     * @param {Range} range
-     * @param {number} numberOfBins
+     * @param {number} binWidth
      * @param {Object} [options]
      */
-    constructor( debugName, values, range, numberOfBins, options ) {
+    constructor( values, binWidth, options ) {
 
       options = _.extend( {
         stroke: 'black', // {ColorDef}
-        fill: null // {ColorDef}
+        fill: 'white' // {ColorDef}
       }, options );
 
       // @public (read-only)
-      this.debugName = debugName;
       this.values = values;
-      this.range = range;
-      this.numberOfBins = numberOfBins;
+      this.binWidth = binWidth;
       this.stroke = options.stroke;
       this.fill = options.fill;
     }
-
-    get binWidth() { return this.range.length / this.numberOfBins; }
   }
 
   return gasProperties.register( 'HistogramDataSet', HistogramDataSet );

@@ -12,12 +12,17 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
+  const HistogramDataSet = require( 'GAS_PROPERTIES/energy/model/HistogramDataSet' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
   const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
+
+  // constants
+  const BIN_WIDTH = 50; //TODO value and units
 
   class KineticEnergyHistogram extends Histogram {
 
@@ -41,7 +46,12 @@ define( require => {
      * @param {number} dt - time delta, in ps
      */
     step( dt ) {
-      //TODO
+      this.removeAllDataSets();
+      this.addDataSet( new HistogramDataSet( this.model.getKineticEnergyValues(), BIN_WIDTH, {
+        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+        stroke: null
+      } ) );
+      this.update();
     }
   }
 

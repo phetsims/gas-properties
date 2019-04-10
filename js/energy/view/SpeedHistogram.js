@@ -12,12 +12,17 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
+  const HistogramDataSet = require( 'GAS_PROPERTIES/energy/model/HistogramDataSet' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
   const speedString = require( 'string!GAS_PROPERTIES/speed' );
+
+  // constants
+  const BIN_WIDTH = 100; //TODO value and units
 
   class SpeedHistogram extends Histogram {
 
@@ -36,6 +41,8 @@ define( require => {
 
       // @private
       this.model = model;
+      this.heavyVisibleProperty = heavyVisibleProperty;
+      this.lightVisibleProperty = lightVisibleProperty;
     }
 
     /**
@@ -43,7 +50,37 @@ define( require => {
      * @param {number} dt - time delta, in ps
      */
     step( dt ) {
-      //TODO
+
+      this.removeAllDataSets();
+
+      // Get speed values
+      const heavyValues = this.model.getHeavyParticleSpeedValues();
+      const lightValues = this.model.getLightParticleSpeedValues();
+      const allValues = heavyValues.concat( lightValues );
+
+      // all particles
+      this.addDataSet( new HistogramDataSet( allValues, BIN_WIDTH, {
+        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+        stroke: null
+      } ) );
+
+      // heavy particles
+      if ( this.heavyVisibleProperty.value ) {
+        this.addDataSet( new HistogramDataSet( heavyValues, BIN_WIDTH, {
+          stroke: GasPropertiesColorProfile.heavyParticleColorProperty,
+          fill: null
+        } ) );
+      }
+
+      // light particles
+      if ( this.lightVisibleProperty.value ) {
+        this.addDataSet( new HistogramDataSet( lightValues, BIN_WIDTH, {
+          stroke: GasPropertiesColorProfile.lightParticleColorProperty,
+          fill: null
+        } ) );
+      }
+
+      this.update();
     }
   }
 
