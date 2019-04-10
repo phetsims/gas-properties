@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO flesh out
 /**
  * Speed histogram, shows the distribution of the speeds of the particles in the container.
  *
@@ -22,7 +21,7 @@ define( require => {
   const speedString = require( 'string!GAS_PROPERTIES/speed' );
 
   // constants
-  const BIN_WIDTH = 100; //TODO value and units
+  const BIN_WIDTH = 1; // nm/ps
 
   class SpeedHistogram extends Histogram {
 
@@ -53,31 +52,37 @@ define( require => {
 
       this.removeAllDataSets();
 
-      // Get speed values
+      // Get speed values, {number[]}
       const heavyValues = this.model.getHeavyParticleSpeedValues();
       const lightValues = this.model.getLightParticleSpeedValues();
       const allValues = heavyValues.concat( lightValues );
 
-      // all particles
-      this.addDataSet( new HistogramDataSet( allValues, BIN_WIDTH, {
-        fill: GasPropertiesColorProfile.histogramBarColorProperty,
-        stroke: null
-      } ) );
+      if ( allValues.length > 0 ) {
 
-      // heavy particles
-      if ( this.heavyVisibleProperty.value ) {
-        this.addDataSet( new HistogramDataSet( heavyValues, BIN_WIDTH, {
-          stroke: GasPropertiesColorProfile.heavyParticleColorProperty,
-          fill: null
-        } ) );
-      }
+        // set the y-axis scale
+        this.maxY = allValues.length; //TODO
 
-      // light particles
-      if ( this.lightVisibleProperty.value ) {
-        this.addDataSet( new HistogramDataSet( lightValues, BIN_WIDTH, {
-          stroke: GasPropertiesColorProfile.lightParticleColorProperty,
-          fill: null
+        // all particles
+        this.addDataSet( new HistogramDataSet( allValues, BIN_WIDTH, {
+          fill: GasPropertiesColorProfile.histogramBarColorProperty,
+          stroke: null
         } ) );
+
+        // heavy particles
+        if ( this.heavyVisibleProperty.value ) {
+          this.addDataSet( new HistogramDataSet( heavyValues, BIN_WIDTH, {
+            stroke: GasPropertiesColorProfile.heavyParticleColorProperty,
+            fill: null
+          } ) );
+        }
+
+        // light particles
+        if ( this.lightVisibleProperty.value ) {
+          this.addDataSet( new HistogramDataSet( lightValues, BIN_WIDTH, {
+            stroke: GasPropertiesColorProfile.lightParticleColorProperty,
+            fill: null
+          } ) );
+        }
       }
 
       this.update();

@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO flesh out
 /**
  * Kinetic Energy histogram, shows the distribution of kinetic energy of the particles in the container.
  *
@@ -22,7 +21,7 @@ define( require => {
   const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
 
   // constants
-  const BIN_WIDTH = 50; //TODO value and units
+  const BIN_WIDTH = 5; // AMU * nm^2 / ps^2
 
   class KineticEnergyHistogram extends Histogram {
 
@@ -46,11 +45,24 @@ define( require => {
      * @param {number} dt - time delta, in ps
      */
     step( dt ) {
+
       this.removeAllDataSets();
-      this.addDataSet( new HistogramDataSet( this.model.getKineticEnergyValues(), BIN_WIDTH, {
-        fill: GasPropertiesColorProfile.histogramBarColorProperty,
-        stroke: null
-      } ) );
+
+      // Get KE values, {number[]}
+      const values = this.model.getKineticEnergyValues();
+
+      if ( values.length > 0 ) {
+
+        // set the y-axis scale
+        this.maxY = values.length; //TODO
+
+        // KE data set
+        this.addDataSet( new HistogramDataSet( values, BIN_WIDTH, {
+          fill: GasPropertiesColorProfile.histogramBarColorProperty,
+          stroke: null
+        } ) );
+      }
+
       this.update();
     }
   }
