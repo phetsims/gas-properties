@@ -61,12 +61,16 @@ define( require => {
       yMargin: 4
     },
 
+    HISTOGRAM_AXIS_LABEL_OPTIONS: {
+      fill: GasPropertiesColorProfile.textFillProperty,
+      font: new PhetFont( 14 )
+    },
+
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
 
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),
-    AXIS_LABEL_FONT: new PhetFont( 14 ),
 
     // physics quantities
     BOLTZMANN: 8.316E-3, // Boltzmann constant k, converted to (nm^2 * AMU)/(ps^2 * K) by @arouinfar

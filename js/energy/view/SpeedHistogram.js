@@ -11,7 +11,9 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
@@ -27,12 +29,13 @@ define( require => {
      */
     constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
 
-      options = _.extend( {
-        xAxisString: speedString,
-        yAxisString: numberOfParticlesString
-      }, options );
+      const xAxisLabel = new Text( speedString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
+      const yAxisLabel = new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
 
-      super( model, options );
+      super( xAxisLabel, yAxisLabel, options );
+
+      // @private
+      this.model = model;
     }
 
     /**
