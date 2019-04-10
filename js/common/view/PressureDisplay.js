@@ -12,6 +12,7 @@ define( require => {
   const ComboBoxDisplay = require( 'SCENERY_PHET/ComboBoxDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Range = require( 'DOT/Range' );
 
@@ -20,7 +21,7 @@ define( require => {
   const kilopascalsString = require( 'string!GAS_PROPERTIES/kilopascals' );
 
   // constants
-  const NUMBER_DISPLAY_RANGE = new Range( 0, 99999 ); // determines how wide items in the ComboBoxDisplay will be
+  const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPressure );
 
   class PressureDisplay extends ComboBoxDisplay {
 
