@@ -150,7 +150,6 @@ define( require => {
 
     // radio buttons for choosing particle type
     radioButtonGroupSelectedStroke: {
-      //TODO DESIGN not digging this color
       default: 'rgb( 105, 195, 231 )' // blue
     }
   } );
