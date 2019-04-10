@@ -11,6 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
@@ -31,7 +32,7 @@ define( require => {
       const viewProperties = new IdealViewProperties();
 
       super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, {
-        resizeHandleColor: 'rgb( 187, 154, 86 )' //TODO HandleNode doesn't support ColorDef
+        resizeGripColor: GasPropertiesColorProfile.idealResizeGripColorProperty
       } );
 
       // Control panel at upper right

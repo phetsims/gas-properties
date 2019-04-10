@@ -63,7 +63,7 @@ define( require => {
     constructor( model, particleTypeProperty, sizeVisibleProperty, options ) {
 
       options = _.extend( {
-        resizeHandleColor: 'rgb( 160, 160, 160 )' //TODO HandleNode doesn't support ColorDef
+        resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
       }, options );
 
       super();
@@ -88,7 +88,7 @@ define( require => {
       // Container
       const containerNode = new ContainerNode( model.container, model.modelViewTransform,
         model.holdConstantProperty, this.visibleBoundsProperty, {
-        resizeHandleColor: options.resizeHandleColor,
+        resizeGripColor: options.resizeGripColor,
         resizeHandleIsPressedListener: isPressed => {
           if ( isPressed ) {
 

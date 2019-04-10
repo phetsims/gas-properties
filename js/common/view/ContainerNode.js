@@ -21,9 +21,6 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
 
-  // constants
-  const HANDLE_COLOR = 'rgb( 160, 160, 160 )'; //TODO can't use color profile because HandleNode doesn't support it
-
   class ContainerNode extends Node {
 
     /**
@@ -37,8 +34,8 @@ define( require => {
     constructor( container, modelViewTransform, holdConstantProperty, visibleBoundsProperty, options ) {
 
       options = _.extend( {
-        resizeHandleColor: HANDLE_COLOR, // {Color|string} color of the resize handle
-        lidHandleColor: HANDLE_COLOR, // {Color|string} color of the lid's handle
+        resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of the resize handle's grip
+        lidGripColor: GasPropertiesColorProfile.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
         resizeHandleIsPressedListener: isPressed => {} // function(isPressed: boolean)
       }, options );
 
@@ -65,7 +62,7 @@ define( require => {
 
       const resizeHandleNode = new HandleNode( {
         cursor: 'pointer',
-        gripBaseColor: options.resizeHandleColor,
+        gripBaseColor: options.resizeGripColor,
         attachmentLineWidth: 1,
         rotation: -Math.PI / 2,
         scale: 0.4
@@ -75,7 +72,7 @@ define( require => {
         cursor: 'pointer',
         baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
         baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
-        handleColor: options.lidHandleColor
+        handleColor: options.lidGripColor
       } );
 
       assert && assert( !options.children, 'ContainerNode sets children' );

@@ -19,7 +19,6 @@ define( require => {
   // constants
   const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
   const HANDLE_RIGHT_INSET = 3;
-  const HANDLE_COLOR = 'gray'; //TODO can't use color profile because HandleNode doesn't support it
 
   class LidNode extends Node {
 
@@ -31,7 +30,7 @@ define( require => {
       options = _.extend( {
         baseWidth: 1,
         baseHeight: 1,
-        handleColor: HANDLE_COLOR
+        gripColor: GasPropertiesColorProfile.lidGripColorProperty // {ColorDef}
       }, options );
 
       const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {
@@ -42,7 +41,7 @@ define( require => {
 
       const handleNode = new HandleNode( {
         hasLeftAttachment: false,
-        gripBaseColor: options.handleColor,
+        gripBaseColor: options.gripColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
         scale: 0.4,
         right: baseNode.right - HANDLE_RIGHT_INSET,

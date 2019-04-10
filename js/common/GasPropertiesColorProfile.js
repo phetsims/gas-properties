@@ -151,6 +151,21 @@ define( require => {
     // radio buttons for choosing particle type
     radioButtonGroupSelectedStroke: {
       default: 'rgb( 105, 195, 231 )' // blue
+    },
+
+    // grip on the container's lid
+    lidGripColor: {
+      default: 'rgb( 160, 160, 160 )'
+    },
+
+    // default grip on the container's resize handle
+    resizeGripColor: {
+      default: 'rgb( 160, 160, 160 )'
+    },
+
+    // Ideal screen, grip on the container's resize handle
+    idealResizeGripColor: {
+      default: 'rgb( 187, 154, 86 )'
     }
   } );
 
