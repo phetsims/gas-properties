@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO flesh out
 /**
  * Base class for histograms.
  *
@@ -56,6 +55,8 @@ define( require => {
       const backgroundRectangle = new Rectangle( 0, 0, options.size.width, options.size.height,
         options.backgroundRectangleOptions );
 
+      const barNodesParent = new Node();
+
       // position the x-axis label
       xAxisLabel.maxWidth = backgroundRectangle.width;
       xAxisLabel.centerX = backgroundRectangle.centerX;
@@ -69,15 +70,36 @@ define( require => {
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [ backgroundRectangle, xAxisLabel, yAxisLabel ]
+        children: [ backgroundRectangle, barNodesParent, xAxisLabel, yAxisLabel ]
       }, options );
 
       super( options );
 
       // @private
+      this.barNodesParent = barNodesParent;
       this._maxY = options.maxY;
       this._yInterval = options.yInterval;
       this.dataSets = []; // {number[]}
+    }
+
+    /**
+     * See options.maxY
+     * @param {number} value
+     * @public
+     */
+    set maxY( value ) {
+      assert && assert( value > 0 && Util.isInteger( value ), 'maxY must be a positive integer: ' + value );
+      this._maxY = value;
+    }
+
+    /**
+     * See options.yInterval
+     * @param {number} value
+     * @public
+     */
+    set yInterval( value ) {
+      assert && assert( value > 0 && Util.isInteger( value ), 'yInterval must be a positive integer: ' + value );
+      this._yInterval = value;
     }
 
     /**
@@ -113,27 +135,18 @@ define( require => {
      * @public
      */
     update() {
-      //TODO
+      this.barNodesParent.removeAllChildren();
+      for ( let i = 0; i < this.dataSets.length; i++ ) {
+        this.drawDataSet( this.dataSets[ i ] );
+      }
     }
 
     /**
-     * See options.maxY
-     * @param {number} value
-     * @public
+     * Draws a data set.
+     * @param {HistogramDataSet} dataSet
      */
-    set maxY( value ) {
-      assert && assert( value > 0 && Util.isInteger( value ), 'maxY must be a positive integer: ' + value );
-      this._maxY = value;
-    }
-
-    /**
-     * See options.yInterval
-     * @param {number} value
-     * @public
-     */
-    set yInterval( value ) {
-      assert && assert( value > 0 && Util.isInteger( value ), 'yInterval must be a positive integer: ' + value );
-      this._yInterval = value;
+    drawDataSet( dataSet ) {
+      //TODO flesh out drawDataSet
     }
   }
 
