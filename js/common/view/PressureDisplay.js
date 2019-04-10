@@ -20,7 +20,7 @@ define( require => {
   const kilopascalsString = require( 'string!GAS_PROPERTIES/kilopascals' );
 
   // constants
-  const NUMBER_DISPLAY_RANGE = new Range( 0, 99 ); // determines how wide items in the ComboBoxDisplay will be
+  const NUMBER_DISPLAY_RANGE = new Range( 0, 99999 ); // determines how wide items in the ComboBoxDisplay will be
 
   class PressureDisplay extends ComboBoxDisplay {
 
