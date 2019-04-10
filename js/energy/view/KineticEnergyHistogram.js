@@ -9,11 +9,11 @@ define( require => {
   'use strict';
 
   // modules
+  const DataSet = require( 'GAS_PROPERTIES/energy/model/DataSet' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
-  const HistogramDataSet = require( 'GAS_PROPERTIES/energy/model/HistogramDataSet' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -21,7 +21,8 @@ define( require => {
   const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
 
   // constants
-  const BIN_WIDTH = 5; // AMU * nm^2 / ps^2
+  const NUMBER_OF_BINS = 10;
+  const BIN_WIDTH = 1; // AMU * nm^2 / ps^2
 
   class KineticEnergyHistogram extends Histogram {
 
@@ -34,7 +35,7 @@ define( require => {
       const xAxisLabel = new Text( kineticEnergyString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
       const yAxisLabel = new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
 
-      super( xAxisLabel, yAxisLabel, options );
+      super( NUMBER_OF_BINS, BIN_WIDTH, xAxisLabel, yAxisLabel, options );
 
       // @private
       this.model = model;
@@ -57,7 +58,7 @@ define( require => {
         this.maxY = values.length; //TODO
 
         // KE data set
-        this.addDataSet( new HistogramDataSet( values, BIN_WIDTH, {
+        this.addDataSet( new DataSet( values, {
           fill: GasPropertiesColorProfile.histogramBarColorProperty,
           stroke: null
         } ) );

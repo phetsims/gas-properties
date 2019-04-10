@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Describes a data set for a histogram.
+ * A data set is a set of values and the colors used to render them.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -11,14 +11,13 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  class HistogramDataSet {
+  class DataSet {
 
     /**
      * @param {number[]} values
-     * @param {number} binWidth
      * @param {Object} [options]
      */
-    constructor( values, binWidth, options ) {
+    constructor( values, options ) {
 
       options = _.extend( {
         stroke: 'black', // {ColorDef}
@@ -27,11 +26,10 @@ define( require => {
 
       // @public (read-only)
       this.values = values;
-      this.binWidth = binWidth;
       this.stroke = options.stroke;
       this.fill = options.fill;
     }
   }
 
-  return gasProperties.register( 'HistogramDataSet', HistogramDataSet );
+  return gasProperties.register( 'DataSet', DataSet );
 } );

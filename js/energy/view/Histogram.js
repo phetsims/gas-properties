@@ -18,30 +18,29 @@ define( require => {
   class Histogram extends Node {
 
     /**
+     * @param {number} numberOfBins
+     * @param {number} binWidth
      * @param {Node} xAxisLabel - label on the x axis
      * @param {Node} yAxisLabel - label on the y axis
      * @param {Object} [options]
      */
-    constructor( xAxisLabel, yAxisLabel, options ) {
+    constructor( numberOfBins, binWidth, xAxisLabel, yAxisLabel, options ) {
 
       options = _.extend( {
 
         // size of the Rectangle that is the histogram background
-        size: new Dimension2( 150, 130 ),
+        chartSize: new Dimension2( 150, 130 ),
 
         maxY: 100, // {number} maximum for the y axis
         yInterval: 100, // {number} a horizontal line will be drawn at intervals of this value
 
-        // options for the Rectangle that is the histogram background
-        backgroundRectangleOptions: {
-          fill: 'black',
-          stroke: 'white',
-          lineWidth: 1
-        },
+        backgroundFill: 'black', // {ColorDef}
+        borderStroke: 'white',// {ColorDef}
+        borderLineWidth: 1, 
 
         // options for the horizontal interval lines
         intervalLineOptions: {
-          stroke: 'white',
+          stroke: 'white', // {ColorDef}
           lineWidth: 0.5
         }
 
@@ -52,33 +51,44 @@ define( require => {
       assert && assert( options.yInterval > 0 && Util.isInteger( options.yInterval ),
         'yInterval must be a positive integer: ' + options.yInterval );
 
-      const backgroundRectangle = new Rectangle( 0, 0, options.size.width, options.size.height,
-        options.backgroundRectangleOptions );
+      const background = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
+        fill: options.backgroundFill
+      });
+      
+      const border = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
+        stroke: options.borderStroke,
+        lineWidth: options.borderLineWidth
+      });
 
       const barNodesParent = new Node();
 
       // position the x-axis label
-      xAxisLabel.maxWidth = backgroundRectangle.width;
-      xAxisLabel.centerX = backgroundRectangle.centerX;
-      xAxisLabel.top = backgroundRectangle.bottom + 5;
+      xAxisLabel.maxWidth = background.width;
+      xAxisLabel.centerX = background.centerX;
+      xAxisLabel.top = background.bottom + 5;
 
       // position the y-axis label
       yAxisLabel.rotation = -Math.PI / 2;
-      yAxisLabel.maxWidth = backgroundRectangle.height;
-      yAxisLabel.right = backgroundRectangle.left - 8;
-      yAxisLabel.centerY = backgroundRectangle.centerY;
+      yAxisLabel.maxWidth = background.height;
+      yAxisLabel.right = background.left - 8;
+      yAxisLabel.centerY = background.centerY;
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [ backgroundRectangle, barNodesParent, xAxisLabel, yAxisLabel ]
+        children: [ background, barNodesParent, border, xAxisLabel, yAxisLabel ]
       }, options );
 
       super( options );
 
       // @private
+      this.background = background;
       this.barNodesParent = barNodesParent;
+      this.numberOfBins = numberOfBins;
+      this.binWidth = binWidth;
+      this.chartSize = options.chartSize;
       this._maxY = options.maxY;
       this._yInterval = options.yInterval;
+      this.intervalLineOptions = options.intervalLineOptions;
       this.dataSets = []; // {number[]}
     }
 
@@ -104,7 +114,7 @@ define( require => {
 
     /**
      * Adds a data set to the histogram.  Data sets are rendered in the order that they are added.
-     * @param {HistogramDataSet} dataSet
+     * @param {DataSet} dataSet
      * @public
      */
     addDataSet( dataSet ) {
@@ -113,7 +123,7 @@ define( require => {
 
     /**
      * Removes a data set from the histogram.
-     * @param {HistogramDataSet} dataSet
+     * @param {DataSet} dataSet
      * @public
      */
     removeDataSet( dataSet ) {
@@ -143,10 +153,38 @@ define( require => {
 
     /**
      * Draws a data set.
-     * @param {HistogramDataSet} dataSet
+     * @param {DataSet} dataSet
      */
     drawDataSet( dataSet ) {
-      //TODO flesh out drawDataSet
+
+      // Compute the bar width
+      const barWidth = this.chartSize.width / this.numberOfBins;
+
+      for ( let i = 0; i < this.numberOfBins; i++ ) {
+
+        // Determine the range of the bin, [min,max)
+        const min = i * this.binWidth;
+        const max = ( i + 1 ) * this.binWidth;
+
+        // Determine the number of values that belong in this bin
+        const count = _.filter( dataSet.values, value => ( value >= min && value < max ) ).length;
+
+        if ( count > 0 ) {
+
+          // Compute the bar height
+          const barHeight = ( count / this._maxY ) * this.chartSize.height;
+          assert && assert( barHeight <= this.chartSize.height, `barHeight exceeds chart height: ${barHeight}` );
+
+          // Add the bar
+          const barNode = new Rectangle( 0, 0, barWidth, barHeight, {
+            fill: dataSet.fill,
+            stroke: dataSet.stroke,
+            left: this.background.left + ( i * barWidth ),
+            bottom: this.background.bottom
+          } );
+          this.barNodesParent.addChild( barNode );
+        }
+      }
     }
   }
 

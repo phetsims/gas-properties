@@ -170,7 +170,7 @@ define( require => {
 
     // bars in the histograms
     histogramBarColor: {
-      default: 'green'
+      default: 'rgb( 122, 247, 88 )'
     }
   } );
 

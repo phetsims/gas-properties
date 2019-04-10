@@ -9,11 +9,11 @@ define( require => {
   'use strict';
 
   // modules
+  const DataSet = require( 'GAS_PROPERTIES/energy/model/DataSet' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
-  const HistogramDataSet = require( 'GAS_PROPERTIES/energy/model/HistogramDataSet' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -21,7 +21,8 @@ define( require => {
   const speedString = require( 'string!GAS_PROPERTIES/speed' );
 
   // constants
-  const BIN_WIDTH = 1; // nm/ps
+  const NUMBER_OF_BINS = 10;
+  const BIN_WIDTH = 0.25; // nm/ps
 
   class SpeedHistogram extends Histogram {
 
@@ -36,7 +37,7 @@ define( require => {
       const xAxisLabel = new Text( speedString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
       const yAxisLabel = new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
 
-      super( xAxisLabel, yAxisLabel, options );
+      super( NUMBER_OF_BINS, BIN_WIDTH, xAxisLabel, yAxisLabel, options );
 
       // @private
       this.model = model;
@@ -63,14 +64,14 @@ define( require => {
         this.maxY = allValues.length; //TODO
 
         // all particles
-        this.addDataSet( new HistogramDataSet( allValues, BIN_WIDTH, {
+        this.addDataSet( new DataSet( allValues, {
           fill: GasPropertiesColorProfile.histogramBarColorProperty,
           stroke: null
         } ) );
 
         // heavy particles
         if ( this.heavyVisibleProperty.value ) {
-          this.addDataSet( new HistogramDataSet( heavyValues, BIN_WIDTH, {
+          this.addDataSet( new DataSet( heavyValues, {
             stroke: GasPropertiesColorProfile.heavyParticleColorProperty,
             fill: null
           } ) );
@@ -78,7 +79,7 @@ define( require => {
 
         // light particles
         if ( this.lightVisibleProperty.value ) {
-          this.addDataSet( new HistogramDataSet( lightValues, BIN_WIDTH, {
+          this.addDataSet( new DataSet( lightValues, {
             stroke: GasPropertiesColorProfile.lightParticleColorProperty,
             fill: null
           } ) );
