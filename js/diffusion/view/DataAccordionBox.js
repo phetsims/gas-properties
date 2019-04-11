@@ -13,7 +13,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VSeparator = require( 'SUN/VSeparator' );
 
@@ -44,8 +44,8 @@ define( require => {
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
 
       //TODO placeholders
-      const leftData = new Rectangle( 0, 0, 175, 75 );
-      const rightData = new Rectangle( 0, 0, 175, 75 );
+      const leftData = new HStrut( 175 );
+      const rightData = new HStrut( 175 );
 
       const separator = new VSeparator( 75, {
         stroke: GasPropertiesColorProfile.separatorColorProperty

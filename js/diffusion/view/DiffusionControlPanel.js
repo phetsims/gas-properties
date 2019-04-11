@@ -19,6 +19,7 @@ define( require => {
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   class DiffusionControlPanel extends Panel {
 
@@ -42,6 +43,7 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
+          new VStrut( 300 ), //TODO temporary
           new HSeparator( separatorWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: separatorWidth
