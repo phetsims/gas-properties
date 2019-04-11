@@ -4,14 +4,10 @@ UP NEXT
 
 Pressure model
 
-Histogram base class:
-- fixed number of bins
-- scale y-axis based on #particles
-- horizontal lines to denote vertical scale, increments of 100?
-- temporary 'out of range' indicator for x-axis
-
-Energy: Speed histogram
-Energy: KE histogram
+Histogram interval lines
+Histogram when to adjust maxY
+Histogram smoothing
+Histogram bin sizes and number of bins
 
 Intro: hold constant
 - None: change N, T, or V => change P
@@ -39,6 +35,7 @@ DESIGN QUESTIONS (MODEL)
   - How to address the fact that pressure should be zero until particles collide with walls?
 
 DESIGN QUESTIONS (VIEW)
+* Histogram x-out-of-range indicator
 
 REFERENCES
 Is this a better collision model?
