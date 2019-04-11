@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
+  const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -58,10 +59,7 @@ define( require => {
         this.maxY = values.length; //TODO
 
         // KE data set
-        this.addDataSet( new DataSet( values, {
-          fill: GasPropertiesColorProfile.histogramBarColorProperty,
-          stroke: GasPropertiesColorProfile.histogramBarColorProperty
-        } ) );
+        this.addDataSet( new DataSet( values, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );
       }
 
       this.update();

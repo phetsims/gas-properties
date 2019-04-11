@@ -12,7 +12,10 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Shape = require( 'KITE/Shape' );
   const Util = require( 'DOT/Util' );
 
   class Histogram extends Node {
@@ -36,7 +39,7 @@ define( require => {
 
         backgroundFill: 'black', // {ColorDef}
         borderStroke: 'white',// {ColorDef}
-        borderLineWidth: 1, 
+        borderLineWidth: 1,
 
         // options for the horizontal interval lines
         intervalLineOptions: {
@@ -53,12 +56,12 @@ define( require => {
 
       const background = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
         fill: options.backgroundFill
-      });
-      
+      } );
+
       const border = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
         stroke: options.borderStroke,
         lineWidth: options.borderLineWidth
-      });
+      } );
 
       const barNodesParent = new Node();
 
@@ -122,17 +125,6 @@ define( require => {
     }
 
     /**
-     * Removes a data set from the histogram.
-     * @param {DataSet} dataSet
-     * @public
-     */
-    removeDataSet( dataSet ) {
-      const index = this.dataSets.indexOf( dataSet );
-      assert && assert( index !== 1, 'dataSet does not belong to this Histogram' );
-      this.dataSets.splice( index, 1 );
-    }
-
-    /**
      * Removes all data sets from the histogram.
      * @public
      */
@@ -145,21 +137,33 @@ define( require => {
      * @public
      */
     update() {
+
+      // Remove previous plots
       this.barNodesParent.removeAllChildren();
+
+      // Create new plots
       for ( let i = 0; i < this.dataSets.length; i++ ) {
-        this.drawDataSet( this.dataSets[ i ] );
+        const dataSet = this.dataSets[ i ];
+        const counts = this.getCounts( dataSet );
+        if ( dataSet.plotType === PlotType.BARS ) {
+          this.drawBars( counts, dataSet.color );
+        }
+        else {
+          this.drawLines( counts, dataSet.color );
+        }
       }
+
+      //TODO add 'out of range' indicator
     }
 
     /**
-     * Draws a data set.
-     * @param {DataSet} dataSet
+     * Converts a data set to an array of counts, one value for each bin.
+     * @param dataSet
+     * @returns {number[]}
+     * @private
      */
-    drawDataSet( dataSet ) {
-
-      // Compute the bar width
-      const barWidth = this.chartSize.width / this.numberOfBins;
-
+    getCounts( dataSet ) {
+      const counts = [];
       for ( let i = 0; i < this.numberOfBins; i++ ) {
 
         // Determine the range of the bin, [min,max)
@@ -169,22 +173,69 @@ define( require => {
         // Determine the number of values that belong in this bin
         const count = _.filter( dataSet.values, value => ( value >= min && value < max ) ).length;
 
-        if ( count > 0 ) {
+        counts.push( count );
+      }
+      return counts;
+    }
+
+    /**
+     * Draws the data set as a set of bars.
+     * @param {number[]} counts - the count for each bin
+     * @param {ColorDef} color - the color of the bars
+     */
+    drawBars( counts, color ) {
+
+      // Compute the bar width
+      const barWidth = this.chartSize.width / this.numberOfBins;
+
+      for ( let i = 0; i < counts.length; i++ ) {
+        if ( counts[ i ] > 0 ) {
 
           // Compute the bar height
-          const barHeight = ( count / this._maxY ) * this.chartSize.height;
+          const barHeight = ( counts[ i ] / this._maxY ) * this.chartSize.height;
           assert && assert( barHeight <= this.chartSize.height, `barHeight exceeds chart height: ${barHeight}` );
 
           // Add the bar
           const barNode = new Rectangle( 0, 0, barWidth, barHeight, {
-            fill: dataSet.fill,
-            stroke: dataSet.stroke,
+            fill: color,
+            stroke: color,
             left: this.background.left + ( i * barWidth ),
             bottom: this.background.bottom
           } );
           this.barNodesParent.addChild( barNode );
         }
       }
+    }
+
+    /**
+     * Draws the data set as lines segments.
+     * @param {number[]} counts - the count for each bin
+     * @param {ColorDef} color - the color of the bars
+     */
+    drawLines( counts, color ) {
+
+      const shape = new Shape().moveTo( 0, this.chartSize.height );
+
+      // Compute the line width
+      const lineWidth = this.chartSize.width / this.numberOfBins;
+
+      // Draw the line segments
+      let previousCount = 0;
+      for ( let i = 0; i < counts.length; i++ ) {
+        const count = counts[ i ];
+        const lineHeight = ( count / this._maxY ) * this.chartSize.height;
+        const y = this.chartSize.height - lineHeight;
+        if ( count !== previousCount ) {
+          shape.lineTo( i * lineWidth, y );
+        }
+        shape.lineTo( ( i + 1 ) * lineWidth, y );
+        previousCount = count;
+      }
+
+      this.barNodesParent.addChild( new Path( shape, {
+        stroke: color,
+        lineWidth: 2 //TODO
+      } ) );
     }
   }
 

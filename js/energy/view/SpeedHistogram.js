@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
+  const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -64,25 +65,16 @@ define( require => {
         this.maxY = allValues.length; //TODO
 
         // all particles
-        this.addDataSet( new DataSet( allValues, {
-          fill: GasPropertiesColorProfile.histogramBarColorProperty,
-          stroke: GasPropertiesColorProfile.histogramBarColorProperty
-        } ) );
+        this.addDataSet( new DataSet( allValues, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );
 
         // heavy particles
         if ( this.heavyVisibleProperty.value ) {
-          this.addDataSet( new DataSet( heavyValues, {
-            stroke: GasPropertiesColorProfile.heavyParticleColorProperty,
-            fill: null
-          } ) );
+          this.addDataSet( new DataSet( heavyValues, PlotType.LINES, GasPropertiesColorProfile.heavyParticleColorProperty ) );
         }
 
         // light particles
         if ( this.lightVisibleProperty.value ) {
-          this.addDataSet( new DataSet( lightValues, {
-            stroke: GasPropertiesColorProfile.lightParticleColorProperty,
-            fill: null
-          } ) );
+          this.addDataSet( new DataSet( lightValues, PlotType.LINES, GasPropertiesColorProfile.lightParticleColorProperty ) );
         }
       }
 

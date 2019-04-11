@@ -10,24 +10,23 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
 
   class DataSet {
 
     /**
      * @param {number[]} values
-     * @param {Object} [options]
+     * @param {PlotType} plotType
+     * @param {ColorDef} color
      */
-    constructor( values, options ) {
+    constructor( values, plotType, color ) {
 
-      options = _.extend( {
-        stroke: 'black', // {ColorDef}
-        fill: 'white' // {ColorDef}
-      }, options );
+      assert && assert( PlotType.includes( plotType ), `invalid plotType: ${plotType}` );
 
       // @public (read-only)
       this.values = values;
-      this.stroke = options.stroke;
-      this.fill = options.fill;
+      this.plotType = plotType;
+      this.color = color;
     }
   }
 
