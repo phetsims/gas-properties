@@ -4,6 +4,8 @@ UP NEXT
 
 mutable mass for Particle
 
+Diffusion: play/pause button, normal/slow radio buttons
+
 Pressure model
 
 Histograms avoid addChild/removeChild
