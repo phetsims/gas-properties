@@ -118,6 +118,7 @@ define( require => {
         isValidValue: value => ( value === null || typeof value === 'number' )
       };
 
+      //TODO should Average Speed and Speed Histogram both use get get*ParticleSpeedValues, to reduce iterations?
       // @public (read-only) average speed of heavy particles in the container, null when container is empty, m/s
       this.heavyAverageSpeedProperty = new Property( null, averageSpeedPropertyOptions );
       this.lightAverageSpeedProperty = new Property( null, averageSpeedPropertyOptions );
