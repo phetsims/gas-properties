@@ -108,8 +108,10 @@ define( require => {
      */
     setMaxY( maxY ) {
       assert && assert( maxY > 0 && Util.isInteger( maxY ), 'maxY must be a positive integer: ' + maxY );
-      this.maxY = maxY;
-      this.intervalLinesDirty = true;
+      if ( maxY !== this.maxY ) {
+        this.maxY = maxY;
+        this.intervalLinesDirty = true;
+      }
     }
 
     /**
@@ -119,8 +121,10 @@ define( require => {
      */
     setYInterval( yInterval ) {
       assert && assert( yInterval > 0 && Util.isInteger( yInterval ), 'yInterval must be a positive integer: ' + yInterval );
-      this.yInterval = yInterval;
-      this.intervalLinesDirty = true;
+      if ( yInterval !== this.yInterval ) {
+        this.yInterval = yInterval;
+        this.intervalLinesDirty = true;
+      }
     }
 
     /**

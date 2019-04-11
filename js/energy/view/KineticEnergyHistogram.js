@@ -53,10 +53,10 @@ define( require => {
       // Get KE values, {number[]}
       const values = this.model.getKineticEnergyValues();
 
-      if ( values.length > 0 ) {
+      // set the y-axis scale
+      this.setMaxY( Math.max( values.length, 2 * this.yInterval ) ); //TODO
 
-        // set the y-axis scale
-        this.setMaxY( values.length ); //TODO
+      if ( values.length > 0 ) {
 
         // KE data set
         this.addDataSet( new DataSet( values, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );

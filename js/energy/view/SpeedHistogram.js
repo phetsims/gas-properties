@@ -59,10 +59,10 @@ define( require => {
       const lightValues = this.model.getLightParticleSpeedValues();
       const allValues = heavyValues.concat( lightValues );
 
-      if ( allValues.length > 0 ) {
+      // set the y-axis scale
+      this.setMaxY( Math.max( allValues.length, 2 * this.yInterval ) ); //TODO
 
-        // set the y-axis scale
-        this.setMaxY( allValues.length ); //TODO
+      if ( allValues.length > 0 ) {
 
         // all particles
         this.addDataSet( new DataSet( allValues, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );
