@@ -23,12 +23,13 @@ define( require => {
   class DiffusionControlPanel extends Panel {
 
     /**
+     * @param {DiffusionModel} model
      * @param {BooleanProperty} particleFlowRateVisibleProperty
      * @param {BooleanProperty} centerOfMassVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {Object} [options]
      */
-    constructor( particleFlowRateVisibleProperty, centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
+    constructor( model, particleFlowRateVisibleProperty, centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
 
       options = _.extend( {
         fixedWidth: 100,

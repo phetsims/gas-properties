@@ -37,7 +37,7 @@ define( require => {
       this.addChild( dataAccordionBox );
 
       // Control panel at right side of screen
-      const controlPanel = new DiffusionControlPanel(
+      const controlPanel = new DiffusionControlPanel( model,
         viewProperties.particleFlowRateVisibleProperty,
         viewProperties.centerOfMassVisibleProperty,
         model.stopwatch.visibleProperty, {
