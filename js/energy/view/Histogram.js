@@ -210,6 +210,8 @@ define( require => {
           this.plotNodesParent.addChild( new Text( '\u2022\u2022\u2022', {
             font: new PhetFont( 14 ),
             fill: dataSet.color,
+
+            //TODO x-axis label will overlap this
             right: this.background.right,
             top: this.background.bottom + 4
           } ) );
