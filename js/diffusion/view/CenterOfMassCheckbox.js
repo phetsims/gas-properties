@@ -34,7 +34,7 @@ define( require => {
         textIconSpacing: 12
       }, options );
 
-      const icon  = new HBox( {
+      const icon = new HBox( {
         spacing: 12,
         children: [
           new Line( 0, 0, 0, ICON_LINE_LENGTH, {
