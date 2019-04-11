@@ -112,5 +112,11 @@
   },
   "data": {
     "value": "Data"
+  },
+  "centerOfMass": {
+    "value": "Center of Mass"
+  },
+  "particleFlowRate": {
+    "value": "Particle Flow Rate"
   }
 }

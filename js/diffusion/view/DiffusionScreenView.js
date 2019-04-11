@@ -37,11 +37,14 @@ define( require => {
       this.addChild( dataAccordionBox );
 
       // Control panel at right side of screen
-      const controlPanel = new DiffusionControlPanel( model.stopwatch.visibleProperty, {
-        fixedWidth: 300,
-        right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+      const controlPanel = new DiffusionControlPanel(
+        viewProperties.particleFlowRateVisibleProperty,
+        viewProperties.centerOfMassVisibleProperty,
+        model.stopwatch.visibleProperty, {
+          fixedWidth: 300,
+          right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
       this.addChild( controlPanel );
 
       // Reset All button

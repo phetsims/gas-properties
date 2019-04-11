@@ -9,22 +9,26 @@ define( require => {
   'use strict';
 
   // modules
+  const CenterOfMassCheckbox = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassCheckbox' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HSeparator = require( 'SUN/HSeparator' );
   const Panel = require( 'SUN/Panel' );
+  const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   class DiffusionControlPanel extends Panel {
 
     /**
+     * @param {BooleanProperty} particleFlowRateVisibleProperty
+     * @param {BooleanProperty} centerOfMassVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {Object} [options]
      */
-    constructor( stopwatchVisibleProperty, options ) {
+    constructor( particleFlowRateVisibleProperty, centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
 
       options = _.extend( {
         fixedWidth: 100,
@@ -41,6 +45,8 @@ define( require => {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: separatorWidth
           } ),
+          new ParticleFlowRateCheckbox( particleFlowRateVisibleProperty ),
+          new CenterOfMassCheckbox( centerOfMassVisibleProperty ),
           new StopwatchCheckbox( stopwatchVisibleProperty )
         ]
       });

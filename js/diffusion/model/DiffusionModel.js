@@ -1,5 +1,6 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
+//TODO duplication with GasPropertiesModel herein
 /**
  * Model for the 'Diffusion' screen.
  *

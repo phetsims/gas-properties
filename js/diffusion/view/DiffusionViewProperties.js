@@ -18,12 +18,20 @@ define( require => {
     constructor() {
 
       // @public whether the Data accordion box is expanded
-      this.dataExpandedProperty = new BooleanProperty( false || GasPropertiesQueryParameters.checked );
+      this.dataExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
+
+      // @public whether particle flow rate vectors are visible below the container
+      this.particleFlowRateVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
+
+      // @public whether the center-of-mass indicators are visible on the container
+      this.centerOfMassVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
     }
 
     // @public @override
     reset() {
       this.dataExpandedProperty.reset();
+      this.particleFlowRateVisibleProperty.reset();
+      this.centerOfMassVisibleProperty.reset();
     }
   }
 
