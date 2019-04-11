@@ -13,9 +13,11 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
 
   class Histogram extends Node {
@@ -63,7 +65,7 @@ define( require => {
         lineWidth: options.borderLineWidth
       } );
 
-      const barNodesParent = new Node();
+      const plotNodesParent = new Node();
 
       // position the x-axis label
       xAxisLabel.maxWidth = background.width;
@@ -78,14 +80,14 @@ define( require => {
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [ background, barNodesParent, border, xAxisLabel, yAxisLabel ]
+        children: [ background, plotNodesParent, border, xAxisLabel, yAxisLabel ]
       }, options );
 
       super( options );
 
       // @private
       this.background = background;
-      this.barNodesParent = barNodesParent;
+      this.plotNodesParent = plotNodesParent;
       this.numberOfBins = numberOfBins;
       this.binWidth = binWidth;
       this.chartSize = options.chartSize;
@@ -139,21 +141,37 @@ define( require => {
     update() {
 
       // Remove previous plots
-      this.barNodesParent.removeAllChildren();
+      this.plotNodesParent.removeAllChildren();
+
+      const maxX = this.numberOfBins * this.binWidth;
 
       // Create new plots
       for ( let i = 0; i < this.dataSets.length; i++ ) {
+
         const dataSet = this.dataSets[ i ];
+
+        // Convert data set to counts for each bin.
         const counts = this.getCounts( dataSet );
+
+        // Plot the data set as bars or line segments.
         if ( dataSet.plotType === PlotType.BARS ) {
-          this.drawBars( counts, dataSet.color );
+          this.plotBars( counts, dataSet.color );
         }
         else {
-          this.drawLines( counts, dataSet.color );
+          this.plotLines( counts, dataSet.color );
+        }
+
+        //TODO temporary 'out of range' indicator for x axis, ellipsis
+        const outOfRangeValues = _.filter( dataSet.values, value => ( value > maxX ) );
+        if ( outOfRangeValues.length > 0 ) {
+          this.plotNodesParent.addChild( new Text( '\u2022\u2022\u2022', {
+            font: new PhetFont( 14 ),
+            fill: dataSet.color,
+            right: this.background.right,
+            top: this.background.bottom + 4
+          } ) );
         }
       }
-
-      //TODO add 'out of range' indicator
     }
 
     /**
@@ -179,12 +197,12 @@ define( require => {
     }
 
     /**
-     * Draws the data set as a set of bars.
+     * Plots the data set as bars.
      * @param {number[]} counts - the count for each bin
      * @param {ColorDef} color - the color of the bars
      * @private
      */
-    drawBars( counts, color ) {
+    plotBars( counts, color ) {
 
       const shape = new Shape();
 
@@ -203,19 +221,19 @@ define( require => {
         }
       }
 
-      this.barNodesParent.addChild( new Path( shape, {
+      this.plotNodesParent.addChild( new Path( shape, {
         fill: color,
         stroke: color // to hide seams
       } ) );
     }
 
     /**
-     * Draws the data set as lines segments.
+     * Plots the data set as lines segments.
      * @param {number[]} counts - the count for each bin
      * @param {ColorDef} color - the color of the bars
      * @private
      */
-    drawLines( counts, color ) {
+    plotLines( counts, color ) {
 
       const shape = new Shape().moveTo( 0, this.chartSize.height );
 
@@ -235,7 +253,7 @@ define( require => {
         previousCount = count;
       }
 
-      this.barNodesParent.addChild( new Path( shape, {
+      this.plotNodesParent.addChild( new Path( shape, {
         stroke: color,
         lineWidth: 2 //TODO
       } ) );
