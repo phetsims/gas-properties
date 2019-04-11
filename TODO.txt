@@ -2,6 +2,9 @@ TODO list for gas-properties
 
 UP NEXT
 
+ParticleFlowRateCheckbox icon
+CenterOfMassCheckbox icon
+
 Pressure model
 
 Histograms avoid addChild/removeChild
