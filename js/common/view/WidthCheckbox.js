@@ -9,11 +9,9 @@ define( require => {
   'use strict';
 
   // modules
-  const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
 
   // strings
   const widthString = require( 'string!GAS_PROPERTIES/width' );
@@ -33,11 +31,8 @@ define( require => {
 
       options = _.extend( {
         text: widthString,
-        icon: new DimensionalArrowsNode( new NumberProperty( 44 ), {
-          color: GasPropertiesColorProfile.sizeArrowColorProperty,
-          pickable: false
-        }, options )
-      } );
+        icon: GasPropertiesIconFactory.createContainerWidthIcon()
+      }, options );
 
       super( sizeVisibleProperty, options );
     }

@@ -12,6 +12,7 @@ define( require => {
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
+  const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -20,6 +21,7 @@ define( require => {
   const Line = require( 'SCENERY/nodes/Line' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Path = require( 'SCENERY/nodes/Path' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
   const Shape = require( 'KITE/Shape' );
@@ -106,6 +108,19 @@ define( require => {
       return new Path( shape, {
         stroke: strokeProperty,
         lineWidth: 1.5
+      } );
+    },
+
+    /**
+     * Creates the icon used on the 'Width' checkbox.
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createContainerWidthIcon() {
+      return new DimensionalArrowsNode( new NumberProperty( 44 ), {
+        color: GasPropertiesColorProfile.sizeArrowColorProperty,
+        pickable: false
       } );
     },
 
