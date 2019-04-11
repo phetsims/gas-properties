@@ -62,7 +62,7 @@ define( require => {
       if ( allValues.length > 0 ) {
 
         // set the y-axis scale
-        this.maxY = allValues.length; //TODO
+        this.setMaxY( allValues.length ); //TODO
 
         // all particles
         this.addDataSet( new DataSet( allValues, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );

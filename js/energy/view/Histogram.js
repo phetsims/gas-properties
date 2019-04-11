@@ -46,6 +46,7 @@ define( require => {
         // options for the horizontal interval lines
         intervalLineOptions: {
           stroke: 'white', // {ColorDef}
+          opacity: 0.5,
           lineWidth: 0.5
         }
 
@@ -67,6 +68,8 @@ define( require => {
 
       const plotNodesParent = new Node();
 
+      const intervalLines = new Path( null, options.intervalLineOptions );
+
       // position the x-axis label
       xAxisLabel.maxWidth = background.width;
       xAxisLabel.centerX = background.centerX;
@@ -80,41 +83,44 @@ define( require => {
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [ background, plotNodesParent, border, xAxisLabel, yAxisLabel ]
+        children: [ background, intervalLines, plotNodesParent, border, xAxisLabel, yAxisLabel ]
       }, options );
 
       super( options );
 
       // @private
       this.background = background;
+      this.intervalLines = intervalLines;
       this.plotNodesParent = plotNodesParent;
       this.numberOfBins = numberOfBins;
       this.binWidth = binWidth;
       this.chartSize = options.chartSize;
-      this._maxY = options.maxY;
-      this._yInterval = options.yInterval;
-      this.intervalLineOptions = options.intervalLineOptions;
+      this.maxY = options.maxY;
+      this.yInterval = options.yInterval;
       this.dataSets = []; // {number[]}
+      this.intervalLinesDirty = true; // does intervalLines Shape need recomputing?
     }
 
     /**
      * See options.maxY
-     * @param {number} value
+     * @param {number} maxY
      * @public
      */
-    set maxY( value ) {
-      assert && assert( value > 0 && Util.isInteger( value ), 'maxY must be a positive integer: ' + value );
-      this._maxY = value;
+    setMaxY( maxY ) {
+      assert && assert( maxY > 0 && Util.isInteger( maxY ), 'maxY must be a positive integer: ' + maxY );
+      this.maxY = maxY;
+      this.intervalLinesDirty = true;
     }
 
     /**
      * See options.yInterval
-     * @param {number} value
+     * @param {number} yInterval
      * @public
      */
-    set yInterval( value ) {
-      assert && assert( value > 0 && Util.isInteger( value ), 'yInterval must be a positive integer: ' + value );
-      this._yInterval = value;
+    setYInterval( yInterval ) {
+      assert && assert( yInterval > 0 && Util.isInteger( yInterval ), 'yInterval must be a positive integer: ' + yInterval );
+      this.yInterval = yInterval;
+      this.intervalLinesDirty = true;
     }
 
     /**
@@ -139,6 +145,37 @@ define( require => {
      * @public
      */
     update() {
+      this.updatePlots();
+      if ( this.intervalLinesDirty ) {
+        this.updateIntervalLines();
+        this.intervalLinesDirty = false;
+      }
+    }
+
+    /**
+     * Updates the horizontal interval lines.
+     * @private
+     */
+    updateIntervalLines() {
+
+      const shape = new Shape();
+
+      const numberOfLines = Math.floor( this.maxY / this.yInterval );
+      const ySpacing = ( this.yInterval / this.maxY ) * this.chartSize.height;
+
+      for ( let i = 1; i <= numberOfLines; i++ ) {
+        const y = this.chartSize.height - ( i * ySpacing );
+        shape.moveTo( 0, y ).lineTo( this.chartSize.width, y );
+      }
+
+      this.intervalLines.shape = shape;
+    }
+
+    /**
+     * Updates the plots.
+     * @private
+     */
+    updatePlots() {
 
       // Remove previous plots
       this.plotNodesParent.removeAllChildren();
@@ -213,7 +250,7 @@ define( require => {
         if ( counts[ i ] > 0 ) {
 
           // Compute the bar height
-          const barHeight = ( counts[ i ] / this._maxY ) * this.chartSize.height;
+          const barHeight = ( counts[ i ] / this.maxY ) * this.chartSize.height;
           assert && assert( barHeight <= this.chartSize.height, `barHeight exceeds chart height: ${barHeight}` );
 
           // Add the bar
@@ -244,7 +281,7 @@ define( require => {
       let previousCount = 0;
       for ( let i = 0; i < counts.length; i++ ) {
         const count = counts[ i ];
-        const lineHeight = ( count / this._maxY ) * this.chartSize.height;
+        const lineHeight = ( count / this.maxY ) * this.chartSize.height;
         const y = this.chartSize.height - lineHeight;
         if ( count !== previousCount ) {
           shape.lineTo( i * lineWidth, y );

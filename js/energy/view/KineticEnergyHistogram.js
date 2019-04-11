@@ -56,7 +56,7 @@ define( require => {
       if ( values.length > 0 ) {
 
         // set the y-axis scale
-        this.maxY = values.length; //TODO
+        this.setMaxY( values.length ); //TODO
 
         // KE data set
         this.addDataSet( new DataSet( values, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );
