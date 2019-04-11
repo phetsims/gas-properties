@@ -182,8 +182,11 @@ define( require => {
      * Draws the data set as a set of bars.
      * @param {number[]} counts - the count for each bin
      * @param {ColorDef} color - the color of the bars
+     * @private
      */
     drawBars( counts, color ) {
+
+      const shape = new Shape();
 
       // Compute the bar width
       const barWidth = this.chartSize.width / this.numberOfBins;
@@ -196,21 +199,21 @@ define( require => {
           assert && assert( barHeight <= this.chartSize.height, `barHeight exceeds chart height: ${barHeight}` );
 
           // Add the bar
-          const barNode = new Rectangle( 0, 0, barWidth, barHeight, {
-            fill: color,
-            stroke: color,
-            left: this.background.left + ( i * barWidth ),
-            bottom: this.background.bottom
-          } );
-          this.barNodesParent.addChild( barNode );
+          shape.rect( i * barWidth, this.chartSize.height - barHeight, barWidth, barHeight );
         }
       }
+
+      this.barNodesParent.addChild( new Path( shape, {
+        fill: color,
+        stroke: color // to hide seams
+      } ) );
     }
 
     /**
      * Draws the data set as lines segments.
      * @param {number[]} counts - the count for each bin
      * @param {ColorDef} color - the color of the bars
+     * @private
      */
     drawLines( counts, color ) {
 
