@@ -12,8 +12,11 @@ define( require => {
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
+  const Line = require( 'SCENERY/nodes/Line' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -102,6 +105,32 @@ define( require => {
       return new Path( shape, {
         stroke: strokeProperty,
         lineWidth: 1.5
+      } );
+    },
+
+    /**
+     * Creates the icon used on the 'Center of Mass' checkbox.
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createCenterOfMassIcon() {
+
+      const lineLength = 15;
+      const lineWidth = 2;
+
+      return new HBox( {
+        spacing: 12,
+        children: [
+          new Line( 0, 0, 0, lineLength, {
+            stroke: GasPropertiesColorProfile.diffusionParticle1ColorProperty,
+            lineWidth: lineWidth
+          } ),
+          new Line( 0, 0, 0, lineLength, {
+            stroke: GasPropertiesColorProfile.diffusionParticle2ColorProperty,
+            lineWidth: lineWidth
+          } )
+        ]
       } );
     }
   };
