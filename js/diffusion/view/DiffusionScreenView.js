@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const DataAccordionBox = require( 'GAS_PROPERTIES/diffusion/view/DataAccordionBox' );
+  const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -46,6 +47,12 @@ define( require => {
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
+      // Container
+      const containerNode = new DiffusionContainerNode( {
+        left: this.layoutBounds.left + 2 * GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        centerY: this.layoutBounds.centerY + 25
+      } );
+
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty
@@ -65,6 +72,7 @@ define( require => {
       // Rendering order
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
+      this.addChild( containerNode );
       this.addChild( resetAllButton );
       this.addChild( stopwatchNode );
 
