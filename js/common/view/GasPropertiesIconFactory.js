@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -130,6 +131,31 @@ define( require => {
             stroke: GasPropertiesColorProfile.diffusionParticle2ColorProperty,
             lineWidth: lineWidth
           } )
+        ]
+      } );
+    },
+
+    /**
+     * Creates the icon used on the 'Particle Flow Rate' checkbox.
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createParticleFlowRateIcon() {
+
+      const arrowOptions = {
+        fill: GasPropertiesColorProfile.diffusionParticle1ColorProperty,
+        stroke: null,
+        headHeight: 10,
+        headWidth: 10,
+        tailWidth: 5
+      };
+
+      return new HBox( {
+        spacing: 4,
+        children: [
+          new ArrowNode( 0, 0, -15, 0, arrowOptions ),
+          new ArrowNode( 0, 0, 20, 0, arrowOptions )
         ]
       } );
     }
