@@ -29,7 +29,7 @@ define( require => {
 
       // @public (read-only)
       this.stopwatch = new Stopwatch( {
-        location: new Vector2( 250, 15 ) // view coordinates! determined empirically
+        location: new Vector2( 25, 15 ) // view coordinates! determined empirically
       } );
     }
 

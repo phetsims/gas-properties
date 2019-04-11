@@ -16,6 +16,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
 
   class DiffusionScreenView extends ScreenView {
 
@@ -31,10 +32,9 @@ define( require => {
       // Data accordion box
       const dataAccordionBox = new DataAccordionBox( model, {
         expandedProperty: viewProperties.dataExpandedProperty,
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        left: this.layoutBounds.left + 200, //TODO
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      this.addChild( dataAccordionBox );
 
       // Control panel at right side of screen
       const controlPanel = new DiffusionControlPanel( model,
@@ -45,7 +45,11 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      this.addChild( controlPanel );
+
+      // Stopwatch
+      const stopwatchNode = new StopwatchNode( model.stopwatch, {
+        dragBoundsProperty: this.visibleBoundsProperty
+      } );
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
@@ -57,7 +61,12 @@ define( require => {
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
+
+      // Rendering order
+      this.addChild( dataAccordionBox );
+      this.addChild( controlPanel );
       this.addChild( resetAllButton );
+      this.addChild( stopwatchNode );
 
       // @private
       this.model = model;
