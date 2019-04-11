@@ -4,11 +4,6 @@ UP NEXT
 
 Pressure model
 
-Histogram interval lines
-Histogram when to adjust maxY
-Histogram smoothing
-Histogram bin sizes and number of bins
-
 Intro: hold constant
 - None: change N, T, or V => change P
 - Volume: change N or T => change P
@@ -35,7 +30,11 @@ DESIGN QUESTIONS (MODEL)
   - How to address the fact that pressure should be zero until particles collide with walls?
 
 DESIGN QUESTIONS (VIEW)
-* Histogram x-out-of-range indicator
+* Histograms:
+  - x-out-of-range indicator
+  - when to adjust maxY
+  - smoothing
+  - bin sizes and number of bins
 
 REFERENCES
 Is this a better collision model?
