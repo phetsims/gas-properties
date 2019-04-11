@@ -31,7 +31,7 @@ define( require => {
     constructor( centerOfMassVisibleProperty, options ) {
 
       options = _.extend( {
-        textIconSpacing: 15
+        textIconSpacing: 12
       }, options );
 
       const icon  = new HBox( {
