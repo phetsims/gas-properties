@@ -4,6 +4,8 @@ UP NEXT
 
 Pressure model
 
+Histograms avoid addChild/removeChild
+
 Intro: hold constant
 - None: change N, T, or V => change P
 - Volume: change N or T => change P

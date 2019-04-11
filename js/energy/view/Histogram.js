@@ -199,6 +199,8 @@ define( require => {
         }
 
         //TODO temporary 'out of range' indicator for x axis, ellipsis
+        //TODO should this be implemented more efficiently?
+        //TODO there should be one indicator, not one per data set
         const outOfRangeValues = _.filter( dataSet.values, value => ( value > maxX ) );
         if ( outOfRangeValues.length > 0 ) {
           this.plotNodesParent.addChild( new Text( '\u2022\u2022\u2022', {
@@ -211,6 +213,7 @@ define( require => {
       }
     }
 
+    //TODO should this be implemented more efficiently?
     /**
      * Converts a data set to an array of counts, one value for each bin.
      * @param dataSet
