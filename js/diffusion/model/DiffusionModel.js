@@ -9,16 +9,31 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const LinearFunction = require( 'DOT/LinearFunction' );
+  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   class DiffusionModel {
 
     constructor() {
-      //TODO constructor
+
+      // @public (read-only) transform between real time and sim time
+      // 1 second of real time is 2.5 picoseconds of sim time.
+      this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
+
+      // @public is the sim playing?
+      this.isPlayingProperty = new BooleanProperty( true );
+
+      // @public (read-only)
+      this.stopwatch = new Stopwatch( {
+        location: new Vector2( 250, 15 ) // view coordinates! determined empirically
+      } );
     }
 
     reset() {
-      //TODO reset
+      this.stopwatch.reset();
     }
 
     /**
@@ -27,7 +42,9 @@ define( require => {
      * @public
      */
     step( dt ) {
-      //TODO step
+      if ( this.isPlayingProperty.value ) {
+        this.stepModelTime( this.timeTransform( dt ) );
+      }
     }
 
     /**
@@ -36,7 +53,11 @@ define( require => {
      * @private
      */
     stepModelTime( dt ) {
-      //TODO
+      if ( this.isPlayingProperty.value ) {
+
+        // Advance the stopwatch
+        this.stopwatch.step( dt );
+      }
     }
   }
 
