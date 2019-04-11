@@ -66,7 +66,7 @@ define( require => {
         // all particles
         this.addDataSet( new DataSet( allValues, {
           fill: GasPropertiesColorProfile.histogramBarColorProperty,
-          stroke: null
+          stroke: GasPropertiesColorProfile.histogramBarColorProperty
         } ) );
 
         // heavy particles

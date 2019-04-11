@@ -60,7 +60,7 @@ define( require => {
         // KE data set
         this.addDataSet( new DataSet( values, {
           fill: GasPropertiesColorProfile.histogramBarColorProperty,
-          stroke: null
+          stroke: GasPropertiesColorProfile.histogramBarColorProperty
         } ) );
       }
 
