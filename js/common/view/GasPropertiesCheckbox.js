@@ -29,6 +29,7 @@ define( require => {
         icon: null, // {Node|null} optional icon, to the right of text
         textFill: GasPropertiesColorProfile.textFillProperty,
         textMaxWidth: 250,
+        textIconSpacing: 8,
         font: GasPropertiesConstants.CONTROL_FONT,
         checkboxColor: GasPropertiesColorProfile.checkboxStrokeProperty,
         checkboxColorBackground: GasPropertiesColorProfile.checkboxFillProperty
@@ -57,7 +58,7 @@ define( require => {
       else {
         content = new HBox( {
           align: 'center',
-          spacing: 8,
+          spacing: options.textIconSpacing,
           children: contentChildren
         } );
       }
