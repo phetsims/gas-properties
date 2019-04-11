@@ -2,6 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
+mutable mass for Particle
 ParticleFlowRateCheckbox icon
 CenterOfMassCheckbox icon
 
