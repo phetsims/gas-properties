@@ -12,6 +12,8 @@ define( require => {
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
+  const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
+  const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -38,7 +40,7 @@ define( require => {
      * @static
      */
     createHeavyParticleIcon( modelViewTransform ) {
-      return new ParticleNode( new HeavyParticle(), modelViewTransform );
+      return createParticleIcon( new HeavyParticle(), modelViewTransform );
     },
 
     /**
@@ -49,7 +51,29 @@ define( require => {
      * @static
      */
     createLightParticleIcon( modelViewTransform ) {
-      return new ParticleNode( new LightParticle(), modelViewTransform );
+      return createParticleIcon( new LightParticle(), modelViewTransform );
+    },
+
+    /**
+     * Creates an icon for particle type 1 in the Diffusion screen.
+     * @param {ModelViewTransform2} modelViewTransform
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createDiffusionParticle1Icon( modelViewTransform ) {
+      return createParticleIcon( new DiffusionParticle1(), modelViewTransform );
+    },
+
+    /**
+     * Creates an icon for particle type 2 in the Diffusion screen.
+     * @param {ModelViewTransform2} modelViewTransform
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createDiffusionParticle2Icon( modelViewTransform ) {
+      return createParticleIcon( new DiffusionParticle2(), modelViewTransform );
     },
 
     //TODO DESIGN create a less detailed icon for the stopwatch, that doesn't need stopwatch
@@ -175,6 +199,18 @@ define( require => {
       } );
     }
   };
+
+  /**
+   * Creates the icon for a particle.
+   * @param {Particle} particle
+   * @param {ModelViewTransform2} modelViewTransform
+   * @returns {Node}
+   * @public
+   * @static
+   */
+  function createParticleIcon( particle, modelViewTransform ) {
+    return new ParticleNode( particle, modelViewTransform );
+  }
 
   return gasProperties.register( 'GasPropertiesIconFactory', GasPropertiesIconFactory );
 } );
