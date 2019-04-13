@@ -57,6 +57,7 @@ define( require => {
         model.rightAverageTemperatureProperty
       );
 
+      //TODO should this separator be a bit more pronounced, since it corresponds to the container divider?
       const separator = new VSeparator( 75, {
         stroke: GasPropertiesColorProfile.separatorColorProperty
       } );
