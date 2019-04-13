@@ -20,7 +20,6 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
-  const Property = require( 'AXON/Property' );
   const QuantityControl = require( 'GAS_PROPERTIES/diffusion/view/QuantityControl' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
@@ -54,37 +53,31 @@ define( require => {
       const spinnersEnabledProperty = new DerivedProperty( [ hasDividerProperty ], hasDivider => hasDivider );
 
       //TODO move to model
-      const initialNumberRangeProperty = new Property( new RangeWithValue( 0, 100, 0 ) );
-      const initialNumber1Property = new NumberProperty( initialNumberRangeProperty.value.defaultValue );
-      const initialNumber2Property = new NumberProperty( initialNumberRangeProperty.value.defaultValue );
+      const initialNumberRange = new RangeWithValue( 0, 100, 0 );
+      const initialNumberDelta = 10;
+      const initialNumber1Property = new NumberProperty( initialNumberRange.defaultValue );
+      const initialNumber2Property = new NumberProperty( initialNumberRange.defaultValue );
       const initialNumberControl = new QuantityControl( model.modelViewTransform, initialNumberString,
-        initialNumber1Property, initialNumberRangeProperty,
-        initialNumber2Property, initialNumberRangeProperty,
-        spinnersEnabledProperty, {
-          deltaValue: 10
-        } );
+        initialNumber1Property, initialNumber2Property, initialNumberRange, initialNumberDelta,
+        spinnersEnabledProperty );
 
       // TODO move to model
-      const massRangeProperty = new Property( new RangeWithValue( 4, 32, 28 ) );
-      const mass1Property = new NumberProperty( massRangeProperty.value.defaultValue );
-      const mass2Property = new NumberProperty( massRangeProperty.value.defaultValue );
+      const massRange = new RangeWithValue( 4, 32, 28 );
+      const massDelta = 1;
+      const mass1Property = new NumberProperty( massRange.defaultValue );
+      const mass2Property = new NumberProperty( massRange.defaultValue );
       const massControl = new QuantityControl( model.modelViewTransform, massAmuString,
-        mass1Property, massRangeProperty,
-        mass2Property, massRangeProperty,
-        spinnersEnabledProperty, {
-          deltaValue: 1
-        } );
+        mass1Property, mass2Property, massRange, massDelta,
+        spinnersEnabledProperty );
 
       //TODO move to model
-      const initialTemperatureRangeProperty = new Property( new RangeWithValue( 50, 500, 300 ) );
-      const initialTemperature1Property = new NumberProperty( initialTemperatureRangeProperty.value.defaultValue );
-      const initialTemperature2Property = new NumberProperty( initialTemperatureRangeProperty.value.defaultValue );
+      const initialTemperatureRange = new RangeWithValue( 50, 500, 300 );
+      const initialTemperatureDelta = 50;
+      const initialTemperature1Property = new NumberProperty( initialTemperatureRange.defaultValue );
+      const initialTemperature2Property = new NumberProperty( initialTemperatureRange.defaultValue );
       const initialTemperatureControl = new QuantityControl( model.modelViewTransform, initialTemperatureKString,
-        initialTemperature1Property, initialTemperatureRangeProperty,
-        initialTemperature2Property, initialTemperatureRangeProperty,
-        spinnersEnabledProperty, {
-          deltaValue: 50
-        } );
+        initialTemperature1Property, initialTemperature2Property, initialTemperatureRange, initialTemperatureDelta,
+        spinnersEnabledProperty );
 
       hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {

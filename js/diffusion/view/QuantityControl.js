@@ -13,9 +13,9 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
+  const GasPropertiesSpinner = require( 'GAS_PROPERTIES/diffusion/view/GasPropertiesSpinner' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const NumberSpinner = require( 'SUN/NumberSpinner' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -25,46 +25,38 @@ define( require => {
      * @param {ModelViewTransform2} modelViewTransform
      * @param {string} title
      * @param {NumberProperty} particle1Property
-     * @param {Property<Range>} particle1RangeProperty
      * @param {NumberProperty} particle2Property
-     * @param {Property<Range>} particle2RangeProperty
+     * @param {Range} range
+     * @param {number} delta - spinner delta
      * @param {BooleanProperty} enabledProperty
      * @param {Object} [options]
      */
-    constructor( modelViewTransform, title,
-                 particle1Property, particle1RangeProperty,
-                 particle2Property, particle2RangeProperty,
-                 enabledProperty,
-                 options ) {
+    constructor( modelViewTransform, title, particle1Property, particle2Property, range, delta, enabledProperty, options ) {
 
       options = _.extend( {
         spacing: 12,
-        align: 'left',
-        deltaValue: 1  // {number} spinner delta
+        align: 'left'
       }, options );
 
+      // title
       const titleNode = new Text( title, {
         font: GasPropertiesConstants.CONTROL_FONT,
         fill: GasPropertiesColorProfile.textFillProperty
       } );
 
+      // icons
       const particle1Icon = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform );
       const particle2Icon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
 
-      const numberSpinnerOptions = {
-        deltaValue: options.deltaValue,
-        enabledProperty: enabledProperty,
-        font: GasPropertiesConstants.CONTROL_FONT,
-        xMargin: 8,
-        yMargin: 6,
-        valueAlign: 'right',
-        touchAreaXDilation: 15,
-        touchAreaYDilation: 15
+      // spinners
+      const spinnerOptions = {
+        deltaValue: delta,
+        enabledProperty: enabledProperty
       };
+      const particle1Spinner = new GasPropertiesSpinner( particle1Property, range, spinnerOptions );
+      const particle2Spinner = new GasPropertiesSpinner( particle2Property, range, spinnerOptions );
 
-      const particle1Spinner = new NumberSpinner( particle1Property, particle1RangeProperty, numberSpinnerOptions );
-      const particle2Spinner = new NumberSpinner( particle2Property, particle2RangeProperty, numberSpinnerOptions );
-
+      // layout
       const hBox1 = new HBox( {
         spacing: 10,
         children: [ particle1Icon, particle1Spinner ]
