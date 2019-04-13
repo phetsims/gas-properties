@@ -47,7 +47,7 @@ define( require => {
         spacing: 12,
         children: [
           new VStrut( 300 ), //TODO temporary
-          new DividerToggleButton( hasDividerProperty ),
+          new DividerToggleButton( hasDividerProperty ), //TODO center me
           new HSeparator( separatorWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: separatorWidth
