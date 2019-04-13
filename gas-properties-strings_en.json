@@ -127,5 +127,14 @@
   },
   "tAvg": {
     "value": "T<sub>avg</sub> = {{value}}"
+  },
+  "initialNumber": {
+    "value": "Initial Number"
+  },
+  "massAmu": {
+    "value": "Mass (amu)"
+  },
+  "initialTemperatureK": {
+    "value": "Initial Temperature (K)"
   }
 }
