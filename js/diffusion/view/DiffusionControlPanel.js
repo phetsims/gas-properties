@@ -55,30 +55,47 @@ define( require => {
 
       //TODO move to model
       const initialNumberRangeProperty = new Property( new RangeWithValue( 0, 100, 0 ) );
+      const initialNumber1Property = new NumberProperty( initialNumberRangeProperty.value.defaultValue );
+      const initialNumber2Property = new NumberProperty( initialNumberRangeProperty.value.defaultValue );
       const initialNumberControl = new QuantityControl( model.modelViewTransform, initialNumberString,
-        new NumberProperty( initialNumberRangeProperty.value.defaultValue ), initialNumberRangeProperty,
-        new NumberProperty( initialNumberRangeProperty.value.defaultValue ), initialNumberRangeProperty,
+        initialNumber1Property, initialNumberRangeProperty,
+        initialNumber2Property, initialNumberRangeProperty,
         spinnersEnabledProperty, {
           deltaValue: 10
         } );
 
       // TODO move to model
       const massRangeProperty = new Property( new RangeWithValue( 4, 32, 28 ) );
+      const mass1Property = new NumberProperty( massRangeProperty.value.defaultValue );
+      const mass2Property = new NumberProperty( massRangeProperty.value.defaultValue );
       const massControl = new QuantityControl( model.modelViewTransform, massAmuString,
-        new NumberProperty( massRangeProperty.value.defaultValue ), massRangeProperty,
-        new NumberProperty( massRangeProperty.value.defaultValue ), massRangeProperty,
+        mass1Property, massRangeProperty,
+        mass2Property, massRangeProperty,
         spinnersEnabledProperty, {
           deltaValue: 1
         } );
 
       //TODO move to model
       const initialTemperatureRangeProperty = new Property( new RangeWithValue( 50, 500, 300 ) );
+      const initialTemperature1Property = new NumberProperty( initialTemperatureRangeProperty.value.defaultValue );
+      const initialTemperature2Property = new NumberProperty( initialTemperatureRangeProperty.value.defaultValue );
       const initialTemperatureControl = new QuantityControl( model.modelViewTransform, initialTemperatureKString,
-        new NumberProperty( initialTemperatureRangeProperty.value.defaultValue ), initialTemperatureRangeProperty,
-        new NumberProperty( initialTemperatureRangeProperty.value.defaultValue ), initialTemperatureRangeProperty,
+        initialTemperature1Property, initialTemperatureRangeProperty,
+        initialTemperature2Property, initialTemperatureRangeProperty,
         spinnersEnabledProperty, {
           deltaValue: 50
         } );
+
+      hasDividerProperty.link( hasDivider => {
+        if ( hasDivider ) {
+          initialNumber1Property.reset();
+          initialNumber2Property.reset();
+          mass1Property.reset();
+          mass2Property.reset();
+          initialTemperature1Property.reset();
+          initialTemperature2Property.reset();
+        }
+      } );
 
       const content = new VBox( {
         align: 'left',
