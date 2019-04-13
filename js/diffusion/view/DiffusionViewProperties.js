@@ -25,6 +25,9 @@ define( require => {
 
       // @public whether the center-of-mass indicators are visible on the container
       this.centerOfMassVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
+
+      //TODO move to model
+      this.hasDividerProperty = new BooleanProperty( true );
     }
 
     // @public @override
@@ -32,6 +35,7 @@ define( require => {
       this.dataExpandedProperty.reset();
       this.particleFlowRateVisibleProperty.reset();
       this.centerOfMassVisibleProperty.reset();
+      this.hasDividerProperty.reset();
     }
   }
 

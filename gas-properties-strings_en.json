@@ -118,5 +118,11 @@
   },
   "particleFlowRate": {
     "value": "Particle Flow Rate"
+  },
+  "removeDivider": {
+    "value": "Remove Divider"
+  },
+  "reset": {
+    "value": "Reset"
   }
 }

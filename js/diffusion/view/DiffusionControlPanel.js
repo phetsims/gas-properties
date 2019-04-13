@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const CenterOfMassCheckbox = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassCheckbox' );
+  const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -25,12 +26,14 @@ define( require => {
 
     /**
      * @param {DiffusionModel} model
+     * @param {BooleanProperty} hasDividerProperty
      * @param {BooleanProperty} particleFlowRateVisibleProperty
      * @param {BooleanProperty} centerOfMassVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {Object} [options]
      */
-    constructor( model, particleFlowRateVisibleProperty, centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
+    constructor( model, hasDividerProperty, particleFlowRateVisibleProperty,
+                 centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
 
       options = _.extend( {
         fixedWidth: 100,
@@ -44,6 +47,7 @@ define( require => {
         spacing: 12,
         children: [
           new VStrut( 300 ), //TODO temporary
+          new DividerToggleButton( hasDividerProperty ),
           new HSeparator( separatorWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: separatorWidth
