@@ -20,8 +20,8 @@ define( require => {
      */
     constructor( options ) {
       super( _.extend( {
-        colorProperty: GasPropertiesColorProfile.diffusionDiffusionParticle2ColorProperty,
-        highlightColorProperty: GasPropertiesColorProfile.diffusionDiffusionParticle2ColorProperty
+        colorProperty: GasPropertiesColorProfile.diffusionParticle2ColorProperty,
+        highlightColorProperty: GasPropertiesColorProfile.diffusionParticle2ColorProperty
       }, options ) );
     }
   }

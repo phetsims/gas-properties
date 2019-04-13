@@ -124,5 +124,8 @@
   },
   "reset": {
     "value": "Reset"
+  },
+  "tAvg": {
+    "value": "T<sub>avg</sub> = {{value}}"
   }
 }
