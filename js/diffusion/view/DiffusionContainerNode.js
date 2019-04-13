@@ -11,15 +11,17 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const Line = require( 'SCENERY/nodes/Line' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   class DiffusionContainerNode extends Node {
 
     /**
+     * @param {BooleanProperty} hasDividerProperty TODO temporary
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( hasDividerProperty, options ) {
 
       options = _.extend( {
         //TODO
@@ -30,13 +32,24 @@ define( require => {
         stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
         lineWidth: 3
       } );
+
+      const dividerNode = new Line( 0, 0, 0, rectangle.height, {
+        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+        lineWidth: 3,
+        center: rectangle.center
+      } );
       
       assert && assert( !options.children, 'DiffusionContainerNodeNode sets children' );
       options = _.extend( {
-        children: [ rectangle ]
+        children: [ rectangle, dividerNode ]
       }, options );
       
       super( options );
+
+      //TODO temporary
+      hasDividerProperty.link( hasDivider => {
+        dividerNode.visible = hasDivider;
+      } );
     }
   }
 

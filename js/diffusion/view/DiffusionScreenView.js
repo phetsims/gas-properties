@@ -49,7 +49,7 @@ define( require => {
         } );
 
       // Container
-      const containerNode = new DiffusionContainerNode( {
+      const containerNode = new DiffusionContainerNode( model.hasDividerProperty, {
         left: this.layoutBounds.left + 2 * GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         centerY: this.layoutBounds.centerY + 25
       } );
