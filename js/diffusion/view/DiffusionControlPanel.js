@@ -98,7 +98,7 @@ define( require => {
             spacing: 20,
             align: 'left',
             children: [
-              //TODO alignment
+              //TODO alignment - spinners have different ranges, so different widths
               initialNumberControl,
               massControl,
               initialTemperatureControl,
