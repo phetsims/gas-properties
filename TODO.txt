@@ -2,11 +2,11 @@ TODO list for gas-properties
 
 UP NEXT
 
-mutable mass for Particle
-
 Diffusion: play/pause button, normal/slow radio buttons
 
-Pressure model
+mutable mass for Particle
+
+Pressure model #50
 
 Histograms avoid addChild/removeChild
 
