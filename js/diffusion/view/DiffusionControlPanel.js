@@ -58,8 +58,12 @@ define( require => {
       const initialNumber1Property = new NumberProperty( initialNumberRange.defaultValue );
       const initialNumber2Property = new NumberProperty( initialNumberRange.defaultValue );
       const initialNumberControl = new QuantityControl( model.modelViewTransform, initialNumberString,
-        initialNumber1Property, initialNumber2Property, initialNumberRange, initialNumberDelta,
-        spinnersEnabledProperty );
+        initialNumber1Property, initialNumber2Property, initialNumberRange, {
+          spinnerOptions: {
+            enabledProperty: spinnersEnabledProperty,
+            deltaValue: initialNumberDelta
+          }
+        } );
 
       // TODO move to model
       const massRange = new RangeWithValue( 4, 32, 28 );
@@ -67,8 +71,13 @@ define( require => {
       const mass1Property = new NumberProperty( massRange.defaultValue );
       const mass2Property = new NumberProperty( massRange.defaultValue );
       const massControl = new QuantityControl( model.modelViewTransform, massAmuString,
-        mass1Property, mass2Property, massRange, massDelta,
-        spinnersEnabledProperty );
+        mass1Property, mass2Property, massRange, {
+          spinnerOptions: {
+            enabledProperty: spinnersEnabledProperty,
+            deltaValue: massDelta,
+            xMargin: 12 // empirical hack to make all spinners the same same width
+          }
+        } );
 
       //TODO move to model
       const initialTemperatureRange = new RangeWithValue( 50, 500, 300 );
@@ -76,8 +85,12 @@ define( require => {
       const initialTemperature1Property = new NumberProperty( initialTemperatureRange.defaultValue );
       const initialTemperature2Property = new NumberProperty( initialTemperatureRange.defaultValue );
       const initialTemperatureControl = new QuantityControl( model.modelViewTransform, initialTemperatureKString,
-        initialTemperature1Property, initialTemperature2Property, initialTemperatureRange, initialTemperatureDelta,
-        spinnersEnabledProperty );
+        initialTemperature1Property, initialTemperature2Property, initialTemperatureRange, {
+          spinnerOptions: {
+            enabledProperty: spinnersEnabledProperty,
+            deltaValue: initialTemperatureDelta
+          }
+        } );
 
       hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {

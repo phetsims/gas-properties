@@ -27,13 +27,14 @@ define( require => {
      * @param {NumberProperty} particle1Property
      * @param {NumberProperty} particle2Property
      * @param {Range} range
-     * @param {number} delta - spinner delta
-     * @param {BooleanProperty} enabledProperty
      * @param {Object} [options]
      */
-    constructor( modelViewTransform, title, particle1Property, particle2Property, range, delta, enabledProperty, options ) {
+    constructor( modelViewTransform, title, particle1Property, particle2Property, range, options ) {
 
       options = _.extend( {
+        spinnerOptions: null, // {*} see NumberSpinner
+
+        // VBox options
         spacing: 12,
         align: 'left'
       }, options );
@@ -49,12 +50,8 @@ define( require => {
       const particle2Icon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
 
       // spinners
-      const spinnerOptions = {
-        deltaValue: delta,
-        enabledProperty: enabledProperty
-      };
-      const particle1Spinner = new GasPropertiesSpinner( particle1Property, range, spinnerOptions );
-      const particle2Spinner = new GasPropertiesSpinner( particle2Property, range, spinnerOptions );
+      const particle1Spinner = new GasPropertiesSpinner( particle1Property, range, options.spinnerOptions );
+      const particle2Spinner = new GasPropertiesSpinner( particle2Property, range, options.spinnerOptions );
 
       // layout
       const hBox1 = new HBox( {
