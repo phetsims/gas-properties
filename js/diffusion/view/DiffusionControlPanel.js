@@ -91,6 +91,7 @@ define( require => {
           }
         } );
 
+      // When the divider is returned, reset values for all spinners
       hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {
           initialNumber1Property.reset();
