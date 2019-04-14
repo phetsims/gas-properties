@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const CenterOfMassCheckbox = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassCheckbox' );
   const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
@@ -50,8 +49,6 @@ define( require => {
 
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      const spinnersEnabledProperty = new DerivedProperty( [ hasDividerProperty ], hasDivider => hasDivider );
-
       //TODO move to model
       const initialNumberRange = new RangeWithValue( 0, 100, 0 );
       const initialNumberDelta = 10;
@@ -69,7 +66,7 @@ define( require => {
       const initialNumberControl = new QuantityControl( model.modelViewTransform, initialNumberString,
         initialNumber1Property, initialNumber2Property, initialNumberRange, {
           spinnerOptions: {
-            enabledProperty: spinnersEnabledProperty,
+            enabledProperty: hasDividerProperty,
             deltaValue: initialNumberDelta
           }
         } );
@@ -79,7 +76,7 @@ define( require => {
       const massControl = new QuantityControl( model.modelViewTransform, massAmuString,
         mass1Property, mass2Property, massRange, {
           spinnerOptions: {
-            enabledProperty: spinnersEnabledProperty,
+            enabledProperty: hasDividerProperty,
             deltaValue: massDelta,
             xMargin: 12 // empirical hack to make all spinners the same same width
           }
@@ -89,7 +86,7 @@ define( require => {
       const initialTemperatureControl = new QuantityControl( model.modelViewTransform, initialTemperatureKString,
         initialTemperature1Property, initialTemperature2Property, initialTemperatureRange, {
           spinnerOptions: {
-            enabledProperty: spinnersEnabledProperty,
+            enabledProperty: hasDividerProperty,
             deltaValue: initialTemperatureDelta
           }
         } );
