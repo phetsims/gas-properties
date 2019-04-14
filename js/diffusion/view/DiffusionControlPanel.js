@@ -57,6 +57,15 @@ define( require => {
       const initialNumberDelta = 10;
       const initialNumber1Property = new NumberProperty( initialNumberRange.defaultValue );
       const initialNumber2Property = new NumberProperty( initialNumberRange.defaultValue );
+      const massRange = new RangeWithValue( 4, 32, 28 );
+      const massDelta = 1;
+      const mass1Property = new NumberProperty( massRange.defaultValue );
+      const initialTemperatureRange = new RangeWithValue( 50, 500, 300 );
+      const initialTemperatureDelta = 50;
+      const initialTemperature1Property = new NumberProperty( initialTemperatureRange.defaultValue );
+      const initialTemperature2Property = new NumberProperty( initialTemperatureRange.defaultValue );
+
+      // Initial Number
       const initialNumberControl = new QuantityControl( model.modelViewTransform, initialNumberString,
         initialNumber1Property, initialNumber2Property, initialNumberRange, {
           spinnerOptions: {
@@ -65,10 +74,7 @@ define( require => {
           }
         } );
 
-      // TODO move to model
-      const massRange = new RangeWithValue( 4, 32, 28 );
-      const massDelta = 1;
-      const mass1Property = new NumberProperty( massRange.defaultValue );
+      // Mass (AMU)
       const mass2Property = new NumberProperty( massRange.defaultValue );
       const massControl = new QuantityControl( model.modelViewTransform, massAmuString,
         mass1Property, mass2Property, massRange, {
@@ -79,11 +85,7 @@ define( require => {
           }
         } );
 
-      //TODO move to model
-      const initialTemperatureRange = new RangeWithValue( 50, 500, 300 );
-      const initialTemperatureDelta = 50;
-      const initialTemperature1Property = new NumberProperty( initialTemperatureRange.defaultValue );
-      const initialTemperature2Property = new NumberProperty( initialTemperatureRange.defaultValue );
+      // Initial Temperature (K)
       const initialTemperatureControl = new QuantityControl( model.modelViewTransform, initialTemperatureKString,
         initialTemperature1Property, initialTemperature2Property, initialTemperatureRange, {
           spinnerOptions: {
