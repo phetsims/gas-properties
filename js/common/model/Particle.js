@@ -38,7 +38,6 @@ define( require => {
 
       // @public (read-only) the particle is initially at rest
       this.velocity = new Vector2( 0, 0 ); // nm / ps
-      this.momentum = new Vector2( 0, 0 ); // AMU * nm / ps //TODO delete if not used
       this.kineticEnergy = 0; // AMU * nm^2 / ps^2
 
       // @public (read-only)
@@ -119,9 +118,6 @@ define( require => {
 
       // mutate velocity vector
       this.velocity.setXY( x, y );
-
-      // P = m * v
-      this.momentum.setXY( this.velocity.x * this.mass, this.velocity.y * this.mass );
 
       // KE = (1/2) * m * |v|^2
       this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared;
