@@ -96,7 +96,9 @@ define( require => {
             wasPlaying = model.isPlayingProperty.value;
             model.isPlayingProperty.value = false;
             model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
-            model.collisionCounter.isRunningProperty.value = false;
+            if ( model.collisionCounter ) {
+              model.collisionCounter.isRunningProperty.value = false;
+            }
 
             // gray out the particles
             particlesNode.opacity = 0.6;
