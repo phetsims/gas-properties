@@ -202,6 +202,7 @@ define( require => {
       return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
     }
 
+    //TODO this assumes that all particles have the same mass, verify that
     /**
      * Gets the center of mass of a collection of particles.
      * @param {Particle[]} particles
