@@ -10,9 +10,8 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const Property = require( 'AXON/Property' );
 
   // constants
@@ -22,11 +21,10 @@ define( require => {
   // average speed computation is averaged over this time window
   const AVERAGE_SPEED_SMOOTHING_INTERVAL = GasPropertiesQueryParameters.averageSpeedSmoothingInterval; // ps
 
-  class EnergyModel extends GasPropertiesModel {
+  class EnergyModel extends IdealModel {
 
     constructor() {
       super( {
-        holdConstant: HoldConstantEnum.VOLUME,
         hasCollisionCounter: false
       } );
 

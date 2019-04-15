@@ -10,10 +10,10 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
 
-  class ExploreModel extends GasPropertiesModel {
+  class ExploreModel extends IdealModel {
 
     constructor() {
       super( {
