@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * The timescale used to map realtime (seconds) to sim time (picoseconds).

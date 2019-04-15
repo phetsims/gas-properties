@@ -1,4 +1,4 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2019, University of Colorado Boulder
 
 /**
  * Model for the 'Intro' screen. Also serves as the superclass model for the 'Explore' and 'Energy' screens.
