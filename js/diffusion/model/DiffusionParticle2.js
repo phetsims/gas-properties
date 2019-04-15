@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for the 2nd type of particle in the 'Diffusion' screen.
+ * Model for particle type 2 (red) in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for the 1st type of particle in the 'Diffusion' screen.
+ * Model for particle type 1 (cyan) in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
