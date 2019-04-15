@@ -240,8 +240,6 @@ define( require => {
     }
   }
 
-  gasProperties.register( 'ContainerNode.ResizeHandleDragListener', ResizeHandleDragListener );
-
   /**
    * Drag listener for the container's lid, determines the size of the opening in the top of the container.
    */
@@ -287,8 +285,6 @@ define( require => {
       } );
     }
   }
-
-  gasProperties.register( 'ContainerNode.LidDragListener', LidDragListener );
 
   return ContainerNode;
 } );
