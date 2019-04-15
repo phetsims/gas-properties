@@ -16,11 +16,9 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HSeparator = require( 'SUN/HSeparator' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
   const QuantityControl = require( 'GAS_PROPERTIES/diffusion/view/QuantityControl' );
-  const RangeWithValue = require( 'DOT/RangeWithValue' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -49,57 +47,38 @@ define( require => {
 
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      //TODO move to model
-      const initialNumberRange = new RangeWithValue( 0, 100, 0 );
-      const initialNumberDelta = 10;
-      const initialNumber1Property = new NumberProperty( initialNumberRange.defaultValue );
-      const initialNumber2Property = new NumberProperty( initialNumberRange.defaultValue );
-      const massRange = new RangeWithValue( 4, 32, 28 );
-      const massDelta = 1;
-      const mass1Property = new NumberProperty( massRange.defaultValue );
-      const initialTemperatureRange = new RangeWithValue( 50, 500, 300 );
-      const initialTemperatureDelta = 50;
-      const initialTemperature1Property = new NumberProperty( initialTemperatureRange.defaultValue );
-      const initialTemperature2Property = new NumberProperty( initialTemperatureRange.defaultValue );
-
       // Initial Number
       const initialNumberControl = new QuantityControl( model.modelViewTransform, initialNumberString,
-        initialNumber1Property, initialNumber2Property, initialNumberRange, {
+        model.initialNumber1Property, model.initialNumber2Property, model.initialNumberRange, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: initialNumberDelta
+            deltaValue: model.initialNumberDelta
           }
         } );
 
       // Mass (AMU)
-      const mass2Property = new NumberProperty( massRange.defaultValue );
       const massControl = new QuantityControl( model.modelViewTransform, massAmuString,
-        mass1Property, mass2Property, massRange, {
+        model.mass1Property, model.mass2Property, model.massRange, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: massDelta,
+            deltaValue: model.massDelta,
             xMargin: 12 // empirical hack to make all spinners the same same width
           }
         } );
 
       // Initial Temperature (K)
       const initialTemperatureControl = new QuantityControl( model.modelViewTransform, initialTemperatureKString,
-        initialTemperature1Property, initialTemperature2Property, initialTemperatureRange, {
+        model.initialTemperature1Property, model.initialTemperature2Property, model.initialTemperatureRange, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: initialTemperatureDelta
+            deltaValue: model.initialTemperatureDelta
           }
         } );
 
-      // When the divider is returned, reset values for all spinners
+      // When the divider is returned, reset the experiment.
       hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {
-          initialNumber1Property.reset();
-          initialNumber2Property.reset();
-          mass1Property.reset();
-          mass2Property.reset();
-          initialTemperature1Property.reset();
-          initialTemperature2Property.reset();
+          model.resetExperiment();
         }
       } );
 
