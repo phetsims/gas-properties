@@ -21,7 +21,11 @@ define( require => {
 
   class GasPropertiesModel {
 
-    constructor() {
+    constructor( options ) {
+
+      options = _.extend( {
+        stopwatchLocation: new Vector2( 250, 15 ) // in view coordinates! determined empirically
+      }, options );
 
       // @public (read-only) bounds of the entire space that the model knows about.
       // This corresponds to the browser window, and doesn't have a valid value until the view is created.
@@ -49,7 +53,7 @@ define( require => {
 
       // @public (read-only)
       this.stopwatch = new Stopwatch( {
-        location: new Vector2( 250, 15 ) // view coordinates! determined empirically
+        location: options.stopwatchLocation
       } );
     }
 

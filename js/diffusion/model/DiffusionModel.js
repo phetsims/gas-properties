@@ -18,12 +18,15 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   class DiffusionModel extends GasPropertiesModel {
 
     constructor() {
 
-      super();
+      super( {
+        stopwatchLocation: new Vector2( 35, 15 ) // in view coordinates! determined empirically
+      } );
 
       // @public
       this.timescaleProperty = new EnumerationProperty( Timescale, Timescale.NORMAL );
