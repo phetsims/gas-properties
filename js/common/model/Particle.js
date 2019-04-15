@@ -24,7 +24,7 @@ define( require => {
       options = _.extend( {
         mass: 1, // AMU
         radius: 1, // nm
-        colorProperty: null, // {Property.<ColorDef}
+        colorProperty: null, // {Property.<ColorDef>}
         highlightColorProperty: null // {Property.<ColorDef>} color for specular highlight
       }, options );
 
