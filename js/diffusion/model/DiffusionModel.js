@@ -77,7 +77,7 @@ define( require => {
 
     // @public
     reset() {
-      this.timescaleProperty.rest();
+      this.timescaleProperty.reset();
       this.stopwatch.reset();
       this.hasDividerProperty.reset();
       this.leftNumberOfParticles1Property.reset();
