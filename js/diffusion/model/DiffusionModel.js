@@ -105,11 +105,9 @@ define( require => {
      * @private
      */
     stepModelTime( dt ) {
-      if ( this.isPlayingProperty.value ) {
 
-        // Advance the stopwatch
-        this.stopwatch.step( dt );
-      }
+      // Advance the stopwatch
+      this.stopwatch.step( dt );
     }
   }
 

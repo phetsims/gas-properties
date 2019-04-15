@@ -39,8 +39,6 @@ define( require => {
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
-  // average speed computation is averaged over this time window
-  const AVERAGE_SPEED_SMOOTHING_INTERVAL = GasPropertiesQueryParameters.averageSpeedSmoothingInterval; // ps
 
   class GasPropertiesModel {
 
@@ -114,15 +112,6 @@ define( require => {
         range: INITIAL_TEMPERATURE_RANGE
       } );
 
-      const averageSpeedPropertyOptions = {
-        isValidValue: value => ( value === null || typeof value === 'number' )
-      };
-
-      //TODO should Average Speed and Speed Histogram both use get get*ParticleSpeedValues, to reduce iterations?
-      // @public (read-only) average speed of heavy particles in the container, null when container is empty, m/s
-      this.heavyAverageSpeedProperty = new Property( null, averageSpeedPropertyOptions );
-      this.lightAverageSpeedProperty = new Property( null, averageSpeedPropertyOptions );
-
       // @public (read-only)
       this.container = new Container();
 
@@ -159,12 +148,6 @@ define( require => {
           this.redistributeParticles( newWidth / oldWidth );
         } );
       }
-
-      // @private used internally to smooth the average speed computation
-      this.numberOfAverageSpeedSamples = 0; // number of samples we've taken
-      this.averageSpeedSmoothingTime = 0; // accumulated dts while samples were taken
-      this.heavyAverageSpeedSum = 0; // sum of samples for heavy particles
-      this.lightAverageSpeedSum = 0; // sum of samples for light particles
     }
 
     /**
@@ -307,74 +290,48 @@ define( require => {
     /**
      * Steps the model using model time units.
      * @param {number} dt - time delta, in ps
-     * @private
+     * @protected
      */
     stepModelTime( dt ) {
-      if ( this.isPlayingProperty.value ) {
 
-        // Advance the stopwatch
-        this.stopwatch.step( dt );
+      // Advance the stopwatch
+      this.stopwatch.step( dt );
 
-        // Apply heat/cool
-        if ( this.heatCoolFactorProperty.value !== 0 ) {
-          heatCoolParticles( this.heavyParticles, this.heatCoolFactorProperty.value );
-          heatCoolParticles( this.lightParticles, this.heatCoolFactorProperty.value );
-        }
+      // Apply heat/cool
+      if ( this.heatCoolFactorProperty.value !== 0 ) {
+        heatCoolParticles( this.heavyParticles, this.heatCoolFactorProperty.value );
+        heatCoolParticles( this.lightParticles, this.heatCoolFactorProperty.value );
+      }
 
-        // Step particles
-        stepParticles( this.heavyParticles, dt );
-        stepParticles( this.lightParticles, dt );
-        stepParticles( this.heavyParticlesOutside, dt );
-        stepParticles( this.lightParticlesOutside, dt );
+      // Step particles
+      stepParticles( this.heavyParticles, dt );
+      stepParticles( this.lightParticles, dt );
+      stepParticles( this.heavyParticlesOutside, dt );
+      stepParticles( this.lightParticlesOutside, dt );
 
-        // Collision detection and response
-        this.collisionDetector.step( dt );
+      // Collision detection and response
+      this.collisionDetector.step( dt );
 
-        // Remove particles that have left the model bounds
-        removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );
-        removeParticlesOutOfBounds( this.lightParticlesOutside, this.modelBoundsProperty.value );
+      // Remove particles that have left the model bounds
+      removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );
+      removeParticlesOutOfBounds( this.lightParticlesOutside, this.modelBoundsProperty.value );
 
-        // Verify that these particles are fully enclosed in the container
-        assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
-        assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
+      // Verify that these particles are fully enclosed in the container
+      assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
+      assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
 
-        // compute the average speed for each particle type, smooth the values over an interval
-        this.heavyAverageSpeedSum += getAverageSpeed( this.heavyParticles );
-        this.lightAverageSpeedSum += getAverageSpeed( this.lightParticles );
-        this.numberOfAverageSpeedSamples++;
-        this.averageSpeedSmoothingTime += dt;
-        if ( this.averageSpeedSmoothingTime >= AVERAGE_SPEED_SMOOTHING_INTERVAL ) {
+      // Do this after collision detection, so that the number of collisions detected has been recorded.
+      this.collisionCounter && this.collisionCounter.step( dt );
 
-          // update the average speed Properties
-          this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
-          this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
+      // Compute temperature. Do this before pressure, because pressure depends on temperature.
+      this.thermometer.temperatureKelvinProperty.value = this.computeTemperature();
 
-          // reset the smoothing variables
-          this.numberOfAverageSpeedSamples = 0;
-          this.averageSpeedSmoothingTime = 0;
-          this.heavyAverageSpeedSum = 0;
-          this.lightAverageSpeedSum = 0;
-        }
-        if ( this.heavyParticles.length === 0 ) {
-          this.heavyAverageSpeedProperty.value = null;
-        }
-        if ( this.lightParticles.length === 0 ) {
-          this.lightAverageSpeedProperty.value = null;
-        }
+      // Compute pressure
+      this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
 
-        // Do this after collision detection, so that the number of collisions detected has been recorded.
-        this.collisionCounter && this.collisionCounter.step( dt );
-
-        // Compute temperature. Do this before pressure, because pressure depends on temperature.
-        this.thermometer.temperatureKelvinProperty.value = this.computeTemperature();
-
-        // Compute pressure
-        this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
-
-        // If pressure exceeds the maximum, blow the lid off of the container.
-        if ( this.pressureGauge.pressureKilopascalsProperty.value > GasPropertiesQueryParameters.maxPressure ) {
-          this.container.lidIsOnProperty.value = false;
-        }
+      // If pressure exceeds the maximum, blow the lid off of the container.
+      if ( this.pressureGauge.pressureKilopascalsProperty.value > GasPropertiesQueryParameters.maxPressure ) {
+        this.container.lidIsOnProperty.value = false;
       }
     }
 
@@ -421,48 +378,6 @@ define( require => {
 
       // P = NkT/V, converted to kPa
       return 1.66E3 * ( numberOfParticles * k * temperature / volume );
-    }
-
-    /**
-     * Gets kinetic energy values for all particles in the container. Used by the Kinetic Energy histogram.
-     * @returns {number[]}
-     * @public
-     */
-    getKineticEnergyValues() {
-      const values = [];
-      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-        values.push( this.heavyParticles[ i ].kineticEnergy );
-      }
-      for ( let i = 0; i < this.lightParticles.length; i++ ) {
-        values.push( this.lightParticles[ i ].kineticEnergy );
-      }
-      return values;
-    }
-
-    /**
-     * Gets speed values for all heavy particles in the container. Used by the Speed histogram.
-     * @returns {number[]}
-     * @public
-     */
-    getHeavyParticleSpeedValues() {
-      const values = [];
-      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-        values.push( this.heavyParticles[ i ].velocity.magnitude );
-      }
-      return values;
-    }
-
-    /**
-     * Gets speed values for all light particles in the container. Used by the Speed histogram.
-     * @returns {number[]}
-     * @public
-     */
-    getLightParticleSpeedValues() {
-      const values = [];
-      for ( let i = 0; i < this.lightParticles.length; i++ ) {
-        values.push( this.lightParticles[ i ].velocity.magnitude );
-      }
-      return values;
     }
   }
 
@@ -552,23 +467,6 @@ define( require => {
       assert && assert( container.enclosesParticle( particles[ i ] ),
         `container does not enclose particle: ${particles[ i ].toString()}` );
     }
-  }
-
-  /**
-   * Gets the average speed of a set of particles, in nm/ps.
-   * @param {Particle[]} particles
-   * @returns {number|null} null if there are no particles
-   */
-  function getAverageSpeed( particles ) {
-    let averageSpeed = null;
-    if ( particles.length > 0 ) {
-      let totalSpeed = 0;
-      for ( let i = 0; i < particles.length; i++ ) {
-        totalSpeed += particles[ i ].velocity.magnitude;
-      }
-      averageSpeed = totalSpeed / particles.length;
-    }
-    return averageSpeed;
   }
 
   return gasProperties.register( 'GasPropertiesModel', GasPropertiesModel );
