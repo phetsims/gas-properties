@@ -11,6 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const Property = require( 'AXON/Property' );
 
@@ -26,6 +27,7 @@ define( require => {
     constructor() {
 
       super( {
+        holdConstant: HoldConstantEnum.VOLUME,
         hasCollisionCounter: false
       } );
 
