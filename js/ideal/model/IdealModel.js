@@ -217,8 +217,14 @@ define( require => {
       redistributeParticles( this.lightParticles, ratio );
     }
 
-    // @public resets the model
+    /**
+     * Resets the model.
+     * @public
+     * @override
+     */
     reset() {
+
+      super.reset();
 
       // model elements
       this.container.reset();
@@ -239,17 +245,6 @@ define( require => {
       // Dispose of particles that are outside the container
       removeParticles( this.heavyParticlesOutside.length, this.heavyParticlesOutside );
       removeParticles( this.lightParticlesOutside.length, this.lightParticlesOutside );
-    }
-
-    /**
-     * Steps the model using real time units.
-     * @param {number} dt - time delta, in seconds
-     * @public
-     */
-    step( dt ) {
-      if ( this.isPlayingProperty.value ) {
-        this.stepModelTime( this.timeTransform( dt ) );
-      }
     }
 
     /**

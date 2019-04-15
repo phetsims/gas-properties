@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Energy' screen.
+ * Model for the 'Energy' screen, an extension of the 'Ideal' model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,12 +24,13 @@ define( require => {
   class EnergyModel extends IdealModel {
 
     constructor() {
+
       super( {
         hasCollisionCounter: false
       } );
 
       this.holdConstantProperty.lazyLink( holdConstant => {
-        throw new Error( 'holdConstant is fixed in Energy screen' );
+        throw new Error( 'holdConstant is fixed in this screen' );
       } );
 
       //TODO should Average Speed and Speed Histogram both use get get*ParticleSpeedValues, to reduce iterations?
@@ -44,7 +45,11 @@ define( require => {
       this.lightAverageSpeedSum = 0; // sum of samples for light particles
     }
 
-    // @public @override
+    /**
+     * Resets the model.
+     * @public
+     * @override
+     */
     reset() {
       this.heavyAverageSpeedProperty.reset();
       this.lightAverageSpeedProperty.reset();

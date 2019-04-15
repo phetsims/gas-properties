@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Explore' screen.
+ * Model for the 'Explore' screen, a variation of the 'Ideal' model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,12 +16,13 @@ define( require => {
   class ExploreModel extends IdealModel {
 
     constructor() {
+
       super( {
         holdConstant: HoldConstantEnum.NOTHING
       } );
 
       this.holdConstantProperty.lazyLink( holdConstant => {
-        throw new Error( 'holdConstant is fixed in Explore screen' );
+        throw new Error( 'holdConstant is fixed in this screen' );
       } );
     }
   }

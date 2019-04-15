@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO duplication with GasPropertiesModel herein
 /**
  * Model for the 'Diffusion' screen.
  *
@@ -13,42 +12,29 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const LinearFunction = require( 'DOT/LinearFunction' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
+  const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
+  const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
-  const Vector2 = require( 'DOT/Vector2' );
 
-  class DiffusionModel {
+  class DiffusionModel extends GasPropertiesModel {
 
     constructor() {
+
+      super();
 
       // @public
       this.timescaleProperty = new EnumerationProperty( Timescale, Timescale.NORMAL );
 
-      // @private (read-only) 'normal' transform between real time and sim time
-      // 1 second of real time is 2.5 picoseconds of sim time.
-      this.normalTimeTransform = new LinearFunction( 0, 1, 0, 2.5 );
-
-      // @private (read-only) 'slow' transform between real time and sim time
-      // 1 second of real time is 2.5 picoseconds of sim time.
-      this.slowTimeTransform = new LinearFunction( 0, 1, 0, 20 );
-
-      // @public (read-only) transform between model and view coordinate frames
-      const modelViewScale = 40; // number of pixels per nm
-      this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
-        new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
-        modelViewScale,
-        -modelViewScale // y is inverted
-      );
-
-      // @public is the sim playing?
-      this.isPlayingProperty = new BooleanProperty( true );
-
-      // @public (read-only)
-      this.stopwatch = new Stopwatch( {
-        location: new Vector2( 25, 15 ) // view coordinates! determined empirically
+      // Change the time transform to match the timescale.
+      this.timescaleProperty.link( timescale => {
+        if ( timescale === Timescale.NORMAL ) {
+          this.timeTransform = new NormalTimeTransform();
+        }
+        else {
+          this.timeTransform = new SlowTimeTransform();
+        }
       } );
 
       //TODO
@@ -62,23 +48,14 @@ define( require => {
     }
 
     /**
-     * Gets the time transform that's the related to the current timescale.
-     * @returns {LinearFunction}
+     * Resets the model.
      * @public
+     * @override
      */
-    get timeTransform() {
-      if ( this.timescaleProperty.value === Timescale.NORMAL ) {
-        return this.normalTimeTransform;
-      }
-      else {
-        return this.slowTimeTransform;
-      }
-    }
-
-    // @public
     reset() {
+      super.reset();
+
       this.timescaleProperty.reset();
-      this.stopwatch.reset();
       this.hasDividerProperty.reset();
       this.leftNumberOfParticles1Property.reset();
       this.leftNumberOfParticles2Property.reset();
@@ -89,25 +66,14 @@ define( require => {
     }
 
     /**
-     * Steps the model using real time units.
-     * @param {number} dt - time delta, in seconds
-     * @public
-     */
-    step( dt ) {
-      if ( this.isPlayingProperty.value ) {
-        this.stepModelTime( this.timeTransform( dt ) );
-      }
-    }
-
-    /**
      * Steps the model using model time units.
      * @param {number} dt - time delta, in ps
-     * @private
+     * @protected
+     * @override
      */
     stepModelTime( dt ) {
-
-      // Advance the stopwatch
-      this.stopwatch.step( dt );
+      super.stepModelTime( dt );
+      //TODO
     }
   }
 

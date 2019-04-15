@@ -2,6 +2,7 @@
 
 /**
  * Base class for models in all screens.
+ * Primarily responsible for Properties and model elements related to bounds and time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,7 +13,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const LinearFunction = require( 'DOT/LinearFunction' );
+  const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Property = require( 'AXON/Property' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
@@ -37,9 +38,8 @@ define( require => {
         -modelViewScale // y is inverted
       );
 
-      // @public (read-only) transform between real time and sim time
-      // 1 second of real time is 2.5 picoseconds of sim time.
-      this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
+      // @public (read-only) transform between real time and sim time, can be set by subclasses
+      this._timeTransform = new NormalTimeTransform();
 
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
@@ -52,6 +52,20 @@ define( require => {
         location: new Vector2( 250, 15 ) // view coordinates! determined empirically
       } );
     }
+
+    /**
+     * Sets the transform between real and sim time.
+     * @param {LinearFunction} value
+     * @protected
+     */
+    set timeTransform( value ) { this._timeTransform = value; }
+
+    /**
+     * Gets the transform between real and sim time.
+     * @returns {LinearFunction}
+     * @public
+     */
+    get timeTransform() { return this._timeTransform; }
 
     /**
      * Resets the model.
