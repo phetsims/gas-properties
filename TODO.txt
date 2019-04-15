@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Diffusion: play/pause button, normal/slow radio buttons
 Diffusion: Center of Mass view
 Diffusion: Particle Flow Rate view
 Diffusion: Container model with divider

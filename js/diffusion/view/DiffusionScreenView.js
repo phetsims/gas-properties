@@ -12,6 +12,7 @@ define( require => {
   const DataAccordionBox = require( 'GAS_PROPERTIES/diffusion/view/DataAccordionBox' );
   const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
+  const DiffusionTimeControls = require( 'GAS_PROPERTIES/diffusion/view/DiffusionTimeControls' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -70,10 +71,16 @@ define( require => {
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
+      const timeControls = new DiffusionTimeControls( model, {
+        right: resetAllButton.left - 65,
+        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+
       // Rendering order
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
       this.addChild( containerNode );
+      this.addChild( timeControls );
       this.addChild( resetAllButton );
       this.addChild( stopwatchNode );
 

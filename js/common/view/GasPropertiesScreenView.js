@@ -175,6 +175,7 @@ define( require => {
       const timeControlsLeft = containerViewLocation.x -
                                model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
       const timeControls = new TimeControls( model, {
+        enabledProperty: model.isTimeControlsEnabledProperty,
         left: timeControlsLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );

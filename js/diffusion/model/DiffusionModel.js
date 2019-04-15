@@ -11,20 +11,29 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
+  const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class DiffusionModel {
 
     constructor() {
 
-      // @public (read-only) transform between real time and sim time
+      // @public
+      this.timescaleProperty = new EnumerationProperty( Timescale, Timescale.NORMAL );
+
+      // @private (read-only) 'normal' transform between real time and sim time
       // 1 second of real time is 2.5 picoseconds of sim time.
-      this.timeTransform = new LinearFunction( 0, 1, 0, 2.5 );
+      this.normalTimeTransform = new LinearFunction( 0, 1, 0, 2.5 );
+
+      // @private (read-only) 'slow' transform between real time and sim time
+      // 1 second of real time is 2.5 picoseconds of sim time.
+      this.slowTimeTransform = new LinearFunction( 0, 1, 0, 20 );
 
       // @public (read-only) transform between model and view coordinate frames
       const modelViewScale = 40; // number of pixels per nm
@@ -52,7 +61,23 @@ define( require => {
       this.rightAverageTemperatureProperty = new NumberProperty( 0 );
     }
 
+    /**
+     * Gets the time transform that's the related to the current timescale.
+     * @returns {LinearFunction}
+     * @public
+     */
+    get timeTransform() {
+      if ( this.timescaleProperty.value === Timescale.NORMAL ) {
+        return this.normalTimeTransform;
+      }
+      else {
+        return this.slowTimeTransform;
+      }
+    }
+
+    // @public
     reset() {
+      this.timescaleProperty.rest();
       this.stopwatch.reset();
       this.hasDividerProperty.reset();
       this.leftNumberOfParticles1Property.reset();

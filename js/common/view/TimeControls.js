@@ -16,6 +16,7 @@ define( require => {
   const StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
 
   class TimeControls extends HBox {
+
     /**
      * @param {GasPropertiesModel} model TODO narrower interface?
      * @param {Object} [options]
@@ -24,6 +25,9 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
+
+        enabledProperty: null, // {null|BooleanProperty}
+
         // HBox options
         spacing: 15,
         scale: 0.75
@@ -31,13 +35,11 @@ define( require => {
 
       const playPauseButton = new PlayPauseButton( model.isPlayingProperty );
 
-      // time step, in seconds
-      const dt = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
-
       const stepButton = new StepButton( {
         isPlayingProperty: model.isPlayingProperty,
         listener: () => {
           model.isPlayingProperty.value = true;
+          const dt = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP ); // seconds
           model.step( dt );
           model.isPlayingProperty.value = false;
         }
@@ -51,10 +53,12 @@ define( require => {
       super( options );
 
       // Disable time controls
-      model.isTimeControlsEnabledProperty.link( enabled => {
-        playPauseButton.enabled = enabled;
-        stepButton.enabled = enabled && !model.isPlayingProperty.value;
-      } );
+      if ( options.enabledProperty ) {
+        options.enabledProperty.link( enabled => {
+          playPauseButton.enabled = enabled;
+          stepButton.enabled = enabled && !model.isPlayingProperty.value;
+        } );
+      }
     }
   }
 

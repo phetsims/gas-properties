@@ -66,6 +66,10 @@ define( require => {
       font: new PhetFont( 14 )
     },
 
+    AQUA_RADIO_BUTTON_OPTIONS: {
+      radius: 10
+    },
+
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
 
