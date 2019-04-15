@@ -2,10 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
-Diffusion: Center of Mass view
-Diffusion: Particle Flow Rate view
-Diffusion: Container model with divider
-Diffusion: Container view
+Diffusion: Container with divider and center of mass indicators
+Diffusion: Particle Flow Rate vectors
 
 mutable mass for Particle
 
