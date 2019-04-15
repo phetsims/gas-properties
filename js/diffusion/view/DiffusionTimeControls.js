@@ -28,8 +28,10 @@ define( require => {
         align: 'center'
       }, options );
 
+      // play/pause and step buttons
       const playPauseStepControl = new PlayPauseStepControl( model );
 
+      // normal and slow radio buttons
       const timescaleControl = new TimescaleControl( model.timescaleProperty );
 
       assert && assert( !options.children, 'DiffusionTimeControls sets children' );
