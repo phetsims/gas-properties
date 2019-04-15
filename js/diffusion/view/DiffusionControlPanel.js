@@ -30,14 +30,15 @@ define( require => {
   class DiffusionControlPanel extends Panel {
 
     /**
-     * @param {DiffusionModel} model
+     * @param {DiffusionExperiment} experiment
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {BooleanProperty} hasDividerProperty
      * @param {BooleanProperty} particleFlowRateVisibleProperty
      * @param {BooleanProperty} centerOfMassVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {Object} [options]
      */
-    constructor( model, hasDividerProperty, particleFlowRateVisibleProperty,
+    constructor( experiment, modelViewTransform, hasDividerProperty, particleFlowRateVisibleProperty,
                  centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
 
       options = _.extend( {
@@ -48,37 +49,37 @@ define( require => {
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
       // Initial Number
-      const initialNumberControl = new QuantityControl( model.modelViewTransform, initialNumberString,
-        model.initialNumber1Property, model.initialNumber2Property, model.initialNumberRange, {
+      const initialNumberControl = new QuantityControl( modelViewTransform, initialNumberString,
+        experiment.initialNumber1Property, experiment.initialNumber2Property, experiment.initialNumberRange, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: model.initialNumberDelta
+            deltaValue: experiment.initialNumberDelta
           }
         } );
 
       // Mass (AMU)
-      const massControl = new QuantityControl( model.modelViewTransform, massAmuString,
-        model.mass1Property, model.mass2Property, model.massRange, {
+      const massControl = new QuantityControl( modelViewTransform, massAmuString,
+        experiment.mass1Property, experiment.mass2Property, experiment.massRange, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: model.massDelta,
+            deltaValue: experiment.massDelta,
             xMargin: 12 // empirical hack to make all spinners the same same width
           }
         } );
 
       // Initial Temperature (K)
-      const initialTemperatureControl = new QuantityControl( model.modelViewTransform, initialTemperatureKString,
-        model.initialTemperature1Property, model.initialTemperature2Property, model.initialTemperatureRange, {
+      const initialTemperatureControl = new QuantityControl( modelViewTransform, initialTemperatureKString,
+        experiment.initialTemperature1Property, experiment.initialTemperature2Property, experiment.initialTemperatureRange, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: model.initialTemperatureDelta
+            deltaValue: experiment.initialTemperatureDelta
           }
         } );
 
       // When the divider is returned, reset the experiment.
       hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {
-          model.resetExperiment();
+          experiment.reset();
         }
       } );
 

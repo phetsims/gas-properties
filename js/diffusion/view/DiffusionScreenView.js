@@ -39,7 +39,7 @@ define( require => {
       } );
 
       // Control panel at right side of screen
-      const controlPanel = new DiffusionControlPanel( model,
+      const controlPanel = new DiffusionControlPanel( model.experiment, model.modelViewTransform,
         model.hasDividerProperty,
         viewProperties.particleFlowRateVisibleProperty,
         viewProperties.centerOfMassVisibleProperty,
