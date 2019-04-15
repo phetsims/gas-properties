@@ -2,7 +2,7 @@
 
 /**
  * Transform between real and sim time for the 'slow' timescale.
- * 1 second of real time is 2.5 picoseconds of sim time.
+ * 1 second of real time is 0.3 picoseconds of sim time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,7 +16,7 @@ define( require => {
   class SlowTimeTransform extends LinearFunction {
 
     constructor() {
-      super( 0, 1, 0, 20 );
+      super( 0, 1, 0, 0.3 );
     }
   }
 
