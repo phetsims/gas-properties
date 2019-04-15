@@ -5,8 +5,6 @@ UP NEXT
 Diffusion: Container with divider and center of mass indicators
 Diffusion: Particle Flow Rate vectors
 
-mutable mass for Particle
-
 Pressure model #50
 
 Histograms avoid addChild/removeChild

@@ -24,8 +24,8 @@ define( require => {
       options = _.extend( {
         mass: 1, // AMU
         radius: 1, // nm
-        colorProperty: null, // {Property.<Color|string>|null}
-        highlightColorProperty: null // {Property.<Color|string>|null} color for specular highlight
+        colorProperty: null, // {Property.<ColorDef}
+        highlightColorProperty: null // {Property.<ColorDef>} color for specular highlight
       }, options );
 
       // @public (read-only)
@@ -33,12 +33,11 @@ define( require => {
       this.previousLocation = this.location.copy(); // location on previous time step
       this.mass = options.mass; // AMU
       this.radius = options.radius; // radians
+      this.velocity = new Vector2( 0, 0 ); // nm/ps, initially at rest
+
+      // @public (read-only)
       this.colorProperty = options.colorProperty || new Property( 'white' );
       this.highlightColorProperty = options.highlightColorProperty || new Property( 'white' );
-
-      // @public (read-only) the particle is initially at rest
-      this.velocity = new Vector2( 0, 0 ); // nm / ps
-      this.kineticEnergy = 0; // AMU * nm^2 / ps^2
 
       // @public (read-only)
       this.isDisposed = false;
@@ -69,6 +68,14 @@ define( require => {
     set top( value ) { this.setLocationXY( this.location.x, value - this.radius ); }
 
     set bottom( value ) { this.setLocationXY( this.location.x, value + this.radius ); }
+
+    /**
+     * ES5 getter for kinetic energy.
+     * @returns {number} AMU * nm^2 / ps^2
+     */
+    get kineticEnergy() {
+      return 0.5 * this.mass * this.velocity.magnitudeSquared; // KE = (1/2) * m * |v|^2
+    }
 
     /**
      * String representation of a Particle.
@@ -115,12 +122,7 @@ define( require => {
      * @public
      */
     setVelocityXY( x, y ) {
-
-      // mutate velocity vector
       this.velocity.setXY( x, y );
-
-      // KE = (1/2) * m * |v|^2
-      this.kineticEnergy = 0.5 * this.mass * this.velocity.magnitudeSquared;
     }
 
     /**
@@ -198,7 +200,7 @@ define( require => {
       return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
     }
 
-    //TODO this assumes that all particles have the same mass, verify that
+    //TODO this assumes that all particles have the same mass, verify that assumption
     /**
      * Gets the center of mass of a collection of particles.
      * @param {Particle[]} particles
