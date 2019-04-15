@@ -16,6 +16,8 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HSeparator = require( 'SUN/HSeparator' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
   const QuantityControl = require( 'GAS_PROPERTIES/diffusion/view/QuantityControl' );
@@ -83,9 +85,18 @@ define( require => {
         }
       } );
 
+      // TODO is there a better way to center the button?
+      // to center the button
+      const dividerButtonParent = new Node( {
+        children: [
+          new HStrut( separatorWidth ),
+          new DividerToggleButton( hasDividerProperty, { centerX: separatorWidth / 2 } )
+        ]
+      } );
+
       const content = new VBox( {
         align: 'left',
-        spacing: 22,
+        spacing: 20,
         children: [
           new VBox( {
             spacing: 20,
@@ -95,7 +106,7 @@ define( require => {
               initialNumberControl,
               massControl,
               initialTemperatureControl,
-              new DividerToggleButton( hasDividerProperty ) //TODO center
+              dividerButtonParent
             ]
           } ),
           new HSeparator( separatorWidth, {
