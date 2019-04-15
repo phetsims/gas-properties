@@ -11,7 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const HBox = require( 'SCENERY/nodes/HBox' );
-  const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
+  const PlayPauseStepControl = require( 'GAS_PROPERTIES/common/view/PlayPauseStepControl' );
   const TimescaleControl = require( 'GAS_PROPERTIES/diffusion/view/TimescaleControl' );
 
   class DiffusionTimeControls extends HBox {
@@ -28,13 +28,13 @@ define( require => {
         align: 'center'
       }, options );
 
-      const timeControls = new TimeControls( model );
+      const playPauseStepControl = new PlayPauseStepControl( model );
 
       const timescaleControl = new TimescaleControl( model.timescaleProperty );
 
       assert && assert( !options.children, 'DiffusionTimeControls sets children' );
       options = _.extend( {
-        children: [ timeControls, timescaleControl ]
+        children: [ playPauseStepControl, timescaleControl ]
       }, options );
 
       super( options );

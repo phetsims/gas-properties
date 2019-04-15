@@ -40,6 +40,7 @@ define( require => {
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
+  const PlayPauseStepControl = require( 'GAS_PROPERTIES/common/view/PlayPauseStepControl' );
   const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
@@ -47,7 +48,6 @@ define( require => {
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
-  const TimeControls = require( 'GAS_PROPERTIES/common/view/TimeControls' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
@@ -171,12 +171,10 @@ define( require => {
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
-      // Time controls
-      const timeControlsLeft = containerViewLocation.x -
-                               model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
-      const timeControls = new TimeControls( model, {
+      // Play/Pause/Step controls
+      const playPauseStepControl = new PlayPauseStepControl( model, {
         enabledProperty: model.isTimeControlsEnabledProperty,
-        left: timeControlsLeft,
+        left: containerViewLocation.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue ),
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
@@ -257,7 +255,7 @@ define( require => {
       this.addChild( particlesNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
-      this.addChild( timeControls );
+      this.addChild( playPauseStepControl );
       this.addChild( resetAllButton );
       gridNode && this.addChild( gridNode );
       collisionCounterNode && this.addChild( collisionCounterNode );

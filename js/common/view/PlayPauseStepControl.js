@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Controls related to time: play, pause and step.
+ * Controls to play, pause and step the simulation clock.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,7 +15,7 @@ define( require => {
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   const StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
 
-  class TimeControls extends HBox {
+  class PlayPauseStepControl extends HBox {
 
     /**
      * @param {GasPropertiesModel} model TODO narrower interface?
@@ -45,7 +45,7 @@ define( require => {
         }
       } );
 
-      assert && assert( !options.children, 'TimeControls sets children' );
+      assert && assert( !options.children, 'PlayPauseStepControl sets children' );
       options = _.extend( {
         children: [ playPauseButton, stepButton ]
       }, options );
@@ -62,5 +62,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'TimeControls', TimeControls );
+  return gasProperties.register( 'PlayPauseStepControl', PlayPauseStepControl );
 } );
