@@ -337,7 +337,7 @@ define( require => {
       const volume = this.container.volume; // V, in nm^3
 
       // P = NkT/V, converted to kPa
-      return 1.66E3 * ( numberOfParticles * k * temperature / volume );
+      return ( numberOfParticles * k * temperature / volume ) * 1.66E3;
     }
   }
 
