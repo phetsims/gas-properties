@@ -199,25 +199,6 @@ define( require => {
       const maxY = ( this.top < bounds.maxY ) ? this.top : bounds.maxY;
       return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
     }
-
-    //TODO this assumes that all particles have the same mass, verify that assumption
-    /**
-     * Gets the center of mass of a collection of particles.
-     * @param {Particle[]} particles
-     * @returns {Vector2|null} null if there are no particles and therefore no center of mass
-     * @public
-     */
-    static getCenterOfMass( particles ) {
-      let centerOfMass = null;
-      if ( particles.length > 0 ) {
-        centerOfMass = new Vector2( 0, 0 ); // this vector is mutated!
-        for ( let i = 0; i < particles.length; i++ ) {
-          centerOfMass.add( particles[ i ].locationProperty.value );
-        }
-        centerOfMass.divideScalar( particles.length );
-      }
-      return centerOfMass;
-    }
   }
 
   return gasProperties.register( 'Particle', Particle );

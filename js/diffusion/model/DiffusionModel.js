@@ -11,14 +11,22 @@ define( require => {
   // modules
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
+  const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
+  const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
   const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
   const Vector2 = require( 'DOT/Vector2' );
+  
+  // constants
+  const CENTER_OF_MASS_OPTIONS = {
+    isValidValue: value => ( value === null || typeof value === 'number' )
+  };
 
   class DiffusionModel extends GasPropertiesModel {
 
@@ -48,16 +56,42 @@ define( require => {
 
       // @public parameters that control the experiment
       this.experiment = new DiffusionExperiment();
+      
+      // @public (read-only)
+      this.particles1 = []; // {DiffusionParticle1[]}
+      this.particles2 = []; // {DiffusionParticle2[]}
+      
+      // @public (read-only) center of mass for particles of type DiffusionParticle1
+      this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
-      // Data for the left half of the container
+      // @public (read-only) center of mass for particles of type DiffusionParticle2
+      this.centerOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
+
+      // @public (read-only) Data for the left half of the container
       this.leftNumberOfParticles1Property = new NumberProperty( 0 );
       this.leftNumberOfParticles2Property = new NumberProperty( 0 );
       this.leftAverageTemperatureProperty = new NumberProperty( 0 );
 
-      // Data for the right half of the container
+      // @public (read-only) Data for the right half of the container
       this.rightNumberOfParticles1Property = new NumberProperty( 0 );
       this.rightNumberOfParticles2Property = new NumberProperty( 0 );
       this.rightAverageTemperatureProperty = new NumberProperty( 0 );
+
+      // Add or remove particles
+      this.experiment.initialNumber1Property.link( initialNumber => {
+        this.numberOfParticlesListener( initialNumber,
+          this.experiment.mass1Property.value,
+          this.experiment.initialTemperature1Property.value,
+          this.particles1,
+          DiffusionParticle1 );
+      } );
+      this.experiment.initialNumber2Property.link( initialNumber => {
+        this.numberOfParticlesListener( initialNumber,
+          this.experiment.mass2Property.value,
+          this.experiment.initialTemperature2Property.value,
+          this.particles2,
+          DiffusionParticle2 );
+      } );
     }
 
     /**
@@ -74,12 +108,10 @@ define( require => {
       // Properties
       this.timescaleProperty.reset();
       this.experiment.reset();
-      this.leftNumberOfParticles1Property.reset();
-      this.leftNumberOfParticles2Property.reset();
-      this.leftAverageTemperatureProperty.reset();
-      this.rightNumberOfParticles1Property.reset();
-      this.rightNumberOfParticles2Property.reset();
-      this.rightAverageTemperatureProperty.reset();
+      // other Properties will be updated when experiment.reset
+
+      assert && assert( this.particles1.length === 0, 'there should be no DiffusionParticle1 particles' );
+      assert && assert( this.particles2.length === 0, 'there should be no DiffusionParticle2 particles' );
     }
 
     /**
@@ -90,7 +122,133 @@ define( require => {
      */
     stepModelTime( dt ) {
       super.stepModelTime( dt );
-      //TODO
+      stepParticles( this.particles1, dt );
+      stepParticles( this.particles2, dt );
+      this.update();
+    }
+
+    /**
+     * Adjusts an array of particles to have the desired number of elements.
+     * @param {number} numberOfParticles - desired number of particles
+     * @param {number} mass
+     * @param {number} initialTemperature
+     * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
+     * @param particleConstructor - constructor for elements in particles array
+     * @private
+     */
+    numberOfParticlesListener( numberOfParticles, mass, initialTemperature, particles, particleConstructor ) {
+      const delta = numberOfParticles - particles.length;
+      if ( delta !== 0 ) {
+        if ( delta > 0 ) {
+          this.addParticles( delta, mass, initialTemperature, particles, particleConstructor );
+        }
+        else {
+          removeParticles( -delta, particles );
+        }
+      }
+    }
+
+    /**
+     * Adds n particles to the end of the specified array.
+     * @param {number} n
+     * @param {number} mass
+     * @param {number} initialTemperature
+     * @param {Particle[]} particles
+     * @param {constructor} Constructor - a Particle subclass constructor
+     * @private
+     */
+    addParticles( n, mass, initialTemperature, particles, Constructor ) {
+      //TODO use IdealModel.addParticles as a starting point
+
+      // If paused, update things that would normally be handled by step.
+      if ( !this.isPlayingProperty.value ) {
+        this.update();
+      }
+    }
+
+    /**
+     * Updates Properties that are based on the current state of the particle system.
+     * @private
+     */
+    update() {
+      this.updateCenterOfMass();
+      this.updateLeftRightCounts();
+      this.updateLeftRightAverageTemperatures();
+    }
+
+    /**
+     * Updates the center of mass Properties.
+     * @private
+     */
+    updateCenterOfMass() {
+      this.centerOfMass1Property.value = getCenterOfMassY( this.particles1 );
+      this.centerOfMass2Property.value = getCenterOfMassY( this.particles2 );
+    }
+
+    /**
+     * Updates the particle counts for the left and right halves of the container.
+     * @private
+     */
+    updateLeftRightCounts() {
+      //TODO update leftNumberOfParticles1Property, leftNumberOfParticles2Property
+      //TODO update rightNumberOfParticles1Property, rightNumberOfParticles2Property
+    }
+
+    /**
+     * Updates the average temperature for the left and right halves of the container.
+     * @private
+     */
+    updateLeftRightAverageTemperatures() {
+      //TODO update leftAverageTemperatureProperty, rightAverageTemperatureProperty
+    }
+  }
+
+  //TODO copied from IdealModel
+  /**
+   * Steps a collection of particles.
+   * @param {Particle[]} particles
+   * @param {number} dt - time step in ps
+   */
+  function stepParticles( particles, dt ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      particles[ i ].step( dt );
+    }
+  }
+
+  //TODO copied from IdealModel and modified
+  /**
+   * Removes the last n particles from an array.
+   * @param {number} n
+   * @param {Particle[]} particles
+   */
+  function removeParticles( n, particles ) {
+    assert && assert( n <= particles.length,
+      `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
+    const particlesRemoved = particles.splice( particles.length - n, particles.length );
+    for ( let i = 0; i < particlesRemoved.length; i++ ) {
+      particlesRemoved[ i ].dispose();
+    }
+  }
+
+  /**
+   * Gets the y-axis center of mass of a collection of particles.
+   * @param {Particle[]} particles
+   * @returns {number|null} null if there are no particles and therefore no center of mass
+   * @public
+   */
+  function getCenterOfMassY( particles ) {
+    if ( particles.length > 0 ) {
+      let numerator = 0;
+      let totalMass = 0;
+      for ( let i = 0; i < particles.length; i++ ) {
+        const particle = particles[ i ];
+        numerator += ( particle.mass * particle.locationProperty.value.y );
+        totalMass += particle.mass;
+      }
+      return numerator / totalMass;
+    }
+    else {
+      return null;
     }
   }
 

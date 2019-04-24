@@ -16,6 +16,7 @@ Intro: hold constant
 - Pressure T: change N or V => change T
 - Pressure V: change N or T => change V
 
+Intro: should heat/cool function while paused?
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
 
