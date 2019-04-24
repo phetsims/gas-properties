@@ -21,7 +21,7 @@ define( require => {
     constructor( options ) {
       super( _.extend( {
         colorProperty: GasPropertiesColorProfile.diffusionParticle2ColorProperty,
-        highlightColorProperty: GasPropertiesColorProfile.diffusionParticle2ColorProperty
+        highlightColorProperty: GasPropertiesColorProfile.diffusionParticle2HighlightColorProperty
       }, options ) );
     }
   }

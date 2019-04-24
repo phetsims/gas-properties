@@ -15,6 +15,7 @@ define( require => {
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -183,7 +184,29 @@ define( require => {
      * @private
      */
     addParticles( n, mass, initialTemperature, particles, Constructor ) {
-      //TODO use IdealModel.addParticles as a starting point
+
+      // Create n particles
+      for ( let i = 0; i < n; i++ ) {
+
+        const particle = new Constructor( {
+          mass: mass
+        } );
+
+        // Position the particle at a random location.
+        particle.setLocationXY( this.container.left + 1, this.container.bottom + 1 ); //TODO
+
+        // Set the initial velocity, based on initial temperature and mass.
+        particle.setVelocityPolar(
+
+          // |v| = sqrt( 3kT / m )
+          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * initialTemperature / particle.mass ),
+
+          // Random angle
+          phet.joist.random.nextDouble() * 2 * Math.PI
+        );
+
+        particles.push( particle );
+      }
 
       // If paused, update things that would normally be handled by step.
       if ( !this.isPlayingProperty.value ) {
@@ -250,7 +273,7 @@ define( require => {
       let totalMass = 0;
       for ( let i = 0; i < particles.length; i++ ) {
         const particle = particles[ i ];
-        numerator += ( particle.mass * particle.locationProperty.value.y );
+        numerator += ( particle.mass * particle.location.y );
         totalMass += particle.mass;
       }
       return numerator / totalMass;

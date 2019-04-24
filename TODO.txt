@@ -2,6 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
+Diffusion: render particles
+
 Diffusion: Container with divider and center of mass indicators
 Diffusion: Particle Flow Rate vectors
 

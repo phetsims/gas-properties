@@ -12,6 +12,7 @@ define( require => {
   const DataAccordionBox = require( 'GAS_PROPERTIES/diffusion/view/DataAccordionBox' );
   const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
+  const DiffusionParticlesNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionParticlesNode' );
   const DiffusionTimeControls = require( 'GAS_PROPERTIES/diffusion/view/DiffusionTimeControls' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -52,6 +53,9 @@ define( require => {
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
+      // The complete system of particles
+      const particlesNode = new DiffusionParticlesNode( model );
+
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty
@@ -78,24 +82,27 @@ define( require => {
       this.addChild( controlPanel );
       this.addChild( containerNode );
       this.addChild( timeControls );
+      this.addChild( particlesNode );
       this.addChild( resetAllButton );
       this.addChild( stopwatchNode );
 
       // @private
       this.model = model;
+      this.particlesNode = particlesNode;
     }
 
     /**
-     * Called on each step of the simulation's timer.
+     * Called on each step of the simulation's timer. The view is stepped regardless of whether the model is
+     * paused, because changes made while the model is paused should immediately be reflected in the view.
      * @param {number} dt - time delta, in seconds
      */
     step( dt ) {
 
       // convert s to ps
-      //TODO
+      const ps = this.model.timeTransform( dt );
 
       // step elements that are specific to the view
-      //TODO
+      this.particlesNode.step( ps );
     }
   }
 
