@@ -65,7 +65,7 @@ define( require => {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
             deltaValue: experiment.massDelta,
-            xMargin: 13 //TODO empirical hack to make all spinners the same same width
+            xMargin: 13 //TODO empirical hack to make all spinners the same width
           }
         } );
 
