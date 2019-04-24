@@ -20,12 +20,12 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
-  const Line = require( 'SCENERY/nodes/Line' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Path = require( 'SCENERY/nodes/Path' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
@@ -156,19 +156,19 @@ define( require => {
      */
     createCenterOfMassIcon() {
 
-      const lineLength = 15;
-      const lineWidth = 2;
+      const width = 4;
+      const height = 15;
 
       return new HBox( {
         spacing: 12,
         children: [
-          new Line( 0, 0, 0, lineLength, {
-            stroke: GasPropertiesColorProfile.diffusionParticle1ColorProperty,
-            lineWidth: lineWidth
+          new Rectangle( 0, 0, width, height, {
+            fill: GasPropertiesColorProfile.diffusionParticle1ColorProperty,
+            stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
           } ),
-          new Line( 0, 0, 0, lineLength, {
-            stroke: GasPropertiesColorProfile.diffusionParticle2ColorProperty,
-            lineWidth: lineWidth
+          new Rectangle( 0, 0, width, height, {
+            fill: GasPropertiesColorProfile.diffusionParticle2ColorProperty,
+            stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
           } )
         ]
       } );

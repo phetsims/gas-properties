@@ -115,6 +115,12 @@ define( require => {
       projector: 'rgb( 217, 50, 138 )'
     },
 
+    // Stroke around center-of-mass indicators
+    centerOfMassStroke: {
+      default: 'white',
+      projector: 'black'
+    },
+
     //------------------------------------------------------------------------------------------------------------------
     // These colors currently do NOT change. They are included here for future-proofing, and to support experimenting
     // with colors in gas-properties-colors.html.
@@ -142,7 +148,7 @@ define( require => {
 
     // primary color for 1st particle type in Diffusion screen
     diffusionParticle1Color: {
-      default: 'rgb( 121, 249, 253 )' // cyan
+      default: 'rgb( 115, 251, 253 )' // cyan
     },
 
     // specular highlight for 1st particle type in Diffusion screen
