@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Container in the 'Diffusion' screen.
+ * The container in the 'Diffusion' screen.
  * 
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,37 +18,52 @@ define( require => {
   class DiffusionContainerNode extends Node {
 
     /**
-     * @param {BooleanProperty} hasDividerProperty TODO temporary
+     * @param {DiffusionContainer} container
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( hasDividerProperty, options ) {
+    constructor( container, modelViewTransform, options ) {
 
-      options = _.extend( {
-        //TODO
-      }, options );
-      
-      //TODO placeholder
-      const rectangle = new Rectangle( 0, 0, 600, 300, {
+      // Transform to view coordinate frame
+      const viewLocation = modelViewTransform.modelToViewPosition( container.location );
+      const viewWidth = modelViewTransform.modelToViewDeltaX( container.width );
+      const viewHeight = modelViewTransform.modelToViewDeltaX( container.height );
+      const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
+      const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
+      const viewDividerX = modelViewTransform.modelToViewX( container.dividerX );
+
+      // Outside border of the container
+      const borderNode = new Rectangle( viewLocation.x - viewWidth, viewLocation.y - viewHeight, viewWidth, viewHeight, {
         stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
-        lineWidth: 3
+        lineWidth: viewWallThickness
       } );
 
-      const dividerNode = new Line( 0, 0, 0, rectangle.height, {
-        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
-        lineWidth: 3,
-        center: rectangle.center
+      // Vertical divider
+      const dividerNode = new Line( viewDividerX, viewLocation.y - viewHeight, viewDividerX, viewLocation.y, {
+        stroke: GasPropertiesColorProfile.dividerColorProperty,
+        lineWidth: viewDividerThickness,
+        center: borderNode.center
+      } );
+
+      // Vertical dashed line to indicate the center of the container when the divider is not present.
+      const noDividerNode = new Line( viewDividerX, viewLocation.y - viewHeight, viewDividerX, viewLocation.y, {
+        stroke: GasPropertiesColorProfile.dividerColorProperty,
+        lineWidth: 1,
+        lineDash: [ 10, 24 ],
+        center: borderNode.center
       } );
       
-      assert && assert( !options.children, 'DiffusionContainerNodeNode sets children' );
+      assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );
       options = _.extend( {
-        children: [ rectangle, dividerNode ]
+        children: [ borderNode, noDividerNode, dividerNode ]
       }, options );
       
       super( options );
 
-      //TODO temporary
-      hasDividerProperty.link( hasDivider => {
+      // Show/hide the divider
+      container.hasDividerProperty.link( hasDivider => {
         dividerNode.visible = hasDivider;
+        noDividerNode.visible = !hasDivider;
       } );
     }
   }

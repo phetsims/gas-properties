@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -42,7 +42,9 @@ define( require => {
       } );
 
       // @public
-      this.hasDividerProperty = new BooleanProperty( true );
+      this.container = new DiffusionContainer( {
+        location: new Vector2( 0, -1.5 ) //TODO better to shift the MVT?
+      } );
 
       // @public parameters that control the experiment
       this.experiment = new DiffusionExperiment();
@@ -66,8 +68,11 @@ define( require => {
     reset() {
       super.reset();
 
+      // components
+      this.container.reset();
+
+      // Properties
       this.timescaleProperty.reset();
-      this.hasDividerProperty.reset();
       this.experiment.reset();
       this.leftNumberOfParticles1Property.reset();
       this.leftNumberOfParticles2Property.reset();

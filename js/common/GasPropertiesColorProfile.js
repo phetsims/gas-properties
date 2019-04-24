@@ -109,6 +109,12 @@ define( require => {
       projector: 'rgba( 255, 255, 255, 0.5 )'
     },
 
+    // Container divider in the Diffusion screen
+    dividerColor: {
+      default: 'rgb( 243, 235, 87 )',
+      projector: 'rgb( 217, 50, 138 )'
+    },
+
     //------------------------------------------------------------------------------------------------------------------
     // These colors currently do NOT change. They are included here for future-proofing, and to support experimenting
     // with colors in gas-properties-colors.html.

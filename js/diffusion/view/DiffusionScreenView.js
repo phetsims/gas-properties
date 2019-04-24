@@ -31,16 +31,19 @@ define( require => {
 
       const viewProperties = new DiffusionViewProperties();
 
+      // Container
+      const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );
+
       // Data accordion box
       const dataAccordionBox = new DataAccordionBox( model, {
         expandedProperty: viewProperties.dataExpandedProperty,
-        left: this.layoutBounds.left + 200, //TODO
+        centerX: containerNode.centerX,
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
       // Control panel at right side of screen
       const controlPanel = new DiffusionControlPanel( model.experiment, model.modelViewTransform,
-        model.hasDividerProperty,
+        model.container.hasDividerProperty,
         viewProperties.particleFlowRateVisibleProperty,
         viewProperties.centerOfMassVisibleProperty,
         model.stopwatch.visibleProperty, {
@@ -48,12 +51,6 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-
-      // Container
-      const containerNode = new DiffusionContainerNode( model.hasDividerProperty, {
-        left: this.layoutBounds.left + 2 * GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        centerY: this.layoutBounds.centerY + 25
-      } );
 
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatch, {
