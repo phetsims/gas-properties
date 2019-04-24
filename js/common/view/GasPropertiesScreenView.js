@@ -192,7 +192,7 @@ define( require => {
         centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30
       } );
 
-      // @private
+      // The complete system of particles
       const particlesNode = new ParticlesNode( model );
 
       // Device to heat/cool the contents of the container
@@ -278,7 +278,8 @@ define( require => {
     }
 
     /**
-     * Called on each step of the simulation's timer.
+     * Called on each step of the simulation's timer. The view is stepped regardless of whether the model is
+     * paused, because changes made while the model is paused should immediately be reflected in the view.
      * @param {number} dt - delta time, in seconds
      * @public
      */
