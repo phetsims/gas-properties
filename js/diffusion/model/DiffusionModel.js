@@ -22,9 +22,12 @@ define( require => {
   const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
   const Vector2 = require( 'DOT/Vector2' );
-  
+
   // constants
   const CENTER_OF_MASS_OPTIONS = {
+    isValidValue: value => ( value === null || typeof value === 'number' )
+  };
+  const AVERAGE_TEMPERATURE_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' )
   };
 
@@ -56,11 +59,11 @@ define( require => {
 
       // @public parameters that control the experiment
       this.experiment = new DiffusionExperiment();
-      
+
       // @public (read-only)
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
-      
+
       // @public (read-only) center of mass for particles of type DiffusionParticle1
       this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
@@ -70,12 +73,12 @@ define( require => {
       // @public (read-only) Data for the left half of the container
       this.leftNumberOfParticles1Property = new NumberProperty( 0 );
       this.leftNumberOfParticles2Property = new NumberProperty( 0 );
-      this.leftAverageTemperatureProperty = new NumberProperty( 0 );
+      this.leftAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
 
       // @public (read-only) Data for the right half of the container
       this.rightNumberOfParticles1Property = new NumberProperty( 0 );
       this.rightNumberOfParticles2Property = new NumberProperty( 0 );
-      this.rightAverageTemperatureProperty = new NumberProperty( 0 );
+      this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
 
       // Add or remove particles
       this.experiment.initialNumber1Property.link( initialNumber => {
@@ -91,6 +94,28 @@ define( require => {
           this.experiment.initialTemperature2Property.value,
           this.particles2,
           DiffusionParticle2 );
+      } );
+
+      // Update mass of existing particles
+      this.experiment.mass1Property.link( mass => {
+        for ( let i = 0; i < this.particles1.length; i++ ) {
+          this.particles1[ i ].mass = mass;
+          //TODO adjust velocity?
+        }
+      } );
+      this.experiment.mass2Property.link( mass => {
+        for ( let i = 0; i < this.particles2.length; i++ ) {
+          this.particles2[ i ].mass = mass;
+          //TODO adjust velocity?
+        }
+      } );
+
+      // Update initial temperature of existing particles
+      this.experiment.initialTemperature1Property.link( initialTemperature => {
+        //TODO adjust velocities of all particles1
+      } );
+      this.experiment.initialTemperature2Property.link( initialTemperature => {
+        //TODO adjust velocities of all particles2
       } );
     }
 
@@ -171,34 +196,17 @@ define( require => {
      * @private
      */
     update() {
-      this.updateCenterOfMass();
-      this.updateLeftRightCounts();
-      this.updateLeftRightAverageTemperatures();
-    }
 
-    /**
-     * Updates the center of mass Properties.
-     * @private
-     */
-    updateCenterOfMass() {
+      // center of mass
       this.centerOfMass1Property.value = getCenterOfMassY( this.particles1 );
       this.centerOfMass2Property.value = getCenterOfMassY( this.particles2 );
-    }
 
-    /**
-     * Updates the particle counts for the left and right halves of the container.
-     * @private
-     */
-    updateLeftRightCounts() {
+      // particle counts for the left and right halves of the container
       //TODO update leftNumberOfParticles1Property, leftNumberOfParticles2Property
       //TODO update rightNumberOfParticles1Property, rightNumberOfParticles2Property
-    }
 
-    /**
-     * Updates the average temperature for the left and right halves of the container.
-     * @private
-     */
-    updateLeftRightAverageTemperatures() {
+
+      // average temperature for the left and right halves of the container
       //TODO update leftAverageTemperatureProperty, rightAverageTemperatureProperty
     }
   }
