@@ -9,7 +9,7 @@ Diffusion: Particle Flow Rate vectors
 
 Pressure model #50
 
-Histograms avoid addChild/removeChild
+Energy: avoid addChild/removeChild in histograms
 
 Intro: hold constant
 - None: change N, T, or V => change P
