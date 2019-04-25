@@ -2,6 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
+Intro: disable heat/cool slider when paused
+
 Diffusion: initial location of particles
 Diffusion: collision detection and response, with and without divider
 Diffusion: Center of mass indicators
@@ -18,7 +20,6 @@ Intro: hold constant
 - Pressure T: change N or V => change T
 - Pressure V: change N or T => change V
 
-Intro: should heat/cool function while paused?
 Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
 
