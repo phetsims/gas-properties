@@ -193,7 +193,7 @@ define( require => {
         } );
 
         // Position the particle at a random location.
-        particle.setLocationXY( this.container.left + 1, this.container.bottom + 1 ); //TODO
+        particle.setLocationXY( -1, -1 ); //TODO
 
         // Set the initial velocity, based on initial temperature and mass.
         particle.setVelocityPolar(

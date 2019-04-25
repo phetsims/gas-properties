@@ -30,6 +30,12 @@ define( require => {
 
       super();
 
+      //TODO duplicated in GasPropertiesScreenView
+      // The model bounds are equivalent to the visible bounds of ScreenView, as fills the browser window.
+      this.visibleBoundsProperty.link( visibleBounds => {
+        model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
+      } );
+
       const viewProperties = new DiffusionViewProperties();
 
       // Container
