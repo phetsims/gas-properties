@@ -1,6 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO lots of duplication with DiffusionParticlesNode
+//TODO lots of duplication with ParticlesNode
 /**
  * Renders all of the particles in the model using CanvasNode and CanvasRenderingContext2D.drawImage().
  * Do not transform this node! It's origin must be at the origin of the view coordinate frame.
