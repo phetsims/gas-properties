@@ -18,9 +18,10 @@ define( require => {
     /**
      * @param {NumberProperty} heatCoolAmountProperty
      * @param {EnumerationProperty} holdConstantProperty
+     * @param {BooleanProperty} isPlayingProperty
      * @param {Object} [options]
      */
-    constructor( heatCoolAmountProperty, holdConstantProperty, options ) {
+    constructor( heatCoolAmountProperty, holdConstantProperty, isPlayingProperty, options ) {
 
       options = _.extend( {
         scale: 0.81
@@ -28,11 +29,17 @@ define( require => {
 
       super( heatCoolAmountProperty, options );
 
-      // Hide the slider when temperature is held constant
+      // Hide the slider when temperature is held constant.
       holdConstantProperty.link( holdConstant => {
         this.interruptSubtreeInput(); // cancel interaction
         this.slider.visible = ( holdConstant !== HoldConstantEnum.TEMPERATURE &&
                                 holdConstant !== HoldConstantEnum.PRESSURE_T );
+      } );
+
+      // Disable the slider when the sim is paused.
+      isPlayingProperty.link( isPlaying => {
+        this.interruptSubtreeInput(); // cancel interaction
+        this.slider.enabled = isPlaying;
       } );
     }
   }

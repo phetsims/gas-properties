@@ -199,15 +199,10 @@ define( require => {
       const heaterCoolerNodeLeft = containerViewLocation.x -
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
-        model.heatCoolFactorProperty, model.holdConstantProperty, {
+        model.heatCoolFactorProperty, model.holdConstantProperty, model.isPlayingProperty, {
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-
-      // Disable the heat/cool slider when the sim is paused.
-      model.isPlayingProperty.link( isPlaying => {
-        heaterCoolerNode.slider.enabled = isPlaying;
-      } );
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
