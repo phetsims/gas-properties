@@ -4,7 +4,6 @@ UP NEXT
 
 Diffusion: initial location of particles
 Diffusion: collision detection and response, with and without divider
-Diffusion: Center of mass indicators
 Diffusion: Particle Flow Rate vectors
 
 Pressure model #50
