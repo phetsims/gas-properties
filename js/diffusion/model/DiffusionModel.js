@@ -66,10 +66,10 @@ define( require => {
       this.particles2 = []; // {DiffusionParticle2[]}
 
       // @public (read-only) center of mass for particles of type DiffusionParticle1
-      this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
+      this.centerXOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
       // @public (read-only) center of mass for particles of type DiffusionParticle2
-      this.centerOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
+      this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
       // @public (read-only) Data for the left half of the container
       this.leftNumberOfParticles1Property = new NumberProperty( 0 );
@@ -221,8 +221,8 @@ define( require => {
     update() {
 
       // center of mass
-      this.centerOfMass1Property.value = getCenterOfMassY( this.particles1 );
-      this.centerOfMass2Property.value = getCenterOfMassY( this.particles2 );
+      this.centerXOfMass1Property.value = getCenterXOfMass( this.particles1 );
+      this.centerXOfMass2Property.value = getCenterXOfMass( this.particles2 );
 
       // particle counts for the left and right halves of the container
       //TODO update leftNumberOfParticles1Property, leftNumberOfParticles2Property
@@ -262,18 +262,18 @@ define( require => {
   }
 
   /**
-   * Gets the y-axis center of mass of a collection of particles.
+   * Gets the x-axis center of mass of a collection of particles.
    * @param {Particle[]} particles
    * @returns {number|null} null if there are no particles and therefore no center of mass
    * @public
    */
-  function getCenterOfMassY( particles ) {
+  function getCenterXOfMass( particles ) {
     if ( particles.length > 0 ) {
       let numerator = 0;
       let totalMass = 0;
       for ( let i = 0; i < particles.length; i++ ) {
         const particle = particles[ i ];
-        numerator += ( particle.mass * particle.location.y );
+        numerator += ( particle.mass * particle.location.x );
         totalMass += particle.mass;
       }
       return numerator / totalMass;

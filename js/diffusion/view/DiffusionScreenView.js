@@ -2,13 +2,14 @@
 
 /**
  * The view for the 'Diffusion' screen.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
   'use strict';
 
   // modules
+  const CenterXOfMassNode = require( 'GAS_PROPERTIES/diffusion/view/CenterXOfMassNode' );
   const DataAccordionBox = require( 'GAS_PROPERTIES/diffusion/view/DataAccordionBox' );
   const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
@@ -16,6 +17,7 @@ define( require => {
   const DiffusionTimeControls = require( 'GAS_PROPERTIES/diffusion/view/DiffusionTimeControls' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -40,6 +42,17 @@ define( require => {
 
       // Container
       const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );
+
+      // Center of Mass indicators
+      const centerOfMassNode1 = new CenterXOfMassNode( model.centerXOfMass1Property, model.container.bottom,
+        model.modelViewTransform, GasPropertiesColorProfile.particle1ColorProperty );
+      const centerOfMassNode2 = new CenterXOfMassNode( model.centerXOfMass2Property, model.container.bottom,
+        model.modelViewTransform, GasPropertiesColorProfile.particle2ColorProperty );
+
+      viewProperties.centerOfMassVisibleProperty.link( centerOfMassVisible => {
+        centerOfMassNode1.visible = centerOfMassVisible;
+        centerOfMassNode2.visible = centerOfMassVisible;
+      } );
 
       // Data accordion box
       const dataAccordionBox = new DataAccordionBox( model, {
@@ -83,6 +96,8 @@ define( require => {
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
       this.addChild( containerNode );
+      this.addChild( centerOfMassNode1 );
+      this.addChild( centerOfMassNode2 );
       this.addChild( timeControls );
       this.addChild( particlesNode );
       this.addChild( resetAllButton );
