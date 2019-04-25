@@ -63,11 +63,7 @@ define( require => {
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
-        listener: () => {
-          this.interruptSubtreeInput(); // cancel interactions that are in progress
-          model.reset();
-          viewProperties.reset();
-        },
+        listener: () => { this.reset(); },
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
@@ -89,6 +85,17 @@ define( require => {
       // @private
       this.model = model;
       this.particlesNode = particlesNode;
+      this.viewProperties = viewProperties;
+    }
+
+    /**
+     * Resets things that are specific to the view.
+     * @private
+     */
+    reset() {
+      this.interruptSubtreeInput(); // cancel interactions that are in progress
+      this.model.reset();
+      this.viewProperties.reset();
     }
 
     /**
