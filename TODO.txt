@@ -2,8 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Intro: disable heat/cool slider when paused
-
 Diffusion: initial location of particles
 Diffusion: collision detection and response, with and without divider
 Diffusion: Center of mass indicators
