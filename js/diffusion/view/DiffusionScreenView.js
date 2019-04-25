@@ -102,6 +102,7 @@ define( require => {
      * Called on each step of the simulation's timer. The view is stepped regardless of whether the model is
      * paused, because changes made while the model is paused should immediately be reflected in the view.
      * @param {number} dt - time delta, in seconds
+     * @public
      */
     step( dt ) {
 
