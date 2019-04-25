@@ -121,6 +121,7 @@ define( require => {
     /**
      * Called on each step of the simulation's timer.
      * @param {number} dt - time delta, in seconds
+     * @public
      * @override
      */
     step( dt ) {
