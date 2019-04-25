@@ -42,6 +42,7 @@ define( require => {
       // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
       // edges of the container.
       //TODO generalize this or add assertions for assumptions.
+      //TODO make this cover inside of box and recreate when box width changes?
       this.regions = [];
       let maxX = model.container.right;
       while ( maxX > model.container.right - model.container.widthRange.max  ) {
