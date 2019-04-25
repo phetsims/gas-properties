@@ -28,7 +28,7 @@ define( require => {
   class KineticEnergyHistogram extends Histogram {
 
     /**
-     * @param {GasPropertiesModel} model
+     * @param {EnergyModel} model
      * @param {Object} [options]
      */
     constructor( model, options ) {

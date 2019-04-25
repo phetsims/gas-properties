@@ -18,7 +18,7 @@ define( require => {
   class PlayPauseStepControl extends HBox {
 
     /**
-     * @param {GasPropertiesModel} model TODO fix type expression
+     * @param {GasPropertiesModel} model TODO narrower interface?
      * @param {Object} [options]
      * @constructor
      */

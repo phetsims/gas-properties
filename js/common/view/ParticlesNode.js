@@ -19,7 +19,7 @@ define( require => {
   class ParticlesNode extends CanvasNode {
 
     /**
-     * @param {GasPropertiesModel} model TODO narrower interface?
+     * @param {IdealModel} model TODO narrower interface?
      */
     constructor( model ) {
 

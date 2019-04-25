@@ -23,7 +23,7 @@ define( require => {
   class KineticEnergyAccordionBox extends AccordionBox {
 
     /**
-     * @param {GasPropertiesModel} model
+     * @param {EnergyModel} model
      * @param {Object} [options]
      */
     constructor( model, options ) {
