@@ -204,6 +204,11 @@ define( require => {
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
+      // Disable the heat/cool slider when the sim is paused.
+      model.isPlayingProperty.link( isPlaying => {
+        heaterCoolerNode.slider.enabled = isPlaying;
+      } );
+
       // Reset All button
       const resetAllButton = new ResetAllButton( {
         listener: () => { this.reset(); },
