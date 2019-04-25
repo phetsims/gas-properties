@@ -142,12 +142,11 @@ define( require => {
     /**
      * Adds n particles to the end of the specified array.
      * @param {number} n
-     * @param {number} initialTemperature
      * @param {Particle[]} particles
      * @param {constructor} Constructor - a Particle subclass constructor
      * @private
      */
-    addParticles( n, initialTemperature, particles, Constructor ) {
+    addParticles( n, particles, Constructor ) {
 
       // Get the temperature that will be used to compute initial velocity magnitude.
       let meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
