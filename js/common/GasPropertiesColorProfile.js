@@ -147,22 +147,22 @@ define( require => {
     },
 
     // primary color for 1st particle type in Diffusion screen
-    diffusionParticle1Color: {
+    particle1Color: {
       default: 'rgb( 115, 251, 253 )' // cyan
     },
 
     // specular highlight for 1st particle type in Diffusion screen
-    diffusionParticle1HighlightColor: {
+    particle1HighlightColor: {
       default: 'rgb( 203, 247, 252 )' // lighter cyan
     },
 
     // primary color for 2nd particle type in Diffusion screen
-    diffusionParticle2Color: {
+    particle2Color: {
       default: 'rgb( 232, 78, 32 )' // red
     },
 
     // specular highlight for 2nd particle type in Diffusion screen
-    diffusionParticle2HighlightColor: {
+    particle2HighlightColor: {
       default: 'rgb( 255, 170, 170 )' // lighter red
     },
 

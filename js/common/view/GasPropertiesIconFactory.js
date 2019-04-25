@@ -163,11 +163,11 @@ define( require => {
         spacing: 12,
         children: [
           new Rectangle( 0, 0, width, height, {
-            fill: GasPropertiesColorProfile.diffusionParticle1ColorProperty,
+            fill: GasPropertiesColorProfile.particle1ColorProperty,
             stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
           } ),
           new Rectangle( 0, 0, width, height, {
-            fill: GasPropertiesColorProfile.diffusionParticle2ColorProperty,
+            fill: GasPropertiesColorProfile.particle2ColorProperty,
             stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
           } )
         ]
@@ -183,7 +183,7 @@ define( require => {
     createParticleFlowRateIcon() {
 
       const arrowOptions = {
-        fill: GasPropertiesColorProfile.diffusionParticle1ColorProperty,
+        fill: GasPropertiesColorProfile.particle1ColorProperty,
         stroke: null,
         headHeight: 10,
         headWidth: 10,
