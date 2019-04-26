@@ -40,10 +40,10 @@ define( require => {
       this.dividerThickness = 0.1;
 
       // @public (read-only) inside bounds in nm.
-      this.left = this.location.x - this.width;
-      this.right = this.location.x;
-      this.top = this.location.y + this.height;
-      this.bottom = this.location.y;
+      this.bounds = new Bounds2(
+        this.location.x - this.width, this.location.y,
+        this.location.x, this.location.y + this.height
+        );
 
       // @public (read-only) divider is horizontally centered, but no code assumes that
       this.dividerX = this.left + ( this.width / 2 );
@@ -72,6 +72,21 @@ define( require => {
     reset() {
       this.hasDividerProperty.reset();
     }
+
+    //TODO copied from Container
+    /**
+     * Convenience getters for inner bounds of the container, in model coordinate frame.
+     * Bounds2 has similar getters, but use view coordinate frame, where 'top' is minY and 'bottom' is maxY.
+     * @returns {number} in nm
+     * @public
+     */
+    get left() { return this.bounds.minX; }
+
+    get right() { return this.bounds.maxX; }
+
+    get bottom() { return this.bounds.minY; }
+
+    get top() { return this.bounds.maxY; }
   }
 
   return gasProperties.register( 'DiffusionContainer', DiffusionContainer );

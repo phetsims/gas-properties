@@ -71,7 +71,7 @@ define( require => {
         pointOnLine: new Vector2( 0, 0 ),
         reflectedPoint: new Vector2( 0, 0 )
       };
-      
+
       // @private fields needed by methods
       this.container = container;
       this.particleArrays = particleArrays;
@@ -105,7 +105,7 @@ define( require => {
       // particle-container collisions
       this.numberOfParticleContainerCollisions = 0;
       for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ], this.container );
+        this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds );
       }
     }
   }
@@ -252,10 +252,10 @@ define( require => {
    * Detects and handles particle-container collisions.
    * Handles x and y directions separately in case a particle hits the container diagonally at a corner.
    * @param {Particle[]} particles
-   * @param {Container} container
+   * @param {Bounds2} containerBounds
    * @returns {number} number of collisions
    */
-  function doParticleContainerCollisions( particles, container ) {
+  function doParticleContainerCollisions( particles, containerBounds ) {
     let numberOfCollisions = 0;
     for ( let i = 0; i < particles.length; i++ ) {
 
@@ -263,26 +263,26 @@ define( require => {
       let collided = false;
 
       // adjust x
-      if ( particle.left <= container.left ) {
-        particle.left = container.left;
+      if ( particle.left <= containerBounds.minX ) {
+        particle.left = containerBounds.minX;
         particle.invertDirectionX();
         collided = true;
         //TODO handle kinetic energy if the left wall is moving
       }
-      else if ( particle.right >= container.right ) {
-        particle.right = container.right;
+      else if ( particle.right >= containerBounds.maxX ) {
+        particle.right = containerBounds.maxX;
         particle.invertDirectionX();
         collided = true;
       }
 
       // adjust y
-      if ( particle.top >= container.top ) {
-        particle.top = container.top;
+      if ( particle.top >= containerBounds.maxY ) {
+        particle.top = containerBounds.maxY;
         particle.invertDirectionY();
         collided = true;
       }
-      else if ( particle.bottom <= container.bottom ) {
-        particle.bottom = container.bottom;
+      else if ( particle.bottom <= containerBounds.minY ) {
+        particle.bottom = containerBounds.minY;
         particle.invertDirectionY();
         collided = true;
       }

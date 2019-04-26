@@ -36,18 +36,17 @@ define( require => {
       // @public (read-only) height of the container, in nm
       this.height = 8.75;
 
-      //TODO is this OK?
-      // @private depth of the container, in nm
+      // @private (read-only) depth of the container, in nm
       this.depth = 1;
 
       // @public (read-only) wall thickness, in nm
       this.wallThickness = 0.05;
 
-      // @public (read-only) locations of the container's inside bounds in nm.
-      // left is dynamic, see ES5 getter.
-      this.right = this.location.x;
-      this.top = this.location.y + this.height;
-      this.bottom = this.location.y;
+      // @public (read-only) inside bounds, in nm
+      this.bounds = new Bounds2(
+        this.location.x - this.widthProperty.value, this.location.y,
+        this.location.x, this.location.y + this.height
+      );
 
       // @public whether the lid is on the container
       this.lidIsOnProperty = new BooleanProperty( true );
@@ -63,25 +62,24 @@ define( require => {
 
       // @public (read-only) the right coordinate of the opening in the top of the container, in nm
       // openingLeft is dynamic, see ES5 getter
-      this.openingRight = this.right - this.openingRightInset;
+      this.openingRight = this.location.y - this.openingRightInset;
 
       // @public width of the lid, in nm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
         units: 'nm'
       } );
 
-      // @public minimum width of the lid, overlaps the left wall, in nm.
+      // @public (read-only) minimum width of the lid, overlaps the left wall, in nm.
       // maxLidWidth is dynamic, see ES5 getter.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
       // @public (read-only) bicycle pump hose is connected to the outside right side of the container, in nm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 2 );
 
-      // @public (read-only) max bounds of the container, when it is expanded to its full width, in nm
-      this.maxBounds = new Bounds2(
-        this.location.x - this.widthRange.max, this.location.y,
-        this.location.x, this.location.y + this.height
-      );
+      // Adjust bounds
+      this.widthProperty.link( width => {
+        this.bounds.setMinX( this.location.x - width );
+      } );
 
       // Validate lidWidth, whose range changes dynamically.
       assert && this.lidWidthProperty.link( lidWidth => {
@@ -103,11 +101,18 @@ define( require => {
     get volume() { return this.widthProperty.value * this.height * this.depth; }
 
     /**
-     * Gets the location of the left edge of the container's inside bounds.
+     * Convenience getters for inner bounds of the container, in model coordinate frame.
+     * Bounds2 has similar getters, but use view coordinate frame, where 'top' is minY and 'bottom' is maxY.
      * @returns {number} in nm
      * @public
      */
-    get left() { return this.location.x - this.widthProperty.value; }
+    get left() { return this.bounds.minX; }
+
+    get right() { return this.bounds.maxX; }
+
+    get bottom() { return this.bounds.minY; }
+
+    get top() { return this.bounds.maxY; }
 
     /**
      * Gets the maximum lid width, when the lid is fully closed.
