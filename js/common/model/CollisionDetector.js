@@ -45,7 +45,7 @@ define( require => {
       //TODO make this cover inside of box and recreate when box width changes?
       this.regions = [];
       let maxX = model.container.right;
-      while ( maxX > model.container.right - model.container.widthRange.max  ) {
+      while ( maxX > model.container.right - model.container.widthRange.max ) {
         let minY = model.container.bottom;
         while ( minY < model.container.top ) {
           const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
@@ -62,15 +62,17 @@ define( require => {
       // @public determines whether particle-particle collisions occur
       this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true );
 
+      // @private mutable vectors, reused in critical code
+      this.mutableVectors = {
+        normal: new Vector2( 0, 0 ),
+        tangent: new Vector2( 0, 0 ),
+        relativeVelocity: new Vector2( 0, 0 ),
+        pointOnLine: new Vector2( 0, 0 ),
+        reflectedPoint: new Vector2( 0, 0 )
+      };
+      
       // @private fields needed by methods
       this.model = model;
-
-      // @private reusable (mutated) vectors
-      this.normalVector = new Vector2( 0, 0 );
-      this.tangentVector = new Vector2( 0, 0 );
-      this.relativeVelocity = new Vector2( 0, 0 );
-      this.pointOnLine = new Vector2( 0, 0 );
-      this.relectedPoint = new Vector2( 0, 0 );
     }
 
     // @public
@@ -88,7 +90,7 @@ define( require => {
       // allow particles to escape from the opening in the top of the container
       if ( this.model.container.openingWidth > 0 ) {
         escapeParticles( this.model.container, this.model.numberOfHeavyParticlesProperty,
-          this.model.heavyParticles, this.model.heavyParticlesOutside,  );
+          this.model.heavyParticles, this.model.heavyParticlesOutside, );
         escapeParticles( this.model.container, this.model.numberOfLightParticlesProperty,
           this.model.lightParticles, this.model.lightParticlesOutside );
       }
@@ -101,7 +103,7 @@ define( require => {
       // detect and handle particle-particle collisions within each region
       if ( this.particleParticleCollisionsEnabledProperty.value ) {
         for ( let i = 0; i < this.regions.length; i++ ) {
-          this.doParticleParticleCollisions( this.regions[ i ].particles );
+          doParticleParticleCollisions( this.regions[ i ].particles, this.mutableVectors );
         }
       }
 
@@ -109,101 +111,6 @@ define( require => {
       this.numberOfParticleContainerCollisions = 0;
       this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
       this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.lightParticles, this.model.container );
-    }
-
-    /**
-     * Detects and handles particle-particle collisions.
-     * @param {Particle[]} particles
-     * @private
-     */
-    doParticleParticleCollisions( particles ) {
-      for ( let i = 0; i < particles.length - 1; i++ ) {
-
-        const particle1 = particles[ i ];
-
-        for ( let j = i + 1; j < particles.length; j++ ) {
-
-          const particle2 = particles[ j ];
-          assert && assert( particle1 !== particle2, 'particle cannot collide with itself' );
-
-          // Ignore collisions if the particles were in contact on the previous step.
-          // This results in more natural behavior, and was adopted from the Java version.
-          if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
-
-            //-----------------------------------------------------------------------------------------
-            // Determine where the particles made contact.
-            //-----------------------------------------------------------------------------------------
-
-            const dx = particle1.location.x - particle2.location.x;
-            const dy = particle1.location.y - particle2.location.y;
-            const contactRatio = particle1.radius / particle1.location.distance( particle2.location );
-            const contactPointX = particle1.location.x - dx * contactRatio;
-            const contactPointY = particle1.location.y - dy * contactRatio;
-
-            //-----------------------------------------------------------------------------------------
-            // Adjust particle locations by reflecting across the line of impact.
-            //-----------------------------------------------------------------------------------------
-
-            // Normal vector, aka 'line of impact'
-            this.normalVector.setXY( dx, dy ).normalize();
-
-            // Tangent vector, perpendicular to the line of impact, aka 'plane of contact'
-            this.tangentVector.setXY( dy, -dx );
-
-            // Angle of the plane of contact
-            const lineAngle =  Math.atan2( this.tangentVector.y, this.tangentVector.x );
-
-            // Adjust location of particle1
-            const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
-            const locationRatio1 = particle1.radius / previousDistance1;
-            this.pointOnLine.setXY(
-              contactPointX - ( contactPointX - particle1.previousLocation.x ) * locationRatio1,
-              contactPointY - ( contactPointY - particle1.previousLocation.y ) * locationRatio1
-            );
-            reflectPointAcrossLine( particle1.location, this.pointOnLine, lineAngle, this.relectedPoint );
-            particle1.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
-
-            //TODO in Java version, particle2 algorithm was very different than particle1. Does making them same cause any problems?
-            // Adjust location of particle2
-            const previousDistance2 = particle2.previousLocation.distanceXY( contactPointX, contactPointY );
-            const locationRatio2 = particle2.radius / previousDistance2;
-            this.pointOnLine.setXY(
-              contactPointX - ( contactPointX - particle2.previousLocation.x ) * locationRatio2,
-              contactPointY - ( contactPointY - particle2.previousLocation.y ) * locationRatio2
-            );
-            reflectPointAcrossLine( particle2.location, this.pointOnLine, lineAngle, this.relectedPoint );
-            particle2.setLocationXY( this.relectedPoint.x, this.relectedPoint.y );
-
-            //-----------------------------------------------------------------------------------------
-            // Adjust particle velocities using impulse-based contact model.
-            // See https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model
-            //-----------------------------------------------------------------------------------------
-
-            // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
-            // after they collide. It normally ranges from 0 to 1 where 1 is a perfectly elastic collision.
-            // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
-            const e = 1;
-
-            // Compute the impulse, j.
-            // There is no angular velocity in our model, so the denominator involves only mass.
-            this.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
-            const vr = this.relativeVelocity.dot( this.normalVector );
-            const numerator = -vr * ( 1 + e );
-            const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
-            const j = numerator / denominator;
-
-            const vScale1 = j / particle1.mass;
-            const vx1 = this.normalVector.x * vScale1;
-            const vy1 = this.normalVector.y * vScale1;
-            particle1.setVelocityXY( particle1.velocity.x + vx1, particle1.velocity.y + vy1 );
-
-            const vScale2 = -j / particle2.mass;
-            const vx2 = this.normalVector.x * vScale2;
-            const vy2 = this.normalVector.y * vScale2;
-            particle2.setVelocityXY( particle2.velocity.x + vx2, particle2.velocity.y + vy2 );
-          }
-        }
-      }
     }
   }
 
@@ -266,6 +173,102 @@ define( require => {
         insideParticles.splice( insideParticles.indexOf( particle ), 1 );
         numberOfParticlesProperty.value--;
         outsideParticles.push( particle );
+      }
+    }
+  }
+
+  /**
+   * Detects and handles particle-particle collisions.
+   * @param {Particle[]} particles
+   * @param {*} mutableVectors - collection of mutable vectors, see this.mutableVectors in CollisionDetector constructor
+   * @private
+   */
+  function doParticleParticleCollisions( particles, mutableVectors ) {
+    for ( let i = 0; i < particles.length - 1; i++ ) {
+
+      const particle1 = particles[ i ];
+
+      for ( let j = i + 1; j < particles.length; j++ ) {
+
+        const particle2 = particles[ j ];
+        assert && assert( particle1 !== particle2, 'particle cannot collide with itself' );
+
+        // Ignore collisions if the particles were in contact on the previous step.
+        // This results in more natural behavior, and was adopted from the Java version.
+        if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
+
+          //-----------------------------------------------------------------------------------------
+          // Determine where the particles made contact.
+          //-----------------------------------------------------------------------------------------
+
+          const dx = particle1.location.x - particle2.location.x;
+          const dy = particle1.location.y - particle2.location.y;
+          const contactRatio = particle1.radius / particle1.location.distance( particle2.location );
+          const contactPointX = particle1.location.x - dx * contactRatio;
+          const contactPointY = particle1.location.y - dy * contactRatio;
+
+          //-----------------------------------------------------------------------------------------
+          // Adjust particle locations by reflecting across the line of impact.
+          //-----------------------------------------------------------------------------------------
+
+          // Normal vector, aka 'line of impact'
+          mutableVectors.normal.setXY( dx, dy ).normalize();
+
+          // Tangent vector, perpendicular to the line of impact, aka 'plane of contact'
+          mutableVectors.tangent.setXY( dy, -dx );
+
+          // Angle of the plane of contact
+          const lineAngle = Math.atan2( mutableVectors.tangent.y, mutableVectors.tangent.x );
+
+          // Adjust location of particle1
+          const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
+          const locationRatio1 = particle1.radius / previousDistance1;
+          mutableVectors.pointOnLine.setXY(
+            contactPointX - ( contactPointX - particle1.previousLocation.x ) * locationRatio1,
+            contactPointY - ( contactPointY - particle1.previousLocation.y ) * locationRatio1
+          );
+          reflectPointAcrossLine( particle1.location, mutableVectors.pointOnLine, lineAngle, mutableVectors.reflectedPoint );
+          particle1.setLocationXY( mutableVectors.reflectedPoint.x, mutableVectors.reflectedPoint.y );
+
+          //TODO in Java version, particle2 algorithm was very different than particle1. Does making them same cause any problems?
+          // Adjust location of particle2
+          const previousDistance2 = particle2.previousLocation.distanceXY( contactPointX, contactPointY );
+          const locationRatio2 = particle2.radius / previousDistance2;
+          mutableVectors.pointOnLine.setXY(
+            contactPointX - ( contactPointX - particle2.previousLocation.x ) * locationRatio2,
+            contactPointY - ( contactPointY - particle2.previousLocation.y ) * locationRatio2
+          );
+          reflectPointAcrossLine( particle2.location, mutableVectors.pointOnLine, lineAngle, mutableVectors.reflectedPoint );
+          particle2.setLocationXY( mutableVectors.reflectedPoint.x, mutableVectors.reflectedPoint.y );
+
+          //-----------------------------------------------------------------------------------------
+          // Adjust particle velocities using impulse-based contact model.
+          // See https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model
+          //-----------------------------------------------------------------------------------------
+
+          // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
+          // after they collide. It normally ranges from 0 to 1 where 1 is a perfectly elastic collision.
+          // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
+          const e = 1;
+
+          // Compute the impulse, j.
+          // There is no angular velocity in our model, so the denominator involves only mass.
+          mutableVectors.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
+          const vr = mutableVectors.relativeVelocity.dot( mutableVectors.normal );
+          const numerator = -vr * ( 1 + e );
+          const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
+          const j = numerator / denominator;
+
+          const vScale1 = j / particle1.mass;
+          const vx1 = mutableVectors.normal.x * vScale1;
+          const vy1 = mutableVectors.normal.y * vScale1;
+          particle1.setVelocityXY( particle1.velocity.x + vx1, particle1.velocity.y + vy1 );
+
+          const vScale2 = -j / particle2.mass;
+          const vx2 = mutableVectors.normal.x * vScale2;
+          const vy2 = mutableVectors.normal.y * vScale2;
+          particle2.setVelocityXY( particle2.velocity.x + vx2, particle2.velocity.y + vy2 );
+        }
       }
     }
   }
