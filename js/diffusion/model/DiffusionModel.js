@@ -289,9 +289,9 @@ define( require => {
     }
   }
 
-  //TODO move to DOT/Random?
+  //TODO move to DOT/Random, see https://github.com/phetsims/dot/issues/94
   /**
-   * Randomly selects a number between min and max (inclusive).
+   * Randomly selects a double in the range [min,max).
    * @param {number} min
    * @param {number} max
    * @returns {number}
@@ -299,7 +299,7 @@ define( require => {
   function nextDoubleBetween( min, max ) {
     assert && assert( min < max, `bad arguments: ${min} ${max} ` );
     const value = min + phet.joist.random.nextDouble() * ( max - min );
-    assert && assert( value >= min && value <= max, `bad value: ${value}` );
+    assert && assert( value >= min && value < max, `bad value: ${value}` );
     return value;
   }
 
