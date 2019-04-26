@@ -2,6 +2,9 @@ TODO list for gas-properties
 
 UP NEXT
 
+Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
+Combine ContainerNode and DiffusionContainerNode into 1 class, with optional lid, divider, mutable width
+
 Diffusion: collision detection and response, with and without divider
 Diffusion: Particle Flow Rate vectors
 
