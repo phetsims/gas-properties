@@ -102,10 +102,21 @@ define( require => {
         }
       }
 
+      //TODO hasDivider case is a temporary hack
       // particle-container collisions
       this.numberOfParticleContainerCollisions = 0;
-      for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds );
+      if ( this.container.hasDividerProperty && this.container.hasDividerProperty.value ) {
+
+        // If there is a divider, use bounds for subsets of the container
+        this.numberOfParticleContainerCollisions += doParticleContainerCollisions(  this.particleArrays[ 0 ], this.container.leftBounds );
+        this.numberOfParticleContainerCollisions += doParticleContainerCollisions(  this.particleArrays[ 1 ], this.container.rightBounds );
+      }
+      else {
+
+        // If there is no divider, use bounds for the entire container
+        for ( let i = 0; i < this.particleArrays.length; i++ ) {
+          this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds );
+        }
       }
     }
   }
