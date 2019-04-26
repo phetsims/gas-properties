@@ -6,9 +6,8 @@ Diffusion: initial location of particles
 Diffusion: collision detection and response, with and without divider
 Diffusion: Particle Flow Rate vectors
 
-Pressure model #50
-
-Energy: avoid addChild/removeChild in histograms
+Intro: zero pressure until one particle collides with container
+Intro: add jitter to pressure gauge
 
 Intro: hold constant
 - None: change N, T, or V => change P
@@ -22,18 +21,12 @@ Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 
-Diffusion: lots of new/different features
+Energy: avoid addChild/removeChild in histograms
 
 DESIGN FYI
 * I changed the location of the Return Lid button, because container.left is mutable.
 
 DESIGN QUESTIONS (MODEL)
-* Problems with pressure model:
-  - Why is P = NkT/V yielding a much larger value than Java version?
-  - Is our conversion factor to kPa correct?
-  - Are values in the Java version correct?
-  - Why does Java version use a complicated 'slice' model?
-  - How to address the fact that pressure should be zero until particles collide with walls?
 
 DESIGN QUESTIONS (VIEW)
 * Histograms:
