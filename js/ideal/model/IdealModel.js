@@ -89,7 +89,7 @@ define( require => {
       this.container = new Container();
 
       // @public (read-only)
-      this.collisionDetector = new CollisionDetector( this );
+      this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ] );
 
       // @public the factor to heat (positive value) or cool (negative value) the contents of the container
       this.heatCoolFactorProperty = new NumberProperty( 0, {

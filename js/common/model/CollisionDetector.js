@@ -26,10 +26,11 @@ define( require => {
   class CollisionDetector {
 
     /**
-     * @param {IdealModel} model
+     * @param {Container} container
+     * @param {Particle[][]} particleArrays
      * @param {Object} [options]
      */
-    constructor( model, options ) {
+    constructor( container, particleArrays, options ) {
 
       options = _.extend( {
         regionLength: 2 // Regions are square, length of one side, nm
@@ -44,10 +45,10 @@ define( require => {
       //TODO generalize this or add assertions for assumptions.
       //TODO make this cover inside of box and recreate when box width changes?
       this.regions = [];
-      let maxX = model.container.right;
-      while ( maxX > model.container.right - model.container.widthRange.max ) {
-        let minY = model.container.bottom;
-        while ( minY < model.container.top ) {
+      let maxX = container.right;
+      while ( maxX > container.right - container.widthRange.max ) {
+        let minY = container.bottom;
+        while ( minY < container.top ) {
           const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
           this.regions.push( new Region( regionBounds ) );
           minY = minY + options.regionLength;
@@ -72,7 +73,8 @@ define( require => {
       };
       
       // @private fields needed by methods
-      this.model = model;
+      this.container = container;
+      this.particleArrays = particleArrays;
     }
 
     // @public
@@ -89,8 +91,9 @@ define( require => {
 
       // put particles in regions
       clearRegions( this.regions );
-      assignParticlesToRegions( this.model.heavyParticles, this.regions );
-      assignParticlesToRegions( this.model.lightParticles, this.regions );
+      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+        assignParticlesToRegions( this.particleArrays[ i ], this.regions );
+      }
 
       // particle-particle collisions, within each region
       if ( this.particleParticleCollisionsEnabledProperty.value ) {
@@ -101,8 +104,9 @@ define( require => {
 
       // particle-container collisions
       this.numberOfParticleContainerCollisions = 0;
-      this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
-      this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.lightParticles, this.model.container );
+      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+        this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ], this.container );
+      }
     }
   }
 
