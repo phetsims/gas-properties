@@ -84,6 +84,7 @@ define( require => {
       // Add or remove particles
       this.experiment.initialNumber1Property.link( initialNumber => {
         this.numberOfParticlesListener( initialNumber,
+          this.container.leftBounds,
           this.experiment.mass1Property.value,
           this.experiment.initialTemperature1Property.value,
           this.particles1,
@@ -91,6 +92,7 @@ define( require => {
       } );
       this.experiment.initialNumber2Property.link( initialNumber => {
         this.numberOfParticlesListener( initialNumber,
+          this.container.rightBounds,
           this.experiment.mass2Property.value,
           this.experiment.initialTemperature2Property.value,
           this.particles2,
@@ -156,17 +158,18 @@ define( require => {
     /**
      * Adjusts an array of particles to have the desired number of elements.
      * @param {number} numberOfParticles - desired number of particles
+     * @param {Bounds2} locationBounds - initial location will be inside this bounds
      * @param {number} mass
      * @param {number} initialTemperature
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
      * @param particleConstructor - constructor for elements in particles array
      * @private
      */
-    numberOfParticlesListener( numberOfParticles, mass, initialTemperature, particles, particleConstructor ) {
+    numberOfParticlesListener( numberOfParticles, locationBounds, mass, initialTemperature, particles, particleConstructor ) {
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {
-          this.addParticles( delta, mass, initialTemperature, particles, particleConstructor );
+          this.addParticles( delta, locationBounds, mass, initialTemperature, particles, particleConstructor );
         }
         else {
           removeParticles( -delta, particles );
@@ -177,13 +180,14 @@ define( require => {
     /**
      * Adds n particles to the end of the specified array.
      * @param {number} n
+     * @param {Bounds2} locationBounds - initial location will be inside this bounds
      * @param {number} mass
      * @param {number} initialTemperature
      * @param {Particle[]} particles
      * @param {constructor} Constructor - a Particle subclass constructor
      * @private
      */
-    addParticles( n, mass, initialTemperature, particles, Constructor ) {
+    addParticles( n, locationBounds, mass, initialTemperature, particles, Constructor ) {
 
       // Create n particles
       for ( let i = 0; i < n; i++ ) {
@@ -192,8 +196,10 @@ define( require => {
           mass: mass
         } );
 
-        // Position the particle at a random location.
-        particle.setLocationXY( -1, -1 ); //TODO
+        // Position the particle at a random location within locationBounds, accounting for particle radius.
+        const x = nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
+        const y = nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
+        particle.setLocationXY( x, y );
 
         // Set the initial velocity, based on initial temperature and mass.
         particle.setVelocityPolar(
@@ -281,6 +287,20 @@ define( require => {
     else {
       return null;
     }
+  }
+
+  //TODO move to DOT/Random?
+  /**
+   * Randomly selects a number between min and max (inclusive).
+   * @param {number} min
+   * @param {number} max
+   * @returns {number}
+   */
+  function nextDoubleBetween( min, max ) {
+    assert && assert( min < max, `bad arguments: ${min} ${max} ` );
+    const value = min + phet.joist.random.nextDouble() * ( max - min );
+    assert && assert( value >= min && value <= max, `bad value: ${value}` );
+    return value;
   }
 
   return gasProperties.register( 'DiffusionModel', DiffusionModel );
