@@ -126,6 +126,19 @@ define( require => {
       this.experiment.initialTemperature2Property.link( initialTemperature => {
         //TODO adjust velocities of all particles2
       } );
+
+      // When the divider is restored, create a new initial state with same numbers of particles.
+      this.container.hasDividerProperty.link( hasDivider => {
+        if ( hasDivider ) {
+          const n1 = this.experiment.initialNumber1Property.value;
+          this.experiment.initialNumber1Property.value = 0;
+          this.experiment.initialNumber1Property.value = n1;
+
+          const n2 = this.experiment.initialNumber2Property.value;
+          this.experiment.initialNumber2Property.value = 0;
+          this.experiment.initialNumber2Property.value = n2;
+        }
+      } );
     }
 
     /**

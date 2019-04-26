@@ -78,13 +78,6 @@ define( require => {
           }
         } );
 
-      // When the divider is returned, reset the experiment.
-      hasDividerProperty.link( hasDivider => {
-        if ( hasDivider ) {
-          experiment.reset();
-        }
-      } );
-
       // TODO is there a better way to center the button?
       // to center the button
       const dividerButtonParent = new Node( {
