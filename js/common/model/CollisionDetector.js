@@ -108,8 +108,8 @@ define( require => {
       if ( this.container.hasDividerProperty && this.container.hasDividerProperty.value ) {
 
         // If there is a divider, use bounds for subsets of the container
-        this.numberOfParticleContainerCollisions += doParticleContainerCollisions(  this.particleArrays[ 0 ], this.container.leftBounds );
-        this.numberOfParticleContainerCollisions += doParticleContainerCollisions(  this.particleArrays[ 1 ], this.container.rightBounds );
+        this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ 0 ], this.container.leftBounds );
+        this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ 1 ], this.container.rightBounds );
       }
       else {
 
