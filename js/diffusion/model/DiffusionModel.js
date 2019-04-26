@@ -105,27 +105,13 @@ define( require => {
           DiffusionParticle2 );
       } );
 
-      // Update mass of existing particles
-      this.experiment.mass1Property.link( mass => {
-        for ( let i = 0; i < this.particles1.length; i++ ) {
-          this.particles1[ i ].mass = mass;
-          //TODO adjust velocity?
-        }
-      } );
-      this.experiment.mass2Property.link( mass => {
-        for ( let i = 0; i < this.particles2.length; i++ ) {
-          this.particles2[ i ].mass = mass;
-          //TODO adjust velocity?
-        }
-      } );
-
-      // Update initial temperature of existing particles
-      this.experiment.initialTemperature1Property.link( initialTemperature => {
-        //TODO adjust velocities of all particles1
-      } );
-      this.experiment.initialTemperature2Property.link( initialTemperature => {
-        //TODO adjust velocities of all particles2
-      } );
+      // Update mass and temperature of existing particles. This adjusts speed of the particles.
+      Property.multilink( [ this.experiment.mass1Property, this.experiment.initialTemperature1Property ],
+        ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles1 ); }
+      );
+      Property.multilink( [ this.experiment.mass2Property, this.experiment.initialTemperature2Property ],
+        ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles2 ); }
+      );
 
       // When the divider is restored, create a new initial state with same numbers of particles.
       this.container.hasDividerProperty.link( hasDivider => {
@@ -229,7 +215,6 @@ define( require => {
 
         // Set the initial velocity, based on initial temperature and mass.
         particle.setVelocityPolar(
-
           // |v| = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * initialTemperature / particle.mass ),
 
@@ -312,6 +297,21 @@ define( require => {
     }
     else {
       return null;
+    }
+  }
+
+  /**
+   * When mass or initial temperature changes, update particles and adjust their speed accordingly.
+   * @param {number} mass
+   * @param {number} temperature
+   * @param {Particle[]} particles
+   */
+  function updateMassAndTemperature( mass, temperature, particles ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      particles[ i ].mass = mass;
+
+      // |v| = sqrt( 3kT / m )
+      particles[ i ].setVelocityMagnitude( Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass ) );
     }
   }
 

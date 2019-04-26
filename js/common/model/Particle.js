@@ -31,9 +31,11 @@ define( require => {
       // @public (read-only)
       this.location = new Vector2( 0, 0 ); // center of the particle, nm
       this.previousLocation = this.location.copy(); // location on previous time step
-      this.mass = options.mass; // AMU
       this.radius = options.radius; // radians
       this.velocity = new Vector2( 0, 0 ); // nm/ps, initially at rest
+
+      // @public
+      this.mass = options.mass; // AMU
 
       // @public (read-only)
       this.colorProperty = options.colorProperty || new Property( 'white' );
@@ -138,8 +140,18 @@ define( require => {
     }
 
     /**
-     * Scales the velocity.
+     * Sets the velocity magnitude.
+     * @param {number} magnitude
+     * @public
+     */
+    setVelocityMagnitude( magnitude ) {
+      this.velocity.setMagnitude( magnitude );
+    }
+
+    /**
+     * Scales the velocity. Used when heat/cool is applied.
      * @param {number} scale
+     * @public
      */
     scaleVelocity( scale ) {
       this.velocity.multiply( scale );
@@ -191,6 +203,7 @@ define( require => {
      * of times per step.
      * @param {Bounds2} bounds
      * @returns {boolean}
+     * @public
      */
     intersectsBounds( bounds ) {
       const minX = ( this.left > bounds.minX ) ? this.left : bounds.minX;
