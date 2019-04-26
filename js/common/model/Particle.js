@@ -29,10 +29,10 @@ define( require => {
       }, options );
 
       // @public (read-only)
-      this.location = new Vector2( 0, 0 ); // center of the particle, nm
-      this.previousLocation = this.location.copy(); // location on previous time step
+      this.location = new Vector2( 0, 0 ); // center of the particle, nm, MUTATED!
+      this.previousLocation = this.location.copy(); // location on previous time step, MUTATED!
       this.radius = options.radius; // radians
-      this.velocity = new Vector2( 0, 0 ); // nm/ps, initially at rest
+      this.velocity = new Vector2( 0, 0 ); // nm/ps, initially at rest, MUTATED!
 
       // @public
       this.mass = options.mass; // AMU
