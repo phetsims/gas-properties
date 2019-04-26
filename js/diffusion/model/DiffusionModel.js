@@ -241,10 +241,11 @@ define( require => {
       this.centerXOfMass1Property.value = getCenterXOfMass( this.particles1 );
       this.centerXOfMass2Property.value = getCenterXOfMass( this.particles2 );
 
-      // particle counts for the left and right halves of the container
-      //TODO update leftNumberOfParticles1Property, leftNumberOfParticles2Property
-      //TODO update rightNumberOfParticles1Property, rightNumberOfParticles2Property
-
+      // particle counts for the left and right sides of the container
+      updateLeftRightCounts( this.particles1, this.container.leftBounds,
+        this.leftNumberOfParticles1Property, this.rightNumberOfParticles1Property );
+      updateLeftRightCounts( this.particles2, this.container.leftBounds,
+        this.leftNumberOfParticles2Property, this.rightNumberOfParticles2Property );
 
       // average temperature for the left and right halves of the container
       //TODO update leftAverageTemperatureProperty, rightAverageTemperatureProperty
@@ -312,6 +313,26 @@ define( require => {
 
       // |v| = sqrt( 3kT / m )
       particles[ i ].setVelocityMagnitude( Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass ) );
+    }
+  }
+
+  /**
+   * Updates particle counts for the left and right sides of the container.
+   * @param {Particle[]} particles
+   * @param {Bounds2} leftBounds
+   * @param {NumberProperty} leftNumberOfParticlesProperty
+   * @param {NumberProperty} rightNumberOfParticlesProperty
+   */
+  function updateLeftRightCounts( particles, leftBounds, leftNumberOfParticlesProperty, rightNumberOfParticlesProperty ) {
+    leftNumberOfParticlesProperty.value = 0;
+    rightNumberOfParticlesProperty.value = 0;
+    for ( let i = 0; i < particles.length; i++ ) {
+      if ( leftBounds.containsPoint( particles[ i ].location ) ) {
+        leftNumberOfParticlesProperty.value++;
+      }
+      else {
+        rightNumberOfParticlesProperty.value++;
+      }
     }
   }
 
