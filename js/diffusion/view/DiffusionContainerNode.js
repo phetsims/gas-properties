@@ -31,6 +31,7 @@ define( require => {
       const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
       const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
       const viewDividerX = modelViewTransform.modelToViewX( container.dividerX );
+      console.log( 'container.dividerX=' + container.dividerX + ' viewDividerX=' + viewDividerX );
 
       // Outside border of the container
       const borderNode = new Rectangle( viewLocation.x - viewWidth, viewLocation.y - viewHeight, viewWidth, viewHeight, {
@@ -41,8 +42,7 @@ define( require => {
       // Vertical divider
       const dividerNode = new Line( viewDividerX, viewLocation.y - viewHeight, viewDividerX, viewLocation.y, {
         stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: viewDividerThickness,
-        center: borderNode.center
+        lineWidth: viewDividerThickness
       } );
 
       // Vertical dashed line to indicate the center of the container when the divider is not present.
