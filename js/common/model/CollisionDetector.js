@@ -87,27 +87,19 @@ define( require => {
      */
     step( dt ) {
 
-      // allow particles to escape from the opening in the top of the container
-      if ( this.model.container.openingWidth > 0 ) {
-        escapeParticles( this.model.container, this.model.numberOfHeavyParticlesProperty,
-          this.model.heavyParticles, this.model.heavyParticlesOutside, );
-        escapeParticles( this.model.container, this.model.numberOfLightParticlesProperty,
-          this.model.lightParticles, this.model.lightParticlesOutside );
-      }
-
       // put particles in regions
       clearRegions( this.regions );
       assignParticlesToRegions( this.model.heavyParticles, this.regions );
       assignParticlesToRegions( this.model.lightParticles, this.regions );
 
-      // detect and handle particle-particle collisions within each region
+      // particle-particle collisions, within each region
       if ( this.particleParticleCollisionsEnabledProperty.value ) {
         for ( let i = 0; i < this.regions.length; i++ ) {
           doParticleParticleCollisions( this.regions[ i ].particles, this.mutableVectors );
         }
       }
 
-      // detect and handle particle-container collisions
+      // particle-container collisions
       this.numberOfParticleContainerCollisions = 0;
       this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.heavyParticles, this.model.container );
       this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.model.lightParticles, this.model.container );
@@ -154,27 +146,6 @@ define( require => {
     const d = p.distance( pointOnLine );
     reflectedPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
     return reflectedPoint;
-  }
-
-  /**
-   * Identifies particles that have escaped via the opening in the top of the container, and
-   * moves them from insideParticles to outsideParticles.
-   * @param {Container} container
-   * @param {NumberProperty} numberOfParticlesProperty - number of particles inside the container
-   * @param {Particle[]} insideParticles - particles inside the container
-   * @param {Particle[]} outsideParticles - particles outside the container
-   */
-  function escapeParticles( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
-    for ( let i = 0; i < insideParticles.length; i++ ) {
-      const particle = insideParticles[ i ];
-      if ( particle.top > container.top &&
-           particle.left > container.openingLeft &&
-           particle.right < container.openingRight ) {
-        insideParticles.splice( insideParticles.indexOf( particle ), 1 );
-        numberOfParticlesProperty.value--;
-        outsideParticles.push( particle );
-      }
-    }
   }
 
   /**

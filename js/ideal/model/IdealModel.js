@@ -196,7 +196,6 @@ define( require => {
 
         // Set the initial velocity
         particle.setVelocityPolar(
-
           // |v| = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
 
@@ -269,6 +268,12 @@ define( require => {
       stepParticles( this.lightParticles, dt );
       stepParticles( this.heavyParticlesOutside, dt );
       stepParticles( this.lightParticlesOutside, dt );
+
+      // Allow particles to escape from the opening in the top of the container
+      if ( this.container.openingWidth > 0 ) {
+        escapeParticles( this.container, this.numberOfHeavyParticlesProperty, this.heavyParticles, this.heavyParticlesOutside, );
+        escapeParticles( this.container, this.numberOfLightParticlesProperty, this.lightParticles, this.lightParticlesOutside );
+      }
 
       // Collision detection and response
       this.collisionDetector.step( dt );
@@ -427,6 +432,27 @@ define( require => {
     for ( let i = 0; i < particles.length; i++ ) {
       assert && assert( container.enclosesParticle( particles[ i ] ),
         `container does not enclose particle: ${particles[ i ].toString()}` );
+    }
+  }
+
+  /**
+   * Identifies particles that have escaped via the opening in the top of the container, and
+   * moves them from insideParticles to outsideParticles.
+   * @param {Container} container
+   * @param {NumberProperty} numberOfParticlesProperty - number of particles inside the container
+   * @param {Particle[]} insideParticles - particles inside the container
+   * @param {Particle[]} outsideParticles - particles outside the container
+   */
+  function escapeParticles( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
+    for ( let i = 0; i < insideParticles.length; i++ ) {
+      const particle = insideParticles[ i ];
+      if ( particle.top > container.top &&
+           particle.left > container.openingLeft &&
+           particle.right < container.openingRight ) {
+        insideParticles.splice( insideParticles.indexOf( particle ), 1 );
+        numberOfParticlesProperty.value--;
+        outsideParticles.push( particle );
+      }
     }
   }
 
