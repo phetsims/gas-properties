@@ -17,7 +17,7 @@ define( require => {
 
   // strings
   const removeDividerString = require( 'string!GAS_PROPERTIES/removeDivider' );
-  const resetString = require( 'string!GAS_PROPERTIES/reset' );
+  const resetDividerString = require( 'string!GAS_PROPERTIES/resetDivider' );
 
   class DividerToggleButton extends BooleanRectangularToggleButton {
 
@@ -37,7 +37,7 @@ define( require => {
       };
 
       const trueNode = new Text( removeDividerString, textOptions );
-      const falseNode = new Text( resetString, textOptions );
+      const falseNode = new Text( resetDividerString, textOptions );
 
       super( trueNode, falseNode, hasDividerProperty, options );
     }

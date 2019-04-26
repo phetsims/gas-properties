@@ -122,8 +122,8 @@
   "removeDivider": {
     "value": "Remove Divider"
   },
-  "reset": {
-    "value": "Reset"
+  "resetDivider": {
+    "value": "Reset Divider"
   },
   "tAvg": {
     "value": "T<sub>avg</sub> = {{value}}"
