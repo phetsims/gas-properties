@@ -20,6 +20,7 @@ define( require => {
 
   // strings
   const tAvgString = require( 'string!GAS_PROPERTIES/tAvg' );
+  const tAvgKString = require( 'string!GAS_PROPERTIES/tAvgK' );
 
   // constants
   const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
@@ -67,8 +68,9 @@ define( require => {
 
       const averageTemperatureNode = new NumberDisplay( averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
         _.extend( {}, numberDisplayOptions, {
-          valuePattern: tAvgString,
-        useRichText: true
+          valuePattern: tAvgKString,
+          noValuePattern: tAvgString,
+          useRichText: true
       } ) );
 
       assert && assert( !options.children, 'DataNode sets children' );

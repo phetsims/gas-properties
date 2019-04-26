@@ -128,6 +128,9 @@
   "tAvg": {
     "value": "T<sub>avg</sub> = {{value}}"
   },
+  "tAvgK": {
+    "value": "T<sub>avg</sub> = {{value}} K"
+  },
   "initialNumber": {
     "value": "Initial Number"
   },

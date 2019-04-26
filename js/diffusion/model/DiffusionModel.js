@@ -236,19 +236,84 @@ define( require => {
      * @private
      */
     update() {
+      this.updateCenterOfMass();
+      this.updateParticleCounts();
+      this.updateAverageTemperatures(); // do this after updateParticleCounts!
+    }
 
-      // center of mass
+    /**
+     * Updates the center of mass, as shown by the center-of-mass indicators.
+     * @private
+     */
+    updateCenterOfMass() {
       this.centerXOfMass1Property.value = getCenterXOfMass( this.particles1 );
       this.centerXOfMass2Property.value = getCenterXOfMass( this.particles2 );
+    }
 
-      // particle counts for the left and right sides of the container
+    /**
+     * Updates particle counts for the left and right sides of the container, as displayed in the Data accordion box.
+     * @private
+     */
+    updateParticleCounts() {
       updateLeftRightCounts( this.particles1, this.container.leftBounds,
         this.leftNumberOfParticles1Property, this.rightNumberOfParticles1Property );
       updateLeftRightCounts( this.particles2, this.container.leftBounds,
         this.leftNumberOfParticles2Property, this.rightNumberOfParticles2Property );
+    }
 
-      // average temperature for the left and right halves of the container
-      //TODO update leftAverageTemperatureProperty, rightAverageTemperatureProperty
+    /**
+     * Updates average temperatures for the left and right sides of the container, as displayed in the Data accordion box.
+     * @private
+     */
+    updateAverageTemperatures() {
+
+      let leftTotalKE = 0;
+      let rightTotalKE = 0;
+
+      // add KE contribution for particle1
+      for ( let i = 0; i < this.particles1.length; i++ ) {
+        const particle = this.particles1[ i ];
+        if ( this.container.leftBounds.containsPoint( particle.location ) ) {
+          leftTotalKE += particle.kineticEnergy;
+        }
+        else {
+          rightTotalKE += particle.kineticEnergy;
+        }
+      }
+
+      // add KE contribution for particle2
+      for ( let i = 0; i < this.particles2.length; i++ ) {
+        const particle = this.particles2[ i ];
+        if ( this.container.leftBounds.containsPoint( particle.location ) ) {
+          leftTotalKE += particle.kineticEnergy;
+        }
+        else {
+          rightTotalKE += particle.kineticEnergy;
+        }
+      }
+
+      const leftNumberOfParticles = this.leftNumberOfParticles1Property.value + this.leftNumberOfParticles2Property.value;
+      const rightNumberOfParticles = this.rightNumberOfParticles1Property.value + this.rightNumberOfParticles2Property.value;
+
+      if ( leftNumberOfParticles === 0 ) {
+        this.leftAverageTemperatureProperty.value = null;
+      }
+      else {
+
+        // T = (2/3)KE/k
+        const leftAverageKE = leftTotalKE / leftNumberOfParticles;
+        this.leftAverageTemperatureProperty.value = ( 2 / 3 ) * leftAverageKE / GasPropertiesConstants.BOLTZMANN; // K
+      }
+
+      if ( rightNumberOfParticles === 0 ) {
+        this.rightAverageTemperatureProperty.value = null;
+      }
+      else {
+
+        // T = (2/3)KE/k
+        const rightAverageKE = rightTotalKE / rightNumberOfParticles;
+        this.rightAverageTemperatureProperty.value = ( 2 / 3 ) * rightAverageKE / GasPropertiesConstants.BOLTZMANN; // K
+      }
     }
   }
 
