@@ -19,6 +19,8 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
@@ -42,6 +44,12 @@ define( require => {
 
       // Container
       const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );
+
+      // Show how the collision detection space is partitioned into regions
+      let regionsNode =  null;
+      if ( GasPropertiesQueryParameters.regions ) {
+        regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
+      }
 
       // Center of Mass indicators
       const centerOfMassNode1 = new CenterXOfMassNode( model.centerXOfMass1Property, model.container.bottom,
@@ -93,6 +101,7 @@ define( require => {
       } );
 
       // Rendering order
+      regionsNode && this.addChild( regionsNode );
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
       this.addChild( containerNode );
@@ -105,6 +114,7 @@ define( require => {
 
       // @private
       this.model = model;
+      this.regionsNode = regionsNode;
       this.particlesNode = particlesNode;
       this.viewProperties = viewProperties;
     }
@@ -132,6 +142,7 @@ define( require => {
 
       // step elements that are specific to the view
       this.particlesNode.step( ps );
+      this.regionsNode && this.regionsNode.step( ps );
     }
   }
 

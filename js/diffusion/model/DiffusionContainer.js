@@ -13,6 +13,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Range = require( 'DOT/Range' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class DiffusionContainer {
@@ -62,6 +63,9 @@ define( require => {
         this.leftBounds.setMaxX( this.dividerX - dividerOffset );
         this.rightBounds.setMinX( this.dividerX + dividerOffset );
       } );
+
+      //TODO this is here to make it work with CollisionDetector, make it go away
+      this.widthRange = new Range( 1, this.width );
     }
 
     // @public

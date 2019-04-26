@@ -33,7 +33,7 @@ define( require => {
     constructor( container, particleArrays, options ) {
 
       options = _.extend( {
-        regionLength: 2 // Regions are square, length of one side, nm
+        regionLength: 1 // Regions are square, length of one side, nm
       }, options );
 
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );

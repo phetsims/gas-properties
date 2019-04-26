@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
@@ -81,6 +82,11 @@ define( require => {
       this.rightNumberOfParticles2Property = new NumberProperty( 0 );
       this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
 
+      // @public (read-only)
+      this.collisionDetector = new CollisionDetector( this.container, [ this.particles1, this.particles2 ], {
+        regionLength: this.container.height / 4
+      } );
+
       // Add or remove particles
       this.experiment.initialNumber1Property.link( initialNumber => {
         this.numberOfParticlesListener( initialNumber,
@@ -150,8 +156,15 @@ define( require => {
      */
     stepModelTime( dt ) {
       super.stepModelTime( dt );
+
+      // Step particles
       stepParticles( this.particles1, dt );
       stepParticles( this.particles2, dt );
+
+      // Collision detection and response
+      this.collisionDetector.step( dt );
+
+      // Update Properties that are based on the current state of the system.
       this.update();
     }
 
@@ -221,7 +234,7 @@ define( require => {
     }
 
     /**
-     * Updates Properties that are based on the current state of the particle system.
+     * Updates Properties that are based on the current state of the system.
      * @private
      */
     update() {
