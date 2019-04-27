@@ -94,7 +94,7 @@ define( require => {
       defaultValue: 25
     },
 
-    //TODO choose a value and delete
+    //TODO #52 choose a value and delete
     // Number of bins for the Speed histogram.
     // For internal use only, not public facing.
     speedBins: {
@@ -103,7 +103,7 @@ define( require => {
       defaultValue: 10
     },
 
-    //TODO choose a value and delete
+    //TODO #52 choose a value and delete
     // Bin width for the Speed histogram, in nm/ps
     // For internal use only, not public facing.
     speedBinWidth: {
@@ -112,7 +112,7 @@ define( require => {
       defaultValue: 0.25
     },
 
-    //TODO choose a value and delete
+    //TODO #52 choose a value and delete
     // Number of bins for the Kinetic Energy histogram.
     // For internal use only, not public facing.
     keBins: {
@@ -121,7 +121,7 @@ define( require => {
       defaultValue: 10
     },
 
-    //TODO choose a value and delete
+    //TODO #52 choose a value and delete
     // Bin width for the Kinetic Energy histogram, in AMU * nm^2 / ps^2
     // For internal use only, not public facing.
     keBinWidth: {
