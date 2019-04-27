@@ -76,7 +76,7 @@ define( require => {
       defaultValue: 50000
     },
 
-    //TODO choose a value and delete
+    //TODO #51 choose a value and delete
     // The sample period for particle flow rate, in ps.
     // For internal use only, not public facing.
     flowRateSamplePeriod: {
@@ -85,7 +85,7 @@ define( require => {
       defaultValue: 1
     },
 
-    //TODO choose a value and delete
+    //TODO #51 choose a value and delete
     // Particle flow rate vector of 1 particle/ps will have a vector (arrow) that is this long.
     // For internal use only, not public facing.
     flowRateScale: {
