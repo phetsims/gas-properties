@@ -15,18 +15,18 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
 
   // constants
-  const X_SPACING = 5;
-  const TAIL_LENGTH_PER_PARTICLE = 20;
-  const REFRESH_INTERVAL = 1; // ps
+  const X_SPACING = 5; // space between the tails of the left and right arrows
+  const SCALE = 20; // arrow length per 1 particle/ps
 
   class ParticleFlowRateNode extends Node {
 
     /**
      * @param {number} dividerX - x coordinate of the container's divider
-     * @param {Particle[]} particles
+     * @param {NumberProperty} leftFlowRateProperty - flow rate to left side of container, in particles/ps
+     * @param {NumberProperty} rightFlowRateProperty - flow rate to right side of container, in particles/ps
      * @param {Object} [options]
      */
-    constructor( dividerX, particles, options ) {
+    constructor( dividerX, leftFlowRateProperty, rightFlowRateProperty, options ) {
 
       options = _.extend( {
         arrowNodeOptions: null // nested options, set below
@@ -40,9 +40,11 @@ define( require => {
         stroke: 'black'
       }, options.arrowNodeOptions );
 
+      const minTailLength = options.arrowNodeOptions.headHeight + 4;
+
       // left and right arrows
-      const leftArrowNode = new ArrowNode( 0, 0, -20, 0, options.arrowNodeOptions );
-      const rightArrowNode = new ArrowNode( 0, 0, 20, 0, options.arrowNodeOptions );
+      const leftArrowNode = new ArrowNode( 0, 0, -minTailLength, 0, options.arrowNodeOptions );
+      const rightArrowNode = new ArrowNode( 0, 0, minTailLength, 0, options.arrowNodeOptions );
 
       // origin is between the tails of the 2 arrows 
       leftArrowNode.x = -X_SPACING / 2;
@@ -55,48 +57,15 @@ define( require => {
 
       super( options );
 
-      // @private
-      this.dividerX = dividerX;
-      this.particles = particles;
-      this.leftArrowNode = leftArrowNode;
-      this.rightArrowNode = rightArrowNode;
-      this.minTailLength = options.arrowNodeOptions.headHeight + 4;
-      this.numberToLeft = 0;
-      this.numberToRight = 0;
-      this.dtAccumulator = 0;
-    }
+      leftFlowRateProperty.link( flowRate => {
+        leftArrowNode.visible = ( flowRate > 0 );
+        leftArrowNode.setTip( -( minTailLength + flowRate * SCALE ), 0 );
+      } );
 
-    /**
-     * Updates the vectors.
-     * @param {number} dt - time delta, in ps
-     * @public
-     */
-    step( dt ) {
-
-      this.dtAccumulator += dt;
-
-      for ( let i = 0; i < this.particles.length; i++ ) {
-        const particle = this.particles[ i ];
-        if ( particle.previousLocation.x <= this.dividerX && particle.location.x > this.dividerX ) {
-          this.numberToRight++;
-        }
-        else if ( particle.previousLocation.x >= this.dividerX && particle.location.x < this.dividerX ) {
-          this.numberToLeft++;
-        }
-      }
-
-      if ( this.dtAccumulator >= REFRESH_INTERVAL ) {
-        
-        this.leftArrowNode.visible = ( this.numberToLeft > 0 );
-        this.leftArrowNode.setTip( -( this.minTailLength + this.numberToLeft * TAIL_LENGTH_PER_PARTICLE ), 0 );
-        this.numberToLeft = 0;
-
-        this.rightArrowNode.visible = ( this.numberToRight > 0 );
-        this.rightArrowNode.setTip( this.minTailLength + this.numberToRight * TAIL_LENGTH_PER_PARTICLE, 0 );
-        this.numberToRight = 0;
-
-        this.dtAccumulator = this.dtAccumulator - REFRESH_INTERVAL; //TODO or just set to zero?
-      }
+      rightFlowRateProperty.link( flowRate => {
+        rightArrowNode.visible = ( flowRate > 0 );
+        rightArrowNode.setTip( minTailLength + flowRate * SCALE, 0 );
+      } );
     }
   }
 

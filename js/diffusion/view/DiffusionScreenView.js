@@ -64,20 +64,22 @@ define( require => {
       } );
 
       // Particle Flow Rate vectors
-      const particleFlowRateNode1 = new ParticleFlowRateNode( model.container.dividerX, model.particles1, {
-        arrowNodeOptions: {
-          fill: GasPropertiesColorProfile.particle1ColorProperty
-        },
-        centerX: containerNode.centerX,
-        top: containerNode.bottom + 25
-      } );
-      const particleFlowRateNode2 = new ParticleFlowRateNode( model.container.dividerX, model.particles2, {
-        arrowNodeOptions: {
-          fill: GasPropertiesColorProfile.particle2ColorProperty
-        },
-        centerX: containerNode.centerX,
-        top: particleFlowRateNode1.bottom + 5
-      } );
+      const particleFlowRateNode1 = new ParticleFlowRateNode( model.container.dividerX,
+        model.leftFlowRate1Property, model.rightFlowRate1Property, {
+          arrowNodeOptions: {
+            fill: GasPropertiesColorProfile.particle1ColorProperty
+          },
+          centerX: containerNode.centerX,
+          top: containerNode.bottom + 25
+        } );
+      const particleFlowRateNode2 = new ParticleFlowRateNode( model.container.dividerX,
+        model.leftFlowRate2Property, model.rightFlowRate2Property, {
+          arrowNodeOptions: {
+            fill: GasPropertiesColorProfile.particle2ColorProperty
+          },
+          centerX: containerNode.centerX,
+          top: particleFlowRateNode1.bottom + 5
+        } );
 
       viewProperties.particleFlowRateVisibleProperty.link( visible => {
         particleFlowRateNode1.visible = visible;
@@ -141,8 +143,6 @@ define( require => {
       this.viewProperties = viewProperties;
       this.regionsNode = regionsNode;
       this.particlesNode = particlesNode;
-      this.particleFlowRateNode1 = particleFlowRateNode1;
-      this.particleFlowRateNode2 = particleFlowRateNode2;
     }
 
     /**
@@ -168,8 +168,6 @@ define( require => {
 
       // step elements that are specific to the view
       this.particlesNode.step( ps );
-      this.particleFlowRateNode1.step( ps );
-      this.particleFlowRateNode2.step( ps );
       this.regionsNode && this.regionsNode.step( ps );
     }
   }

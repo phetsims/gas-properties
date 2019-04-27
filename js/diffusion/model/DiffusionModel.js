@@ -32,6 +32,7 @@ define( require => {
   const AVERAGE_TEMPERATURE_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' )
   };
+  const FLOW_RATE_REFRESH_INTERVAL = 1; // ps
 
   class DiffusionModel extends GasPropertiesModel {
 
@@ -71,6 +72,14 @@ define( require => {
 
       // @public (read-only) center of mass for particles of type DiffusionParticle2
       this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
+
+      // @public flow rates for for particles of type DiffusionParticle1, in particles/ps
+      this.leftFlowRate1Property = new NumberProperty( 0 );
+      this.rightFlowRate1Property = new NumberProperty( 0 );
+
+      // @public flow rates for for particles of type DiffusionParticle2, in particles/ps
+      this.leftFlowRate2Property = new NumberProperty( 0 );
+      this.rightFlowRate2Property = new NumberProperty( 0 );
 
       // @public (read-only) Data for the left half of the container
       this.leftNumberOfParticles1Property = new NumberProperty( 0 );
@@ -123,8 +132,25 @@ define( require => {
           const n2 = this.experiment.initialNumber2Property.value;
           this.experiment.initialNumber2Property.value = 0;
           this.experiment.initialNumber2Property.value = n2;
+
+          // reset fields related to flow rate
+          this.rightFlowRate1Property.reset();
+          this.leftFlowRate2Property.reset();
+          this.rightFlowRate2Property.reset();
+          this.flowRateDtAccumulator = 0;
+          this.numberToLeft1 = 0;
+          this.numberToRight1 = 0;
+          this.numberToLeft2 = 0;
+          this.numberToRight2 = 0;
         }
       } );
+
+      // @private accumulators related to particle flow rates
+      this.flowRateDtAccumulator = 0;
+      this.numberToLeft1 = 0;
+      this.numberToRight1 = 0;
+      this.numberToLeft2 = 0;
+      this.numberToRight2 = 0;
     }
 
     /**
@@ -141,7 +167,11 @@ define( require => {
       // Properties
       this.timescaleProperty.reset();
       this.experiment.reset();
-      // other Properties will be updated when experiment.reset
+      this.leftFlowRate1Property.reset();
+      this.rightFlowRate1Property.reset();
+      this.leftFlowRate2Property.reset();
+      this.rightFlowRate2Property.reset();
+      // other Properties will be updated by experiment.reset
 
       assert && assert( this.particles1.length === 0, 'there should be no DiffusionParticle1 particles' );
       assert && assert( this.particles2.length === 0, 'there should be no DiffusionParticle2 particles' );
@@ -160,11 +190,63 @@ define( require => {
       stepParticles( this.particles1, dt );
       stepParticles( this.particles2, dt );
 
+      if ( !this.container.hasDividerProperty.value ) {
+        this.stepParticleFlowRate( dt );
+      }
+
       // Collision detection and response
       this.collisionDetector.step( dt );
 
       // Update Properties that are based on the current state of the system.
       this.update();
+    }
+
+    /**
+     * Steps aspects of the model that are related to particle flow rate.
+     * @param {number} dt - time delta, in ps
+     * @private
+     */
+    stepParticleFlowRate( dt ) {
+
+      this.flowRateDtAccumulator += dt;
+      const dividerX = this.container.dividerX;
+
+      for ( let i = 0; i < this.particles1.length; i++ ) {
+        const particle = this.particles1[ i ];
+        if ( particle.previousLocation.x >= dividerX && particle.location.x < dividerX ) {
+          this.numberToLeft1++;
+        }
+        else if ( particle.previousLocation.x <= dividerX && particle.location.x > dividerX ) {
+          this.numberToRight1++;
+        }
+      }
+
+      //TODO duplicate of for loop above
+      for ( let i = 0; i < this.particles2.length; i++ ) {
+        const particle = this.particles2[ i ];
+        if ( particle.previousLocation.x >= dividerX && particle.location.x < dividerX ) {
+          this.numberToLeft2++;
+        }
+        else if ( particle.previousLocation.x <= dividerX && particle.location.x > dividerX ) {
+          this.numberToRight2++;
+        }
+      }
+
+      if ( this.flowRateDtAccumulator >= FLOW_RATE_REFRESH_INTERVAL ) {
+
+        // update flow-rate Properties
+        this.leftFlowRate1Property.value = this.numberToLeft1 / this.flowRateDtAccumulator;
+        this.rightFlowRate1Property.value = this.numberToRight1 / this.flowRateDtAccumulator;
+        this.leftFlowRate2Property.value = this.numberToLeft2 / this.flowRateDtAccumulator;
+        this.rightFlowRate2Property.value = this.numberToRight2 / this.flowRateDtAccumulator;
+
+        // zero out accumulators
+        this.flowRateDtAccumulator = 0;
+        this.numberToLeft1 = 0;
+        this.numberToRight1 = 0;
+        this.numberToLeft2 = 0;
+        this.numberToRight2 = 0;
+      }
     }
 
     /**
