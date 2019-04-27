@@ -29,7 +29,7 @@ DESIGN FYI
 * I changed the location of the Return Lid button, because container.left is mutable.
 
 DESIGN QUESTIONS (MODEL)
-* How should things that have a sample period (e.g. flow rate) behave when user is stepping the model view StepButton?
+* How should things that have a sample period (e.g. flow rate) behave when user is stepping the model via StepButton?
 
 DESIGN QUESTIONS (VIEW)
 * Histograms:
