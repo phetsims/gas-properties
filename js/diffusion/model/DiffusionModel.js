@@ -26,6 +26,7 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
+  const NUMBER_OF_PARTICLES_OPTIONS = { numberType: 'Integer' };
   const CENTER_OF_MASS_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' )
   };
@@ -81,14 +82,21 @@ define( require => {
       this.leftFlowRate2Property = new NumberProperty( 0 );
       this.rightFlowRate2Property = new NumberProperty( 0 );
 
+      // @private accumulators related to particle flow rates
+      this.flowRateDtAccumulator = 0;
+      this.numberToLeft1 = 0;
+      this.numberToRight1 = 0;
+      this.numberToLeft2 = 0;
+      this.numberToRight2 = 0;
+
       // @public (read-only) Data for the left half of the container
-      this.leftNumberOfParticles1Property = new NumberProperty( 0 );
-      this.leftNumberOfParticles2Property = new NumberProperty( 0 );
+      this.leftNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
+      this.leftNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
       this.leftAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
 
       // @public (read-only) Data for the right half of the container
-      this.rightNumberOfParticles1Property = new NumberProperty( 0 );
-      this.rightNumberOfParticles2Property = new NumberProperty( 0 );
+      this.rightNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
+      this.rightNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
       this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
 
       // @public (read-only)
@@ -125,6 +133,7 @@ define( require => {
       // When the divider is restored, create a new initial state with same numbers of particles.
       this.container.hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {
+
           const n1 = this.experiment.initialNumber1Property.value;
           this.experiment.initialNumber1Property.value = 0;
           this.experiment.initialNumber1Property.value = n1;
@@ -144,13 +153,6 @@ define( require => {
           this.numberToRight2 = 0;
         }
       } );
-
-      // @private accumulators related to particle flow rates
-      this.flowRateDtAccumulator = 0;
-      this.numberToLeft1 = 0;
-      this.numberToRight1 = 0;
-      this.numberToLeft2 = 0;
-      this.numberToRight2 = 0;
     }
 
     /**
