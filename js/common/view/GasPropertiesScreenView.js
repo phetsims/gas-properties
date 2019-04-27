@@ -81,7 +81,7 @@ define( require => {
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
 
-      //TODO delete this if we choose GasPropertiesQueryParameters.redistribute === 'drag' strategy
+      //TODO #45 delete this if we choose GasPropertiesQueryParameters.redistribute === 'drag' strategy
       // Width of the container when interaction with resize handle started.
       let containerWidth = model.container.widthProperty.value;
 
