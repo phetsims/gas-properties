@@ -49,7 +49,6 @@ define( require => {
       defaultValue: 'end'
     },
 
-    //TODO #44 choose a value and delete
     // Determines how fast particles are heated or cooled. Smaller number is faster.
     // velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
     // For internal use only, not public facing.
