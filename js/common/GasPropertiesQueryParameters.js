@@ -92,6 +92,42 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 25
+    },
+
+    //TODO choose a value and delete
+    // Number of bins for the Speed histogram.
+    // For internal use only, not public facing.
+    speedBins: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 10
+    },
+
+    //TODO choose a value and delete
+    // Bin width for the Speed histogram, in nm/ps
+    // For internal use only, not public facing.
+    speedBinWidth: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 0.25
+    },
+
+    //TODO choose a value and delete
+    // Number of bins for the Kinetic Energy histogram.
+    // For internal use only, not public facing.
+    keBins: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 10
+    },
+
+    //TODO choose a value and delete
+    // Bin width for the Kinetic Energy histogram, in AMU * nm^2 / ps^2
+    // For internal use only, not public facing.
+    keBinWidth: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 1
     }
   } );
 

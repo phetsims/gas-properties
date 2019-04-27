@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
   const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -22,8 +23,8 @@ define( require => {
   const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
 
   // constants
-  const NUMBER_OF_BINS = 10;
-  const BIN_WIDTH = 1; // AMU * nm^2 / ps^2
+  const NUMBER_OF_BINS = GasPropertiesQueryParameters.keBins;
+  const BIN_WIDTH = GasPropertiesQueryParameters.keBinWidth; // AMU * nm^2 / ps^2
 
   class KineticEnergyHistogram extends Histogram {
 
