@@ -13,6 +13,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
@@ -34,7 +35,7 @@ define( require => {
         } );
 
       // @public (read-only) pressure range in kilopascals (kPa)
-      this.pressureRange = new Range( 0, 10000 ); //TODO values
+      this.pressureRange = new Range( 0, GasPropertiesQueryParameters.maxPressure );
 
       // @public {Property.<PressureGauge.Units>} pressure units displayed by the pressure gauge
       this.unitsProperty = new Property( PressureGauge.Units.KILOPASCALS, {
