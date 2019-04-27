@@ -67,7 +67,7 @@ define( require => {
       defaultValue: 0.5
     },
 
-    //TODO choose a value and delete
+    //TODO #50 choose a value and delete
     // Pressure at which the lid blows off of the container, in kPa.
     // For internal use only, not public facing.
     maxPressure: {
