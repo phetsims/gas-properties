@@ -10,10 +10,12 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
 
   // constants
-  const SAMPLE_PERIOD = 1; // Properties are updated with this frequency, in ps
+  // Properties are updated with this frequency, in ps
+  const SAMPLE_PERIOD = GasPropertiesQueryParameters.flowRateSamplePeriod;
 
   class ParticleFlowRate {
 

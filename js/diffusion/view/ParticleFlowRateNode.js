@@ -12,11 +12,12 @@ define( require => {
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   // constants
   const X_SPACING = 5; // space between the tails of the left and right arrows
-  const SCALE = 20; // arrow length per 1 particle/ps
+  const SCALE = GasPropertiesQueryParameters.flowRateScale; // arrow length per 1 particle/ps
 
   class ParticleFlowRateNode extends Node {
 
