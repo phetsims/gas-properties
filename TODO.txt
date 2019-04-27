@@ -4,6 +4,7 @@ UP NEXT
 
 Add species checkboxes to KE histogram?
 
+Combine ParticlesNode and DiffusionParticlesNode
 Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
 Combine ContainerNode and DiffusionContainerNode into 1 class, with optional lid, divider, mutable width
 
