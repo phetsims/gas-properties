@@ -113,7 +113,7 @@ define( require => {
       }
       else {
 
-        // If there is no divider, use bounds for the entire container
+        // If there is no divider, use bounds of the entire container
         for ( let i = 0; i < this.particleArrays.length; i++ ) {
           this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds );
         }
