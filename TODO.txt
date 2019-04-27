@@ -23,7 +23,7 @@ Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 
-Energy: avoid addChild/removeChild in histograms
+Energy: avoid addChild/removeAllChildren in histograms
 
 DESIGN FYI
 * I changed the location of the Return Lid button, because container.left is mutable.
