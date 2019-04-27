@@ -21,12 +21,10 @@ define( require => {
   class ParticleFlowRateNode extends Node {
 
     /**
-     * @param {number} dividerX - x coordinate of the container's divider
-     * @param {NumberProperty} leftFlowRateProperty - flow rate to left side of container, in particles/ps
-     * @param {NumberProperty} rightFlowRateProperty - flow rate to right side of container, in particles/ps
+     * @param {ParticleFlowRate} model
      * @param {Object} [options]
      */
-    constructor( dividerX, leftFlowRateProperty, rightFlowRateProperty, options ) {
+    constructor( model, options ) {
 
       options = _.extend( {
         arrowNodeOptions: null // nested options, set below
@@ -57,12 +55,12 @@ define( require => {
 
       super( options );
 
-      leftFlowRateProperty.link( flowRate => {
+      model.leftFlowRateProperty.link( flowRate => {
         leftArrowNode.visible = ( flowRate > 0 );
         leftArrowNode.setTip( -( minTailLength + flowRate * SCALE ), 0 );
       } );
 
-      rightFlowRateProperty.link( flowRate => {
+      model.rightFlowRateProperty.link( flowRate => {
         rightArrowNode.visible = ( flowRate > 0 );
         rightArrowNode.setTip( minTailLength + flowRate * SCALE, 0 );
       } );

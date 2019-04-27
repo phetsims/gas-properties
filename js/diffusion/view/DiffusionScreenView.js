@@ -64,16 +64,14 @@ define( require => {
       } );
 
       // Particle Flow Rate vectors
-      const particleFlowRateNode1 = new ParticleFlowRateNode( model.container.dividerX,
-        model.leftFlowRate1Property, model.rightFlowRate1Property, {
+      const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleFlowRate1, {
           arrowNodeOptions: {
             fill: GasPropertiesColorProfile.particle1ColorProperty
           },
           centerX: containerNode.centerX,
           top: containerNode.bottom + 25
         } );
-      const particleFlowRateNode2 = new ParticleFlowRateNode( model.container.dividerX,
-        model.leftFlowRate2Property, model.rightFlowRate2Property, {
+      const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRate2, {
           arrowNodeOptions: {
             fill: GasPropertiesColorProfile.particle2ColorProperty
           },

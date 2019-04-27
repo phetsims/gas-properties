@@ -20,6 +20,7 @@ define( require => {
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const Property = require( 'AXON/Property' );
   const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
@@ -33,7 +34,6 @@ define( require => {
   const AVERAGE_TEMPERATURE_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' )
   };
-  const FLOW_RATE_REFRESH_INTERVAL = 1; // ps
 
   class DiffusionModel extends GasPropertiesModel {
 
@@ -74,20 +74,11 @@ define( require => {
       // @public (read-only) center of mass for particles of type DiffusionParticle2
       this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
-      // @public flow rates for for particles of type DiffusionParticle1, in particles/ps
-      this.leftFlowRate1Property = new NumberProperty( 0 );
-      this.rightFlowRate1Property = new NumberProperty( 0 );
+      // @public flow rate model for particles of type DiffusionParticle1
+      this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
 
-      // @public flow rates for for particles of type DiffusionParticle2, in particles/ps
-      this.leftFlowRate2Property = new NumberProperty( 0 );
-      this.rightFlowRate2Property = new NumberProperty( 0 );
-
-      // @private accumulators related to particle flow rates
-      this.flowRateDtAccumulator = 0;
-      this.numberToLeft1 = 0;
-      this.numberToRight1 = 0;
-      this.numberToLeft2 = 0;
-      this.numberToRight2 = 0;
+      // @public flow rate model for particles of type DiffusionParticle2
+      this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2 );
 
       // @public (read-only) Data for the left half of the container
       this.leftNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
@@ -134,23 +125,19 @@ define( require => {
       this.container.hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {
 
-          const n1 = this.experiment.initialNumber1Property.value;
+          // Delete existing DiffusionParticle1 particles, create a new set
+          const initialNumber1 = this.experiment.initialNumber1Property.value;
           this.experiment.initialNumber1Property.value = 0;
-          this.experiment.initialNumber1Property.value = n1;
+          this.experiment.initialNumber1Property.value = initialNumber1;
 
-          const n2 = this.experiment.initialNumber2Property.value;
+          // Delete existing DiffusionParticle2 particles, create a new set
+          const initialNumber2 = this.experiment.initialNumber2Property.value;
           this.experiment.initialNumber2Property.value = 0;
-          this.experiment.initialNumber2Property.value = n2;
+          this.experiment.initialNumber2Property.value = initialNumber2;
 
-          // reset fields related to flow rate
-          this.rightFlowRate1Property.reset();
-          this.leftFlowRate2Property.reset();
-          this.rightFlowRate2Property.reset();
-          this.flowRateDtAccumulator = 0;
-          this.numberToLeft1 = 0;
-          this.numberToRight1 = 0;
-          this.numberToLeft2 = 0;
-          this.numberToRight2 = 0;
+          // Reset flow rate models
+          this.particleFlowRate1.reset();
+          this.particleFlowRate2.reset();
         }
       } );
     }
@@ -169,10 +156,8 @@ define( require => {
       // Properties
       this.timescaleProperty.reset();
       this.experiment.reset();
-      this.leftFlowRate1Property.reset();
-      this.rightFlowRate1Property.reset();
-      this.leftFlowRate2Property.reset();
-      this.rightFlowRate2Property.reset();
+      this.particleFlowRate1.reset();
+      this.particleFlowRate2.reset();
       // other Properties will be updated by experiment.reset
 
       assert && assert( this.particles1.length === 0, 'there should be no DiffusionParticle1 particles' );
@@ -193,7 +178,8 @@ define( require => {
       stepParticles( this.particles2, dt );
 
       if ( !this.container.hasDividerProperty.value ) {
-        this.stepParticleFlowRate( dt );
+        this.particleFlowRate1.step( dt );
+        this.particleFlowRate2.step( dt );
       }
 
       // Collision detection and response
@@ -201,54 +187,6 @@ define( require => {
 
       // Update Properties that are based on the current state of the system.
       this.update();
-    }
-
-    /**
-     * Steps aspects of the model that are related to particle flow rate.
-     * @param {number} dt - time delta, in ps
-     * @private
-     */
-    stepParticleFlowRate( dt ) {
-
-      this.flowRateDtAccumulator += dt;
-      const dividerX = this.container.dividerX;
-
-      for ( let i = 0; i < this.particles1.length; i++ ) {
-        const particle = this.particles1[ i ];
-        if ( particle.previousLocation.x >= dividerX && particle.location.x < dividerX ) {
-          this.numberToLeft1++;
-        }
-        else if ( particle.previousLocation.x <= dividerX && particle.location.x > dividerX ) {
-          this.numberToRight1++;
-        }
-      }
-
-      //TODO duplicate of for loop above
-      for ( let i = 0; i < this.particles2.length; i++ ) {
-        const particle = this.particles2[ i ];
-        if ( particle.previousLocation.x >= dividerX && particle.location.x < dividerX ) {
-          this.numberToLeft2++;
-        }
-        else if ( particle.previousLocation.x <= dividerX && particle.location.x > dividerX ) {
-          this.numberToRight2++;
-        }
-      }
-
-      if ( this.flowRateDtAccumulator >= FLOW_RATE_REFRESH_INTERVAL ) {
-
-        // update flow-rate Properties
-        this.leftFlowRate1Property.value = this.numberToLeft1 / this.flowRateDtAccumulator;
-        this.rightFlowRate1Property.value = this.numberToRight1 / this.flowRateDtAccumulator;
-        this.leftFlowRate2Property.value = this.numberToLeft2 / this.flowRateDtAccumulator;
-        this.rightFlowRate2Property.value = this.numberToRight2 / this.flowRateDtAccumulator;
-
-        // zero out accumulators
-        this.flowRateDtAccumulator = 0;
-        this.numberToLeft1 = 0;
-        this.numberToRight1 = 0;
-        this.numberToLeft2 = 0;
-        this.numberToRight2 = 0;
-      }
     }
 
     /**
