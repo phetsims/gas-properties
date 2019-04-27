@@ -2,8 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Add species checkboxes to KE histogram?
-
 Combine ParticlesNode and DiffusionParticlesNode
 Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
 Combine ContainerNode and DiffusionContainerNode into 1 class, with optional lid, divider, mutable width
@@ -18,7 +16,6 @@ Intro: hold constant
 - Pressure T: change N or V => change T
 - Pressure V: change N or T => change V
 
-Intro: clean up particle arrays in IdealModel
 Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
