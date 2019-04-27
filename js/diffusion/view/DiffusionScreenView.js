@@ -20,7 +20,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const ParticleFlowRatesNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRatesNode' );
+  const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -64,14 +64,24 @@ define( require => {
       } );
 
       // Particle Flow Rate vectors
-      const particleFlowRatesNode = new ParticleFlowRatesNode( model.container.dividerX,
-        model.particles1, model.particles2, {
-          centerX: containerNode.centerX,
-          top: containerNode.bottom + 25
-        } );
+      const particleFlowRateNode1 = new ParticleFlowRateNode( model.container.dividerX, model.particles1, {
+        arrowNodeOptions: {
+          fill: GasPropertiesColorProfile.particle1ColorProperty
+        },
+        centerX: containerNode.centerX,
+        top: containerNode.bottom + 25
+      } );
+      const particleFlowRateNode2 = new ParticleFlowRateNode( model.container.dividerX, model.particles2, {
+        arrowNodeOptions: {
+          fill: GasPropertiesColorProfile.particle2ColorProperty
+        },
+        centerX: containerNode.centerX,
+        top: particleFlowRateNode1.bottom + 5
+      } );
 
       viewProperties.particleFlowRateVisibleProperty.link( visible => {
-        particleFlowRatesNode.visible = visible;
+        particleFlowRateNode1.visible = visible;
+        particleFlowRateNode2.visible = visible;
       } );
 
       // Data accordion box
@@ -119,7 +129,8 @@ define( require => {
       this.addChild( containerNode );
       this.addChild( centerOfMassNode1 );
       this.addChild( centerOfMassNode2 );
-      this.addChild( particleFlowRatesNode );
+      this.addChild( particleFlowRateNode1 );
+      this.addChild( particleFlowRateNode2 );
       this.addChild( timeControls );
       this.addChild( particlesNode );
       this.addChild( resetAllButton );
@@ -127,10 +138,11 @@ define( require => {
 
       // @private
       this.model = model;
+      this.viewProperties = viewProperties;
       this.regionsNode = regionsNode;
       this.particlesNode = particlesNode;
-      this.particleFlowRatesNode = particleFlowRatesNode;
-      this.viewProperties = viewProperties;
+      this.particleFlowRateNode1 = particleFlowRateNode1;
+      this.particleFlowRateNode2 = particleFlowRateNode2;
     }
 
     /**
@@ -156,7 +168,8 @@ define( require => {
 
       // step elements that are specific to the view
       this.particlesNode.step( ps );
-      this.particleFlowRatesNode.step( ps );
+      this.particleFlowRateNode1.step( ps );
+      this.particleFlowRateNode2.step( ps );
       this.regionsNode && this.regionsNode.step( ps );
     }
   }
