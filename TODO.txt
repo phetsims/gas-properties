@@ -32,11 +32,6 @@ DESIGN QUESTIONS (MODEL)
 * How should things that have a sample period (e.g. flow rate) behave when user is stepping the model via StepButton?
 
 DESIGN QUESTIONS (VIEW)
-* Histograms:
-  - x-out-of-range indicator
-  - when to adjust maxY
-  - smoothing
-  - bin sizes and number of bins
 
 REFERENCES
 Is this a better collision model?
