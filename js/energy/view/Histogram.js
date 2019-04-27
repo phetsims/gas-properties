@@ -20,6 +20,9 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
 
+  // constants
+  const ELLIPSIS_STRING = '\u2022\u2022\u2022'; // ...
+
   class Histogram extends Node {
 
     /**
@@ -207,7 +210,7 @@ define( require => {
         //TODO there should be one indicator, not one per data set
         const outOfRangeValues = _.filter( dataSet.values, value => ( value > maxX ) );
         if ( outOfRangeValues.length > 0 ) {
-          this.plotNodesParent.addChild( new Text( '\u2022\u2022\u2022', {
+          this.plotNodesParent.addChild( new Text( ELLIPSIS_STRING, {
             font: new PhetFont( 14 ),
             fill: dataSet.color,
 
