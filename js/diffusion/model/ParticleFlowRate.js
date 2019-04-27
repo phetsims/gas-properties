@@ -33,7 +33,7 @@ define( require => {
       this.rightFlowRateProperty = new NumberProperty( 0 );
 
       // @private accumulators
-      this.flowRateDtAccumulator = 0;
+      this.dtAccumulator = 0;
       this.numberToLeft = 0;
       this.numberToRight = 0;
     }
@@ -47,7 +47,7 @@ define( require => {
 
     // @private
     resetAccumulators() {
-      this.flowRateDtAccumulator = 0;
+      this.dtAccumulator = 0;
       this.numberToLeft = 0;
       this.numberToRight = 0;
     }
@@ -69,13 +69,13 @@ define( require => {
         }
       }
 
-      this.flowRateDtAccumulator += dt;
+      this.dtAccumulator += dt;
 
-      if ( this.flowRateDtAccumulator >= SAMPLE_PERIOD ) {
+      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
         // update flow-rate Properties
-        this.leftFlowRateProperty.value = this.numberToLeft / this.flowRateDtAccumulator;
-        this.rightFlowRateProperty.value = this.numberToRight / this.flowRateDtAccumulator;
+        this.leftFlowRateProperty.value = this.numberToLeft / this.dtAccumulator;
+        this.rightFlowRateProperty.value = this.numberToRight / this.dtAccumulator;
 
         this.resetAccumulators();
       }

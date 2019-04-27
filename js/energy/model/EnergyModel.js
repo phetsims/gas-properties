@@ -19,8 +19,7 @@ define( require => {
   const AVERAGE_SPEED_PROPERTY_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' )
   };
-  // average speed computation is averaged over this time window
-  const AVERAGE_SPEED_SMOOTHING_INTERVAL = GasPropertiesQueryParameters.averageSpeedSmoothingInterval; // ps
+  const SAMPLE_PERIOD = GasPropertiesQueryParameters.averageSpeedSamplePeriod; // ps
 
   class EnergyModel extends IdealModel {
 
@@ -41,8 +40,8 @@ define( require => {
       this.lightAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
 
       // @private used internally to smooth the average speed computation
+      this.dtAccumulator = 0; // accumulated dts while samples were taken
       this.numberOfAverageSpeedSamples = 0; // number of samples we've taken
-      this.averageSpeedSmoothingTime = 0; // accumulated dts while samples were taken
       this.heavyAverageSpeedSum = 0; // sum of samples for heavy particles
       this.lightAverageSpeedSum = 0; // sum of samples for light particles
     }
@@ -53,8 +52,17 @@ define( require => {
      * @override
      */
     reset() {
+
+      // Properties
       this.heavyAverageSpeedProperty.reset();
       this.lightAverageSpeedProperty.reset();
+
+      // accumulators
+      this.dtAccumulator = 0;
+      this.numberOfAverageSpeedSamples = 0;
+      this.heavyAverageSpeedSum = 0;
+      this.lightAverageSpeedSum = 0;
+
       super.reset();
     }
 
@@ -72,19 +80,22 @@ define( require => {
       this.heavyAverageSpeedSum += getAverageSpeed( this.heavyParticles );
       this.lightAverageSpeedSum += getAverageSpeed( this.lightParticles );
       this.numberOfAverageSpeedSamples++;
-      this.averageSpeedSmoothingTime += dt;
-      if ( this.averageSpeedSmoothingTime >= AVERAGE_SPEED_SMOOTHING_INTERVAL ) {
+
+      this.dtAccumulator += dt;
+
+      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
         // update the average speed Properties
         this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
         this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
 
         // reset the smoothing variables
+        this.dtAccumulator = 0;
         this.numberOfAverageSpeedSamples = 0;
-        this.averageSpeedSmoothingTime = 0;
         this.heavyAverageSpeedSum = 0;
         this.lightAverageSpeedSum = 0;
       }
+
       if ( this.heavyParticles.length === 0 ) {
         this.heavyAverageSpeedProperty.value = null;
       }

@@ -59,9 +59,9 @@ define( require => {
     },
 
     //TODO #49 choose a value and delete
-    // Average Speed is smoothed over this interval, in ps
+    // The sample period for Average Speed, in ps
     // For internal use only, not public facing.
-    averageSpeedSmoothingInterval: {
+    averageSpeedSamplePeriod: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 0.5
