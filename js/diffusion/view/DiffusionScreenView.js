@@ -126,13 +126,13 @@ define( require => {
       regionsNode && this.addChild( regionsNode );
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
+      this.addChild( timeControls );
       this.addChild( containerNode );
+      this.addChild( particlesNode );
       this.addChild( centerOfMassNode1 );
       this.addChild( centerOfMassNode2 );
       this.addChild( particleFlowRateNode1 );
       this.addChild( particleFlowRateNode2 );
-      this.addChild( timeControls );
-      this.addChild( particlesNode );
       this.addChild( resetAllButton );
       this.addChild( stopwatchNode );
 
