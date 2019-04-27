@@ -5,8 +5,6 @@ UP NEXT
 Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
 Combine ContainerNode and DiffusionContainerNode into 1 class, with optional lid, divider, mutable width
 
-Diffusion: Particle Flow Rate vectors
-
 Intro: zero pressure until one particle collides with container
 Intro: add jitter to pressure gauge
 
