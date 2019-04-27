@@ -16,7 +16,8 @@ define( require => {
 
   // constants
   const X_SPACING = 5;
-  const TAIL_LENGTH_PER_PARTICLE = 10;
+  const TAIL_LENGTH_PER_PARTICLE = 20;
+  const REFRESH_INTERVAL = 1; // ps
 
   class ParticleFlowRateNode extends Node {
 
@@ -60,6 +61,9 @@ define( require => {
       this.leftArrowNode = leftArrowNode;
       this.rightArrowNode = rightArrowNode;
       this.minTailLength = options.arrowNodeOptions.headHeight + 4;
+      this.numberToLeft = 0;
+      this.numberToRight = 0;
+      this.dtAccumulator = 0;
     }
 
     /**
@@ -69,24 +73,30 @@ define( require => {
      */
     step( dt ) {
 
-      let numberToLeft = 0;
-      let numberToRight = 0;
+      this.dtAccumulator += dt;
 
       for ( let i = 0; i < this.particles.length; i++ ) {
         const particle = this.particles[ i ];
         if ( particle.previousLocation.x <= this.dividerX && particle.location.x > this.dividerX ) {
-          numberToRight++;
+          this.numberToRight++;
         }
         else if ( particle.previousLocation.x >= this.dividerX && particle.location.x < this.dividerX ) {
-          numberToLeft++;
+          this.numberToLeft++;
         }
       }
 
-      this.leftArrowNode.visible = ( numberToLeft > 0 );
-      this.leftArrowNode.setTip( -( this.minTailLength + numberToLeft * TAIL_LENGTH_PER_PARTICLE ), 0 );
+      if ( this.dtAccumulator >= REFRESH_INTERVAL ) {
+        
+        this.leftArrowNode.visible = ( this.numberToLeft > 0 );
+        this.leftArrowNode.setTip( -( this.minTailLength + this.numberToLeft * TAIL_LENGTH_PER_PARTICLE ), 0 );
+        this.numberToLeft = 0;
 
-      this.rightArrowNode.visible = ( numberToRight > 0 );
-      this.rightArrowNode.setTip( this.minTailLength + numberToRight * TAIL_LENGTH_PER_PARTICLE, 0 );
+        this.rightArrowNode.visible = ( this.numberToRight > 0 );
+        this.rightArrowNode.setTip( this.minTailLength + this.numberToRight * TAIL_LENGTH_PER_PARTICLE, 0 );
+        this.numberToRight = 0;
+
+        this.dtAccumulator = this.dtAccumulator - REFRESH_INTERVAL; //TODO or just set to zero?
+      }
     }
   }
 
