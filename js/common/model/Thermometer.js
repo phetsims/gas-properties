@@ -34,6 +34,7 @@ define( require => {
       this.range = options.range;
 
       // @public temperature in the container, in K
+      // Value is null when the container is empty.
       this.temperatureKelvinProperty = temperatureKelvinProperty;
 
       // @public {Property.<number|null>} temperature in the container, in Celsius.

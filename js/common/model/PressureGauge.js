@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model of the pressure gauge
+ * Model of the pressure gauge.  Adds a bit of jitter to make the gauge look more realistic.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -19,15 +19,28 @@ define( require => {
 
   class PressureGauge {
 
-    constructor( pressureKilopascalsProperty ) {
+    /**
+     * @param {Property.<number|null>} pressureKilopascalsProperty - pressure in the container, in kPa
+     * @param {NumberProperty} totalParticlesProperty - total number of particles in the container
+     * @param {number} maxParticles - maximum number of particles in the container
+     */
+    constructor( pressureKilopascalsProperty, totalParticlesProperty, maxParticles ) {
 
-      // @public pressure in kilopascals (kPa)
-      this.pressureKilopascalsProperty = pressureKilopascalsProperty;
+      // @public pressure in kilopascals (kPa) with jitter added
+      this.pressureKilopascalsProperty = new DerivedProperty( [ pressureKilopascalsProperty, totalParticlesProperty ],
+        ( pressureKilopascals, totalParticles ) => {
+          if ( totalParticles === 0 ) {
+            return pressureKilopascals;
+          }
+          else {
+            return pressureKilopascals; //TODO #50 add jitter here, more jitter with fewer particles
+          }
+        } );
 
-      // @public pressure in atmospheres (atm)
+      // @public pressure in atmospheres (atm) with jitter added
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
         pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
-        units: 'atm'
+          units: 'atm'
         } );
 
       // @public (read-only) pressure range in kilopascals (kPa)
@@ -41,7 +54,6 @@ define( require => {
 
     // @public
     reset() {
-      this.pressureKilopascalsProperty.reset();
       this.unitsProperty.reset();
     }
   }
