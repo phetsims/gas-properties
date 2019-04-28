@@ -130,7 +130,7 @@ define( require => {
       defaultValue: 1
     },
     
-    //TODO choose a value and delete
+    //TODO #50 choose a value and delete
     // Depth of the container, in nm
     // For internal use only, not public facing.
     containerDepth: {
