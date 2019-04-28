@@ -108,8 +108,14 @@ define( require => {
       // @public (read-only)
       this.thermometer = new Thermometer( this.temperatureProperty );
 
+      // @public pressure in the container, in kPa
+      this.pressureProperty = new NumberProperty( 0, {
+        isValidValue: value => ( value >= 0 ),
+        units: 'kPa'
+      } );
+
       // @public (read-only)
-      this.pressureGauge = new PressureGauge();
+      this.pressureGauge = new PressureGauge( this.pressureProperty );
 
       // @public (read-only)
       this.collisionCounter = null;
@@ -302,10 +308,10 @@ define( require => {
       this.temperatureProperty.value = this.computeTemperature();
 
       // Compute pressure
-      this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
+      this.pressureProperty.value = this.computePressure();
 
       // If pressure exceeds the maximum, blow the lid off of the container.
-      if ( this.pressureGauge.pressureKilopascalsProperty.value > GasPropertiesQueryParameters.maxPressure ) {
+      if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
         this.container.lidIsOnProperty.value = false;
       }
     }

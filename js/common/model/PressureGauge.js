@@ -14,19 +14,15 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
 
   class PressureGauge {
 
-    constructor() {
+    constructor( pressureKilopascalsProperty ) {
 
       // @public pressure in kilopascals (kPa)
-      this.pressureKilopascalsProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 ),
-        units: 'kPa'
-      } );
+      this.pressureKilopascalsProperty = pressureKilopascalsProperty;
 
       // @public pressure in atmospheres (atm)
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
