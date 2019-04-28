@@ -2,13 +2,12 @@ TODO list for gas-properties
 
 UP NEXT
 
-containerDepth query parameter
+Intro: add jitter to pressure gauge - ask AP what he had in mind
+Intro: zero pressure until one particle collides with container
+
 Combine ParticlesNode and DiffusionParticlesNode
 Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
 Combine ContainerNode and DiffusionContainerNode into 1 class, with optional lid, divider, mutable width
-
-Intro: zero pressure until one particle collides with container
-Intro: add jitter to pressure gauge
 
 Intro: hold constant
 - None: change N, T, or V => change P
