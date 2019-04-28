@@ -13,6 +13,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Range = require( 'DOT/Range' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -30,7 +31,7 @@ define( require => {
       // @public (read-only) inside dimensions, in nm
       this.width = 15;
       this.height = 8.75;
-      this.depth = 1;
+      this.depth = GasPropertiesQueryParameters.containerDepth;
       this.volume = this.width * this.height * this.depth;
 
       // @public (read-only) wall thickness, in nm

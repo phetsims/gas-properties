@@ -128,6 +128,15 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 1
+    },
+    
+    //TODO choose a value and delete
+    // Depth of the container, in nm
+    // For internal use only, not public facing.
+    containerDepth: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 1
     }
   } );
 
