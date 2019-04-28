@@ -100,13 +100,13 @@ define( require => {
       } );
 
       // @public temperature in the container, in K.  Value is null when the container is empty.
-      this.temperatureKelvinProperty = new Property( null, {
+      this.temperatureProperty = new Property( null, {
         isValidValue: value => ( value === null || typeof value === 'number' ),
         units: 'K'
       } );
 
       // @public (read-only)
-      this.thermometer = new Thermometer( this.temperatureKelvinProperty );
+      this.thermometer = new Thermometer( this.temperatureProperty );
 
       // @public (read-only)
       this.pressureGauge = new PressureGauge();
@@ -167,7 +167,7 @@ define( require => {
       else if ( this.heavyParticles.length + this.lightParticles.length > 0 ) {
 
         // Current temperature in the non-empty container
-        meanTemperature = this.temperatureKelvinProperty.value;
+        meanTemperature = this.temperatureProperty.value;
       }
 
       // Create a set of temperature values that will be used to compute initial speed.
@@ -242,7 +242,7 @@ define( require => {
       this.collisionDetector.reset();
 
       // Properties
-      this.temperatureKelvinProperty.reset();
+      this.temperatureProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset(); // clears this.heavyParticles
       this.numberOfLightParticlesProperty.reset(); // clears this.lightParticles
@@ -299,7 +299,7 @@ define( require => {
       this.collisionCounter && this.collisionCounter.step( dt );
 
       // Compute temperature. Do this before pressure, because pressure depends on temperature.
-      this.temperatureKelvinProperty.value = this.computeTemperature();
+      this.temperatureProperty.value = this.computeTemperature();
 
       // Compute pressure
       this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
@@ -348,7 +348,7 @@ define( require => {
 
       const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;  // N
       const k = GasPropertiesConstants.BOLTZMANN; // k, in (nm^2 * AMU)/(ps^2 * K)
-      const temperature = this.temperatureKelvinProperty.value; // T, in K
+      const temperature = this.temperatureProperty.value; // T, in K
       const volume = this.container.volume; // V, in nm^3
 
       // P = NkT/V, converted to kPa
