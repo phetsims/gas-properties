@@ -25,6 +25,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
@@ -98,8 +99,14 @@ define( require => {
         range: new Range( -1, 1 )
       } );
 
+      // @public temperature in the container, in K.  Value is null when the container is empty.
+      this.temperatureKelvinProperty = new Property( null, {
+        isValidValue: value => ( value === null || typeof value === 'number' ),
+        units: 'K'
+      } );
+
       // @public (read-only)
-      this.thermometer = new Thermometer();
+      this.thermometer = new Thermometer( this.temperatureKelvinProperty );
 
       // @public (read-only)
       this.pressureGauge = new PressureGauge();
@@ -160,7 +167,7 @@ define( require => {
       else if ( this.heavyParticles.length + this.lightParticles.length > 0 ) {
 
         // Current temperature in the non-empty container
-        meanTemperature = this.thermometer.temperatureKelvinProperty.value;
+        meanTemperature = this.temperatureKelvinProperty.value;
       }
 
       // Create a set of temperature values that will be used to compute initial speed.
@@ -231,11 +238,11 @@ define( require => {
       // model elements
       this.container.reset();
       this.collisionCounter && this.collisionCounter.reset();
-      this.thermometer.reset();
       this.pressureGauge.reset();
       this.collisionDetector.reset();
 
       // Properties
+      this.temperatureKelvinProperty.reset();
       this.holdConstantProperty.reset();
       this.numberOfHeavyParticlesProperty.reset(); // clears this.heavyParticles
       this.numberOfLightParticlesProperty.reset(); // clears this.lightParticles
@@ -292,7 +299,7 @@ define( require => {
       this.collisionCounter && this.collisionCounter.step( dt );
 
       // Compute temperature. Do this before pressure, because pressure depends on temperature.
-      this.thermometer.temperatureKelvinProperty.value = this.computeTemperature();
+      this.temperatureKelvinProperty.value = this.computeTemperature();
 
       // Compute pressure
       this.pressureGauge.pressureKilopascalsProperty.value = this.computePressure();
@@ -341,7 +348,7 @@ define( require => {
 
       const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;  // N
       const k = GasPropertiesConstants.BOLTZMANN; // k, in (nm^2 * AMU)/(ps^2 * K)
-      const temperature = this.thermometer.temperatureKelvinProperty.value; // T, in K
+      const temperature = this.temperatureKelvinProperty.value; // T, in K
       const volume = this.container.volume; // V, in nm^3
 
       // P = NkT/V, converted to kPa

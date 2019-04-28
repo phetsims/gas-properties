@@ -21,9 +21,10 @@ define( require => {
   class Thermometer {
 
     /**
+     * @param {Property.<number|null>} temperatureKelvinProperty - temperature in the container, in K
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( temperatureKelvinProperty, options ) {
 
       options = _.extend( {
         range: DEFAULT_RANGE
@@ -32,17 +33,14 @@ define( require => {
       // @public {Range} range of thermometer, in K. temperatureProperty is expected to exceed this.
       this.range = options.range;
 
-      // @public {Property.<number|null>} the temperature in the container, in Kelvin.
-      // Value is null when the container is empty.
-      this.temperatureKelvinProperty = new Property( null, {
-        isValidValue: value => ( value === null || typeof value === 'number' )
-      } );
+      // @public temperature in the container, in K
+      this.temperatureKelvinProperty = temperatureKelvinProperty;
 
       // @public {Property.<number|null>} temperature in the container, in Celsius.
       // Value is null when the container is empty.
       this.temperatureCelsiusProperty = new DerivedProperty( [ this.temperatureKelvinProperty ],
         temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15, {
-        units: 'degrees Celsius'
+        units: '\u00B0C'
         } );
 
       // @public {Property.<Thermometer.Units>} temperature units displayed by the thermometer
@@ -53,7 +51,6 @@ define( require => {
 
     // @public
     reset() {
-      this.temperatureKelvinProperty.reset();
       this.unitsProperty.reset();
     }
   }
