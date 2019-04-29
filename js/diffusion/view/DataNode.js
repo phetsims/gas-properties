@@ -43,15 +43,17 @@ define( require => {
       }, options );
 
       const numberDisplayOptions = {
-        align: 'left',
+        align: 'right',
         numberFill: GasPropertiesColorProfile.textFillProperty,
+        font: GasPropertiesConstants.CONTROL_FONT,
         backgroundFill: null,
         backgroundStroke: null,
-        font: GasPropertiesConstants.CONTROL_FONT
+        xMargin: 0,
+        yMargin: 0
       };
 
       const particle1CountNode = new HBox( {
-        spacing: 5,
+        spacing: 3,
         children: [
           GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform ),
           new NumberDisplay( numberOfParticles1Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
@@ -59,7 +61,7 @@ define( require => {
       } );
 
       const particle2CountNode = new HBox( {
-        spacing: 5,
+        spacing: 3,
         children: [
           GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform ),
           new NumberDisplay( numberOfParticles2Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
@@ -68,6 +70,7 @@ define( require => {
 
       const averageTemperatureNode = new NumberDisplay( averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
         _.extend( {}, numberDisplayOptions, {
+          align: 'left',
           valuePattern: tAvgKString,
           noValuePattern: tAvgString,
           useRichText: true
