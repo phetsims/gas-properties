@@ -12,8 +12,13 @@ define( require => {
   const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const PlayIconShape = require( 'SCENERY_PHET/PlayIconShape' );
   const UTurnArrowShape = require( 'SCENERY_PHET/UTurnArrowShape' );
+
+  // constants
+  const PLAY_COLOR = 'rgb( 0, 179, 0 )';
+  const RESET_COLOR = PhetColorScheme.RED_COLORBLIND;
 
   class PlayResetButton extends BooleanRectangularToggleButton {
 
@@ -38,6 +43,10 @@ define( require => {
       } );
 
       super( resetIconNode, playIconNode, isPlayingProperty, options );
+
+      isPlayingProperty.link( isPlaying => {
+        this.setBaseColor( isPlaying ? RESET_COLOR : PLAY_COLOR );
+      } );
     }
   }
 
