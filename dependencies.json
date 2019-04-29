@@ -1,11 +1,11 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.12 Fri Apr 26 2019 20:35:58 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.13 Mon Apr 29 2019 14:57:49 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
   },
   "axon": {
-    "sha": "3e02ed9e1acde64cdc0c2e022832d0c28f5992b0",
+    "sha": "592e555a231db4950387ee86cf23acdd574a8eb3",
     "branch": "master"
   },
   "brand": {
@@ -17,11 +17,11 @@
     "branch": "master"
   },
   "dot": {
-    "sha": "3720766c753e975a489389a38103ceda4310e869",
+    "sha": "edad94cd273f5de17d751aa69752d319761b2d9e",
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "fb420da5baebacdfb8e730433af85add01183494",
+    "sha": "34b62f152edf48bbf958ed2eaa578cb91ad7c7db",
     "branch": "master"
   },
   "joist": {
@@ -53,7 +53,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "290069e1e34cf535a15aaea05ae6672f80e60964",
+    "sha": "25ff7bbc46f0aa7691f52ddb729cd1686e05544a",
     "branch": "master"
   },
   "phetcommon": {
