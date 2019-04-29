@@ -44,19 +44,16 @@ define( require => {
 
       assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );
 
-      options = _.extend( {
+      options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         fixedWidth: 100,
 
         // AccordionBox options
-        buttonXMargin: 0,
-        titleXSpacing: 0,
-        contentXMargin: 0,
         titleNode: new Text( particleToolsString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         } )
-      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
+      }, options );
 
       // Limit width of title
       options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;

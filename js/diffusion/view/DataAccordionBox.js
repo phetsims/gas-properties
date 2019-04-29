@@ -29,20 +29,17 @@ define( require => {
      */
     constructor( model, options ) {
 
-      options = _.extend( {
+      options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         fixedWidth: 100,
 
         // AccordionBox options
-        buttonXMargin: 0,
-        titleXSpacing: 0,
-        contentXMargin: 0,
         titleNode: new Text( dataString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         } )
 
-      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, options );
+      }, options );
 
       const leftDataNode = new DataNode(
         model.modelViewTransform,
