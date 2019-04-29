@@ -16,14 +16,15 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
   const ParticleToolsAccordionBox = require( 'GAS_PROPERTIES/energy/view/ParticleToolsAccordionBox' );
   const SpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/SpeedAccordionBox' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
   const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
   const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
+  const VBOX_SPACING = 10;
 
   class EnergyScreenView extends GasPropertiesScreenView {
 
@@ -41,34 +42,38 @@ define( require => {
       const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
         model.heavyAverageSpeedProperty, model.lightAverageSpeedProperty, model.modelViewTransform, {
           expandedProperty: viewProperties.averageSpeedExpandedProperty,
-          fixedWidth: LEFT_PANEL_WIDTH,
-          left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: 10
+          fixedWidth: LEFT_PANEL_WIDTH
         } );
 
       // Speed accordion box with histogram and related controls
       const speedAccordionBox = new SpeedAccordionBox( model, {
-        fixedWidth: LEFT_PANEL_WIDTH,
         expandedProperty: viewProperties.speedExpandedProperty,
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: averageSpeedAccordionBox.bottom + 10
+        fixedWidth: LEFT_PANEL_WIDTH
       } );
 
       // Kinetic Energy accordion box with histogram
       const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
-        fixedWidth: LEFT_PANEL_WIDTH,
         expandedProperty: viewProperties.kineticEnergyExpandedProperty,
-        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: speedAccordionBox.bottom + 10
+        fixedWidth: LEFT_PANEL_WIDTH
       } );
 
-      // Panel at upper right
+      // Panels on the left side of the screen
+      const leftPanels = new VBox( {
+        children: [
+          averageSpeedAccordionBox,
+          speedAccordionBox,
+          kineticEnergyAccordionBox
+        ],
+        spacing: VBOX_SPACING,
+        top: GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+        left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN
+      } );
+
+      // Tools panel
       const toolsPanel = new EnergyToolsPanel(
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty, {
-          fixedWidth: RIGHT_PANEL_WIDTH,
-          right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+          fixedWidth: RIGHT_PANEL_WIDTH
         } );
 
       // Particle Tools accordion box
@@ -76,10 +81,8 @@ define( require => {
         model.collisionDetector.particleParticleCollisionsEnabledProperty,
         model.controlTemperatureEnabledProperty,
         model.initialTemperatureProperty, {
-          fixedWidth: RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleToolsExpandedProperty,
-          right: toolsPanel.right,
-          top: toolsPanel.bottom + 15
+          fixedWidth: RIGHT_PANEL_WIDTH
         }
       );
 
@@ -88,22 +91,25 @@ define( require => {
         model.numberOfHeavyParticlesProperty,
         model.numberOfLightParticlesProperty,
         model.modelViewTransform, {
-          fixedWidth: RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
-          right: particleToolsAccordionBox.right,
-          top: particleToolsAccordionBox.bottom + 15
+          fixedWidth: RIGHT_PANEL_WIDTH
         } );
 
-      // Rendering order. Everything we add should be behind what is created by super.
-      const parent = new Node();
-      parent.addChild( averageSpeedAccordionBox );
-      parent.addChild( speedAccordionBox );
-      parent.addChild( kineticEnergyAccordionBox );
-      parent.addChild( toolsPanel );
-      parent.addChild( particleToolsAccordionBox );
-      parent.addChild( particleCountsAccordionBox );
-      this.addChild( parent );
-      parent.moveToBack();
+      // Panels on the right side of the screen
+      const rightPanels = new VBox( {
+        children: [
+          toolsPanel,
+          particleToolsAccordionBox,
+          particleCountsAccordionBox
+        ],
+        spacing: VBOX_SPACING,
+        right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+
+      // Rendering order
+      this.addChild( leftPanels );
+      this.addChild( rightPanels );
 
       // @private used in methods
       this.viewProperties = viewProperties;

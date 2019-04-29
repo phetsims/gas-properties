@@ -42,6 +42,7 @@ define( require => {
         buttonXMargin: 0,
         titleXSpacing: 0,
         contentXMargin: 0,
+        contentYSpacing: 0,
         titleNode: new Text( kineticEnergyString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
