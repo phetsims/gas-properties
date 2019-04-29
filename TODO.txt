@@ -24,8 +24,8 @@ Explore: moving wall does not pause animation and does work on particles, do not
 Energy: avoid addChild/removeAllChildren in Histogram
 
 DESIGN QUESTIONS (MODEL)
-**** What is the model for work done on particles by moving wall?
-  https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
+Work done on particles by moving wall, see:
+https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
 
 DESIGN QUESTIONS (VIEW)
 
