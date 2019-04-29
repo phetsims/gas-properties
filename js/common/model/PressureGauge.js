@@ -14,28 +14,27 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
+
+  // constants
+  const SAMPLE_PERIOD = 0.25; // ps
+  const MAX_JITTER = 50; // maximum amount of jitter that will be added, in kPa
 
   class PressureGauge {
 
     /**
-     * @param {Property.<number|null>} pressureKilopascalsProperty - pressure in the container, in kPa
+     * @param {Property.<number|null>} pressureProperty - pressure in the container, in kPa
      * @param {NumberProperty} totalParticlesProperty - total number of particles in the container
      * @param {number} maxParticles - maximum number of particles in the container
      */
-    constructor( pressureKilopascalsProperty, totalParticlesProperty, maxParticles ) {
+    constructor( pressureProperty, totalParticlesProperty, maxParticles ) {
 
       // @public pressure in kilopascals (kPa) with jitter added
-      this.pressureKilopascalsProperty = new DerivedProperty( [ pressureKilopascalsProperty, totalParticlesProperty ],
-        ( pressureKilopascals, totalParticles ) => {
-          if ( totalParticles === 0 ) {
-            return pressureKilopascals;
-          }
-          else {
-            return pressureKilopascals; //TODO #50 add jitter here, more jitter with fewer particles
-          }
-        } );
+      this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
+        units: 'kPa'
+      } );
 
       // @public pressure in atmospheres (atm) with jitter added
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
@@ -50,11 +49,37 @@ define( require => {
       this.unitsProperty = new Property( PressureGauge.Units.KILOPASCALS, {
         isValidValue: value => PressureGauge.Units.includes( value )
       } );
+
+      // @private
+      this.pressureProperty = pressureProperty;
+      this.totalParticlesProperty = totalParticlesProperty;
+      this.maxParticles = maxParticles;
+      this.dtAccumulator = 0;
     }
 
     // @public
     reset() {
       this.unitsProperty.reset();
+    }
+
+    /**
+     * @param {number} dt - time step, in ps
+     * @public
+     */
+    step( dt ) {
+
+      this.dtAccumulator += dt;
+
+      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
+
+        // Add jitter to the displayed value, more jitter with fewer particles
+        if ( this.totalParticlesProperty.value !== 0 ) {
+          const sign = phet.joist.random.nextBoolean() ? 1 : -1;
+          const delta = MAX_JITTER * ( 1 - ( this.totalParticlesProperty.value / this.maxParticles ) );
+          this.pressureKilopascalsProperty.value = this.pressureProperty.value + ( sign * delta );
+          this.dtAccumulator = 0;
+        }
+      }
     }
   }
 

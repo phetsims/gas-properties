@@ -317,6 +317,7 @@ define( require => {
 
       // Compute pressure
       this.pressureProperty.value = this.computePressure();
+      this.pressureGauge.step( dt );
 
       // If pressure exceeds the maximum, blow the lid off of the container.
       if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {

@@ -2,7 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
-Intro: add jitter to pressure gauge - ask AP what he had in mind
+Use EnumerationProperty for unitsProperty in PressureGauge and Thermometer
+
 Intro: zero pressure until one particle collides with container
 
 Combine ParticlesNode and DiffusionParticlesNode
