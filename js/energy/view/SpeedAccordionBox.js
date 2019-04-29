@@ -72,7 +72,7 @@ define( require => {
       // Checkboxes centered below histogram
       const vBox = new VBox( {
         align: 'center',
-        spacing: 15,
+        spacing: 10,
         children: [ histogram, checkboxes ]
       } );
 

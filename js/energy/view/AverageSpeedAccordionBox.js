@@ -47,7 +47,7 @@ define( require => {
         buttonXMargin: 0,
         titleXSpacing: 0,
         contentXMargin: 0,
-        contentYSpacing: 4,
+        contentYSpacing: 0,
         titleNode: new Text( averageSpeedString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
