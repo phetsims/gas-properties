@@ -21,7 +21,7 @@ Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 
-Energy: avoid addChild/removeAllChildren in Histogram
+Histogram: rewrite to mutate bars/lines, instead of removeAllChildren/addChild on every step
 
 DESIGN QUESTIONS (MODEL)
 Work done on particles by moving wall, see:
