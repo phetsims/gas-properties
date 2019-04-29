@@ -2,7 +2,9 @@ TODO list for gas-properties
 
 UP NEXT
 
-Intro: zero pressure until one particle collides with container
+#50 Intro: zero pressure until one particle collides with container
+
+#55 Support mutable particle radius in model and view
 
 Combine ParticlesNode and DiffusionParticlesNode
 Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
