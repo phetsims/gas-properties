@@ -20,15 +20,13 @@ Intro: hold constant
 Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
+https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
 
 Histogram: rewrite to mutate bars/lines, instead of removeAllChildren/addChild on every step
 Histogram: don't update when not visible
 
-DESIGN QUESTIONS (MODEL)
-Work done on particles by moving wall, see:
-https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
-
-DESIGN QUESTIONS (VIEW)
+DESIGN QUESTIONS
+What should update when the sim is paused? E.g. change particle counts.
 
 REFERENCES
 Is this a better collision model?
