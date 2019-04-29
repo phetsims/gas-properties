@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
@@ -18,7 +19,7 @@ define( require => {
     constructor() {
 
       // @public (read-only)
-      this.initialNumberRange = new RangeWithValue( 0, 100, 0 );
+      this.initialNumberRange = new RangeWithValue( 0, GasPropertiesQueryParameters.maxInitialNumber, 0 );
       this.initialNumberDelta = 10;
 
       // @public initial number of particles of each type

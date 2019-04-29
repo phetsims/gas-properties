@@ -77,6 +77,15 @@ define( require => {
     },
 
     //TODO #51 choose a value and delete
+    // Maximum initial number of particles in the Diffusion screen
+    // For internal use only, not public facing.
+    maxInitialNumber: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 100
+    },
+
+    //TODO #51 choose a value and delete
     // The sample period for particle flow rate, in ps.
     // For internal use only, not public facing.
     flowRateSamplePeriod: {
