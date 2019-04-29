@@ -28,6 +28,7 @@ DESIGN FYI
 DESIGN QUESTIONS (MODEL)
 * What is the model for work done on particles by moving wall?
   https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
+* What quantities should have a sample period?
 * How should things that have a sample period (e.g. flow rate) behave when user is stepping the model via StepButton?
 
 DESIGN QUESTIONS (VIEW)
