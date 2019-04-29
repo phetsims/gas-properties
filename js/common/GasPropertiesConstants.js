@@ -26,6 +26,9 @@ define( require => {
 
     MODEL_TIME_STEP: 0.2, // ps
 
+    HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
+    LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
+
     // Defaults for all AccordionBox instances
     ACCORDION_BOX_OPTIONS: {
       cornerRadius: PANEL_CORNER_RADIUS,
@@ -70,14 +73,13 @@ define( require => {
       radius: 10
     },
 
-    HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
-    LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
-
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),
 
-    // physics quantities
+    // physical constants
     BOLTZMANN: 8.316E-3, // Boltzmann constant k, converted to (nm^2 * AMU)/(ps^2 * K) by @arouinfar
+
+    // conversion factors
     KG_PER_AMU: 1.66E-27, // mass conversion: kg per 1 AMU (atomic mass unit)
     ATM_PER_KPA: 0.00986923 // pressure conversion: atm (atmospheres) per 1 kPa (kilopascal)
   };
