@@ -17,7 +17,8 @@ define( require => {
 
   // constants
   const AVERAGE_SPEED_PROPERTY_OPTIONS = {
-    isValidValue: value => ( value === null || typeof value === 'number' )
+    isValidValue: value => ( value === null || typeof value === 'number' ),
+    units: 'nm/ps'
   };
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.averageSpeedSamplePeriod; // ps
 
@@ -36,7 +37,7 @@ define( require => {
 
       //TODO should Average Speed and Speed Histogram both use get get*ParticleSpeedValues, to reduce iterations?
       // @public (read-only) {Property.<number|null>}
-      // average speed of heavy particles in the container, null when container is empty, m/s
+      // average speed of heavy particles in the container, null when container is empty, nm/s
       this.heavyAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
       this.lightAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
 

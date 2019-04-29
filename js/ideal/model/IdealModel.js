@@ -83,7 +83,8 @@ define( require => {
       // @public initial temperature of particles added to the container, in K.
       // Ignored if !controlTemperatureEnabledProperty.value
       this.initialTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
-        range: INITIAL_TEMPERATURE_RANGE
+        range: INITIAL_TEMPERATURE_RANGE,
+        units: 'K'
       } );
 
       // @public (read-only)

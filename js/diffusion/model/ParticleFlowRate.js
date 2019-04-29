@@ -16,6 +16,9 @@ define( require => {
   // constants
   // Properties are updated with this frequency, in ps
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.flowRateSamplePeriod;
+  const FLOW_RATE_OPTIONS = {
+    units: 'particles/ps'
+  };
 
   class ParticleFlowRate {
 
@@ -27,10 +30,10 @@ define( require => {
       this.particles = particles;
 
       // @public flow rate to left side of container, in particles/ps
-      this.leftFlowRateProperty = new NumberProperty( 0 );
+      this.leftFlowRateProperty = new NumberProperty( 0, FLOW_RATE_OPTIONS );
       
       // @public flow rate to right side of container, in particles/ps
-      this.rightFlowRateProperty = new NumberProperty( 0 );
+      this.rightFlowRateProperty = new NumberProperty( 0, FLOW_RATE_OPTIONS );
 
       // @private accumulators
       this.dtAccumulator = 0;

@@ -29,10 +29,12 @@ define( require => {
   // constants
   const NUMBER_OF_PARTICLES_OPTIONS = { numberType: 'Integer' };
   const CENTER_OF_MASS_OPTIONS = {
-    isValidValue: value => ( value === null || typeof value === 'number' )
+    isValidValue: value => ( value === null || typeof value === 'number' ),
+    units: 'nm'
   };
   const AVERAGE_TEMPERATURE_OPTIONS = {
-    isValidValue: value => ( value === null || typeof value === 'number' )
+    isValidValue: value => ( value === null || typeof value === 'number' ),
+    units: 'K'
   };
 
   class DiffusionModel extends GasPropertiesModel {

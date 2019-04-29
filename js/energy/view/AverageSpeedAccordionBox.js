@@ -65,8 +65,11 @@ define( require => {
       lightParticleNode.addChild( new HStrut( maxWidth, { center: lightParticleNode.center } ) );
 
       // {Property.<number|null>} adapter Properties, in m/s
-      const heavyMetersPerSecondProperty = new Property( null );
-      const lightMetersPerSecondProperty = new Property( null );
+      const metersPerSecondOptions = {
+        units: 'm/s'
+      };
+      const heavyMetersPerSecondProperty = new Property( null, metersPerSecondOptions );
+      const lightMetersPerSecondProperty = new Property( null, metersPerSecondOptions );
 
       const numberDisplayRange = new Range( 0, 9999 );
       const numberDisplayOptions = {
