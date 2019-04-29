@@ -33,10 +33,9 @@ define( require => {
     constructor( holdConstantProperty, sizeVisibleProperty,
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
-      options = _.extend( {
-        fixedWidth: 100,
-        xMargin: 0
-      }, GasPropertiesConstants.PANEL_OPTIONS, options );
+      options = _.extend( {}, GasPropertiesConstants.PANEL_OPTIONS, {
+        fixedWidth: 100
+      }, options );
 
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 

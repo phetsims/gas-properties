@@ -26,10 +26,9 @@ define( require => {
      */
     constructor( sizeVisibleProperty, stopwatchVisibleProperty, options ) {
 
-      options = _.extend( {
-        fixedWidth: 100,
-        xMargin: 0
-      }, GasPropertiesConstants.PANEL_OPTIONS, options );
+      options = _.extend( {}, GasPropertiesConstants.PANEL_OPTIONS, {
+        fixedWidth: 100
+      }, options );
 
       const content = new VBox( {
         align: 'left',
