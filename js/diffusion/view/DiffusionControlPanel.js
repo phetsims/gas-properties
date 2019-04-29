@@ -51,7 +51,7 @@ define( require => {
 
       // Initial Number
       const initialNumberControl = new QuantityControl( modelViewTransform, initialNumberString,
-        experiment.initialNumber1Property, experiment.initialNumber2Property, experiment.initialNumberRange, {
+        experiment.initialNumber1Property, experiment.initialNumber2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
             deltaValue: experiment.initialNumberDelta
@@ -60,7 +60,7 @@ define( require => {
 
       // Mass (AMU)
       const massControl = new QuantityControl( modelViewTransform, massAmuString,
-        experiment.mass1Property, experiment.mass2Property, experiment.massRange, {
+        experiment.mass1Property, experiment.mass2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
             deltaValue: experiment.massDelta,
@@ -70,7 +70,7 @@ define( require => {
 
       // Initial Temperature (K)
       const initialTemperatureControl = new QuantityControl( modelViewTransform, initialTemperatureKString,
-        experiment.initialTemperature1Property, experiment.initialTemperature2Property, experiment.initialTemperatureRange, {
+        experiment.initialTemperature1Property, experiment.initialTemperature2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
             deltaValue: experiment.initialTemperatureDelta

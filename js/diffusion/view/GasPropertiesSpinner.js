@@ -18,10 +18,11 @@ define( require => {
 
     /**
      * @param {NumberProperty} numberProperty
-     * @param {Range} range
      * @param {Object} [options]
      */
-    constructor( numberProperty, range, options ) {
+    constructor( numberProperty, options ) {
+
+      assert && assert( numberProperty.range, 'numberProperty is missing range' );
 
       options = _.extend( {
         font: GasPropertiesConstants.CONTROL_FONT,
@@ -32,7 +33,7 @@ define( require => {
         touchAreaYDilation: 15
       }, options );
 
-      super( numberProperty, new Property( range), options );
+      super( numberProperty, new Property( numberProperty.range ), options );
     }
   }
 

@@ -10,37 +10,45 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const RangeWithValue = require( 'DOT/RangeWithValue' );
 
   class DiffusionExperiment {
 
     constructor() {
 
-      // @public (read-only)
-      this.initialNumberRange = new RangeWithValue( 0, GasPropertiesQueryParameters.maxInitialNumber, 0 );
-      this.initialNumberDelta = 10;
-
       // @public initial number of particles of each type
-      this.initialNumber1Property = new NumberProperty( this.initialNumberRange.defaultValue );
-      this.initialNumber2Property = new NumberProperty( this.initialNumberRange.defaultValue );
-
-      // @public (read-only)
-      this.massRange = new RangeWithValue( 4, 32, 28 ); // AMU
-      this.massDelta = 1; // AMU
+      this.initialNumber1Property = new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
+        range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE
+      } );
+      this.initialNumber2Property = new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
+        range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE
+      } );
 
       // @public mass of each particle type
-      this.mass1Property = new NumberProperty( this.massRange.defaultValue ); // AMU
-      this.mass2Property = new NumberProperty( this.massRange.defaultValue ); // AMU
-
-      // @public (read-only)
-      this.initialTemperatureRange = new RangeWithValue( 50, 500, 300 ); // K
-      this.initialTemperatureDelta = 50; // K
+      this.mass1Property = new NumberProperty( GasPropertiesConstants.MASS_RANGE.defaultValue, {
+        range: GasPropertiesConstants.MASS_RANGE,
+        units: 'AMU'
+      } );
+      this.mass2Property = new NumberProperty( GasPropertiesConstants.MASS_RANGE.defaultValue, {
+        range: GasPropertiesConstants.MASS_RANGE,
+        units: 'AMU'
+      } );
 
       // @public initial temperature for each particle type, used to compute initial velocity
-      this.initialTemperature1Property = new NumberProperty( this.initialTemperatureRange.defaultValue ); // K
-      this.initialTemperature2Property = new NumberProperty( this.initialTemperatureRange.defaultValue ); // K
+      this.initialTemperature1Property = new NumberProperty( GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE.defaultValue, {
+        range: GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE,
+        units: 'K'
+      } );
+      this.initialTemperature2Property = new NumberProperty( GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE.defaultValue, {
+        range: GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE,
+        units: 'K'
+      } );
+
+      // @public (read-only) deltas for spinners
+      this.initialNumberDelta = 10;
+      this.massDelta = 1; // AMU
+      this.initialTemperatureDelta = 50; // K
     }
 
     /**

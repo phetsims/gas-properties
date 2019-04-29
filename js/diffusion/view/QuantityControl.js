@@ -26,10 +26,9 @@ define( require => {
      * @param {string} title
      * @param {NumberProperty} particle1Property
      * @param {NumberProperty} particle2Property
-     * @param {Range} range
      * @param {Object} [options]
      */
-    constructor( modelViewTransform, title, particle1Property, particle2Property, range, options ) {
+    constructor( modelViewTransform, title, particle1Property, particle2Property, options ) {
 
       options = _.extend( {
         spinnerOptions: null, // {*} see NumberSpinner
@@ -50,8 +49,8 @@ define( require => {
       const particle2Icon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
 
       // spinners
-      const particle1Spinner = new GasPropertiesSpinner( particle1Property, range, options.spinnerOptions );
-      const particle2Spinner = new GasPropertiesSpinner( particle2Property, range, options.spinnerOptions );
+      const particle1Spinner = new GasPropertiesSpinner( particle1Property, options.spinnerOptions );
+      const particle2Spinner = new GasPropertiesSpinner( particle2Property, options.spinnerOptions );
 
       // layout
       const hBox1 = new HBox( {

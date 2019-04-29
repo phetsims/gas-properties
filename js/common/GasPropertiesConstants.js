@@ -11,6 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
@@ -28,6 +29,11 @@ define( require => {
 
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
+
+    // Diffusion experiment ranges
+    NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, GasPropertiesQueryParameters.maxInitialNumber, 0 ),
+    MASS_RANGE: new RangeWithValue( 4, 32, 28 ), // AMU
+    INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
 
     // Defaults for all AccordionBox instances
     ACCORDION_BOX_OPTIONS: {
