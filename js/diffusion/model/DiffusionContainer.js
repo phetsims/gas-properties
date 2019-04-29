@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO lots of duplication with Container
 /**
  * The container in the 'Diffusion' screen.  It differs dramatically from the container in the other screens.
  * It has a fixed width, no lid, and a removable vertical divider.
