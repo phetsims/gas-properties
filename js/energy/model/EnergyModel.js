@@ -35,7 +35,8 @@ define( require => {
       } );
 
       //TODO should Average Speed and Speed Histogram both use get get*ParticleSpeedValues, to reduce iterations?
-      // @public (read-only) average speed of heavy particles in the container, null when container is empty, m/s
+      // @public (read-only) {Property.<number|null>}
+      // average speed of heavy particles in the container, null when container is empty, m/s
       this.heavyAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
       this.lightAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
 

@@ -107,7 +107,7 @@ define( require => {
         range: new Range( -1, 1 )
       } );
 
-      // @public temperature in the container, in K.  Value is null when the container is empty.
+      // @public {Property.<number|null>} temperature in the container, in K. Value is null when the container is empty.
       this.temperatureProperty = new Property( null, {
         isValidValue: value => ( value === null || typeof value === 'number' ),
         units: 'K'

@@ -32,8 +32,8 @@ define( require => {
   class AverageSpeedAccordionBox extends AccordionBox {
 
     /**
-     * @param {NumberProperty} heavyAverageSpeedProperty - average speed of heavy particles, in nm/ps
-     * @param {NumberProperty} lightAverageSpeedProperty - average speed of light particles, in nm/ps
+     * @param {Property.<number|null>} heavyAverageSpeedProperty - average speed of heavy particles, in nm/ps
+     * @param {Property.<number|null>} lightAverageSpeedProperty - average speed of light particles, in nm/ps
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
@@ -67,7 +67,7 @@ define( require => {
       heavyParticleNode.addChild( new HStrut( maxWidth, { center: heavyParticleNode.center } ) );
       lightParticleNode.addChild( new HStrut( maxWidth, { center: lightParticleNode.center } ) );
 
-      // Adapter Properties, in m/s
+      // {Property.<number|null>} adapter Properties, in m/s
       const heavyMetersPerSecondProperty = new Property( null );
       const lightMetersPerSecondProperty = new Property( null );
 
