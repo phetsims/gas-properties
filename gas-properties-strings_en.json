@@ -134,8 +134,8 @@
   "numberOfParticles": {
     "value": "Number of Particles"
   },
-  "massAmu": {
-    "value": "Mass (amu)"
+  "massAMU": {
+    "value": "Mass (AMU)"
   },
   "initialTemperatureK": {
     "value": "Initial Temperature (K)"

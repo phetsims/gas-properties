@@ -26,7 +26,7 @@ define( require => {
 
   // strings
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
-  const massAmuString = require( 'string!GAS_PROPERTIES/massAmu' );
+  const massAMUString = require( 'string!GAS_PROPERTIES/massAMU' );
   const initialTemperatureKString = require( 'string!GAS_PROPERTIES/initialTemperatureK' );
 
   class DiffusionControlPanel extends Panel {
@@ -59,7 +59,7 @@ define( require => {
         } );
 
       // Mass (AMU)
-      const massControl = new QuantityControl( modelViewTransform, massAmuString,
+      const massControl = new QuantityControl( modelViewTransform, massAMUString,
         experiment.mass1Property, experiment.mass2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
