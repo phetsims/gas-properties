@@ -2,8 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Diffusion: Scale particle radius based on mass
-
 Intro: add jitter to pressure gauge - ask AP what he had in mind
 Intro: zero pressure until one particle collides with container
 
