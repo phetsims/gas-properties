@@ -58,7 +58,7 @@ define( require => {
 
       // @public
       this.container = new DiffusionContainer( {
-        location: new Vector2( 0, -1.5 ) //TODO better to shift the MVT?
+        location: new Vector2( 0, -1.25 ) //TODO better to shift the MVT?
       } );
 
       // @public parameters that control the experiment
