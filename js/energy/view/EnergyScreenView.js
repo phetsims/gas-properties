@@ -115,6 +115,7 @@ define( require => {
     reset() {
       this.viewProperties.reset();
       this.speedAccordionBox.reset();
+      this.kineticEnergyAccordionBox.reset();
       super.reset();
     }
 

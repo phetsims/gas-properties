@@ -13,12 +13,12 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const HeavyParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/HeavyParticlesCheckbox' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const LightParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/LightParticlesCheckbox' );
   const SpeedHistogram = require( 'GAS_PROPERTIES/energy/view/SpeedHistogram' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -59,37 +59,17 @@ define( require => {
 
       const histogram = new SpeedHistogram( model, heavyVisibleProperty, lightVisibleProperty );
 
-      const iconOptions = {
-        align: 'center',
-        spacing: 5
-      };
-
-      // Heavy particles checkbox
-      const heavyCheckbox = new GasPropertiesCheckbox( heavyVisibleProperty, {
-        icon: new HBox( _.extend( {
-          children: [
-            GasPropertiesIconFactory.createHeavyParticleIcon( model.modelViewTransform ),
-            GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.heavyParticleColorProperty )
-          ]
-        }, iconOptions ) )
-      } );
-
-      // Light particles checkbox
-      const lightCheckbox = new GasPropertiesCheckbox( lightVisibleProperty, {
-        icon: new HBox( _.extend( {
-          children: [
-            GasPropertiesIconFactory.createLightParticleIcon( model.modelViewTransform ),
-            GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.lightParticleColorProperty )
-          ]
-        }, iconOptions ) )
-      } );
-
+      // Checkboxes
       const checkboxes = new HBox( {
-        children: [ heavyCheckbox, lightCheckbox ],
+        children: [
+          new HeavyParticlesCheckbox( heavyVisibleProperty, model.modelViewTransform ),
+          new LightParticlesCheckbox( lightVisibleProperty, model.modelViewTransform )
+        ],
         align: 'center',
         spacing: 25
       } );
 
+      // Checkboxes centered below histogram
       const vBox = new VBox( {
         align: 'center',
         spacing: 15,
@@ -98,7 +78,7 @@ define( require => {
 
       const content = new FixedWidthNode( vBox, {
         fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
-      });
+      } );
 
       super( content, options );
 

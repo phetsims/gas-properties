@@ -30,9 +30,11 @@ define( require => {
 
     /**
      * @param {EnergyModel} model
+     * @param {BooleanProperty} heavyVisibleProperty
+     * @param {BooleanProperty} lightVisibleProperty
      * @param {Object} [options]
      */
-    constructor( model, options ) {
+    constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
 
       const xAxisLabel = new Text( kineticEnergyString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
       const yAxisLabel = new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
@@ -41,6 +43,8 @@ define( require => {
 
       // @private
       this.model = model;
+      this.heavyVisibleProperty = heavyVisibleProperty;
+      this.lightVisibleProperty = lightVisibleProperty;
     }
 
     /**
@@ -52,15 +56,27 @@ define( require => {
       this.removeAllDataSets();
 
       // Get KE values, {number[]}
-      const values = this.model.getKineticEnergyValues();
+      const heavyValues = this.model.getHeavyParticleKineticEnergyValues();
+      const lightValues = this.model.getLightParticleKineticEnergyValues();
+      const allValues = heavyValues.concat( lightValues );
 
       // set the y-axis scale
-      this.setMaxY( Math.max( values.length, 2 * this.yInterval ) ); //TODO
+      this.setMaxY( Math.max( allValues.length, 2 * this.yInterval ) ); //TODO
 
-      if ( values.length > 0 ) {
+      if ( allValues.length > 0 ) {
 
-        // KE data set
-        this.addDataSet( new DataSet( values, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );
+        // all particles
+        this.addDataSet( new DataSet( allValues, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );
+
+        // heavy particles
+        if ( this.heavyVisibleProperty.value ) {
+          this.addDataSet( new DataSet( heavyValues, PlotType.LINES, GasPropertiesColorProfile.heavyParticleColorProperty ) );
+        }
+
+        // light particles
+        if ( this.lightVisibleProperty.value ) {
+          this.addDataSet( new DataSet( lightValues, PlotType.LINES, GasPropertiesColorProfile.lightParticleColorProperty ) );
+        }
       }
 
       this.update();

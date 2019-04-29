@@ -10,12 +10,18 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const HeavyParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/HeavyParticlesCheckbox' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const LightParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/LightParticlesCheckbox' );
   const KineticEnergyHistogram = require( 'GAS_PROPERTIES/energy/view/KineticEnergyHistogram' );
   const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
@@ -46,9 +52,31 @@ define( require => {
       // Limit width of title
       options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
 
-      const histogram = new KineticEnergyHistogram( model );
+      //TODO should these Properties live somewhere else?
+      // @private
+      const heavyVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
+      const lightVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
 
-      const content = new FixedWidthNode( histogram, {
+      const histogram = new KineticEnergyHistogram( model, heavyVisibleProperty, lightVisibleProperty );
+
+      // Checkboxes
+      const checkboxes = new HBox( {
+        children: [
+          new HeavyParticlesCheckbox( heavyVisibleProperty, model.modelViewTransform ),
+          new LightParticlesCheckbox( lightVisibleProperty, model.modelViewTransform )
+        ],
+        align: 'center',
+        spacing: 25
+      } );
+
+      // Checkboxes centered below histogram
+      const vBox = new VBox( {
+        align: 'center',
+        spacing: 15,
+        children: [ histogram, checkboxes ]
+      } );
+
+      const content = new FixedWidthNode( vBox, {
         fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
       } );
 
@@ -56,6 +84,14 @@ define( require => {
 
       // @private
       this.histogram = histogram;
+      this.heavyVisibleProperty = heavyVisibleProperty;
+      this.lightVisibleProperty = lightVisibleProperty;
+    }
+
+    // @public
+    reset() {
+      this.heavyVisibleProperty.reset();
+      this.lightVisibleProperty.reset();
     }
 
     /**

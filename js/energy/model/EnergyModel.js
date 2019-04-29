@@ -106,15 +106,25 @@ define( require => {
     }
 
     /**
-     * Gets kinetic energy values for all particles in the container. Used by the Kinetic Energy histogram.
+     * Gets kinetic energy values for all heavy particles in the container. Used by the Kinetic Energy histogram.
      * @returns {number[]} in AMU * nm^2 / ps^2
      * @public
      */
-    getKineticEnergyValues() {
+    getHeavyParticleKineticEnergyValues() {
       const values = [];
       for ( let i = 0; i < this.heavyParticles.length; i++ ) {
         values.push( this.heavyParticles[ i ].kineticEnergy );
       }
+      return values;
+    }
+
+    /**
+     * Gets kinetic energy values for all light particles in the container. Used by the Kinetic Energy histogram.
+     * @returns {number[]} in AMU * nm^2 / ps^2
+     * @public
+     */
+    getLightParticleKineticEnergyValues() {
+      const values = [];
       for ( let i = 0; i < this.lightParticles.length; i++ ) {
         values.push( this.lightParticles[ i ].kineticEnergy );
       }
