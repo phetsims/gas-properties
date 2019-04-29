@@ -11,8 +11,8 @@ define( require => {
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Enumeration = require( 'PHET_CORE/Enumeration' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
 
   // constants
@@ -44,10 +44,8 @@ define( require => {
         units: '\u00B0C'
         } );
 
-      // @public {Property.<Thermometer.Units>} temperature units displayed by the thermometer
-      this.unitsProperty = new Property( Thermometer.Units.KELVIN, {
-        isValidValue: value => Thermometer.Units.includes( value )
-      } );
+      // @public temperature units displayed by the thermometer
+      this.unitsProperty = new EnumerationProperty( Thermometer.Units, Thermometer.Units.KELVIN );
     }
 
     // @public
