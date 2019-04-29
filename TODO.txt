@@ -2,6 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
+#53 add species checkboxes to KE histogram
+
 Intro: zero pressure until one particle collides with container
 
 Combine ParticlesNode and DiffusionParticlesNode
