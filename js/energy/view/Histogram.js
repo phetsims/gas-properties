@@ -214,7 +214,7 @@ define( require => {
             font: new PhetFont( 14 ),
             fill: dataSet.color,
 
-            //TODO x-axis label will overlap this
+            //TODO x-axis label will overlap ellipsis
             right: this.background.right,
             top: this.background.bottom + 4
           } ) );
