@@ -33,13 +33,15 @@ define( require => {
 
       // @public pressure in kilopascals (kPa) with jitter added
       this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
-        units: 'kPa'
+        units: 'kPa',
+        isValidValue: value => value >= 0
       } );
 
       // @public pressure in atmospheres (atm) with jitter added
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
         pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
-          units: 'atm'
+          units: 'atm',
+          isValidValue: value => value >= 0
         } );
 
       // @public (read-only) pressure range in kilopascals (kPa)
@@ -72,8 +74,14 @@ define( require => {
 
         // Add jitter to the displayed value, more jitter with fewer particles
         if ( this.totalParticlesProperty.value !== 0 ) {
-          const sign = phet.joist.random.nextBoolean() ? 1 : -1;
+
           const delta = MAX_JITTER * ( 1 - ( this.totalParticlesProperty.value / this.maxParticles ) );
+
+          let sign = phet.joist.random.nextBoolean() ? 1 : -1;
+          if ( delta >= this.pressureProperty.value ) {
+            sign = 1;
+          }
+
           this.pressureKilopascalsProperty.value = this.pressureProperty.value + ( sign * delta );
           this.dtAccumulator = 0;
         }
