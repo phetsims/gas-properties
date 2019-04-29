@@ -26,7 +26,7 @@ Histogram: rewrite to mutate bars/lines, instead of removeAllChildren/addChild o
 Histogram: don't update when not visible
 
 DESIGN QUESTIONS
-What should update when the sim is paused? E.g. change particle counts.
+What should update when the sim is paused? What should be disabled?
 
 REFERENCES
 Is this a better collision model?
