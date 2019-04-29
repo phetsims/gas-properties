@@ -4,7 +4,6 @@ UP NEXT
 
 Issue: sample periods, step button
 Diffusion: Scale particle radius based on mass
-Diffusion: add ?maxInitialNumber
 
 Intro: add jitter to pressure gauge - ask AP what he had in mind
 Intro: zero pressure until one particle collides with container
