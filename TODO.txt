@@ -31,6 +31,7 @@ DESIGN QUESTIONS
 What should update when the sim is paused? What should be disabled?
 * Resize container, should pressure and temperature change?
 * Change number of particles, should pressure, temperature, container width change, lid blow off?
+* Should I be able to apply heat/cool?
 
 REFERENCES
 Is this a better collision model?
