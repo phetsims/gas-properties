@@ -146,6 +146,24 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 1
+    },
+
+    //TODO #50 choose a value and delete
+    // Minimum amount of jitter in the pressure gauge, in kPa.
+    // For internal use only, not public facing.
+    minJitter: {
+      type: 'number',
+      isValidValue: value => ( value >= 0 ),
+      defaultValue: 0
+    },
+
+    //TODO #50 choose a value and delete
+    // Maximum amount of jitter in the pressure gauge, in kPa.
+    // For internal use only, not public facing.
+    maxJitter: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 50
     }
   } );
 

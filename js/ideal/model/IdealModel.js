@@ -13,7 +13,6 @@ define( require => {
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -37,8 +36,6 @@ define( require => {
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
-  // maximum number of particles in the container
-  const MAX_PARTICLES = GasPropertiesConstants.HEAVY_PARTICLES_RANGE.max + GasPropertiesConstants.LIGHT_PARTICLES_RANGE.max;
 
   class IdealModel extends GasPropertiesModel {
 
@@ -71,11 +68,6 @@ define( require => {
         numberType: 'Integer',
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
       } );
-
-      // @public total number of particles in the container
-      this.totalParticlesProperty = new DerivedProperty(
-        [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty  ],
-        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles );
 
       // Synchronize particle counts and arrays
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
@@ -123,7 +115,7 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.pressureGauge = new PressureGauge( this.pressureProperty, this.totalParticlesProperty, MAX_PARTICLES );
+      this.pressureGauge = new PressureGauge( this.pressureProperty );
 
       // @public (read-only)
       this.collisionCounter = null;
