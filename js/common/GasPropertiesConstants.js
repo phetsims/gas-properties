@@ -31,7 +31,7 @@ define( require => {
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
 
     // Diffusion experiment ranges
-    NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, GasPropertiesQueryParameters.maxInitialNumber, 0 ),
+    NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, GasPropertiesQueryParameters.maxNumberOfParticlesDiffusion, 0 ),
     MASS_RANGE: new RangeWithValue( 4, 32, 28 ), // AMU
     INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
 

@@ -77,9 +77,9 @@ define( require => {
     },
 
     //TODO #51 choose a value and delete
-    // Maximum initial number of particles in the Diffusion screen
+    // Maximum number of particles in the Diffusion screen
     // For internal use only, not public facing.
-    maxInitialNumber: {
+    maxNumberOfParticlesDiffusion: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 100
