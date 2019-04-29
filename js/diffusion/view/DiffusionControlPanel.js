@@ -109,8 +109,8 @@ define( require => {
             align: 'left',
             spacing: 12,
             children: [
-              new ParticleFlowRateCheckbox( particleFlowRateVisibleProperty ),
               new CenterOfMassCheckbox( centerOfMassVisibleProperty ),
+              new ParticleFlowRateCheckbox( particleFlowRateVisibleProperty ),
               new StopwatchCheckbox( stopwatchVisibleProperty )
             ]
           } )
