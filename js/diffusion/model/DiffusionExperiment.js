@@ -17,11 +17,11 @@ define( require => {
 
     constructor() {
 
-      // @public initial number of particles of each type
-      this.initialNumber1Property = new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
+      // @public number of each particle type
+      this.numberOfParticles1Property = new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
         range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE
       } );
-      this.initialNumber2Property = new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
+      this.numberOfParticles2Property = new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
         range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE
       } );
 
@@ -46,7 +46,7 @@ define( require => {
       } );
 
       // @public (read-only) deltas for spinners
-      this.initialNumberDelta = 10;
+      this.numberOfParticlesDelta = 10;
       this.massDelta = 1; // AMU
       this.initialTemperatureDelta = 50; // K
     }
@@ -56,8 +56,8 @@ define( require => {
      * @public
      */
     reset() {
-      this.initialNumber1Property.reset();
-      this.initialNumber2Property.reset();
+      this.numberOfParticles1Property.reset();
+      this.numberOfParticles2Property.reset();
       this.mass1Property.reset();
       this.mass2Property.reset();
       this.initialTemperature1Property.reset();

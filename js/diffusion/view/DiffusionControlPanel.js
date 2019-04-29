@@ -25,7 +25,7 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  const initialNumberString = require( 'string!GAS_PROPERTIES/initialNumber' );
+  const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
   const massAmuString = require( 'string!GAS_PROPERTIES/massAmu' );
   const initialTemperatureKString = require( 'string!GAS_PROPERTIES/initialTemperatureK' );
 
@@ -50,11 +50,11 @@ define( require => {
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
       // Initial Number
-      const initialNumberControl = new QuantityControl( modelViewTransform, initialNumberString,
-        experiment.initialNumber1Property, experiment.initialNumber2Property, {
+      const numberOfParticlesControl = new QuantityControl( modelViewTransform, numberOfParticlesString,
+        experiment.numberOfParticles1Property, experiment.numberOfParticles2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.initialNumberDelta
+            deltaValue: experiment.numberOfParticlesDelta
           }
         } );
 
@@ -95,7 +95,7 @@ define( require => {
             align: 'left',
             children: [
               //TODO alignment - spinners have different ranges, so different widths
-              initialNumberControl,
+              numberOfParticlesControl,
               massControl,
               initialTemperatureControl,
               dividerButtonParent

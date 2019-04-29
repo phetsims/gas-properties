@@ -98,16 +98,16 @@ define( require => {
       } );
 
       // Add or remove particles
-      this.experiment.initialNumber1Property.link( initialNumber => {
-        this.numberOfParticlesListener( initialNumber,
+      this.experiment.numberOfParticles1Property.link( numberOfParticles => {
+        this.numberOfParticlesListener( numberOfParticles,
           this.container.leftBounds,
           this.experiment.mass1Property.value,
           this.experiment.initialTemperature1Property.value,
           this.particles1,
           DiffusionParticle1 );
       } );
-      this.experiment.initialNumber2Property.link( initialNumber => {
-        this.numberOfParticlesListener( initialNumber,
+      this.experiment.numberOfParticles2Property.link( numberOfParticles => {
+        this.numberOfParticlesListener( numberOfParticles,
           this.container.rightBounds,
           this.experiment.mass2Property.value,
           this.experiment.initialTemperature2Property.value,
@@ -128,14 +128,14 @@ define( require => {
         if ( hasDivider ) {
 
           // Delete existing DiffusionParticle1 particles, create a new set
-          const initialNumber1 = this.experiment.initialNumber1Property.value;
-          this.experiment.initialNumber1Property.value = 0;
-          this.experiment.initialNumber1Property.value = initialNumber1;
+          const numberOfParticles1 = this.experiment.numberOfParticles1Property.value;
+          this.experiment.numberOfParticles1Property.value = 0;
+          this.experiment.numberOfParticles1Property.value = numberOfParticles1;
 
           // Delete existing DiffusionParticle2 particles, create a new set
-          const initialNumber2 = this.experiment.initialNumber2Property.value;
-          this.experiment.initialNumber2Property.value = 0;
-          this.experiment.initialNumber2Property.value = initialNumber2;
+          const numberOfParticles2 = this.experiment.numberOfParticles2Property.value;
+          this.experiment.numberOfParticles2Property.value = 0;
+          this.experiment.numberOfParticles2Property.value = numberOfParticles2;
 
           // Reset flow rate models
           this.particleFlowRate1.reset();

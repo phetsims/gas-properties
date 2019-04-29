@@ -131,7 +131,7 @@
   "tAvgK": {
     "value": "T<sub>avg</sub> = {{value}} K"
   },
-  "initialNumber": {
+  "numberOfParticles": {
     "value": "Number of Particles"
   },
   "massAmu": {
