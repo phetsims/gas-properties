@@ -39,6 +39,12 @@ define( require => {
         isValidValue: value => value >= 0
       } );
 
+      pressureProperty.link( pressure => {
+        if ( pressure === 0 ) {
+          this.pressureKilopascalsProperty.value = 0;
+        }
+      } );
+
       // @public pressure in atmospheres (atm) with jitter added
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
         pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
@@ -62,7 +68,6 @@ define( require => {
 
     // @public
     reset() {
-      this.pressureKilopascalsProperty.reset();
       this.unitsProperty.reset();
     }
 
@@ -73,6 +78,7 @@ define( require => {
      */
     step( dt ) {
       if ( this.pressureProperty.value === 0 ) {
+        this.pressureKilopascalsProperty.value = 0;
         this.dtAccumulator = 0;
       }
       else {
