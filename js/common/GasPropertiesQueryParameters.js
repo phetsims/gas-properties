@@ -164,6 +164,15 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 50
+    },
+
+    //TODO #50 choose a value and delete
+    // Sample period for updating the pressure gauge, in ps.
+    // For internal use only, not public facing.
+    pressureGaugeSamplePeriod: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 0.25
     }
   } );
 

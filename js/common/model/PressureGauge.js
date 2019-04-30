@@ -20,7 +20,7 @@ define( require => {
   const Range = require( 'DOT/Range' );
 
   // constants
-  const SAMPLE_PERIOD = 0.25; // ps
+  const SAMPLE_PERIOD = GasPropertiesQueryParameters.pressureGaugeSamplePeriod; // ps
   const MIN_JITTER = GasPropertiesQueryParameters.minJitter; // minimum amount of jitter, in kPa
   const MAX_JITTER = GasPropertiesQueryParameters.maxJitter; // maximum amount of jitter, in kPa
   assert && assert( MIN_JITTER < MAX_JITTER, 'MIN_JITTER must be < MAX_JITTER' );
@@ -38,8 +38,6 @@ define( require => {
         units: 'kPa',
         isValidValue: value => value >= 0
       } );
-
-      pressureProperty.link( pressure => { this.pressureKilopascalsProperty.value = pressure; } );
 
       // @public pressure in atmospheres (atm) with jitter added
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
@@ -64,6 +62,7 @@ define( require => {
 
     // @public
     reset() {
+      this.pressureKilopascalsProperty.reset();
       this.unitsProperty.reset();
     }
 
