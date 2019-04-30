@@ -30,7 +30,7 @@ define( require => {
         align: 'left'
       }, options );
 
-      assert && assert( ALIGN_VALUES.includes( options.align ), `invalid align: ${options.align}` );
+      assert && assert( _.includes( ALIGN_VALUES, options.align ), `invalid align: ${options.align}` );
 
       child.maxWidth = options.fixedWidth;
       const strut = new HStrut( options.fixedWidth, { pickable: false } );
