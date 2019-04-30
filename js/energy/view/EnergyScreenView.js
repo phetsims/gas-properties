@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const AverageSpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/AverageSpeedAccordionBox' );
+  const EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
   const EnergyToolsPanel = require( 'GAS_PROPERTIES/energy/view/EnergyToolsPanel' );
   const EnergyViewProperties = require( 'GAS_PROPERTIES/energy/view/EnergyViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -32,6 +33,7 @@ define( require => {
      * @param {EnergyModel} model
      */
     constructor( model ) {
+      assert && assert( model instanceof EnergyModel, `invalid model: ${model}` );
 
       // view-specific Properties
       const viewProperties = new EnergyViewProperties();

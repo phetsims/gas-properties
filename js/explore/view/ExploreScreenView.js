@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const ExploreModel = require( 'GAS_PROPERTIES/explore/model/ExploreModel' );
   const ExploreToolsPanel = require( 'GAS_PROPERTIES/explore/view/ExploreToolsPanel' );
   const ExploreViewProperties = require( 'GAS_PROPERTIES/explore/view/ExploreViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -26,6 +27,7 @@ define( require => {
      * @param {ExploreModel} model
      */
     constructor( model ) {
+      assert && assert( model instanceof ExploreModel, `invalid model: ${model}` );
 
       // view-specific Properties
       const viewProperties = new ExploreViewProperties();

@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
+  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
@@ -27,6 +28,7 @@ define( require => {
      * @param {IdealModel} model
      */
     constructor( model ) {
+      assert && assert( model instanceof IdealModel, `invalid model: ${model}` );
 
       // view-specific Properties
       const viewProperties = new IdealViewProperties();

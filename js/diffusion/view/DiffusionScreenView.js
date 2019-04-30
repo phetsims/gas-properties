@@ -13,6 +13,7 @@ define( require => {
   const DataAccordionBox = require( 'GAS_PROPERTIES/diffusion/view/DataAccordionBox' );
   const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
+  const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
   const DiffusionParticlesNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionParticlesNode' );
   const DiffusionTimeControls = require( 'GAS_PROPERTIES/diffusion/view/DiffusionTimeControls' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
@@ -32,6 +33,7 @@ define( require => {
      * @param {DiffusionModel} model
      */
     constructor( model ) {
+      assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
 
       super();
 
