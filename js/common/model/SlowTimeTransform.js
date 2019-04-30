@@ -16,7 +16,7 @@ define( require => {
   class SlowTimeTransform extends LinearFunction {
 
     constructor() {
-      super( 0, 1, 0, 0.3 );
+      super( 0, 1, 0, 0.3 ); // s -> ps
     }
   }
 

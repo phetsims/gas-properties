@@ -16,7 +16,7 @@ define( require => {
   class NormalTimeTransform extends LinearFunction {
 
     constructor() {
-      super( 0, 1, 0, 2.5 );
+      super( 0, 1, 0, 2.5 ); // s -> ps
     }
   }
 
