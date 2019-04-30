@@ -1,11 +1,11 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.13 Mon Apr 29 2019 14:57:49 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.14 Mon Apr 29 2019 18:13:33 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
   },
   "axon": {
-    "sha": "592e555a231db4950387ee86cf23acdd574a8eb3",
+    "sha": "2216990b533ab393974c212545fd776a4d435de2",
     "branch": "master"
   },
   "brand": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "34b62f152edf48bbf958ed2eaa578cb91ad7c7db",
+    "sha": "6ec93a99049915dcee1bb639c60fa5ee0ce3dac7",
     "branch": "master"
   },
   "joist": {
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "phet-core": {
-    "sha": "98d20de43c3360cb8e10109401ab44b6e6bc6986",
+    "sha": "2e645e8a002ed2a7f6e9583298dd2e967e7846eb",
     "branch": "master"
   },
   "phet-io": {
@@ -69,19 +69,19 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "0f1e2a30e6099b6452addc0910085d988ffe3a7d",
+    "sha": "6a6abce028f0bdbdb54a10a55bf2405a5521b36f",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "a590049fab36abd2fae7fcd90b76ac506c90f592",
+    "sha": "4d9fbcf81d3b99c39fd0b6b0c922edca71fea3aa",
     "branch": "master"
   },
   "sherpa": {
-    "sha": "e337874597449ebee1ce68bf9c3f5901233b2705",
+    "sha": "12772c1d2de2227d105419370de4e28b44b79b12",
     "branch": "master"
   },
   "sun": {
-    "sha": "c88288bb8c8bf95511dfbc6eb21a4e8903dc2ce2",
+    "sha": "8a750ad92dba7da203aded3554ba903db8d1a795",
     "branch": "master"
   },
   "tambo": {
