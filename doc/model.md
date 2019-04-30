@@ -22,7 +22,7 @@ Symbols:
 * t = time
 * T = temperature
 * v = velocity
-* |v| = velocity magnitude
+* |v| = velocity magnitude, or speed
 * V = volume
  
 Equations:
