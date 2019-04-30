@@ -39,7 +39,7 @@ Units:
 * distance: nm
 * kinetic energy: AMU * nm<sup>2</sup> / ps<sup>2</sup>
 * location: (nm, nm)
-* mass: AMU (unified atomic mass unit, 1 AMU === 1.66E-27 kg)
+* mass: AMU (unified mass unit, 1 AMU === 1.66E-27 kg)
 * momentum: AMU * nm / ps
 * pressure: kPa (and atm in view)
 * temperature: K (and °C in view)
