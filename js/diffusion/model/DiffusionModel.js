@@ -63,23 +63,19 @@ define( require => {
         location: new Vector2( 0, -1.25 ) //TODO better to shift the MVT?
       } );
 
-      // @public parameters that control the experiment
+      // @public parameters that define the experiment to be run when the container's divider is removed
       this.experiment = new DiffusionExperiment();
 
-      // @public (read-only)
+      // @public (read-only) particles of each type
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
-      // @public (read-only) center of mass for particles of type DiffusionParticle1
+      // @public (read-only) centerX of mass for particles of types DiffusionParticle1 and DiffusionParticle2
       this.centerXOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
-
-      // @public (read-only) center of mass for particles of type DiffusionParticle2
       this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
-      // @public flow rate model for particles of type DiffusionParticle1
+      // @public flow rate model for particles of types DiffusionParticle1 and DiffusionParticle2
       this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
-
-      // @public flow rate model for particles of type DiffusionParticle2
       this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2 );
 
       // @public (read-only) Data for the left half of the container

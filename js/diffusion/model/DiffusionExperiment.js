@@ -17,7 +17,7 @@ define( require => {
 
     constructor() {
 
-      // @public number of each particle type
+      // @public quantity of each particle type
       this.numberOfParticles1Property = new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
         range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE
       } );

@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Sub-component of the 'Diffusion' screen model that deals with flow rate for one set of particles.
+ * Sub-component of the 'Diffusion' screen model, responsible for flow rate for one set of particles.
+ * Flow rate is the number of particles moving between the two sides of the container, in particles/ps.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,11 +23,14 @@ define( require => {
 
   class ParticleFlowRate {
 
+    /**
+     * @param {number} dividerX - x location of the container's divider
+     * @param {Particle[]} particles - particles to be monitored
+     */
     constructor( dividerX, particles ) {
 
+      // @private 
       this.dividerX = dividerX;
-      
-      // @private
       this.particles = particles;
 
       // @public flow rate to left side of container, in particles/ps
@@ -37,8 +41,8 @@ define( require => {
 
       // @private accumulators
       this.dtAccumulator = 0;
-      this.numberToLeft = 0;
-      this.numberToRight = 0;
+      this.leftCount = 0; // number of particles that have crossed dividerX while moving from right to left
+      this.rightCount = 0; // number of particles that have crossed dividerX while moving from left to right
     }
 
     // @public
@@ -51,8 +55,8 @@ define( require => {
     // @private
     resetAccumulators() {
       this.dtAccumulator = 0;
-      this.numberToLeft = 0;
-      this.numberToRight = 0;
+      this.leftCount = 0;
+      this.rightCount = 0;
     }
 
     /**
@@ -65,10 +69,10 @@ define( require => {
       for ( let i = 0; i < this.particles.length; i++ ) {
         const particle = this.particles[ i ];
         if ( particle.previousLocation.x >= this.dividerX && particle.location.x < this.dividerX ) {
-          this.numberToLeft++;
+          this.leftCount++;
         }
         else if ( particle.previousLocation.x <= this.dividerX && particle.location.x > this.dividerX ) {
-          this.numberToRight++;
+          this.rightCount++;
         }
       }
 
@@ -77,8 +81,8 @@ define( require => {
       if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
         // update flow-rate Properties
-        this.leftFlowRateProperty.value = this.numberToLeft / this.dtAccumulator;
-        this.rightFlowRateProperty.value = this.numberToRight / this.dtAccumulator;
+        this.leftFlowRateProperty.value = this.leftCount / this.dtAccumulator;
+        this.rightFlowRateProperty.value = this.rightCount / this.dtAccumulator;
 
         this.resetAccumulators();
       }

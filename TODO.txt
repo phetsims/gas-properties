@@ -25,6 +25,8 @@ Histogram: don't update when not visible
 
 stringTest
 
+Better names than particle1, particle2, mass1, mass2, etc?
+
 REFERENCES
 Is this a better collision model?
 http://web.mst.edu/~reflori/be150/Dyn%20Lecture%20Videos/Impact%20Particles%201/Impact%20Particles%201.pdf
