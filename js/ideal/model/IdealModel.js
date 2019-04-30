@@ -13,6 +13,7 @@ define( require => {
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const Container = require( 'GAS_PROPERTIES/common/model/Container' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -77,6 +78,12 @@ define( require => {
         this.numberOfParticlesListener( newValue, oldValue, this.lightParticles, LightParticle );
       } );
 
+      // @private
+      this.totalNumberOfParticlesProperty = new DerivedProperty(
+        [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
+        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles
+      );
+
       // @public whether initial temperature is controlled by the user or determined by what's in the container
       this.controlTemperatureEnabledProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
 
@@ -117,6 +124,17 @@ define( require => {
 
       // @public (read-only)
       this.pressureGauge = new PressureGauge( this.pressureProperty );
+      
+      // @private whether to update pressure
+      this.updatePressure = false;
+
+      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
+      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        if ( totalNumberOfParticles === 0 ) {
+          this.updatePressure = false;
+          this.pressureProperty.value = 0;
+        }
+      } );
 
       // @public (read-only)
       this.collisionCounter = null;
@@ -308,9 +326,16 @@ define( require => {
       // Compute temperature. Do this before pressure, because pressure depends on temperature.
       this.temperatureProperty.value = this.computeTemperature();
 
+      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
+      if ( !this.updatePressure && this.collisionDetector.numberOfParticleContainerCollisions > 0 ) {
+        this.updatePressure = true;
+      }
+
       // Compute pressure
-      this.pressureProperty.value = this.computePressure();
-      this.pressureGauge.step( dt );
+      if ( this.updatePressure ) {
+        this.pressureProperty.value = this.computePressure();
+        this.pressureGauge.step( dt );
+      }
 
       // If pressure exceeds the maximum, blow the lid off of the container.
       if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {

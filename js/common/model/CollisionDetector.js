@@ -72,9 +72,10 @@ define( require => {
         reflectedPoint: new Vector2( 0, 0 )
       };
 
-      // @private fields needed by methods
+      // @private
       this.container = container;
       this.particleArrays = particleArrays;
+      this.numberOfParticleContainerCollisions = 0;
     }
 
     // @public
