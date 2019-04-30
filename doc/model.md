@@ -17,7 +17,6 @@ Symbols:
 * KE = Kinetic Energy
 * m = mass
 * N = number of gas molecules (aka particles)
-* p = momentum
 * P = pressure
 * t = time
 * T = temperature
@@ -31,7 +30,6 @@ Equations:
 * KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
 * T = (2/3)KE/k
 * |v| = sqrt( 3kT / m )
-* p = m * v
 
 Units:
 
@@ -40,7 +38,6 @@ Units:
 * kinetic energy: AMU * nm<sup>2</sup> / ps<sup>2</sup>
 * location: (nm, nm)
 * mass: AMU (unified mass unit, 1 AMU === 1.66E-27 kg)
-* momentum: AMU * nm / ps
 * pressure: kPa (and atm in view)
 * temperature: K (and °C in view)
 * time: ps
