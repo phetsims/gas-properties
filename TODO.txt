@@ -8,12 +8,7 @@ Combine ParticlesNode and DiffusionParticlesNode
 Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
 Combine ContainerNode and DiffusionContainerNode into 1 class, with optional lid, divider, mutable width
 
-Intro: hold constant
-- None: change N, T, or V => change P
-- Volume: change N or T => change P
-- Temperature: change N or V => change P
-- Pressure T: change N or V => change T
-- Pressure V: change N or T => change V
+Intro: hold constant, see HoldConstantEnum
 
 Intro: optimize number of iterations over particle arrays
 
