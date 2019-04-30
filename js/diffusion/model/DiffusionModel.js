@@ -233,8 +233,8 @@ define( require => {
         } );
 
         // Position the particle at a random location within locationBounds, accounting for particle radius.
-        const x = nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
-        const y = nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
+        const x = phet.joist.random.nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
+        const y = phet.joist.random.nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
         particle.setLocationXY( x, y );
 
         // Set the initial velocity, based on initial temperature and mass.
@@ -423,20 +423,6 @@ define( require => {
         rightNumberOfParticlesProperty.value++;
       }
     }
-  }
-
-  //TODO move to DOT/Random, see https://github.com/phetsims/dot/issues/94
-  /**
-   * Randomly selects a double in the range [min,max).
-   * @param {number} min
-   * @param {number} max
-   * @returns {number}
-   */
-  function nextDoubleBetween( min, max ) {
-    assert && assert( min < max, `bad arguments: ${min} ${max} ` );
-    const value = min + phet.joist.random.nextDouble() * ( max - min );
-    assert && assert( value >= min && value < max, `bad value: ${value}` );
-    return value;
   }
 
   return gasProperties.register( 'DiffusionModel', DiffusionModel );
