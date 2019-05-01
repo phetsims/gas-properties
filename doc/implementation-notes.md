@@ -19,7 +19,7 @@ We're using _AMU * nm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://git
 for the full list of units used in the model.
 
 
-Top-level class hierarchies:
+Top-level class hierarchies, note symmetry:
 
 Model:
 ```
@@ -34,7 +34,7 @@ BaseModel
 View:
 ```
 ScreenView
-  GasPropertiesScreenView( IdealModel )
+  GasPropertiesScreenView( GasPropertiesModel )
     IdealScreenView( IdealModel ), IdealViewProperties
     ExploreScreenView( ExploreModel ), ExploreViewProperties
     EnergyScreenView( EnergyModel ), EnergyViewProperties
