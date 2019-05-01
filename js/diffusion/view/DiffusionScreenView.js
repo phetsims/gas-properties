@@ -67,19 +67,19 @@ define( require => {
 
       // Particle Flow Rate vectors
       const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleFlowRate1, {
-          arrowNodeOptions: {
-            fill: GasPropertiesColorProfile.particle1ColorProperty
-          },
-          centerX: containerNode.centerX,
-          top: containerNode.bottom + 25
-        } );
+        arrowNodeOptions: {
+          fill: GasPropertiesColorProfile.particle1ColorProperty
+        },
+        centerX: containerNode.centerX,
+        top: containerNode.bottom + 25
+      } );
       const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRate2, {
-          arrowNodeOptions: {
-            fill: GasPropertiesColorProfile.particle2ColorProperty
-          },
-          centerX: containerNode.centerX,
-          top: particleFlowRateNode1.bottom + 5
-        } );
+        arrowNodeOptions: {
+          fill: GasPropertiesColorProfile.particle2ColorProperty
+        },
+        centerX: containerNode.centerX,
+        top: particleFlowRateNode1.bottom + 5
+      } );
 
       viewProperties.particleFlowRateVisibleProperty.link( visible => {
         particleFlowRateNode1.visible = visible;

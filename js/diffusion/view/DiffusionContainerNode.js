@@ -2,7 +2,7 @@
 
 /**
  * The container in the 'Diffusion' screen.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -51,12 +51,12 @@ define( require => {
         lineDash: [ 10, 24 ],
         center: borderNode.center
       } );
-      
+
       assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );
       options = _.extend( {
         children: [ borderNode, noDividerNode, dividerNode ]
       }, options );
-      
+
       super( options );
 
       // Show/hide the divider

@@ -75,7 +75,7 @@ define( require => {
           noValuePattern: tAvgString,
           useRichText: true,
           maxWidth: 100 // determined empirically
-      } ) );
+        } ) );
 
       assert && assert( !options.children, 'DataNode sets children' );
       options = _.extend( {

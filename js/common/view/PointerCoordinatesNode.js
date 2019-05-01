@@ -24,7 +24,7 @@ define( require => {
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options] - not propagated to super
      */
-    constructor( modelViewTransform, options) {
+    constructor( modelViewTransform, options ) {
 
       options = _.extend( {
         textColor: 'black',

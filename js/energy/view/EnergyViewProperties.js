@@ -26,7 +26,7 @@ define( require => {
       this.speedExpandedProperty = new BooleanProperty( true || GasPropertiesQueryParameters.expanded );
 
       // @public whether the Kinetic Energy accordion box is expanded
-      this.kineticEnergyExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded ) ;
+      this.kineticEnergyExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
 
       // @public whether the 'Particles Tools' accordion box is expanded
       this.particleToolsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );

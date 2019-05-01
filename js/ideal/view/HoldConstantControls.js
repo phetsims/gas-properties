@@ -35,7 +35,7 @@ define( require => {
     fill: GasPropertiesColorProfile.textFillProperty,
     maxWidth: 175 // determined empirically
   };
-  
+
   class HoldConstantControls extends VBox {
 
     /**

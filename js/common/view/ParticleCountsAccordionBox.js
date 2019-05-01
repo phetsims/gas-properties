@@ -54,7 +54,7 @@ define( require => {
         children: [
 
           // Heavy
-          new ParticleCountControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform),
+          new ParticleCountControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
             heavyString, numberOfHeavyParticlesProperty ),
 
           // Light

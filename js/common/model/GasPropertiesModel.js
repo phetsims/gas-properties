@@ -124,7 +124,7 @@ define( require => {
 
       // @public (read-only)
       this.pressureGauge = new PressureGauge( this.pressureProperty );
-      
+
       // @private whether to update pressure
       this.updatePressure = false;
 

@@ -45,7 +45,7 @@ define( require => {
       this.bounds = new Bounds2(
         this.location.x - this.width, this.location.y,
         this.location.x, this.location.y + this.height
-        );
+      );
 
       // @public (read-only) divider is horizontally centered, but no code assumes that
       this.dividerX = this.left + ( this.width / 2 );

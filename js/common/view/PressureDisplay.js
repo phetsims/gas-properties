@@ -33,7 +33,7 @@ define( require => {
     constructor( pressureGauge, listParent, options ) {
 
       options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
-      
+
       const items = [
         {
           choice: PressureGauge.Units.KILOPASCALS,

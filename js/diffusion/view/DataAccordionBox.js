@@ -2,7 +2,7 @@
 
 /**
  * The 'Data' accordion box in the 'Diffusion' screen.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {

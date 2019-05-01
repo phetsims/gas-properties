@@ -35,7 +35,7 @@ define( require => {
 
       // @public flow rate to left side of container, in particles/ps
       this.leftFlowRateProperty = new NumberProperty( 0, FLOW_RATE_OPTIONS );
-      
+
       // @public flow rate to right side of container, in particles/ps
       this.rightFlowRateProperty = new NumberProperty( 0, FLOW_RATE_OPTIONS );
 
