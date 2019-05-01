@@ -23,7 +23,7 @@ Top-level class hierarchies:
 
 Model:
 ```
-GasPropertiesModel
+BaseModel
   IdealModel
     ExploreModel
     EnergyModel

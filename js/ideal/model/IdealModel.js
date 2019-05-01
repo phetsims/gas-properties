@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
@@ -17,7 +18,6 @@ define( require => {
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
@@ -38,7 +38,7 @@ define( require => {
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
-  class IdealModel extends GasPropertiesModel {
+  class IdealModel extends BaseModel {
 
     constructor( options ) {
 

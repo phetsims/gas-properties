@@ -19,7 +19,7 @@ define( require => {
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  class GasPropertiesModel {
+  class BaseModel {
 
     constructor( options ) {
 
@@ -108,5 +108,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesModel', GasPropertiesModel );
+  return gasProperties.register( 'BaseModel', BaseModel );
 } );

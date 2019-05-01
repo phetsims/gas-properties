@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
@@ -17,7 +18,6 @@ define( require => {
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
@@ -37,7 +37,7 @@ define( require => {
     units: 'K'
   };
 
-  class DiffusionModel extends GasPropertiesModel {
+  class DiffusionModel extends BaseModel {
 
     constructor() {
 
