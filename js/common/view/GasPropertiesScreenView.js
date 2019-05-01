@@ -36,6 +36,7 @@ define( require => {
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
+  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
@@ -61,6 +62,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( model, particleTypeProperty, sizeVisibleProperty, options ) {
+
+      assert && assert( model instanceof IdealModel, `invalid model: ${model}` );
 
       options = _.extend( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
