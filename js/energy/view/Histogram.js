@@ -72,6 +72,7 @@ define( require => {
 
       const plotNodesParent = new Node();
 
+      // horizontal lines that appear at equally-spaced intervals based on y-axis scale
       const intervalLines = new Path( null, options.intervalLineOptions );
 
       // position the x-axis label
