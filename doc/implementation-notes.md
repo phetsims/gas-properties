@@ -25,7 +25,7 @@ GasPropertiesModel
   IdealModel
     ExploreModel
     EnergyModel
-  DiffusionMode
+  DiffusionModel
   
 ScreenView
   GasPropertiesScreenView( IdealModel )
