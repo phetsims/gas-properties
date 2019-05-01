@@ -83,7 +83,7 @@ define( require => {
       xAxisLabel.centerX = background.centerX;
       xAxisLabel.top = background.bottom + 5;
 
-      // position the y-axis label
+      // rotate and position the y-axis label
       yAxisLabel.rotation = -Math.PI / 2;
       yAxisLabel.maxWidth = 0.85 * background.height;
       yAxisLabel.right = background.left - 8;
