@@ -19,7 +19,7 @@ We're using _AMU * nm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://git
 for the full list of units used in the model.
 
 
-Top-level class hierarchies, note symmetry:
+Important class hierarchies, note symmetry:
 
 Model:
 ```
@@ -29,6 +29,10 @@ BaseModel
     ExploreModel
     EnergyModel
   DiffusionModel
+  
+BaseContainer
+  GasPropertiesContainer
+  DiffusionContainer
 ```
   
 View:
