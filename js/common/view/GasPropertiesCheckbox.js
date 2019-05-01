@@ -28,7 +28,7 @@ define( require => {
         text: null, // {string|null} optional text label
         icon: null, // {Node|null} optional icon, to the right of text
         textFill: GasPropertiesColorProfile.textFillProperty,
-        textMaxWidth: 250,
+        textMaxWidth: null,
         textIconSpacing: 10, // horizontal space between text and icon
         font: GasPropertiesConstants.CONTROL_FONT,
         checkboxColor: GasPropertiesColorProfile.checkboxStrokeProperty,

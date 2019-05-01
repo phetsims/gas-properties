@@ -31,6 +31,7 @@ define( require => {
 
       options = _.extend( {
         text: widthString,
+        textMaxWidth: 100,
         icon: GasPropertiesIconFactory.createContainerWidthIcon()
       }, options );
 

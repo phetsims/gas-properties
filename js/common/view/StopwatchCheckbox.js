@@ -31,6 +31,7 @@ define( require => {
 
       options = _.extend( {
         text: stopwatchString,
+        textMaxWidth: 100,
         icon: GasPropertiesIconFactory.createStopwatchIcon()
       }, options );
 

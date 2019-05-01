@@ -44,7 +44,8 @@ define( require => {
 
       const titleNode = new Text( title, {
         font: GasPropertiesConstants.CONTROL_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColorProfile.textFillProperty,
+        maxWidth: 150 // determined empirically
       } );
 
       const titleBox = new HBox( {

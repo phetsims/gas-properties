@@ -46,7 +46,7 @@ define( require => {
       }, options );
 
       // Limit width of title
-      options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
+      options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
       const vBox = new VBox( {
         align: 'left',

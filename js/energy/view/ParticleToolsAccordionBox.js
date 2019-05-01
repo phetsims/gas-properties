@@ -56,7 +56,7 @@ define( require => {
       }, options );
 
       // Limit width of title
-      options.titleNode.maxWidth = options.fixedWidth - options.buttonXMargin - options.titleXSpacing;
+      options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
       // Collisions checkbox
       const collisionsCheckbox = new GasPropertiesCheckbox( collisionsEnabledProperty, {
