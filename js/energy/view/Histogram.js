@@ -61,10 +61,12 @@ define( require => {
       assert && assert( options.yInterval > 0 && Util.isInteger( options.yInterval ),
         'yInterval must be a positive integer: ' + options.yInterval );
 
+      // Background appears behind plotted data
       const background = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
         fill: options.backgroundFill
       } );
 
+      // Outside border appears on top of plotted data
       const border = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
         stroke: options.borderStroke,
         lineWidth: options.borderLineWidth
