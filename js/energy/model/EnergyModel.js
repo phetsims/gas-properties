@@ -12,7 +12,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
-  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
+  const IdealModel = require( 'GAS_PROPERTIES/common/model/IdealModel' );
   const Property = require( 'AXON/Property' );
 
   // constants

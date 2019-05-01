@@ -11,7 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
-  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
+  const IdealModel = require( 'GAS_PROPERTIES/common/model/IdealModel' );
 
   class ExploreModel extends IdealModel {
 

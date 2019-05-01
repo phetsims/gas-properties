@@ -11,7 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
-  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
+  const IdealModel = require( 'GAS_PROPERTIES/common/model/IdealModel' );
   const IdealScreenView = require( 'GAS_PROPERTIES/ideal/view/IdealScreenView' );
 
   // strings
