@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for the 'Intro' screen. Also serves as the superclass model for the 'Explore' and 'Energy' screens.
+ * Base class for models in the Intro, Explore, and Energy screens.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
