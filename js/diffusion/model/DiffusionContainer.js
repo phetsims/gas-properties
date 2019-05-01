@@ -26,7 +26,7 @@ define( require => {
         location: Vector2.ZERO
       }, options );
 
-      // @public (read-only) lower-right corner, in nm, for consistency with other screens
+      // @public (read-only) location of the container's bottom right corner, in nm
       this.location = options.location;
 
       // @public (read-only) inside dimensions, in nm

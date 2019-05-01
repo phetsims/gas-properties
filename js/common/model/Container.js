@@ -20,10 +20,14 @@ define( require => {
 
   class Container {
 
-    constructor() {
+    constructor( options ) {
+
+      options = _.extend( {
+        location: Vector2.ZERO
+      }, options );
 
       // @public (read-only) location of the container's bottom right corner, in nm
-      this.location = new Vector2( 0, 0 );
+      this.location = options.location;
 
       // @public (read-only) range of the container's width, in nm
       this.widthRange = new RangeWithValue( 5, 15, 10 );
