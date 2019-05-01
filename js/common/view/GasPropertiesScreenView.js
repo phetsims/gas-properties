@@ -132,13 +132,23 @@ define( require => {
       const containerContainerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
         model.modelViewTransform, sizeVisibleProperty );
 
-      // Where the bicycle pump hose attaches to the container, in view coordinates
-      const hoseAttachmentPosition = new Vector2( containerNode.right,
+      // Radio buttons for selecting particle type
+      const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,
+        model.modelViewTransform, {
+          left: containerNode.right + 20,
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
+
+      // Bicycle pump is centered above the radio buttons.
+      const bicyclePumpLocation = new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 30 );
+
+      // Bicycle pump hose attaches to the container.
+      const hoseAttachmentPoint = new Vector2( containerNode.right,
         model.modelViewTransform.modelToViewY( model.container.hoseLocation.y ) );
 
       const bicyclePumpOptions = {
-        //TODO states-of-matter#217 I don't understand. Apparently this sets the pump location, relative to hoseAttachmentPosition?
-        hoseAttachmentOffset: new Vector2( -67, -130 ),
+        translation: bicyclePumpLocation,
+        hoseAttachmentOffset: hoseAttachmentPoint.minus( bicyclePumpLocation ),
         enabledProperty: model.isPlayingProperty,
         handleTouchAreaXDilation: 35,
         handleTouchAreaYDilation: 35
@@ -149,16 +159,14 @@ define( require => {
         _.extend( {
           bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty
         }, bicyclePumpOptions ) );
-      //TODO states-of-matter#217 should be able to set this via options
-      heavyBicyclePumpNode.setHoseAttachmentPosition( hoseAttachmentPosition );
+
+      console.log( `x=${heavyBicyclePumpNode.x} y=${heavyBicyclePumpNode.y}`);//XXX
 
       // Bicycle pump for light particles
       const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty,
         _.extend( {
           bodyFill: GasPropertiesColorProfile.lightParticleColorProperty
         }, bicyclePumpOptions ) );
-      //TODO states-of-matter#217 should be able to set this via options
-      lightBicyclePumpNode.setHoseAttachmentPosition( hoseAttachmentPosition );
 
       // Toggle button for switching between heavy and light bicycle pumps
       const bicyclePumpsToggleNode = new ToggleNode( particleTypeProperty, [
@@ -170,13 +178,6 @@ define( require => {
       particleTypeProperty.link( particleType => {
         bicyclePumpsToggleNode.interruptSubtreeInput();
       } );
-
-      // Radio buttons for selecting particle type
-      const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,
-        model.modelViewTransform, {
-          left: containerNode.right + 20,
-          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-        } );
 
       // Play/Pause/Step controls
       const playPauseStepControl = new PlayPauseStepControl( model, {
