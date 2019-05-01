@@ -81,7 +81,8 @@ define( require => {
         font: new PhetFont( 16 ),
         numberFill: GasPropertiesColorProfile.textFillProperty,
         backgroundFill: null,
-        backgroundStroke: null
+        backgroundStroke: null,
+        maxWidth: 150
       };
 
       const heavyNumberDisplay = new NumberDisplay( heavyMetersPerSecondProperty, numberDisplayRange, numberDisplayOptions );
