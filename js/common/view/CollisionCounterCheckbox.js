@@ -31,7 +31,7 @@ define( require => {
 
       options = _.extend( {
         text: collisionCounterString,
-        textMaxWidth: 100, // determined empirically
+        textMaxWidth: 125, // determined empirically
         icon: GasPropertiesIconFactory.createCollisionCounterIcon()
       }, options );
 
