@@ -13,11 +13,11 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
-  const Container = require( 'GAS_PROPERTIES/common/model/Container' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
@@ -95,7 +95,7 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.container = new Container();
+      this.container = new GasPropertiesContainer();
 
       // @public (read-only)
       this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ], {
@@ -468,7 +468,7 @@ define( require => {
   /**
    * Verifies that the container encloses all particles, surrounding them on all sides.
    * @param {Particle[]} particles
-   * @param {Container} container
+   * @param {GasPropertiesContainer} container
    */
   function assertContainerEnclosesParticles( container, particles ) {
     for ( let i = 0; i < particles.length; i++ ) {
@@ -480,7 +480,7 @@ define( require => {
   /**
    * Identifies particles that have escaped via the opening in the top of the container, and
    * moves them from insideParticles to outsideParticles.
-   * @param {Container} container
+   * @param {GasPropertiesContainer} container
    * @param {NumberProperty} numberOfParticlesProperty - number of particles inside the container
    * @param {Particle[]} insideParticles - particles inside the container
    * @param {Particle[]} outsideParticles - particles outside the container

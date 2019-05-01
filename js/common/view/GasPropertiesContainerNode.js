@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * View of the Container. Location of the right edge of the container remains fixed.
+ * View of the container in for the 'Ideal', 'Explorer', and 'Energy' screens.
+ * This container has mutable width, and a lid that can be moved/removed.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,10 +22,10 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
 
-  class ContainerNode extends Node {
+  class GasPropertiesContainerNode extends Node {
 
     /**
-     * @param {Container} container
+     * @param {GasPropertiesContainer} container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {EnumerationProperty} holdConstantProperty
      * @param {Property.<Bounds2>} visibleBoundsProperty
@@ -75,7 +76,7 @@ define( require => {
         handleColor: options.lidGripColor
       } );
 
-      assert && assert( !options.children, 'ContainerNode sets children' );
+      assert && assert( !options.children, 'GasPropertiesContainerNode sets children' );
       options = _.extend( {
         children: [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ]
       }, options );
@@ -194,7 +195,7 @@ define( require => {
     }
   }
 
-  gasProperties.register( 'ContainerNode', ContainerNode );
+  gasProperties.register( 'GasPropertiesContainerNode', GasPropertiesContainerNode );
 
   /**
    * Drag listener for the container's resize handle, changes the container's width.
@@ -203,7 +204,7 @@ define( require => {
   class ResizeHandleDragListener extends DragListener {
 
     /**
-     * @param {Container} container
+     * @param {GasPropertiesContainer} container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Node} parentNode
      */
@@ -246,7 +247,7 @@ define( require => {
   class LidDragListener extends DragListener {
 
     /**
-     * @param {Container} container
+     * @param {GasPropertiesContainer} container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Node} parentNode
      */
@@ -286,5 +287,5 @@ define( require => {
     }
   }
 
-  return ContainerNode;
+  return GasPropertiesContainerNode;
 } );

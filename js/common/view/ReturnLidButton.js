@@ -20,7 +20,7 @@ define( require => {
   class ReturnLidButton extends RectangularPushButton {
 
     /**
-     * @param {Container} container
+     * @param {GasPropertiesContainer} container
      * @param {Object} [options]
      */
     constructor( container, options ) {

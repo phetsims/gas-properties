@@ -1,7 +1,7 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2019, University of Colorado Boulder
 
 /**
- * A rectangular container for particles. Origin is at the bottom-right corner. Width increases to the left.
+ * Container for the 'Ideal', 'Explore', and 'Energy' screens, adds a movable/removable lid.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,49 +9,16 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseContainer = require( 'GAS_PROPERTIES/common/model/BaseContainer' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const RangeWithValue = require( 'DOT/RangeWithValue' );
-  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  class Container {
+  class GasPropertiesContainer extends BaseContainer {
 
     constructor( options ) {
-
-      options = _.extend( {
-        location: Vector2.ZERO
-      }, options );
-
-      // @public (read-only) location of the container's bottom right corner, in nm
-      this.location = options.location;
-
-      // @public (read-only) range of the container's width, in nm
-      this.widthRange = new RangeWithValue( 5, 15, 10 );
-
-      // @public width of the container, in nm
-      this.widthProperty = new NumberProperty( this.widthRange.defaultValue, {
-        range: this.widthRange,
-        units: 'nm'
-      } );
-
-      // @public (read-only) height of the container, in nm
-      this.height = 8.75;
-
-      // @private (read-only) depth of the container, in nm
-      this.depth = GasPropertiesQueryParameters.containerDepth;
-
-      // @public (read-only) wall thickness, in nm
-      this.wallThickness = 0.05;
-
-      // @public (read-only) inside bounds, in nm
-      this.bounds = new Bounds2(
-        this.location.x - this.widthProperty.value, this.location.y,
-        this.location.x, this.location.y + this.height
-      );
+      super( options );
 
       // @public whether the lid is on the container
       this.lidIsOnProperty = new BooleanProperty( true );
@@ -81,43 +48,18 @@ define( require => {
       // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in nm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 5 );
 
-      // Adjust bounds
-      this.widthProperty.link( width => {
-        this.bounds.setMinX( this.location.x - width );
-      } );
-
       // Validate lidWidth, whose range changes dynamically.
       assert && this.lidWidthProperty.link( lidWidth => {
         assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.maxLidWidth, `invalid lidWidth: ${lidWidth}` );
       } );
     }
 
-    // @public
+    // @public @override
     reset() {
-      this.widthProperty.reset();
+      super.reset();
       this.lidIsOnProperty.reset();
       this.lidWidthProperty.reset();
     }
-
-    /**
-     * Gets the volume of the container.
-     * @returns {number} in nm^3
-     */
-    get volume() { return this.widthProperty.value * this.height * this.depth; }
-
-    /**
-     * Convenience getters for inner bounds of the container, in model coordinate frame.
-     * Bounds2 has similar getters, but use view coordinate frame, where 'top' is minY and 'bottom' is maxY.
-     * @returns {number} in nm
-     * @public
-     */
-    get left() { return this.bounds.minX; }
-
-    get right() { return this.bounds.maxX; }
-
-    get bottom() { return this.bounds.minY; }
-
-    get top() { return this.bounds.maxY; }
 
     /**
      * Gets the maximum lid width, when the lid is fully closed.
@@ -154,22 +96,7 @@ define( require => {
       return openingWidth;
     }
 
-    /**
-     * Determines whether the container surrounds a particle on all sides. Accounts for the particle's radius.
-     * @param {Particle} particle
-     * @returns {boolean}
-     * @public
-     */
-    enclosesParticle( particle ) {
-
-      // Util.toFixedNumber is a threshold comparison, necessary due to floating-point error.
-      const decimalPlaces = 3;
-      return Util.toFixedNumber( particle.left, decimalPlaces ) >= Util.toFixedNumber( this.left, decimalPlaces ) &&
-             Util.toFixedNumber( particle.right, decimalPlaces ) <= Util.toFixedNumber( this.right, decimalPlaces ) &&
-             Util.toFixedNumber( particle.top, decimalPlaces ) <= Util.toFixedNumber( this.top, decimalPlaces ) &&
-             Util.toFixedNumber( particle.bottom, decimalPlaces ) >= Util.toFixedNumber( this.bottom, decimalPlaces );
-    }
   }
 
-  return gasProperties.register( 'Container', Container );
+  return gasProperties.register( 'GasPropertiesContainer', GasPropertiesContainer );
 } );

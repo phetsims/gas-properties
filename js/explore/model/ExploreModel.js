@@ -21,7 +21,7 @@ define( require => {
         holdConstant: HoldConstantEnum.NOTHING
       } );
 
-      //TODO would like to avoid this, but may be the best option
+      // In case clients attempt to exercise this feature of the base class
       this.holdConstantProperty.lazyLink( holdConstant => {
         throw new Error( 'holdConstant is fixed in this screen' );
       } );

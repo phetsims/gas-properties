@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * The container in the 'Diffusion' screen.
+ * View of the container in the 'Diffusion' screen.
+ * This container has a fixed with and a removable vertical divider.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

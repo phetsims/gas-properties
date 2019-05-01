@@ -5,8 +5,6 @@ UP NEXT
 #55 Support mutable particle radius in model and view
 
 Combine ParticlesNode and DiffusionParticlesNode
-Combine Container and DiffusionContainer into 1 class, with optional lid, divider, mutable width
-Combine ContainerNode and DiffusionContainerNode into 1 class, with optional lid, divider, mutable width
 
 Intro: hold constant, see HoldConstantEnum
 

@@ -27,12 +27,12 @@ define( require => {
 
   // modules
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
-  const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesBicyclePumpNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesBicyclePumpNode' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesContainerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesContainerNode' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
@@ -89,7 +89,7 @@ define( require => {
       let containerWidth = model.container.widthProperty.value;
 
       // Container
-      const containerNode = new ContainerNode( model.container, model.modelViewTransform,
+      const containerNode = new GasPropertiesContainerNode( model.container, model.modelViewTransform,
         model.holdConstantProperty, this.visibleBoundsProperty, {
           resizeGripColor: options.resizeGripColor,
           resizeHandleIsPressedListener: isPressed => {
