@@ -19,14 +19,19 @@ We're using _AMU * nm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://git
 for the full list of units used in the model.
 
 
-Class hierarchies:
+Top-level class hierarchies:
 
+Model:
+```
 GasPropertiesModel
   IdealModel
     ExploreModel
     EnergyModel
   DiffusionModel
+```
   
+View:
+```
 ScreenView
   GasPropertiesScreenView( IdealModel )
     IdealScreenView( IdealModel ), IdealViewProperties
@@ -39,3 +44,4 @@ GasPropertiesViewProperties
   ExploreViewProperties
   EnergyViewProperties
 DiffusionViewProperties
+```
