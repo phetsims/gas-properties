@@ -136,24 +136,28 @@ define( require => {
       const hoseAttachmentPosition = new Vector2( containerNode.right,
         model.modelViewTransform.modelToViewY( model.container.hoseLocation.y ) );
 
-      //TODO states-of-matter#217 I don't understand. Apparently this sets the pump location, relative to hoseAttachmentPosition?
-      const hoseAttachmentOffset = new Vector2( -67, -130 );
-      
-      // Bicycle pump for heavy particles
-      const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfHeavyParticlesProperty, {
-        bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty,
+      const bicyclePumpOptions = {
+        //TODO states-of-matter#217 I don't understand. Apparently this sets the pump location, relative to hoseAttachmentPosition?
+        hoseAttachmentOffset: new Vector2( -67, -130 ),
         enabledProperty: model.isPlayingProperty,
-        hoseAttachmentOffset: hoseAttachmentOffset
-      } );
+        handleTouchAreaXDilation: 35,
+        handleTouchAreaYDilation: 35
+      };
+
+      // Bicycle pump for heavy particles
+      const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfHeavyParticlesProperty,
+        _.extend( {
+          bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty
+        }, bicyclePumpOptions ) );
       //TODO states-of-matter#217 should be able to set this via options
       heavyBicyclePumpNode.setHoseAttachmentPosition( hoseAttachmentPosition );
 
       // Bicycle pump for light particles
-      const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty, {
-        bodyFill: GasPropertiesColorProfile.lightParticleColorProperty,
-        enabledProperty: model.isPlayingProperty,
-        hoseAttachmentOffset: hoseAttachmentOffset
-      } );
+      const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty,
+        _.extend( {
+        bodyFill: GasPropertiesColorProfile.lightParticleColorProperty
+      }, bicyclePumpOptions ) );
+      //TODO states-of-matter#217 should be able to set this via options
       lightBicyclePumpNode.setHoseAttachmentPosition( hoseAttachmentPosition );
 
       // Toggle button for switching between heavy and light bicycle pumps
