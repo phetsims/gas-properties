@@ -132,19 +132,6 @@ define( require => {
     }
 
     /**
-     * See options.yInterval
-     * @param {number} yInterval
-     * @public
-     */
-    setYInterval( yInterval ) {
-      assert && assert( yInterval > 0 && Util.isInteger( yInterval ), 'yInterval must be a positive integer: ' + yInterval );
-      if ( yInterval !== this.yInterval ) {
-        this.yInterval = yInterval;
-        this.intervalLinesDirty = true;
-      }
-    }
-
-    /**
      * Adds a data set to the histogram.  Data sets are rendered in the order that they are added.
      * @param {DataSet} dataSet
      * @public
@@ -167,29 +154,30 @@ define( require => {
      */
     update() {
       this.updatePlots();
-      if ( this.intervalLinesDirty ) {
-        this.updateIntervalLines();
-        this.intervalLinesDirty = false;
-      }
+      this.updateIntervalLines();
     }
 
     /**
-     * Updates the horizontal interval lines.
+     * Updates the horizontal interval lines.  This is a no-op if !this.intervalLinesDirty.
      * @private
      */
     updateIntervalLines() {
+      if ( this.intervalLinesDirty ) {
 
-      const shape = new Shape();
+        const shape = new Shape();
 
-      const numberOfLines = Math.floor( this.maxY / this.yInterval );
-      const ySpacing = ( this.yInterval / this.maxY ) * this.chartSize.height;
+        const numberOfLines = Math.floor( this.maxY / this.yInterval );
+        const ySpacing = ( this.yInterval / this.maxY ) * this.chartSize.height;
 
-      for ( let i = 1; i <= numberOfLines; i++ ) {
-        const y = this.chartSize.height - ( i * ySpacing );
-        shape.moveTo( 0, y ).lineTo( this.chartSize.width, y );
+        for ( let i = 1; i <= numberOfLines; i++ ) {
+          const y = this.chartSize.height - ( i * ySpacing );
+          shape.moveTo( 0, y ).lineTo( this.chartSize.width, y );
+        }
+
+        this.intervalLines.shape = shape;
+
+        this.intervalLinesDirty = false;
       }
-
-      this.intervalLines.shape = shape;
     }
 
     /**
