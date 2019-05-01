@@ -2,6 +2,7 @@
 
 /**
  * Model for the 'Ideal' screen.
+ * Adds no additional functionality to the base class, but provided for symmetry in the model-view type hierarchy.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,7 +16,6 @@ define( require => {
   class IdealModel extends GasPropertiesModel {
 
     constructor() {
-      //TODO move holdConstantProperty here
       super();
     }
   }
