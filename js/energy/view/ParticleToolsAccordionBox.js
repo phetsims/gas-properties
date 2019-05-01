@@ -60,12 +60,14 @@ define( require => {
 
       // Collisions checkbox
       const collisionsCheckbox = new GasPropertiesCheckbox( collisionsEnabledProperty, {
-        text: collisionsString
+        text: collisionsString,
+        textMaxWidth: 175 // determined empirically
       } );
 
       // Control Temperature checkbox
       const controlTemperatureCheckbox = new GasPropertiesCheckbox( controlTemperatureEnabledProperty, {
-        text: controlTemperatureString
+        text: controlTemperatureString,
+        textMaxWidth: 175 // determined empirically
       } );
 
       // Major ticks for temperature slider
@@ -89,13 +91,15 @@ define( require => {
         layoutFunction: NumberControl.createLayoutFunction4(),
         titleNodeOptions: {
           fill: GasPropertiesColorProfile.textFillProperty,
-          font: GasPropertiesConstants.CONTROL_FONT
+          font: GasPropertiesConstants.CONTROL_FONT,
+          maxWidth: 125
         },
         numberDisplayOptions: {
           font: GasPropertiesConstants.CONTROL_FONT,
           valuePattern: StringUtils.fillIn( valueUnitsString, {
             units: kelvinString
-          } )
+          } ),
+          maxWidth: 75
         },
         sliderOptions: {
           trackSize: new Dimension2( 120, 5 ),
