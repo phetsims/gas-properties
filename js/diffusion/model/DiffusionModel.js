@@ -232,6 +232,8 @@ define( require => {
         const x = phet.joist.random.nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
         const y = phet.joist.random.nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
         particle.setLocationXY( x, y );
+        assert && assert( locationBounds.containsPoint( particle.location ),
+          'oops, particle is outside of locationBounds' );
 
         // Set the initial velocity, based on initial temperature and mass.
         particle.setVelocityPolar(
