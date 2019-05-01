@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO placeholder, see https://github.com/phetsims/states-of-matter/issues/217
 /**
  * Bicycle pump, used to add particles to the container.
  *
@@ -22,7 +21,7 @@ define( require => {
   // constants
   const PARTICLES_PER_PUMP = 20;
 
-  class BicyclePumpNode extends Node {
+  class GasPropertiesBicyclePumpNode extends Node {
 
     /**
      * @param {NumberProperty} numberOfParticlesProperty
@@ -70,7 +69,7 @@ define( require => {
         center: progressBar.center
       } );
 
-      assert && assert( !options.children, 'BicyclePumpNode sets children' );
+      assert && assert( !options.children, 'GasPropertiesBicyclePumpNode sets children' );
       options = _.extend( {
         children: [ background, pumpButton, progressBar, fillBar ]
       }, options );
@@ -85,6 +84,6 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'BicyclePumpNode', BicyclePumpNode );
+  return gasProperties.register( 'GasPropertiesBicyclePumpNode', GasPropertiesBicyclePumpNode );
 } );
  

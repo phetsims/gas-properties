@@ -26,10 +26,10 @@ define( require => {
   'use strict';
 
   // modules
-  const BicyclePumpNode = require( 'GAS_PROPERTIES/common/view/BicyclePumpNode' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesBicyclePumpNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesBicyclePumpNode' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
@@ -138,7 +138,7 @@ define( require => {
         // Bicycle pump for heavy particles
         {
           value: ParticleType.HEAVY,
-          node: new BicyclePumpNode( model.numberOfHeavyParticlesProperty, {
+          node: new GasPropertiesBicyclePumpNode( model.numberOfHeavyParticlesProperty, {
             color: GasPropertiesColorProfile.heavyParticleColorProperty
           } )
         },
@@ -146,7 +146,7 @@ define( require => {
         // Bicycle pump for light particles
         {
           value: ParticleType.LIGHT,
-          node: new BicyclePumpNode( model.numberOfLightParticlesProperty, {
+          node: new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty, {
             color: GasPropertiesColorProfile.lightParticleColorProperty
           } )
         }
