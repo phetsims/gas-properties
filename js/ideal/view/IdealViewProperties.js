@@ -2,6 +2,7 @@
 
 /**
  * Properties that are specific to the view in the 'Ideal' screen.
+ * Adds no additional Properties to the base class, but provided for symmetry in the model-view type hierarchy.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
