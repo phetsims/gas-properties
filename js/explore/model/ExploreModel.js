@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Explore' screen, a variation of the 'Ideal' model.
+ * Model for the 'Explore' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,10 +10,10 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
-  const IdealModel = require( 'GAS_PROPERTIES/common/model/IdealModel' );
 
-  class ExploreModel extends IdealModel {
+  class ExploreModel extends GasPropertiesModel {
 
     constructor() {
 

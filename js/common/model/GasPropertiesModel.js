@@ -38,7 +38,7 @@ define( require => {
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
-  class IdealModel extends BaseModel {
+  class GasPropertiesModel extends BaseModel {
 
     constructor( options ) {
 
@@ -498,5 +498,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'IdealModel', IdealModel );
+  return gasProperties.register( 'GasPropertiesModel', GasPropertiesModel );
 } );

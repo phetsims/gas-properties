@@ -24,7 +24,8 @@ Top-level class hierarchies:
 Model:
 ```
 BaseModel
-  IdealModel
+  GasPropertiesModel
+    IdealModel
     ExploreModel
     EnergyModel
   DiffusionModel

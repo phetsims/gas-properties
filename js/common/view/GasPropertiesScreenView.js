@@ -34,9 +34,9 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
-  const IdealModel = require( 'GAS_PROPERTIES/common/model/IdealModel' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
@@ -56,14 +56,14 @@ define( require => {
   class GasPropertiesScreenView extends ScreenView {
 
     /**
-     * @param {IdealModel} model
+     * @param {GasPropertiesModel} model
      * @param {Property.<ParticleType>} particleTypeProperty
      * @param {BooleanProperty} sizeVisibleProperty
      * @param {Object} [options]
      */
     constructor( model, particleTypeProperty, sizeVisibleProperty, options ) {
 
-      assert && assert( model instanceof IdealModel, `invalid model: ${model}` );
+      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
 
       options = _.extend( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty

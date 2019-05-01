@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Energy' screen, an extension of the 'Ideal' model.
+ * Model for the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,9 +10,9 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
-  const IdealModel = require( 'GAS_PROPERTIES/common/model/IdealModel' );
   const Property = require( 'AXON/Property' );
 
   // constants
@@ -22,7 +22,7 @@ define( require => {
   };
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.averageSpeedSamplePeriod; // ps
 
-  class EnergyModel extends IdealModel {
+  class EnergyModel extends GasPropertiesModel {
 
     constructor() {
 
