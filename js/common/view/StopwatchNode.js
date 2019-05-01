@@ -35,7 +35,8 @@ define( require => {
         maxValue: 999.99,
         timerReadoutNodeOptions: {
           unitsNode: new Text( picosecondsString, {
-            font: TimerReadoutNode.DEFAULT_SMALL_FONT
+            font: TimerReadoutNode.DEFAULT_SMALL_FONT,
+            maxWidth: 30 // deterimined empirically
           } )
         }
       }, options );

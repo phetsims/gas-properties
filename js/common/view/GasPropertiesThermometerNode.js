@@ -29,9 +29,6 @@ define( require => {
         align: 'center'
       }, options );
 
-      // ComboBox that displays dynamic temperature for various units, centered above the thermometer
-      const temperatureDisplay = new TemperatureDisplay( thermometer, listParent );
-
       // temperatureProperty is null when there are no particles in the container.
       // Map null to zero, since ThermometerNode doesn't support null values.
       const temperatureNumberProperty = new DerivedProperty( [ thermometer.temperatureKelvinProperty ],
@@ -49,6 +46,11 @@ define( require => {
           minorTickLength: 6,
           lineWidth: 1
         } );
+
+      // ComboBox that displays dynamic temperature for various units, centered above the thermometer
+      const temperatureDisplay = new TemperatureDisplay( thermometer, listParent, {
+        maxWidth: 4 * thermometerNode.width
+      } );
 
       options.children = [ temperatureDisplay, thermometerNode ];
 

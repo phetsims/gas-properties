@@ -60,7 +60,8 @@ define( require => {
       }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
-        font: LABEL_FONT
+        font: LABEL_FONT,
+        maxWidth: 110 // determined empirically
       } );
 
       const valueDisplay = new NumberDisplay( collisionCounter.numberOfCollisionsProperty, NUMBER_DISPLAY_RANGE, {
@@ -76,7 +77,8 @@ define( require => {
 
       const samplePeriodTextNode = new Text( samplePeriodString, {
         font: LABEL_FONT,
-        left: X_MARGIN
+        left: X_MARGIN,
+        maxWidth: 110 // determined empirically
       } );
 
       // Combo box items
@@ -88,7 +90,8 @@ define( require => {
           units: picosecondsString
         } );
         const node = new Text( samplePeriodString, {
-          font: CONTROL_FONT
+          font: CONTROL_FONT,
+          maxWidth: 100 // determined empirically
         } );
         return new ComboBoxItem( node, samplePeriod );
       } );
@@ -117,6 +120,7 @@ define( require => {
           comboBox
         ]
       } );
+      console.log( 'content.width=' + content.width );//XXX
 
       // Background, sized to fit the content
       const backgroundNode = new Rectangle( 0, 0, content.width + ( 2 * X_MARGIN ), content.height + ( 2 * Y_MARGIN ), {
