@@ -70,6 +70,7 @@ define( require => {
         lineWidth: options.borderLineWidth
       } );
 
+      // parent Node for all plotted data
       const plotNodesParent = new Node();
 
       // horizontal lines that appear at equally-spaced intervals based on y-axis scale
