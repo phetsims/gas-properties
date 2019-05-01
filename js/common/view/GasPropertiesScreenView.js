@@ -88,45 +88,45 @@ define( require => {
       // Container
       const containerNode = new ContainerNode( model.container, model.modelViewTransform,
         model.holdConstantProperty, this.visibleBoundsProperty, {
-        resizeGripColor: options.resizeGripColor,
-        resizeHandleIsPressedListener: isPressed => {
-          if ( isPressed ) {
+          resizeGripColor: options.resizeGripColor,
+          resizeHandleIsPressedListener: isPressed => {
+            if ( isPressed ) {
 
-            // save playing state, pause the sim, and disable time controls
-            wasPlaying = model.isPlayingProperty.value;
-            model.isPlayingProperty.value = false;
-            model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
-            if ( model.collisionCounter ) {
-              model.collisionCounter.isRunningProperty.value = false;
+              // save playing state, pause the sim, and disable time controls
+              wasPlaying = model.isPlayingProperty.value;
+              model.isPlayingProperty.value = false;
+              model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
+              if ( model.collisionCounter ) {
+                model.collisionCounter.isRunningProperty.value = false;
+              }
+
+              // gray out the particles
+              particlesNode.opacity = 0.6;
+
+              // remember width of container
+              containerWidth = model.container.widthProperty.value;
             }
+            else {
 
-            // gray out the particles
-            particlesNode.opacity = 0.6;
+              // enable time controls and restore playing state
+              model.isTimeControlsEnabledProperty.value = true;
+              model.isPlayingProperty.value = wasPlaying;
 
-            // remember width of container
-            containerWidth = model.container.widthProperty.value;
-          }
-          else {
+              // make particles opaque
+              particlesNode.opacity = 1;
 
-            // enable time controls and restore playing state
-            model.isTimeControlsEnabledProperty.value = true;
-            model.isPlayingProperty.value = wasPlaying;
-
-            // make particles opaque
-            particlesNode.opacity = 1;
-
-            if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
-              model.redistributeParticles( model.container.widthProperty.value / containerWidth );
+              if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
+                model.redistributeParticles( model.container.widthProperty.value / containerWidth );
+              }
             }
           }
-        }
+        } );
+
+      // Return Lid button
+      const returnLidButton = new ReturnLidButton( model.container, {
+        right: model.modelViewTransform.modelToViewX( model.container.right - model.container.openingRightInset ) - 30,
+        bottom: model.modelViewTransform.modelToViewY( model.container.top ) - 15
       } );
-
-     // Return Lid button
-     const returnLidButton = new ReturnLidButton( model.container, {
-       right:  model.modelViewTransform.modelToViewX( model.container.right - model.container.openingRightInset ) - 30,
-       bottom: model.modelViewTransform.modelToViewY( model.container.top ) - 15
-     } );
 
       // Dimensional arrows that indicate container size
       const containerContainerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
@@ -155,8 +155,8 @@ define( require => {
       // Bicycle pump for light particles
       const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty,
         _.extend( {
-        bodyFill: GasPropertiesColorProfile.lightParticleColorProperty
-      }, bicyclePumpOptions ) );
+          bodyFill: GasPropertiesColorProfile.lightParticleColorProperty
+        }, bicyclePumpOptions ) );
       //TODO states-of-matter#217 should be able to set this via options
       lightBicyclePumpNode.setHoseAttachmentPosition( hoseAttachmentPosition );
 
@@ -230,7 +230,7 @@ define( require => {
       } );
 
       // Show how the collision detection space is partitioned into regions
-      let regionsNode =  null;
+      let regionsNode = null;
       if ( GasPropertiesQueryParameters.regions ) {
         regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
       }
