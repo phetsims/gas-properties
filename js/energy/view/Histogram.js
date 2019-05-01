@@ -50,7 +50,7 @@ define( require => {
         // options for the horizontal interval lines
         intervalLineOptions: {
           stroke: 'white', // {ColorDef}
-          opacity: 0.5,
+          opacity: 0.5, // (0,1)
           lineWidth: 0.5
         }
 
