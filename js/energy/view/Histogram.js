@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -74,30 +75,39 @@ define( require => {
       const intervalLines = new Path( null, options.intervalLineOptions );
 
       // position the x-axis label
-      xAxisLabel.maxWidth = background.width;
+      xAxisLabel.maxWidth = 0.65 * background.width; // leave room for out-of-range ellipsis!
       xAxisLabel.centerX = background.centerX;
       xAxisLabel.top = background.bottom + 5;
 
       // position the y-axis label
       yAxisLabel.rotation = -Math.PI / 2;
-      yAxisLabel.maxWidth = background.height;
+      yAxisLabel.maxWidth = 0.85 * background.height;
       yAxisLabel.right = background.left - 8;
       yAxisLabel.centerY = background.centerY;
 
+      //TODO temporary 'out of range' indicator for x axis, ellipsis
+      // ellipsis to indicate x-axis data out of range
+      const ellipsisNode = new Text( ELLIPSIS_STRING, {
+        font: new PhetFont( 14 ),
+        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+        right: background.right,
+        centerY: xAxisLabel.centerY
+      } );
+
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [ background, intervalLines, plotNodesParent, border, xAxisLabel, yAxisLabel ]
+        children: [ background, intervalLines, plotNodesParent, border, xAxisLabel, yAxisLabel, ellipsisNode ]
       }, options );
 
       super( options );
 
       // @private
-      this.background = background;
       this.intervalLines = intervalLines;
       this.plotNodesParent = plotNodesParent;
       this.numberOfBins = numberOfBins;
       this.binWidth = binWidth;
       this.chartSize = options.chartSize;
+      this.ellipsisNode = ellipsisNode;
       this.maxY = options.maxY;
       this.yInterval = options.yInterval;
       this.dataSets = []; // {number[]}
@@ -189,6 +199,8 @@ define( require => {
 
       const maxX = this.numberOfBins * this.binWidth;
 
+      let numberOfValuesOutOfRange = 0;
+
       // Create new plots
       for ( let i = 0; i < this.dataSets.length; i++ ) {
 
@@ -205,21 +217,12 @@ define( require => {
           this.plotLines( counts, dataSet.color );
         }
 
-        //TODO temporary 'out of range' indicator for x axis, ellipsis
-        //TODO should this be implemented more efficiently?
-        //TODO there should be one indicator, not one per data set
-        const outOfRangeValues = _.filter( dataSet.values, value => ( value > maxX ) );
-        if ( outOfRangeValues.length > 0 ) {
-          this.plotNodesParent.addChild( new Text( ELLIPSIS_STRING, {
-            font: new PhetFont( 14 ),
-            fill: dataSet.color,
-
-            //TODO x-axis label will overlap ellipsis
-            right: this.background.right,
-            top: this.background.bottom + 4
-          } ) );
-        }
+        // count the number of values that exceed the x range
+        numberOfValuesOutOfRange += _.filter( dataSet.values, value => ( value > maxX ) ).length;
       }
+
+      // If there are values out of range, make the ellipsis visible.
+      this.ellipsisNode.visible = ( numberOfValuesOutOfRange > 0 );
     }
 
     //TODO should this be implemented more efficiently?
