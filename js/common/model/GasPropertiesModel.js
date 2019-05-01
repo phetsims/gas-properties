@@ -2,7 +2,7 @@
 
 /**
  * Base class for models in all screens.
- * Primarily responsible for Properties and model elements related to bounds and time.
+ * Primarily responsible for Properties and model elements related to bounds, model-view transform, and time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
