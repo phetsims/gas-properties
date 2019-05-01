@@ -74,8 +74,8 @@ define( require => {
       // maxLidWidth is dynamic, see ES5 getter.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
-      // @public (read-only) bicycle pump hose is connected to the outside right side of the container, in nm
-      this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 2 );
+      // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in nm
+      this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 5 );
 
       // Adjust bounds
       this.widthProperty.link( width => {

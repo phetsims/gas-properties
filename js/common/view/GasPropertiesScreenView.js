@@ -28,6 +28,7 @@ define( require => {
   // modules
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerNode = require( 'GAS_PROPERTIES/common/view/ContainerNode' );
+  const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesBicyclePumpNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesBicyclePumpNode' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -49,8 +50,7 @@ define( require => {
   const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const ToggleNode = require( 'SUN/ToggleNode' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
-  const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   class GasPropertiesScreenView extends ScreenView {
 
@@ -132,24 +132,34 @@ define( require => {
       const containerContainerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
         model.modelViewTransform, sizeVisibleProperty );
 
-      // Bicycle pumps, one of which is visible depending on the selected particle type
+      // Where the bicycle pump hose attaches to the container, in view coordinates
+      const hoseAttachmentPosition = new Vector2( containerNode.right,
+        model.modelViewTransform.modelToViewY( model.container.hoseLocation.y ) );
+
+      //TODO states-of-matter#217 I don't understand. Apparently this sets the pump location, relative to hoseAttachmentPosition?
+      const hoseAttachmentOffset = new Vector2( -67, -130 );
+      
+      // Bicycle pump for heavy particles
+      const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfHeavyParticlesProperty, {
+        bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty,
+        enabledProperty: model.isPlayingProperty,
+        hoseAttachmentOffset: hoseAttachmentOffset
+      } );
+      //TODO states-of-matter#217 should be able to set this via options
+      heavyBicyclePumpNode.setHoseAttachmentPosition( hoseAttachmentPosition );
+
+      // Bicycle pump for light particles
+      const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty, {
+        bodyFill: GasPropertiesColorProfile.lightParticleColorProperty,
+        enabledProperty: model.isPlayingProperty,
+        hoseAttachmentOffset: hoseAttachmentOffset
+      } );
+      lightBicyclePumpNode.setHoseAttachmentPosition( hoseAttachmentPosition );
+
+      // Toggle button for switching between heavy and light bicycle pumps
       const bicyclePumpsToggleNode = new ToggleNode( particleTypeProperty, [
-
-        // Bicycle pump for heavy particles
-        {
-          value: ParticleType.HEAVY,
-          node: new GasPropertiesBicyclePumpNode( model.numberOfHeavyParticlesProperty, {
-            color: GasPropertiesColorProfile.heavyParticleColorProperty
-          } )
-        },
-
-        // Bicycle pump for light particles
-        {
-          value: ParticleType.LIGHT,
-          node: new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty, {
-            color: GasPropertiesColorProfile.lightParticleColorProperty
-          } )
-        }
+        { value: ParticleType.HEAVY, node: heavyBicyclePumpNode },
+        { value: ParticleType.LIGHT, node: lightBicyclePumpNode }
       ] );
 
       // Cancel interaction with the pump when particle type changes.
@@ -159,19 +169,10 @@ define( require => {
 
       // Radio buttons for selecting particle type
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,
-        model.modelViewTransform );
-
-      // Bicycle pumps + radio buttons
-      const pumpBox = new VBox( {
-        align: 'center',
-        spacing: 15,
-        children: [
-          bicyclePumpsToggleNode,
-          particleTypeRadioButtonGroup
-        ],
-        left: containerNode.right + 20,
-        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+        model.modelViewTransform, {
+          left: containerNode.right + 20,
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
 
       // Play/Pause/Step controls
       const playPauseStepControl = new PlayPauseStepControl( model, {
@@ -249,7 +250,8 @@ define( require => {
 
       // rendering order
       regionsNode && this.addChild( regionsNode );
-      this.addChild( pumpBox );
+      this.addChild( particleTypeRadioButtonGroup );
+      this.addChild( bicyclePumpsToggleNode );
       this.addChild( pressureGaugeNode );
       this.addChild( containerNode );
       this.addChild( thermometerNode );
@@ -269,12 +271,16 @@ define( require => {
       this.model = model;
       this.particlesNode = particlesNode;
       this.regionsNode = regionsNode;
+      this.heavyBicyclePumpNode = heavyBicyclePumpNode;
+      this.lightBicyclePumpNode = lightBicyclePumpNode;
     }
 
     // @protected
     reset() {
       this.interruptSubtreeInput(); // cancel interactions that are in progress
       this.model.reset();
+      this.heavyBicyclePumpNode.reset();
+      this.lightBicyclePumpNode.reset();
     }
 
     /**
