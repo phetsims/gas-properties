@@ -159,8 +159,6 @@ define( require => {
           bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty
         }, bicyclePumpOptions ) );
 
-      console.log( `x=${heavyBicyclePumpNode.x} y=${heavyBicyclePumpNode.y}`);//XXX
-
       // Bicycle pump for light particles
       const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty,
         _.extend( {

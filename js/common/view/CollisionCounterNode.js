@@ -120,7 +120,6 @@ define( require => {
           comboBox
         ]
       } );
-      console.log( 'content.width=' + content.width );//XXX
 
       // Background, sized to fit the content
       const backgroundNode = new Rectangle( 0, 0, content.width + ( 2 * X_MARGIN ), content.height + ( 2 * Y_MARGIN ), {
