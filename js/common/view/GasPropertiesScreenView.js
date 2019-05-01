@@ -143,11 +143,11 @@ define( require => {
       const bicyclePumpLocation = new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 30 );
 
       // Bicycle pump hose attaches to the container.
-      const hoseAttachmentPoint = model.modelViewTransform.modelToViewPosition( model.container.hoseLocation );
+      const hoseLocation = model.modelViewTransform.modelToViewPosition( model.container.hoseLocation );
 
       const bicyclePumpOptions = {
         translation: bicyclePumpLocation,
-        hoseAttachmentOffset: hoseAttachmentPoint.minus( bicyclePumpLocation ),
+        hoseAttachmentOffset: hoseLocation.minus( bicyclePumpLocation ),
         enabledProperty: model.isPlayingProperty,
         handleTouchAreaXDilation: 35,
         handleTouchAreaYDilation: 35
