@@ -2,8 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Integrate BicyclePumpNode
-
 #55 Support mutable particle radius in model and view
 
 Combine ParticlesNode and DiffusionParticlesNode
