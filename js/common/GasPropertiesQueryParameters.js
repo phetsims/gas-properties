@@ -73,7 +73,7 @@ define( require => {
     maxPressure: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 50000
+      defaultValue: 20000
     },
 
     //TODO #51 choose a value and delete
@@ -145,7 +145,7 @@ define( require => {
     containerDepth: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 1
+      defaultValue: 2
     },
 
     //TODO #50 choose a value and delete
@@ -163,7 +163,7 @@ define( require => {
     maxJitter: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 50
+      defaultValue: 200
     },
 
     //TODO #50 choose a value and delete
@@ -172,7 +172,7 @@ define( require => {
     pressureGaugeSamplePeriod: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 0.25
+      defaultValue: 0.75
     }
   } );
 
