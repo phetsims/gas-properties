@@ -24,7 +24,7 @@ define( require => {
     constructor( model, options ) {
 
       options = _.extend( {
-        spacing: 35,
+        spacing: 25,
         align: 'center'
       }, options );
 

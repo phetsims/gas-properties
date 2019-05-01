@@ -31,12 +31,11 @@ define( require => {
 
       options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        fixedWidth: 100,
-
         // AccordionBox options
         titleNode: new Text( dataString, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColorProfile.textFillProperty
+          fill: GasPropertiesColorProfile.textFillProperty,
+          maxWidth: 200 // determined empirically
         } )
 
       }, options );

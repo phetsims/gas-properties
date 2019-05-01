@@ -32,6 +32,7 @@ define( require => {
       assert && assert( !options.icon, 'ParticleFlowRateCheckbox sets icon' );
       options = _.extend( {
         text: particleFlowRateString,
+        textMaxWidth: 175, // determined empirically
         icon: GasPropertiesIconFactory.createParticleFlowRateIcon()
       }, options );
 

@@ -32,6 +32,7 @@ define( require => {
       assert && assert( !options.icon, 'CenterOfMassCheckbox sets icon' );
       options = _.extend( {
         text: centerOfMassString,
+        textMaxWidth: 175, // determined empirically
         icon: GasPropertiesIconFactory.createCenterOfMassIcon()
       }, options );
 

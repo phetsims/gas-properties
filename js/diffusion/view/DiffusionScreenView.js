@@ -120,7 +120,7 @@ define( require => {
       } );
 
       const timeControls = new DiffusionTimeControls( model, {
-        right: resetAllButton.left - 65,
+        left: controlPanel.left,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 

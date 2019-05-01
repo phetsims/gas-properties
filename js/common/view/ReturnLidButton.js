@@ -30,7 +30,8 @@ define( require => {
       }, options );
 
       const textNode = new Text( returnLidString, {
-        font: GasPropertiesConstants.CONTROL_FONT
+        font: GasPropertiesConstants.CONTROL_FONT,
+        maxWidth: 150 // determined empirically
       } );
 
       const buttonListener = () => {

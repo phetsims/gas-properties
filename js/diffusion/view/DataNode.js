@@ -73,7 +73,8 @@ define( require => {
           align: 'left',
           valuePattern: tAvgKString,
           noValuePattern: tAvgString,
-          useRichText: true
+          useRichText: true,
+          maxWidth: 100 // determined empirically
       } ) );
 
       assert && assert( !options.children, 'DataNode sets children' );

@@ -36,7 +36,8 @@ define( require => {
 
       const textOptions = {
         font: GasPropertiesConstants.CONTROL_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColorProfile.textFillProperty,
+        maxWidth: 85 // determined empirically
       };
 
       assert && assert( !options.children, 'DiffusionTimeControls sets children' );

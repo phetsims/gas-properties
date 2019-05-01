@@ -33,7 +33,8 @@ define( require => {
 
       const textOptions = {
         font: GasPropertiesConstants.CONTROL_FONT,
-        fill: 'black'
+        fill: 'black',
+        maxWidth: 150 // determined empirically
       };
 
       const trueNode = new Text( removeDividerString, textOptions );

@@ -41,7 +41,8 @@ define( require => {
       // title
       const titleNode = new Text( title, {
         font: GasPropertiesConstants.CONTROL_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColorProfile.textFillProperty,
+        maxWidth: 200 // determined empirically
       } );
 
       // icons
