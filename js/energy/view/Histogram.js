@@ -284,6 +284,7 @@ define( require => {
       // Compute the line width
       const lineWidth = this.chartSize.width / this.numberOfBins;
 
+      //TODO use moveTo for y values that are 0 or > this.chartSize.height
       // Draw the line segments
       let previousCount = 0;
       for ( let i = 0; i < counts.length; i++ ) {
