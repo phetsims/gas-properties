@@ -92,16 +92,29 @@ define( require => {
 
       //TODO temporary 'out of range' indicator for x axis, ellipsis
       // ellipsis to indicate x-axis data out of range
-      const ellipsisNode = new Text( ELLIPSIS_STRING, {
+      const xEllipsisNode = new Text( ELLIPSIS_STRING, {
         font: new PhetFont( 14 ),
         fill: GasPropertiesColorProfile.histogramBarColorProperty,
         right: background.right,
         centerY: xAxisLabel.centerY
       } );
+      
+      //TODO temporary 'out of range' indicator for y axis, ellipsis
+      // ellipsis to indicate y-axis data out of range
+      const yEllipsisNode = new Text( ELLIPSIS_STRING, {
+        font: new PhetFont( 14 ),
+        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+        left: background.right + 5,
+        top: background.top,
+        rotation: Math.PI / 2
+      } );
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [ background, intervalLines, plotNodesParent, border, xAxisLabel, yAxisLabel, ellipsisNode ]
+        children: [ 
+          background, intervalLines, plotNodesParent, border, 
+          xAxisLabel, yAxisLabel, xEllipsisNode, yEllipsisNode 
+        ]
       }, options );
 
       super( options );
@@ -112,7 +125,8 @@ define( require => {
       this.numberOfBins = numberOfBins;
       this.binWidth = binWidth;
       this.chartSize = options.chartSize;
-      this.ellipsisNode = ellipsisNode;
+      this.xEllipsisNode = xEllipsisNode;
+      this.yEllipsisNode = yEllipsisNode;
       this.maxY = options.maxY;
       this.yInterval = options.yInterval;
       this.dataSets = []; // {number[]}
@@ -191,14 +205,15 @@ define( require => {
 
       const maxX = this.numberOfBins * this.binWidth;
 
-      let numberOfValuesOutOfRange = 0;
+      let xRangeExceededCount = 0;
+      let yRangeExceededCount = 0;
 
       // Create new plots
       for ( let i = 0; i < this.dataSets.length; i++ ) {
 
         const dataSet = this.dataSets[ i ];
 
-        // Convert data set to counts for each bin.
+        // {number[]} Convert data set to counts for each bin.
         const counts = this.getCounts( dataSet );
 
         // Plot the data set as bars or line segments.
@@ -209,12 +224,14 @@ define( require => {
           this.plotLines( counts, dataSet.color );
         }
 
-        // count the number of values that exceed the x range
-        numberOfValuesOutOfRange += _.filter( dataSet.values, value => ( value > maxX ) ).length;
+        // count the number of values that exceed the x and y ranges
+        xRangeExceededCount += _.filter( dataSet.values, value => ( value > maxX ) ).length;
+        yRangeExceededCount += _.filter( counts, value => ( value > this.maxY ) ).length;
       }
 
       // If there are values out of range, make the ellipsis visible.
-      this.ellipsisNode.visible = ( numberOfValuesOutOfRange > 0 );
+      this.xEllipsisNode.visible = ( xRangeExceededCount > 0 );
+      this.yEllipsisNode.visible = ( yRangeExceededCount > 0 );
     }
 
     //TODO should this be implemented more efficiently?
