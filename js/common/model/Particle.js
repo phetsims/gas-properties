@@ -31,11 +31,11 @@ define( require => {
       // @public (read-only)
       this.location = new Vector2( 0, 0 ); // center of the particle, nm, MUTATED!
       this.previousLocation = this.location.copy(); // location on previous time step, MUTATED!
-      this.radius = options.radius; // radians
       this.velocity = new Vector2( 0, 0 ); // nm/ps, initially at rest, MUTATED!
 
-      // @public
+      // @public these are mutated in the Diffusion screen
       this.mass = options.mass; // AMU
+      this.radius = options.radius; // radians
 
       // @public (read-only)
       this.colorProperty = options.colorProperty || new Property( 'white' );
@@ -77,16 +77,6 @@ define( require => {
      */
     get kineticEnergy() {
       return 0.5 * this.mass * this.velocity.magnitudeSquared; // KE = (1/2) * m * |v|^2
-    }
-
-    /**
-     * String representation of a Particle.
-     * For debugging only, do not rely on format.
-     * @returns {string}
-     * @public
-     */
-    toString() {
-      return `Particle[location:(${this.location.x},${this.location.y}) mass:${this.mass} radius:${this.radius}]`;
     }
 
     // @public
