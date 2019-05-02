@@ -256,9 +256,9 @@ define( require => {
       for ( let i = 0; i < counts.length; i++ ) {
         if ( counts[ i ] > 0 ) {
 
+          //TODO indicate y max exceeded?
           // Compute the bar height
-          const barHeight = ( counts[ i ] / this.maxY ) * this.chartSize.height;
-          assert && assert( barHeight <= this.chartSize.height, `barHeight exceeds chart height: ${barHeight}` );
+          const barHeight = Math.min( ( counts[ i ] / this.maxY ) * this.chartSize.height, this.chartSize.height );
 
           // Add the bar
           shape.rect( i * barWidth, this.chartSize.height - barHeight, barWidth, barHeight );

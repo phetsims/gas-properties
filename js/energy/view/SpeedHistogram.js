@@ -61,7 +61,7 @@ define( require => {
       const allValues = heavyValues.concat( lightValues );
 
       // set the y-axis scale
-      this.setMaxY( Math.max( allValues.length, 2 * this.yInterval ) ); //TODO
+      this.setMaxY( Math.max( 0.2 * allValues.length, 2 * this.yInterval ) ); //TODO
 
       if ( allValues.length > 0 ) {
 
