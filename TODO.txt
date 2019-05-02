@@ -2,8 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
-5/2/19 design meeting
-
+5/2/19 design meeting:
 #55 add Radius spinners to Diffusion experiment
 #55 Support mutable particle radius in model and view
 #51 use a running average for Particle Flow Rate
