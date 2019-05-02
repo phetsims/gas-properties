@@ -36,19 +36,19 @@ define( require => {
 
       const items = [
         {
-          choice: PressureGauge.Units.KILOPASCALS,
-          numberProperty: pressureGauge.pressureKilopascalsProperty,
+          choice: PressureGauge.Units.ATMOSPHERES,
+          numberProperty: pressureGauge.pressureAtmospheresProperty,
           range: NUMBER_DISPLAY_RANGE,
-          units: kilopascalsString,
+          units: atmospheresString,
           numberDisplayOptions: {
             decimalPlaces: 0
           }
         },
         {
-          choice: PressureGauge.Units.ATMOSPHERES,
-          numberProperty: pressureGauge.pressureAtmospheresProperty,
+          choice: PressureGauge.Units.KILOPASCALS,
+          numberProperty: pressureGauge.pressureKilopascalsProperty,
           range: NUMBER_DISPLAY_RANGE,
-          units: atmospheresString,
+          units: kilopascalsString,
           numberDisplayOptions: {
             decimalPlaces: 0
           }
