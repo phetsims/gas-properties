@@ -64,7 +64,7 @@ define( require => {
     averageSpeedSamplePeriod: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 0.5
+      defaultValue: 1
     },
 
     //TODO #50 choose a value and delete
