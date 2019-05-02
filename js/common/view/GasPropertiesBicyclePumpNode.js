@@ -25,7 +25,8 @@ define( require => {
       options = _.extend( {
         height: 230,
         bodyTopFill: 'white',
-        numberOfParticlesPerPumpAction: 20
+        numberOfParticlesPerPumpAction: 20,
+        hoseCurviness: 0.75
       }, options );
 
       assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
