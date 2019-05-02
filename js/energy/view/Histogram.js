@@ -56,8 +56,7 @@ define( require => {
 
       }, options );
 
-      assert && assert( options.maxY > 0 && Util.isInteger( options.maxY ),
-        'maxY must be a positive integer: ' + options.maxY );
+      assert && assert( options.maxY > 0, 'maxY must be positive: ' + options.maxY );
       assert && assert( options.yInterval > 0 && Util.isInteger( options.yInterval ),
         'yInterval must be a positive integer: ' + options.yInterval );
 
@@ -72,8 +71,10 @@ define( require => {
         lineWidth: options.borderLineWidth
       } );
 
-      // parent Node for all plotted data
-      const plotNodesParent = new Node();
+      // parent Node for all plotted data, clipped to the background
+      const plotNodesParent = new Node( {
+        clipArea: Shape.rect( 0, 0, options.chartSize.width, options.chartSize.height )
+      });
 
       // horizontal lines that appear at equally-spaced intervals based on y-axis scale
       const intervalLines = new Path( null, options.intervalLineOptions );
@@ -124,7 +125,6 @@ define( require => {
      * @public
      */
     setMaxY( maxY ) {
-      assert && assert( maxY > 0 && Util.isInteger( maxY ), 'maxY must be a positive integer: ' + maxY );
       if ( maxY !== this.maxY ) {
         this.maxY = maxY;
         this.intervalLinesDirty = true;
@@ -256,9 +256,8 @@ define( require => {
       for ( let i = 0; i < counts.length; i++ ) {
         if ( counts[ i ] > 0 ) {
 
-          //TODO indicate y max exceeded?
           // Compute the bar height
-          const barHeight = Math.min( ( counts[ i ] / this.maxY ) * this.chartSize.height, this.chartSize.height );
+          const barHeight = ( counts[ i ] / this.maxY ) * this.chartSize.height;
 
           // Add the bar
           shape.rect( i * barWidth, this.chartSize.height - barHeight, barWidth, barHeight );
