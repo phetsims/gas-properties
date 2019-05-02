@@ -181,8 +181,5 @@ define( require => {
   // log the values of all sim-specific query parameters
   phet.log && phet.log( 'query parameters: ' + JSON.stringify( GasPropertiesQueryParameters, null, 2 ) );
 
-  //TODO #41 need a better way to prevent graphics processor switching
-  phet.chipper.queryParameters.webgl = false;
-
   return GasPropertiesQueryParameters;
 } );
