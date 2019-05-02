@@ -25,9 +25,10 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
-  const massAMUString = require( 'string!GAS_PROPERTIES/massAMU' );
   const initialTemperatureKString = require( 'string!GAS_PROPERTIES/initialTemperatureK' );
+  const massAMUString = require( 'string!GAS_PROPERTIES/massAMU' );
+  const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
+  const radiusPmString = require( 'string!GAS_PROPERTIES/radiusPm' );
 
   class DiffusionControlPanel extends Panel {
 
@@ -68,6 +69,15 @@ define( require => {
           }
         } );
 
+      // Radius (pm)
+      const radiusControl = new QuantityControl( modelViewTransform, radiusPmString,
+        experiment.radius1Property, experiment.radius2Property, {
+          spinnerOptions: {
+            enabledProperty: hasDividerProperty,
+            deltaValue: experiment.radiusDelta
+          }
+        } );
+
       // Initial Temperature (K)
       const initialTemperatureControl = new QuantityControl( modelViewTransform, initialTemperatureKString,
         experiment.initialTemperature1Property, experiment.initialTemperature2Property, {
@@ -97,6 +107,7 @@ define( require => {
               //TODO alignment - spinners have different ranges, so different widths
               numberOfParticlesControl,
               massControl,
+              radiusControl,
               initialTemperatureControl,
               dividerButtonParent
             ]

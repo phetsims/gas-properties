@@ -35,6 +35,16 @@ define( require => {
         units: 'AMU'
       } );
 
+      // @public radius of each particle type
+      this.radius1Property = new NumberProperty( GasPropertiesConstants.RADIUS_RANGE.defaultValue, {
+        range: GasPropertiesConstants.RADIUS_RANGE,
+        units: 'pm'
+      } );
+      this.radius2Property = new NumberProperty( GasPropertiesConstants.RADIUS_RANGE.defaultValue, {
+        range: GasPropertiesConstants.RADIUS_RANGE,
+        units: 'pm'
+      } );
+
       // @public initial temperature for each particle type, used to compute initial velocity
       this.initialTemperature1Property = new NumberProperty( GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE.defaultValue, {
         range: GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE,
@@ -48,6 +58,7 @@ define( require => {
       // @public (read-only) deltas for spinners
       this.numberOfParticlesDelta = 10;
       this.massDelta = 1; // AMU
+      this.radiusDelta = 5; // pm
       this.initialTemperatureDelta = 50; // K
     }
 
@@ -60,6 +71,8 @@ define( require => {
       this.numberOfParticles2Property.reset();
       this.mass1Property.reset();
       this.mass2Property.reset();
+      this.radius1Property.reset();
+      this.radius2Property.reset();
       this.initialTemperature1Property.reset();
       this.initialTemperature2Property.reset();
     }
