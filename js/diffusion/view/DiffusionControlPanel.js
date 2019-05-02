@@ -104,7 +104,6 @@ define( require => {
             spacing: 20,
             align: 'left',
             children: [
-              //TODO alignment - spinners have different ranges, so different widths
               numberOfParticlesControl,
               massControl,
               radiusControl,
