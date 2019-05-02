@@ -3,10 +3,10 @@ TODO list for gas-properties
 UP NEXT
 
 5/2/19 design meeting:
+#55 where to handle mapping between nm and pm for radius in Diffusion screen?
 #55 Support mutable particle radius in model and view, wire up to Diffusion spinners
 #51 use a running average for Particle Flow Rate
 #52 add a sample period for histograms, use for Average Speed
-#60 Explore: unpause sim when resize handle is moved
 
 Combine ParticlesNode and DiffusionParticlesNode, after we determine whether radius is mutable
 
@@ -16,6 +16,7 @@ Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
+Explore: #60 unpause sim when resize handle is moved
 
 Histogram: rewrite to mutate bars/lines, instead of removeAllChildren/addChild on every step
 Histogram: don't update when not visible
