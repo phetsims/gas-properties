@@ -59,7 +59,7 @@ define( require => {
       this.jitterFunction = new LinearFunction( 0, this.pressureRange.max, MAX_JITTER, MIN_JITTER, true );
 
       // @public pressure units displayed by the pressure gauge
-      this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.KILOPASCALS );
+      this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES );
 
       // @private
       this.pressureProperty = pressureProperty;

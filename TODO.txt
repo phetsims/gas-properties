@@ -2,6 +2,8 @@ TODO list for gas-properties
 
 UP NEXT
 
+5/2/19 design meeting
+
 #55 Support mutable particle radius in model and view
 
 Combine ParticlesNode and DiffusionParticlesNode, after we determine whether radius is mutable
@@ -19,8 +21,6 @@ Histogram: don't update when not visible
 stringTest
 
 Better names than particle1, particle2, mass1, mass2, etc?
-
-'PV = NkT' vs 'PV = nkT', which to use in doc and code?
 
 REFERENCES
 Is this a better collision model?

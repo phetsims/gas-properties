@@ -41,7 +41,7 @@ define( require => {
           range: NUMBER_DISPLAY_RANGE,
           units: atmospheresString,
           numberDisplayOptions: {
-            decimalPlaces: 0
+            decimalPlaces: 1
           }
         },
         {
