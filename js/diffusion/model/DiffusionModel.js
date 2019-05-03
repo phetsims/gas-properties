@@ -186,10 +186,6 @@ define( require => {
       // Collision detection and response
       this.collisionDetector.step( dt );
 
-      // Verify that particles are fully enclosed in the container
-      assert && assertContainerEnclosesParticles( this.container, this.particles1 );
-      assert && assertContainerEnclosesParticles( this.container, this.particles2 );
-
       // Update Properties that are based on the current state of the system.
       this.update();
     }
@@ -372,19 +368,6 @@ define( require => {
     const particlesRemoved = particles.splice( particles.length - n, particles.length );
     for ( let i = 0; i < particlesRemoved.length; i++ ) {
       particlesRemoved[ i ].dispose();
-    }
-  }
-
-  //TODO copied from IdealModel
-  /**
-   * Verifies that the container encloses all particles, surrounding them on all sides.
-   * @param {Particle[]} particles
-   * @param {BaseContainer} container
-   */
-  function assertContainerEnclosesParticles( container, particles ) {
-    for ( let i = 0; i < particles.length; i++ ) {
-      assert && assert( container.containsParticle( particles[ i ] ),
-        `container does not enclose particle: ${particles[ i ].toString()}, container bounds: ${container.bounds}` );
     }
   }
 

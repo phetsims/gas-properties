@@ -317,10 +317,6 @@ define( require => {
       removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );
       removeParticlesOutOfBounds( this.lightParticlesOutside, this.modelBoundsProperty.value );
 
-      // Verify that these particles are fully enclosed in the container
-      assert && assertContainerEnclosesParticles( this.container, this.heavyParticles );
-      assert && assertContainerEnclosesParticles( this.container, this.lightParticles );
-
       // Do this after collision detection, so that the number of collisions detected has been recorded.
       this.collisionCounter && this.collisionCounter.step( dt );
 
@@ -463,18 +459,6 @@ define( require => {
     assert && assert( ratio > 0, `invalid ratio: ${ratio}` );
     for ( let i = 0; i < particles.length; i++ ) {
       particles[ i ].location.setX( ratio * particles[ i ].location.x );
-    }
-  }
-
-  /**
-   * Verifies that the container encloses all particles, surrounding them on all sides.
-   * @param {Particle[]} particles
-   * @param {BaseContainer} container
-   */
-  function assertContainerEnclosesParticles( container, particles ) {
-    for ( let i = 0; i < particles.length; i++ ) {
-      assert && assert( container.containsParticle( particles[ i ] ),
-        `container does not enclose particle: ${particles[ i ].toString()}, container bounds: ${container.bounds}` );
     }
   }
 

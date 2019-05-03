@@ -119,6 +119,9 @@ define( require => {
           this.numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds );
         }
       }
+
+      // Verify that particles are fully inside in the container.
+      assert && assertParticlesInsideContainer( this.container, this.particleArrays );
     }
   }
 
@@ -304,6 +307,22 @@ define( require => {
       }
     }
     return numberOfCollisions;
+  }
+
+  /**
+   * Verifies that all particles are fully inside the container.
+   * @param {Particle[][]} particleArrays
+   * @param {BaseContainer} container
+   */
+  function assertParticlesInsideContainer( container, particleArrays ) {
+    for ( let i = 0; i < particleArrays.length; i++ ) {
+      const particles = particleArrays[ i ];
+      for ( let j = 0; j < particles.length; j++ ) {
+        const particle = particles[ j ];
+        assert && assert( container.containsParticle( particle ),
+          `container does not enclose particle: ${particle.toString()}, container bounds: ${container.bounds}` );
+      }
+    }
   }
 
   return gasProperties.register( 'CollisionDetector', CollisionDetector );
