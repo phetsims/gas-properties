@@ -5,12 +5,9 @@ UP NEXT
 Temperature is wrong when using BicyclePumpNode
 
 5/2/19 design meeting:
-#55 where to handle mapping between nm and pm for radius in Diffusion screen?
 #55 Support mutable particle radius in model and view, wire up to Diffusion spinners
 #51 use a running average for Particle Flow Rate
 #52 add a sample period for histograms, use for Average Speed
-
-Why is radius spinner only going to 0.24 when max is 0.25?
 
 Combine ParticlesNode and DiffusionParticlesNode, after we determine whether radius is mutable
 
