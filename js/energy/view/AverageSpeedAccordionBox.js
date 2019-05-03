@@ -129,7 +129,7 @@ define( require => {
    */
   const convertAverageSpeed = ( averageSpeed ) => {
     if ( typeof averageSpeed === 'number' ) {
-      return 1000 * averageSpeed;
+      return averageSpeed;
     }
     else {
       return null;

@@ -60,7 +60,7 @@ define( require => {
 
       // @public
       this.container = new DiffusionContainer( {
-        location: new Vector2( 0, -1.25 ) //TODO better to shift the MVT?
+        location: new Vector2( 0, -1250 ) //TODO better to shift the MVT?
       } );
 
       // @public parameters that define the experiment to be run when the container's divider is removed

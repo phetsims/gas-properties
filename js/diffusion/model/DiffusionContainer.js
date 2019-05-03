@@ -23,7 +23,7 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        widthRange: new RangeWithValue( 15, 15, 15 ) // effectively fixed width
+        widthRange: new RangeWithValue( 15000, 15000, 15000 ) // effectively fixed width
       }, options );
 
       super( options );
@@ -34,7 +34,7 @@ define( require => {
       } );
 
       // @public (read-only) divider thickness, in nm
-      this.dividerThickness = 0.1;
+      this.dividerThickness = 100;
 
       // @public (read-only) divider is horizontally centered, but no code assumes that
       this.dividerX = this.left + ( this.width / 2 );

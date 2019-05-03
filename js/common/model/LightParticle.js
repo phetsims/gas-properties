@@ -21,7 +21,7 @@ define( require => {
     constructor( options ) {
       super( _.extend( {
         mass: 4, // He, rounded to the closest integer
-        radius: 0.0875, // nm
+        radius: 87.5, // nm
         colorProperty: GasPropertiesColorProfile.lightParticleColorProperty,
         highlightColorProperty: GasPropertiesColorProfile.lightParticleHighlightColorProperty
       }, options ) );

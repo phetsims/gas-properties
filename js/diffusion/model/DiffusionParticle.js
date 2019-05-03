@@ -19,7 +19,7 @@ define( require => {
      */
     constructor( options ) {
       super( _.extend( {
-        radius: 0.125 // nm
+        radius: 125 // nm
       }, options ) );
     }
   }

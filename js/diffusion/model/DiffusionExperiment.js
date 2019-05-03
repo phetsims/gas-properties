@@ -58,7 +58,7 @@ define( require => {
       // @public (read-only) deltas for spinners
       this.numberOfParticlesDelta = 10;
       this.massDelta = 1; // AMU
-      this.radiusDelta = 0.01; // nm
+      this.radiusDelta = 5; // nm
       this.initialTemperatureDelta = 50; // K
     }
 

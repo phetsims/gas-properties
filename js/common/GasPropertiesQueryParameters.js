@@ -118,7 +118,7 @@ define( require => {
     speedBinWidth: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 0.25
+      defaultValue: 250
     },
 
     //TODO #52 choose a value and delete
@@ -136,7 +136,7 @@ define( require => {
     keBinWidth: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 1
+      defaultValue: 1E6
     },
 
     //TODO #50 choose a value and delete
@@ -145,7 +145,7 @@ define( require => {
     containerDepth: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 2
+      defaultValue: 2000
     },
 
     //TODO #50 choose a value and delete

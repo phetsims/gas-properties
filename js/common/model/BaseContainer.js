@@ -25,7 +25,7 @@ define( require => {
 
       options = _.extend( {
         location: Vector2.ZERO, // location of the container's bottom right corner, in nm
-        widthRange: new RangeWithValue( 5, 15, 10 ) // range and initial value of the contaner's width, in nm
+        widthRange: new RangeWithValue( 5000, 15000, 10000 ) // range and initial value of the container's width, in nm
       }, options );
 
       assert && assert( options.location instanceof Vector2, 'invalid location type: ' + options.location );
@@ -42,13 +42,13 @@ define( require => {
       } );
 
       // @public (read-only) height of the container, in nm
-      this.height = 8.75;
+      this.height = 8750;
 
       // @private (read-only) depth of the container, in nm
       this.depth = GasPropertiesQueryParameters.containerDepth;
 
       // @public (read-only) wall thickness, in nm
-      this.wallThickness = 0.05;
+      this.wallThickness = 50;
 
       // @public (read-only) inside bounds, in nm
       this.bounds = new Bounds2(

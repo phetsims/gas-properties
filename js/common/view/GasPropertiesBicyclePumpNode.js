@@ -25,7 +25,7 @@ define( require => {
       options = _.extend( {
         height: 230,
         bodyTopFill: 'white',
-        numberOfParticlesPerPumpAction: 20,
+        numberOfParticlesPerPumpAction: 50,
         hoseCurviness: 0.75
       }, options );
 

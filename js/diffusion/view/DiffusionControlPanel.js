@@ -76,7 +76,7 @@ define( require => {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
             deltaValue: experiment.radiusDelta,
-            decimalPlaces: 2
+            decimalPlaces: 0
           }
         } );
 

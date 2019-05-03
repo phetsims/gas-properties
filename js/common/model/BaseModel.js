@@ -35,7 +35,7 @@ define( require => {
       } );
 
       // @public (read-only) transform between model and view coordinate frames
-      const modelViewScale = 40; // number of pixels per nm
+      const modelViewScale = 0.040; // number of pixels per nm
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
         new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
         modelViewScale,
