@@ -2,7 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
-Temperature is wrong when using BicyclePumpNode
+Temperature is wrong when using BicyclePumpNode, not a problem in 1.0.0-dev.15
 
 5/2/19 design meeting:
 #55 Support mutable particle radius in model and view, wire up to Diffusion spinners
