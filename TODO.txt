@@ -2,7 +2,6 @@ TODO list for gas-properties
 
 UP NEXT
 
-Show container width in nm
 Temperature is wrong when using BicyclePumpNode
 
 5/2/19 design meeting:

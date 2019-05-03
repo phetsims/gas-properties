@@ -17,6 +17,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // strings
@@ -43,7 +44,11 @@ define( require => {
         color: GasPropertiesColorProfile.sizeArrowColorProperty
       } );
 
-      const widthDisplay = new NumberDisplay( widthProperty, widthProperty.range, {
+      // Convert from pm to nm
+      const nmWidthProperty = new DerivedProperty( [ widthProperty ], width => width / 1000 );
+      const nmWidthRange = new Range( widthProperty.range.min / 1000, widthProperty.range.max / 1000 );
+      
+      const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
         decimalPlaces: 1,
         valuePattern: StringUtils.fillIn( valueUnitsString, { units: nanometersString } ),
         font: new PhetFont( 12 ),
