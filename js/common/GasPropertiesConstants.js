@@ -33,7 +33,7 @@ define( require => {
     // Diffusion experiment ranges
     NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, GasPropertiesQueryParameters.maxNumberOfParticlesDiffusion, 0 ),
     MASS_RANGE: new RangeWithValue( 4, 32, 28 ), // AMU
-    RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // nm
+    RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // pm
     INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
 
     // Defaults for all AccordionBox instances
@@ -84,7 +84,7 @@ define( require => {
     CONTROL_FONT: new PhetFont( 16 ),
 
     // physical constants
-    BOLTZMANN: 8.316E3, // Boltzmann constant k, converted to (nm^2 * AMU)/(ps^2 * K) by @arouinfar
+    BOLTZMANN: 8.316E3, // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K) by @arouinfar
 
     // conversion factors
     KG_PER_AMU: 1.66E-27, // mass conversion: kg per 1 AMU (atomic mass unit)

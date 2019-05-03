@@ -24,7 +24,7 @@ define( require => {
 
   // constants
   const NUMBER_OF_BINS = GasPropertiesQueryParameters.speedBins;
-  const BIN_WIDTH = GasPropertiesQueryParameters.speedBinWidth; // nm/ps
+  const BIN_WIDTH = GasPropertiesQueryParameters.speedBinWidth; // pm/ps
 
   class SpeedHistogram extends Histogram {
 

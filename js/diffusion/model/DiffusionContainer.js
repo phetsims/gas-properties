@@ -33,7 +33,7 @@ define( require => {
         throw new Error( 'mutable width is not supported in the Diffusion screen' );
       } );
 
-      // @public (read-only) divider thickness, in nm
+      // @public (read-only) divider thickness, in pm
       this.dividerThickness = 100;
 
       // @public (read-only) divider is horizontally centered, but no code assumes that

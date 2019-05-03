@@ -18,7 +18,7 @@ define( require => {
   // constants
   const AVERAGE_SPEED_PROPERTY_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' ),
-    units: 'nm/ps'
+    units: 'pm/ps'
   };
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.averageSpeedSamplePeriod; // ps
 
@@ -38,7 +38,7 @@ define( require => {
 
       //TODO should Average Speed and Speed Histogram both use get get*ParticleSpeedValues, to reduce iterations?
       // @public (read-only) {Property.<number|null>}
-      // average speed of heavy particles in the container, null when container is empty, nm/s
+      // average speed of heavy particles in the container, null when container is empty, pm/s
       this.heavyAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
       this.lightAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
 
@@ -109,7 +109,7 @@ define( require => {
 
     /**
      * Gets kinetic energy values for all heavy particles in the container. Used by the Kinetic Energy histogram.
-     * @returns {number[]} in AMU * nm^2 / ps^2
+     * @returns {number[]} in AMU * pm^2 / ps^2
      * @public
      */
     getHeavyParticleKineticEnergyValues() {
@@ -122,7 +122,7 @@ define( require => {
 
     /**
      * Gets kinetic energy values for all light particles in the container. Used by the Kinetic Energy histogram.
-     * @returns {number[]} in AMU * nm^2 / ps^2
+     * @returns {number[]} in AMU * pm^2 / ps^2
      * @public
      */
     getLightParticleKineticEnergyValues() {
@@ -135,7 +135,7 @@ define( require => {
 
     /**
      * Gets speed values for all heavy particles in the container. Used by the Speed histogram.
-     * @returns {number[]} in nm/ps
+     * @returns {number[]} in pm/ps
      * @public
      */
     getHeavyParticleSpeedValues() {
@@ -148,7 +148,7 @@ define( require => {
 
     /**
      * Gets speed values for all light particles in the container. Used by the Speed histogram.
-     * @returns {number[]} in nm/ps
+     * @returns {number[]} in pm/ps
      * @public
      */
     getLightParticleSpeedValues() {
@@ -161,7 +161,7 @@ define( require => {
   }
 
   /**
-   * Gets the average speed of a set of particles, in nm/ps.
+   * Gets the average speed of a set of particles, in pm/ps.
    * @param {Particle[]} particles
    * @returns {number|null} null if there are no particles
    */

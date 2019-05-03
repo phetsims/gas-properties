@@ -113,7 +113,7 @@ define( require => {
     },
 
     //TODO #52 choose a value and delete
-    // Bin width for the Speed histogram, in nm/ps
+    // Bin width for the Speed histogram, in pm/ps
     // For internal use only, not public facing.
     speedBinWidth: {
       type: 'number',
@@ -131,7 +131,7 @@ define( require => {
     },
 
     //TODO #52 choose a value and delete
-    // Bin width for the Kinetic Energy histogram, in AMU * nm^2 / ps^2
+    // Bin width for the Kinetic Energy histogram, in AMU * pm^2 / ps^2
     // For internal use only, not public facing.
     keBinWidth: {
       type: 'number',
@@ -140,7 +140,7 @@ define( require => {
     },
 
     //TODO #50 choose a value and delete
-    // Depth of the container, in nm
+    // Depth of the container, in pm
     // For internal use only, not public facing.
     containerDepth: {
       type: 'number',

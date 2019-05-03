@@ -23,15 +23,15 @@ define( require => {
 
       options = _.extend( {
         mass: 1, // AMU
-        radius: 0.1, // nm
+        radius: 100, // pm
         colorProperty: null, // {Property.<ColorDef>}
         highlightColorProperty: null // {Property.<ColorDef>} color for specular highlight
       }, options );
 
       // @public (read-only)
-      this.location = new Vector2( 0, 0 ); // center of the particle, nm, MUTATED!
+      this.location = new Vector2( 0, 0 ); // center of the particle, pm, MUTATED!
       this.previousLocation = this.location.copy(); // location on previous time step, MUTATED!
-      this.velocity = new Vector2( 0, 0 ); // nm/ps, initially at rest, MUTATED!
+      this.velocity = new Vector2( 0, 0 ); // pm/ps, initially at rest, MUTATED!
 
       // @public these are mutated in the Diffusion screen
       this.mass = options.mass; // AMU
@@ -73,7 +73,7 @@ define( require => {
 
     /**
      * ES5 getter for kinetic energy.
-     * @returns {number} AMU * nm^2 / ps^2
+     * @returns {number} AMU * pm^2 / ps^2
      */
     get kineticEnergy() {
       return 0.5 * this.mass * this.velocity.magnitudeSquared; // KE = (1/2) * m * |v|^2
@@ -121,7 +121,7 @@ define( require => {
      * Sets the velocity in polar coordinates.
      * As a side effect, updates everything that is a function of velocity.
      *
-     * @param {number} magnitude - nm / ps
+     * @param {number} magnitude - pm / ps
      * @param {number} angle - in radians
      * @public
      */

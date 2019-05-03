@@ -353,7 +353,7 @@ define( require => {
       const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;
       if ( numberOfParticles > 0 ) {
 
-        // Compute the average kinetic energy, AMU * nm^2 / ps^2
+        // Compute the average kinetic energy, AMU * pm^2 / ps^2
         let totalKineticEnergy = 0;
         for ( let i = 0; i < this.heavyParticles.length; i++ ) {
           totalKineticEnergy += this.heavyParticles[ i ].kineticEnergy;
@@ -364,7 +364,7 @@ define( require => {
 
         const averageKineticEnergy = totalKineticEnergy / numberOfParticles;
 
-        const k = GasPropertiesConstants.BOLTZMANN; // (nm^2 * AMU)/(ps^2 * K)
+        const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
 
         // T = (2/3)KE/k
         temperature = ( 2 / 3 ) * averageKineticEnergy / k; // K
@@ -380,9 +380,9 @@ define( require => {
     computePressure() {
 
       const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;  // N
-      const k = GasPropertiesConstants.BOLTZMANN; // k, in (nm^2 * AMU)/(ps^2 * K)
+      const k = GasPropertiesConstants.BOLTZMANN; // k, in (pm^2 * AMU)/(ps^2 * K)
       const temperature = this.temperatureProperty.value; // T, in K
-      const volume = this.container.volume; // V, in nm^3
+      const volume = this.container.volume; // V, in pm^3
 
       // P = NkT/V, converted to kPa
       return ( numberOfParticles * k * temperature / volume ) * 1.66E6;

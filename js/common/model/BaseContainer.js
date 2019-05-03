@@ -24,8 +24,8 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        location: Vector2.ZERO, // location of the container's bottom right corner, in nm
-        widthRange: new RangeWithValue( 5000, 15000, 10000 ) // range and initial value of the container's width, in nm
+        location: Vector2.ZERO, // location of the container's bottom right corner, in pm
+        widthRange: new RangeWithValue( 5000, 15000, 10000 ) // range and initial value of the container's width, in pm
       }, options );
 
       assert && assert( options.location instanceof Vector2, 'invalid location type: ' + options.location );
@@ -35,22 +35,22 @@ define( require => {
       this.location = options.location;
       this.widthRange = options.widthRange;
 
-      // @public width of the container, in nm
+      // @public width of the container, in pm
       this.widthProperty = new NumberProperty( this.widthRange.defaultValue, {
         range: this.widthRange,
-        units: 'nm'
+        units: 'pm'
       } );
 
-      // @public (read-only) height of the container, in nm
+      // @public (read-only) height of the container, in pm
       this.height = 8750;
 
-      // @private (read-only) depth of the container, in nm
+      // @private (read-only) depth of the container, in pm
       this.depth = GasPropertiesQueryParameters.containerDepth;
 
-      // @public (read-only) wall thickness, in nm
+      // @public (read-only) wall thickness, in pm
       this.wallThickness = 50;
 
-      // @public (read-only) inside bounds, in nm
+      // @public (read-only) inside bounds, in pm
       this.bounds = new Bounds2(
         this.location.x - this.widthProperty.value, this.location.y,
         this.location.x, this.location.y + this.height
@@ -69,14 +69,14 @@ define( require => {
 
     /**
      * Convenience getter for width.
-     * @returns {number} in nm
+     * @returns {number} in pm
      */
     get width() { return this.widthProperty.value; }
 
     /**
      * Convenience getters for inner bounds of the container, in model coordinate frame.
      * Bounds2 has similar getters, but uses view coordinate frame, where 'top' is minY and 'bottom' is maxY.
-     * @returns {number} in nm
+     * @returns {number} in pm
      * @public
      */
     get left() { return this.bounds.minX; }
@@ -89,7 +89,7 @@ define( require => {
 
     /**
      * Gets the volume of the container.
-     * @returns {number} in nm^3
+     * @returns {number} in pm^3
      */
     get volume() { return this.widthProperty.value * this.height * this.depth; }
 

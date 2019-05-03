@@ -28,7 +28,7 @@ define( require => {
   const initialTemperatureKString = require( 'string!GAS_PROPERTIES/initialTemperatureK' );
   const massAMUString = require( 'string!GAS_PROPERTIES/massAMU' );
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
-  const radiusNmString = require( 'string!GAS_PROPERTIES/radiusNm' );
+  const radiusPmString = require( 'string!GAS_PROPERTIES/radiusPm' );
 
   class DiffusionControlPanel extends Panel {
 
@@ -71,7 +71,7 @@ define( require => {
         } );
 
       // Radius (pm)
-      const radiusControl = new QuantityControl( modelViewTransform, radiusNmString,
+      const radiusControl = new QuantityControl( modelViewTransform, radiusPmString,
         experiment.radius1Property, experiment.radius2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,

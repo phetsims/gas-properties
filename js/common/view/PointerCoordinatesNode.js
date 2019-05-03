@@ -69,7 +69,7 @@ define( require => {
           const yModel = Util.toFixed( modelPoint.y, options.modelDecimalPlaces );
 
           // Update coordinates display.
-          textNode.text = `(${xView},${yView})<br>(${xModel},${yModel}) nm`;
+          textNode.text = `(${xView},${yView})<br>(${xModel},${yModel}) pm`;
 
           // Resize background
           backgroundNode.setRect( 0, 0, textNode.width + 4, textNode.height + 4 );

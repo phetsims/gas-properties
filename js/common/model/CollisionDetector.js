@@ -33,7 +33,7 @@ define( require => {
     constructor( container, particleArrays, options ) {
 
       options = _.extend( {
-        regionLength: 1 // Regions are square, length of one side, nm
+        regionLength: 1 // Regions are square, length of one side, pm
       }, options );
 
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
@@ -55,7 +55,7 @@ define( require => {
         }
         maxX = maxX - options.regionLength;
       }
-      phet.log && phet.log( `created ${this.regions.length} regions of ${options.regionLength}nm each` );
+      phet.log && phet.log( `created ${this.regions.length} regions of ${options.regionLength}pm each` );
 
       // @public (read-only) number of wall collisions on the most recent call to step
       this.numberOfParticleContainerCollisions = 0;

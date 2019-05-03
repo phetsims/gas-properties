@@ -31,11 +31,11 @@ define( require => {
       // This corresponds to the browser window, and doesn't have a valid value until the view is created.
       this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
       phet.log && this.modelBoundsProperty.link( modelBounds => {
-        phet.log( `modelBounds: ${modelBounds.toString()} nm` );
+        phet.log( `modelBounds: ${modelBounds.toString()} pm` );
       } );
 
       // @public (read-only) transform between model and view coordinate frames
-      const modelViewScale = 0.040; // number of pixels per nm
+      const modelViewScale = 0.040; // number of pixels per pm
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
         new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
         modelViewScale,

@@ -32,8 +32,8 @@ define( require => {
   class AverageSpeedAccordionBox extends AccordionBox {
 
     /**
-     * @param {Property.<number|null>} heavyAverageSpeedProperty - average speed of heavy particles, in nm/ps
-     * @param {Property.<number|null>} lightAverageSpeedProperty - average speed of light particles, in nm/ps
+     * @param {Property.<number|null>} heavyAverageSpeedProperty - average speed of heavy particles, in pm/ps
+     * @param {Property.<number|null>} lightAverageSpeedProperty - average speed of light particles, in pm/ps
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
@@ -122,9 +122,10 @@ define( require => {
     }
   }
 
+  //TODO no longer needed, delete
   /**
-   * Converts from nm/ps to m/s.
-   * @param {number|null} averageSpeed - in nm/ps
+   * Converts from pm/ps to m/s.
+   * @param {number|null} averageSpeed - in pm/ps
    * @returns {number|null}
    */
   const convertAverageSpeed = ( averageSpeed ) => {

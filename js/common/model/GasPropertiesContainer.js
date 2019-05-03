@@ -23,29 +23,29 @@ define( require => {
       // @public whether the lid is on the container
       this.lidIsOnProperty = new BooleanProperty( true );
 
-      // @public (read-only) lid thickness, in nm
+      // @public (read-only) lid thickness, in pm
       this.lidThickness = 3 * this.wallThickness;
 
-      // @public (read-only) insets of the opening in the top, from the inside edges of the container, in nm
+      // @public (read-only) insets of the opening in the top, from the inside edges of the container, in pm
       this.openingLeftInset = 1250;
       this.openingRightInset = 2000;
       assert && assert( this.widthRange.min > this.openingLeftInset + this.openingRightInset,
         'widthRange.min is too small to accommodate insets' );
 
-      // @public (read-only) the right coordinate of the opening in the top of the container, in nm
+      // @public (read-only) the right coordinate of the opening in the top of the container, in pm
       // openingLeft is dynamic, see ES5 getter
       this.openingRight = this.location.y - this.openingRightInset;
 
-      // @public width of the lid, in nm
+      // @public width of the lid, in pm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
-        units: 'nm'
+        units: 'pm'
       } );
 
-      // @public (read-only) minimum width of the lid, overlaps the left wall, in nm.
+      // @public (read-only) minimum width of the lid, overlaps the left wall, in pm.
       // maxLidWidth is dynamic, see ES5 getter.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
-      // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in nm
+      // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in pm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 5 );
 
       // Validate lidWidth, whose range changes dynamically.
@@ -63,14 +63,14 @@ define( require => {
 
     /**
      * Gets the maximum lid width, when the lid is fully closed.
-     * @returns {number} in nm
+     * @returns {number} in pm
      * @public
      */
     get maxLidWidth() { return this.widthProperty.value - this.openingRightInset + this.wallThickness; }
 
     /**
      * Gets the left coordinate of the opening in the top of the container.
-     * @returns {number} in nm
+     * @returns {number} in pm
      * @public
      */
     get openingLeft() {
@@ -87,7 +87,7 @@ define( require => {
 
     /**
      * Gets the width of the opening in the top of the container.
-     * @returns {number} in nm
+     * @returns {number} in pm
      * @public
      */
     get openingWidth() {

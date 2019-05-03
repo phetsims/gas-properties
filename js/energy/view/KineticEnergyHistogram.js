@@ -24,7 +24,7 @@ define( require => {
 
   // constants
   const NUMBER_OF_BINS = GasPropertiesQueryParameters.keBins;
-  const BIN_WIDTH = GasPropertiesQueryParameters.keBinWidth; // AMU * nm^2 / ps^2
+  const BIN_WIDTH = GasPropertiesQueryParameters.keBinWidth; // AMU * pm^2 / ps^2
 
   class KineticEnergyHistogram extends Histogram {
 

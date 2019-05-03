@@ -30,7 +30,7 @@ define( require => {
   const NUMBER_OF_PARTICLES_OPTIONS = { numberType: 'Integer' };
   const CENTER_OF_MASS_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' ),
-    units: 'nm'
+    units: 'pm'
   };
   const AVERAGE_TEMPERATURE_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' ),
