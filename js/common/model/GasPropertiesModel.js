@@ -469,7 +469,7 @@ define( require => {
   /**
    * Verifies that the container encloses all particles, surrounding them on all sides.
    * @param {Particle[]} particles
-   * @param {GasPropertiesContainer} container
+   * @param {BaseContainer} container
    */
   function assertContainerEnclosesParticles( container, particles ) {
     for ( let i = 0; i < particles.length; i++ ) {
