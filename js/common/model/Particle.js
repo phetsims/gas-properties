@@ -202,6 +202,16 @@ define( require => {
       const maxY = ( this.top < bounds.maxY ) ? this.top : bounds.maxY;
       return ( maxX - minX ) >= 0 && ( maxY - minY >= 0 );
     }
+
+    /**
+     * String representation of a Particle.
+     * For debugging only, do not rely on format.
+     * @returns {string}
+     * @public
+     */
+    toString() {
+      return `Particle[location:(${this.location.x},${this.location.y}) mass:${this.mass} radius:${this.radius}]`;
+    }
   }
 
   return gasProperties.register( 'Particle', Particle );
