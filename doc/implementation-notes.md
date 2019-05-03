@@ -15,7 +15,7 @@ provided by `Sim` when it steps the simulation. All other `dt` values are in pic
 To avoid working with very small numbers and encountering potential 
 float-point errors, we are not using SI units in the model.  For example,
 KE (Kinetic Energy) is typically in J, which is _kg * m<sup>2</sup> / s<sup>2</sup>_.
-We're using _AMU * nm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) 
+We're using _AMU * pm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) 
 for the full list of units used in the model.
 
 

@@ -10,7 +10,7 @@ Constraints:
 
 Constants:
 
-* k = Boltzmann constant, 1.38E-23 (m<sup>2</sup> * kg)/(s<sup>2</sup> * K) === 8.316E-3 (nm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K)
+* k = Boltzmann constant, 1.38E-23 (m<sup>2</sup> * kg)/(s<sup>2</sup> * K) === 8.316E-3 (pm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K)
 
 Symbols:
 
@@ -34,15 +34,15 @@ Equations:
 Units:
 
 * angle: radians
-* distance: nm
-* kinetic energy: AMU * nm<sup>2</sup> / ps<sup>2</sup>
-* location: (nm, nm)
+* distance: pm
+* kinetic energy: AMU * pm<sup>2</sup> / ps<sup>2</sup>
+* location: (pm, pm)
 * mass: AMU (unified mass unit, 1 AMU === 1.66E-27 kg)
 * pressure: kPa (and atm in view)
 * temperature: K (and °C in view)
 * time: ps
-* velocity: nm / ps
-* volume: nm<sup>3</sup>
+* velocity: pm / ps
+* volume: pm<sup>3</sup>
 
 
 TODO include calculations for conversions between SI and our units
