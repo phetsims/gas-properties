@@ -15,6 +15,9 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
+  // constants
+  const CONTAINER_WIDTH = 15000; // pm
+
   class DiffusionContainer extends BaseContainer {
 
     /**
@@ -23,7 +26,7 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        widthRange: new RangeWithValue( 15000, 15000, 15000 ) // effectively fixed width
+        widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ) // effectively fixed width
       }, options );
 
       super( options );
