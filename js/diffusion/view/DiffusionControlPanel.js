@@ -28,7 +28,7 @@ define( require => {
   const initialTemperatureKString = require( 'string!GAS_PROPERTIES/initialTemperatureK' );
   const massAMUString = require( 'string!GAS_PROPERTIES/massAMU' );
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
-  const radiusPmString = require( 'string!GAS_PROPERTIES/radiusPm' );
+  const radiusNmString = require( 'string!GAS_PROPERTIES/radiusNm' );
 
   class DiffusionControlPanel extends Panel {
 
@@ -55,7 +55,8 @@ define( require => {
         experiment.numberOfParticles1Property, experiment.numberOfParticles2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.numberOfParticlesDelta
+            deltaValue: experiment.numberOfParticlesDelta,
+            decimalPlaces: 0
           }
         } );
 
@@ -65,16 +66,17 @@ define( require => {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
             deltaValue: experiment.massDelta,
-            xMargin: 13 //TODO empirical hack to make all spinners the same width
+            decimalPlaces: 0
           }
         } );
 
       // Radius (pm)
-      const radiusControl = new QuantityControl( modelViewTransform, radiusPmString,
+      const radiusControl = new QuantityControl( modelViewTransform, radiusNmString,
         experiment.radius1Property, experiment.radius2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.radiusDelta
+            deltaValue: experiment.radiusDelta,
+            decimalPlaces: 2
           }
         } );
 
@@ -83,7 +85,8 @@ define( require => {
         experiment.initialTemperature1Property, experiment.initialTemperature2Property, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.initialTemperatureDelta
+            deltaValue: experiment.initialTemperatureDelta,
+            decimalPlaces: 0
           }
         } );
 
@@ -104,6 +107,7 @@ define( require => {
             spacing: 20,
             align: 'left',
             children: [
+              //TODO these don't align because some NumberSpinners are a different width
               numberOfParticlesControl,
               massControl,
               radiusControl,

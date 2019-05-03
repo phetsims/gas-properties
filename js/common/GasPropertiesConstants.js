@@ -33,7 +33,7 @@ define( require => {
     // Diffusion experiment ranges
     NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, GasPropertiesQueryParameters.maxNumberOfParticlesDiffusion, 0 ),
     MASS_RANGE: new RangeWithValue( 4, 32, 28 ), // AMU
-    RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // pm
+    RADIUS_RANGE: new RangeWithValue( 0.05, 0.25, 0.12 ), // nm
     INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
 
     // Defaults for all AccordionBox instances

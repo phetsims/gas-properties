@@ -137,8 +137,8 @@
   "massAMU": {
     "value": "Mass (AMU)"
   },
-  "radiusPm": {
-    "value": "Radius (pm)"
+  "radiusNm": {
+    "value": "Radius (nm)"
   },
   "initialTemperatureK": {
     "value": "Initial Temperature (K)"
