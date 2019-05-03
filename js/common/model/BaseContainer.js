@@ -16,7 +16,6 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
-  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class BaseContainer {
@@ -94,19 +93,16 @@ define( require => {
     get volume() { return this.widthProperty.value * this.height * this.depth; }
 
     /**
-     * Determines whether the container surrounds a particle on all sides. Accounts for the particle's radius.
+     * Determines whether the container fully contains a particle.
      * @param {Particle} particle
      * @returns {boolean}
      * @public
      */
-    enclosesParticle( particle ) {
-
-      // Util.toFixedNumber is a threshold comparison, necessary due to floating-point error.
-      const decimalPlaces = 3;
-      return Util.toFixedNumber( particle.left, decimalPlaces ) >= Util.toFixedNumber( this.left, decimalPlaces ) &&
-             Util.toFixedNumber( particle.right, decimalPlaces ) <= Util.toFixedNumber( this.right, decimalPlaces ) &&
-             Util.toFixedNumber( particle.top, decimalPlaces ) <= Util.toFixedNumber( this.top, decimalPlaces ) &&
-             Util.toFixedNumber( particle.bottom, decimalPlaces ) >= Util.toFixedNumber( this.bottom, decimalPlaces );
+    containsParticle( particle ) {
+      return particle.left >= this.bounds.minX &&
+             particle.right <= this.bounds.maxX &&
+             particle.bottom >= this.bounds.minY &&
+             particle.top <= this.bounds.maxY;
     }
   }
 

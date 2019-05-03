@@ -230,7 +230,7 @@ define( require => {
 
         // Set the initial velocity
         particle.setVelocityPolar(
-          
+
           // |v| = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
 
@@ -473,7 +473,7 @@ define( require => {
    */
   function assertContainerEnclosesParticles( container, particles ) {
     for ( let i = 0; i < particles.length; i++ ) {
-      assert && assert( container.enclosesParticle( particles[ i ] ),
+      assert && assert( container.containsParticle( particles[ i ] ),
         `container does not enclose particle: ${particles[ i ].toString()}` );
     }
   }
