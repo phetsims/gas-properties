@@ -45,7 +45,7 @@ define( require => {
 
       // @public (read-only) inside bounds for left and right sides of the container
       this.leftBounds = new Bounds2( this.left, this.bottom, this.dividerX, this.top );
-      this.rightBounds = new Bounds2( this.centerX, this.bottom, this.right, this.top );
+      this.rightBounds = new Bounds2( this.dividerX, this.bottom, this.right, this.top );
 
       // @public whether the divider is in place
       this.hasDividerProperty = new BooleanProperty( true );
