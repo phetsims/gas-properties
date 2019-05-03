@@ -230,6 +230,7 @@ define( require => {
 
         // Set the initial velocity
         particle.setVelocityPolar(
+          
           // |v| = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
 
