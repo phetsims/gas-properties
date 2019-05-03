@@ -19,7 +19,6 @@ define( require => {
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const SunConstants = require( 'SUN/SunConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -64,13 +63,6 @@ define( require => {
       heavyParticleNode.addChild( new HStrut( maxWidth, { center: heavyParticleNode.center } ) );
       lightParticleNode.addChild( new HStrut( maxWidth, { center: lightParticleNode.center } ) );
 
-      // {Property.<number|null>} adapter Properties, in m/s
-      const metersPerSecondOptions = {
-        units: 'm/s'
-      };
-      const heavyMetersPerSecondProperty = new Property( null, metersPerSecondOptions );
-      const lightMetersPerSecondProperty = new Property( null, metersPerSecondOptions );
-
       const numberDisplayRange = new Range( 0, 9999 );
       const numberDisplayOptions = {
         valuePattern: valueMetersPerSecondString,
@@ -82,11 +74,13 @@ define( require => {
         numberFill: GasPropertiesColorProfile.textFillProperty,
         backgroundFill: null,
         backgroundStroke: null,
-        maxWidth: 150
+        maxWidth: 150                                                        
       };
 
-      const heavyNumberDisplay = new NumberDisplay( heavyMetersPerSecondProperty, numberDisplayRange, numberDisplayOptions );
-      const lightNumberDisplay = new NumberDisplay( lightMetersPerSecondProperty, numberDisplayRange, numberDisplayOptions );
+      // These Properties are in pm/ps, and we want to display in m/s.  There is no need to convert the values,
+      // since the conversion (1E-12) is the same for numerator and denominator.
+      const heavyNumberDisplay = new NumberDisplay( heavyAverageSpeedProperty, numberDisplayRange, numberDisplayOptions );
+      const lightNumberDisplay = new NumberDisplay( lightAverageSpeedProperty, numberDisplayRange, numberDisplayOptions );
 
       // layout icons and NumberDisplays in a grid
       const vBox = new VBox( {
@@ -103,39 +97,8 @@ define( require => {
       } );
 
       super( content, options );
-
-      // Update only when visible.
-      Property.multilink(
-        [ this.expandedProperty, heavyAverageSpeedProperty ],
-        ( expanded, heavyAverageSpeed ) => {
-          if ( expanded ) {
-            heavyMetersPerSecondProperty.value = convertAverageSpeed( heavyAverageSpeed );
-          }
-        } );
-      Property.multilink(
-        [ this.expandedProperty, lightAverageSpeedProperty ],
-        ( expanded, lightAverageSpeed ) => {
-          if ( expanded ) {
-            lightMetersPerSecondProperty.value = convertAverageSpeed( lightAverageSpeed );
-          }
-        } );
     }
   }
-
-  //TODO no longer needed, delete
-  /**
-   * Converts from pm/ps to m/s.
-   * @param {number|null} averageSpeed - in pm/ps
-   * @returns {number|null}
-   */
-  const convertAverageSpeed = ( averageSpeed ) => {
-    if ( typeof averageSpeed === 'number' ) {
-      return averageSpeed;
-    }
-    else {
-      return null;
-    }
-  };
 
   return gasProperties.register( 'AverageSpeedAccordionBox', AverageSpeedAccordionBox );
 } );
