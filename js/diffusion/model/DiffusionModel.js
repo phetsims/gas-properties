@@ -98,6 +98,7 @@ define( require => {
         this.numberOfParticlesListener( numberOfParticles,
           this.container.leftBounds,
           this.experiment.mass1Property.value,
+          this.experiment.radius1Property.value,
           this.experiment.initialTemperature1Property.value,
           this.particles1,
           DiffusionParticle1 );
@@ -106,6 +107,7 @@ define( require => {
         this.numberOfParticlesListener( numberOfParticles,
           this.container.rightBounds,
           this.experiment.mass2Property.value,
+          this.experiment.radius2Property.value,
           this.experiment.initialTemperature2Property.value,
           this.particles2,
           DiffusionParticle2 );
@@ -175,6 +177,7 @@ define( require => {
       stepParticles( this.particles1, dt );
       stepParticles( this.particles2, dt );
 
+      // Particle Flow Rate model
       if ( !this.container.hasDividerProperty.value ) {
         this.particleFlowRate1.step( dt );
         this.particleFlowRate2.step( dt );
@@ -182,6 +185,10 @@ define( require => {
 
       // Collision detection and response
       this.collisionDetector.step( dt );
+
+      // Verify that particles are fully enclosed in the container
+      assert && assertContainerEnclosesParticles( this.container, this.particles1 );
+      assert && assertContainerEnclosesParticles( this.container, this.particles2 );
 
       // Update Properties that are based on the current state of the system.
       this.update();
@@ -192,16 +199,17 @@ define( require => {
      * @param {number} numberOfParticles - desired number of particles
      * @param {Bounds2} locationBounds - initial location will be inside this bounds
      * @param {number} mass
+     * @param {number} radius
      * @param {number} initialTemperature
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
      * @param particleConstructor - constructor for elements in particles array
      * @private
      */
-    numberOfParticlesListener( numberOfParticles, locationBounds, mass, initialTemperature, particles, particleConstructor ) {
+    numberOfParticlesListener( numberOfParticles, locationBounds, mass, radius, initialTemperature, particles, particleConstructor ) {
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {
-          this.addParticles( delta, locationBounds, mass, initialTemperature, particles, particleConstructor );
+          this.addParticles( delta, locationBounds, mass, radius, initialTemperature, particles, particleConstructor );
         }
         else {
           removeParticles( -delta, particles );
@@ -214,26 +222,27 @@ define( require => {
      * @param {number} n
      * @param {Bounds2} locationBounds - initial location will be inside this bounds
      * @param {number} mass
+     * @param {number} radius
      * @param {number} initialTemperature
      * @param {Particle[]} particles
      * @param {constructor} Constructor - a Particle subclass constructor
      * @private
      */
-    addParticles( n, locationBounds, mass, initialTemperature, particles, Constructor ) {
+    addParticles( n, locationBounds, mass, radius, initialTemperature, particles, Constructor ) {
 
       // Create n particles
       for ( let i = 0; i < n; i++ ) {
 
         const particle = new Constructor( {
-          mass: mass
+          mass: mass,
+          radius: radius
         } );
 
         // Position the particle at a random location within locationBounds, accounting for particle radius.
         const x = phet.joist.random.nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
         const y = phet.joist.random.nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
         particle.setLocationXY( x, y );
-        assert && assert( locationBounds.containsPoint( particle.location ),
-          'oops, particle is outside of locationBounds' );
+        assert && assert( locationBounds.containsPoint( particle.location ), 'particle is outside of locationBounds' );
 
         // Set the initial velocity, based on initial temperature and mass.
         particle.setVelocityPolar(
@@ -363,6 +372,19 @@ define( require => {
     const particlesRemoved = particles.splice( particles.length - n, particles.length );
     for ( let i = 0; i < particlesRemoved.length; i++ ) {
       particlesRemoved[ i ].dispose();
+    }
+  }
+
+  //TODO copied from IdealModel
+  /**
+   * Verifies that the container encloses all particles, surrounding them on all sides.
+   * @param {Particle[]} particles
+   * @param {BaseContainer} container
+   */
+  function assertContainerEnclosesParticles( container, particles ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+      assert && assert( container.containsParticle( particles[ i ] ),
+        `container does not enclose particle: ${particles[ i ].toString()}, container bounds: ${container.bounds}` );
     }
   }
 
