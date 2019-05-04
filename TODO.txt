@@ -9,8 +9,6 @@ Temperature is wrong when using BicyclePumpNode, not a problem in 1.0.0-dev.15
 #51 use a running average for Particle Flow Rate
 #52 add a sample period for histograms, use for Average Speed
 
-Combine ParticlesNode and DiffusionParticlesNode
-
 Intro: hold constant, see HoldConstantEnum
 
 Intro: optimize number of iterations over particle arrays
