@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
@@ -23,23 +24,29 @@ define( require => {
      */
     constructor( model ) {
 
-      // {Property.<HTMLCanvasElement>} Create heavy particle image to match color profile.
-      // The content is centered in the HTMLCanvasElement, and may have uniform padding around it.
+      // {Property.<HTMLCanvasElement>} generated images for the heavy and light particle types
       const heavyParticleImageProperty = new Property( null );
-      const heavyParticle = new HeavyParticle();
-      heavyParticle.colorProperty.link( color => {
-        const particleNode = new ParticleNode( heavyParticle, model.modelViewTransform );
-        particleNode.toCanvas( canvas => { heavyParticleImageProperty.value = canvas; } );
-      } );
-
-      // {Property.<HTMLCanvasElement>} Create light particle image to match color profile changes.
-      // The content is centered in the HTMLCanvasElement, and may have uniform padding around it.
       const lightParticleImageProperty = new Property( null );
-      const lightParticle = new LightParticle();
-      lightParticle.colorProperty.link( color => {
-        const particleNode = new ParticleNode( lightParticle, model.modelViewTransform );
-        particleNode.toCanvas( canvas => { lightParticleImageProperty.value = canvas; } );
-      } );
+
+      // Create heavy particle image to match color profile.
+      // The content is centered in the HTMLCanvasElement, and may have uniform padding around it.
+      Property.multilink(
+        [ GasPropertiesColorProfile.heavyParticleColorProperty, GasPropertiesColorProfile.heavyParticleHighlightColorProperty ],
+        ( color, highlightColor ) => {
+          const heavyParticle = new HeavyParticle();
+          const particleNode = new ParticleNode( heavyParticle, model.modelViewTransform );
+          particleNode.toCanvas( canvas => { heavyParticleImageProperty.value = canvas; } );
+        } );
+
+      // Create light particle image to match color profile.
+      // The content is centered in the HTMLCanvasElement, and may have uniform padding around it.
+      Property.multilink(
+        [ GasPropertiesColorProfile.lightParticleColorProperty, GasPropertiesColorProfile.lightParticleHighlightColorProperty ],
+        ( color, highlightColor ) => {
+          const lightParticle = new LightParticle();
+          const particleNode = new ParticleNode( lightParticle, model.modelViewTransform );
+          particleNode.toCanvas( canvas => { lightParticleImageProperty.value = canvas; } );
+        } );
 
       super(
         model.modelBoundsProperty,

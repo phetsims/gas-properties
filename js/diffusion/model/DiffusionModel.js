@@ -121,6 +121,14 @@ define( require => {
         ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles2 ); }
       );
 
+      // Update radii of existing particles.
+      this.experiment.radius1Property.link( radius => {
+        updateRadius( radius, this.particles1, this.container.leftBounds, this.isPlayingProperty.value );
+      } );
+      this.experiment.radius2Property.link( radius => {
+        updateRadius( radius, this.particles2, this.container.rightBounds, this.isPlayingProperty.value );
+      } );
+
       // When the divider is restored, create a new initial state with same numbers of particles.
       this.container.hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {
@@ -356,6 +364,42 @@ define( require => {
 
       // |v| = sqrt( 3kT / m )
       particles[ i ].setVelocityMagnitude( Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass ) );
+    }
+  }
+
+  /**
+   * Updates the radius for a set of particles.
+   * @param {number} radius
+   * @param {Particle[]} particles
+   * @param {Bounds2} bounds - particles should be inside these bounds
+   * @param {boolean} isPlaying
+   */
+  function updateRadius( radius, particles, bounds, isPlaying ) {
+    for ( let i = 0; i < particles.length; i++ ) {
+
+      const particle = particles[ i ];
+      particle.radius = radius;
+
+      // If the sim is paused, then adjust the location of any particles are not fully inside the bounds.
+      // While the sim is playing, this adjustment will be handled by collision detection.
+      if ( !isPlaying ) {
+
+        // constrain horizontally
+        if ( particle.left < bounds.minX ) {
+          particle.left = bounds.minX;
+        }
+        else if ( particle.right > bounds.maxX ) {
+          particle.right = bounds.maxX;
+        }
+
+        // constrain vertically
+        if ( particle.bottom < bounds.minY ) {
+          particle.bottom = bounds.minY;
+        }
+        else if ( particle.top > bounds.maxY ) {
+          particle.top = bounds.maxY;
+        }
+      }
     }
   }
 
