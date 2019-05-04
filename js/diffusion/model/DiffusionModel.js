@@ -21,6 +21,7 @@ define( require => {
   const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
+  const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
   const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
@@ -173,8 +174,8 @@ define( require => {
       super.stepModelTime( dt );
 
       // Step particles
-      stepParticles( this.particles1, dt );
-      stepParticles( this.particles2, dt );
+      ParticleUtils.stepParticles( this.particles1, dt );
+      ParticleUtils.stepParticles( this.particles2, dt );
 
       // Particle Flow Rate model
       if ( !this.container.hasDividerProperty.value ) {
@@ -207,7 +208,7 @@ define( require => {
           this.addParticles( delta, locationBounds, mass, radius, initialTemperature, particles, particleConstructor );
         }
         else {
-          removeParticles( -delta, particles );
+          ParticleUtils.removeParticles( -delta, particles );
         }
       }
     }
@@ -272,8 +273,8 @@ define( require => {
      * @private
      */
     updateCenterOfMass() {
-      this.centerXOfMass1Property.value = getCenterXOfMass( this.particles1 );
-      this.centerXOfMass2Property.value = getCenterXOfMass( this.particles2 );
+      this.centerXOfMass1Property.value = ParticleUtils.getCenterXOfMass( this.particles1 );
+      this.centerXOfMass2Property.value = ParticleUtils.getCenterXOfMass( this.particles2 );
     }
 
     /**
@@ -340,55 +341,6 @@ define( require => {
         const rightAverageKE = rightTotalKE / rightNumberOfParticles;
         this.rightAverageTemperatureProperty.value = ( 2 / 3 ) * rightAverageKE / GasPropertiesConstants.BOLTZMANN; // K
       }
-    }
-  }
-
-  //TODO copied from IdealModel
-  /**
-   * Steps a collection of particles.
-   * @param {Particle[]} particles
-   * @param {number} dt - time step in ps
-   */
-  function stepParticles( particles, dt ) {
-    for ( let i = 0; i < particles.length; i++ ) {
-      particles[ i ].step( dt );
-    }
-  }
-
-  //TODO copied from IdealModel and modified
-  /**
-   * Removes the last n particles from an array.
-   * @param {number} n
-   * @param {Particle[]} particles
-   */
-  function removeParticles( n, particles ) {
-    assert && assert( n <= particles.length,
-      `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
-    const particlesRemoved = particles.splice( particles.length - n, particles.length );
-    for ( let i = 0; i < particlesRemoved.length; i++ ) {
-      particlesRemoved[ i ].dispose();
-    }
-  }
-
-  /**
-   * Gets the x-axis center of mass of a collection of particles.
-   * @param {Particle[]} particles
-   * @returns {number|null} null if there are no particles and therefore no center of mass
-   * @public
-   */
-  function getCenterXOfMass( particles ) {
-    if ( particles.length > 0 ) {
-      let numerator = 0;
-      let totalMass = 0;
-      for ( let i = 0; i < particles.length; i++ ) {
-        const particle = particles[ i ];
-        numerator += ( particle.mass * particle.location.x );
-        totalMass += particle.mass;
-      }
-      return numerator / totalMass;
-    }
-    else {
-      return null;
     }
   }
 

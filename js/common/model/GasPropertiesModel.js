@@ -24,7 +24,7 @@ define( require => {
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
+  const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
@@ -167,7 +167,7 @@ define( require => {
           this.addParticles( delta, particles, particleConstructor );
         }
         else if ( delta < 0 ) {
-          removeParticles( -delta, particles );
+          ParticleUtils.removeParticles( -delta, particles );
         }
         assert && assert( particles.length === newValue, 'particles array is out of sync' );
       }
@@ -230,7 +230,6 @@ define( require => {
 
         // Set the initial velocity
         particle.setVelocityPolar(
-
           // |v| = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
 
@@ -240,16 +239,6 @@ define( require => {
 
         particles.push( particle );
       }
-    }
-
-    /**
-     * Redistributes the particles in the container, called in response to changing the container width.
-     * @param {number} ratio
-     * @public
-     */
-    redistributeParticles( ratio ) {
-      redistributeParticles( this.heavyParticles, ratio );
-      redistributeParticles( this.lightParticles, ratio );
     }
 
     /**
@@ -270,16 +259,17 @@ define( require => {
       // Properties
       this.temperatureProperty.reset();
       this.holdConstantProperty.reset();
-      this.numberOfHeavyParticlesProperty.reset(); // clears this.heavyParticles
-      this.numberOfLightParticlesProperty.reset(); // clears this.lightParticles
       this.heatCoolFactorProperty.reset();
 
+      // Remove and dispose of particles
+      this.numberOfHeavyParticlesProperty.reset();
       assert && assert( this.heavyParticles.length === 0, 'there should be no heavyParticles' );
+      this.numberOfLightParticlesProperty.reset();
       assert && assert( this.lightParticles.length === 0, 'there should be no lightParticles' );
-
-      // Dispose of particles that are outside the container
-      removeParticles( this.heavyParticlesOutside.length, this.heavyParticlesOutside );
-      removeParticles( this.lightParticlesOutside.length, this.lightParticlesOutside );
+      ParticleUtils.removeAllParticles( this.heavyParticlesOutside );
+      assert && assert( this.heavyParticlesOutside.length === 0, 'there should be no heavyParticlesOutside' );
+      ParticleUtils.removeAllParticles( this.lightParticlesOutside );
+      assert && assert( this.lightParticlesOutside.length === 0, 'there should be no lightParticlesOutside' );
     }
 
     /**
@@ -294,28 +284,30 @@ define( require => {
 
       // Apply heat/cool
       if ( this.heatCoolFactorProperty.value !== 0 ) {
-        heatCoolParticles( this.heavyParticles, this.heatCoolFactorProperty.value );
-        heatCoolParticles( this.lightParticles, this.heatCoolFactorProperty.value );
+        ParticleUtils.heatCoolParticles( this.heavyParticles, this.heatCoolFactorProperty.value );
+        ParticleUtils.heatCoolParticles( this.lightParticles, this.heatCoolFactorProperty.value );
       }
 
       // Step particles
-      stepParticles( this.heavyParticles, dt );
-      stepParticles( this.lightParticles, dt );
-      stepParticles( this.heavyParticlesOutside, dt );
-      stepParticles( this.lightParticlesOutside, dt );
+      ParticleUtils.stepParticles( this.heavyParticles, dt );
+      ParticleUtils.stepParticles( this.lightParticles, dt );
+      ParticleUtils.stepParticles( this.heavyParticlesOutside, dt );
+      ParticleUtils.stepParticles( this.lightParticlesOutside, dt );
 
       // Allow particles to escape from the opening in the top of the container
       if ( this.container.openingWidth > 0 ) {
-        escapeParticles( this.container, this.numberOfHeavyParticlesProperty, this.heavyParticles, this.heavyParticlesOutside, );
-        escapeParticles( this.container, this.numberOfLightParticlesProperty, this.lightParticles, this.lightParticlesOutside );
+        ParticleUtils.escapeParticles( this.container, this.numberOfHeavyParticlesProperty,
+          this.heavyParticles, this.heavyParticlesOutside, );
+        ParticleUtils.escapeParticles( this.container, this.numberOfLightParticlesProperty,
+          this.lightParticles, this.lightParticlesOutside );
       }
 
       // Collision detection and response
       this.collisionDetector.step( dt );
 
       // Remove particles that have left the model bounds
-      removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );
-      removeParticlesOutOfBounds( this.lightParticlesOutside, this.modelBoundsProperty.value );
+      ParticleUtils.removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );
+      ParticleUtils.removeParticlesOutOfBounds( this.lightParticlesOutside, this.modelBoundsProperty.value );
 
       // Do this after collision detection, so that the number of collisions detected has been recorded.
       this.collisionCounter && this.collisionCounter.step( dt );
@@ -338,6 +330,16 @@ define( require => {
       if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
         this.container.lidIsOnProperty.value = false;
       }
+    }
+
+    /**
+     * Redistributes the particles in the container, called in response to changing the container width.
+     * @param {number} ratio
+     * @public
+     */
+    redistributeParticles( ratio ) {
+      ParticleUtils.redistributeParticles( this.heavyParticles, ratio );
+      ParticleUtils.redistributeParticles( this.lightParticles, ratio );
     }
 
     /**
@@ -383,103 +385,6 @@ define( require => {
 
       // P = NkT/V, converted to kPa
       return ( numberOfParticles * k * temperature / volume ) * 1.66E6;
-    }
-  }
-
-  /**
-   * Steps a collection of particles.
-   * @param {Particle[]} particles
-   * @param {number} dt - time step in ps
-   */
-  function stepParticles( particles, dt ) {
-    for ( let i = 0; i < particles.length; i++ ) {
-      particles[ i ].step( dt );
-    }
-  }
-
-  /**
-   * Heats or cools a collection of particles.
-   * @param {Particle[]} particles
-   * @param {number} heatCoolFactor - (-1,1), heat=[0,1), cool=(-1,0]
-   */
-  function heatCoolParticles( particles, heatCoolFactor ) {
-    assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
-    const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
-    for ( let i = 0; i < particles.length; i++ ) {
-      particles[ i ].scaleVelocity( velocityScale );
-    }
-  }
-
-  /**
-   * Removes a particle from an array.
-   * @param {Particle} particle
-   * @param {Particle[]} particles
-   */
-  function removeParticle( particle, particles ) {
-    assert && assert( particle instanceof Particle, `not a Particle: ${particle}` );
-    const index = particles.indexOf( particle );
-    assert && assert( index !== -1, 'particle not found' );
-    particles.splice( index, 1 );
-    particle.dispose();
-  }
-
-  /**
-   * Removes the last n particles from an array.
-   * @param {number} n
-   * @param {Particle[]} particles
-   */
-  function removeParticles( n, particles ) {
-    assert && assert( n <= particles.length,
-      `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
-    const particlesToRemove = particles.slice( particles.length - n, particles.length );
-    for ( let i = 0; i < particlesToRemove.length; i++ ) {
-      removeParticle( particlesToRemove[ i ], particles );
-    }
-  }
-
-  /**
-   * Removes particles that are out of bounds.
-   * @param {Particle[]} particles
-   * @param {Bounds2} bounds
-   */
-  function removeParticlesOutOfBounds( particles, bounds ) {
-    for ( let i = 0; i < particles.length; i++ ) {
-      if ( !particles[ i ].intersectsBounds( bounds ) ) {
-        removeParticle( particles[ i ], particles );
-      }
-    }
-  }
-
-  /**
-   * Redistributes particles in the horizontal dimension
-   * @param {Particle[]} particles
-   * @param {number} ratio
-   */
-  function redistributeParticles( particles, ratio ) {
-    assert && assert( ratio > 0, `invalid ratio: ${ratio}` );
-    for ( let i = 0; i < particles.length; i++ ) {
-      particles[ i ].location.setX( ratio * particles[ i ].location.x );
-    }
-  }
-
-  /**
-   * Identifies particles that have escaped via the opening in the top of the container, and
-   * moves them from insideParticles to outsideParticles.
-   * @param {GasPropertiesContainer} container
-   * @param {NumberProperty} numberOfParticlesProperty - number of particles inside the container
-   * @param {Particle[]} insideParticles - particles inside the container
-   * @param {Particle[]} outsideParticles - particles outside the container
-   */
-  function escapeParticles( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
-    for ( let i = 0; i < insideParticles.length; i++ ) {
-      const particle = insideParticles[ i ];
-      if ( particle.top > container.top &&
-           particle.left > container.openingLeft &&
-           particle.right < container.openingRight ) {
-        insideParticles.splice( insideParticles.indexOf( particle ), 1 );
-        numberOfParticlesProperty.value--;
-        outsideParticles.push( particle );
-      }
     }
   }
 
