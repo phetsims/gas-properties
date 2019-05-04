@@ -95,7 +95,6 @@ define( require => {
       assert && assert( openingWidth >= 0, `invalid openingWidth: ${openingWidth}` );
       return openingWidth;
     }
-
   }
 
   return gasProperties.register( 'GasPropertiesContainer', GasPropertiesContainer );
