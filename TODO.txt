@@ -2,7 +2,7 @@ TODO list for gas-properties
 
 UP NEXT
 
-Temperature is wrong when using BicyclePumpNode, not a problem in 1.0.0-dev.15
+#62 Temperature is wrong when using BicyclePumpNode
 
 Diffusion: When sim is paused, all particles shift down-right then up-left as radius is changed with spinners
 
