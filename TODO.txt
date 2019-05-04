@@ -4,7 +4,7 @@ UP NEXT
 
 Temperature is wrong when using BicyclePumpNode, not a problem in 1.0.0-dev.15
 
-When sim is paused, all particles shift down-right then up-left as radius is changed
+Diffusion: When sim is paused, all particles shift down-right then up-left as radius is changed with spinners
 
 5/2/19 design meeting:
 #51 use a running average for Particle Flow Rate
