@@ -61,7 +61,7 @@ define( require => {
   }
 
   /**
-   * Draws a collection of particles using CanvasRenderingContext2D.drawImage()
+   * Draws a collection of particles.
    * @param {CanvasRenderingContext2D} context
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Particle[]} particles
