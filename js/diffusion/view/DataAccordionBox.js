@@ -40,6 +40,7 @@ define( require => {
 
       }, options );
 
+      // Data for left side of the container
       const leftDataNode = new DataNode(
         model.modelViewTransform,
         model.leftNumberOfParticles1Property,
@@ -47,6 +48,7 @@ define( require => {
         model.leftAverageTemperatureProperty
       );
 
+      // Data for right side of container
       const rightDataNode = new DataNode(
         model.modelViewTransform,
         model.rightNumberOfParticles1Property,
@@ -54,7 +56,7 @@ define( require => {
         model.rightAverageTemperatureProperty
       );
 
-      //TODO should this separator be a bit more pronounced, since it corresponds to the container divider?
+      // Vertical separator, analogous to the container's divider
       const separator = new VSeparator( 75, {
         stroke: GasPropertiesColorProfile.separatorColorProperty
       } );
