@@ -76,7 +76,7 @@ define( require => {
       return createParticleIcon( new DiffusionParticle2(), modelViewTransform );
     },
 
-    //TODO DESIGN create a less detailed icon for the stopwatch, that doesn't need stopwatch
+    //TODO #57 create a less detailed icon for the stopwatch, that doesn't need stopwatch
     /**
      * Creates an icon for the stopwatch.
      * @returns {Node}
@@ -91,7 +91,7 @@ define( require => {
       } );
     },
 
-    //TODO DESIGN create a less detailed icon for the collision counter, that doesn't need collisionCounter or comboBoxListParent
+    //TODO #57 create a less detailed icon for the collision counter, that doesn't need collisionCounter or comboBoxListParent
     /**
      * Creates an icon for the collision counter.
      * @returns {Node}
