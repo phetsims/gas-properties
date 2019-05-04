@@ -91,30 +91,32 @@ define( require => {
       yAxisLabel.right = background.left - 8;
       yAxisLabel.centerY = background.centerY;
 
-      //TODO temporary 'out of range' indicator for x axis, ellipsis
-      // ellipsis to indicate x-axis data out of range
-      const xEllipsisNode = new Text( ELLIPSIS_STRING, {
+      // Options shared by both out-of-range indicators
+      const outOfRangeOptions = {
         font: new PhetFont( 14 ),
-        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+        fill: GasPropertiesColorProfile.histogramBarColorProperty
+      };
+
+      //TODO 'out of range' indicator for x axis, temporary?
+      // indicates that x-axis has data that is out of range
+      const xOutOfRangeNode = new Text( ELLIPSIS_STRING, _.extend( {}, outOfRangeOptions, {
         right: background.right,
         centerY: xAxisLabel.centerY
-      } );
+      } ) );
       
-      //TODO temporary 'out of range' indicator for y axis, ellipsis
-      // ellipsis to indicate y-axis data out of range
-      const yEllipsisNode = new Text( ELLIPSIS_STRING, {
-        font: new PhetFont( 14 ),
-        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+      //TODO 'out of range' indicator for y axis, temporary?
+      // indicates that y-axis has data that is out of range
+      const yOutOfRangeNode = new Text( ELLIPSIS_STRING, _.extend( {}, outOfRangeOptions, {
         left: background.right + 5,
         top: background.top,
         rotation: Math.PI / 2
-      } );
+      } ) );
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
         children: [ 
           background, intervalLines, plotNodesParent, border, 
-          xAxisLabel, yAxisLabel, xEllipsisNode, yEllipsisNode 
+          xAxisLabel, yAxisLabel, xOutOfRangeNode, yOutOfRangeNode 
         ]
       }, options );
 
@@ -126,8 +128,8 @@ define( require => {
       this.numberOfBins = numberOfBins;
       this.binWidth = binWidth;
       this.chartSize = options.chartSize;
-      this.xEllipsisNode = xEllipsisNode;
-      this.yEllipsisNode = yEllipsisNode;
+      this.xOutOfRangeNode = xOutOfRangeNode;
+      this.yOutOfRangeNode = yOutOfRangeNode;
       this.maxY = options.maxY;
       this.yInterval = options.yInterval;
       this.dataSets = []; // {number[]}
@@ -232,8 +234,8 @@ define( require => {
       }
 
       // If there are values out of range, make the ellipsis visible.
-      this.xEllipsisNode.visible = ( xRangeExceededCount > 0 );
-      this.yEllipsisNode.visible = ( yRangeExceededCount > 0 );
+      this.xOutOfRangeNode.visible = ( xRangeExceededCount > 0 );
+      this.yOutOfRangeNode.visible = ( yRangeExceededCount > 0 );
     }
 
     //TODO should this be implemented more efficiently?
