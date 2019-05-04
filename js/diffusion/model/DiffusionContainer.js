@@ -23,13 +23,11 @@ define( require => {
     /**
      * @param {Object} [options]
      */                                                        
-    constructor( options ) {
+    constructor() {
 
-      options = _.extend( {
+      super( {
         widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ) // effectively fixed width
-      }, options );
-
-      super( options );
+      } );
 
       // In case clients attempt to exercise this feature of the base class
       this.widthProperty.lazyLink( width => {

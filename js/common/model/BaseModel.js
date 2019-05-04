@@ -18,12 +18,16 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
+  
+  // constants
+  const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
 
   class BaseModel {
 
     constructor( options ) {
-
+      
       options = _.extend( {
+        modelOriginOffset: new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
         stopwatchLocation: new Vector2( 250, 15 ) // in view coordinates! determined empirically
       }, options );
 
@@ -35,11 +39,10 @@ define( require => {
       } );
 
       // @public (read-only) transform between model and view coordinate frames
-      const modelViewScale = 0.040; // number of pixels per pm
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
-        new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
-        modelViewScale,
-        -modelViewScale // y is inverted
+        options.modelOriginOffset,
+        MODEL_VIEW_SCALE,
+        -MODEL_VIEW_SCALE // y is inverted
       );
 
       // @public (read-only) transform between real time and sim time, can be set by subclasses

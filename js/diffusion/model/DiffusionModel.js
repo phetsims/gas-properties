@@ -42,6 +42,7 @@ define( require => {
     constructor() {
 
       super( {
+        modelOriginOffset: new Vector2( 645, 525 ), // offset of the model's origin, in view coordinates
         stopwatchLocation: new Vector2( 35, 15 ) // in view coordinates! determined empirically
       } );
 
@@ -59,9 +60,7 @@ define( require => {
       } );
 
       // @public
-      this.container = new DiffusionContainer( {
-        location: new Vector2( 0, -1250 ) //TODO better to shift the MVT?
-      } );
+      this.container = new DiffusionContainer();
 
       // @public parameters that define the experiment to be run when the container's divider is removed
       this.experiment = new DiffusionExperiment();
