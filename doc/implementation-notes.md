@@ -37,7 +37,7 @@ BaseContainer
   
 View:
 ```
-ScreenView
+BaseScreenView
   GasPropertiesScreenView( GasPropertiesModel )
     IdealScreenView( IdealModel ), IdealViewProperties
     ExploreScreenView( ExploreModel ), ExploreViewProperties
