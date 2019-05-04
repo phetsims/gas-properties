@@ -20,8 +20,6 @@ Explore: #60 unpause sim when resize handle is moved
 Histogram: rewrite to mutate bars/lines, instead of removeAllChildren/addChild on every step
 Histogram: don't update when not visible
 
-stringTest
-
 Better names than particle1, particle2, mass1, mass2, etc?
 
 REFERENCES
