@@ -26,6 +26,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -48,12 +49,11 @@ define( require => {
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
-  const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  class GasPropertiesScreenView extends ScreenView {
+  class GasPropertiesScreenView extends BaseScreenView {
 
     /**
      * @param {GasPropertiesModel} model
@@ -69,12 +69,7 @@ define( require => {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
       }, options );
 
-      super();
-
-      // The model bounds are equivalent to the visible bounds of ScreenView, as fills the browser window.
-      this.visibleBoundsProperty.link( visibleBounds => {
-        model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
-      } );
+      super( model, options );
 
       const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
 

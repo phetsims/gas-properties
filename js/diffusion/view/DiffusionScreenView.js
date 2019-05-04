@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
   const CenterXOfMassNode = require( 'GAS_PROPERTIES/diffusion/view/CenterXOfMassNode' );
   const DataAccordionBox = require( 'GAS_PROPERTIES/diffusion/view/DataAccordionBox' );
   const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
@@ -24,24 +25,18 @@ define( require => {
   const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  const ScreenView = require( 'JOIST/ScreenView' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
 
-  class DiffusionScreenView extends ScreenView {
+  class DiffusionScreenView extends BaseScreenView {
 
     /**
      * @param {DiffusionModel} model
+     * @param {Object} [options]
      */
-    constructor( model ) {
+    constructor( model, options ) {
       assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
 
-      super();
-
-      //TODO duplicated in GasPropertiesScreenView
-      // The model bounds are equivalent to the visible bounds of ScreenView, as fills the browser window.
-      this.visibleBoundsProperty.link( visibleBounds => {
-        model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
-      } );
+      super( model, options );
 
       const viewProperties = new DiffusionViewProperties();
 
