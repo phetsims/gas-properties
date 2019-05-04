@@ -46,6 +46,7 @@ define( require => {
         backgroundFill: 'black', // {ColorDef}
         borderStroke: 'white',// {ColorDef}
         borderLineWidth: 1,
+        plotLineWidth: 2, // lineWidth for PlotType.LINES
 
         // options for the horizontal interval lines
         intervalLineOptions: {
@@ -131,6 +132,7 @@ define( require => {
       this.yInterval = options.yInterval;
       this.dataSets = []; // {number[]}
       this.intervalLinesDirty = true; // does intervalLines Shape need recomputing?
+      this.plotLineWidth = options.plotLineWidth;
     }
 
     /**
@@ -315,7 +317,7 @@ define( require => {
 
       this.plotNodesParent.addChild( new Path( shape, {
         stroke: color,
-        lineWidth: 2 //TODO
+        lineWidth: this.plotLineWidth
       } ) );
     }
   }
