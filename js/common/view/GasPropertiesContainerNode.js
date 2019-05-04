@@ -3,6 +3,7 @@
 /**
  * View of the container in for the 'Ideal', 'Explorer', and 'Energy' screens.
  * This container has mutable width, and a lid that can be moved/removed.
+ * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

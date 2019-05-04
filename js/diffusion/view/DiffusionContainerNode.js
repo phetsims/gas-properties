@@ -3,6 +3,7 @@
 /**
  * View of the container in the 'Diffusion' screen.
  * This container has a fixed with and a removable vertical divider.
+ * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
