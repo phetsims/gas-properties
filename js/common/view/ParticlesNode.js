@@ -18,8 +18,8 @@ define( require => {
     /**
      * @param {Property.<Bounds2>} modelBoundsProperty
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {Particle[][]} particleArrays
-     * @param {Property.<HTMLCanvasElement>} imageProperties
+     * @param {Particle[][]} particleArrays - arrays of particles to render
+     * @param {Property.<HTMLCanvasElement>[]} imageProperties - an image for each array in particleArrays
      */
     constructor( modelBoundsProperty, modelViewTransform, particleArrays, imageProperties ) {
 
