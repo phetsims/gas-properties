@@ -58,7 +58,7 @@ define( require => {
       defaultValue: 800
     },
 
-    //TODO #49 choose a value and delete
+    //TODO #54 choose a value and delete
     // The sample period for Average Speed, in ps
     // For internal use only, not public facing.
     averageSpeedSamplePeriod: {
