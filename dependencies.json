@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.16 Fri May 03 2019 16:36:27 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.17 Mon May 06 2019 15:48:10 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "b3f15c64393b88552a412db0bff593f5bcdfae39",
+    "sha": "6e3739d46007b18e9bbcc0483d9895a90c2b0d87",
     "branch": "master"
   },
   "joist": {
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "11bdd83456b879d3014ed22c41cb803d5ed5a9bd",
+    "sha": "a372c4368df3fd663b0450960f03c4cae893058b",
     "branch": "master"
   },
   "phet-io-wrapper-classroom-activity": {
@@ -53,7 +53,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "9fd73ea7cea6b860cedd7a7889fae7bd9d957192",
+    "sha": "1b679c042197cb09698b0d9252af25b70eeb2730",
     "branch": "master"
   },
   "phetcommon": {
