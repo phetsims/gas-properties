@@ -39,11 +39,9 @@ define( require => {
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
 
       // @public (read-only) {Region[]} 2D grid of Regions
-      // Partition the collision detection bounds into Regions.
+      // Partition the collision detection bounds into Regions, covering the container at its max width.
       // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
       // edges of the container.
-      //TODO generalize this or add assertions for assumptions.
-      //TODO make regions cover the inside of the container, and recreate when container width changes?
       this.regions = [];
       let maxX = container.right;
       while ( maxX > container.right - container.widthRange.max ) {
@@ -145,6 +143,7 @@ define( require => {
   function assignParticlesToRegions( particles, regions ) {
     for ( let i = 0; i < particles.length; i++ ) {
       for ( let j = 0; j < regions.length; j++ ) {
+        //TODO skip region if it's bounds don't intersect the container
         if ( particles[ i ].intersectsBounds( regions[ j ].bounds ) ) {
           regions[ j ].addParticle( particles[ i ] );
         }
