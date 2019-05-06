@@ -15,16 +15,16 @@ define( require => {
   class DataSet {
 
     /**
-     * @param {number[]} values
+     * @param {number[][]} valueArrays - one array for each sample, to avoid expensive Array.concat
      * @param {PlotType} plotType
      * @param {ColorDef} color
      */
-    constructor( values, plotType, color ) {
+    constructor( valueArrays, plotType, color ) {
 
       assert && assert( PlotType.includes( plotType ), `invalid plotType: ${plotType}` );
 
       // @public (read-only)
-      this.values = values;
+      this.valueArrays = valueArrays;
       this.plotType = plotType;
       this.color = color;
     }

@@ -75,7 +75,7 @@ define( require => {
       // parent Node for all plotted data, clipped to the background
       const plotNodesParent = new Node( {
         clipArea: Shape.rect( 0, 0, options.chartSize.width, options.chartSize.height )
-      });
+      } );
 
       // horizontal lines that appear at equally-spaced intervals based on y-axis scale
       const intervalLines = new Path( null, options.intervalLineOptions );
@@ -103,7 +103,7 @@ define( require => {
         right: background.right,
         centerY: xAxisLabel.centerY
       } ) );
-      
+
       //TODO 'out of range' indicator for y axis, temporary?
       // indicates that y-axis has data that is out of range
       const yOutOfRangeNode = new Text( ELLIPSIS_STRING, _.extend( {}, outOfRangeOptions, {
@@ -114,9 +114,9 @@ define( require => {
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [ 
-          background, intervalLines, plotNodesParent, border, 
-          xAxisLabel, yAxisLabel, xOutOfRangeNode, yOutOfRangeNode 
+        children: [
+          background, intervalLines, plotNodesParent, border,
+          xAxisLabel, yAxisLabel, xOutOfRangeNode, yOutOfRangeNode
         ]
       }, options );
 
@@ -135,6 +135,12 @@ define( require => {
       this.dataSets = []; // {number[]}
       this.intervalLinesDirty = true; // does intervalLines Shape need recomputing?
       this.plotLineWidth = options.plotLineWidth;
+    }
+
+    // @public
+    reset() {
+      this.removeAllDataSets();
+      this.update();
     }
 
     /**
@@ -254,9 +260,20 @@ define( require => {
         const max = ( i + 1 ) * this.binWidth;
 
         // Determine the number of values that belong in this bin
-        const count = _.filter( dataSet.values, value => ( value >= min && value < max ) ).length;
+        let totalCount = 0;
+        for ( let j = 0; j < dataSet.valueArrays.length; j++ ) {
+          const values = dataSet.valueArrays[ j ];
+          for ( let k = 0; k < values.length; k++ ) {
+            const value = values[ k ];
+            if ( value >= min && value < max ) {
+              totalCount++;
+            }
+          }
+        }
 
-        counts.push( count );
+        // Average over the number of samples
+        const averageCount = totalCount / dataSet.valueArrays.length;
+        counts.push( averageCount );
       }
       return counts;
     }

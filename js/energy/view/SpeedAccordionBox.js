@@ -88,6 +88,7 @@ define( require => {
 
     // @public
     reset() {
+      this.histogram.reset();
       this.heavyVisibleProperty.reset();
       this.lightVisibleProperty.reset();
     }

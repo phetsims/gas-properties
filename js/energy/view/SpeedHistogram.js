@@ -25,6 +25,7 @@ define( require => {
   // constants
   const NUMBER_OF_BINS = GasPropertiesQueryParameters.speedBins;
   const BIN_WIDTH = GasPropertiesQueryParameters.speedBinWidth; // pm/ps
+  const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
 
   class SpeedHistogram extends Histogram {
 
@@ -45,6 +46,30 @@ define( require => {
       this.model = model;
       this.heavyVisibleProperty = heavyVisibleProperty;
       this.lightVisibleProperty = lightVisibleProperty;
+
+      // @private accumulators
+      this.dtAccumulator = 0;
+      this.numberOfSamples = 0;
+      this.numberOfValues = 0; // {number} number of values in this.allValues
+      this.heavyValues = []; // {number[][]} samples for heavy particles
+      this.lightValues = []; // {number[][]} samples for light particles
+      this.allValues = []; // {number[][]} samples for all particles
+    }
+
+    // @public @override
+    reset() {
+      super.reset();
+      this.resetAccumulators();
+    }
+
+    // @private
+    resetAccumulators() {
+      this.dtAccumulator = 0;
+      this.numberOfSamples = 0;
+      this.numberOfValues = 0;
+      this.heavyValues.length = 0;
+      this.lightValues.length = 0;
+      this.allValues.length = 0;
     }
 
     /**
@@ -53,33 +78,49 @@ define( require => {
      */
     step( dt ) {
 
-      this.removeAllDataSets();
-
-      // Get speed values, {number[]}
+      // take a sample
       const heavyValues = this.model.getHeavyParticleSpeedValues();
       const lightValues = this.model.getLightParticleSpeedValues();
-      const allValues = heavyValues.concat( lightValues );
+      const allValues = heavyValues.concat( lightValues ); //TODO concat is expensive
 
-      // set the y-axis scale
-      this.setMaxY( Math.max( 0.2 * allValues.length, 2 * this.yInterval ) ); //TODO
+      // accumulate the sample
+      this.dtAccumulator += dt;
+      this.numberOfSamples++;
+      this.numberOfValues += allValues.length;
+      this.heavyValues.push( heavyValues );
+      this.lightValues.push( lightValues );
+      this.allValues.push( allValues );
 
-      if ( allValues.length > 0 ) {
+      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
-        // all particles
-        this.addDataSet( new DataSet( allValues, PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty ) );
+        this.removeAllDataSets();
 
-        // heavy particles
-        if ( this.heavyVisibleProperty.value ) {
-          this.addDataSet( new DataSet( heavyValues, PlotType.LINES, GasPropertiesColorProfile.heavyParticleColorProperty ) );
+        if ( this.numberOfValues > 0 ) {
+
+          // set the y-axis scale
+          const valuesPerSample = this.numberOfValues / this.numberOfSamples;
+          this.setMaxY( Math.max( 0.2 * valuesPerSample, 2 * this.yInterval ) ); //TODO
+
+          // all particles
+          this.addDataSet( new DataSet( this.allValues, PlotType.BARS,
+            GasPropertiesColorProfile.histogramBarColorProperty ) );
+
+          // heavy particles
+          if ( this.heavyVisibleProperty.value ) {
+            this.addDataSet( new DataSet( this.heavyValues, PlotType.LINES,
+              GasPropertiesColorProfile.heavyParticleColorProperty ) );
+          }
+
+          // light particles
+          if ( this.lightVisibleProperty.value ) {
+            this.addDataSet( new DataSet( this.lightValues, PlotType.LINES,
+              GasPropertiesColorProfile.lightParticleColorProperty ) );
+          }
         }
 
-        // light particles
-        if ( this.lightVisibleProperty.value ) {
-          this.addDataSet( new DataSet( lightValues, PlotType.LINES, GasPropertiesColorProfile.lightParticleColorProperty ) );
-        }
+        this.update();
+        this.resetAccumulators();
       }
-
-      this.update();
     }
   }
 
