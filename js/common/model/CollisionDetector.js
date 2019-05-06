@@ -93,13 +93,13 @@ define( require => {
       // put particles in regions
       clearRegions( this.regions );
       for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        assignParticlesToRegions( this.particleArrays[ i ], this.regions );
+        assignParticlesToRegions( this.particleArrays[ i ], this.regions ); //TODO skip regions that are outside of container.bounds
       }
 
       // particle-particle collisions, within each region
       if ( this.particleParticleCollisionsEnabledProperty.value ) {
         for ( let i = 0; i < this.regions.length; i++ ) {
-          doParticleParticleCollisions( this.regions[ i ].particles, this.mutableVectors );
+          doParticleParticleCollisions( this.regions[ i ].particles, this.mutableVectors ); //TODO skip regions that are outside of container.bounds
         }
       }
 
@@ -143,7 +143,6 @@ define( require => {
   function assignParticlesToRegions( particles, regions ) {
     for ( let i = 0; i < particles.length; i++ ) {
       for ( let j = 0; j < regions.length; j++ ) {
-        //TODO skip region if it's bounds don't intersect the container
         if ( particles[ i ].intersectsBounds( regions[ j ].bounds ) ) {
           regions[ j ].addParticle( particles[ i ] );
         }
