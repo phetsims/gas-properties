@@ -94,7 +94,7 @@ define( require => {
     }
 
     /**
-     * Steps the histogram.
+     * Steps the histogram if it's visible.
      * @param {number} dt - time delta, in ps
      */
     step( dt ) {
