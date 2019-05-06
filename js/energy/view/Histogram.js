@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Base class for histograms.
+ * Base class for general histograms.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
