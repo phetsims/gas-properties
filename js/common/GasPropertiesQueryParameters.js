@@ -59,9 +59,9 @@ define( require => {
     },
 
     //TODO #54 choose a value and delete
-    // The sample period for Average Speed, in ps
+    // The sample period for the histograms and Average Speed display, in ps
     // For internal use only, not public facing.
-    averageSpeedSamplePeriod: {
+    histogramSamplePeriod: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 1

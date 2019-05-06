@@ -20,7 +20,7 @@ define( require => {
     isValidValue: value => ( value === null || typeof value === 'number' ),
     units: 'pm/ps'
   };
-  const SAMPLE_PERIOD = GasPropertiesQueryParameters.averageSpeedSamplePeriod; // ps
+  const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
 
   class EnergyModel extends GasPropertiesModel {
 
