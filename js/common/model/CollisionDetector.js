@@ -47,9 +47,11 @@ define( require => {
       this.regions = [];
       let maxX = container.right;
       while ( maxX > container.right - container.widthRange.max ) {
+        const minX = maxX - options.regionLength;
         let minY = container.bottom;
         while ( minY < container.top ) {
-          const regionBounds = new Bounds2( maxX - options.regionLength, minY, maxX, minY + options.regionLength );
+          const maxY = minY + options.regionLength;
+          const regionBounds = new Bounds2( minX, minY, maxX, maxY );
           this.regions.push( new Region( regionBounds ) );
           minY = minY + options.regionLength;
         }
