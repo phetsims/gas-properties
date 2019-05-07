@@ -138,7 +138,7 @@ define( require => {
         } );
 
       // Bicycle pump is centered above the radio buttons.
-      const bicyclePumpLocation = new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 30 );
+      const bicyclePumpLocation = new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 19 );
 
       // Bicycle pump hose attaches to the container.
       const hoseLocation = model.modelViewTransform.modelToViewPosition( model.container.hoseLocation );
