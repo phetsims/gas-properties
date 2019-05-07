@@ -39,23 +39,7 @@ define( require => {
       assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
 
       // @public (read-only) {Region[]} 2D grid of Regions
-      // Partition the collision detection bounds into Regions, covering the container at its max width.
-      // This algorithm builds the grid right-to-left, bottom-to-top, so that it's aligned with the right and bottom
-      // edges of the container.
-      this.regions = [];
-      let maxX = container.right;
-      while ( maxX > container.right - container.widthRange.max ) {
-        const minX = maxX - options.regionLength;
-        let minY = container.bottom;
-        while ( minY < container.top ) {
-          const maxY = minY + options.regionLength;
-          const regionBounds = new Bounds2( minX, minY, maxX, maxY );
-          this.regions.push( new Region( regionBounds ) );
-          minY = minY + options.regionLength;
-        }
-        maxX = maxX - options.regionLength;
-      }
-      phet.log && phet.log( `created ${this.regions.length} regions of ${options.regionLength}pm each` );
+      this.regions = createRegions( container, options.regionLength  );
 
       // @public (read-only) number of wall collisions on the most recent call to step
       this.numberOfParticleContainerCollisions = 0;
@@ -90,16 +74,20 @@ define( require => {
      */
     step( dt ) {
 
-      // put particles in regions
       clearRegions( this.regions );
+
+      // Use regions that intersect the container, since collisions only occur inside the container.
+      const containerRegions = _.filter( this.regions, region => this.container.bounds.intersectsBounds( region.bounds ) );
+
+      // put particles in regions
       for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        assignParticlesToRegions( this.particleArrays[ i ], this.regions ); //TODO skip regions that are outside of container.bounds
+        assignParticlesToRegions( this.particleArrays[ i ], containerRegions );
       }
 
       // particle-particle collisions, within each region
       if ( this.particleParticleCollisionsEnabledProperty.value ) {
-        for ( let i = 0; i < this.regions.length; i++ ) {
-          doParticleParticleCollisions( this.regions[ i ].particles, this.mutableVectors ); //TODO skip regions that are outside of container.bounds
+        for ( let i = 0; i < containerRegions.length; i++ ) {
+          doParticleParticleCollisions( containerRegions[ i ].particles, this.mutableVectors );
         }
       }
 
@@ -123,6 +111,33 @@ define( require => {
       // Verify that particles are fully inside in the container.
       assert && assertParticlesInsideContainer( this.container, this.particleArrays );
     }
+  }
+
+  /**
+   * Partitions the collision detection bounds into Regions.  Since collisions only occur inside the container,
+   * the maximum collision detection bounds is the container at its max width.  This algorithm builds the grid
+   * right-to-left, bottom-to-top, so that it's aligned with the right and bottom edges of the container.
+   * Regions along the top and left edges may be outside the container, and that's OK.
+   * @param {BaseContainer} container
+   * @param {number} regionLength - regions are square, length of one side, in pm
+   * @returns {Region[]}
+   */
+  function createRegions( container, regionLength ) {
+    const regions = [];
+    let maxX = container.right;
+    while ( maxX > container.right - container.widthRange.max ) {
+      const minX = maxX - regionLength;
+      let minY = container.bottom;
+      while ( minY < container.top ) {
+        const maxY = minY + regionLength;
+        const regionBounds = new Bounds2( minX, minY, maxX, maxY );
+        regions.push( new Region( regionBounds ) );
+        minY = minY + regionLength;
+      }
+      maxX = maxX - regionLength;
+    }
+    phet.log && phet.log( `created ${regions.length} regions of ${regionLength} pm each` );
+    return regions;
   }
 
   /**
