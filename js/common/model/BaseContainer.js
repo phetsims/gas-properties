@@ -76,11 +76,12 @@ define( require => {
      * @param {number} dt - the time step, in ps
      */
     step( dt ) {
-      if ( this.left !== this.previousLeft ) {
-        this.leftWallVelocity.setXY( this.left - this.previousLeft / dt, 0 );
-        this.previousLeft = this.left;
-        //TODO why is leftWallVelocity.x never negative?
-        // console.log( `wall velocity = ${this.leftWallVelocity}` );//XXX
+
+      // Adjust the velocity of the left (movable) wall
+      this.leftWallVelocity.setXY( ( this.left - this.previousLeft ) / dt, 0 );
+      this.previousLeft = this.left;
+      if ( phet.log && this.leftWallVelocity.magnitude !== 0 ) {
+        phet.log( 'leftWallVelocity.x = ' + this.leftWallVelocity.x );
       }
     }
 
