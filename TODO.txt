@@ -8,8 +8,6 @@ Diffusion: alignment of spinners
 
 Particles overlap container a bit, most visible in Diffusion with large radius
 
-#51 use a running average for Particle Flow Rate
-
 Intro: hold constant, see HoldConstantEnum
 
 Intro: optimize number of iterations over particle arrays

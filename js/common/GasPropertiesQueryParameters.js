@@ -86,12 +86,12 @@ define( require => {
     },
 
     //TODO #51 choose a value and delete
-    // The sample period for particle flow rate, in ps.
+    // The number of samples in the running average for particle flow rate.
     // For internal use only, not public facing.
-    flowRateSamplePeriod: {
+    flowRateSamples: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 1
+      defaultValue: 50
     },
 
     //TODO #51 choose a value and delete

@@ -3,6 +3,7 @@
 /**
  * Sub-component of the 'Diffusion' screen model, responsible for flow rate for one set of particles.
  * Flow rate is the number of particles moving between the two sides of the container, in particles/ps.
+ * Uses a running average.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,7 +17,7 @@ define( require => {
 
   // constants
   // Properties are updated with this frequency, in ps
-  const SAMPLE_PERIOD = GasPropertiesQueryParameters.flowRateSamplePeriod;
+  const NUMBER_OF_SAMPLES = GasPropertiesQueryParameters.flowRateSamples;
   const FLOW_RATE_OPTIONS = {
     units: 'particles/ps'
   };
@@ -39,53 +40,62 @@ define( require => {
       // @public flow rate to right side of container, in particles/ps
       this.rightFlowRateProperty = new NumberProperty( 0, FLOW_RATE_OPTIONS );
 
-      // @private accumulators
-      this.dtAccumulator = 0;
-      this.leftCount = 0; // number of particles that have crossed dividerX while moving from right to left
-      this.rightCount = 0; // number of particles that have crossed dividerX while moving from left to right
+      // @private {number[]} samples of number of particles that have crossed the container's divider
+      this.leftCounts = []; // particles that crossed from right to left <--
+      this.rightCounts = []; // particles that crossed from left to right -->
+
+      // @private {number[]} dt values for each sample
+      this.dts = [];
     }
 
     // @public
     reset() {
       this.leftFlowRateProperty.reset();
       this.rightFlowRateProperty.reset();
-      this.resetAccumulators();
-    }
-
-    // @private
-    resetAccumulators() {
-      this.dtAccumulator = 0;
-      this.leftCount = 0;
-      this.rightCount = 0;
+      this.leftCounts.length = 0;
+      this.rightCounts.length = 0;
+      this.dts.length = 0;
     }
 
     /**
-     * @param {number} dt - time delta, in ps
+     * @param {number} dt - time delta , in ps
      * @private
      */
     step( dt ) {
 
-      // Record the number of particles that crossed between left and right sides on this time step.
+      // Take a sample.
+      let leftCount = 0; // <--
+      let rightCount = 0; // -->
       for ( let i = 0; i < this.particles.length; i++ ) {
         const particle = this.particles[ i ];
         if ( particle.previousLocation.x >= this.dividerX && particle.location.x < this.dividerX ) {
-          this.leftCount++;
+          leftCount++;
         }
         else if ( particle.previousLocation.x <= this.dividerX && particle.location.x > this.dividerX ) {
-          this.rightCount++;
+          rightCount++;
         }
       }
+      this.leftCounts.push( leftCount );
+      this.rightCounts.push( rightCount );
+      this.dts.push( dt );
 
-      this.dtAccumulator += dt;
-
-      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
-
-        // update flow-rate Properties
-        this.leftFlowRateProperty.value = this.leftCount / this.dtAccumulator;
-        this.rightFlowRateProperty.value = this.rightCount / this.dtAccumulator;
-
-        this.resetAccumulators();
+      // Drop the oldest sample.
+      if ( this.leftCounts.length > NUMBER_OF_SAMPLES ) {
+        this.leftCounts.shift();
+        this.rightCounts.shift();
+        this.dts.shift();
       }
+
+      // All arrays should be the same length
+      assert && assert( this.leftCounts.length === this.rightCounts.length && this.leftCounts.length === this.dts.length,
+        'all arrays should have the same length');
+
+      // Update flow-rate Properties with an average of the current samples.
+      const leftAverage = _.sum( this.leftCounts ) / this.leftCounts.length;
+      const rightAverage = _.sum( this.rightCounts ) / this.rightCounts.length;
+      const dtAverage = _.sum( this.dts ) / this.dts.length;
+      this.leftFlowRateProperty.value = leftAverage / dtAverage;
+      this.rightFlowRateProperty.value = rightAverage / dtAverage;
     }
   }
 
