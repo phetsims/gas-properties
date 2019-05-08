@@ -97,14 +97,12 @@ define( require => {
         fill: GasPropertiesColorProfile.histogramBarColorProperty
       };
 
-      //TODO 'out of range' indicator for x axis, temporary?
       // indicates that x-axis has data that is out of range
       const xOutOfRangeNode = new Text( ELLIPSIS_STRING, _.extend( {}, outOfRangeOptions, {
         right: background.right,
         centerY: xAxisLabel.centerY
       } ) );
 
-      //TODO 'out of range' indicator for y axis, temporary?
       // indicates that y-axis has data that is out of range
       const yOutOfRangeNode = new Text( ELLIPSIS_STRING, _.extend( {}, outOfRangeOptions, {
         left: background.right + 5,
