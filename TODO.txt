@@ -9,7 +9,6 @@ Diffusion: alignment of spinners
 Particles overlap container a bit, most visible in Diffusion with large radius
 
 #51 use a running average for Particle Flow Rate
-#52 add a sample period for histograms, use for Average Speed
 
 Intro: hold constant, see HoldConstantEnum
 
