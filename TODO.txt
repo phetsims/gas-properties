@@ -1,5 +1,7 @@
 TODO list for gas-properties
 
+leftWallVelocity.x is never negative in BaseContainer.step
+
 #55 address antialiasing of particles by scaling up HTMLImageElements
 
 #62 Temperature is wrong when using BicyclePumpNode
