@@ -6,8 +6,6 @@ Diffusion: When sim is paused, all particles shift back and forth as radius is c
 Diffusion: Handle divider properly in CollisionDetector.step
 Diffusion: alignment of spinners
 
-Particles overlap container a bit, most visible in Diffusion with large radius
-
 Intro: hold constant, see HoldConstantEnum
 
 Intro: optimize number of iterations over particle arrays
