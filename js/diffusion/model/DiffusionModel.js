@@ -70,23 +70,23 @@ define( require => {
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
-      // @public (read-only) centerX of mass for particles of types DiffusionParticle1 and DiffusionParticle2
+      // @public (read-only) centerX of mass for particles of types DiffusionParticle1 and DiffusionParticle2, in pm
       this.centerXOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
       this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
-      // @public flow rate model for particles of types DiffusionParticle1 and DiffusionParticle2
+      // @public flow rate model for particles of types DiffusionParticle1 and DiffusionParticle2, in particles/pm
       this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
       this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2 );
 
       // @public (read-only) Data for the left half of the container
       this.leftNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
       this.leftNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.leftAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
+      this.leftAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
 
       // @public (read-only) Data for the right half of the container
       this.rightNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
       this.rightNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
+      this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
 
       // @public (read-only)
       this.collisionDetector = new CollisionDetector( this.container, [ this.particles1, this.particles2 ], {
