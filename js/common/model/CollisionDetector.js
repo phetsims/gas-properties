@@ -26,7 +26,7 @@ define( require => {
   class CollisionDetector {
 
     /**
-     * @param {Container} container
+     * @param {BaseContainer} container
      * @param {Particle[][]} particleArrays
      * @param {Object} [options]
      */
