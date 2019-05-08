@@ -52,12 +52,13 @@ define( require => {
           particleNode.toCanvas( canvas => { particle2ImageProperty.value = canvas; } );
         } );
 
-      super(
-        model.modelBoundsProperty,
-        model.modelViewTransform,
-        [ model.particles1, model.particles2 ],
-        [ particle1ImageProperty, particle2ImageProperty ]
-      );
+      // arrays for each particle type
+      const particleArrays = [ model.particles1, model.particles2 ];
+
+      // images for each particle type in particleArrays
+      const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
+
+      super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties );
     }
   }
 

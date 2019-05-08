@@ -48,12 +48,19 @@ define( require => {
           particleNode.toCanvas( canvas => { lightParticleImageProperty.value = canvas; } );
         } );
 
-      super(
-        model.modelBoundsProperty,
-        model.modelViewTransform,
-        [ model.heavyParticles, model.lightParticles, model.heavyParticlesOutside, model.lightParticlesOutside ],
-        [ heavyParticleImageProperty, lightParticleImageProperty, heavyParticleImageProperty, lightParticleImageProperty ]
-      );
+      // arrays for each particle type
+      const particleArrays = [
+        model.heavyParticles, model.lightParticles,
+        model.heavyParticlesOutside, model.lightParticlesOutside
+      ];
+
+      // images for each particle type in particleArrays
+      const imageProperties = [
+        heavyParticleImageProperty, lightParticleImageProperty,
+        heavyParticleImageProperty, lightParticleImageProperty
+      ];
+
+      super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties );
     }
   }
 
