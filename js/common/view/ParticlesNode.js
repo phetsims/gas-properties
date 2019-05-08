@@ -24,7 +24,7 @@ define( require => {
     constructor( modelBoundsProperty, modelViewTransform, particleArrays, imageProperties ) {
 
       assert && assert( particleArrays.length === imageProperties.length,
-        'must supply an image for each particles array' );
+        'must supply an image Property for each particle array' );
 
       super();
 
