@@ -177,7 +177,7 @@ define( require => {
      * Updates a specific data set that was previously added using addDataSet.
      * Client must call update to render the data set.
      * @param {number} index - the data set's index, returned by addDataSet
-     * @param {DataSet} dataSet
+     * @param {number[]} valueArrays
      */
     updateDataSet( index, valueArrays ) {
       assert && assert( index >= 0 && index < this.dataSets.length, `index out of range: ${index}` );
