@@ -13,6 +13,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class GasPropertiesContainer extends BaseContainer {
@@ -74,14 +75,19 @@ define( require => {
      * @public
      */
     get openingLeft() {
+
       let openingLeft = null;
       if ( this.lidIsOnProperty.value ) {
         openingLeft = this.left - this.wallThickness + this.lidWidthProperty.value;
+
+        // Round to the nearest pm to avoid floating-point error, see https://github.com/phetsims/gas-properties/issues/63.
+        openingLeft = Util.roundSymmetric( openingLeft );
       }
       else {
         openingLeft = this.left + this.openingLeftInset;
       }
-      assert && assert( openingLeft <= this.openingRight, 'openingLeft must be <= openingRight' );
+      assert && assert( openingLeft <= this.openingRight,
+        `openingLeft ${openingLeft} must be <= openingRight ${this.openingRight}` );
       return openingLeft;
     }
 
