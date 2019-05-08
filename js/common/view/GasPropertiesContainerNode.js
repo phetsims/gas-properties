@@ -36,7 +36,7 @@ define( require => {
     constructor( container, modelViewTransform, holdConstantProperty, visibleBoundsProperty, options ) {
 
       options = _.extend( {
-        resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of the resize handle's grip
+        resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
         lidGripColor: GasPropertiesColorProfile.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
         resizeHandleIsPressedListener: isPressed => {} // function(isPressed: boolean)
       }, options );
@@ -150,7 +150,8 @@ define( require => {
 
         // display the previous bounds of the container
         previousBoundsNode.visible = isPressed;
-        previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY, wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
+        previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY,
+          wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
         options.resizeHandleIsPressedListener( isPressed );
 
         // when the handle is released, log the opening
