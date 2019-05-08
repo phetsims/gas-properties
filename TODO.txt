@@ -15,6 +15,7 @@ Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
+
 Explore: #60 unpause sim when resize handle is moved
 
 Histogram: rewrite to mutate bars/lines, instead of removeAllChildren/addChild on every step
