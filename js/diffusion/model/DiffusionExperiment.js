@@ -40,7 +40,7 @@ define( require => {
         isValidValue: value => ( value % this.massDelta === 0 )
       };
 
-      // @public mass of each particle type
+      // @public mass of each particle type, in AMU
       this.mass1Property = new NumberProperty( GasPropertiesConstants.MASS_RANGE.defaultValue, massOptions );
       this.mass2Property = new NumberProperty( GasPropertiesConstants.MASS_RANGE.defaultValue, massOptions );
 
@@ -50,7 +50,7 @@ define( require => {
         isValidValue: value => ( value % this.radiusDelta === 0 )
       };
 
-      // @public radius of each particle type
+      // @public radius of each particle type, in pm
       this.radius1Property = new NumberProperty( GasPropertiesConstants.RADIUS_RANGE.defaultValue, radiusOptions );
       this.radius2Property = new NumberProperty( GasPropertiesConstants.RADIUS_RANGE.defaultValue, radiusOptions );
 
@@ -60,7 +60,7 @@ define( require => {
         isValidValue: value => ( value % this.initialTemperatureDelta === 0 )
       };
 
-      // @public initial temperature for each particle type, used to compute initial velocity
+      // @public initial temperature for each particle type, in K, used to compute initial velocity
       this.initialTemperature1Property =
         new NumberProperty( GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE.defaultValue, initialTemperatureOptions );
       this.initialTemperature2Property =
