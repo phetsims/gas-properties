@@ -95,7 +95,7 @@ define( require => {
 
       // Add or remove particles
       this.experiment.numberOfParticles1Property.link( numberOfParticles => {
-        this.numberOfParticlesListener( numberOfParticles,
+        this.updateNumberOfParticles( numberOfParticles,
           this.container.leftBounds,
           this.experiment.mass1Property.value,
           this.experiment.radius1Property.value,
@@ -104,7 +104,7 @@ define( require => {
           DiffusionParticle1 );
       } );
       this.experiment.numberOfParticles2Property.link( numberOfParticles => {
-        this.numberOfParticlesListener( numberOfParticles,
+        this.updateNumberOfParticles( numberOfParticles,
           this.container.rightBounds,
           this.experiment.mass2Property.value,
           this.experiment.radius2Property.value,
@@ -206,14 +206,14 @@ define( require => {
      * @param {number} radius
      * @param {number} initialTemperature
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
-     * @param particleConstructor - constructor for elements in particles array
+     * @param {constructor} Constructor - constructor for elements in particles array
      * @private
      */
-    numberOfParticlesListener( numberOfParticles, locationBounds, mass, radius, initialTemperature, particles, particleConstructor ) {
+    updateNumberOfParticles( numberOfParticles, locationBounds, mass, radius, initialTemperature, particles, Constructor ) {
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {
-          this.addParticles( delta, locationBounds, mass, radius, initialTemperature, particles, particleConstructor );
+          this.addParticles( delta, locationBounds, mass, radius, initialTemperature, particles, Constructor );
         }
         else {
           ParticleUtils.removeParticles( -delta, particles );
@@ -267,7 +267,7 @@ define( require => {
     }
 
     /**
-     * Updates Properties that are based on the current state of the system.
+     * Updates Properties that are based on the current state of the particle system.
      * @private
      */
     update() {
