@@ -93,9 +93,10 @@ define( require => {
 
         if ( this.numberOfValues > 0 ) {
 
+          //TODO how to scale the y axis?
           // set the y-axis scale
           const valuesPerSample = this.numberOfValues / this.numberOfSamples;
-          this.setMaxY( Math.max( 0.2 * valuesPerSample, 2 * this.yInterval ) ); //TODO
+          this.setMaxY( Math.max( 0.2 * valuesPerSample, 2 * this.yInterval ) );
 
           // all particles
           this.addDataSet( new DataSet( this.allValues, PlotType.BARS,
