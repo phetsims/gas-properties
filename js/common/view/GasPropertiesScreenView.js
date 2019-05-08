@@ -166,7 +166,6 @@ define( require => {
       const bicyclePumpOptions = {
         translation: bicyclePumpLocation,
         hoseAttachmentOffset: hoseLocation.minus( bicyclePumpLocation ),
-        enabledProperty: model.isPlayingProperty,
         handleTouchAreaXDilation: 35,
         handleTouchAreaYDilation: 35
       };
