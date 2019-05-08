@@ -360,6 +360,7 @@ define( require => {
       const plotNode = this.plotNodesParent.getChildAt( index );
       plotNode.shape = shape;
       plotNode.mutate( {
+        fill: null,
         stroke: color,
         lineWidth: this.plotLineWidth
       } );
