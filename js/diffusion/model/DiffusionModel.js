@@ -89,9 +89,7 @@ define( require => {
       this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
 
       // @public (read-only)
-      this.collisionDetector = new CollisionDetector( this.container, [ this.particles1, this.particles2 ], {
-        regionLength: this.container.height / 4
-      } );
+      this.collisionDetector = new CollisionDetector( this.container, [ this.particles1, this.particles2 ] );
 
       // Add or remove particles
       this.experiment.numberOfParticles1Property.link( numberOfParticles => {

@@ -33,13 +33,17 @@ define( require => {
     constructor( container, particleArrays, options ) {
 
       options = _.extend( {
-        regionLength: 1 // Regions are square, length of one side, pm
+
+        // {number|null} Regions are square, length of one side, pm. If null, default will be set below.
+        regionLength: null
       }, options );
 
-      assert && assert( options.regionLength > 0, `invalid regionLength: ${options.regionLength}` );
+      // If regionLength is not provided, the default is based on container height.
+      const regionLength = options.regionLength || container.height / 4;
+      assert && assert( regionLength > 0, `invalid regionLength: ${regionLength}` );
 
       // @public (read-only) {Region[]} 2D grid of Regions
-      this.regions = createRegions( container, options.regionLength  );
+      this.regions = createRegions( container, regionLength  );
 
       // @public (read-only) number of wall collisions on the most recent call to step
       this.numberOfParticleContainerCollisions = 0;

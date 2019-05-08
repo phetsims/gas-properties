@@ -98,9 +98,7 @@ define( require => {
       this.container = new GasPropertiesContainer();
 
       // @public (read-only)
-      this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ], {
-        regionLength: this.container.height / 4
-      } );
+      this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ] );
 
       // @public the factor to heat (positive value) or cool (negative value) the contents of the container
       this.heatCoolFactorProperty = new NumberProperty( 0, {
