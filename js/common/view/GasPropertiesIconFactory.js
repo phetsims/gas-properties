@@ -184,17 +184,17 @@ define( require => {
 
       const arrowOptions = {
         fill: GasPropertiesColorProfile.particle1ColorProperty,
-        stroke: null,
-        headHeight: 10,
-        headWidth: 10,
-        tailWidth: 5
+        stroke: 'black',
+        headHeight: 12,
+        headWidth: 12,
+        tailWidth: 6
       };
 
       return new HBox( {
-        spacing: 4,
+        spacing: 3,
         children: [
-          new ArrowNode( 0, 0, -15, 0, arrowOptions ),
-          new ArrowNode( 0, 0, 20, 0, arrowOptions )
+          new ArrowNode( 0, 0, -18, 0, arrowOptions ),
+          new ArrowNode( 0, 0, 24, 0, arrowOptions )
         ]
       } );
     }
