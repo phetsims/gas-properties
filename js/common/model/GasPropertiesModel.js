@@ -72,10 +72,10 @@ define( require => {
 
       // Synchronize particle counts and arrays
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
-        this.numberOfParticlesListener( newValue, oldValue, this.heavyParticles, HeavyParticle );
+        this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, HeavyParticle );
       } );
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
-        this.numberOfParticlesListener( newValue, oldValue, this.lightParticles, LightParticle );
+        this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, LightParticle );
       } );
 
       // @private
@@ -160,7 +160,7 @@ define( require => {
      * @param particleConstructor - constructor for elements in particles array
      * @private
      */
-    numberOfParticlesListener( newValue, oldValue, particles, particleConstructor ) {
+    updateNumberOfParticles( newValue, oldValue, particles, particleConstructor ) {
       if ( particles.length !== newValue ) {
         const delta = newValue - oldValue;
         if ( delta > 0 ) {
