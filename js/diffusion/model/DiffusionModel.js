@@ -330,25 +330,26 @@ define( require => {
       const leftNumberOfParticles = this.leftNumberOfParticles1Property.value + this.leftNumberOfParticles2Property.value;
       const rightNumberOfParticles = this.rightNumberOfParticles1Property.value + this.rightNumberOfParticles2Property.value;
 
-      if ( leftNumberOfParticles === 0 ) {
-        this.leftAverageTemperatureProperty.value = null;
-      }
-      else {
+      updateAverageTemperature( this.leftAverageTemperatureProperty, leftTotalKE, leftNumberOfParticles );
+      updateAverageTemperature( this.rightAverageTemperatureProperty, rightTotalKE, rightNumberOfParticles );
+    }
+  }
 
-        // T = (2/3)KE/k
-        const leftAverageKE = leftTotalKE / leftNumberOfParticles;
-        this.leftAverageTemperatureProperty.value = ( 2 / 3 ) * leftAverageKE / GasPropertiesConstants.BOLTZMANN; // K
-      }
+  /**
+   * Updates an average temperature Property.
+   * @param {Property.<number|null>} averageTemperatureProperty - null if there are no particles
+   * @param {number} totalKE
+   * @param {number} numberOfParticles
+   */
+  function updateAverageTemperature( averageTemperatureProperty, totalKE, numberOfParticles ) {
+    if ( numberOfParticles === 0 ) {
+      averageTemperatureProperty.value = null;
+    }
+    else {
 
-      if ( rightNumberOfParticles === 0 ) {
-        this.rightAverageTemperatureProperty.value = null;
-      }
-      else {
-
-        // T = (2/3)KE/k
-        const rightAverageKE = rightTotalKE / rightNumberOfParticles;
-        this.rightAverageTemperatureProperty.value = ( 2 / 3 ) * rightAverageKE / GasPropertiesConstants.BOLTZMANN; // K
-      }
+      // T = (2/3)KE/k
+      const averageKE = totalKE / numberOfParticles;
+      averageTemperatureProperty.value = ( 2 / 3 ) * averageKE / GasPropertiesConstants.BOLTZMANN; // K
     }
   }
 
