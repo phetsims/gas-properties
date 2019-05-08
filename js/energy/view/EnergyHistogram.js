@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const DataSet = require( 'GAS_PROPERTIES/energy/model/DataSet' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
@@ -50,12 +49,25 @@ define( require => {
       this.heavyValues = []; // {number[][]} samples for heavy particles
       this.lightValues = []; // {number[][]} samples for light particles
       this.allValues = []; // {number[][]} samples for all particles
+
+      // @private add data sets and store indices
+      this.allIndex = this.addDataSet( PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty );
+      this.heavyIndex = this.addDataSet( PlotType.LINES, GasPropertiesColorProfile.heavyParticleColorProperty  );
+      this.lightIndex = this.addDataSet( PlotType.LINES, GasPropertiesColorProfile.lightParticleColorProperty );
+
+      // Sets visibility of data sets for heavy and light particles
+      this.heavyVisibleProperty.link( visible => {
+        this.setDataSetVisible( this.heavyIndex, visible );
+      } );
+      this.lightVisibleProperty.link( visible => {
+        this.setDataSetVisible( this.lightIndex, visible );
+      } );
     }
 
-    // @public @override
+    // @public
     reset() {
-      super.reset();
       this.resetAccumulators();
+      this.updateDataSets();
     }
 
     // @private
@@ -89,35 +101,27 @@ define( require => {
 
       if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
-        this.removeAllDataSets();
+        //TODO how to scale the y axis?
+        // set the y-axis scale
+        const valuesPerSample = this.numberOfValues / this.numberOfSamples;
+        this.setMaxY( Math.max( 0.2 * valuesPerSample, 2 * this.yInterval ) );
 
-        if ( this.numberOfValues > 0 ) {
-
-          //TODO how to scale the y axis?
-          // set the y-axis scale
-          const valuesPerSample = this.numberOfValues / this.numberOfSamples;
-          this.setMaxY( Math.max( 0.2 * valuesPerSample, 2 * this.yInterval ) );
-
-          // all particles
-          this.addDataSet( new DataSet( this.allValues, PlotType.BARS,
-            GasPropertiesColorProfile.histogramBarColorProperty ) );
-
-          // heavy particles
-          if ( this.heavyVisibleProperty.value ) {
-            this.addDataSet( new DataSet( this.heavyValues, PlotType.LINES,
-              GasPropertiesColorProfile.heavyParticleColorProperty ) );
-          }
-
-          // light particles
-          if ( this.lightVisibleProperty.value ) {
-            this.addDataSet( new DataSet( this.lightValues, PlotType.LINES,
-              GasPropertiesColorProfile.lightParticleColorProperty ) );
-          }
-        }
-
-        this.update();
+        // update data sets
+        this.updateDataSets();
+        
         this.resetAccumulators();
       }
+    }
+
+    /**
+     * Updates the data sets.
+     * @private
+     */
+    updateDataSets() {
+      this.updateDataSet( this.allIndex, this.allValues );
+      this.updateDataSet( this.heavyIndex, this.heavyValues );
+      this.updateDataSet( this.lightIndex, this.lightValues );
+      this.update();
     }
   }
 

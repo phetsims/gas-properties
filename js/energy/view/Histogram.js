@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const DataSet = require( 'GAS_PROPERTIES/energy/model/DataSet' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -135,12 +136,6 @@ define( require => {
       this.plotLineWidth = options.plotLineWidth;
     }
 
-    // @public
-    reset() {
-      this.removeAllDataSets();
-      this.update();
-    }
-
     /**
      * See options.maxY
      * @param {number} maxY
@@ -154,33 +149,54 @@ define( require => {
     }
 
     /**
+     * Sets the visibility of a data set.
+     * @param {number} index
+     * @param {boolean} visible
+     */
+    setDataSetVisible( index, visible ) {
+      assert && assert( index > 0 && index < this.plotNodesParent.getChildrenCount(),
+        `index out of range: ${index}` );
+      this.plotNodesParent.getChildAt( index ).visible = visible;
+    }
+
+    /**
      * Adds a data set to the histogram.  Data sets are rendered in the order that they are added.
+     * Client must call update to render the data set.
+     * @param {PlotType} plotType
+     * @param {ColorDef} color
+     * @returns {number} the index of the data set
+     * @public
+     */
+    addDataSet( plotType, color ) {
+      this.dataSets.push( new DataSet( [], plotType, color ) );
+      this.plotNodesParent.addChild( new Path( new Shape() ) );
+      return this.dataSets.length - 1;
+    }
+
+    /**
+     * Updates a specific data set that was previously added using addDataSet.
+     * Client must call update to render the data set.
+     * @param {number} index - the data set's index, returned by addDataSet
      * @param {DataSet} dataSet
-     * @public
      */
-    addDataSet( dataSet ) {
-      this.dataSets.push( dataSet );
+    updateDataSet( index, valueArrays ) {
+      assert && assert( index >= 0 && index < this.dataSets.length, `index out of range: ${index}` );
+      this.dataSets[ index ].valueArrays = valueArrays;
     }
 
     /**
-     * Removes all data sets from the histogram.
-     * @public
-     */
-    removeAllDataSets() {
-      this.dataSets.length = 0;
-    }
-
-    /**
-     * Updates the histogram. Client is responsible for calling update after adding or removing data sets.
+     * Updates the histogram. Client is responsible for calling update after adding or updating data sets.
      * @public
      */
     update() {
+      assert && assert( this.plotNodesParent.getChildrenCount() === this.dataSets.length,
+        'there should be one Path for each DataSet');
       this.updatePlots();
       this.updateIntervalLines();
     }
 
     /**
-     * Updates the horizontal interval lines.  This is a no-op if !this.intervalLinesDirty.
+     * Updates the horizontal interval lines. This is a no-op if !this.intervalLinesDirty.
      * @private
      */
     updateIntervalLines() {
@@ -208,15 +224,11 @@ define( require => {
      */
     updatePlots() {
 
-      // Remove previous plots
-      this.plotNodesParent.removeAllChildren();
-
       const maxX = this.numberOfBins * this.binWidth;
 
       let xRangeExceededCount = 0;
       let yRangeExceededCount = 0;
 
-      // Create new plots
       for ( let i = 0; i < this.dataSets.length; i++ ) {
 
         const dataSet = this.dataSets[ i ];
@@ -226,10 +238,10 @@ define( require => {
 
         // Plot the data set as bars or line segments.
         if ( dataSet.plotType === PlotType.BARS ) {
-          this.plotBars( counts, dataSet.color );
+          this.plotBars( i, counts, dataSet.color );
         }
         else {
-          this.plotLines( counts, dataSet.color );
+          this.plotLines( i, counts, dataSet.color );
         }
 
         // count the number of values that exceed the x and y ranges
@@ -242,7 +254,6 @@ define( require => {
       this.yOutOfRangeNode.visible = ( yRangeExceededCount > 0 );
     }
 
-    //TODO should this be implemented more efficiently?
     /**
      * Converts a data set to an array of counts, one value for each bin.
      * @param dataSet
@@ -270,7 +281,10 @@ define( require => {
         }
 
         // Average over the number of samples
-        const averageCount = totalCount / dataSet.valueArrays.length;
+        let averageCount = 0;
+        if ( dataSet.valueArrays.length > 0 ) {
+          averageCount = totalCount / dataSet.valueArrays.length;
+        }
         counts.push( averageCount );
       }
       return counts;
@@ -278,17 +292,19 @@ define( require => {
 
     /**
      * Plots the data set as bars.
+     * @param {number} index - data set index
      * @param {number[]} counts - the count for each bin
      * @param {ColorDef} color - the color of the bars
      * @private
      */
-    plotBars( counts, color ) {
+    plotBars( index, counts, color ) {
 
+      assert && assert( index >= 0 && index < this.plotNodesParent.getChildrenCount(),
+        `index out of range: ${index}` );
+
+      // Draw the bars as a single shape.
       const shape = new Shape();
-
-      // Compute the bar width
       const barWidth = this.chartSize.width / this.numberOfBins;
-
       for ( let i = 0; i < counts.length; i++ ) {
         if ( counts[ i ] > 0 ) {
 
@@ -300,42 +316,52 @@ define( require => {
         }
       }
 
-      this.plotNodesParent.addChild( new Path( shape, {
+      // Update the Path that corresponds to the data set.
+      const plotNode = this.plotNodesParent.getChildAt( index );
+      plotNode.shape = shape;
+      plotNode.mutate( {
         fill: color,
         stroke: color // to hide seams
-      } ) );
+      } );
     }
 
     /**
      * Plots the data set as lines segments.
+     *  @param {number} index - data set index
      * @param {number[]} counts - the count for each bin
      * @param {ColorDef} color - the color of the bars
      * @private
      */
-    plotLines( counts, color ) {
+    plotLines( index, counts, color ) {
 
-      const shape = new Shape().moveTo( 0, this.chartSize.height );
+      assert && assert( index >= 0 && index < this.plotNodesParent.getChildrenCount(),
+        `index out of range: ${index}` );
 
-      // Compute the line width
-      const lineWidth = this.chartSize.width / this.numberOfBins;
-
-      // Draw the line segments
-      let previousCount = 0;
-      for ( let i = 0; i < counts.length; i++ ) {
-        const count = counts[ i ];
-        const lineHeight = ( count / this.maxY ) * this.chartSize.height;
-        const y = this.chartSize.height - lineHeight;
-        if ( count !== previousCount ) {
-          shape.lineTo( i * lineWidth, y );
+      // Draw the line segments as a single shape.
+      const shape = new Shape();
+      if ( counts.length > 0 ) {
+        shape.moveTo( 0, this.chartSize.height );
+        const lineWidth = this.chartSize.width / this.numberOfBins;
+        let previousCount = 0;
+        for ( let i = 0; i < counts.length; i++ ) {
+          const count = counts[ i ];
+          const lineHeight = ( count / this.maxY ) * this.chartSize.height;
+          const y = this.chartSize.height - lineHeight;
+          if ( count !== previousCount ) {
+            shape.lineTo( i * lineWidth, y );
+          }
+          shape.lineTo( ( i + 1 ) * lineWidth, y );
+          previousCount = count;
         }
-        shape.lineTo( ( i + 1 ) * lineWidth, y );
-        previousCount = count;
       }
 
-      this.plotNodesParent.addChild( new Path( shape, {
+      // Update the Path that corresponds to the data set.
+      const plotNode = this.plotNodesParent.getChildAt( index );
+      plotNode.shape = shape;
+      plotNode.mutate( {
         stroke: color,
         lineWidth: this.plotLineWidth
-      } ) );
+      } );
     }
   }
 

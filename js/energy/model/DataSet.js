@@ -23,8 +23,10 @@ define( require => {
 
       assert && assert( PlotType.includes( plotType ), `invalid plotType: ${plotType}` );
 
-      // @public (read-only)
+      // @public
       this.valueArrays = valueArrays;
+
+      // @public (read-only)
       this.plotType = plotType;
       this.color = color;
     }
