@@ -53,7 +53,7 @@ define( require => {
       // @public (read-only) wall thickness, in pm
       this.wallThickness = 50;
 
-      // @public (read-only) inside bounds, in pm
+      // @public inside bounds, in pm
       this.boundsProperty = new DerivedProperty( [ this.widthProperty ],
         width => new Bounds2(
           this.location.x - width, this.location.y,
