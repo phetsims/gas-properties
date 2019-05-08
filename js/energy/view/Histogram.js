@@ -178,6 +178,7 @@ define( require => {
      * Client must call update to render the data set.
      * @param {number} index - the data set's index, returned by addDataSet
      * @param {number[]} valueArrays
+     * @public
      */
     updateDataSet( index, valueArrays ) {
       assert && assert( index >= 0 && index < this.dataSets.length, `index out of range: ${index}` );
