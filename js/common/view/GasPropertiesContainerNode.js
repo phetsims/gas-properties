@@ -121,7 +121,7 @@ define( require => {
       // Update the lid width
       container.lidWidthProperty.link( lidWidth => {
 
-        // resize the base
+        // resize the lid's base
         lidNode.setBaseWidth( modelViewTransform.modelToViewDeltaX( lidWidth ) + 1 );  // +1 to cover seam
 
         // reposition the lid
