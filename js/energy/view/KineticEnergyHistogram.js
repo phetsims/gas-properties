@@ -19,10 +19,6 @@ define( require => {
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
   const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
 
-  // constants
-  const NUMBER_OF_BINS = GasPropertiesQueryParameters.keBins;
-  const BIN_WIDTH = GasPropertiesQueryParameters.keBinWidth; // AMU * pm^2 / ps^2
-
   class KineticEnergyHistogram extends EnergyHistogram {
 
     /**
@@ -33,7 +29,8 @@ define( require => {
      */
     constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
       super(
-        NUMBER_OF_BINS, BIN_WIDTH,
+        GasPropertiesQueryParameters.keBins,
+        GasPropertiesQueryParameters.keBinWidth, // AMU * pm^2 / ps^2
         new Text( kineticEnergyString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         heavyVisibleProperty,

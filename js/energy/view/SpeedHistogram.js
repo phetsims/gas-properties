@@ -19,10 +19,6 @@ define( require => {
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
   const speedString = require( 'string!GAS_PROPERTIES/speed' );
 
-  // constants
-  const NUMBER_OF_BINS = GasPropertiesQueryParameters.speedBins;
-  const BIN_WIDTH = GasPropertiesQueryParameters.speedBinWidth; // pm/ps
-
   class SpeedHistogram extends EnergyHistogram {
 
     /**
@@ -33,7 +29,8 @@ define( require => {
      */
     constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
       super(
-        NUMBER_OF_BINS, BIN_WIDTH,
+        GasPropertiesQueryParameters.speedBins,
+        GasPropertiesQueryParameters.speedBinWidth, // pm/ps
         new Text( speedString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         heavyVisibleProperty, lightVisibleProperty,
