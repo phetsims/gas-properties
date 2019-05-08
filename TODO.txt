@@ -2,9 +2,7 @@ TODO list for gas-properties
 
 leftWallVelocity.x is never negative in BaseContainer.step
 
-#55 address antialiasing of particles by scaling up HTMLImageElements
-
-#62 Temperature is wrong when using BicyclePumpNode
+#62 pump problems: temperature is misbehaving, and one particle gets stuck where it enters the container
 
 Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners
 Diffusion: Handle divider properly in CollisionDetector.step
