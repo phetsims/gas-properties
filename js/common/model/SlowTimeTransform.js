@@ -2,7 +2,6 @@
 
 /**
  * Transform between real and sim time for the 'slow' timescale.
- * 1 second of real time is 0.3 picoseconds of sim time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

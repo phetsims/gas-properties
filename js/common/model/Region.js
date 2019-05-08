@@ -4,8 +4,8 @@
  * Spatial partitioning is a technique for improving the performance of collision detection.
  * The collision detection bounds are partitioning into a 2D grid of Regions. Objects (particles and
  * containers) are members of one or more regions based on whether they intersect the bounds of the region.
- * Rather than having to consider collisions between an object and every other object, only objects within the
- * same region need be considered.
+ * Rather than having to consider collisions between every object in the system, only objects within the
+ * same region need to be considered.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,7 +18,7 @@ define( require => {
   class Region {
 
     /**
-     * @param {Bounds2} bounds
+     * @param {Bounds2} bounds - bounds of the region, in pm
      */
     constructor( bounds ) {
 
