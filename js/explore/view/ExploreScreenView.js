@@ -32,7 +32,9 @@ define( require => {
       // view-specific Properties
       const viewProperties = new ExploreViewProperties();
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty );
+      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, {
+        redistributeParticles: false
+      } );
 
       // Panel at upper right
       const toolsPanel = new ExploreToolsPanel(

@@ -59,11 +59,29 @@ define( require => {
           this.location.x - width, this.location.y,
           this.location.x, this.location.y + this.height
         ) );
+
+      // @public (read-only) velocity of the left (movable) wall, pm/ps, MUTATED!
+      this.leftWallVelocity = new Vector2( 0, 0 ); //
+
+      // @private {number} previous location of the left wall
+      this.previousLeft = this.left;
     }
 
     // @public
     reset() {
       this.widthProperty.reset();
+    }
+
+    /**
+     * @param {number} dt - the time step, in ps
+     */
+    step( dt ) {
+      if ( this.left !== this.previousLeft ) {
+        this.leftWallVelocity.setXY( this.left - this.previousLeft / dt, 0 );
+        this.previousLeft = this.left;
+        //TODO why is leftWallVelocity.x never negative?
+        // console.log( `wall velocity = ${this.leftWallVelocity}` );//XXX
+      }
     }
 
     /**

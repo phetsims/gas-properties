@@ -300,6 +300,9 @@ define( require => {
           this.lightParticles, this.lightParticlesOutside );
       }
 
+      // Container, to compute velocity of movable left wall.
+      this.container.step( dt );
+
       // Collision detection and response
       this.collisionDetector.step( dt );
 

@@ -66,6 +66,7 @@ define( require => {
       assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
 
       options = _.extend( {
+        redistributeParticles: true,
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
       }, options );
 
@@ -83,41 +84,60 @@ define( require => {
       // Width of the container when interaction with resize handle started.
       let containerWidth = model.container.widthProperty.value;
 
+      let resizeHandleIsPressedListener = null;
+      if ( options.redistributeParticles ) {
+
+        // Resizing the container pauses the sim and grays out the particles. The moving wall will have
+        // no affect on the velocity of the particles.  The particles will be redistributed in the new volume
+        // when the resize handle is released.
+        resizeHandleIsPressedListener = isPressed => {
+          if ( isPressed ) {
+
+            // save playing state, pause the sim, and disable time controls
+            wasPlaying = model.isPlayingProperty.value;
+            model.isPlayingProperty.value = false;
+            model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
+            if ( model.collisionCounter ) {
+              model.collisionCounter.isRunningProperty.value = false;
+            }
+
+            // gray out the particles
+            particlesNode.opacity = 0.6;
+
+            // remember width of container
+            containerWidth = model.container.widthProperty.value;
+          }
+          else {
+
+            // enable time controls and restore playing state
+            model.isTimeControlsEnabledProperty.value = true;
+            model.isPlayingProperty.value = wasPlaying;
+
+            // make particles opaque
+            particlesNode.opacity = 1;
+
+            if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
+              model.redistributeParticles( model.container.widthProperty.value / containerWidth );
+            }
+          }
+        };
+      }
+      else {
+        
+        // Resizing the container unpauses the sim. The velocity of the moving wall will affect
+        // the velocity of the particles colliding with it.
+        resizeHandleIsPressedListener = isPressed => {
+          if ( isPressed && !model.isPlayingProperty.value ) {
+            model.isPlayingProperty.value = true;
+          }
+        };
+      }
+
       // Container
       const containerNode = new GasPropertiesContainerNode( model.container, model.modelViewTransform,
         model.holdConstantProperty, this.visibleBoundsProperty, {
           resizeGripColor: options.resizeGripColor,
-          resizeHandleIsPressedListener: isPressed => {
-            if ( isPressed ) {
-
-              // save playing state, pause the sim, and disable time controls
-              wasPlaying = model.isPlayingProperty.value;
-              model.isPlayingProperty.value = false;
-              model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
-              if ( model.collisionCounter ) {
-                model.collisionCounter.isRunningProperty.value = false;
-              }
-
-              // gray out the particles
-              particlesNode.opacity = 0.6;
-
-              // remember width of container
-              containerWidth = model.container.widthProperty.value;
-            }
-            else {
-
-              // enable time controls and restore playing state
-              model.isTimeControlsEnabledProperty.value = true;
-              model.isPlayingProperty.value = wasPlaying;
-
-              // make particles opaque
-              particlesNode.opacity = 1;
-
-              if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
-                model.redistributeParticles( model.container.widthProperty.value / containerWidth );
-              }
-            }
-          }
+          resizeHandleIsPressedListener: resizeHandleIsPressedListener
         } );
 
       // Return Lid button
