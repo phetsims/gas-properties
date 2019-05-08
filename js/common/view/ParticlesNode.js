@@ -20,8 +20,9 @@ define( require => {
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Particle[][]} particleArrays - arrays of particles to render
      * @param {Property.<HTMLCanvasElement>[]} imageProperties - an image for each array in particleArrays
+     * @param {number} imageScale - scale of the images in imageProperties
      */
-    constructor( modelBoundsProperty, modelViewTransform, particleArrays, imageProperties ) {
+    constructor( modelBoundsProperty, modelViewTransform, particleArrays, imageProperties, imageScale ) {
 
       assert && assert( particleArrays.length === imageProperties.length,
         'must supply an image Property for each particle array' );
@@ -37,6 +38,7 @@ define( require => {
       this.modelViewTransform = modelViewTransform;
       this.particleArrays = particleArrays;
       this.imageProperties = imageProperties;
+      this.imageScale = imageScale;
     }
 
     /**
@@ -56,7 +58,8 @@ define( require => {
      */
     paintCanvas( context ) {
       for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        drawParticles( context, this.modelViewTransform, this.particleArrays[ i ], this.imageProperties[ i ].value );
+        drawParticles( context, this.modelViewTransform, this.particleArrays[ i ],
+          this.imageProperties[ i ].value, this.imageScale );
       }
     }
   }
@@ -67,16 +70,19 @@ define( require => {
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Particle[]} particles
    * @param {HTMLCanvasElement} image
+   * @param {number} imageScale
    * @private
    */
-  function drawParticles( context, modelViewTransform, particles, image ) {
+  function drawParticles( context, modelViewTransform, particles, image, imageScale ) {
     for ( let i = 0; i < particles.length; i++ ) {
       context.drawImage( image,
 
         //TODO Use integer coordinates with drawImage to improve performance?
         // content is centered and padded in HTMLCanvasElement, so be careful about how dx, dy args are computed.
-        modelViewTransform.modelToViewX( particles[ i ].location.x ) - image.width / 2,
-        modelViewTransform.modelToViewY( particles[ i ].location.y ) - image.height / 2
+        modelViewTransform.modelToViewX( particles[ i ].location.x ) - ( image.width / 2 ) / imageScale,
+        modelViewTransform.modelToViewY( particles[ i ].location.y ) - ( image.height / 2 ) / imageScale,
+        image.width / imageScale,
+        image.height / imageScale
       );
     }
   }

@@ -17,6 +17,9 @@ define( require => {
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const Property = require( 'AXON/Property' );
 
+  // constants
+  const IMAGE_SCALE = 2; // scale HTMLCanvasElements to improve quality
+
   class GasPropertiesParticlesNode extends ParticlesNode {
 
     /**
@@ -35,6 +38,7 @@ define( require => {
         ( color, highlightColor ) => {
           const heavyParticle = new HeavyParticle();
           const particleNode = new ParticleNode( heavyParticle, model.modelViewTransform );
+          particleNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
           particleNode.toCanvas( canvas => { heavyParticleImageProperty.value = canvas; } );
         } );
 
@@ -45,6 +49,7 @@ define( require => {
         ( color, highlightColor ) => {
           const lightParticle = new LightParticle();
           const particleNode = new ParticleNode( lightParticle, model.modelViewTransform );
+          particleNode.setScaleMagnitude( IMAGE_SCALE, IMAGE_SCALE );
           particleNode.toCanvas( canvas => { lightParticleImageProperty.value = canvas; } );
         } );
 
@@ -60,7 +65,7 @@ define( require => {
         heavyParticleImageProperty, lightParticleImageProperty
       ];
 
-      super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties );
+      super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties, IMAGE_SCALE );
     }
   }
 
