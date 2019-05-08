@@ -1,5 +1,7 @@
 TODO list for gas-properties
 
+#55 address antialiasing of particles by scaling up HTMLImageElements
+
 #62 Temperature is wrong when using BicyclePumpNode
 
 Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners
