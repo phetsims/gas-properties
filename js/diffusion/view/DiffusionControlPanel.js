@@ -107,7 +107,7 @@ define( require => {
             spacing: 20,
             align: 'left',
             children: [
-              //TODO these don't align because some NumberSpinners are a different width
+              //TODO these don't horizontally align because some NumberSpinners are a different width
               numberOfParticlesControl,
               massControl,
               radiusControl,
