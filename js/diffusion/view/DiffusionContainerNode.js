@@ -34,11 +34,15 @@ define( require => {
       const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
       const viewDividerX = modelViewTransform.modelToViewX( container.dividerX );
 
-      // Outside border of the container
-      const borderNode = new Rectangle( viewLocation.x - viewWidth, viewLocation.y - viewHeight, viewWidth, viewHeight, {
-        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
-        lineWidth: viewWallThickness
-      } );
+      // Outside border of the container, expanded to account for wall thickness
+      const borderNode = new Rectangle(
+        viewLocation.x - viewWidth - viewWallThickness / 2,
+        viewLocation.y - viewHeight - viewWallThickness / 2,
+        viewWidth + viewWallThickness,
+        viewHeight + viewWallThickness, {
+          stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+          lineWidth: viewWallThickness
+        } );
 
       // Vertical divider
       const dividerNode = new Line( viewDividerX, viewLocation.y - viewHeight, viewDividerX, viewLocation.y, {
