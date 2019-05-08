@@ -27,31 +27,28 @@ define( require => {
     constructor( container, modelViewTransform, options ) {
 
       // Transform to view coordinate frame
-      const viewLocation = modelViewTransform.modelToViewPosition( container.location );
-      const viewWidth = modelViewTransform.modelToViewDeltaX( container.width );
-      const viewHeight = modelViewTransform.modelToViewDeltaX( container.height );
       const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
       const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
       const viewDividerX = modelViewTransform.modelToViewX( container.dividerX );
 
+      // Expand the container bounds to account for wall thickness.
+      const viewBounds = modelViewTransform.modelToViewBounds( container.bounds )
+        .dilated( modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 ) );
+
       // Outside border of the container, expanded to account for wall thickness
-      const borderNode = new Rectangle(
-        viewLocation.x - viewWidth - viewWallThickness / 2,
-        viewLocation.y - viewHeight - viewWallThickness / 2,
-        viewWidth + viewWallThickness,
-        viewHeight + viewWallThickness, {
+      const borderNode = new Rectangle( viewBounds, {
           stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
           lineWidth: viewWallThickness
         } );
 
       // Vertical divider
-      const dividerNode = new Line( viewDividerX, viewLocation.y - viewHeight, viewDividerX, viewLocation.y, {
+      const dividerNode = new Line( viewDividerX, viewBounds.minY, viewDividerX, viewBounds.maxY, {
         stroke: GasPropertiesColorProfile.dividerColorProperty,
         lineWidth: viewDividerThickness
       } );
 
       // Vertical dashed line to indicate the center of the container when the divider is not present.
-      const noDividerNode = new Line( viewDividerX, viewLocation.y - viewHeight, viewDividerX, viewLocation.y, {
+      const noDividerNode = new Line( viewDividerX, viewBounds.minY, viewDividerX, viewBounds.maxY, {
         stroke: GasPropertiesColorProfile.dividerColorProperty,
         lineWidth: 1,
         lineDash: [ 10, 24 ],

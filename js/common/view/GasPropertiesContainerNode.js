@@ -42,8 +42,6 @@ define( require => {
       }, options );
 
       // Constant aspects of the container, in view coordinates
-      const viewLocation = modelViewTransform.modelToViewPosition( container.location );
-      const viewHeight = Math.abs( modelViewTransform.modelToViewDeltaY( container.height ) );
       const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
       const viewOpeningLeftInset = modelViewTransform.modelToViewDeltaX( container.openingLeftInset );
       const viewOpeningRightInset = modelViewTransform.modelToViewDeltaX( container.openingRightInset );
@@ -90,17 +88,12 @@ define( require => {
         lidNode.y = wallsNode.top + viewWallThickness;
       }
 
-      // Update the container width
-      container.widthProperty.link( width => {
-
-        const viewWidth = modelViewTransform.modelToViewDeltaX( width );
+      // Update the container when its bounds change.
+      container.boundsProperty.link( bounds => {
 
         // Account for wall thickness, so that container walls are drawn around the container's model bounds.
-        const wallOffset = viewWallThickness / 2;
-        const left = viewLocation.x - viewWidth - wallOffset;
-        const right = viewLocation.x + wallOffset;
-        const top = viewLocation.y - viewHeight - wallOffset;
-        const bottom = viewLocation.y + wallOffset;
+        const viewBounds = modelViewTransform.modelToViewBounds( bounds )
+          .dilated( modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 ) );
 
         // Update the walls, start at top-left, origin at bottom-right. Shape looks like:
         //  __               ___
@@ -110,12 +103,12 @@ define( require => {
         // |____________________|
         //
         wallsNode.shape = new Shape()
-          .moveTo( left + viewOpeningLeftInset, top )
-          .lineTo( left, top )
-          .lineTo( left, bottom )
-          .lineTo( right, bottom )
-          .lineTo( right, top )
-          .lineTo( right - viewOpeningRightInset, top );
+          .moveTo( viewBounds.minX + viewOpeningLeftInset, viewBounds.minY )
+          .lineTo( viewBounds.minX, viewBounds.minY )
+          .lineTo( viewBounds.minX, viewBounds.maxY )
+          .lineTo( viewBounds.maxX, viewBounds.maxY )
+          .lineTo( viewBounds.maxX, viewBounds.minY )
+          .lineTo( viewBounds.maxX - viewOpeningRightInset, viewBounds.minY );
 
         // reposition the resize handle
         resizeHandleNode.right = wallsNode.left + 1; // hide the overlap

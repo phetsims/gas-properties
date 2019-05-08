@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -53,15 +54,11 @@ define( require => {
       this.wallThickness = 50;
 
       // @public (read-only) inside bounds, in pm
-      this.bounds = new Bounds2(
-        this.location.x - this.widthProperty.value, this.location.y,
-        this.location.x, this.location.y + this.height
-      );
-
-      // Adjust bounds when width changes
-      this.widthProperty.link( width => {
-        this.bounds.setMinX( this.location.x - width );
-      } );
+      this.boundsProperty = new DerivedProperty( [ this.widthProperty ],
+        width => new Bounds2(
+          this.location.x - width, this.location.y,
+          this.location.x, this.location.y + this.height
+        ) );
     }
 
     // @public
@@ -74,6 +71,12 @@ define( require => {
      * @returns {number} in pm
      */
     get width() { return this.widthProperty.value; }
+
+    /**
+     * Convenience getter for bounds.
+     * @returns {Bounds2} in pm
+     */
+    get bounds() { return this.boundsProperty.value; }
 
     /**
      * Convenience getters for inner bounds of the container, in model coordinate frame.
