@@ -238,7 +238,6 @@ define( require => {
           reflectPointAcrossLine( particle1.location, mutableVectors.pointOnLine, lineAngle, mutableVectors.reflectedPoint );
           particle1.setLocationXY( mutableVectors.reflectedPoint.x, mutableVectors.reflectedPoint.y );
 
-          //TODO in Java version, particle2 algorithm was very different than particle1. Does making them same cause any problems?
           // Adjust location of particle2
           const previousDistance2 = particle2.previousLocation.distanceXY( contactPointX, contactPointY );
           const locationRatio2 = particle2.radius / previousDistance2;
