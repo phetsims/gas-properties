@@ -18,7 +18,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
 
   // constants
-  const IMAGE_SCALE = 2; // scale HTMLCanvasElements to improve quality
+  const IMAGE_SCALE = 2; // scale images to improve quality, see https://github.com/phetsims/gas-properties/issues/55
 
   class DiffusionParticlesNode extends ParticlesNode {
 
