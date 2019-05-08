@@ -155,7 +155,9 @@ define( require => {
         options.resizeHandleIsPressedListener( isPressed );
 
         // when the handle is released, log the opening
-        !isPressed && phet.log && phet.log( `Container opening from ${container.openingLeft} to ${container.openingRight} pm` );
+        if ( container.openingLeft !== container.openingRight ) {
+          !isPressed && phet.log && phet.log( `Container opening from ${container.openingLeft} to ${container.openingRight} pm` );
+        }
       } );
 
       // Dragging the lid horizontally changes the size of the opening in the top of the container
