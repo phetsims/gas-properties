@@ -10,12 +10,11 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
+  const SpeciesCheckbox = require( 'GAS_PROPERTIES/energy/view/SpeciesCheckbox' );
 
-  class HeavyParticlesCheckbox extends GasPropertiesCheckbox {
+  class HeavyParticlesCheckbox extends SpeciesCheckbox {
 
     /**
      * @param {BooleanProperty} heavyVisibleProperty
@@ -23,16 +22,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( heavyVisibleProperty, modelViewTransform, options ) {
-      super( heavyVisibleProperty, {
-        align: 'center',
-        spacing: 5,
-        icon: new HBox( {
-          children: [
-            GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-            GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.heavyParticleColorProperty )
-          ]
-        } )
-      } );
+      super(
+        heavyVisibleProperty,
+        modelViewTransform,
+        GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
+        GasPropertiesColorProfile.heavyParticleColorProperty
+      );
     }
   }
 

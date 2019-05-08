@@ -10,12 +10,11 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
+  const SpeciesCheckbox = require( 'GAS_PROPERTIES/energy/view/SpeciesCheckbox' );
 
-  class LightParticlesCheckbox extends GasPropertiesCheckbox {
+  class LightParticlesCheckbox extends SpeciesCheckbox {
 
     /**
      * @param {BooleanProperty} lightVisibleProperty
@@ -23,16 +22,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( lightVisibleProperty, modelViewTransform, options ) {
-      super( lightVisibleProperty, {
-        align: 'center',
-        spacing: 5,
-        icon: new HBox( {
-          children: [
-            GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-            GasPropertiesIconFactory.createHistogramIcon( GasPropertiesColorProfile.lightParticleColorProperty )
-          ]
-        } )
-      } );
+      super(
+        lightVisibleProperty,
+        modelViewTransform,
+        GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
+        GasPropertiesColorProfile.lightParticleColorProperty
+      );
     }
   }
 
