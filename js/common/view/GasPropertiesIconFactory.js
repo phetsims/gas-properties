@@ -16,6 +16,7 @@ define( require => {
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
@@ -62,7 +63,9 @@ define( require => {
      * @static
      */
     createDiffusionParticle1Icon( modelViewTransform ) {
-      return createParticleIcon( new DiffusionParticle1(), modelViewTransform );
+      return createParticleIcon( new DiffusionParticle1( {
+        radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue
+      } ), modelViewTransform );
     },
 
     /**
@@ -73,7 +76,9 @@ define( require => {
      * @static
      */
     createDiffusionParticle2Icon( modelViewTransform ) {
-      return createParticleIcon( new DiffusionParticle2(), modelViewTransform );
+      return createParticleIcon( new DiffusionParticle2( {
+        radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue
+      } ), modelViewTransform );
     },
 
     //TODO #57 create a less detailed icon for the stopwatch, that doesn't need stopwatch
