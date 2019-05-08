@@ -20,9 +20,6 @@ define( require => {
 
   class DiffusionContainer extends BaseContainer {
 
-    /**
-     * @param {Object} [options]
-     */                                                        
     constructor() {
 
       super( {
