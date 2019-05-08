@@ -51,7 +51,6 @@ define( require => {
       options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
       //TODO should these Properties live somewhere else?
-      // @private
       const heavyVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
       const lightVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
 

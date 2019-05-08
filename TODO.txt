@@ -3,6 +3,8 @@ TODO list for gas-properties
 #62 Temperature is wrong when using BicyclePumpNode
 
 Diffusion: When sim is paused, all particles shift back and forth as radius is changed with spinners, particles overlap container a bit
+Diffusion: Handle divider properly in CollisionDetector.step
+Diffusion: alignment of spinners
 
 #51 use a running average for Particle Flow Rate
 #52 add a sample period for histograms, use for Average Speed
@@ -18,6 +20,8 @@ Explore: #60 unpause sim when resize handle is moved
 Histogram: rewrite to mutate bars/lines, instead of removeAllChildren/addChild on every step
 
 Better names than particle1, particle2, mass1, mass2, etc?
+
+Better approach to fixed-width panels
 
 REFERENCES
 Is this a better collision model?
