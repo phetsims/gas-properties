@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.17 Mon May 06 2019 15:48:10 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.18 Tue May 07 2019 19:41:51 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "8021353ae5292cd14af24a76e56adada8844b0ab",
+    "sha": "853ab96fc06e4acb0a21ce57f3f098926a0c795a",
     "branch": "master"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "6e3739d46007b18e9bbcc0483d9895a90c2b0d87",
+    "sha": "1b3aff458552d5ccd34be64900eefa1049f38a27",
     "branch": "master"
   },
   "joist": {
@@ -69,11 +69,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "584f783a1196e59500c72fd131ea21e7437f04cc",
+    "sha": "aad9be85e64742bf77361c46c7988b59c04930ae",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "21892fd242c96b93775a8ecfb955b920423c62d4",
+    "sha": "b31192c7ae3d7e44d4cabc2990f7be3fe5cdbbe4",
     "branch": "master"
   },
   "sherpa": {
