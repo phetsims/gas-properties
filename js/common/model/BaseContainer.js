@@ -20,6 +20,9 @@ define( require => {
 
   class BaseContainer {
 
+    /**
+     * @param {Object} [options]
+     */
     constructor( options ) {
 
       options = _.extend( {

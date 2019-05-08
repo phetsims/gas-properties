@@ -18,8 +18,8 @@ define( require => {
 
   class GasPropertiesContainer extends BaseContainer {
 
-    constructor( options ) {
-      super( options );
+    constructor() {
+      super();
 
       // @public whether the lid is on the container
       this.lidIsOnProperty = new BooleanProperty( true );
