@@ -151,7 +151,7 @@ define( require => {
   }
 
   /**
-   * Assigns each particle to the Regions that it intersects.
+   * Assigns each particle to the Regions that it intersects, accounting for particle radius.
    * @param {Particle[]} particles
    * @param {Region[]} regions
    */
@@ -186,7 +186,6 @@ define( require => {
    * Detects and handles particle-particle collisions.
    * @param {Particle[]} particles
    * @param {*} mutableVectors - collection of mutable vectors, see this.mutableVectors in CollisionDetector constructor
-   * @private
    */
   function doParticleParticleCollisions( particles, mutableVectors ) {
     for ( let i = 0; i < particles.length - 1; i++ ) {
