@@ -137,7 +137,7 @@ define( require => {
     containerDepth: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 2000
+      defaultValue: 4000
     },
 
     //TODO #50 choose a value and delete
