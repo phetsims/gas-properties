@@ -13,6 +13,7 @@ define( require => {
   // modules
   const ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   const GasPropertiesColorProfile = new ColorProfile( [ 'default', 'projector' ], {
 
@@ -200,9 +201,14 @@ define( require => {
       default: 'rgb( 187, 154, 86 )'
     },
 
-    // bars in the histograms
-    histogramBarColor: {
-      default: 'rgb( 122, 247, 88 )'
+    // bars in the Speed histogram
+    speedHistogramBarColor: {
+      default: 'white'
+    },
+
+    // bars in the Kinetic Energy histogram
+    kineticEnergyHistogramBarColor: {
+      default: PhetColorScheme.KINETIC_ENERGY
     }
   } );
 

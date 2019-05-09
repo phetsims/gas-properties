@@ -29,10 +29,14 @@ define( require => {
      * @param {BooleanProperty} lightVisibleProperty
      * @param {function:number[]} getHeavyValues
      * @param {function:number[]} getLightValues
+     * @param {ColorDef} barsColor
      * @param {Object} [options]
      */
-    constructor( numberOfBins, binWidth, xAxisLabel, yAxisLabel, heavyVisibleProperty, lightVisibleProperty,
-                 getHeavyValues, getLightValues, options ) {
+    constructor( numberOfBins, binWidth,
+                 xAxisLabel, yAxisLabel,
+                 heavyVisibleProperty, lightVisibleProperty,
+                 getHeavyValues, getLightValues,
+                 barsColor, options ) {
 
       super( numberOfBins, binWidth, xAxisLabel, yAxisLabel, options );
 
@@ -51,7 +55,7 @@ define( require => {
       this.allValues = []; // {number[][]} samples for all particles
 
       // @private add data sets and store indices
-      this.allIndex = this.addDataSet( PlotType.BARS, GasPropertiesColorProfile.histogramBarColorProperty );
+      this.allIndex = this.addDataSet( PlotType.BARS, barsColor );
       this.heavyIndex = this.addDataSet( PlotType.LINES, GasPropertiesColorProfile.heavyParticleColorProperty  );
       this.lightIndex = this.addDataSet( PlotType.LINES, GasPropertiesColorProfile.lightParticleColorProperty );
 

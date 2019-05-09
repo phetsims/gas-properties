@@ -43,7 +43,7 @@ define( require => {
         yInterval: 20, // {number} a horizontal line will be drawn at intervals of this value
 
         backgroundFill: 'black', // {ColorDef}
-        borderStroke: 'white',// {ColorDef}
+        borderStroke: GasPropertiesColorProfile.panelStrokeProperty,// {ColorDef}
         borderLineWidth: 1,
         plotLineWidth: 2, // lineWidth for PlotType.LINES
 
@@ -93,7 +93,7 @@ define( require => {
       // Options shared by both out-of-range indicators
       const outOfRangeOptions = {
         font: new PhetFont( { size: 20, weight: 'bold' } ),
-        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+        fill: 'white',
         visible: false
       };
 

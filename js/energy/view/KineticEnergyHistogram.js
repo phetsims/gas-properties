@@ -11,6 +11,7 @@ define( require => {
   // modules
   const EnergyHistogram = require( 'GAS_PROPERTIES/energy/view/EnergyHistogram' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -37,6 +38,7 @@ define( require => {
         lightVisibleProperty,
         model.getHeavyParticleKineticEnergyValues.bind( model ),
         model.getLightParticleKineticEnergyValues.bind( model ),
+        GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty,
         options
       );
     }
