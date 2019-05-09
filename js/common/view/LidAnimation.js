@@ -1,6 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO what should this look like?
+//TODO #64 what should lid animation look like?
+//TODO #64 lid animation should be tied to sim play/pause/step
 //TODO make animation adapt to change of visibleBoundsProperty.value.top
 //TODO make animation constant speed, regardless of where visibleBoundsProperty.value.top
 /**
