@@ -30,6 +30,10 @@ define( require => {
     // For internal use only, not public facing.
     pointerCoordinates: { type: 'flag' },
 
+    // Shows arrows on x and y axes of histogram when there is data that is out of range
+    // For internal use only, not public facing.
+    outOfRangeIndicators: { type: 'flag' },
+
     //TODO #45 choose a value and delete
     // Determines when particles will be redistributed as the result of resizing the container in the Ideal screen.
     // 'drag' redistributes as the resize handle is being dragged.

@@ -13,6 +13,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -21,9 +22,6 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
-
-  // constants
-  const ELLIPSIS_STRING = '\u2022\u2022\u2022'; // ...
 
   class Histogram extends Node {
 
@@ -94,32 +92,35 @@ define( require => {
 
       // Options shared by both out-of-range indicators
       const outOfRangeOptions = {
-        font: new PhetFont( 14 ),
-        fill: GasPropertiesColorProfile.histogramBarColorProperty
+        font: new PhetFont( { size: 20, weight: 'bold' } ),
+        fill: GasPropertiesColorProfile.histogramBarColorProperty,
+        visible: false
       };
 
-      // indicates that x-axis has data that is out of range
-      const xOutOfRangeNode = new Text( ELLIPSIS_STRING, _.extend( {}, outOfRangeOptions, {
-        right: background.right,
-        centerY: xAxisLabel.centerY
+      // indicates that y-axis has data that is out of range, up arrow
+      const yOutOfRangeNode = new Text( '\u2191', _.extend( {}, outOfRangeOptions, {
+        right: background.right - 2,
+        top: background.top
       } ) );
 
-      // indicates that y-axis has data that is out of range
-      const yOutOfRangeNode = new Text( ELLIPSIS_STRING, _.extend( {}, outOfRangeOptions, {
-        left: background.right + 5,
-        top: background.top,
-        rotation: Math.PI / 2
+      // indicates that x-axis has data that is out of range, right arrow
+      const xOutOfRangeNode = new Text( '\u2192', _.extend( {}, outOfRangeOptions, {
+        right: yOutOfRangeNode.left - 2,
+        top: background.top
       } ) );
 
       assert && assert( !options.children, 'Histogram sets children' );
       options = _.extend( {
-        children: [
-          background, intervalLines, plotNodesParent, border,
-          xAxisLabel, yAxisLabel, xOutOfRangeNode, yOutOfRangeNode
-        ]
+        children: [ background, intervalLines, plotNodesParent, border, xAxisLabel, yAxisLabel ]
       }, options );
 
       super( options );
+
+      // out-of-range indicators, for debugging
+      if ( GasPropertiesQueryParameters.outOfRangeIndicators ) {
+        this.addChild( xOutOfRangeNode );
+        this.addChild( yOutOfRangeNode );
+      }
 
       // @private
       this.intervalLines = intervalLines;
@@ -191,7 +192,7 @@ define( require => {
      */
     update() {
       assert && assert( this.plotNodesParent.getChildrenCount() === this.dataSets.length,
-        'there should be one Path for each DataSet');
+        'there should be one Path for each DataSet' );
       this.updatePlots();
       this.updateIntervalLines();
     }
@@ -226,9 +227,8 @@ define( require => {
     updatePlots() {
 
       const maxX = this.numberOfBins * this.binWidth;
-
-      let xRangeExceededCount = 0;
-      let yRangeExceededCount = 0;
+      let xRangeExceeded = false;
+      let yRangeExceeded = false;
 
       for ( let i = 0; i < this.dataSets.length; i++ ) {
 
@@ -245,14 +245,16 @@ define( require => {
           this.plotLines( i, counts, dataSet.color );
         }
 
-        // count the number of values that exceed the x and y ranges
-        xRangeExceededCount += _.filter( dataSet.values, value => ( value > maxX ) ).length;
-        yRangeExceededCount += _.filter( counts, value => ( value > this.maxY ) ).length;
+        // count the number of values that exceed the x & y ranges
+        if ( GasPropertiesQueryParameters.outOfRangeIndicators ) {
+          xRangeExceeded = xRangeExceeded || _.some( dataSet.valueArrays, valueArray => _.some( valueArray, value => value > maxX ) );
+          yRangeExceeded = yRangeExceeded || _.some( counts, count => ( count > this.maxY ) );
+        }
       }
 
-      // If there are values out of range, make the ellipsis visible.
-      this.xOutOfRangeNode.visible = ( xRangeExceededCount > 0 );
-      this.yOutOfRangeNode.visible = ( yRangeExceededCount > 0 );
+      // If there are values out of range, make the indicators visible.
+      this.xOutOfRangeNode.visible = xRangeExceeded;
+      this.yOutOfRangeNode.visible = yRangeExceeded;
     }
 
     /**
