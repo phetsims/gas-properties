@@ -29,8 +29,9 @@ define( require => {
 
     /**
      * @param {Property.<number|null>} pressureProperty - pressure in the container, in kPa
+     * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K
      */
-    constructor( pressureProperty ) {
+    constructor( pressureProperty, temperatureProperty ) {
 
       // @public pressure in kilopascals (kPa) with jitter added. This is not derived from pressureProperty,
       // because it needs to jitter on step, not when pressureProperty changes.
@@ -56,13 +57,17 @@ define( require => {
       this.pressureRange = new Range( 0, GasPropertiesQueryParameters.maxPressure );
 
       // @private amount of jitter in kPa is inversely proportional to pressure
-      this.jitterFunction = new LinearFunction( 0, this.pressureRange.max, MAX_JITTER, MIN_JITTER, true );
+      this.pressureJitterFunction = new LinearFunction( 0, this.pressureRange.max, MAX_JITTER, MIN_JITTER, true );
+
+      // @private scale the amount of jitter based on temperature (K), so that jitter falls off at low temperatures
+      this.scaleJitterFunction = new LinearFunction( 5, 50, 0, 1, true );
 
       // @public pressure units displayed by the pressure gauge
       this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES );
 
       // @private
       this.pressureProperty = pressureProperty;
+      this.temperatureProperty = temperatureProperty;
       this.dtAccumulator = 0;
     }
 
@@ -86,7 +91,9 @@ define( require => {
         if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
           // kPa
-          const jitter = this.jitterFunction( this.pressureProperty.value ) * phet.joist.random.nextDouble();
+          const jitter = this.pressureJitterFunction( this.pressureProperty.value ) *
+                         this.scaleJitterFunction( this.temperatureProperty.value ) *
+                         phet.joist.random.nextDouble();
 
           // random sign
           const sign = ( jitter >= this.pressureProperty.value || phet.joist.random.nextBoolean() ) ? 1 : -1;
