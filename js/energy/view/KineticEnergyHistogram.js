@@ -29,7 +29,7 @@ define( require => {
      */
     constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
       super(
-        GasPropertiesQueryParameters.keBins,
+        GasPropertiesQueryParameters.bins,
         GasPropertiesQueryParameters.keBinWidth, // AMU * pm^2 / ps^2
         new Text( kineticEnergyString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),

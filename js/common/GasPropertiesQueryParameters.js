@@ -96,12 +96,12 @@ define( require => {
     },
 
     //TODO #52 choose a value and delete
-    // Number of bins for the Speed histogram.
+    // Number of bins for the histograms.
     // For internal use only, not public facing.
-    speedBins: {
+    bins: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 10
+      defaultValue: 19
     },
 
     //TODO #52 choose a value and delete
@@ -110,16 +110,7 @@ define( require => {
     speedBinWidth: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 250
-    },
-
-    //TODO #52 choose a value and delete
-    // Number of bins for the Kinetic Energy histogram.
-    // For internal use only, not public facing.
-    keBins: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 10
+      defaultValue: 170
     },
 
     //TODO #52 choose a value and delete
@@ -128,7 +119,7 @@ define( require => {
     keBinWidth: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 1E6
+      defaultValue: 8E5
     },
 
     //TODO #50 choose a value and delete

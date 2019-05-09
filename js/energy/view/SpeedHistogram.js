@@ -29,7 +29,7 @@ define( require => {
      */
     constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
       super(
-        GasPropertiesQueryParameters.speedBins,
+        GasPropertiesQueryParameters.bins,
         GasPropertiesQueryParameters.speedBinWidth, // pm/ps
         new Text( speedString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
