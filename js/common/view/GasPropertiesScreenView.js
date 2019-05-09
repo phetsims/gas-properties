@@ -84,7 +84,6 @@ define( require => {
       // Width of the container when interaction with resize handle started.
       let containerWidth = model.container.widthProperty.value;
 
-      //TODO move this into GasPropertiesContainerNode
       let resizeHandleIsPressedListener = null;
       if ( options.redistributeParticles ) {
 
