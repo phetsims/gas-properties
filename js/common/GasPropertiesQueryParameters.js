@@ -74,7 +74,7 @@ define( require => {
     maxNumberOfParticlesDiffusion: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 100
+      defaultValue: 200
     },
 
     //TODO #51 choose a value and delete
