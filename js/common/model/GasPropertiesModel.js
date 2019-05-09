@@ -297,10 +297,6 @@ define( require => {
       // assert && assert( typeof meanTemperature === 'number' && meanTemperature > 0,
       //   `bad meanTemperature: ${meanTemperature}` );
 
-      if ( !meanTemperature ) {
-        meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
-      }
-
       // Create a set of temperature values that will be used to compute initial speed.
       let temperatures = null;
       if ( n !== 1 && this.collisionDetector.particleParticleCollisionsEnabledProperty.value ) {
@@ -384,6 +380,7 @@ define( require => {
 
       const k = GasPropertiesConstants.BOLTZMANN; // k, in (pm^2 * AMU)/(ps^2 * K)
       const temperature = this.temperatureProperty.value; // T, in K
+      assert && assert( typeof temperature === 'number' && temperature > 0, `invalid temperature: ${temperature}` );
       const volume = this.container.volume; // V, in pm^3
 
       // P = NkT/V, converted to kPa
