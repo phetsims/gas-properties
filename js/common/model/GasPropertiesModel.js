@@ -282,20 +282,20 @@ define( require => {
     addParticles( n, particles, Constructor ) {
 
       // Get the temperature that will be used to compute initial velocity magnitude.
+      // Get the temperature that will be used to compute initial velocity magnitude.
       let meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
       if ( this.controlTemperatureEnabledProperty.value ) {
 
         // User's setting
         meanTemperature = this.initialTemperatureProperty.value;
       }
-      else if ( this.numberOfParticles > 0 ) {
+      else if ( this.temperatureProperty.value !== null ) {
 
         // Current temperature in the non-empty container
         meanTemperature = this.temperatureProperty.value;
       }
-      //TODO #62
-      // assert && assert( typeof meanTemperature === 'number' && meanTemperature > 0,
-      //   `bad meanTemperature: ${meanTemperature}` );
+      assert && assert( typeof meanTemperature === 'number' && meanTemperature > 0,
+        `bad meanTemperature: ${meanTemperature}` );
 
       // Create a set of temperature values that will be used to compute initial speed.
       let temperatures = null;
