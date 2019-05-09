@@ -101,10 +101,9 @@ define( require => {
 
       if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
-        //TODO how to scale the y axis?
         // set the y-axis scale
         const valuesPerSample = this.numberOfValues / this.numberOfSamples;
-        this.setMaxY( Math.max( 0.2 * valuesPerSample, 2 * this.yInterval ) );
+        this.setMaxY( Math.max( 0.2 * valuesPerSample, 1 ) );
 
         // update data sets
         this.updateDataSets();
