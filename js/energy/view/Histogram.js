@@ -42,7 +42,7 @@ define( require => {
         chartSize: new Dimension2( 150, 130 ),
 
         maxY: 100, // {number} maximum for the y axis
-        yInterval: 100, // {number} a horizontal line will be drawn at intervals of this value
+        yInterval: 20, // {number} a horizontal line will be drawn at intervals of this value
 
         backgroundFill: 'black', // {ColorDef}
         borderStroke: 'white',// {ColorDef}
