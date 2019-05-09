@@ -125,7 +125,7 @@ define( require => {
       }
       else {
         
-        // Resizing the container unpauses the sim. The velocity of the moving wall will affect
+        // Resizing the container un-pauses the sim. The velocity of the moving wall will affect
         // the velocity of the particles colliding with it.
         resizeHandleIsPressedListener = isPressed => {
           if ( isPressed && !model.isPlayingProperty.value ) {
