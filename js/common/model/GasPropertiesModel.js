@@ -192,6 +192,7 @@ define( require => {
         // Current temperature in the non-empty container
         meanTemperature = this.temperatureProperty.value;
       }
+      //TODO #62 assert && assert( typeof meanTemperature === 'number', `bad meanTemperature: ${meanTemperature}` );
 
       // Create a set of temperature values that will be used to compute initial speed.
       let temperatures = null;
