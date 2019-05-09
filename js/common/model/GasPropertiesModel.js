@@ -85,7 +85,7 @@ define( require => {
       );
 
       // @public whether initial temperature is controlled by the user or determined by what's in the container
-      this.controlTemperatureEnabledProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
+      this.controlTemperatureEnabledProperty = new BooleanProperty( false );
 
       // @public initial temperature of particles added to the container, in K.
       // Ignored if !controlTemperatureEnabledProperty.value

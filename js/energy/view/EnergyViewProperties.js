@@ -12,7 +12,6 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesViewProperties = require( 'GAS_PROPERTIES/common/view/GasPropertiesViewProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
 
   class EnergyViewProperties extends GasPropertiesViewProperties {
 
@@ -20,16 +19,16 @@ define( require => {
       super();
 
       // @public whether the Average Speed accordion box is expanded
-      this.averageSpeedExpandedProperty = new BooleanProperty( true || GasPropertiesQueryParameters.checked );
+      this.averageSpeedExpandedProperty = new BooleanProperty( true );
 
       // @public whether the Speed accordion box is expanded
-      this.speedExpandedProperty = new BooleanProperty( true || GasPropertiesQueryParameters.expanded );
+      this.speedExpandedProperty = new BooleanProperty( true );
 
       // @public whether the Kinetic Energy accordion box is expanded
-      this.kineticEnergyExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
+      this.kineticEnergyExpandedProperty = new BooleanProperty( false );
 
       // @public whether the 'Particles Tools' accordion box is expanded
-      this.particleToolsExpandedProperty = new BooleanProperty( GasPropertiesQueryParameters.expanded );
+      this.particleToolsExpandedProperty = new BooleanProperty( false );
     }
 
     // @public @override

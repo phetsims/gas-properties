@@ -30,14 +30,6 @@ define( require => {
     // For internal use only, not public facing.
     pointerCoordinates: { type: 'flag' },
 
-    // Checks all checkboxes at startup
-    // For internal use only, not public facing.
-    checked: { type: 'flag' },
-
-    // Expands all accordion boxes at startup
-    // For internal use only, not public facing.
-    expanded: { type: 'flag' },
-
     //TODO #45 choose a value and delete
     // Determines when particles will be redistributed as the result of resizing the container in the Ideal screen.
     // 'drag' redistributes as the resize handle is being dragged.

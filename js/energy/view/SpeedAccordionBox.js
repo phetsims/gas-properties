@@ -15,7 +15,6 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeavyParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/HeavyParticlesCheckbox' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const LightParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/LightParticlesCheckbox' );
@@ -51,8 +50,8 @@ define( require => {
       options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
       //TODO should these Properties live somewhere else?
-      const heavyVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
-      const lightVisibleProperty = new BooleanProperty( GasPropertiesQueryParameters.checked );
+      const heavyVisibleProperty = new BooleanProperty( false );
+      const lightVisibleProperty = new BooleanProperty( false );
 
       const histogram = new SpeedHistogram( model, heavyVisibleProperty, lightVisibleProperty );
 
