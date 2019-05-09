@@ -16,10 +16,6 @@ define( require => {
   const PlayIconShape = require( 'SCENERY_PHET/PlayIconShape' );
   const UTurnArrowShape = require( 'SCENERY_PHET/UTurnArrowShape' );
 
-  // constants
-  const PLAY_COLOR = 'rgb( 0, 179, 0 )';
-  const RESET_COLOR = PhetColorScheme.RED_COLORBLIND;
-
   class PlayResetButton extends BooleanRectangularToggleButton {
 
     /**
@@ -32,21 +28,23 @@ define( require => {
         baseColor: '#DFE0E1'
       }, options );
 
+      const iconOptions = {
+        stroke: 'black',
+        lineWidth: 0.5
+      };
+
       // reset icon
-      const resetIconNode = new Path( new UTurnArrowShape( 10 ), {
-        fill: 'black'
-      } );
+      const resetIconNode = new Path( new UTurnArrowShape( 10 ), _.extend( {}, iconOptions, {
+        fill: PhetColorScheme.RED_COLORBLIND
+      } ) );
 
       // play icon
-      const playIconNode = new Path( new PlayIconShape( 0.8 * resetIconNode.height, resetIconNode.height ), {
-        fill: 'black'
-      } );
+      const playIconNode = new Path( new PlayIconShape( 0.8 * resetIconNode.height, resetIconNode.height ),
+        _.extend( {}, iconOptions, {
+        fill: 'rgb( 0, 179, 0 )'
+      } ) );
 
       super( resetIconNode, playIconNode, isPlayingProperty, options );
-
-      isPlayingProperty.link( isPlaying => {
-        this.setBaseColor( isPlaying ? RESET_COLOR : PLAY_COLOR );
-      } );
     }
   }
 
