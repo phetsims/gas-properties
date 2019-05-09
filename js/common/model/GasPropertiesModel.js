@@ -187,12 +187,13 @@ define( require => {
         // User's setting
         meanTemperature = this.initialTemperatureProperty.value;
       }
-      else if ( this.heavyParticles.length + this.lightParticles.length > 0 ) {
+      else if ( this.numberOfParticles > 0 ) {
 
         // Current temperature in the non-empty container
         meanTemperature = this.temperatureProperty.value;
       }
-      //TODO #62 assert && assert( typeof meanTemperature === 'number', `bad meanTemperature: ${meanTemperature}` );
+      assert && assert( typeof meanTemperature === 'number' && meanTemperature > 0,
+        `bad meanTemperature: ${meanTemperature}` );
 
       if ( !meanTemperature ) {
         meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
@@ -339,6 +340,12 @@ define( require => {
     }
 
     /**
+     * Gets the number of particles in the container.
+     * @returns {number}
+     */
+    get numberOfParticles() { return this.heavyParticles.length + this.lightParticles.length; }
+
+    /**
      * Redistributes the particles in the container, called in response to changing the container width.
      * @param {number} ratio
      * @public
@@ -355,8 +362,7 @@ define( require => {
      */
     computeTemperature() {
       let temperature = null;
-      const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;
-      if ( numberOfParticles > 0 ) {
+      if ( this.numberOfParticles > 0 ) {
 
         // Compute the average kinetic energy, AMU * pm^2 / ps^2
         let totalKineticEnergy = 0;
@@ -367,7 +373,7 @@ define( require => {
           totalKineticEnergy += this.lightParticles[ i ].kineticEnergy;
         }
 
-        const averageKineticEnergy = totalKineticEnergy / numberOfParticles;
+        const averageKineticEnergy = totalKineticEnergy / this.numberOfParticles;
 
         const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
 
@@ -384,13 +390,12 @@ define( require => {
      */
     computePressure() {
 
-      const numberOfParticles = this.heavyParticles.length + this.lightParticles.length;  // N
       const k = GasPropertiesConstants.BOLTZMANN; // k, in (pm^2 * AMU)/(ps^2 * K)
       const temperature = this.temperatureProperty.value; // T, in K
       const volume = this.container.volume; // V, in pm^3
 
       // P = NkT/V, converted to kPa
-      return ( numberOfParticles * k * temperature / volume ) * 1.66E6;
+      return ( this.numberOfParticles * k * temperature / volume ) * 1.66E6;
     }
   }
 
