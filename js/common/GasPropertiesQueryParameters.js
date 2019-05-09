@@ -173,6 +173,22 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 0.75
+    },
+
+    //TODO #56 choose a value and delete
+    // Sample periods for the collision detector, in ps
+    // For internal use only, not public facing.
+    collisionCounterSamplePeriods: {
+      type: 'array',
+      elementSchema: {
+        type: 'number'
+      },
+      defaultValue: [ 10, 25, 50, 100 ],
+      isValidValue: array => {
+        return ( array.length > 1 ) && // more than one value
+               ( _.uniq( array ).length === array.length ) &&  // unique values
+               ( _.filter( array, value => value | 0 === value ).length === array.length ); // integer values
+      }
     }
   } );
 
