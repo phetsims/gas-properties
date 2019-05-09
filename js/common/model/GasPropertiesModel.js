@@ -342,6 +342,7 @@ define( require => {
     /**
      * Gets the number of particles in the container.
      * @returns {number}
+     * @public
      */
     get numberOfParticles() { return this.heavyParticles.length + this.lightParticles.length; }
 
