@@ -194,6 +194,10 @@ define( require => {
       }
       //TODO #62 assert && assert( typeof meanTemperature === 'number', `bad meanTemperature: ${meanTemperature}` );
 
+      if ( !meanTemperature ) {
+        meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
+      }
+
       // Create a set of temperature values that will be used to compute initial speed.
       let temperatures = null;
       if ( n !== 1 && this.collisionDetector.particleParticleCollisionsEnabledProperty.value ) {
