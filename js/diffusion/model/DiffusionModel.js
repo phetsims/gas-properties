@@ -123,6 +123,13 @@ define( require => {
         ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles2 ); }
       );
 
+      Property.multilink( [ this.experiment.initialTemperature1Property, this.experiment.initialTemperature2Property ],
+        ( initialTemperature1, initialTemperature2 ) => {
+          if ( !this.isPlayingProperty.value ) {
+            this.updateAverageTemperatures();
+          }
+        } );
+
       // Update radii of existing particles.
       this.experiment.radius1Property.link( radius => {
         updateRadius( radius, this.particles1, this.container.leftBounds, this.isPlayingProperty.value );
