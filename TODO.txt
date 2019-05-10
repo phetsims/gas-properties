@@ -1,6 +1,7 @@
 TODO list for gas-properties
 
-Data accordion box doesn't update properly while sim is paused
+Data accordion box doesn't update when particles are removed with sim paused
+Histograms don't update when particles are added/removed with sim paused
 
 Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners
 Diffusion: Handle divider properly in CollisionDetector.step
