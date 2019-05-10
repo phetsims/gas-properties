@@ -74,6 +74,7 @@ define( require => {
     /**
      * ES5 getter for kinetic energy.
      * @returns {number} AMU * pm^2 / ps^2
+     * @public
      */
     get kineticEnergy() {
       return 0.5 * this.mass * this.velocity.magnitudeSquared; // KE = (1/2) * m * |v|^2

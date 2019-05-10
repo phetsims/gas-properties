@@ -93,6 +93,7 @@ define( require => {
     /**
      * Steps the collision counter.
      * @param {number} dt - time step, in ps
+     * @public
      */
     step( dt ) {
       if ( this.isRunningProperty.value ) {

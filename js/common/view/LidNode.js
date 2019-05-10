@@ -1,5 +1,6 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
+//TODO pass in GasPropertiesContainer.lidWidthProperty instead of baseWidth
 /**
  * The lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.
  * Origin is at bottom-left of base.
@@ -65,6 +66,7 @@ define( require => {
     /**
      * Sets the width of the lid's base.
      * @param {number} baseWidth
+     * @public
      */
     setBaseWidth( baseWidth ) {
       this.baseNode.setRectWidth( baseWidth );

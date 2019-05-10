@@ -236,6 +236,7 @@ define( require => {
       }
     }
 
+    //TODO convert to private function
     /**
      * Adds n particles to the end of the specified array.
      * @param {number} n

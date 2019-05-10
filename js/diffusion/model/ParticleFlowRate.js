@@ -59,7 +59,7 @@ define( require => {
 
     /**
      * @param {number} dt - time delta , in ps
-     * @private
+     * @public
      */
     step( dt ) {
 

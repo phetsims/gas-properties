@@ -74,6 +74,7 @@ define( require => {
 
     /**
      * @param {number} dt - the time step, in ps
+     * @public
      */
     step( dt ) {
 
@@ -88,12 +89,14 @@ define( require => {
     /**
      * Convenience getter for width.
      * @returns {number} in pm
+     * @public
      */
     get width() { return this.widthProperty.value; }
 
     /**
      * Convenience getter for bounds.
      * @returns {Bounds2} in pm
+     * @public
      */
     get bounds() { return this.boundsProperty.value; }
 
@@ -114,6 +117,7 @@ define( require => {
     /**
      * Gets the volume of the container.
      * @returns {number} in pm^3
+     * @public
      */
     get volume() { return this.widthProperty.value * this.height * this.depth; }
 

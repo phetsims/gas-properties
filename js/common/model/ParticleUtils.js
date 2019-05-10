@@ -20,6 +20,7 @@ define( require => {
      * Steps a collection of particles.
      * @param {Particle[]} particles
      * @param {number} dt - time step in ps
+     * @public
      */
     stepParticles( particles, dt ) {
       for ( let i = 0; i < particles.length; i++ ) {
@@ -31,6 +32,7 @@ define( require => {
      * Removes a particle from an array and disposes it.
      * @param {Particle} particle
      * @param {Particle[]} particles
+     * @public
      */
     removeParticle: function( particle, particles ) {
       assert && assert( particle instanceof Particle, `not a Particle: ${particle}` );
@@ -44,6 +46,7 @@ define( require => {
      * Removes the last n particles from an array and disposes them.
      * @param {number} n
      * @param {Particle[]} particles
+     * @public
      */
     removeParticles: function( n, particles ) {
       assert && assert( n <= particles.length,
@@ -57,6 +60,7 @@ define( require => {
     /**
      * Removes and disposes an entire collection of particles.
      * @param {Particle[]} particles
+     * @public
      */
     removeAllParticles: function( particles ) {
       ParticleUtils.removeParticles( particles.length, particles );
@@ -66,6 +70,7 @@ define( require => {
      * Removes particles that are out of bounds and disposes them.
      * @param {Particle[]} particles
      * @param {Bounds2} bounds
+     * @public
      */
     removeParticlesOutOfBounds: function( particles, bounds ) {
       for ( let i = 0; i < particles.length; i++ ) {
@@ -79,6 +84,7 @@ define( require => {
      * Redistributes particles in the horizontal dimension.
      * @param {Particle[]} particles
      * @param {number} ratio
+     * @public
      */
     redistributeParticles: function( particles, ratio ) {
       assert && assert( ratio > 0, `invalid ratio: ${ratio}` );
@@ -91,6 +97,7 @@ define( require => {
      * Heats or cools a collection of particles.
      * @param {Particle[]} particles
      * @param {number} heatCoolFactor - (-1,1), heat=[0,1), cool=(-1,0]
+     * @public
      */
     heatCoolParticles: function( particles, heatCoolFactor ) {
       assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
@@ -107,6 +114,7 @@ define( require => {
      * @param {NumberProperty} numberOfParticlesProperty - number of particles inside the container
      * @param {Particle[]} insideParticles - particles inside the container
      * @param {Particle[]} outsideParticles - particles outside the container
+     * @public
      */
     escapeParticles: function( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
       assert && assert( container instanceof GasPropertiesContainer, `invalid container type: ${container}` );
@@ -127,6 +135,7 @@ define( require => {
      * Gets the x-axis center of mass for a collection of particles.
      * @param {Particle[]} particles
      * @returns {number|null} null if there are no particles and therefore no center of mass
+     * @public
      */
     getCenterXOfMass: function( particles ) {
       if ( particles.length > 0 ) {
