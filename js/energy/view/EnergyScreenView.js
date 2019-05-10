@@ -119,12 +119,16 @@ define( require => {
       this.kineticEnergyAccordionBox = kineticEnergyAccordionBox;
     }
 
-    // @protected @override
+    /**
+     * Resets the screen.
+     * @protected
+     * @override
+     */
     reset() {
+      super.reset();
       this.viewProperties.reset();
       this.speedAccordionBox.reset();
       this.kineticEnergyAccordionBox.reset();
-      super.reset();
     }
 
     /**

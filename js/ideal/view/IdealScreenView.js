@@ -70,10 +70,14 @@ define( require => {
       this.viewProperties = viewProperties;
     }
 
-    // @protected @override
+    /**
+     * Resets the screen.
+     * @protected
+     * @override
+     */
     reset() {
-      this.viewProperties.reset();
       super.reset();
+      this.viewProperties.reset();
     }
   }
 

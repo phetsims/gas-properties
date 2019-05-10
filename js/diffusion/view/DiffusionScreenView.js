@@ -148,12 +148,12 @@ define( require => {
     }
 
     /**
-     * Resets things that are specific to the view.
-     * @private
+     * Resets the screen.
+     * @protected
+     * @override
      */
     reset() {
-      this.interruptSubtreeInput(); // cancel interactions that are in progress
-      this.model.reset();
+      super.reset();
       this.viewProperties.reset();
     }
 

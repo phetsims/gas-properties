@@ -301,10 +301,13 @@ define( require => {
       this.lightBicyclePumpNode = lightBicyclePumpNode;
     }
 
-    // @protected
+    /**
+     * Resets the screen.
+     * @protected
+     * @override
+     */
     reset() {
-      this.interruptSubtreeInput(); // cancel interactions that are in progress
-      this.model.reset();
+      super.reset();
       this.heavyBicyclePumpNode.reset();
       this.lightBicyclePumpNode.reset();
     }

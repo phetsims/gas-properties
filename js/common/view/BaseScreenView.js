@@ -26,6 +26,18 @@ define( require => {
       this.visibleBoundsProperty.link( visibleBounds => {
         model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
       } );
+
+      // @private
+      this.model = model;
+    }
+
+    /**
+     * Resets the screen.
+     * @private
+     */
+    reset() {
+      this.interruptSubtreeInput(); // cancel interactions that are in progress
+      this.model.reset();
     }
   }
 
