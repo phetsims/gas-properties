@@ -55,6 +55,7 @@ define( require => {
      * @override
      */
     reset() {
+      super.reset();
 
       // Properties
       this.heavyAverageSpeedProperty.reset();
@@ -65,8 +66,6 @@ define( require => {
       this.numberOfAverageSpeedSamples = 0;
       this.heavyAverageSpeedSum = 0;
       this.lightAverageSpeedSum = 0;
-
-      super.reset();
     }
 
     /**

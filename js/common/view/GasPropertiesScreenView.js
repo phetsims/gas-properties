@@ -293,8 +293,10 @@ define( require => {
       this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
 
-      // @private used in methods
+      // @protected
       this.model = model;
+
+      // @private used in methods
       this.particlesNode = particlesNode;
       this.regionsNode = regionsNode;
       this.heavyBicyclePumpNode = heavyBicyclePumpNode;

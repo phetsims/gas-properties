@@ -33,11 +33,11 @@ define( require => {
 
     // @public @override
     reset() {
+      super.reset();
       this.averageSpeedExpandedProperty.reset();
       this.speedExpandedProperty.reset();
       this.kineticEnergyExpandedProperty.reset();
       this.particleToolsExpandedProperty.reset();
-      super.reset();
     }
   }
 

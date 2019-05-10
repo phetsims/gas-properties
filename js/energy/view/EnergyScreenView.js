@@ -138,15 +138,17 @@ define( require => {
      * @override
      */
     step( dt ) {
-
-      // convert s to ps
-      const ps = this.model.timeTransform( dt );
-
-      // step elements that are specific to the view
-      this.speedAccordionBox.step( ps );
-      this.kineticEnergyAccordionBox.step( ps );
-
       super.step( dt );
+
+      if ( this.model.isPlayingProperty.value ) {
+
+        // convert s to ps
+        const ps = this.model.timeTransform( dt );
+
+        // step elements that are specific to the view
+        this.speedAccordionBox.step( ps );
+        this.kineticEnergyAccordionBox.step( ps );
+      }
     }
   }
 
