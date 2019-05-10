@@ -61,7 +61,10 @@ define( require => {
       // {Property.<HTMLCanvasElement>[]} images for each particle type in particleArrays
       const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
 
-      super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties );
+      super( particleArrays, imageProperties, model.modelViewTransform );
+
+      // Size the canvas to match the container bounds.
+      this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.bounds ) );
 
       // If either image changes while the sim is paused, redraw the particle system.
       Property.multilink( [ particle1ImageProperty, particle2ImageProperty ],

@@ -4,7 +4,6 @@ Histograms: y axis scale
 Histograms: rewrite, they are a mess
 Histograms: they don't update when particles are added/removed with sim paused
 
-Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners
 Diffusion: Handle divider properly in CollisionDetector.step
 Diffusion: alignment of spinners
 

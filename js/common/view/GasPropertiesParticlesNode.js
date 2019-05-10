@@ -57,7 +57,12 @@ define( require => {
         heavyParticleImageProperty, lightParticleImageProperty
       ];
 
-      super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties );
+      super( particleArrays, imageProperties, model.modelViewTransform );
+
+      // Size the canvas to match the model bounds. This changes dynamically as the browser window is resized.
+      model.modelBoundsProperty.link( modelBounds => {
+        this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( modelBounds ) );
+      } );
 
       // If either image changes while the sim is paused, redraw the particle system.
       Property.multilink( [ heavyParticleImageProperty, lightParticleImageProperty ],

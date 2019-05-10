@@ -21,22 +21,16 @@ define( require => {
   class ParticlesNode extends CanvasNode {
 
     /**
-     * @param {Property.<Bounds2>} modelBoundsProperty
-     * @param {ModelViewTransform2} modelViewTransform
      * @param {Particle[][]} particleArrays - arrays of particles to render
      * @param {Property.<HTMLCanvasElement>[]} imageProperties - an image for each array in particleArrays
+     * @param {ModelViewTransform2} modelViewTransform
      */
-    constructor( modelBoundsProperty, modelViewTransform, particleArrays, imageProperties ) {
+    constructor( particleArrays, imageProperties, modelViewTransform ) {
 
       assert && assert( particleArrays.length === imageProperties.length,
         'must supply an image Property for each particle array' );
 
       super();
-
-      // Size the canvas to match the model bounds. This changes dynamically as the browser window is resized.
-      modelBoundsProperty.link( modelBounds => {
-        this.setCanvasBounds( modelViewTransform.modelToViewBounds( modelBounds ) );
-      } );
 
       // @private
       this.modelViewTransform = modelViewTransform;
