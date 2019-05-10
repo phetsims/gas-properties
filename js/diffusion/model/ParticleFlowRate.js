@@ -86,7 +86,7 @@ define( require => {
         this.dts.shift();
       }
 
-      // All arrays should be the same length
+      // All sample arrays should have the same length
       assert && assert( this.leftCounts.length === this.rightCounts.length && this.leftCounts.length === this.dts.length,
         'all arrays should have the same length');
 
