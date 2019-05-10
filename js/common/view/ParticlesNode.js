@@ -13,6 +13,7 @@ define( require => {
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
+  const Property = require( 'AXON/Property' );
 
   // constants
   const IMAGE_SCALE = 2; // scale images to improve quality, see https://github.com/phetsims/gas-properties/issues/55
@@ -31,6 +32,9 @@ define( require => {
         'must supply an image Property for each particle array' );
 
       super();
+
+      // If any image changes while the sim is paused, redraw the particle system.
+      Property.multilink( imageProperties, () => { this.update(); } );
 
       // @private
       this.modelViewTransform = modelViewTransform;

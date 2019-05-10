@@ -61,14 +61,11 @@ define( require => {
 
       // Size the canvas to match the portion of the model bounds that is above the bottom of the container.
       // Particles will never be drawn below the container, but can escape through the lid and float up.
+      // See https://github.com/phetsims/gas-properties/issues/38
       model.modelBoundsProperty.link( modelBounds => {
         const canvasBounds = modelBounds.withMinY( model.container.bottom );
         this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( canvasBounds ) );
       } );
-
-      // If either image changes while the sim is paused, redraw the particle system.
-      Property.multilink( [ heavyParticleImageProperty, lightParticleImageProperty ],
-        ( heavyParticleImage, lightParticleImage ) => { this.update(); } );
     }
   }
 

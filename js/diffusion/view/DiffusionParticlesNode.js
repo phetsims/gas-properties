@@ -63,12 +63,8 @@ define( require => {
 
       super( particleArrays, imageProperties, model.modelViewTransform );
 
-      // Size the canvas to match the container bounds.
+      // Size the canvas to match the container bounds. See https://github.com/phetsims/gas-properties/issues/38
       this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.bounds ) );
-
-      // If either image changes while the sim is paused, redraw the particle system.
-      Property.multilink( [ particle1ImageProperty, particle2ImageProperty ],
-        ( particle1Image, particle2Image ) => { this.update(); } );
     }
   }
 
