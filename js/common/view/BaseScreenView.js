@@ -33,7 +33,7 @@ define( require => {
 
     /**
      * Resets the screen.
-     * @private
+     * @protected
      */
     reset() {
       this.interruptSubtreeInput(); // cancel interactions that are in progress
