@@ -70,7 +70,6 @@ define( require => {
    * @param {Particle[]} particles
    * @param {HTMLCanvasElement} image
    * @param {number} imageScale
-   * @private
    */
   function drawParticles( context, modelViewTransform, particles, image, imageScale ) {
     for ( let i = 0; i < particles.length; i++ ) {
