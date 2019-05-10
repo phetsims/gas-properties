@@ -1,7 +1,6 @@
 TODO list for gas-properties
 
-Things that don't update properly while paused:
-- Data accordion box
+Data accordion box doesn't update properly while sim is paused
 
 Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners
 Diffusion: Handle divider properly in CollisionDetector.step
