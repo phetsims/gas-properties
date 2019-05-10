@@ -1,22 +1,20 @@
 TODO list for gas-properties
 
-Histograms don't update when particles are added/removed with sim paused
+Histograms: y axis scale
+Histograms: rewrite, they are a mess
+Histograms: they don't update when particles are added/removed with sim paused
 
 Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners
 Diffusion: Handle divider properly in CollisionDetector.step
 Diffusion: alignment of spinners
 
 Intro: hold constant, see HoldConstantEnum
-
 Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
 
-Histogram: rewrite, they are a mess
-
 Better names than particle1, particle2, mass1, mass2, etc?
-
 Better approach to fixed-width panels
 
 REFERENCES
