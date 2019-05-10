@@ -42,15 +42,6 @@ define( require => {
     }
 
     /**
-     * Called on each step of the simulation's timer.
-     * @param {number} dt - time delta, in ps
-     * @public
-     */
-    step( dt ) {
-      this.update();
-    }
-
-    /**
      * Redraws the particle system.
      * @public
      */

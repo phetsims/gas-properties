@@ -164,13 +164,8 @@ define( require => {
      */
     step( dt ) {
       if ( this.model.isPlayingProperty.value ) {
-        
-        // convert s to ps
-        const ps = this.model.timeTransform( dt );
-
-        // step elements that are specific to the view
-        this.particlesNode.step( ps );
-        this.regionsNode && this.regionsNode.step( ps );
+        this.particlesNode.update();
+        this.regionsNode && this.regionsNode.update();
       }
     }
   }

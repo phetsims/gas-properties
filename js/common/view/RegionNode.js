@@ -59,9 +59,9 @@ define( require => {
 
     /**
      * Displays the number of particles in the region.
-     * @param {number} dt - time delta, in ps
+     * @public
      */
-    step( dt ) {
+    update() {
       this.countNode.text = this.region.particles.length;
       this.countNode.center = this.cellNode.center;
     }
