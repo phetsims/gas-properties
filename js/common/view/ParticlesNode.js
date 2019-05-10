@@ -47,6 +47,14 @@ define( require => {
      * @public
      */
     step( dt ) {
+      this.update();
+    }
+
+    /**
+     * Redraws the particle system.
+     * @public
+     */
+    update() {
       this.invalidatePaint(); // results in a call to paintCanvas
     }
 

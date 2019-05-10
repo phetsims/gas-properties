@@ -215,6 +215,13 @@ define( require => {
       // The complete system of particles
       const particlesNode = new GasPropertiesParticlesNode( model );
 
+      // If the number of particles changes while the sim is paused, redraw the particle system.
+      model.numberOfParticlesChangedEmitter.addListener( () => {
+        if ( !this.model.isPlayingProperty.value ) {
+          particlesNode.update();
+        }
+      } );
+
       // Device to heat/cool the contents of the container
       const heaterCoolerNodeLeft = containerViewLocation.x -
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );

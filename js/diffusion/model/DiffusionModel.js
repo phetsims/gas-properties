@@ -15,6 +15,7 @@ define( require => {
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
+  const Emitter = require( 'AXON/Emitter' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -69,6 +70,9 @@ define( require => {
       // @public (read-only) particles of each type
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
+
+      // @public emit is called when any of the above Particle arrays are modified
+      this.numberOfParticlesChangedEmitter = new Emitter();
 
       // @public (read-only) centerX of mass for particles of types DiffusionParticle1 and DiffusionParticle2, in pm
       this.centerXOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
@@ -216,6 +220,7 @@ define( require => {
         else {
           ParticleUtils.removeParticles( -delta, particles );
         }
+        this.numberOfParticlesChangedEmitter.emit();
       }
     }
 

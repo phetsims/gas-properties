@@ -14,6 +14,7 @@ define( require => {
   const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Emitter = require( 'AXON/Emitter' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -57,6 +58,9 @@ define( require => {
       this.lightParticles = []; // {LightParticle[]} inside the container
       this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
       this.lightParticlesOutside = []; // {LightParticle[]} outside the container
+
+      // @public emit is called when any of the above Particle arrays are modified
+      this.numberOfParticlesChangedEmitter = new Emitter();
 
       // @public the number of heavy particles inside the container
       this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
@@ -269,6 +273,7 @@ define( require => {
           ParticleUtils.removeParticles( -delta, particles );
         }
         assert && assert( particles.length === newValue, 'particles array is out of sync' );
+        this.numberOfParticlesChangedEmitter.emit();
       }
     }
 

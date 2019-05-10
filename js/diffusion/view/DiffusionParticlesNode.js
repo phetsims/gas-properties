@@ -64,6 +64,10 @@ define( require => {
       const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
 
       super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties, IMAGE_SCALE );
+
+      // If either image changes while the sim is paused, redraw the particle system.
+      Property.multilink( [ particle1ImageProperty, particle2ImageProperty ],
+        ( particle1Image, particle2Image ) => { this.update(); } );
     }
   }
 

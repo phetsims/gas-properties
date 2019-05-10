@@ -66,6 +66,10 @@ define( require => {
       ];
 
       super( model.modelBoundsProperty, model.modelViewTransform, particleArrays, imageProperties, IMAGE_SCALE );
+
+      // If either image changes while the sim is paused, redraw the particle system.
+      Property.multilink( [ heavyParticleImageProperty, lightParticleImageProperty ],
+        ( heavyParticleImage, lightParticleImage ) => { this.update(); } );
     }
   }
 

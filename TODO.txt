@@ -1,8 +1,6 @@
 TODO list for gas-properties
 
 Things that don't update properly while paused:
-- particles
-- radius
 - Data accordion box
 
 Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners

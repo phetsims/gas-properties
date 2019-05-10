@@ -102,6 +102,13 @@ define( require => {
       // The complete system of particles
       const particlesNode = new DiffusionParticlesNode( model );
 
+      // If the number of particles changes while the sim is paused, redraw the particle system.
+      model.numberOfParticlesChangedEmitter.addListener( () => {
+        if ( !this.model.isPlayingProperty.value ) {
+          particlesNode.update();
+        }
+      } );
+
       // Stopwatch
       const stopwatchNode = new StopwatchNode( model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty
