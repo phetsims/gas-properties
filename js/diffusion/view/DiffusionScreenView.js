@@ -114,7 +114,7 @@ define( require => {
         bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
-      const timeControls = new DiffusionTimeControls( model, {
+      const timeControls = new DiffusionTimeControls( model, this, {
         left: controlPanel.left,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
@@ -151,19 +151,20 @@ define( require => {
     }
 
     /**
-     * Called on each step of the simulation's timer. The view is stepped regardless of whether the model is
-     * paused, because changes made while the model is paused should immediately be reflected in the view.
+     * Called on each step of the simulation's timer.
      * @param {number} dt - time delta, in seconds
      * @public
      */
     step( dt ) {
+      if ( this.model.isPlayingProperty.value ) {
+        
+        // convert s to ps
+        const ps = this.model.timeTransform( dt );
 
-      // convert s to ps
-      const ps = this.model.timeTransform( dt );
-
-      // step elements that are specific to the view
-      this.particlesNode.step( ps );
-      this.regionsNode && this.regionsNode.step( ps );
+        // step elements that are specific to the view
+        this.particlesNode.step( ps );
+        this.regionsNode && this.regionsNode.step( ps );
+      }
     }
   }
 

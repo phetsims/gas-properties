@@ -18,11 +18,12 @@ define( require => {
   class PlayPauseStepControl extends HBox {
 
     /**
-     * @param {BaseModel} model
+     * @param {BaseModel} model TODO narrower interface?
+     * @param {BaseScreenView} screenView TODO narrower interface?
      * @param {Object} [options]
      * @constructor
      */
-    constructor( model, options ) {
+    constructor( model, screenView, options ) {
 
       options = _.extend( {
 
@@ -41,6 +42,7 @@ define( require => {
           model.isPlayingProperty.value = true;
           const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
           model.step( seconds );
+          screenView.step( seconds );
           model.isPlayingProperty.value = false;
         }
       } );

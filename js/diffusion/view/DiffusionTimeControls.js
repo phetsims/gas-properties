@@ -17,11 +17,12 @@ define( require => {
   class DiffusionTimeControls extends HBox {
 
     /**
-     * @param {DiffusionModel} model narrower interface?
+     * @param {DiffusionModel} model TODO narrower interface?
+     * @param {BaseScreenView} screenView TODO narrower interface?
      * @param {Object} [options]
      * @constructor
      */
-    constructor( model, options ) {
+    constructor( model, screenView, options ) {
 
       options = _.extend( {
         spacing: 25,
@@ -29,7 +30,7 @@ define( require => {
       }, options );
 
       // play/pause and step buttons
-      const playPauseStepControl = new PlayPauseStepControl( model );
+      const playPauseStepControl = new PlayPauseStepControl( model, screenView );
 
       // normal and slow radio buttons
       const timescaleControl = new TimescaleControl( model.timescaleProperty );

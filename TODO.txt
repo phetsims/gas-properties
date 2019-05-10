@@ -1,6 +1,9 @@
 TODO list for gas-properties
 
-#62 pump problems: temperature is misbehaving, and one particle gets stuck where it enters the container
+Things that don't update properly while paused:
+- particles
+- radius
+- Data accordion box
 
 Diffusion: #66 When sim is paused, all particles shift back and forth as radius is changed with spinners
 Diffusion: Handle divider properly in CollisionDetector.step
@@ -20,8 +23,6 @@ Better names than particle1, particle2, mass1, mass2, etc?
 Better approach to fixed-width panels
 
 Do you really want wave-like motion of particles when collisions are off?
-
-Examine what is being stepped when !model.isPlaying, what is being updated when it doesn't need to be, etc.
 
 REFERENCES
 Is this a better collision model?
