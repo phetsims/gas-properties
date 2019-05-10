@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * KineticEnergyAccordionBox contains the kinetic energy histogram.
+ * KineticEnergyAccordionBox contains the kinetic energy histogram and related controls.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

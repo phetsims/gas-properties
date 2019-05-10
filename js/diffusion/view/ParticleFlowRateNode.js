@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Vectors that indicate the flow rate of particles between the left and right sides of the container.
+ * Vectors that indicate the flow rate of one particle type between the left and right sides of the container.
  * Higher flow rate results in a bigger vector.
  *
  * @author Chris Malley (PixelZoom, Inc.)

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Speed histogram, shows the distribution of the speeds of the particles in the container.
+ * SpeedHistogram shows the distribution of the speeds of the particles in the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

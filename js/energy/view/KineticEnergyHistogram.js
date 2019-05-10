@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Kinetic Energy histogram, shows the distribution of kinetic energy of the particles in the container.
+ * KineticEnergyHistogram shows the distribution of kinetic energy of the particles in the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
