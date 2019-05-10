@@ -221,6 +221,11 @@ define( require => {
           ParticleUtils.removeParticles( -delta, particles );
         }
         this.numberOfParticlesChangedEmitter.emit();
+
+        // If paused, update things that would normally be handled by step.
+        if ( !this.isPlayingProperty.value ) {
+          this.update();
+        }
       }
     }
 
@@ -261,11 +266,6 @@ define( require => {
         );
 
         particles.push( particle );
-      }
-
-      // If paused, update things that would normally be handled by step.
-      if ( !this.isPlayingProperty.value ) {
-        this.update();
       }
     }
 
@@ -415,16 +415,18 @@ define( require => {
    * @param {NumberProperty} rightNumberOfParticlesProperty
    */
   function updateLeftRightCounts( particles, leftBounds, leftNumberOfParticlesProperty, rightNumberOfParticlesProperty ) {
-    leftNumberOfParticlesProperty.value = 0;
-    rightNumberOfParticlesProperty.value = 0;
+    let leftNumberOfParticles = 0;
+    let rightNumberOfParticles = 0;
     for ( let i = 0; i < particles.length; i++ ) {
       if ( leftBounds.containsPoint( particles[ i ].location ) ) {
-        leftNumberOfParticlesProperty.value++;
+        leftNumberOfParticles++;
       }
       else {
-        rightNumberOfParticlesProperty.value++;
+        rightNumberOfParticles++;
       }
     }
+    leftNumberOfParticlesProperty.value = leftNumberOfParticles;
+    rightNumberOfParticlesProperty.value = rightNumberOfParticles;
   }
 
   return gasProperties.register( 'DiffusionModel', DiffusionModel );
