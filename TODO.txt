@@ -4,17 +4,25 @@ Histograms: y axis scale
 Histograms: rewrite, they are a mess
 Histograms: they don't update when particles are added/removed with sim paused
 
-Diffusion: Handle divider properly in CollisionDetector.step
-Diffusion: alignment of spinners
-
 Intro: hold constant, see HoldConstantEnum
 Intro: optimize number of iterations over particle arrays
 
 Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
 https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
 
+PUNCH LIST:
+CollisionDetector: handle divider properly in CollisionDetector.step
+DiffusionModel: convert addParticles to private function
+FixedWidthNode: better approach to fixed-width panels
+Region: use ObservableArray and observer in RegionNode?
+GasPropertiesIconFactory: #57 icons for stopwatch and collision counter
+LidAnimation: #64 make it rotate and move left, make it step
+LidNode: observe container.lidWidthProperty
+DiffusionControlPanel: better way to center DividerToggleButton?
+DiffusionControlPanel: alignment of spinners
+EnergyModel: *AverageSpeedProperty vs get*ParticleSpeedValues
+Narrower interfaces for constructors that have @param model
 Better names than particle1, particle2, mass1, mass2, etc?
-Better approach to fixed-width panels
 
 REFERENCES
 Is this a better collision model?
