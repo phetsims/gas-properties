@@ -24,7 +24,6 @@ define( require => {
   const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
-  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
 
   class DiffusionScreenView extends BaseScreenView {
 
@@ -34,6 +33,10 @@ define( require => {
      */
     constructor( model, options ) {
       assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
+
+      options = _.extend( {
+        hasSlowMotion: true // adds Normal/Slow radio buttons to the time controls
+      }, options );
 
       super( model, options );
 
@@ -113,34 +116,10 @@ define( require => {
         dragBoundsProperty: this.visibleBoundsProperty
       } );
 
-      // Time controls
-      const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
-        isSlowMotionProperty: model.isSlowMotionProperty,
-        buttonsXSpacing: 25,
-        labelOptions: {
-          font: GasPropertiesConstants.CONTROL_FONT,
-          fill: GasPropertiesColorProfile.textFillProperty
-        },
-
-        //TODO duplicated in GasPropertiesScreenView
-        stepOptions: {
-          listener: () => {
-            model.isPlayingProperty.value = true;
-            const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
-            model.step( seconds );
-            this.step( seconds );
-            model.isPlayingProperty.value = false;
-          }
-        },
-        left: controlPanel.left,
-        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
-
       // Rendering order
       regionsNode && this.addChild( regionsNode );
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
-      this.addChild( timeControlNode );
       this.addChild( containerNode );
       this.addChild( particlesNode );
       this.addChild( centerOfMassNode1 );
@@ -148,6 +127,12 @@ define( require => {
       this.addChild( particleFlowRateNode1 );
       this.addChild( particleFlowRateNode2 );
       this.addChild( stopwatchNode );
+
+      // Position the time controls
+      this.timeControlNode.mutate( {
+        left: controlPanel.left,
+        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
 
       // @private
       this.model = model;

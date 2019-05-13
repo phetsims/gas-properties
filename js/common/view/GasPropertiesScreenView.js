@@ -48,7 +48,6 @@ define( require => {
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
-  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -95,7 +94,7 @@ define( require => {
             // save playing state, pause the sim, and disable time controls
             wasPlaying = model.isPlayingProperty.value;
             model.isPlayingProperty.value = false;
-            timeControlNode.enabledProperty.value = false; //TODO must be done last or StepButton enables itself
+            this.timeControlNode.enabledProperty.value = false; //TODO must be done last or StepButton enables itself
             if ( model.collisionCounter ) {
               model.collisionCounter.isRunningProperty.value = false;
             }
@@ -109,7 +108,7 @@ define( require => {
           else {
 
             // enable time controls and restore playing state
-            timeControlNode.enabledProperty.value = true;
+            this.timeControlNode.enabledProperty.value = true;
             model.isPlayingProperty.value = wasPlaying;
 
             // make particles opaque
@@ -192,21 +191,6 @@ define( require => {
         bicyclePumpsToggleNode.interruptSubtreeInput();
       } );
 
-      // Play/Pause/Step controls
-      const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
-        stepOptions: {
-          listener: () => {
-            model.isPlayingProperty.value = true;
-            const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
-            model.step( seconds );
-            this.step( seconds );
-            model.isPlayingProperty.value = false;
-          }
-        },
-        left: containerViewLocation.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue ),
-        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
-
       // Thermometer
       const thermometerNode = new GasPropertiesThermometerNode( model.thermometer, comboBoxListParent, {
         right: containerNode.right,
@@ -285,12 +269,17 @@ define( require => {
       this.addChild( particlesNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
-      this.addChild( timeControlNode );
       gridNode && this.addChild( gridNode );
       collisionCounterNode && this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );
       this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
+
+      // Position the time controls
+      this.timeControlNode.mutate( {
+        left: containerViewLocation.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue ),
+        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
 
       // @protected
       this.model = model;

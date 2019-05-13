@@ -10,9 +10,11 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
 
   class BaseScreenView extends ScreenView {
 
@@ -21,6 +23,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( model, options ) {
+
+      options = _.extend( {
+        hasSlowMotion: false
+      }, options );
       
       super( options );
 
@@ -28,6 +34,26 @@ define( require => {
       this.visibleBoundsProperty.link( visibleBounds => {
         model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
       } );
+
+      // @protected Time Controls - subclass is responsible for position
+      this.timeControlNode = new TimeControlNode( model.isPlayingProperty, {
+        isSlowMotionProperty: options.hasSlowMotion ? model.isSlowMotionProperty : null,
+        buttonsXSpacing: 25,
+        labelOptions: {
+          font: GasPropertiesConstants.CONTROL_FONT,
+          fill: GasPropertiesColorProfile.textFillProperty
+        },
+        stepOptions: {
+          listener: () => {
+            model.isPlayingProperty.value = true;
+            const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
+            model.step( seconds );
+            this.step( seconds );
+            model.isPlayingProperty.value = false;
+          }
+        }
+      } );
+      this.addChild( this.timeControlNode );
 
       // Reset All button
       const resetAllButton = new ResetAllButton( {
