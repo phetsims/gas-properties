@@ -37,6 +37,8 @@ define( require => {
 
       // @protected Time Controls - subclass is responsible for position
       this.timeControlNode = new TimeControlNode( model.isPlayingProperty, {
+
+        // optional Normal/Slow radio buttons
         isSlowMotionProperty: options.hasSlowMotion ? model.isSlowMotionProperty : null,
         buttonsXSpacing: 25,
         labelOptions: {
@@ -44,6 +46,8 @@ define( require => {
           fill: GasPropertiesColorProfile.textFillProperty
         },
         stepOptions: {
+
+          // when the Step button is pressed
           listener: () => {
             model.isPlayingProperty.value = true;
             const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
