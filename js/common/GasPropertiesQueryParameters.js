@@ -170,7 +170,7 @@ define( require => {
       elementSchema: {
         type: 'number'
       },
-      defaultValue: [ 10, 25, 50, 100 ],
+      defaultValue: [ 5, 10, 20 ],
       isValidValue: array => {
         return ( array.length > 1 ) && // more than one value
                ( _.uniq( array ).length === array.length ) &&  // unique values
