@@ -12,7 +12,6 @@ https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in
 
 PUNCH LIST:
 CollisionDetector: handle divider properly in CollisionDetector.step
-DiffusionModel: convert addParticles to private function
 FixedWidthNode: better approach to fixed-width panels
 Region: use ObservableArray and observer in RegionNode?
 GasPropertiesIconFactory: #57 icons for stopwatch and collision counter

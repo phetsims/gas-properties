@@ -204,7 +204,7 @@ define( require => {
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {
-          this.addParticles( delta, locationBounds, mass, radius, initialTemperature, particles, Constructor );
+          addParticles( delta, locationBounds, mass, radius, initialTemperature, particles, Constructor );
         }
         else {
           ParticleUtils.removeParticles( -delta, particles );
@@ -215,47 +215,6 @@ define( require => {
         if ( !this.isPlayingProperty.value ) {
           this.update();
         }
-      }
-    }
-
-    //TODO convert to private function
-    /**
-     * Adds n particles to the end of the specified array.
-     * @param {number} n
-     * @param {Bounds2} locationBounds - initial location will be inside this bounds
-     * @param {number} mass
-     * @param {number} radius
-     * @param {number} initialTemperature
-     * @param {Particle[]} particles
-     * @param {constructor} Constructor - a Particle subclass constructor
-     * @private
-     */
-    addParticles( n, locationBounds, mass, radius, initialTemperature, particles, Constructor ) {
-
-      // Create n particles
-      for ( let i = 0; i < n; i++ ) {
-
-        const particle = new Constructor( {
-          mass: mass,
-          radius: radius
-        } );
-
-        // Position the particle at a random location within locationBounds, accounting for particle radius.
-        const x = phet.joist.random.nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
-        const y = phet.joist.random.nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
-        particle.setLocationXY( x, y );
-        assert && assert( locationBounds.containsPoint( particle.location ), 'particle is outside of locationBounds' );
-
-        // Set the initial velocity, based on initial temperature and mass.
-        particle.setVelocityPolar(
-          // |v| = sqrt( 3kT / m )
-          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * initialTemperature / particle.mass ),
-
-          // Random angle
-          phet.joist.random.nextDouble() * 2 * Math.PI
-        );
-
-        particles.push( particle );
       }
     }
 
@@ -325,6 +284,46 @@ define( require => {
 
       updateAverageTemperature( this.leftAverageTemperatureProperty, leftTotalKE, leftNumberOfParticles );
       updateAverageTemperature( this.rightAverageTemperatureProperty, rightTotalKE, rightNumberOfParticles );
+    }
+  }
+
+  /**
+   * Adds n particles to the end of the specified array.
+   * @param {number} n
+   * @param {Bounds2} locationBounds - initial location will be inside this bounds
+   * @param {number} mass
+   * @param {number} radius
+   * @param {number} initialTemperature
+   * @param {Particle[]} particles
+   * @param {constructor} Constructor - a Particle subclass constructor
+   * @private
+   */
+  function addParticles( n, locationBounds, mass, radius, initialTemperature, particles, Constructor ) {
+
+    // Create n particles
+    for ( let i = 0; i < n; i++ ) {
+
+      const particle = new Constructor( {
+        mass: mass,
+        radius: radius
+      } );
+
+      // Position the particle at a random location within locationBounds, accounting for particle radius.
+      const x = phet.joist.random.nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
+      const y = phet.joist.random.nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
+      particle.setLocationXY( x, y );
+      assert && assert( locationBounds.containsPoint( particle.location ), 'particle is outside of locationBounds' );
+
+      // Set the initial velocity, based on initial temperature and mass.
+      particle.setVelocityPolar(
+        // |v| = sqrt( 3kT / m )
+        Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * initialTemperature / particle.mass ),
+
+        // Random angle
+        phet.joist.random.nextDouble() * 2 * Math.PI
+      );
+
+      particles.push( particle );
     }
   }
 
