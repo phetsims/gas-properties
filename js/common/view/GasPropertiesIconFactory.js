@@ -205,7 +205,7 @@ define( require => {
   }
 
   /**
-   * Creates a simplified icons for a tool like the stopwatch or collision counter.
+   * Creates a simplified icon for a tool like the stopwatch or collision counter.
    * @param {ColorDef} color
    * @returns {Node}
    * @public
