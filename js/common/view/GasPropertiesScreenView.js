@@ -94,7 +94,7 @@ define( require => {
             // save playing state, pause the sim, and disable time controls
             wasPlaying = model.isPlayingProperty.value;
             model.isPlayingProperty.value = false;
-            this.timeControlNode.enabledProperty.value = false; //TODO must be done last or StepButton enables itself
+            this.timeControlNode.enabledProperty.value = false;
             if ( model.collisionCounter ) {
               model.collisionCounter.isRunningProperty.value = false;
             }
