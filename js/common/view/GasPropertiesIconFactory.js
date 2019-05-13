@@ -10,8 +10,7 @@ define( require => {
 
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
-  const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
+  const Bounds2 = require( 'DOT/Bounds2' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
@@ -27,9 +26,8 @@ define( require => {
   const Path = require( 'SCENERY/nodes/Path' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const Shape = require( 'KITE/Shape' );
-  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
-  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
 
   const GasPropertiesIconFactory = {
 
@@ -81,35 +79,24 @@ define( require => {
       } ), modelViewTransform );
     },
 
-    //TODO #57 create a less detailed icon for the stopwatch, that doesn't need stopwatch
     /**
-     * Creates an icon for the stopwatch.
+     * Creates a simplified icon for the stopwatch.
      * @returns {Node}
      * @public
      * @static
      */
     createStopwatchIcon() {
-      const stopwatch = new Stopwatch( { visible: true } );
-      return new StopwatchNode( stopwatch, {
-        scale: 0.25,
-        pickable: false
-      } );
+      return createToolIcon( 'rgb( 80, 130, 230 )' );
     },
 
-    //TODO #57 create a less detailed icon for the collision counter, that doesn't need collisionCounter or comboBoxListParent
     /**
-     * Creates an icon for the collision counter.
+     * Creates a simplified icon for the collision counter.
      * @returns {Node}
      * @public
      * @static
      */
     createCollisionCounterIcon() {
-      const collisionCounter = new CollisionCounter( null /* CollisionDetector */, { visible: true } );
-      const comboBoxListParent = new Node();
-      return new CollisionCounterNode( collisionCounter, comboBoxListParent, {
-        scale: 0.2,
-        pickable: false
-      } );
+      return createToolIcon( GasPropertiesColorProfile.collisionCounterBackgroundColorProperty );
     },
 
     /**
@@ -215,6 +202,34 @@ define( require => {
    */
   function createParticleIcon( particle, modelViewTransform ) {
     return new ParticleNode( particle, modelViewTransform );
+  }
+
+  /**
+   * Creates a simplified icons for a tool like the stopwatch or collision counter.
+   * @param {ColorDef} color
+   * @returns {Node}
+   * @public
+   * @static
+   */
+  function createToolIcon( color ) {
+
+    const background = new ShadedRectangle( new Bounds2( 0, 0, 25, 20 ), {
+      baseColor: color,
+      cornerRadius: 4
+    } );
+
+    const display = new Rectangle( 0, 0, 0.75 * background.width, 0.35 * background.height, {
+      fill: 'white',
+      stroke: 'black',
+      lineWidth: 0.5,
+      cornerRadius: 1.5,
+      centerX: background.centerX,
+      top: background.top + 0.25 * background.height
+    } );
+
+    return new Node( {
+      children: [ background, display ]
+    } );
   }
 
   return gasProperties.register( 'GasPropertiesIconFactory', GasPropertiesIconFactory );
