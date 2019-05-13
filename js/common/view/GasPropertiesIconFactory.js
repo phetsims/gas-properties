@@ -86,7 +86,7 @@ define( require => {
      * @static
      */
     createStopwatchIcon() {
-      return createToolIcon( 'rgb( 80, 130, 230 )' );
+      return createToolIcon( GasPropertiesColorProfile.stopwatchBackgroundColorProperty );
     },
 
     /**

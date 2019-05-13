@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
@@ -32,6 +33,7 @@ define( require => {
         dragBoundsProperty: null, // {Property.<Bounds2>|null} in view coordinates
 
         // TimerNode options
+        backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
         maxValue: 999.99,
         timerReadoutNodeOptions: {
           unitsNode: new Text( picosecondsString, {

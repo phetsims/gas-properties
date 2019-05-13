@@ -167,6 +167,10 @@ define( require => {
       default: 'rgb( 255, 170, 170 )' // lighter red
     },
 
+    stopwatchBackgroundColor: {
+      default: 'rgb(  80, 130, 230  )' // blue
+    },
+
     collisionCounterBackgroundColor: {
       default: 'rgb( 254, 212, 131 )' // yellowish
     },
