@@ -121,9 +121,9 @@ define( require => {
           font: GasPropertiesConstants.CONTROL_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         },
-        stepOptions: {
 
-          //TODO duplicated in PlayPauseStepControl
+        //TODO duplicated in GasPropertiesScreenView
+        stepOptions: {
           listener: () => {
             model.isPlayingProperty.value = true;
             const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );

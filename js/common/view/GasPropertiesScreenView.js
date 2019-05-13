@@ -27,7 +27,6 @@ define( require => {
 
   // modules
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -44,12 +43,12 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
-  const PlayPauseStepControl = require( 'GAS_PROPERTIES/common/view/PlayPauseStepControl' );
   const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
+  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -80,9 +79,6 @@ define( require => {
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
 
-      // Whether the time controls are enabled. DO NOT instrument for PhET-iO!
-      const isTimeControlsEnabledProperty = new BooleanProperty( true );
-
       //TODO #45 delete this if we choose GasPropertiesQueryParameters.redistribute === 'drag' strategy
       // Width of the container when interaction with resize handle started.
       let containerWidth = model.container.widthProperty.value;
@@ -99,7 +95,7 @@ define( require => {
             // save playing state, pause the sim, and disable time controls
             wasPlaying = model.isPlayingProperty.value;
             model.isPlayingProperty.value = false;
-            isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
+            timeControlNode.enabledProperty.value = false; //TODO must be done last or StepButton enables itself
             if ( model.collisionCounter ) {
               model.collisionCounter.isRunningProperty.value = false;
             }
@@ -113,7 +109,7 @@ define( require => {
           else {
 
             // enable time controls and restore playing state
-            isTimeControlsEnabledProperty.value = true;
+            timeControlNode.enabledProperty.value = true;
             model.isPlayingProperty.value = wasPlaying;
 
             // make particles opaque
@@ -197,8 +193,16 @@ define( require => {
       } );
 
       // Play/Pause/Step controls
-      const playPauseStepControl = new PlayPauseStepControl( model, this, {
-        enabledProperty: isTimeControlsEnabledProperty,
+      const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
+        stepOptions: {
+          listener: () => {
+            model.isPlayingProperty.value = true;
+            const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
+            model.step( seconds );
+            this.step( seconds );
+            model.isPlayingProperty.value = false;
+          }
+        },
         left: containerViewLocation.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue ),
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
@@ -281,7 +285,7 @@ define( require => {
       this.addChild( particlesNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
-      this.addChild( playPauseStepControl );
+      this.addChild( timeControlNode );
       gridNode && this.addChild( gridNode );
       collisionCounterNode && this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );
