@@ -27,6 +27,7 @@ define( require => {
 
   // modules
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -79,6 +80,9 @@ define( require => {
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
 
+      // Whether the time controls are enabled. DO NOT instrument for PhET-iO!
+      const isTimeControlsEnabledProperty = new BooleanProperty( true );
+
       //TODO #45 delete this if we choose GasPropertiesQueryParameters.redistribute === 'drag' strategy
       // Width of the container when interaction with resize handle started.
       let containerWidth = model.container.widthProperty.value;
@@ -95,7 +99,7 @@ define( require => {
             // save playing state, pause the sim, and disable time controls
             wasPlaying = model.isPlayingProperty.value;
             model.isPlayingProperty.value = false;
-            model.isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
+            isTimeControlsEnabledProperty.value = false; //TODO must be done last or StepButton enables itself
             if ( model.collisionCounter ) {
               model.collisionCounter.isRunningProperty.value = false;
             }
@@ -109,7 +113,7 @@ define( require => {
           else {
 
             // enable time controls and restore playing state
-            model.isTimeControlsEnabledProperty.value = true;
+            isTimeControlsEnabledProperty.value = true;
             model.isPlayingProperty.value = wasPlaying;
 
             // make particles opaque
@@ -194,7 +198,7 @@ define( require => {
 
       // Play/Pause/Step controls
       const playPauseStepControl = new PlayPauseStepControl( model, this, {
-        enabledProperty: model.isTimeControlsEnabledProperty,
+        enabledProperty: isTimeControlsEnabledProperty,
         left: containerViewLocation.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue ),
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );

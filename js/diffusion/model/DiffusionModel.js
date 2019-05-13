@@ -10,7 +10,6 @@ define( require => {
 
   // modules
   const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
@@ -19,12 +18,10 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
-  const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -45,14 +42,6 @@ define( require => {
       super( {
         modelOriginOffset: new Vector2( 645, 525 ), // offset of the model's origin, in view coordinates
         stopwatchLocation: new Vector2( 35, 15 ) // in view coordinates! determined empirically
-      } );
-
-      // @public is the sim running in slow motion?
-      this.isSlowMotionProperty = new BooleanProperty( false );
-
-      // Adjust the time transform
-      this.isSlowMotionProperty.link( isSlowMotion => {
-        this.timeTransform = isSlowMotion ? new SlowTimeTransform() : new NormalTimeTransform();
       } );
 
       // @public
@@ -165,7 +154,6 @@ define( require => {
       this.container.reset();
 
       // Properties
-      this.isSlowMotionProperty.reset();
       this.experiment.reset();
       this.particleFlowRate1.reset();
       this.particleFlowRate2.reset();

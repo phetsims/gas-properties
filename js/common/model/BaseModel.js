@@ -20,6 +20,7 @@ define( require => {
   const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Property = require( 'AXON/Property' );
+  const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -49,34 +50,25 @@ define( require => {
         -MODEL_VIEW_SCALE // y is inverted
       );
 
-      // @public (read-only) transform between real time and sim time, can be set by subclasses
-      this._timeTransform = new NormalTimeTransform();
-
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
 
-      // @public are the time controls (play, pause, step) enabled?
-      this.isTimeControlsEnabledProperty = new BooleanProperty( true );
+      // @public is the sim running in slow motion?
+      this.isSlowMotionProperty = new BooleanProperty( false );
+
+      // @public (read-only) {LinearFunction} transform between real time and sim time, initialized below
+      this.timeTransform = null;
+
+      // Adjust the time transform
+      this.isSlowMotionProperty.link( isSlowMotion => {
+        this.timeTransform = isSlowMotion ? new SlowTimeTransform() : new NormalTimeTransform();
+      } );
 
       // @public (read-only)
       this.stopwatch = new Stopwatch( {
         location: options.stopwatchLocation
       } );
     }
-
-    /**
-     * Sets the transform between real and sim time.
-     * @param {LinearFunction} value
-     * @protected
-     */
-    set timeTransform( value ) { this._timeTransform = value; }
-
-    /**
-     * Gets the transform between real and sim time.
-     * @returns {LinearFunction}
-     * @public
-     */
-    get timeTransform() { return this._timeTransform; }
 
     /**
      * Resets the model.
@@ -86,7 +78,7 @@ define( require => {
 
       // Properties
       this.isPlayingProperty.reset();
-      this.isTimeControlsEnabledProperty.reset();
+      this.isSlowMotionProperty.reset();
 
       // model elements
       this.stopwatch.reset();
