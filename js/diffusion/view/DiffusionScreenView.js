@@ -16,7 +16,6 @@ define( require => {
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
   const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
   const DiffusionParticlesNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionParticlesNode' );
-  const DiffusionTimeControls = require( 'GAS_PROPERTIES/diffusion/view/DiffusionTimeControls' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -24,8 +23,8 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
-  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
+  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
 
   class DiffusionScreenView extends BaseScreenView {
 
@@ -114,14 +113,24 @@ define( require => {
         dragBoundsProperty: this.visibleBoundsProperty
       } );
 
-      // Reset All button
-      const resetAllButton = new ResetAllButton( {
-        listener: () => { this.reset(); },
-        right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+      // Time controls
+      const timeControlNode = new TimeControlNode( model.isPlayingProperty, model.isSlowMotionProperty, {
+        spacing: 25,
+        labelOptions: {
+          font: GasPropertiesConstants.CONTROL_FONT,
+          fill: GasPropertiesColorProfile.textFillProperty
+        },
+        stepOptions: {
 
-      const timeControls = new DiffusionTimeControls( model, this, {
+          //TODO duplicated in PlayPauseStepControl
+          listener: () => {
+            model.isPlayingProperty.value = true;
+            const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
+            model.step( seconds );
+            this.step( seconds );
+            model.isPlayingProperty.value = false;
+          }
+        },
         left: controlPanel.left,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
@@ -130,14 +139,13 @@ define( require => {
       regionsNode && this.addChild( regionsNode );
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
-      this.addChild( timeControls );
+      this.addChild( timeControlNode );
       this.addChild( containerNode );
       this.addChild( particlesNode );
       this.addChild( centerOfMassNode1 );
       this.addChild( centerOfMassNode2 );
       this.addChild( particleFlowRateNode1 );
       this.addChild( particleFlowRateNode2 );
-      this.addChild( resetAllButton );
       this.addChild( stopwatchNode );
 
       // @private

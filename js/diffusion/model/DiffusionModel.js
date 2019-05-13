@@ -10,13 +10,13 @@ define( require => {
 
   // modules
   const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const Emitter = require( 'AXON/Emitter' );
-  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
@@ -25,7 +25,6 @@ define( require => {
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
   const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
-  const Timescale = require( 'GAS_PROPERTIES/diffusion/model/Timescale' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -48,17 +47,12 @@ define( require => {
         stopwatchLocation: new Vector2( 35, 15 ) // in view coordinates! determined empirically
       } );
 
-      // @public
-      this.timescaleProperty = new EnumerationProperty( Timescale, Timescale.NORMAL );
+      // @public is the sim running in slow motion?
+      this.isSlowMotionProperty = new BooleanProperty( false );
 
-      // Change the time transform to match the timescale.
-      this.timescaleProperty.link( timescale => {
-        if ( timescale === Timescale.NORMAL ) {
-          this.timeTransform = new NormalTimeTransform();
-        }
-        else {
-          this.timeTransform = new SlowTimeTransform();
-        }
+      // Adjust the time transform
+      this.isSlowMotionProperty.link( isSlowMotion => {
+        this.timeTransform = isSlowMotion ? new SlowTimeTransform() : new NormalTimeTransform();
       } );
 
       // @public
@@ -171,7 +165,7 @@ define( require => {
       this.container.reset();
 
       // Properties
-      this.timescaleProperty.reset();
+      this.isSlowMotionProperty.reset();
       this.experiment.reset();
       this.particleFlowRate1.reset();
       this.particleFlowRate2.reset();

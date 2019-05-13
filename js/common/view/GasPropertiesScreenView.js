@@ -47,7 +47,6 @@ define( require => {
   const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
-  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const ToggleNode = require( 'SUN/ToggleNode' );
@@ -231,13 +230,6 @@ define( require => {
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
-      // Reset All button
-      const resetAllButton = new ResetAllButton( {
-        listener: () => { this.reset(); },
-        right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-      } );
-
       // Collision Counter
       let collisionCounterNode = null;
       if ( model.collisionCounter ) {
@@ -286,7 +278,6 @@ define( require => {
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
       this.addChild( playPauseStepControl );
-      this.addChild( resetAllButton );
       gridNode && this.addChild( gridNode );
       collisionCounterNode && this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );

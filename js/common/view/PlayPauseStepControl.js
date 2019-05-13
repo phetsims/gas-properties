@@ -13,7 +13,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  const StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
+  const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
 
   class PlayPauseStepControl extends HBox {
 
@@ -36,7 +36,7 @@ define( require => {
 
       const playPauseButton = new PlayPauseButton( model.isPlayingProperty );
 
-      const stepButton = new StepButton( {
+      const stepButton = new StepForwardButton( {
         isPlayingProperty: model.isPlayingProperty,
         listener: () => {
           model.isPlayingProperty.value = true;

@@ -10,6 +10,8 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
 
   class BaseScreenView extends ScreenView {
@@ -26,6 +28,14 @@ define( require => {
       this.visibleBoundsProperty.link( visibleBounds => {
         model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
       } );
+
+      // Reset All button
+      const resetAllButton = new ResetAllButton( {
+        listener: () => { this.reset(); },
+        right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+      this.addChild( resetAllButton );
 
       // @private
       this.model = model;

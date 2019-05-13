@@ -142,11 +142,5 @@
   },
   "initialTemperatureK": {
     "value": "Initial Temperature (K)"
-  },
-  "normal": {
-    "value": "Normal"
-  },
-  "slow": {
-    "value": "Slow"
   }
 }
