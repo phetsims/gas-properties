@@ -114,8 +114,9 @@ define( require => {
       } );
 
       // Time controls
-      const timeControlNode = new TimeControlNode( model.isPlayingProperty, model.isSlowMotionProperty, {
-        spacing: 25,
+      const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
+        isSlowMotionProperty: model.isSlowMotionProperty,
+        buttonsXSpacing: 25,
         labelOptions: {
           font: GasPropertiesConstants.CONTROL_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
