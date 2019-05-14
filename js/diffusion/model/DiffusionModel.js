@@ -53,7 +53,7 @@ define( require => {
       this.leftData = new DiffusionData();
       this.rightData = new DiffusionData();
 
-      // @public (read-only) particles of each species
+      // @public (read-only) particles of each species, together these make up the 'particle system'
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
@@ -170,7 +170,7 @@ define( require => {
       // Collision detection and response
       this.collisionDetector.step( dt );
 
-      // Update Properties that are based on the current state of the system.
+      // Update Properties that are based on the current state of the particle system.
       this.update();
     }
 
@@ -240,29 +240,20 @@ define( require => {
       let leftTotalKE = 0;
       let rightTotalKE = 0;
 
-      // add KE contribution for particle1
-      for ( let i = 0; i < this.particles1.length; i++ ) {
-        const particle = this.particles1[ i ];
-        if ( this.container.leftBounds.containsPoint( particle.location ) ) {
-          leftTotalKE += particle.kineticEnergy;
+      // Compute total KE in each side of the container
+      [ this.particles1, this.particles2 ].forEach( particles => {
+        for ( let i = 0; i < particles.length; i++ ) {
+          const particle = particles[ i ];
+          if ( this.container.leftBounds.containsPoint( particle.location ) ) {
+            leftTotalKE += particle.kineticEnergy;
+          }
+          else {
+            rightTotalKE += particle.kineticEnergy;
+          }
         }
-        else {
-          rightTotalKE += particle.kineticEnergy;
-        }
-      }
+      } );
 
-      //TODO duplication here, add another outer loop
-      // add KE contribution for particle2
-      for ( let i = 0; i < this.particles2.length; i++ ) {
-        const particle = this.particles2[ i ];
-        if ( this.container.leftBounds.containsPoint( particle.location ) ) {
-          leftTotalKE += particle.kineticEnergy;
-        }
-        else {
-          rightTotalKE += particle.kineticEnergy;
-        }
-      }
-
+      // Compute average temperature in each side of the container
       updateAverageTemperature( this.leftData.averageTemperatureProperty, leftTotalKE, this.leftData.numberOfParticles );
       updateAverageTemperature( this.rightData.averageTemperatureProperty, rightTotalKE, this.rightData.numberOfParticles );
     }
