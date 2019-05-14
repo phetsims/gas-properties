@@ -1,8 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * A Node that has a fixed width, enforced using an HStrut and options.maxWidth. This is used for the content
- * in Panels and AccordionBoxes.
+ * A Node that has a fixed width. This is used for the content in Panels and AccordionBoxes.
  *
  * A solution using AlignGroup and AlignBox was investigated, but they do not address horizontal separators
  * they do not handle container margins, and their width is dictated by the largest component vs a specified width.
@@ -30,7 +29,7 @@ define( require => {
     constructor( fixedWidth, content, options ) {
 
       options = _.extend( {
-        align: 'left'
+        align: 'left' // horizontal alignment of content in fixedWidth, see ALIGN_VALUES
       }, options );
 
       assert && assert( _.includes( ALIGN_VALUES, options.align ), `invalid align: ${options.align}` );
