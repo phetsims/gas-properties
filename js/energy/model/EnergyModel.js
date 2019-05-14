@@ -39,9 +39,8 @@ define( require => {
         throw new Error( 'holdConstant is fixed in this screen' );
       } );
 
-      //TODO should Average Speed and Speed Histogram both use get get*ParticleSpeedValues, to reduce iterations?
       // @public (read-only) {Property.<number|null>}
-      // average speed of heavy particles in the container, null when container is empty, pm/s
+      // average speed of heavy particles in the container, in pm/ps, null when the container is empty
       this.heavyAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
       this.lightAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
 
@@ -110,60 +109,46 @@ define( require => {
     }
 
     /**
-     * Gets kinetic energy values for all heavy particles in the container. Used by the Kinetic Energy histogram.
-     * @returns {number[]} in AMU * pm^2 / ps^2
+     * Gets kinetic energy values for all heavy particles in the container, in AMU * pm^2 / ps^2.
+     * Used by the Kinetic Energy histogram.
+     * @returns {number[]}
      * @public
      */
     getHeavyParticleKineticEnergyValues() {
-      const values = [];
-      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-        values.push( this.heavyParticles[ i ].kineticEnergy );
-      }
-      return values;
+      return getKineticEnergyValues( this.heavyParticles );
     }
 
     /**
-     * Gets kinetic energy values for all light particles in the container. Used by the Kinetic Energy histogram.
-     * @returns {number[]} in AMU * pm^2 / ps^2
+     * Gets kinetic energy values for all light particles in the container, in AMU * pm^2 / ps^2.
+     * Used by the Kinetic Energy histogram.
+     * @returns {number[]}
      * @public
      */
     getLightParticleKineticEnergyValues() {
-      const values = [];
-      for ( let i = 0; i < this.lightParticles.length; i++ ) {
-        values.push( this.lightParticles[ i ].kineticEnergy );
-      }
-      return values;
+      return getKineticEnergyValues( this.lightParticles );
     }
 
     /**
-     * Gets speed values for all heavy particles in the container. Used by the Speed histogram.
-     * @returns {number[]} in pm/ps
+     * Gets speed values for all heavy particles in the container, in pm/ps. Used by the Speed histogram.
+     * @returns {number[]}
      * @public
      */
     getHeavyParticleSpeedValues() {
-      const values = [];
-      for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-        values.push( this.heavyParticles[ i ].velocity.magnitude );
-      }
-      return values;
+      return getSpeedValues( this.heavyParticles );
     }
 
     /**
-     * Gets speed values for all light particles in the container. Used by the Speed histogram.
-     * @returns {number[]} in pm/ps
+     * Gets speed values for all light particles in the container, in pm/ps. Used by the Speed histogram.
+     * @returns {number[]}
      * @public
      */
     getLightParticleSpeedValues() {
-      const values = [];
-      for ( let i = 0; i < this.lightParticles.length; i++ ) {
-        values.push( this.lightParticles[ i ].velocity.magnitude );
-      }
-      return values;
+      return getSpeedValues( this.lightParticles );
     }
   }
 
   /**
-   * Gets the average speed of a set of particles, in pm/ps.
+   * Gets the average speed for a set of particles, in pm/ps.
    * @param {Particle[]} particles
    * @returns {number|null} null if there are no particles
    */
@@ -177,6 +162,32 @@ define( require => {
       averageSpeed = totalSpeed / particles.length;
     }
     return averageSpeed;
+  }
+
+  /**
+   * Gets the speed values for a set of particles, in pm/ps.
+   * @param {Particle[]} particles
+   * @returns {number[]}
+   */
+  function getSpeedValues( particles ) {
+    const values = [];
+    for ( let i = 0; i < particles.length; i++ ) {
+      values.push( particles[ i ].velocity.magnitude );
+    }
+    return values;
+  }
+
+  /**
+   * Gets the kinetic energy values for a set of particles, in in AMU * pm^2 / ps^2.
+   * @param {Particle[]} particles
+   * @returns {number[]}
+   */
+  function getKineticEnergyValues( particles ) {
+    const values = [];
+    for ( let i = 0; i < particles.length; i++ ) {
+      values.push( particles[ i ].kineticEnergy );
+    }
+    return values;
   }
 
   return gasProperties.register( 'EnergyModel', EnergyModel );
