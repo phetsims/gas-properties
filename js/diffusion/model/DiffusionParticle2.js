@@ -1,8 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for particle species 2 in the 'Diffusion' screen.
- * These are referred to as 'orange particles' in the design doc.
+ * Model for particle species 2 in the 'Diffusion' screen, referred to as 'orange particles' in the design doc.
  * Where you see variable names like particles2, centerXOfMass2Property, etc., they are related to this species.
  *
  * @author Chris Malley (PixelZoom, Inc.)
