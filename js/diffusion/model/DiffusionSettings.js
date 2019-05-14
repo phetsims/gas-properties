@@ -86,6 +86,5 @@ define( require => {
   // @public (read-only) values must be a multiple of these deltas
   DiffusionSettings.DELTAS = DELTAS;
 
-
   return gasProperties.register( 'DiffusionSettings', DiffusionSettings );
 } );
