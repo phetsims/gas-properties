@@ -182,7 +182,7 @@ define( require => {
         dragBoundsProperty: dragBoundsProperty
       } ) );
 
-      // show/hide
+      // visibility
       collisionCounter.visibleProperty.link( visible => {
         this.interruptSubtreeInput(); // interrupt user interactions
         this.visible = visible;

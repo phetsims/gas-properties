@@ -82,7 +82,7 @@ define( require => {
         dragBoundsProperty: dragBoundsProperty
       } ) );
 
-      // show/hide
+      // visibility
       stopwatch.visibleProperty.link( visible => {
         this.interruptSubtreeInput(); // interrupt user interactions
         this.visible = visible;
