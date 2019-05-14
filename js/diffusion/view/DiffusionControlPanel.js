@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const CenterOfMassCheckbox = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassCheckbox' );
-  const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
+  const DiffusionSettingsNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionSettingsNode' );
   const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -21,15 +21,8 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
-  const QuantityControl = require( 'GAS_PROPERTIES/diffusion/view/QuantityControl' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
-
-  // strings
-  const initialTemperatureKString = require( 'string!GAS_PROPERTIES/initialTemperatureK' );
-  const massAMUString = require( 'string!GAS_PROPERTIES/massAMU' );
-  const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
-  const radiusPmString = require( 'string!GAS_PROPERTIES/radiusPm' );
 
   class DiffusionControlPanel extends Panel {
 
@@ -53,46 +46,6 @@ define( require => {
 
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      // Initial Number
-      const numberOfParticlesControl = new QuantityControl( numberOfParticlesString, modelViewTransform,
-        leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, {
-          spinnerOptions: {
-            enabledProperty: hasDividerProperty,
-            deltaValue: DiffusionSettings.DELTAS.numberOfParticles,
-            decimalPlaces: 0
-          }
-        } );
-
-      // Mass (AMU)
-      const massControl = new QuantityControl( massAMUString, modelViewTransform,
-        leftSettings.massProperty, rightSettings.massProperty, {
-          spinnerOptions: {
-            enabledProperty: hasDividerProperty,
-            deltaValue: DiffusionSettings.DELTAS.mass,
-            decimalPlaces: 0
-          }
-        } );
-
-      // Radius (pm)
-      const radiusControl = new QuantityControl( radiusPmString, modelViewTransform,
-        leftSettings.radiusProperty, rightSettings.radiusProperty, {
-          spinnerOptions: {
-            enabledProperty: hasDividerProperty,
-            deltaValue: DiffusionSettings.DELTAS.radius,
-            decimalPlaces: 0
-          }
-        } );
-
-      // Initial Temperature (K)
-      const initialTemperatureControl = new QuantityControl( initialTemperatureKString, modelViewTransform,
-        leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, {
-          spinnerOptions: {
-            enabledProperty: hasDividerProperty,
-            deltaValue: DiffusionSettings.DELTAS.initialTemperature,
-            decimalPlaces: 0
-          }
-        } );
-
       // TODO is there a better way to center the button?
       // to center the button
       const dividerButtonParent = new Node( {
@@ -106,22 +59,20 @@ define( require => {
         align: 'left',
         spacing: 20,
         children: [
-          new VBox( {
-            spacing: 20,
-            align: 'left',
-            children: [
-              //TODO these don't horizontally align because some NumberSpinners are a different width
-              numberOfParticlesControl,
-              massControl,
-              radiusControl,
-              initialTemperatureControl,
-              dividerButtonParent
-            ]
-          } ),
+
+          // spinners
+          new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty ),
+
+          // Remove/Restore Divider button
+          dividerButtonParent,
+
+          // ------------
           new HSeparator( separatorWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: separatorWidth
           } ),
+
+          // checkboxes
           new VBox( {
             align: 'left',
             spacing: 12,
