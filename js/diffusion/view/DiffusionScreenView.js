@@ -29,16 +29,17 @@ define( require => {
 
     /**
      * @param {DiffusionModel} model
+     * @param {Tandem} tandem
      * @param {Object} [options]
      */
-    constructor( model, options ) {
+    constructor( model, tandem, options ) {
       assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
 
       options = _.extend( {
         hasSlowMotion: true // adds Normal/Slow radio buttons to the time controls
       }, options );
 
-      super( model, options );
+      super( model, tandem, options );
 
       const viewProperties = new DiffusionViewProperties();
 

@@ -25,14 +25,15 @@ define( require => {
 
     /**
      * @param {ExploreModel} model
+     * @param {Tandem} tandem
      */
-    constructor( model ) {
+    constructor( model, tandem ) {
       assert && assert( model instanceof ExploreModel, `invalid model: ${model}` );
 
       // view-specific Properties
       const viewProperties = new ExploreViewProperties();
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, {
+      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem, {
         redistributeParticles: false
       } );
 

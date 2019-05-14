@@ -24,9 +24,12 @@ define( require => {
 
   class EnergyModel extends GasPropertiesModel {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-      super( {
+      super( tandem, {
         holdConstant: HoldConstantEnum.VOLUME,
         hasCollisionCounter: false
       } );

@@ -19,15 +19,17 @@ define( require => {
 
   class ExploreScreen extends GasPropertiesScreen {
 
-    constructor() {
-      super(
-        // createModel
-        () => new ExploreModel(),
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-        // createView
-        model => new ExploreScreenView( model ), {
-          name: screenExploreString
-        } );
+      const createModel = () => new ExploreModel( tandem.createTandem( 'model' ) );
+      const createView = ( model ) => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
+
+      super( createModel, createView, tandem, {
+        name: screenExploreString
+      } );
     }
   }
 

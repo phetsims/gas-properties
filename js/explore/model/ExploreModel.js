@@ -15,9 +15,12 @@ define( require => {
 
   class ExploreModel extends GasPropertiesModel {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-      super( {
+      super( tandem, {
         holdConstant: HoldConstantEnum.NOTHING
       } );
 

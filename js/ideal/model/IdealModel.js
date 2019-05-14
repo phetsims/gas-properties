@@ -15,8 +15,11 @@ define( require => {
 
   class IdealModel extends GasPropertiesModel {
 
-    constructor() {
-      super();
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
+      super( tandem );
     }
   }
 

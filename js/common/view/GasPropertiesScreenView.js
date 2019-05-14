@@ -57,9 +57,10 @@ define( require => {
      * @param {GasPropertiesModel} model
      * @param {Property.<ParticleType>} particleTypeProperty
      * @param {BooleanProperty} sizeVisibleProperty
+     * @param {Tandem} tandem
      * @param {Object} [options]
      */
-    constructor( model, particleTypeProperty, sizeVisibleProperty, options ) {
+    constructor( model, particleTypeProperty, sizeVisibleProperty, tandem, options ) {
 
       assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
 
@@ -68,7 +69,7 @@ define( require => {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
       }, options );
 
-      super( model, options );
+      super( model, tandem, options );
 
       const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
 

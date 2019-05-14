@@ -20,13 +20,17 @@ define( require => {
 
     /**
      * @param {BaseModel} model
+     * @param {Tandem} tandem
      * @param {Object} [options]
      */
-    constructor( model, options ) {
+    constructor( model, tandem, options ) {
 
       options = _.extend( {
         hasSlowMotion: false
       }, options );
+
+      assert && assert( !options.tandem, 'BaseScreenView sets tandem' );
+      options.tandem = tandem;
       
       super( options );
 

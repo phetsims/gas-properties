@@ -26,14 +26,15 @@ define( require => {
 
     /**
      * @param {IdealModel} model
+     * @param {Tandem} tandem
      */
-    constructor( model ) {
+    constructor( model, tandem ) {
       assert && assert( model instanceof IdealModel, `invalid model: ${model}` );
 
       // view-specific Properties
       const viewProperties = new IdealViewProperties();
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, {
+      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem, {
         resizeGripColor: GasPropertiesColorProfile.idealResizeGripColorProperty
       } );
 

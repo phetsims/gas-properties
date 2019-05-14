@@ -41,7 +41,11 @@ define( require => {
 
   class GasPropertiesModel extends BaseModel {
 
-    constructor( options ) {
+    /**
+     * @param {Tandem} tandem
+     * @param {Object} [options]
+     */
+    constructor( tandem, options ) {
 
       options = _.extend( {
         holdConstant: HoldConstantEnum.NOTHING,

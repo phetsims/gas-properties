@@ -18,9 +18,10 @@ define( require => {
     /**
      * @param {function} createModel
      * @param {function( model:Object ) } createView
+     * @param {Tandem} tandem
      * @param {Object} [options]
      */
-    constructor( createModel, createView, options ) {
+    constructor( createModel, createView, tandem, options ) {
 
       options = _.extend( {
         backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
@@ -31,6 +32,9 @@ define( require => {
         // put a gray border around screen icons when the navigation bar is black
         showScreenIconFrameForNavigationBarFill: 'black'
       }, options );
+
+      assert && assert( !options.tandem, 'GasPropertiesScreen sets tandem' );
+      options.tandem = tandem;
 
       super( createModel, createView, options );
     }

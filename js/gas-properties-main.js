@@ -17,6 +17,7 @@ define( require => {
   const EnergyScreen = require( 'GAS_PROPERTIES/energy/EnergyScreen' );
   const Sim = require( 'JOIST/Sim' );
   const SimLauncher = require( 'JOIST/SimLauncher' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   const gasPropertiesTitleString = require( 'string!GAS_PROPERTIES/gas-properties.title' );
@@ -39,7 +40,12 @@ define( require => {
   };
 
   SimLauncher.launch( () => {
-    const screens = [ new IdealScreen(), new ExploreScreen(), new EnergyScreen(), new DiffusionScreen() ];
+    const screens = [
+      new IdealScreen( Tandem.rootTandem.createTandem( 'idealScreen' ) ),
+      new ExploreScreen( Tandem.rootTandem.createTandem( 'exploreScreen' ) ),
+      new EnergyScreen( Tandem.rootTandem.createTandem( 'energyScreen' ) ),
+      new DiffusionScreen( Tandem.rootTandem.createTandem( 'diffusionScreen' ) )
+    ];
     const sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();
   } );

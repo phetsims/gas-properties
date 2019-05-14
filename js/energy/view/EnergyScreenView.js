@@ -31,14 +31,15 @@ define( require => {
 
     /**
      * @param {EnergyModel} model
+     * @param {Tandem} tandem
      */
-    constructor( model ) {
+    constructor( model, tandem ) {
       assert && assert( model instanceof EnergyModel, `invalid model: ${model}` );
 
       // view-specific Properties
       const viewProperties = new EnergyViewProperties();
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty );
+      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem );
 
       // Average Speed
       const averageSpeedAccordionBox = new AverageSpeedAccordionBox(

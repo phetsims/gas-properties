@@ -32,9 +32,12 @@ define( require => {
 
   class DiffusionModel extends BaseModel {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-      super( {
+      super( tandem, {
         modelOriginOffset: new Vector2( 645, 525 ), // offset of the model's origin, in view coordinates
         stopwatchLocation: new Vector2( 35, 15 ) // in view coordinates! determined empirically
       } );

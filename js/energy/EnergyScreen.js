@@ -19,15 +19,17 @@ define( require => {
 
   class EnergyScreen extends GasPropertiesScreen {
 
-    constructor() {
-      super(
-        //createModel
-        () => new EnergyModel(),
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-        // createView
-        model => new EnergyScreenView( model ), {
-          name: screenEnergyString
-        } );
+      const createModel = () => new EnergyModel( tandem.createTandem( 'model' ) );
+      const createView = ( model ) => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
+
+      super( createModel, createView, tandem, {
+        name: screenEnergyString
+      } );
     }
   }
 

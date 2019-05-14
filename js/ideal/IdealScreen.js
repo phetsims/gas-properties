@@ -19,15 +19,17 @@ define( require => {
 
   class IdealScreen extends GasPropertiesScreen {
 
-    constructor() {
-      super(
-        // createModel
-        () => new IdealModel(),
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-        // createView
-        model => new IdealScreenView( model ), {
-          name: screenIdealString
-        } );
+      const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
+      const createView = ( model ) => new IdealScreenView( model, tandem.createTandem( 'view' ) );
+
+      super( createModel, createView, tandem, {
+        name: screenIdealString
+      } );
     }
   }
 

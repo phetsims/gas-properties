@@ -19,15 +19,17 @@ define( require => {
 
   class DiffusionScreen extends GasPropertiesScreen {
 
-    constructor() {
-      super(
-        // createModel
-        () => new DiffusionModel(),
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-        // createView
-        model => new DiffusionScreenView( model ), {
-          name: screenDiffusionString
-        } );
+      const createModel = () => new DiffusionModel( tandem.createTandem( 'model' ) );
+      const createView = ( model ) => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
+
+      super( createModel, createView, tandem, {
+        name: screenDiffusionString
+      } );
     }
   }
 

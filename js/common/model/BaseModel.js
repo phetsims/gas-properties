@@ -27,9 +27,13 @@ define( require => {
   // constants
   const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
 
+  /**
+   * @param {Tandem} tandem
+   * @param {Object} [options]
+   */
   class BaseModel {
 
-    constructor( options ) {
+    constructor( tandem, options ) {
 
       options = _.extend( {
         modelOriginOffset: new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
