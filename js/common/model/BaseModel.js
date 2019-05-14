@@ -3,10 +3,9 @@
 /**
  * Base class for models in all screens. Primarily responsibilities are:
  *
- * - model bounds
  * - model-view transform
- * - time
- * - static utility methods
+ * - model bounds
+ * - control of time (play, pause, step, speed)
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -44,19 +43,19 @@ define( require => {
         stopwatchLocation: new Vector2( 250, 15 )
       }, options );
 
-      // @public (read-only) bounds of the entire space that the model knows about.
-      // This corresponds to the browser window, and doesn't have a valid value until the view is created.
-      this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
-      phet.log && this.modelBoundsProperty.link( modelBounds => {
-        phet.log( `modelBounds: ${modelBounds.toString()} pm` );
-      } );
-
       // @public (read-only) transform between model and view coordinate frames
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
         options.modelOriginOffset,
         MODEL_VIEW_SCALE,
         -MODEL_VIEW_SCALE // y is inverted
       );
+
+      // @public (read-only) bounds of the entire space that the model knows about.
+      // This corresponds to the browser window, and doesn't have a valid value until the view is created.
+      this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
+      phet.log && this.modelBoundsProperty.link( modelBounds => {
+        phet.log( `modelBounds: ${modelBounds.toString()} pm` );
+      } );
 
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
