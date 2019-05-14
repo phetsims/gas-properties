@@ -166,7 +166,7 @@ define( require => {
       // If the collision counter is outside the drag bounds, move it inside.
       dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
-        if ( !dragBounds.containsBounds( this.bounds ) ) {
+        if ( !dragBounds.containsPoint( collisionCounter.locationProperty ) ) {
           collisionCounter.locationProperty.value = dragBounds.closestPointTo( collisionCounter.locationProperty.value );
         }
       } );

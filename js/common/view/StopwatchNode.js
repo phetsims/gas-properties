@@ -67,7 +67,7 @@ define( require => {
       // If the stopwatch is outside the drag bounds, move it inside.
       dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
-        if ( !dragBounds.containsBounds( this.bounds ) ) {
+        if ( !dragBounds.containsPoint( stopwatch.locationProperty ) ) {
           stopwatch.locationProperty.value = dragBounds.closestPointTo( stopwatch.locationProperty.value );
         }
       } );
