@@ -24,6 +24,7 @@ define( require => {
     constructor( model ) {
 
       // {Property.<HTMLCanvasElement>} generated images for the heavy and light particle types
+      // initialized below
       const heavyParticleImageProperty = new Property( null );
       const lightParticleImageProperty = new Property( null );
 

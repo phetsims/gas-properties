@@ -52,7 +52,9 @@ define( require => {
 
       // @public (read-only) bounds of the entire space that the model knows about.
       // This corresponds to the browser window, and doesn't have a valid value until the view is created.
-      this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ) );
+      this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ), {
+        valueType: Bounds2
+      } );
       phet.log && this.modelBoundsProperty.link( modelBounds => {
         phet.log( `modelBounds: ${modelBounds.toString()} pm` );
       } );

@@ -30,7 +30,8 @@ define( require => {
       // @public number of DiffusionParticle2 in this side of the container
       this.numberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
 
-      // @public average temperature in this side of the container, in K
+      // @public {Property.<number|null>} average temperature in this side of the container, in K
+      // null when there are no particles in this side of the container.
       this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
     }
 

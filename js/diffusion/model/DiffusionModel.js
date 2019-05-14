@@ -65,6 +65,7 @@ define( require => {
       this.numberOfParticlesChangedEmitter = new Emitter();
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
+      // null when there are no particles in the container.
       this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
       this.centerOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
