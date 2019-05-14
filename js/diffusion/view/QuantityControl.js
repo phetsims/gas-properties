@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Control for changing a quantity for 2 particle types.
+ * Control for changing a quantity for for the left and right sides of the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,13 +22,13 @@ define( require => {
   class QuantityControl extends VBox {
 
     /**
-     * @param {ModelViewTransform2} modelViewTransform
      * @param {string} title
-     * @param {NumberProperty} particle1Property
-     * @param {NumberProperty} particle2Property
+     * @param {ModelViewTransform2} modelViewTransform
+     * @param {NumberProperty} leftProperty - quantity for the left side of the container
+     * @param {NumberProperty} rightProperty - quantity for the right side of the container
      * @param {Object} [options]
      */
-    constructor( modelViewTransform, title, particle1Property, particle2Property, options ) {
+    constructor( title, modelViewTransform, leftProperty, rightProperty, options ) {
 
       options = _.extend( {
         spinnerOptions: null, // {*} see NumberSpinner
@@ -46,27 +46,27 @@ define( require => {
       } );
 
       // icons
-      const particle1Icon = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform );
-      const particle2Icon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
+      const leftParticleIcon = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform );
+      const rightParticleIcon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
 
       // spinners
-      const particle1Spinner = new GasPropertiesSpinner( particle1Property, options.spinnerOptions );
-      const particle2Spinner = new GasPropertiesSpinner( particle2Property, options.spinnerOptions );
+      const leftSpinner = new GasPropertiesSpinner( leftProperty, options.spinnerOptions );
+      const rightSpinner = new GasPropertiesSpinner( rightProperty, options.spinnerOptions );
 
       // layout
-      const hBox1 = new HBox( {
+      const leftBox = new HBox( {
         spacing: 10,
-        children: [ particle1Icon, particle1Spinner ]
+        children: [ leftParticleIcon, leftSpinner ]
       } );
 
-      const hBox2 = new HBox( {
+      const rightBox = new HBox( {
         spacing: 10,
-        children: [ particle2Icon, particle2Spinner ]
+        children: [ rightParticleIcon, rightSpinner ]
       } );
 
       const hBox = new HBox( {
         spacing: 30,
-        children: [ new HStrut( 1 ), hBox1, hBox2 ]
+        children: [ new HStrut( 1 ), leftBox, rightBox ]
       } );
 
       assert && assert( !options.children, 'DataNode sets children' );

@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const CenterOfMassCheckbox = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassCheckbox' );
+  const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
   const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -33,7 +34,8 @@ define( require => {
   class DiffusionControlPanel extends Panel {
 
     /**
-     * @param {DiffusionExperiment} experiment
+     * @param {DiffusionSettings} leftSettings - setting for the left side of the container
+     * @param {DiffusionSettings} rightSettings - setting for the right side of the container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {BooleanProperty} hasDividerProperty
      * @param {BooleanProperty} particleFlowRateVisibleProperty
@@ -41,7 +43,8 @@ define( require => {
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {Object} [options]
      */
-    constructor( experiment, modelViewTransform, hasDividerProperty, particleFlowRateVisibleProperty,
+    constructor( leftSettings, rightSettings,
+                 modelViewTransform, hasDividerProperty, particleFlowRateVisibleProperty,
                  centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
 
       options = _.extend( {}, GasPropertiesConstants.PANEL_OPTIONS, {
@@ -51,41 +54,41 @@ define( require => {
       const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
 
       // Initial Number
-      const numberOfParticlesControl = new QuantityControl( modelViewTransform, numberOfParticlesString,
-        experiment.numberOfParticles1Property, experiment.numberOfParticles2Property, {
+      const numberOfParticlesControl = new QuantityControl( numberOfParticlesString, modelViewTransform,
+        leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.numberOfParticlesDelta,
+            deltaValue: DiffusionSettings.DELTAS.numberOfParticles,
             decimalPlaces: 0
           }
         } );
 
       // Mass (AMU)
-      const massControl = new QuantityControl( modelViewTransform, massAMUString,
-        experiment.mass1Property, experiment.mass2Property, {
+      const massControl = new QuantityControl( massAMUString, modelViewTransform,
+        leftSettings.massProperty, rightSettings.massProperty, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.massDelta,
+            deltaValue: DiffusionSettings.DELTAS.mass,
             decimalPlaces: 0
           }
         } );
 
       // Radius (pm)
-      const radiusControl = new QuantityControl( modelViewTransform, radiusPmString,
-        experiment.radius1Property, experiment.radius2Property, {
+      const radiusControl = new QuantityControl( radiusPmString, modelViewTransform,
+        leftSettings.radiusProperty, rightSettings.radiusProperty, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.radiusDelta,
+            deltaValue: DiffusionSettings.DELTAS.radius,
             decimalPlaces: 0
           }
         } );
 
       // Initial Temperature (K)
-      const initialTemperatureControl = new QuantityControl( modelViewTransform, initialTemperatureKString,
-        experiment.initialTemperature1Property, experiment.initialTemperature2Property, {
+      const initialTemperatureControl = new QuantityControl( initialTemperatureKString, modelViewTransform,
+        leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, {
           spinnerOptions: {
             enabledProperty: hasDividerProperty,
-            deltaValue: experiment.initialTemperatureDelta,
+            deltaValue: DiffusionSettings.DELTAS.initialTemperature,
             decimalPlaces: 0
           }
         } );

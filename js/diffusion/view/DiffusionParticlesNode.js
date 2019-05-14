@@ -29,7 +29,7 @@ define( require => {
 
       // Update DiffusionParticle1 image to match radius and color profile
       Property.multilink( [
-          model.experiment.radius1Property,
+          model.leftSettings.radiusProperty,
           GasPropertiesColorProfile.particle1ColorProperty,
           GasPropertiesColorProfile.particle1HighlightColorProperty
         ],
@@ -43,7 +43,7 @@ define( require => {
 
       // Update DiffusionParticle2 image to match radius and color profile
       Property.multilink( [
-          model.experiment.radius2Property,
+          model.rightSettings.radiusProperty,
           GasPropertiesColorProfile.particle2ColorProperty,
           GasPropertiesColorProfile.particle2HighlightColorProperty
         ],

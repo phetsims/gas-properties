@@ -13,9 +13,9 @@ define( require => {
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
-  const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
+  const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -45,25 +45,26 @@ define( require => {
       // @public
       this.container = new DiffusionContainer();
 
-      // @public parameters that define the experiment to be run when the container's divider is removed
-      this.experiment = new DiffusionExperiment();
+      // @public settings for the left and right sides of the container, before the divider is removed
+      this.leftSettings = new DiffusionSettings();
+      this.rightSettings = new DiffusionSettings();
 
-      // @public data for the left and right sides of the container, shown in the Data accordion box
+      // @public data for the left and right sides of the container
       this.leftData = new DiffusionData();
       this.rightData = new DiffusionData();
 
-      // @public (read-only) particles of each type
+      // @public (read-only) particles of each species
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
       // @public emit is called when any of the above Particle arrays are modified
       this.numberOfParticlesChangedEmitter = new Emitter();
 
-      // @public (read-only) centerX of mass for particles of types DiffusionParticle1 and DiffusionParticle2, in pm
+      // @public (read-only) centerX of mass for each particle species, in pm
       this.centerXOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
       this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
-      // @public flow rate model for particles of types DiffusionParticle1 and DiffusionParticle2, in particles/pm
+      // @public flow rate model for each particle species
       this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
       this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2 );
 
@@ -71,45 +72,41 @@ define( require => {
       this.collisionDetector = new CollisionDetector( this.container, [ this.particles1, this.particles2 ] );
 
       // Add or remove particles
-      this.experiment.numberOfParticles1Property.link( numberOfParticles => {
+      this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
           this.container.leftBounds,
-          this.experiment.mass1Property.value,
-          this.experiment.radius1Property.value,
-          this.experiment.initialTemperature1Property.value,
+          this.leftSettings,
           this.particles1,
           DiffusionParticle1 );
       } );
-      this.experiment.numberOfParticles2Property.link( numberOfParticles => {
+      this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
           this.container.rightBounds,
-          this.experiment.mass2Property.value,
-          this.experiment.radius2Property.value,
-          this.experiment.initialTemperature2Property.value,
+          this.rightSettings,
           this.particles2,
           DiffusionParticle2 );
       } );
 
       // Update mass and temperature of existing particles. This adjusts speed of the particles.
-      Property.multilink( [ this.experiment.mass1Property, this.experiment.initialTemperature1Property ],
+      Property.multilink( [ this.leftSettings.massProperty, this.leftSettings.initialTemperatureProperty ],
         ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles1 ); }
       );
-      Property.multilink( [ this.experiment.mass2Property, this.experiment.initialTemperature2Property ],
+      Property.multilink( [ this.rightSettings.massProperty, this.rightSettings.initialTemperatureProperty ],
         ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles2 ); }
       );
 
-      Property.multilink( [ this.experiment.initialTemperature1Property, this.experiment.initialTemperature2Property ],
-        ( initialTemperature1, initialTemperature2 ) => {
+      Property.multilink( [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
+        ( leftInitialTemperature, rightInitialTemperature ) => {
           if ( !this.isPlayingProperty.value ) {
             this.updateAverageTemperatures();
           }
         } );
 
       // Update radii of existing particles.
-      this.experiment.radius1Property.link( radius => {
+      this.leftSettings.radiusProperty.link( radius => {
         updateRadius( radius, this.particles1, this.container.leftBounds, this.isPlayingProperty.value );
       } );
-      this.experiment.radius2Property.link( radius => {
+      this.rightSettings.radiusProperty.link( radius => {
         updateRadius( radius, this.particles2, this.container.rightBounds, this.isPlayingProperty.value );
       } );
 
@@ -117,15 +114,10 @@ define( require => {
       this.container.hasDividerProperty.link( hasDivider => {
         if ( hasDivider ) {
 
-          // Delete existing DiffusionParticle1 particles, create a new set
-          const numberOfParticles1 = this.experiment.numberOfParticles1Property.value;
-          this.experiment.numberOfParticles1Property.value = 0;
-          this.experiment.numberOfParticles1Property.value = numberOfParticles1;
-
-          // Delete existing DiffusionParticle2 particles, create a new set
-          const numberOfParticles2 = this.experiment.numberOfParticles2Property.value;
-          this.experiment.numberOfParticles2Property.value = 0;
-          this.experiment.numberOfParticles2Property.value = numberOfParticles2;
+          // Restarts the experiment with the same settings.
+          // This causes the current sets of particles to be deleted, and new sets of particles to be created.
+          this.leftSettings.restart();
+          this.rightSettings.restart();
 
           // Reset flow rate models
           this.particleFlowRate1.reset();
@@ -143,7 +135,8 @@ define( require => {
       super.reset();
 
       this.container.reset();
-      this.experiment.reset();
+      this.leftSettings.reset();
+      this.rightSettings.reset();
       this.leftData.reset();
       this.rightData.reset();
       this.centerXOfMass1Property.reset();
@@ -185,18 +178,16 @@ define( require => {
      * Adjusts an array of particles to have the desired number of elements.
      * @param {number} numberOfParticles - desired number of particles
      * @param {Bounds2} locationBounds - initial location will be inside this bounds
-     * @param {number} mass
-     * @param {number} radius
-     * @param {number} initialTemperature
+     * @param {DiffusionSettings} settings
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
      * @param {constructor} Constructor - constructor for elements in particles array
      * @private
      */
-    updateNumberOfParticles( numberOfParticles, locationBounds, mass, radius, initialTemperature, particles, Constructor ) {
+    updateNumberOfParticles( numberOfParticles, locationBounds, settings, particles, Constructor ) {
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {
-          addParticles( delta, locationBounds, mass, radius, initialTemperature, particles, Constructor );
+          addParticles( delta, locationBounds, settings, particles, Constructor );
         }
         else {
           ParticleUtils.removeParticles( -delta, particles );
@@ -241,7 +232,7 @@ define( require => {
     }
 
     /**
-     * Updates average temperatures for the left and right sides of the container, as displayed in the Data accordion box.
+     * Updates average temperatures for the left and right sides of the container.
      * @private
      */
     updateAverageTemperatures() {
@@ -260,6 +251,7 @@ define( require => {
         }
       }
 
+      //TODO duplication here, add another outer loop
       // add KE contribution for particle2
       for ( let i = 0; i < this.particles2.length; i++ ) {
         const particle = this.particles2[ i ];
@@ -280,20 +272,18 @@ define( require => {
    * Adds n particles to the end of the specified array.
    * @param {number} n
    * @param {Bounds2} locationBounds - initial location will be inside this bounds
-   * @param {number} mass
-   * @param {number} radius
-   * @param {number} initialTemperature
+   * @param {DiffusionSettings} settings
    * @param {Particle[]} particles
    * @param {constructor} Constructor - a Particle subclass constructor
    */
-  function addParticles( n, locationBounds, mass, radius, initialTemperature, particles, Constructor ) {
+  function addParticles( n, locationBounds, settings, particles, Constructor ) {
 
     // Create n particles
     for ( let i = 0; i < n; i++ ) {
 
       const particle = new Constructor( {
-        mass: mass,
-        radius: radius
+        mass: settings.massProperty.value,
+        radius: settings.radiusProperty.value
       } );
 
       // Position the particle at a random location within locationBounds, accounting for particle radius.
@@ -305,7 +295,7 @@ define( require => {
       // Set the initial velocity, based on initial temperature and mass.
       particle.setVelocityPolar(
         // |v| = sqrt( 3kT / m )
-        Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * initialTemperature / particle.mass ),
+        Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * settings.initialTemperatureProperty.value / particle.mass ),
 
         // Random angle
         phet.joist.random.nextDouble() * 2 * Math.PI

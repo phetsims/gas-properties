@@ -24,10 +24,14 @@ define( require => {
 
     constructor() {
 
-      // @public
+      // @public number of DiffusionParticle1 in this side of the container
       this.numberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
+
+      // @public number of DiffusionParticle2 in this side of the container
       this.numberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
+
+      // @public average temperature in this side of the container, in K
+      this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
     }
 
     // @public
