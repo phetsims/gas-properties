@@ -23,20 +23,22 @@ define( require => {
   class SpeedHistogram extends EnergyHistogram {
 
     /**
-     * @param {EnergyModel} model TODO narrower interface?
      * @param {BooleanProperty} heavyVisibleProperty
      * @param {BooleanProperty} lightVisibleProperty
+     * @param {function:number[]} getHeavyValues
+     * @param {function:number[]} getLightValues
      * @param {Object} [options]
      */
-    constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
+    constructor( heavyVisibleProperty, lightVisibleProperty, getHeavyValues, getLightValues, options ) {
       super(
         GasPropertiesQueryParameters.bins,
         GasPropertiesQueryParameters.speedBinWidth, // pm/ps
         new Text( speedString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
-        heavyVisibleProperty, lightVisibleProperty,
-        model.getHeavyParticleSpeedValues.bind( model ),
-        model.getLightParticleSpeedValues.bind( model ),
+        heavyVisibleProperty,
+        lightVisibleProperty,
+        getHeavyValues,
+        getLightValues,
         GasPropertiesColorProfile.speedHistogramBarColorProperty,
         options
       );

@@ -49,16 +49,22 @@ define( require => {
         } );
 
       // Speed accordion box with histogram and related controls
-      const speedAccordionBox = new SpeedAccordionBox( model, {
-        expandedProperty: viewProperties.speedExpandedProperty,
-        fixedWidth: LEFT_PANEL_WIDTH
-      } );
+      const speedAccordionBox = new SpeedAccordionBox(
+        model.getHeavyParticleSpeedValues.bind( model ),
+        model.getLightParticleSpeedValues.bind( model ),
+        model.modelViewTransform, {
+          expandedProperty: viewProperties.speedExpandedProperty,
+          fixedWidth: LEFT_PANEL_WIDTH
+        } );
 
       // Kinetic Energy accordion box with histogram
-      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model, {
-        expandedProperty: viewProperties.kineticEnergyExpandedProperty,
-        fixedWidth: LEFT_PANEL_WIDTH
-      } );
+      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox(
+        model.getHeavyParticleKineticEnergyValues.bind( model ),
+        model.getLightParticleKineticEnergyValues.bind( model ),
+        model.modelViewTransform, {
+          expandedProperty: viewProperties.kineticEnergyExpandedProperty,
+          fixedWidth: LEFT_PANEL_WIDTH
+        } );
 
       // Panels on the left side of the screen
       const leftPanels = new VBox( {

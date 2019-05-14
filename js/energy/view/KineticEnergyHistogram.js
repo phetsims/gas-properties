@@ -23,12 +23,13 @@ define( require => {
   class KineticEnergyHistogram extends EnergyHistogram {
 
     /**
-     * @param {EnergyModel} model TODO narrower interface?
      * @param {BooleanProperty} heavyVisibleProperty
      * @param {BooleanProperty} lightVisibleProperty
+     * @param {function:number[]} getHeavyValues
+     * @param {function:number[]} getLightValues
      * @param {Object} [options]
      */
-    constructor( model, heavyVisibleProperty, lightVisibleProperty, options ) {
+    constructor( heavyVisibleProperty, lightVisibleProperty, getHeavyValues, getLightValues, options ) {
       super(
         GasPropertiesQueryParameters.bins,
         GasPropertiesQueryParameters.keBinWidth, // AMU * pm^2 / ps^2
@@ -36,8 +37,8 @@ define( require => {
         new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS ),
         heavyVisibleProperty,
         lightVisibleProperty,
-        model.getHeavyParticleKineticEnergyValues.bind( model ),
-        model.getLightParticleKineticEnergyValues.bind( model ),
+        getHeavyValues,
+        getLightValues,
         GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty,
         options
       );
