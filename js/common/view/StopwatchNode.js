@@ -67,7 +67,7 @@ define( require => {
         }
       } );
 
-      // If the stopwatch becomes outside the drag bounds, move it inside.
+      // If the stopwatch is outside the drag bounds, move it inside.
       adjustedDragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
         if ( !dragBounds.containsBounds( this.bounds ) ) {

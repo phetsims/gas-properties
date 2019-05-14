@@ -166,7 +166,7 @@ define( require => {
       } );
 
       //TODO duplicated in StopwatchNode
-      // If the collision counter becomes outside the drag bounds, move it inside.
+      // If the collision counter is outside the drag bounds, move it inside.
       adjustedDragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
         if ( !dragBounds.containsBounds( this.bounds ) ) {
