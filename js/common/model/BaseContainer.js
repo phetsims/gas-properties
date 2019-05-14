@@ -60,7 +60,7 @@ define( require => {
           this.location.x, this.location.y + this.height
         ) );
 
-      // @public (read-only) velocity of the left (movable) wall, pm/ps, MUTATED!
+      // @public (read-only) velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
       this.leftWallVelocity = new Vector2( 0, 0 ); //
 
       // @private {number} previous location of the left wall
