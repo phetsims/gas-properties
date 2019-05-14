@@ -27,10 +27,9 @@ define( require => {
 
     /**
      * @param {Node} targetNode
-     * @param {BooleanProperty} visibleProperty
      * @param {Object} [options]
      */
-    constructor( targetNode, visibleProperty, options ) {
+    constructor( targetNode, options ) {
 
       options = _.extend( {
         locationProperty: new Vector2Property( Vector2.ZERO ), // in view coordinates
@@ -67,12 +66,6 @@ define( require => {
           }
         } );
       }
-
-      // show/hide targetNode
-      visibleProperty.link( visible => {
-        targetNode.interruptSubtreeInput(); // interrupt user interactions
-        targetNode.visible = visible;
-      } );
 
       super( options );
     }

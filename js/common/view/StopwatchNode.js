@@ -51,10 +51,16 @@ define( require => {
       }
 
       // dragging
-      this.addInputListener( new ToolDragListener( this, stopwatch.visibleProperty, {
+      this.addInputListener( new ToolDragListener( this, {
         locationProperty: stopwatch.locationProperty,
         dragBoundsProperty: options.dragBoundsProperty
       } ) );
+
+      // show/hide
+      stopwatch.visibleProperty.link( visible => {
+        this.interruptSubtreeInput(); // interrupt user interactions
+        this.visible = visible;
+      } );
     }
   }
 

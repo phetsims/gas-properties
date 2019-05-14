@@ -150,10 +150,16 @@ define( require => {
       }
 
       // dragging
-      this.addInputListener( new ToolDragListener( this, collisionCounter.visibleProperty, {
+      this.addInputListener( new ToolDragListener( this, {
         locationProperty: collisionCounter.locationProperty,
         dragBoundsProperty: options.dragBoundsProperty
       } ) );
+
+      // show/hide
+      collisionCounter.visibleProperty.link( visible => {
+        this.interruptSubtreeInput(); // interrupt user interactions
+        this.visible = visible;
+      } );
     }
   }
 
