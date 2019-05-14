@@ -225,15 +225,11 @@ define( require => {
       // Collision Counter
       let collisionCounterNode = null;
       if ( model.collisionCounter ) {
-        collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, {
-          dragBoundsProperty: this.visibleBoundsProperty
-        } );
+        collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, this.visibleBoundsProperty );
       }
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
+      const stopwatchNode = new StopwatchNode( model.stopwatch, this.visibleBoundsProperty );
 
       // Show how the collision detection space is partitioned into regions
       let regionsNode = null;

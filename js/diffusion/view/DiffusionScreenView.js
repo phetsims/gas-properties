@@ -112,9 +112,7 @@ define( require => {
       } );
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, {
-        dragBoundsProperty: this.visibleBoundsProperty
-      } );
+      const stopwatchNode = new StopwatchNode( model.stopwatch, this.visibleBoundsProperty );
 
       // Rendering order
       regionsNode && this.addChild( regionsNode );

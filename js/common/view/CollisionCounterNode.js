@@ -14,6 +14,8 @@ define( require => {
   const Circle = require( 'SCENERY/nodes/Circle' );
   const ComboBox = require( 'SUN/ComboBox' );
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -26,7 +28,6 @@ define( require => {
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const ToolDragListener = require( 'GAS_PROPERTIES/common/view/ToolDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
@@ -53,11 +54,9 @@ define( require => {
      * @param {Node} comboBoxListParent
      * @param {Object} [options]
      */
-    constructor( collisionCounter, comboBoxListParent, options ) {
+    constructor( collisionCounter, comboBoxListParent, dragBoundsProperty, options ) {
 
-      options = _.extend( {
-        dragBoundsProperty: null // {Property.<Bounds2>|null} in view coordinates
-      }, options );
+      options = options || {};
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
         font: LABEL_FONT,
@@ -154,10 +153,32 @@ define( require => {
         this.translation = location;
       } );
 
+      //TODO duplicated in StopwatchNode
+      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
+      const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {
+        if ( dragBounds ) {
+          return new Bounds2( dragBounds.minX, dragBounds.minY,
+            dragBounds.maxX - this.width, dragBounds.maxY - this.height );
+        }
+        else {
+          return null;
+        }
+      } );
+
+      //TODO duplicated in StopwatchNode
+      // Ensure that collision counter is fully inside the adjusted drag bounds.
+      adjustedDragBoundsProperty.link( dragBounds => {
+        this.interruptSubtreeInput(); // interrupt user interactions
+        if ( !dragBounds.containsBounds( this.bounds ) ) {
+          collisionCounter.locationProperty.value = dragBounds.closestPointTo( collisionCounter.locationProperty.value );
+        }
+      } );
+
       // dragging
-      this.addInputListener( new ToolDragListener( this, {
+      this.addInputListener( new DragListener( {
+        targetNode: this,
         locationProperty: collisionCounter.locationProperty,
-        dragBoundsProperty: options.dragBoundsProperty
+        dragBoundsProperty: adjustedDragBoundsProperty
       } ) );
 
       // show/hide

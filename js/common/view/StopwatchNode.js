@@ -9,13 +9,15 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
-  const ToolDragListener = require( 'GAS_PROPERTIES/common/view/ToolDragListener' );
 
   // strings
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
@@ -24,13 +26,12 @@ define( require => {
 
     /**
      * @param {Stopwatch} stopwatch
+     * @param {Property.<Bounds>} dragBoundsProperty
      * @param {Object} [options]
      */
-    constructor( stopwatch, options ) {
+    constructor( stopwatch, dragBoundsProperty, options ) {
 
       options = _.extend( {
-
-        dragBoundsProperty: null, // {Property.<Bounds2>|null} in view coordinates
 
         // TimerNode options
         backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
@@ -55,10 +56,30 @@ define( require => {
         this.translation = location;
       } );
 
+      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
+      const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {
+        if ( dragBounds ) {
+          return new Bounds2( dragBounds.minX, dragBounds.minY,
+            dragBounds.maxX - this.width, dragBounds.maxY - this.height );
+        }
+        else {
+          return null;
+        }
+      } );
+
+      // Ensure that stopwatch is fully inside the adjusted drag bounds.
+      adjustedDragBoundsProperty.link( dragBounds => {
+        this.interruptSubtreeInput(); // interrupt user interactions
+        if ( !dragBounds.containsBounds( this.bounds ) ) {
+          stopwatch.locationProperty.value = dragBounds.closestPointTo( stopwatch.locationProperty.value );
+        }
+      } );
+
       // dragging
-      this.addInputListener( new ToolDragListener( this, {
+      this.addInputListener( new DragListener( {
+        targetNode: this,
         locationProperty: stopwatch.locationProperty,
-        dragBoundsProperty: options.dragBoundsProperty
+        dragBoundsProperty: adjustedDragBoundsProperty
       } ) );
 
       // show/hide
