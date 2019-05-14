@@ -85,7 +85,7 @@ define( require => {
       } );
 
       // Data accordion box
-      const dataAccordionBox = new DataAccordionBox( model, {
+      const dataAccordionBox = new DataAccordionBox( model.leftData, model.rightData, model.modelViewTransform, {
         expandedProperty: viewProperties.dataExpandedProperty,
         centerX: containerNode.centerX,
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

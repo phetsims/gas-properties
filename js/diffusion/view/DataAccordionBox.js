@@ -24,10 +24,12 @@ define( require => {
   class DataAccordionBox extends AccordionBox {
 
     /**
-     * @param {DiffusionModel} model TODO narrower interface?
+     * @param {DiffusionData} leftData
+     * @param {DiffusionData} rightData
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( model, options ) {
+    constructor( leftData, rightData, modelViewTransform, options ) {
 
       options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
@@ -41,10 +43,10 @@ define( require => {
       }, options );
 
       // Data for left side of the container
-      const leftDataNode = new DiffusionDataNode( model.modelViewTransform, model.leftData );
+      const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform );
 
       // Data for right side of container
-      const rightDataNode = new DiffusionDataNode( model.modelViewTransform, model.rightData );
+      const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform );
 
       // Vertical separator, analogous to the container's divider
       const separator = new VSeparator( 75, {
