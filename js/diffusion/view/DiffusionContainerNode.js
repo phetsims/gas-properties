@@ -50,14 +50,14 @@ define( require => {
       // Vertical dashed line to indicate the center of the container when the divider is not present.
       const noDividerNode = new Line( viewDividerX, viewBounds.minY, viewDividerX, viewBounds.maxY, {
         stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: 1,
+        lineWidth: 1.5,
         lineDash: [ 10, 24 ],
         center: borderNode.center
       } );
 
       assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );
       options = _.extend( {
-        children: [ borderNode, noDividerNode, dividerNode ]
+        children: [ noDividerNode, dividerNode, borderNode ]
       }, options );
 
       super( options );
