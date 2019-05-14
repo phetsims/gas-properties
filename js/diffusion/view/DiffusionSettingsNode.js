@@ -47,14 +47,14 @@ define( require => {
         align: 'left'
       }, options );
 
-      // To make all spinners have the same width
+      // To make all spinners have the same bounds width
       const spinnersAlignGroup = new AlignGroup( {
         matchHorizontal: true
       } );
 
       // Number of Particles
-      const numberOfParticlesControl = new QuantityControl( spinnersAlignGroup, numberOfParticlesString, modelViewTransform,
-        leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, {
+      const numberOfParticlesControl = new QuantityControl( numberOfParticlesString, modelViewTransform,
+        leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
           spinnerOptions: {
             enabledProperty: enabledProperty,
             deltaValue: DiffusionSettings.DELTAS.numberOfParticles,
@@ -63,18 +63,19 @@ define( require => {
         } );
 
       // Mass (AMU)
-      const massControl = new QuantityControl( spinnersAlignGroup, massAMUString, modelViewTransform,
-        leftSettings.massProperty, rightSettings.massProperty, {
+      const massControl = new QuantityControl( massAMUString, modelViewTransform,
+        leftSettings.massProperty, rightSettings.massProperty, spinnersAlignGroup, {
           spinnerOptions: {
             enabledProperty: enabledProperty,
             deltaValue: DiffusionSettings.DELTAS.mass,
-            decimalPlaces: 0
+            decimalPlaces: 0,
+            xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
           }
         } );
 
       // Radius (pm)
-      const radiusControl = new QuantityControl( spinnersAlignGroup, radiusPmString, modelViewTransform,
-        leftSettings.radiusProperty, rightSettings.radiusProperty, {
+      const radiusControl = new QuantityControl( radiusPmString, modelViewTransform,
+        leftSettings.radiusProperty, rightSettings.radiusProperty, spinnersAlignGroup, {
           spinnerOptions: {
             enabledProperty: enabledProperty,
             deltaValue: DiffusionSettings.DELTAS.radius,
@@ -83,8 +84,8 @@ define( require => {
         } );
 
       // Initial Temperature (K)
-      const initialTemperatureControl = new QuantityControl( spinnersAlignGroup, initialTemperatureKString, modelViewTransform,
-        leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, {
+      const initialTemperatureControl = new QuantityControl( initialTemperatureKString, modelViewTransform,
+        leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
           spinnerOptions: {
             enabledProperty: enabledProperty,
             deltaValue: DiffusionSettings.DELTAS.initialTemperature,
@@ -92,7 +93,6 @@ define( require => {
           }
         } );
 
-      //TODO these don't horizontally align because some NumberSpinners are a different width
       assert && assert( !options.children, 'DiffusionSettingsNode sets children' );
       options = _.extend( {
         children: [
@@ -115,14 +115,14 @@ define( require => {
   class QuantityControl extends VBox {
 
     /**
-     * @param {AlignGroup} spinnersAlignGroup
      * @param {string} title
      * @param {ModelViewTransform2} modelViewTransform
      * @param {NumberProperty} leftProperty - quantity for the left side of the container
      * @param {NumberProperty} rightProperty - quantity for the right side of the container
+     * @param {AlignGroup} spinnersAlignGroup
      * @param {Object} [options]
      */
-    constructor( spinnersAlignGroup, title, modelViewTransform, leftProperty, rightProperty, options ) {
+    constructor( title, modelViewTransform, leftProperty, rightProperty, spinnersAlignGroup, options ) {
 
       options = _.extend( {
         spinnerOptions: null, // {*} see NumberSpinner
@@ -143,7 +143,7 @@ define( require => {
       const leftParticleIcon = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform );
       const rightParticleIcon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
 
-      // spinners
+      // spinners, with uniform bounds width to facilitate layout
       const alignBoxOptions = {
         group: spinnersAlignGroup,
         xAlign: 'left'
