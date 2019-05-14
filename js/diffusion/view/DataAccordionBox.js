@@ -43,17 +43,17 @@ define( require => {
       // Data for left side of the container
       const leftDataNode = new DataNode(
         model.modelViewTransform,
-        model.leftNumberOfParticles1Property,
-        model.leftNumberOfParticles2Property,
-        model.leftAverageTemperatureProperty
+        model.data.leftNumberOfParticles1Property,
+        model.data.leftNumberOfParticles2Property,
+        model.data.leftAverageTemperatureProperty
       );
 
       // Data for right side of container
       const rightDataNode = new DataNode(
         model.modelViewTransform,
-        model.rightNumberOfParticles1Property,
-        model.rightNumberOfParticles2Property,
-        model.rightAverageTemperatureProperty
+        model.data.rightNumberOfParticles1Property,
+        model.data.rightNumberOfParticles2Property,
+        model.data.rightAverageTemperatureProperty
       );
 
       // Vertical separator, analogous to the container's divider

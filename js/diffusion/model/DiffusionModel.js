@@ -12,27 +12,22 @@ define( require => {
   const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
+  const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
   const DiffusionExperiment = require( 'GAS_PROPERTIES/diffusion/model/DiffusionExperiment' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  const NUMBER_OF_PARTICLES_OPTIONS = { numberType: 'Integer' };
   const CENTER_OF_MASS_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' ),
     units: 'pm'
-  };
-  const AVERAGE_TEMPERATURE_OPTIONS = {
-    isValidValue: value => ( value === null || typeof value === 'number' ),
-    units: 'K'
   };
 
   class DiffusionModel extends BaseModel {
@@ -50,6 +45,9 @@ define( require => {
       // @public parameters that define the experiment to be run when the container's divider is removed
       this.experiment = new DiffusionExperiment();
 
+      // @public values shown in the Data accordion box
+      this.data = new DiffusionData();
+
       // @public (read-only) particles of each type
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
@@ -64,16 +62,6 @@ define( require => {
       // @public flow rate model for particles of types DiffusionParticle1 and DiffusionParticle2, in particles/pm
       this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
       this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2 );
-
-      // @public (read-only) Data for the left half of the container
-      this.leftNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.leftNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.leftAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
-
-      // @public (read-only) Data for the right half of the container
-      this.rightNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.rightNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
 
       // @public (read-only)
       this.collisionDetector = new CollisionDetector( this.container, [ this.particles1, this.particles2 ] );
@@ -150,14 +138,13 @@ define( require => {
     reset() {
       super.reset();
 
-      // components
       this.container.reset();
-
-      // Properties
       this.experiment.reset();
+      this.data.reset();
+      this.centerXOfMass1Property.reset();
+      this.centerXOfMass2Property.reset();
       this.particleFlowRate1.reset();
       this.particleFlowRate2.reset();
-      // other Properties will be updated by experiment.reset
 
       assert && assert( this.particles1.length === 0, 'there should be no DiffusionParticle1 particles' );
       assert && assert( this.particles2.length === 0, 'there should be no DiffusionParticle2 particles' );
@@ -243,9 +230,9 @@ define( require => {
      */
     updateParticleCounts() {
       updateLeftRightCounts( this.particles1, this.container.leftBounds,
-        this.leftNumberOfParticles1Property, this.rightNumberOfParticles1Property );
+        this.data.leftNumberOfParticles1Property, this.data.rightNumberOfParticles1Property );
       updateLeftRightCounts( this.particles2, this.container.leftBounds,
-        this.leftNumberOfParticles2Property, this.rightNumberOfParticles2Property );
+        this.data.leftNumberOfParticles2Property, this.data.rightNumberOfParticles2Property );
     }
 
     /**
@@ -279,11 +266,8 @@ define( require => {
         }
       }
 
-      const leftNumberOfParticles = this.leftNumberOfParticles1Property.value + this.leftNumberOfParticles2Property.value;
-      const rightNumberOfParticles = this.rightNumberOfParticles1Property.value + this.rightNumberOfParticles2Property.value;
-
-      updateAverageTemperature( this.leftAverageTemperatureProperty, leftTotalKE, leftNumberOfParticles );
-      updateAverageTemperature( this.rightAverageTemperatureProperty, rightTotalKE, rightNumberOfParticles );
+      updateAverageTemperature( this.data.leftAverageTemperatureProperty, leftTotalKE, this.data.leftNumberOfParticles );
+      updateAverageTemperature( this.data.rightAverageTemperatureProperty, rightTotalKE, this.data.rightNumberOfParticles );
     }
   }
 
@@ -296,7 +280,6 @@ define( require => {
    * @param {number} initialTemperature
    * @param {Particle[]} particles
    * @param {constructor} Constructor - a Particle subclass constructor
-   * @private
    */
   function addParticles( n, locationBounds, mass, radius, initialTemperature, particles, Constructor ) {
 
