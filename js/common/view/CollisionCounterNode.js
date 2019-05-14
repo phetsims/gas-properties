@@ -149,6 +149,10 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
+      collisionCounter.locationProperty.link( location => {
+        this.translation = location;
+      } );
+
       // dragging
       this.addInputListener( new ToolDragListener( this, {
         locationProperty: collisionCounter.locationProperty,

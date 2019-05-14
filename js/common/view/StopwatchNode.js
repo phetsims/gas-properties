@@ -50,6 +50,10 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
+      stopwatch.locationProperty.link( location => {
+        this.translation = location;
+      } );
+
       // dragging
       this.addInputListener( new ToolDragListener( this, {
         locationProperty: stopwatch.locationProperty,

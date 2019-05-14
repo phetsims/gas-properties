@@ -36,15 +36,15 @@ define( require => {
         dragBoundsProperty: null // {Property.<Bounds2>|null} in view coordinates
       }, options );
 
-      // move targetNode
-      options.locationProperty.linkAttribute( targetNode, 'translation' );
+      assert && assert( !options.targetNode, 'ToolDragListener sets targetNode' );
+      options.targetNode = targetNode;
 
       if ( options.dragBoundsProperty ) {
 
-        const originalDragBounds = options.dragBoundsProperty;
+        const originalDragBoundsProperty = options.dragBoundsProperty;
 
         // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
-        options.dragBoundsProperty = new DerivedProperty( [ originalDragBounds ], dragBounds => {
+        options.dragBoundsProperty = new DerivedProperty( [ originalDragBoundsProperty ], dragBounds => {
             if ( dragBounds ) {
               return new Bounds2( dragBounds.minX, dragBounds.minY,
                 dragBounds.maxX - targetNode.width, dragBounds.maxY - targetNode.height );
