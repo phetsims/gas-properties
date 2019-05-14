@@ -38,7 +38,7 @@ define( require => {
         timerReadoutNodeOptions: {
           unitsNode: new Text( picosecondsString, {
             font: TimerReadoutNode.DEFAULT_SMALL_FONT,
-            maxWidth: 30 // deterimined empirically
+            maxWidth: 30 // determined empirically
           } )
         }
       }, options );
