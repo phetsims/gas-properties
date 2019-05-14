@@ -18,12 +18,12 @@ define( require => {
   class CenterOfMassNode extends Node {
 
     /**
-     * @param {Property.<number|null>} centerXProperty
-     * @param {number} centerY
+     * @param {Property.<number|null>} centerOfMassProperty - centerX of mass, in pm
+     * @param {number} centerY - centerY of the indicator, in pm
      * @param {ModelViewTransform2} modelViewTransform
      * @param {ColorDef} fill
      */
-    constructor( centerXProperty, centerY, modelViewTransform, fill ) {
+    constructor( centerOfMassProperty, centerY, modelViewTransform, fill ) {
 
       const rectangle = new Rectangle( 0, 0, 5, 30, {
         fill: fill,
@@ -34,7 +34,7 @@ define( require => {
         children: [ rectangle ]
       } );
 
-      centerXProperty.link( centerX => {
+      centerOfMassProperty.link( centerX => {
         if ( centerX === null ) {
           rectangle.visible = false;
         }
