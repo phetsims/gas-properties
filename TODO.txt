@@ -18,7 +18,6 @@ DiffusionControlPanel: better way to center DividerToggleButton?
 DiffusionControlPanel: alignment of spinners
 EnergyModel: *AverageSpeedProperty vs get*ParticleSpeedValues
 Narrower interfaces for constructors that have @param model
-Better names than particle1, particle2, mass1, mass2, etc?
 
 REFERENCES
 Is this a better collision model?
