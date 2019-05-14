@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Values shown in the 'Data' accordion box in the 'Diffusion' screen.
+ * Values shown for one side of the container in the 'Data' accordion box in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,7 +24,7 @@ define( require => {
 
     constructor() {
 
-      // @public (read-only) Data for the left half of the container
+      // @public
       this.numberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
       this.numberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
       this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
