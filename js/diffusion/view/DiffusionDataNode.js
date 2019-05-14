@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * One side of the display in the 'Data' accordion box.
+ * Display for one side of the container in the 'Data' accordion box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

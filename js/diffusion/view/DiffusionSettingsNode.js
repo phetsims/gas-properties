@@ -26,6 +26,9 @@ define( require => {
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
   const radiusPmString = require( 'string!GAS_PROPERTIES/radiusPm' );
 
+  // constants
+  const ICON_SPACING = 10; // space between particle icon and spinner
+
   class DiffusionSettingsNode extends VBox {
 
     /**
@@ -134,22 +137,25 @@ define( require => {
       const leftSpinner = new GasPropertiesSpinner( leftProperty, options.spinnerOptions );
       const rightSpinner = new GasPropertiesSpinner( rightProperty, options.spinnerOptions );
 
-      // layout
+      // left icon and spinner
       const leftBox = new HBox( {
-        spacing: 10,
+        spacing: ICON_SPACING,
         children: [ leftParticleIcon, leftSpinner ]
       } );
 
+      // right icon and spinner
       const rightBox = new HBox( {
-        spacing: 10,
+        spacing: ICON_SPACING,
         children: [ rightParticleIcon, rightSpinner ]
       } );
 
+      // both controls, indented
       const hBox = new HBox( {
         spacing: 30,
         children: [ new HStrut( 1 ), leftBox, rightBox ]
       } );
 
+      // title and controls
       assert && assert( !options.children, 'DataNode sets children' );
       options = _.extend( {
         children: [ titleNode, hBox ]
