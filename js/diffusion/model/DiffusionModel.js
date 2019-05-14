@@ -48,8 +48,9 @@ define( require => {
       // @public parameters that define the experiment to be run when the container's divider is removed
       this.experiment = new DiffusionExperiment();
 
-      // @public values shown in the Data accordion box
-      this.data = new DiffusionData();
+      // @public data for the left and right sides of the container, shown in the Data accordion box
+      this.leftData = new DiffusionData();
+      this.rightData = new DiffusionData();
 
       // @public (read-only) particles of each type
       this.particles1 = []; // {DiffusionParticle1[]}
@@ -143,7 +144,8 @@ define( require => {
 
       this.container.reset();
       this.experiment.reset();
-      this.data.reset();
+      this.leftData.reset();
+      this.rightData.reset();
       this.centerXOfMass1Property.reset();
       this.centerXOfMass2Property.reset();
       this.particleFlowRate1.reset();
@@ -233,9 +235,9 @@ define( require => {
      */
     updateParticleCounts() {
       updateLeftRightCounts( this.particles1, this.container.leftBounds,
-        this.data.leftNumberOfParticles1Property, this.data.rightNumberOfParticles1Property );
+        this.leftData.numberOfParticles1Property, this.rightData.numberOfParticles1Property );
       updateLeftRightCounts( this.particles2, this.container.leftBounds,
-        this.data.leftNumberOfParticles2Property, this.data.rightNumberOfParticles2Property );
+        this.leftData.numberOfParticles2Property, this.rightData.numberOfParticles2Property );
     }
 
     /**
@@ -269,8 +271,8 @@ define( require => {
         }
       }
 
-      updateAverageTemperature( this.data.leftAverageTemperatureProperty, leftTotalKE, this.data.leftNumberOfParticles );
-      updateAverageTemperature( this.data.rightAverageTemperatureProperty, rightTotalKE, this.data.rightNumberOfParticles );
+      updateAverageTemperature( this.leftData.averageTemperatureProperty, leftTotalKE, this.leftData.numberOfParticles );
+      updateAverageTemperature( this.rightData.averageTemperatureProperty, rightTotalKE, this.rightData.numberOfParticles );
     }
   }
 

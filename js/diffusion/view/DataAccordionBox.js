@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
-  const DataNode = require( 'GAS_PROPERTIES/diffusion/view/DataNode' );
+  const DiffusionDataNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionDataNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -41,20 +41,10 @@ define( require => {
       }, options );
 
       // Data for left side of the container
-      const leftDataNode = new DataNode(
-        model.modelViewTransform,
-        model.data.leftNumberOfParticles1Property,
-        model.data.leftNumberOfParticles2Property,
-        model.data.leftAverageTemperatureProperty
-      );
+      const leftDataNode = new DiffusionDataNode( model.modelViewTransform, model.leftData );
 
       // Data for right side of container
-      const rightDataNode = new DataNode(
-        model.modelViewTransform,
-        model.data.rightNumberOfParticles1Property,
-        model.data.rightNumberOfParticles2Property,
-        model.data.rightAverageTemperatureProperty
-      );
+      const rightDataNode = new DiffusionDataNode( model.modelViewTransform, model.rightData );
 
       // Vertical separator, analogous to the container's divider
       const separator = new VSeparator( 75, {

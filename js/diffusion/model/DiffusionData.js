@@ -25,42 +25,25 @@ define( require => {
     constructor() {
 
       // @public (read-only) Data for the left half of the container
-      this.leftNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.leftNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.leftAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
-
-      // @public (read-only) Data for the right half of the container
-      this.rightNumberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.rightNumberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
-      this.rightAverageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
+      this.numberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
+      this.numberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
+      this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS ); // K
     }
 
     // @public
     reset() {
-      this.leftNumberOfParticles1Property.reset();
-      this.leftNumberOfParticles2Property.reset();
-      this.leftAverageTemperatureProperty.reset();
-      this.rightNumberOfParticles1Property.reset();
-      this.rightNumberOfParticles2Property.reset();
-      this.rightAverageTemperatureProperty.reset();
+      this.numberOfParticles1Property.reset();
+      this.numberOfParticles2Property.reset();
+      this.averageTemperatureProperty.reset();
     }
 
     /**
-     * Gets the total number of particles in the left side of the container.
+     * Gets the total number of particles represented by the data.
      * @returns {number}
      * @public
      */
-    get leftNumberOfParticles() {
-      return this.leftNumberOfParticles1Property.value + this.leftNumberOfParticles2Property.value;
-    }
-
-    /**
-     * Gets the total number of particles in the right side of the container.
-     * @returns {number}
-     * @public
-     */
-    get rightNumberOfParticles() {
-      return this.rightNumberOfParticles1Property.value + this.rightNumberOfParticles2Property.value;
+    get numberOfParticles() {
+      return this.numberOfParticles1Property.value + this.numberOfParticles2Property.value;
     }
   }
 

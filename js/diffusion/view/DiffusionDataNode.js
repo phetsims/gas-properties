@@ -26,16 +26,14 @@ define( require => {
   const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
   const AVERAGE_TEMPERATURE_RANGE = new Range( 0, 1000 );
 
-  class DataNode extends VBox {
+  class DiffusionDataNode extends VBox {
 
     /**
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {NumberProperty} numberOfParticles1Property
-     * @param {NumberProperty} numberOfParticles2Property
-     * @param {NumberProperty} averageTemperatureProperty
+     * @param {DiffusionData} data
      * @param {Object} [options]
      */
-    constructor( modelViewTransform, numberOfParticles1Property, numberOfParticles2Property, averageTemperatureProperty, options ) {
+    constructor( modelViewTransform, data, options ) {
 
       options = _.extend( {
         spacing: 10,
@@ -56,7 +54,7 @@ define( require => {
         spacing: 3,
         children: [
           GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform ),
-          new NumberDisplay( numberOfParticles1Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
+          new NumberDisplay( data.numberOfParticles1Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
         ]
       } );
 
@@ -64,11 +62,11 @@ define( require => {
         spacing: 3,
         children: [
           GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform ),
-          new NumberDisplay( numberOfParticles2Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
+          new NumberDisplay( data.numberOfParticles2Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
         ]
       } );
 
-      const averageTemperatureNode = new NumberDisplay( averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
+      const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
         _.extend( {}, numberDisplayOptions, {
           align: 'left',
           valuePattern: tAvgKString,
@@ -77,7 +75,7 @@ define( require => {
           maxWidth: 100 // determined empirically
         } ) );
 
-      assert && assert( !options.children, 'DataNode sets children' );
+      assert && assert( !options.children, 'DiffusionDataNode sets children' );
       options = _.extend( {
         children: [ particle1CountNode, particle2CountNode, averageTemperatureNode ]
       }, options );
@@ -86,5 +84,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'DataNode', DataNode );
+  return gasProperties.register( 'DiffusionDataNode', DiffusionDataNode );
 } );
