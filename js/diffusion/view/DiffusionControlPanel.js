@@ -63,7 +63,7 @@ define( require => {
           // spinners
           new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty ),
 
-          // Remove/Restore Divider button
+          // Remove/Reset Divider button
           dividerButtonParent,
 
           // ------------
