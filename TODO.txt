@@ -14,8 +14,6 @@ PUNCH LIST:
 CollisionDetector: handle divider properly in CollisionDetector.step
 LidAnimation: #64 make it rotate and move left, make it step
 LidNode: observe container.lidWidthProperty
-DiffusionControlPanel: better way to center DividerToggleButton?
-DiffusionControlPanel: alignment of spinners
 EnergyModel: *AverageSpeedProperty vs get*ParticleSpeedValues
 Narrower interfaces for constructors that have @param model
 

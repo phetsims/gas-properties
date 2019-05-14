@@ -17,8 +17,6 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HSeparator = require( 'SUN/HSeparator' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
@@ -47,15 +45,6 @@ define( require => {
 
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      // TODO is there a better way to center the button?
-      // to center the button
-      const dividerButtonParent = new Node( {
-        children: [
-          new HStrut( contentWidth ),
-          new DividerToggleButton( hasDividerProperty, { centerX: contentWidth / 2 } )
-        ]
-      } );
-
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 20,
@@ -64,8 +53,10 @@ define( require => {
           // spinners
           new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty ),
 
-          // Remove/Reset Divider button
-          dividerButtonParent,
+          // Remove/Reset Divider button, centered
+          new FixedWidthNode( contentWidth, new DividerToggleButton( hasDividerProperty ), {
+            align: 'center'
+          } ),
 
           // ------------
           new HSeparator( contentWidth, {
