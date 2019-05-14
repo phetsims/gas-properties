@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for particle type 2 in the 'Diffusion' screen.
+ * Model for particle species 2 in the 'Diffusion' screen.
  * These are referred to as 'orange particles' in the design doc.
  *
  * @author Chris Malley (PixelZoom, Inc.)

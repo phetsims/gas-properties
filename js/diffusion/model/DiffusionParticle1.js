@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for particle type 1 in the 'Diffusion' screen.
+ * Model for particle species 1 in the 'Diffusion' screen.
  * These are referred to as 'cyan particles' in the design doc.
  *
  * @author Chris Malley (PixelZoom, Inc.)
