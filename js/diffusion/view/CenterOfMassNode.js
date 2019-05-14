@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Indicator on the bottom of the container that indicates where the centerX of mass is for one particle species.
+ * Indicator at the bottom of the container that indicates where the centerX of mass is for one particle species.
  * The indicator is color-coded to the particle color.
  *
  * @author Chris Malley (PixelZoom, Inc.)
