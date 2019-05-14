@@ -26,24 +26,23 @@ define( require => {
      */
     constructor( sizeVisibleProperty, stopwatchVisibleProperty, options ) {
 
-      options = _.extend( {}, GasPropertiesConstants.PANEL_OPTIONS, {
-        fixedWidth: 100
-      }, options );
+      options = _.extend( {
+        fixedWidth: 100,
+        xMargin: 0
+      }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
-      const content = new VBox( {
+      const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
+
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 12,
         children: [
           new WidthCheckbox( sizeVisibleProperty ),
           new StopwatchCheckbox( stopwatchVisibleProperty )
         ]
-      } );
+      } ) );
 
-      const fixedWidthNode = new FixedWidthNode( content, {
-        fixedWidth: options.fixedWidth - ( 2 * options.xMargin )
-      } );
-
-      super( fixedWidthNode, options );
+      super( content, options );
     }
   }
 

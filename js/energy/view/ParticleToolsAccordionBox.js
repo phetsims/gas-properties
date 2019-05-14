@@ -45,9 +45,10 @@ define( require => {
 
       assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );
 
-      options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
-
+      options = _.extend( {
         fixedWidth: 100,
+        contentXMargin: 0
+      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBox options
         titleNode: new Text( particleToolsString, {
@@ -113,15 +114,13 @@ define( require => {
         }
       } );
 
-      const vBox = new VBox( {
+      const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
+
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 12,
         children: [ collisionsCheckbox, controlTemperatureCheckbox, temperatureControl ]
-      } );
-
-      const content = new FixedWidthNode( vBox, {
-        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
-      } );
+      } ) ) ;
 
       super( content, options );
 

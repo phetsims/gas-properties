@@ -34,9 +34,10 @@ define( require => {
      */
     constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, modelViewTransform, options ) {
 
-      options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
-
+      options = _.extend( {
         fixedWidth: 100,
+        contentXMargin: 0
+      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBox options
         titleNode: new Text( particleCountsString, {
@@ -48,7 +49,9 @@ define( require => {
       // Limit width of title
       options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
-      const vBox = new VBox( {
+      const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
+
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 15,
         children: [
@@ -61,11 +64,7 @@ define( require => {
           new ParticleCountControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
             lightString, numberOfLightParticlesProperty )
         ]
-      } );
-
-      const content = new FixedWidthNode( vBox, {
-        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
-      } );
+      } ) );
 
       super( content, options );
     }

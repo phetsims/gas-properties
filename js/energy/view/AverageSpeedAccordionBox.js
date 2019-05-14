@@ -38,9 +38,10 @@ define( require => {
      */
     constructor( heavyAverageSpeedProperty, lightAverageSpeedProperty, modelViewTransform, options ) {
 
-      options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
-
+      options = _.extend( {
         fixedWidth: 100,
+        contentXMargin: 0
+      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBox options
         contentYSpacing: 0,
@@ -82,17 +83,16 @@ define( require => {
       const heavyNumberDisplay = new NumberDisplay( heavyAverageSpeedProperty, numberDisplayRange, numberDisplayOptions );
       const lightNumberDisplay = new NumberDisplay( lightAverageSpeedProperty, numberDisplayRange, numberDisplayOptions );
 
+      const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
+
       // layout icons and NumberDisplays in a grid
-      const vBox = new VBox( {
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         children: [
           new HBox( { children: [ heavyParticleNode, heavyNumberDisplay ] } ),
           new HBox( { children: [ lightParticleNode, lightNumberDisplay ] } )
         ]
-      } );
-
-      const content = new FixedWidthNode( vBox, {
-        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
+      } ), {
         align: 'center'
       } );
 

@@ -20,20 +20,20 @@ define( require => {
   class FixedWidthNode extends Node {
 
     /**
+     * @param {number} fixedWidth
      * @param {Node} child
      * @param {Object} [options]
      */
-    constructor( child, options ) {
+    constructor( fixedWidth, child, options ) {
 
       options = _.extend( {
-        fixedWidth: 100,
         align: 'left'
       }, options );
 
       assert && assert( _.includes( ALIGN_VALUES, options.align ), `invalid align: ${options.align}` );
 
-      child.maxWidth = options.fixedWidth;
-      const strut = new HStrut( options.fixedWidth, { pickable: false } );
+      child.maxWidth = fixedWidth;
+      const strut = new HStrut( fixedWidth, { pickable: false } );
 
       assert && assert( !options.children, 'FixedWidthNode sets children' );
       options = _.extend( {

@@ -33,9 +33,10 @@ define( require => {
      */
     constructor( model, options ) {
 
-      options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
-
+      options = _.extend( {
         fixedWidth: 100,
+        contentXMargin: 0
+      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBox options
         contentYSpacing: 0,
@@ -65,16 +66,14 @@ define( require => {
         spacing: 25
       } );
 
+      const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
+
       // Checkboxes centered below histogram
-      const vBox = new VBox( {
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'center',
         spacing: 10,
         children: [ histogram, checkboxes ]
-      } );
-
-      const content = new FixedWidthNode( vBox, {
-        fixedWidth: options.fixedWidth - ( 2 * options.contentXMargin )
-      } );
+      } ) );
 
       super( content, options );
 

@@ -40,22 +40,23 @@ define( require => {
                  modelViewTransform, hasDividerProperty, particleFlowRateVisibleProperty,
                  centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
 
-      options = _.extend( {}, GasPropertiesConstants.PANEL_OPTIONS, {
-        fixedWidth: 100
-      }, options );
+      options = _.extend( {
+        fixedWidth: 100,
+        xMargin: 0
+      }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
-      const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
+      const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
       // TODO is there a better way to center the button?
       // to center the button
       const dividerButtonParent = new Node( {
         children: [
-          new HStrut( separatorWidth ),
-          new DividerToggleButton( hasDividerProperty, { centerX: separatorWidth / 2 } )
+          new HStrut( contentWidth ),
+          new DividerToggleButton( hasDividerProperty, { centerX: contentWidth / 2 } )
         ]
       } );
 
-      const content = new VBox( {
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 20,
         children: [
@@ -67,9 +68,9 @@ define( require => {
           dividerButtonParent,
 
           // ------------
-          new HSeparator( separatorWidth, {
+          new HSeparator( contentWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
-            maxWidth: separatorWidth
+            maxWidth: contentWidth
           } ),
 
           // checkboxes
@@ -83,13 +84,9 @@ define( require => {
             ]
           } )
         ]
-      } );
+      } ) );
 
-      const fixedWidthNode = new FixedWidthNode( content, {
-        fixedWidth: separatorWidth
-      } );
-
-      super( fixedWidthNode, options );
+      super( content, options );
     }
   }
 

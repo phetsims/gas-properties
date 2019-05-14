@@ -33,32 +33,29 @@ define( require => {
     constructor( holdConstantProperty, sizeVisibleProperty,
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
-      options = _.extend( {}, GasPropertiesConstants.PANEL_OPTIONS, {
-        fixedWidth: 100
-      }, options );
+      options = _.extend( {
+        fixedWidth: 100,
+        xMargin: 0
+      }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
-      const separatorWidth = options.fixedWidth - ( 2 * options.xMargin );
+      const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      const content = new VBox( {
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 12,
         children: [
-          new HoldConstantControls( holdConstantProperty, { maxWidth: separatorWidth } ),
-          new HSeparator( separatorWidth, {
+          new HoldConstantControls( holdConstantProperty, { maxWidth: contentWidth } ),
+          new HSeparator( contentWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
-            maxWidth: separatorWidth
+            maxWidth: contentWidth
           } ),
           new WidthCheckbox( sizeVisibleProperty ),
           new StopwatchCheckbox( stopwatchVisibleProperty ),
           new CollisionCounterCheckbox( collisionCounterVisibleProperty )
         ]
-      } );
+      } ) );
 
-      const fixedWidthNode = new FixedWidthNode( content, {
-        fixedWidth: separatorWidth
-      } );
-
-      super( fixedWidthNode, options );
+      super( content, options );
     }
   }
 
