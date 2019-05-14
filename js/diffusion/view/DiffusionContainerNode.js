@@ -50,7 +50,7 @@ define( require => {
       // Vertical dashed line to indicate the center of the container when the divider is not present.
       const noDividerNode = new Line( viewDividerX, viewBounds.minY, viewDividerX, viewBounds.maxY, {
         stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: 1.5,
+        lineWidth: viewDividerThickness / 2,
         lineDash: [ 10, 24 ],
         center: borderNode.center
       } );
