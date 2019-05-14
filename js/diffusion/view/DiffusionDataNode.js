@@ -29,11 +29,11 @@ define( require => {
   class DiffusionDataNode extends VBox {
 
     /**
-     * @param {ModelViewTransform2} modelViewTransform
      * @param {DiffusionData} data
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( modelViewTransform, data, options ) {
+    constructor( data, modelViewTransform, options ) {
 
       options = _.extend( {
         spacing: 10,

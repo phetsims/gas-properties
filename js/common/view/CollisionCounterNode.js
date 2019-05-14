@@ -14,7 +14,7 @@ define( require => {
   const Circle = require( 'SCENERY/nodes/Circle' );
   const ComboBox = require( 'SUN/ComboBox' );
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DragBoundsProperty = require( 'GAS_PROPERTIES/common/view/DragBoundsProperty' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -160,23 +160,13 @@ define( require => {
         this.translation = location;
       } );
 
-      //TODO duplicated in StopwatchNode
-      // {DerivedProperty.<Bounds2|null>} drag bounds, adjusted to keep this entire Node inside visible bounds
-      const dragBoundsProperty = new DerivedProperty( [ visibleBoundsProperty ], visibleBounds => {
-        if ( visibleBounds ) {
-          return new Bounds2( visibleBounds.minX, visibleBounds.minY,
-            visibleBounds.maxX - this.width, visibleBounds.maxY - this.height );
-        }
-        else {
-          return null;
-        }
-      } );
+      // drag bounds, adjusted to keep this entire Node inside visible bounds
+      const dragBoundsProperty = new DragBoundsProperty( this, visibleBoundsProperty );
 
-      //TODO duplicated in StopwatchNode
       // If the collision counter is outside the drag bounds, move it inside.
       dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
-        if ( !dragBounds.containsBounds( this.bounds ) ) {
+        if ( !dragBounds.containsPoint( collisionCounter.locationProperty ) ) {
           collisionCounter.locationProperty.value = dragBounds.closestPointTo( collisionCounter.locationProperty.value );
         }
       } );

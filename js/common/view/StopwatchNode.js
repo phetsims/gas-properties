@@ -9,9 +9,8 @@ define( require => {
   'use strict';
 
   // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DragBoundsProperty = require( 'GAS_PROPERTIES/common/view/DragBoundsProperty' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -62,21 +61,13 @@ define( require => {
         this.translation = location;
       } );
 
-      // {DerivedProperty.<Bounds2|null>} drag bounds, adjusted to keep this entire Node inside visible bounds
-      const dragBoundsProperty = new DerivedProperty( [ visibleBoundsProperty ], visibleBounds => {
-        if ( visibleBounds ) {
-          return new Bounds2( visibleBounds.minX, visibleBounds.minY,
-            visibleBounds.maxX - this.width, visibleBounds.maxY - this.height );
-        }
-        else {
-          return null;
-        }
-      } );
+      // drag bounds, adjusted to keep this entire Node inside visible bounds
+      const dragBoundsProperty = new DragBoundsProperty( this, visibleBoundsProperty );
 
       // If the stopwatch is outside the drag bounds, move it inside.
       dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
-        if ( !dragBounds.containsBounds( this.bounds ) ) {
+        if ( !dragBounds.containsPoint( stopwatch.locationProperty ) ) {
           stopwatch.locationProperty.value = dragBounds.closestPointTo( stopwatch.locationProperty.value );
         }
       } );

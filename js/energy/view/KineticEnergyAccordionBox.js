@@ -28,10 +28,12 @@ define( require => {
   class KineticEnergyAccordionBox extends AccordionBox {
 
     /**
-     * @param {EnergyModel} model TODO narrower interface?
+     * @param {function:number[]} getHeavyValues
+     * @param {function:number[]} getLightValues
+     * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( model, options ) {
+    constructor( getHeavyValues, getLightValues, modelViewTransform, options ) {
 
       options = _.extend( {
         fixedWidth: 100,
@@ -54,13 +56,14 @@ define( require => {
       const heavyVisibleProperty = new BooleanProperty( false );
       const lightVisibleProperty = new BooleanProperty( false );
 
-      const histogram = new KineticEnergyHistogram( model, heavyVisibleProperty, lightVisibleProperty );
+      const histogram = new KineticEnergyHistogram( heavyVisibleProperty, lightVisibleProperty,
+        getHeavyValues, getLightValues );
 
       // Checkboxes
       const checkboxes = new HBox( {
         children: [
-          new HeavyParticlesCheckbox( heavyVisibleProperty, model.modelViewTransform ),
-          new LightParticlesCheckbox( lightVisibleProperty, model.modelViewTransform )
+          new HeavyParticlesCheckbox( heavyVisibleProperty, modelViewTransform ),
+          new LightParticlesCheckbox( lightVisibleProperty, modelViewTransform )
         ],
         align: 'center',
         spacing: 25
