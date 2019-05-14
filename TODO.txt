@@ -13,7 +13,6 @@ https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in
 PUNCH LIST:
 CollisionDetector: handle divider properly in CollisionDetector.step
 FixedWidthNode: better approach to fixed-width panels
-GasPropertiesIconFactory: #57 icons for stopwatch and collision counter
 LidAnimation: #64 make it rotate and move left, make it step
 LidNode: observe container.lidWidthProperty
 DiffusionControlPanel: better way to center DividerToggleButton?
