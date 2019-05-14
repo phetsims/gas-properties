@@ -1,8 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO investigate a better way to ensure a fixed size for Panels and AccordionBoxes
 /**
  * A Node that has a fixed width.
+ * Minimum width is handled by adding an HStrut.  Maximum width is handled via options.maxWidth.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
