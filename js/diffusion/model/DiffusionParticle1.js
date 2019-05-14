@@ -2,7 +2,7 @@
 
 /**
  * Model for particle species 1 in the 'Diffusion' screen, referred to as 'cyan particles' in the design doc.
- * Where you see variable names like particles1, centerXOfMass1Property, etc., they are related to this species.
+ * Where you see variable names like particles1, centerOfMass1Property, etc., they are related to this species.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

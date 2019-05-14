@@ -61,8 +61,8 @@ define( require => {
       this.numberOfParticlesChangedEmitter = new Emitter();
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
-      this.centerXOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
-      this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
+      this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
+      this.centerOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
       // @public flow rate model for each particle species
       this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
@@ -141,8 +141,8 @@ define( require => {
       this.rightSettings.reset();
       this.leftData.reset();
       this.rightData.reset();
-      this.centerXOfMass1Property.reset();
-      this.centerXOfMass2Property.reset();
+      this.centerOfMass1Property.reset();
+      this.centerOfMass2Property.reset();
       this.particleFlowRate1.reset();
       this.particleFlowRate2.reset();
 
@@ -218,8 +218,8 @@ define( require => {
      * @private
      */
     updateCenterOfMass() {
-      this.centerXOfMass1Property.value = ParticleUtils.getCenterXOfMass( this.particles1 );
-      this.centerXOfMass2Property.value = ParticleUtils.getCenterXOfMass( this.particles2 );
+      this.centerOfMass1Property.value = ParticleUtils.getCenterXOfMass( this.particles1 );
+      this.centerOfMass2Property.value = ParticleUtils.getCenterXOfMass( this.particles2 );
     }
 
     /**

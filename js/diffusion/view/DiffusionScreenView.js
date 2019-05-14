@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
-  const CenterXOfMassNode = require( 'GAS_PROPERTIES/diffusion/view/CenterXOfMassNode' );
+  const CenterOfMassNode = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassNode' );
   const DataAccordionBox = require( 'GAS_PROPERTIES/diffusion/view/DataAccordionBox' );
   const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
@@ -53,9 +53,9 @@ define( require => {
       }
 
       // Center of Mass indicators
-      const centerOfMassNode1 = new CenterXOfMassNode( model.centerXOfMass1Property, model.container.bottom,
+      const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
         model.modelViewTransform, GasPropertiesColorProfile.particle1ColorProperty );
-      const centerOfMassNode2 = new CenterXOfMassNode( model.centerXOfMass2Property, model.container.bottom,
+      const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
         model.modelViewTransform, GasPropertiesColorProfile.particle2ColorProperty );
 
       viewProperties.centerOfMassVisibleProperty.link( visible => {

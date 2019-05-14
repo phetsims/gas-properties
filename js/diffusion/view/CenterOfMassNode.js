@@ -15,7 +15,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  class CenterXOfMassNode extends Node {
+  class CenterOfMassNode extends Node {
 
     /**
      * @param {Property.<number|null>} centerXProperty
@@ -46,5 +46,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'CenterXOfMassNode', CenterXOfMassNode );
+  return gasProperties.register( 'CenterOfMassNode', CenterOfMassNode );
 } );
