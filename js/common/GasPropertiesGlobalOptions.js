@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Global options for this simulation.
+ * Global options for this simulation, accessed via the Options menu item in the PhET menu.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
