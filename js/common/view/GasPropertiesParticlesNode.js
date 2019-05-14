@@ -19,7 +19,7 @@ define( require => {
   class GasPropertiesParticlesNode extends ParticlesNode {
 
     /**
-     * @param {GasPropertiesModel} model
+     * @param {GasPropertiesModel} model TODO narrower interface?
      */
     constructor( model ) {
 

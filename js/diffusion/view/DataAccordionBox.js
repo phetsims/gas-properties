@@ -24,7 +24,7 @@ define( require => {
   class DataAccordionBox extends AccordionBox {
 
     /**
-     * @param {DiffusionModel} model
+     * @param {DiffusionModel} model TODO narrower interface?
      * @param {Object} [options]
      */
     constructor( model, options ) {

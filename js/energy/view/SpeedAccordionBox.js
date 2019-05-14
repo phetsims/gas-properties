@@ -28,7 +28,7 @@ define( require => {
   class SpeedAccordionBox extends AccordionBox {
 
     /**
-     * @param {EnergyModel} model
+     * @param {EnergyModel} model TODO narrower interface?
      * @param {Object} [options]
      */
     constructor( model, options ) {

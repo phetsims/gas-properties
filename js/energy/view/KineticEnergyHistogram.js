@@ -23,7 +23,7 @@ define( require => {
   class KineticEnergyHistogram extends EnergyHistogram {
 
     /**
-     * @param {EnergyModel} model
+     * @param {EnergyModel} model TODO narrower interface?
      * @param {BooleanProperty} heavyVisibleProperty
      * @param {BooleanProperty} lightVisibleProperty
      * @param {Object} [options]
