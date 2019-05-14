@@ -25,7 +25,6 @@ define( require => {
       // @public (read-only) {Bounds2}
       this.bounds = bounds;
 
-      //TODO use ObservableArray and observer in RegionNode?
       // @public (read-only) {Particle[]}
       this.particles = [];
     }
