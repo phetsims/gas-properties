@@ -50,6 +50,7 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
+      // Move to the stopwatch's location
       stopwatch.locationProperty.link( location => {
         this.translation = location;
       } );

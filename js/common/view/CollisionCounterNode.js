@@ -149,6 +149,7 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
+      // Move to the collision counter's location
       collisionCounter.locationProperty.link( location => {
         this.translation = location;
       } );
