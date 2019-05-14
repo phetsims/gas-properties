@@ -60,7 +60,7 @@ define( require => {
       // @public emit is called when any of the above Particle arrays are modified
       this.numberOfParticlesChangedEmitter = new Emitter();
 
-      // @public (read-only) centerX of mass for each particle species, in pm
+      // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
       this.centerXOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
       this.centerXOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
 
@@ -89,11 +89,13 @@ define( require => {
 
       // Update mass and temperature of existing particles. This adjusts speed of the particles.
       Property.multilink( [ this.leftSettings.massProperty, this.leftSettings.initialTemperatureProperty ],
-        ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles1 ); }
-      );
+        ( mass, initialTemperature ) => {
+          updateMassAndTemperature( mass, initialTemperature, this.particles1 );
+        } );
       Property.multilink( [ this.rightSettings.massProperty, this.rightSettings.initialTemperatureProperty ],
-        ( mass, initialTemperature ) => { updateMassAndTemperature( mass, initialTemperature, this.particles2 ); }
-      );
+        ( mass, initialTemperature ) => {
+          updateMassAndTemperature( mass, initialTemperature, this.particles2 );
+        } );
 
       Property.multilink( [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
         ( leftInitialTemperature, rightInitialTemperature ) => {
@@ -119,7 +121,7 @@ define( require => {
           this.leftSettings.restart();
           this.rightSettings.restart();
 
-          // Reset flow rate models
+          // Reset flow-rate models
           this.particleFlowRate1.reset();
           this.particleFlowRate2.reset();
         }
