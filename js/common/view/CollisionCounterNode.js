@@ -155,7 +155,7 @@ define( require => {
       } );
 
       //TODO duplicated in StopwatchNode
-      // {DerivedProperty.<Bounds2|null>} drag bounds, adjusted to keep this entire Node in bounds
+      // {DerivedProperty.<Bounds2|null>} drag bounds, adjusted to keep this entire Node inside visible bounds
       const dragBoundsProperty = new DerivedProperty( [ visibleBoundsProperty ], visibleBounds => {
         if ( visibleBounds ) {
           return new Bounds2( visibleBounds.minX, visibleBounds.minY,
