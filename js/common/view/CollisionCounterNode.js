@@ -163,7 +163,6 @@ define( require => {
       // drag bounds, adjusted to keep this entire Node inside visible bounds
       const dragBoundsProperty = new DragBoundsProperty( this, visibleBoundsProperty );
 
-      //TODO duplicated in StopwatchNode
       // If the collision counter is outside the drag bounds, move it inside.
       dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
