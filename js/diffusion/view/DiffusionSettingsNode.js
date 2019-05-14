@@ -87,12 +87,14 @@ define( require => {
 
       //TODO these don't horizontally align because some NumberSpinners are a different width
       assert && assert( !options.children, 'DiffusionSettingsNode sets children' );
-      options.children = [
-        numberOfParticlesControl,
-        massControl,
-        radiusControl,
-        initialTemperatureControl
-      ];
+      options = _.extend( {
+        children: [
+          numberOfParticlesControl,
+          massControl,
+          radiusControl,
+          initialTemperatureControl
+        ]
+      }, options );
 
       super( options );
     }

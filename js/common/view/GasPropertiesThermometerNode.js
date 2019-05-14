@@ -52,7 +52,10 @@ define( require => {
         maxWidth: 4 * thermometerNode.width
       } );
 
-      options.children = [ temperatureDisplay, thermometerNode ];
+      assert && assert( !options.children, 'GasPropertiesThermometerNode sets children' );
+      options = _.extend( {
+        children: [ temperatureDisplay, thermometerNode ]
+      }, options );
 
       super( options );
     }
