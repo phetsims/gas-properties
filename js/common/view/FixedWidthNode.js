@@ -1,8 +1,11 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * A Node that has a fixed width.
- * Minimum width is handled by adding an HStrut.  Maximum width is handled via options.maxWidth.
+ * A Node that has a fixed width, enforced using an HStrut and options.maxWidth. This is used for the content
+ * in Panels and AccordionBoxes.
+ *
+ * A solution using AlignGroup and AlignBox was investigated, but they do not address horizontal separators
+ * they do not handle container margins, and their width is dictated by the largest component vs a specified width.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,11 +23,11 @@ define( require => {
   class FixedWidthNode extends Node {
 
     /**
-     * @param {number} fixedWidth
-     * @param {Node} child
+     * @param {number} fixedWidth - this Node will be exactly this width
+     * @param {Node} content - Node wrapped by this Node
      * @param {Object} [options]
      */
-    constructor( fixedWidth, child, options ) {
+    constructor( fixedWidth, content, options ) {
 
       options = _.extend( {
         align: 'left'
@@ -32,22 +35,25 @@ define( require => {
 
       assert && assert( _.includes( ALIGN_VALUES, options.align ), `invalid align: ${options.align}` );
 
-      child.maxWidth = fixedWidth;
+      // prevents the content from getting narrower than fixedWidth
       const strut = new HStrut( fixedWidth, { pickable: false } );
 
+      assert && assert( options.maxWidth === undefined, 'FixedWidthNode sets maxWidth' );
       assert && assert( !options.children, 'FixedWidthNode sets children' );
       options = _.extend( {
-        children: [ strut, child ]
+        maxWidth: fixedWidth, // prevents the content from getting wider than fixedWidth
+        children: [ strut, content ]
       }, options );
 
+      // align content in fixedWidth
       if ( options.align === 'left' ) {
-        child.left = strut.left;
+        content.left = strut.left;
       }
       else if ( options.align === 'right' ) {
-        child.right = strut.right;
+        content.right = strut.right;
       }
       else {
-        child.centerX = strut.centerX;
+        content.centerX = strut.centerX;
       }
 
       super( options );
