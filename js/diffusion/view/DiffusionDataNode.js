@@ -50,6 +50,7 @@ define( require => {
         yMargin: 0
       };
 
+      // number of DiffusionParticle1
       const particle1CountNode = new HBox( {
         spacing: 3,
         children: [
@@ -58,6 +59,7 @@ define( require => {
         ]
       } );
 
+      // number of DiffusionParticle2
       const particle2CountNode = new HBox( {
         spacing: 3,
         children: [

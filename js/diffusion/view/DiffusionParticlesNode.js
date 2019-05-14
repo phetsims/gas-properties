@@ -23,7 +23,7 @@ define( require => {
      */
     constructor( model ) {
 
-      // {Property.<HTMLCanvasElement>} generated images for DiffusionParticle1 and DiffusionParticle2 types
+      // {Property.<HTMLCanvasElement>} generated images for DiffusionParticle1 and DiffusionParticle2 species
       const particle1ImageProperty = new Property( null );
       const particle2ImageProperty = new Property( null );
 
