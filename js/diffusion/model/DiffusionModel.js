@@ -38,8 +38,12 @@ define( require => {
     constructor( tandem ) {
 
       super( tandem, {
-        modelOriginOffset: new Vector2( 645, 525 ), // offset of the model's origin, in view coordinates
-        stopwatchLocation: new Vector2( 35, 15 ) // in view coordinates! determined empirically
+
+        // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
+        modelOriginOffset: new Vector2( 645, 525 ),
+
+        // Stopwatch initial location (in view coordinates!), determined empirically.
+        stopwatchLocation: new Vector2( 35, 15 )
       } );
 
       // @public

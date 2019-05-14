@@ -36,8 +36,12 @@ define( require => {
     constructor( tandem, options ) {
 
       options = _.extend( {
-        modelOriginOffset: new Vector2( 645, 475 ), // offset of the model's origin, in view coordinates
-        stopwatchLocation: new Vector2( 250, 15 ) // in view coordinates! determined empirically
+
+        // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
+        modelOriginOffset: new Vector2( 645, 475 ),
+
+        // Stopwatch initial location (in view coordinates!), determined empirically.
+        stopwatchLocation: new Vector2( 250, 15 )
       }, options );
 
       // @public (read-only) bounds of the entire space that the model knows about.
