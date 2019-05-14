@@ -149,6 +149,12 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
+      // visibility
+      collisionCounter.visibleProperty.link( visible => {
+        this.interruptSubtreeInput(); // interrupt user interactions
+        this.visible = visible;
+      } );
+
       // Move to the collision counter's location
       collisionCounter.locationProperty.link( location => {
         this.translation = location;
@@ -181,12 +187,6 @@ define( require => {
         locationProperty: collisionCounter.locationProperty,
         dragBoundsProperty: dragBoundsProperty
       } ) );
-
-      // visibility
-      collisionCounter.visibleProperty.link( visible => {
-        this.interruptSubtreeInput(); // interrupt user interactions
-        this.visible = visible;
-      } );
     }
   }
 

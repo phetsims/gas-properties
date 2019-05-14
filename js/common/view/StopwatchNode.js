@@ -51,6 +51,12 @@ define( require => {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
+      // visibility
+      stopwatch.visibleProperty.link( visible => {
+        this.interruptSubtreeInput(); // interrupt user interactions
+        this.visible = visible;
+      } );
+      
       // Move to the stopwatch's location
       stopwatch.locationProperty.link( location => {
         this.translation = location;
@@ -81,12 +87,6 @@ define( require => {
         locationProperty: stopwatch.locationProperty,
         dragBoundsProperty: dragBoundsProperty
       } ) );
-
-      // visibility
-      stopwatch.visibleProperty.link( visible => {
-        this.interruptSubtreeInput(); // interrupt user interactions
-        this.visible = visible;
-      } );
     }
   }
 
