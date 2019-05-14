@@ -19,7 +19,7 @@ define( require => {
   class GasPropertiesParticlesNode extends ParticlesNode {
 
     /**
-     * @param {GasPropertiesModel} model
+     * @param {GasPropertiesModel} model - passing in the entire model since we use so much of its public API
      */
     constructor( model ) {
 
