@@ -26,10 +26,10 @@ define( require => {
 
     /**
      * @param {Stopwatch} stopwatch
-     * @param {Property.<Bounds>} dragBoundsProperty
+     * @param {Property.<Bounds2|null>} visibleBoundsProperty - visible bounds of the ScreenView
      * @param {Object} [options]
      */
-    constructor( stopwatch, dragBoundsProperty, options ) {
+    constructor( stopwatch, visibleBoundsProperty, options ) {
 
       options = _.extend( {
 
@@ -56,11 +56,11 @@ define( require => {
         this.translation = location;
       } );
 
-      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
-      const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {
-        if ( dragBounds ) {
-          return new Bounds2( dragBounds.minX, dragBounds.minY,
-            dragBounds.maxX - this.width, dragBounds.maxY - this.height );
+      // {DerivedProperty.<Bounds2|null>} drag bounds, adjusted to keep this entire Node in bounds
+      const dragBoundsProperty = new DerivedProperty( [ visibleBoundsProperty ], visibleBounds => {
+        if ( visibleBounds ) {
+          return new Bounds2( visibleBounds.minX, visibleBounds.minY,
+            visibleBounds.maxX - this.width, visibleBounds.maxY - this.height );
         }
         else {
           return null;
@@ -68,7 +68,7 @@ define( require => {
       } );
 
       // If the stopwatch is outside the drag bounds, move it inside.
-      adjustedDragBoundsProperty.link( dragBounds => {
+      dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
         if ( !dragBounds.containsBounds( this.bounds ) ) {
           stopwatch.locationProperty.value = dragBounds.closestPointTo( stopwatch.locationProperty.value );
@@ -79,7 +79,7 @@ define( require => {
       this.addInputListener( new DragListener( {
         targetNode: this,
         locationProperty: stopwatch.locationProperty,
-        dragBoundsProperty: adjustedDragBoundsProperty
+        dragBoundsProperty: dragBoundsProperty
       } ) );
 
       // show/hide

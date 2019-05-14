@@ -52,9 +52,10 @@ define( require => {
     /**
      * @param {CollisionCounter} collisionCounter
      * @param {Node} comboBoxListParent
+     * @param {Property.<Bounds2|null>} visibleBoundsProperty - visible bounds of the ScreenView
      * @param {Object} [options]
      */
-    constructor( collisionCounter, comboBoxListParent, dragBoundsProperty, options ) {
+    constructor( collisionCounter, comboBoxListParent, visibleBoundsProperty, options ) {
 
       options = options || {};
 
@@ -154,11 +155,11 @@ define( require => {
       } );
 
       //TODO duplicated in StopwatchNode
-      // {DerivedProperty.<Bounds2>|null>} adjust the drag bounds to keep this entire Node in bounds
-      const adjustedDragBoundsProperty = new DerivedProperty( [ dragBoundsProperty ], dragBounds => {
-        if ( dragBounds ) {
-          return new Bounds2( dragBounds.minX, dragBounds.minY,
-            dragBounds.maxX - this.width, dragBounds.maxY - this.height );
+      // {DerivedProperty.<Bounds2|null>} drag bounds, adjusted to keep this entire Node in bounds
+      const dragBoundsProperty = new DerivedProperty( [ visibleBoundsProperty ], visibleBounds => {
+        if ( visibleBounds ) {
+          return new Bounds2( visibleBounds.minX, visibleBounds.minY,
+            visibleBounds.maxX - this.width, visibleBounds.maxY - this.height );
         }
         else {
           return null;
@@ -167,7 +168,7 @@ define( require => {
 
       //TODO duplicated in StopwatchNode
       // If the collision counter is outside the drag bounds, move it inside.
-      adjustedDragBoundsProperty.link( dragBounds => {
+      dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
         if ( !dragBounds.containsBounds( this.bounds ) ) {
           collisionCounter.locationProperty.value = dragBounds.closestPointTo( collisionCounter.locationProperty.value );
@@ -178,7 +179,7 @@ define( require => {
       this.addInputListener( new DragListener( {
         targetNode: this,
         locationProperty: collisionCounter.locationProperty,
-        dragBoundsProperty: adjustedDragBoundsProperty
+        dragBoundsProperty: dragBoundsProperty
       } ) );
 
       // show/hide
