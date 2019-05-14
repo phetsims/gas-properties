@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Query parameters that are specific to the Equality Explorer sim.
+ * Query parameters that are specific to this sim.
  *
  * Running with ?log will print these query parameters and their values to the console.
  *
