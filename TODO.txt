@@ -14,7 +14,6 @@ PUNCH LIST:
 CollisionDetector: handle divider properly in CollisionDetector.step
 LidAnimation: #64 make it rotate and move left, make it step
 EnergyModel: *AverageSpeedProperty vs get*ParticleSpeedValues
-Narrower interfaces for constructors that have @param model
 
 REFERENCES
 Is this a better collision model?
