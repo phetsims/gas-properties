@@ -57,7 +57,7 @@ define( require => {
       // @public the quantity to hold constant
       this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, options.holdConstant );
 
-      // @public (read-only)
+      // @public (read-only) together these arrays make up the 'particle system'
       this.heavyParticles = []; // {HeavyParticle[]} inside the container
       this.lightParticles = []; // {LightParticle[]} inside the container
       this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
