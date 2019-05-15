@@ -210,21 +210,18 @@ define( require => {
       // pointer's x offset from the left edge of the container, when a drag starts
       let startXOffset = 0;
 
-      // width of the opening in the top of the container, when a drag starts
-      let openingWidth = 0;
-
       super( {
 
         start: ( event, listener ) => {
           const viewWidth = modelViewTransform.modelToViewX( container.left );
           startXOffset = viewWidth - parentNode.globalToParentPoint( event.pointer.point ).x;
-          openingWidth = container.openingWidth;
         },
 
         drag: ( event, listener ) => {
 
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
+          const openingWidth = container.openingWidth;
 
           // resize the container
           const containerWidthRange = container.widthProperty.range;
@@ -232,7 +229,6 @@ define( require => {
 
           // resize the lid, maintaining the opening width if possible
           container.lidWidthProperty.value = Math.max( container.maxLidWidth - openingWidth, container.minLidWidth );
-          openingWidth = container.openingWidth;
         }
       } );
     }
