@@ -35,7 +35,11 @@ define( require => {
       options = _.extend( {
 
         // {number|null} Regions are square, length of one side, pm. If null, default will be set below.
-        regionLength: null
+        regionLength: null,
+
+        // {boolean} whether the container does work on particles when the left wall is moved
+        containerDoesWork: false
+
       }, options );
 
       // If regionLength is not provided, the default is based on container height.
@@ -62,6 +66,7 @@ define( require => {
 
       // @private
       this.container = container;
+      this.containerDoesWork = options.containerDoesWork;
       this.particleArrays = particleArrays;
       this.numberOfParticleContainerCollisions = 0;
     }
@@ -102,16 +107,19 @@ define( require => {
 
         // If there is a divider, use bounds for subsets of the container
         this.numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ 0 ], this.container.leftBounds );
+          doParticleContainerCollisions( this.particleArrays[ 0 ], this.container.leftBounds, 0 );
         this.numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ 1 ], this.container.rightBounds );
+          doParticleContainerCollisions( this.particleArrays[ 1 ], this.container.rightBounds, 0 );
       }
       else {
+
+        // If the container does work, use the velocity of the left wall. Otherwise use zero velocity.
+        const leftWallVelocity = this.containerDoesWork ? this.container.leftWallVelocity : Vector2.ZERO;
 
         // If there is no divider, use bounds of the entire container
         for ( let i = 0; i < this.particleArrays.length; i++ ) {
           this.numberOfParticleContainerCollisions +=
-            doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds );
+            doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, leftWallVelocity );
         }
       }
 
@@ -288,21 +296,23 @@ define( require => {
    * Handles x and y directions separately in case a particle hits the container diagonally at a corner.
    * @param {Particle[]} particles
    * @param {Bounds2} containerBounds
+   * @param {Vector2} leftWallVelocity - velocity of the container's left (movable) wall
    * @returns {number} number of collisions
    */
-  function doParticleContainerCollisions( particles, containerBounds ) {
+  function doParticleContainerCollisions( particles, containerBounds, leftWallVelocity ) {
+
     let numberOfCollisions = 0;
     for ( let i = 0; i < particles.length; i++ ) {
 
       const particle = particles[ i ];
       let collided = false;
 
-      //TODO handle kinetic energy if the left wall is moving
-
       // adjust x
       if ( particle.left <= containerBounds.minX ) {
         particle.left = containerBounds.minX;
-        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
+
+        // If the left wall is moving, it will do work.
+        particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
         collided = true;
       }
       else if ( particle.right >= containerBounds.maxX ) {

@@ -79,11 +79,14 @@ define( require => {
     step( dt ) {
 
       // Adjust the velocity of the left (movable) wall
-      this.leftWallVelocity.setXY( ( this.left - this.previousLeft ) / dt, 0 );
-      this.previousLeft = this.left;
-      if ( phet.log && this.leftWallVelocity.magnitude !== 0 ) {
-        phet.log( 'leftWallVelocity.x = ' + this.leftWallVelocity.x );
+      const previousX = this.leftWallVelocity.x;
+      const x = ( this.left - this.previousLeft ) / dt;
+      if ( x !== previousX ) {
+        this.leftWallVelocity.setXY( x, 0 );
+        phet.log && phet.log( 'leftWallVelocity.x = ' + this.leftWallVelocity.x );
       }
+
+      this.previousLeft = this.left;
     }
 
     /**

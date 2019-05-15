@@ -21,7 +21,8 @@ define( require => {
     constructor( tandem ) {
 
       super( tandem, {
-        holdConstant: HoldConstantEnum.NOTHING
+        holdConstant: HoldConstantEnum.NOTHING,
+        containerDoesWork: true
       } );
 
       // In case clients attempt to exercise this feature of the base class
