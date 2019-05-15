@@ -6,7 +6,6 @@ Histograms: y axis scale
 Histograms: rewrite, they are a mess
 Histograms: they don't update when particles are added/removed with sim paused
 
-Intro: hold constant, see HoldConstantEnum
 Intro: optimize number of iterations over particle arrays
 
 PUNCH LIST:
