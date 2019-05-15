@@ -31,6 +31,7 @@ define( require => {
   const Range = require( 'DOT/Range' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
+  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -38,6 +39,8 @@ define( require => {
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
+  // multiplier for converting pressure to kPa
+  const PRESSURE_CONVERSION_SCALE = 1.66E6; //TODO handle this in view?
 
   class GasPropertiesModel extends BaseModel {
 
@@ -118,7 +121,7 @@ define( require => {
 
       // @public {Property.<number|null>} temperature in the container, in K. Value is null when the container is empty.
       this.temperatureProperty = new Property( null, {
-        isValidValue: value => ( value === null || typeof value === 'number' ),
+        isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
         units: 'K'
       } );
 
@@ -134,13 +137,13 @@ define( require => {
       // @public (read-only)
       this.pressureGauge = new PressureGauge( this.pressureProperty, this.temperatureProperty );
 
-      // @private whether to update pressure
-      this.updatePressure = false;
+      // @private whether to call stepPressure
+      this.stepPressureEnabled = false;
 
       // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
       this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( totalNumberOfParticles === 0 ) {
-          this.updatePressure = false;
+          this.stepPressureEnabled = false;
           this.pressureProperty.value = 0;
         }
       } );
@@ -239,20 +242,12 @@ define( require => {
       this.temperatureProperty.value = this.computeTemperature();
 
       // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
-      if ( !this.updatePressure && this.collisionDetector.numberOfParticleContainerCollisions > 0 ) {
-        this.updatePressure = true;
+      if ( !this.stepPressureEnabled && this.collisionDetector.numberOfParticleContainerCollisions > 0 ) {
+        this.stepPressureEnabled = true;
       }
 
-      // Compute pressure
-      if ( this.updatePressure ) {
-        this.pressureProperty.value = this.computePressure();
-        this.pressureGauge.step( dt );
-      }
-
-      // If pressure exceeds the maximum, blow the lid off of the container.
-      if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
-        this.container.lidIsOnProperty.value = false;
-      }
+      // Step pressure
+      this.stepPressureEnabled && this.stepPressure( dt );
     }
 
     /**
@@ -396,7 +391,59 @@ define( require => {
       const volume = this.container.volume; // V, in pm^3
 
       // P = NkT/V, converted to kPa
-      return ( this.numberOfParticles * k * temperature / volume ) * 1.66E6;
+      return ( this.numberOfParticles * k * temperature / volume ) * PRESSURE_CONVERSION_SCALE;
+    }
+
+    /**
+     * Steps pressure. This either updates pressure, or updates related quantities if pressure is being held constant.
+     * @private
+     */
+    stepPressure( dt ) {
+      assert && assert( this.stepPressureEnabled, 'stepPressureEnabled must be enabled' );
+
+      const holdPressureConstant = ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
+                                     this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
+
+      if ( this.pressureProperty.value === null || !holdPressureConstant ) {
+
+        // update pressure
+        this.pressureProperty.value = this.computePressure();
+        this.pressureGauge.step( dt ); //TODO if we want gauge jitter when pressure is held constant, move this out of if statement
+
+        // If pressure exceeds the maximum, blow the lid off of the container.
+        if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
+          this.container.lidIsOnProperty.value = false;
+        }
+      }
+      else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
+
+        //TODO this is behaving backwards, T is decreasing as N increases
+        // hold pressure constant by changing temperature, T = PV/Nk
+        const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+        this.temperatureProperty.value = ( pressure * this.container.volume ) /
+                                         ( this.numberOfParticles * GasPropertiesConstants.BOLTZMANN );
+      }
+      else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
+
+        // hold pressure constant by changing volume, V = NkT/P
+        const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+        const volume = ( this.numberOfParticles * GasPropertiesConstants.BOLTZMANN * this.temperatureProperty.value ) / pressure;
+        let containerWidth = volume / ( this.container.height * this.container.depth );
+
+        if ( !this.container.widthRange.contains( containerWidth ) ) {
+
+          //TODO dialog when max container width would be exceeded
+          console.log( `Oops! container width is out of range: ${containerWidth}` );
+          this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
+          containerWidth = Util.clamp( containerWidth, this.container.widthRange.min, this.container.widthRange.max );
+        }
+
+        //TODO implement GasPropertiesContainer.resize, use code from ResizeHandleDragListener
+        // this.container.widthProperty.value = containerWidth;
+      }
+      else {
+        throw new Error( 'programming error, some case is not handled' );
+      }
     }
 
     /**
