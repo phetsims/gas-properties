@@ -149,24 +149,6 @@ define( require => {
     }
 
     /**
-     * Makes the particle travel with the same speed, but in the opposite horizontal direction.
-     * This is called when a particle hits a vertical wall.
-     * @public
-     */
-    invertDirectionX() {
-      this.setVelocityXY( -this.velocity.x, this.velocity.y );
-    }
-
-    /**
-     * Makes the particle travel with the same speed, but in the opposite vertical direction.
-     * This is called when a particle hits a horizontal wall.
-     * @public
-     */
-    invertDirectionY() {
-      this.setVelocityXY( this.velocity.x, -this.velocity.y );
-    }
-
-    /**
      * Does this particle contact another particle now?
      * @param {Particle} particle
      * @returns {boolean}

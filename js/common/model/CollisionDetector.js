@@ -294,28 +294,29 @@ define( require => {
       const particle = particles[ i ];
       let collided = false;
 
+      //TODO handle kinetic energy if the left wall is moving
+
       // adjust x
       if ( particle.left <= containerBounds.minX ) {
         particle.left = containerBounds.minX;
-        particle.invertDirectionX();
+        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
         collided = true;
-        //TODO handle kinetic energy if the left wall is moving
       }
       else if ( particle.right >= containerBounds.maxX ) {
         particle.right = containerBounds.maxX;
-        particle.invertDirectionX();
+        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
         collided = true;
       }
 
       // adjust y
       if ( particle.top >= containerBounds.maxY ) {
         particle.top = containerBounds.maxY;
-        particle.invertDirectionY();
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
         collided = true;
       }
       else if ( particle.bottom <= containerBounds.minY ) {
         particle.bottom = containerBounds.minY;
-        particle.invertDirectionY();
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
         collided = true;
       }
 
