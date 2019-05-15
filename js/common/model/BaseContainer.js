@@ -28,7 +28,8 @@ define( require => {
 
       options = _.extend( {
         location: Vector2.ZERO, // location of the container's bottom right corner, in pm
-        widthRange: new RangeWithValue( 5000, 15000, 10000 ) // range and initial value of the container's width, in pm
+        widthRange: new RangeWithValue( 5000, 15000, 10000 ), // range and initial value of the container's width, in pm
+        leftWallDoesWork: false // true if the left wall does work on particles
       }, options );
 
       assert && assert( options.location instanceof Vector2, 'invalid location type: ' + options.location );
@@ -61,7 +62,10 @@ define( require => {
         ) );
 
       // @public (read-only) velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
-      this.leftWallVelocity = new Vector2( 0, 0 ); //
+      this.leftWallVelocity = new Vector2( 0, 0 );
+
+      // @public (read-only) whether the left wall does work on particles
+      this.leftWallDoesWork = options.leftWallDoesWork;
 
       // @private {number} previous location of the left wall
       this.previousLeft = this.left;
@@ -78,15 +82,19 @@ define( require => {
      */
     step( dt ) {
 
-      // Adjust the velocity of the left (movable) wall
-      const previousX = this.leftWallVelocity.x;
-      const x = ( this.left - this.previousLeft ) / dt;
-      if ( x !== previousX ) {
-        this.leftWallVelocity.setXY( x, 0 );
-        phet.log && phet.log( 'leftWallVelocity.x = ' + this.leftWallVelocity.x );
-      }
+      // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
+      // velocity is irrelevant and should be set to zero, so that it doesn't contribute to collision detection.
+      if ( this.leftWallDoesWork ) {
 
-      this.previousLeft = this.left;
+        const previousX = this.leftWallVelocity.x;
+        const x = ( this.left - this.previousLeft ) / dt;
+        if ( x !== previousX ) {
+          this.leftWallVelocity.setXY( x, 0 );
+          phet.log && phet.log( 'leftWallVelocity.x = ' + this.leftWallVelocity.x );
+        }
+
+        this.previousLeft = this.left;
+      }
     }
 
     /**

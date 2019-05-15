@@ -35,10 +35,7 @@ define( require => {
       options = _.extend( {
 
         // {number|null} Regions are square, length of one side, pm. If null, default will be set below.
-        regionLength: null,
-
-        // {boolean} whether the container does work on particles when the left wall is moved
-        containerDoesWork: false
+        regionLength: null
 
       }, options );
 
@@ -66,7 +63,6 @@ define( require => {
 
       // @private
       this.container = container;
-      this.containerDoesWork = options.containerDoesWork;
       this.particleArrays = particleArrays;
       this.numberOfParticleContainerCollisions = 0;
     }
@@ -107,19 +103,16 @@ define( require => {
 
         // If there is a divider, use bounds for subsets of the container
         this.numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ 0 ], this.container.leftBounds, 0 );
+          doParticleContainerCollisions( this.particleArrays[ 0 ], this.container.leftBounds, Vector2.ZERO );
         this.numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ 1 ], this.container.rightBounds, 0 );
+          doParticleContainerCollisions( this.particleArrays[ 1 ], this.container.rightBounds, Vector2.ZERO );
       }
       else {
-
-        // If the container does work, use the velocity of the left wall. Otherwise use zero velocity.
-        const leftWallVelocity = this.containerDoesWork ? this.container.leftWallVelocity : Vector2.ZERO;
 
         // If there is no divider, use bounds of the entire container
         for ( let i = 0; i < this.particleArrays.length; i++ ) {
           this.numberOfParticleContainerCollisions +=
-            doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, leftWallVelocity );
+            doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, this.container.leftWallVelocity );
         }
       }
 

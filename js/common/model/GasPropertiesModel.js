@@ -50,7 +50,7 @@ define( require => {
       options = _.extend( {
         holdConstant: HoldConstantEnum.NOTHING,
         hasCollisionCounter: true,
-        containerDoesWork: false
+        leftWallDoesWork: false
       }, options );
 
       super();
@@ -104,12 +104,12 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.container = new GasPropertiesContainer();
+      this.container = new GasPropertiesContainer( {
+        leftWallDoesWork: options.leftWallDoesWork
+      } );
 
       // @public (read-only)
-      this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ], {
-        containerDoesWork: options.containerDoesWork
-      } );
+      this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ] );
 
       // @public the factor to heat (positive value) or cool (negative value) the contents of the container
       this.heatCoolFactorProperty = new NumberProperty( 0, {

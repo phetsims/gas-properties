@@ -65,7 +65,6 @@ define( require => {
       assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
 
       options = _.extend( {
-        redistributeParticles: true,
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
       }, options );
 
@@ -84,7 +83,16 @@ define( require => {
       let containerWidth = model.container.widthProperty.value;
 
       let resizeHandleIsPressedListener = null;
-      if ( options.redistributeParticles ) {
+      if ( model.container.leftWallDoesWork ) {
+
+        // Resizing the container un-pauses the sim, and the left wall will do work on particles that collide with it.
+        resizeHandleIsPressedListener = isPressed => {
+          if ( isPressed && !model.isPlayingProperty.value ) {
+            model.isPlayingProperty.value = true;
+          }
+        };
+      }
+      else {
 
         // Resizing the container pauses the sim and grays out the particles. The moving wall will have
         // no affect on the velocity of the particles.  The particles will be redistributed in the new volume
@@ -118,16 +126,6 @@ define( require => {
             if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
               model.redistributeParticles( model.container.widthProperty.value / containerWidth );
             }
-          }
-        };
-      }
-      else {
-        
-        // Resizing the container un-pauses the sim. The velocity of the moving wall will affect
-        // the velocity of the particles colliding with it.
-        resizeHandleIsPressedListener = isPressed => {
-          if ( isPressed && !model.isPlayingProperty.value ) {
-            model.isPlayingProperty.value = true;
           }
         };
       }
