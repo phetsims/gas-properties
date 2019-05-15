@@ -63,6 +63,25 @@ define( require => {
     }
 
     /**
+     * Resizes the container to the specified width.
+     * Maintains a constant opening size in the top of the container, if possible.
+     * @param {number} width
+     * @public
+     */
+    resize( width ) {
+      assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
+
+      // Get opening width before changing widthProperty
+      const openingWidth = this.openingWidth;
+
+      // resize the container
+      this.widthProperty.value = width;
+
+      // resize the lid, maintaining the opening width if possible
+      this.lidWidthProperty.value = Math.max( this.maxLidWidth - openingWidth, this.minLidWidth );
+    }
+
+    /**
      * Gets the maximum lid width, when the lid is fully closed.
      * @returns {number} in pm
      * @public

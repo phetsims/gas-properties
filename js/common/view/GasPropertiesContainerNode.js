@@ -221,14 +221,8 @@ define( require => {
 
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          const openingWidth = container.openingWidth;
-
-          // resize the container
-          const containerWidthRange = container.widthProperty.range;
-          container.widthProperty.value = containerWidthRange.constrainValue( container.right - modelX );
-
-          // resize the lid, maintaining the opening width if possible
-          container.lidWidthProperty.value = Math.max( container.maxLidWidth - openingWidth, container.minLidWidth );
+          const containerWidth = container.widthRange.constrainValue( container.right - modelX );
+          container.resize( containerWidth );
         }
       } );
     }

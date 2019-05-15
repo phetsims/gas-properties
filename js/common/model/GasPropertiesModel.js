@@ -31,7 +31,6 @@ define( require => {
   const Range = require( 'DOT/Range' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
-  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -435,11 +434,10 @@ define( require => {
           //TODO dialog when max container width would be exceeded
           console.log( `Oops! container width is out of range: ${containerWidth}` );
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
-          containerWidth = Util.clamp( containerWidth, this.container.widthRange.min, this.container.widthRange.max );
+          containerWidth = this.container.widthRange.constrainValue( containerWidth );
         }
 
-        //TODO implement GasPropertiesContainer.resize, use code from ResizeHandleDragListener
-        // this.container.widthProperty.value = containerWidth;
+        this.container.resize( containerWidth );
       }
       else {
         throw new Error( 'programming error, some case is not handled' );
