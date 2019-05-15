@@ -16,6 +16,5 @@ Is this a better collision model?
 http://web.mst.edu/~reflori/be150/Dyn%20Lecture%20Videos/Impact%20Particles%201/Impact%20Particles%201.pdf
 
 POLISH
-Odd color for divider in projector mode
 Odd color for pump radio buttons
 Thicker container walls?
