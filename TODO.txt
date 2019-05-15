@@ -1,5 +1,7 @@
 TODO list for gas-properties
 
+Get rid of most ES5 getters, they obscure the dynamic nature of some values
+
 Histograms: y axis scale
 Histograms: rewrite, they are a mess
 Histograms: they don't update when particles are added/removed with sim paused
