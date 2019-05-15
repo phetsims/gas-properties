@@ -7,9 +7,6 @@ Histograms: they don't update when particles are added/removed with sim paused
 Intro: hold constant, see HoldConstantEnum
 Intro: optimize number of iterations over particle arrays
 
-Explore: moving wall does not pause animation and does work on particles, do not redistribute particles
-https://physics.stackexchange.com/questions/19589/simple-question-about-a-gas-in-a-box-with-a-moving-wall
-
 PUNCH LIST:
 CollisionDetector: handle divider properly in CollisionDetector.step
 LidAnimation: #64 make it rotate and move left, make it step
