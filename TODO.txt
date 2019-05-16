@@ -1,5 +1,7 @@
 TODO list for gas-properties
 
+Should HoldConstant.PRESSURE_T scale the velocity of all particles in the container?
+
 Get rid of most ES5 getters, they obscure the dynamic nature of some values
 
 Histograms: y axis scale
