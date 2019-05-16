@@ -1,6 +1,6 @@
 TODO list for gas-properties
 
-Should HoldConstant.PRESSURE_T scale the velocity of all particles in the container?
+For HoldConstant.PRESSURE_T how should speed of particles be adjusted? T = PV/Nk, |v| = sqrt( 3kT / m )
 
 Get rid of most ES5 getters, they obscure the dynamic nature of some values
 
