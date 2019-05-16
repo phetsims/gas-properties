@@ -1,19 +1,17 @@
 TODO list for gas-properties
 
-For HoldConstant.PRESSURE_T scale particle velocities to give desired T.
-Fire/Ice needs to come out of bucket in HoldConstant.PRESSURE_T, animated
-
 Get rid of most ES5 getters, they obscure the dynamic nature of some values
+
+#78 PRESSURE_T fixes
+#71 speed limit for left wall
+#64 lid animation
 
 Histograms: y axis scale
 Histograms: rewrite, they are a mess
 Histograms: they don't update when particles are added/removed with sim paused
 
-Intro: optimize number of iterations over particle arrays
-
 PUNCH LIST:
 CollisionDetector: handle divider properly in CollisionDetector.step
-LidAnimation: #64 make it rotate and move left, make it step
 
 REFERENCES
 Is this a better collision model?
