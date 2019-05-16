@@ -74,33 +74,35 @@ define( require => {
     // @public
     reset() {
       this.unitsProperty.reset();
+      this.dtAccumulator = 0;
     }
 
     /**
-     * Add jitter to the displayed value, more jitter with lower pressure.
+     * Steps the pressure gauge.
      * @param {number} dt - time step, in ps
+     * @param {boolean} jitterEnabled - whether jitter should be added to make the gauge look more realistic
      * @public
      */
-    step( dt ) {
-      if ( this.pressureProperty.value === 0 ) {
-        this.pressureKilopascalsProperty.value = 0;
-        this.dtAccumulator = 0;
-      }
-      else {
-        this.dtAccumulator += dt;
-        if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
+    step( dt, jitterEnabled ) {
 
-          // kPa
-          const jitter = this.pressureJitterFunction( this.pressureProperty.value ) *
-                         this.scaleJitterFunction( this.temperatureProperty.value ) *
-                         phet.joist.random.nextDouble();
+      this.dtAccumulator += dt;
 
-          // random sign
-          const sign = ( jitter >= this.pressureProperty.value || phet.joist.random.nextBoolean() ) ? 1 : -1;
+      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
-          this.pressureKilopascalsProperty.value = this.pressureProperty.value + ( sign * jitter );
-          this.dtAccumulator = 0;
+        // Add jitter (kPa) to the displayed value, more jitter with lower pressure.
+        // Jitter is added if we're not holding pressure constant.
+        let jitter = 0;
+        if ( jitterEnabled ) {
+          jitter = this.pressureJitterFunction( this.pressureProperty.value ) *
+                   this.scaleJitterFunction( this.temperatureProperty.value ) *
+                   phet.joist.random.nextDouble();
         }
+
+        // random sign
+        const sign = ( jitter >= this.pressureProperty.value || phet.joist.random.nextBoolean() ) ? 1 : -1;
+
+        this.pressureKilopascalsProperty.value = this.pressureProperty.value + ( sign * jitter );
+        this.dtAccumulator = 0;
       }
     }
   }

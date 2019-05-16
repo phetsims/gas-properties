@@ -408,11 +408,10 @@ define( require => {
       const holdPressureConstant = ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
                                      this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
 
-      if ( this.pressureProperty.value === null || !holdPressureConstant ) {
+      if ( this.pressureProperty.value === 0 || !holdPressureConstant ) {
 
         // update pressure
         this.pressureProperty.value = this.computePressure();
-        this.pressureGauge.step( dt ); //TODO if we want gauge jitter when pressure is held constant, move this out of if statement
 
         // If pressure exceeds the maximum, blow the lid off of the container.
         if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
@@ -424,6 +423,7 @@ define( require => {
         //TODO should this scale the velocity of all particles in the container?
         // hold pressure constant by changing temperature, T = PV/Nk
         const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+        assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
         this.temperatureProperty.value = ( pressure * this.container.volume ) /
                                          ( this.numberOfParticles * GasPropertiesConstants.BOLTZMANN );
       }
@@ -431,6 +431,7 @@ define( require => {
 
         // hold pressure constant by changing volume, V = NkT/P
         const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+        assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
         const volume = ( this.numberOfParticles * GasPropertiesConstants.BOLTZMANN * this.temperatureProperty.value ) / pressure;
         let containerWidth = volume / ( this.container.height * this.container.depth );
 
@@ -451,6 +452,9 @@ define( require => {
       else {
         throw new Error( 'programming error, some case is not handled' );
       }
+
+      // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
+      this.pressureGauge.step( dt, !holdPressureConstant /* jitterEnabled */ );
     }
 
     /**
