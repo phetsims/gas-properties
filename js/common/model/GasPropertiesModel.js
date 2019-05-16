@@ -155,6 +155,11 @@ define( require => {
         } );
       }
 
+      // @public emit(width:number) is called when holding pressure constant would result in a bad container width
+      this.containerWidthOutOfRangeEmitter = new Emitter( {
+        validators: [ { valueType: 'number' } ]
+      } );
+
       // Redistribute particles as the container width changes.
       if ( GasPropertiesQueryParameters.redistribute === 'drag' ) {
         this.container.widthProperty.link( ( newWidth, oldWidth ) => {
@@ -431,9 +436,13 @@ define( require => {
 
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
-          //TODO dialog when max container width would be exceeded
-          console.log( `Oops! container width is out of range: ${containerWidth}` );
+          // This results in an OopsDialog being displayed
+          this.containerWidthOutOfRangeEmitter.emit( containerWidth );
+
+          // Switch to the 'Nothing' mode
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
+
+          // Set the container width to its min or max.
           containerWidth = this.container.widthRange.constrainValue( containerWidth );
         }
 

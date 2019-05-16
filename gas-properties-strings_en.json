@@ -139,5 +139,11 @@
   },
   "initialTemperatureK": {
     "value": "Initial Temperature (K)"
+  },
+  "containerTooLarge": {
+    "value": "Oops!<br><br>Pressure cannot be held constant.<br>Container would be too large."
+  },
+  "containerTooSmall": {
+    "value": "Oops!<br><br>Pressure cannot be held constant.<br>Container would be too small."
   }
 }

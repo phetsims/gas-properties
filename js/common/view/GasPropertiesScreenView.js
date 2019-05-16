@@ -41,6 +41,7 @@ define( require => {
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const OopsDialog = require( 'SCENERY_PHET/OopsDialog' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PointerCoordinatesNode = require( 'GAS_PROPERTIES/common/view/PointerCoordinatesNode' );
@@ -50,6 +51,10 @@ define( require => {
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
+
+  // string
+  const containerTooLargeString = require( 'string!GAS_PROPERTIES/containerTooLarge' );
+  const containerTooSmallString = require( 'string!GAS_PROPERTIES/containerTooSmall' );
 
   class GasPropertiesScreenView extends BaseScreenView {
 
@@ -274,6 +279,24 @@ define( require => {
       this.timeControlNode.mutate( {
         left: containerViewLocation.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue ),
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+
+      // If the container's volume range is exceeded, show a dialog.
+      let containerTooBigDialog = null;
+      let containerTooSmallDialog = null;
+      model.containerWidthOutOfRangeEmitter.addListener( ( containerWidth ) => {
+        if ( containerWidth > model.container.widthRange.max ) {
+          if ( !containerTooBigDialog ) {
+            containerTooBigDialog = new OopsDialog( containerTooLargeString );
+          }
+          containerTooBigDialog.show();
+        }
+        else {
+          if ( !containerTooSmallDialog ) {
+            containerTooSmallDialog = new OopsDialog( containerTooSmallString );
+          }
+          containerTooSmallDialog.show();
+        }
       } );
 
       // @protected
