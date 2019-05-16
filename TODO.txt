@@ -1,5 +1,8 @@
 TODO list for gas-properties
 
+HoldConstantEnum.PRESSURE_T is behaving backwards
+OopsDialog port and integration
+
 Get rid of most ES5 getters, they obscure the dynamic nature of some values
 
 Histograms: y axis scale
