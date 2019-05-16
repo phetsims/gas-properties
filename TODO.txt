@@ -1,6 +1,6 @@
 TODO list for gas-properties
 
-For HoldConstant.PRESSURE_T scale particle velocites to give desired T.
+For HoldConstant.PRESSURE_T scale particle velocities to give desired T.
 Fire/Ice needs to come out of bucket in HoldConstant.PRESSURE_T
 
 Get rid of most ES5 getters, they obscure the dynamic nature of some values
