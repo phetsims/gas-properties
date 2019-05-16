@@ -53,8 +53,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // string
-  const containerTooLargeString = require( 'string!GAS_PROPERTIES/containerTooLarge' );
-  const containerTooSmallString = require( 'string!GAS_PROPERTIES/containerTooSmall' );
+  const volumeTooLargeString = require( 'string!GAS_PROPERTIES/volumeTooLarge' );
+  const volumeTooSmallString = require( 'string!GAS_PROPERTIES/volumeTooSmall' );
 
   class GasPropertiesScreenView extends BaseScreenView {
 
@@ -282,20 +282,20 @@ define( require => {
       } );
 
       // If the container's volume range is exceeded, show a dialog.
-      let containerTooBigDialog = null;
-      let containerTooSmallDialog = null;
+      let volumeTooLargeDialog = null;
+      let volumeTooSmallDialog = null;
       model.containerWidthOutOfRangeEmitter.addListener( ( containerWidth ) => {
         if ( containerWidth > model.container.widthRange.max ) {
-          if ( !containerTooBigDialog ) {
-            containerTooBigDialog = new OopsDialog( containerTooLargeString );
+          if ( !volumeTooLargeDialog ) {
+            volumeTooLargeDialog = new OopsDialog( volumeTooLargeString );
           }
-          containerTooBigDialog.show();
+          volumeTooLargeDialog.show();
         }
         else {
-          if ( !containerTooSmallDialog ) {
-            containerTooSmallDialog = new OopsDialog( containerTooSmallString );
+          if ( !volumeTooSmallDialog ) {
+            volumeTooSmallDialog = new OopsDialog( volumeTooSmallString );
           }
-          containerTooSmallDialog.show();
+          volumeTooSmallDialog.show();
         }
       } );
 
