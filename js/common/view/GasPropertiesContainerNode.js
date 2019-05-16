@@ -148,8 +148,8 @@ define( require => {
         lidNode.interruptSubtreeInput();
         lidNode.pickable = !isPressed;
 
-        // display the previous bounds of the container
-        previousBoundsNode.visible = isPressed;
+        // display the previous bounds of the container if the wall doesn't do work
+        previousBoundsNode.visible = isPressed && !container.leftWallDoesWork;
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY,
           wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
         options.resizeHandleIsPressedListener( isPressed );
