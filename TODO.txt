@@ -1,6 +1,7 @@
 TODO list for gas-properties
 
-For HoldConstant.PRESSURE_T how should speed of particles be adjusted? T = PV/Nk, |v| = sqrt( 3kT / m )
+For HoldConstant.PRESSURE_T scale particle velocites to give desired T.
+Fire/Ice needs to come out of bucket in HoldConstant.PRESSURE_T
 
 Get rid of most ES5 getters, they obscure the dynamic nature of some values
 
