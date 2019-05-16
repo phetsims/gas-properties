@@ -421,7 +421,6 @@ define( require => {
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
 
-        //TODO this is behaving backwards, T is decreasing as N increases
         // hold pressure constant by changing temperature, T = PV/Nk
         const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
         this.temperatureProperty.value = ( pressure * this.container.volume ) /
