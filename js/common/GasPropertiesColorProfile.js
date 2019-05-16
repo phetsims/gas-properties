@@ -110,12 +110,6 @@ define( require => {
       projector: 'rgba( 255, 255, 255, 0.5 )'
     },
 
-    // Container divider in the Diffusion screen
-    dividerColor: {
-      default: 'rgb( 243, 235, 87 )',
-      projector: 'rgb( 217, 50, 138 )'
-    },
-
     // Stroke around center-of-mass indicators
     centerOfMassStroke: {
       default: 'white',
@@ -213,6 +207,11 @@ define( require => {
     // bars in the Kinetic Energy histogram
     kineticEnergyHistogramBarColor: {
       default: PhetColorScheme.KINETIC_ENERGY
+    },
+
+    // Container divider in the Diffusion screen
+    dividerColor: {
+      default: 'rgb(60, 180, 75)'
     }
   } );
 

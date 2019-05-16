@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Toggle button for whether the container has a vertical divider.
+ * Toggle button for whether the container has a vertical divider, color-code to the divider.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,9 +10,9 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
-  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -28,7 +28,7 @@ define( require => {
     constructor( hasDividerProperty, options ) {
 
       options = _.extend( {
-        baseColor: PhetColorScheme.BUTTON_YELLOW
+        baseColor: GasPropertiesColorProfile.dividerColorProperty
       }, options );
 
       const textOptions = {
