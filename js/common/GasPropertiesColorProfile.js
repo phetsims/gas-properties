@@ -211,7 +211,7 @@ define( require => {
 
     // Container divider in the Diffusion screen
     dividerColor: {
-      default: 'rgb(60, 180, 75)'
+      default: 'rgb( 60, 180, 75 )'
     }
   } );
 
