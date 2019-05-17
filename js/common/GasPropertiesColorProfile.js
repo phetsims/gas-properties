@@ -1,5 +1,6 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
+//TODO if we use the same color for both profiles, delete projector and move definition
 /**
  * Color profiles for this simulation.
  * Default colors are required. Colors for other profiles are optional.
@@ -28,8 +29,8 @@ define( require => {
 
     // fill for control panels
     panelFill: {
-      default: 'black',
-      projector: 'white'
+      default: 'rgb( 220, 220, 220 )',
+      projector: 'rgb( 220, 220, 220 )'
     },
 
     // stroke for control panels
@@ -40,19 +41,19 @@ define( require => {
 
     // default fill for text
     textFill: {
-      default: 'white',
+      default: 'black',
       projector: 'black'
     },
 
     // fill for check boxes
     checkboxFill: {
-      default: 'black',
+      default: 'white',
       projector: 'white'
     },
 
     // stroke for check boxes
     checkboxStroke: {
-      default: 'white',
+      default: 'black',
       projector: 'black'
     },
 
@@ -86,9 +87,15 @@ define( require => {
       projector: 'rgb( 128, 128, 128 )'
     },
 
-    // dimensional arrow, shown using the 'Size' checkbox
+    // dimensional arrow that appears below the container
     sizeArrowColor: {
       default: 'white',
+      projector: 'black'
+    },
+
+    // icon for the 'Width' checkbox
+    widthIconColor: {
+      default: 'black',
       projector: 'black'
     },
 

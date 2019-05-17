@@ -135,7 +135,7 @@ define( require => {
      */
     createContainerWidthIcon() {
       return new DimensionalArrowsNode( new NumberProperty( 44 ), {
-        color: GasPropertiesColorProfile.sizeArrowColorProperty,
+        color: GasPropertiesColorProfile.widthIconColorProperty,
         pickable: false
       } );
     },
