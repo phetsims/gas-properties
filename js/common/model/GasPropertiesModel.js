@@ -366,10 +366,10 @@ define( require => {
         // Compute the average kinetic energy, AMU * pm^2 / ps^2
         let totalKineticEnergy = 0;
         for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-          totalKineticEnergy += this.heavyParticles[ i ].kineticEnergy;
+          totalKineticEnergy += this.heavyParticles[ i ].getKineticEnergy();
         }
         for ( let i = 0; i < this.lightParticles.length; i++ ) {
-          totalKineticEnergy += this.lightParticles[ i ].kineticEnergy;
+          totalKineticEnergy += this.lightParticles[ i ].getKineticEnergy();
         }
 
         const averageKineticEnergy = totalKineticEnergy / this.getNumberOfParticles();

@@ -185,7 +185,7 @@ define( require => {
   function getKineticEnergyValues( particles ) {
     const values = [];
     for ( let i = 0; i < particles.length; i++ ) {
-      values.push( particles[ i ].kineticEnergy );
+      values.push( particles[ i ].getKineticEnergy() );
     }
     return values;
   }

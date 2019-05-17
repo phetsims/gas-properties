@@ -252,10 +252,10 @@ define( require => {
         for ( let i = 0; i < particles.length; i++ ) {
           const particle = particles[ i ];
           if ( this.container.leftBounds.containsPoint( particle.location ) ) {
-            leftTotalKE += particle.kineticEnergy;
+            leftTotalKE += particle.getKineticEnergy();
           }
           else {
-            rightTotalKE += particle.kineticEnergy;
+            rightTotalKE += particle.getKineticEnergy();
           }
         }
       } );

@@ -72,11 +72,11 @@ define( require => {
     set bottom( value ) { this.setLocationXY( this.location.x, value + this.radius ); }
 
     /**
-     * ES5 getter for kinetic energy.
+     * Gets kinetic energy of this particle.
      * @returns {number} AMU * pm^2 / ps^2
      * @public
      */
-    get kineticEnergy() {
+    getKineticEnergy() {
       return 0.5 * this.mass * this.velocity.magnitudeSquared; // KE = (1/2) * m * |v|^2
     }
 
