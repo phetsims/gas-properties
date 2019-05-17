@@ -33,8 +33,7 @@ define( require => {
       assert && assert( this.widthRange.min > this.openingLeftInset + this.openingRightInset,
         'widthRange.min is too small to accommodate insets' );
 
-      // @public (read-only) the right coordinate of the opening in the top of the container, in pm
-      // openingLeft is dynamic, see ES5 getter
+      // @private the right coordinate of the opening in the top of the container, in pm
       this.openingRight = this.location.y - this.openingRightInset;
 
       // @public width of the lid, in pm
@@ -71,7 +70,7 @@ define( require => {
       assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
 
       // Get opening width before changing widthProperty
-      const openingWidth = this.openingWidth;
+      const openingWidth = this.getOpeningWidth();
 
       // resize the container
       this.widthProperty.value = width;
@@ -102,7 +101,7 @@ define( require => {
      * @returns {number} in pm
      * @public
      */
-    get openingLeft() {
+    getOpeningLeft() {
 
       let openingLeft = null;
       if ( this.lidIsOnProperty.value ) {
@@ -114,9 +113,18 @@ define( require => {
       else {
         openingLeft = this.left + this.openingLeftInset;
       }
-      assert && assert( openingLeft <= this.openingRight,
-        `openingLeft ${openingLeft} must be <= openingRight ${this.openingRight}` );
+      assert && assert( openingLeft <= this.getOpeningRight(),
+        `openingLeft ${openingLeft} must be <= openingRight ${this.getOpeningRight()}` );
       return openingLeft;
+    }
+
+    /**
+     * Gets the right coordinate of the opening in the top of the container.
+     * @returns {number} in pm
+     * @public
+     */
+    getOpeningRight() {
+      return this.openingRight;
     }
 
     /**
@@ -124,10 +132,18 @@ define( require => {
      * @returns {number} in pm
      * @public
      */
-    get openingWidth() {
-      const openingWidth = this.openingRight - this.openingLeft;
+    getOpeningWidth() {
+      const openingWidth = this.getOpeningRight() - this.getOpeningLeft();
       assert && assert( openingWidth >= 0, `invalid openingWidth: ${openingWidth}` );
       return openingWidth;
+    }
+
+    /**
+     * Is the container's lid open?
+     * @returns {boolean}
+     */
+    isLidOpen() {
+      return ( this.getOpeningWidth() !== 0 );
     }
   }
 

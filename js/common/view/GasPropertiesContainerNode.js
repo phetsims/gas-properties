@@ -155,8 +155,8 @@ define( require => {
         options.resizeHandleIsPressedListener( isPressed );
 
         // when the handle is released, log the opening
-        if ( container.openingLeft !== container.openingRight ) {
-          !isPressed && phet.log && phet.log( `Container opening from ${container.openingLeft} to ${container.openingRight} pm` );
+        if ( container.isLidOpen() ) {
+          !isPressed && phet.log && phet.log( `Container opening from ${container.getOpeningLeft()} to ${container.openingRight} pm` );
         }
       } );
 
@@ -240,13 +240,13 @@ define( require => {
      */
     constructor( container, modelViewTransform, parentNode ) {
 
-      // pointer's x offset from openingLeft, when a drag starts
+      // pointer's x offset from container.getOpeningLeft(), when a drag starts
       let startXOffset = 0;
 
       super( {
 
         start: ( event, listener ) => {
-          startXOffset = modelViewTransform.modelToViewX( container.openingLeft ) -
+          startXOffset = modelViewTransform.modelToViewX( container.getOpeningLeft() ) -
                          parentNode.globalToParentPoint( event.pointer.point ).x;
         },
 
@@ -269,7 +269,7 @@ define( require => {
 
         // when the lid handle is released, log the opening
         end: ( listener ) => {
-          phet.log && phet.log( `Container opening from ${container.openingLeft} to ${container.openingRight} pm` );
+          phet.log && phet.log( `Container opening from ${container.getOpeningLeft()} to ${container.openingRight} pm` );
         }
       } );
     }

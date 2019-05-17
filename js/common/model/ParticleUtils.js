@@ -122,7 +122,7 @@ define( require => {
         const particle = insideParticles[ i ];
         assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
         if ( particle.top > container.top &&
-             particle.left > container.openingLeft &&
+             particle.left > container.getOpeningLeft() &&
              particle.right < container.openingRight ) {
           insideParticles.splice( insideParticles.indexOf( particle ), 1 );
           numberOfParticlesProperty.value--;

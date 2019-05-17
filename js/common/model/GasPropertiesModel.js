@@ -222,7 +222,7 @@ define( require => {
       ParticleUtils.stepParticles( this.lightParticlesOutside, dt );
 
       // Allow particles to escape from the opening in the top of the container
-      if ( this.container.openingWidth > 0 ) {
+      if ( this.container.isLidOpen() ) {
         ParticleUtils.escapeParticles( this.container, this.numberOfHeavyParticlesProperty,
           this.heavyParticles, this.heavyParticlesOutside, );
         ParticleUtils.escapeParticles( this.container, this.numberOfLightParticlesProperty,
