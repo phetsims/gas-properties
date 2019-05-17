@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
-  const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
+  const DiffusionCollisionDetector = require( 'GAS_PROPERTIES/diffusion/model/DiffusionCollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
@@ -74,7 +74,7 @@ define( require => {
       this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2 );
 
       // @public (read-only)
-      this.collisionDetector = new CollisionDetector( this.container, [ this.particles1, this.particles2 ] );
+      this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
       // Add or remove particles
       this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {

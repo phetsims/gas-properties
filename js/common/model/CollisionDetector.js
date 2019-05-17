@@ -44,9 +44,10 @@ define( require => {
       assert && assert( regionLength > 0, `invalid regionLength: ${regionLength}` );
 
       // @public (read-only) {Region[]} 2D grid of Regions
-      this.regions = createRegions( container, regionLength  );
+      this.regions = createRegions( container, regionLength );
 
-      // @public (read-only) number of wall collisions on the most recent call to step
+      // @public (read-only) number of wall collisions on the most recent call to step.
+      // This is used to delay pressure computation until at least 1 particle has collided with the container.
       this.numberOfParticleContainerCollisions = 0;
 
       // @public determines whether particle-particle collisions occur
@@ -96,28 +97,26 @@ define( require => {
         }
       }
 
-      //TODO hasDivider case is a temporary hack
       // particle-container collisions
-      this.numberOfParticleContainerCollisions = 0;
-      if ( this.container.hasDividerProperty && this.container.hasDividerProperty.value ) {
-
-        // If there is a divider, use bounds for subsets of the container
-        this.numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ 0 ], this.container.leftBounds, Vector2.ZERO );
-        this.numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ 1 ], this.container.rightBounds, Vector2.ZERO );
-      }
-      else {
-
-        // If there is no divider, use bounds of the entire container
-        for ( let i = 0; i < this.particleArrays.length; i++ ) {
-          this.numberOfParticleContainerCollisions +=
-            doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, this.container.leftWallVelocity );
-        }
-      }
+      this.numberOfParticleContainerCollisions = this.stepParticleContainerCollisions( dt );
 
       // Verify that particles are fully inside in the container.
       assert && assertParticlesInsideContainer( this.container, this.particleArrays );
+    }
+
+    /**
+     * Detects and handles particle-container collisions for the system for one time step.
+     * @param {number} dt
+     * @returns {number} the number of collisions
+     * @protected
+     */
+    stepParticleContainerCollisions( dt ) {
+      let numberOfParticleContainerCollisions = 0;
+      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+        numberOfParticleContainerCollisions +=
+          doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, this.container.leftWallVelocity );
+      }
+      return numberOfParticleContainerCollisions;
     }
   }
 
@@ -348,6 +347,9 @@ define( require => {
       }
     }
   }
+
+  // @protected
+  CollisionDetector.doParticleContainerCollisions = doParticleContainerCollisions;
 
   return gasProperties.register( 'CollisionDetector', CollisionDetector );
 } );
