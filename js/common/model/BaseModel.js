@@ -55,9 +55,6 @@ define( require => {
       this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ), {
         valueType: Bounds2
       } );
-      phet.log && this.modelBoundsProperty.link( modelBounds => {
-        phet.log( `modelBounds: ${modelBounds.toString()} pm` );
-      } );
 
       // @public is the sim playing?
       this.isPlayingProperty = new BooleanProperty( true );
