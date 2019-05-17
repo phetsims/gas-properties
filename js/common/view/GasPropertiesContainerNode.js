@@ -269,7 +269,10 @@ define( require => {
 
         // when the lid handle is released, log the opening
         end: ( listener ) => {
-          phet.log && phet.log( `Container opening from ${container.getOpeningLeft()} to ${container.openingRight} pm` );
+          phet.log && phet.log( container.isLidOpen() ?
+                                `Container is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
+                                'Container is closed'
+          );
         }
       } );
     }
