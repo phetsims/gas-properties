@@ -261,8 +261,8 @@ define( require => {
       } );
 
       // Compute average temperature in each side of the container
-      updateAverageTemperature( this.leftData.averageTemperatureProperty, leftTotalKE, this.leftData.numberOfParticles );
-      updateAverageTemperature( this.rightData.averageTemperatureProperty, rightTotalKE, this.rightData.numberOfParticles );
+      updateAverageTemperature( this.leftData.averageTemperatureProperty, leftTotalKE, this.leftData.getNumberOfParticles() );
+      updateAverageTemperature( this.rightData.averageTemperatureProperty, rightTotalKE, this.rightData.getNumberOfParticles() );
     }
   }
 

@@ -47,7 +47,7 @@ define( require => {
      * @returns {number}
      * @public
      */
-    get numberOfParticles() {
+    getNumberOfParticles() {
       return this.numberOfParticles1Property.value + this.numberOfParticles2Property.value;
     }
   }
