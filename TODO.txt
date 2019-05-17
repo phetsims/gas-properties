@@ -3,14 +3,10 @@ TODO list for gas-properties
 #78 PRESSURE_T: adjust velocity of particles, animate heat/cool
 #71 speed limit for left wall
 #64 lid animation
-
 #52 histograms rewrite
 #52 histograms y-axis scale
 #60 histograms don't update when particles are added/removed with sim paused
-
-REFERENCES
-Is this a better collision model?
-http://web.mst.edu/~reflori/be150/Dyn%20Lecture%20Videos/Impact%20Particles%201/Impact%20Particles%201.pdf
+#40 investigate standard collision model
 
 PIXEL POLISH
 Thicker container walls?
