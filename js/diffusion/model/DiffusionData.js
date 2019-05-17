@@ -14,9 +14,12 @@ define( require => {
   const Property = require( 'AXON/Property' );
 
   // constants
-  const NUMBER_OF_PARTICLES_OPTIONS = { numberType: 'Integer' };
+  const NUMBER_OF_PARTICLES_OPTIONS = {
+    numberType: 'Integer',
+    isValidValue: value => ( value >= 0 )
+  };
   const AVERAGE_TEMPERATURE_OPTIONS = {
-    isValidValue: value => ( value === null || typeof value === 'number' ),
+    isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
     units: 'K'
   };
 
