@@ -286,7 +286,6 @@ define( require => {
     addParticles( n, particles, Constructor ) {
 
       // Get the temperature that will be used to compute initial velocity magnitude.
-      // Get the temperature that will be used to compute initial velocity magnitude.
       let meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
       if ( this.controlTemperatureEnabledProperty.value ) {
 
