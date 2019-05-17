@@ -16,6 +16,11 @@ define( require => {
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const Property = require( 'AXON/Property' );
 
+  // constants
+  const IMAGE_PROPERTY_OPTIONS = {
+    isValidValue: value => ( value === null || value instanceof HTMLCanvasElement )
+  };
+
   class DiffusionParticlesNode extends ParticlesNode {
 
     /**
@@ -25,8 +30,8 @@ define( require => {
 
       // {Property.<HTMLCanvasElement>} generated images for DiffusionParticle1 and DiffusionParticle2 species,
       // initialized below
-      const particle1ImageProperty = new Property( null );
-      const particle2ImageProperty = new Property( null );
+      const particle1ImageProperty = new Property( null, IMAGE_PROPERTY_OPTIONS );
+      const particle2ImageProperty = new Property( null, IMAGE_PROPERTY_OPTIONS );
 
       // Update DiffusionParticle1 image to match radius and color profile
       Property.multilink( [

@@ -16,6 +16,11 @@ define( require => {
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const Property = require( 'AXON/Property' );
 
+  // constants
+  const IMAGE_PROPERTY_OPTIONS = {
+    isValidValue: value => ( value === null || value instanceof HTMLCanvasElement )
+  };
+
   class GasPropertiesParticlesNode extends ParticlesNode {
 
     /**
@@ -25,8 +30,8 @@ define( require => {
 
       // {Property.<HTMLCanvasElement>} generated images for the heavy and light particle types
       // initialized below
-      const heavyParticleImageProperty = new Property( null );
-      const lightParticleImageProperty = new Property( null );
+      const heavyParticleImageProperty = new Property( null, IMAGE_PROPERTY_OPTIONS );
+      const lightParticleImageProperty = new Property( null, IMAGE_PROPERTY_OPTIONS );
 
       // Update heavy particle image to match color profile.
       Property.multilink( [
