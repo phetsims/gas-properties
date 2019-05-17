@@ -4,9 +4,9 @@ TODO list for gas-properties
 #71 speed limit for left wall
 #64 lid animation
 
-Histograms: y axis scale
-Histograms: rewrite, they are a mess
-Histograms: they don't update when particles are added/removed with sim paused
+#52 histograms rewrite
+#52 histograms y-axis scale
+#60 histograms don't update when particles are added/removed with sim paused
 
 REFERENCES
 Is this a better collision model?
