@@ -1,7 +1,5 @@
 TODO list for gas-properties
 
-Get rid of most ES5 getters, they obscure the dynamic nature of some values
-
 #78 PRESSURE_T fixes
 #71 speed limit for left wall
 #64 lid animation
