@@ -50,7 +50,7 @@ define( require => {
 
       // Vertical separator, analogous to the container's divider
       const separator = new VSeparator( 75, {
-        stroke: GasPropertiesColorProfile.separatorColorProperty
+        stroke: GasPropertiesColorProfile.dividerColorProperty
       } );
 
       const contentNode = new HBox( {
