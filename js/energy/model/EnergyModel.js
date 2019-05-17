@@ -17,7 +17,7 @@ define( require => {
 
   // constants
   const AVERAGE_SPEED_PROPERTY_OPTIONS = {
-    isValidValue: value => ( value === null || typeof value === 'number' ),
+    isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
     units: 'pm/ps'
   };
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
