@@ -257,9 +257,9 @@ define( require => {
     /**
      * Gets the number of particles in the container.
      * @returns {number}
-     * @public
+     * @private
      */
-    get numberOfParticles() { return this.heavyParticles.length + this.lightParticles.length; }
+    getNumberOfParticles() { return this.heavyParticles.length + this.lightParticles.length; }
 
     /**
      * Adjusts an array of particles to have the desired number of elements.
@@ -361,7 +361,7 @@ define( require => {
      */
     computeTemperature() {
       let temperature = null;
-      if ( this.numberOfParticles > 0 ) {
+      if ( this.getNumberOfParticles() > 0 ) {
 
         // Compute the average kinetic energy, AMU * pm^2 / ps^2
         let totalKineticEnergy = 0;
@@ -372,7 +372,7 @@ define( require => {
           totalKineticEnergy += this.lightParticles[ i ].kineticEnergy;
         }
 
-        const averageKineticEnergy = totalKineticEnergy / this.numberOfParticles;
+        const averageKineticEnergy = totalKineticEnergy / this.getNumberOfParticles();
 
         const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
 
@@ -395,7 +395,7 @@ define( require => {
       const volume = this.container.volume; // V, in pm^3
 
       // P = NkT/V, converted to kPa
-      return ( this.numberOfParticles * k * temperature / volume ) * PRESSURE_CONVERSION_SCALE;
+      return ( this.getNumberOfParticles() * k * temperature / volume ) * PRESSURE_CONVERSION_SCALE;
     }
 
     /**
@@ -425,14 +425,14 @@ define( require => {
         const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
         assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
         this.temperatureProperty.value = ( pressure * this.container.volume ) /
-                                         ( this.numberOfParticles * GasPropertiesConstants.BOLTZMANN );
+                                         ( this.getNumberOfParticles() * GasPropertiesConstants.BOLTZMANN );
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
 
         // hold pressure constant by changing volume, V = NkT/P
         const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
         assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
-        const volume = ( this.numberOfParticles * GasPropertiesConstants.BOLTZMANN * this.temperatureProperty.value ) / pressure;
+        const volume = ( this.getNumberOfParticles() * GasPropertiesConstants.BOLTZMANN * this.temperatureProperty.value ) / pressure;
         let containerWidth = volume / ( this.container.height * this.container.depth );
 
         if ( !this.container.widthRange.contains( containerWidth ) ) {
