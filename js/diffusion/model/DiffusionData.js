@@ -14,11 +14,11 @@ define( require => {
   const Property = require( 'AXON/Property' );
 
   // constants
-  const NUMBER_OF_PARTICLES_OPTIONS = {
+  const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS = {
     numberType: 'Integer',
     isValidValue: value => ( value >= 0 )
   };
-  const AVERAGE_TEMPERATURE_OPTIONS = {
+  const AVERAGE_TEMPERATURE_PROPERTY_OPTIONS = {
     isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
     units: 'K'
   };
@@ -28,14 +28,14 @@ define( require => {
     constructor() {
 
       // @public number of DiffusionParticle1 in this side of the container
-      this.numberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
+      this.numberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS );
 
       // @public number of DiffusionParticle2 in this side of the container
-      this.numberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_OPTIONS );
+      this.numberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS );
 
       // @public {Property.<number|null>} average temperature in this side of the container, in K
       // null when there are no particles in this side of the container.
-      this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_OPTIONS );
+      this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_PROPERTY_OPTIONS );
     }
 
     // @public
