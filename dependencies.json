@@ -1,11 +1,11 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.22 Wed May 15 2019 20:34:15 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.23 Fri May 17 2019 11:31:52 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
   },
   "axon": {
-    "sha": "cf44e5c436f2dfa66f6272a0714c87e12dadf159",
+    "sha": "d845ea40cdb540be6a0b7587afe8824abcb37afe",
     "branch": "master"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "c9d38290b758e5a4b7393f4f26763222142c54bb",
+    "sha": "e95257acdfa58846bd4d2f9b5612c4042b3a38d8",
     "branch": "master"
   },
   "dot": {
@@ -21,11 +21,11 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "cc8c45441c45d7184aa09052239813a88118b286",
+    "sha": "28bd2ba4a9313f5c24e6b96483d84989916aee10",
     "branch": "master"
   },
   "joist": {
-    "sha": "fde14be53693d108c92761873ecd7703e0720255",
+    "sha": "5e59567bd0efdf9b503ee9e3294e1a7546bfedbb",
     "branch": "master"
   },
   "kite": {
@@ -37,23 +37,11 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "d359693f6b68e3000aaa09713c56661b29a8735b",
-    "branch": "master"
-  },
-  "phet-io-wrapper-classroom-activity": {
-    "sha": "248958109c8d3b73b5f9d6c31015b2c8b5016571",
-    "branch": "master"
-  },
-  "phet-io-wrapper-hookes-law-energy": {
-    "sha": "3ea0d43712de26832a841086365544fa930fe458",
-    "branch": "master"
-  },
-  "phet-io-wrapper-lab-book": {
-    "sha": "e5309c0d655079dede0616b5aa637e624e978242",
+    "sha": "776e79092d16b2c1310953570adb60ee0e010343",
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "3c66963fd5f26c72f89d3dc29961d8928c04cc1a",
+    "sha": "47c8c5740b9a5369207e8851e062e89ff56f66fa",
     "branch": "master"
   },
   "phetcommon": {
@@ -73,7 +61,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "5affe7f8236f1c72e12775c1880a7fe8d6c58180",
+    "sha": "6161b29baa4053c281c66175792154400b2fe4db",
     "branch": "master"
   },
   "sherpa": {
