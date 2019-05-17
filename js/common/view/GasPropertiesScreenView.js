@@ -83,9 +83,9 @@ define( require => {
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
 
-      //TODO #45 delete this if we choose GasPropertiesQueryParameters.redistribute === 'drag' strategy
-      // Width of the container when interaction with resize handle started.
-      let containerWidth = model.container.widthProperty.value;
+      // Width of the container when interaction with resize handle started, used to compute how to
+      // redistribute particles in the new container width.
+      let startContainerWidth = model.container.widthProperty.value;
 
       let resizeHandleIsPressedListener = null;
       if ( model.container.leftWallDoesWork ) {
@@ -117,7 +117,7 @@ define( require => {
             particlesNode.opacity = 0.6;
 
             // remember width of container
-            containerWidth = model.container.widthProperty.value;
+            startContainerWidth = model.container.widthProperty.value;
           }
           else {
 
@@ -128,9 +128,8 @@ define( require => {
             // make particles opaque
             particlesNode.opacity = 1;
 
-            if ( GasPropertiesQueryParameters.redistribute === 'end' ) {
-              model.redistributeParticles( model.container.widthProperty.value / containerWidth );
-            }
+            // redistribute the particle
+            model.redistributeParticles( model.container.widthProperty.value / startContainerWidth );
           }
         };
       }

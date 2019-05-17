@@ -159,13 +159,6 @@ define( require => {
       this.containerWidthOutOfRangeEmitter = new Emitter( {
         validators: [ { valueType: 'number' } ]
       } );
-
-      // Redistribute particles as the container width changes.
-      if ( GasPropertiesQueryParameters.redistribute === 'drag' ) {
-        this.container.widthProperty.link( ( newWidth, oldWidth ) => {
-          this.redistributeParticles( newWidth / oldWidth );
-        } );
-      }
     }
 
     /**

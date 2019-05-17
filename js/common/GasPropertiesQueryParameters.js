@@ -35,16 +35,6 @@ define( require => {
     // For internal use only, not public facing.
     outOfRangeIndicators: { type: 'flag' },
 
-    // Determines when particles will be redistributed as the result of resizing the container in the Ideal screen.
-    // 'drag' redistributes as the resize handle is being dragged.
-    // 'end' redistributes when the user releases the resize handle, on end drag.
-    // For internal use only, not public facing.
-    redistribute: {
-      type: 'string',
-      validValues: [ 'drag', 'end' ],
-      defaultValue: 'end'
-    },
-
     // Determines how fast particles are heated or cooled. Smaller number is faster.
     // velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
     // For internal use only, not public facing.
