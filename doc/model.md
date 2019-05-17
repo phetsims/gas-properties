@@ -49,3 +49,5 @@ TODO include calculations for conversions between SI and our units
 
 In the _Explore_ screen, the left (movable) wall does work on particles. After a collision with the left wall
 occurs, the new X component of a particle's velocity is `-( particleVelocity.x - leftWallVelocity.x )`.
+
+Speed limit on _Explore_ wall.
