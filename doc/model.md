@@ -52,4 +52,4 @@ occurs, the new X component of a particle's velocity is `-( particleVelocity.x -
 
 Speed limit on _Explore_ wall.
 
-PressureV and PressureT modes
+Describe "Hold Constant" modes for _Ideal_ screen.
