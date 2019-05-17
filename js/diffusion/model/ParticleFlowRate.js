@@ -16,11 +16,13 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
 
   // constants
-  // Properties are updated with this frequency, in ps
-  const NUMBER_OF_SAMPLES = GasPropertiesQueryParameters.flowRateSamples;
-  const FLOW_RATE_OPTIONS = {
+  const FLOW_RATE_PROPERTY_OPTIONS = {
+    isValidValue: value => ( value >= 0 ),
     units: 'particles/ps'
   };
+
+  // number of samples used to compute running average
+  const NUMBER_OF_SAMPLES = GasPropertiesQueryParameters.flowRateSamples;
 
   class ParticleFlowRate {
 
@@ -35,10 +37,10 @@ define( require => {
       this.particles = particles;
 
       // @public flow rate to left side of container, in particles/ps
-      this.leftFlowRateProperty = new NumberProperty( 0, FLOW_RATE_OPTIONS );
+      this.leftFlowRateProperty = new NumberProperty( 0, FLOW_RATE_PROPERTY_OPTIONS );
 
       // @public flow rate to right side of container, in particles/ps
-      this.rightFlowRateProperty = new NumberProperty( 0, FLOW_RATE_OPTIONS );
+      this.rightFlowRateProperty = new NumberProperty( 0, FLOW_RATE_PROPERTY_OPTIONS );
 
       // @private {number[]} samples of number of particles that have crossed the container's divider
       this.leftCounts = []; // particles that crossed from right to left <--

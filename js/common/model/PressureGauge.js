@@ -37,7 +37,7 @@ define( require => {
       // because it needs to jitter on step, not when pressureProperty changes.
       this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
         units: 'kPa',
-        isValidValue: value => value >= 0
+        isValidValue: value => ( value >= 0 )
       } );
 
       pressureProperty.link( pressure => {
@@ -50,6 +50,7 @@ define( require => {
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
         pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
           units: 'atm',
+          valueType: 'number',
           isValidValue: value => value >= 0
         } );
 

@@ -59,7 +59,9 @@ define( require => {
         width => new Bounds2(
           this.location.x - width, this.location.y,
           this.location.x, this.location.y + this.height
-        ) );
+        ), {
+        valueType: Bounds2
+        } );
 
       // @public (read-only) velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
       this.leftWallVelocity = new Vector2( 0, 0 );

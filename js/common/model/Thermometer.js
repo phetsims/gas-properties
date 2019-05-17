@@ -41,7 +41,8 @@ define( require => {
       // Value is null when the container is empty.
       this.temperatureCelsiusProperty = new DerivedProperty( [ this.temperatureKelvinProperty ],
         temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15, {
-          units: '\u00B0C'
+          units: '\u00B0C',
+          isValidValue: value => ( value === null || ( typeof value === 'number' && value !== 0 ) )
         } );
 
       // @public temperature units displayed by the thermometer

@@ -92,7 +92,10 @@ define( require => {
       // @private
       this.totalNumberOfParticlesProperty = new DerivedProperty(
         [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
-        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles
+        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
+          valueType: 'number',
+          isValidValue: value => value >= 0
+        }
       );
 
       // @public whether initial temperature is controlled by the user or determined by what's in the container

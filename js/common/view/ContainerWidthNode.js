@@ -38,14 +38,18 @@ define( require => {
       assert && assert( widthProperty.range, 'widthProperty must have range' );
 
       const viewWidthProperty = new DerivedProperty( [ widthProperty ],
-        width => modelViewTransform.modelToViewDeltaX( width ) );
+        width => modelViewTransform.modelToViewDeltaX( width ), {
+          valueType: 'number'
+        } );
 
       const dimensionalArrowNode = new DimensionalArrowsNode( viewWidthProperty, {
         color: GasPropertiesColorProfile.sizeArrowColorProperty
       } );
 
       // Convert from pm to nm
-      const nmWidthProperty = new DerivedProperty( [ widthProperty ], width => width / 1000 );
+      const nmWidthProperty = new DerivedProperty( [ widthProperty ], width => width / 1000, {
+        valueType: 'number'
+      } );
       const nmWidthRange = new Range( widthProperty.range.min / 1000, widthProperty.range.max / 1000 );
       
       const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
