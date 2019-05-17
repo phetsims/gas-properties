@@ -392,7 +392,7 @@ define( require => {
       const k = GasPropertiesConstants.BOLTZMANN; // k, in (pm^2 * AMU)/(ps^2 * K)
       const temperature = this.temperatureProperty.value; // T, in K
       assert && assert( typeof temperature === 'number' && temperature > 0, `invalid temperature: ${temperature}` );
-      const volume = this.container.volume; // V, in pm^3
+      const volume = this.container.getVolume(); // V, in pm^3
 
       // P = NkT/V, converted to kPa
       return ( this.getNumberOfParticles() * k * temperature / volume ) * PRESSURE_CONVERSION_SCALE;
@@ -424,7 +424,7 @@ define( require => {
         // hold pressure constant by changing temperature, T = PV/Nk
         const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
         assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
-        this.temperatureProperty.value = ( pressure * this.container.volume ) /
+        this.temperatureProperty.value = ( pressure * this.container.getVolume() ) /
                                          ( this.getNumberOfParticles() * GasPropertiesConstants.BOLTZMANN );
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {

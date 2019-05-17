@@ -130,7 +130,7 @@ define( require => {
      * @returns {number} in pm^3
      * @public
      */
-    get volume() { return this.widthProperty.value * this.height * this.depth; }
+    getVolume() { return this.widthProperty.value * this.height * this.depth; }
 
     /**
      * Determines whether the container fully contains a particle.
