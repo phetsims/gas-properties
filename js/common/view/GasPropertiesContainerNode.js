@@ -174,7 +174,7 @@ define( require => {
           }
 
           // restore the lid in the fully-closed position
-          container.lidWidthProperty.value = container.maxLidWidth;
+          container.lidWidthProperty.value = container.getMaxLidWidth();
           lidNode.setRotation( 0 );
           updateLidPosition();
           lidNode.visible = true;
@@ -256,13 +256,14 @@ define( require => {
           if ( modelX >= container.openingRight ) {
 
             // the lid is fully closed
-            container.lidWidthProperty.value = container.maxLidWidth;
+            container.lidWidthProperty.value = container.getMaxLidWidth();
           }
           else {
 
             // the lid is open
             const openingWidth = container.openingRight - modelX;
-            container.lidWidthProperty.value = Math.max( container.maxLidWidth - openingWidth, container.minLidWidth );
+            container.lidWidthProperty.value =
+              Math.max( container.getMaxLidWidth() - openingWidth, container.getMinLidWidth() );
           }
         },
 

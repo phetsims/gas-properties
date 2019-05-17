@@ -42,8 +42,7 @@ define( require => {
         units: 'pm'
       } );
 
-      // @public (read-only) minimum width of the lid, overlaps the left wall, in pm.
-      // maxLidWidth is dynamic, see ES5 getter.
+      // @private minimum width of the lid, overlaps the left wall, in pm.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
       // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in pm
@@ -51,7 +50,7 @@ define( require => {
 
       // Validate lidWidth, whose range changes dynamically.
       assert && this.lidWidthProperty.link( lidWidth => {
-        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.maxLidWidth, `invalid lidWidth: ${lidWidth}` );
+        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.getMaxLidWidth(), `invalid lidWidth: ${lidWidth}` );
       } );
     }
 
@@ -78,15 +77,25 @@ define( require => {
       this.widthProperty.value = width;
 
       // resize the lid, maintaining the opening width if possible
-      this.lidWidthProperty.value = Math.max( this.maxLidWidth - openingWidth, this.minLidWidth );
+      this.lidWidthProperty.value = Math.max( this.getMaxLidWidth() - openingWidth, this.minLidWidth );
     }
 
     /**
-     * Gets the maximum lid width, when the lid is fully closed.
+     * Gets the minimum lid width. This is constant, independent of the container width.
+     * @returns {number} in pm
+     */
+    getMinLidWidth() {
+      return this.minLidWidth;
+    }
+
+    /**
+     * Gets the maximum lid width, when the lid is fully closed. This changes dynamically with the container width.
      * @returns {number} in pm
      * @public
      */
-    get maxLidWidth() { return this.widthProperty.value - this.openingRightInset + this.wallThickness; }
+    getMaxLidWidth() {
+      return this.widthProperty.value - this.openingRightInset + this.wallThickness;
+    }
 
     /**
      * Gets the left coordinate of the opening in the top of the container.
