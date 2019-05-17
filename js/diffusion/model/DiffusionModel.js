@@ -25,7 +25,7 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  const CENTER_OF_MASS_OPTIONS = {
+  const CENTER_OF_MASS_PROPERTY_OPTIONS = {
     isValidValue: value => ( value === null || typeof value === 'number' ),
     units: 'pm'
   };
@@ -66,8 +66,8 @@ define( require => {
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
       // null when there are no particles in the container.
-      this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_OPTIONS );
-      this.centerOfMass2Property = new Property( null, CENTER_OF_MASS_OPTIONS );
+      this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_PROPERTY_OPTIONS );
+      this.centerOfMass2Property = new Property( null, CENTER_OF_MASS_PROPERTY_OPTIONS );
 
       // @public flow rate model for each particle species
       this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
