@@ -1,7 +1,10 @@
 TODO list for gas-properties
 
+factor out ParticleImageProperty
+remove color Properties from Particle?
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
 #38 split GasPropertiesParticlesNode into 2 instances, for inside and outside container
+
 #78 PRESSURE_T: adjust velocity of particles, animate heat/cool
 #71 speed limit for left wall
 #64 lid animation
