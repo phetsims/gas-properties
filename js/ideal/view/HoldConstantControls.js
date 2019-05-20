@@ -1,5 +1,6 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
+//TODO use VerticalAquaRadioButtonGroup
 /**
  * Controls for selecting what should be held constant.
  *
