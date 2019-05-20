@@ -53,7 +53,6 @@ define( require => {
       options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
       const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
-      console.log( `contentWidth=${contentWidth}`);//XXX
 
       const children = [
 
