@@ -4,7 +4,6 @@ GasPropertiesModel.stepPressure: always call computePressure, to eliminate float
 
 #78 PRESSURE_T: adjust velocity of particles, animate heat/cool
 #71 speed limit for left wall
-#64 lid animation
 #52 histograms rewrite
 #52 histograms y-axis scale
 #60 histograms don't update when particles are added/removed with sim paused
