@@ -312,7 +312,7 @@ define( require => {
         // of particles look less wave-like. We do this for temperature instead of speed because temperature
         // in the container is T = (2/3)KE/k, and KE is a function of speed^2, so deviation in speed would
         // change the desired temperature.
-        temperatures = GasPropertiesUtils.getGaussianValues( n, meanTemperature, 0.2 * meanTemperature, 1E-10 );
+        temperatures = GasPropertiesUtils.getGaussianValues( n, meanTemperature, 0.2 * meanTemperature, 1E-3 );
       }
       else {
 
