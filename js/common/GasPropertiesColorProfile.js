@@ -35,8 +35,8 @@ define( require => {
 
     // stroke for control panels
     panelStroke: {
-      default: 'black',
-      projector: 'white'
+      default: 'rgb( 55, 55, 55 )',
+      projector: 'rgb( 220, 220, 220 )'
     },
 
     // default fill for text
