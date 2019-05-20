@@ -1,5 +1,7 @@
 TODO list for gas-properties
 
+GasPropertiesModel pressureProperty in core model units, have view convert to kPa
+
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
 
 #78 PRESSURE_T: adjust velocity of particles, animate heat/cool
