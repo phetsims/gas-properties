@@ -90,13 +90,13 @@ define( require => {
         model.numberOfHeavyParticlesProperty,
         model.numberOfLightParticlesProperty,
         model.modelViewTransform, {
+          collisionsEnabledProperty: model.collisionDetector.particleParticleCollisionsEnabledProperty,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
           fixedWidth: RIGHT_PANEL_WIDTH
         } );
 
       // Particle Tools accordion box
       const particleToolsAccordionBox = new ParticleToolsAccordionBox(
-        model.collisionDetector.particleParticleCollisionsEnabledProperty,
         model.controlTemperatureEnabledProperty,
         model.initialTemperatureProperty, {
           expandedProperty: viewProperties.particleToolsExpandedProperty,

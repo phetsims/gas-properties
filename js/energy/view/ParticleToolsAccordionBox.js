@@ -23,7 +23,6 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  const collisionsString = require( 'string!GAS_PROPERTIES/collisions' );
   const controlTemperatureString = require( 'string!GAS_PROPERTIES/controlTemperature' );
   const particleToolsString = require( 'string!GAS_PROPERTIES/particleTools' );
   const temperatureString = require( 'string!GAS_PROPERTIES/temperature' );
@@ -33,15 +32,11 @@ define( require => {
   class ParticleToolsAccordionBox extends AccordionBox {
 
     /**
-     * @param {BooleanProperty} collisionsEnabledProperty
      * @param {BooleanProperty} controlTemperatureEnabledProperty
      * @param {NumberProperty} initialTemperatureProperty
      * @param {Object} [options]
      */
-    constructor( collisionsEnabledProperty,
-                 controlTemperatureEnabledProperty,
-                 initialTemperatureProperty,
-                 options ) {
+    constructor( controlTemperatureEnabledProperty, initialTemperatureProperty, options ) {
 
       assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );
 
@@ -59,12 +54,6 @@ define( require => {
 
       // Limit width of title
       options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
-
-      // Collisions checkbox
-      const collisionsCheckbox = new GasPropertiesCheckbox( collisionsEnabledProperty, {
-        text: collisionsString,
-        textMaxWidth: 175 // determined empirically
-      } );
 
       // Control Temperature checkbox
       const controlTemperatureCheckbox = new GasPropertiesCheckbox( controlTemperatureEnabledProperty, {
@@ -119,7 +108,7 @@ define( require => {
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 12,
-        children: [ collisionsCheckbox, controlTemperatureCheckbox, temperatureControl ]
+        children: [ controlTemperatureCheckbox, temperatureControl ]
       } ) ) ;
 
       super( content, options );
