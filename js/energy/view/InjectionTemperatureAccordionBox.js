@@ -136,6 +136,11 @@ define( require => {
 
   /**
    * Layout function for the temperature NumberControl.
+   * The title is ignored, and the other controls are arranged like this, horizontally centered:
+   *
+   *   < number >
+   *  -----|------
+   * 
    * @param {Node} titleNode
    * @param {NumberDisplay} numberDisplay
    * @param {Slider} slider
