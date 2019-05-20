@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-remove color Properties from Particle?
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
 #38 split GasPropertiesParticlesNode into 2 instances, for inside and outside container
 
@@ -11,6 +10,9 @@ GasPropertiesModel.stepPressure: always call computePressure, to eliminate float
 #52 histograms y-axis scale
 #60 histograms don't update when particles are added/removed with sim paused
 #40 investigate standard collision model
+
+INTERNAL POLISH
+remove color Properties from Particle?
 
 PIXEL POLISH
 Thicker container walls?
