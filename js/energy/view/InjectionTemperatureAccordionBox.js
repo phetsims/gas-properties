@@ -31,10 +31,6 @@ define( require => {
   const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
 
   // constants
-  const RADIO_BUTTON_OPTIONS = {
-    radius: 10,
-    xSpacing: 10
-  };
   const TEXT_OPTIONS = {
     font: GasPropertiesConstants.CONTROL_FONT,
     fill: GasPropertiesColorProfile.textFillProperty,
@@ -69,11 +65,11 @@ define( require => {
 
       // Radio buttons
       const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
-        { node: new Text( matchContainerString, TEXT_OPTIONS ), value: false },
-        { node: new Text( setToString, TEXT_OPTIONS ), value: true }
+        { value: false, node: new Text( matchContainerString, TEXT_OPTIONS ) },
+        { value: true, node: new Text( setToString, TEXT_OPTIONS ) }
       ], {
         spacing: 12,
-        radioButtonOptions: RADIO_BUTTON_OPTIONS
+        radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS
       } );
 
       // Major ticks for temperature slider

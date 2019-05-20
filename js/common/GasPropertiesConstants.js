@@ -57,6 +57,12 @@ define( require => {
       }
     },
 
+    // Defaults for AquaRadioButton instances
+    AQUA_RADIO_BUTTON_OPTIONS: {
+      radius: 8,
+      xSpacing: 10
+    },
+
     // Defaults for all Panel instances
     PANEL_OPTIONS: {
       align: 'left',
@@ -79,10 +85,6 @@ define( require => {
     HISTOGRAM_AXIS_LABEL_OPTIONS: {
       fill: GasPropertiesColorProfile.textFillProperty,
       font: new PhetFont( 14 )
-    },
-
-    AQUA_RADIO_BUTTON_OPTIONS: {
-      radius: 10
     },
 
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
