@@ -53,7 +53,7 @@ define( require => {
 
     // stroke for check boxes
     checkboxStroke: {
-      default: 'rgb( 255, 255, 255 )',
+      default: 'white',
       projector: 'black'
     },
 
