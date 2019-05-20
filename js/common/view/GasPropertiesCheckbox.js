@@ -31,6 +31,10 @@ define( require => {
         textMaxWidth: null,
         textIconSpacing: 10, // horizontal space between text and icon
         font: GasPropertiesConstants.CONTROL_FONT,
+
+        // Checkbox options
+        spacing: 8,
+        boxWidth: 16,
         checkboxColor: GasPropertiesColorProfile.checkboxStrokeProperty,
         checkboxColorBackground: GasPropertiesColorProfile.checkboxFillProperty
       }, options );
