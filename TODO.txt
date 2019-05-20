@@ -1,6 +1,6 @@
 TODO list for gas-properties
 
-GasPropertiesModel pressureProperty in core model units, have view convert to kPa
+GasPropertiesModel pressureProperty in core model units (AMU/(pm * ps^2)), have view convert to kPa
 
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
 
