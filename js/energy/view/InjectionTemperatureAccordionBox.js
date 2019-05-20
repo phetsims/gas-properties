@@ -2,7 +2,7 @@
 
 /**
  * Control panel labeled 'Particle Tools', which has controls related to particles.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -12,7 +12,6 @@ define( require => {
   const AccordionBox = require( 'SUN/AccordionBox' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -21,15 +20,28 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
 
   // strings
-  const controlTemperatureString = require( 'string!GAS_PROPERTIES/controlTemperature' );
-  const particleToolsString = require( 'string!GAS_PROPERTIES/particleTools' );
+  const injectionTemperatureString = require( 'string!GAS_PROPERTIES/injectionTemperature' );
   const temperatureString = require( 'string!GAS_PROPERTIES/temperature' );
   const kelvinString = require( 'string!GAS_PROPERTIES/kelvin' );
+  const matchContainerString = require( 'string!GAS_PROPERTIES/matchContainer' );
+  const setToString = require( 'string!GAS_PROPERTIES/setTo' );
   const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
 
-  class ParticleToolsAccordionBox extends AccordionBox {
+  // constants
+  const RADIO_BUTTON_OPTIONS = {
+    radius: 10,
+    xSpacing: 10
+  };
+  const TEXT_OPTIONS = {
+    font: GasPropertiesConstants.CONTROL_FONT,
+    fill: GasPropertiesColorProfile.textFillProperty,
+    maxWidth: 175 // determined empirically
+  };
+
+  class InjectionTemperatureAccordionBox extends AccordionBox {
 
     /**
      * @param {BooleanProperty} controlTemperatureEnabledProperty
@@ -46,7 +58,7 @@ define( require => {
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBox options
-        titleNode: new Text( particleToolsString, {
+        titleNode: new Text( injectionTemperatureString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         } )
@@ -55,10 +67,13 @@ define( require => {
       // Limit width of title
       options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
-      // Control Temperature checkbox
-      const controlTemperatureCheckbox = new GasPropertiesCheckbox( controlTemperatureEnabledProperty, {
-        text: controlTemperatureString,
-        textMaxWidth: 175 // determined empirically
+      // Radio buttons
+      const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
+        { node: new Text( matchContainerString, TEXT_OPTIONS ), value: false },
+        { node: new Text( setToString, TEXT_OPTIONS ), value: true }
+      ], {
+        spacing: 12,
+        radioButtonOptions: RADIO_BUTTON_OPTIONS
       } );
 
       // Major ticks for temperature slider
@@ -108,8 +123,8 @@ define( require => {
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 12,
-        children: [ controlTemperatureCheckbox, temperatureControl ]
-      } ) ) ;
+        children: [ radioButtonGroup, temperatureControl ]
+      } ) );
 
       super( content, options );
 
@@ -119,5 +134,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ParticleToolsAccordionBox', ParticleToolsAccordionBox );
+  return gasProperties.register( 'InjectionTemperatureAccordionBox', InjectionTemperatureAccordionBox );
 } );

@@ -95,14 +95,17 @@
   "kineticEnergy": {
     "value": "Kinetic Energy"
   },
-  "particleTools": {
-    "value": "Particle Tools"
+  "injectionTemperature": {
+    "value": "Injection Temperature"
   },
   "collisions": {
     "value": "Collisions"
   },
-  "controlTemperature": {
-    "value": "Control Temperature"
+  "matchContainer": {
+    "value": "Match Container"
+  },
+  "setTo": {
+    "value": "Set to:"
   },
   "temperature": {
     "value": "Temperature"

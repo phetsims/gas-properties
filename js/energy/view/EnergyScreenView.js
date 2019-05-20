@@ -16,9 +16,9 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
+  const InjectionTemperatureAccordionBox = require( 'GAS_PROPERTIES/energy/view/InjectionTemperatureAccordionBox' );
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
-  const ParticleToolsAccordionBox = require( 'GAS_PROPERTIES/energy/view/ParticleToolsAccordionBox' );
   const SpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/SpeedAccordionBox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -95,8 +95,8 @@ define( require => {
           fixedWidth: RIGHT_PANEL_WIDTH
         } );
 
-      // Particle Tools accordion box
-      const particleToolsAccordionBox = new ParticleToolsAccordionBox(
+      // Injection Temperature accordion box
+      const injectionTemperatureAccordionBox = new InjectionTemperatureAccordionBox(
         model.controlTemperatureEnabledProperty,
         model.initialTemperatureProperty, {
           expandedProperty: viewProperties.particleToolsExpandedProperty,
@@ -109,7 +109,7 @@ define( require => {
         children: [
           toolsPanel,
           particlesAccordionBox,
-          particleToolsAccordionBox
+          injectionTemperatureAccordionBox
         ],
         spacing: VBOX_SPACING,
         right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
