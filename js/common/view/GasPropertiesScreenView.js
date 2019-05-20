@@ -302,6 +302,7 @@ define( require => {
       this.model = model;
 
       // @private used in methods
+      this.containerNode = containerNode;
       this.particlesNode = particlesNode;
       this.regionsNode = regionsNode;
       this.heavyBicyclePumpNode = heavyBicyclePumpNode;
@@ -326,6 +327,7 @@ define( require => {
      */
     step( dt ) {
       if ( this.model.isPlayingProperty.value ) {
+        this.containerNode.step( dt );
         this.particlesNode.update();
         this.regionsNode && this.regionsNode.update();
       }

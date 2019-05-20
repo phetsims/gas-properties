@@ -14,14 +14,20 @@ define( require => {
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
-  const LidAnimation = require( 'GAS_PROPERTIES/common/view/LidAnimation' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Util = require( 'DOT/Util' );
+
+  // constants
+  const LID_X_SPEED = GasPropertiesQueryParameters.lidSpeedX; // pixels/second
+  const LID_Y_SPEED = GasPropertiesQueryParameters.lidSpeedY; // pixels/second
+  const LID_ROTATION_SPEED = GasPropertiesQueryParameters.lidSpeedTheta; // degrees/second
 
   class GasPropertiesContainerNode extends Node {
 
@@ -163,32 +169,49 @@ define( require => {
       // Dragging the lid horizontally changes the size of the opening in the top of the container
       lidNode.addInputListener( new LidDragListener( container, modelViewTransform, this ) );
 
-      let lidAnimation = null;
       container.lidIsOnProperty.link( lidIsOn => {
         if ( lidIsOn ) {
 
-          // cancel any animation that is in progress
-          if ( lidAnimation ) {
-            lidAnimation.stop();
-            lidAnimation = null;
-          }
-
           // restore the lid in the fully-closed position
           container.lidWidthProperty.value = container.getMaxLidWidth();
+          lidNode.visible = true;
           lidNode.setRotation( 0 );
           updateLidPosition();
           lidNode.visible = true;
         }
+      } );
+
+      // @private
+      this.container = container;
+      this.lidNode = lidNode;
+      this.modelViewTransform = modelViewTransform;
+      this.visibleBoundsProperty = visibleBoundsProperty;
+    }
+
+    /**
+     * @param {number} dt - delta time, in seconds
+     * @public
+     */
+    step( dt ) {
+
+      // Blow off the lid
+      if ( !this.container.lidIsOnProperty.value && this.lidNode.visible ) {
+        if ( this.visibleBoundsProperty.value.intersectsBounds( this.lidNode.bounds ) ) {
+
+          // Lid is inside the visible bounds, animate it.
+          const dx = LID_X_SPEED * dt;
+          const dy = LID_Y_SPEED * dt;
+          this.lidNode.centerX += dx;
+          this.lidNode.centerY += dy;
+          const dr = Util.toRadians( LID_ROTATION_SPEED) * dt;
+          this.lidNode.rotateAround( this.lidNode.center, dr );
+        }
         else {
 
-          // blow the lid off of the container
-          lidAnimation = new LidAnimation( lidNode, visibleBoundsProperty );
-          lidAnimation.endedEmitter.addListener( () => {
-            lidNode.visible = false;
-          } );
-          lidAnimation.start();
+          // Lid has left the visible bounds, hide it.
+          this.lidNode.visible = false;
         }
-      } );
+      }
     }
   }
 
