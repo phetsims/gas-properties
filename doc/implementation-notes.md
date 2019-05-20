@@ -18,6 +18,7 @@ KE (Kinetic Energy) is typically in J, which is _kg * m<sup>2</sup> / s<sup>2</s
 We're using _AMU * pm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) 
 for the full list of units used in the model.
 
+Diffusion screen vs the other 3 screens
 
 Important class hierarchies, note symmetry:
 
