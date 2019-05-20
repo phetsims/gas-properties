@@ -8,6 +8,8 @@ GasPropertiesModel.stepPressure: always call computePressure, to eliminate float
 #52 histograms rewrite
 #52 histograms y-axis scale
 #60 histograms don't update when particles are added/removed with sim paused
+
+OPTIONAL
 #40 investigate standard collision model
 
 INTERNAL POLISH
