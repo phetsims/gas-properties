@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-factor out ParticleImageProperty, how to handle radius for heavy/light particles?
 remove color Properties from Particle?
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
 #38 split GasPropertiesParticlesNode into 2 instances, for inside and outside container

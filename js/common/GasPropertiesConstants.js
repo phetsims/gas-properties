@@ -27,8 +27,13 @@ define( require => {
 
     MODEL_TIME_STEP: 0.2, // ps
 
+    // number of particles
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
+
+    // radii
+    HEAVY_PARTICLES_RADIUS: 125, // pm
+    LIGHT_PARTICLES_RADIUS: 87.5, // pm
 
     // Diffusion experiment ranges
     NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, GasPropertiesQueryParameters.maxNumberOfParticlesDiffusion, 0 ),

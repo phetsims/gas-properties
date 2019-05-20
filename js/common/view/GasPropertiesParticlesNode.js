@@ -11,15 +11,12 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const ParticleImageProperty = require( 'GAS_PROPERTIES/common/view/ParticleImageProperty' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
-  const Property = require( 'AXON/Property' );
-
-  // constants
-  const IMAGE_PROPERTY_OPTIONS = {
-    isValidValue: value => ( value === null || value instanceof HTMLCanvasElement )
-  };
 
   class GasPropertiesParticlesNode extends ParticlesNode {
 
@@ -28,28 +25,23 @@ define( require => {
      */
     constructor( model ) {
 
-      // {Property.<HTMLCanvasElement>} generated images for the heavy and light particle types
-      // initialized below
-      const heavyParticleImageProperty = new Property( null, IMAGE_PROPERTY_OPTIONS );
-      const lightParticleImageProperty = new Property( null, IMAGE_PROPERTY_OPTIONS );
+      // generated image for HeavyParticle species
+      const heavyParticleImageProperty = new ParticleImageProperty(
+        HeavyParticle,
+        model.modelViewTransform,
+        new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS ),
+        GasPropertiesColorProfile.heavyParticleColorProperty,
+        GasPropertiesColorProfile.heavyParticleHighlightColorProperty
+      );
 
-      // Update heavy particle image to match color profile.
-      Property.multilink( [
-          GasPropertiesColorProfile.heavyParticleColorProperty,
-          GasPropertiesColorProfile.heavyParticleHighlightColorProperty
-        ],
-        ( color, highlightColor ) => {
-          ParticlesNode.particleToCanvas( new HeavyParticle(), model.modelViewTransform, heavyParticleImageProperty );
-        } );
-
-      // Update light particle image to match color profile.
-      Property.multilink( [
-          GasPropertiesColorProfile.lightParticleColorProperty,
-          GasPropertiesColorProfile.lightParticleHighlightColorProperty
-        ],
-        ( color, highlightColor ) => {
-          ParticlesNode.particleToCanvas( new LightParticle(), model.modelViewTransform, lightParticleImageProperty );
-        } );
+      // generated image for HeavyParticle species
+      const lightParticleImageProperty = new ParticleImageProperty(
+        LightParticle,
+        model.modelViewTransform,
+        new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS ),
+        GasPropertiesColorProfile.lightParticleColorProperty,
+        GasPropertiesColorProfile.lightParticleHighlightColorProperty
+      );
 
       // {Particle[][]} arrays for each particle type
       const particleArrays = [
