@@ -19,6 +19,10 @@ define( require => {
 
   const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 
+    // Strokes the canvasBounds of each CanvasNode.
+    // For internal use only, not public facing.
+    canvasBounds: { type: 'flag' },
+
     // Shows how the collision detection space is partitioned into a 2D grid of regions.
     // For internal use only, not public facing.
     regions: { type: 'flag' },

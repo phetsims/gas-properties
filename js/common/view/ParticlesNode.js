@@ -12,6 +12,7 @@ define( require => {
   // modules
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
   const Property = require( 'AXON/Property' );
 
@@ -57,8 +58,18 @@ define( require => {
      * @override
      */
     paintCanvas( context ) {
+
+      // Draw the particles
       for ( let i = 0; i < this.particleArrays.length; i++ ) {
         drawParticles( context, this.modelViewTransform, this.particleArrays[ i ], this.imageProperties[ i ].value );
+      }
+
+      // Stroke the canvas bounds, for debugging.  This is a big performance hit.
+      if ( GasPropertiesQueryParameters.canvasBounds ) {
+        const canvasBounds = this.getCanvasBounds();
+        context.rect( canvasBounds.x, canvasBounds.y, canvasBounds.width, canvasBounds.height );
+        context.strokeStyle = 'red';
+        context.stroke();
       }
     }
 

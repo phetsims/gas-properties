@@ -63,6 +63,12 @@ define( require => {
         valueType: Bounds2
         } );
 
+      // @public (read-only) maximum inside bounds, in pm
+      this.maxBounds = new Bounds2(
+        this.location.x - this.widthRange.max, this.location.y,
+        this.location.x, this.location.y + this.height
+      );
+
       // @public (read-only) velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
       this.leftWallVelocity = new Vector2( 0, 0 );
 
