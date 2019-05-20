@@ -1,11 +1,11 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.23 Fri May 17 2019 11:31:52 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.24 Mon May 20 2019 10:34:34 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
   },
   "axon": {
-    "sha": "d845ea40cdb540be6a0b7587afe8824abcb37afe",
+    "sha": "40c3753ff9b804843e28563344bea61ec582d89e",
     "branch": "master"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "e95257acdfa58846bd4d2f9b5612c4042b3a38d8",
+    "sha": "f59672e93787410efd8a798204d331279c803263",
     "branch": "master"
   },
   "dot": {
@@ -21,11 +21,11 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "28bd2ba4a9313f5c24e6b96483d84989916aee10",
+    "sha": "d4e4890784f1139cac3c9fbdca1f7f38e853c518",
     "branch": "master"
   },
   "joist": {
-    "sha": "5e59567bd0efdf9b503ee9e3294e1a7546bfedbb",
+    "sha": "9ee130f9e64ec8ba49872dee7655f04370d1cd21",
     "branch": "master"
   },
   "kite": {
@@ -37,11 +37,11 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "776e79092d16b2c1310953570adb60ee0e010343",
+    "sha": "d8146fb2d4432eef7039403f1a6872f56222699f",
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "47c8c5740b9a5369207e8851e062e89ff56f66fa",
+    "sha": "7a4a34a32ffe78204292e454cf44f76fe3f5e39d",
     "branch": "master"
   },
   "phetcommon": {
@@ -57,11 +57,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "d9368c35ad8fb4249399318bf496055713a5f480",
+    "sha": "0c6f655f38e41d6d3bb14edee2eb5bbb0ad8e0e1",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "6161b29baa4053c281c66175792154400b2fe4db",
+    "sha": "79ae2b46d7e3585d070760020369cabd28b767a8",
     "branch": "master"
   },
   "sherpa": {
@@ -69,7 +69,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "d255c2028e17322e852514bfad866ca478ef0ae7",
+    "sha": "32d502ddc5e96c6c4ad9ef1ec2f6bd333c9c6349",
     "branch": "master"
   },
   "tambo": {
