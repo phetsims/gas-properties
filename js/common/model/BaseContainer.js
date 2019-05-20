@@ -63,7 +63,7 @@ define( require => {
         valueType: Bounds2
         } );
 
-      // @public (read-only) maximum inside bounds, in pm
+      // @public (read-only) maximum inside bounds, in pm.  Used for sizing CanvasNode.
       this.maxBounds = new Bounds2(
         this.location.x - this.widthRange.max, this.location.y,
         this.location.x, this.location.y + this.height
