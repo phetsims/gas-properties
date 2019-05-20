@@ -14,7 +14,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HoldConstantControls = require( 'GAS_PROPERTIES/ideal/view/HoldConstantControls' );
+  const HoldConstantControl = require( 'GAS_PROPERTIES/ideal/view/HoldConstantControl' );
   const HSeparator = require( 'SUN/HSeparator' );
   const Panel = require( 'SUN/Panel' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
@@ -44,7 +44,7 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
-          new HoldConstantControls( holdConstantProperty, { maxWidth: contentWidth } ),
+          new HoldConstantControl( holdConstantProperty, { maxWidth: contentWidth } ),
           new HSeparator( contentWidth, {
             stroke: GasPropertiesColorProfile.separatorColorProperty,
             maxWidth: contentWidth

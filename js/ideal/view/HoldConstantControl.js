@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Radio button group for selecting what should be held constant.
+ * Control for selecting what should be held constant.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -32,7 +32,7 @@ define( require => {
     maxWidth: 175 // determined empirically
   };
 
-  class HoldConstantControls extends VBox {
+  class HoldConstantControl extends VBox {
 
     /**
      * @param {StringProperty} holdConstantProperty
@@ -65,7 +65,7 @@ define( require => {
         radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS
       } );
 
-      assert && assert( !options.children, 'HoldConstantControls sets children' );
+      assert && assert( !options.children, 'HoldConstantControl sets children' );
       options = _.extend( {
         children: [ titleNode, radioButtonGroup ]
       }, options );
@@ -74,5 +74,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'HoldConstantControls', HoldConstantControls );
+  return gasProperties.register( 'HoldConstantControl', HoldConstantControl );
 } );
