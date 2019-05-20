@@ -37,7 +37,6 @@ define( require => {
         titleNode: new Text( dataString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty,
-          separatorLineWidth: 1,
           maxWidth: 200 // determined empirically
         } )
 
@@ -51,7 +50,7 @@ define( require => {
 
       // Vertical separator, analogous to the container's divider
       const separator = new VSeparator( 75, {
-        lineWidth: options.separatorLineWidth,
+        lineWidth: 2,
         stroke: GasPropertiesColorProfile.dividerColorProperty
       } );
 
