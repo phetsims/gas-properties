@@ -51,6 +51,22 @@ define( require => {
         `mean: ${mean}, actualMean: ${actualMean}` );
 
       return values;
+    },
+
+    //TODO delete if unused
+    /**
+     * Are 2 values sufficiently close?
+     * Used in situations where floating-point error prevents values from being precisely equal.
+     * @param {number} value1
+     * @param {number} value2
+     * @param {number} threshold
+     * @returns {boolean}
+     */
+    close( value1, value2, threshold ) {
+      assert && assert( typeof value1 === 'number', `invalid value1: ${value1}` );
+      assert && assert( typeof value2 === 'number', `invalid value1: ${value2}` );
+      assert && assert( threshold >= 0, `invalid threshold: ${threshold}` );
+      return Math.abs( value1 - value2 ) < threshold;
     }
   };
 
