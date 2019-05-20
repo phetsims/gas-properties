@@ -17,7 +17,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
-  const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
+  const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
   const ParticleToolsAccordionBox = require( 'GAS_PROPERTIES/energy/view/ParticleToolsAccordionBox' );
   const SpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/SpeedAccordionBox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -85,6 +85,15 @@ define( require => {
           fixedWidth: RIGHT_PANEL_WIDTH
         } );
 
+      // Particles accordion box
+      const particlesAccordionBox = new ParticlesAccordionBox(
+        model.numberOfHeavyParticlesProperty,
+        model.numberOfLightParticlesProperty,
+        model.modelViewTransform, {
+          expandedProperty: viewProperties.particleCountsExpandedProperty,
+          fixedWidth: RIGHT_PANEL_WIDTH
+        } );
+
       // Particle Tools accordion box
       const particleToolsAccordionBox = new ParticleToolsAccordionBox(
         model.collisionDetector.particleParticleCollisionsEnabledProperty,
@@ -95,21 +104,12 @@ define( require => {
         }
       );
 
-      // Particle Counts accordion box
-      const particleCountsAccordionBox = new ParticleCountsAccordionBox(
-        model.numberOfHeavyParticlesProperty,
-        model.numberOfLightParticlesProperty,
-        model.modelViewTransform, {
-          expandedProperty: viewProperties.particleCountsExpandedProperty,
-          fixedWidth: RIGHT_PANEL_WIDTH
-        } );
-
       // Panels on the right side of the screen
       const rightPanels = new VBox( {
         children: [
           toolsPanel,
-          particleToolsAccordionBox,
-          particleCountsAccordionBox
+          particlesAccordionBox,
+          particleToolsAccordionBox
         ],
         spacing: VBOX_SPACING,
         right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,

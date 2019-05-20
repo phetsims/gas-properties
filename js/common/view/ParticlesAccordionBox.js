@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The accordion box titled 'Particle Counts'.
+ * The accordion box titled 'Particles'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,9 +22,9 @@ define( require => {
   // strings
   const heavyString = require( 'string!GAS_PROPERTIES/heavy' );
   const lightString = require( 'string!GAS_PROPERTIES/light' );
-  const particleCountsString = require( 'string!GAS_PROPERTIES/particleCounts' );
+  const particlesString = require( 'string!GAS_PROPERTIES/particles' );
 
-  class ParticleCountsAccordionBox extends AccordionBox {
+  class ParticlesAccordionBox extends AccordionBox {
 
     /**
      * @param {NumberProperty} numberOfHeavyParticlesProperty
@@ -40,7 +40,7 @@ define( require => {
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBox options
-        titleNode: new Text( particleCountsString, {
+        titleNode: new Text( particlesString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         } )
@@ -70,6 +70,6 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ParticleCountsAccordionBox', ParticleCountsAccordionBox );
+  return gasProperties.register( 'ParticlesAccordionBox', ParticlesAccordionBox );
 } );
  

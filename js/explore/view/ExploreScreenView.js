@@ -16,7 +16,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const ParticleCountsAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticleCountsAccordionBox' );
+  const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
 
   // constants
   const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
@@ -45,8 +45,8 @@ define( require => {
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
-      // Particle Counts accordion box
-      const particleCountsAccordionBox = new ParticleCountsAccordionBox(
+      // Particles accordion box
+      const particlesAccordionBox = new ParticlesAccordionBox(
         model.numberOfHeavyParticlesProperty,
         model.numberOfLightParticlesProperty,
         model.modelViewTransform, {
@@ -59,7 +59,7 @@ define( require => {
       // Rendering order. Everything we add should be behind what is created by super.
       const parent = new Node();
       parent.addChild( toolsPanel );
-      parent.addChild( particleCountsAccordionBox );
+      parent.addChild( particlesAccordionBox );
       this.addChild( parent );
       parent.moveToBack();
 
