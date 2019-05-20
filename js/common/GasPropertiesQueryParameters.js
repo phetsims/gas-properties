@@ -184,7 +184,7 @@ define( require => {
      */
     lidSpeedTheta: {
       type: 'number',
-      defaultValue: -90
+      defaultValue: -50
     }
   } );
 
