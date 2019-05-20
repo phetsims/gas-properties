@@ -165,7 +165,7 @@ define( require => {
      */
     lidSpeedX: {
       type: 'number',
-      defaultValue: -75
+      defaultValue: -50
     },
 
     /**
@@ -175,7 +175,7 @@ define( require => {
     lidSpeedY: {
       type: 'number',
       isValidValue: value => ( value < 0 ), // lid must move upward
-      defaultValue: -100
+      defaultValue: -150
     },
 
     /**
@@ -184,7 +184,7 @@ define( require => {
      */
     lidSpeedTheta: {
       type: 'number',
-      defaultValue: -180
+      defaultValue: -90
     }
   } );
 
