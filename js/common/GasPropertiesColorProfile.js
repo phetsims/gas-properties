@@ -29,31 +29,31 @@ define( require => {
 
     // fill for control panels
     panelFill: {
-      default: 'rgb( 220, 220, 220 )',
-      projector: 'rgb( 220, 220, 220 )'
+      default: 'rgb( 40, 40, 40 )',
+      projector: 'rgb( 235, 235, 235 )'
     },
 
     // stroke for control panels
     panelStroke: {
-      default: 'white',
-      projector: 'black'
+      default: 'black',
+      projector: 'white'
     },
 
     // default fill for text
     textFill: {
-      default: 'black',
+      default: 'white',
       projector: 'black'
     },
 
     // fill for check boxes
     checkboxFill: {
-      default: 'white',
+      default: 'black',
       projector: 'white'
     },
 
     // stroke for check boxes
     checkboxStroke: {
-      default: 'black',
+      default: 'rgb( 255, 255, 255 )',
       projector: 'black'
     },
 
@@ -95,7 +95,7 @@ define( require => {
 
     // icon for the 'Width' checkbox
     widthIconColor: {
-      default: 'black',
+      default: 'white',
       projector: 'black'
     },
 
@@ -150,7 +150,7 @@ define( require => {
 
     // primary color for 1st particle type in Diffusion screen
     particle1Color: {
-      default: 'rgb( 115, 251, 253 )' // cyan
+      default: 'rgb( 0, 230, 255)' // cyan
     },
 
     // specular highlight for 1st particle type in Diffusion screen
