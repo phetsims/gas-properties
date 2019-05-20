@@ -15,6 +15,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -24,7 +25,6 @@ define( require => {
 
   // strings
   const injectionTemperatureString = require( 'string!GAS_PROPERTIES/injectionTemperature' );
-  const temperatureString = require( 'string!GAS_PROPERTIES/temperature' );
   const kelvinString = require( 'string!GAS_PROPERTIES/kelvin' );
   const matchContainerString = require( 'string!GAS_PROPERTIES/matchContainer' );
   const setToString = require( 'string!GAS_PROPERTIES/setTo' );
@@ -93,8 +93,8 @@ define( require => {
       ];
 
       // Temperature NumberControl
-      const temperatureControl = new NumberControl( temperatureString, initialTemperatureProperty, initialTemperatureProperty.range, {
-        layoutFunction: NumberControl.createLayoutFunction4(),
+      const temperatureControl = new NumberControl( '', initialTemperatureProperty, initialTemperatureProperty.range, {
+        layoutFunction: temperatureLayoutFunction,
         titleNodeOptions: {
           fill: GasPropertiesColorProfile.textFillProperty,
           font: GasPropertiesConstants.CONTROL_FONT,
@@ -108,7 +108,7 @@ define( require => {
           maxWidth: 75
         },
         sliderOptions: {
-          trackSize: new Dimension2( 120, 5 ),
+          trackSize: new Dimension2( 175, 5 ),
           trackStroke: GasPropertiesColorProfile.textFillProperty,
           majorTicks: majorTicks,
           majorTickStroke: GasPropertiesColorProfile.textFillProperty,
@@ -132,6 +132,30 @@ define( require => {
         temperatureControl.enabled = controlTemperatureEnabled;
       } );
     }
+  }
+
+  /**
+   * Layout function for the temperature NumberControl.
+   * @param {Node} titleNode
+   * @param {NumberDisplay} numberDisplay
+   * @param {Slider} slider
+   * @param {ArrowButton} leftArrowButton
+   * @param {ArrowButton} rightArrowButton
+   * @returns {Node}
+   */
+  function temperatureLayoutFunction( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) {
+    return new VBox( {
+      align: 'center',
+      spacing: 5,
+      resize: false, // prevent slider from causing a resize when thumb is at min or max
+      children: [
+        new HBox( {
+          spacing: 5,
+          children: [ leftArrowButton, numberDisplay, rightArrowButton ]
+        } ),
+        slider
+      ]
+    } );
   }
 
   return gasProperties.register( 'InjectionTemperatureAccordionBox', InjectionTemperatureAccordionBox );

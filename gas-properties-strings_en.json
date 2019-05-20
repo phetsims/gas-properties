@@ -107,9 +107,6 @@
   "setTo": {
     "value": "Set to:"
   },
-  "temperature": {
-    "value": "Temperature"
-  },
   "returnLid": {
     "value": "Return Lid"
   },
