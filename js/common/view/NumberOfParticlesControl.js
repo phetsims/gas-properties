@@ -22,7 +22,7 @@ define( require => {
   // const
   const X_SPACING = 8;
 
-  class ParticleCountControl extends VBox {
+  class NumberOfParticlesControl extends VBox {
 
     /**
      * @param {Node} icon
@@ -64,7 +64,7 @@ define( require => {
       // Limit width of text
       titleNode.maxWidth = spinner.width - icon.width - X_SPACING;
 
-      assert && assert( !options.children, 'ParticleCountControl sets children' );
+      assert && assert( !options.children, 'NumberOfParticlesControl sets children' );
       options = _.extend( {
         children: [ titleBox, spinner ]
       }, options );
@@ -73,5 +73,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ParticleCountControl', ParticleCountControl );
+  return gasProperties.register( 'NumberOfParticlesControl', NumberOfParticlesControl );
 } );
