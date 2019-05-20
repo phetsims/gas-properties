@@ -58,7 +58,8 @@ define( require => {
         deltaCoarse: 50,
         numberDisplayOptions: {
           font: new PhetFont( 18 )
-        }
+        },
+        maxWidth: 190 // determined empirically
       } );
 
       // Limit width of text
