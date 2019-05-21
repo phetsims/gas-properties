@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Control panel labeled 'Particle Tools', which has controls related to particles.
+ * Control panel labeled 'Injection Temperature', which has controls related to particles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
