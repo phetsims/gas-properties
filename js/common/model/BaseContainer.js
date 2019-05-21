@@ -52,7 +52,7 @@ define( require => {
       this.depth = GasPropertiesQueryParameters.containerDepth;
 
       // @public (read-only) wall thickness, in pm
-      this.wallThickness = 50;
+      this.wallThickness = GasPropertiesQueryParameters.wallThickness;
 
       // @public inside bounds, in pm
       this.boundsProperty = new DerivedProperty( [ this.widthProperty ],

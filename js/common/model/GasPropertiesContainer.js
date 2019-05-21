@@ -12,6 +12,7 @@ define( require => {
   const BaseContainer = require( 'GAS_PROPERTIES/common/model/BaseContainer' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -25,7 +26,7 @@ define( require => {
       this.lidIsOnProperty = new BooleanProperty( true );
 
       // @public (read-only) lid thickness, in pm
-      this.lidThickness = 3 * this.wallThickness;
+      this.lidThickness = GasPropertiesQueryParameters.lidThickness;
 
       // @public (read-only) insets of the opening in the top, from the inside edges of the container, in pm
       this.openingLeftInset = 1250;

@@ -13,6 +13,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
   // constants
@@ -32,7 +33,7 @@ define( require => {
       } );
 
       // @public (read-only) divider thickness, in pm
-      this.dividerThickness = 100;
+      this.dividerThickness = GasPropertiesQueryParameters.dividerThickness;
 
       // @public (read-only) divider is horizontally centered, but no code assumes that
       this.dividerX = this.left + ( this.width / 2 );

@@ -185,6 +185,36 @@ define( require => {
     lidSpeedTheta: {
       type: 'number',
       defaultValue: -50
+    },
+
+    /**
+     * Thickness of the container's walls, in pm.
+     * For internal use only, not public facing.
+     */
+    wallThickness: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 50
+    },
+
+    /**
+     * Thickness of the container's lid, in pm.
+     * For internal use only, not public facing.
+     */
+    lidThickness: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 150
+    },
+
+    /**
+     * Thickness of the container's vertical divider, in pm.
+     * For internal use only, not public facing.
+     */
+    dividerThickness: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 100
     }
   } );
 
