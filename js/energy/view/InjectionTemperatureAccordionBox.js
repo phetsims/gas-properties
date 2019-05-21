@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Control panel labeled 'Injection Temperature', which has controls related to particles.
+ * Accordion box labeled 'Injection Temperature', which contains controls related to the temperature used to
+ * compute the initial velocity of particles when they are injected into the contaner.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
