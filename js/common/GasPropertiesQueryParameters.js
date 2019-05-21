@@ -48,7 +48,7 @@ define( require => {
       defaultValue: 800
     },
 
-    // The sample period for the histograms and Average Speed display, in ps
+    // The sample period for the histograms and Average Speed display, in ps.
     // For internal use only, not public facing.
     histogramSamplePeriod: {
       type: 'number',
