@@ -1,6 +1,6 @@
 TODO list for gas-properties
 
-PressureT and PressureV when number of particles goes to zero
+PressureT when number of particles goes to zero, T = PV/Nk
 
 GasPropertiesModel pressureProperty in core model units (AMU/(pm * ps^2)), have view convert to kPa
 
