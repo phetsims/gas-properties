@@ -48,7 +48,6 @@ define( require => {
 
       // @public
       this.container = new DiffusionContainer();
-      console.log( 'this.container.left='+ this.modelViewTransform.modelToViewX( this.container.left ) );//XXX
 
       // @public settings for the left and right sides of the container, before the divider is removed
       this.leftSettings = new DiffusionSettings();
