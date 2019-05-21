@@ -14,7 +14,6 @@ define( require => {
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
@@ -25,9 +24,9 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  const LID_X_SPEED = GasPropertiesQueryParameters.lidSpeedX; // pixels/second
-  const LID_Y_SPEED = GasPropertiesQueryParameters.lidSpeedY; // pixels/second
-  const LID_ROTATION_SPEED = GasPropertiesQueryParameters.lidSpeedTheta; // degrees/second
+  const LID_X_SPEED = -50; // pixels/second
+  const LID_Y_SPEED = -150; // pixels/second
+  const LID_ROTATION_SPEED = -50; // degrees/second
 
   class GasPropertiesContainerNode extends Node {
 

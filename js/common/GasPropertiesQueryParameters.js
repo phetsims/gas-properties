@@ -160,34 +160,6 @@ define( require => {
     },
 
     /**
-     * x component of the lid's animation speed, in pixels/second. Positive x is to the right.
-     * For internal use only, not public facing.
-     */
-    lidSpeedX: {
-      type: 'number',
-      defaultValue: -50
-    },
-
-    /**
-     * y component of the lid's animation speed, in pixels/second. Positive y is down.
-     * For internal use only, not public facing.
-     */
-    lidSpeedY: {
-      type: 'number',
-      isValidValue: value => ( value < 0 ), // lid must move upward
-      defaultValue: -150
-    },
-
-    /**
-     * The lid's rotation speed, in degrees/second. Positive rotation is clockwise.
-     * For internal use only, not public facing.
-     */
-    lidSpeedTheta: {
-      type: 'number',
-      defaultValue: -50
-    },
-
-    /**
      * Thickness of the container's walls, in pm.
      * For internal use only, not public facing.
      */
