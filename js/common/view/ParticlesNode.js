@@ -26,8 +26,10 @@ define( require => {
      * @param {Particle[][]} particleArrays - arrays of particles to render
      * @param {Property.<HTMLCanvasElement>[]} imageProperties - an image for each array in particleArrays
      * @param {ModelViewTransform2} modelViewTransform
+     * @param {ColorDef} debugFill - fill the canvas when ?canvasBounds, for debugging
+     * @param {Object} [options]
      */
-    constructor( particleArrays, imageProperties, modelViewTransform ) {
+    constructor( particleArrays, imageProperties, modelViewTransform, debugFill ) {
 
       assert && assert( particleArrays.length === imageProperties.length,
         'must supply an image Property for each particle array' );
@@ -41,6 +43,7 @@ define( require => {
       this.modelViewTransform = modelViewTransform;
       this.particleArrays = particleArrays;
       this.imageProperties = imageProperties;
+      this.debugFill = debugFill;
     }
 
     /**
@@ -59,17 +62,16 @@ define( require => {
      */
     paintCanvas( context ) {
 
-      // Draw the particles
-      for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        drawParticles( context, this.modelViewTransform, this.particleArrays[ i ], this.imageProperties[ i ].value );
-      }
-
       // Stroke the canvas bounds, for debugging.  This is a big performance hit.
       if ( GasPropertiesQueryParameters.canvasBounds ) {
         const canvasBounds = this.getCanvasBounds();
-        context.rect( canvasBounds.x, canvasBounds.y, canvasBounds.width, canvasBounds.height );
-        context.strokeStyle = 'red';
-        context.stroke();
+        context.fillStyle = this.debugFill;
+        context.fillRect(  canvasBounds.x, canvasBounds.y, canvasBounds.width, canvasBounds.height );
+      }
+
+      // Draw the particles
+      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+        drawParticles( context, this.modelViewTransform, this.particleArrays[ i ], this.imageProperties[ i ].value );
       }
     }
 

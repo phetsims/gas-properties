@@ -20,6 +20,10 @@ define( require => {
   const ParticleImageProperty = require( 'GAS_PROPERTIES/common/view/ParticleImageProperty' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
 
+  // constants
+  const INSIDE_DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )'; // canvas fill for particles INSIDE container
+  const OUTSIDE_DEBUG_FILL = 'rgba( 0, 255, 0, 0.1 )'; // canvas fill for particles OUTSIDE container
+
   class GasPropertiesParticlesNode extends Node {
 
     /**
@@ -49,7 +53,8 @@ define( require => {
       const insideParticlesNode = new ParticlesNode(
         [ model.heavyParticles, model.lightParticles ],
         [ heavyParticleImageProperty, lightParticleImageProperty ],
-        model.modelViewTransform
+        model.modelViewTransform,
+        INSIDE_DEBUG_FILL
       );
 
       // Size the inside canvas to the maximium bounds for the container.
@@ -59,7 +64,8 @@ define( require => {
       const outsideParticlesNode = new ParticlesNode(
         [ model.heavyParticlesOutside, model.lightParticlesOutside ],
         [ heavyParticleImageProperty, lightParticleImageProperty ],
-        model.modelViewTransform
+        model.modelViewTransform,
+        OUTSIDE_DEBUG_FILL
       );
 
       // When particles escape through the container's lid, they float up, since there is no gravity.

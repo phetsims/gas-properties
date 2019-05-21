@@ -16,6 +16,9 @@ define( require => {
   const ParticleImageProperty = require( 'GAS_PROPERTIES/common/view/ParticleImageProperty' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
 
+  // constants
+  const DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )';
+
   class DiffusionParticlesNode extends ParticlesNode {
 
     /**
@@ -47,7 +50,7 @@ define( require => {
       // {Property.<HTMLCanvasElement>[]} images for each particle species in particleArrays
       const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
 
-      super( particleArrays, imageProperties, model.modelViewTransform );
+      super( particleArrays, imageProperties, model.modelViewTransform, DEBUG_FILL );
 
       // Size the canvas to match the container bounds. See https://github.com/phetsims/gas-properties/issues/38
       this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.bounds ) );

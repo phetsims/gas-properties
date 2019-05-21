@@ -19,7 +19,7 @@ define( require => {
     // For internal use only, not public facing.
     origin: { type: 'flag' },
 
-    // Strokes the canvasBounds of each CanvasNode.
+    // Fills the canvasBounds of each CanvasNode, for debugging size and position.
     // For internal use only, not public facing.
     canvasBounds: { type: 'flag' },
 
