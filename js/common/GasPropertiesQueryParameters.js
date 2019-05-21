@@ -64,14 +64,6 @@ define( require => {
       defaultValue: 20000
     },
 
-    // Maximum number of particles in the Diffusion screen
-    // For internal use only, not public facing.
-    maxNumberOfParticlesDiffusion: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 200
-    },
-
     // The number of samples in the running average for particle flow rate.
     // For internal use only, not public facing.
     flowRateSamples: {
