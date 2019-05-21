@@ -39,7 +39,6 @@ define( require => {
   const GasPropertiesParticlesNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesParticlesNode' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
-  const ModelGridNode = require( 'GAS_PROPERTIES/common/view/ModelGridNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const OopsDialog = require( 'SCENERY_PHET/OopsDialog' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
@@ -240,15 +239,6 @@ define( require => {
         regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
       }
 
-      // 2D grid for model coordinate frame
-      let gridNode = null;
-      if ( GasPropertiesQueryParameters.grid ) {
-        gridNode = new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform, {
-          cellLength: 1000, // pm
-          stroke: GasPropertiesColorProfile.gridColorProperty
-        } );
-      }
-
       // model and view coordinates for pointer location
       let pointerCoordinatesNode = null;
       if ( GasPropertiesQueryParameters.pointerCoordinates ) {
@@ -269,7 +259,6 @@ define( require => {
       this.addChild( particlesNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
-      gridNode && this.addChild( gridNode );
       collisionCounterNode && this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );
       this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
