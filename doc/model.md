@@ -31,7 +31,7 @@ Equations:
 * T = (2/3)KE/k
 * |v| = sqrt( 3kT / m )
 
-Units:
+Units, chosen so that we're not working with integers instead of small floating-point numbers:
 
 * angle: radians
 * distance: pm
@@ -45,7 +45,10 @@ Units:
 * volume: pm<sup>3</sup>
 
 
-TODO include calculations for conversions between SI and our units
+TODO include calculations for conversions between SI and our units, specifically:
+* Boltzmann constant
+* pressure in kPa
+
 
 In the _Explore_ screen, the left (movable) wall does work on particles. After a collision with the left wall
 occurs, the new X component of a particle's velocity is `-( particleVelocity.x - leftWallVelocity.x )`.
