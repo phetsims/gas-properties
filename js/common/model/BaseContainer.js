@@ -49,7 +49,7 @@ define( require => {
       this.height = 8750;
 
       // @private (read-only) depth of the container, in pm
-      this.depth = GasPropertiesQueryParameters.containerDepth;
+      this.depth = 4000;
 
       // @public (read-only) wall thickness, in pm
       this.wallThickness = GasPropertiesQueryParameters.wallThickness;

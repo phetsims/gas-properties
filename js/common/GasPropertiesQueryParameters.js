@@ -104,14 +104,6 @@ define( require => {
       defaultValue: 8E5
     },
 
-    // Depth of the container, in pm
-    // For internal use only, not public facing.
-    containerDepth: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 4000
-    },
-
     // Minimum amount of jitter in the pressure gauge, in kPa.
     // For internal use only, not public facing.
     minJitter: {
