@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO if we use the same color for both profiles, delete projector and move definition
 /**
  * Color profiles for this simulation.
  * Default colors are required. Colors for other profiles are optional.
@@ -99,6 +98,12 @@ define( require => {
       projector: 'black'
     },
 
+    // stroke around center-of-mass indicators
+    centerOfMassStroke: {
+      default: 'white',
+      projector: 'black'
+    },
+
     // enabled with ?grid query parameter
     gridColor: {
       default: 'white',
@@ -117,15 +122,9 @@ define( require => {
       projector: 'rgba( 255, 255, 255, 0.5 )'
     },
 
-    // Stroke around center-of-mass indicators
-    centerOfMassStroke: {
-      default: 'white',
-      projector: 'black'
-    },
-
     //------------------------------------------------------------------------------------------------------------------
-    // These colors currently do NOT change. They are included here for future-proofing, and to support experimenting
-    // with colors in gas-properties-colors.html.
+    // These colors currently do NOT change in projector mode. They are included here for future-proofing,
+    // and to facilitate experimenting with colors in gas-properties-colors.html.
     //------------------------------------------------------------------------------------------------------------------
 
     // primary color for heavy particles
@@ -135,7 +134,7 @@ define( require => {
 
     // specular highlight for heavy particles
     heavyParticleHighlightColor: {
-      default: 'rgb( 220, 220, 255 )' // lighter purple
+      default: 'rgb( 220, 220, 255 )' // lighter shade of heavyParticleColor
     },
 
     // primary color for light particles
@@ -145,7 +144,7 @@ define( require => {
 
     // specular highlight for light particles
     lightParticleHighlightColor: {
-      default: 'rgb( 255, 170, 170 )' // lighter red
+      default: 'rgb( 255, 170, 170 )' // lighter shade of lightParticleColor
     },
 
     // primary color for 1st particle type in Diffusion screen
@@ -155,7 +154,7 @@ define( require => {
 
     // specular highlight for 1st particle type in Diffusion screen
     particle1HighlightColor: {
-      default: 'rgb( 203, 247, 252 )' // lighter cyan
+      default: 'rgb( 203, 247, 252 )' // lighter shade of particle1Color
     },
 
     // primary color for 2nd particle type in Diffusion screen
@@ -165,7 +164,7 @@ define( require => {
 
     // specular highlight for 2nd particle type in Diffusion screen
     particle2HighlightColor: {
-      default: 'rgb( 255, 170, 170 )' // lighter red
+      default: 'rgb( 255, 170, 170 )' // lighter shade of particle2Color
     },
 
     stopwatchBackgroundColor: {
@@ -201,9 +200,9 @@ define( require => {
       default: 'rgb( 160, 160, 160 )'
     },
 
-    // Ideal screen, grip on the container's resize handle
+    // grip on the container's resize handle in the Ideal screen
     idealResizeGripColor: {
-      default: 'rgb( 187, 154, 86 )'
+      default: 'rgb( 187, 154, 86 )' // gold
     },
 
     // bars in the Speed histogram
@@ -216,7 +215,7 @@ define( require => {
       default: PhetColorScheme.KINETIC_ENERGY
     },
 
-    // Container divider in the Diffusion screen
+    // container divider in the Diffusion screen
     dividerColor: {
       default: 'rgb( 70, 205, 85 )'
     }
