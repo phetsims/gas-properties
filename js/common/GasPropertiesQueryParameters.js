@@ -15,7 +15,7 @@ define( require => {
 
   const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 
-    // Puts a red dot at the origin of some UI components, for debugging layout and drag listeners.
+    // Shows a red dot at the origin of some UI components, for debugging layout and drag listeners.
     // For internal use only, not public facing.
     origin: { type: 'flag' },
 
