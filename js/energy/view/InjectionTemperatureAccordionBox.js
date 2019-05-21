@@ -2,7 +2,7 @@
 
 /**
  * Accordion box labeled 'Injection Temperature', which contains controls related to the temperature used to
- * compute the initial velocity of particles when they are injected into the contaner.
+ * compute the initial velocity of particles when they are injected into the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
