@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO #56 redesign collision counter UX
 /**
  * Collision Counter, displays the number of collisions between particles and the container walls.
  *
