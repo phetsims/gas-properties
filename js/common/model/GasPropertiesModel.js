@@ -415,7 +415,7 @@ define( require => {
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
 
-        //TODO should this scale the velocity of all particles in the container?
+        //TODO #78 scale the velocity of all particles in the container
         // hold pressure constant by changing temperature, T = PV/Nk
         const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
         assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
