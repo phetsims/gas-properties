@@ -144,21 +144,6 @@ define( require => {
       defaultValue: 0.75
     },
 
-    // Sample periods for the collision detector, in ps
-    // For internal use only, not public facing.
-    collisionCounterSamplePeriods: {
-      type: 'array',
-      elementSchema: {
-        type: 'number'
-      },
-      defaultValue: [ 5, 10, 20 ],
-      isValidValue: array => {
-        return ( array.length > 1 ) && // more than one value
-               ( _.uniq( array ).length === array.length ) &&  // unique values
-               ( _.filter( array, value => value | 0 === value ).length === array.length ); // integer values
-      }
-    },
-
     /**
      * Thickness of the container's walls, in pm.
      * For internal use only, not public facing.

@@ -11,7 +11,6 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
@@ -51,7 +50,7 @@ define( require => {
       this.visibleProperty = new BooleanProperty( options.visible );
 
       // @public (read-only) valid values for samplePeriodProperty, in ps
-      this.samplePeriods = GasPropertiesQueryParameters.collisionCounterSamplePeriods;
+      this.samplePeriods = [ 5, 10, 20 ];
 
       // @public sample period for counting collisions
       // Actual sample period will be close to this value, but not exact (confirmed OK with @arouifar).
