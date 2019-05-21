@@ -17,4 +17,3 @@ INTERNAL POLISH
 remove color Properties from Particle?
 
 PIXEL POLISH
-Thicker container walls?
