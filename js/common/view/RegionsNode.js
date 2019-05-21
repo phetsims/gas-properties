@@ -50,7 +50,7 @@ define( require => {
      * Updates each RegionNode.
      * @public
      */
-    step( dt ) {
+    update() {
       for ( let i = 0; i < this.regionNodes.length; i++ ) {
         this.regionNodes[ i ].update();
       }
