@@ -43,11 +43,12 @@ define( require => {
         modelOriginOffset: new Vector2( 645, 525 ),
 
         // Stopwatch initial location (in view coordinates!), determined empirically.
-        stopwatchLocation: new Vector2( 35, 15 )
+        stopwatchLocation: new Vector2( 60, 50 )
       } );
 
       // @public
       this.container = new DiffusionContainer();
+      console.log( 'this.container.left='+ this.modelViewTransform.modelToViewX( this.container.left ) );//XXX
 
       // @public settings for the left and right sides of the container, before the divider is removed
       this.leftSettings = new DiffusionSettings();
