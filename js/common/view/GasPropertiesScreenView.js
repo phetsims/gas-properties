@@ -244,6 +244,7 @@ define( require => {
       let gridNode = null;
       if ( GasPropertiesQueryParameters.grid ) {
         gridNode = new ModelGridNode( this.visibleBoundsProperty, model.modelViewTransform, {
+          cellLength: 1000, // pm
           stroke: GasPropertiesColorProfile.gridColorProperty
         } );
       }

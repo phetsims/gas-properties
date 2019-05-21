@@ -15,7 +15,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Shape = require( 'KITE/Shape' );
-  const Vector2 = require( 'DOT/Vector2' );
+  const Util = require( 'DOT/Util' );
 
   class ModelGridNode extends Path {
 
@@ -38,30 +38,29 @@ define( require => {
       // Update the grid when the visibleBounds change.
       visibleBoundsProperty.link( visibleBounds => {
 
+        //TODO this assumes that y is inverted by modelViewTransform
         // lower-left of model coordinate frame
-        let modelPosition = modelViewTransform.viewToModelPosition( new Vector2( visibleBounds.minX, visibleBounds.maxY ) );
-        const minX = Math.ceil( modelPosition.x );
-        const minY = Math.ceil( modelPosition.y );
+        const minX = Util.roundToInterval( modelViewTransform.viewToModelX( visibleBounds.minX ), options.cellLength );
+        const minY = Util.roundToInterval( modelViewTransform.viewToModelY( visibleBounds.maxY ), options.cellLength );
 
         // upper-right of model coordinate frame
-        modelPosition = modelViewTransform.viewToModelPosition( new Vector2( visibleBounds.maxX, visibleBounds.minY ) );
-        const maxX = Math.ceil( modelPosition.x );
-        const maxY = Math.ceil( modelPosition.y );
+        const maxX = Util.roundToInterval( modelViewTransform.viewToModelX( visibleBounds.maxX ), options.cellLength );
+        const maxY = Util.roundToInterval( modelViewTransform.viewToModelY( visibleBounds.minY ), options.cellLength );
 
         const gridShape = new Shape();
 
         // vertical grid lines
         for ( let x = minX; x < maxX; x += options.cellLength ) {
-          const viewPosition = modelViewTransform.modelToViewXY( x, 0 );
-          gridShape.moveTo( viewPosition.x, visibleBounds.minY );
-          gridShape.lineTo( viewPosition.x, visibleBounds.maxY, );
+          const viewX = modelViewTransform.modelToViewX( x );
+          gridShape.moveTo( viewX, visibleBounds.minY );
+          gridShape.lineTo( viewX, visibleBounds.maxY, );
         }
 
         // horizontal grid lines
         for ( let y = minY; y < maxY; y += options.cellLength ) {
-          const viewPosition = modelViewTransform.modelToViewXY( 0, y );
-          gridShape.moveTo( visibleBounds.minX, viewPosition.y );
-          gridShape.lineTo( visibleBounds.maxX, viewPosition.y, );
+          const viewY = modelViewTransform.modelToViewY( y );
+          gridShape.moveTo( visibleBounds.minX, viewY );
+          gridShape.lineTo( visibleBounds.maxX, viewY, );
         }
 
         this.shape = gridShape;
