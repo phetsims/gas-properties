@@ -1,14 +1,16 @@
 TODO list for gas-properties
 
+PressureT and PressureV when number of particles goes to zero
+
 GasPropertiesModel pressureProperty in core model units (AMU/(pm * ps^2)), have view convert to kPa
 
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
 
-#78 PRESSURE_T: adjust velocity of particles, animate heat/cool
+#78 PressureT: adjust velocity of particles, animate heat/cool
 #71 speed limit for left wall
 #52 histograms rewrite
 #52 histograms y-axis scale
-#60 histograms don't update when particles are added/removed with sim paused
+#60 histograms shoulds update when particles are added/removed with sim paused
 
 OPTIONAL
 #40 investigate standard collision model
