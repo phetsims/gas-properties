@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -69,7 +70,7 @@ define( require => {
       super( options );
 
       // Red dot at the origin, for debugging layout
-      if ( phet.chipper.queryParameters.dev ) {
+      if ( GasPropertiesQueryParameters.origin ) {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
     }

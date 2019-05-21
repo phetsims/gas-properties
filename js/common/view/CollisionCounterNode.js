@@ -18,6 +18,7 @@ define( require => {
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
@@ -145,7 +146,7 @@ define( require => {
       super( options );
 
       // Put a red dot at the origin, for debugging layout.
-      if ( phet.chipper.queryParameters.dev ) {
+      if ( GasPropertiesQueryParameters.origin ) {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 

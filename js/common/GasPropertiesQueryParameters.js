@@ -3,11 +3,7 @@
 //TODO delete query parameters when they are no longer needed
 /**
  * Query parameters that are specific to this sim.
- *
- * Running with ?log will print these query parameters and their values to the console.
- *
- * Running with ?dev shows the following things that are specific to this sim:
- * TODO describe what ?dev shows
+ * Running with ?log will print these query parameters and their values to the console at startup.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,6 +14,10 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
   const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
+
+    // Puts a red dot at the origin of some UI components, for debugging layout and drag listeners.
+    // For internal use only, not public facing.
+    origin: { type: 'flag' },
 
     // Strokes the canvasBounds of each CanvasNode.
     // For internal use only, not public facing.

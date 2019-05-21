@@ -14,6 +14,7 @@ define( require => {
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
@@ -46,7 +47,7 @@ define( require => {
       super( stopwatch.timeProperty, stopwatch.isRunningProperty, options );
 
       // Put a red dot at the origin, for debugging layout.
-      if ( phet.chipper.queryParameters.dev ) {
+      if ( GasPropertiesQueryParameters.origin ) {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
 
