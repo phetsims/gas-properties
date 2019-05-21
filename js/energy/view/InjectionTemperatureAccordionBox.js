@@ -95,14 +95,14 @@ define( require => {
         titleNodeOptions: {
           fill: GasPropertiesColorProfile.textFillProperty,
           font: GasPropertiesConstants.CONTROL_FONT,
-          maxWidth: 125
+          maxWidth: 125 // determined empirically
         },
         numberDisplayOptions: {
           font: GasPropertiesConstants.CONTROL_FONT,
           valuePattern: StringUtils.fillIn( valueUnitsString, {
             units: kelvinString
           } ),
-          maxWidth: 75
+          maxWidth: 75 // determined empirically
         },
         sliderOptions: {
           trackSize: new Dimension2( 175, 5 ),
