@@ -379,7 +379,7 @@ define( require => {
     }
 
     /**
-     * Gets the temperature in the container.
+     * Gets the temperature that is a measure of the kinetic energy of the particles in the container.
      * @returns {number|null} in K, null if the container is empty
      * @private
      */
@@ -408,49 +408,16 @@ define( require => {
     }
 
     /**
-     * Gets the pressure in the container.
-     * @returns {number} in kPa
-     * @private
-     */
-    computePressure() {
-
-      const N = this.totalNumberOfParticlesProperty.value; // N, number of particles
-      const k = GasPropertiesConstants.BOLTZMANN; // k, in (pm^2 * AMU)/(ps^2 * K)
-      const T = this.temperatureProperty.value; // T, in K
-      assert && assert( typeof T === 'number' && T > 0, `invalid temperature: ${T}` );
-      const V = this.container.getVolume(); // V, in pm^3
-
-      // P = NkT/V, converted to kPa
-      return ( N * k * T / V ) * PRESSURE_CONVERSION_SCALE;
-    }
-
-    /**
      * Steps pressure. This either updates pressure, or updates related quantities if pressure is being held constant.
      * @private
      */
     stepPressure( dt ) {
       assert && assert( this.stepPressureEnabled, 'stepPressureEnabled must be enabled' );
 
-      const holdPressureConstant = ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
-                                     this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
+      if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
 
-      if ( this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
-
-        // hold temperature constant by changing pressure, P = NkT/V
-        //TODO #87 adjust particle velocities
-        //TODO #87 animate heat/cool
-      }
-      else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
-
-        // hold pressure constant by changing volume, V = NkT/P
-        const N = this.totalNumberOfParticlesProperty.value;
-        const k = GasPropertiesConstants.BOLTZMANN;
-        const T = this.temperatureProperty.value;
-        const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
-        assert && assert( P !== 0, `unexpected pressure: ${P}` );
-        const V = ( N * k * T ) / P;
-
-        let containerWidth = V / ( this.container.height * this.container.depth );
+        // hold pressure constant by changing volume
+        let containerWidth = this.computeIdealVolume() / ( this.container.height * this.container.depth );
 
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
@@ -476,17 +443,12 @@ define( require => {
         // hold pressure constant by changing temperature, T = PV/Nk
         //TODO #88 adjust particle velocities
         //TODO #88 animate heat/cool
-        const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
-        assert && assert( P !== 0, `unexpected pressure: ${P}` );
-        const N = this.totalNumberOfParticlesProperty.value;
-        const V = this.container.getVolume();
-        const k = GasPropertiesConstants.BOLTZMANN;
-        this.temperatureProperty.value = ( P * V ) / ( N * k );
+        this.temperatureProperty.value = this.computeIdealTemperature();
       }
       else {
 
         // update pressure
-        this.pressureProperty.value = this.computePressure();
+        this.pressureProperty.value = this.computeIdealPressure();
 
         // If pressure exceeds the maximum, blow the lid off of the container.
         if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
@@ -494,8 +456,58 @@ define( require => {
         }
       }
 
+      // Disable jitter when we're holding pressure constant.
+      const jitterEnabled = !( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
+                               this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
+
       // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
-      this.pressureGauge.step( dt, !holdPressureConstant /* jitterEnabled */ );
+      this.pressureGauge.step( dt, jitterEnabled );
+    }
+    
+    /**
+     * Computes pressure using the Ideal Gas Law, P = NkT/V
+     * @returns {number} in kPa
+     * @private
+     */
+    computeIdealPressure() {
+
+      const N = this.totalNumberOfParticlesProperty.value;
+      const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
+      const T = this.temperatureProperty.value; // K
+      assert && assert( typeof T === 'number' && T >= 0, `invalid temperature: ${T}` );
+      const V = this.container.getVolume(); // pm^3
+      const P = ( N * k * T / V );
+
+      // converted to kPa
+      return P * PRESSURE_CONVERSION_SCALE;
+    }
+
+    /**
+     * Computes temperature using the Ideal Gas Law, T = PV/Nk
+     * @returns {number} in K
+     * @private
+     */
+    computeIdealTemperature() {
+      const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+      assert && assert( P !== 0, `unexpected pressure: ${P}` );
+      const N = this.totalNumberOfParticlesProperty.value;
+      const V = this.container.getVolume(); // pm^3
+      const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
+      return ( P * V ) / ( N * k );
+    }
+
+    /**
+     * Computes volume using the Ideal Gas Law, V = NkT/P
+     * @returns {number} in pm^3
+     * @private
+     */
+    computeIdealVolume() {
+      const N = this.totalNumberOfParticlesProperty.value;
+      const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
+      const T = this.temperatureProperty.value; // K
+      const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+      assert && assert( P !== 0, `unexpected pressure: ${P}` );
+      return ( N * k * T ) / P;
     }
 
     /**
