@@ -26,12 +26,13 @@ define( require => {
     /**
      * @param {StringProperty} holdConstantProperty
      * @param {NumberProperty} totalNumberOfParticlesProperty
+     * @param {NumberProperty} pressureProperty
      * @param {BooleanProperty} sizeVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {BooleanProperty} collisionCounterVisibleProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, totalNumberOfParticlesProperty, sizeVisibleProperty,
+    constructor( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, sizeVisibleProperty,
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
 
       options = _.extend( {
@@ -45,7 +46,7 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
-          new HoldConstantControl( holdConstantProperty, totalNumberOfParticlesProperty, {
+          new HoldConstantControl( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, {
             maxWidth: contentWidth
           } ),
           new HSeparator( contentWidth, {

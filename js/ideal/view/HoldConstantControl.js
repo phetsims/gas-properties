@@ -38,9 +38,10 @@ define( require => {
     /**
      * @param {EnumerationProperty} holdConstantProperty
      * @param {NumberProperty} totalNumberOfParticlesProperty
+     * @param {NumberProperty} pressureProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, totalNumberOfParticlesProperty, options ) {
+    constructor( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, options ) {
 
       options = _.extend( {
         align: 'left',
@@ -100,9 +101,13 @@ define( require => {
       // Disable radio buttons for selections that are not possible when the container is empty.
       totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         temperatureRadioButton.enabledProperty.value = ( totalNumberOfParticles !== 0 );
-        pressureVRadioButton.enabledProperty.value = ( totalNumberOfParticles !== 0 );
-        pressureTRadioButton.enabledProperty.value = ( totalNumberOfParticles !== 0 );
       } );
+
+      // Disable radio buttons for selections that are not possible with zero pressure.
+      pressureProperty.link( pressure => {
+        pressureVRadioButton.enabledProperty.value = ( pressure !== 0 );
+        pressureTRadioButton.enabledProperty.value = ( pressure !== 0 );
+      });
     }
   }
 

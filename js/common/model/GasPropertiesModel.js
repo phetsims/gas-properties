@@ -193,8 +193,10 @@ define( require => {
           `bad state: holdConstant=${holdConstant} with empty container` );
 
         // values that are incompatible with zero pressure
-        //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_V && pressure === 0 )
-        //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_T && pressure === 0 )
+        assert && assert( !( this.pressureProperty.value === 0 &&
+        ( holdConstant === HoldConstantEnum.PRESSURE_V ||
+          holdConstant === HoldConstantEnum.PRESSURE_T ) ),
+          `bad state: holdConstant=${holdConstant} with zero pressure` );
       } );
     }
 
