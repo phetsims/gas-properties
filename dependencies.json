@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.25 Mon May 20 2019 16:32:35 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.26 Wed May 22 2019 17:58:18 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "f9422b30a84e6d725f61d40c736a22033d233fc0",
+    "sha": "68cbf60c30d19d897a64452acf1d617aa281b991",
     "branch": "master"
   },
   "joist": {
@@ -61,7 +61,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "79ae2b46d7e3585d070760020369cabd28b767a8",
+    "sha": "fc6261fb21007f3f69179a991bb9c31c82a8961e",
     "branch": "master"
   },
   "sherpa": {
@@ -69,11 +69,11 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "32d502ddc5e96c6c4ad9ef1ec2f6bd333c9c6349",
+    "sha": "5de3b52095e4bbe23cedee39da134b547e1ec8d2",
     "branch": "master"
   },
   "tambo": {
-    "sha": "6fef5d3dbdbc5b788243fe89e2b30ee58158a69f",
+    "sha": "d45a9badf4ff3aeb150dab4e78ed2e128b1ddba4",
     "branch": "master"
   },
   "tandem": {
