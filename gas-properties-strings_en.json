@@ -141,10 +141,10 @@
     "value": "Initial Temperature (K)"
   },
   "oops1": {
-    "value": "Oops!<br><br>Temperature cannot be held constant.<br>Container is empty."
+    "value": "Oops!<br><br>Temperature cannot be held constant<br>when the container is empty."
   },
   "oops2": {
-    "value": "Oops!<br><br>Pressure cannot be held constant.<br>Container is empty."
+    "value": "Oops!<br><br>Pressure cannot be held constant<br>when the container is empty."
   },
   "oops3": {
     "value": "Oops!<br><br>Pressure cannot be held constant.<br>Volume would be too large."
