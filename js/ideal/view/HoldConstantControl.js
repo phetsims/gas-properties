@@ -36,7 +36,7 @@ define( require => {
   class HoldConstantControl extends VBox {
 
     /**
-     * @param {StringProperty} holdConstantProperty
+     * @param {EnumerationProperty} holdConstantProperty
      * @param {Object} [options]
      */
     constructor( holdConstantProperty, options ) {
