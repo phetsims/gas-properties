@@ -140,13 +140,16 @@
   "initialTemperatureK": {
     "value": "Initial Temperature (K)"
   },
-  "volumeTooLarge": {
+  "oops1": {
+    "value": "Oops!<br><br>Temperature cannot be held constant.<br>Container is empty."
+  },
+  "oops2": {
+    "value": "Oops!<br><br>Pressure cannot be held constant.<br>Container is empty."
+  },
+  "oops3": {
     "value": "Oops!<br><br>Pressure cannot be held constant.<br>Volume would be too large."
   },
-  "volumeTooSmall": {
+  "oops4": {
     "value": "Oops!<br><br>Pressure cannot be held constant.<br>Volume would be too small."
-  },
-  "temperatureContainerEmpty": {
-    "value": "Oops!<br><br>Temperature cannot be held constant.<br>Container is empty."
   }
 }

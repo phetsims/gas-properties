@@ -53,9 +53,10 @@ define( require => {
 
   // string
   //TODO better keys for OopsDialog strings
-  const temperatureContainerEmptyString = require( 'string!GAS_PROPERTIES/temperatureContainerEmpty' );
-  const volumeTooLargeString = require( 'string!GAS_PROPERTIES/volumeTooLarge' );
-  const volumeTooSmallString = require( 'string!GAS_PROPERTIES/volumeTooSmall' );
+  const oops1String = require( 'string!GAS_PROPERTIES/oops1' );
+  const oops2String = require( 'string!GAS_PROPERTIES/oops2' );
+  const oops3String = require( 'string!GAS_PROPERTIES/oops3' );
+  const oops4String = require( 'string!GAS_PROPERTIES/oops4' );
 
   class GasPropertiesScreenView extends BaseScreenView {
 
@@ -272,27 +273,34 @@ define( require => {
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
+      // If N goes to zero while holding T constant, show a dialog.
+      let oops1Dialog = null;
+      model.oops1Emitter.addListener( () => {
+        oops1Dialog = oops1Dialog || new OopsDialog( oops1String );
+        oops1Dialog.show();
+      } );
+
+      // If N goes to zero while holding P constant, show a dialog.
+      let oops2Dialog = null;
+      model.oops2Emitter.addListener( () => {
+        oops2Dialog = oops2Dialog || new OopsDialog( oops2String );
+        oops2Dialog.show();
+      } );
+
       // If V exceeds the max while holding P constant, show a dialog.
-      let volumeTooLargeDialog = null;
-      model.oopsPressureMaxVolumeEmitter.addListener( () => {
-        volumeTooLargeDialog = volumeTooLargeDialog || new OopsDialog( volumeTooLargeString );
-        volumeTooLargeDialog.show();
+      let oops3Dialog = null;
+      model.oops3Emitter.addListener( () => {
+        oops3Dialog = oops3Dialog || new OopsDialog( oops3String );
+        oops3Dialog.show();
       } );
 
       // If V exceeds the min while holding P constant, show a dialog.
-      let volumeTooSmallDialog = null;
-      model.oopsPressureMaxVolumeEmitter.addListener( () => {
-        volumeTooSmallDialog = volumeTooSmallDialog || new OopsDialog( volumeTooSmallString );
-        volumeTooSmallDialog.show();
+      let oops4Dialog = null;
+      model.oops4Emitter.addListener( () => {
+        oops4Dialog = oops4Dialog || new OopsDialog( oops4String );
+        oops4Dialog.show();
       } );
-
-      // If N goes to zero while holding T constant, show a dialog.
-      let oopsTemperatureDialog = null;
-      model.oopsTemperatureEmitter.addListener( () => {
-        oopsTemperatureDialog = oopsTemperatureDialog || new OopsDialog( temperatureContainerEmptyString );
-        oopsTemperatureDialog.show();
-      } );
-
+      
       // @protected
       this.model = model;
 

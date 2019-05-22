@@ -160,14 +160,24 @@ define( require => {
 
       //TODO better names and doc for these Emitters
       // @public (read-only) Emitters related to OopsDialogs
-      this.oopsPressureMaxVolumeEmitter = new Emitter();
-      this.oopsPressureMinVolumeEmitter = new Emitter();
-      this.oopsTemperatureEmitter = new Emitter();
+      this.oops1Emitter = new Emitter();
+      this.oops2Emitter = new Emitter();
+      this.oops3Emitter = new Emitter();
+      this.oops4Emitter = new Emitter();
 
-      // Temperature can't be held constant when the container is empty.
       this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
-          this.oopsTemperatureEmitter.emit();
+
+          // Temperature can't be held constant when the container is empty.
+          this.oops1Emitter.emit();
+          this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
+        }
+        else if ( totalNumberOfParticles === 0 &&
+                  ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
+                    this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) ) {
+
+          // Pressure can't be held constant when the container is empty.
+          this.oops2Emitter.emit();
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
         }
       } );
@@ -449,10 +459,10 @@ define( require => {
 
           // This results in an OopsDialog being displayed
           if ( containerWidth > this.container.widthRange.max ) {
-            this.oopsPressureMaxVolumeEmitter.emit();
+            this.oops3Emitter.emit();
           }
           else {
-            this.oopsPressureMinVolumeEmitter.emit();
+            this.oops4Emitter.emit();
           }
 
           // Switch to the 'Nothing' mode
