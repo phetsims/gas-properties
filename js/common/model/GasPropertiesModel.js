@@ -182,9 +182,17 @@ define( require => {
         }
       } );
 
+      // Verify that we're not in a bad state.
       this.holdConstantProperty.link( holdConstant => {
-        assert && assert( !( holdConstant === HoldConstantEnum.TEMPERATURE && this.totalNumberOfParticlesProperty.value === 0 ),
-          'bad state' );
+
+        // values that are incompatible with an empty container
+        assert && assert( !( this.totalNumberOfParticlesProperty.value === 0 &&
+        ( holdConstant === HoldConstantEnum.TEMPERATURE ||
+          holdConstant === HoldConstantEnum.PRESSURE_T ||
+          holdConstant === HoldConstantEnum.PRESSURE_V ) ),
+          `bad state: holdConstant=${holdConstant} with empty container` );
+
+        // values that are incompatible with zero pressure
         //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_V && pressure === 0 )
         //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_T && pressure === 0 )
       } );
