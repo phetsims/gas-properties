@@ -389,14 +389,8 @@ define( require => {
       if ( n > 0 ) {
 
         // Compute the average kinetic energy, AMU * pm^2 / ps^2
-        let totalKineticEnergy = 0;
-        for ( let i = 0; i < this.heavyParticles.length; i++ ) {
-          totalKineticEnergy += this.heavyParticles[ i ].getKineticEnergy();
-        }
-        for ( let i = 0; i < this.lightParticles.length; i++ ) {
-          totalKineticEnergy += this.lightParticles[ i ].getKineticEnergy();
-        }
-
+        const totalKineticEnergy = ParticleUtils.getTotalKineticEnergy( this.heavyParticles ) +
+                                   ParticleUtils.getTotalKineticEnergy( this.lightParticles );
         const averageKineticEnergy = totalKineticEnergy / n;
 
         const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
@@ -463,7 +457,7 @@ define( require => {
       // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
       this.pressureGauge.step( dt, jitterEnabled );
     }
-    
+
     /**
      * Computes pressure using the Ideal Gas Law, P = NkT/V
      * @returns {number} in kPa

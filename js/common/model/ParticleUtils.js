@@ -132,6 +132,19 @@ define( require => {
     },
 
     /**
+     * Gets the total kinetic energy of a collection of particles.
+     * @param {Particle[]} particles
+     * @returns {number} in AMU * pm^2 / ps^2
+     */
+    getTotalKineticEnergy: function( particles ) {
+      let totalKineticEnergy = 0;
+      for ( let i = 0; i < particles.length; i++ ) {
+        totalKineticEnergy += particles[ i ].getKineticEnergy();
+      }
+      return totalKineticEnergy;
+    },
+
+    /**
      * Gets the x-axis center of mass for a collection of particles.
      * @param {Particle[]} particles
      * @returns {number|null} null if there are no particles and therefore no center of mass
