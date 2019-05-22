@@ -31,7 +31,7 @@ define( require => {
 
       assert && assert( !options.tandem, 'BaseScreenView sets tandem' );
       options.tandem = tandem;
-      
+
       super( options );
 
       // The model bounds are equivalent to the visible bounds of ScreenView, as fills the browser window.
@@ -53,11 +53,9 @@ define( require => {
 
           // when the Step button is pressed
           listener: () => {
-            model.isPlayingProperty.value = true;
             const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
-            model.step( seconds );
-            this.step( seconds );
-            model.isPlayingProperty.value = false;
+            model.stepManual( seconds );
+            this.stepManual( seconds );
           }
         }
       } );
@@ -83,6 +81,27 @@ define( require => {
       this.interruptSubtreeInput(); // cancel interactions that are in progress
       this.model.reset();
     }
+
+    /**
+     * Steps the model using real time units.
+     * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
+     * @param {number} dt - time delta, in seconds
+     * @public
+     */
+    step( dt ) {
+      if ( this.model.isPlayingProperty.value ) {
+        this.stepManual( dt );
+      }
+    }
+
+    /**
+     * Steps the model using real time units.
+     * Intended to be called when the Step button is pressed.
+     * @param {number} dt - time delta, in seconds
+     * @param dt
+     * @public
+     */
+    stepManual( dt ) {}
   }
 
   return gasProperties.register( 'BaseScreenView', BaseScreenView );

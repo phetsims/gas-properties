@@ -311,16 +311,16 @@ define( require => {
     }
 
     /**
-     * Called on each step of the simulation's timer.
+     * Steps the model using real time units.
      * @param {number} dt - delta time, in seconds
      * @public
+     * @override
      */
-    step( dt ) {
-      if ( this.model.isPlayingProperty.value ) {
-        this.containerNode.step( dt );
-        this.particlesNode.update();
-        this.regionsNode && this.regionsNode.update();
-      }
+    stepManual( dt ) {
+      super.stepManual( dt );
+      this.containerNode.step( dt );
+      this.particlesNode.update();
+      this.regionsNode && this.regionsNode.update();
     }
   }
 

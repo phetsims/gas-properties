@@ -92,23 +92,34 @@ define( require => {
 
     /**
      * Steps the model using real time units.
+     * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
      * @param {number} dt - time delta, in seconds
      * @public
      */
     step( dt ) {
       if ( this.isPlayingProperty.value ) {
-        this.stepModelTime( this.timeTransform( dt ) );
+        this.stepManual( dt );
       }
     }
 
     /**
+     * Steps the model using real time units.
+     * This is intended to be called by clients that need to step the sim, e.g. Step button listener.
+     * @param {number} dt - time delta, in seconds
+     * @param dt
+     * @public
+     */
+    stepManual( dt ) {
+      this.stepModelTime( this.timeTransform( dt ) );
+    }
+
+    /**
      * Steps the model using model time units.
+     * Subclasses that need to add additional step functionality should overrride this method.
      * @param {number} dt - time delta, in ps
      * @protected
      */
     stepModelTime( dt ) {
-
-      // Advance the stopwatch
       this.stopwatch.step( dt );
     }
   }
