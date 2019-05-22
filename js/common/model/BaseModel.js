@@ -115,7 +115,7 @@ define( require => {
 
     /**
      * Steps the model using model time units.
-     * Subclasses that need to add additional step functionality should overrride this method.
+     * Subclasses that need to add additional step functionality should override this method.
      * @param {number} dt - time delta, in ps
      * @protected
      */
