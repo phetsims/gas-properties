@@ -436,7 +436,7 @@ define( require => {
 
       if ( this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
 
-        // hold temperature constant by changing pressure
+        // hold temperature constant by changing pressure, P = NkT/V
         //TODO #87 adjust particle velocities
         //TODO #87 animate heat/cool
       }
