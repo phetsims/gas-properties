@@ -1,7 +1,5 @@
 TODO list for gas-properties
 
-PressureT when number of particles goes to zero, T = PV/Nk
-
 GasPropertiesModel pressureProperty in core model units (AMU/(pm * ps^2)), have view convert to kPa
 
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
