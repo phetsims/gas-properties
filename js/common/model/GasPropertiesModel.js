@@ -434,26 +434,11 @@ define( require => {
       const holdPressureConstant = ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
                                      this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
 
-      if ( this.pressureProperty.value === 0 || !holdPressureConstant ) {
+      if ( this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
 
-        // update pressure
-        this.pressureProperty.value = this.computePressure();
-
-        // If pressure exceeds the maximum, blow the lid off of the container.
-        if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
-          this.container.lidIsOnProperty.value = false;
-        }
-      }
-      else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
-
-        //TODO #88 scale the velocity of all particles in the container
-        // hold pressure constant by changing temperature, T = PV/Nk
-        const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
-        assert && assert( P !== 0, `unexpected pressure: ${P}` );
-        const N = this.totalNumberOfParticlesProperty.value;
-        const V = this.container.getVolume();
-        const k = GasPropertiesConstants.BOLTZMANN;
-        this.temperatureProperty.value = ( P * V ) / ( N * k );
+        // hold temperature constant by changing pressure
+        //TODO #87 adjust particle velocities
+        //TODO #87 animate heat/cool
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
 
@@ -464,6 +449,7 @@ define( require => {
         const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
         assert && assert( P !== 0, `unexpected pressure: ${P}` );
         const V = ( N * k * T ) / P;
+
         let containerWidth = V / ( this.container.height * this.container.depth );
 
         if ( !this.container.widthRange.contains( containerWidth ) ) {
@@ -485,8 +471,27 @@ define( require => {
 
         this.container.resize( containerWidth );
       }
+      else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
+
+        // hold pressure constant by changing temperature, T = PV/Nk
+        //TODO #88 adjust particle velocities
+        //TODO #88 animate heat/cool
+        const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+        assert && assert( P !== 0, `unexpected pressure: ${P}` );
+        const N = this.totalNumberOfParticlesProperty.value;
+        const V = this.container.getVolume();
+        const k = GasPropertiesConstants.BOLTZMANN;
+        this.temperatureProperty.value = ( P * V ) / ( N * k );
+      }
       else {
-        throw new Error( 'programming error, some case is not handled' );
+
+        // update pressure
+        this.pressureProperty.value = this.computePressure();
+
+        // If pressure exceeds the maximum, blow the lid off of the container.
+        if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
+          this.container.lidIsOnProperty.value = false;
+        }
       }
 
       // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
