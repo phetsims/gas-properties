@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Control for selecting what should be held constant.
+ * Controls for selecting what should be held constant.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,12 +9,12 @@ define( require => {
   'use strict';
 
   // modules
+  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
@@ -31,6 +31,7 @@ define( require => {
     fill: GasPropertiesColorProfile.textFillProperty,
     maxWidth: 175 // determined empirically
   };
+  const SPACING = 12;
 
   class HoldConstantControl extends VBox {
 
@@ -42,7 +43,7 @@ define( require => {
 
       options = _.extend( {
         align: 'left',
-        spacing: 12
+        spacing: SPACING
       }, options );
 
       const titleNode = new Text( holdConstantString, {
@@ -51,18 +52,36 @@ define( require => {
         maxWidth: 200 // determined empirically
       } );
 
-      const items = [
-        { value: HoldConstantEnum.NOTHING, node: new Text( holdConstantNothingString, TEXT_OPTIONS ) },
-        { value: HoldConstantEnum.VOLUME, node: new Text( holdConstantVolumeString, TEXT_OPTIONS ) },
-        { value: HoldConstantEnum.TEMPERATURE, node: new Text( holdConstantTemperatureString, TEXT_OPTIONS ) },
-        { value: HoldConstantEnum.PRESSURE_V, node: new Text( holdConstantPressureVString, TEXT_OPTIONS ) },
-        { value: HoldConstantEnum.PRESSURE_T, node: new Text( holdConstantPressureTString, TEXT_OPTIONS ) }
-      ];
+      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.NOTHING,
+        new Text( holdConstantNothingString, TEXT_OPTIONS ),
+        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
-      const radioButtonGroup = new VerticalAquaRadioButtonGroup( holdConstantProperty, items, {
+      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.VOLUME,
+        new Text( holdConstantVolumeString, TEXT_OPTIONS ),
+        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
+
+      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.TEMPERATURE,
+        new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
+        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
+
+      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_V,
+        new Text( holdConstantPressureVString, TEXT_OPTIONS ),
+        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
+
+      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_T,
+        new Text( holdConstantPressureTString, TEXT_OPTIONS ),
+        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
+
+      const radioButtonGroup = new VBox( {
         align: 'left',
-        spacing: 12,
-        radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS
+        spacing: SPACING,
+        children: [
+          nothingRadioButton,
+          volumeRadioButton,
+          temperatureRadioButton,
+          pressureVRadioButton,
+          pressureTRadioButton
+        ]
       } );
 
       assert && assert( !options.children, 'HoldConstantControl sets children' );
