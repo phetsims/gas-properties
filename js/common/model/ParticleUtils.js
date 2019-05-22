@@ -145,7 +145,7 @@ define( require => {
     },
 
     /**
-     * Gets the x-axis center of mass for a collection of particles.
+     * Gets the centerX of mass for a collection of particles.
      * @param {Particle[]} particles
      * @returns {number|null} null if there are no particles and therefore no center of mass
      * @public
