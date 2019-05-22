@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Controls for selecting what should be held constant.
+ * Control for selecting what should be held constant.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
