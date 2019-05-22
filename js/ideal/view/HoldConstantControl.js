@@ -97,9 +97,11 @@ define( require => {
 
       super( options );
 
-      // Disable 'Temperature (T)' when the container is empty, because there is no temperature without particles.
+      // Disable radio buttons for selections that are not possible when the container is empty.
       totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         temperatureRadioButton.enabledProperty.value = ( totalNumberOfParticles !== 0 );
+        pressureVRadioButton.enabledProperty.value = ( totalNumberOfParticles !== 0 );
+        pressureTRadioButton.enabledProperty.value = ( totalNumberOfParticles !== 0 );
       } );
     }
   }
