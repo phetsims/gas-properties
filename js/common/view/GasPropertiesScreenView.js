@@ -52,6 +52,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // string
+  //TODO better keys for OopsDialog strings
+  const temperatureContainerEmptyString = require( 'string!GAS_PROPERTIES/temperatureContainerEmpty' );
   const volumeTooLargeString = require( 'string!GAS_PROPERTIES/volumeTooLarge' );
   const volumeTooSmallString = require( 'string!GAS_PROPERTIES/volumeTooSmall' );
 
@@ -270,22 +272,25 @@ define( require => {
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
-      // If the container's volume range is exceeded, show a dialog.
+      // If V exceeds the max while holding P constant, show a dialog.
       let volumeTooLargeDialog = null;
+      model.oopsPressureMaxVolumeEmitter.addListener( () => {
+        volumeTooLargeDialog = volumeTooLargeDialog || new OopsDialog( volumeTooLargeString );
+        volumeTooLargeDialog.show();
+      } );
+
+      // If V exceeds the min while holding P constant, show a dialog.
       let volumeTooSmallDialog = null;
-      model.containerWidthOutOfRangeEmitter.addListener( ( containerWidth ) => {
-        if ( containerWidth > model.container.widthRange.max ) {
-          if ( !volumeTooLargeDialog ) {
-            volumeTooLargeDialog = new OopsDialog( volumeTooLargeString );
-          }
-          volumeTooLargeDialog.show();
-        }
-        else {
-          if ( !volumeTooSmallDialog ) {
-            volumeTooSmallDialog = new OopsDialog( volumeTooSmallString );
-          }
-          volumeTooSmallDialog.show();
-        }
+      model.oopsPressureMaxVolumeEmitter.addListener( () => {
+        volumeTooSmallDialog = volumeTooSmallDialog || new OopsDialog( volumeTooSmallString );
+        volumeTooSmallDialog.show();
+      } );
+
+      // If N goes to zero while holding T constant, show a dialog.
+      let oopsTemperatureDialog = null;
+      model.oopsTemperatureEmitter.addListener( () => {
+        oopsTemperatureDialog = oopsTemperatureDialog || new OopsDialog( temperatureContainerEmptyString );
+        oopsTemperatureDialog.show();
       } );
 
       // @protected

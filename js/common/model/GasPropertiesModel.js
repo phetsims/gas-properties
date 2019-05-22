@@ -158,9 +158,24 @@ define( require => {
         } );
       }
 
-      // @public emit(width:number) is called when holding pressure constant would result in a bad container width
-      this.containerWidthOutOfRangeEmitter = new Emitter( {
-        validators: [ { valueType: 'number' } ]
+      //TODO better names and doc for these Emitters
+      // @public (read-only) Emitters related to OopsDialogs
+      this.oopsPressureMaxVolumeEmitter = new Emitter();
+      this.oopsPressureMinVolumeEmitter = new Emitter();
+      this.oopsTemperatureEmitter = new Emitter();
+
+      // Temperature can't be held constant when the container is empty.
+      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
+          this.oopsTemperatureEmitter.emit();
+          this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
+        }
+      } );
+
+      this.holdConstantProperty.link( holdConstant => {
+        //TODO assert !( holdConstant === HoldConstantEnum.TEMPERATURE && totalNumberOfParticles === 0 )
+        //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_V && pressure === 0 )
+        //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_T && pressure === 0 )
       } );
     }
 
@@ -433,7 +448,12 @@ define( require => {
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
           // This results in an OopsDialog being displayed
-          this.containerWidthOutOfRangeEmitter.emit( containerWidth );
+          if ( containerWidth > this.container.widthRange.max ) {
+            this.oopsPressureMaxVolumeEmitter.emit();
+          }
+          else {
+            this.oopsPressureMinVolumeEmitter.emit();
+          }
 
           // Switch to the 'Nothing' mode
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
