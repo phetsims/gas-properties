@@ -183,7 +183,8 @@ define( require => {
       } );
 
       this.holdConstantProperty.link( holdConstant => {
-        //TODO assert !( holdConstant === HoldConstantEnum.TEMPERATURE && totalNumberOfParticles === 0 )
+        assert && assert( !( holdConstant === HoldConstantEnum.TEMPERATURE && this.totalNumberOfParticlesProperty.value === 0 ),
+          'bad state' );
         //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_V && pressure === 0 )
         //TODO assert !( holdConstant === HoldConstantEnum.PRESSURE_T && pressure === 0 )
       } );

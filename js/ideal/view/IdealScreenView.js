@@ -41,6 +41,7 @@ define( require => {
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
         model.holdConstantProperty,
+        model.totalNumberOfParticlesProperty,
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {

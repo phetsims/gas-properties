@@ -37,9 +37,10 @@ define( require => {
 
     /**
      * @param {EnumerationProperty} holdConstantProperty
+     * @param {NumberProperty} totalNumberOfParticlesProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, options ) {
+    constructor( holdConstantProperty, totalNumberOfParticlesProperty, options ) {
 
       options = _.extend( {
         align: 'left',
@@ -52,22 +53,27 @@ define( require => {
         maxWidth: 200 // determined empirically
       } );
 
+      // Nothing
       const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.NOTHING,
         new Text( holdConstantNothingString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
+      // Volume (V)
       const volumeRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.VOLUME,
         new Text( holdConstantVolumeString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
+      // Temperature (T)
       const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.TEMPERATURE,
         new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
+      // Pressure V
       const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_V,
         new Text( holdConstantPressureVString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
+      // Pressure T
       const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_T,
         new Text( holdConstantPressureTString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
@@ -90,6 +96,11 @@ define( require => {
       }, options );
 
       super( options );
+
+      // Disable 'Temperature (T)' when the container is empty, because there is no temperature without particles.
+      totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        temperatureRadioButton.enabledProperty.value = ( totalNumberOfParticles !== 0 );
+      } );
     }
   }
 
