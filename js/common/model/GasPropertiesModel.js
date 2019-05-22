@@ -251,13 +251,6 @@ define( require => {
     }
 
     /**
-     * Gets the number of particles in the container.
-     * @returns {number}
-     * @private
-     */
-    getNumberOfParticles() { return this.heavyParticles.length + this.lightParticles.length; }
-
-    /**
      * Adjusts an array of particles to have the desired number of elements.
      * @param {number} newValue - new number of particles
      * @param {number} oldValue - old number of particles
@@ -356,7 +349,8 @@ define( require => {
      */
     computeTemperature() {
       let temperature = null;
-      if ( this.getNumberOfParticles() > 0 ) {
+      const n = this.totalNumberOfParticlesProperty.value;
+      if ( n > 0 ) {
 
         // Compute the average kinetic energy, AMU * pm^2 / ps^2
         let totalKineticEnergy = 0;
@@ -367,7 +361,7 @@ define( require => {
           totalKineticEnergy += this.lightParticles[ i ].getKineticEnergy();
         }
 
-        const averageKineticEnergy = totalKineticEnergy / this.getNumberOfParticles();
+        const averageKineticEnergy = totalKineticEnergy / n;
 
         const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
 
@@ -384,13 +378,14 @@ define( require => {
      */
     computePressure() {
 
+      const N = this.totalNumberOfParticlesProperty.value; // N, number of particles
       const k = GasPropertiesConstants.BOLTZMANN; // k, in (pm^2 * AMU)/(ps^2 * K)
-      const temperature = this.temperatureProperty.value; // T, in K
-      assert && assert( typeof temperature === 'number' && temperature > 0, `invalid temperature: ${temperature}` );
-      const volume = this.container.getVolume(); // V, in pm^3
+      const T = this.temperatureProperty.value; // T, in K
+      assert && assert( typeof T === 'number' && T > 0, `invalid temperature: ${T}` );
+      const V = this.container.getVolume(); // V, in pm^3
 
       // P = NkT/V, converted to kPa
-      return ( this.getNumberOfParticles() * k * temperature / volume ) * PRESSURE_CONVERSION_SCALE;
+      return ( N * k * T / V ) * PRESSURE_CONVERSION_SCALE;
     }
 
     /**
@@ -417,18 +412,23 @@ define( require => {
 
         //TODO #78 scale the velocity of all particles in the container
         // hold pressure constant by changing temperature, T = PV/Nk
-        const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
-        assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
-        this.temperatureProperty.value = ( pressure * this.container.getVolume() ) /
-                                         ( this.getNumberOfParticles() * GasPropertiesConstants.BOLTZMANN );
+        const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+        assert && assert( P !== 0, `unexpected pressure: ${P}` );
+        const N = this.totalNumberOfParticlesProperty.value;
+        const V = this.container.getVolume();
+        const k = GasPropertiesConstants.BOLTZMANN;
+        this.temperatureProperty.value = ( P * V ) / ( N * k );
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
 
         // hold pressure constant by changing volume, V = NkT/P
-        const pressure = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
-        assert && assert( pressure !== 0, `unexpected pressure: ${pressure}` );
-        const volume = ( this.getNumberOfParticles() * GasPropertiesConstants.BOLTZMANN * this.temperatureProperty.value ) / pressure;
-        let containerWidth = volume / ( this.container.height * this.container.depth );
+        const N = this.totalNumberOfParticlesProperty.value;
+        const k = GasPropertiesConstants.BOLTZMANN;
+        const T = this.temperatureProperty.value;
+        const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+        assert && assert( P !== 0, `unexpected pressure: ${P}` );
+        const V = ( N * k * T ) / P;
+        let containerWidth = V / ( this.container.height * this.container.depth );
 
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
