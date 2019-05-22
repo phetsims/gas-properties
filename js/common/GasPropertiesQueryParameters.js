@@ -131,7 +131,7 @@ define( require => {
     wallThickness: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 50
+      defaultValue: 75
     },
 
     /**
@@ -141,7 +141,7 @@ define( require => {
     lidThickness: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 150
+      defaultValue: 175
     },
 
     /**
