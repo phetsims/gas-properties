@@ -65,7 +65,7 @@ define( require => {
     flowRateSamples: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 50
+      defaultValue: 300
     },
 
     // Particle flow rate vector of 1 particle/ps will have a vector (arrow) that is this long.
