@@ -1,7 +1,6 @@
 TODO list for gas-properties
 
 arg type checking for Property params?
-type checking for dt params?
 
 #88 animate heat/cool for PRESSURE_T
 
