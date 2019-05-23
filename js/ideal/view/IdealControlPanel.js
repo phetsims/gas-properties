@@ -38,12 +38,18 @@ define( require => {
      */
     constructor( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, sizeVisibleProperty,
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
-      assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
-      assert && assert( totalNumberOfParticlesProperty instanceof Property, `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
-      assert && assert( pressureProperty instanceof NumberProperty, `invalid pressureProperty: ${pressureProperty}` );
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty, `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
-      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty, `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
-      assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty, `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
+      assert && assert( holdConstantProperty instanceof EnumerationProperty,
+        `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( totalNumberOfParticlesProperty instanceof Property,
+        `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( pressureProperty instanceof NumberProperty,
+        `invalid pressureProperty: ${pressureProperty}` );
+      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
+        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
+        `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
+      assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty,
+        `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
 
       options = _.extend( {
         fixedWidth: 100,
