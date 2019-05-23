@@ -89,7 +89,7 @@ define( require => {
         this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, LightParticle );
       } );
 
-      // @private
+      // @public total number of particles in the container
       this.totalNumberOfParticlesProperty = new DerivedProperty(
         [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
         ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
