@@ -18,6 +18,7 @@ define( require => {
   const HeavyParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/HeavyParticlesCheckbox' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const LightParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/LightParticlesCheckbox' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const SpeedHistogram = require( 'GAS_PROPERTIES/energy/view/SpeedHistogram' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -34,6 +35,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( getHeavyValues, getLightValues, modelViewTransform, options ) {
+      assert && assert( typeof getHeavyValues === 'function', `invalid getHeavyValues: ${getHeavyValues}` );
+      assert && assert( typeof getLightValues === 'function', `invalid getLightValues: ${getLightValues}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         fixedWidth: 100,

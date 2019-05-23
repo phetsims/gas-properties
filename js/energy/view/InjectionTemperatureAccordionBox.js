@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
+  const ArrowButton = require( 'SUN/buttons/ArrowButton' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
@@ -18,8 +19,11 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Slider = require( 'SUN/Slider' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
@@ -152,6 +156,12 @@ define( require => {
    * @returns {Node}
    */
   function temperatureLayoutFunction( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) {
+    assert && assert( titleNode instanceof Node, `invalid titleNode: ${titleNode}` );
+    assert && assert( numberDisplay instanceof NumberDisplay, `invalid numberDisplay: ${numberDisplay}` );
+    assert && assert( slider instanceof Slider, `invalid slider: ${slider}` );
+    assert && assert( leftArrowButton instanceof ArrowButton, `invalid leftArrowButton: ${leftArrowButton}` );
+    assert && assert( rightArrowButton instanceof ArrowButton, `invalid rightArrowButton: ${rightArrowButton}` );
+
     return new VBox( {
       align: 'center',
       spacing: 5,

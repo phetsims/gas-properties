@@ -17,7 +17,9 @@ define( require => {
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
+  const Property = require( 'AXON/Property' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Range = require( 'DOT/Range' );
   const SunConstants = require( 'SUN/SunConstants' );
@@ -37,6 +39,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( heavyAverageSpeedProperty, lightAverageSpeedProperty, modelViewTransform, options ) {
+      assert && assert( heavyAverageSpeedProperty instanceof Property,
+        `invalid heavyAverageSpeedProperty: ${heavyAverageSpeedProperty}` );
+      assert && assert( lightAverageSpeedProperty instanceof Property,
+        `invalid lightAverageSpeedProperty: ${lightAverageSpeedProperty}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         fixedWidth: 100,

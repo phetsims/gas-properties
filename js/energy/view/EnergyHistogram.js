@@ -10,10 +10,12 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const ColorDef = require( 'SCENERY/util/ColorDef' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
 
   // constants
@@ -38,9 +40,15 @@ define( require => {
                  heavyVisibleProperty, lightVisibleProperty,
                  getHeavyValues, getLightValues,
                  barsColor, options ) {
-      //TODO validate other args
+      assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
+      assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
+      assert && assert( xAxisLabel instanceof Node, `invalid xAxisLabel: ${xAxisLabel}` );
+      assert && assert( yAxisLabel instanceof Node, `invalid yAxisLabel: ${yAxisLabel}` );
       assert && assert( heavyVisibleProperty instanceof BooleanProperty, `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
       assert && assert( lightVisibleProperty instanceof BooleanProperty, `invalid lightVisibleProperty: ${lightVisibleProperty}` );
+      assert && assert( typeof getHeavyValues === 'function', `invalid heavyVisibleProperty: ${getHeavyValues}` );
+      assert && assert( typeof getLightValues === 'function', `invalid getLightValues: ${getLightValues}` );
+      assert && assert( ColorDef.isColorDef( barsColor ), `invalid barsColor: ${barsColor}` );
 
       super( numberOfBins, binWidth, xAxisLabel, yAxisLabel, options );
 

@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const ColorDef = require( 'SCENERY/util/ColorDef' );
   const DataSet = require( 'GAS_PROPERTIES/energy/model/DataSet' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -33,6 +34,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( numberOfBins, binWidth, xAxisLabel, yAxisLabel, options ) {
+      assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
+      assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
+      assert && assert( xAxisLabel instanceof Node, `invalid xAxisLabel: ${xAxisLabel}` );
+      assert && assert( yAxisLabel instanceof Node, `invalid yAxisLabel: ${yAxisLabel}` );
 
       options = _.extend( {
 
@@ -143,6 +148,7 @@ define( require => {
      * @public
      */
     setMaxY( maxY ) {
+      assert && assert( typeof maxY === 'number' && maxY > 0, `invalid maxY: ${maxY}` );
       if ( maxY !== this.maxY ) {
         this.maxY = maxY;
         this.intervalLinesDirty = true;
@@ -155,8 +161,10 @@ define( require => {
      * @param {boolean} visible
      */
     setDataSetVisible( index, visible ) {
-      assert && assert( index > 0 && index < this.plotNodesParent.getChildrenCount(),
-        `index out of range: ${index}` );
+      assert && assert( typeof index === 'number', `invalid index: ${index}` );
+      assert && assert( index > 0 && index < this.plotNodesParent.getChildrenCount(), `index out of range: ${index}` );
+      assert && assert( typeof visible === 'boolean', `invalid visible: ${visible}` );
+
       this.plotNodesParent.getChildAt( index ).visible = visible;
     }
 
@@ -169,6 +177,9 @@ define( require => {
      * @public
      */
     addDataSet( plotType, color ) {
+      assert && assert( PlotType.includes( plotType ), `invalid plotType: ${plotType}` );
+      assert && assert( ColorDef.isColorDef( color ), `invalid color: ${color}` );
+
       this.dataSets.push( new DataSet( [], plotType, color ) );
       this.plotNodesParent.addChild( new Path( new Shape() ) );
       return this.dataSets.length - 1;
@@ -182,7 +193,10 @@ define( require => {
      * @public
      */
     updateDataSet( index, valueArrays ) {
+      assert && assert( typeof index === 'number', `invalid index: ${index}` );
       assert && assert( index >= 0 && index < this.dataSets.length, `index out of range: ${index}` );
+      assert && assert( Array.isArray( valueArrays ), `invalid valueArrays: ${valueArrays}` );
+
       this.dataSets[ index ].valueArrays = valueArrays;
     }
 
@@ -259,11 +273,13 @@ define( require => {
 
     /**
      * Converts a data set to an array of counts, one value for each bin.
-     * @param dataSet
+     * @param {DataSet} dataSet
      * @returns {number[]}
      * @private
      */
     getCounts( dataSet ) {
+      assert && assert( dataSet instanceof DataSet, `invalid dataSet: ${dataSet}` );
+
       const counts = [];
       for ( let i = 0; i < this.numberOfBins; i++ ) {
 
@@ -301,9 +317,11 @@ define( require => {
      * @private
      */
     plotBars( index, counts, color ) {
-
+      assert && assert( typeof index === 'number', `invalid index: ${index}` );
       assert && assert( index >= 0 && index < this.plotNodesParent.getChildrenCount(),
         `index out of range: ${index}` );
+      assert && assert( Array.isArray( counts ), `invalid counts: ${counts}` );
+      assert && assert( ColorDef.isColorDef( color ), `invalid color: ${color}` );
 
       // Draw the bars as a single shape.
       const shape = new Shape();
@@ -336,6 +354,11 @@ define( require => {
      * @private
      */
     plotLines( index, counts, color ) {
+      assert && assert( typeof index === 'number', `invalid index: ${index}` );
+      assert && assert( index >= 0 && index < this.plotNodesParent.getChildrenCount(),
+        `index out of range: ${index}` );
+      assert && assert( Array.isArray( counts ), `invalid counts: ${counts}` );
+      assert && assert( ColorDef.isColorDef( color ), `invalid color: ${color}` );
 
       assert && assert( index >= 0 && index < this.plotNodesParent.getChildrenCount(),
         `index out of range: ${index}` );
