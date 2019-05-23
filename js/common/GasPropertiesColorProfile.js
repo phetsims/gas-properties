@@ -218,6 +218,11 @@ define( require => {
     // container divider in the Diffusion screen
     dividerColor: {
       default: 'rgb( 70, 205, 85 )'
+    },
+
+    // color of the eraser button that is used to clear particles from the container
+    eraserButtonColor: {
+      default: 'rgb( 242, 242, 242 )'
     }
   } );
 

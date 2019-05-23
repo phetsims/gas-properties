@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
   const Property = require( 'AXON/Property' );
 
@@ -22,7 +23,9 @@ define( require => {
     constructor( numberProperties, options ) {
       assert && assert( Array.isArray( numberProperties ), `invalid numberProperties: ${numberProperties}` );
 
-      options = options || {};
+      options = _.extend( {
+        baseColor: GasPropertiesColorProfile.eraserButtonColorProperty
+      }, options );
 
       assert && assert( !options.listener, 'ClearParticlesButton sets listener' );
       options = _.extend( {
