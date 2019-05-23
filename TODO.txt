@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-
 GasPropertiesModel pressureProperty in core model units (AMU/(pm * ps^2)), have view convert to kPa
 
 #88 animate heat/cool for PRESSURE_T
