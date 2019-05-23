@@ -22,6 +22,7 @@ define( require => {
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
   const Util = require( 'DOT/Util' );
@@ -45,6 +46,7 @@ define( require => {
       assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( visibleBoundsProperty instanceof Property, `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
       options = _.extend( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip

@@ -10,10 +10,13 @@ define( require => {
 
   // modules
   const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const Property = require( 'AXON/Property' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -37,11 +40,14 @@ define( require => {
 
     /**
      * @param {EnumerationProperty} holdConstantProperty
-     * @param {NumberProperty} totalNumberOfParticlesProperty
+     * @param {Property.<number>>} totalNumberOfParticlesProperty
      * @param {NumberProperty} pressureProperty
      * @param {Object} [options]
      */
     constructor( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, options ) {
+      assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( totalNumberOfParticlesProperty instanceof Property, `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( pressureProperty instanceof NumberProperty, `invalid pressureProperty: ${pressureProperty}` );
 
       options = _.extend( {
         align: 'left',

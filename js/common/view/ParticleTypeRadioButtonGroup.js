@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
@@ -19,11 +20,12 @@ define( require => {
   class ParticleTypeRadioButtonGroup extends RadioButtonGroup {
 
     /**
-     * @param {StringProperty} particleTypeProperty
+     * @param {EnumerationProperty} particleTypeProperty
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
     constructor( particleTypeProperty, modelViewTransform, options ) {
+      assert && assert( particleTypeProperty instanceof EnumerationProperty, `invalid particleTypeProperty: ${particleTypeProperty}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
