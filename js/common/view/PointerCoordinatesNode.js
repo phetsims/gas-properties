@@ -2,7 +2,7 @@
 
 /**
  * Shows the model and view coordinates that correspond to the cursor location.
- * Used exclusively for debugging, see GasPropertiesQueryParameters.pointerCoordinates.
+ * Originally implemented for use in gas-properties, where it was used exclusively for debugging.
  * CAUTION! This adds a listener to the Display, see notes below.
  *
  * @author Chris Malley (PixelZoom, Inc.)
