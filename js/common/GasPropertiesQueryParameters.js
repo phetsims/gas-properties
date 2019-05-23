@@ -125,36 +125,6 @@ define( require => {
     },
 
     /**
-     * Thickness of the container's walls, in pm.
-     * For internal use only, not public facing.
-     */
-    wallThickness: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 75
-    },
-
-    /**
-     * Thickness of the container's lid, in pm.
-     * For internal use only, not public facing.
-     */
-    lidThickness: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 175
-    },
-
-    /**
-     * Thickness of the container's vertical divider, in pm.
-     * For internal use only, not public facing.
-     */
-    dividerThickness: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 100
-    },
-
-    /**
      * Speed limit for the left movable wall, in pm/ps.
      * For internal use only, not public facing.
      */

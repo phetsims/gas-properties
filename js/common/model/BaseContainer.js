@@ -14,7 +14,6 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -52,7 +51,7 @@ define( require => {
       this.depth = 4000;
 
       // @public (read-only) wall thickness, in pm
-      this.wallThickness = GasPropertiesQueryParameters.wallThickness;
+      this.wallThickness = 75;
 
       // @public inside bounds, in pm
       this.boundsProperty = new DerivedProperty( [ this.widthProperty ],
