@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.26 Wed May 22 2019 17:58:18 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.27 Wed May 22 2019 21:11:19 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "68cbf60c30d19d897a64452acf1d617aa281b991",
+    "sha": "7a85a1394b9641ca9021fec980bc6e0b51252ae7",
     "branch": "master"
   },
   "joist": {
