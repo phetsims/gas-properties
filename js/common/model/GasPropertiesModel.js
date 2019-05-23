@@ -320,14 +320,19 @@ define( require => {
      * @param {number} newValue - new number of particles
      * @param {number} oldValue - old number of particles
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
-     * @param particleConstructor - constructor for elements in particles array
+     * @param Constructor - constructor for elements in particles array
      * @private
      */
-    updateNumberOfParticles( newValue, oldValue, particles, particleConstructor ) {
+    updateNumberOfParticles( newValue, oldValue, particles, Constructor ) {
+      assert && assert( typeof newValue === 'number', `invalid newValue: ${newValue}` );
+      assert && assert( oldValue === null || typeof oldValue === 'number', `invalid oldValue: ${oldValue}` );
+      assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+      //TODO validate Constructor
+
       if ( particles.length !== newValue ) {
         const delta = newValue - oldValue;
         if ( delta > 0 ) {
-          this.addParticles( delta, particles, particleConstructor );
+          this.addParticles( delta, particles, Constructor );
         }
         else if ( delta < 0 ) {
           ParticleUtils.removeParticles( -delta, particles );
@@ -345,6 +350,9 @@ define( require => {
      * @private
      */
     addParticles( n, particles, Constructor ) {
+      assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
+      assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+      //TODO validate Constructor
 
       // Get the temperature that will be used to compute initial velocity magnitude.
       let meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
@@ -520,6 +528,8 @@ define( require => {
      * @public
      */
     redistributeParticles( ratio ) {
+      assert && assert( typeof ratio === 'number', `invalid ratio: ${ratio}` );
+
       ParticleUtils.redistributeParticles( this.heavyParticles, ratio );
       ParticleUtils.redistributeParticles( this.lightParticles, ratio );
     }
@@ -546,6 +556,7 @@ define( require => {
      * @param {number} temperature
      */
     adjustParticleVelocitiesForTemperature( temperature ) {
+      assert && assert( typeof temperature === 'number', `invalid temperature: ${temperature}` );
 
       const desiredAverageKE = ( 3 / 2 ) * temperature * GasPropertiesConstants.BOLTZMANN; // KE = (3/2)Tk
       const actualAverageKE = this.getAverageKineticEnergy();

@@ -33,7 +33,8 @@ define( require => {
      */
     constructor( container, particleArrays, options ) {
       assert && assert( container instanceof BaseContainer, `invalid container: ${container}` );
-      assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0, `invalid particleArrays: ${particleArrays}` );
+      assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0,
+        `invalid particleArrays: ${particleArrays}` );
 
       options = _.extend( {
 
