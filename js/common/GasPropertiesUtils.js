@@ -23,6 +23,10 @@ define( require => {
      * @returns {number[]}
      */
     getGaussianValues: function( n, mean, deviation, threshold ) {
+      assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
+      assert && assert( typeof mean === 'number', `invalid mean: ${mean}` );
+      assert && assert( typeof deviation === 'number', `invalid deviation: ${deviation}` );
+      assert && assert( typeof threshold === 'number' && threshold >= 0, `invalid threshold: ${threshold}` );
 
       const values = [];
       let sum = 0;

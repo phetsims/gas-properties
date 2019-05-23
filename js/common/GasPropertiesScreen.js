@@ -12,16 +12,20 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Screen = require( 'JOIST/Screen' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class GasPropertiesScreen extends Screen {
 
     /**
-     * @param {function} createModel
-     * @param {function( model:Object ) } createView
+     * @param {function: Object} createModel
+     * @param {function( model:Object ): ScreenView } createView
      * @param {Tandem} tandem
      * @param {Object} [options]
      */
     constructor( createModel, createView, tandem, options ) {
+      assert && assert( typeof createModel === 'function', `invalid createModel: ${createModel}` );
+      assert && assert( typeof createView === 'function', `invalid createView: ${createView}` );
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
         backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
