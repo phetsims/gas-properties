@@ -562,7 +562,7 @@ define( require => {
       const actualAverageKE = this.getAverageKineticEnergy();
       const ratio = desiredAverageKE / actualAverageKE;
 
-      //TODO is this iterator OK?
+      //TODO is this iterator OK? or should model have {Particle[][]} particleArrays?
       [ this.heavyParticles, this.lightParticles ].forEach( particles => {
         for ( let i = 0; i < particles.length; i++ ) {
           const particle = particles[ i ];
