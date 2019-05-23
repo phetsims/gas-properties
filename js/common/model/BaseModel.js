@@ -20,6 +20,7 @@ define( require => {
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Property = require( 'AXON/Property' );
   const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -33,6 +34,7 @@ define( require => {
   class BaseModel {
 
     constructor( tandem, options ) {
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
 

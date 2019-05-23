@@ -30,6 +30,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -48,6 +49,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( tandem, options ) {
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
         holdConstant: HoldConstantEnum.NOTHING,
@@ -55,7 +57,7 @@ define( require => {
         leftWallDoesWork: false
       }, options );
 
-      super();
+      super( tandem );
 
       // @public the quantity to hold constant
       this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, options.holdConstant );
