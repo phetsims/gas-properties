@@ -13,7 +13,9 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   class Region {
 
@@ -21,6 +23,7 @@ define( require => {
      * @param {Bounds2} bounds - bounds of the region, in pm
      */
     constructor( bounds ) {
+      assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
 
       // @public (read-only) {Bounds2}
       this.bounds = bounds;
@@ -35,6 +38,7 @@ define( require => {
      * @public
      */
     addParticle( particle ) {
+      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
       assert && assert( this.particles.indexOf( particle ) === -1, 'particle is already in this Region' );
       this.particles.push( particle );
     }
