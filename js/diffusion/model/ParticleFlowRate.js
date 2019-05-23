@@ -12,7 +12,6 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
 
   // constants
@@ -21,8 +20,8 @@ define( require => {
     units: 'particles/ps'
   };
 
-  // number of samples used to compute running average
-  const NUMBER_OF_SAMPLES = GasPropertiesQueryParameters.flowRateSamples;
+  // number of samples used to compute running average, see https://github.com/phetsims/gas-properties/issues/51
+  const NUMBER_OF_SAMPLES = 300;
 
   class ParticleFlowRate {
 

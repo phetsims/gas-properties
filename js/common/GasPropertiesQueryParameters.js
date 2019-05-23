@@ -60,22 +60,6 @@ define( require => {
       defaultValue: 20000
     },
 
-    // The number of samples in the running average for particle flow rate.
-    // For internal use only, not public facing.
-    flowRateSamples: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 300
-    },
-
-    // Particle flow rate vector of 1 particle/ps will have a vector (arrow) that is this long.
-    // For internal use only, not public facing.
-    flowRateScale: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 25
-    },
-
     // Number of bins for the histograms.
     // For internal use only, not public facing.
     bins: {

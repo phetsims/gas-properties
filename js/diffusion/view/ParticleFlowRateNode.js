@@ -12,12 +12,11 @@ define( require => {
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   // constants
   const X_SPACING = 5; // space between the tails of the left and right arrows
-  const SCALE = GasPropertiesQueryParameters.flowRateScale; // arrow length per 1 particle/ps
+  const VECTOR_SCALE = 25; // vector length per 1 particle/ps, see https://github.com/phetsims/gas-properties/issues/51
 
   class ParticleFlowRateNode extends Node {
 
@@ -58,12 +57,12 @@ define( require => {
 
       model.leftFlowRateProperty.link( flowRate => {
         leftArrowNode.visible = ( flowRate > 0 );
-        leftArrowNode.setTip( -( minTailLength + flowRate * SCALE ), 0 );
+        leftArrowNode.setTip( -( minTailLength + flowRate * VECTOR_SCALE ), 0 );
       } );
 
       model.rightFlowRateProperty.link( flowRate => {
         rightArrowNode.visible = ( flowRate > 0 );
-        rightArrowNode.setTip( minTailLength + flowRate * SCALE, 0 );
+        rightArrowNode.setTip( minTailLength + flowRate * VECTOR_SCALE, 0 );
       } );
     }
   }
