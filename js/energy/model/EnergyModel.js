@@ -156,6 +156,8 @@ define( require => {
    * @returns {number|null} null if there are no particles
    */
   function getAverageSpeed( particles ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
     let averageSpeed = null;
     if ( particles.length > 0 ) {
       let totalSpeed = 0;
@@ -173,6 +175,8 @@ define( require => {
    * @returns {number[]}
    */
   function getSpeedValues( particles ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
     const values = [];
     for ( let i = 0; i < particles.length; i++ ) {
       values.push( particles[ i ].velocity.magnitude );
@@ -186,6 +190,8 @@ define( require => {
    * @returns {number[]}
    */
   function getKineticEnergyValues( particles ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
     const values = [];
     for ( let i = 0; i < particles.length; i++ ) {
       values.push( particles[ i ].getKineticEnergy() );

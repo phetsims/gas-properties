@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const ColorDef = require( 'SCENERY/util/ColorDef' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
 
@@ -20,8 +21,9 @@ define( require => {
      * @param {ColorDef} color
      */
     constructor( valueArrays, plotType, color ) {
-
+      assert && assert( Array.isArray( valueArrays ), `invalid valueArrays: ${valueArrays}` );
       assert && assert( PlotType.includes( plotType ), `invalid plotType: ${plotType}` );
+      assert && assert( ColorDef.isColorDef( color ), `invalid color: ${color}` );
 
       // @public
       this.valueArrays = valueArrays;
