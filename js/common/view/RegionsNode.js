@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const RegionNode = require( 'GAS_PROPERTIES/common/view/RegionNode' );
 
@@ -23,6 +24,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( regions, modelViewTransform, options ) {
+      assert && assert( Array.isArray( regions ) && regions.length > 0, `invalid regions: ${regions}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         pickable: false

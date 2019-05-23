@@ -10,6 +10,8 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   class ParticleNode extends ShadedSphereNode {
@@ -21,6 +23,8 @@ define( require => {
      * @constructor
      */
     constructor( particle, modelViewTransform, options ) {
+      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       assert && assert( !options || !options.mainColor, 'ParticleNode sets mainColor' );
       options = _.extend( {

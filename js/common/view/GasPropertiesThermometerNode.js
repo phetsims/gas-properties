@@ -11,7 +11,9 @@ define( require => {
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const TemperatureDisplay = require( 'GAS_PROPERTIES/common/view/TemperatureDisplay' );
+  const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -23,6 +25,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( thermometer, listParent, options ) {
+      assert && assert( thermometer instanceof Thermometer, `invalid thermometer: ${thermometer}` );
+      assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
       options = _.extend( {
         spacing: 5,

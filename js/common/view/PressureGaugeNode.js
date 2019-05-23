@@ -16,6 +16,7 @@ define( require => {
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PressureDisplay = require( 'GAS_PROPERTIES/common/view/PressureDisplay' );
+  const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // strings
@@ -40,6 +41,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( pressureGauge, listParent, options ) {
+      assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
+      assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
       // circular dial with needle
       const dialNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,

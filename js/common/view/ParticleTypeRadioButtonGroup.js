@@ -12,6 +12,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
@@ -23,6 +24,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( particleTypeProperty, modelViewTransform, options ) {
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
 

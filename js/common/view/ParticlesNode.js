@@ -11,8 +11,10 @@ define( require => {
 
   // modules
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
+  const ColorDef = require( 'SCENERY/util/ColorDef' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
   const Property = require( 'AXON/Property' );
 
@@ -31,8 +33,13 @@ define( require => {
      */
     constructor( particleArrays, imageProperties, modelViewTransform, debugFill ) {
 
+      assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0,
+        `invalid particleArrays: ${particleArrays}` );
       assert && assert( particleArrays.length === imageProperties.length,
         'must supply an image Property for each particle array' );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( ColorDef.isColorDef( debugFill ), `invalid debugFill: ${debugFill}` );
 
       super();
 

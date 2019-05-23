@@ -10,6 +10,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -24,6 +25,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( container, options ) {
+      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
 
       options = _.extend( {
         baseColor: PhetColorScheme.BUTTON_YELLOW

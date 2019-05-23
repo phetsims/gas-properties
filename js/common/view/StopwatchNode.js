@@ -15,6 +15,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TimerNode = require( 'SCENERY_PHET/TimerNode' );
   const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
@@ -30,6 +31,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( stopwatch, visibleBoundsProperty, options ) {
+      assert && assert( stopwatch instanceof Stopwatch, `invalid stopwatch: ${stopwatch}` );
 
       options = _.extend( {
 

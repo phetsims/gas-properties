@@ -11,9 +11,11 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Region = require( 'GAS_PROPERTIES/common/model/Region' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
@@ -27,6 +29,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( region, modelViewTransform, options ) {
+      assert && assert( region instanceof Region, `invalid region: ${region}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       const viewBounds = modelViewTransform.modelToViewBounds( region.bounds );
 

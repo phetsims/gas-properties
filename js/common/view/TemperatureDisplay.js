@@ -30,6 +30,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( thermometer, listParent, options ) {
+      assert && assert( thermometer instanceof Thermometer, `invalid thermometer: ${thermometer}` );
 
       options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
 

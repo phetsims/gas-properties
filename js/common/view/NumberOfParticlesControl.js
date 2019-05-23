@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -31,6 +32,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( icon, title, numberOfParticlesProperty, options ) {
+      assert && assert( icon instanceof Node, `invalid icon: ${icon}` );
+      assert && assert( typeof title === 'string', `invalid title: ${title}` );
 
       options = _.extend( {
         align: 'left',

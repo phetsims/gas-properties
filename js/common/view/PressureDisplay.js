@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Range = require( 'DOT/Range' );
 
@@ -31,6 +32,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( pressureGauge, listParent, options ) {
+      assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
+      assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
       options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
 
