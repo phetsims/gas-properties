@@ -274,18 +274,33 @@ define( require => {
       // Do this after collision detection, so that the number of collisions detected has been recorded.
       this.collisionCounter && this.collisionCounter.step( dt );
 
-      //TODO this doesn't need to be done for PRESSURE_T
+      // Adjust quantities to compensate for holdConstant mode. Do this before computing temperature or pressure.
+      this.compensateForHoldConstant();
+
       // Compute temperature. Do this before pressure, because pressure depends on temperature.
       this.temperatureProperty.value = this.computeActualTemperature();
 
-      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
+      // When adding particles to an empty container, don't compute pressure until 1 particle has collided with the container.
       if ( !this.stepPressureEnabled && this.collisionDetector.numberOfParticleContainerCollisions > 0 ) {
         this.stepPressureEnabled = true;
       }
 
-      //TODO fold stepPressure into stepModelTime?
-      // Step pressure
-      this.stepPressureEnabled && this.stepPressure( dt );
+      // Compute pressure
+      if ( this.stepPressureEnabled ) {
+        this.pressureProperty.value = this.computePressure();
+
+        // Disable jitter when we're holding pressure constant.
+        const jitterEnabled = !( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
+                                 this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
+
+        // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
+        this.pressureGauge.step( dt, jitterEnabled );
+
+        // If pressure exceeds the maximum, blow the lid off of the container.
+        if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
+          this.container.lidIsOnProperty.value = false;
+        }
+      }
     }
 
     /**
@@ -380,18 +395,16 @@ define( require => {
       }
     }
 
-    //TODO this is poorly named, fold into stepModelTime?
     /**
-     * Steps pressure. This either updates pressure, or updates related quantities if pressure is being held constant.
+     * Adjust quantities to compensate for what is being held constant.
      * @private
      */
-    stepPressure( dt ) {
-      assert && assert( this.stepPressureEnabled, 'stepPressureEnabled must be enabled' );
+    compensateForHoldConstant() {
 
       if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
 
         // hold pressure constant by changing volume
-        let containerWidth = this.computeIdealVolume() / ( this.container.height * this.container.depth );
+        let containerWidth = this.computeVolume() / ( this.container.height * this.container.depth );
 
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
@@ -416,29 +429,12 @@ define( require => {
 
         // hold pressure constant by changing temperature
         // adjust particle velocities
-        const desiredTemperature = this.computeIdealTemperature();
+        const desiredTemperature = this.computeDesiredTemperature();
         this.adjustParticleVelocitiesForTemperature( desiredTemperature );
         this.temperatureProperty.value = desiredTemperature;
 
         //TODO #88 animate heat/cool
       }
-      else {
-
-        // update pressure
-        this.pressureProperty.value = this.computeIdealPressure();
-
-        // If pressure exceeds the maximum, blow the lid off of the container.
-        if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
-          this.container.lidIsOnProperty.value = false;
-        }
-      }
-
-      // Disable jitter when we're holding pressure constant.
-      const jitterEnabled = !( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
-                               this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
-
-      // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
-      this.pressureGauge.step( dt, jitterEnabled );
     }
 
     /**
@@ -446,11 +442,11 @@ define( require => {
      * @returns {number} in kPa
      * @private
      */
-    computeIdealPressure() {
+    computePressure() {
 
       const N = this.totalNumberOfParticlesProperty.value;
       const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
-      const T = this.temperatureProperty.value; // K
+      const T = this.temperatureProperty.value; // in K, assumes the this.temperatureProperty has been updated
       assert && assert( typeof T === 'number' && T >= 0, `invalid temperature: ${T}` );
       const V = this.container.getVolume(); // pm^3
       const P = ( N * k * T / V );
@@ -464,21 +460,21 @@ define( require => {
      * @returns {number} in pm^3
      * @private
      */
-    computeIdealVolume() {
+    computeVolume() {
       const N = this.totalNumberOfParticlesProperty.value;
       const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
-      const T = this.temperatureProperty.value; // K
+      const T = this.computeActualTemperature(); // in K, this.temperatureProperty has not been updated, so compute T
       const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
-      assert && assert( P !== 0, `unexpected pressure: ${P}` );
+      assert && assert( P !== 0, 'zero pressure not supported' );
       return ( N * k * T ) / P;
     }
 
     /**
-     * Computes temperature using the Ideal Gas Law, T = (PV)/(Nk)
+     * Computes a desired temperature using the Ideal Gas Law, T = (PV)/(Nk)
      * @returns {number} in K
      * @private
      */
-    computeIdealTemperature() {
+    computeDesiredTemperature() {
       const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
       assert && assert( P !== 0, 'zero pressure not supported' );
       const N = this.totalNumberOfParticlesProperty.value;
