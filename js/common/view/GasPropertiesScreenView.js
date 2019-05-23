@@ -27,6 +27,7 @@ define( require => {
 
   // modules
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
+  const ClearParticlesButton  = require( 'GAS_PROPERTIES/common/view/ClearParticlesButton' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -152,7 +153,7 @@ define( require => {
       } );
 
       // Dimensional arrows that indicate container size
-      const containerContainerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
+      const containerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
         model.modelViewTransform, sizeVisibleProperty );
 
       // Radio buttons for selecting particle type
@@ -228,6 +229,13 @@ define( require => {
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
+      
+      // Button to clear particles from container
+      const clearParticlesButton = new ClearParticlesButton( 
+        [ model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty ], {
+          right: containerNode.right,
+          top: containerWidthNode.bottom + 5
+        } );
 
       // Collision Counter
       let collisionCounterNode = null;
@@ -259,8 +267,9 @@ define( require => {
       this.addChild( bicyclePumpsToggleNode );
       this.addChild( pressureGaugeNode );
       this.addChild( containerNode );
+      this.addChild( clearParticlesButton );
       this.addChild( thermometerNode );
-      this.addChild( containerContainerWidthNode );
+      this.addChild( containerWidthNode );
       this.addChild( particlesNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
