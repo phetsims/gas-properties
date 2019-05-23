@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -30,6 +31,7 @@ define( require => {
      * @param {GasPropertiesModel} model - passing in the entire model since we use so much of its public API
      */
     constructor( model ) {
+      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
 
       // generated image for HeavyParticle species
       const heavyParticleImageProperty = new ParticleImageProperty(
