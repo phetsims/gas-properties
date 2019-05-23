@@ -38,8 +38,8 @@ define( require => {
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
-  // multiplier for converting pressure to kPa
-  const PRESSURE_CONVERSION_SCALE = 1.66E6; //TODO handle this in view?
+  // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
+  const PRESSURE_CONVERSION_SCALE = 1.66E6;
 
   class GasPropertiesModel extends BaseModel {
 
