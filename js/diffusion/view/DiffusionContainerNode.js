@@ -11,9 +11,9 @@ define( require => {
   'use strict';
 
   // modules
+  const DividerNode = require( 'GAS_PROPERTIES/diffusion/view/DividerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const Line = require( 'SCENERY/nodes/Line' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -26,47 +26,32 @@ define( require => {
      */
     constructor( container, modelViewTransform, options ) {
 
-      // Transform to view coordinate frame
-      const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
-      const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
-      const viewDividerX = modelViewTransform.modelToViewX( container.dividerX );
-
       // Expand the container bounds to account for wall thickness.
       const viewBounds = modelViewTransform.modelToViewBounds( container.bounds )
         .dilated( modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 ) );
 
-      // Outside border of the container, expanded to account for wall thickness
+      // Outside border of the container
       const borderNode = new Rectangle( viewBounds, {
           stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
-          lineWidth: viewWallThickness
+          lineWidth: modelViewTransform.modelToViewDeltaX( container.wallThickness )
         } );
 
       // Vertical divider
-      const dividerNode = new Line( viewDividerX, viewBounds.minY, viewDividerX, viewBounds.maxY, {
-        stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: viewDividerThickness
-      } );
-
-      // Vertical dashed line to indicate the center of the container when the divider is not present.
-      const noDividerNode = new Line( viewDividerX, viewBounds.minY, viewDividerX, viewBounds.maxY, {
-        stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: viewDividerThickness / 2,
-        lineDash: [ 10, 24 ],
-        center: borderNode.center
+      const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
+      const dividerNode = new DividerNode( container.hasDividerProperty, {
+        length: modelViewTransform.modelToViewDeltaX( container.height ),
+        solidLineWidth: viewDividerThickness,
+        dashedLineWidth: viewDividerThickness / 2,
+        centerX: modelViewTransform.modelToViewX( container.dividerX ),
+        bottom: modelViewTransform.modelToViewY( container.location.y )
       } );
 
       assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );
       options = _.extend( {
-        children: [ noDividerNode, dividerNode, borderNode ]
+        children: [ dividerNode, borderNode ]
       }, options );
 
       super( options );
-
-      // Show/hide the divider
-      container.hasDividerProperty.link( hasDivider => {
-        dividerNode.visible = hasDivider;
-        noDividerNode.visible = !hasDivider;
-      } );
     }
   }
 
