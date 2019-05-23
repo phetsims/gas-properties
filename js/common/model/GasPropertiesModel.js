@@ -274,14 +274,16 @@ define( require => {
       // Do this after collision detection, so that the number of collisions detected has been recorded.
       this.collisionCounter && this.collisionCounter.step( dt );
 
+      //TODO this doesn't need to be done for PRESSURE_T
       // Compute temperature. Do this before pressure, because pressure depends on temperature.
-      this.temperatureProperty.value = this.computeTemperature();
+      this.temperatureProperty.value = this.computeActualTemperature();
 
       // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
       if ( !this.stepPressureEnabled && this.collisionDetector.numberOfParticleContainerCollisions > 0 ) {
         this.stepPressureEnabled = true;
       }
 
+      //TODO fold stepPressure into stepModelTime?
       // Step pressure
       this.stepPressureEnabled && this.stepPressure( dt );
     }
@@ -378,29 +380,7 @@ define( require => {
       }
     }
 
-    /**
-     * Gets the temperature that is a measure of the kinetic energy of the particles in the container.
-     * @returns {number|null} in K, null if the container is empty
-     * @private
-     */
-    computeTemperature() {
-      let temperature = null;
-      const n = this.totalNumberOfParticlesProperty.value;
-      if ( n > 0 ) {
-
-        // Compute the average kinetic energy, AMU * pm^2 / ps^2
-        const totalKineticEnergy = ParticleUtils.getTotalKineticEnergy( this.heavyParticles ) +
-                                   ParticleUtils.getTotalKineticEnergy( this.lightParticles );
-        const averageKineticEnergy = totalKineticEnergy / n;
-
-        const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
-
-        // T = (2/3)KE/k
-        temperature = ( 2 / 3 ) * averageKineticEnergy / k; // K
-      }
-      return temperature;
-    }
-
+    //TODO this is poorly named, fold into stepModelTime?
     /**
      * Steps pressure. This either updates pressure, or updates related quantities if pressure is being held constant.
      * @private
@@ -434,10 +414,13 @@ define( require => {
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
 
-        // hold pressure constant by changing temperature, T = PV/Nk
-        //TODO #88 adjust particle velocities
+        // hold pressure constant by changing temperature
+        // adjust particle velocities
+        const desiredTemperature = this.computeIdealTemperature();
+        this.adjustParticleVelocitiesForTemperature( desiredTemperature );
+        this.temperatureProperty.value = desiredTemperature;
+
         //TODO #88 animate heat/cool
-        this.temperatureProperty.value = this.computeIdealTemperature();
       }
       else {
 
@@ -477,20 +460,6 @@ define( require => {
     }
 
     /**
-     * Computes temperature using the Ideal Gas Law, T = (PV)/(Nk)
-     * @returns {number} in K
-     * @private
-     */
-    computeIdealTemperature() {
-      const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
-      assert && assert( P !== 0, `unexpected pressure: ${P}` );
-      const N = this.totalNumberOfParticlesProperty.value;
-      const V = this.container.getVolume(); // pm^3
-      const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
-      return ( P * V ) / ( N * k );
-    }
-
-    /**
      * Computes volume using the Ideal Gas Law, V = NkT/P
      * @returns {number} in pm^3
      * @private
@@ -505,6 +474,39 @@ define( require => {
     }
 
     /**
+     * Computes temperature using the Ideal Gas Law, T = (PV)/(Nk)
+     * @returns {number} in K
+     * @private
+     */
+    computeIdealTemperature() {
+      const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+      assert && assert( P !== 0, 'zero pressure not supported' );
+      const N = this.totalNumberOfParticlesProperty.value;
+      assert && assert( N !== 0, 'empty container not supported' );
+      const V = this.container.getVolume(); // pm^3
+      const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
+      return ( P * V ) / ( N * k );
+    }
+
+    /**
+     * Computes the actual temperature, which is a measure of the kinetic energy of the particles in the container.
+     * @returns {number|null} in K, null if the container is empty
+     * @private
+     */
+    computeActualTemperature() {
+      let temperature = null;
+      const n = this.totalNumberOfParticlesProperty.value;
+      if ( n > 0 ) {
+        const averageKineticEnergy = this.getAverageKineticEnergy(); // AMU * pm^2 / ps^2
+        const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
+
+        // T = (2/3)KE/k
+        temperature = ( 2 / 3 ) * averageKineticEnergy / k; // K
+      }
+      return temperature;
+    }
+
+    /**
      * Redistributes the particles in the container, called in response to changing the container width.
      * @param {number} ratio
      * @public
@@ -512,6 +514,48 @@ define( require => {
     redistributeParticles( ratio ) {
       ParticleUtils.redistributeParticles( this.heavyParticles, ratio );
       ParticleUtils.redistributeParticles( this.lightParticles, ratio );
+    }
+
+    /**
+     * Gets the average kinetic energy of the particles in the container.
+     * @returns {number} in AMU * pm^2 / ps^2
+     */
+    getAverageKineticEnergy() {
+      return this.getTotalKineticEnergy() / this.totalNumberOfParticlesProperty.value;
+    }
+
+    /**
+     * Gets the total kinetic energy of the particles in the container.
+     * @returns {number} in AMU * pm^2 / ps^2
+     */
+    getTotalKineticEnergy() {
+      return ParticleUtils.getTotalKineticEnergy( this.heavyParticles ) +
+             ParticleUtils.getTotalKineticEnergy( this.lightParticles );
+    }
+
+    /**
+     * Adjusts velocities of particle in the container so that the resulting temperature matches a specified temperature.
+     * @param {number} temperature
+     */
+    adjustParticleVelocitiesForTemperature( temperature ) {
+
+      const desiredAverageKE = ( 3 / 2 ) * temperature * GasPropertiesConstants.BOLTZMANN; // KE = (3/2)Tk
+      const actualAverageKE = this.getAverageKineticEnergy();
+      const ratio = desiredAverageKE / actualAverageKE;
+
+      //TODO is this iterator OK?
+      [ this.heavyParticles, this.lightParticles ].forEach( particles => {
+        for ( let i = 0; i < particles.length; i++ ) {
+          const particle = particles[ i ];
+          const actualParticleKE = particle.getKineticEnergy();
+          const desiredParticleKE = ratio * actualParticleKE;
+          const desiredSpeed = Math.sqrt( 2 * desiredParticleKE / particle.mass ); // |v| = Math.sqrt( 2 * KE / m )
+          particle.setVelocityMagnitude( desiredSpeed );
+        }
+      } );
+
+      assert && assert( Math.abs( temperature - this.computeActualTemperature() < 1E-3 ),
+        'actual temperature does not match desired temperature' );
     }
   }
 
