@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BicyclePumpNode = require( 'SCENERY_PHET/BicyclePumpNode' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Property = require( 'AXON/Property' );
 
@@ -21,6 +22,7 @@ define( require => {
      * @constructor
      */
     constructor( numberOfParticlesProperty, options ) {
+      assert && assert( numberOfParticlesProperty instanceof NumberProperty, `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
 
       options = _.extend( {
         height: 230,

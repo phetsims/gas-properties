@@ -11,6 +11,7 @@ define( require => {
   // modules
   const AlignBox = require( 'SCENERY/nodes/AlignBox' );
   const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -19,6 +20,7 @@ define( require => {
   const GasPropertiesSpinner = require( 'GAS_PROPERTIES/diffusion/view/GasPropertiesSpinner' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -41,6 +43,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( leftSettings, rightSettings, modelViewTransform, enabledProperty, options ) {
+      assert && assert( leftSettings instanceof DiffusionSettings, `invalid leftSettings: ${leftSettings}` );
+      assert && assert( rightSettings instanceof DiffusionSettings, `invalid rightSettings: ${rightSettings}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( enabledProperty instanceof BooleanProperty, `invalid enabledProperty: ${enabledProperty}` );
 
       options = _.extend( {
         spacing: 20,

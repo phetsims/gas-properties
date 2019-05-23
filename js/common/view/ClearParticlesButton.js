@@ -12,14 +12,16 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
+  const Property = require( 'AXON/Property' );
 
   class ClearParticlesButton extends EraserButton {
 
     /**
-     * @param {NumberProperty} totalNumberOfParticlesProperty
+     * @param {Property.<number>>} totalNumberOfParticlesProperty
      * @param {Object} [options]
      */
     constructor( totalNumberOfParticlesProperty, options ) {
+      assert && assert( totalNumberOfParticlesProperty instanceof Property, `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
 
       options = _.extend( {
         baseColor: GasPropertiesColorProfile.eraserButtonColorProperty

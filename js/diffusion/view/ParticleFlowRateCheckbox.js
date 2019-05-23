@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
@@ -23,6 +24,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( particleFlowRateVisibleProperty, options ) {
+      assert && assert( particleFlowRateVisibleProperty instanceof BooleanProperty,
+        `invalid particleFlowRateVisibleProperty: ${particleFlowRateVisibleProperty}` );
 
       options = _.extend( {
         textIconSpacing: 12

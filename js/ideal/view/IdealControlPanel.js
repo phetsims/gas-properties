@@ -9,14 +9,18 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounterCheckbox = require( 'GAS_PROPERTIES/common/view/CollisionCounterCheckbox' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstantControl = require( 'GAS_PROPERTIES/ideal/view/HoldConstantControl' );
   const HSeparator = require( 'SUN/HSeparator' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Panel = require( 'SUN/Panel' );
+  const Property = require( 'AXON/Property' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const WidthCheckbox = require( 'GAS_PROPERTIES/common/view/WidthCheckbox' );
@@ -24,8 +28,8 @@ define( require => {
   class IdealControlPanel extends Panel {
 
     /**
-     * @param {StringProperty} holdConstantProperty
-     * @param {NumberProperty} totalNumberOfParticlesProperty
+     * @param {EnumerationProperty} holdConstantProperty
+     * @param {Property.<number>>} totalNumberOfParticlesProperty
      * @param {NumberProperty} pressureProperty
      * @param {BooleanProperty} sizeVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
@@ -34,6 +38,12 @@ define( require => {
      */
     constructor( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, sizeVisibleProperty,
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
+      assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( totalNumberOfParticlesProperty instanceof Property, `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( pressureProperty instanceof NumberProperty, `invalid pressureProperty: ${pressureProperty}` );
+      assert && assert( sizeVisibleProperty instanceof BooleanProperty, `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty, `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
+      assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty, `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
 
       options = _.extend( {
         fixedWidth: 100,

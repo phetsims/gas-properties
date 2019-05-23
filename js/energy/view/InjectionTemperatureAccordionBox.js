@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -18,6 +19,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
@@ -46,6 +48,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( controlTemperatureEnabledProperty, initialTemperatureProperty, options ) {
+      assert && assert( controlTemperatureEnabledProperty instanceof BooleanProperty,
+        `invalid controlTemperatureEnabledProperty: ${controlTemperatureEnabledProperty}` );
+      assert && assert( initialTemperatureProperty instanceof NumberProperty,
+        `invalid initialTemperatureProperty: ${initialTemperatureProperty}` );
 
       assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );
 

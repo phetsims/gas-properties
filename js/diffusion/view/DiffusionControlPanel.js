@@ -9,7 +9,9 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CenterOfMassCheckbox = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassCheckbox' );
+  const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
   const DiffusionSettingsNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionSettingsNode' );
   const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
@@ -37,6 +39,18 @@ define( require => {
     constructor( leftSettings, rightSettings,
                  modelViewTransform, hasDividerProperty, particleFlowRateVisibleProperty,
                  centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
+      assert && assert( leftSettings instanceof DiffusionSettings,
+        `invalid leftSettings: ${leftSettings}` );
+      assert && assert( rightSettings instanceof DiffusionSettings,
+        `invalid rightSettings: ${rightSettings}` );
+      assert && assert( hasDividerProperty instanceof BooleanProperty,
+        `invalid hasDividerProperty: ${hasDividerProperty}` );
+      assert && assert( particleFlowRateVisibleProperty instanceof BooleanProperty,
+        `invalid particleFlowRateVisibleProperty: ${particleFlowRateVisibleProperty}` );
+      assert && assert( centerOfMassVisibleProperty instanceof BooleanProperty,
+        `invalid centerOfMassVisibleProperty: ${centerOfMassVisibleProperty}` );
+      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
+        `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
 
       options = _.extend( {
         fixedWidth: 100,

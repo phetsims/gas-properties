@@ -14,6 +14,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
 
   class ParticleImageProperty extends DerivedProperty {
@@ -27,7 +28,11 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( Constructor, modelViewTransform, radiusProperty, colorProperty, highlightColorProperty, options ) {
+      //TODO validate Constructor
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
+      assert && assert( colorProperty instanceof Property, `invalid colorProperty: ${colorProperty}` );
+      assert && assert( highlightColorProperty instanceof Property, `invalid highlightColorProperty: ${highlightColorProperty}` );
 
       options = _.extend( {
         isValidValue: value => ( value === null || value instanceof HTMLCanvasElement )

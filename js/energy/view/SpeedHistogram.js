@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const EnergyHistogram = require( 'GAS_PROPERTIES/energy/view/EnergyHistogram' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -30,6 +31,11 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( heavyVisibleProperty, lightVisibleProperty, getHeavyValues, getLightValues, options ) {
+      assert && assert( heavyVisibleProperty instanceof BooleanProperty, `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
+      assert && assert( lightVisibleProperty instanceof BooleanProperty, `invalid lightVisibleProperty: ${lightVisibleProperty}` );
+      assert && assert( typeof getHeavyValues === 'function', `invalid getHeavyValues: ${getHeavyValues}` );
+      assert && assert( typeof getLightValues === 'function', `invalid getLightValues: ${getLightValues}` );
+
       super(
         GasPropertiesQueryParameters.bins,
         GasPropertiesQueryParameters.speedBinWidth, // pm/ps

@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
@@ -23,6 +24,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( collisionCounterVisibleProperty, options ) {
+      assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty,
+        `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
 
       if ( options ) {
         assert && assert( !options.text, 'StopwatchCheckbox sets text' );

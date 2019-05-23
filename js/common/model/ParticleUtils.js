@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   const ParticleUtils = {
@@ -26,6 +27,7 @@ define( require => {
     stepParticles( particles, dt ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
       for ( let i = 0; i < particles.length; i++ ) {
         particles[ i ].step( dt );
       }
@@ -40,8 +42,10 @@ define( require => {
     removeParticle: function( particle, particles ) {
       assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
       const index = particles.indexOf( particle );
       assert && assert( index !== -1, 'particle not found' );
+
       particles.splice( index, 1 );
       particle.dispose();
     },
@@ -53,9 +57,9 @@ define( require => {
      * @public
      */
     removeParticles: function( n, particles ) {
-      assert && assert( n <= particles.length,
-        `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
+      assert && assert( n <= particles.length, `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
       const particlesToRemove = particles.slice( particles.length - n, particles.length );
       for ( let i = 0; i < particlesToRemove.length; i++ ) {
         ParticleUtils.removeParticle( particlesToRemove[ i ], particles );
@@ -69,6 +73,7 @@ define( require => {
      */
     removeAllParticles: function( particles ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
       ParticleUtils.removeParticles( particles.length, particles );
     },
 
@@ -81,6 +86,7 @@ define( require => {
     removeParticlesOutOfBounds: function( particles, bounds ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
       assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
+
       for ( let i = 0; i < particles.length; i++ ) {
         if ( !particles[ i ].intersectsBounds( bounds ) ) {
           ParticleUtils.removeParticle( particles[ i ], particles );
@@ -97,6 +103,7 @@ define( require => {
     redistributeParticles: function( particles, ratio ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
       assert && assert( ratio > 0, `invalid ratio: ${ratio}` );
+
       for ( let i = 0; i < particles.length; i++ ) {
         particles[ i ].location.setX( ratio * particles[ i ].location.x );
       }
@@ -110,8 +117,8 @@ define( require => {
      */
     heatCoolParticles: function( particles, heatCoolFactor ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-      assert && assert( typeof heatCoolFactor === 'number' && heatCoolFactor >= -1 && heatCoolFactor <= 1,
-        `invalid heatCoolFactor: ${heatCoolFactor}` );
+      assert && assert( typeof heatCoolFactor === 'number' && heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
+
       const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
       for ( let i = 0; i < particles.length; i++ ) {
         particles[ i ].scaleVelocity( velocityScale );
@@ -129,8 +136,10 @@ define( require => {
      */
     escapeParticles: function( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
       assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( numberOfParticlesProperty instanceof NumberProperty, `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( Array.isArray( insideParticles ), `invalid insideParticles: ${insideParticles}` );
       assert && assert( Array.isArray( outsideParticles ), `invalid outsideParticles: ${outsideParticles}` );
+
       for ( let i = 0; i < insideParticles.length; i++ ) {
         const particle = insideParticles[ i ];
         assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
@@ -151,6 +160,7 @@ define( require => {
      */
     getTotalKineticEnergy: function( particles ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
       let totalKineticEnergy = 0;
       for ( let i = 0; i < particles.length; i++ ) {
         totalKineticEnergy += particles[ i ].getKineticEnergy();
@@ -166,6 +176,7 @@ define( require => {
      */
     getCenterXOfMass: function( particles ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
       if ( particles.length > 0 ) {
         let numerator = 0;
         let totalMass = 0;

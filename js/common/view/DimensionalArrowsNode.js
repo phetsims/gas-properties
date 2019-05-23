@@ -15,6 +15,7 @@ define( require => {
   const Matrix3 = require( 'DOT/Matrix3' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const Property = require( 'AXON/Property' );
   const Shape = require( 'KITE/Shape' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -24,10 +25,11 @@ define( require => {
   class DimensionalArrowsNode extends Node {
 
     /**
-     * @param {NumberProperty} lengthProperty - length in view coordinates
+     * @param {Property.<number>} lengthProperty - length in view coordinates
      * @param {Object} [options]
      */
     constructor( lengthProperty, options ) {
+      assert && assert( lengthProperty instanceof Property, `invalid lengthProperty: ${lengthProperty}` );
 
       options = _.extend( {
         color: 'black',

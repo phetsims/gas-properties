@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -26,6 +27,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( hasDividerProperty, options ) {
+      assert && assert( hasDividerProperty instanceof BooleanProperty, `invalid hasDividerProperty: ${hasDividerProperty}` );
 
       options = _.extend( {
         baseColor: GasPropertiesColorProfile.dividerColorProperty

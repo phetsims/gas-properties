@@ -27,6 +27,7 @@ define( require => {
 
   // modules
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const ClearParticlesButton  = require( 'GAS_PROPERTIES/common/view/ClearParticlesButton' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
@@ -46,6 +47,7 @@ define( require => {
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PointerCoordinatesNode = require( 'SCENERY_PHET/PointerCoordinatesNode' );
   const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
+  const Property = require( 'AXON/Property' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
@@ -70,8 +72,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( model, particleTypeProperty, sizeVisibleProperty, tandem, options ) {
-
       assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
+      assert && assert( particleTypeProperty instanceof Property, `invalid particleTypeProperty: ${particleTypeProperty}` );
+      assert && assert( sizeVisibleProperty instanceof BooleanProperty, `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {

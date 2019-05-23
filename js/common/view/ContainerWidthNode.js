@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -17,6 +18,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -37,8 +39,10 @@ define( require => {
      */
     constructor( containerLocation, widthProperty, modelViewTransform, visibleProperty, options ) {
       assert && assert( containerLocation instanceof Vector2, `invalid containerLocation: ${containerLocation}` );
+      assert && assert( widthProperty instanceof NumberProperty, `invalid widthProperty: ${widthProperty}` );
       assert && assert( widthProperty.range, 'widthProperty must have range' );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
 
       const viewWidthProperty = new DerivedProperty( [ widthProperty ],
         width => modelViewTransform.modelToViewDeltaX( width ), {

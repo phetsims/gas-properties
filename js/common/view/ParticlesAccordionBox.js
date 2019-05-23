@@ -18,6 +18,7 @@ define( require => {
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberOfParticlesControl = require( 'GAS_PROPERTIES/common/view/NumberOfParticlesControl' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -36,6 +37,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, modelViewTransform, options ) {
+      assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty, `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
+      assert && assert( numberOfLightParticlesProperty instanceof NumberProperty, `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {

@@ -9,10 +9,12 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
 
   class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
@@ -23,7 +25,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( heatCoolAmountProperty, holdConstantProperty, isPlayingProperty, options ) {
+      assert && assert( heatCoolAmountProperty instanceof NumberProperty, `invalid heatCoolAmountProperty: ${heatCoolAmountProperty}` );
       assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
 
       options = _.extend( {
         scale: 0.81

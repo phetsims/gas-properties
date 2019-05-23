@@ -20,6 +20,7 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
@@ -391,6 +392,11 @@ define( require => {
    * @param {NumberProperty} rightNumberOfParticlesProperty
    */
   function updateLeftRightCounts( particles, leftBounds, leftNumberOfParticlesProperty, rightNumberOfParticlesProperty ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+    assert && assert( leftBounds instanceof Bounds2, `invalid leftBounds: ${leftBounds}` );
+    assert && assert( leftNumberOfParticlesProperty instanceof NumberProperty, `invalid leftNumberOfParticlesProperty: ${leftNumberOfParticlesProperty}` );
+    assert && assert( rightNumberOfParticlesProperty instanceof NumberProperty, `invalid rightNumberOfParticlesProperty: ${rightNumberOfParticlesProperty}` );
+
     let leftNumberOfParticles = 0;
     let rightNumberOfParticles = 0;
     for ( let i = 0; i < particles.length; i++ ) {

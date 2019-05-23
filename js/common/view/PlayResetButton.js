@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -23,6 +24,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( isPlayingProperty, options ) {
+      assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
 
       options = _.extend( {
         baseColor: '#DFE0E1'
