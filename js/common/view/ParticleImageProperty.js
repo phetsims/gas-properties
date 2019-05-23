@@ -28,7 +28,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( Constructor, modelViewTransform, radiusProperty, colorProperty, highlightColorProperty, options ) {
-      //TODO validate Constructor
+      //TODO validate Constructor?
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
       assert && assert( colorProperty instanceof Property, `invalid colorProperty: ${colorProperty}` );
