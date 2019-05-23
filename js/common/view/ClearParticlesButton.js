@@ -12,35 +12,24 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
-  const Property = require( 'AXON/Property' );
 
   class ClearParticlesButton extends EraserButton {
 
     /**
-     * @param {NumberProperty[]} numberProperties
+     * @param {NumberProperty} totalNumberOfParticlesProperty
      * @param {Object} [options]
      */
-    constructor( numberProperties, options ) {
-      assert && assert( Array.isArray( numberProperties ), `invalid numberProperties: ${numberProperties}` );
+    constructor( totalNumberOfParticlesProperty, options ) {
 
       options = _.extend( {
         baseColor: GasPropertiesColorProfile.eraserButtonColorProperty
       }, options );
 
-      assert && assert( !options.listener, 'ClearParticlesButton sets listener' );
-      options = _.extend( {
-        listener: () => {
-          for ( let i = 0; i < numberProperties.length; i++ ) {
-            numberProperties[ i ].value = 0;
-          }
-        }
-      }, options );
-
       super( options );
       
-      // Enables the button if any of numberProperties is non-zero.
-      Property.multilink( numberProperties, () => {
-         this.enabled = !!_.find( numberProperties, numberProperty => numberProperty.value !== 0 );
+      // Disables the button when the container is empty.
+      totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        this.enabled = ( totalNumberOfParticles !== 0 );
       } );
     }
   }

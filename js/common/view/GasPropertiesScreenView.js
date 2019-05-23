@@ -229,13 +229,13 @@ define( require => {
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
-      
+
       // Button to clear particles from container
-      const clearParticlesButton = new ClearParticlesButton( 
-        [ model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty ], {
-          right: containerNode.right,
-          top: containerWidthNode.bottom + 5
-        } );
+      const clearParticlesButton = new ClearParticlesButton( model.totalNumberOfParticlesProperty, {
+        listener: model.removeAllParticles.bind( model ),
+        right: containerNode.right,
+        top: containerWidthNode.bottom + 5
+      } );
 
       // Collision Counter
       let collisionCounterNode = null;

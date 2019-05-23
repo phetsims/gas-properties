@@ -234,6 +234,15 @@ define( require => {
     }
 
     /**
+     * Removes all particles from the container.
+     * @public
+     */
+    removeAllParticles() {
+      this.numberOfHeavyParticlesProperty.value = 0;
+      this.numberOfLightParticlesProperty.value = 0;
+    }
+
+    /**
      * Steps the model using model time units.
      * @param {number} dt - time delta, in ps
      * @protected
