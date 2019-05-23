@@ -11,6 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
 
@@ -20,6 +21,7 @@ define( require => {
      * @param {GasPropertiesGlobalOptions} globalOptions
      */
     constructor( globalOptions ) {
+      assert && assert( globalOptions instanceof GasPropertiesGlobalOptions, `invalid globalOptions: ${globalOptions}` );
 
       // Projector Mode
       const projectorModeCheckbox = new ProjectorModeCheckbox( {

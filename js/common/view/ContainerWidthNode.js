@@ -15,10 +15,12 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // strings
   const nanometersString = require( 'string!GAS_PROPERTIES/nanometers' );
@@ -34,8 +36,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( containerLocation, widthProperty, modelViewTransform, visibleProperty, options ) {
-
+      assert && assert( containerLocation instanceof Vector2, `invalid containerLocation: ${containerLocation}` );
       assert && assert( widthProperty.range, 'widthProperty must have range' );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       const viewWidthProperty = new DerivedProperty( [ widthProperty ],
         width => modelViewTransform.modelToViewDeltaX( width ), {

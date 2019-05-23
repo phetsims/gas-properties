@@ -12,11 +12,14 @@ define( require => {
 
   // modules
   const DragListener = require( 'SCENERY/listeners/DragListener' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -39,6 +42,9 @@ define( require => {
      * @constructor
      */
     constructor( container, modelViewTransform, holdConstantProperty, visibleBoundsProperty, options ) {
+      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
 
       options = _.extend( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip

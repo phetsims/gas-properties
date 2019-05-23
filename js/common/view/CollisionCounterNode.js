@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );
+  const CollisionCounter = require( 'GAS_PROPERTIES/common/model/CollisionCounter' );
   const ComboBox = require( 'SUN/ComboBox' );
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
   const DragBoundsProperty = require( 'GAS_PROPERTIES/common/view/DragBoundsProperty' );
@@ -56,6 +57,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( collisionCounter, comboBoxListParent, visibleBoundsProperty, options ) {
+      assert && assert( collisionCounter instanceof CollisionCounter, `invalid collisionCounter: ${collisionCounter}` );
+      assert && assert( comboBoxListParent instanceof Node, `invalid comboBoxListParent: ${comboBoxListParent}` );
 
       options = options || {};
 

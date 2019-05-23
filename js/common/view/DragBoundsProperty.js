@@ -12,6 +12,7 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Node = require( 'SCENERY/nodes/Node' );
 
   class DragBoundsProperty extends DerivedProperty {
 
@@ -20,6 +21,7 @@ define( require => {
      * @param {Property.<Bounds2|null>} visibleBoundsProperty - visible bounds of the ScreenView
      */
     constructor( targetNode, visibleBoundsProperty ) {
+      assert && assert( targetNode instanceof Node, `invalid targetNode: ${targetNode}` );
 
       super( [ visibleBoundsProperty ], visibleBounds => {
         if ( visibleBounds ) {

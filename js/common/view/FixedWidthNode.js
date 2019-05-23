@@ -27,6 +27,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( fixedWidth, content, options ) {
+      assert && assert( typeof fixedWidth === 'number' && fixedWidth > 0, `invalid fixedWidth: ${fixedWidth}` );
+      assert && assert( content instanceof Node, `invalid content: ${content}` );
 
       options = _.extend( {
         align: 'left' // horizontal alignment of content in fixedWidth, see ALIGN_VALUES
