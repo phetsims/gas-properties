@@ -4,7 +4,7 @@ GasPropertiesModel pressureProperty in core model units (AMU/(pm * ps^2)), have 
 
 GasPropertiesModel.stepPressure: always call computePressure, to eliminate floating-point issues
 
-#71 speed limit for left wall
+#90 speed limit for left wall
 
 #52 histograms rewrite
 #52 histograms y-axis scale
