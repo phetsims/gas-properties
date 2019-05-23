@@ -25,7 +25,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( container, particles1, particles2, options ) {
-      assert && assert( container instanceof DiffusionContainer, 'invalid container' );
+      assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
+      assert && assert( Array.isArray( particles1 ), `invalid particles1: ${particles1}` );
+      assert && assert( Array.isArray( particles2 ), `invalid particles2: ${particles2}` );
       super( container, [ particles1, particles2 ], options );
     }
 

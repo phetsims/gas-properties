@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
+  const Bounds2 = require( 'DOT/Bounds2' );
   const DiffusionCollisionDetector = require( 'GAS_PROPERTIES/diffusion/model/DiffusionCollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
@@ -195,6 +196,12 @@ define( require => {
      * @private
      */
     updateNumberOfParticles( numberOfParticles, locationBounds, settings, particles, Constructor ) {
+      assert && assert( typeof numberOfParticles === 'number', `invalid numberOfParticles: ${numberOfParticles}` );
+      assert && assert( locationBounds instanceof Bounds2, `invalid locationBounds: ${locationBounds}` );
+      assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
+      assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+      //TODO validate Constructor?
+
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {

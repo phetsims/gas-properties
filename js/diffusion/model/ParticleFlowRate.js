@@ -31,6 +31,8 @@ define( require => {
      * @param {Particle[]} particles - particles to be monitored
      */
     constructor( dividerX, particles ) {
+      assert && assert( typeof dividerX === 'number', `invalid dividerX: ${dividerX}` );
+      assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
       // @private 
       this.dividerX = dividerX;

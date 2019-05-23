@@ -13,15 +13,6 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
 
-  // constants
-  // values must be a multiple of these deltas
-  const DELTAS = {
-    numberOfParticles: 10,
-    mass: 1, // AMU
-    radius: 5, // pm
-    initialTemperature: 50 // K
-  };
-
   class DiffusionSettings {
 
     constructor() {
@@ -31,7 +22,7 @@ define( require => {
         new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
           numberType: 'Integer',
           range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE,
-          isValidValue: value => ( value % DELTAS.numberOfParticles === 0 )
+          isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 )
         } );
 
       // @public mass, in AMU
@@ -39,7 +30,7 @@ define( require => {
         numberType: 'Integer',
         range: GasPropertiesConstants.MASS_RANGE,
         units: 'AMU',
-        isValidValue: value => ( value % DELTAS.mass === 0 )
+        isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 )
       } );
 
       // @public radius, in pm
@@ -47,7 +38,7 @@ define( require => {
         numberType: 'Integer',
         range: GasPropertiesConstants.RADIUS_RANGE,
         units: 'pm',
-        isValidValue: value => ( value % DELTAS.radius === 0 )
+        isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 )
       } );
 
       // @public initial temperature, in K, used to compute initial velocity
@@ -56,7 +47,7 @@ define( require => {
           numberType: 'Integer',
           range: GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE,
           units: 'K',
-          isValidValue: value => ( value % DELTAS.initialTemperature === 0 )
+          isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 )
         } );
     }
 
@@ -84,7 +75,12 @@ define( require => {
   }
 
   // @public (read-only) values must be a multiple of these deltas
-  DiffusionSettings.DELTAS = DELTAS;
+  DiffusionSettings.DELTAS = {
+    numberOfParticles: 10,
+    mass: 1, // AMU
+    radius: 5, // pm
+    initialTemperature: 50 // K
+    };
 
   return gasProperties.register( 'DiffusionSettings', DiffusionSettings );
 } );

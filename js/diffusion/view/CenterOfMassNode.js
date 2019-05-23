@@ -10,9 +10,11 @@ define( require => {
   'use strict';
 
   // modules
+  const ColorDef = require( 'SCENERY/util/ColorDef' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   class CenterOfMassNode extends Node {
@@ -24,6 +26,9 @@ define( require => {
      * @param {ColorDef} fill
      */
     constructor( centerOfMassProperty, centerY, modelViewTransform, fill ) {
+      assert && assert( typeof centerY === 'number', `invalid centerY: ${centerY}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( ColorDef.isColorDef( fill ), `invalid fill: ${fill}` );
 
       const rectangle = new Rectangle( 0, 0, 5, 30, {
         fill: fill,
