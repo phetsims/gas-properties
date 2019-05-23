@@ -9,11 +9,13 @@ define( require => {
   'use strict';
 
   // modules
+  const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const Range = require( 'DOT/Range' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -34,6 +36,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( data, modelViewTransform, options ) {
+      assert && assert( data instanceof DiffusionData, `invalid data: ${data}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         spacing: 10,

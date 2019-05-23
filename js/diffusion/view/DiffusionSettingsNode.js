@@ -21,6 +21,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -129,6 +130,11 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( title, modelViewTransform, leftProperty, rightProperty, spinnersAlignGroup, options ) {
+      assert && assert( typeof title === 'string', `invalid title: ${title}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( leftProperty instanceof NumberProperty, `invalid leftProperty: ${leftProperty}` );
+      assert && assert( rightProperty instanceof NumberProperty, `invalid rightProperty: ${rightProperty}` );
+      assert && assert( spinnersAlignGroup instanceof AlignGroup, `invalid spinnersAlignGroup: ${spinnersAlignGroup}` );
 
       options = _.extend( {
         spinnerOptions: null, // {*} see NumberSpinner

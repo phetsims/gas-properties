@@ -12,6 +12,7 @@ define( require => {
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   // constants
@@ -25,6 +26,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( model, options ) {
+      assert && assert( model instanceof ParticleFlowRate, `invalid model: ${model}` );
 
       options = _.extend( {
         arrowNodeOptions: null // nested options, set below

@@ -31,6 +31,7 @@ define( require => {
      */
     constructor( leftData, rightData, modelViewTransform, options ) {
 
+
       options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // AccordionBox options

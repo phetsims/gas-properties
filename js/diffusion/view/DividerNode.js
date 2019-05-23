@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Line = require( 'SCENERY/nodes/Line' );
@@ -17,9 +18,11 @@ define( require => {
   class DividerNode extends Node {
 
     /**
+     * @param {BooleanProperty} hasDividerProperty
      * @param {Object} [options]
      */
     constructor( hasDividerProperty, options ) {
+      assert && assert( hasDividerProperty instanceof BooleanProperty, `invalid hasDividerProperty: ${hasDividerProperty}` );
 
       options = _.extend( {
         length: 100,

@@ -11,9 +11,11 @@ define( require => {
   'use strict';
 
   // modules
+  const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DividerNode = require( 'GAS_PROPERTIES/diffusion/view/DividerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -25,6 +27,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( container, modelViewTransform, options ) {
+      assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       // Expand the container bounds to account for wall thickness.
       const viewBounds = modelViewTransform.modelToViewBounds( container.bounds )

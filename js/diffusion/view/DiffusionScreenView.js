@@ -164,6 +164,7 @@ define( require => {
      */
     stepManual( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
       super.stepManual( dt );
       this.particlesNode.update();
       this.regionsNode && this.regionsNode.update();

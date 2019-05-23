@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
@@ -25,6 +26,7 @@ define( require => {
      * @param {DiffusionModel} model - passing in the entire model since we use so much of its public API
      */
     constructor( model ) {
+      assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
 
       // generated image for DiffusionParticle1 species
       const particle1ImageProperty = new ParticleImageProperty(
