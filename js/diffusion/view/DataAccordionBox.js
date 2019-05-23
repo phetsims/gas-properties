@@ -10,11 +10,13 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
+  const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
   const DiffusionDataNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionDataNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VSeparator = require( 'SUN/VSeparator' );
 
@@ -30,6 +32,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( leftData, rightData, modelViewTransform, options ) {
+      assert && assert( leftData instanceof DiffusionData, `invalid leftData: ${leftData}` );
+      assert && assert( rightData instanceof DiffusionData, `invalid rightData: ${rightData}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
 
       options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
