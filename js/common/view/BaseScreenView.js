@@ -9,11 +9,13 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
 
   class BaseScreenView extends ScreenView {
@@ -24,6 +26,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( model, tandem, options ) {
+      assert && assert( model instanceof BaseModel, `invalid model: ${model}` );
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
         hasSlowMotion: false
