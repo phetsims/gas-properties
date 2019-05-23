@@ -287,6 +287,11 @@ define( require => {
    * @param {constructor} Constructor - a Particle subclass constructor
    */
   function addParticles( n, locationBounds, settings, particles, Constructor ) {
+    assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
+    assert && assert( locationBounds instanceof Bounds2, `invalid location: ${location}` );
+    assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+    //TODO validate Constructor
 
     // Create n particles
     for ( let i = 0; i < n; i++ ) {
@@ -322,6 +327,10 @@ define( require => {
    * @param {number} numberOfParticles
    */
   function updateAverageTemperature( averageTemperatureProperty, totalKE, numberOfParticles ) {
+    assert && assert( averageTemperatureProperty instanceof Property, `invalid averageTemperatureProperty: ${averageTemperatureProperty}` );
+    assert && assert( typeof totalKE === 'number' && totalKE >= 0, `invalid totalKE: ${totalKE}` );
+    assert && assert( typeof numberOfParticles === 'number' && numberOfParticles >= 0, `invalid numberOfParticles: ${numberOfParticles}` );
+
     if ( numberOfParticles === 0 ) {
       averageTemperatureProperty.value = null;
     }
@@ -340,6 +349,10 @@ define( require => {
    * @param {Particle[]} particles
    */
   function updateMassAndTemperature( mass, temperature, particles ) {
+    assert && assert( typeof mass === 'number' && mass > 0, `invalid mass: ${mass}` );
+    assert && assert( typeof temperature === 'number' && temperature >= 0, `invalid temperature: ${temperature}` );
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
     for ( let i = 0; i < particles.length; i++ ) {
       particles[ i ].mass = mass;
 
@@ -356,6 +369,11 @@ define( require => {
    * @param {boolean} isPlaying
    */
   function updateRadius( radius, particles, bounds, isPlaying ) {
+    assert && assert( typeof radius === 'number' && radius > 0, `invalid radius: ${radius}` );
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+    assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
+    assert && assert( typeof isPlaying === 'boolean', `invalid isPlaying: ${isPlaying}` );
+
     for ( let i = 0; i < particles.length; i++ ) {
 
       const particle = particles[ i ];

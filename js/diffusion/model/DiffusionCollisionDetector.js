@@ -28,6 +28,7 @@ define( require => {
       assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
       assert && assert( Array.isArray( particles1 ), `invalid particles1: ${particles1}` );
       assert && assert( Array.isArray( particles2 ), `invalid particles2: ${particles2}` );
+
       super( container, [ particles1, particles2 ], options );
     }
 
@@ -40,6 +41,7 @@ define( require => {
      */
     stepParticleContainerCollisions( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
       let numberOfParticleContainerCollisions = 0;
       if ( this.container.hasDividerProperty.value ) {
 
