@@ -38,6 +38,7 @@ define( require => {
          stroke: GasPropertiesColorProfile.dividerColorProperty,
          lineWidth: options.dashedLineWidth,
          lineDash: [ 10, 24 ],
+         opacity: 0.5,
          center: solidLineNode.center
        } );
 
