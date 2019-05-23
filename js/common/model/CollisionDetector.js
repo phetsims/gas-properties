@@ -17,6 +17,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseContainer = require( 'GAS_PROPERTIES/common/model/BaseContainer' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -31,6 +32,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( container, particleArrays, options ) {
+      assert && assert( container instanceof BaseContainer, `invalid container: ${container}` );
+      assert && assert( Array.isArray( particleArrays ), `invalid particleArrays: ${particleArrays}` );
 
       options = _.extend( {
 

@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -22,6 +23,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( collisionDetector, options ) {
+      assert && assert( collisionDetector instanceof CollisionDetector,
+        `invalid collisionDetector: ${collisionDetector}` );
 
       options = _.extend( {
         location: Vector2.ZERO,
