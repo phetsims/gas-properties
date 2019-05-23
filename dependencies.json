@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.27 Wed May 22 2019 21:11:19 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.28 Thu May 23 2019 12:42:53 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
@@ -21,11 +21,11 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "7a85a1394b9641ca9021fec980bc6e0b51252ae7",
+    "sha": "a467297c0e77cb92eff3a113a34ea2c7de2cd0b6",
     "branch": "master"
   },
   "joist": {
-    "sha": "9ee130f9e64ec8ba49872dee7655f04370d1cd21",
+    "sha": "f49a5eca7774e936755a1e5c0a095fba11bc662a",
     "branch": "master"
   },
   "kite": {
@@ -37,11 +37,11 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "d8146fb2d4432eef7039403f1a6872f56222699f",
+    "sha": "292a136bfd9c5d1a1c504a895d923b33f6eba027",
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "7a4a34a32ffe78204292e454cf44f76fe3f5e39d",
+    "sha": "983c891b95719d3d9de6acefbfd6dbf8a1a86c37",
     "branch": "master"
   },
   "phetcommon": {
@@ -57,11 +57,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "0c6f655f38e41d6d3bb14edee2eb5bbb0ad8e0e1",
+    "sha": "3835f8b53bfef2335c029e0acfa998076a846771",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "fc6261fb21007f3f69179a991bb9c31c82a8961e",
+    "sha": "4afaef1af997969bb82afb35cb6e2e6351677958",
     "branch": "master"
   },
   "sherpa": {
@@ -73,7 +73,7 @@
     "branch": "master"
   },
   "tambo": {
-    "sha": "d45a9badf4ff3aeb150dab4e78ed2e128b1ddba4",
+    "sha": "3ac53c61aa31ec7c62d1716b8c57484322ced2ff",
     "branch": "master"
   },
   "tandem": {
