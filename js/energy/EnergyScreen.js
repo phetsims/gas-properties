@@ -13,6 +13,7 @@ define( require => {
   const EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   const screenEnergyString = require( 'string!GAS_PROPERTIES/screen.energy' );
@@ -23,6 +24,7 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       const createModel = () => new EnergyModel( tandem.createTandem( 'model' ) );
       const createView = ( model ) => new EnergyScreenView( model, tandem.createTandem( 'view' ) );

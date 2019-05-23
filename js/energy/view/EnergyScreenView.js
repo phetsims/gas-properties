@@ -20,6 +20,7 @@ define( require => {
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
   const SpeedAccordionBox = require( 'GAS_PROPERTIES/energy/view/SpeedAccordionBox' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
@@ -35,6 +36,7 @@ define( require => {
      */
     constructor( model, tandem ) {
       assert && assert( model instanceof EnergyModel, `invalid model: ${model}` );
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       // view-specific Properties
       const viewProperties = new EnergyViewProperties();

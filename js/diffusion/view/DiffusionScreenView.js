@@ -24,6 +24,7 @@ define( require => {
   const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class DiffusionScreenView extends BaseScreenView {
 
@@ -34,6 +35,7 @@ define( require => {
      */
     constructor( model, tandem, options ) {
       assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
         hasSlowMotion: true // adds Normal/Slow radio buttons to the time controls

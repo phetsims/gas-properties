@@ -12,6 +12,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class IdealModel extends GasPropertiesModel {
 
@@ -19,6 +20,7 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
       super( tandem );
     }
   }

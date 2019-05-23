@@ -13,6 +13,7 @@ define( require => {
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealScreenView = require( 'GAS_PROPERTIES/ideal/view/IdealScreenView' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   const screenIdealString = require( 'string!GAS_PROPERTIES/screen.ideal' );
@@ -23,6 +24,7 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
       const createView = ( model ) => new IdealScreenView( model, tandem.createTandem( 'view' ) );

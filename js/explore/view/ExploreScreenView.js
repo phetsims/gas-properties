@@ -17,6 +17,7 @@ define( require => {
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
@@ -29,6 +30,7 @@ define( require => {
      */
     constructor( model, tandem ) {
       assert && assert( model instanceof ExploreModel, `invalid model: ${model}` );
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       // view-specific Properties
       const viewProperties = new ExploreViewProperties();

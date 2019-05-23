@@ -48,6 +48,7 @@ define( require => {
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -70,6 +71,7 @@ define( require => {
     constructor( model, particleTypeProperty, sizeVisibleProperty, tandem, options ) {
 
       assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty

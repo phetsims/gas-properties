@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const Property = require( 'AXON/Property' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const AVERAGE_SPEED_PROPERTY_OPTIONS = {
@@ -28,6 +29,7 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       super( tandem, {
         holdConstant: HoldConstantEnum.VOLUME,
