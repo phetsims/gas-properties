@@ -477,7 +477,7 @@ define( require => {
     }
 
     /**
-     * Computes temperature using the Ideal Gas Law, T = PV/Nk
+     * Computes temperature using the Ideal Gas Law, T = (PV)/(Nk)
      * @returns {number} in K
      * @private
      */
