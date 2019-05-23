@@ -237,6 +237,9 @@ define( require => {
      * @param {Node} parentNode
      */
     constructor( container, modelViewTransform, parentNode ) {
+      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
 
       // pointer's x offset from the left edge of the container, when a drag starts
       let startXOffset = 0;
@@ -270,6 +273,9 @@ define( require => {
      * @param {Node} parentNode
      */
     constructor( container, modelViewTransform, parentNode ) {
+      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
 
       // pointer's x offset from container.getOpeningLeft(), when a drag starts
       let startXOffset = 0;

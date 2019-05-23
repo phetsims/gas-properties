@@ -15,6 +15,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
   const Property = require( 'AXON/Property' );
 
@@ -68,6 +69,7 @@ define( require => {
      * @override
      */
     paintCanvas( context ) {
+      assert && assert( context instanceof CanvasRenderingContext2D, `invalid context: ${context}` );
 
       // Stroke the canvas bounds, for debugging.  This is a big performance hit.
       if ( GasPropertiesQueryParameters.canvasBounds ) {
@@ -90,6 +92,9 @@ define( require => {
      * @public
      */
     static particleToCanvas( particle, modelViewTransform, particleImageProperty ) {
+      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( particleImageProperty instanceof Property, `invalid particleImageProperty: ${particleImageProperty}` );
 
       // Create a particle Node, scaled up to improve quality.
       const particleNode = new ParticleNode( particle, modelViewTransform );
@@ -113,6 +118,11 @@ define( require => {
    * @param {HTMLCanvasElement} image
    */
   function drawParticles( context, modelViewTransform, particles, image ) {
+    assert && assert( context instanceof CanvasRenderingContext2D, `invalid context: ${context}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+    assert && assert( image instanceof HTMLCanvasElement, `invalid image: ${image}` );
+
     for ( let i = 0; i < particles.length; i++ ) {
       context.drawImage( image,
 

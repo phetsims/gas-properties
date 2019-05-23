@@ -17,6 +17,7 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
 
   // constants
@@ -32,6 +33,8 @@ define( require => {
      * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K
      */
     constructor( pressureProperty, temperatureProperty ) {
+      assert && assert( pressureProperty instanceof Property, `invalid pressureProperty: ${pressureProperty}` );
+      assert && assert( temperatureProperty instanceof Property, `invalid temperatureProperty: ${temperatureProperty}` );
 
       // @public pressure in kilopascals (kPa) with jitter added. This is not derived from pressureProperty,
       // because it needs to jitter on step, not when pressureProperty changes.
@@ -85,6 +88,8 @@ define( require => {
      * @public
      */
     step( dt, jitterEnabled ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+      assert && assert( typeof jitterEnabled === 'boolean', `invalid jitterEnabled: ${jitterEnabled}` );
 
       this.dtAccumulator += dt;
 

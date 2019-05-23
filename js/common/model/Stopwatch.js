@@ -64,6 +64,7 @@ define( require => {
      */
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
       if ( this.isRunningProperty.value ) {
         this.timeProperty.value += dt;
       }

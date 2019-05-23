@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Property = require( 'AXON/Property' );
 
   class DragBoundsProperty extends DerivedProperty {
 
@@ -22,6 +23,7 @@ define( require => {
      */
     constructor( targetNode, visibleBoundsProperty ) {
       assert && assert( targetNode instanceof Node, `invalid targetNode: ${targetNode}` );
+      assert && assert( visibleBoundsProperty instanceof Property, `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
       super( [ visibleBoundsProperty ], visibleBounds => {
         if ( visibleBounds ) {

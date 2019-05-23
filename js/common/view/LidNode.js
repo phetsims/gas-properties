@@ -69,6 +69,7 @@ define( require => {
      */
     setBaseWidth( baseWidth ) {
       assert && assert( typeof baseWidth === 'number' && baseWidth > 0, `invalid baseWidth: ${baseWidth}` );
+
       this.baseNode.setRectWidth( baseWidth );
       this.baseNode.left = 0;
       this.baseNode.bottom = 0;

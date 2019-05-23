@@ -21,7 +21,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( totalNumberOfParticlesProperty, options ) {
-      assert && assert( totalNumberOfParticlesProperty instanceof Property, `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( totalNumberOfParticlesProperty instanceof Property,
+        `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
 
       options = _.extend( {
         baseColor: GasPropertiesColorProfile.eraserButtonColorProperty

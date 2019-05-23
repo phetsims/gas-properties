@@ -37,9 +37,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, modelViewTransform, options ) {
-      assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty, `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
-      assert && assert( numberOfLightParticlesProperty instanceof NumberProperty, `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty,
+        `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
+      assert && assert( numberOfLightParticlesProperty instanceof NumberProperty,
+        `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         fixedWidth: 100,

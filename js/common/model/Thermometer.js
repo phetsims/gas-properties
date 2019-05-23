@@ -13,6 +13,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
 
   // constants
@@ -25,6 +26,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( temperatureKelvinProperty, options ) {
+      assert && assert( temperatureKelvinProperty instanceof Property,
+        `invalid temperatureKelvinProperty: ${temperatureKelvinProperty}` );
 
       options = _.extend( {
         range: DEFAULT_RANGE

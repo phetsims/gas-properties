@@ -24,6 +24,7 @@ define( require => {
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayResetButton = require( 'GAS_PROPERTIES/common/view/PlayResetButton' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
@@ -59,6 +60,7 @@ define( require => {
     constructor( collisionCounter, comboBoxListParent, visibleBoundsProperty, options ) {
       assert && assert( collisionCounter instanceof CollisionCounter, `invalid collisionCounter: ${collisionCounter}` );
       assert && assert( comboBoxListParent instanceof Node, `invalid comboBoxListParent: ${comboBoxListParent}` );
+      assert && assert( visibleBoundsProperty instanceof Property, `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
       options = options || {};
 

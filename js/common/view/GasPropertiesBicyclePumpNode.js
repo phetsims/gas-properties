@@ -22,7 +22,8 @@ define( require => {
      * @constructor
      */
     constructor( numberOfParticlesProperty, options ) {
-      assert && assert( numberOfParticlesProperty instanceof NumberProperty, `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
+      assert && assert( numberOfParticlesProperty instanceof NumberProperty,
+        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
 
       options = _.extend( {
         height: 230,

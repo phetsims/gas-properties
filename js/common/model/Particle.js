@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -63,13 +64,25 @@ define( require => {
      * @param {number} value
      * @public
      */
-    set left( value ) { this.setLocationXY( value + this.radius, this.location.y ); }
+    set left( value ) {
+      assert && assert( typeof value === 'number', `invalid value: ${value}` );
+      this.setLocationXY( value + this.radius, this.location.y );
+    }
 
-    set right( value ) { this.setLocationXY( value - this.radius, this.location.y ); }
+    set right( value ) {
+      assert && assert( typeof value === 'number', `invalid value: ${value}` );
+      this.setLocationXY( value - this.radius, this.location.y );
+    }
 
-    set top( value ) { this.setLocationXY( this.location.x, value - this.radius ); }
+    set top( value ) {
+      assert && assert( typeof value === 'number', `invalid value: ${value}` );
+      this.setLocationXY( this.location.x, value - this.radius );
+    }
 
-    set bottom( value ) { this.setLocationXY( this.location.x, value + this.radius ); }
+    set bottom( value ) {
+      assert && assert( typeof value === 'number', `invalid value: ${value}` );
+      this.setLocationXY( this.location.x, value + this.radius );
+    }
 
     /**
      * Gets kinetic energy of this particle.
@@ -94,6 +107,7 @@ define( require => {
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       assert && assert( !this.isDisposed, 'attempted to step a disposed Particle' );
+
       this.setLocationXY( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
     }
 
@@ -104,6 +118,8 @@ define( require => {
      * @public
      */
     setLocationXY( x, y ) {
+      assert && assert( typeof x === 'number', `invalid x: ${x}` );
+      assert && assert( typeof y === 'number', `invalid y: ${y}` );
       this.previousLocation.setXY( this.location.x, this.location.y );
       this.location.setXY( x, y );
     }
@@ -116,6 +132,8 @@ define( require => {
      * @public
      */
     setVelocityXY( x, y ) {
+      assert && assert( typeof x === 'number', `invalid x: ${x}` );
+      assert && assert( typeof y === 'number', `invalid y: ${y}` );
       this.velocity.setXY( x, y );
     }
 
@@ -128,6 +146,8 @@ define( require => {
      * @public
      */
     setVelocityPolar( magnitude, angle ) {
+      assert && assert( typeof magnitude === 'number' && magnitude >= 0, `invalid magnitude: ${magnitude}` );
+      assert && assert( typeof angle === 'number', `invalid angle: ${angle}` );
       this.setVelocityXY( magnitude * Math.cos( angle ), magnitude * Math.sin( angle ) );
     }
 
@@ -137,6 +157,7 @@ define( require => {
      * @public
      */
     setVelocityMagnitude( magnitude ) {
+      assert && assert( typeof magnitude === 'number' && magnitude >= 0, `invalid magnitude: ${magnitude}` );
       this.velocity.setMagnitude( magnitude );
     }
 
@@ -146,6 +167,7 @@ define( require => {
      * @public
      */
     scaleVelocity( scale ) {
+      assert && assert( typeof scale === 'number' && scale > 0, `invalid scale: ${scale}` );
       this.velocity.multiply( scale );
     }
 
@@ -156,6 +178,7 @@ define( require => {
      * @public
      */
     contactsParticle( particle ) {
+      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
       return this.location.distance( particle.location ) <= ( this.radius + particle.radius );
     }
 
@@ -168,6 +191,7 @@ define( require => {
      * @public
      */
     contactedParticle( particle ) {
+      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
       return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
     }
 
@@ -180,6 +204,8 @@ define( require => {
      * @public
      */
     intersectsBounds( bounds ) {
+      assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
+
       const minX = ( this.left > bounds.minX ) ? this.left : bounds.minX;
       const minY = ( this.bottom > bounds.minY ) ? this.bottom : bounds.minY;
       const maxX = ( this.right < bounds.maxX ) ? this.right : bounds.maxX;
