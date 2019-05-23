@@ -129,7 +129,6 @@ define( require => {
      */
     escapeParticles: function( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
       assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
-      //TODO validate numberOfParticlesProperty?
       assert && assert( Array.isArray( insideParticles ), `invalid insideParticles: ${insideParticles}` );
       assert && assert( Array.isArray( outsideParticles ), `invalid outsideParticles: ${outsideParticles}` );
       for ( let i = 0; i < insideParticles.length; i++ ) {
