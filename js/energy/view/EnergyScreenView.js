@@ -145,6 +145,8 @@ define( require => {
      * @override
      */
     step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
       super.step( dt );
 
       if ( this.model.isPlayingProperty.value ) {

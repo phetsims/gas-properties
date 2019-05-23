@@ -93,6 +93,7 @@ define( require => {
      * @public
      */
     step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       if ( this.model.isPlayingProperty.value ) {
         this.stepManual( dt );
       }
@@ -105,7 +106,9 @@ define( require => {
      * @param dt
      * @public
      */
-    stepManual( dt ) {}
+    stepManual( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+    }
   }
 
   return gasProperties.register( 'BaseScreenView', BaseScreenView );

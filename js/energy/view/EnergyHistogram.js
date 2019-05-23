@@ -89,6 +89,7 @@ define( require => {
      * @param {number} dt - time delta, in ps
      */
     step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       // take a sample
       const heavyValues = this.getHeavyValues();

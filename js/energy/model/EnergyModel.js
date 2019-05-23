@@ -77,6 +77,7 @@ define( require => {
      * @override
      */
     stepModelTime( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       super.stepModelTime( dt );
 

@@ -92,6 +92,7 @@ define( require => {
      * @public
      */
     step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       assert && assert( !this.isDisposed, 'attempted to step a disposed Particle' );
       this.setLocationXY( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
     }

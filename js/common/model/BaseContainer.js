@@ -89,6 +89,7 @@ define( require => {
      * @public
      */
     step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
       // velocity is irrelevant and should be set to zero, so that it doesn't contribute to collision detection.

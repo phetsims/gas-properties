@@ -64,6 +64,7 @@ define( require => {
      * @public
      */
     step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       // Take a sample.
       let leftCount = 0; // <--

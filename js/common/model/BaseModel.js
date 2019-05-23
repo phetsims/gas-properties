@@ -99,6 +99,7 @@ define( require => {
      * @public
      */
     step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       if ( this.isPlayingProperty.value ) {
         this.stepManual( dt );
       }
@@ -112,6 +113,7 @@ define( require => {
      * @public
      */
     stepManual( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       this.stepModelTime( this.timeTransform( dt ) );
     }
 
@@ -122,6 +124,7 @@ define( require => {
      * @protected
      */
     stepModelTime( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       this.stopwatch.step( dt );
     }
   }

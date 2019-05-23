@@ -37,6 +37,7 @@ define( require => {
      * @override
      */
     stepParticleContainerCollisions( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       let numberOfParticleContainerCollisions = 0;
       if ( this.container.hasDividerProperty.value ) {
 
