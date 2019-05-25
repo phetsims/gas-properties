@@ -287,7 +287,9 @@ define( require => {
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
-      //TODO better names for OopsDialog instances
+      //TODO better names for OopsDialogs
+      //TODO boilerplate code for OopsDialogs
+
       // If N goes to zero while holding T constant, show a dialog.
       let oops1Dialog = null;
       model.oops1Emitter.addListener( () => {
