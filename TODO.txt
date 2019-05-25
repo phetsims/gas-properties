@@ -13,5 +13,6 @@ OPTIONAL
 
 INTERNAL POLISH
 remove color Properties from Particle?
+shrink or break up large classes
 
 PIXEL POLISH
