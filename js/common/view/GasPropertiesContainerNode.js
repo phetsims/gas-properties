@@ -44,9 +44,12 @@ define( require => {
      */
     constructor( container, modelViewTransform, holdConstantProperty, visibleBoundsProperty, options ) {
       assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
-      assert && assert( visibleBoundsProperty instanceof Property, `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( holdConstantProperty instanceof EnumerationProperty,
+        `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( visibleBoundsProperty instanceof Property,
+        `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
       options = _.extend( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
@@ -168,8 +171,8 @@ define( require => {
         options.resizeHandleIsPressedListener( isPressed );
 
         // when the handle is released, log the opening
-        if ( container.isLidOpen() ) {
-          !isPressed && phet.log && phet.log( `Container opening from ${container.getOpeningLeft()} to ${container.openingRight} pm` );
+        if ( !isPressed && container.isLidOpen() ) {
+          phet.log && phet.log( `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` );
         }
       } );
 
@@ -307,8 +310,8 @@ define( require => {
         // when the lid handle is released, log the opening
         end: ( listener ) => {
           phet.log && phet.log( container.isLidOpen() ?
-                                `Container is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
-                                'Container is closed'
+                                `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
+                                'Lid is closed'
           );
         }
       } );

@@ -27,7 +27,8 @@ define( require => {
      */
     constructor( createParticle, modelViewTransform, radiusProperty, options ) {
       assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
 
       options = _.extend( {

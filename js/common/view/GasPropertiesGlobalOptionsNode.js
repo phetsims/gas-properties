@@ -21,7 +21,8 @@ define( require => {
      * @param {GasPropertiesGlobalOptions} globalOptions
      */
     constructor( globalOptions ) {
-      assert && assert( globalOptions instanceof GasPropertiesGlobalOptions, `invalid globalOptions: ${globalOptions}` );
+      assert && assert( globalOptions instanceof GasPropertiesGlobalOptions,
+        `invalid globalOptions: ${globalOptions}` );
 
       // Projector Mode
       const projectorModeCheckbox = new ProjectorModeCheckbox( {

@@ -25,9 +25,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( heatCoolAmountProperty, holdConstantProperty, isPlayingProperty, options ) {
-      assert && assert( heatCoolAmountProperty instanceof NumberProperty, `invalid heatCoolAmountProperty: ${heatCoolAmountProperty}` );
-      assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
-      assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
+      assert && assert( heatCoolAmountProperty instanceof NumberProperty,
+        `invalid heatCoolAmountProperty: ${heatCoolAmountProperty}` );
+      assert && assert( holdConstantProperty instanceof EnumerationProperty,
+        `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( isPlayingProperty instanceof BooleanProperty,
+        `invalid isPlayingProperty: ${isPlayingProperty}` );
 
       options = _.extend( {
         scale: 0.81
