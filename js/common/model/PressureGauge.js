@@ -98,7 +98,7 @@ define( require => {
         // Add jitter (kPa) to the displayed value, more jitter with lower pressure.
         // Jitter is added if we're not holding pressure constant.
         let jitter = 0;
-        if ( jitterEnabled ) {
+        if ( jitterEnabled && !GasPropertiesQueryParameters.pressureNoiseOff ) {
           jitter = this.pressureJitterFunction( this.pressureProperty.value ) *
                    this.scaleJitterFunction( this.temperatureProperty.value ) *
                    phet.joist.random.nextDouble();

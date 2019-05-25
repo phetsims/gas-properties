@@ -15,6 +15,10 @@ define( require => {
 
   const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 
+    // Turns off noise that is added to the pressure gauge to make it behave more realistically.
+    // Public facing.
+    pressureNoiseOff: { type: 'flag' },
+
     // Shows a red dot at the origin of some UI components, for debugging layout and drag listeners.
     // For internal use only, not public facing.
     origin: { type: 'flag' },
