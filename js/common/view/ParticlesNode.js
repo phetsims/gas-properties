@@ -93,8 +93,10 @@ define( require => {
      */
     static particleToCanvas( particle, modelViewTransform, particleImageProperty ) {
       assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( particleImageProperty instanceof Property, `invalid particleImageProperty: ${particleImageProperty}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( particleImageProperty instanceof Property,
+        `invalid particleImageProperty: ${particleImageProperty}` );
 
       // Create a particle Node, scaled up to improve quality.
       const particleNode = new ParticleNode( particle, modelViewTransform );
@@ -119,7 +121,8 @@ define( require => {
    */
   function drawParticles( context, modelViewTransform, particles, image ) {
     assert && assert( context instanceof CanvasRenderingContext2D, `invalid context: ${context}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
     assert && assert( image instanceof HTMLCanvasElement, `invalid image: ${image}` );
 

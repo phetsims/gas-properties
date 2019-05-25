@@ -41,7 +41,8 @@ define( require => {
       assert && assert( containerLocation instanceof Vector2, `invalid containerLocation: ${containerLocation}` );
       assert && assert( widthProperty instanceof NumberProperty, `invalid widthProperty: ${widthProperty}` );
       assert && assert( widthProperty.range, 'widthProperty must have range' );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
 
       const viewWidthProperty = new DerivedProperty( [ widthProperty ],

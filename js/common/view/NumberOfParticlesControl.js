@@ -33,7 +33,8 @@ define( require => {
      */
     constructor( icon, title, numberOfParticlesProperty, options ) {
       assert && assert( icon instanceof Node, `invalid icon: ${icon}` );
-      assert && assert( numberOfParticlesProperty instanceof NumberProperty, `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
+      assert && assert( numberOfParticlesProperty instanceof NumberProperty,
+        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( typeof title === 'string', `invalid title: ${title}` );
 
       options = _.extend( {

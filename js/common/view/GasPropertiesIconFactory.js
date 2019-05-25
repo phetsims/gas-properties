@@ -42,7 +42,8 @@ define( require => {
      * @static
      */
     createHeavyParticleIcon( modelViewTransform ) {
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       return createParticleIcon( new HeavyParticle(), modelViewTransform );
     },
 
@@ -54,7 +55,8 @@ define( require => {
      * @static
      */
     createLightParticleIcon( modelViewTransform ) {
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       return createParticleIcon( new LightParticle(), modelViewTransform );
     },
 
@@ -66,7 +68,8 @@ define( require => {
      * @static
      */
     createDiffusionParticle1Icon( modelViewTransform ) {
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       return createParticleIcon( new DiffusionParticle1( {
         radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue
       } ), modelViewTransform );
@@ -80,7 +83,8 @@ define( require => {
      * @static
      */
     createDiffusionParticle2Icon( modelViewTransform ) {
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       return createParticleIcon( new DiffusionParticle2( {
         radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue
       } ), modelViewTransform );
@@ -209,7 +213,8 @@ define( require => {
    */
   function createParticleIcon( particle, modelViewTransform ) {
     assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
     return new ParticleNode( particle, modelViewTransform );
   }
 

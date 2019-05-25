@@ -24,7 +24,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( isPlayingProperty, options ) {
-      assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
+      assert && assert( isPlayingProperty instanceof BooleanProperty,
+        `invalid isPlayingProperty: ${isPlayingProperty}` );
 
       options = _.extend( {
         baseColor: '#DFE0E1'

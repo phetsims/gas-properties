@@ -25,7 +25,8 @@ define( require => {
      */
     constructor( regions, modelViewTransform, options ) {
       assert && assert( Array.isArray( regions ) && regions.length > 0, `invalid regions: ${regions}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         pickable: false
