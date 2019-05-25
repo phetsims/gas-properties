@@ -85,7 +85,7 @@ define( require => {
     }
 
     /**
-     * Gets kinetic energy of this particle.
+     * Gets the kinetic energy of this particle.
      * @returns {number} AMU * pm^2 / ps^2
      * @public
      */
