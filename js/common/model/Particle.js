@@ -140,7 +140,6 @@ define( require => {
     /**
      * Sets the velocity in polar coordinates.
      * As a side effect, updates everything that is a function of velocity.
-     *
      * @param {number} magnitude - pm / ps
      * @param {number} angle - in radians
      * @public
