@@ -81,19 +81,21 @@ define( require => {
       this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
       // Add or remove particles
+      const createDiffusionParticle1 = ( options ) => new DiffusionParticle1( options );
       this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
           this.container.leftBounds,
           this.leftSettings,
           this.particles1,
-          DiffusionParticle1 );
+          createDiffusionParticle1 );
       } );
+      const createDiffusionParticle2 = ( options ) => new DiffusionParticle2( options );
       this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
           this.container.rightBounds,
           this.rightSettings,
           this.particles2,
-          DiffusionParticle2 );
+          createDiffusionParticle2 );
       } );
 
       // Update mass and temperature of existing particles. This adjusts speed of the particles.
@@ -193,20 +195,20 @@ define( require => {
      * @param {Bounds2} locationBounds - initial location will be inside this bounds
      * @param {DiffusionSettings} settings
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
-     * @param {constructor} Constructor - constructor for elements in particles array
+     * @param {function(options:*):Particle} createParticle - creates a Particle instance
      * @private
      */
-    updateNumberOfParticles( numberOfParticles, locationBounds, settings, particles, Constructor ) {
+    updateNumberOfParticles( numberOfParticles, locationBounds, settings, particles, createParticle ) {
       assert && assert( typeof numberOfParticles === 'number', `invalid numberOfParticles: ${numberOfParticles}` );
       assert && assert( locationBounds instanceof Bounds2, `invalid locationBounds: ${locationBounds}` );
       assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-      //TODO validate Constructor?
+      assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
 
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {
-          addParticles( delta, locationBounds, settings, particles, Constructor );
+          addParticles( delta, locationBounds, settings, particles, createParticle );
         }
         else {
           ParticleUtils.removeParticles( -delta, particles );
@@ -284,19 +286,19 @@ define( require => {
    * @param {Bounds2} locationBounds - initial location will be inside this bounds
    * @param {DiffusionSettings} settings
    * @param {Particle[]} particles
-   * @param {constructor} Constructor - a Particle subclass constructor
+   * @param {function(options:*):Particle} createParticle - creates a Particle instance
    */
-  function addParticles( n, locationBounds, settings, particles, Constructor ) {
+  function addParticles( n, locationBounds, settings, particles, createParticle ) {
     assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
     assert && assert( locationBounds instanceof Bounds2, `invalid location: ${location}` );
     assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-    //TODO validate Constructor
+    assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
 
     // Create n particles
     for ( let i = 0; i < n; i++ ) {
 
-      const particle = new Constructor( {
+      const particle = createParticle( {
         mass: settings.massProperty.value,
         radius: settings.radiusProperty.value
       } );

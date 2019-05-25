@@ -85,11 +85,13 @@ define( require => {
       } );
 
       // Synchronize particle counts and arrays
+      const createHeavyParticle = ( options ) => new HeavyParticle( options );
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
-        this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, HeavyParticle );
+        this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
       } );
+      const createLightParticle = ( options ) => new LightParticle( options );
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
-        this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, LightParticle );
+        this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, createLightParticle );
       } );
 
       // @public total number of particles in the container
@@ -323,19 +325,19 @@ define( require => {
      * @param {number} newValue - new number of particles
      * @param {number} oldValue - old number of particles
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
-     * @param Constructor - constructor for elements in particles array
+     * @param {function(options:*):Particle} createParticle - creates a Particle instance
      * @private
      */
-    updateNumberOfParticles( newValue, oldValue, particles, Constructor ) {
+    updateNumberOfParticles( newValue, oldValue, particles, createParticle ) {
       assert && assert( typeof newValue === 'number', `invalid newValue: ${newValue}` );
       assert && assert( oldValue === null || typeof oldValue === 'number', `invalid oldValue: ${oldValue}` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-      //TODO validate Constructor
+      assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
 
       if ( particles.length !== newValue ) {
         const delta = newValue - oldValue;
         if ( delta > 0 ) {
-          this.addParticles( delta, particles, Constructor );
+          this.addParticles( delta, particles, createParticle );
         }
         else if ( delta < 0 ) {
           ParticleUtils.removeParticles( -delta, particles );
@@ -349,13 +351,13 @@ define( require => {
      * Adds n particles to the end of the specified array.
      * @param {number} n
      * @param {Particle[]} particles
-     * @param {constructor} Constructor - a Particle subclass constructor
+     * @param {function(options:*):Particle} createParticle - creates a Particle instance
      * @private
      */
-    addParticles( n, particles, Constructor ) {
+    addParticles( n, particles, createParticle ) {
       assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-      //TODO validate Constructor
+      assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
 
       // Get the temperature that will be used to compute initial velocity magnitude.
       let meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
@@ -397,7 +399,7 @@ define( require => {
       for ( let i = 0; i < n; i++ ) {
         assert && assert( i < temperatures.length, `index out of range, i: ${i}` );
 
-        const particle = new Constructor();
+        const particle = createParticle();
 
         // Position the particle just inside the container, where the bicycle pump hose attaches to the right wall.
         particle.setLocationXY(
