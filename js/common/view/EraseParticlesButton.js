@@ -35,7 +35,7 @@ define( require => {
         baseColor: GasPropertiesColorProfile.eraserButtonColorProperty
       }, options );
 
-      // Delete all particles when the button fires.
+      // Deletes all particles when the button fires.
       assert && assert( !options.listener, 'EraseParticlesButton sets listener' );
       options.listener = () => {
         numberOfHeavyParticlesProperty.value = 0;
