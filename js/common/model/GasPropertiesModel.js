@@ -161,12 +161,12 @@ define( require => {
         } );
       }
 
-      //TODO better names and doc for these Emitters
+      //TODO better names for these Emitters
       // @public (read-only) Emitters related to OopsDialogs
-      this.oops1Emitter = new Emitter();
-      this.oops2Emitter = new Emitter();
-      this.oops3Emitter = new Emitter();
-      this.oops4Emitter = new Emitter();
+      this.oops1Emitter = new Emitter(); // Oops! Temperature cannot be held constant when the container is empty.
+      this.oops2Emitter = new Emitter(); // Oops! Pressure cannot be held constant when the container is empty.
+      this.oops3Emitter = new Emitter(); // Oops! Pressure cannot be held constant. Volume would be too large.
+      this.oops4Emitter = new Emitter(); // Oops! Pressure cannot be held constant. Volume would be too small.
 
       this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
