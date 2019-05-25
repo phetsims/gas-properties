@@ -32,6 +32,7 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
+  const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -171,6 +172,7 @@ define( require => {
         if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
 
           // Temperature can't be held constant when the container is empty.
+          phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
           this.oops1Emitter.emit();
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
         }
@@ -179,6 +181,7 @@ define( require => {
                     this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) ) {
 
           // Pressure can't be held constant when the container is empty.
+          phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
           this.oops2Emitter.emit();
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
         }
@@ -426,9 +429,14 @@ define( require => {
         // hold pressure constant by changing volume
         let containerWidth = this.computeVolume() / ( this.container.height * this.container.depth );
 
+        // Address floating-point error, see https://github.com/phetsims/gas-properties/issues/89
+        containerWidth = Util.toFixedNumber( containerWidth, 5 );
+
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
           // This results in an OopsDialog being displayed
+          phet.log && phet.log( 'Oops! P cannot be held constant when V exceeds range, ' +
+                                `containerWidth=${containerWidth} widthRange=${this.container.widthRange}` );
           if ( containerWidth > this.container.widthRange.max ) {
             this.oops3Emitter.emit();
           }
