@@ -329,9 +329,11 @@ define( require => {
    * @param {number} numberOfParticles
    */
   function updateAverageTemperature( averageTemperatureProperty, totalKE, numberOfParticles ) {
-    assert && assert( averageTemperatureProperty instanceof Property, `invalid averageTemperatureProperty: ${averageTemperatureProperty}` );
+    assert && assert( averageTemperatureProperty instanceof Property,
+      `invalid averageTemperatureProperty: ${averageTemperatureProperty}` );
     assert && assert( typeof totalKE === 'number' && totalKE >= 0, `invalid totalKE: ${totalKE}` );
-    assert && assert( typeof numberOfParticles === 'number' && numberOfParticles >= 0, `invalid numberOfParticles: ${numberOfParticles}` );
+    assert && assert( typeof numberOfParticles === 'number' && numberOfParticles >= 0,
+      `invalid numberOfParticles: ${numberOfParticles}` );
 
     if ( numberOfParticles === 0 ) {
       averageTemperatureProperty.value = null;
@@ -414,8 +416,10 @@ define( require => {
   function updateLeftRightCounts( particles, leftBounds, leftNumberOfParticlesProperty, rightNumberOfParticlesProperty ) {
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
     assert && assert( leftBounds instanceof Bounds2, `invalid leftBounds: ${leftBounds}` );
-    assert && assert( leftNumberOfParticlesProperty instanceof NumberProperty, `invalid leftNumberOfParticlesProperty: ${leftNumberOfParticlesProperty}` );
-    assert && assert( rightNumberOfParticlesProperty instanceof NumberProperty, `invalid rightNumberOfParticlesProperty: ${rightNumberOfParticlesProperty}` );
+    assert && assert( leftNumberOfParticlesProperty instanceof NumberProperty,
+      `invalid leftNumberOfParticlesProperty: ${leftNumberOfParticlesProperty}` );
+    assert && assert( rightNumberOfParticlesProperty instanceof NumberProperty,
+      `invalid rightNumberOfParticlesProperty: ${rightNumberOfParticlesProperty}` );
 
     let leftNumberOfParticles = 0;
     let rightNumberOfParticles = 0;
