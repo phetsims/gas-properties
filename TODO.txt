@@ -12,7 +12,6 @@ OPTIONAL
 #40 investigate standard collision model
 
 INTERNAL POLISH
-remove color Properties from Particle?
 shrink or break up large classes
 
 PIXEL POLISH
