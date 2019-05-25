@@ -42,7 +42,7 @@ define( require => {
         GasPropertiesColorProfile.heavyParticleHighlightColorProperty
       );
 
-      // generated image for HeavyParticle species
+      // generated image for LightParticle species
       const lightParticleImageProperty = new ParticleImageProperty(
         options => new LightParticle( options ),
         model.modelViewTransform,
