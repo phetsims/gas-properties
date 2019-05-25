@@ -86,6 +86,12 @@ define( require => {
       font: new PhetFont( 14 )
     },
 
+    OOPS_DIALOG_OPTIONS: {
+      richTextOptions: {
+        font: new PhetFont( 16 )
+      }
+    },
+
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),
 

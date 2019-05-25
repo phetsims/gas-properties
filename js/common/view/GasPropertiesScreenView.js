@@ -298,28 +298,28 @@ define( require => {
       // If N goes to zero while holding T constant, show a dialog.
       let oops1Dialog = null;
       model.oops1Emitter.addListener( () => {
-        oops1Dialog = oops1Dialog || new OopsDialog( oops1String );
+        oops1Dialog = oops1Dialog || new OopsDialog( oops1String, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
         oops1Dialog.show();
       } );
 
       // If N goes to zero while holding P constant, show a dialog.
       let oops2Dialog = null;
       model.oops2Emitter.addListener( () => {
-        oops2Dialog = oops2Dialog || new OopsDialog( oops2String );
+        oops2Dialog = oops2Dialog || new OopsDialog( oops2String, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
         oops2Dialog.show();
       } );
 
       // If V exceeds the max while holding P constant, show a dialog.
       let oops3Dialog = null;
       model.oops3Emitter.addListener( () => {
-        oops3Dialog = oops3Dialog || new OopsDialog( oops3String );
+        oops3Dialog = oops3Dialog || new OopsDialog( oops3String, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
         oops3Dialog.show();
       } );
 
       // If V exceeds the min while holding P constant, show a dialog.
       let oops4Dialog = null;
       model.oops4Emitter.addListener( () => {
-        oops4Dialog = oops4Dialog || new OopsDialog( oops4String );
+        oops4Dialog = oops4Dialog || new OopsDialog( oops4String, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
         oops4Dialog.show();
       } );
       
