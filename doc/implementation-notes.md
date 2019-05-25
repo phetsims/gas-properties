@@ -51,3 +51,7 @@ GasPropertiesViewProperties
   EnergyViewProperties
 DiffusionViewProperties
 ```
+
+I experimented with type-checking all function arguments via `assert`.  Feels like
+overkill, but it did catch quite a few things during refactoring, so probably was 
+a net gain.
