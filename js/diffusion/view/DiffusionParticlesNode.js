@@ -11,7 +11,6 @@ define( require => {
   // modules
   const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const ParticleImageProperty = require( 'GAS_PROPERTIES/common/view/ParticleImageProperty' );
@@ -32,18 +31,14 @@ define( require => {
       const particle1ImageProperty = new ParticleImageProperty(
         options => new DiffusionParticle1( options ),
         model.modelViewTransform,
-        model.leftSettings.radiusProperty,
-        GasPropertiesColorProfile.particle1ColorProperty,
-        GasPropertiesColorProfile.particle1HighlightColorProperty
+        model.leftSettings.radiusProperty
       );
 
       // generated image for DiffusionParticle2 species
       const particle2ImageProperty = new ParticleImageProperty(
         options => new DiffusionParticle2( options ),
         model.modelViewTransform,
-        model.rightSettings.radiusProperty,
-        GasPropertiesColorProfile.particle2ColorProperty,
-        GasPropertiesColorProfile.particle2HighlightColorProperty
+        model.rightSettings.radiusProperty
       );
 
       // {Particle[][]} arrays for each particle species

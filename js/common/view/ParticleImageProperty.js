@@ -23,31 +23,29 @@ define( require => {
      * @param {function(options:*):Particle} createParticle - creates a Particle instance
      * @param {ModelViewTransform2} modelViewTransform
      * @param {NumberProperty} radiusProperty
-     * @param {Property.<ColorDef>} colorProperty
-     * @param {Property.<ColorDef>} highlightColorProperty
      * @param {Object} [options]
      */
-    constructor( createParticle, modelViewTransform, radiusProperty, colorProperty, highlightColorProperty, options ) {
+    constructor( createParticle, modelViewTransform, radiusProperty, options ) {
       assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
-      assert && assert( colorProperty instanceof Property, `invalid colorProperty: ${colorProperty}` );
-      assert && assert( highlightColorProperty instanceof Property, `invalid highlightColorProperty: ${highlightColorProperty}` );
 
       options = _.extend( {
-        isValidValue: value => ( value === null || value instanceof HTMLCanvasElement )
+        isValidValue: value => ( value === null || value instanceof HTMLCanvasElement ),
+        radiusProperty: null
       }, options );
+
+      // Create a prototypical Particle
+      const particle = createParticle( {
+        radius: radiusProperty.value
+      } );
 
       // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to
       // derive the value and act as a proxy for the DerivedProperty dependencies.
       const privateProperty = new Property( null );
-      Property.multilink( [ radiusProperty, colorProperty, highlightColorProperty ],
+      Property.multilink( [ radiusProperty, particle.colorProperty, particle.highlightColorProperty ],
         ( radius, color, highlightColor ) => {
-          const particle = createParticle( {
-            radius: radius,
-            colorProperty: colorProperty,
-            highlightColorProperty: highlightColorProperty
-          } );
+          particle.radius = radius;
           ParticlesNode.particleToCanvas( particle, modelViewTransform, privateProperty );
         } );
 

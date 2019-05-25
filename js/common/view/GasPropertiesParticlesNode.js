@@ -11,7 +11,6 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
@@ -37,18 +36,14 @@ define( require => {
       const heavyParticleImageProperty = new ParticleImageProperty(
         options => new HeavyParticle( options ),
         model.modelViewTransform,
-        new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS ),
-        GasPropertiesColorProfile.heavyParticleColorProperty,
-        GasPropertiesColorProfile.heavyParticleHighlightColorProperty
+        new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS )
       );
 
       // generated image for LightParticle species
       const lightParticleImageProperty = new ParticleImageProperty(
         options => new LightParticle( options ),
         model.modelViewTransform,
-        new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS ),
-        GasPropertiesColorProfile.lightParticleColorProperty,
-        GasPropertiesColorProfile.lightParticleHighlightColorProperty
+        new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS )
       );
 
       // particles inside the container
