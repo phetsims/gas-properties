@@ -28,9 +28,9 @@ define( require => {
   // modules
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const ClearParticlesButton  = require( 'GAS_PROPERTIES/common/view/ClearParticlesButton' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
+  const EraseParticlesButton  = require( 'GAS_PROPERTIES/common/view/EraseParticlesButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesBicyclePumpNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesBicyclePumpNode' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -236,8 +236,8 @@ define( require => {
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
-      // Button to clear particles from container
-      const clearParticlesButton = new ClearParticlesButton( model.totalNumberOfParticlesProperty, {
+      // Button to erase all particles from container
+      const eraseParticlesButton = new EraseParticlesButton( model.totalNumberOfParticlesProperty, {
         listener: model.removeAllParticles.bind( model ),
         right: containerNode.right,
         top: containerWidthNode.bottom + 5
@@ -274,7 +274,7 @@ define( require => {
       this.addChild( bicyclePumpsToggleNode );
       this.addChild( pressureGaugeNode );
       this.addChild( containerNode );
-      this.addChild( clearParticlesButton );
+      this.addChild( eraseParticlesButton );
       this.addChild( thermometerNode );
       this.addChild( containerWidthNode );
       this.addChild( particlesNode );

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Button for clearing all particles from the container.
+ * Button for erasing (deleting) all particles from the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,7 +14,7 @@ define( require => {
   const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
   const Property = require( 'AXON/Property' );
 
-  class ClearParticlesButton extends EraserButton {
+  class EraseParticlesButton extends EraserButton {
 
     /**
      * @param {Property.<number>>} totalNumberOfParticlesProperty
@@ -37,5 +37,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'ClearParticlesButton', ClearParticlesButton );
+  return gasProperties.register( 'EraseParticlesButton', EraseParticlesButton );
 } );
