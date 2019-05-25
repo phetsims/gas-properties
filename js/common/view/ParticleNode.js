@@ -24,7 +24,8 @@ define( require => {
      */
     constructor( particle, modelViewTransform, options ) {
       assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       assert && assert( !options || !options.mainColor, 'ParticleNode sets mainColor' );
       options = _.extend( {
