@@ -237,8 +237,8 @@ define( require => {
         } );
 
       // Button to erase all particles from container
-      const eraseParticlesButton = new EraseParticlesButton( model.totalNumberOfParticlesProperty, {
-        listener: model.removeAllParticles.bind( model ),
+      const eraseParticlesButton = new EraseParticlesButton( model.totalNumberOfParticlesProperty,
+        model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
         right: containerNode.right,
         top: containerWidthNode.bottom + 5
       } );
