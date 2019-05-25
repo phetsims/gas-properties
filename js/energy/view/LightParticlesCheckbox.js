@@ -24,8 +24,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( lightVisibleProperty, modelViewTransform, options ) {
-      assert && assert( lightVisibleProperty instanceof BooleanProperty, `invalid lightVisibleProperty: ${lightVisibleProperty}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( lightVisibleProperty instanceof BooleanProperty,
+        `invalid lightVisibleProperty: ${lightVisibleProperty}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       super(
         lightVisibleProperty,

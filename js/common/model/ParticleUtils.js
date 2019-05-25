@@ -57,7 +57,8 @@ define( require => {
      * @public
      */
     removeParticles: function( n, particles ) {
-      assert && assert( n <= particles.length, `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
+      assert && assert( n <= particles.length,
+        `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
       const particlesToRemove = particles.slice( particles.length - n, particles.length );
@@ -117,7 +118,8 @@ define( require => {
      */
     heatCoolParticles: function( particles, heatCoolFactor ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-      assert && assert( typeof heatCoolFactor === 'number' && heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
+      assert && assert( typeof heatCoolFactor === 'number' && heatCoolFactor >= -1 && heatCoolFactor <= 1,
+        `invalid heatCoolFactor: ${heatCoolFactor}` );
 
       const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
       for ( let i = 0; i < particles.length; i++ ) {
@@ -136,7 +138,8 @@ define( require => {
      */
     escapeParticles: function( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
       assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
-      assert && assert( numberOfParticlesProperty instanceof NumberProperty, `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
+      assert && assert( numberOfParticlesProperty instanceof NumberProperty,
+        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( Array.isArray( insideParticles ), `invalid insideParticles: ${insideParticles}` );
       assert && assert( Array.isArray( outsideParticles ), `invalid outsideParticles: ${outsideParticles}` );
 

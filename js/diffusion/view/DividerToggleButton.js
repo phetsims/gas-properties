@@ -27,7 +27,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( hasDividerProperty, options ) {
-      assert && assert( hasDividerProperty instanceof BooleanProperty, `invalid hasDividerProperty: ${hasDividerProperty}` );
+      assert && assert( hasDividerProperty instanceof BooleanProperty,
+        `invalid hasDividerProperty: ${hasDividerProperty}` );
 
       options = _.extend( {
         baseColor: GasPropertiesColorProfile.dividerColorProperty

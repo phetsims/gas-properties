@@ -28,7 +28,8 @@ define( require => {
      */
     constructor( container, modelViewTransform, options ) {
       assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       // Expand the container bounds to account for wall thickness.
       const viewBounds = modelViewTransform.modelToViewBounds( container.bounds )

@@ -33,8 +33,10 @@ define( require => {
      * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K
      */
     constructor( pressureProperty, temperatureProperty ) {
-      assert && assert( pressureProperty instanceof Property, `invalid pressureProperty: ${pressureProperty}` );
-      assert && assert( temperatureProperty instanceof Property, `invalid temperatureProperty: ${temperatureProperty}` );
+      assert && assert( pressureProperty instanceof Property,
+        `invalid pressureProperty: ${pressureProperty}` );
+      assert && assert( temperatureProperty instanceof Property,
+        `invalid temperatureProperty: ${temperatureProperty}` );
 
       // @public pressure in kilopascals (kPa) with jitter added. This is not derived from pressureProperty,
       // because it needs to jitter on step, not when pressureProperty changes.

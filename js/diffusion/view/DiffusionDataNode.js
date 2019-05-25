@@ -37,7 +37,8 @@ define( require => {
      */
     constructor( data, modelViewTransform, options ) {
       assert && assert( data instanceof DiffusionData, `invalid data: ${data}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         spacing: 10,

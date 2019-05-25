@@ -37,7 +37,8 @@ define( require => {
     constructor( getHeavyValues, getLightValues, modelViewTransform, options ) {
       assert && assert( typeof getHeavyValues === 'function', `invalid getHeavyValues: ${getHeavyValues}` );
       assert && assert( typeof getLightValues === 'function', `invalid getLightValues: ${getLightValues}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         fixedWidth: 100,

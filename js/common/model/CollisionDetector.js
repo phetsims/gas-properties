@@ -88,7 +88,8 @@ define( require => {
       clearRegions( this.regions );
 
       // Use regions that intersect the container, since collisions only occur inside the container.
-      const containerRegions = _.filter( this.regions, region => this.container.bounds.intersectsBounds( region.bounds ) );
+      const containerRegions = _.filter( this.regions,
+          region => this.container.bounds.intersectsBounds( region.bounds ) );
 
       // put particles in regions
       for ( let i = 0; i < this.particleArrays.length; i++ ) {

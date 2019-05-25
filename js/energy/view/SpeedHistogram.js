@@ -31,8 +31,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( heavyVisibleProperty, lightVisibleProperty, getHeavyValues, getLightValues, options ) {
-      assert && assert( heavyVisibleProperty instanceof BooleanProperty, `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
-      assert && assert( lightVisibleProperty instanceof BooleanProperty, `invalid lightVisibleProperty: ${lightVisibleProperty}` );
+      assert && assert( heavyVisibleProperty instanceof BooleanProperty,
+        `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
+      assert && assert( lightVisibleProperty instanceof BooleanProperty,
+        `invalid lightVisibleProperty: ${lightVisibleProperty}` );
       assert && assert( typeof getHeavyValues === 'function', `invalid getHeavyValues: ${getHeavyValues}` );
       assert && assert( typeof getLightValues === 'function', `invalid getLightValues: ${getLightValues}` );
 

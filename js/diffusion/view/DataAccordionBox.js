@@ -34,7 +34,8 @@ define( require => {
     constructor( leftData, rightData, modelViewTransform, options ) {
       assert && assert( leftData instanceof DiffusionData, `invalid leftData: ${leftData}` );
       assert && assert( rightData instanceof DiffusionData, `invalid rightData: ${rightData}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
 
       options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {

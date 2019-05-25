@@ -45,9 +45,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, options ) {
-      assert && assert( holdConstantProperty instanceof EnumerationProperty, `invalid holdConstantProperty: ${holdConstantProperty}` );
-      assert && assert( totalNumberOfParticlesProperty instanceof Property, `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
-      assert && assert( pressureProperty instanceof NumberProperty, `invalid pressureProperty: ${pressureProperty}` );
+      assert && assert( holdConstantProperty instanceof EnumerationProperty,
+        `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( totalNumberOfParticlesProperty instanceof Property,
+        `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( pressureProperty instanceof NumberProperty,
+        `invalid pressureProperty: ${pressureProperty}` );
 
       options = _.extend( {
         align: 'left',

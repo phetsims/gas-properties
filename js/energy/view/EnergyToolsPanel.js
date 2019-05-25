@@ -26,8 +26,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( sizeVisibleProperty, stopwatchVisibleProperty, options ) {
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty, `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
-      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty, `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
+      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
+        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
+        `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
 
       options = _.extend( {
         fixedWidth: 100,

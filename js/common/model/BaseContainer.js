@@ -31,8 +31,10 @@ define( require => {
         leftWallDoesWork: false // true if the left wall does work on particles
       }, options );
 
-      assert && assert( options.location instanceof Vector2, 'invalid location type: ' + options.location );
-      assert && assert( options.widthRange instanceof RangeWithValue, 'invalid widthRange type: ' + options.widthRange );
+      assert && assert( options.location instanceof Vector2,
+        'invalid location type: ' + options.location );
+      assert && assert( options.widthRange instanceof RangeWithValue,
+        'invalid widthRange type: ' + options.widthRange );
 
       // @public (read-only)
       this.location = options.location;

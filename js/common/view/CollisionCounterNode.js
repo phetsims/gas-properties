@@ -58,9 +58,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( collisionCounter, comboBoxListParent, visibleBoundsProperty, options ) {
-      assert && assert( collisionCounter instanceof CollisionCounter, `invalid collisionCounter: ${collisionCounter}` );
-      assert && assert( comboBoxListParent instanceof Node, `invalid comboBoxListParent: ${comboBoxListParent}` );
-      assert && assert( visibleBoundsProperty instanceof Property, `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
+      assert && assert( collisionCounter instanceof CollisionCounter,
+        `invalid collisionCounter: ${collisionCounter}` );
+      assert && assert( comboBoxListParent instanceof Node,
+        `invalid comboBoxListParent: ${comboBoxListParent}` );
+      assert && assert( visibleBoundsProperty instanceof Property,
+        `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
       options = options || {};
 
@@ -134,7 +137,8 @@ define( require => {
       } );
 
       // Pseudo-3D bezel around the outside edge of the counter
-      const bezelBounds = new Bounds2( 0, 0, backgroundNode.width + ( 2 * BEZEL_WIDTH ), backgroundNode.height + ( 2 * BEZEL_WIDTH ) );
+      const bezelBounds = new Bounds2( 0, 0,
+        backgroundNode.width + ( 2 * BEZEL_WIDTH ), backgroundNode.height + ( 2 * BEZEL_WIDTH ) );
       const bezelNode = new ShadedRectangle( bezelBounds, {
         baseColor: GasPropertiesColorProfile.collisionCounterBezelColorProperty
       } );
@@ -172,7 +176,8 @@ define( require => {
       dragBoundsProperty.link( dragBounds => {
         this.interruptSubtreeInput(); // interrupt user interactions
         if ( !dragBounds.containsPoint( collisionCounter.locationProperty ) ) {
-          collisionCounter.locationProperty.value = dragBounds.closestPointTo( collisionCounter.locationProperty.value );
+          collisionCounter.locationProperty.value =
+            dragBounds.closestPointTo( collisionCounter.locationProperty.value );
         }
       } );
 

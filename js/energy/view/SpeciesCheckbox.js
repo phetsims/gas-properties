@@ -28,8 +28,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( speciesVisibleProperty, modelViewTransform, particleIcon, particleColor, options ) {
-      assert && assert( speciesVisibleProperty instanceof BooleanProperty, `invalid speciesVisibleProperty: ${speciesVisibleProperty}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( speciesVisibleProperty instanceof BooleanProperty,
+        `invalid speciesVisibleProperty: ${speciesVisibleProperty}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( particleIcon instanceof Node, `invalid particleIcon: ${particleIcon}` );
       assert && assert( ColorDef.isColorDef( particleColor ), `invalid particleColor: ${particleColor}` );
 

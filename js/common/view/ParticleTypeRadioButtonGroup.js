@@ -25,8 +25,10 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( particleTypeProperty, modelViewTransform, options ) {
-      assert && assert( particleTypeProperty instanceof EnumerationProperty, `invalid particleTypeProperty: ${particleTypeProperty}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( particleTypeProperty instanceof EnumerationProperty,
+        `invalid particleTypeProperty: ${particleTypeProperty}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
 

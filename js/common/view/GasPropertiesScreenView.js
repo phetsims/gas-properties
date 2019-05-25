@@ -73,8 +73,10 @@ define( require => {
      */
     constructor( model, particleTypeProperty, sizeVisibleProperty, tandem, options ) {
       assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
-      assert && assert( particleTypeProperty instanceof Property, `invalid particleTypeProperty: ${particleTypeProperty}` );
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty, `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+      assert && assert( particleTypeProperty instanceof Property,
+        `invalid particleTypeProperty: ${particleTypeProperty}` );
+      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
+        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
@@ -167,7 +169,8 @@ define( require => {
         } );
 
       // Bicycle pump is centered above the radio buttons.
-      const bicyclePumpLocation = new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 15 );
+      const bicyclePumpLocation =
+        new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 15 );
 
       // Bicycle pump hose attaches to the container.
       const hoseLocation = model.modelViewTransform.modelToViewPosition( model.container.hoseLocation );
@@ -243,7 +246,8 @@ define( require => {
       // Collision Counter
       let collisionCounterNode = null;
       if ( model.collisionCounter ) {
-        collisionCounterNode = new CollisionCounterNode( model.collisionCounter, comboBoxListParent, this.visibleBoundsProperty );
+        collisionCounterNode =
+          new CollisionCounterNode( model.collisionCounter, comboBoxListParent, this.visibleBoundsProperty );
       }
 
       // Stopwatch
@@ -282,8 +286,9 @@ define( require => {
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
 
       // Position the time controls
+      const defaultWidth = model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
       this.timeControlNode.mutate( {
-        left: containerViewLocation.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue ),
+        left: containerViewLocation.x - defaultWidth,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 

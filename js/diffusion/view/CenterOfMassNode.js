@@ -27,9 +27,11 @@ define( require => {
      * @param {ColorDef} fill
      */
     constructor( centerOfMassProperty, centerY, modelViewTransform, fill ) {
-      assert && assert( centerOfMassProperty instanceof Property, `invalid centerOfMassProperty: ${centerOfMassProperty}` );
+      assert && assert( centerOfMassProperty instanceof Property,
+        `invalid centerOfMassProperty: ${centerOfMassProperty}` );
       assert && assert( typeof centerY === 'number', `invalid centerY: ${centerY}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( ColorDef.isColorDef( fill ), `invalid fill: ${fill}` );
 
       const rectangle = new Rectangle( 0, 0, 5, 30, {
