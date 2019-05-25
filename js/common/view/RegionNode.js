@@ -30,7 +30,8 @@ define( require => {
      */
     constructor( region, modelViewTransform, options ) {
       assert && assert( region instanceof Region, `invalid region: ${region}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
 
       const viewBounds = modelViewTransform.modelToViewBounds( region.bounds );
 
