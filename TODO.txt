@@ -12,6 +12,6 @@ OPTIONAL
 #40 investigate standard collision model
 
 INTERNAL POLISH
-shrink or break up large classes
+shrink or break up large classes: GasPropertiesModel, DiffusionModel, Histogram
 
 PIXEL POLISH
