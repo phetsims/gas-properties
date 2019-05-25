@@ -30,7 +30,7 @@ define( require => {
 
       // generated image for DiffusionParticle1 species
       const particle1ImageProperty = new ParticleImageProperty(
-        DiffusionParticle1,
+        options => new DiffusionParticle1( options ),
         model.modelViewTransform,
         model.leftSettings.radiusProperty,
         GasPropertiesColorProfile.particle1ColorProperty,
@@ -39,7 +39,7 @@ define( require => {
 
       // generated image for DiffusionParticle2 species
       const particle2ImageProperty = new ParticleImageProperty(
-        DiffusionParticle2,
+        options => new DiffusionParticle2( options ),
         model.modelViewTransform,
         model.rightSettings.radiusProperty,
         GasPropertiesColorProfile.particle2ColorProperty,

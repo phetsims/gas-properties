@@ -35,7 +35,7 @@ define( require => {
 
       // generated image for HeavyParticle species
       const heavyParticleImageProperty = new ParticleImageProperty(
-        HeavyParticle,
+        options => new HeavyParticle( options ),
         model.modelViewTransform,
         new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS ),
         GasPropertiesColorProfile.heavyParticleColorProperty,
@@ -44,7 +44,7 @@ define( require => {
 
       // generated image for HeavyParticle species
       const lightParticleImageProperty = new ParticleImageProperty(
-        LightParticle,
+        options => new LightParticle( options ),
         model.modelViewTransform,
         new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS ),
         GasPropertiesColorProfile.lightParticleColorProperty,

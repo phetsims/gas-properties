@@ -20,14 +20,14 @@ define( require => {
   class ParticleImageProperty extends DerivedProperty {
 
     /**
-     * @param Constructor - constructor for Particle or one of its subclasses
+     * @param {function(options:*):Particle} createParticle - creates a Particle instance
      * @param {ModelViewTransform2} modelViewTransform
      * @param {NumberProperty} radiusProperty
      * @param {Property.<ColorDef>} colorProperty
      * @param {Property.<ColorDef>} highlightColorProperty
      * @param {Object} [options]
      */
-    constructor( Constructor, modelViewTransform, radiusProperty, colorProperty, highlightColorProperty, options ) {
+    constructor( createParticle, modelViewTransform, radiusProperty, colorProperty, highlightColorProperty, options ) {
       //TODO validate Constructor?
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
@@ -43,7 +43,7 @@ define( require => {
       const privateProperty = new Property( null );
       Property.multilink( [ radiusProperty, colorProperty, highlightColorProperty ],
         ( radius, color, highlightColor ) => {
-          const particle = new Constructor( {
+          const particle = createParticle( {
             radius: radius,
             colorProperty: colorProperty,
             highlightColorProperty: highlightColorProperty
