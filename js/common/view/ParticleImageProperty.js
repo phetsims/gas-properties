@@ -28,7 +28,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( createParticle, modelViewTransform, radiusProperty, colorProperty, highlightColorProperty, options ) {
-      //TODO validate Constructor?
+      assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
       assert && assert( colorProperty instanceof Property, `invalid colorProperty: ${colorProperty}` );
