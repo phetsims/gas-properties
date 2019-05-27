@@ -65,7 +65,7 @@ define( require => {
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
-      // @private
+      // @private for iterating over all particles
       this.particleArrays = [ this.particles1, this.particles2 ];
 
       // @public emit is called when any of the above Particle arrays are modified
