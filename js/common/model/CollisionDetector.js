@@ -78,6 +78,16 @@ define( require => {
     }
 
     /**
+     * Clears all regions.
+     * @private
+     */
+    clearRegions() {
+      for ( let i = 0; i < this.regions.length; i++ ) {
+        this.regions[ i ].clear();
+      }
+    }
+
+    /**
      * Handles collision detection and response for one time step.
      * @param {number} dt - time step, in ps
      * @public
@@ -85,7 +95,7 @@ define( require => {
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
-      clearRegions( this.regions );
+      this.clearRegions();
 
       // Use regions that intersect the container, since collisions only occur inside the container.
       const containerRegions = _.filter( this.regions,
@@ -152,16 +162,6 @@ define( require => {
     }
     phet.log && phet.log( `created ${regions.length} regions of ${regionLength} pm each` );
     return regions;
-  }
-
-  /**
-   * Clears all regions.
-   * @param {Region[]} regions
-   */
-  function clearRegions( regions ) {
-    for ( let i = 0; i < regions.length; i++ ) {
-      regions[ i ].clear();
-    }
   }
 
   /**
