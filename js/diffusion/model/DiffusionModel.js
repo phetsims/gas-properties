@@ -50,23 +50,19 @@ define( require => {
         stopwatchLocation: new Vector2( 60, 50 )
       } );
 
-      // @public
-      this.container = new DiffusionContainer();
-
-      // @public settings for the left and right sides of the container, before the divider is removed
-      this.leftSettings = new DiffusionSettings();
-      this.rightSettings = new DiffusionSettings();
-
-      // @public data for the left and right sides of the container
-      this.leftData = new DiffusionData();
-      this.rightData = new DiffusionData();
-
       // @public (read-only) particles of each species, together these make up the 'particle system'
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
       // @private for iterating over all particles
       this.particleArrays = [ this.particles1, this.particles2 ];
+
+      // @public
+      this.container = new DiffusionContainer();
+
+      // @public settings for the left and right sides of the container, before the divider is removed
+      this.leftSettings = new DiffusionSettings();
+      this.rightSettings = new DiffusionSettings();
 
       // @public {Property.<number>} total number of particles in the container
       this.totalNumberOfParticlesProperty = new DerivedProperty(
@@ -76,6 +72,10 @@ define( require => {
           valueType: 'number',
           isValidValue: value => value >= 0
         } );
+
+      // @public data for the left and right sides of the container, appears in Data accordion box
+      this.leftData = new DiffusionData();
+      this.rightData = new DiffusionData();
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
       // null when there are no particles in the container.
