@@ -3,7 +3,7 @@
 /**
  * Color profiles for this simulation.
  * Default colors are required. Colors for other profiles are optional.
- * Profile 'projector' is used for Projector Mode.
+ * Profile 'projector' is used for Projector Mode, which can be set via the Options dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
