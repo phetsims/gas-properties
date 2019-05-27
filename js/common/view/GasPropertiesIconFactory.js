@@ -101,7 +101,7 @@ define( require => {
 
     /**
      * Creates the icon that represents the histogram for a species of particle.
-     * @param {Particle} particle
+     * @param {Particle} particle - a prototypical particle
      * @param {ModelViewTransform2} modelViewTransform
      * @returns {Node}
      * @public
@@ -182,7 +182,7 @@ define( require => {
 
   /**
    * Creates the icon for a particle.
-   * @param {Particle} particle
+   * @param {Particle} particle - a prototypical particle
    * @param {ModelViewTransform2} modelViewTransform
    * @returns {Node}
    */
