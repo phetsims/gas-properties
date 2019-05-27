@@ -22,6 +22,7 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -263,19 +264,27 @@ define( require => {
           const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
           const j = numerator / denominator;
 
-          const vScale1 = j / particle1.mass;
-          const vx1 = mutableVectors.normal.x * vScale1;
-          const vy1 = mutableVectors.normal.y * vScale1;
-          particle1.setVelocityXY( particle1.velocity.x + vx1, particle1.velocity.y + vy1 );
-
-          //TODO duplication of above code
-          const vScale2 = -j / particle2.mass;
-          const vx2 = mutableVectors.normal.x * vScale2;
-          const vy2 = mutableVectors.normal.y * vScale2;
-          particle2.setVelocityXY( particle2.velocity.x + vx2, particle2.velocity.y + vy2 );
+          scaleVelocity( particle1, j / particle1.mass, mutableVectors.normal );
+          scaleVelocity( particle2, -j / particle2.mass, mutableVectors.normal );
         }
       }
     }
+  }
+
+  /**
+   * Scales the velocity of a particle.
+   * @param {Particle} particle
+   * @param {number} scale
+   * @param {Vector2} normalVector
+   */
+  function scaleVelocity( particle, scale, normalVector ) {
+    assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+    assert && assert( typeof scale === 'number', `invalid scale: ${scale}` );
+    assert && assert( normalVector instanceof Vector2, `invalid normalVector: ${normalVector}` );
+
+    const vx = normalVector.x * scale;
+    const vy = normalVector.y * scale;
+    particle.setVelocityXY( particle.velocity.x + vx, particle.velocity.y + vy );
   }
 
   /**
