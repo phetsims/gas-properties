@@ -293,7 +293,7 @@ define( require => {
       this.container.step( dt );
 
       // Collision detection and response
-      this.collisionDetector.step( dt );
+      this.collisionDetector.update();
 
       // Remove particles that have left the model bounds
       ParticleUtils.removeParticlesOutOfBounds( this.heavyParticlesOutside, this.modelBoundsProperty.value );

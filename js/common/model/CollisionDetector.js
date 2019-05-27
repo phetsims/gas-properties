@@ -90,12 +90,10 @@ define( require => {
     }
 
     /**
-     * Handles collision detection and response for one time step.
-     * @param {number} dt - time step, in ps
+     * Handles collision detection and response for the current state of the particle system.
      * @public
      */
-    step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+    update() {
 
       this.clearRegions();
 
@@ -133,6 +131,9 @@ define( require => {
    * @returns {Region[]}
    */
   function createRegions( container, regionLength ) {
+    assert && assert( container instanceof BaseContainer, `invalid container: ${container}` );
+    assert && assert( typeof regionLength === 'number' && regionLength > 0, `invalid regionLength: ${regionLength}` );
+
     const regions = [];
     let maxX = container.right;
     while ( maxX > container.right - container.widthRange.max ) {
@@ -156,6 +157,9 @@ define( require => {
    * @param {Region[]} regions
    */
   function assignParticlesToRegions( particleArrays, regions ) {
+    assert && assert( Array.isArray( particleArrays ), `invalid particleArrays: ${particleArrays}` );
+    assert && assert( Array.isArray( regions ) && regions.length > 0, `invalid regions: ${regions}` );
+
     for ( let i = 0; i < particleArrays.length; i++ ) {
       const particles = particleArrays[ i ];
       for ( let j = 0; j < particles.length; j++ ) {
@@ -176,6 +180,8 @@ define( require => {
    * @param {*} mutableVectors - collection of mutable vectors, see this.mutableVectors in CollisionDetector constructor
    */
   function doParticleParticleCollisions( particles, mutableVectors ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
     for ( let i = 0; i < particles.length - 1; i++ ) {
 
       const particle1 = particles[ i ];
@@ -284,6 +290,9 @@ define( require => {
    * @returns {number} number of collisions
    */
   function doParticleContainerCollisions( particleArrays, containerBounds, leftWallVelocity ) {
+    assert && assert( Array.isArray( particleArrays ), `invalid particleArrays: ${particleArrays}` );
+    assert && assert( containerBounds instanceof Bounds2, `invalid containerBounds: ${containerBounds}` );
+    assert && assert( leftWallVelocity instanceof Vector2, `invalid leftWallVelocity: ${leftWallVelocity}` );
 
     let numberOfCollisions = 0;
 

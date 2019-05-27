@@ -183,7 +183,7 @@ define( require => {
       }
 
       // Collision detection and response
-      this.collisionDetector.step( dt );
+      this.collisionDetector.update();
 
       // Update Properties that are based on the current state of the particle system.
       this.update();
