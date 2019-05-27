@@ -11,6 +11,7 @@ OPTIONAL
 
 INTERNAL POLISH
 shrink or break up large classes: GasPropertiesModel, DiffusionModel, Histogram
+rename oops*Emitter, oops*Dialog, oops*String
 
 PIXEL POLISH
 put checkboxes in a separate panel for every screen, for PhET-iO? 
