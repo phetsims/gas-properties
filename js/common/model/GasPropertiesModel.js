@@ -464,7 +464,7 @@ define( require => {
           containerWidth = this.container.widthRange.constrainValue( containerWidth );
         }
 
-        this.container.resize( containerWidth );
+        this.container.resizeImmediately( containerWidth );
       }
       else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
 

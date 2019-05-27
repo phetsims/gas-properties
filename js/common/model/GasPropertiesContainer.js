@@ -127,6 +127,16 @@ define( require => {
     }
 
     /**
+     * Resizes the container immediately to the specified width.
+     * @param {number} width
+     * @public
+     */
+    resizeImmediately( width ) {
+      this.resize( width );
+      this.desiredWidth = width;
+    }
+
+    /**
      * Gets the minimum lid width. This is constant, independent of the container width.
      * @returns {number} in pm
      */
