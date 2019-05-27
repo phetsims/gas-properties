@@ -292,7 +292,7 @@ define( require => {
           this.lightParticles, this.lightParticlesOutside );
       }
 
-      // Container, to compute velocity of movable left wall.
+      // Step container, to compute velocity of movable left wall.
       this.container.step( dt );
 
       // Collision detection and response
@@ -435,7 +435,7 @@ define( require => {
     }
 
     /**
-     * Adjust quantities to compensate for what is being held constant.
+     * Adjusts quantities to compensate for the quantity that is being held constant.
      * @private
      */
     compensateForHoldConstant() {
