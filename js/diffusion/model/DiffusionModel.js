@@ -83,7 +83,7 @@ define( require => {
       // @public (read-only)
       this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
-      // Add or remove particles
+      // Add/remove DiffusionParticle1
       const createDiffusionParticle1 = ( options ) => new DiffusionParticle1( options );
       this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
@@ -94,6 +94,8 @@ define( require => {
         assert && assert( _.every( this.particles1, particle => particle instanceof DiffusionParticle1 ),
           'particles1 should contain only DiffusionParticle1' );
       } );
+
+      // Add/remove DiffusionParticle2
       const createDiffusionParticle2 = ( options ) => new DiffusionParticle2( options );
       this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
