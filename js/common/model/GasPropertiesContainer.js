@@ -132,6 +132,7 @@ define( require => {
      * @public
      */
     resizeImmediately( width ) {
+      assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
       this.resize( width );
       this.desiredWidth = width;
     }
