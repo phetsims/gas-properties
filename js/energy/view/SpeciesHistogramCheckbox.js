@@ -18,7 +18,7 @@ define( require => {
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
 
-  class SpeciesCheckbox extends GasPropertiesCheckbox {
+  class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 
     /**
      * @param {BooleanProperty} speciesVisibleProperty
@@ -49,5 +49,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'SpeciesCheckbox', SpeciesCheckbox );
+  return gasProperties.register( 'SpeciesHistogramCheckbox', SpeciesHistogramCheckbox );
 } );

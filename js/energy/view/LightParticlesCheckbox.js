@@ -14,9 +14,9 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const SpeciesCheckbox = require( 'GAS_PROPERTIES/energy/view/SpeciesCheckbox' );
+  const SpeciesHistogramCheckbox = require( 'GAS_PROPERTIES/energy/view/SpeciesHistogramCheckbox' );
 
-  class LightParticlesCheckbox extends SpeciesCheckbox {
+  class LightParticlesCheckbox extends SpeciesHistogramCheckbox {
 
     /**
      * @param {BooleanProperty} lightVisibleProperty
