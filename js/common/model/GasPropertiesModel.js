@@ -62,9 +62,6 @@ define( require => {
 
       super( tandem );
 
-      // @public the quantity to hold constant
-      this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, options.holdConstant );
-
       // @public (read-only) together these arrays make up the 'particle system'
       this.heavyParticles = []; // {HeavyParticle[]} inside the container
       this.lightParticles = []; // {LightParticle[]} inside the container
@@ -108,6 +105,17 @@ define( require => {
         }
       );
 
+      // @public (read-only)
+      this.container = new GasPropertiesContainer( {
+        leftWallDoesWork: options.leftWallDoesWork
+      } );
+
+      // @public (read-only)
+      this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ] );
+
+      // @public the quantity to hold constant
+      this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, options.holdConstant );
+
       // @public whether initial temperature is controlled by the user or determined by what's in the container
       this.controlTemperatureEnabledProperty = new BooleanProperty( false );
 
@@ -117,14 +125,6 @@ define( require => {
         range: INITIAL_TEMPERATURE_RANGE,
         units: 'K'
       } );
-
-      // @public (read-only)
-      this.container = new GasPropertiesContainer( {
-        leftWallDoesWork: options.leftWallDoesWork
-      } );
-
-      // @public (read-only)
-      this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ] );
 
       // @public the factor to heat or cool the contents of the container. 1 is max heat, -1 is max cool, 0 is no change.
       this.heatCoolFactorProperty = new NumberProperty( 0, {
@@ -152,14 +152,6 @@ define( require => {
       // @private whether to call stepPressure
       this.stepPressureEnabled = false;
 
-      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
-      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        if ( totalNumberOfParticles === 0 ) {
-          this.stepPressureEnabled = false;
-          this.pressureProperty.value = 0;
-        }
-      } );
-
       // @public (read-only)
       this.collisionCounter = null;
       if ( options.hasCollisionCounter ) {
@@ -167,6 +159,14 @@ define( require => {
           location: new Vector2( 40, 15 ) // view coordinates! determined empirically
         } );
       }
+
+      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
+      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        if ( totalNumberOfParticles === 0 ) {
+          this.stepPressureEnabled = false;
+          this.pressureProperty.value = 0;
+        }
+      } );
 
       //TODO better names for these Emitters
       // @public (read-only) Emitters related to OopsDialogs
