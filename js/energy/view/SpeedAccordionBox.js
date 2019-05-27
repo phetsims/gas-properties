@@ -57,7 +57,7 @@ define( require => {
       // Limit width of title
       options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
-      //TODO should these Properties live somewhere else?
+      // Visibility of species-specific histograms
       const heavyVisibleProperty = new BooleanProperty( false );
       const lightVisibleProperty = new BooleanProperty( false );
 
