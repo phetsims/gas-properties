@@ -83,8 +83,8 @@
   "averageSpeed": {
     "value": "Average Speed"
   },
-  "valueMetersPerSecond": {
-    "value": "{{value}} m/s"
+  "metersPerSecond": {
+    "value": "m/s"
   },
   "speed": {
     "value": "Speed"

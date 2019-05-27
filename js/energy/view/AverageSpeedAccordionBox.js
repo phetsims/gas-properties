@@ -22,13 +22,15 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Range = require( 'DOT/Range' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const SunConstants = require( 'SUN/SunConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   const averageSpeedString = require( 'string!GAS_PROPERTIES/averageSpeed' );
-  const valueMetersPerSecondString = require( 'string!GAS_PROPERTIES/valueMetersPerSecond' );
+  const metersPerSecondString = require( 'string!GAS_PROPERTIES/metersPerSecond' );
+  const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
 
   class AverageSpeedAccordionBox extends AccordionBox {
 
@@ -74,7 +76,7 @@ define( require => {
 
       const numberDisplayRange = new Range( 0, 9999 );
       const numberDisplayOptions = {
-        valuePattern: valueMetersPerSecondString,
+        valuePattern: StringUtils.fillIn( valueUnitsString, { units: metersPerSecondString } ),
         noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
         decimalPlaces: 0,
         align: 'right',
