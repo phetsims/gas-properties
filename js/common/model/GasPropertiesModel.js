@@ -104,6 +104,7 @@ define( require => {
       this.totalNumberOfParticlesProperty = new DerivedProperty(
         [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
         ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
+          numberType: 'Integer',
           valueType: 'number',
           isValidValue: value => value >= 0
         }

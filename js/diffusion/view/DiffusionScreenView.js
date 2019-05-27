@@ -99,7 +99,8 @@ define( require => {
         model.container.hasDividerProperty,
         viewProperties.particleFlowRateVisibleProperty,
         viewProperties.centerOfMassVisibleProperty,
-        model.stopwatch.visibleProperty, {
+        model.stopwatch.visibleProperty,
+        model.totalNumberOfParticlesProperty, {
           fixedWidth: 300,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
@@ -109,7 +110,7 @@ define( require => {
       const particlesNode = new DiffusionParticlesNode( model );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
-      model.numberOfParticlesChangedEmitter.addListener( () => {
+      model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( !this.model.isPlayingProperty.value ) {
           particlesNode.update();
         }

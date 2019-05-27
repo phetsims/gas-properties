@@ -21,6 +21,7 @@ define( require => {
   const HSeparator = require( 'SUN/HSeparator' );
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
+  const Property = require( 'AXON/Property' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -34,11 +35,12 @@ define( require => {
      * @param {BooleanProperty} particleFlowRateVisibleProperty
      * @param {BooleanProperty} centerOfMassVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
+     * @param {Property.<number>} totalNumberOfParticlesProperty
      * @param {Object} [options]
      */
     constructor( leftSettings, rightSettings,
                  modelViewTransform, hasDividerProperty, particleFlowRateVisibleProperty,
-                 centerOfMassVisibleProperty, stopwatchVisibleProperty, options ) {
+                 centerOfMassVisibleProperty, stopwatchVisibleProperty, totalNumberOfParticlesProperty, options ) {
       assert && assert( leftSettings instanceof DiffusionSettings,
         `invalid leftSettings: ${leftSettings}` );
       assert && assert( rightSettings instanceof DiffusionSettings,
@@ -51,6 +53,8 @@ define( require => {
         `invalid centerOfMassVisibleProperty: ${centerOfMassVisibleProperty}` );
       assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
         `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
+      assert && assert( totalNumberOfParticlesProperty instanceof Property,
+        `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
 
       options = _.extend( {
         fixedWidth: 100,
@@ -58,6 +62,8 @@ define( require => {
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
+
+      const dividerToggleButton = new DividerToggleButton( hasDividerProperty );
 
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
@@ -68,7 +74,7 @@ define( require => {
           new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty ),
 
           // Remove/Reset Divider button, centered
-          new FixedWidthNode( contentWidth, new DividerToggleButton( hasDividerProperty ), {
+          new FixedWidthNode( contentWidth, dividerToggleButton, {
             align: 'center'
           } ),
 
@@ -92,6 +98,11 @@ define( require => {
       } ) );
 
       super( content, options );
+
+      // Disable the button when the container is empty.
+      totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        dividerToggleButton.enabled = ( totalNumberOfParticles !== 0 );
+      } );
     }
   }
 

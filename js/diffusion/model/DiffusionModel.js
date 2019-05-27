@@ -11,13 +11,13 @@ define( require => {
   // modules
   const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
   const Bounds2 = require( 'DOT/Bounds2' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DiffusionCollisionDetector = require( 'GAS_PROPERTIES/diffusion/model/DiffusionCollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
-  const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -68,8 +68,14 @@ define( require => {
       // @private for iterating over all particles
       this.particleArrays = [ this.particles1, this.particles2 ];
 
-      // @public emit is called when any of the above Particle arrays are modified
-      this.numberOfParticlesChangedEmitter = new Emitter();
+      // @public {Property.<number>} total number of particles in the container
+      this.totalNumberOfParticlesProperty = new DerivedProperty(
+        [ this.leftSettings.numberOfParticlesProperty, this.rightSettings.numberOfParticlesProperty ],
+        ( leftNumberOfParticles, rightNumberOfParticles ) => leftNumberOfParticles + rightNumberOfParticles, {
+          numberType: 'Integer',
+          valueType: 'number',
+          isValidValue: value => value >= 0
+        } );
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
       // null when there are no particles in the container.
@@ -222,7 +228,6 @@ define( require => {
         else {
           ParticleUtils.removeParticles( -delta, particles );
         }
-        this.numberOfParticlesChangedEmitter.emit();
 
         // If paused, update things that would normally be handled by step.
         if ( !this.isPlayingProperty.value ) {
