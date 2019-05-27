@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-OopsDialog is displayed when PRESSURE_V is selected with min or max volume
 #93 lid shrinks to min size before blowing off
 #88 animate heat/cool for PRESSURE_T
 
