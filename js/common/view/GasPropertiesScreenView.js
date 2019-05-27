@@ -217,7 +217,7 @@ define( require => {
         centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30
       } );
 
-      // The complete system of particles
+      // The complete system of particles, inside and outside the container
       const particlesNode = new GasPropertiesParticlesNode( model );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
