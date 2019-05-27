@@ -63,13 +63,13 @@ define( require => {
       const viewOpeningLeftInset = modelViewTransform.modelToViewDeltaX( container.openingLeftInset );
       const viewOpeningRightInset = modelViewTransform.modelToViewDeltaX( container.openingRightInset );
 
-      // Displays the walls of the container
+      // Walls of the container
       const wallsNode = new Path( null, {
         stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
         lineWidth: viewWallThickness
       } );
 
-      // Displays the previous bounds of the container, visible while dragging.
+      // Previous bounds of the container, visible while dragging.
       // This is a simple rectangle, and does not need to show the previous opening in the top.
       const previousBoundsNode = new Rectangle( 0, 0, 1, 1, {
         stroke: GasPropertiesColorProfile.containerPreviousBoundsStrokeProperty,
@@ -77,6 +77,7 @@ define( require => {
         visible: false
       } );
 
+      // Resize handle on the left wall
       const resizeHandleNode = new HandleNode( {
         cursor: 'pointer',
         gripBaseColor: options.resizeGripColor,
@@ -85,6 +86,7 @@ define( require => {
         scale: 0.4
       } );
 
+      // Lid on the top of the container
       const lidNode = new LidNode( {
         cursor: 'pointer',
         baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
@@ -206,7 +208,7 @@ define( require => {
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
-      // Blow off the lid
+      // Blow the lid off the container
       if ( !this.container.lidIsOnProperty.value && this.lidNode.visible ) {
         if ( this.visibleBoundsProperty.value.intersectsBounds( this.lidNode.bounds ) ) {
 
