@@ -17,7 +17,7 @@ define( require => {
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
 
   // strings
-  const celsiusString = require( 'string!GAS_PROPERTIES/celsius' );
+  const degreesCelsiusString = require( 'string!GAS_PROPERTIES/degreesCelsius' );
   const kelvinString = require( 'string!GAS_PROPERTIES/kelvin' );
 
   // constants
@@ -47,7 +47,7 @@ define( require => {
           choice: Thermometer.Units.CELSIUS,
           numberProperty: thermometer.temperatureCelsiusProperty,
           range: NUMBER_DISPLAY_RANGE,
-          units: celsiusString
+          units: degreesCelsiusString
         }
       ];
 

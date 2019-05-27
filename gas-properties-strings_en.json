@@ -62,7 +62,7 @@
   "kelvin": {
     "value": "K"
   },
-  "celsius": {
+  "degreesCelsius": {
     "value": "\u00B0C"
   },
   "valueUnits": {
