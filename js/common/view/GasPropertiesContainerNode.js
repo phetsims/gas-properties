@@ -259,8 +259,15 @@ define( require => {
 
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          const containerWidth = container.widthRange.constrainValue( container.right - modelX );
-          container.resize( containerWidth );
+
+          // Set the desired width, so that container will animate to new width with a speed limit.  See #90.
+          container.desiredWidth = container.widthRange.constrainValue( container.right - modelX );
+        },
+
+        end: ( listener ) => {
+
+          // Stop the animation wherever the container happens to be at when the drag ends.
+          container.desiredWidth = container.widthProperty.value;
         }
       } );
     }

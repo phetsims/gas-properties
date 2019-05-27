@@ -12,6 +12,7 @@ define( require => {
   const BaseContainer = require( 'GAS_PROPERTIES/common/model/BaseContainer' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -47,6 +48,10 @@ define( require => {
       // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in pm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 5 );
 
+      // @public {number} desired width of the container, in pm.
+      // Set this to animate width change with a speed limit. See #90.
+      this.desiredWidth = this.widthProperty.value;
+
       // Validate lidWidth, whose range changes dynamically.
       assert && this.lidWidthProperty.link( lidWidth => {
         assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.getMaxLidWidth(), `invalid lidWidth: ${lidWidth}` );
@@ -58,13 +63,49 @@ define( require => {
       super.reset();
       this.lidIsOnProperty.reset();
       this.lidWidthProperty.reset();
+      this.desiredWidth = this.widthProperty.value;
+    }
+
+    /**
+     * Animates the container's width one step towards desiredWidth.
+     * @param {number} dt - time delta, in ps
+     * @public
+     */
+    stepWidth( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
+      const widthDifference = this.desiredWidth - this.widthProperty.value;
+
+      if ( widthDifference !== 0 ) {
+
+        // Default is to move the entire distance in one step.
+        let newWidth = this.desiredWidth;
+
+        // If the left wall does work (as in the Explore screen), limit the wall's speed and thus how much the
+        // width changes per time step. The speed limit prevents the lid from blowing off too easily.  See #90.
+        if ( this.leftWallDoesWork ) {
+
+          const widthStep = dt * GasPropertiesQueryParameters.leftWallSpeedLimit;
+
+          if ( widthStep < Math.abs( widthDifference ) ) {
+            if ( widthDifference > 0 ) {
+              newWidth = this.widthProperty.value + widthStep;
+            }
+            else {
+              newWidth = this.widthProperty.value - widthStep;
+            }
+          }
+        }
+
+        this.resize( newWidth );
+      }
     }
 
     /**
      * Resizes the container to the specified width.
      * Maintains a constant opening size in the top of the container, if possible.
      * @param {number} width
-     * @public
+     * @private
      */
     resize( width ) {
       assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
