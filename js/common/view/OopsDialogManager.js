@@ -54,7 +54,7 @@ define( require => {
     }
 
     /**
-     * Shows a dialog for the specified message.
+     * Shows a modal dialog for the specified message.
      * If a dialog has not previously been shown for the message, a dialog is created and added to the cache.
      * @param {number} dialogCacheIndex
      * @param {string} message
