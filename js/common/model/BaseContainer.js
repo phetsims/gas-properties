@@ -14,6 +14,7 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -149,6 +150,8 @@ define( require => {
      * @public
      */
     containsParticle( particle ) {
+      assert  && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+      
       return particle.left >= this.bounds.minX &&
              particle.right <= this.bounds.maxX &&
              particle.bottom >= this.bounds.minY &&
