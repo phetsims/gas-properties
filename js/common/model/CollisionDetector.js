@@ -121,7 +121,7 @@ define( require => {
 
     /**
      * Detects and handles particle-container collisions for the system for one time step.
-     * This is overridden by subclass DiffusionCollisionDetector to implement collison detection with the divider
+     * This is overridden by subclass DiffusionCollisionDetector to implement collision detection with the divider
      * that appears in the container in the 'Diffusion' screen.
      * @returns {number} the number of collisions
      * @protected
