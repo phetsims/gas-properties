@@ -10,41 +10,31 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const ColorDef = require( 'SCENERY/util/ColorDef' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Node = require( 'SCENERY/nodes/Node' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 
     /**
      * @param {BooleanProperty} speciesVisibleProperty
+     * @param {Particle} particle
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {Node} particleIcon
-     * @param {ColorDef} particleColor
      * @param {Object} [options]
      */
-    constructor( speciesVisibleProperty, modelViewTransform, particleIcon, particleColor, options ) {
+    constructor( speciesVisibleProperty, particle, modelViewTransform, options ) {
       assert && assert( speciesVisibleProperty instanceof BooleanProperty,
         `invalid speciesVisibleProperty: ${speciesVisibleProperty}` );
+      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( particleIcon instanceof Node, `invalid particleIcon: ${particleIcon}` );
-      assert && assert( ColorDef.isColorDef( particleColor ), `invalid particleColor: ${particleColor}` );
 
       super( speciesVisibleProperty, {
         align: 'center',
         spacing: 5,
-        icon: new HBox( {
-          spacing: 3,
-          children: [
-            particleIcon,
-            GasPropertiesIconFactory.createHistogramIcon( particleColor )
-          ]
-        } )
+        icon: GasPropertiesIconFactory.createSpeciesHistogramIcon( particle, modelViewTransform )
       } );
     }
   }

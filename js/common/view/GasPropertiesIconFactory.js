@@ -38,7 +38,6 @@ define( require => {
      * @param {ModelViewTransform2} modelViewTransform
      * @returns {Node}
      * @public
-     * @static
      */
     createHeavyParticleIcon( modelViewTransform ) {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
@@ -51,7 +50,6 @@ define( require => {
      * @param {ModelViewTransform2} modelViewTransform
      * @returns {Node}
      * @public
-     * @static
      */
     createLightParticleIcon( modelViewTransform ) {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
@@ -64,7 +62,6 @@ define( require => {
      * @param {ModelViewTransform2} modelViewTransform
      * @returns {Node}
      * @public
-     * @static
      */
     createDiffusionParticle1Icon( modelViewTransform ) {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
@@ -77,7 +74,6 @@ define( require => {
      * @param {ModelViewTransform2} modelViewTransform
      * @returns {Node}
      * @public
-     * @static
      */
     createDiffusionParticle2Icon( modelViewTransform ) {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
@@ -89,7 +85,6 @@ define( require => {
      * Creates a simplified icon for the Stopwatch.
      * @returns {Node}
      * @public
-     * @static
      */
     createStopwatchIcon() {
       return createToolIcon( GasPropertiesColorProfile.stopwatchBackgroundColorProperty );
@@ -99,37 +94,27 @@ define( require => {
      * Creates a simplified icon for the Collision Counter.
      * @returns {Node}
      * @public
-     * @static
      */
     createCollisionCounterIcon() {
       return createToolIcon( GasPropertiesColorProfile.collisionCounterBackgroundColorProperty );
     },
 
     /**
-     * Creates an icon for a histogram shape, used for the checkboxes on the Speed histogram.
-     * @param {Property.<ColorDef>} strokeProperty
+     * Creates the icon that represents the histogram for a species of particle.
+     * @param {Particle} particle
+     * @param {ModelViewTransform2} modelViewTransform
+     * @returns {Node}
      * @public
-     * @static
      */
-    createHistogramIcon( strokeProperty ) {
-
-      // unit shape
-      const shape = new Shape()
-        .moveTo( 0, 1 )
-        .lineTo( 0, 0.25 )
-        .lineTo( 0.25, 0.25 )
-        .lineTo( 0.25, 0 )
-        .lineTo( 0.5, 0 )
-        .lineTo( 0.5, 0.5 )
-        .lineTo( 0.75, 0.5 )
-        .lineTo( 0.75, 0.75 )
-        .lineTo( 1, 0.75 )
-        .lineTo( 1, 1 )
-        .transformed( Matrix3.scaling( 12, 12 ) );
-
-      return new Path( shape, {
-        stroke: strokeProperty,
-        lineWidth: 1.5
+    createSpeciesHistogramIcon( particle, modelViewTransform ) {
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
+      return new HBox( {
+        spacing: 3,
+        children: [
+          createParticleIcon( particle, modelViewTransform ),
+          createHistogramIcon( particle.colorProperty )
+        ]
       } );
     },
 
@@ -137,7 +122,6 @@ define( require => {
      * Creates the icon used on the 'Width' checkbox.
      * @returns {Node}
      * @public
-     * @static
      */
     createContainerWidthIcon() {
       return new DimensionalArrowsNode( new NumberProperty( 44 ), {
@@ -150,7 +134,6 @@ define( require => {
      * Creates the icon used on the 'Center of Mass' checkbox.
      * @returns {Node}
      * @public
-     * @static
      */
     createCenterOfMassIcon() {
 
@@ -176,7 +159,6 @@ define( require => {
      * Creates the icon used on the 'Particle Flow Rate' checkbox.
      * @returns {Node}
      * @public
-     * @static
      */
     createParticleFlowRateIcon() {
 
@@ -203,8 +185,6 @@ define( require => {
    * @param {Particle} particle
    * @param {ModelViewTransform2} modelViewTransform
    * @returns {Node}
-   * @public
-   * @static
    */
   function createParticleIcon( particle, modelViewTransform ) {
     assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
@@ -217,8 +197,6 @@ define( require => {
    * Creates a simplified icon for a tool like the stopwatch or collision counter.
    * @param {ColorDef} color
    * @returns {Node}
-   * @public
-   * @static
    */
   function createToolIcon( color ) {
     assert && assert( ColorDef.isColorDef( color ), `invalid color: ${color}` );
@@ -239,6 +217,33 @@ define( require => {
 
     return new Node( {
       children: [ background, display ]
+    } );
+  }
+
+  /**
+   * Creates an icon for a histogram shape, used for the checkboxes on the Speed histogram.
+   * @param {Property.<ColorDef>} strokeProperty
+   * @returns {Node}
+   */
+  function createHistogramIcon( strokeProperty ) {
+
+    // unit shape
+    const shape = new Shape()
+      .moveTo( 0, 1 )
+      .lineTo( 0, 0.25 )
+      .lineTo( 0.25, 0.25 )
+      .lineTo( 0.25, 0 )
+      .lineTo( 0.5, 0 )
+      .lineTo( 0.5, 0.5 )
+      .lineTo( 0.75, 0.5 )
+      .lineTo( 0.75, 0.75 )
+      .lineTo( 1, 0.75 )
+      .lineTo( 1, 1 )
+      .transformed( Matrix3.scaling( 12, 12 ) );
+
+    return new Path( shape, {
+      stroke: strokeProperty,
+      lineWidth: 1.5
     } );
   }
 

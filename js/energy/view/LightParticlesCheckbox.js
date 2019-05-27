@@ -11,8 +11,7 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
+  const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const SpeciesHistogramCheckbox = require( 'GAS_PROPERTIES/energy/view/SpeciesHistogramCheckbox' );
 
@@ -29,12 +28,7 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
 
-      super(
-        lightVisibleProperty,
-        modelViewTransform,
-        GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        GasPropertiesColorProfile.lightParticleColorProperty
-      );
+      super( lightVisibleProperty, new LightParticle(), modelViewTransform );
     }
   }
 
