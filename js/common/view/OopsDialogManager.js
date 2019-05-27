@@ -4,7 +4,8 @@
  * Manages the set of 'Oops!' dialogs that are related to the 'Hold Constant' feature.
  * When holding a quantity constant would break the model, the model puts itself in a sane configuration,
  * the model notifies the view via an Emitter, and the view notifies the user via a dialog.
- * Dialogs are created on demand, then cached for reuse.
+ *
+ * The student is almost certain to encounter these on the Ideal (first) screen, so dialogs are created eagerly.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -29,47 +30,21 @@ define( require => {
      */
     constructor( oops ) {
 
-      // @private {OopsDialog[]} created on demand, cached for the lifetime of the program
-      this.dialogCache = [];
-
       // Oops! Temperature cannot be held constant when the container is empty.
-      oops.temperatureEmptyEmitter.addListener( () => {
-        this.showDialog( 0, oopsTemperatureEmptyString );
-      } );
+      const oopsTemperatureEmptyDialog = new OopsDialog( oopsTemperatureEmptyString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      oops.temperatureEmptyEmitter.addListener( () => { oopsTemperatureEmptyDialog.show(); } );
 
       // Oops! Pressure cannot be held constant when the container is empty.
-      oops.pressureEmptyEmitter.addListener( () => {
-        this.showDialog( 1, oopsPressureEmptyString );
-      } );
+      const oopsPressureEmptyDialog = new OopsDialog( oopsPressureEmptyString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      oops.pressureEmptyEmitter.addListener( () => { oopsPressureEmptyDialog.show(); } );
 
       // Oops! Pressure cannot be held constant. Volume would be too large.
-      oops.pressureLargeEmitter.addListener( () => {
-        this.showDialog( 2, oopsPressureLargeString );
-      } );
+      const oopsPressureLargeDialog = new OopsDialog( oopsPressureLargeString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      oops.pressureLargeEmitter.addListener( () => { oopsPressureLargeDialog.show(); } );
 
       // Oops! Pressure cannot be held constant. Volume would be too small.
-      oops.pressureSmallEmitter.addListener( () => {
-        this.showDialog( 3, oopsPressureSmallString );
-      } );
-    }
-
-    /**
-     * Shows a modal dialog for the specified message.
-     * If a dialog has not previously been shown for the message, a dialog is created and added to the cache.
-     * @param {number} dialogCacheIndex
-     * @param {string} message
-     * @private
-     */
-    showDialog( dialogCacheIndex, message ) {
-      assert && assert( typeof dialogCacheIndex === 'number', `invalid dialogCacheIndex: ${dialogCacheIndex}` );
-      assert && assert( typeof message === 'string', `invalid message: ${message}` );
-
-      let dialog = this.dialogCache[ dialogCacheIndex ];
-      if ( !dialog ) {
-        dialog = new OopsDialog( message, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
-        this.dialogCache[ dialogCacheIndex ] = dialog;
-      }
-      dialog.show();
+      const oopsPressureSmallDialog = new OopsDialog( oopsPressureSmallString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      oops.pressureSmallEmitter.addListener( () => { oopsPressureSmallDialog.show(); } );
     }
   }
 
