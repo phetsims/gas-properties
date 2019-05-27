@@ -22,6 +22,8 @@ define( require => {
 
   // constants
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.pressureGaugeSamplePeriod; // ps
+  const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
+  const PRESSURE_NOISE_OFF = GasPropertiesQueryParameters.pressureNoiseOff; // whether jitter is turned off
   const MIN_JITTER = GasPropertiesQueryParameters.minJitter; // minimum amount of jitter, in kPa
   const MAX_JITTER = GasPropertiesQueryParameters.maxJitter; // maximum amount of jitter, in kPa
   assert && assert( MIN_JITTER < MAX_JITTER, 'MIN_JITTER must be < MAX_JITTER' );
@@ -60,7 +62,7 @@ define( require => {
         } );
 
       // @public (read-only) pressure range in kilopascals (kPa)
-      this.pressureRange = new Range( 0, GasPropertiesQueryParameters.maxPressure );
+      this.pressureRange = new Range( 0, MAX_PRESSURE );
 
       // @private amount of jitter in kPa is inversely proportional to pressure
       this.pressureJitterFunction = new LinearFunction( 0, this.pressureRange.max, MAX_JITTER, MIN_JITTER, true );
@@ -100,7 +102,7 @@ define( require => {
         // Add jitter (kPa) to the displayed value, more jitter with lower pressure.
         // Jitter is added if we're not holding pressure constant.
         let jitter = 0;
-        if ( jitterEnabled && !GasPropertiesQueryParameters.pressureNoiseOff ) {
+        if ( jitterEnabled && !PRESSURE_NOISE_OFF ) {
           jitter = this.pressureJitterFunction( this.pressureProperty.value ) *
                    this.scaleJitterFunction( this.temperatureProperty.value ) *
                    phet.joist.random.nextDouble();

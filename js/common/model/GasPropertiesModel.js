@@ -40,6 +40,8 @@ define( require => {
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
+  // maximum pressure in kPa, when exceeded the lid blows off
+  const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
   // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
   const PRESSURE_CONVERSION_SCALE = 1.66E6;
 
@@ -323,7 +325,7 @@ define( require => {
         this.pressureGauge.step( dt, jitterEnabled );
 
         // If pressure exceeds the maximum, blow the lid off of the container.
-        if ( this.pressureProperty.value > GasPropertiesQueryParameters.maxPressure ) {
+        if ( this.pressureProperty.value > MAX_PRESSURE ) {
           this.container.lidIsOnProperty.value = false;
         }
       }
