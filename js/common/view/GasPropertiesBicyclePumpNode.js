@@ -24,6 +24,7 @@ define( require => {
     constructor( numberOfParticlesProperty, options ) {
       assert && assert( numberOfParticlesProperty instanceof NumberProperty,
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
+      assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
 
       options = _.extend( {
         height: 230,
@@ -34,8 +35,6 @@ define( require => {
           addParticlesOneAtATime: false
         }
       }, options );
-
-      assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
 
       super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
     }
