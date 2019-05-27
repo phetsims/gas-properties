@@ -220,7 +220,7 @@ define( require => {
       default: 'rgb( 70, 205, 85 )'
     },
 
-    // color of the eraser button that is used to clear particles from the container
+    // eraser button that is used to clear particles from the container
     eraserButtonColor: {
       default: 'rgb( 242, 242, 242 )'
     }
