@@ -17,6 +17,9 @@ define( require => {
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  const WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
+
   class GasPropertiesContainer extends BaseContainer {
 
     constructor( options ) {
@@ -85,7 +88,7 @@ define( require => {
         // width changes per time step. The speed limit prevents the lid from blowing off too easily.  See #90.
         if ( this.leftWallDoesWork ) {
 
-          const widthStep = dt * GasPropertiesQueryParameters.leftWallSpeedLimit;
+          const widthStep = dt * WALL_SPEED_LIMIT;
 
           if ( widthStep < Math.abs( widthDifference ) ) {
             if ( widthDifference > 0 ) {

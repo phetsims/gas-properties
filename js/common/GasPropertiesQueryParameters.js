@@ -125,7 +125,7 @@ define( require => {
      * Speed limit for the left movable wall, in pm/ps.
      * For internal use only.
      */
-    leftWallSpeedLimit: {
+    wallSpeedLimit: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 1000
