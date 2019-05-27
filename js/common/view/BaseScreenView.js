@@ -73,7 +73,7 @@ define( require => {
       } );
       this.addChild( resetAllButton );
 
-      // @private
+      // @protected
       this.model = model;
     }
 

@@ -31,7 +31,10 @@ define( require => {
       this.particleToolsExpandedProperty = new BooleanProperty( false );
     }
 
-    // @public @override
+    /**
+     * @public
+     * @override
+     */
     reset() {
       super.reset();
       this.averageSpeedExpandedProperty.reset();

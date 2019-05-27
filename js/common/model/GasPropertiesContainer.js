@@ -61,7 +61,10 @@ define( require => {
       } );
     }
 
-    // @public @override
+    /**
+     * @public
+     * @override
+     */
     reset() {
       super.reset();
       this.lidIsOnProperty.reset();

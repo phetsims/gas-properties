@@ -26,7 +26,10 @@ define( require => {
       this.centerOfMassVisibleProperty = new BooleanProperty( false );
     }
 
-    // @public @override
+    /**
+     * @public
+     * @override
+     */
     reset() {
       this.dataExpandedProperty.reset();
       this.particleFlowRateVisibleProperty.reset();

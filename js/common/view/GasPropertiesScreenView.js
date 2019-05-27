@@ -323,9 +323,6 @@ define( require => {
         oops4Dialog.show();
       } );
       
-      // @protected
-      this.model = model;
-
       // @private used in methods
       this.containerNode = containerNode;
       this.particlesNode = particlesNode;

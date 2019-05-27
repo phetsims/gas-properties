@@ -56,7 +56,10 @@ define( require => {
       } );
     }
 
-    // @public @override
+    /**
+     * @public
+     * @override
+     */
     reset() {
       super.reset();
       this.hasDividerProperty.reset();
