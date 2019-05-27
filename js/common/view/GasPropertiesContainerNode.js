@@ -13,6 +13,7 @@ define( require => {
   // modules
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const Event = require( 'SCENERY/input/Event' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
@@ -251,11 +252,14 @@ define( require => {
       super( {
 
         start: ( event, listener ) => {
+
+          assert && assert( event instanceof Event, `invalid event: ${event}` );
           const viewWidth = modelViewTransform.modelToViewX( container.left );
           startXOffset = viewWidth - parentNode.globalToParentPoint( event.pointer.point ).x;
         },
 
         drag: ( event, listener ) => {
+          assert && assert( event instanceof Event, `invalid event: ${event}` );
 
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
@@ -266,7 +270,7 @@ define( require => {
 
         end: ( listener ) => {
 
-          // Stop the animation wherever the container happens to be at when the drag ends.
+          // Stop the animation wherever the container width happens to be when the drag ends.
           container.desiredWidth = container.widthProperty.value;
         }
       } );
@@ -295,11 +299,15 @@ define( require => {
       super( {
 
         start: ( event, listener ) => {
+          assert && assert( event instanceof Event, `invalid event: ${event}` );
+
           startXOffset = modelViewTransform.modelToViewX( container.getOpeningLeft() ) -
                          parentNode.globalToParentPoint( event.pointer.point ).x;
         },
 
         drag: ( event, listener ) => {
+          assert && assert( event instanceof Event, `invalid event: ${event}` );
+          
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
           if ( modelX >= container.openingRight ) {
