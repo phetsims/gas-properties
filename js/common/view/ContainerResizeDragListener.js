@@ -2,7 +2,6 @@
 
 /**
  * Drag listener for resizing the container by changing its width.
- * Maintains a constant opening size in the top of the container, if possible.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
