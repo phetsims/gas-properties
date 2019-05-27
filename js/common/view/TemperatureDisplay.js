@@ -21,7 +21,7 @@ define( require => {
   const kelvinString = require( 'string!GAS_PROPERTIES/kelvin' );
 
   // constants
-  const NUMBER_DISPLAY_RANGE = new Range( -9999, 9999 ); // determines how wide items in the ComboBoxDisplay will be
+  const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
 
   class TemperatureDisplay extends ComboBoxDisplay {
 
