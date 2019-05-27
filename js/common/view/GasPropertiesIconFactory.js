@@ -221,7 +221,7 @@ define( require => {
   }
 
   /**
-   * Creates an icon for a histogram shape, used for the checkboxes on the Speed histogram.
+   * Creates an icon for a histogram shape, used for the checkboxes on the histograms.
    * @param {Property.<ColorDef>} strokeProperty
    * @returns {Node}
    */
