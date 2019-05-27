@@ -154,6 +154,26 @@ define( require => {
              particle.bottom >= this.bounds.minY &&
              particle.top <= this.bounds.maxY;
     }
+
+    /**
+     * Determines whether the container fully contains a collection of particles.
+     * @param {Particle[][]} particleArrays
+     * @returns {boolean}
+     */
+    containsParticles( particleArrays ) {
+      assert  && assert( Array.isArray( particleArrays ), `invalid particlesArray: ${particleArrays}` );
+
+      for ( let i = 0; i < particleArrays.length; i++ ) {
+        const particles = particleArrays[ i ];
+        for ( let j = 0; j < particles.length; j++ ) {
+          const particle = particles[ j ];
+          if ( !this.containsParticle( particle ) ) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
   }
 
   return gasProperties.register( 'BaseContainer', BaseContainer );
