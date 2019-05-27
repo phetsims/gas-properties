@@ -11,14 +11,14 @@ define( require => {
   'use strict';
 
   // modules
-  const DragListener = require( 'SCENERY/listeners/DragListener' );
+  const ContainerResizeDragListener = require( 'GAS_PROPERTIES/common/view/ContainerResizeDragListener' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
-  const Event = require( 'SCENERY/input/Event' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const LidDragListener = require( 'GAS_PROPERTIES/common/view/LidDragListener' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -155,11 +155,11 @@ define( require => {
       resizeHandleNode.on( 'visibility', () => resizeHandleNode.interruptSubtreeInput() );
 
       // Dragging the resize handle horizontally changes the container's width
-      const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this );
-      resizeHandleNode.addInputListener( resizeHandleDragListener );
+      const resizeDragListener = new ContainerResizeDragListener( container, modelViewTransform, this );
+      resizeHandleNode.addInputListener( resizeDragListener );
 
       // While interacting with the resize handle...
-      resizeHandleDragListener.isPressedProperty.lazyLink( isPressed => {
+      resizeDragListener.isPressedProperty.lazyLink( isPressed => {
 
         // disable interaction with the lid, to simplify implementation
         lidNode.interruptSubtreeInput();
@@ -227,113 +227,5 @@ define( require => {
     }
   }
 
-  gasProperties.register( 'GasPropertiesContainerNode', GasPropertiesContainerNode );
-
-  /**
-   * Drag listener for the container's resize handle, changes the container's width.
-   * Maintains a constant opening size in the top of the container, if possible.
-   */
-  class ResizeHandleDragListener extends DragListener {
-
-    /**
-     * @param {GasPropertiesContainer} container
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Node} parentNode
-     */
-    constructor( container, modelViewTransform, parentNode ) {
-      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
-
-      // pointer's x offset from the left edge of the container, when a drag starts
-      let startXOffset = 0;
-
-      super( {
-
-        start: ( event, listener ) => {
-
-          assert && assert( event instanceof Event, `invalid event: ${event}` );
-          const viewWidth = modelViewTransform.modelToViewX( container.left );
-          startXOffset = viewWidth - parentNode.globalToParentPoint( event.pointer.point ).x;
-        },
-
-        drag: ( event, listener ) => {
-          assert && assert( event instanceof Event, `invalid event: ${event}` );
-
-          const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
-          const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-
-          // Set the desired width, so that container will animate to new width with a speed limit.  See #90.
-          container.desiredWidth = container.widthRange.constrainValue( container.right - modelX );
-        },
-
-        end: ( listener ) => {
-
-          // Stop the animation wherever the container width happens to be when the drag ends.
-          container.desiredWidth = container.widthProperty.value;
-        }
-      } );
-    }
-  }
-
-  /**
-   * Drag listener for the container's lid, determines the size of the opening in the top of the container.
-   */
-  class LidDragListener extends DragListener {
-
-    /**
-     * @param {GasPropertiesContainer} container
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Node} parentNode
-     */
-    constructor( container, modelViewTransform, parentNode ) {
-      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
-
-      // pointer's x offset from container.getOpeningLeft(), when a drag starts
-      let startXOffset = 0;
-
-      super( {
-
-        start: ( event, listener ) => {
-          assert && assert( event instanceof Event, `invalid event: ${event}` );
-
-          startXOffset = modelViewTransform.modelToViewX( container.getOpeningLeft() ) -
-                         parentNode.globalToParentPoint( event.pointer.point ).x;
-        },
-
-        drag: ( event, listener ) => {
-          assert && assert( event instanceof Event, `invalid event: ${event}` );
-          
-          const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
-          const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          if ( modelX >= container.openingRight ) {
-
-            // the lid is fully closed
-            container.lidWidthProperty.value = container.getMaxLidWidth();
-          }
-          else {
-
-            // the lid is open
-            const openingWidth = container.openingRight - modelX;
-            container.lidWidthProperty.value =
-              Math.max( container.getMaxLidWidth() - openingWidth, container.getMinLidWidth() );
-          }
-        },
-
-        // when the lid handle is released, log the opening
-        end: ( listener ) => {
-          phet.log && phet.log( container.isLidOpen() ?
-                                `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
-                                'Lid is closed'
-          );
-        }
-      } );
-    }
-  }
-
-  return GasPropertiesContainerNode;
+  return gasProperties.register( 'GasPropertiesContainerNode', GasPropertiesContainerNode );
 } );
