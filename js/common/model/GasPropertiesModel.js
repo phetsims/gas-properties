@@ -247,10 +247,13 @@ define( require => {
      */
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      super.step( dt );
 
-      // Animate the container's width with a speed limit, regardless of whether the sim is paused.  See #90.
+      // Animate the container's width with a speed limit, regardless of whether the sim is paused.
+      // Do this before super.step because it affects the subsequent computation of wall velocity.
+      // See #90.
       this.container.stepWidth( this.timeTransform( dt ) );
+
+      super.step( dt );
     }
 
     /**
