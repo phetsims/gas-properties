@@ -16,10 +16,9 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const NormalTimeTransform = require( 'GAS_PROPERTIES/common/model/NormalTimeTransform' );
+  const TimeTransform = require( 'GAS_PROPERTIES/common/model/TimeTransform' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Property = require( 'AXON/Property' );
-  const SlowTimeTransform = require( 'GAS_PROPERTIES/common/model/SlowTimeTransform' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -69,7 +68,7 @@ define( require => {
 
       // Adjust the time transform
       this.isSlowMotionProperty.link( isSlowMotion => {
-        this.timeTransform = isSlowMotion ? new SlowTimeTransform() : new NormalTimeTransform();
+        this.timeTransform = isSlowMotion ? TimeTransform.SLOW : TimeTransform.NORMAL;
       } );
 
       // @public (read-only)
