@@ -53,8 +53,8 @@ define( require => {
 
       }, options );
 
-      // Limit width of title
-      options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
+      // Limit width of title, multiplier determined empirically
+      options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
       // Visibility of species-specific histograms
       const heavyVisibleProperty = new BooleanProperty( false );
