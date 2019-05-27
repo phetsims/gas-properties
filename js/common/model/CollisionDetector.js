@@ -101,12 +101,10 @@ define( require => {
 
       // Use regions that intersect the container, since collisions only occur inside the container.
       const containerRegions = _.filter( this.regions,
-          region => this.container.bounds.intersectsBounds( region.bounds ) );
+        region => this.container.bounds.intersectsBounds( region.bounds ) );
 
       // put particles in regions
-      for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        assignParticlesToRegions( this.particleArrays[ i ], containerRegions );
-      }
+      assignParticlesToRegions( this.particleArrays, containerRegions );
 
       // particle-particle collisions, within each region
       if ( this.particleParticleCollisionsEnabledProperty.value ) {
@@ -116,26 +114,12 @@ define( require => {
       }
 
       // particle-container collisions
-      this.numberOfParticleContainerCollisions = this.stepParticleContainerCollisions( dt );
+      this.numberOfParticleContainerCollisions =
+        doParticleContainerCollisions( this.particleArrays, this.container.bounds, this.container.leftWallVelocity );
 
       // Verify that particles are fully inside the container.
       assert && assert( this.container.containsParticles( this.particleArrays ),
         'particles have leaked out of the container' );
-    }
-
-    /**
-     * Detects and handles particle-container collisions for the system for one time step.
-     * @param {number} dt
-     * @returns {number} the number of collisions
-     * @protected
-     */
-    stepParticleContainerCollisions( dt ) {
-      let numberOfParticleContainerCollisions = 0;
-      for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, this.container.leftWallVelocity );
-      }
-      return numberOfParticleContainerCollisions;
     }
   }
 
@@ -168,14 +152,19 @@ define( require => {
 
   /**
    * Assigns each particle to the Regions that it intersects, accounting for particle radius.
-   * @param {Particle[]} particles
+   * @param {Particle[]} particleArrays
    * @param {Region[]} regions
    */
-  function assignParticlesToRegions( particles, regions ) {
-    for ( let i = 0; i < particles.length; i++ ) {
-      for ( let j = 0; j < regions.length; j++ ) {
-        if ( particles[ i ].intersectsBounds( regions[ j ].bounds ) ) {
-          regions[ j ].addParticle( particles[ i ] );
+  function assignParticlesToRegions( particleArrays, regions ) {
+    for ( let i = 0; i < particleArrays.length; i++ ) {
+      const particles = particleArrays[ i ];
+      for ( let j = 0; j < particles.length; j++ ) {
+        const particle = particles[ j ];
+        for ( let k = 0; k < regions.length; k++ ) {
+          const region = regions[ k ];
+          if ( particle.intersectsBounds( region.bounds ) ) {
+            region.addParticle( particle );
+          }
         }
       }
     }
@@ -289,49 +278,56 @@ define( require => {
 
   /**
    * Detects and handles particle-container collisions.
-   * @param {Particle[]} particles
+   * @param {Particle[][]} particleArrays
    * @param {Bounds2} containerBounds
    * @param {Vector2} leftWallVelocity - velocity of the container's left (movable) wall
    * @returns {number} number of collisions
    */
-  function doParticleContainerCollisions( particles, containerBounds, leftWallVelocity ) {
+  function doParticleContainerCollisions( particleArrays, containerBounds, leftWallVelocity ) {
 
     let numberOfCollisions = 0;
-    for ( let i = 0; i < particles.length; i++ ) {
 
-      const particle = particles[ i ];
-      let collided = false;
+    for ( let i = 0; i < particleArrays.length; i++ ) {
 
-      // adjust x
-      if ( particle.left <= containerBounds.minX ) {
-        particle.left = containerBounds.minX;
+      const particles = particleArrays[ i ];
 
-        // If the left wall is moving, it will do work.
-        particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
-        collided = true;
-      }
-      else if ( particle.right >= containerBounds.maxX ) {
-        particle.right = containerBounds.maxX;
-        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
-        collided = true;
-      }
+      for ( let j = 0; j < particles.length; j++ ) {
 
-      // adjust y
-      if ( particle.top >= containerBounds.maxY ) {
-        particle.top = containerBounds.maxY;
-        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
-        collided = true;
-      }
-      else if ( particle.bottom <= containerBounds.minY ) {
-        particle.bottom = containerBounds.minY;
-        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
-        collided = true;
-      }
+        const particle = particles[ j ];
+        let collided = false;
 
-      if ( collided ) {
-        numberOfCollisions++;
+        // adjust x
+        if ( particle.left <= containerBounds.minX ) {
+          particle.left = containerBounds.minX;
+
+          // If the left wall is moving, it will do work.
+          particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
+          collided = true;
+        }
+        else if ( particle.right >= containerBounds.maxX ) {
+          particle.right = containerBounds.maxX;
+          particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
+          collided = true;
+        }
+
+        // adjust y
+        if ( particle.top >= containerBounds.maxY ) {
+          particle.top = containerBounds.maxY;
+          particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+          collided = true;
+        }
+        else if ( particle.bottom <= containerBounds.minY ) {
+          particle.bottom = containerBounds.minY;
+          particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+          collided = true;
+        }
+
+        if ( collided ) {
+          numberOfCollisions++;
+        }
       }
     }
+
     return numberOfCollisions;
   }
 
