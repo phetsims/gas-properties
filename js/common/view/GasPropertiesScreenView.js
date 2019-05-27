@@ -285,7 +285,7 @@ define( require => {
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
       
-      // @private manages 'Oops!' dialogs related to the 'Hold Constant' feature
+      // @private manages OopsDialogs related to the 'Hold Constant' feature
       this.oopsDialogManager = new OopsDialogManager( model.oops );
 
       // @private used in methods
