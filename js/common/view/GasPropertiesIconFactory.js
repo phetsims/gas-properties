@@ -222,10 +222,10 @@ define( require => {
 
   /**
    * Creates an icon for a histogram shape, used for the checkboxes on the histograms.
-   * @param {Property.<ColorDef>} strokeProperty
+   * @param {ColorDef} stroke
    * @returns {Node}
    */
-  function createHistogramIcon( strokeProperty ) {
+  function createHistogramIcon( stroke ) {
 
     // unit shape
     const shape = new Shape()
@@ -242,7 +242,7 @@ define( require => {
       .transformed( Matrix3.scaling( 12, 12 ) );
 
     return new Path( shape, {
-      stroke: strokeProperty,
+      stroke: stroke,
       lineWidth: 1.5
     } );
   }
