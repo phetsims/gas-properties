@@ -71,6 +71,9 @@ define( require => {
       this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
       this.lightParticlesOutside = []; // {LightParticle[]} outside the container
 
+      // @public for iterating over all particles inside the container
+      this.insideParticleArrays = [ this.heavyParticles, this.lightParticles ];
+
       // @public emit is called when any of the above Particle arrays are modified
       this.numberOfParticlesChangedEmitter = new Emitter();
 
@@ -573,7 +576,8 @@ define( require => {
     }
 
     /**
-     * Adjusts velocities of particle in the container so that the resulting temperature matches a specified temperature.
+     * Adjusts velocities of particle inside the container so that the resulting temperature matches
+     * a specified temperature.
      * @param {number} temperature
      */
     adjustParticleVelocitiesForTemperature( temperature ) {
@@ -583,16 +587,16 @@ define( require => {
       const actualAverageKE = this.getAverageKineticEnergy();
       const ratio = desiredAverageKE / actualAverageKE;
 
-      //TODO is this iterator OK? or should model have {Particle[][]} particleArrays?
-      [ this.heavyParticles, this.lightParticles ].forEach( particles => {
-        for ( let i = 0; i < particles.length; i++ ) {
-          const particle = particles[ i ];
+      for ( let i = 0; i < this.insideParticleArrays.length; i++ ) {
+        const particles = this.insideParticleArrays[ i ];
+        for ( let j = 0; j < particles.length; j++ ) {
+          const particle = particles[ j ];
           const actualParticleKE = particle.getKineticEnergy();
           const desiredParticleKE = ratio * actualParticleKE;
           const desiredSpeed = Math.sqrt( 2 * desiredParticleKE / particle.mass ); // |v| = Math.sqrt( 2 * KE / m )
           particle.setVelocityMagnitude( desiredSpeed );
         }
-      } );
+      }
 
       assert && assert( Math.abs( temperature - this.computeActualTemperature() < 1E-3 ),
         'actual temperature does not match desired temperature' );
