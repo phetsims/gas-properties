@@ -218,28 +218,11 @@ define( require => {
           // Angle of the plane of contact
           const lineAngle = Math.atan2( mutableVectors.tangent.y, mutableVectors.tangent.x );
 
-          // Adjust location of particle1
-          const previousDistance1 = particle1.previousLocation.distanceXY( contactPointX, contactPointY );
-          const locationRatio1 = particle1.radius / previousDistance1;
-          mutableVectors.pointOnLine.setXY(
-            contactPointX - ( contactPointX - particle1.previousLocation.x ) * locationRatio1,
-            contactPointY - ( contactPointY - particle1.previousLocation.y ) * locationRatio1
-          );
-          GasPropertiesUtils.reflectPointAcrossLine( particle1.location, mutableVectors.pointOnLine,
-            lineAngle, mutableVectors.reflectedPoint );
-          particle1.setLocationXY( mutableVectors.reflectedPoint.x, mutableVectors.reflectedPoint.y );
-
-          //TODO duplication of above code
-          // Adjust location of particle2
-          const previousDistance2 = particle2.previousLocation.distanceXY( contactPointX, contactPointY );
-          const locationRatio2 = particle2.radius / previousDistance2;
-          mutableVectors.pointOnLine.setXY(
-            contactPointX - ( contactPointX - particle2.previousLocation.x ) * locationRatio2,
-            contactPointY - ( contactPointY - particle2.previousLocation.y ) * locationRatio2
-          );
-          GasPropertiesUtils.reflectPointAcrossLine( particle2.location, mutableVectors.pointOnLine,
-            lineAngle, mutableVectors.reflectedPoint );
-          particle2.setLocationXY( mutableVectors.reflectedPoint.x, mutableVectors.reflectedPoint.y );
+          // Adjust locations
+          adjustParticleLocation( particle1, contactPointX, contactPointY, lineAngle,
+            mutableVectors.pointOnLine, mutableVectors.reflectedPoint );
+          adjustParticleLocation( particle2, contactPointX, contactPointY, lineAngle,
+                      mutableVectors.pointOnLine, mutableVectors.reflectedPoint );
 
           //-----------------------------------------------------------------------------------------
           // Adjust particle velocities using impulse-based contact model.
@@ -259,20 +242,47 @@ define( require => {
           const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
           const j = numerator / denominator;
 
-          scaleVelocity( particle1, j / particle1.mass, mutableVectors.normal );
-          scaleVelocity( particle2, -j / particle2.mass, mutableVectors.normal );
+          adjustParticleSpeed( particle1, j / particle1.mass, mutableVectors.normal );
+          adjustParticleSpeed( particle2, -j / particle2.mass, mutableVectors.normal );
         }
       }
     }
   }
 
   /**
-   * Scales the velocity of a particle.
+   * Adjusts the location of a particle in response to a collision with another particle.
+   * @param {Particle} particle
+   * @param {number} contactPointX - x coordinate where collision occurred
+   * @param {number} contactPointY - y coordinate where collision occurred
+   * @param {number} lineAngle - angle of the plane of contact, in radians
+   * @param {Vector2} pointOnLine - used to compute a point of line of contact, will be mutated!
+   * @param {Vector2} reflectedPoint - used to compute reflected point, will be mutated!
+   */
+  function adjustParticleLocation( particle, contactPointX, contactPointY, lineAngle, pointOnLine, reflectedPoint ) {
+    assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+    assert && assert( typeof contactPointX === 'number', `invalid contactPointX: ${contactPointX}` );
+    assert && assert( typeof contactPointY === 'number', `invalid contactPointY: ${contactPointY}` );
+    assert && assert( typeof lineAngle === 'number', `invalid lineAngle: ${lineAngle}` );
+    assert && assert( pointOnLine instanceof Vector2, `invalid pointOnLine: ${pointOnLine}` );
+    assert && assert( reflectedPoint instanceof Vector2, `invalid reflectedPoint: ${reflectedPoint}` );
+
+    const previousDistance = particle.previousLocation.distanceXY( contactPointX, contactPointY );
+    const locationRatio = particle.radius / previousDistance;
+    pointOnLine.setXY(
+      contactPointX - ( contactPointX - particle.previousLocation.x ) * locationRatio,
+      contactPointY - ( contactPointY - particle.previousLocation.y ) * locationRatio
+    );
+    GasPropertiesUtils.reflectPointAcrossLine( particle.location, pointOnLine, lineAngle, reflectedPoint );
+    particle.setLocationXY( reflectedPoint.x, reflectedPoint.y );
+  }
+
+  /**
+   * Adjusts the speed of a particle in response to a collision with another particle.
    * @param {Particle} particle
    * @param {number} scale
    * @param {Vector2} normalVector
    */
-  function scaleVelocity( particle, scale, normalVector ) {
+  function adjustParticleSpeed( particle, scale, normalVector ) {
     assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
     assert && assert( typeof scale === 'number', `invalid scale: ${scale}` );
     assert && assert( normalVector instanceof Vector2, `invalid normalVector: ${normalVector}` );
