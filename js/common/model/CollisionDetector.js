@@ -112,12 +112,25 @@ define( require => {
       }
 
       // particle-container collisions
-      this.numberOfParticleContainerCollisions =
-        doParticleContainerCollisions( this.particleArrays, this.container.bounds, this.container.leftWallVelocity );
+      this.numberOfParticleContainerCollisions = this.updateParticleContainerCollisions();
 
       // Verify that particles are fully inside the container.
       assert && assert( this.container.containsParticles( this.particleArrays ),
         'particles have leaked out of the container' );
+    }
+
+    /**
+     * Detects and handles particle-container collisions for the system for one time step.
+     * @returns {number} the number of collisions
+     * @protected
+     */
+    updateParticleContainerCollisions() {
+      let numberOfParticleContainerCollisions = 0;
+      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+        numberOfParticleContainerCollisions +=
+          doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, this.container.leftWallVelocity );
+      }
+      return numberOfParticleContainerCollisions;
     }
   }
 
@@ -222,7 +235,7 @@ define( require => {
           adjustParticleLocation( particle1, contactPointX, contactPointY, lineAngle,
             mutableVectors.pointOnLine, mutableVectors.reflectedPoint );
           adjustParticleLocation( particle2, contactPointX, contactPointY, lineAngle,
-                      mutableVectors.pointOnLine, mutableVectors.reflectedPoint );
+            mutableVectors.pointOnLine, mutableVectors.reflectedPoint );
 
           //-----------------------------------------------------------------------------------------
           // Adjust particle velocities using impulse-based contact model.
@@ -294,56 +307,51 @@ define( require => {
 
   /**
    * Detects and handles particle-container collisions.
-   * @param {Particle[][]} particleArrays
+   * @param {Particle[]} particles
    * @param {Bounds2} containerBounds
    * @param {Vector2} leftWallVelocity - velocity of the container's left (movable) wall
    * @returns {number} number of collisions
    */
-  function doParticleContainerCollisions( particleArrays, containerBounds, leftWallVelocity ) {
-    assert && assert( Array.isArray( particleArrays ), `invalid particleArrays: ${particleArrays}` );
+  function doParticleContainerCollisions( particles, containerBounds, leftWallVelocity ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
     assert && assert( containerBounds instanceof Bounds2, `invalid containerBounds: ${containerBounds}` );
     assert && assert( leftWallVelocity instanceof Vector2, `invalid leftWallVelocity: ${leftWallVelocity}` );
 
     let numberOfCollisions = 0;
 
-    for ( let i = 0; i < particleArrays.length; i++ ) {
+    for ( let i = 0; i < particles.length; i++ ) {
 
-      const particles = particleArrays[ i ];
+      const particle = particles[ i ];
+      let collided = false;
 
-      for ( let j = 0; j < particles.length; j++ ) {
+      // adjust x
+      if ( particle.left <= containerBounds.minX ) {
+        particle.left = containerBounds.minX;
 
-        const particle = particles[ j ];
-        let collided = false;
+        // If the left wall is moving, it will do work.
+        particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
+        collided = true;
+      }
+      else if ( particle.right >= containerBounds.maxX ) {
+        particle.right = containerBounds.maxX;
+        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
+        collided = true;
+      }
 
-        // adjust x
-        if ( particle.left <= containerBounds.minX ) {
-          particle.left = containerBounds.minX;
+      // adjust y
+      if ( particle.top >= containerBounds.maxY ) {
+        particle.top = containerBounds.maxY;
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+        collided = true;
+      }
+      else if ( particle.bottom <= containerBounds.minY ) {
+        particle.bottom = containerBounds.minY;
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+        collided = true;
+      }
 
-          // If the left wall is moving, it will do work.
-          particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
-          collided = true;
-        }
-        else if ( particle.right >= containerBounds.maxX ) {
-          particle.right = containerBounds.maxX;
-          particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
-          collided = true;
-        }
-
-        // adjust y
-        if ( particle.top >= containerBounds.maxY ) {
-          particle.top = containerBounds.maxY;
-          particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
-          collided = true;
-        }
-        else if ( particle.bottom <= containerBounds.minY ) {
-          particle.bottom = containerBounds.minY;
-          particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
-          collided = true;
-        }
-
-        if ( collided ) {
-          numberOfCollisions++;
-        }
+      if ( collided ) {
+        numberOfCollisions++;
       }
     }
 

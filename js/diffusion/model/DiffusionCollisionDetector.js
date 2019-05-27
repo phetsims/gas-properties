@@ -34,13 +34,11 @@ define( require => {
 
     /**
      * Detects and handles particle-container collisions for the system for one time step.
-     * @param {number} dt
      * @returns {number} the number of collisions
      * @protected
      * @override
      */
-    stepParticleContainerCollisions( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+    updateParticleContainerCollisions() {
 
       let numberOfParticleContainerCollisions = 0;
       if ( this.container.hasDividerProperty.value ) {
@@ -55,7 +53,7 @@ define( require => {
       else {
 
         // If there is no divider, use default behavior.
-        numberOfParticleContainerCollisions = super.stepParticleContainerCollisions( dt );
+        numberOfParticleContainerCollisions = super.updateParticleContainerCollisions();
       }
       return numberOfParticleContainerCollisions;
     }
