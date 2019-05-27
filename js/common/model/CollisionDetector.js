@@ -21,6 +21,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -106,8 +107,9 @@ define( require => {
       // particle-container collisions
       this.numberOfParticleContainerCollisions = this.stepParticleContainerCollisions( dt );
 
-      // Verify that particles are fully inside in the container.
-      assert && assertParticlesInsideContainer( this.container, this.particleArrays );
+      // Verify that particles are fully inside the container.
+      assert && assert( ParticleUtils.containsParticles( this.container, this.particleArrays ),
+        'particles have leaked out of the container' );
     }
 
     /**
@@ -335,22 +337,6 @@ define( require => {
       }
     }
     return numberOfCollisions;
-  }
-
-  /**
-   * Verifies that all particles are fully inside the container.
-   * @param {Particle[][]} particleArrays
-   * @param {BaseContainer} container
-   */
-  function assertParticlesInsideContainer( container, particleArrays ) {
-    for ( let i = 0; i < particleArrays.length; i++ ) {
-      const particles = particleArrays[ i ];
-      for ( let j = 0; j < particles.length; j++ ) {
-        const particle = particles[ j ];
-        assert && assert( container.containsParticle( particle ),
-          `container does not enclose particle: ${particle.toString()}, container bounds: ${container.bounds}` );
-      }
-    }
   }
 
   // @protected

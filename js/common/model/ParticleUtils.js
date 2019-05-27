@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BaseContainer = require( 'GAS_PROPERTIES/common/model/BaseContainer' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
@@ -193,6 +194,28 @@ define( require => {
       else {
         return null;
       }
+    },
+
+    /**
+     * Does a container fully contains a collection of particles?
+     * @param {BaseContainer} container
+     * @param {Particle[][]} particleArrays
+     * @returns {boolean}
+     */
+    containsParticles( container, particleArrays ) {
+      assert  && assert( container instanceof BaseContainer, `invalid container: ${container}` );
+      assert  && assert( Array.isArray( particleArrays ), `invalid particlesArray: ${particleArrays}` );
+
+      for ( let i = 0; i < particleArrays.length; i++ ) {
+        const particles = particleArrays[ i ];
+        for ( let j = 0; j < particles.length; j++ ) {
+          const particle = particles[ j ];
+          if ( !container.containsParticle( particle ) ) {
+            return false;
+          }
+        }
+      }
+      return true;
     }
   };
 
