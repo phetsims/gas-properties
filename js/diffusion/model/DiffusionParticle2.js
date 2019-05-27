@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
@@ -21,6 +22,7 @@ define( require => {
      */
     constructor( options ) {
       super( _.extend( {
+        radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue,
         colorProperty: GasPropertiesColorProfile.particle2ColorProperty,
         highlightColorProperty: GasPropertiesColorProfile.particle2HighlightColorProperty
       }, options ) );

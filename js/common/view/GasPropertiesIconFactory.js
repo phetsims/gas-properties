@@ -16,7 +16,6 @@ define( require => {
   const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
@@ -70,9 +69,7 @@ define( require => {
     createDiffusionParticle1Icon( modelViewTransform ) {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
-      return createParticleIcon( new DiffusionParticle1( {
-        radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue
-      } ), modelViewTransform );
+      return createParticleIcon( new DiffusionParticle1(), modelViewTransform );
     },
 
     /**
@@ -85,13 +82,11 @@ define( require => {
     createDiffusionParticle2Icon( modelViewTransform ) {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
-      return createParticleIcon( new DiffusionParticle2( {
-        radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue
-      } ), modelViewTransform );
+      return createParticleIcon( new DiffusionParticle2(), modelViewTransform );
     },
 
     /**
-     * Creates a simplified icon for the stopwatch.
+     * Creates a simplified icon for the Stopwatch.
      * @returns {Node}
      * @public
      * @static
@@ -101,7 +96,7 @@ define( require => {
     },
 
     /**
-     * Creates a simplified icon for the collision counter.
+     * Creates a simplified icon for the Collision Counter.
      * @returns {Node}
      * @public
      * @static
