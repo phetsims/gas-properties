@@ -91,6 +91,8 @@ define( require => {
           this.leftSettings,
           this.particles1,
           createDiffusionParticle1 );
+        assert && assert( _.every( this.particles1, particle => particle instanceof DiffusionParticle1 ),
+          'particles1 should contain only DiffusionParticle1' );
       } );
       const createDiffusionParticle2 = ( options ) => new DiffusionParticle2( options );
       this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
@@ -99,6 +101,8 @@ define( require => {
           this.rightSettings,
           this.particles2,
           createDiffusionParticle2 );
+        assert && assert( _.every( this.particles2, particle => particle instanceof DiffusionParticle2 ),
+          'particles2 should contain only DiffusionParticle2' );
       } );
 
       // Update mass and temperature of existing particles. This adjusts speed of the particles.
@@ -172,10 +176,6 @@ define( require => {
      */
     stepModelTime( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      assert && assert( _.every( this.particles1, particle => particle instanceof DiffusionParticle1 ),
-        'particles1 should contain only DiffusionParticle1' );
-      assert && assert( _.every( this.particles2, particle => particle instanceof DiffusionParticle2 ),
-        'particles2 should contain only DiffusionParticle2' );
 
       super.stepModelTime( dt );
 

@@ -90,10 +90,14 @@ define( require => {
       const createHeavyParticle = ( options ) => new HeavyParticle( options );
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
+        assert && assert( _.every( this.heavyParticles, particle => particle instanceof HeavyParticle ),
+          'heavyParticles should contain only HeavyParticle' );
       } );
       const createLightParticle = ( options ) => new LightParticle( options );
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, createLightParticle );
+        assert && assert( _.every( this.lightParticles, particle => particle instanceof LightParticle ),
+          'lightParticles should contain only LightParticle' );
       } );
 
       // @public total number of particles in the container
@@ -297,10 +301,16 @@ define( require => {
 
       // Allow particles to escape from the opening in the top of the container
       if ( this.container.isLidOpen() ) {
+
         ParticleUtils.escapeParticles( this.container, this.numberOfHeavyParticlesProperty,
           this.heavyParticles, this.heavyParticlesOutside, );
+        assert && assert( _.every( this.heavyParticlesOutside, particle => particle instanceof HeavyParticle ),
+          'heavyParticlesOutside should contain only HeavyParticle' );
+
         ParticleUtils.escapeParticles( this.container, this.numberOfLightParticlesProperty,
           this.lightParticles, this.lightParticlesOutside );
+        assert && assert( _.every( this.lightParticlesOutside, particle => particle instanceof LightParticle ),
+          'lightParticlesOutside should contain only LightParticle' );
       }
 
       // Step container, to compute velocity of movable left wall.
