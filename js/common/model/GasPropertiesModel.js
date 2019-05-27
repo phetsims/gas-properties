@@ -374,19 +374,7 @@ define( require => {
       assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
 
       // Get the temperature that will be used to compute initial velocity magnitude.
-      let meanTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
-      if ( this.controlTemperatureEnabledProperty.value ) {
-
-        // User's setting
-        meanTemperature = this.initialTemperatureProperty.value;
-      }
-      else if ( this.temperatureProperty.value !== null ) {
-
-        // Current temperature in the non-empty container
-        meanTemperature = this.temperatureProperty.value;
-      }
-      assert && assert( typeof meanTemperature === 'number' && meanTemperature > 0,
-        `bad meanTemperature: ${meanTemperature}` );
+      const initialTemperature = this.getInitialTemperature();
 
       // Create a set of temperature values that will be used to compute initial speed.
       let temperatures = null;
@@ -397,15 +385,15 @@ define( require => {
         // of particles look less wave-like. We do this for temperature instead of speed because temperature
         // in the container is T = (2/3)KE/k, and KE is a function of speed^2, so deviation in speed would
         // change the desired temperature.
-        temperatures = GasPropertiesUtils.getGaussianValues( n, meanTemperature, 0.2 * meanTemperature, 1E-3 );
+        temperatures = GasPropertiesUtils.getGaussianValues( n, initialTemperature, 0.2 * initialTemperature, 1E-3 );
       }
       else {
 
-        // For single particles, or if particle-particle collisions are disabled, use the mean temperature
+        // For single particles, or if particle-particle collisions are disabled, use the same temperature
         // for all particles. For groups of particles, this yields wave-like motion.
         temperatures = [];
         for ( let i = 0; i < n; i++ ) {
-          temperatures[ i ] = meanTemperature;
+          temperatures[ i ] = initialTemperature;
         }
       }
 
@@ -432,6 +420,36 @@ define( require => {
 
         particles.push( particle );
       }
+    }
+
+    /**
+     * Gets the temperature that will be used to compute initial velocity magnitude.
+     * @returns {number} in K
+     * @private
+     */
+    getInitialTemperature() {
+
+      let initialTemperature = null;
+
+      if ( this.controlTemperatureEnabledProperty.value ) {
+
+        // User's setting
+        initialTemperature = this.initialTemperatureProperty.value;
+      }
+      else if ( this.temperatureProperty.value !== null ) {
+
+        // Current temperature in a non-empty container
+        initialTemperature = this.temperatureProperty.value;
+      }
+      else {
+
+        // Default for empty container
+        initialTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
+      }
+
+      assert && assert( typeof initialTemperature === 'number' && initialTemperature > 0,
+        `bad initialTemperature: ${initialTemperature}` );
+      return initialTemperature;
     }
 
     /**
