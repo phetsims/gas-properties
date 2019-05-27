@@ -65,6 +65,9 @@ define( require => {
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
+      // @private
+      this.particleArrays = [ this.particles1, this.particles2 ];
+
       // @public emit is called when any of the above Particle arrays are modified
       this.numberOfParticlesChangedEmitter = new Emitter();
 
@@ -262,9 +265,10 @@ define( require => {
       let rightTotalKE = 0;
 
       // Compute total KE in each side of the container
-      [ this.particles1, this.particles2 ].forEach( particles => {
-        for ( let i = 0; i < particles.length; i++ ) {
-          const particle = particles[ i ];
+      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+        const particles = this.particleArrays[ i ];
+        for ( let j = 0; j < particles.length; j++ ) {
+          const particle = particles[ j ];
           if ( this.container.leftBounds.containsPoint( particle.location ) ) {
             leftTotalKE += particle.getKineticEnergy();
           }
@@ -272,7 +276,7 @@ define( require => {
             rightTotalKE += particle.getKineticEnergy();
           }
         }
-      } );
+      }
 
       // Compute average temperature in each side of the container
       updateAverageTemperature( this.leftData.averageTemperatureProperty, leftTotalKE, this.leftData.getNumberOfParticles() );
