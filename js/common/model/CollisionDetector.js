@@ -291,7 +291,6 @@ define( require => {
 
   /**
    * Detects and handles particle-container collisions.
-   * Handles x and y directions separately in case a particle hits the container diagonally at a corner.
    * @param {Particle[]} particles
    * @param {Bounds2} containerBounds
    * @param {Vector2} leftWallVelocity - velocity of the container's left (movable) wall
