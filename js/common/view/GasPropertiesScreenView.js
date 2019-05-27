@@ -285,7 +285,7 @@ define( require => {
       this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
 
-      // Position the time controls
+      // Time controls are created by the superclass, but subclass is responsible for positioning them
       const defaultWidth = model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
       this.timeControlNode.mutate( {
         left: containerViewLocation.x - defaultWidth,
