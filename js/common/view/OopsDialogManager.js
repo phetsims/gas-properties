@@ -2,7 +2,7 @@
 
 /**
  * Manages the set of 'Oops!' dialogs that are related to the 'Hold Constant' feature.
- * When holding a quantity constant would break the model, the model puts itself in a sane configurations,
+ * When holding a quantity constant would break the model, the model puts itself in a sane configuration,
  * the model notifies the view via an Emitter, and the view notifies the user via a dialog.
  * Dialogs are created on demand, then cached for reuse.
  *
@@ -17,10 +17,10 @@ define( require => {
   const OopsDialog = require( 'SCENERY_PHET/OopsDialog' );
 
   // string
-  const oopsTemperatureWithEmptyContainerString = require( 'string!GAS_PROPERTIES/oopsTemperatureWithEmptyContainer' );
-  const oopsPressureWithEmptyContainerString = require( 'string!GAS_PROPERTIES/oopsPressureWithEmptyContainer' );
-  const oopsPressureWithLargeVolumeString = require( 'string!GAS_PROPERTIES/oopsPressureWithLargeVolume' );
-  const oopsPressureWithSmallVolumeString = require( 'string!GAS_PROPERTIES/oopsPressureWithSmallVolume' );
+  const oopsTemperatureEmptyString = require( 'string!GAS_PROPERTIES/oopsTemperatureEmpty' );
+  const oopsPressureEmptyString = require( 'string!GAS_PROPERTIES/oopsPressureEmpty' );
+  const oopsPressureLargeString = require( 'string!GAS_PROPERTIES/oopsPressureLarge' );
+  const oopsPressureSmallString = require( 'string!GAS_PROPERTIES/oopsPressureSmall' );
 
   class OopsDialogManager {
 
@@ -33,23 +33,23 @@ define( require => {
       this.dialogCache = {};
 
       // Oops! Temperature cannot be held constant when the container is empty.
-      oops.temperatureWithEmptyContainerEmitter.addListener( () => {
-        this.showDialog( oopsTemperatureWithEmptyContainerString );
+      oops.temperatureEmptyEmitter.addListener( () => {
+        this.showDialog( oopsTemperatureEmptyString );
       } );
 
       // Oops! Pressure cannot be held constant when the container is empty.
-      oops.pressureWithEmptyContainerEmitter.addListener( () => {
-        this.showDialog( oopsPressureWithEmptyContainerString );
+      oops.pressureEmptyEmitter.addListener( () => {
+        this.showDialog( oopsPressureEmptyString );
       } );
 
       // Oops! Pressure cannot be held constant. Volume would be too large.
-      oops.pressureWithLargeVolumeEmitter.addListener( () => {
-        this.showDialog( oopsPressureWithLargeVolumeString );
+      oops.pressureLargeEmitter.addListener( () => {
+        this.showDialog( oopsPressureLargeString );
       } );
 
       // Oops! Pressure cannot be held constant. Volume would be too small.
-      oops.pressureWithSmallVolumeEmitter.addListener( () => {
-        this.showDialog( oopsPressureWithSmallVolumeString );
+      oops.pressureSmallEmitter.addListener( () => {
+        this.showDialog( oopsPressureSmallString );
       } );
     }
 

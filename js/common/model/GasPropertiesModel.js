@@ -168,20 +168,22 @@ define( require => {
         }
       } );
 
-      // @public (read-only) Emitters related to OopsDialogs
+      // @public (read-only) Emitters related to OopsDialogs for the 'Hold Constant' feature.
+      // When holding a quantity constant would break the model, the model puts itself in a sane configuration,
+      // the model notifies the view via an Emitter, and the view notifies the user via a dialog.
       this.oops = {
 
         // Oops! Temperature cannot be held constant when the container is empty.
-        temperatureWithEmptyContainerEmitter: new Emitter(),
+        temperatureEmptyEmitter: new Emitter(),
 
         // Oops! Pressure cannot be held constant when the container is empty.
-        pressureWithEmptyContainerEmitter: new Emitter(),
+        pressureEmptyEmitter: new Emitter(),
 
         // Oops! Pressure cannot be held constant. Volume would be too large.
-        pressureWithLargeVolumeEmitter: new Emitter(),
+        pressureLargeEmitter: new Emitter(),
 
         // Oops! Pressure cannot be held constant. Volume would be too small.
-        pressureWithSmallVolumeEmitter: new Emitter()
+        pressureSmallEmitter: new Emitter()
       };
 
       this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
@@ -189,7 +191,7 @@ define( require => {
 
           // Temperature can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
-          this.oops.temperatureWithEmptyContainerEmitter.emit();
+          this.oops.temperatureEmptyEmitter.emit();
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
         }
         else if ( totalNumberOfParticles === 0 &&
@@ -198,7 +200,7 @@ define( require => {
 
           // Pressure can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
-          this.oops.pressureWithEmptyContainerEmitter.emit();
+          this.oops.pressureEmptyEmitter.emit();
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
         }
       } );
@@ -481,10 +483,10 @@ define( require => {
           phet.log && phet.log( 'Oops! P cannot be held constant when V exceeds range, ' +
                                 `containerWidth=${containerWidth} widthRange=${this.container.widthRange}` );
           if ( containerWidth > this.container.widthRange.max ) {
-            this.oops.pressureWithLargeVolumeEmitter.emit();
+            this.oops.pressureLargeEmitter.emit();
           }
           else {
-            this.oops.pressureWithSmallVolumeEmitter.emit();
+            this.oops.pressureSmallEmitter.emit();
           }
 
           // Switch to the 'Nothing' mode
