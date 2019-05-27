@@ -55,6 +55,24 @@ define( require => {
         `mean: ${mean}, actualMean: ${actualMean}` );
 
       return values;
+    },
+
+    /**
+     * Determines the position of a point that is the reflection of a specified point across a line.
+     * Used in collision response.
+     * @param {Vector2} p - the point to reflect
+     * @param {Vector2} pointOnLine - point on the line
+     * @param {number} lineAngle - angle of the line, in radians
+     * @param {Vector2} reflectedPoint - the point to be mutated with the return value
+     * @returns {Vector2} reflectedPoint mutated
+     */
+    reflectPointAcrossLine( p, pointOnLine, lineAngle, reflectedPoint ) {
+      const alpha = lineAngle % ( Math.PI * 2 );
+      const gamma = Math.atan2( ( p.y - pointOnLine.y ), ( p.x - pointOnLine.x ) ) % ( Math.PI * 2 );
+      const theta = ( 2 * alpha - gamma ) % ( Math.PI * 2 );
+      const d = p.distance( pointOnLine );
+      reflectedPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
+      return reflectedPoint;
     }
   };
 

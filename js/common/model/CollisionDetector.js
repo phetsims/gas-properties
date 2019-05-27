@@ -21,6 +21,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -180,23 +181,6 @@ define( require => {
   }
 
   /**
-   * Determines the position of a point that is the reflection of a specified point across a line.
-   * @param {Vector2} p - the point to reflect
-   * @param {Vector2} pointOnLine - point on the line
-   * @param {number} lineAngle - angle of the line, in radians
-   * @param {Vector2} reflectedPoint - the point to be mutated with the return value
-   * @returns {Vector2} reflectedPoint mutated
-   */
-  function reflectPointAcrossLine( p, pointOnLine, lineAngle, reflectedPoint ) {
-    const alpha = lineAngle % ( Math.PI * 2 );
-    const gamma = Math.atan2( ( p.y - pointOnLine.y ), ( p.x - pointOnLine.x ) ) % ( Math.PI * 2 );
-    const theta = ( 2 * alpha - gamma ) % ( Math.PI * 2 );
-    const d = p.distance( pointOnLine );
-    reflectedPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
-    return reflectedPoint;
-  }
-
-  /**
    * Detects and handles particle-particle collisions.
    * @param {Particle[]} particles
    * @param {*} mutableVectors - collection of mutable vectors, see this.mutableVectors in CollisionDetector constructor
@@ -245,9 +229,11 @@ define( require => {
             contactPointX - ( contactPointX - particle1.previousLocation.x ) * locationRatio1,
             contactPointY - ( contactPointY - particle1.previousLocation.y ) * locationRatio1
           );
-          reflectPointAcrossLine( particle1.location, mutableVectors.pointOnLine, lineAngle, mutableVectors.reflectedPoint );
+          GasPropertiesUtils.reflectPointAcrossLine( particle1.location, mutableVectors.pointOnLine,
+            lineAngle, mutableVectors.reflectedPoint );
           particle1.setLocationXY( mutableVectors.reflectedPoint.x, mutableVectors.reflectedPoint.y );
 
+          //TODO duplication of above code
           // Adjust location of particle2
           const previousDistance2 = particle2.previousLocation.distanceXY( contactPointX, contactPointY );
           const locationRatio2 = particle2.radius / previousDistance2;
@@ -255,7 +241,8 @@ define( require => {
             contactPointX - ( contactPointX - particle2.previousLocation.x ) * locationRatio2,
             contactPointY - ( contactPointY - particle2.previousLocation.y ) * locationRatio2
           );
-          reflectPointAcrossLine( particle2.location, mutableVectors.pointOnLine, lineAngle, mutableVectors.reflectedPoint );
+          GasPropertiesUtils.reflectPointAcrossLine( particle2.location, mutableVectors.pointOnLine,
+            lineAngle, mutableVectors.reflectedPoint );
           particle2.setLocationXY( mutableVectors.reflectedPoint.x, mutableVectors.reflectedPoint.y );
 
           //-----------------------------------------------------------------------------------------
@@ -281,6 +268,7 @@ define( require => {
           const vy1 = mutableVectors.normal.y * vScale1;
           particle1.setVelocityXY( particle1.velocity.x + vx1, particle1.velocity.y + vy1 );
 
+          //TODO duplication of above code
           const vScale2 = -j / particle2.mass;
           const vx2 = mutableVectors.normal.x * vScale2;
           const vy2 = mutableVectors.normal.y * vScale2;
