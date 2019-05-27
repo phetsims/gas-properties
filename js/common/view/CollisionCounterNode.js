@@ -54,7 +54,7 @@ define( require => {
     /**
      * @param {CollisionCounter} collisionCounter
      * @param {Node} comboBoxListParent
-     * @param {Property.<Bounds2|null>} visibleBoundsProperty - visible bounds of the ScreenView
+     * @param {Property.<Bounds2>} visibleBoundsProperty - visible bounds of the ScreenView
      * @param {Object} [options]
      */
     constructor( collisionCounter, comboBoxListParent, visibleBoundsProperty, options ) {

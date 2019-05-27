@@ -27,7 +27,7 @@ define( require => {
 
     /**
      * @param {Stopwatch} stopwatch
-     * @param {Property.<Bounds2|null>} visibleBoundsProperty - visible bounds of the ScreenView
+     * @param {Property.<Bounds2>} visibleBoundsProperty - visible bounds of the ScreenView
      * @param {Object} [options]
      */
     constructor( stopwatch, visibleBoundsProperty, options ) {
