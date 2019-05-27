@@ -29,43 +29,45 @@ define( require => {
      */
     constructor( oops ) {
 
-      // @private dialogs are cached in a map, with {string} key and {OopsDialog} value
-      this.dialogCache = {};
+      // @private {OopsDialog[]} created on demand, cached for the lifetime of the program
+      this.dialogCache = [];
 
       // Oops! Temperature cannot be held constant when the container is empty.
       oops.temperatureEmptyEmitter.addListener( () => {
-        this.showDialog( oopsTemperatureEmptyString );
+        this.showDialog( 0, oopsTemperatureEmptyString );
       } );
 
       // Oops! Pressure cannot be held constant when the container is empty.
       oops.pressureEmptyEmitter.addListener( () => {
-        this.showDialog( oopsPressureEmptyString );
+        this.showDialog( 1, oopsPressureEmptyString );
       } );
 
       // Oops! Pressure cannot be held constant. Volume would be too large.
       oops.pressureLargeEmitter.addListener( () => {
-        this.showDialog( oopsPressureLargeString );
+        this.showDialog( 2, oopsPressureLargeString );
       } );
 
       // Oops! Pressure cannot be held constant. Volume would be too small.
       oops.pressureSmallEmitter.addListener( () => {
-        this.showDialog( oopsPressureSmallString );
+        this.showDialog( 3, oopsPressureSmallString );
       } );
     }
 
     /**
      * Shows a dialog for the specified message.
      * If a dialog has not previously been shown for the message, a dialog is created and added to the cache.
+     * @param {number} dialogCacheIndex
      * @param {string} message
      * @private
      */
-    showDialog( message ) {
+    showDialog( dialogCacheIndex, message ) {
+      assert && assert( typeof dialogCacheIndex === 'number', `invalid dialogCacheIndex: ${dialogCacheIndex}` );
       assert && assert( typeof message === 'string', `invalid message: ${message}` );
 
-      let dialog = this.dialogCache[ message ];
+      let dialog = this.dialogCache[ dialogCacheIndex ];
       if ( !dialog ) {
         dialog = new OopsDialog( message, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
-        this.dialogCache[ message ] = dialog;
+        this.dialogCache[ dialogCacheIndex ] = dialog;
       }
       dialog.show();
     }
