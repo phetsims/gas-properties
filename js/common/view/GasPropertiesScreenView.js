@@ -26,11 +26,12 @@ define( require => {
   'use strict';
 
   // modules
+  const AnimatedHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/AnimatedHeaterCoolerNode' );
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
   const ContainerWidthNode = require( 'GAS_PROPERTIES/common/view/ContainerWidthNode' );
-  const EraseParticlesButton  = require( 'GAS_PROPERTIES/common/view/EraseParticlesButton' );
+  const EraseParticlesButton = require( 'GAS_PROPERTIES/common/view/EraseParticlesButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesBicyclePumpNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesBicyclePumpNode' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -54,6 +55,9 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
+
+  // constants
+  const HEATER_COOLER_SCALE = 0.81;
 
   class GasPropertiesScreenView extends BaseScreenView {
 
@@ -225,16 +229,24 @@ define( require => {
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
         model.heatCoolFactorProperty, model.holdConstantProperty, model.isPlayingProperty, {
+          scale: HEATER_COOLER_SCALE,
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        } );
+
+      // Shown when HoldConstantEnum.PRESSURE_T, flame/ice is animated as T is manipulated.
+      const animatedHeaterCoolerNode = new AnimatedHeaterCoolerNode(
+        model.temperatureProperty, model.holdConstantProperty, {
+          translation: heaterCoolerNode.translation,
+          scale: HEATER_COOLER_SCALE
         } );
 
       // Button to erase all particles from container
       const eraseParticlesButton = new EraseParticlesButton( model.totalNumberOfParticlesProperty,
         model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
-        right: containerNode.right,
-        top: containerWidthNode.bottom + 5
-      } );
+          right: containerNode.right,
+          top: containerWidthNode.bottom + 5
+        } );
 
       // Collision Counter
       let collisionCounterNode = null;
@@ -272,6 +284,7 @@ define( require => {
       this.addChild( containerWidthNode );
       this.addChild( particlesNode );
       this.addChild( returnLidButton );
+      this.addChild( animatedHeaterCoolerNode );
       this.addChild( heaterCoolerNode );
       collisionCounterNode && this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );
@@ -284,7 +297,7 @@ define( require => {
         left: containerViewLocation.x - defaultWidth,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      
+
       // @private manages OopsDialogs related to the 'Hold Constant' feature
       this.oopsDialogManager = new OopsDialogManager( model.oops );
 

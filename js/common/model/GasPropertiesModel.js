@@ -517,8 +517,6 @@ define( require => {
         const desiredTemperature = this.computeDesiredTemperature();
         this.adjustParticleVelocitiesForTemperature( desiredTemperature );
         this.temperatureProperty.value = desiredTemperature;
-
-        //TODO #88 animate heat/cool
       }
     }
 
