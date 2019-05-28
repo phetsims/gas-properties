@@ -60,8 +60,8 @@ define( require => {
       const heavyVisibleProperty = new BooleanProperty( false );
       const lightVisibleProperty = new BooleanProperty( false );
 
-      const histogram = new KineticEnergyHistogram( heavyVisibleProperty, lightVisibleProperty,
-        getHeavyValues, getLightValues );
+      const histogram =
+        new KineticEnergyHistogram( heavyVisibleProperty, lightVisibleProperty, getHeavyValues, getLightValues );
 
       // Checkboxes
       const checkboxes = new HBox( {
