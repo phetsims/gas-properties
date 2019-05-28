@@ -1,7 +1,5 @@
 TODO list for gas-properties
 
-#88 animate heat/cool for PRESSURE_T
-
 #52 histograms rewrite
 #52 histograms y-axis scale
 #60 histograms should update when particles are added/removed with sim paused
