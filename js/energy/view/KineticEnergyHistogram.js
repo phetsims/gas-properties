@@ -24,10 +24,10 @@ define( require => {
   class KineticEnergyHistogram extends EnergyHistogram {
 
     /**
-     * @param {BooleanProperty} heavyVisibleProperty
-     * @param {BooleanProperty} lightVisibleProperty
-     * @param {function:number[]} getHeavyValues
-     * @param {function:number[]} getLightValues
+     * @param {BooleanProperty} heavyVisibleProperty - visibility of the histogram for heavy particles
+     * @param {BooleanProperty} lightVisibleProperty - visibility of the histogram for light particles
+     * @param {function:number[]} getHeavyValues - gets the model values for heavy particles
+     * @param {function:number[]} getLightValues - gets the model values for light particles
      * @param {Object} [options]
      */
     constructor( heavyVisibleProperty, lightVisibleProperty, getHeavyValues, getLightValues, options ) {
