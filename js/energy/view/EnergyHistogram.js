@@ -24,15 +24,15 @@ define( require => {
   class EnergyHistogram extends Histogram {
 
     /**
-     * @param {number} numberOfBins
-     * @param {number} binWidth
-     * @param {Node} xAxisLabel
-     * @param {Node} yAxisLabel
-     * @param {BooleanProperty} heavyVisibleProperty
-     * @param {BooleanProperty} lightVisibleProperty
-     * @param {function:number[]} getHeavyValues
-     * @param {function:number[]} getLightValues
-     * @param {ColorDef} barsColor
+     * @param {number} numberOfBins - number of bins, determines the width of bars in the histogram
+     * @param {number} binWidth - bin width, in whatever units are relevant to the data being displayed
+     * @param {Node} xAxisLabel - label on the x axis
+     * @param {Node} yAxisLabel - label on the y axis
+     * @param {BooleanProperty} heavyVisibleProperty - visibility of the histogram for heavy particles
+     * @param {BooleanProperty} lightVisibleProperty - visibility of the histogram for light particles
+     * @param {function:number[]} getHeavyValues - gets the model values for heavy particles
+     * @param {function:number[]} getLightValues - gets the model values for light particles
+     * @param {ColorDef} barsColor - color of the 'bars' in the histogram
      * @param {Object} [options]
      */
     constructor( numberOfBins, binWidth,
