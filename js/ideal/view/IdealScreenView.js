@@ -49,6 +49,8 @@ define( require => {
         } );
       this.addChild( animatedHeaterCoolerNode );
 
+      //TODO add holdConstantProperty listener that swaps animatedHeaterCoolerNode and this.heaterCoolerNode
+
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
         model.holdConstantProperty,
