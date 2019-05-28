@@ -27,9 +27,9 @@ define( require => {
   const DELTA_TEMPERATURE_THRESHOLD = 0.1; // temperature change (K) below this value is considered zero change
   const DURATION = 1.5; // animation duration, in seconds, split evenly between up and down animations
   const STEP_EMITTER = null; // Animations will be controlled by calling step
-  const MIN_HEAT_COOL_FACTOR = 0.20; // smallest heatCoolFactor for any temperature change
-  const MAX_HEAT_COOL_FACTOR = 1; // largest heatCoolFactor for any temperature change
-  const MAX_DELTA_TEMPERATURE = 100; // absolute temperature change (K) that corresponds to MAX_HEAT_COOL_FACTOR
+  const MIN_HEAT_FACTOR = 0.20; // smallest heat factor for any positive temperature change
+  const MAX_HEAT_FACTOR = 1; // largest heat factor for any positive temperature change
+  const MAX_DELTA_TEMPERATURE = 100; // absolute temperature change (K) that corresponds to MAX_HEAT_FACTOR
 
   class AnimatedHeaterCoolerNode extends HeaterCoolerNode {
 
@@ -67,6 +67,11 @@ define( require => {
         stepEmitter: STEP_EMITTER
       } );
 
+      // If the down animation is stopped, turn off heat/cool.
+      this.downAnimation.stopEmitter.addListener( () => {
+        heatCoolFactorProperty.value = 0;
+      } );
+
       // @private {Animation|null} Animation to raise the flame/ice associated with HeaterCoolerNode
       this.upAnimation = null; //
 
@@ -79,16 +84,10 @@ define( require => {
         }
       };
 
-      // cancels the animation and sets heatCoolFactor to zero
-      const cancelAnimation = () => {
-        stopAnimation();
-        heatCoolFactorProperty.value = 0;
-      };
-
       // When temperature changes in HoldConstantEnum.PRESSURE_T mode, animate the heater/cooler.
       temperatureProperty.link( ( temperature, previousTemperature ) => {
         if ( temperature === null || previousTemperature === null ) {
-          cancelAnimation();
+          stopAnimation();
         }
         else if ( holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
 
@@ -114,6 +113,10 @@ define( require => {
               this.upAnimation = null;
               this.downAnimation.start();
             } );
+            this.upAnimation.stopEmitter.addListener( () => {
+              this.upAnimation = null;
+              heatCoolFactorProperty.value = 0;
+            } );
             this.upAnimation.start();
           }
         }
@@ -123,7 +126,7 @@ define( require => {
       holdConstantProperty.link( holdConstant => {
         this.visible = ( holdConstant === HoldConstantEnum.PRESSURE_T );
         if ( holdConstant !== HoldConstantEnum.PRESSURE_T ) {
-          cancelAnimation();
+          stopAnimation();
         }
       } );
     }
@@ -156,14 +159,14 @@ define( require => {
     const absDeltaT = Math.abs( deltaT );
     if ( absDeltaT > 0 ) {
 
-      // linear mapping of temperature change to heat/cool factor
-      heatCoolFactor = Util.linear( 0, MAX_DELTA_TEMPERATURE, MIN_HEAT_COOL_FACTOR, MAX_HEAT_COOL_FACTOR, absDeltaT );
+      // linear mapping of temperature change to heat factor
+      heatCoolFactor = Util.linear( 0, MAX_DELTA_TEMPERATURE, MIN_HEAT_FACTOR, MAX_HEAT_FACTOR, absDeltaT );
 
-      // clamp to the heat/cool factor range
-      heatCoolFactor = Util.clamp( heatCoolFactor, MIN_HEAT_COOL_FACTOR, MAX_HEAT_COOL_FACTOR );
+      // clamp to the heat factor range
+      heatCoolFactor = Util.clamp( heatCoolFactor, MIN_HEAT_FACTOR, MAX_HEAT_FACTOR );
 
-      // set the correct sign
-      heatCoolFactor *= ( deltaT > 1 ) ? 1 : -1;
+      // set the sign to correspond to heat vs cool
+      heatCoolFactor *= Util.sign( deltaT );
     }
 
     return heatCoolFactor;
