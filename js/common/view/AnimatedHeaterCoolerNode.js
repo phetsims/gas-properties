@@ -16,6 +16,7 @@ define( require => {
   const Easing = require( 'TWIXT/Easing' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -24,12 +25,20 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  const DELTA_TEMPERATURE_THRESHOLD = 0.1; // temperature change (K) below this value is considered zero change
-  const DURATION = 1.5; // animation duration, in seconds, split evenly between up and down animations
-  const STEP_EMITTER = null; // Animations will be controlled by calling step
-  const MIN_HEAT_FACTOR = 0.20; // smallest heat factor for any positive temperature change
-  const MAX_HEAT_FACTOR = 1; // largest heat factor for any positive temperature change
-  const MAX_DELTA_TEMPERATURE = 100; // absolute temperature change (K) that corresponds to MAX_HEAT_FACTOR
+  // Temperature changes below this value (in K) are considered zero and result in no animation of flame/ice.
+  const MIN_DELTA_T = GasPropertiesQueryParameters.minDeltaT; 
+
+  // Temperature changes >= this value (in K) result in flame/ice being fully on.
+  const MAX_DELTA_T = GasPropertiesQueryParameters.maxDeltaT;
+
+  // Smallest percentage of the flame/ice that is raised out of the bucket for any temperature change.
+  const MIN_HEAT_FACTOR = GasPropertiesQueryParameters.minHeatCoolFactor;
+
+  // Animation duration in seconds, split evenly between raising and lowering the flame/ice.
+  const DURATION = GasPropertiesQueryParameters.heatCoolDuration;
+
+  // Animations will be controlled by calling step
+  const STEP_EMITTER = null;
 
   class AnimatedHeaterCoolerNode extends HeaterCoolerNode {
 
@@ -87,7 +96,7 @@ define( require => {
 
           const deltaT = temperature - previousTemperature;
 
-          if ( Math.abs( deltaT ) > DELTA_TEMPERATURE_THRESHOLD ) {
+          if ( Math.abs( deltaT ) > MIN_DELTA_T ) {
 
             // stop any animation that is in progress
             stopAnimation();
@@ -172,10 +181,10 @@ define( require => {
     if ( absDeltaT > 0 ) {
 
       // linear mapping of temperature change to heat factor
-      heatCoolFactor = Util.linear( 0, MAX_DELTA_TEMPERATURE, MIN_HEAT_FACTOR, MAX_HEAT_FACTOR, absDeltaT );
+      heatCoolFactor = Util.linear( 0, MAX_DELTA_T, MIN_HEAT_FACTOR, 1, absDeltaT );
 
       // clamp to the heat factor range
-      heatCoolFactor = Util.clamp( heatCoolFactor, MIN_HEAT_FACTOR, MAX_HEAT_FACTOR );
+      heatCoolFactor = Util.clamp( heatCoolFactor, MIN_HEAT_FACTOR, 1 );
 
       // set the sign to correspond to heat vs cool
       heatCoolFactor *= Util.sign( deltaT );

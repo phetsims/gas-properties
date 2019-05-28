@@ -129,6 +129,50 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 800
+    },
+
+    /**
+     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
+     * Temperature changes below this value (in K) are considered zero and result in no animation of flame/ice.
+     * For internal use only.
+     */
+    minDeltaT: {
+      type: 'number',
+      isValidValue: value => ( value >= 0 ),
+      defaultValue: 0.1
+    },
+
+    /**
+     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
+     * Temperature changes >= this value (in K) result in flame/ice being fully on.
+     * For internal use only.
+     */
+    maxDeltaT: {
+      type: 'number',
+      isValidValue: value => ( value >= 0 ),
+      defaultValue: 100
+    },
+
+    /**
+     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
+     * Smallest percentage of the flame/ice that is raised out of the bucket for any temperature change.
+     * For internal use only.
+     */
+    minHeatCoolFactor: {
+      type: 'number',
+      isValidValue: value => ( value >= 0 ),
+      defaultValue: 0.2
+    },
+
+    /**
+     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
+     * Animation duration in seconds, split evenly between raising and lowering the flame/ice.
+     * For internal use only.
+     */
+    heatCoolDuration: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 1.5
     }
   } );
 
