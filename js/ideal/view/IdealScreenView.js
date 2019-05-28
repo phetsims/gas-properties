@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const AnimatedHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/AnimatedHeaterCoolerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -16,7 +17,6 @@ define( require => {
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -40,6 +40,15 @@ define( require => {
         resizeGripColor: GasPropertiesColorProfile.idealResizeGripColorProperty
       } );
 
+      // Flame/ice is animated by when holding pressure constant and adjusting temperature (HoldConstant.PRESSURE_T).
+      // The user is not controlling the heat, and we animate the bucket to correspond to the temperature change.
+      const animatedHeaterCoolerNode = new AnimatedHeaterCoolerNode(
+        model.temperatureProperty, model.holdConstantProperty, {
+          translation: this.heaterCoolerNode.translation,
+          scale: GasPropertiesConstants.HEATER_COOLER_SCALE
+        } );
+      this.addChild( animatedHeaterCoolerNode );
+
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
         model.holdConstantProperty,
@@ -52,6 +61,8 @@ define( require => {
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
+      this.addChild( controlPanel );
+      controlPanel.moveToBack();
 
       // Particles accordion box
       const particlesAccordionBox = new ParticlesAccordionBox(
@@ -63,13 +74,8 @@ define( require => {
           right: controlPanel.right,
           top: controlPanel.bottom + 15
         } );
-
-      // Rendering order. Everything we add should be behind what is created by super.
-      const parent = new Node();
-      parent.addChild( controlPanel );
-      parent.addChild( particlesAccordionBox );
-      this.addChild( parent );
-      parent.moveToBack();
+      this.addChild( particlesAccordionBox );
+      particlesAccordionBox.moveToBack();
 
       // @private used in methods
       this.viewProperties = viewProperties;

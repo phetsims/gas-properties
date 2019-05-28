@@ -95,6 +95,9 @@ define( require => {
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
     CONTROL_FONT: new PhetFont( 16 ),
 
+    // scale for HeaterCoolerNode
+    HEATER_COOLER_SCALE: 0.8,
+
     // physical constants
     BOLTZMANN: 8.316E3, // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K) by @arouinfar
 

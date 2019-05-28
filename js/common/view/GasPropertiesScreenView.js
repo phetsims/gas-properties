@@ -26,7 +26,6 @@ define( require => {
   'use strict';
 
   // modules
-  const AnimatedHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/AnimatedHeaterCoolerNode' );
   const BaseScreenView = require( 'GAS_PROPERTIES/common/view/BaseScreenView' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionCounterNode = require( 'GAS_PROPERTIES/common/view/CollisionCounterNode' );
@@ -55,9 +54,6 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
-
-  // constants
-  const HEATER_COOLER_SCALE = 0.81;
 
   class GasPropertiesScreenView extends BaseScreenView {
 
@@ -229,16 +225,9 @@ define( require => {
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
         model.heatCoolFactorProperty, model.holdConstantProperty, model.isPlayingProperty, {
-          scale: HEATER_COOLER_SCALE,
+          scale: GasPropertiesConstants.HEATER_COOLER_SCALE,
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-        } );
-
-      // Shown when HoldConstantEnum.PRESSURE_T, flame/ice is animated as T is manipulated.
-      const animatedHeaterCoolerNode = new AnimatedHeaterCoolerNode(
-        model.temperatureProperty, model.holdConstantProperty, {
-          translation: heaterCoolerNode.translation,
-          scale: HEATER_COOLER_SCALE
         } );
 
       // Button to erase all particles from container
@@ -284,7 +273,6 @@ define( require => {
       this.addChild( containerWidthNode );
       this.addChild( particlesNode );
       this.addChild( returnLidButton );
-      this.addChild( animatedHeaterCoolerNode );
       this.addChild( heaterCoolerNode );
       collisionCounterNode && this.addChild( collisionCounterNode );
       this.addChild( stopwatchNode );
@@ -307,6 +295,9 @@ define( require => {
       this.regionsNode = regionsNode;
       this.heavyBicyclePumpNode = heavyBicyclePumpNode;
       this.lightBicyclePumpNode = lightBicyclePumpNode;
+
+      // @protected use by subclasses, primarily for layout
+      this.heaterCoolerNode = heaterCoolerNode;
     }
 
     /**
