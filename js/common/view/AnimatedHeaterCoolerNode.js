@@ -67,17 +67,11 @@ define( require => {
         stepEmitter: STEP_EMITTER
       } );
 
-      // If the down animation is stopped, turn off heat/cool.
-      this.downAnimation.stopEmitter.addListener( () => {
-        heatCoolFactorProperty.value = 0;
-      } );
-
-      // @private {Animation|null} Animation to raise the flame/ice associated with HeaterCoolerNode
-      this.upAnimation = null; //
+      // @private {Animation|null}
+      this.animation = null;
 
       // stops the animation at whatever stage it's in
       const stopAnimation = () => {
-        this.downAnimation.stop();
         if ( this.upAnimation ) {
           this.upAnimation.stop();
           this.upAnimation = null;
@@ -101,23 +95,46 @@ define( require => {
             // heat/cool factor is relative to temperature change
             const heatCoolFactor = deltaTemperatureToHeatCoolFactor( deltaT );
 
-            // create and start the animation
-            this.upAnimation = new Animation( {
+            // Animation that moves the flame/ice up
+            this.animation = new Animation( {
               property: heatCoolFactorProperty,
               to: heatCoolFactor,
               duration: DURATION / 2,
               easing: Easing.CUBIC_OUT, // accelerates
               stepEmitter: STEP_EMITTER
             } );
-            this.upAnimation.finishEmitter.addListener( () => {
-              this.upAnimation = null;
-              this.downAnimation.start();
-            } );
-            this.upAnimation.stopEmitter.addListener( () => {
-              this.upAnimation = null;
+
+            // If the Animation is stopped prematurely, abruptly turn off heat/cool
+            this.animation.stopEmitter.addListener( () => {
+              this.animation = null;
               heatCoolFactorProperty.value = 0;
             } );
-            this.upAnimation.start();
+
+            // When the up Animation finishes, create and start an Animation that move the flame/ice down
+            this.animation.finishEmitter.addListener( () => {
+
+              this.animation = new Animation( {
+                property: heatCoolFactorProperty,
+                to: 0,
+                duration: DURATION / 2,
+                easing: Easing.CUBIC_IN, // decelerates
+                stepEmitter: STEP_EMITTER
+              } );
+
+              // If the down animation is stopped, abruptly turn off heat/cool.
+              this.animation.stopEmitter.addListener( () => {
+                heatCoolFactorProperty.value = 0;
+              } );
+
+              // When the down Animation finishes, we're done.
+              this.animation.finishEmitter.addListener( () => {
+                this.animation = null;
+              } );
+
+              this.animation.start();
+            } );
+
+            this.animation.start();
           }
         }
       } );
@@ -132,17 +149,12 @@ define( require => {
     }
 
     /**
-     * Steps the animation associated with this Node.
+     * Steps the animation.
      * @param {number} dt - time delta, in seconds
      */
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      if ( this.upAnimation ) {
-        this.upAnimation.step( dt );
-      }
-      else {
-        this.downAnimation.step( dt );
-      }
+      this.animation && this.animation.step( dt );
     }
   }
 
