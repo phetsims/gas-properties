@@ -14,4 +14,3 @@ INTERNAL POLISH
 
 PIXEL POLISH
 put checkboxes in a separate panel for every screen, for PhET-iO?
-disable 'Remove Divider' button when container is empty?
