@@ -24,7 +24,7 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  const DELTA_TEMPERATURE_THRESHOLD = 1; // temperature change (K) below this value is considered zero change
+  const DELTA_TEMPERATURE_THRESHOLD = 0.1; // temperature change (K) below this value is considered zero change
   const DURATION = 2; // animation duration, in seconds, split evenly between up and down animations
   const EASING = Easing.CUBIC_OUT;
   const MIN_HEAT_COOL_FACTOR = 0.20; // smallest heatCoolFactor for any temperature change
