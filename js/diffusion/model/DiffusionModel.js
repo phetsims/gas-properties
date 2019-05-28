@@ -20,7 +20,6 @@ define( require => {
   const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
@@ -54,9 +53,6 @@ define( require => {
       this.particles1 = []; // {DiffusionParticle1[]}
       this.particles2 = []; // {DiffusionParticle2[]}
 
-      // @private for iterating over all particles
-      this.particleArrays = [ this.particles1, this.particles2 ];
-
       // @public
       this.container = new DiffusionContainer();
 
@@ -74,8 +70,8 @@ define( require => {
         } );
 
       // @public data for the left and right sides of the container, appears in Data accordion box
-      this.leftData = new DiffusionData();
-      this.rightData = new DiffusionData();
+      this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2 );
+      this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2 );
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
       // null when there are no particles in the container.
@@ -114,19 +110,22 @@ define( require => {
       } );
 
       // Update mass and temperature of existing particles. This adjusts speed of the particles.
-      Property.multilink( [ this.leftSettings.massProperty, this.leftSettings.initialTemperatureProperty ],
+      Property.multilink(
+        [ this.leftSettings.massProperty, this.leftSettings.initialTemperatureProperty ],
         ( mass, initialTemperature ) => {
           updateMassAndTemperature( mass, initialTemperature, this.particles1 );
         } );
-      Property.multilink( [ this.rightSettings.massProperty, this.rightSettings.initialTemperatureProperty ],
+      Property.multilink(
+        [ this.rightSettings.massProperty, this.rightSettings.initialTemperatureProperty ],
         ( mass, initialTemperature ) => {
           updateMassAndTemperature( mass, initialTemperature, this.particles2 );
         } );
 
-      Property.multilink( [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
+      Property.multilink(
+        [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
         ( leftInitialTemperature, rightInitialTemperature ) => {
           if ( !this.isPlayingProperty.value ) {
-            this.updateAverageTemperatures();
+            this.updateData();
           }
         } );
 
@@ -165,8 +164,6 @@ define( require => {
       this.container.reset();
       this.leftSettings.reset();
       this.rightSettings.reset();
-      this.leftData.reset();
-      this.rightData.reset();
       this.centerOfMass1Property.reset();
       this.centerOfMass2Property.reset();
       this.particleFlowRate1.reset();
@@ -200,8 +197,9 @@ define( require => {
       // Collision detection and response
       this.collisionDetector.update();
 
-      // Update Properties that are based on the current state of the particle system.
-      this.update();
+      // Update other things that are based on the current state of the particle system.
+      this.updateCenterOfMass();
+      this.updateData();
     }
 
     /**
@@ -231,19 +229,10 @@ define( require => {
 
         // If paused, update things that would normally be handled by step.
         if ( !this.isPlayingProperty.value ) {
-          this.update();
+          this.updateCenterOfMass();
+          this.updateData();
         }
       }
-    }
-
-    /**
-     * Updates Properties that are based on the current state of the particle system.
-     * @private
-     */
-    update() {
-      this.updateCenterOfMass();
-      this.updateParticleCounts();
-      this.updateAverageTemperatures(); // do this after updateParticleCounts!
     }
 
     /**
@@ -256,43 +245,14 @@ define( require => {
     }
 
     /**
-     * Updates particle counts for the left and right sides of the container, as displayed in the Data accordion box.
+     * Updates the Data displayed for the left and right sides of the container.
      * @private
      */
-    updateParticleCounts() {
-      updateLeftRightCounts( this.particles1, this.container.leftBounds,
-        this.leftData.numberOfParticles1Property, this.rightData.numberOfParticles1Property );
-      updateLeftRightCounts( this.particles2, this.container.leftBounds,
-        this.leftData.numberOfParticles2Property, this.rightData.numberOfParticles2Property );
+    updateData() {
+      this.leftData.update( this.particles1, this.particles2 );
+      this.rightData.update( this.particles1, this.particles2 );
     }
 
-    /**
-     * Updates average temperatures for the left and right sides of the container.
-     * @private
-     */
-    updateAverageTemperatures() {
-
-      let leftTotalKE = 0;
-      let rightTotalKE = 0;
-
-      // Compute total KE in each side of the container
-      for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        const particles = this.particleArrays[ i ];
-        for ( let j = 0; j < particles.length; j++ ) {
-          const particle = particles[ j ];
-          if ( this.container.leftBounds.containsPoint( particle.location ) ) {
-            leftTotalKE += particle.getKineticEnergy();
-          }
-          else {
-            rightTotalKE += particle.getKineticEnergy();
-          }
-        }
-      }
-
-      // Compute average temperature in each side of the container
-      updateAverageTemperature( this.leftData.averageTemperatureProperty, leftTotalKE, this.leftData.getNumberOfParticles() );
-      updateAverageTemperature( this.rightData.averageTemperatureProperty, rightTotalKE, this.rightData.getNumberOfParticles() );
-    }
   }
 
   /**
@@ -334,30 +294,6 @@ define( require => {
       );
 
       particles.push( particle );
-    }
-  }
-
-  /**
-   * Updates an average temperature Property.
-   * @param {Property.<number|null>} averageTemperatureProperty - null if there are no particles
-   * @param {number} totalKE
-   * @param {number} numberOfParticles
-   */
-  function updateAverageTemperature( averageTemperatureProperty, totalKE, numberOfParticles ) {
-    assert && assert( averageTemperatureProperty instanceof Property,
-      `invalid averageTemperatureProperty: ${averageTemperatureProperty}` );
-    assert && assert( typeof totalKE === 'number' && totalKE >= 0, `invalid totalKE: ${totalKE}` );
-    assert && assert( typeof numberOfParticles === 'number' && numberOfParticles >= 0,
-      `invalid numberOfParticles: ${numberOfParticles}` );
-
-    if ( numberOfParticles === 0 ) {
-      averageTemperatureProperty.value = null;
-    }
-    else {
-
-      // T = (2/3)KE/k
-      const averageKE = totalKE / numberOfParticles;
-      averageTemperatureProperty.value = ( 2 / 3 ) * averageKE / GasPropertiesConstants.BOLTZMANN; // K
     }
   }
 
@@ -419,35 +355,6 @@ define( require => {
         }
       }
     }
-  }
-
-  /**
-   * Updates particle counts for the left and right sides of the container.
-   * @param {Particle[]} particles
-   * @param {Bounds2} leftBounds
-   * @param {NumberProperty} leftNumberOfParticlesProperty
-   * @param {NumberProperty} rightNumberOfParticlesProperty
-   */
-  function updateLeftRightCounts( particles, leftBounds, leftNumberOfParticlesProperty, rightNumberOfParticlesProperty ) {
-    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-    assert && assert( leftBounds instanceof Bounds2, `invalid leftBounds: ${leftBounds}` );
-    assert && assert( leftNumberOfParticlesProperty instanceof NumberProperty,
-      `invalid leftNumberOfParticlesProperty: ${leftNumberOfParticlesProperty}` );
-    assert && assert( rightNumberOfParticlesProperty instanceof NumberProperty,
-      `invalid rightNumberOfParticlesProperty: ${rightNumberOfParticlesProperty}` );
-
-    let leftNumberOfParticles = 0;
-    let rightNumberOfParticles = 0;
-    for ( let i = 0; i < particles.length; i++ ) {
-      if ( leftBounds.containsPoint( particles[ i ].location ) ) {
-        leftNumberOfParticles++;
-      }
-      else {
-        rightNumberOfParticles++;
-      }
-    }
-    leftNumberOfParticlesProperty.value = leftNumberOfParticles;
-    rightNumberOfParticlesProperty.value = rightNumberOfParticles;
   }
 
   return gasProperties.register( 'DiffusionModel', DiffusionModel );
