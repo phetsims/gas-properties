@@ -110,7 +110,7 @@ define( require => {
               heatCoolFactorProperty.value = 0;
             } );
 
-            // When the up Animation finishes, create and start an Animation that move the flame/ice down
+            // When the 'up' Animation finishes, create and start an Animation that move the flame/ice down
             this.animation.finishEmitter.addListener( () => {
 
               this.animation = new Animation( {
