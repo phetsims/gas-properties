@@ -128,7 +128,7 @@ define( require => {
     wallSpeedLimit: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 1000
+      defaultValue: 800
     }
   } );
 
