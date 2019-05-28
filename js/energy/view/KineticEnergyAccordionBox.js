@@ -29,8 +29,8 @@ define( require => {
   class KineticEnergyAccordionBox extends AccordionBox {
 
     /**
-     * @param {function:number[]} getHeavyValues
-     * @param {function:number[]} getLightValues
+     * @param {function:number[]} getHeavyValues - gets the model values for heavy particles
+     * @param {function:number[]} getLightValues - gets the model values for light particles
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
