@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-#93 lid shrinks to min size before blowing off
 #88 animate heat/cool for PRESSURE_T
 
 #52 histograms rewrite
