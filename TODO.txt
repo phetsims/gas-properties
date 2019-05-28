@@ -12,4 +12,3 @@ OPTIONAL
 INTERNAL POLISH
 
 PIXEL POLISH
-put checkboxes in a separate panel for every screen, for PhET-iO?
