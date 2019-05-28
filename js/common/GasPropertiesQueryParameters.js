@@ -150,7 +150,7 @@ define( require => {
      */
     maxDeltaT: {
       type: 'number',
-      isValidValue: value => ( value >= 0 ),
+      isValidValue: value => ( value > 0 ),
       defaultValue: 100
     },
 
