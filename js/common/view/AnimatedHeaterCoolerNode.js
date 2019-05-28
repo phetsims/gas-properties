@@ -25,8 +25,7 @@ define( require => {
 
   // constants
   const DELTA_TEMPERATURE_THRESHOLD = 0.1; // temperature change (K) below this value is considered zero change
-  const DURATION = 2; // animation duration, in seconds, split evenly between up and down animations
-  const EASING = Easing.CUBIC_OUT;
+  const DURATION = 1.5; // animation duration, in seconds, split evenly between up and down animations
   const MIN_HEAT_COOL_FACTOR = 0.20; // smallest heatCoolFactor for any temperature change
   const MAX_HEAT_COOL_FACTOR = 1; // largest heatCoolFactor for any temperature change
   const MAX_DELTA_TEMPERATURE = 100; // absolute temperature change (K) that corresponds to MAX_HEAT_COOL_FACTOR
@@ -63,7 +62,7 @@ define( require => {
         property: heatCoolFactorProperty,
         to: 0,
         duration: DURATION / 2,
-        easing: EASING
+        easing: Easing.CUBIC_IN // decelerates
       } );
 
       // Animation to raise the flame/ice associated with HeaterCoolerNode
@@ -106,7 +105,7 @@ define( require => {
               property: heatCoolFactorProperty,
               to: heatCoolFactor,
               duration: DURATION / 2,
-              easing: EASING
+              easing: Easing.CUBIC_OUT // accelerates
             } );
             upAnimation.finishEmitter.addListener( () => {
               downAnimation.start();
