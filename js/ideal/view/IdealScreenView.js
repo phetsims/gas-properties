@@ -79,6 +79,7 @@ define( require => {
 
       // @private used in methods
       this.viewProperties = viewProperties;
+      this.animatedHeaterCoolerNode = animatedHeaterCoolerNode;
     }
 
     /**
@@ -89,6 +90,17 @@ define( require => {
     reset() {
       super.reset();
       this.viewProperties.reset();
+    }
+
+    /**
+     * Steps the model using real time units.
+     * @param {number} dt - delta time, in seconds
+     * @public
+     * @override
+     */
+    stepManual( dt ) {
+      super.stepManual( dt );
+      this.animatedHeaterCoolerNode.step( dt );
     }
   }
 

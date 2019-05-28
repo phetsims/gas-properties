@@ -5,7 +5,7 @@
  * adjusted to result in the temperature required to keep pressure constant. This class animates a Property to
  * reflect the speed adjustment, and that Property is observed by a SCENERY_PHET/HeaterCoolerNode.
  * This animation has no affect on the model, it is pure 'Hollywood'.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -26,6 +26,7 @@ define( require => {
   // constants
   const DELTA_TEMPERATURE_THRESHOLD = 0.1; // temperature change (K) below this value is considered zero change
   const DURATION = 1.5; // animation duration, in seconds, split evenly between up and down animations
+  const STEP_EMITTER = null; // Animations will be controlled by calling step
   const MIN_HEAT_COOL_FACTOR = 0.20; // smallest heatCoolFactor for any temperature change
   const MAX_HEAT_COOL_FACTOR = 1; // largest heatCoolFactor for any temperature change
   const MAX_DELTA_TEMPERATURE = 100; // absolute temperature change (K) that corresponds to MAX_HEAT_COOL_FACTOR
@@ -57,23 +58,24 @@ define( require => {
       // Slider is hidden, because the user is not controlling temperature.
       this.slider.visible = false;
 
-      // Animation to lower the flame/ice associated with HeaterCoolerNode
-      const downAnimation = new Animation( {
+      // @private Animation to lower the flame/ice associated with HeaterCoolerNode
+      this.downAnimation = new Animation( {
         property: heatCoolFactorProperty,
         to: 0,
         duration: DURATION / 2,
-        easing: Easing.CUBIC_IN // decelerates
+        easing: Easing.CUBIC_IN, // decelerates
+        stepEmitter: STEP_EMITTER
       } );
 
-      // Animation to raise the flame/ice associated with HeaterCoolerNode
-      let upAnimation = null; // {Animation}
-                   
+      // @private {Animation|null} Animation to raise the flame/ice associated with HeaterCoolerNode
+      this.upAnimation = null; //
+
       // stops the animation at whatever stage it's in
       const stopAnimation = () => {
-        downAnimation.stop();
-        if ( upAnimation ) {
-          upAnimation.stop();
-          upAnimation = null;
+        this.downAnimation.stop();
+        if ( this.upAnimation ) {
+          this.upAnimation.stop();
+          this.upAnimation = null;
         }
       };
 
@@ -101,16 +103,18 @@ define( require => {
             const heatCoolFactor = deltaTemperatureToHeatCoolFactor( deltaT );
 
             // create and start the animation
-            upAnimation = new Animation( {
+            this.upAnimation = new Animation( {
               property: heatCoolFactorProperty,
               to: heatCoolFactor,
               duration: DURATION / 2,
-              easing: Easing.CUBIC_OUT // accelerates
+              easing: Easing.CUBIC_OUT, // accelerates
+              stepEmitter: STEP_EMITTER
             } );
-            upAnimation.finishEmitter.addListener( () => {
-              downAnimation.start();
+            this.upAnimation.finishEmitter.addListener( () => {
+              this.upAnimation = null;
+              this.downAnimation.start();
             } );
-            upAnimation.start();
+            this.upAnimation.start();
           }
         }
       } );
@@ -122,6 +126,20 @@ define( require => {
           cancelAnimation();
         }
       } );
+    }
+
+    /**
+     * Steps the animation associated with this Node.
+     * @param {number} dt - time delta, in seconds
+     */
+    step( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+      if ( this.upAnimation ) {
+        this.upAnimation.step( dt );
+      }
+      else {
+        this.downAnimation.step( dt );
+      }
     }
   }
 
