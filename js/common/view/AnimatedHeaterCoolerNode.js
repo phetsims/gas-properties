@@ -35,7 +35,7 @@ define( require => {
   const MIN_HEAT_FACTOR = GasPropertiesQueryParameters.minHeatCoolFactor;
 
   // Animation duration in seconds, split evenly between raising and lowering the flame/ice.
-  const DURATION = GasPropertiesQueryParameters.heatCoolDuration;
+  const HEAT_COOL_DURATION = GasPropertiesQueryParameters.heatCoolDuration;
 
   // Animations will be controlled by calling step
   const STEP_EMITTER = null;
@@ -71,7 +71,7 @@ define( require => {
       this.downAnimation = new Animation( {
         property: heatCoolFactorProperty,
         to: 0,
-        duration: DURATION / 2,
+        duration: HEAT_COOL_DURATION / 2,
         easing: Easing.CUBIC_IN, // decelerates
         stepEmitter: STEP_EMITTER
       } );
@@ -108,7 +108,7 @@ define( require => {
             this.animation = new Animation( {
               property: heatCoolFactorProperty,
               to: heatCoolFactor,
-              duration: DURATION / 2,
+              duration: HEAT_COOL_DURATION / 2,
               easing: Easing.CUBIC_OUT, // accelerates
               stepEmitter: STEP_EMITTER
             } );
@@ -125,7 +125,7 @@ define( require => {
               this.animation = new Animation( {
                 property: heatCoolFactorProperty,
                 to: 0,
-                duration: DURATION / 2,
+                duration: HEAT_COOL_DURATION / 2,
                 easing: Easing.CUBIC_IN, // decelerates
                 stepEmitter: STEP_EMITTER
               } );
