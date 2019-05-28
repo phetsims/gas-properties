@@ -192,6 +192,9 @@ define( require => {
           updateLidPosition();
           lidNode.visible = true;
         }
+        else {
+          this.interruptSubtreeInput(); // cancel interactions with the container, because we're blowing the lid off
+        }
       } );
 
       // @private
