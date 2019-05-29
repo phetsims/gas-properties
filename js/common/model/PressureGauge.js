@@ -31,11 +31,11 @@ define( require => {
   class PressureGauge {
 
     /**
-     * @param {Property.<number|null>} pressureProperty - pressure in the container, in kPa
-     * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K
+     * @param {NumberProperty} pressureProperty - pressure in the container, in kPa
+     * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K, null if empty container
      */
     constructor( pressureProperty, temperatureProperty ) {
-      assert && assert( pressureProperty instanceof Property,
+      assert && assert( pressureProperty instanceof NumberProperty,
         `invalid pressureProperty: ${pressureProperty}` );
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
