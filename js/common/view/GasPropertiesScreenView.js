@@ -214,7 +214,7 @@ define( require => {
       const particlesNode = new GasPropertiesParticlesNode( model );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
-      model.numberOfParticlesChangedEmitter.addListener( () => {
+      model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( !this.model.isPlayingProperty.value ) {
           particlesNode.update();
         }

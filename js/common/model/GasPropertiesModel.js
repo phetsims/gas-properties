@@ -38,10 +38,13 @@ define( require => {
   // constants
   // radians, used to compute initial velocity angle for particles
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
+
   // K, temperature used to compute initial speed of particles
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
+
   // maximum pressure in kPa, when exceeded the lid blows off
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
+
   // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
   const PRESSURE_CONVERSION_SCALE = 1.66E6;
 
@@ -63,16 +66,13 @@ define( require => {
       super( tandem );
 
       // @public (read-only) together these arrays make up the 'particle system'
-      this.heavyParticles = []; // {HeavyParticle[]} inside the container
-      this.lightParticles = []; // {LightParticle[]} inside the container
-      this.heavyParticlesOutside = []; // {HeavyParticle[]} outside the container
-      this.lightParticlesOutside = []; // {LightParticle[]} outside the container
+      this.heavyParticles = []; // {HeavyParticle[]} heavy particles inside the container
+      this.lightParticles = []; // {LightParticle[]} light particles inside the container
+      this.heavyParticlesOutside = []; // {HeavyParticle[]} heavy particles outside the container
+      this.lightParticlesOutside = []; // {LightParticle[]} light particles outside the container
 
       // @public for iterating over all particles inside the container
       this.insideParticleArrays = [ this.heavyParticles, this.lightParticles ];
-
-      // @public emit is called when any of the above Particle arrays are modified
-      this.numberOfParticlesChangedEmitter = new Emitter();
 
       // @public the number of heavy particles inside the container
       this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
@@ -380,7 +380,6 @@ define( require => {
           ParticleUtils.removeParticles( -delta, particles );
         }
         assert && assert( particles.length === newValue, 'particles array is out of sync' );
-        this.numberOfParticlesChangedEmitter.emit();
       }
     }
 
