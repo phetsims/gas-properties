@@ -44,7 +44,7 @@ define( require => {
         stopwatchLocation: new Vector2( 240, 15 )
       }, options );
 
-      // @public (read-only) transform between model and view coordinate frames
+      // @public (read-only) {ModelViewTransform2} transform between model and view coordinate frames
       this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
         options.modelOriginOffset,
         MODEL_VIEW_SCALE,
@@ -63,7 +63,7 @@ define( require => {
       // @public is the sim running in slow motion?
       this.isSlowMotionProperty = new BooleanProperty( false );
 
-      // @public (read-only) {LinearFunction} transform between real time and sim time, initialized below
+      // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
       this.timeTransform = null;
 
       // Adjust the time transform

@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the collision counter.
+ * CollisionCounter counts collisions between particles and the walls of a container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -19,7 +19,7 @@ define( require => {
   class CollisionCounter {
 
     /**
-     * @param {CollisionDetector} collisionDetector
+     * @param {CollisionDetector} collisionDetector - detects collisions between particles and the container
      * @param {Object} [options]
      */
     constructor( collisionDetector, options ) {

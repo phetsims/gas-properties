@@ -27,9 +27,15 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        location: Vector2.ZERO, // location of the container's bottom right corner, in pm
-        widthRange: new RangeWithValue( 5000, 15000, 10000 ), // range and initial value of the container's width, in pm
-        leftWallDoesWork: false // true if the left wall does work on particles
+
+        // location of the container's bottom right corner, in pm
+        location: Vector2.ZERO,
+
+        // range and initial value of the container's width, in pm
+        widthRange: new RangeWithValue( 5000, 15000, 10000 ),
+
+        // true if the left wall does work on particles, as in the Explore screen
+        leftWallDoesWork: false
       }, options );
 
       assert && assert( options.location instanceof Vector2,
@@ -81,7 +87,10 @@ define( require => {
       this.previousLeft = this.left;
     }
 
-    // @public
+    /**
+     * Resets the container.
+     * @public
+     */
     reset() {
       this.widthProperty.reset();
     }
@@ -94,7 +103,7 @@ define( require => {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
-      // velocity is irrelevant and should be set to zero, so that it doesn't contribute to collision detection.
+      // velocity is irrelevant and should remain set to zero, so that it doesn't contribute to collision detection.
       if ( this.leftWallDoesWork ) {
 
         const previousX = this.leftWallVelocity.x;
@@ -116,15 +125,15 @@ define( require => {
     get width() { return this.widthProperty.value; }
 
     /**
-     * Convenience getter for bounds.
+     * Convenience getter for inside bounds.
      * @returns {Bounds2} in pm
      * @public
      */
     get bounds() { return this.boundsProperty.value; }
 
     /**
-     * Convenience getters for inner bounds of the container, in model coordinate frame.
-     * Bounds2 has similar getters, but uses view coordinate frame, where 'top' is minY and 'bottom' is maxY.
+     * Convenience getters for inside bounds of the container, in model coordinate frame.
+     * Bounds2 has similar getters, but uses a view coordinate frame, where 'top' is minY and 'bottom' is maxY.
      * @returns {number} in pm
      * @public
      */
@@ -159,7 +168,7 @@ define( require => {
     }
 
     /**
-     * Determines whether the container fully contains a collection of particles.
+     * Determines whether the container fully contains one or more collections of particles.
      * @param {Particle[][]} particleArrays
      * @returns {boolean}
      */

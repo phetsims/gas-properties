@@ -29,8 +29,8 @@ define( require => {
   class CollisionDetector {
 
     /**
-     * @param {BaseContainer} container
-     * @param {Particle[][]} particleArrays
+     * @param {BaseContainer} container - the container inside which collision occur
+     * @param {Particle[][]} particleArrays - collections of particles inside the container
      * @param {Object} [options]
      */
     constructor( container, particleArrays, options ) {
@@ -52,8 +52,7 @@ define( require => {
       // @public (read-only) {Region[]} 2D grid of Regions
       this.regions = createRegions( container, regionLength );
 
-      // @public (read-only) number of wall collisions on the most recent call to step.
-      // This is used to delay pressure computation until at least 1 particle has collided with the container.
+      // @public (read-only) number of wall collisions on the most recent call to update
       this.numberOfParticleContainerCollisions = 0;
 
       // @public determines whether particle-particle collisions occur
@@ -74,7 +73,10 @@ define( require => {
       this.numberOfParticleContainerCollisions = 0;
     }
 
-    // @public
+    /**
+     * Resets the collision detector.
+     * @public
+     */
     reset() {
       this.particleParticleCollisionsEnabledProperty.reset();
     }
@@ -90,7 +92,7 @@ define( require => {
     }
 
     /**
-     * Handles collision detection and response for the current state of the particle system.
+     * Performs collision detection and response for the current state of the particle system.
      * @public
      */
     update() {
@@ -114,7 +116,7 @@ define( require => {
       // particle-container collisions
       this.numberOfParticleContainerCollisions = this.updateParticleContainerCollisions();
 
-      // Verify that particles are fully inside the container.
+      // Verify that all particles are fully inside the container.
       assert && assert( this.container.containsParticles( this.particleArrays ),
         'particles have leaked out of the container' );
     }
@@ -139,8 +141,9 @@ define( require => {
   /**
    * Partitions the collision detection bounds into Regions.  Since collisions only occur inside the container,
    * the maximum collision detection bounds is the container at its max width.  This algorithm builds the grid
-   * right-to-left, bottom-to-top, so that it's aligned with the right and bottom edges of the container.
-   * Regions along the top and left edges may be outside the container, and that's OK.
+   * right-to-left, bottom-to-top, so that the grid is aligned with the right and bottom edges of the container.
+   * Regions along the top and left edges may be outside the container, and that's OK.  Regions outside the
+   * container will be excluded from collision detection.
    * @param {BaseContainer} container
    * @param {number} regionLength - regions are square, length of one side, in pm
    * @returns {Region[]}
@@ -168,7 +171,7 @@ define( require => {
 
   /**
    * Assigns each particle to the Regions that it intersects, accounting for particle radius.
-   * @param {Particle[]} particleArrays
+   * @param {Particle[]} particleArrays - collections of particles
    * @param {Region[]} regions
    */
   function assignParticlesToRegions( particleArrays, regions ) {
@@ -206,8 +209,8 @@ define( require => {
         const particle2 = particles[ j ];
         assert && assert( particle1 !== particle2, 'particle cannot collide with itself' );
 
-        // Ignore collisions if the particles were in contact on the previous step.
-        // This results in more natural behavior, and was adopted from the Java version.
+        // Ignore collisions if the particles were in contact on the previous step. This results in more
+        // natural behavior where the particles enter the container, and was adapted from the Java version.
         if ( !particle1.contactedParticle( particle2 ) && particle1.contactsParticle( particle2 ) ) {
 
           //-----------------------------------------------------------------------------------------
@@ -245,7 +248,7 @@ define( require => {
           //-----------------------------------------------------------------------------------------
 
           // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
-          // after they collide. It normally ranges from 0 to 1 where 1 is a perfectly elastic collision.
+          // after they collide. It normally ranges from 0 to 1, where 1 is a perfectly elastic collision.
           // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
           const e = 1;
 
