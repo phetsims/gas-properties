@@ -110,12 +110,12 @@ define( require => {
      * @returns {Node}
      */
     createEnergyScreenIcon() {
-      
+
+      // histogram shape
       const iconWidth = 250;
       const iconHeight = 200;
       const bins = [ 0.8, 1.0, 0.7, 0.5, 0.4, 0.25, 0.1 ];
       const deltaX = iconWidth / bins.length;
-
       let x = 0;
       let y = 0;
       const iconShape = new Shape().moveTo( x, y );
