@@ -20,6 +20,7 @@ define( require => {
   const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
@@ -93,7 +94,7 @@ define( require => {
           this.leftSettings,
           this.particles1,
           createDiffusionParticle1 );
-        assert && assert( _.every( this.particles1, particle => particle instanceof DiffusionParticle1 ),
+        assert && assert( GasPropertiesUtils.isArrayOf( this.particles1, DiffusionParticle1 ),
           'particles1 should contain only DiffusionParticle1' );
       } );
 
@@ -105,7 +106,7 @@ define( require => {
           this.rightSettings,
           this.particles2,
           createDiffusionParticle2 );
-        assert && assert( _.every( this.particles2, particle => particle instanceof DiffusionParticle2 ),
+        assert && assert( GasPropertiesUtils.isArrayOf( this.particles2, DiffusionParticle2 ),
           'particles2 should contain only DiffusionParticle2' );
       } );
 

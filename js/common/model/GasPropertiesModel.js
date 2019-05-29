@@ -36,7 +36,7 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  
+
   // radians, used to compute initial velocity angle for particles
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
 
@@ -91,13 +91,13 @@ define( require => {
       const createHeavyParticle = ( options ) => new HeavyParticle( options );
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
-        assert && assert( _.every( this.heavyParticles, particle => particle instanceof HeavyParticle ),
+        assert && assert( GasPropertiesUtils.isArrayOf( this.heavyParticles, HeavyParticle ),
           'heavyParticles should contain only HeavyParticle' );
       } );
       const createLightParticle = ( options ) => new LightParticle( options );
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, createLightParticle );
-        assert && assert( _.every( this.lightParticles, particle => particle instanceof LightParticle ),
+        assert && assert( GasPropertiesUtils.isArrayOf( this.lightParticles, LightParticle ),
           'lightParticles should contain only LightParticle' );
       } );
 
@@ -307,12 +307,12 @@ define( require => {
 
         ParticleUtils.escapeParticles( this.container, this.numberOfHeavyParticlesProperty,
           this.heavyParticles, this.heavyParticlesOutside, );
-        assert && assert( _.every( this.heavyParticlesOutside, particle => particle instanceof HeavyParticle ),
+        assert && assert( GasPropertiesUtils.isArrayOf( this.heavyParticlesOutside, HeavyParticle ),
           'heavyParticlesOutside should contain only HeavyParticle' );
 
         ParticleUtils.escapeParticles( this.container, this.numberOfLightParticlesProperty,
           this.lightParticles, this.lightParticlesOutside );
-        assert && assert( _.every( this.lightParticlesOutside, particle => particle instanceof LightParticle ),
+        assert && assert( GasPropertiesUtils.isArrayOf( this.lightParticlesOutside, LightParticle ),
           'lightParticlesOutside should contain only LightParticle' );
       }
 

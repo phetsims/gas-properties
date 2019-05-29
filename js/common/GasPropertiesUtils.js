@@ -73,6 +73,16 @@ define( require => {
       const d = p.distance( pointOnLine );
       reflectedPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
       return reflectedPoint;
+    },
+
+    /**
+     * Determines whether an array is homogeneous.
+     * @param {Array} array
+     * @param {constructor} Constructor
+     * @returns {boolean}
+     */
+    isArrayOf( array, Constructor ) {
+      return Array.isArray( array ) && _.every( array, value => value instanceof Constructor );
     }
   };
 

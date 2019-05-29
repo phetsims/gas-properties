@@ -11,9 +11,12 @@ define( require => {
   'use strict';
 
   // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
+  const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
+  const DiffusionParticle2 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle2' );
+  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class DiffusionCollisionDetector extends CollisionDetector {
@@ -26,8 +29,10 @@ define( require => {
      */
     constructor( container, particles1, particles2, options ) {
       assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
-      assert && assert( Array.isArray( particles1 ), `invalid particles1: ${particles1}` );
-      assert && assert( Array.isArray( particles2 ), `invalid particles2: ${particles2}` );
+      assert && assert( GasPropertiesUtils.isArrayOf( particles1, DiffusionParticle1 ),
+        `invalid particles1: ${particles1}` );
+      assert && assert( GasPropertiesUtils.isArrayOf( particles2, DiffusionParticle2 ),
+        `invalid particles2: ${particles2}` );
 
       super( container, [ particles1, particles2 ], options );
     }
