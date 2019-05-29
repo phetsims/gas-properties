@@ -62,6 +62,7 @@ define( require => {
     }
 
     /**
+     * Resets the container.
      * @public
      * @override
      */
@@ -103,7 +104,7 @@ define( require => {
           }
         }
 
-        this.resize( newWidth );
+        this.setWidth( newWidth );
       }
     }
 
@@ -113,7 +114,7 @@ define( require => {
      * @param {number} width
      * @private
      */
-    resize( width ) {
+    setWidth( width ) {
       assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
 
       // Get opening width before changing widthProperty
@@ -133,7 +134,7 @@ define( require => {
      */
     resizeImmediately( width ) {
       assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
-      this.resize( width );
+      this.setWidth( width );
       this.desiredWidth = width;
     }
 
