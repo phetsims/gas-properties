@@ -4,6 +4,13 @@
  * Handles collision detection and response. Our collision model involves rigid bodies. It is a perfectly elastic
  * collision model, where there is no net loss of kinetic energy.
  *
+ * The basic algorithms for particle-particle collisions and particle-container collisions were adapted from the
+ * Java implementation of Gas Properties. It differs from the standard rigid-body collision model as described in (e.g.)
+ * http://web.mst.edu/~reflori/be150/Dyn%20Lecture%20Videos/Impact%20Particles%201/Impact%20Particles%201.pdf.
+ * For more on how the Java implementation informed this implementation, see:
+ * https://github.com/phetsims/gas-properties/issues/37
+ * https://github.com/phetsims/gas-properties/issues/40
+ *
  * References:
  * https://en.wikipedia.org/wiki/Collision_detection
  * https://en.wikipedia.org/wiki/Collision_response
