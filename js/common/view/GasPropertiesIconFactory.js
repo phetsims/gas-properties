@@ -95,13 +95,44 @@ define( require => {
       gaugeNode.centerX = postNode.right;
       gaugeNode.centerY = postNode.centerY;
       particlesParent.center = containerNode.center;
-      
+
       const iconNode = new Node( {
         children: [ postNode, containerNode, gaugeNode, particlesParent, thermometerNode ]
-      });
+      } );
 
       return new ScreenIcon( iconNode, {
-        maxIconHeightProportion: 0.8,
+        fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      } );
+    },
+
+    /**
+     * Creates the icon for the Energy screen.
+     * @returns {Node}
+     */
+    createEnergyScreenIcon() {
+      
+      const iconWidth = 250;
+      const iconHeight = 200;
+      const bins = [ 0.8, 1.0, 0.7, 0.5, 0.4, 0.25, 0.1 ];
+      const deltaX = iconWidth / bins.length;
+
+      let x = 0;
+      let y = 0;
+      const iconShape = new Shape().moveTo( x, y );
+      for ( let i = 0; i < bins.length; i++ ) {
+        x = i * deltaX;
+        y = -iconHeight * bins[ i ];
+        iconShape.lineTo( x, y );
+        x = ( i + 1 ) * deltaX;
+        iconShape.lineTo( x, y );
+      }
+      iconShape.lineTo( iconWidth, 0 ).lineTo( 0, 0 ).close();
+
+      const iconNode = new Path( iconShape, {
+        fill: GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty
+      } );
+
+      return new ScreenIcon( iconNode, {
         fill: GasPropertiesColorProfile.screenBackgroundColorProperty
       } );
     },

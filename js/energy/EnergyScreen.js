@@ -12,6 +12,7 @@ define( require => {
   const EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
   const EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -30,7 +31,8 @@ define( require => {
       const createView = ( model ) => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
 
       super( createModel, createView, tandem, {
-        name: screenEnergyString
+        name: screenEnergyString,
+        homeScreenIcon: GasPropertiesIconFactory.createEnergyScreenIcon()
       } );
     }
   }
