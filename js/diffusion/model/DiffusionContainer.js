@@ -26,7 +26,7 @@ define( require => {
         widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ) // effectively fixed width
       } );
 
-      // In case clients attempt to exercise this feature of the base class
+      // In case clients attempt to use this feature of the base class
       this.widthProperty.lazyLink( width => {
         throw new Error( 'width is fixed in the Diffusion screen' );
       } );

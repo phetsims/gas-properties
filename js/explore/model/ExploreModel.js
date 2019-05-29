@@ -27,7 +27,7 @@ define( require => {
         leftWallDoesWork: true // moving the left wall does work on particles
       } );
 
-      // In case clients attempt to exercise this feature of the base class
+      // In case clients attempt to use this feature of the base class
       this.holdConstantProperty.lazyLink( holdConstant => {
         throw new Error( 'holdConstant is fixed in the Explore screen' );
       } );
