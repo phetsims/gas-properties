@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealScreenView = require( 'GAS_PROPERTIES/ideal/view/IdealScreenView' );
@@ -30,7 +31,8 @@ define( require => {
       const createView = ( model ) => new IdealScreenView( model, tandem.createTandem( 'view' ) );
 
       super( createModel, createView, tandem, {
-        name: screenIdealString
+        name: screenIdealString,
+        homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon()
       } );
     }
   }

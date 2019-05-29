@@ -17,9 +17,11 @@ define( require => {
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
+  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -27,11 +29,82 @@ define( require => {
   const Path = require( 'SCENERY/nodes/Path' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
+  const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const ScreenIcon = require( 'JOIST/ScreenIcon' );
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const Shape = require( 'KITE/Shape' );
+  const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
 
   const GasPropertiesIconFactory = {
+
+    /**
+     * Creates the icon for the Ideal screen.
+     * @returns {Node}
+     */
+    createIdealScreenIcon() {
+
+      const containerNode = new Rectangle( 0, 0, 275, 200, {
+        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+        lineWidth: 5
+      } );
+
+      const thermometerNode = new ThermometerNode( 0, 100, new NumberProperty( 40 ), {
+        backgroundFill: 'white',
+        glassThickness: 5,
+        left: containerNode.right - 10,
+        bottom: containerNode.top + 20
+      } );
+
+      const gaugeNode = new GaugeNode( new NumberProperty( 30 ), '', new Range( 0, 100 ), {
+        needleLineWidth: 8,
+        numberOfTicks: 15,
+        majorTickStroke: 'black',
+        minorTickStroke: 'black',
+        majorTickLength: 16,
+        minorTickLength: 8,
+        majorTickLineWidth: 6,
+        minorTickLineWidth: 4
+      } );
+      gaugeNode.setScaleMagnitude( 0.5 * containerNode.height / gaugeNode.height );
+
+      const postWidth = 0.6 * gaugeNode.width;
+      const postHeight = 0.3 * gaugeNode.height;
+
+      //TODO duplicated in PressureGaugeNode
+      const postGradient = new LinearGradient( 0, 0, 0, postHeight )
+        .addColorStop( 0, 'rgb( 120, 120, 120 )' )
+        .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
+        .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
+        .addColorStop( 1, 'rgb( 100, 100, 100 )' );
+
+      const postNode = new Rectangle( 0, 0, postWidth, postHeight, {
+        fill: postGradient,
+        stroke: 'black'
+      } );
+
+      const particlesParent = new Node( { scale: 0.1 } );
+      particlesParent.addChild( GasPropertiesIconFactory.createHeavyParticleIcon( ModelViewTransform2.createIdentity() ) );
+      //TODO add more particles
+
+      // layout
+      thermometerNode.centerX = containerNode.right - 0.25 * containerNode.width;
+      thermometerNode.centerY = containerNode.top - 3;
+      postNode.left = containerNode.right - 1;
+      postNode.centerY = containerNode.centerY;
+      gaugeNode.centerX = postNode.right;
+      gaugeNode.centerY = postNode.centerY;
+      particlesParent.center = containerNode.center;
+      
+      const iconNode = new Node( {
+        children: [ postNode, containerNode, gaugeNode, particlesParent, thermometerNode ]
+      });
+
+      return new ScreenIcon( iconNode, {
+        maxIconHeightProportion: 0.8,
+        fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      } );
+    },
 
     /**
      * Creates an icon for a heavy particle.
