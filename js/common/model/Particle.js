@@ -93,7 +93,10 @@ define( require => {
       return 0.5 * this.mass * this.velocity.magnitudeSquared; // KE = (1/2) * m * |v|^2
     }
 
-    // @public
+    /**
+     * Disposes the particle.
+     * @public
+     */
     dispose() {
       assert && assert( !this.isDisposed, 'attempted to dispose again' );
       this.isDisposed = true;
@@ -213,8 +216,7 @@ define( require => {
     }
 
     /**
-     * String representation of a Particle.
-     * For debugging only, do not rely on format.
+     * String representation of a Particle. For debugging only, do not rely on format.
      * @returns {string}
      * @public
      */

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Utility methods related to Particles or collections of Particles, used primarily by BaseModel and its subclasses.
+ * Utility methods related to Particles and collections of Particles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
