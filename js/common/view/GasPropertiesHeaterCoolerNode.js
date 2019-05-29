@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * HeaterCoolerNode subclass for this sim.
+ * HeaterCoolerNode subclass for this sim.  It is responsible for disabling the slider when the sim is paused,
+ * and hiding the slider for some of the 'Hold Constant' modes.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

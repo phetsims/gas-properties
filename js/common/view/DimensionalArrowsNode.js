@@ -2,6 +2,7 @@
 
 /**
  * A horizontal dimensional arrow, looks like this, but with solid arrow heads:  |<- - - ->|
+ * NOTE! This implementation is specific to Gas Properties in that the arrow grows to the left.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

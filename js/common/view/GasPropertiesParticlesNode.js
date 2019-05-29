@@ -3,6 +3,7 @@
 /**
  * Renders the particle system for the 'Ideal', 'Explore', and 'Energy' screens.  To optimize the size of canvases,
  * this consists of 2 CanvasNodes; one for particles inside the container, one for particles outside the container.
+ * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -54,7 +55,7 @@ define( require => {
         INSIDE_DEBUG_FILL
       );
 
-      // Size the inside canvas to the maximium bounds for the container.
+      // Size the inside canvas to the maximum bounds for the container.
       insideParticlesNode.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.maxBounds ) );
 
       // particles outside the container

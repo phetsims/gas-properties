@@ -2,6 +2,7 @@
 
 /**
  * Renders the particle system for the 'Diffusion' screens.
+ * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

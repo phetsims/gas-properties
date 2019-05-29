@@ -113,7 +113,7 @@ define( require => {
         cornerRadius: 5
       } );
 
-      // all of the stuff that appear on the counter
+      // all of the stuff that appears on the counter
       const content = new VBox( {
         align: 'center',
         spacing: Y_SPACING,

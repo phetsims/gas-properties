@@ -112,9 +112,10 @@ define( require => {
               heatCoolFactorProperty.value = 0;
             } );
 
-            // When the 'up' Animation finishes, create and start an Animation that move the flame/ice down
+            // When the 'up' Animation finishes...
             this.animation.finishEmitter.addListener( () => {
 
+              // Animation that moves the flame/ice down
               this.animation = new Animation( {
                 property: heatCoolFactorProperty,
                 to: 0,
