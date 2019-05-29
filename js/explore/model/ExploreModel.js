@@ -29,7 +29,7 @@ define( require => {
 
       // In case clients attempt to exercise this feature of the base class
       this.holdConstantProperty.lazyLink( holdConstant => {
-        throw new Error( 'holdConstant is fixed in this screen' );
+        throw new Error( 'holdConstant is fixed in the Explore screen' );
       } );
     }
   }
