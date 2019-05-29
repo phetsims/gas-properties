@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Control for changing for number of particles for a specific type of particle.
+ * Control for changing the number of particles for a specific type of particle.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

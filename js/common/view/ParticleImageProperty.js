@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Property that contains the HTMLCanvasElement for a Particle, uses to render particles with CanvasNode.
+ * Property that contains the HTMLCanvasElement for a Particle, used to render particles with CanvasNode.
  * This image needs to be regenerated when there is a change to the radius or colors for a particle species.
  *
  * @author Chris Malley (PixelZoom, Inc.)

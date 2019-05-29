@@ -5,7 +5,8 @@
  * When holding a quantity constant would break the model, the model puts itself in a sane configuration,
  * the model notifies the view via an Emitter, and the view notifies the user via a dialog.
  *
- * The student is almost certain to encounter these on the Ideal (first) screen, so dialogs are created eagerly.
+ * The student is almost certain to encounter these on the Ideal (first) screen, so dialogs are created eagerly
+ * and reused.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

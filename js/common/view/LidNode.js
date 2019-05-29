@@ -2,7 +2,7 @@
 
 /**
  * The lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.
- * Origin is at bottom-left of base.
+ * Origin is at the bottom-left of the base.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
