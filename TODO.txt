@@ -1,7 +1,5 @@
 TODO list for gas-properties
 
-add holdConstantProperty listener that swaps animatedHeaterCoolerNode and this.heaterCoolerNode
-
 #52 histograms rewrite
 #52 histograms y-axis scale
 #60 histograms should update when particles are added/removed with sim paused
