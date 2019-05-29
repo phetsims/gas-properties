@@ -25,6 +25,7 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
+
   // Temperature changes below this value (in K) are considered zero and result in no animation of flame/ice.
   // This is required to avoid spurious animation due to floating-point errors.
   const MIN_DELTA_T = GasPropertiesQueryParameters.minDeltaT; 

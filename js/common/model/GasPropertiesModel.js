@@ -36,6 +36,7 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
+  
   // radians, used to compute initial velocity angle for particles
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
 
