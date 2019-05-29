@@ -1,7 +1,9 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model of the pressure gauge. Adds a bit of jitter to the displayed values, to make the gauge look more realistic.
+ * Model of the pressure gauge. Responsible for determining what units will be used to present the pressure,
+ * and for deriving pressure in those units. Adds a bit of jitter to the displayed values, to make the gauge
+ * look more realistic.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -40,13 +42,14 @@ define( require => {
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
 
-      // @public pressure in kilopascals (kPa) with jitter added. This is not derived from pressureProperty,
+      // @public pressure in kPa with jitter added. This is not derived from pressureProperty,
       // because it needs to jitter on step, not when pressureProperty changes.
       this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
         units: 'kPa',
         isValidValue: value => ( value >= 0 )
       } );
 
+      // When pressure goes to zero, update the gauge immediately.
       pressureProperty.link( pressure => {
         if ( pressure === 0 ) {
           this.pressureKilopascalsProperty.value = 0;
@@ -58,17 +61,17 @@ define( require => {
         pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
           units: 'atm',
           valueType: 'number',
-          isValidValue: value => value >= 0
+          isValidValue: value => ( value >= 0 )
         } );
 
-      // @public (read-only) pressure range in kilopascals (kPa)
+      // @public (read-only) pressure range in kPa
       this.pressureRange = new Range( 0, MAX_PRESSURE );
 
       // @private amount of jitter in kPa is inversely proportional to pressure
       this.pressureJitterFunction = new LinearFunction( 0, this.pressureRange.max, MAX_JITTER, MIN_JITTER, true );
 
-      // @private scale the amount of jitter based on temperature (K), so that jitter falls off at low temperatures
-      this.scaleJitterFunction = new LinearFunction( 5, 50, 0, 1, true );
+      // @private map from temperature (K) to jitter scale factor, so that jitter falls off at low temperatures
+      this.scaleJitterFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
       // @public pressure units displayed by the pressure gauge
       this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES );

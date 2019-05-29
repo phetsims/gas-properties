@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the stopwatch.
+ * Model for the stopwatch, responsible for time, location, and visibility.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

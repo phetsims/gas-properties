@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the thermometer
+ * Model for the thermometer. Responsible for determining what units will be used to present the temperature,
+ * and for deriving pressure in those units.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -33,7 +34,7 @@ define( require => {
         range: DEFAULT_RANGE
       }, options );
 
-      // @public {Range} range of thermometer, in K. temperatureProperty is expected to exceed this.
+      // @public {Range} range of thermometer display, in K. temperatureProperty is expected to exceed this.
       this.range = options.range;
 
       // @public temperature in the container, in K

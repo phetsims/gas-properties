@@ -28,12 +28,12 @@ define( require => {
       // @public (read-only) {Bounds2}
       this.bounds = bounds;
 
-      // @public (read-only) {Particle[]}
+      // @public (read-only) {Particle[]} the particles in this region
       this.particles = [];
     }
 
     /**
-     * Adds a particle to this Region.
+     * Adds a particle to this region.
      * @param {Particle} particle
      * @public
      */
