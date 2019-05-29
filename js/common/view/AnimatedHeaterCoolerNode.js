@@ -151,7 +151,6 @@ define( require => {
 
       // This Node is relevant only for HoldConstantEnum.PRESSURE_T mode.
       holdConstantProperty.link( holdConstant => {
-        this.visible = ( holdConstant === HoldConstantEnum.PRESSURE_T );
         if ( holdConstant !== HoldConstantEnum.PRESSURE_T ) {
           stopAnimation();
         }
