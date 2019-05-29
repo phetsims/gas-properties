@@ -69,15 +69,6 @@ define( require => {
       // Slider is hidden, because the user is not controlling temperature.
       this.slider.visible = false;
 
-      // @private Animation to lower the flame/ice associated with HeaterCoolerNode
-      this.downAnimation = new Animation( {
-        property: heatCoolFactorProperty,
-        to: 0,
-        duration: HEAT_COOL_DURATION / 2,
-        easing: Easing.CUBIC_IN, // decelerates
-        stepEmitter: STEP_EMITTER
-      } );
-
       // @private {Animation|null}
       this.animation = null;
 
