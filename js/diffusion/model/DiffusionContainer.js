@@ -28,7 +28,7 @@ define( require => {
 
       // In case clients attempt to use this feature of the base class
       this.widthProperty.lazyLink( width => {
-        throw new Error( 'width is fixed in the Diffusion screen' );
+        throw new Error( 'container width is fixed in the Diffusion screen' );
       } );
 
       // @public (read-only) divider thickness, in pm
