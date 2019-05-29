@@ -2,7 +2,7 @@
 
 /**
  * DiffusionCollisionDetector is a specialization of CollisionDetector that handles collisions between
- * particles and a vertical divider in a DiffusionContainer.  When the divider is present, it treat the
+ * particles and a vertical divider in a DiffusionContainer.  When the divider is present, it treats the
  * 2 sides of the container as 2 separate containers.
  *
  * @author Chris Malley (PixelZoom, Inc.)

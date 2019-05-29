@@ -57,6 +57,7 @@ define( require => {
     }
 
     /**
+     * Resets the container.
      * @public
      * @override
      */
