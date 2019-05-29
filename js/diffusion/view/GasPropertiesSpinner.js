@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Specialization of NumberSpinner for this sim.
+ * Specialization of NumberSpinner for this sim. It has the correct options and color profiling for this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

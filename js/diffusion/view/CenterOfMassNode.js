@@ -3,6 +3,7 @@
 /**
  * Indicator at the bottom of the container that indicates where the centerX of mass is for one particle species.
  * The indicator is color-coded to the particle color.
+ * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

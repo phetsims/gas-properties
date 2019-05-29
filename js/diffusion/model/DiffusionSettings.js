@@ -64,7 +64,7 @@ define( require => {
 
     /**
      * Restarts an experiment with the same settings.
-     * This causes the current set of particles to be deleted, and a new set of particles to be created.
+     * This forces the current set of particles to be deleted, and a new set of particles to be created.
      * @public
      */
     restart() {

@@ -122,6 +122,7 @@ define( require => {
           updateMassAndTemperature( mass, initialTemperature, this.particles2 );
         } );
 
+      // Update data if initial temperature settings are changed while the sim is paused.
       Property.multilink(
         [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
         ( leftInitialTemperature, rightInitialTemperature ) => {
