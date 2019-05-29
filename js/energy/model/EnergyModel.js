@@ -38,7 +38,12 @@ define( require => {
 
       // In case clients attempt to exercise this feature of the base class
       this.holdConstantProperty.lazyLink( holdConstant => {
-        throw new Error( 'holdConstant is fixed in this screen' );
+        throw new Error( 'holdConstant is fixed in the Energy screen' );
+      } );
+
+      // In case clients attempt to exercise this feature of the base class
+      this.container.widthProperty.lazyLink( width => {
+        throw new Error( 'container width is fixed in the Energy screen' );
       } );
 
       // @public (read-only) {Property.<number|null>}
