@@ -110,7 +110,6 @@ define( require => {
         const x = ( this.left - this.previousLeft ) / dt;
         if ( x !== previousX ) {
           this.leftWallVelocity.setXY( x, 0 );
-          phet.log && phet.log( 'leftWallVelocity.x = ' + this.leftWallVelocity.x );
         }
 
         this.previousLeft = this.left;
