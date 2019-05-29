@@ -26,7 +26,11 @@ define( require => {
   const GLOBAL_OPTIONS = new GasPropertiesGlobalOptions();
 
   const simOptions = {
+
+    // Contents of the Options dialog, accessible via the PhET menu
     optionsNode: new GasPropertiesGlobalOptionsNode( GLOBAL_OPTIONS ),
+
+    // Appears in the About dialog, accessible via the PhET menu
     credits: {
       //TODO #28 complete the credits
       leadDesign: 'Amy Rouinfar',
