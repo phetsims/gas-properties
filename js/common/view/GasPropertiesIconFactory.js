@@ -153,7 +153,7 @@ define( require => {
 
       // 2 particles away from wall
       heavy2Node.left = wallNode.right + 200;
-      heavy2Node.centerY = wallNode.centerY + 100;
+      heavy2Node.centerY = wallNode.centerY + 85;
       heavy4Node.left = wallNode.right + 150;
       heavy4Node.centerY = wallNode.centerY - 50;
 
