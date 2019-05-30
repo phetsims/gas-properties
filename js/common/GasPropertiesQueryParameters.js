@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO delete query parameters when they are no longer needed
 /**
  * Query parameters that are specific to this sim.
  * Running with ?log will print these query parameters and their values to the console at startup.
