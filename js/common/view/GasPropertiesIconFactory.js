@@ -44,6 +44,7 @@ define( require => {
     /**
      * Creates the icon for the Ideal screen.
      * @returns {Node}
+     * @public
      */
     createIdealScreenIcon() {
 
@@ -115,6 +116,7 @@ define( require => {
     /**
      * Creates the icon for the Explore screen.
      * @returns {Node}
+     * @public
      */
     createExploreScreenIcon() {
 
@@ -132,11 +134,11 @@ define( require => {
       const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
       const heavy1Node = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
       const heavy2Node = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
-      const light1Node = GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform );
-      const light2Node = GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform );
+      const heavy3Node = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
+      const heavy4Node = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
 
       const iconNode = new Node( {
-        children: [ wallNode, handleNode, heavy1Node, heavy2Node, light1Node, light2Node ]
+        children: [ wallNode, handleNode, heavy1Node, heavy2Node, heavy3Node, heavy4Node ]
       } );
 
       // layout
@@ -145,15 +147,15 @@ define( require => {
 
       // 1 particles against wall
       heavy1Node.left = wallNode.right;
-      heavy1Node.bottom = wallNode.centerY - 10;
-      light1Node.left = wallNode.right;
-      light1Node.top = wallNode.centerY + 15;
+      heavy1Node.bottom = wallNode.centerY;
+      heavy3Node.left = wallNode.right;
+      heavy3Node.top = wallNode.centerY;
 
       // 2 particles away from wall
       heavy2Node.left = wallNode.right + 200;
       heavy2Node.centerY = wallNode.centerY + 100;
-      light2Node.left = wallNode.right + 150;
-      light2Node.centerY = wallNode.centerY - 50;
+      heavy4Node.left = wallNode.right + 150;
+      heavy4Node.centerY = wallNode.centerY - 50;
 
       return new ScreenIcon( iconNode, {
         maxIconHeightProportion: 1,
@@ -164,6 +166,7 @@ define( require => {
     /**
      * Creates the icon for the Energy screen.
      * @returns {Node}
+     * @public
      */
     createEnergyScreenIcon() {
 
@@ -190,6 +193,49 @@ define( require => {
 
       return new ScreenIcon( iconNode, {
         maxIconHeightProportion: 0.75,
+        fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      } );
+    },
+
+    /**
+     * Creates the icon for the Diffusion screen.
+     * @returns {Node}
+     * @public
+     */
+    createDiffusionScreenIcon() {
+
+      const dividerNode = new Line( 0, 0, 0, 300, {
+        stroke: GasPropertiesColorProfile.dividerColorProperty,
+        lineWidth: 12
+      } );
+
+      // Particles
+      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
+
+      // Heavy particles
+      const heavyParticleLocations = [ new Vector2( 100, 75 ), new Vector2( 175, 185 ) ];
+      const heavyParticlesParent = new Node();
+      for ( let i = 0; i < heavyParticleLocations.length; i++ ) {
+        const particle = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
+        heavyParticlesParent.addChild( particle );
+        particle.center = heavyParticleLocations[ i ];
+      }
+
+      // Light particles
+      const lightParticlesLocation = [ new Vector2( -100, 75 ), new Vector2( -150, 150 ), new Vector2( -85, 200 )  ];
+      const lightParticlesParent = new Node();
+      for ( let i = 0; i < lightParticlesLocation.length; i++ ) {
+        const particle = GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform );
+        lightParticlesParent.addChild( particle );
+        particle.center = lightParticlesLocation[ i ];
+      }
+
+      const iconNode = new Node( {
+        children: [ dividerNode, heavyParticlesParent, lightParticlesParent ]
+      });
+
+      return new ScreenIcon( iconNode, {
+        maxIconHeightProportion: 1,
         fill: GasPropertiesColorProfile.screenBackgroundColorProperty
       } );
     },

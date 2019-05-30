@@ -12,6 +12,7 @@ define( require => {
   const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
   const DiffusionScreenView = require( 'GAS_PROPERTIES/diffusion/view/DiffusionScreenView' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -30,7 +31,8 @@ define( require => {
       const createView = ( model ) => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
 
       super( createModel, createView, tandem, {
-        name: screenDiffusionString
+        name: screenDiffusionString,
+        homeScreenIcon: GasPropertiesIconFactory.createDiffusionScreenIcon()
       } );
     }
   }
