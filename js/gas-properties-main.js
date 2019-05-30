@@ -11,7 +11,6 @@ define( require => {
   // modules
   const DiffusionScreen = require( 'GAS_PROPERTIES/diffusion/DiffusionScreen' );
   const ExploreScreen = require( 'GAS_PROPERTIES/explore/ExploreScreen' );
-  const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
   const GasPropertiesGlobalOptionsNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesGlobalOptionsNode' );
   const IdealScreen = require( 'GAS_PROPERTIES/ideal/IdealScreen' );
   const EnergyScreen = require( 'GAS_PROPERTIES/energy/EnergyScreen' );
@@ -22,13 +21,10 @@ define( require => {
   // strings
   const gasPropertiesTitleString = require( 'string!GAS_PROPERTIES/gas-properties.title' );
 
-  // constants
-  const GLOBAL_OPTIONS = new GasPropertiesGlobalOptions();
-
   const simOptions = {
 
     // Contents of the Options dialog, accessible via the PhET menu
-    optionsNode: new GasPropertiesGlobalOptionsNode( GLOBAL_OPTIONS ),
+    optionsNode: new GasPropertiesGlobalOptionsNode(),
 
     // Appears in the About dialog, accessible via the PhET menu
     credits: {

@@ -17,6 +17,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
@@ -25,7 +26,6 @@ define( require => {
   // constants
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.pressureGaugeSamplePeriod; // ps
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
-  const PRESSURE_NOISE_OFF = GasPropertiesQueryParameters.pressureNoiseOff; // whether jitter is turned off
   const MIN_JITTER = 0; // minimum amount of jitter, in kPa
   const MAX_JITTER = 50; // maximum amount of jitter, in kPa
   assert && assert( MIN_JITTER < MAX_JITTER, 'MIN_JITTER must be < MAX_JITTER' );
@@ -105,7 +105,7 @@ define( require => {
         // Add jitter (kPa) to the displayed value, more jitter with lower pressure.
         // Jitter is added if we're not holding pressure constant.
         let jitter = 0;
-        if ( jitterEnabled && !PRESSURE_NOISE_OFF ) {
+        if ( jitterEnabled && GasPropertiesGlobalOptions.pressureNoiseProperty.value ) {
           jitter = this.pressureJitterFunction( this.pressureProperty.value ) *
                    this.scaleJitterFunction( this.temperatureProperty.value ) *
                    phet.joist.random.nextDouble();

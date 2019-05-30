@@ -140,6 +140,9 @@
   "initialTemperatureK": {
     "value": "Initial Temperature (K)"
   },
+  "pressureNoise": {
+    "value": "Pressure Noise"
+  },
   "oopsTemperatureEmpty": {
     "value": "Oops!<br><br>Temperature cannot be held constant<br>when the container is empty."
   },

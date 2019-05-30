@@ -9,32 +9,41 @@ define( require => {
   'use strict';
 
   // modules
+  const Checkbox = require( 'SUN/Checkbox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
-  class GasPropertiesGlobalOptionsNode extends Node {
+  // strings
+  const pressureNoiseString = require( 'string!GAS_PROPERTIES/pressureNoise' );
 
-    /**
-     * @param {GasPropertiesGlobalOptions} globalOptions
-     */
-    constructor( globalOptions ) {
-      assert && assert( globalOptions instanceof GasPropertiesGlobalOptions,
-        `invalid globalOptions: ${globalOptions}` );
+  class GasPropertiesGlobalOptionsNode extends VBox {
+
+    constructor() {
 
       // Projector Mode
-      const projectorModeCheckbox = new ProjectorModeCheckbox( {
-        projectorModeEnabledProperty: globalOptions.projectorModeEnabledProperty
-      } );
+      const projectorModeCheckbox = new ProjectorModeCheckbox( _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
+        font: GasPropertiesConstants.CONTROL_FONT,
+        projectorModeEnabledProperty: GasPropertiesGlobalOptions.projectorModeEnabledProperty
+      } ) );
+
+      const pressureNoiseCheckbox = new Checkbox(
+        new Text( pressureNoiseString, { font: GasPropertiesConstants.CONTROL_FONT } ),
+        GasPropertiesGlobalOptions.pressureNoiseProperty,
+        GasPropertiesConstants.CHECKBOX_OPTIONS
+      );
 
       super( {
-        children: [ projectorModeCheckbox ]
+        spacing: 12,
+        children: [ projectorModeCheckbox, pressureNoiseCheckbox ]
       } );
 
       // Switch between default and projector color profiles.
-      globalOptions.projectorModeEnabledProperty.link( projectorModeEnabled => {
+      GasPropertiesGlobalOptions.projectorModeEnabledProperty.link( projectorModeEnabled => {
         GasPropertiesColorProfile.profileNameProperty.set( projectorModeEnabled ? 'projector' : 'default' );
       } );
     }

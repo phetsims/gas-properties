@@ -27,7 +27,7 @@ define( require => {
     constructor( booleanProperty, options ) {
       assert && assert( booleanProperty instanceof BooleanProperty, `invalid booleanProperty: ${booleanProperty}` );
 
-      options = _.extend( {
+      options = _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
         text: null, // {string|null} optional text label
         icon: null, // {Node|null} optional icon, to the right of text
         textFill: GasPropertiesColorProfile.textFillProperty,
@@ -36,8 +36,6 @@ define( require => {
         font: GasPropertiesConstants.CONTROL_FONT,
 
         // Checkbox options
-        spacing: 8,
-        boxWidth: 16,
         checkboxColor: GasPropertiesColorProfile.checkboxStrokeProperty,
         checkboxColorBackground: GasPropertiesColorProfile.checkboxFillProperty
       }, options );

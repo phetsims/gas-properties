@@ -19,10 +19,13 @@ define( require => {
     // Public-facing query parameters.
     //==================================================================================================================
 
-    // Turns off noise that is added to the pressure gauge to make it behave more realistically.
+    // Whether to add noise to the pressure gauge to make it behave more realistically.
     // See https://github.com/phetsims/gas-properties/issues/92
     // Public facing.
-    pressureNoiseOff: { type: 'flag' },
+    pressureNoise: {
+      type: 'boolean',
+      defaultValue: true
+    },
 
     //==================================================================================================================
     // For internal use only. Expose to the public only after discussion and promotion to public-facing.

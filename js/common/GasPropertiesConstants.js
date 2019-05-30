@@ -81,6 +81,11 @@ define( require => {
       yMargin: 4
     },
 
+    CHECKBOX_OPTIONS: {
+      spacing: 8,
+      boxWidth: 16
+    },
+
     HISTOGRAM_AXIS_LABEL_OPTIONS: {
       fill: GasPropertiesColorProfile.textFillProperty,
       font: new PhetFont( 14 )
