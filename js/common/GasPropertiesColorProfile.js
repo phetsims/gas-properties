@@ -122,12 +122,6 @@ define( require => {
       projector: 'rgba( 255, 255, 255, 0.5 )'
     },
 
-    // eraser button that is used to clear particles from the container
-    eraserButtonColor: {
-      default: 'rgb( 139, 139, 139 )',
-      projector: 'rgb( 188, 188, 188 )'
-    },
-
     //------------------------------------------------------------------------------------------------------------------
     // These colors currently do NOT change in projector mode. They are included here for future-proofing,
     // and to facilitate experimenting with colors in gas-properties-colors.html.
@@ -224,6 +218,11 @@ define( require => {
     // container divider in the Diffusion screen
     dividerColor: {
       default: 'rgb( 70, 205, 85 )'
+    },
+
+    // eraser button that is used to clear particles from the container
+    eraserButtonColor: {
+      default: 'rgb( 220, 220, 220 )'
     }
   } );
 
