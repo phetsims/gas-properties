@@ -110,7 +110,7 @@ define( require => {
     maxJitter: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 200
+      defaultValue: 50
     },
 
     // Sample period for updating the pressure gauge, in ps.
