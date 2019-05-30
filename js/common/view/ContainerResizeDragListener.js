@@ -47,8 +47,18 @@ define( require => {
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
 
-          // Set the desired width, so that container will animate to new width with a speed limit.  See #90.
-          container.desiredWidth = container.widthRange.constrainValue( container.right - modelX );
+
+          const desiredWidth = container.widthRange.constrainValue( container.right - modelX );
+          if ( desiredWidth > container.widthProperty.value ) {
+
+            // When making the container larger, no speed limit.
+            container.resizeImmediately( desiredWidth );
+          }
+          else {
+
+            // When making the container smaller, limit the speed.  See #90.
+            container.desiredWidth = container.widthRange.constrainValue( container.right - modelX );
+          }
         },
 
         end: ( listener ) => {
