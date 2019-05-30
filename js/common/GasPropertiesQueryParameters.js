@@ -97,22 +97,6 @@ define( require => {
       defaultValue: 8E5
     },
 
-    // Minimum amount of jitter in the pressure gauge, in kPa.
-    // For internal use only.
-    minJitter: {
-      type: 'number',
-      isValidValue: value => ( value >= 0 ),
-      defaultValue: 0
-    },
-
-    // Maximum amount of jitter in the pressure gauge, in kPa.
-    // For internal use only.
-    maxJitter: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 50
-    },
-
     // Sample period for updating the pressure gauge, in ps.
     // For internal use only.
     pressureGaugeSamplePeriod: {

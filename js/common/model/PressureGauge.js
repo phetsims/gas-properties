@@ -26,8 +26,8 @@ define( require => {
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.pressureGaugeSamplePeriod; // ps
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
   const PRESSURE_NOISE_OFF = GasPropertiesQueryParameters.pressureNoiseOff; // whether jitter is turned off
-  const MIN_JITTER = GasPropertiesQueryParameters.minJitter; // minimum amount of jitter, in kPa
-  const MAX_JITTER = GasPropertiesQueryParameters.maxJitter; // maximum amount of jitter, in kPa
+  const MIN_JITTER = 0; // minimum amount of jitter, in kPa
+  const MAX_JITTER = 50; // maximum amount of jitter, in kPa
   assert && assert( MIN_JITTER < MAX_JITTER, 'MIN_JITTER must be < MAX_JITTER' );
 
   class PressureGauge {
