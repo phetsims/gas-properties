@@ -60,20 +60,34 @@ define( require => {
       defaultValue: 800
     },
 
-    // The sample period for the histograms and Average Speed display, in ps.
-    // For internal use only.
-    histogramSamplePeriod: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 1
-    },
-
     // Pressure at which the lid blows off of the container, in kPa.
     // For internal use only.
     maxPressure: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 20000
+    },
+
+    /**
+     * Speed limit for the left movable wall, in pm/ps.
+     * For internal use only.
+     */
+    wallSpeedLimit: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 800
+    },
+
+    //==================================================================================================================
+    // TODO query parameters below here are candidates for removal
+    //==================================================================================================================
+
+    // The sample period for the histograms and Average Speed display, in ps.
+    // For internal use only.
+    histogramSamplePeriod: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 1
     },
 
     // Number of bins for the histograms.
@@ -106,16 +120,6 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 0.75
-    },
-
-    /**
-     * Speed limit for the left movable wall, in pm/ps.
-     * For internal use only.
-     */
-    wallSpeedLimit: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 800
     },
 
     /**
