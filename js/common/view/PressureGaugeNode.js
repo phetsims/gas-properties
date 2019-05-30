@@ -26,13 +26,6 @@ define( require => {
   const DIAL_RADIUS = 50;
   const POST_HEIGHT = 0.6 * DIAL_RADIUS;
 
-  // lighting from above
-  const POST_GRADIENT = new LinearGradient( 0, 0, 0, POST_HEIGHT )
-    .addColorStop( 0, 'rgb( 120, 120, 120 )' )
-    .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
-    .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
-    .addColorStop( 1, 'rgb( 100, 100, 100 )' );
-
   class PressureGaugeNode extends Node {
 
     /**
@@ -51,9 +44,8 @@ define( require => {
         } );
 
       // horizontal post the sticks out of the left side of the gauge
-      const postHeight = 0.6 * DIAL_RADIUS;
-      const postNode = new Rectangle( 0, 0, DIAL_RADIUS + 15, postHeight, {
-        fill: POST_GRADIENT,
+      const postNode = new Rectangle( 0, 0, DIAL_RADIUS + 15, POST_HEIGHT, {
+        fill: PressureGaugeNode.createPostGradient( POST_HEIGHT ),
         right: dialNode.centerX,
         centerY: dialNode.centerY
       } );
@@ -76,6 +68,23 @@ define( require => {
       if ( GasPropertiesQueryParameters.origin ) {
         this.addChild( new Circle( 3, { fill: 'red' } ) );
       }
+    }
+
+    /**
+     * Creates the gradient for the post that connects the gauge to the container.
+     * @param {number} postHeight
+     * @returns {Gradient}
+     * @public
+     * @static
+     */
+    static createPostGradient( postHeight ) {
+      assert && assert( typeof postHeight === 'number' && postHeight > 0, `invalid postHeight: ${postHeight}` );
+
+      return new LinearGradient( 0, 0, 0, postHeight )
+        .addColorStop( 0, 'rgb( 120, 120, 120 )' )
+        .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
+        .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
+        .addColorStop( 1, 'rgb( 100, 100, 100 )' );
     }
   }
 

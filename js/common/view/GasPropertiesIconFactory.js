@@ -21,7 +21,6 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
-  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -29,6 +28,7 @@ define( require => {
   const Path = require( 'SCENERY/nodes/Path' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const ParticleNode = require( 'GAS_PROPERTIES/common/view/ParticleNode' );
+  const PressureGaugeNode = require( 'GAS_PROPERTIES/common/view/PressureGaugeNode' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ScreenIcon = require( 'JOIST/ScreenIcon' );
@@ -71,16 +71,8 @@ define( require => {
 
       const postWidth = 0.6 * gaugeNode.width;
       const postHeight = 0.3 * gaugeNode.height;
-
-      //TODO duplicated in PressureGaugeNode
-      const postGradient = new LinearGradient( 0, 0, 0, postHeight )
-        .addColorStop( 0, 'rgb( 120, 120, 120 )' )
-        .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
-        .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
-        .addColorStop( 1, 'rgb( 100, 100, 100 )' );
-
       const postNode = new Rectangle( 0, 0, postWidth, postHeight, {
-        fill: postGradient,
+        fill: PressureGaugeNode.createPostGradient( postHeight ),
         stroke: 'black'
       } );
 
