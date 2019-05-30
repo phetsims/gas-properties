@@ -12,6 +12,7 @@ define( require => {
   const ExploreModel = require( 'GAS_PROPERTIES/explore/model/ExploreModel' );
   const ExploreScreenView = require( 'GAS_PROPERTIES/explore/view/ExploreScreenView' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -30,7 +31,8 @@ define( require => {
       const createView = ( model ) => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
 
       super( createModel, createView, tandem, {
-        name: screenExploreString
+        name: screenExploreString,
+        homeScreenIcon: GasPropertiesIconFactory.createExploreScreenIcon()
       } );
     }
   }

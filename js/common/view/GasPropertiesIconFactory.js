@@ -18,11 +18,13 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
+  const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Line = require( 'SCENERY/nodes/Line' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -82,9 +84,9 @@ define( require => {
 
       // Locations of the particles, determined empirically
       const particleLocations = [ new Vector2( -50, 0 ), new Vector2( 600, 450 ), new Vector2( -550, 600 ) ];
-      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 2 );
 
       // Particles
+      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 2 );
       const particlesParent = new Node( { scale: 0.1 } );
       for ( let i = 0; i < particleLocations.length; i++ ) {
         const particle = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
@@ -106,6 +108,55 @@ define( require => {
       } );
 
       return new ScreenIcon( iconNode, {
+        fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      } );
+    },
+
+    /**
+     * Creates the icon for the Explore screen.
+     * @returns {Node}
+     */
+    createExploreScreenIcon() {
+
+      const handleNode = new HandleNode( {
+        gripBaseColor: GasPropertiesColorProfile.resizeGripColorProperty,
+        rotation: -Math.PI / 2
+      } );
+
+      const wallNode = new Line( 0, 0, 0, 300, {
+        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+        lineWidth: 10
+      } );
+
+      // Particles
+      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
+      const heavy1Node = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
+      const heavy2Node = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
+      const light1Node = GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform );
+      const light2Node = GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform );
+
+      const iconNode = new Node( {
+        children: [ wallNode, handleNode, heavy1Node, heavy2Node, light1Node, light2Node ]
+      } );
+
+      // layout
+      handleNode.right = wallNode.left;
+      handleNode.centerY = wallNode.centerY;
+
+      // 1 particles against wall
+      heavy1Node.left = wallNode.right;
+      heavy1Node.bottom = wallNode.centerY - 10;
+      light1Node.left = wallNode.right;
+      light1Node.top = wallNode.centerY + 15;
+
+      // 2 particles away from wall
+      heavy2Node.left = wallNode.right + 200;
+      heavy2Node.centerY = wallNode.centerY + 100;
+      light2Node.left = wallNode.right + 150;
+      light2Node.centerY = wallNode.centerY - 50;
+
+      return new ScreenIcon( iconNode, {
+        maxIconHeightProportion: 1,
         fill: GasPropertiesColorProfile.screenBackgroundColorProperty
       } );
     },
