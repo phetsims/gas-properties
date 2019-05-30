@@ -45,11 +45,13 @@ define( require => {
      */
     createIdealScreenIcon() {
 
+      // Container
       const containerNode = new Rectangle( 0, 0, 275, 200, {
         stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
         lineWidth: 5
       } );
 
+      // Thermometer
       const thermometerNode = new ThermometerNode( 0, 100, new NumberProperty( 40 ), {
         backgroundFill: 'white',
         glassThickness: 5,
@@ -57,6 +59,7 @@ define( require => {
         bottom: containerNode.top + 20
       } );
 
+      // Gauge
       const gaugeNode = new GaugeNode( new NumberProperty( 30 ), '', new Range( 0, 100 ), {
         needleLineWidth: 8,
         numberOfTicks: 15,
@@ -69,6 +72,7 @@ define( require => {
       } );
       gaugeNode.setScaleMagnitude( 0.5 * containerNode.height / gaugeNode.height );
 
+      // Post that connects the gauge to the container
       const postWidth = 0.6 * gaugeNode.width;
       const postHeight = 0.3 * gaugeNode.height;
       const postNode = new Rectangle( 0, 0, postWidth, postHeight, {
@@ -76,9 +80,12 @@ define( require => {
         stroke: 'black'
       } );
 
-      const particlesParent = new Node( { scale: 0.1 } );
+      // Locations of the particles, determined empirically
       const particleLocations = [ new Vector2( -50, 0 ), new Vector2( 600, 450 ), new Vector2( -550, 600 ) ];
       const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 2 );
+
+      // Particles
+      const particlesParent = new Node( { scale: 0.1 } );
       for ( let i = 0; i < particleLocations.length; i++ ) {
         const particle = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
         particlesParent.addChild( particle );
@@ -88,10 +95,10 @@ define( require => {
       // layout
       thermometerNode.centerX = containerNode.right - 0.25 * containerNode.width;
       thermometerNode.centerY = containerNode.top - 3;
-      gaugeNode.top = containerNode.top;
       postNode.left = containerNode.right - 1;
-      postNode.centerY = gaugeNode.centerY;
+      postNode.centerY = containerNode.top + gaugeNode.height / 2;
       gaugeNode.centerX = postNode.right;
+      gaugeNode.centerY = postNode.centerY;
       particlesParent.center = containerNode.center;
 
       const iconNode = new Node( {
