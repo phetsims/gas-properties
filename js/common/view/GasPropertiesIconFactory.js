@@ -131,6 +131,7 @@ define( require => {
       } );
 
       return new ScreenIcon( iconNode, {
+        maxIconHeightProportion: 0.75,
         fill: GasPropertiesColorProfile.screenBackgroundColorProperty
       } );
     },
