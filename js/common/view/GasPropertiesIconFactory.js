@@ -77,7 +77,7 @@ define( require => {
       } );
 
       const particlesParent = new Node( { scale: 0.1 } );
-      const particleLocations = [ new Vector2( 0, 0 ), new Vector2( 550, 450 ), new Vector2( -500, 600 ) ];
+      const particleLocations = [ new Vector2( -50, 0 ), new Vector2( 600, 450 ), new Vector2( -550, 600 ) ];
       const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 2 );
       for ( let i = 0; i < particleLocations.length; i++ ) {
         const particle = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
@@ -88,10 +88,10 @@ define( require => {
       // layout
       thermometerNode.centerX = containerNode.right - 0.25 * containerNode.width;
       thermometerNode.centerY = containerNode.top - 3;
+      gaugeNode.top = containerNode.top;
       postNode.left = containerNode.right - 1;
-      postNode.centerY = containerNode.centerY;
+      postNode.centerY = gaugeNode.centerY;
       gaugeNode.centerX = postNode.right;
-      gaugeNode.centerY = postNode.centerY;
       particlesParent.center = containerNode.center;
 
       const iconNode = new Node( {
