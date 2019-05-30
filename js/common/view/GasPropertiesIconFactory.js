@@ -35,6 +35,7 @@ define( require => {
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const Shape = require( 'KITE/Shape' );
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   const GasPropertiesIconFactory = {
 
@@ -84,8 +85,13 @@ define( require => {
       } );
 
       const particlesParent = new Node( { scale: 0.1 } );
-      particlesParent.addChild( GasPropertiesIconFactory.createHeavyParticleIcon( ModelViewTransform2.createIdentity() ) );
-      //TODO add more particles
+      const particleLocations = [ new Vector2( 0, 0 ), new Vector2( 550, 450 ), new Vector2( -500, 600 ) ];
+      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 2 );
+      for ( let i = 0; i < particleLocations.length; i++ ) {
+        const particle = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
+        particlesParent.addChild( particle );
+        particle.center = particleLocations[ i ];
+      }
 
       // layout
       thermometerNode.centerX = containerNode.right - 0.25 * containerNode.width;
