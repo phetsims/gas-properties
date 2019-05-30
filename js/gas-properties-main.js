@@ -37,7 +37,7 @@ define( require => {
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
             'Emily Moore, Ariel Paul, Kathy Perkins, Carl Wieman',
-      qualityAssurance: '',
+      qualityAssurance: 'Kathryn Woessner',
       graphicArts: '',
       thanks: ''
     }
