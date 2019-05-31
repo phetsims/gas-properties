@@ -30,18 +30,19 @@ define( require => {
 
       options = _.extend( {
         spacing: 12,
-        hasPressureNoiseCheckbox: true
+        hasPressureNoiseCheckbox: true // whether to include the 'Pressure Noise' checkbox
       }, options );
 
       const children = [];
 
-      // Projector Mode
+      // Projector Mode checkbox
       const projectorModeCheckbox = new ProjectorModeCheckbox( _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
         font: GasPropertiesConstants.CONTROL_FONT,
         projectorModeEnabledProperty: GasPropertiesGlobalOptions.projectorModeEnabledProperty
       } ) );
       children.push( projectorModeCheckbox );
 
+      // Pressure Noise checkbox
       if ( options.hasPressureNoiseCheckbox ) {
         const pressureNoiseCheckbox = new Checkbox(
           new Text( pressureNoiseString, { font: GasPropertiesConstants.CONTROL_FONT } ),
