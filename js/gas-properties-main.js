@@ -11,6 +11,7 @@ define( require => {
   // modules
   const DiffusionScreen = require( 'GAS_PROPERTIES/diffusion/DiffusionScreen' );
   const ExploreScreen = require( 'GAS_PROPERTIES/explore/ExploreScreen' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesGlobalOptionsNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesGlobalOptionsNode' );
   const IdealScreen = require( 'GAS_PROPERTIES/ideal/IdealScreen' );
   const EnergyScreen = require( 'GAS_PROPERTIES/energy/EnergyScreen' );
@@ -26,17 +27,8 @@ define( require => {
     // Contents of the Options dialog, accessible via the PhET menu
     optionsNode: new GasPropertiesGlobalOptionsNode(),
 
-    // Appears in the About dialog, accessible via the PhET menu
-    credits: {
-      //TODO #28 complete the credits
-      leadDesign: 'Amy Rouinfar',
-      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-      team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
-            'Emily Moore, Ariel Paul, Kathy Perkins, Carl Wieman',
-      qualityAssurance: 'Kathryn Woessner',
-      graphicArts: '',
-      thanks: ''
-    }
+    // Credits appear in the About dialog, accessible via the PhET menu
+    credits: GasPropertiesConstants
   };
 
   SimLauncher.launch( () => {

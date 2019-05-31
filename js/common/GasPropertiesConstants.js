@@ -21,6 +21,16 @@ define( require => {
 
   const GasPropertiesConstants = {
 
+    CREDITS: {
+      leadDesign: 'Amy Rouinfar',
+      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
+      team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
+            'Emily Moore, Ariel Paul, Kathy Perkins, Carl Wieman',
+      qualityAssurance: 'Kathryn Woessner',  //TODO #28 complete QA credits
+      graphicArts: '',
+      thanks: ''
+    },
+
     SCREEN_VIEW_X_MARGIN: 20,
     SCREEN_VIEW_Y_MARGIN: 20,
 

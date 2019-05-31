@@ -23,24 +23,38 @@ define( require => {
 
   class GasPropertiesGlobalOptionsNode extends VBox {
 
-    constructor() {
+    /**
+     * @param {Object} [options]
+     */
+    constructor( options ) {
+
+      options = _.extend( {
+        spacing: 12,
+        hasPressureNoiseCheckbox: true
+      }, options );
+
+      const children = [];
 
       // Projector Mode
       const projectorModeCheckbox = new ProjectorModeCheckbox( _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
         font: GasPropertiesConstants.CONTROL_FONT,
         projectorModeEnabledProperty: GasPropertiesGlobalOptions.projectorModeEnabledProperty
       } ) );
+      children.push( projectorModeCheckbox );
 
-      const pressureNoiseCheckbox = new Checkbox(
-        new Text( pressureNoiseString, { font: GasPropertiesConstants.CONTROL_FONT } ),
-        GasPropertiesGlobalOptions.pressureNoiseProperty,
-        GasPropertiesConstants.CHECKBOX_OPTIONS
-      );
+      if ( options.hasPressureNoiseCheckbox ) {
+        const pressureNoiseCheckbox = new Checkbox(
+          new Text( pressureNoiseString, { font: GasPropertiesConstants.CONTROL_FONT } ),
+          GasPropertiesGlobalOptions.pressureNoiseProperty,
+          GasPropertiesConstants.CHECKBOX_OPTIONS
+        );
+        children.push( pressureNoiseCheckbox );
+      }
 
-      super( {
-        spacing: 12,
-        children: [ projectorModeCheckbox, pressureNoiseCheckbox ]
-      } );
+      assert && assert( !options.children, 'GasPropertiesGlobalOptionsNode sets children' );
+      options.children = children;
+
+      super( options );
 
       // Switch between default and projector color profiles.
       GasPropertiesGlobalOptions.projectorModeEnabledProperty.link( projectorModeEnabled => {
