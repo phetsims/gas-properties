@@ -21,12 +21,13 @@ define( require => {
 
   const GasPropertiesConstants = {
 
+    // Used by gas-properties-main.js and diffusion-main.js, see https://github.com/phetsims/gas-properties/issues/28
     CREDITS: {
       leadDesign: 'Amy Rouinfar',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
             'Emily Moore, Ariel Paul, Kathy Perkins, Carl Wieman',
-      qualityAssurance: 'Kathryn Woessner',  //TODO #28 complete QA credits
+      qualityAssurance: 'Kathryn Woessner',
       graphicArts: '',
       thanks: ''
     },
