@@ -1,4 +1,7 @@
-TODO model description
+# Gas Properties - model description
+
+This is a high-level description of the model used in Gas Property. It's intended for audiences
+that are not necessarily technical.
 
 Constraints:
  
