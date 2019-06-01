@@ -28,7 +28,7 @@ define( require => {
     optionsNode: new GasPropertiesGlobalOptionsNode(),
 
     // Credits appear in the About dialog, accessible via the PhET menu
-    credits: GasPropertiesConstants
+    credits: GasPropertiesConstants.CREDITS
   };
 
   SimLauncher.launch( () => {
