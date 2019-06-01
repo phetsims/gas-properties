@@ -212,26 +212,26 @@ define( require => {
       // Particles
       const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
 
-      // Heavy particles
-      const heavyParticleLocations = [ new Vector2( 100, 75 ), new Vector2( 175, 185 ) ];
-      const heavyParticlesParent = new Node();
-      for ( let i = 0; i < heavyParticleLocations.length; i++ ) {
-        const particle = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
-        heavyParticlesParent.addChild( particle );
-        particle.center = heavyParticleLocations[ i ];
+      // DiffusionParticle1 particles
+      const particle1Locations = [ new Vector2( -100, 75 ), new Vector2( -150, 150 ), new Vector2( -85, 200 )  ];
+      const particles1Parent = new Node();
+      for ( let i = 0; i < particle1Locations.length; i++ ) {
+        const particle = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform );
+        particles1Parent.addChild( particle );
+        particle.center = particle1Locations[ i ];
       }
 
-      // Light particles
-      const lightParticlesLocation = [ new Vector2( -100, 75 ), new Vector2( -150, 150 ), new Vector2( -85, 200 )  ];
-      const lightParticlesParent = new Node();
-      for ( let i = 0; i < lightParticlesLocation.length; i++ ) {
-        const particle = GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform );
-        lightParticlesParent.addChild( particle );
-        particle.center = lightParticlesLocation[ i ];
+      // DiffusionParticle2 particles
+      const particle2Locations = [ new Vector2( 100, 75 ), new Vector2( 175, 185 ) ];
+      const particles2Parent = new Node();
+      for ( let i = 0; i < particle2Locations.length; i++ ) {
+        const particle = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
+        particles2Parent.addChild( particle );
+        particle.center = particle2Locations[ i ];
       }
 
       const iconNode = new Node( {
-        children: [ dividerNode, heavyParticlesParent, lightParticlesParent ]
+        children: [ dividerNode, particles1Parent, particles2Parent ]
       });
 
       return new ScreenIcon( iconNode, {
