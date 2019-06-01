@@ -19,6 +19,7 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
@@ -26,18 +27,20 @@ define( require => {
 
   // constants
 
-  // Temperature changes below this value (in K) are considered zero and result in no animation of flame/ice.
-  // This is required to avoid spurious animation due to floating-point errors.
-  const MIN_DELTA_T = GasPropertiesQueryParameters.minDeltaT;
-
-  // Temperature changes >= this value (in K) result in flame/ice being fully on.
-  const MAX_DELTA_T = GasPropertiesQueryParameters.maxDeltaT;
-
-  // Smallest percentage of the flame/ice that is raised out of the bucket for any temperature change.
-  const MIN_HEAT_FACTOR = 0.2;
-
   // Animation duration in seconds, split evenly between raising and lowering the flame/ice.
   const HEAT_COOL_DURATION = 1.5;
+
+  // Temperature changes below this value (in K) are considered zero and result in no animation of flame/ice.
+  // This is required to avoid spurious animation due to floating-point errors.
+  const MIN_DELTA_T = 1E-5;
+
+  // HeaterCoolerNode takes a value fro [-1,1], when -1 is ice, 1 is flame, and 0 is nothing. This values is the
+  // minimum absolute value, and ensures that some of the flame/ice is always shown for small temperature changes.
+  const MIN_HEAT_COOL_FACTOR = 0.2;
+
+  // Mapping of deltaT * N to heat factor.  The min factor is 0.2 so that we show at least 20% of the flame/ice.
+  const TO_HEAT_FACTOR = new LinearFunction( 0, GasPropertiesQueryParameters.maxDeltaTN,
+    MIN_HEAT_COOL_FACTOR, 1, true /* clamp */ );
 
   // Animations will be controlled by calling step
   const STEP_EMITTER = null;
@@ -101,8 +104,14 @@ define( require => {
               // stop any animation that is in progress
               stopAnimation();
 
-              // heat/cool factor is relative to temperature change and number of particles
-              const heatCoolFactor = computeHeatCoolFactor( deltaT, numberOfParticles );
+              // compute heat/cool factor, relative to temperature change and number of particles
+              const deltaTN = deltaT * numberOfParticles; // deltaT * N
+              const heatCoolFactor = Util.sign( deltaT ) * TO_HEAT_FACTOR( Math.abs( deltaTN ) );
+              assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` +
+              ` deltaT=${deltaT} numberOfParticles=${numberOfParticles}` );
+
+              //TODO #88 delete this after we tune GasPropertiesQueryParameters.maxDeltaTN
+              console.log( `deltaT=${deltaT} N=${numberOfParticles} heatCoolFactor=${heatCoolFactor}` );
 
               // Animation that moves the flame/ice up
               this.animation = new Animation( {
@@ -166,29 +175,6 @@ define( require => {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       this.animation && this.animation.step( dt );
     }
-  }
-
-  /**
-   * Converts a change in temperature to a heat/cool factor that is appropriate for use with HeaterCoolerNode.
-   * @param {number} deltaT
-   * @param {number} numberOfParticles
-   * @returns {number}
-   */
-  function computeHeatCoolFactor( deltaT, numberOfParticles ) {
-    assert && assert( typeof deltaT === 'number' && Math.abs( deltaT ) > 0, `invalid deltaT: ${deltaT}` );
-    assert && assert( typeof numberOfParticles === 'number' && numberOfParticles > 0,
-      `invalid numberOfParticles: ${numberOfParticles}` );
-
-    // linear mapping of temperature change to heat factor
-    let heatCoolFactor = Util.linear( 0, MAX_DELTA_T, MIN_HEAT_FACTOR, 1, Math.abs( deltaT ) );
-
-    // clamp to the heat factor range
-    heatCoolFactor = Util.clamp( heatCoolFactor, MIN_HEAT_FACTOR, 1 );
-
-    // set the sign to correspond to heat vs cool
-    heatCoolFactor *= Util.sign( deltaT );
-
-    return heatCoolFactor;
   }
 
   return gasProperties.register( 'AnimatedHeaterCoolerNode', AnimatedHeaterCoolerNode );

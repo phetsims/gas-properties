@@ -123,25 +123,13 @@ define( require => {
 
     /**
      * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
-     * Temperature changes below this value (in K) are considered zero and result in no animation of flame/ice.
-     * This is required to avoid spurious animation due to floating-point errors.
+     * deltaT * N >= this value (in K) results in flame/ice being fully on.
      * For internal use only.
      */
-    minDeltaT: {
-      type: 'number',
-      isValidValue: value => ( value >= 0 ),
-      defaultValue: 0.1
-    },
-
-    /**
-     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
-     * Temperature changes >= this value (in K) result in flame/ice being fully on.
-     * For internal use only.
-     */
-    maxDeltaT: {
+    maxDeltaTN: {
       type: 'number',
       isValidValue: value => ( value > 0 ),
-      defaultValue: 100
+      defaultValue: 10000
     }
   } );
 
