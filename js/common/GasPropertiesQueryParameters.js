@@ -142,28 +142,6 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 100
-    },
-
-    /**
-     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
-     * Smallest percentage of the flame/ice that is raised out of the bucket for any temperature change.
-     * For internal use only.
-     */
-    minHeatCoolFactor: {
-      type: 'number',
-      isValidValue: value => ( value > 0 && value < 1 ),
-      defaultValue: 0.2
-    },
-
-    /**
-     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
-     * Animation duration in seconds, split evenly between raising and lowering the flame/ice.
-     * For internal use only.
-     */
-    heatCoolDuration: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 1.5
     }
   } );
 

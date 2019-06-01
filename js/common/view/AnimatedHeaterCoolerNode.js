@@ -34,10 +34,10 @@ define( require => {
   const MAX_DELTA_T = GasPropertiesQueryParameters.maxDeltaT;
 
   // Smallest percentage of the flame/ice that is raised out of the bucket for any temperature change.
-  const MIN_HEAT_FACTOR = GasPropertiesQueryParameters.minHeatCoolFactor;
+  const MIN_HEAT_FACTOR = 0.2;
 
   // Animation duration in seconds, split evenly between raising and lowering the flame/ice.
-  const HEAT_COOL_DURATION = GasPropertiesQueryParameters.heatCoolDuration;
+  const HEAT_COOL_DURATION = 1.5;
 
   // Animations will be controlled by calling step
   const STEP_EMITTER = null;
