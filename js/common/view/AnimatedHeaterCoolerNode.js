@@ -28,7 +28,7 @@ define( require => {
 
   // Temperature changes below this value (in K) are considered zero and result in no animation of flame/ice.
   // This is required to avoid spurious animation due to floating-point errors.
-  const MIN_DELTA_T = GasPropertiesQueryParameters.minDeltaT; 
+  const MIN_DELTA_T = GasPropertiesQueryParameters.minDeltaT;
 
   // Temperature changes >= this value (in K) result in flame/ice being fully on.
   const MAX_DELTA_T = GasPropertiesQueryParameters.maxDeltaT;
@@ -82,62 +82,64 @@ define( require => {
 
       // When temperature changes in HoldConstantEnum.PRESSURE_T mode, animate the heater/cooler.
       temperatureProperty.link( ( temperature, previousTemperature ) => {
-        if ( temperature === null || previousTemperature === null ) {
-          stopAnimation();
-        }
-        else if ( holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
-
-          const deltaT = temperature - previousTemperature;
-
-          if ( Math.abs( deltaT ) > MIN_DELTA_T ) {
-
-            // stop any animation that is in progress
+        if ( holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
+          if ( temperature === null || previousTemperature === null ) {
             stopAnimation();
+          }
+          else {
 
-            // heat/cool factor is relative to temperature change
-            const heatCoolFactor = deltaTemperatureToHeatCoolFactor( deltaT );
+            const deltaT = temperature - previousTemperature;
 
-            // Animation that moves the flame/ice up
-            this.animation = new Animation( {
-              property: heatCoolFactorProperty,
-              to: heatCoolFactor,
-              duration: HEAT_COOL_DURATION / 2,
-              easing: Easing.CUBIC_OUT, // accelerates
-              stepEmitter: STEP_EMITTER
-            } );
+            if ( Math.abs( deltaT ) > MIN_DELTA_T ) {
 
-            // If the Animation is stopped prematurely, abruptly turn off heat/cool
-            this.animation.stopEmitter.addListener( () => {
-              this.animation = null;
-              heatCoolFactorProperty.value = 0;
-            } );
+              // stop any animation that is in progress
+              stopAnimation();
 
-            // When the 'up' Animation finishes...
-            this.animation.finishEmitter.addListener( () => {
+              // heat/cool factor is relative to temperature change
+              const heatCoolFactor = deltaTemperatureToHeatCoolFactor( deltaT );
 
-              // Animation that moves the flame/ice down
+              // Animation that moves the flame/ice up
               this.animation = new Animation( {
                 property: heatCoolFactorProperty,
-                to: 0,
+                to: heatCoolFactor,
                 duration: HEAT_COOL_DURATION / 2,
-                easing: Easing.CUBIC_IN, // decelerates
+                easing: Easing.CUBIC_OUT, // accelerates
                 stepEmitter: STEP_EMITTER
               } );
 
-              // If the down animation is stopped, abruptly turn off heat/cool.
+              // If the Animation is stopped prematurely, abruptly turn off heat/cool
               this.animation.stopEmitter.addListener( () => {
+                this.animation = null;
                 heatCoolFactorProperty.value = 0;
               } );
 
-              // When the down Animation finishes, we're done.
+              // When the 'up' Animation finishes...
               this.animation.finishEmitter.addListener( () => {
-                this.animation = null;
+
+                // Animation that moves the flame/ice down
+                this.animation = new Animation( {
+                  property: heatCoolFactorProperty,
+                  to: 0,
+                  duration: HEAT_COOL_DURATION / 2,
+                  easing: Easing.CUBIC_IN, // decelerates
+                  stepEmitter: STEP_EMITTER
+                } );
+
+                // If the down animation is stopped, abruptly turn off heat/cool.
+                this.animation.stopEmitter.addListener( () => {
+                  heatCoolFactorProperty.value = 0;
+                } );
+
+                // When the down Animation finishes, we're done.
+                this.animation.finishEmitter.addListener( () => {
+                  this.animation = null;
+                } );
+
+                this.animation.start();
               } );
 
               this.animation.start();
-            } );
-
-            this.animation.start();
+            }
           }
         }
       } );
