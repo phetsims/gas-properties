@@ -113,14 +113,6 @@ define( require => {
       defaultValue: 8E5
     },
 
-    // Sample period for updating the pressure gauge, in ps.
-    // For internal use only.
-    pressureGaugeSamplePeriod: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 0.75
-    },
-
     /**
      * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
      * deltaT * N >= this value (in K) results in flame/ice being fully on.

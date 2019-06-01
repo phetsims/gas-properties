@@ -24,7 +24,7 @@ define( require => {
   const Range = require( 'DOT/Range' );
 
   // constants
-  const SAMPLE_PERIOD = GasPropertiesQueryParameters.pressureGaugeSamplePeriod; // ps
+  const SAMPLE_PERIOD = 0.75; // ps
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
   const MIN_JITTER = 0; // minimum amount of jitter, in kPa
   const MAX_JITTER = 50; // maximum amount of jitter, in kPa
