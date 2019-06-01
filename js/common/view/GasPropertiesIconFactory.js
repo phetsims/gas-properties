@@ -138,11 +138,11 @@ define( require => {
       const heavy4Node = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
 
       const iconNode = new Node( {
-        children: [ wallNode, handleNode, heavy1Node, heavy2Node, heavy3Node, heavy4Node ]
+        children: [ handleNode, wallNode, heavy1Node, heavy2Node, heavy3Node, heavy4Node ]
       } );
 
       // layout
-      handleNode.right = wallNode.left;
+      handleNode.right = wallNode.left + 3; // overlap
       handleNode.centerY = wallNode.centerY;
 
       // 1 particles against wall
