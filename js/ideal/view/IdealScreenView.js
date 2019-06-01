@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AnimatedHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/AnimatedHeaterCoolerNode' );
+  const AnimatedHeaterCoolerNode = require( 'GAS_PROPERTIES/ideal/view/AnimatedHeaterCoolerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
