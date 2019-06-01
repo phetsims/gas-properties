@@ -44,7 +44,9 @@ define( require => {
       // Flame/ice is animated when holding pressure constant and adjusting temperature (HoldConstant.PRESSURE_T).
       // The user is not controlling the heat, and we animate the bucket to correspond to the temperature change.
       const animatedHeaterCoolerNode = new AnimatedHeaterCoolerNode(
-        model.temperatureProperty, model.holdConstantProperty, {
+        model.holdConstantProperty, 
+        model.totalNumberOfParticlesProperty,
+        model.temperatureProperty, {
           translation: this.heaterCoolerNode.translation,
           scale: GasPropertiesConstants.HEATER_COOLER_SCALE
         } );

@@ -45,15 +45,18 @@ define( require => {
   class AnimatedHeaterCoolerNode extends HeaterCoolerNode {
 
     /**
-     * @param {Property.<number|null>} temperatureProperty
      * @param {EnumerationProperty} holdConstantProperty
+     * @param {Property.<number>} totalNumberOfParticlesProperty
+     * @param {Property.<number|null>} temperatureProperty
      * @param {Object} [options]
      */
-    constructor( temperatureProperty, holdConstantProperty, options ) {
-      assert && assert( temperatureProperty instanceof Property,
-        `invalid temperatureProperty: ${temperatureProperty}` );
+    constructor( holdConstantProperty, totalNumberOfParticlesProperty, temperatureProperty, options ) {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
+      assert && assert( totalNumberOfParticlesProperty instanceof Property,
+              `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( temperatureProperty instanceof Property,
+        `invalid temperatureProperty: ${temperatureProperty}` );
 
       options = _.extend( {
         pickable: false
@@ -83,7 +86,10 @@ define( require => {
       // When temperature changes in HoldConstantEnum.PRESSURE_T mode, animate the heater/cooler.
       temperatureProperty.link( ( temperature, previousTemperature ) => {
         if ( holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
-          if ( temperature === null || previousTemperature === null ) {
+
+          const numberOfParticles = totalNumberOfParticlesProperty.value;
+
+          if ( temperature === null || previousTemperature === null || numberOfParticles === 0 ) {
             stopAnimation();
           }
           else {
@@ -95,8 +101,8 @@ define( require => {
               // stop any animation that is in progress
               stopAnimation();
 
-              // heat/cool factor is relative to temperature change
-              const heatCoolFactor = deltaTemperatureToHeatCoolFactor( deltaT );
+              // heat/cool factor is relative to temperature change and number of particles
+              const heatCoolFactor = computeHeatCoolFactor( deltaT, numberOfParticles );
 
               // Animation that moves the flame/ice up
               this.animation = new Animation( {
@@ -165,25 +171,22 @@ define( require => {
   /**
    * Converts a change in temperature to a heat/cool factor that is appropriate for use with HeaterCoolerNode.
    * @param {number} deltaT
+   * @param {number} numberOfParticles
    * @returns {number}
    */
-  function deltaTemperatureToHeatCoolFactor( deltaT ) {
-    assert && assert( typeof deltaT === 'number', `invalid deltaT: ${deltaT}` );
+  function computeHeatCoolFactor( deltaT, numberOfParticles ) {
+    assert && assert( typeof deltaT === 'number' && Math.abs( deltaT ) > 0, `invalid deltaT: ${deltaT}` );
+    assert && assert( typeof numberOfParticles === 'number' && numberOfParticles > 0,
+      `invalid numberOfParticles: ${numberOfParticles}` );
 
-    let heatCoolFactor = 0;
+    // linear mapping of temperature change to heat factor
+    let heatCoolFactor = Util.linear( 0, MAX_DELTA_T, MIN_HEAT_FACTOR, 1, Math.abs( deltaT ) );
 
-    const absDeltaT = Math.abs( deltaT );
-    if ( absDeltaT > 0 ) {
+    // clamp to the heat factor range
+    heatCoolFactor = Util.clamp( heatCoolFactor, MIN_HEAT_FACTOR, 1 );
 
-      // linear mapping of temperature change to heat factor
-      heatCoolFactor = Util.linear( 0, MAX_DELTA_T, MIN_HEAT_FACTOR, 1, absDeltaT );
-
-      // clamp to the heat factor range
-      heatCoolFactor = Util.clamp( heatCoolFactor, MIN_HEAT_FACTOR, 1 );
-
-      // set the sign to correspond to heat vs cool
-      heatCoolFactor *= Util.sign( deltaT );
-    }
+    // set the sign to correspond to heat vs cool
+    heatCoolFactor *= Util.sign( deltaT );
 
     return heatCoolFactor;
   }
