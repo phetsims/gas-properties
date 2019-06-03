@@ -17,9 +17,10 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HeavyParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/HeavyParticlesCheckbox' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
   const LightParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/LightParticlesCheckbox' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const SpeedHistogram = require( 'GAS_PROPERTIES/energy/view/SpeedHistogram' );
+  const SpeedHistogramNode = require( 'GAS_PROPERTIES/energy/view/SpeedHistogramNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -29,16 +30,13 @@ define( require => {
   class SpeedAccordionBox extends AccordionBox {
 
     /**
-     * @param {function:number[]} getHeavyValues - gets the model values for heavy particles
-     * @param {function:number[]} getLightValues - gets the model values for light particles
+     * @param {HistogramsModel} histogramsModel
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( getHeavyValues, getLightValues, modelViewTransform, options ) {
-      assert && assert( typeof getHeavyValues === 'function', `invalid getHeavyValues: ${getHeavyValues}` );
-      assert && assert( typeof getLightValues === 'function', `invalid getLightValues: ${getLightValues}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
+    constructor( histogramsModel, modelViewTransform, options ) {
+      assert && assert( histogramsModel instanceof HistogramsModel, `invalid model: ${histogramsModel}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
         fixedWidth: 100,
@@ -61,8 +59,7 @@ define( require => {
       const heavyVisibleProperty = new BooleanProperty( false );
       const lightVisibleProperty = new BooleanProperty( false );
 
-      const histogram =
-        new SpeedHistogram( heavyVisibleProperty, lightVisibleProperty, getHeavyValues, getLightValues );
+      const histogramNode = new SpeedHistogramNode( histogramsModel, heavyVisibleProperty, lightVisibleProperty );
 
       // Checkboxes
       const checkboxes = new HBox( {
@@ -80,33 +77,20 @@ define( require => {
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'center',
         spacing: 10,
-        children: [ histogram, checkboxes ]
+        children: [ histogramNode, checkboxes ]
       } ) );
 
       super( content, options );
 
       // @private
-      this.histogram = histogram;
       this.heavyVisibleProperty = heavyVisibleProperty;
       this.lightVisibleProperty = lightVisibleProperty;
     }
 
     // @public
     reset() {
-      this.histogram.reset();
       this.heavyVisibleProperty.reset();
       this.lightVisibleProperty.reset();
-    }
-
-    /**
-     * Steps the histogram if it's visible.
-     * @param {number} dt - time delta, in ps
-     */
-    step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      if ( this.expandedProperty.value ) {
-        this.histogram.step( dt );
-      }
     }
   }
 

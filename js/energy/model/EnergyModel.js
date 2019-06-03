@@ -12,6 +12,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const Property = require( 'AXON/Property' );
   const Tandem = require( 'TANDEM/Tandem' );
@@ -46,6 +47,9 @@ define( require => {
         throw new Error( 'container width is fixed in the Energy screen' );
       } );
 
+      // @public (read-only)
+      this.histogramsModel = new HistogramsModel( this );
+
       // @public (read-only) {Property.<number|null>}
       // average speed of heavy particles in the container, in pm/ps, null when the container is empty
       this.heavyAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
@@ -65,6 +69,9 @@ define( require => {
      */
     reset() {
       super.reset();
+
+      // sub-model
+      this.histogramsModel.reset();
 
       // Properties
       this.heavyAverageSpeedProperty.reset();
@@ -88,7 +95,20 @@ define( require => {
 
       super.stepModelTime( dt );
 
-      // compute the average speed for each particle type, smooth the values over an interval
+      // step the average speed display
+      this.stepAverageSpeed( dt );
+
+      // step the histograms
+      this.histogramsModel.step( dt );
+    }
+
+    /**
+     * Computes the average speed for each particle type, smoothed over an interval.
+     * @param {number} dt - time delta, in ps
+     * @private
+     */
+    stepAverageSpeed( dt ) {
+
       this.heavyAverageSpeedSum += getAverageSpeed( this.heavyParticles );
       this.lightAverageSpeedSum += getAverageSpeed( this.lightParticles );
       this.numberOfAverageSpeedSamples++;
@@ -117,6 +137,24 @@ define( require => {
     }
 
     /**
+     * Gets speed values for all heavy particles in the container, in pm/ps. Used by the Speed histogram.
+     * @returns {number[]}
+     * @public
+     */
+    getHeavyParticleSpeedValues() {
+      return getSpeedValues( this.heavyParticles );
+    }
+
+    /**
+     * Gets speed values for all light particles in the container, in pm/ps. Used by the Speed histogram.
+     * @returns {number[]}
+     * @public
+     */
+    getLightParticleSpeedValues() {
+      return getSpeedValues( this.lightParticles );
+    }
+
+    /**
      * Gets kinetic energy values for all heavy particles in the container, in AMU * pm^2 / ps^2.
      * Used by the Kinetic Energy histogram.
      * @returns {number[]}
@@ -134,24 +172,6 @@ define( require => {
      */
     getLightParticleKineticEnergyValues() {
       return getKineticEnergyValues( this.lightParticles );
-    }
-
-    /**
-     * Gets speed values for all heavy particles in the container, in pm/ps. Used by the Speed histogram.
-     * @returns {number[]}
-     * @public
-     */
-    getHeavyParticleSpeedValues() {
-      return getSpeedValues( this.heavyParticles );
-    }
-
-    /**
-     * Gets speed values for all light particles in the container, in pm/ps. Used by the Speed histogram.
-     * @returns {number[]}
-     * @public
-     */
-    getLightParticleSpeedValues() {
-      return getSpeedValues( this.lightParticles );
     }
   }
 

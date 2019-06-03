@@ -51,22 +51,16 @@ define( require => {
         } );
 
       // Speed accordion box with histogram and related controls
-      const speedAccordionBox = new SpeedAccordionBox(
-        model.getHeavyParticleSpeedValues.bind( model ),
-        model.getLightParticleSpeedValues.bind( model ),
-        model.modelViewTransform, {
-          expandedProperty: viewProperties.speedExpandedProperty,
-          fixedWidth: LEFT_PANEL_WIDTH
-        } );
+      const speedAccordionBox = new SpeedAccordionBox( model.histogramsModel, model.modelViewTransform, {
+        expandedProperty: viewProperties.speedExpandedProperty,
+        fixedWidth: LEFT_PANEL_WIDTH
+      } );
 
       // Kinetic Energy accordion box with histogram
-      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox(
-        model.getHeavyParticleKineticEnergyValues.bind( model ),
-        model.getLightParticleKineticEnergyValues.bind( model ),
-        model.modelViewTransform, {
-          expandedProperty: viewProperties.kineticEnergyExpandedProperty,
-          fixedWidth: LEFT_PANEL_WIDTH
-        } );
+      const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model.histogramsModel, model.modelViewTransform, {
+        expandedProperty: viewProperties.kineticEnergyExpandedProperty,
+        fixedWidth: LEFT_PANEL_WIDTH
+      } );
 
       // Panels on the left side of the screen
       const leftPanels = new VBox( {
@@ -138,28 +132,6 @@ define( require => {
       this.viewProperties.reset();
       this.speedAccordionBox.reset();
       this.kineticEnergyAccordionBox.reset();
-    }
-
-    /**
-     * Called on each step of the simulation's timer.
-     * @param {number} dt - time delta, in seconds
-     * @public
-     * @override
-     */
-    step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-
-      super.step( dt );
-
-      if ( this.model.isPlayingProperty.value ) {
-
-        // convert s to ps
-        const ps = this.model.timeTransform( dt );
-
-        // step elements that are specific to the view
-        this.speedAccordionBox.step( ps );
-        this.kineticEnergyAccordionBox.step( ps );
-      }
     }
   }
 
