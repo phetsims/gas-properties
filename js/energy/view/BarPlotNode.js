@@ -21,13 +21,13 @@ define( require => {
     /**
      * @param {ColorDef} color
      * @param {Dimension2} chartSize
-     * @param {number} minY TODO #52 bad name, this is the minimum maxY for the y axis
+     * @param {number} minYScale - smallest scale for the y axis
      * @param {NumberProperty} maxBinCountProperty
      */
-    constructor( color, chartSize, minY, maxBinCountProperty ) {
+    constructor( color, chartSize, minYScale, maxBinCountProperty ) {
       assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
       assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
-      assert && assert( typeof minY === 'number' && minY > 0, `invalid minY: ${minY}` );
+      assert && assert( typeof minYScale === 'number' && minYScale > 0, `invalid minYScale: ${minYScale}` );
       assert && assert( maxBinCountProperty instanceof NumberProperty,
                    `invalid maxBinCountProperty: ${maxBinCountProperty}` );
 
@@ -38,7 +38,7 @@ define( require => {
 
       // @private
       this.chartSize = chartSize;
-      this.minY = minY;
+      this.minYScale = minYScale;
       this.maxBinCountProperty = maxBinCountProperty;
     }
 
@@ -52,9 +52,9 @@ define( require => {
 
       const barWidth = this.chartSize.width / binCounts.length;
 
-      // max value on the y axis
-      const maxY = Math.max( this.minY, this.maxBinCountProperty.value );
-      assert && assert( maxY > 0, `invalid maxY: ${maxY} ` );
+      // scale of the y axis
+      const yScale = Math.max( this.minYScale, this.maxBinCountProperty.value );
+      assert && assert( yScale > 0, `invalid yScale: ${yScale} ` );
 
       const shape = new Shape();
       for ( let i = 0; i < binCounts.length; i++ ) {
@@ -62,7 +62,7 @@ define( require => {
         if ( binCount > 0 ) {
 
           // Compute the bar height
-          const barHeight = ( binCount / maxY ) * this.chartSize.height;
+          const barHeight = ( binCount / yScale ) * this.chartSize.height;
 
           // Add the bar
           shape.rect( i * barWidth, this.chartSize.height - barHeight, barWidth, barHeight );
