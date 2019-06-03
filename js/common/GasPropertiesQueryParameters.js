@@ -46,10 +46,6 @@ define( require => {
     // For internal use only.
     pointerCoordinates: { type: 'flag' },
 
-    // Shows arrows on x and y axes of histogram when there is data that is out of range
-    // For internal use only.
-    outOfRangeIndicators: { type: 'flag' },
-
     // Determines how fast particles are heated or cooled. Smaller number is faster.
     // velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
     // For internal use only.

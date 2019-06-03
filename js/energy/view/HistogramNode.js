@@ -16,16 +16,13 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const LinePlotNode = require( 'GAS_PROPERTIES/energy/view/LinePlotNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Path = require( 'SCENERY/nodes/Path' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
-  const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
 
   class HistogramNode extends Node {
@@ -134,37 +131,12 @@ define( require => {
       yAxisLabel.right = background.left - 8;
       yAxisLabel.centerY = background.centerY;
 
-      // Options shared by both out-of-range indicators
-      const outOfRangeOptions = {
-        font: new PhetFont( { size: 20, weight: 'bold' } ),
-        fill: 'white',
-        visible: false
-      };
-
-      // indicates that y-axis has data that is out of range, up arrow
-      const yOutOfRangeNode = new Text( '\u2191', _.extend( {}, outOfRangeOptions, {
-        right: background.right - 2,
-        top: background.top
-      } ) );
-
-      // indicates that x-axis has data that is out of range, right arrow
-      const xOutOfRangeNode = new Text( '\u2192', _.extend( {}, outOfRangeOptions, {
-        right: yOutOfRangeNode.left - 2,
-        top: background.top
-      } ) );
-
       assert && assert( !options.children, 'HistogramNode sets children' );
       options = _.extend( {
         children: [ background, intervalLines, plotNodesParent, border, xAxisLabel, yAxisLabel ]
       }, options );
 
       super( options );
-
-      // out-of-range indicators, for debugging
-      if ( GasPropertiesQueryParameters.outOfRangeIndicators ) {
-        this.addChild( xOutOfRangeNode );
-        this.addChild( yOutOfRangeNode );
-      }
 
       heavyPlotVisibleProperty.link( visible => {
         heavyPlotNode.visible = visible;
@@ -208,10 +180,6 @@ define( require => {
         updatePlots();
         updateIntervalLines();
       } );
-
-      //TODO #52 handle out-of-range indicators
-      this.xOutOfRangeNode = xOutOfRangeNode;
-      this.yOutOfRangeNode = yOutOfRangeNode;
     }
   }
 
