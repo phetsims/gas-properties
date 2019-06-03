@@ -15,10 +15,10 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const HistogramStyle = require( 'GAS_PROPERTIES/energy/model/HistogramStyle' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -50,7 +50,7 @@ define( require => {
         backgroundFill: 'black', // {ColorDef}
         borderStroke: GasPropertiesColorProfile.panelStrokeProperty,// {ColorDef}
         borderLineWidth: 1,
-        plotLineWidth: 2, // lineWidth for PlotType.LINES
+        plotLineWidth: 2, // lineWidth for HistogramStyle.LINES
 
         // options for the horizontal interval lines
         intervalLineOptions: {
@@ -171,16 +171,16 @@ define( require => {
     /**
      * Adds a data set to the histogram.  Data sets are rendered in the order that they are added.
      * Client must call update to render the data set.
-     * @param {PlotType} plotType
+     * @param {HistogramStyle} style
      * @param {ColorDef} color
      * @returns {number} the index of the data set
      * @public
      */
-    addDataSet( plotType, color ) {
-      assert && assert( PlotType.includes( plotType ), `invalid plotType: ${plotType}` );
+    addDataSet( style, color ) {
+      assert && assert( HistogramStyle.includes( style ), `invalid style: ${style}` );
       assert && assert( ColorDef.isColorDef( color ), `invalid color: ${color}` );
 
-      this.dataSets.push( new DataSet( [], plotType, color ) );
+      this.dataSets.push( new DataSet( [], style, color ) );
       this.plotNodesParent.addChild( new Path( new Shape() ) );
       return this.dataSets.length - 1;
     }
@@ -252,11 +252,11 @@ define( require => {
         const counts = this.getCounts( dataSet );
 
         // Plot the data set as bars or line segments.
-        if ( dataSet.plotType === PlotType.BARS ) {
+        if ( dataSet.style === HistogramStyle.BARS ) {
           this.plotBars( i, counts, dataSet.color );
         }
         else {
-          this.plotLines( i, counts, dataSet.color );
+          this.plotLineSegments( i, counts, dataSet.color );
         }
 
         // count the number of values that exceed the x & y ranges
@@ -353,7 +353,7 @@ define( require => {
      * @param {ColorDef} color - the color of the bars
      * @private
      */
-    plotLines( index, counts, color ) {
+    plotLineSegments( index, counts, color ) {
       assert && assert( typeof index === 'number', `invalid index: ${index}` );
       assert && assert( index >= 0 && index < this.plotNodesParent.getChildrenCount(),
         `index out of range: ${index}` );

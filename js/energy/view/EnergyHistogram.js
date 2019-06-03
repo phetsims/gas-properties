@@ -15,8 +15,8 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const Histogram = require( 'GAS_PROPERTIES/energy/view/Histogram' );
+  const HistogramStyle = require( 'GAS_PROPERTIES/energy/model/HistogramStyle' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const PlotType = require( 'GAS_PROPERTIES/energy/model/PlotType' );
 
   // constants
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
@@ -67,9 +67,9 @@ define( require => {
       this.allValues = []; // {number[][]} samples for all particles
 
       // @private add data sets and store indices
-      this.allIndex = this.addDataSet( PlotType.BARS, barsColor );
-      this.heavyIndex = this.addDataSet( PlotType.LINES, GasPropertiesColorProfile.heavyParticleColorProperty  );
-      this.lightIndex = this.addDataSet( PlotType.LINES, GasPropertiesColorProfile.lightParticleColorProperty );
+      this.allIndex = this.addDataSet( HistogramStyle.BARS, barsColor );
+      this.heavyIndex = this.addDataSet( HistogramStyle.LINE_SEGMENTS, GasPropertiesColorProfile.heavyParticleColorProperty  );
+      this.lightIndex = this.addDataSet( HistogramStyle.LINE_SEGMENTS, GasPropertiesColorProfile.lightParticleColorProperty );
 
       // Sets visibility of data sets for heavy and light particles
       this.heavyVisibleProperty.link( visible => {
