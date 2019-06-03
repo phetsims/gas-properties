@@ -164,6 +164,7 @@ define( require => {
       } );
 
       return new ScreenIcon( iconNode, {
+        maxIconWidthProportion: 1,
         maxIconHeightProportion: 1,
         fill: GasPropertiesColorProfile.screenBackgroundColorProperty
       } );
@@ -210,16 +211,21 @@ define( require => {
      */
     createDiffusionScreenIcon() {
 
-      const dividerNode = new Line( 0, 0, 0, 300, {
+      // Invisible container, so that divider is centered
+      const containerNode = new Rectangle( 0, 0, 425, 300 );
+
+      const dividerNode = new Line( 0, 0, 0, containerNode.height, {
         stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: 12
+        lineWidth: 12,
+        center: containerNode.center
       } );
 
       // Scale set empirically to make particles look desired size
       const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
 
       // DiffusionParticle1 particles, locations determined empirically
-      const particle1Locations = [ new Vector2( -100, 75 ), new Vector2( -150, 150 ), new Vector2( -85, 200 )  ];
+      const centerX = dividerNode.centerX;
+      const particle1Locations = [ new Vector2( centerX - 100, 75 ), new Vector2( centerX - 150, 150 ), new Vector2( centerX - 85, 200 )  ];
       const particles1Nodes = new Node();
       for ( let i = 0; i < particle1Locations.length; i++ ) {
         const particle = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform, {
@@ -229,7 +235,7 @@ define( require => {
       }
 
       // DiffusionParticle2 particles, locations determined empirically
-      const particle2Locations = [ new Vector2( 100, 75 ), new Vector2( 175, 185 ) ];
+      const particle2Locations = [ new Vector2( centerX + 100, 75 ), new Vector2( centerX + 165, 185 ) ];
       const particle2Nodes = new Node();
       for ( let i = 0; i < particle2Locations.length; i++ ) {
         const particle = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform, {
@@ -239,10 +245,11 @@ define( require => {
       }
 
       const iconNode = new Node( {
-        children: [ dividerNode, particles1Nodes, particle2Nodes ]
+        children: [ containerNode, dividerNode, particles1Nodes, particle2Nodes ]
       });
 
       return new ScreenIcon( iconNode, {
+        maxIconWidthProportion: 1,
         maxIconHeightProportion: 1,
         fill: GasPropertiesColorProfile.screenBackgroundColorProperty
       } );
