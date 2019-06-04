@@ -90,8 +90,8 @@ define( require => {
             children: [
               new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty ),
               new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty ),
-              new StopwatchCheckbox( stopwatchVisibleProperty ),
-              new ScaleCheckbox( viewProperties.scaleVisibleProperty )
+              new ScaleCheckbox( viewProperties.scaleVisibleProperty ),
+              new StopwatchCheckbox( stopwatchVisibleProperty )
             ]
           } )
         ]
