@@ -403,6 +403,29 @@ define( require => {
           new ArrowNode( 0, 0, 24, 0, arrowOptions )
         ]
       } );
+    },
+
+    /**
+     * Creates the icon used for the 'Scale' checkbox.
+     * @returns {Node}
+     * @public
+     */
+    createScaleIcon() {
+
+      const scaleLength = 30;
+      const tickLength = 6;
+      const numberOfTicks = 5;
+      const tickInterval =  scaleLength / ( numberOfTicks - 1 );
+
+      const shape = new Shape().moveTo( 0, 0 ).lineTo( scaleLength, 0 );
+      for ( let i = 0; i < numberOfTicks; i++ ) {
+        shape.moveTo( i * tickInterval, 0 ).lineTo( i * tickInterval, tickLength );
+      }
+
+      return new Path( shape, {
+        stroke: GasPropertiesColorProfile.scaleColorProperty,
+        lineWidth: 1
+      } );
     }
   };
 

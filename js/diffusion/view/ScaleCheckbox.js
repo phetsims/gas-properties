@@ -12,6 +12,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
+  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
 
   // strings
   const scaleString = require( 'string!GAS_PROPERTIES/scale' );
@@ -32,7 +33,8 @@ define( require => {
 
       options = _.extend( {
         text: scaleString,
-        textMaxWidth: 100 // determined empirically
+        textMaxWidth: 100, // determined empirically
+        icon: GasPropertiesIconFactory.createScaleIcon()
       }, options );
 
       super( scaleVisibleProperty, options );
