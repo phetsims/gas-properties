@@ -147,8 +147,9 @@ define( require => {
         const maxBinCount = Math.max(
           _.max( this.allSpeedBinCountsProperty.value ),
           _.max( this.allKineticEnergyBinCountsProperty.value ) );
-        //TODO #52 scale this up so that there's always a little space above maxBinCount
-        this.yScaleProperty.value = Math.max( maxBinCount, MIN_Y_SCALE );
+
+        // Increase the y scale a bit so that there's always a little space above maxBinCount.
+        this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, MIN_Y_SCALE );
 
         // Notify listeners that the bin counts have been update
         this.binCountsUpdatedEmitter.emit();
