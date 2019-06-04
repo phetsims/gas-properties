@@ -37,10 +37,6 @@ define( require => {
 
     MODEL_TIME_STEP: 0.2, // ps
 
-    // Determines how fast particles are heated or cooled. Smaller number is faster.
-    // velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool
-    HEAT_COOL_SCALE: 800,
-
     // number of particles
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
     LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
