@@ -19,16 +19,16 @@ define( require => {
   class LinePlotNode extends Path {
 
     /**
-     * @param {ColorDef} color
-     * @param {number} lineWidth
-     * @param {Dimension2} chartSize
-     * @param {NumberProperty} yScaleProperty
+     * @param {Dimension2} chartSize - dimensions of the chart
+     * @param {NumberProperty} yScaleProperty - scale of the y axis
+     * @param {ColorDef} color - color of the line segments
+     * @param {number} lineWidth - width of the line segments
      */
-    constructor( color, lineWidth, chartSize, yScaleProperty ) {
-      assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
-      assert && assert( typeof lineWidth === 'number' && lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
+    constructor( chartSize, yScaleProperty, color, lineWidth ) {
       assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
       assert && assert( yScaleProperty instanceof NumberProperty, `invalid yScaleProperty: ${yScaleProperty}` );
+      assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
+      assert && assert( typeof lineWidth === 'number' && lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
 
       super( new Shape(), {
         fill: null,

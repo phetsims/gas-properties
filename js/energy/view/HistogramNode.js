@@ -30,28 +30,24 @@ define( require => {
     /**
      * @param {number} numberOfBins
      * @param {number} binWidth
-     * @param {NumberProperty} yScaleProperty
-     * @param {Emitter} binCountsUpdatedEmitter
-     * @param {Property.<number[]>} allBinCountsProperty
-     * @param {Property.<number[]>} heavyBinCountsProperty
-     * @param {Property.<number[]>} lightBinCountsProperty
+     * @param {Emitter} binCountsUpdatedEmitter - notifies when the bin counts have changed
+     * @param {Property.<number[]>} allBinCountsProperty  - bin counts for all particles
+     * @param {Property.<number[]>} heavyBinCountsProperty - bin counts for heavy particles
+     * @param {Property.<number[]>} lightBinCountsProperty - bin counts for light particles
+     * @param {NumberProperty} yScaleProperty - scale of the y axis
      * @param {Node} xAxisLabel - label on the x axis
      * @param {Node} yAxisLabel - label on the y axis
-     * @param {BooleanProperty} heavyPlotVisibleProperty
-     * @param {BooleanProperty} lightPlotVisibleProperty
+     * @param {BooleanProperty} heavyPlotVisibleProperty - whether the plot for heavy particles is visible
+     * @param {BooleanProperty} lightPlotVisibleProperty - whether the plot for light particles is visible
      * @param {Object} [options]
      */
-    constructor( numberOfBins, binWidth,
-                 yScaleProperty,
-                 binCountsUpdatedEmitter,
+    constructor( numberOfBins, binWidth, binCountsUpdatedEmitter,
                  allBinCountsProperty, heavyBinCountsProperty, lightBinCountsProperty,
-                 xAxisLabel, yAxisLabel,
+                 yScaleProperty, xAxisLabel, yAxisLabel,
                  heavyPlotVisibleProperty, lightPlotVisibleProperty,
                  options ) {
       assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
       assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
-      assert && assert( yScaleProperty instanceof NumberProperty,
-        `invalid yScaleProperty: ${yScaleProperty}` );
       assert && assert( binCountsUpdatedEmitter instanceof Emitter,
         `invalid binCountsUpdatedEmitter: ${binCountsUpdatedEmitter}` );
       assert && assert( allBinCountsProperty instanceof Property,
@@ -60,6 +56,8 @@ define( require => {
         `invalid heavyBinCountsProperty: ${heavyBinCountsProperty}` );
       assert && assert( lightBinCountsProperty instanceof Property,
         `invalid lightBinCountsProperty: ${lightBinCountsProperty}` );
+      assert && assert( yScaleProperty instanceof NumberProperty,
+        `invalid yScaleProperty: ${yScaleProperty}` );
       assert && assert( xAxisLabel instanceof Node, `invalid xAxisLabel: ${xAxisLabel}` );
       assert && assert( yAxisLabel instanceof Node, `invalid yAxisLabel: ${yAxisLabel}` );
       assert && assert( heavyPlotVisibleProperty instanceof BooleanProperty,
@@ -102,13 +100,13 @@ define( require => {
       } );
 
       // The main plot, for all particles
-      const allPlotNode = new BarPlotNode( options.barColor, options.chartSize, yScaleProperty );
+      const allPlotNode = new BarPlotNode( options.chartSize, yScaleProperty, options.barColor );
 
       // Species-specific plots
-      const heavyPlotNode = new LinePlotNode( GasPropertiesColorProfile.heavyParticleColorProperty,
-        options.plotLineWidth, options.chartSize, yScaleProperty );
-      const lightPlotNode = new LinePlotNode( GasPropertiesColorProfile.lightParticleColorProperty,
-        options.plotLineWidth, options.chartSize, yScaleProperty );
+      const heavyPlotNode = new LinePlotNode( options.chartSize, yScaleProperty,
+        GasPropertiesColorProfile.heavyParticleColorProperty, options.plotLineWidth, );
+      const lightPlotNode = new LinePlotNode( options.chartSize, yScaleProperty,
+        GasPropertiesColorProfile.lightParticleColorProperty, options.plotLineWidth );
 
       // parent Node for all plotted data, clipped to the background
       const plotNodesParent = new Node( {

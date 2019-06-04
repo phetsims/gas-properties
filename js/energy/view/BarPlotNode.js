@@ -19,14 +19,14 @@ define( require => {
   class BarPlotNode extends Path {
 
     /**
-     * @param {ColorDef} color
-     * @param {Dimension2} chartSize
-     * @param {NumberProperty} yScaleProperty
+     * @param {Dimension2} chartSize - dimensions of the chart
+     * @param {NumberProperty} yScaleProperty - scale of the y axis
+     * @param {ColorDef} color - color of the bars
      */
-    constructor( color, chartSize, yScaleProperty ) {
-      assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
+    constructor( chartSize, yScaleProperty, color) {
       assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
       assert && assert( yScaleProperty instanceof NumberProperty, `invalid yScaleProperty: ${yScaleProperty}` );
+      assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
 
       super( new Shape(), {
         fill: color,
