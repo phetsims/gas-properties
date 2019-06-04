@@ -42,14 +42,14 @@ define( require => {
       };
 
       // Speed bin counts
-      this.allSpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.heavySpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.lightSpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
+      this.allSpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
 
       // Kinetic Energy bin counts
-      this.allKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
+      this.allKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
 
       // @public (read-only) the y-axis scale for all histograms
       this.yScaleProperty = new NumberProperty( 0, {
@@ -63,12 +63,10 @@ define( require => {
       this.model = model;
 
       // @private Speed samples
-      this.allSpeedSamples = []; // {number[][]} Speed samples for all particles
       this.heavySpeedSamples = []; // {number[][]} Speed samples for heavy particles
       this.lightSpeedSamples = []; // {number[][]} Speed samples for light particles
 
       // @private Kinetic Energy samples
-      this.allKineticEnergySamples = []; // {number[][]} Kinetic Energy samples for all particles
       this.heavyKineticEnergySamples = []; // {number[][]} Kinetic Energy samples for heavy particles
       this.lightKineticEnergySamples = []; // {number[][]} Kinetic Energy samples for light particles
 
@@ -87,12 +85,10 @@ define( require => {
       this.dtAccumulator = 0;
       
       // clear Speed samples
-      this.allSpeedSamples.length = 0;
       this.heavySpeedSamples.length = 0;
       this.lightSpeedSamples.length = 0;
       
       // clear Kinetic Energy samples
-      this.allKineticEnergySamples.length = 0;
       this.heavyKineticEnergySamples.length = 0;
       this.lightKineticEnergySamples.length = 0;
     }
@@ -107,18 +103,14 @@ define( require => {
       // take a Speed sample
       const heavySpeedSamples = this.model.getHeavyParticleSpeedValues();
       const lightSpeedSamples = this.model.getLightParticleSpeedValues();
-      const allSpeedSamples = heavySpeedSamples.concat( lightSpeedSamples ); //TODO #52 concat is expensive
       this.heavySpeedSamples.push( heavySpeedSamples );
       this.lightSpeedSamples.push( lightSpeedSamples );
-      this.allSpeedSamples.push( allSpeedSamples );
 
       // take a Kinetic Energy sample
       const heavyKineticEnergySamples = this.model.getHeavyParticleKineticEnergyValues();
       const lightKineticEnergySamples = this.model.getLightParticleKineticEnergyValues();
-      const allKineticEnergySamples = heavyKineticEnergySamples.concat( lightKineticEnergySamples ); //TODO #52 concat is expensive
       this.heavyKineticEnergySamples.push( heavyKineticEnergySamples );
       this.lightKineticEnergySamples.push( lightKineticEnergySamples );
-      this.allKineticEnergySamples.push( allKineticEnergySamples );
 
       // Accumulate dt
       this.dtAccumulator += dt;
@@ -127,20 +119,20 @@ define( require => {
       if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
         // update Speed histograms
-        this.allSpeedBinCountsProperty.value =
-          samplesToBinCounts( this.allSpeedSamples, this.numberOfBins, this.speedBinWidth );
         this.heavySpeedBinCountsProperty.value =
           samplesToBinCounts( this.heavySpeedSamples, this.numberOfBins, this.speedBinWidth );
         this.lightSpeedBinCountsProperty.value =
           samplesToBinCounts( this.lightSpeedSamples, this.numberOfBins, this.speedBinWidth );
+        this.allSpeedBinCountsProperty.value =
+          sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
 
         // update Speed histograms
-        this.allKineticEnergyBinCountsProperty.value =
-          samplesToBinCounts( this.allKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
         this.heavyKineticEnergyBinCountsProperty.value =
           samplesToBinCounts( this.heavyKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
         this.lightKineticEnergyBinCountsProperty.value =
           samplesToBinCounts( this.lightKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
+        this.allKineticEnergyBinCountsProperty.value =
+          sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
 
         // Find the maximum bin count for all histograms. It's sufficient to look at the 'all' histograms.
         // This is used to determine the y-axis scale, which must be the same for both histograms.
@@ -199,6 +191,24 @@ define( require => {
     
     assert && assert( binCounts.length === numberOfBins, `unexpected number of bins: ${binCounts.length}` );
     return binCounts;
+  }
+
+  /**
+   * Sums the heavy and light bin counts to produce the bin counts for all particles.
+   * @param {number[]} heavyBinCounts
+   * @param {number[]} lightBinCounts
+   * @returns {number[]}
+   */
+  function sumBinCounts( heavyBinCounts, lightBinCounts ) {
+    assert && assert(  Array.isArray( heavyBinCounts ), `invalid heavyBinCounts: ${heavyBinCounts}` );
+    assert && assert(  Array.isArray( lightBinCounts ), `invalid heavyBinCounts: ${lightBinCounts}` );
+    assert && assert(  heavyBinCounts.length === lightBinCounts.length, 'lengths should be the same' );
+
+    const sumBinCounts = [];
+    for ( let i = 0; i < heavyBinCounts.length; i++ ) {
+      sumBinCounts[ i ] = heavyBinCounts[ i ] + lightBinCounts[ i ];
+    }
+    return sumBinCounts;
   }
 
   return gasProperties.register( 'HistogramsModel', HistogramsModel );

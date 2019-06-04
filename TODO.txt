@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-#52 don't use concat in HistogramsModel
 #52 more efficient implementation of samplesToBinCounts in HistogramsModel
 #52 delete query parameters related to histograms
 
