@@ -47,11 +47,11 @@ define( require => {
       super(
         histogramsModel.numberOfBins,
         histogramsModel.kineticEnergyBinWidth,
+        histogramsModel.yScaleProperty,
+        histogramsModel.binCountsUpdatedEmitter,
         histogramsModel.allKineticEnergyBinCountsProperty,
         histogramsModel.heavyKineticEnergyBinCountsProperty,
         histogramsModel.lightKineticEnergyBinCountsProperty,
-        histogramsModel.maxBinCountProperty,
-        histogramsModel.binCountsUpdatedEmitter,
         xAxisLabel,
         yAxisLabel,
         heavyVisibleProperty,

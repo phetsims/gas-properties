@@ -22,16 +22,13 @@ define( require => {
      * @param {ColorDef} color
      * @param {number} lineWidth
      * @param {Dimension2} chartSize
-     * @param {number} minYScale - smallest scale for the y axis
-     * @param {NumberProperty} maxBinCountProperty
+     * @param {NumberProperty} yScaleProperty
      */
-    constructor( color, lineWidth, chartSize, minYScale, maxBinCountProperty ) {
+    constructor( color, lineWidth, chartSize, yScaleProperty ) {
       assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
       assert && assert( typeof lineWidth === 'number' && lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
       assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
-      assert && assert( typeof minYScale === 'number' && minYScale > 0, `invalid minYScale: ${minYScale}` );
-      assert && assert( maxBinCountProperty instanceof NumberProperty,
-        `invalid maxBinCountProperty: ${maxBinCountProperty}` );
+      assert && assert( yScaleProperty instanceof NumberProperty, `invalid yScaleProperty: ${yScaleProperty}` );
 
       super( new Shape(), {
         fill: null,
@@ -41,8 +38,7 @@ define( require => {
 
       // @private
       this.chartSize = chartSize;
-      this.minYScale = minYScale;
-      this.maxBinCountProperty = maxBinCountProperty;
+      this.yScaleProperty = yScaleProperty;
     }
 
     /**
@@ -55,15 +51,11 @@ define( require => {
 
       const binWidth = this.chartSize.width / binCounts.length;
 
-      // scale of the y axis
-      const yScale = Math.max( this.minYScale, this.maxBinCountProperty.value );
-      assert && assert( yScale > 0, `invalid yScale: ${yScale} ` );
-
       const shape = new Shape().moveTo( 0, this.chartSize.height );
       let previousCount = 0;
       for ( let i = 0; i < binCounts.length; i++ ) {
         const binCount = binCounts[ i ];
-        const lineHeight = ( binCount / yScale ) * this.chartSize.height;
+        const lineHeight = ( binCount / this.yScaleProperty.value ) * this.chartSize.height;
         const y = this.chartSize.height - lineHeight;
         if ( binCount !== previousCount ) {
           shape.lineTo( i * binWidth, y );

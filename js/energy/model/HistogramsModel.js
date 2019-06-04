@@ -17,6 +17,7 @@ define( require => {
 
   // constants
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
+  const MIN_Y_SCALE = 20;
 
   class HistogramsModel {
 
@@ -50,8 +51,8 @@ define( require => {
       this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
 
-      // @public (read-only) the maximum bin size for all histograms
-      this.maxBinCountProperty = new NumberProperty( 0, {
+      // @public (read-only) the y-axis scale for all histograms
+      this.yScaleProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 )
       } );
 
@@ -143,8 +144,11 @@ define( require => {
 
         // Find the maximum bin count for all histograms. It's sufficient to look at the 'all' histograms.
         // This is used to determine the y-axis scale, which must be the same for both histograms.
-        this.maxBinCountProperty.value =
-          Math.max( _.max( this.allSpeedBinCountsProperty.value ), _.max( this.allKineticEnergyBinCountsProperty.value ) );
+        const maxBinCount = Math.max(
+          _.max( this.allSpeedBinCountsProperty.value ),
+          _.max( this.allKineticEnergyBinCountsProperty.value ) );
+        //TODO #52 scale this up so that there's always a little space above maxBinCount
+        this.yScaleProperty.value = Math.max( maxBinCount, MIN_Y_SCALE );
 
         // Notify listeners that the bin counts have been update
         this.binCountsUpdatedEmitter.emit();

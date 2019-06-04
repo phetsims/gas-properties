@@ -30,11 +30,11 @@ define( require => {
     /**
      * @param {number} numberOfBins
      * @param {number} binWidth
+     * @param {NumberProperty} yScaleProperty
+     * @param {Emitter} binCountsUpdatedEmitter
      * @param {Property.<number[]>} allBinCountsProperty
      * @param {Property.<number[]>} heavyBinCountsProperty
      * @param {Property.<number[]>} lightBinCountsProperty
-     * @param {NumberProperty} maxBinCountProperty
-     * @param {Emitter} binCountsUpdatedEmitter
      * @param {Node} xAxisLabel - label on the x axis
      * @param {Node} yAxisLabel - label on the y axis
      * @param {BooleanProperty} heavyPlotVisibleProperty
@@ -42,24 +42,24 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( numberOfBins, binWidth,
-                 allBinCountsProperty, heavyBinCountsProperty, lightBinCountsProperty,
-                 maxBinCountProperty,
+                 yScaleProperty,
                  binCountsUpdatedEmitter,
+                 allBinCountsProperty, heavyBinCountsProperty, lightBinCountsProperty,
                  xAxisLabel, yAxisLabel,
                  heavyPlotVisibleProperty, lightPlotVisibleProperty,
                  options ) {
       assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
       assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
+      assert && assert( yScaleProperty instanceof NumberProperty,
+        `invalid yScaleProperty: ${yScaleProperty}` );
+      assert && assert( binCountsUpdatedEmitter instanceof Emitter,
+        `invalid binCountsUpdatedEmitter: ${binCountsUpdatedEmitter}` );
       assert && assert( allBinCountsProperty instanceof Property,
         `invalid allBinCountsProperty: ${allBinCountsProperty}` );
       assert && assert( heavyBinCountsProperty instanceof Property,
         `invalid heavyBinCountsProperty: ${heavyBinCountsProperty}` );
       assert && assert( lightBinCountsProperty instanceof Property,
         `invalid lightBinCountsProperty: ${lightBinCountsProperty}` );
-      assert && assert( maxBinCountProperty instanceof NumberProperty,
-        `invalid maxBinCountProperty: ${maxBinCountProperty}` );
-      assert && assert( binCountsUpdatedEmitter instanceof Emitter,
-        `invalid binCountsUpdatedEmitter: ${binCountsUpdatedEmitter}` );
       assert && assert( xAxisLabel instanceof Node, `invalid xAxisLabel: ${xAxisLabel}` );
       assert && assert( yAxisLabel instanceof Node, `invalid yAxisLabel: ${yAxisLabel}` );
       assert && assert( heavyPlotVisibleProperty instanceof BooleanProperty,
@@ -102,14 +102,13 @@ define( require => {
       } );
 
       // The main plot, for all particles
-      const allPlotNode = new BarPlotNode( options.barColor, options.chartSize,
-        options.intervalLinesSpacing, maxBinCountProperty );
+      const allPlotNode = new BarPlotNode( options.barColor, options.chartSize, yScaleProperty );
 
       // Species-specific plots
       const heavyPlotNode = new LinePlotNode( GasPropertiesColorProfile.heavyParticleColorProperty,
-        options.plotLineWidth, options.chartSize, options.intervalLinesSpacing, maxBinCountProperty );
+        options.plotLineWidth, options.chartSize, yScaleProperty );
       const lightPlotNode = new LinePlotNode( GasPropertiesColorProfile.lightParticleColorProperty,
-        options.plotLineWidth, options.chartSize, options.intervalLinesSpacing, maxBinCountProperty );
+        options.plotLineWidth, options.chartSize, yScaleProperty );
 
       // parent Node for all plotted data, clipped to the background
       const plotNodesParent = new Node( {
@@ -156,7 +155,7 @@ define( require => {
       // Update the interval lines if the y-axis scale has changed.
       let previousMaxY = null;
       const updateIntervalLines = () => {
-        const maxY = maxBinCountProperty.value;
+        const maxY = yScaleProperty.value;
         if ( previousMaxY === null || previousMaxY !== maxY ) {
 
           const shape = new Shape();

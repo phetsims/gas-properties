@@ -21,15 +21,12 @@ define( require => {
     /**
      * @param {ColorDef} color
      * @param {Dimension2} chartSize
-     * @param {number} minYScale - smallest scale for the y axis
-     * @param {NumberProperty} maxBinCountProperty
+     * @param {NumberProperty} yScaleProperty
      */
-    constructor( color, chartSize, minYScale, maxBinCountProperty ) {
+    constructor( color, chartSize, yScaleProperty ) {
       assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
       assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
-      assert && assert( typeof minYScale === 'number' && minYScale > 0, `invalid minYScale: ${minYScale}` );
-      assert && assert( maxBinCountProperty instanceof NumberProperty,
-                   `invalid maxBinCountProperty: ${maxBinCountProperty}` );
+      assert && assert( yScaleProperty instanceof NumberProperty, `invalid yScaleProperty: ${yScaleProperty}` );
 
       super( new Shape(), {
         fill: color,
@@ -38,8 +35,7 @@ define( require => {
 
       // @private
       this.chartSize = chartSize;
-      this.minYScale = minYScale;
-      this.maxBinCountProperty = maxBinCountProperty;
+      this.yScaleProperty = yScaleProperty;
     }
 
     /**
@@ -52,17 +48,13 @@ define( require => {
 
       const barWidth = this.chartSize.width / binCounts.length;
 
-      // scale of the y axis
-      const yScale = Math.max( this.minYScale, this.maxBinCountProperty.value );
-      assert && assert( yScale > 0, `invalid yScale: ${yScale} ` );
-
       const shape = new Shape();
       for ( let i = 0; i < binCounts.length; i++ ) {
         const binCount = binCounts[ i ];
         if ( binCount > 0 ) {
 
           // Compute the bar height
-          const barHeight = ( binCount / yScale ) * this.chartSize.height;
+          const barHeight = ( binCount / this.yScaleProperty.value ) * this.chartSize.height;
 
           // Add the bar
           shape.rect( i * barWidth, this.chartSize.height - barHeight, barWidth, barHeight );
