@@ -134,19 +134,18 @@ define( require => {
 
       super( options );
 
-      heavyPlotVisibleProperty.link( visible => {
-        heavyPlotNode.visible = visible;
-      } );
-
-      lightPlotVisibleProperty.link( visible => {
-        lightPlotNode.visible = visible;
-      } );
-
-      // Update plots to display the current bin counts.
+      // Update plots to display the current bin counts. Update species-specific plots only if they are visible.
       const updatePlots = () => {
+
         allPlotNode.plot( allBinCountsProperty.value );
-        heavyPlotNode.plot( heavyBinCountsProperty.value );
-        lightPlotNode.plot( lightBinCountsProperty.value );
+
+        if ( heavyPlotVisibleProperty.value ) {
+          heavyPlotNode.plot( heavyBinCountsProperty.value );
+        }
+
+        if ( lightPlotVisibleProperty.value ) {
+          lightPlotNode.plot( lightBinCountsProperty.value );
+        }
       };
 
       // Update the interval lines if the y-axis scale has changed.
@@ -175,6 +174,22 @@ define( require => {
       binCountsUpdatedEmitter.addListener( () => {
         updatePlots();
         updateIntervalLines();
+      } );
+
+      // Visibility of heavy plot, update immediately when it's made visible
+      heavyPlotVisibleProperty.link( visible => {
+        heavyPlotNode.visible = visible;
+        if ( visible ) {
+          heavyPlotNode.plot( heavyBinCountsProperty.value );
+        }
+      } );
+
+      // Visibility of light plot, update immediately when it's made visible
+      lightPlotVisibleProperty.link( visible => {
+        lightPlotNode.visible = visible;
+        if ( visible ) {
+          lightPlotNode.plot( lightBinCountsProperty.value );
+        }
       } );
     }
   }
