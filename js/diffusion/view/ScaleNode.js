@@ -28,7 +28,7 @@ define( require => {
 
   // constants
   const TICK_LENGTH = 16; // view coordinates
-  const TICK_INTERVAL = 1000; // pm
+  const TICK_INTERVAL = 1; // nm
 
   class ScaleNode extends Node {
 
@@ -44,8 +44,9 @@ define( require => {
         `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
 
-      const dx = modelViewTransform.modelToViewDeltaX( TICK_INTERVAL );
-      const numberOfTicks = containerWidth / TICK_INTERVAL;
+      const pmTickInterval = TICK_INTERVAL * 1000; // adjusted for nm to pm
+      const dx = modelViewTransform.modelToViewDeltaX( pmTickInterval ); // pm
+      const numberOfTicks = containerWidth / pmTickInterval;
 
       // One shape to describe all of the ticks
       const ticksShape = new Shape();
@@ -58,9 +59,9 @@ define( require => {
         lineWidth: 1
       } );
 
-      // 1 nm label
+      // '1 nm' label
       const labelNode = new Text( StringUtils.fillIn( valueUnitsString, {
-        value: 1,
+        value: TICK_INTERVAL,
         units: nanometersString
       } ), {
         font: new PhetFont( 12 ),
