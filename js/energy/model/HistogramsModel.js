@@ -174,7 +174,7 @@ define( require => {
     for ( let i = 0; i < sampleArrays.length; i++ ) {
       const values = sampleArrays[ i ];
       for ( let j = 0; j < values.length; j++ ) {
-        const index = Math.floor( values[ j ] / binWidth );
+        const index = Math.floor( values[ j ] / binWidth ); // bin range is [min,max)
         if ( index >=0 && index < binCounts.length ) {
           binCounts[ index ]++;
         }
