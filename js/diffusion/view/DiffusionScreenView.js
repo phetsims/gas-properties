@@ -79,7 +79,7 @@ define( require => {
           fill: GasPropertiesColorProfile.particle1ColorProperty
         },
         centerX: containerNode.centerX,
-        top: containerNode.bottom + 25
+        top: containerNode.bottom + 38
       } );
       const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRate2, {
         arrowNodeOptions: {
