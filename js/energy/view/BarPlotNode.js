@@ -23,7 +23,7 @@ define( require => {
      * @param {NumberProperty} yScaleProperty - scale of the y axis
      * @param {ColorDef} color - color of the bars
      */
-    constructor( chartSize, yScaleProperty, color) {
+    constructor( chartSize, yScaleProperty, color ) {
       assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
       assert && assert( yScaleProperty instanceof NumberProperty, `invalid yScaleProperty: ${yScaleProperty}` );
       assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
@@ -50,7 +50,11 @@ define( require => {
 
       const shape = new Shape();
       for ( let i = 0; i < binCounts.length; i++ ) {
+
         const binCount = binCounts[ i ];
+        assert && assert( binCount <= this.yScaleProperty.value,
+          `binCount ${binCount} should be <= yScale ${this.yScaleProperty.value}` );
+
         if ( binCount > 0 ) {
 
           // Compute the bar height

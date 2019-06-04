@@ -108,10 +108,9 @@ define( require => {
       const lightPlotNode = new LinePlotNode( options.chartSize, yScaleProperty,
         GasPropertiesColorProfile.lightParticleColorProperty, options.plotLineWidth );
 
-      // parent Node for all plotted data, clipped to the background
+      // parent Node for all plotted data
       const plotNodesParent = new Node( {
-        children: [ allPlotNode, heavyPlotNode, lightPlotNode ],
-        clipArea: Shape.rect( 0, 0, options.chartSize.width, options.chartSize.height )
+        children: [ allPlotNode, heavyPlotNode, lightPlotNode ]
       } );
 
       // horizontal lines that appear at equally-spaced intervals based on y-axis scale

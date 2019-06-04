@@ -54,13 +54,18 @@ define( require => {
       const shape = new Shape().moveTo( 0, this.chartSize.height );
       let previousCount = 0;
       for ( let i = 0; i < binCounts.length; i++ ) {
+
         const binCount = binCounts[ i ];
+        assert && assert( binCount <= this.yScaleProperty.value,
+          `binCount ${binCount} should be <= yScale ${this.yScaleProperty.value}` );
+
         const lineHeight = ( binCount / this.yScaleProperty.value ) * this.chartSize.height;
         const y = this.chartSize.height - lineHeight;
         if ( binCount !== previousCount ) {
           shape.lineTo( i * binWidth, y );
         }
         shape.lineTo( ( i + 1 ) * binWidth, y );
+
         previousCount = binCount;
       }
       this.shape = shape;
