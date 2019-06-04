@@ -66,7 +66,7 @@ define( require => {
     },
 
     /**
-     * Speed limit for the left movable wall, in pm/ps.
+     * Speed limit for the container's left movable wall, in pm/ps.
      * For internal use only.
      */
     wallSpeedLimit: {
