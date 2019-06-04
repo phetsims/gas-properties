@@ -29,17 +29,21 @@ define( require => {
     /**
      * @param {IdealModel} model
      * @param {Tandem} tandem
+     * @param {Object} [options]
      */
-    constructor( model, tandem ) {
+    constructor( model, tandem, options ) {
       assert && assert( model instanceof IdealModel, `invalid model: ${model}` );
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+
+      options = _.extend( {
+        hasHoldConstantControls: true,
+        resizeGripColor: GasPropertiesColorProfile.idealResizeGripColorProperty
+      }, options );
 
       // view-specific Properties
       const viewProperties = new IdealViewProperties();
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem, {
-        resizeGripColor: GasPropertiesColorProfile.idealResizeGripColorProperty
-      } );
+      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem, options );
 
       // Flame/ice is animated when holding pressure constant and adjusting temperature (HoldConstant.PRESSURE_T).
       // The user is not controlling the heat, and we animate the bucket to correspond to the temperature change.
@@ -66,6 +70,7 @@ define( require => {
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
+          hasHoldConstantControls: options.hasHoldConstantControls,
           fixedWidth: RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

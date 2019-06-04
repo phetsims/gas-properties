@@ -23,17 +23,23 @@ define( require => {
 
     /**
      * @param {Tandem} tandem
+     * @param {Object} options
      */
-    constructor( tandem ) {
+    constructor( tandem, options ) {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
-      const createView = ( model ) => new IdealScreenView( model, tandem.createTandem( 'view' ) );
-
-      super( createModel, createView, tandem, {
+      options = _.extend( {
         name: screenIdealString,
-        homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon()
+        homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
+        hasHoldConstantControls: true
+      }, options );
+
+      const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
+      const createView = ( model ) => new IdealScreenView( model, tandem.createTandem( 'view' ), {
+        hasHoldConstantControls: options.hasHoldConstantControls
       } );
+
+      super( createModel, createView, tandem, options );
     }
   }
 
