@@ -104,6 +104,12 @@ define( require => {
       projector: 'black'
     },
 
+    // the scale that appears below the container in the Diffusion screen
+    scaleColor: {
+      default: 'rgb( 220, 220, 220 )',
+      projector: 'rgb( 150, 150, 150 )'
+    },
+
     // enabled with ?grid query parameter
     gridColor: {
       default: 'white',

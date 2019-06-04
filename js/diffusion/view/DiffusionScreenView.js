@@ -23,6 +23,7 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
+  const ScaleNode = require( 'GAS_PROPERTIES/diffusion/view/ScaleNode' );
   const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -47,6 +48,13 @@ define( require => {
 
       // Container
       const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );
+
+      // Scale below the container
+      const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform,
+        viewProperties.scaleVisibleProperty, {
+          centerX: model.modelViewTransform.modelToViewX( model.container.dividerX ),
+          top: model.modelViewTransform.modelToViewY( model.container.bottom )
+        } );
 
       // Show how the collision detection space is partitioned into regions
       let regionsNode = null;
@@ -122,6 +130,7 @@ define( require => {
       regionsNode && this.addChild( regionsNode );
       this.addChild( dataAccordionBox );
       this.addChild( controlPanel );
+      this.addChild( scaleNode );
       this.addChild( containerNode );
       this.addChild( particlesNode );
       this.addChild( centerOfMassNode1 );
