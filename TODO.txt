@@ -1,5 +1,8 @@
 TODO list for gas-properties
 
+#101 icon for Scale checkbox?
+#101 put Scale checkbox above Stopwatch?
+
 #52 don't use concat in HistogramsModel
 #52 more efficient implementation of samplesToBinCounts in HistogramsModel
 #52 do we need to do anything when some data isn't shown on histograms? phet.log?
