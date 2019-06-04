@@ -53,7 +53,7 @@ define( require => {
     // For internal use only.
     heatCool: {
       type: 'number',
-      isValidValue: value => ( value >= 100 && value <= 100000 ),
+      isValidValue: value => ( value > 0 ),
       defaultValue: 800
     },
 
