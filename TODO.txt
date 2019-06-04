@@ -1,6 +1,9 @@
 TODO list for gas-properties
 
 #60 update view on Step button and when #particles changes while paused
+#103 test for memory leaks
+#79 model.md
+#80 implementation-notes.md
 
 #52 delete query parameters related to histograms
 #88 delete maxDeltaTN and console.log for heat/cool bucket animation
