@@ -53,7 +53,7 @@ define( require => {
       const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform,
         viewProperties.scaleVisibleProperty, {
           centerX: model.modelViewTransform.modelToViewX( model.container.dividerX ),
-          top: model.modelViewTransform.modelToViewY( model.container.bottom )
+          top: model.modelViewTransform.modelToViewY( model.container.bottom - model.container.wallThickness )
         } );
 
       // Show how the collision detection space is partitioned into regions
