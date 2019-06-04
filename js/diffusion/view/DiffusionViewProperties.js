@@ -24,6 +24,9 @@ define( require => {
 
       // @public whether the center-of-mass indicators are visible on the container
       this.centerOfMassVisibleProperty = new BooleanProperty( false );
+
+      // @public whether the scale is visible on the container
+      this.scaleVisibleProperty = new BooleanProperty( false );
     }
 
     /**
@@ -34,6 +37,7 @@ define( require => {
       this.dataExpandedProperty.reset();
       this.particleFlowRateVisibleProperty.reset();
       this.centerOfMassVisibleProperty.reset();
+      this.scaleVisibleProperty.reset();
     }
   }
 

@@ -97,10 +97,9 @@ define( require => {
       const controlPanel = new DiffusionControlPanel( model.leftSettings, model.rightSettings,
         model.modelViewTransform,
         model.container.hasDividerProperty,
-        viewProperties.particleFlowRateVisibleProperty,
-        viewProperties.centerOfMassVisibleProperty,
+        model.totalNumberOfParticlesProperty,
         model.stopwatch.visibleProperty,
-        model.totalNumberOfParticlesProperty, {
+        viewProperties, {
           fixedWidth: 300,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

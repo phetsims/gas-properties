@@ -13,6 +13,7 @@ define( require => {
   const CenterOfMassCheckbox = require( 'GAS_PROPERTIES/diffusion/view/CenterOfMassCheckbox' );
   const DiffusionSettings = require( 'GAS_PROPERTIES/diffusion/model/DiffusionSettings' );
   const DiffusionSettingsNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionSettingsNode' );
+  const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -22,6 +23,7 @@ define( require => {
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
   const Property = require( 'AXON/Property' );
+  const ScaleCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ScaleCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -32,29 +34,26 @@ define( require => {
      * @param {DiffusionSettings} rightSettings - setting for the right side of the container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {BooleanProperty} hasDividerProperty
-     * @param {BooleanProperty} particleFlowRateVisibleProperty
-     * @param {BooleanProperty} centerOfMassVisibleProperty
-     * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {Property.<number>} totalNumberOfParticlesProperty
+     * @param {BooleanProperty} stopwatchVisibleProperty
+     * @param {DiffusionViewProperties} viewProperties
      * @param {Object} [options]
      */
-    constructor( leftSettings, rightSettings,
-                 modelViewTransform, hasDividerProperty, particleFlowRateVisibleProperty,
-                 centerOfMassVisibleProperty, stopwatchVisibleProperty, totalNumberOfParticlesProperty, options ) {
+    constructor( leftSettings, rightSettings, modelViewTransform, hasDividerProperty,
+                 totalNumberOfParticlesProperty, stopwatchVisibleProperty, viewProperties, options ) {
       assert && assert( leftSettings instanceof DiffusionSettings,
         `invalid leftSettings: ${leftSettings}` );
       assert && assert( rightSettings instanceof DiffusionSettings,
         `invalid rightSettings: ${rightSettings}` );
       assert && assert( hasDividerProperty instanceof BooleanProperty,
         `invalid hasDividerProperty: ${hasDividerProperty}` );
-      assert && assert( particleFlowRateVisibleProperty instanceof BooleanProperty,
-        `invalid particleFlowRateVisibleProperty: ${particleFlowRateVisibleProperty}` );
-      assert && assert( centerOfMassVisibleProperty instanceof BooleanProperty,
-        `invalid centerOfMassVisibleProperty: ${centerOfMassVisibleProperty}` );
-      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
-        `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
       assert && assert( totalNumberOfParticlesProperty instanceof Property,
         `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
+        `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
+      assert && assert( viewProperties instanceof DiffusionViewProperties,
+        `invalid viewProperties: ${viewProperties}` );
+
 
       options = _.extend( {
         fixedWidth: 100,
@@ -67,7 +66,7 @@ define( require => {
 
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
-        spacing: 20,
+        spacing: 18,
         children: [
 
           // spinners
@@ -89,9 +88,10 @@ define( require => {
             align: 'left',
             spacing: 12,
             children: [
-              new CenterOfMassCheckbox( centerOfMassVisibleProperty ),
-              new ParticleFlowRateCheckbox( particleFlowRateVisibleProperty ),
-              new StopwatchCheckbox( stopwatchVisibleProperty )
+              new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty ),
+              new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty ),
+              new StopwatchCheckbox( stopwatchVisibleProperty ),
+              new ScaleCheckbox( viewProperties.scaleVisibleProperty )
             ]
           } )
         ]

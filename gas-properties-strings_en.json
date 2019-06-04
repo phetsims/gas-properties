@@ -143,6 +143,9 @@
   "pressureNoise": {
     "value": "Pressure Noise"
   },
+  "scale": {
+    "value": "Scale"
+  },
   "oopsTemperatureEmpty": {
     "value": "Oops!<br><br>Temperature cannot be held constant<br>when the container is empty."
   },
