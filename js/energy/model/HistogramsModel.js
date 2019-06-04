@@ -17,7 +17,7 @@ define( require => {
 
   // constants
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
-  const MIN_Y_SCALE = 20;
+  const MIN_Y_SCALE = 20; // minimum scale for the y axis, in number of particles
 
   class HistogramsModel {
 
