@@ -107,11 +107,10 @@ define( require => {
               // compute heat/cool factor, relative to temperature change and number of particles
               const deltaTN = deltaT * numberOfParticles; // deltaT * N
               const heatCoolFactor = Util.sign( deltaT ) * TO_HEAT_FACTOR( Math.abs( deltaTN ) );
-              assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` +
-              ` deltaT=${deltaT} numberOfParticles=${numberOfParticles}` );
+              assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
 
               //TODO #88 delete this after we tune GasPropertiesQueryParameters.maxDeltaTN
-              console.log( `deltaT=${deltaT} N=${numberOfParticles} heatCoolFactor=${heatCoolFactor}` );
+              console.log( `deltaT=${deltaT} N=${numberOfParticles} |deltaT * N|=${Math.abs( deltaT * numberOfParticles )} heatCoolFactor=${heatCoolFactor}` );
 
               // Animation that moves the flame/ice up
               this.animation = new Animation( {
