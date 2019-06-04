@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-#52 more efficient implementation of samplesToBinCounts in HistogramsModel
 #52 delete query parameters related to histograms
 
 #60 update view on Step button and when #particles changes while paused

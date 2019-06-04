@@ -164,32 +164,29 @@ define( require => {
     assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
     assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
 
+    // Initialize the bins with 0 counts
     const binCounts = [];
-
-    //TODO #52 inefficient, iterate once over sampleArrays to put values in binCounts, once over binCounts to average
     for ( let i = 0; i < numberOfBins; i++ ) {
+      binCounts[ i ] = 0;
+    }
 
-      // Determine the range of the bin, [min,max)
-      const min = i * binWidth;
-      const max = ( i + 1 ) * binWidth;
-
-      // Determine the number of values that belong in this bin
-      let totalCount = 0;
-      for ( let j = 0; j < sampleArrays.length; j++ ) {
-        const values = sampleArrays[ j ];
-        for ( let k = 0; k < values.length; k++ ) {
-          const value = values[ k ];
-          if ( value >= min && value < max ) {
-            totalCount++;
-          }
+    // Bin all of the sample data, for total binCounts
+    for ( let i = 0; i < sampleArrays.length; i++ ) {
+      const values = sampleArrays[ i ];
+      for ( let j = 0; j < values.length; j++ ) {
+        const index = Math.floor( values[ j ] / binWidth );
+        if ( index >=0 && index < binCounts.length ) {
+          binCounts[ index ]++;
         }
       }
+    }
 
-      // Average over the number of samples
-      binCounts.push( totalCount / sampleArrays.length );
+    // Average the bin counts
+    for ( let i = 0; i < binCounts.length; i++ ) {
+      binCounts[ i ] = binCounts[ i ] / sampleArrays.length;
     }
     
-    assert && assert( binCounts.length === numberOfBins, `unexpected number of bins: ${binCounts.length}` );
+    assert && assert( binCounts.length === numberOfBins, `unexpected number of binCounts: ${binCounts.length}` );
     return binCounts;
   }
 
