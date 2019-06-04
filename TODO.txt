@@ -4,11 +4,6 @@ TODO list for gas-properties
 #52 more efficient implementation of samplesToBinCounts in HistogramsModel
 #52 delete query parameters related to histograms
 
->>>> update on every step when paused
->>>> maybe also update whenever #particles changes
-
-#60 when should histograms update while sim is paused?
-#60 temperature doesn't update when container becomes empty while sim is paused
-#60 Average Speed doesn't update when container becomes empty while sim is paused
+#60 update view on Step button and when #particles changes while paused
 
 #88 delete maxDeltaTN and console.log for heat/cool bucket animation
