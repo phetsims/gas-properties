@@ -15,11 +15,10 @@ which provides a high-level description of the simulation model.
 
 The design document for this sim is [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit).
 
-
 Collision detection:
 * reference: https://en.wikipedia.org/wiki/Collision_detection
 * detected after collision occurs (a posteriori, discrete)
-* pruning via spatial partitioning and bounding boxes
+* pruning via spatial partitioning (regions)
 
 Collision response:
 * reference: https://en.wikipedia.org/wiki/Collision_response
@@ -31,10 +30,13 @@ provided by `Sim` when it steps the simulation. All other `dt` values are in pic
 To avoid working with very small numbers and encountering potential 
 float-point errors, we are not using SI units in the model.  For example,
 KE (Kinetic Energy) is typically in J, which is _kg * m<sup>2</sup> / s<sup>2</sup>_.
-We're using _AMU * pm<sup>2</sup> / ps<sup>2</sup>_.  See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) 
+We're using _AMU * pm<sup>2</sup> / ps<sup>2</sup>_.  
+See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) 
 for the full list of units used in the model.
 
 Diffusion screen vs the other 3 screens
+
+Most important classes are [GasPropertiesModel](TODO), [DiffusionModel](TODO) and [CollisionDetector](TODO)
 
 Important class hierarchies, note symmetry:
 
