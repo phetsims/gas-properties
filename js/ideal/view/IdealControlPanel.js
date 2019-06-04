@@ -52,27 +52,34 @@ define( require => {
         `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
 
       options = _.extend( {
+        hasHoldConstantControls: true,
         fixedWidth: 100,
         xMargin: 0
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
+      const children = [];
+
+      // Optional HoldConstantControl and separator
+      if ( options.hasHoldConstantControls ) {
+        children.push( new HoldConstantControl( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, {
+          maxWidth: contentWidth
+        } ) );
+        children.push( new HSeparator( contentWidth, {
+          stroke: GasPropertiesColorProfile.separatorColorProperty,
+          maxWidth: contentWidth
+        } ) );
+      }
+
+      children.push( new WidthCheckbox( sizeVisibleProperty ) );
+      children.push( new StopwatchCheckbox( stopwatchVisibleProperty ) );
+      children.push( new CollisionCounterCheckbox( collisionCounterVisibleProperty ) );
+
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 12,
-        children: [
-          new HoldConstantControl( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, {
-            maxWidth: contentWidth
-          } ),
-          new HSeparator( contentWidth, {
-            stroke: GasPropertiesColorProfile.separatorColorProperty,
-            maxWidth: contentWidth
-          } ),
-          new WidthCheckbox( sizeVisibleProperty ),
-          new StopwatchCheckbox( stopwatchVisibleProperty ),
-          new CollisionCounterCheckbox( collisionCounterVisibleProperty )
-        ]
+        children: children
       } ) );
 
       super( content, options );
