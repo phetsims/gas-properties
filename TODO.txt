@@ -5,7 +5,6 @@ TODO list for gas-properties
 #52 more efficient implementation of samplesToBinCounts in HistogramsModel
 #52 do we need to do anything when some data isn't shown on histograms? phet.log?
 #52 delete query parameters related to histograms
-#52 don't update plots that aren't visible
 
 #60 when should histograms update while sim is paused?
 #60 temperature doesn't update when container becomes empty while sim is paused

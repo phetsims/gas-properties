@@ -82,6 +82,11 @@ define( require => {
 
       super( content, options );
 
+      // Disable updates of the histogram when the accordion box is collapsed.
+       this.expandedProperty.link( expanded => {
+         histogramNode.updateEnabledProperty.value = expanded;
+       } );
+
       // @private
       this.heavyVisibleProperty = heavyVisibleProperty;
       this.lightVisibleProperty = lightVisibleProperty;

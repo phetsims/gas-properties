@@ -170,10 +170,26 @@ define( require => {
         }
       };
 
-      // Update the histogram when the bin counts have been updated.
-      binCountsUpdatedEmitter.addListener( () => {
+      // Update everything
+      const update = () => {
         updatePlots();
         updateIntervalLines();
+      };
+
+      // @public whether update are enabled, false ignores binCountsUpdatedEmitter.
+      // This is used to prevent updates when the accordion box containing a histogram is collapsed.
+      this.updateEnabledProperty = new BooleanProperty( true );
+      this.updateEnabledProperty.lazyLink( updateEnabled => {
+        if ( updateEnabled ) {
+          update();
+        }
+      } );
+
+      // Update the histogram when the bin counts have been updated.
+      binCountsUpdatedEmitter.addListener( () => {
+        if ( this.updateEnabledProperty.value ) {
+          update();
+        }
       } );
 
       // Visibility of heavy plot, update immediately when it's made visible

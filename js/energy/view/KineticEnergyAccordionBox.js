@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO #52 almost entirely duplicated with SpeedAccordionBox
 /**
  * KineticEnergyAccordionBox contains the kinetic energy histogram and related controls.
  *
@@ -82,6 +83,11 @@ define( require => {
       } ) );
 
       super( content, options );
+
+      // Disable updates of the histogram when the accordion box is collapsed.
+      this.expandedProperty.link( expanded => {
+        histogramNode.updateEnabledProperty.value = expanded;
+      } );
 
       // @private
       this.heavyVisibleProperty = heavyVisibleProperty;
