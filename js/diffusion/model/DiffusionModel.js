@@ -44,7 +44,7 @@ define( require => {
       super( tandem, {
 
         // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
-        modelOriginOffset: new Vector2( 645, 525 ),
+        modelOriginOffset: new Vector2( 670, 525 ),
 
         // Stopwatch initial location (in view coordinates!), determined empirically.
         stopwatchLocation: new Vector2( 60, 50 )

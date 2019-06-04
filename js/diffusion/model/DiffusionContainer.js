@@ -16,7 +16,7 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
   // constants
-  const CONTAINER_WIDTH = 15000; // pm
+  const CONTAINER_WIDTH = 16000; // pm
 
   class DiffusionContainer extends BaseContainer {
 
