@@ -49,16 +49,8 @@ define( require => {
     // For internal use only.
     pointerCoordinates: { type: 'flag' },
 
-    // Determines how fast particles are heated or cooled. Smaller number is faster.
-    // velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
-    // For internal use only.
-    heatCool: {
-      type: 'number',
-      isValidValue: value => ( value >= 100 && value <= 100000 ),
-      defaultValue: 800
-    },
-
     // Pressure at which the lid blows off of the container, in kPa.
+    // Set this to a smaller value to blow the lid off more quickly while testing.
     // For internal use only.
     maxPressure: {
       type: 'number',

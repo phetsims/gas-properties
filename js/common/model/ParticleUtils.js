@@ -12,7 +12,7 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
@@ -121,7 +121,7 @@ define( require => {
       assert && assert( typeof heatCoolFactor === 'number' && heatCoolFactor >= -1 && heatCoolFactor <= 1,
         `invalid heatCoolFactor: ${heatCoolFactor}` );
 
-      const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
+      const velocityScale = 1 + heatCoolFactor / GasPropertiesConstants.HEAT_COOL_SCALE;
       for ( let i = 0; i < particles.length; i++ ) {
         particles[ i ].scaleVelocity( velocityScale );
       }
