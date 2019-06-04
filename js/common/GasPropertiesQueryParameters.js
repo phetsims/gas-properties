@@ -49,7 +49,7 @@ define( require => {
     // For internal use only.
     pointerCoordinates: { type: 'flag' },
 
-    // Determines how fast particles are heated or cooled. Smaller number is faster.
+    // Determines how fast particles are heated or cooled. Smaller numbers result in faster heating/cooling.
     // For internal use only.
     heatCool: {
       type: 'number',
