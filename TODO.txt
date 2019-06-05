@@ -18,7 +18,4 @@ Things to update when #particles changes:
 #79 model.md
 #80 implementation-notes.md
 
-
-#52 delete query parameters related to histograms
-
 Gases Intro - screen icons

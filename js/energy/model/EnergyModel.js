@@ -12,13 +12,12 @@ define( require => {
   const AverageSpeedModel = require( 'GAS_PROPERTIES/energy/model/AverageSpeedModel' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
-  const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
+  const SAMPLE_PERIOD = 1; // ps
 
   class EnergyModel extends GasPropertiesModel {
 

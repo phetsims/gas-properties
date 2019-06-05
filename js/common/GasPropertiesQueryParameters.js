@@ -73,42 +73,6 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 800
-    },
-
-    //==================================================================================================================
-    // TODO query parameters below here are candidates for removal
-    //==================================================================================================================
-
-    // The sample period for the histograms and Average Speed display, in ps.
-    // For internal use only.
-    histogramSamplePeriod: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 1
-    },
-
-    // Number of bins for the histograms.
-    // For internal use only.
-    bins: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 19
-    },
-
-    // Bin width for the Speed histogram, in pm/ps
-    // For internal use only.
-    speedBinWidth: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 170
-    },
-
-    // Bin width for the Kinetic Energy histogram, in AMU * pm^2 / ps^2
-    // For internal use only.
-    keBinWidth: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 8E5
     }
   } );
 

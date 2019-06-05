@@ -12,7 +12,6 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
 
@@ -26,10 +25,10 @@ define( require => {
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
       
-      // @public (read-only)
-      this.numberOfBins = GasPropertiesQueryParameters.bins;
-      this.speedBinWidth = GasPropertiesQueryParameters.speedBinWidth; // pm/ps
-      this.kineticEnergyBinWidth = GasPropertiesQueryParameters.keBinWidth; // AMU * pm^2 / ps^2;
+      // @public (read-only) values chosen in https://github.com/phetsims/gas-properties/issues/52
+      this.numberOfBins = 19;
+      this.speedBinWidth = 170; // pm/ps
+      this.kineticEnergyBinWidth = 8E5; // AMU * pm^2 / ps^2;
 
       // Initialize histograms with 0 in all bins
       const emptyBins = [];
