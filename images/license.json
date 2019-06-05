@@ -1,3 +1,10 @@
 {
-
+  "phet-girl-lab-coat.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Mariah Hermsmeyer, adapted by Amy Rouinfar"
+  }
 }

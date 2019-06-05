@@ -15,8 +15,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const OopsDialog = require( 'SCENERY_PHET/OopsDialog' );
+  const GasPropertiesOopsDialog = require( 'GAS_PROPERTIES/common/view/GasPropertiesOopsDialog' );
 
   // string
   const oopsTemperatureEmptyString = require( 'string!GAS_PROPERTIES/oopsTemperatureEmpty' );
@@ -32,19 +31,19 @@ define( require => {
     constructor( oops ) {
 
       // Oops! Temperature cannot be held constant when the container is empty.
-      const oopsTemperatureEmptyDialog = new OopsDialog( oopsTemperatureEmptyString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      const oopsTemperatureEmptyDialog = new GasPropertiesOopsDialog( oopsTemperatureEmptyString );
       oops.temperatureEmptyEmitter.addListener( () => { oopsTemperatureEmptyDialog.show(); } );
 
       // Oops! Pressure cannot be held constant when the container is empty.
-      const oopsPressureEmptyDialog = new OopsDialog( oopsPressureEmptyString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      const oopsPressureEmptyDialog = new GasPropertiesOopsDialog( oopsPressureEmptyString );
       oops.pressureEmptyEmitter.addListener( () => { oopsPressureEmptyDialog.show(); } );
 
       // Oops! Pressure cannot be held constant. Volume would be too large.
-      const oopsPressureLargeDialog = new OopsDialog( oopsPressureLargeString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      const oopsPressureLargeDialog = new GasPropertiesOopsDialog( oopsPressureLargeString );
       oops.pressureLargeEmitter.addListener( () => { oopsPressureLargeDialog.show(); } );
 
       // Oops! Pressure cannot be held constant. Volume would be too small.
-      const oopsPressureSmallDialog = new OopsDialog( oopsPressureSmallString, GasPropertiesConstants.OOPS_DIALOG_OPTIONS );
+      const oopsPressureSmallDialog = new GasPropertiesOopsDialog( oopsPressureSmallString );
       oops.pressureSmallEmitter.addListener( () => { oopsPressureSmallDialog.show(); } );
     }
   }
