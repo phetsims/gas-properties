@@ -24,7 +24,7 @@ define( require => {
   const Range = require( 'DOT/Range' );
 
   // constants
-  const SAMPLE_PERIOD = 0.75; // ps
+  const REFRESH_PERIOD = 0.75; // refresh the display at this interval, in ps
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
   const MIN_JITTER = 0; // minimum amount of jitter, in kPa
   const MAX_JITTER = 50; // maximum amount of jitter, in kPa
@@ -100,7 +100,7 @@ define( require => {
 
       this.dtAccumulator += dt;
 
-      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
+      if ( this.dtAccumulator >= REFRESH_PERIOD ) {
 
         // Add jitter (kPa) to the displayed value, more jitter with lower pressure.
         // Jitter is added if we're not holding pressure constant.
