@@ -48,7 +48,7 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.histogramsModel = new HistogramsModel( this );
+      this.histogramsModel = new HistogramsModel( this, SAMPLE_PERIOD );
 
       // @public (read-only) {Property.<number|null>}
       // average speed of heavy particles in the container, in pm/ps, null when the container is empty

@@ -16,15 +16,15 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
 
-  // constants
-  const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
-
   class HistogramsModel {
 
     /**
      * @param {EnergyModel} model
+     * @param {number} samplePeriod - data is averaged over this period, in ps
      */
-    constructor( model ) {
+    constructor( model, samplePeriod ) {
+      assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
+        `invalid samplePeriod: ${samplePeriod}` );
       
       // @public (read-only)
       this.numberOfBins = GasPropertiesQueryParameters.bins;
@@ -61,6 +61,7 @@ define( require => {
       
       // @private
       this.model = model;
+      this.samplePeriod = samplePeriod;
 
       // @private Speed samples
       this.heavySpeedSamples = []; // {number[][]} Speed samples for heavy particles
@@ -116,7 +117,7 @@ define( require => {
       this.dtAccumulator += dt;
 
       // When we reach the sample period, average the samples and update the histograms.
-      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
+      if ( this.dtAccumulator >= this.samplePeriod ) {
 
         // update Speed bin counts
         this.heavySpeedBinCountsProperty.value =
