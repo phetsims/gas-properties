@@ -183,6 +183,8 @@ define( require => {
 
     // Average the bin counts
     for ( let i = 0; i < binCounts.length; i++ ) {
+      assert && assert( typeof binCounts[ i ] === 'number' && binCounts[ i ] >= 0,
+        `invalid binCount: ${binCounts[ i ]}` );
       binCounts[ i ] = binCounts[ i ] / sampleArrays.length;
     }
     
