@@ -11,11 +11,9 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HistogramNode = require( 'GAS_PROPERTIES/energy/view/HistogramNode' );
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
-  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
@@ -41,9 +39,6 @@ define( require => {
         barColor: GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty
       }, options );
 
-      const xAxisLabel = new Text( kineticEnergyString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
-      const yAxisLabel = new Text( numberOfParticlesString, GasPropertiesConstants.HISTOGRAM_AXIS_LABEL_OPTIONS );
-
       super(
         histogramsModel.numberOfBins,
         histogramsModel.kineticEnergyBinWidth,
@@ -52,8 +47,8 @@ define( require => {
         histogramsModel.heavyKineticEnergyBinCountsProperty,
         histogramsModel.lightKineticEnergyBinCountsProperty,
         histogramsModel.yScaleProperty,
-        xAxisLabel,
-        yAxisLabel,
+        kineticEnergyString,
+        numberOfParticlesString,
         heavyVisibleProperty,
         lightVisibleProperty,
         options

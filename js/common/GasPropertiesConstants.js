@@ -101,12 +101,6 @@ define( require => {
       boxWidth: 16
     },
 
-    // Options for all histogram axis labels
-    HISTOGRAM_AXIS_LABEL_OPTIONS: {
-      fill: GasPropertiesColorProfile.textFillProperty,
-      font: new PhetFont( 14 )
-    },
-
     // default font for titles (accordion boxes, groups of controls, ...)
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
 

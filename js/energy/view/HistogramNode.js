@@ -20,10 +20,19 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
+  
+  // constants
+  // Options for all histogram axis labels
+  const HISTOGRAM_AXIS_LABEL_OPTIONS = {
+    fill: GasPropertiesColorProfile.textFillProperty,
+    font: new PhetFont( 14 )
+  };
 
   class HistogramNode extends Node {
 
@@ -35,15 +44,15 @@ define( require => {
      * @param {Property.<number[]>} heavyBinCountsProperty - bin counts for heavy particles
      * @param {Property.<number[]>} lightBinCountsProperty - bin counts for light particles
      * @param {NumberProperty} yScaleProperty - scale of the y axis
-     * @param {Node} xAxisLabel - label on the x axis
-     * @param {Node} yAxisLabel - label on the y axis
+     * @param {string} xAxisString - label on the x axis
+     * @param {string} yAxisString - label on the y axis
      * @param {BooleanProperty} heavyPlotVisibleProperty - whether the plot for heavy particles is visible
      * @param {BooleanProperty} lightPlotVisibleProperty - whether the plot for light particles is visible
      * @param {Object} [options]
      */
     constructor( numberOfBins, binWidth, binCountsUpdatedEmitter,
                  allBinCountsProperty, heavyBinCountsProperty, lightBinCountsProperty,
-                 yScaleProperty, xAxisLabel, yAxisLabel,
+                 yScaleProperty, xAxisString, yAxisString,
                  heavyPlotVisibleProperty, lightPlotVisibleProperty,
                  options ) {
       assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
@@ -58,8 +67,8 @@ define( require => {
         `invalid lightBinCountsProperty: ${lightBinCountsProperty}` );
       assert && assert( yScaleProperty instanceof NumberProperty,
         `invalid yScaleProperty: ${yScaleProperty}` );
-      assert && assert( xAxisLabel instanceof Node, `invalid xAxisLabel: ${xAxisLabel}` );
-      assert && assert( yAxisLabel instanceof Node, `invalid yAxisLabel: ${yAxisLabel}` );
+      assert && assert( typeof xAxisString === 'string', `invalid xAxisString: ${xAxisString}` );
+      assert && assert( typeof yAxisString === 'string', `invalid yAxisString: ${yAxisString}` );
       assert && assert( heavyPlotVisibleProperty instanceof BooleanProperty,
         `invalid heavyPlotVisibleProperty: ${heavyPlotVisibleProperty}` );
       assert && assert( lightPlotVisibleProperty instanceof BooleanProperty,
@@ -116,20 +125,24 @@ define( require => {
       // horizontal lines that appear at equally-spaced intervals based on y-axis scale
       const intervalLines = new Path( null, options.intervalLineOptions );
 
-      // position the x-axis label
-      xAxisLabel.maxWidth = 0.65 * background.width; // leave room for out-of-range ellipsis!
-      xAxisLabel.centerX = background.centerX;
-      xAxisLabel.top = background.bottom + 5;
+      // x-axis label
+      const xAxisLabelNode = new Text( xAxisString, _.extend( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
+        maxWidth: 0.9 * background.width,
+        centerX: background.centerX,
+        top: background.bottom + 5
+      } ) );
 
-      // rotate and position the y-axis label
-      yAxisLabel.rotation = -Math.PI / 2;
-      yAxisLabel.maxWidth = 0.85 * background.height;
-      yAxisLabel.right = background.left - 8;
-      yAxisLabel.centerY = background.centerY;
+      // y-axis label 
+      const yAxisLabelNode = new Text( yAxisString, _.extend( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
+        rotation: -Math.PI / 2,
+        maxWidth: 0.9 * background.height,
+        right: background.left - 8,
+        centerY: background.centerY
+      } ) );
 
       assert && assert( !options.children, 'HistogramNode sets children' );
       options = _.extend( {
-        children: [ background, intervalLines, plotNodesParent, border, xAxisLabel, yAxisLabel ]
+        children: [ background, intervalLines, plotNodesParent, border, xAxisLabelNode, yAxisLabelNode ]
       }, options );
 
       super( options );
