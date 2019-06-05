@@ -178,7 +178,7 @@ define( require => {
       // When holding a quantity constant would break the model, the model puts itself in a sane configuration,
       // the model notifies the view via an Emitter, and the view notifies the user via a dialog.
       // This is called oops because the end result is that the user sees a dialog with an 'Oops!' message.
-      this.oops = {
+      this.oopsEmitters = {
 
         // Oops! Temperature cannot be held constant when the container is empty.
         temperatureEmptyEmitter: new Emitter(),
@@ -198,7 +198,7 @@ define( require => {
 
           // Temperature can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
-          this.oops.temperatureEmptyEmitter.emit();
+          this.oopsEmitters.temperatureEmptyEmitter.emit();
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
         }
         else if ( totalNumberOfParticles === 0 &&
@@ -207,7 +207,7 @@ define( require => {
 
           // Pressure can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
-          this.oops.pressureEmptyEmitter.emit();
+          this.oopsEmitters.pressureEmptyEmitter.emit();
           this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
         }
       } );
@@ -495,10 +495,10 @@ define( require => {
           phet.log && phet.log( 'Oops! P cannot be held constant when V exceeds range, ' +
                                 `containerWidth=${containerWidth} widthRange=${this.container.widthRange}` );
           if ( containerWidth > this.container.widthRange.max ) {
-            this.oops.pressureLargeEmitter.emit();
+            this.oopsEmitters.pressureLargeEmitter.emit();
           }
           else {
-            this.oops.pressureSmallEmitter.emit();
+            this.oopsEmitters.pressureSmallEmitter.emit();
           }
 
           // Switch to the 'Nothing' mode

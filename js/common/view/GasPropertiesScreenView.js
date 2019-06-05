@@ -42,7 +42,6 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const OopsDialogManager = require( 'GAS_PROPERTIES/common/view/OopsDialogManager' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
   const PointerCoordinatesNode = require( 'SCENERY_PHET/PointerCoordinatesNode' );
@@ -285,9 +284,6 @@ define( require => {
         left: containerViewLocation.x - defaultWidth,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
-
-      // @private manages OopsDialogs related to the 'Hold Constant' feature
-      this.oopsDialogManager = new OopsDialogManager( model.oops );
 
       // @private used in methods
       this.containerNode = containerNode;
