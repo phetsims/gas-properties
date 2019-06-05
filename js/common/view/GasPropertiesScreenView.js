@@ -224,7 +224,7 @@ define( require => {
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
         model.heatCoolFactorProperty, model.holdConstantProperty, model.isPlayingProperty, {
-          scale: GasPropertiesConstants.HEATER_COOLER_SCALE,
+          scale: GasPropertiesConstants.HEATER_COOLER_NODE_SCALE,
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );

@@ -59,7 +59,7 @@ define( require => {
         model.totalNumberOfParticlesProperty,
         model.temperatureProperty, {
           translation: this.heaterCoolerNode.translation,
-          scale: GasPropertiesConstants.HEATER_COOLER_SCALE
+          scale: GasPropertiesConstants.HEATER_COOLER_NODE_SCALE
         } );
       this.addChild( animatedHeaterCoolerNode );
 

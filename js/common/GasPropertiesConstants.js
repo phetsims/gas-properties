@@ -33,10 +33,12 @@ define( require => {
       thanks: ''
     },
 
+    // margins for all ScreenView instances
     SCREEN_VIEW_X_MARGIN: 20,
     SCREEN_VIEW_Y_MARGIN: 20,
 
-    MODEL_TIME_STEP: 0.2, // ps
+    // time step when pressing the Step button, in ps
+    MODEL_TIME_STEP: 0.2,
 
     // number of particles
     HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
@@ -46,7 +48,7 @@ define( require => {
     HEAVY_PARTICLES_RADIUS: 125, // pm
     LIGHT_PARTICLES_RADIUS: 87.5, // pm
 
-    // Diffusion experiment ranges
+    // Ranges for quantities in a Diffusion experiment
     NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, 200, 0 ),
     MASS_RANGE: new RangeWithValue( 4, 32, 28 ), // AMU
     RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // pm
@@ -68,7 +70,7 @@ define( require => {
       }
     },
 
-    // Defaults for AquaRadioButton instances
+    // Defaults for all AquaRadioButton instances
     AQUA_RADIO_BUTTON_OPTIONS: {
       radius: 8,
       xSpacing: 10
@@ -93,21 +95,26 @@ define( require => {
       yMargin: 4
     },
 
+    // Defaults for all Checkbox instances
     CHECKBOX_OPTIONS: {
       spacing: 8,
       boxWidth: 16
     },
 
+    // Options for all histogram axis labels
     HISTOGRAM_AXIS_LABEL_OPTIONS: {
       fill: GasPropertiesColorProfile.textFillProperty,
       font: new PhetFont( 14 )
     },
 
+    // default font for titles (accordion boxes, groups of controls, ...)
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
+
+    // default font for controls (buttons, checkboxes, ...)
     CONTROL_FONT: new PhetFont( 16 ),
 
     // scale for HeaterCoolerNode
-    HEATER_COOLER_SCALE: 0.8,
+    HEATER_COOLER_NODE_SCALE: 0.8,
 
     // physical constants
     BOLTZMANN: 8.316E3, // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K) by @arouinfar
