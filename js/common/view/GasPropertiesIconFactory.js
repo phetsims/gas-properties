@@ -222,32 +222,31 @@ define( require => {
         center: containerNode.center
       } );
 
-      // Scale set empirically to make particles look desired size
-      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
-
-      // Particles, locations determined empirically
-      const centerX = dividerNode.centerX;
+      // Particles, locations determined empirically, relative to centerX of divider
       const particle1Locations = [
-        new Vector2( centerX - 100, 75 ), new Vector2( centerX - 150, 150 ), new Vector2( centerX - 85, 200 )
+        new Vector2( -400, 300 ), new Vector2( -600, 600 ), new Vector2( -340, 800 )
       ];
       const particle2Locations = [
-        new Vector2( centerX + 100, 75 ), new Vector2( centerX + 165, 185 )
+        new Vector2( 400, 300 ), new Vector2( 660, 740 )
       ];
 
       // Create particle icons
       const particleNodes = [];
       for ( let i = 0; i < particle1Locations.length; i++ ) {
-        particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform, {
+        particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle1Icon( SCREEN_ICONS_TRANSFORM, {
           center: particle1Locations[ i ]
         } ) );
       }
       for ( let i = 0; i < particle2Locations.length; i++ ) {
-        particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform, {
+        particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle2Icon( SCREEN_ICONS_TRANSFORM, {
           center: particle2Locations[ i ]
         } ) );
       }
 
       const particlesParent = new Node( {
+        scale: 0.25,
+        x: dividerNode.centerX,
+        y: 0,
         children: particleNodes
       } );
 
