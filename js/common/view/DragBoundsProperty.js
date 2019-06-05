@@ -27,6 +27,8 @@ define( require => {
         `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
       super( [ visibleBoundsProperty ], visibleBounds => {
+
+        // account for the bounds of targetNode
         return new Bounds2( visibleBounds.minX, visibleBounds.minY,
           visibleBounds.maxX - targetNode.width, visibleBounds.maxY - targetNode.height );
       } );
