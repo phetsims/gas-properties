@@ -3,9 +3,13 @@ TODO list for gas-properties
 #60 update view on Step button and when #particles changes while paused
 #60 disable pressure noise on manual Step?
 
-Things that don't update every step:
-* Average Speed display, see EnergyModel.SAMPLE_PERIOD and AverageSpeedModel.step
-* Histograms, see EnergyModel.SAMPLE_PERIOD and HistogramsModel.step
+Things to update when #particles changes:
+* Average Speed Display
+* Histograms
+* Pressure gauge
+* Thermometer
+* COM indicators
+* PFR indicators
 
 #103 test for memory leaks
 #106 better way of specifying particle locations for screen icons
