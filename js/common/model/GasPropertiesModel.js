@@ -175,9 +175,12 @@ define( require => {
       } );
 
       // @public (read-only) Emitters for conditions related to the 'Hold Constant' feature.
-      // When holding a quantity constant would break the model, the model puts itself in a sane configuration,
-      // the model notifies the view via an Emitter, and the view notifies the user via a dialog.
-      // This is called oops because the end result is that the user sees a dialog with an 'Oops!' message.
+      // When holding a quantity constant would break the model, the model switches to 'Nothing' mode, the model
+      // notifies the view via an Emitter, and the view notifies the user via a dialog. This is called oopsEmitters
+      // because the end result is that the user sees an OopsDialog, with a message of the form 'Oops! blah blah'.
+      // It was difficult to find names for these Emitters that weren't overly verbose, so the names are
+      // highly-abbreviated versions of the messages that the user will see, and they are grouped in an object
+      // named oopsEmitters.
       this.oopsEmitters = {
 
         // Oops! Temperature cannot be held constant when the container is empty.

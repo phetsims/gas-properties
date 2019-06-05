@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Specialization of OopsDialog for this sim, with a custom icon and options.
+ * Specialization of OopsDialog, with a custom icon and options.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,7 +17,7 @@ define( require => {
   // images
   const phetGirlLabCoatImage = require( 'image!GAS_PROPERTIES/phet-girl-lab-coat.png' );
 
-  class GasPropertiesOopsDialog extends OopsDialog {
+  class IdealOopsDialog extends OopsDialog {
 
     /**
      * @param {string} message
@@ -38,5 +38,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesOopsDialog', GasPropertiesOopsDialog );
+  return gasProperties.register( 'IdealOopsDialog', IdealOopsDialog );
 } );

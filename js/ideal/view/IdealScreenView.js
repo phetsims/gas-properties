@@ -13,11 +13,11 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesOopsDialog = require( 'GAS_PROPERTIES/common/view/GasPropertiesOopsDialog' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
   const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
+  const IdealOopsDialog = require( 'GAS_PROPERTIES/ideal/view/IdealOopsDialog' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
   const Tandem = require( 'TANDEM/Tandem' );
@@ -102,13 +102,13 @@ define( require => {
       // the model puts itself in a sane configuration, the model notifies the view via an Emitter, and the view
       // notifies the user via a dialog. The student is almost certain to encounter these conditions, so dialogs are
       // created eagerly and reused.
-      const oopsTemperatureEmptyDialog = new GasPropertiesOopsDialog( oopsTemperatureEmptyString );
+      const oopsTemperatureEmptyDialog = new IdealOopsDialog( oopsTemperatureEmptyString );
       model.oopsEmitters.temperatureEmptyEmitter.addListener( () => { oopsTemperatureEmptyDialog.show(); } );
-      const oopsPressureEmptyDialog = new GasPropertiesOopsDialog( oopsPressureEmptyString );
+      const oopsPressureEmptyDialog = new IdealOopsDialog( oopsPressureEmptyString );
       model.oopsEmitters.pressureEmptyEmitter.addListener( () => { oopsPressureEmptyDialog.show(); } );
-      const oopsPressureLargeDialog = new GasPropertiesOopsDialog( oopsPressureLargeString );
+      const oopsPressureLargeDialog = new IdealOopsDialog( oopsPressureLargeString );
       model.oopsEmitters.pressureLargeEmitter.addListener( () => { oopsPressureLargeDialog.show(); } );
-      const oopsPressureSmallDialog = new GasPropertiesOopsDialog( oopsPressureSmallString );
+      const oopsPressureSmallDialog = new IdealOopsDialog( oopsPressureSmallString );
       model.oopsEmitters.pressureSmallEmitter.addListener( () => { oopsPressureSmallDialog.show(); } );
 
       // @private used in methods
