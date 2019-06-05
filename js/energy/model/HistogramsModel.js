@@ -79,6 +79,14 @@ define( require => {
       model.isPlayingProperty.link( isPlaying => {
         this.resetAccumulators();
       } );
+
+      // If the number of particles changes while paused, sample the current state and update immediately.
+      model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        if ( !model.isPlayingProperty.value ) {
+          this.sample();
+          this.update();
+        }
+      } );
     }
 
     /**
@@ -112,6 +120,24 @@ define( require => {
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
+      // Accumulate dt
+      this.dtAccumulator += dt;
+
+      // Takes data samples
+      this.sample();
+
+      // Update now if we've reached the end of the sample period, or if we're manually stepping
+      if ( this.dtAccumulator >= this.samplePeriod || !this.model.isPlayingProperty.value ) {
+        this.update();
+      }
+    }
+
+    /**
+     * Takes a data sample for histograms.
+     * @private
+     */
+    sample() {
+
       // take a Speed sample
       this.heavySpeedSamples.push( getSpeedValues( this.model.heavyParticles ) );
       this.lightSpeedSamples.push( getSpeedValues( this.model.lightParticles ) );
@@ -119,48 +145,48 @@ define( require => {
       // take a Kinetic Energy sample
       this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.model.heavyParticles ) );
       this.lightKineticEnergySamples.push( getKineticEnergyValues( this.model.lightParticles ) );
+    }
 
-      // Accumulate dt
-      this.dtAccumulator += dt;
+    /**
+     * Updates the histograms using the current sample data.
+     * @private
+     */
+    update() {
 
-      // Update now if we've reached the end of the sample period, or if we're manually stepping
-      if ( this.dtAccumulator >= this.samplePeriod || !this.model.isPlayingProperty.value ) {
+      // update Speed bin counts
+      this.heavySpeedBinCountsProperty.value =
+        samplesToBinCounts( this.heavySpeedSamples, this.numberOfBins, this.speedBinWidth );
+      this.lightSpeedBinCountsProperty.value =
+        samplesToBinCounts( this.lightSpeedSamples, this.numberOfBins, this.speedBinWidth );
+      this.allSpeedBinCountsProperty.value =
+        sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
 
-        // update Speed bin counts
-        this.heavySpeedBinCountsProperty.value =
-          samplesToBinCounts( this.heavySpeedSamples, this.numberOfBins, this.speedBinWidth );
-        this.lightSpeedBinCountsProperty.value =
-          samplesToBinCounts( this.lightSpeedSamples, this.numberOfBins, this.speedBinWidth );
-        this.allSpeedBinCountsProperty.value =
-          sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
+      // update Kinetic Energy bin counts
+      this.heavyKineticEnergyBinCountsProperty.value =
+        samplesToBinCounts( this.heavyKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
+      this.lightKineticEnergyBinCountsProperty.value =
+        samplesToBinCounts( this.lightKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
+      this.allKineticEnergyBinCountsProperty.value =
+        sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
 
-        // update Kinetic Energy bin counts
-        this.heavyKineticEnergyBinCountsProperty.value =
-          samplesToBinCounts( this.heavyKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
-        this.lightKineticEnergyBinCountsProperty.value =
-          samplesToBinCounts( this.lightKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
-        this.allKineticEnergyBinCountsProperty.value =
-          sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
+      // Find the maximum bin count for all histograms. It's sufficient to look at the 'all' histograms.
+      // This is used to determine the y-axis scale, which must be the same for both histograms.
+      const maxBinCount = Math.max(
+        _.max( this.allSpeedBinCountsProperty.value ),
+        _.max( this.allKineticEnergyBinCountsProperty.value ) );
 
-        // Find the maximum bin count for all histograms. It's sufficient to look at the 'all' histograms.
-        // This is used to determine the y-axis scale, which must be the same for both histograms.
-        const maxBinCount = Math.max(
-          _.max( this.allSpeedBinCountsProperty.value ),
-          _.max( this.allKineticEnergyBinCountsProperty.value ) );
+      // Adjust the y-axis scale to accommodate the maximum bin count.
+      // Increase the y scale a bit so that there's always a little space above maxBinCount.
+      // The minimum scale is determined by the spacing between horizontal lines in the histogram view.
+      // We don't want to the scale to be less than one interval of the horizontal lines, so that the
+      // y axis doesn't scale for small numbers of particles.
+      this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
 
-        // Adjust the y-axis scale to accommodate the maximum bin count.
-        // Increase the y scale a bit so that there's always a little space above maxBinCount.
-        // The minimum scale is determined by the spacing between horizontal lines in the histogram view.
-        // We don't want to the scale to be less than one interval of the horizontal lines, so that the
-        // y axis doesn't scale for small numbers of particles.
-        this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
+      // Notify listeners that the bin counts have been updated.
+      this.binCountsUpdatedEmitter.emit();
 
-        // Notify listeners that the bin counts have been updated.
-        this.binCountsUpdatedEmitter.emit();
-
-        // Reset accumulators in preparation for the next sample period.
-        this.resetAccumulators();
-      }
+      // Reset accumulators in preparation for the next sample period.
+      this.resetAccumulators();
     }
   }
 
