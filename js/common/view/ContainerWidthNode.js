@@ -3,6 +3,7 @@
 /**
  * Dimensional arrows that show the width of the container.
  * Origin is at the right end of the arrows, which corresponds to the container's origin.
+ * This is not an expensive UI component, so it's updated regardless of whether it's visible.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -45,11 +46,13 @@ define( require => {
         `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
 
+      // Convert the width from model to view coordinates
       const viewWidthProperty = new DerivedProperty( [ widthProperty ],
         width => modelViewTransform.modelToViewDeltaX( width ), {
           valueType: 'number'
         } );
 
+      // Dimensional arrows, in view coordinates
       const dimensionalArrowNode = new DimensionalArrowsNode( viewWidthProperty, {
         color: GasPropertiesColorProfile.sizeArrowColorProperty
       } );
@@ -59,7 +62,8 @@ define( require => {
         valueType: 'number'
       } );
       const nmWidthRange = new Range( widthProperty.range.min / 1000, widthProperty.range.max / 1000 );
-      
+
+      // Display the width in nm
       const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
         decimalPlaces: 1,
         valuePattern: StringUtils.fillIn( valueUnitsString, { units: nanometersString } ),

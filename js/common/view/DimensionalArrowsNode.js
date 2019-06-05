@@ -2,7 +2,8 @@
 
 /**
  * A horizontal dimensional arrow, looks like this, but with solid arrow heads:  |<- - - ->|
- * NOTE! This implementation is specific to Gas Properties in that the arrow grows to the left.
+ * NOTE! This implementation is specific to Gas Properties in that the arrow grows to the left,
+ * which prevents 'strobing' of the dashed line.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -41,21 +42,21 @@ define( require => {
         arrowHeadDimensions: DEFAULT_ARROW_HEAD_DIMENSIONS
       }, options );
 
-      // horizontal line in center
+      // horizontal dashed line in center
       const horizontalLine = new Line( 0, 0, 1, 0, {
         stroke: options.color,
         lineWidth: options.horizontalLineWidth,
         lineDash: options.horizontalLineDash
       } );
 
-      // vertical line at left end
+      // vertical solid line at left end
       const leftVerticalLine = new Line( 0, 0, 0, options.verticalLineLength, {
         stroke: options.color,
         lineWidth: options.verticalLineWidth,
         centerY: horizontalLine.centerY
       } );
 
-      // vertical line at right end
+      // vertical solid line at right end
       const rightVerticalLine = new Line( 0, 0, 0, options.verticalLineLength, {
         stroke: options.color,
         lineWidth: options.verticalLineWidth,
@@ -87,7 +88,7 @@ define( require => {
 
       super( options );
 
-      // Make line grow to the left, and reposition left arrow and vertical line
+      // Make the line grow to the left, and reposition left arrow and vertical line.
       lengthProperty.link( length => {
         horizontalLine.setLine( 0, 0, -length, 0 );
         leftVerticalLine.centerX = -length;
