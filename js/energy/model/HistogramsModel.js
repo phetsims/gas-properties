@@ -28,9 +28,9 @@ define( require => {
         `invalid samplePeriod: ${samplePeriod}` );
 
       // @public (read-only) values chosen in https://github.com/phetsims/gas-properties/issues/52
-      this.numberOfBins = 19;
-      this.speedBinWidth = 170; // pm/ps
-      this.kineticEnergyBinWidth = 8E5; // AMU * pm^2 / ps^2;
+      this.numberOfBins = 19;  // number of bins, common to both histograms
+      this.speedBinWidth = 170; // bin width for the Speed histogram, in pm/ps
+      this.kineticEnergyBinWidth = 8E5; // bin width for the Kinetic Energy histogram, in AMU * pm^2 / ps^2;
 
       // Initialize histograms with 0 in all bins
       const emptyBins = [];
@@ -42,12 +42,12 @@ define( require => {
         isValidValue: value => ( Array.isArray( value ) && value.length === this.numberOfBins )
       };
 
-      // Speed bin counts
+      // @public (read-only) Speed bin counts
       this.heavySpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.lightSpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.allSpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
 
-      // Kinetic Energy bin counts
+      // @public (read-only) Kinetic Energy bin counts
       this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
       this.allKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
@@ -74,10 +74,11 @@ define( require => {
 
       // @private for measuring sample period
       this.dtAccumulator = 0;
+      this.numberOfSamples = 0;
 
-      // Reset accumulators when the play state changes, so that we can update immediately if manually stepping.
+      // Clear sample data when the play state changes, so that we can update immediately if manually stepping.
       model.isPlayingProperty.link( isPlaying => {
-        this.resetAccumulators();
+        this.clearSamples();
       } );
 
       // If the number of particles changes while paused, sample the current state and update immediately.
@@ -93,16 +94,17 @@ define( require => {
      * @public
      */
     reset() {
-      this.resetAccumulators();
+      this.clearSamples();
     }
 
     /**
-     * Resets dt accumulator and clears samples.
+     * Clears the sample data.
      * @private
      */
-    resetAccumulators() {
+    clearSamples() {
 
       this.dtAccumulator = 0;
+      this.numberOfSamples = 0;
 
       // clear Speed samples
       this.heavySpeedSamples.length = 0;
@@ -137,7 +139,9 @@ define( require => {
      * @private
      */
     sample() {
-
+      assert && assert( !( this.numberOfSamples !== 0 && !this.model.isPlayingProperty.value ),
+        'numberOfSamples should be 0 if called while the sim is paused' );
+      
       // take a Speed sample
       this.heavySpeedSamples.push( getSpeedValues( this.model.heavyParticles ) );
       this.lightSpeedSamples.push( getSpeedValues( this.model.lightParticles ) );
@@ -145,6 +149,8 @@ define( require => {
       // take a Kinetic Energy sample
       this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.model.heavyParticles ) );
       this.lightKineticEnergySamples.push( getKineticEnergyValues( this.model.lightParticles ) );
+      
+      this.numberOfSamples++;
     }
 
     /**
@@ -152,6 +158,8 @@ define( require => {
      * @private
      */
     update() {
+      assert && assert( !( this.numberOfSamples !== 1 && !this.model.isPlayingProperty.value ),
+        'numberOfSamples should be 1 if called while the sim is paused' );
 
       // update Speed bin counts
       this.heavySpeedBinCountsProperty.value =
@@ -185,8 +193,8 @@ define( require => {
       // Notify listeners that the bin counts have been updated.
       this.binCountsUpdatedEmitter.emit();
 
-      // Reset accumulators in preparation for the next sample period.
-      this.resetAccumulators();
+      // Clear sample data in preparation for the next sample period.
+      this.clearSamples();
     }
   }
 
@@ -226,7 +234,6 @@ define( require => {
    * @param {number} numberOfBins
    * @param {number} binWidth
    * @returns {number[]}
-   * @private
    */
   function samplesToBinCounts( sampleArrays, numberOfBins, binWidth ) {
     assert && assert( Array.isArray( sampleArrays ) && sampleArrays.length > 0, `invalid sampleArrays: ${sampleArrays}` );

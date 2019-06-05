@@ -6,7 +6,7 @@ TODO list for gas-properties
 Things to update when #particles changes:
 * Thermometer
 * Pressure gauge
-* Average Speed Display
+* Average Speed Display [DONE]
 * Histograms [DONE]
 * COM indicators [DONE]
 * Data display [DONE]
