@@ -16,7 +16,6 @@ define( require => {
   const Easing = require( 'TWIXT/Easing' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const LinearFunction = require( 'DOT/LinearFunction' );
@@ -34,13 +33,16 @@ define( require => {
   // This is required to avoid spurious animation due to floating-point errors.
   const MIN_DELTA_T = 1E-5;
 
-  // HeaterCoolerNode takes a value fro [-1,1], when -1 is ice, 1 is flame, and 0 is nothing. This values is the
+  // HeaterCoolerNode takes a value from [-1,1], when -1 is ice, 1 is flame, and 0 is nothing. This value is the
   // minimum absolute value, and ensures that some of the flame/ice is always shown for small temperature changes.
   const MIN_HEAT_COOL_FACTOR = 0.2;
 
-  // Mapping of deltaT * N to heat factor.  The min factor is 0.2 so that we show at least 20% of the flame/ice.
-  const TO_HEAT_FACTOR = new LinearFunction( 0, GasPropertiesQueryParameters.maxDeltaTN,
-    MIN_HEAT_COOL_FACTOR, 1, true /* clamp */ );
+  // deltaT * N >= this value results in flame/ice being fully on.
+  // See https://github.com/phetsims/gas-properties/issues/88 for additional history.
+  const MAX_DELTA_T_N = 20000;
+
+  // Mapping of deltaT * N to heat factor.
+  const TO_HEAT_FACTOR = new LinearFunction( 0, MAX_DELTA_T_N, MIN_HEAT_COOL_FACTOR, 1, true /* clamp */ );
 
   // Animations will be controlled by calling step
   const STEP_EMITTER = null;

@@ -109,17 +109,6 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 8E5
-    },
-
-    /**
-     * Related to animation of heat/cool bucket for 'Pressure T' mode, #88.
-     * deltaT * N >= this value (in K) results in flame/ice being fully on.
-     * For internal use only.
-     */
-    maxDeltaTN: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 10000
     }
   } );
 
