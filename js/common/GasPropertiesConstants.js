@@ -11,7 +11,6 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
@@ -112,7 +111,7 @@ define( require => {
     HEATER_COOLER_NODE_SCALE: 0.8,
 
     // spacing of the horizontal lines in the histograms, in number of particles
-    HISTOGRAM_LINE_SPACING: GasPropertiesQueryParameters.histogramLineSpacing,
+    HISTOGRAM_LINE_SPACING: 50,
 
     // physical constants
     BOLTZMANN: 8.316E3, // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K) by @arouinfar
