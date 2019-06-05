@@ -9,19 +9,15 @@ define( require => {
   'use strict';
 
   // modules
+  const AverageSpeedModel = require( 'GAS_PROPERTIES/energy/model/AverageSpeedModel' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
-  const Property = require( 'AXON/Property' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
-  const AVERAGE_SPEED_PROPERTY_OPTIONS = {
-    isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
-    units: 'pm/ps'
-  };
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
 
   class EnergyModel extends GasPropertiesModel {
@@ -50,16 +46,8 @@ define( require => {
       // @public (read-only)
       this.histogramsModel = new HistogramsModel( this, SAMPLE_PERIOD );
 
-      // @public (read-only) {Property.<number|null>}
-      // average speed of heavy particles in the container, in pm/ps, null when the container is empty
-      this.heavyAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
-      this.lightAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
-
-      // @private used internally to smooth the average speed computation
-      this.dtAccumulator = 0; // accumulated dts while samples were taken
-      this.numberOfAverageSpeedSamples = 0; // number of samples we've taken
-      this.heavyAverageSpeedSum = 0; // sum of samples for heavy particles
-      this.lightAverageSpeedSum = 0; // sum of samples for light particles
+      // @public
+      this.averageSpeedModel = new AverageSpeedModel( this, SAMPLE_PERIOD );
     }
 
     /**
@@ -69,19 +57,8 @@ define( require => {
      */
     reset() {
       super.reset();
-
-      // sub-model
+      this.averageSpeedModel.reset();
       this.histogramsModel.reset();
-
-      // Properties
-      this.heavyAverageSpeedProperty.reset();
-      this.lightAverageSpeedProperty.reset();
-
-      // accumulators
-      this.dtAccumulator = 0;
-      this.numberOfAverageSpeedSamples = 0;
-      this.heavyAverageSpeedSum = 0;
-      this.lightAverageSpeedSum = 0;
     }
 
     /**
@@ -94,46 +71,8 @@ define( require => {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       super.stepModelTime( dt );
-
-      // step the average speed display
-      this.stepAverageSpeed( dt );
-
-      // step the histograms
+      this.averageSpeedModel.step( dt );
       this.histogramsModel.step( dt );
-    }
-
-    /**
-     * Computes the average speed for each particle type, smoothed over an interval.
-     * @param {number} dt - time delta, in ps
-     * @private
-     */
-    stepAverageSpeed( dt ) {
-
-      this.heavyAverageSpeedSum += getAverageSpeed( this.heavyParticles );
-      this.lightAverageSpeedSum += getAverageSpeed( this.lightParticles );
-      this.numberOfAverageSpeedSamples++;
-
-      this.dtAccumulator += dt;
-
-      if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
-
-        // update the average speed Properties
-        this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
-        this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
-
-        // reset the smoothing variables
-        this.dtAccumulator = 0;
-        this.numberOfAverageSpeedSamples = 0;
-        this.heavyAverageSpeedSum = 0;
-        this.lightAverageSpeedSum = 0;
-      }
-
-      if ( this.heavyParticles.length === 0 ) {
-        this.heavyAverageSpeedProperty.value = null;
-      }
-      if ( this.lightParticles.length === 0 ) {
-        this.lightAverageSpeedProperty.value = null;
-      }
     }
 
     /**
@@ -173,25 +112,6 @@ define( require => {
     getLightParticleKineticEnergyValues() {
       return getKineticEnergyValues( this.lightParticles );
     }
-  }
-
-  /**
-   * Gets the average speed for a set of particles, in pm/ps.
-   * @param {Particle[]} particles
-   * @returns {number|null} null if there are no particles
-   */
-  function getAverageSpeed( particles ) {
-    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-
-    let averageSpeed = null;
-    if ( particles.length > 0 ) {
-      let totalSpeed = 0;
-      for ( let i = 0; i < particles.length; i++ ) {
-        totalSpeed += particles[ i ].velocity.magnitude;
-      }
-      averageSpeed = totalSpeed / particles.length;
-    }
-    return averageSpeed;
   }
 
   /**
