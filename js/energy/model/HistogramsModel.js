@@ -74,13 +74,18 @@ define( require => {
       // @private for measuring sample period
       this.dtAccumulator = 0;
     }
-    
-    // @public
+
+    /**
+     * @public
+     */
     reset() {
       this.resetAccumulators();
     }
 
-    // @private
+    /**
+     * Resets dt accumulator and clears samples.
+     * @private
+     */
     resetAccumulators() {
       
       this.dtAccumulator = 0;
