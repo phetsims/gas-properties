@@ -1,11 +1,13 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Spatial partitioning is a technique for improving the performance of collision detection.
- * The collision detection bounds are partitioning into a 2D grid of Regions. Objects (particles and
- * containers) are members of one or more regions based on whether they intersect the bounds of the region.
- * Rather than having to consider collisions between every object in the system, only objects within the
- * same region need to be considered.
+ * Region is one cell in the collection-detection space.
+ *
+ * Spatial partitioning is a technique for improving the performance of collision detection. The collision detection
+ * space is partitioned into a 2D grid of cells that we refer to as regions (the term used in the Java implementation).
+ * Objects (particles and containers) are members of one or more regions based on whether they intersect the bounds
+ * of the region. Rather than having to consider collisions between every object in the system, only objects within
+ * the same region need to be considered.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

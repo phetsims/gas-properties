@@ -41,7 +41,7 @@ define( require => {
       this.mass = options.mass; // AMU
       this.radius = options.radius; // radians
 
-      // @public (read-only)
+      // @public (read-only) colors are Properties to support ColorProfiles and projector mode
       this.colorProperty = options.colorProperty || new Property( 'white' );
       this.highlightColorProperty = options.highlightColorProperty || new Property( 'white' );
 
@@ -97,7 +97,7 @@ define( require => {
     }
 
     /**
-     * Disposes the particle.
+     * Disposes this particle.
      * @public
      */
     dispose() {
@@ -106,7 +106,7 @@ define( require => {
     }
 
     /**
-     * Moves the particle by one time step.
+     * Moves this particle by one time step.
      * @param {number} dt - time delta, in ps
      * @public
      */
@@ -118,7 +118,7 @@ define( require => {
     }
 
     /**
-     * Sets the location and remembers the previous location.
+     * Sets this particle's location and remembers the previous location.
      * @param {number} x
      * @param {number} y
      * @public
@@ -131,8 +131,7 @@ define( require => {
     }
 
     /**
-     * Sets the velocity in Cartesian coordinates.
-     * As a side effect, updates everything that is a function of velocity.
+     * Sets this particle's velocity in Cartesian coordinates.
      * @param {number} x
      * @param {number} y
      * @public
@@ -144,8 +143,7 @@ define( require => {
     }
 
     /**
-     * Sets the velocity in polar coordinates.
-     * As a side effect, updates everything that is a function of velocity.
+     * Sets this particle's velocity in polar coordinates.
      * @param {number} magnitude - pm / ps
      * @param {number} angle - in radians
      * @public
@@ -157,8 +155,8 @@ define( require => {
     }
 
     /**
-     * Sets the velocity magnitude.
-     * @param {number} magnitude
+     * Sets this particle's velocity magnitude (speed).
+     * @param {number} magnitude - pm/ps
      * @public
      */
     setVelocityMagnitude( magnitude ) {
@@ -167,7 +165,7 @@ define( require => {
     }
 
     /**
-     * Scales the velocity. Used when heat/cool is applied.
+     * Scales this particle's velocity. Used when heat/cool is applied.
      * @param {number} scale
      * @public
      */
@@ -219,7 +217,7 @@ define( require => {
     }
 
     /**
-     * String representation of a Particle. For debugging only, do not rely on format.
+     * String representation of this particle. For debugging only, do not rely on format.
      * @returns {string}
      * @public
      */

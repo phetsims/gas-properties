@@ -18,7 +18,7 @@ define( require => {
   const Range = require( 'DOT/Range' );
 
   // constants
-  const DEFAULT_RANGE = new Range( 0, 1000 );
+  const DEFAULT_RANGE = new Range( 0, 1000 ); // in K
 
   class Thermometer {
 

@@ -36,7 +36,7 @@ define( require => {
       // @public whether the stopwatch is running
       this.isRunningProperty = new BooleanProperty( false );
 
-      // @public time displayed on the stopwatch, in ps
+      // @public (read-only) time displayed on the stopwatch, in ps
       this.timeProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 ),
         units: 'ps'

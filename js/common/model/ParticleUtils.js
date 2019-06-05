@@ -160,6 +160,7 @@ define( require => {
      * Gets the total kinetic energy of a collection of particles.
      * @param {Particle[]} particles
      * @returns {number} in AMU * pm^2 / ps^2
+     * @public
      */
     getTotalKineticEnergy: function( particles ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );

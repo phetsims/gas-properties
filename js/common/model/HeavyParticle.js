@@ -21,7 +21,7 @@ define( require => {
      */
     constructor( options ) {
       super( _.extend( {
-        mass: 28, // N2, in AMU, rounded to the closest integer
+        mass: 28, // equivalent to N2 (nitrogen), in AMU, rounded to the closest integer
         radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS, // pm
         colorProperty: GasPropertiesColorProfile.heavyParticleColorProperty,
         highlightColorProperty: GasPropertiesColorProfile.heavyParticleHighlightColorProperty

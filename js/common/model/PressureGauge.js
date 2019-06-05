@@ -2,8 +2,8 @@
 
 /**
  * Model of the pressure gauge. Responsible for determining what units will be used to present the pressure,
- * and for deriving pressure in those units. Adds a bit of jitter to the displayed values, to make the gauge
- * look more realistic.
+ * and for deriving pressure in those units. Optionally add a bit of jitter to the displayed values, to make
+ * the gauge look more realistic.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
