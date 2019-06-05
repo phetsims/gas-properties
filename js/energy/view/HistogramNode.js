@@ -16,6 +16,7 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const LinePlotNode = require( 'GAS_PROPERTIES/energy/view/LinePlotNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -27,7 +28,6 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
   
-  // constants
   // Options for all histogram axis labels
   const HISTOGRAM_AXIS_LABEL_OPTIONS = {
     fill: GasPropertiesColorProfile.textFillProperty,
@@ -82,8 +82,10 @@ define( require => {
         plotLineWidth: 2, // lineWidth for line segment plots
         barColor: 'white', // {ColorDef}
 
-        // options for the horizontal interval lines
-        intervalLinesSpacing: 20, // {number} a horizontal line will be drawn at intervals of this value
+        // {number} space between the interval lines, in number of particles
+        intervalLinesSpacing: GasPropertiesConstants.HISTOGRAM_LINE_SPACING,
+
+        // options that style the interval lines
         intervalLineOptions: {
           stroke: 'white', // {ColorDef}
           opacity: 0.5, // (0,1)
@@ -122,7 +124,9 @@ define( require => {
         children: [ allPlotNode, heavyPlotNode, lightPlotNode ]
       } );
 
-      // horizontal lines that appear at equally-spaced intervals based on y-axis scale
+      // Horizontal lines that appear at equally-spaced intervals based on y-axis scale.
+      // These lines are intended to cue the student about the relative scale of the y axis.
+      // More lines means a larger value for 'Number of Particles'.
       const intervalLines = new Path( null, options.intervalLineOptions );
 
       // x-axis label

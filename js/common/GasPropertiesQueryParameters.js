@@ -120,6 +120,16 @@ define( require => {
       type: 'number',
       isValidValue: value => ( value > 0 ),
       defaultValue: 10000
+    },
+
+    /**
+     * Spacing between horizontal lines in the histograms, in number of particles.
+     * For internal use only.
+     */
+    histogramLineSpacing: {
+      type: 'number',
+      isValidValue: value => ( value > 20 ),
+      defaultValue: 25
     }
   } );
 

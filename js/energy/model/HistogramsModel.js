@@ -11,13 +11,14 @@ define( require => {
   // modules
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
 
   // constants
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
-  const MIN_Y_SCALE = 20; // minimum scale for the y axis, in number of particles
+  const MIN_Y_SCALE = GasPropertiesConstants.HISTOGRAM_LINE_SPACING; // min scale for the y axis, in number of particles
 
   class HistogramsModel {
 
