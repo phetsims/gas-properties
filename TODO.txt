@@ -8,8 +8,9 @@ Things to update when #particles changes:
 * Histograms
 * Pressure gauge
 * Thermometer
-* COM indicators
-* PFR indicators
+* COM indicators [DONE]
+* Data display [DONE]
+* PFR indicators [NO, REQUIRES UPDATE ONLY ON PARTICLE MOVEMENT]
 
 #103 test for memory leaks
 #106 better way of specifying particle locations for screen icons
