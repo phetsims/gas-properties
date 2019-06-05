@@ -9,6 +9,8 @@
  * T = temperature
  * k = Boltzmann constant
  *
+ * This enumeration was named by consensus, see https://github.com/phetsims/gas-properties/issues/105
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
