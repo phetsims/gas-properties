@@ -46,6 +46,24 @@ define( require => {
     }
 
     /**
+     * @public
+     */
+    reset() {
+      this.resetAccumulators();
+    }
+
+    /**
+     * Resets dt accumulator and clears samples.
+     * @private
+     */
+    resetAccumulators() {
+      this.dtAccumulator = 0;
+      this.numberOfAverageSpeedSamples = 0;
+      this.heavyAverageSpeedSum = 0;
+      this.lightAverageSpeedSum = 0;
+    }
+
+    /**
      * Computes the average speed for each particle type, smoothed over an interval.
      * @param {number} dt - time delta, in ps
      * @private
@@ -64,13 +82,12 @@ define( require => {
         this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
         this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
 
-        // reset the smoothing variables
-        this.dtAccumulator = 0;
-        this.numberOfAverageSpeedSamples = 0;
-        this.heavyAverageSpeedSum = 0;
-        this.lightAverageSpeedSum = 0;
+        // Reset accumulators in preparation for the next sample period.
+        this.resetAccumulators();
       }
 
+      //TODO what about accumulators?
+      // If particle counts go to zero, update immediately
       if ( this.model.heavyParticles.length === 0 ) {
         this.heavyAverageSpeedProperty.value = null;
       }
