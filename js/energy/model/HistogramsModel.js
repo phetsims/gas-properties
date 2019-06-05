@@ -147,7 +147,7 @@ define( require => {
         // y axis doesn't scale for small numbers of particles.
         this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
 
-        // Notify listeners that the bin counts have been update
+        // Notify listeners that the bin counts have been updated.
         this.binCountsUpdatedEmitter.emit();
 
         // Reset accumulators in preparation for the next sample period.
