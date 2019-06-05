@@ -12,16 +12,18 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
 
   class HistogramsModel {
 
     /**
-     * @param {EnergyModel} model
+     * @param {GasPropertiesModel} model
      * @param {number} samplePeriod - data is averaged over this period, in ps
      */
     constructor( model, samplePeriod ) {
+      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
 
