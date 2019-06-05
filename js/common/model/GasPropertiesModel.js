@@ -22,7 +22,7 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
@@ -59,7 +59,7 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
-        holdConstant: HoldConstantEnum.NOTHING,
+        holdConstant: HoldConstant.NOTHING,
         hasCollisionCounter: true,
         leftWallDoesWork: false
       }, options );
@@ -120,7 +120,7 @@ define( require => {
       this.collisionDetector = new CollisionDetector( this.container, [ this.heavyParticles, this.lightParticles ] );
 
       // @public the quantity to hold constant
-      this.holdConstantProperty = new EnumerationProperty( HoldConstantEnum, options.holdConstant );
+      this.holdConstantProperty = new EnumerationProperty( HoldConstant, options.holdConstant );
 
       // @public whether initial temperature is controlled by the user or determined by what's in the container
       this.controlTemperatureEnabledProperty = new BooleanProperty( false );
@@ -197,21 +197,21 @@ define( require => {
       };
 
       this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstantEnum.TEMPERATURE ) {
+        if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
 
           // Temperature can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
           this.oopsEmitters.temperatureEmptyEmitter.emit();
-          this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
+          this.holdConstantProperty.value = HoldConstant.NOTHING;
         }
         else if ( totalNumberOfParticles === 0 &&
-                  ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
-                    this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) ) {
+                  ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
+                    this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) ) {
 
           // Pressure can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
           this.oopsEmitters.pressureEmptyEmitter.emit();
-          this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
+          this.holdConstantProperty.value = HoldConstant.NOTHING;
         }
       } );
 
@@ -220,15 +220,15 @@ define( require => {
 
         // values that are incompatible with an empty container
         assert && assert( !( this.totalNumberOfParticlesProperty.value === 0 &&
-        ( holdConstant === HoldConstantEnum.TEMPERATURE ||
-          holdConstant === HoldConstantEnum.PRESSURE_T ||
-          holdConstant === HoldConstantEnum.PRESSURE_V ) ),
+        ( holdConstant === HoldConstant.TEMPERATURE ||
+          holdConstant === HoldConstant.PRESSURE_T ||
+          holdConstant === HoldConstant.PRESSURE_V ) ),
           `bad state: holdConstant=${holdConstant} with empty container` );
 
         // values that are incompatible with zero pressure
         assert && assert( !( this.pressureProperty.value === 0 &&
-        ( holdConstant === HoldConstantEnum.PRESSURE_V ||
-          holdConstant === HoldConstantEnum.PRESSURE_T ) ),
+        ( holdConstant === HoldConstant.PRESSURE_V ||
+          holdConstant === HoldConstant.PRESSURE_T ) ),
           `bad state: holdConstant=${holdConstant} with zero pressure` );
       } );
     }
@@ -348,8 +348,8 @@ define( require => {
         this.pressureProperty.value = this.computePressure();
 
         // Disable jitter when we're holding pressure constant.
-        const jitterEnabled = !( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ||
-                                 this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V );
+        const jitterEnabled = !( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
+                                 this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
 
         // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
         this.pressureGauge.step( dt, jitterEnabled );
@@ -484,7 +484,7 @@ define( require => {
      */
     compensateForHoldConstant() {
 
-      if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_V ) {
+      if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) {
 
         // hold pressure constant by changing volume
         let containerWidth = this.computeVolume() / ( this.container.height * this.container.depth );
@@ -505,7 +505,7 @@ define( require => {
           }
 
           // Switch to the 'Nothing' mode
-          this.holdConstantProperty.value = HoldConstantEnum.NOTHING;
+          this.holdConstantProperty.value = HoldConstant.NOTHING;
 
           // Set the container width to its min or max.
           containerWidth = this.container.widthRange.constrainValue( containerWidth );
@@ -513,7 +513,7 @@ define( require => {
 
         this.container.resizeImmediately( containerWidth );
       }
-      else if ( this.holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
+      else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
 
         // hold pressure constant by changing temperature
         // adjust particle velocities

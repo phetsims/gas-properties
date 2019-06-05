@@ -14,7 +14,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const Property = require( 'AXON/Property' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -64,27 +64,27 @@ define( require => {
       } );
 
       // Nothing
-      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.NOTHING,
+      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.NOTHING,
         new Text( holdConstantNothingString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
       // Volume (V)
-      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.VOLUME,
+      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.VOLUME,
         new Text( holdConstantVolumeString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
       // Temperature (T)
-      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.TEMPERATURE,
+      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.TEMPERATURE,
         new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
       // Pressure V
-      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_V,
+      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.PRESSURE_V,
         new Text( holdConstantPressureVString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 
       // Pressure T
-      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstantEnum.PRESSURE_T,
+      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.PRESSURE_T,
         new Text( holdConstantPressureTString, TEXT_OPTIONS ),
         GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
 

@@ -13,7 +13,7 @@ define( require => {
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const Property = require( 'AXON/Property' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -33,7 +33,7 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       super( tandem, {
-        holdConstant: HoldConstantEnum.VOLUME,
+        holdConstant: HoldConstant.VOLUME,
         hasCollisionCounter: false
       } );
 

@@ -11,7 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   class ExploreModel extends GasPropertiesModel {
@@ -23,7 +23,7 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       super( tandem, {
-        holdConstant: HoldConstantEnum.NOTHING,
+        holdConstant: HoldConstant.NOTHING,
         leftWallDoesWork: true // moving the left wall does work on particles
       } );
 

@@ -18,7 +18,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
@@ -86,9 +86,9 @@ define( require => {
         }
       };
 
-      // When temperature changes in HoldConstantEnum.PRESSURE_T mode, animate the heater/cooler.
+      // When temperature changes in HoldConstant.PRESSURE_T mode, animate the heater/cooler.
       temperatureProperty.link( ( temperature, previousTemperature ) => {
-        if ( holdConstantProperty.value === HoldConstantEnum.PRESSURE_T ) {
+        if ( holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
 
           const numberOfParticles = totalNumberOfParticlesProperty.value;
 
@@ -158,9 +158,9 @@ define( require => {
         }
       } );
 
-      // This Node is relevant only for HoldConstantEnum.PRESSURE_T mode.
+      // This Node is relevant only for HoldConstant.PRESSURE_T mode.
       holdConstantProperty.link( holdConstant => {
-        if ( holdConstant !== HoldConstantEnum.PRESSURE_T ) {
+        if ( holdConstant !== HoldConstant.PRESSURE_T ) {
           stopAnimation();
         }
       } );

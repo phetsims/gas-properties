@@ -14,7 +14,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealOopsDialog = require( 'GAS_PROPERTIES/ideal/view/IdealOopsDialog' );
@@ -65,8 +65,8 @@ define( require => {
 
       // Swap visibility of HeaterCoolerNodes
       model.holdConstantProperty.link( holdConstant => {
-        animatedHeaterCoolerNode.visible = ( holdConstant === HoldConstantEnum.PRESSURE_T );
-        this.heaterCoolerNode.visible = ( holdConstant !== HoldConstantEnum.PRESSURE_T );
+        animatedHeaterCoolerNode.visible = ( holdConstant === HoldConstant.PRESSURE_T );
+        this.heaterCoolerNode.visible = ( holdConstant !== HoldConstant.PRESSURE_T );
       } );
 
       // Control panel at upper right

@@ -17,7 +17,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
-  const HoldConstantEnum = require( 'GAS_PROPERTIES/common/model/HoldConstantEnum' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const LidDragListener = require( 'GAS_PROPERTIES/common/view/LidDragListener' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -149,8 +149,8 @@ define( require => {
 
       // Hide the resize handle when volume is held constant
       holdConstantProperty.link( holdConstant => {
-        resizeHandleNode.visible = ( holdConstant !== HoldConstantEnum.VOLUME &&
-                                     holdConstant !== HoldConstantEnum.PRESSURE_V );
+        resizeHandleNode.visible = ( holdConstant !== HoldConstant.VOLUME &&
+                                     holdConstant !== HoldConstant.PRESSURE_V );
       } );
 
       // Cancel interaction when visibility of the resize handle changes.
