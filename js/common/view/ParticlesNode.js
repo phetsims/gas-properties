@@ -130,7 +130,7 @@ define( require => {
       context.drawImage( image,
 
         // Be careful about how dx, dy args are computed. Content is centered and padded in HTMLCanvasElement
-        // because we manually provided integer bounds in particleToCanvas.
+        // because we provided integer bounds in particleToCanvas.
         modelViewTransform.modelToViewX( particles[ i ].location.x ) - ( image.width / 2 ) / IMAGE_SCALE,
         modelViewTransform.modelToViewY( particles[ i ].location.y ) - ( image.height / 2 ) / IMAGE_SCALE,
         image.width / IMAGE_SCALE,

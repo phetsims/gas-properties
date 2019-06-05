@@ -58,8 +58,8 @@ define( require => {
           // when the Step button is pressed
           listener: () => {
             const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
-            model.stepManual( seconds );
-            this.stepManual( seconds );
+            model.stepModel( seconds );
+            this.stepView( seconds );
           }
         }
       } );
@@ -89,13 +89,14 @@ define( require => {
     /**
      * Steps the model using real time units.
      * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
+     * Subclasses that need to add functionality should override stepView, not this method.
      * @param {number} dt - time delta, in seconds
      * @public
      */
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       if ( this.model.isPlayingProperty.value ) {
-        this.stepManual( dt );
+        this.stepView( dt );
       }
     }
 
@@ -103,10 +104,9 @@ define( require => {
      * Steps the model using real time units.
      * Intended to be overridden by subclasses and called when the Step button is pressed.
      * @param {number} dt - time delta, in seconds
-     * @param dt
      * @public
      */
-    stepManual( dt ) {
+    stepView( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
     }
   }

@@ -94,24 +94,25 @@ define( require => {
     /**
      * Steps the model using real time units.
      * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
+     * Subclasses that need to add functionality should override stepModelTime, not this method.
      * @param {number} dt - time delta, in seconds
      * @public
      */
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       if ( this.isPlayingProperty.value ) {
-        this.stepManual( dt );
+        this.stepModel( dt );
       }
     }
 
     /**
      * Steps the model using real time units.
      * This is intended to be called by clients that need to step the sim, e.g. Step button listener.
+     * Subclasses that need to add functionality should override stepModelTime, not this method.
      * @param {number} dt - time delta, in seconds
-     * @param dt
      * @public
      */
-    stepManual( dt ) {
+    stepModel( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       this.stepModelTime( this.timeTransform( dt ) );
     }

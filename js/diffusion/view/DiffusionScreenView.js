@@ -166,15 +166,14 @@ define( require => {
     }
 
     /**
-     * Steps the model using real time units.
+     * Steps the view using real time units.
      * @param {number} dt - time delta, in seconds
      * @public
      * @override
      */
-    stepManual( dt ) {
+    stepView( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-
-      super.stepManual( dt );
+      super.stepView( dt );
       this.particlesNode.update();
       this.regionsNode && this.regionsNode.update();
     }

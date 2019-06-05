@@ -127,13 +127,14 @@ define( require => {
     }
 
     /**
-     * Steps the model using real time units.
+     * Steps the view using real time units.
      * @param {number} dt - delta time, in seconds
      * @public
      * @override
      */
-    stepManual( dt ) {
-      super.stepManual( dt );
+    stepView( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+      super.stepView( dt );
       this.animatedHeaterCoolerNode.step( dt );
     }
   }
