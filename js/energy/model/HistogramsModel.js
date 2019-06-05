@@ -126,7 +126,7 @@ define( require => {
         this.allSpeedBinCountsProperty.value =
           sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
 
-        // update Speed histograms
+        // update Kinetic Energy histograms
         this.heavyKineticEnergyBinCountsProperty.value =
           samplesToBinCounts( this.heavyKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
         this.lightKineticEnergyBinCountsProperty.value =
