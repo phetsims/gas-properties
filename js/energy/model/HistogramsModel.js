@@ -118,7 +118,7 @@ define( require => {
       // When we reach the sample period, average the samples and update the histograms.
       if ( this.dtAccumulator >= SAMPLE_PERIOD ) {
 
-        // update Speed histograms
+        // update Speed bin counts
         this.heavySpeedBinCountsProperty.value =
           samplesToBinCounts( this.heavySpeedSamples, this.numberOfBins, this.speedBinWidth );
         this.lightSpeedBinCountsProperty.value =
@@ -126,7 +126,7 @@ define( require => {
         this.allSpeedBinCountsProperty.value =
           sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
 
-        // update Kinetic Energy histograms
+        // update Kinetic Energy bin counts
         this.heavyKineticEnergyBinCountsProperty.value =
           samplesToBinCounts( this.heavyKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
         this.lightKineticEnergyBinCountsProperty.value =
