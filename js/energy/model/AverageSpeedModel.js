@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const Property = require( 'AXON/Property' );
 
   // constants
@@ -26,6 +27,7 @@ define( require => {
      * @param {number} samplePeriod - data is averaged over this period, in ps
      */
     constructor( model, samplePeriod ) {
+      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
 
