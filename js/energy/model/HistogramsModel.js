@@ -73,6 +73,11 @@ define( require => {
 
       // @private for measuring sample period
       this.dtAccumulator = 0;
+
+      // Reset accumulators when the play state changes, so that we can update immediately if manually stepping.
+      model.isPlayingProperty.link( isPlaying => {
+        this.resetAccumulators();
+      } );
     }
 
     /**
@@ -121,8 +126,8 @@ define( require => {
       // Accumulate dt
       this.dtAccumulator += dt;
 
-      // When we reach the sample period, average the samples and update the histograms.
-      if ( this.dtAccumulator >= this.samplePeriod ) {
+      // Update now if we've reached the end of the sample period, or if we're manually stepping
+      if ( this.dtAccumulator >= this.samplePeriod || !this.model.isPlayingProperty.value ) {
 
         // update Speed bin counts
         this.heavySpeedBinCountsProperty.value =
