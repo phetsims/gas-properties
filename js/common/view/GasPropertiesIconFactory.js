@@ -212,7 +212,9 @@ define( require => {
     createDiffusionScreenIcon() {
 
       // Invisible container, so that divider is centered
-      const containerNode = new Rectangle( 0, 0, 425, 300 );
+      const containerNode = new Rectangle( 0, 0, 425, 300, {
+        stroke: phet.chipper.queryParameters.dev ? 'red' : null 
+      } );
 
       const dividerNode = new Line( 0, 0, 0, containerNode.height, {
         stroke: GasPropertiesColorProfile.dividerColorProperty,
@@ -251,6 +253,58 @@ define( require => {
       return new ScreenIcon( iconNode, {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1,
+        fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      } );
+    },
+
+    /**
+     * Creates the icon for the Intro screen in the Gases Intro sim.
+     * @returns {Node}
+     * @public
+     */
+    createIntroScreenIcon() {
+
+      // Invisible container
+      const containerNode = new Rectangle( 0, 0, 800, 600, {
+        stroke: phet.chipper.queryParameters.dev ? 'red' : null
+      } );
+
+      // Scale set empirically to make particles look desired size
+      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.45 );
+
+      // Particles, locations determined empirically in view coordinates
+      const heavyParticleLocations = [
+        new Vector2( 0, 400 ), new Vector2( 50, 50 ), new Vector2( 250, 450 ),
+        new Vector2( 300, 200 ), new Vector2( 450, 60 ), new Vector2( 550, 500 )  ];
+      const lightParticleLocations = [
+        new Vector2( 125, 225 ), new Vector2( 450, 325 ), new Vector2( 650, 100 )
+      ];
+
+      // Create particle icons
+      const particleNodes = [];
+      for ( let i = 0; i < heavyParticleLocations.length; i++ ) {
+        particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+          center: heavyParticleLocations[ i ]
+        } ) );
+      }
+      for ( let i = 0; i < lightParticleLocations.length; i++ ) {
+        particleNodes.push( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform, {
+          center: lightParticleLocations[ i ]
+        } ) );
+      }
+
+      const particlesParent = new Node( {
+        children: particleNodes,
+        center: containerNode.center
+      } );
+
+      const iconNode = new Node( {
+        children: [ containerNode, particlesParent ]
+      } );
+
+      return new ScreenIcon( iconNode, {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 0.9,
         fill: GasPropertiesColorProfile.screenBackgroundColorProperty
       } );
     },
