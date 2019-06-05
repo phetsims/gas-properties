@@ -95,9 +95,9 @@ define( require => {
         } ) );
       }
       const particlesParent = new Node( {
-        children: particleNodes,
         scale: 0.2,
-        center: containerNode.center
+        center: containerNode.center,
+        children: particleNodes
       } );
 
       const iconNode = new Node( {
@@ -130,11 +130,10 @@ define( require => {
         centerY: wallNode.centerY
       } );
 
-      // Particles, locations determined empirically relative to center of wall
+      // Particles, locations determined empirically, relative to rightCenter of wall
       const particlesNode = new Node( {
         scale: 0.25,
-        x: wallNode.right,
-        y: wallNode.centerY,
+        translation: wallNode.rightCenter,
         children: [
 
           // 2 particles against the wall
@@ -230,7 +229,7 @@ define( require => {
         new Vector2( 400, 300 ), new Vector2( 660, 740 )
       ];
 
-      // Create particle icons
+      // Create particle icons, relative to centerTop of divider
       const particleNodes = [];
       for ( let i = 0; i < particle1Locations.length; i++ ) {
         particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle1Icon( SCREEN_ICONS_TRANSFORM, {
@@ -245,8 +244,7 @@ define( require => {
 
       const particlesParent = new Node( {
         scale: 0.25,
-        x: dividerNode.centerX,
-        y: 0,
+        translation: dividerNode.centerTop,
         children: particleNodes
       } );
 
