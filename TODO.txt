@@ -1,7 +1,7 @@
 TODO list for gas-properties
 
 #60 update view on Step button and when #particles changes while paused
-#60 disable pressure noise on manual Step?  GasPropertiesModel line 351
+#60 disable pressure noise on manual Step? 
 
 #103 test for memory leaks
 #106 better way of specifying particle locations for screen icons
