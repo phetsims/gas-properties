@@ -18,7 +18,6 @@ define( require => {
 
   // constants
   const SAMPLE_PERIOD = GasPropertiesQueryParameters.histogramSamplePeriod; // ps
-  const MIN_Y_SCALE = GasPropertiesConstants.HISTOGRAM_LINE_SPACING; // min scale for the y axis, in number of particles
 
   class HistogramsModel {
 
@@ -141,8 +140,12 @@ define( require => {
           _.max( this.allSpeedBinCountsProperty.value ),
           _.max( this.allKineticEnergyBinCountsProperty.value ) );
 
+        // Adjust the y-axis scale to accommodate the maximum bin count.
         // Increase the y scale a bit so that there's always a little space above maxBinCount.
-        this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, MIN_Y_SCALE );
+        // The minimum scale is determined by the spacing between horizontal lines in the histogram view.
+        // We don't want to the scale to be less than one interval of the horizontal lines, so that the
+        // y axis doesn't scale for small numbers of particles.
+        this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
 
         // Notify listeners that the bin counts have been update
         this.binCountsUpdatedEmitter.emit();
