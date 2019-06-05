@@ -43,6 +43,10 @@ define( require => {
       this.numberOfAverageSpeedSamples = 0; // number of samples we've taken
       this.heavyAverageSpeedSum = 0; // sum of samples for heavy particles
       this.lightAverageSpeedSum = 0; // sum of samples for light particles
+
+      model.isPlayingProperty.link( isPlaying => {
+        this.resetAccumulators();
+      } );
     }
 
     /**
@@ -70,29 +74,29 @@ define( require => {
      */
     step( dt ) {
 
-      this.heavyAverageSpeedSum += getAverageSpeed( this.model.heavyParticles );
-      this.lightAverageSpeedSum += getAverageSpeed( this.model.lightParticles );
-      this.numberOfAverageSpeedSamples++;
+      if ( this.model.isPlayingProperty.value ) {
 
-      this.dtAccumulator += dt;
+        this.heavyAverageSpeedSum += getAverageSpeed( this.model.heavyParticles );
+        this.lightAverageSpeedSum += getAverageSpeed( this.model.lightParticles );
+        this.numberOfAverageSpeedSamples++;
 
-      if ( this.dtAccumulator >= this.samplePeriod ) {
+        this.dtAccumulator += dt;
 
-        // update the average speed Properties
-        this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
-        this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
+        if ( this.dtAccumulator >= this.samplePeriod ) {
 
-        // Reset accumulators in preparation for the next sample period.
-        this.resetAccumulators();
+          // update the average speed Properties
+          this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
+          this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
+
+          // Reset accumulators in preparation for the next sample period.
+          this.resetAccumulators();
+        }
       }
+      else {
 
-      //TODO what about accumulators?
-      // If particle counts go to zero, update immediately
-      if ( this.model.heavyParticles.length === 0 ) {
-        this.heavyAverageSpeedProperty.value = null;
-      }
-      if ( this.model.lightParticles.length === 0 ) {
-        this.lightAverageSpeedProperty.value = null;
+        // if the sim is paused, update immediately
+        this.heavyAverageSpeedProperty.value = getAverageSpeed( this.model.heavyParticles );
+        this.lightAverageSpeedProperty.value = getAverageSpeed( this.model.lightParticles );
       }
     }
   }
