@@ -47,8 +47,8 @@ define( require => {
         histogramsModel.heavySpeedBinCountsProperty,
         histogramsModel.lightSpeedBinCountsProperty,
         histogramsModel.yScaleProperty,
-        speedString,
-        numberOfParticlesString,
+        speedString, // x-axis label
+        numberOfParticlesString, // y-axis label
         heavyVisibleProperty,
         lightVisibleProperty,
         options

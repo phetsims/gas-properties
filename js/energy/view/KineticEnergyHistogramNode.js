@@ -47,8 +47,8 @@ define( require => {
         histogramsModel.heavyKineticEnergyBinCountsProperty,
         histogramsModel.lightKineticEnergyBinCountsProperty,
         histogramsModel.yScaleProperty,
-        kineticEnergyString,
-        numberOfParticlesString,
+        kineticEnergyString, // x-axis label
+        numberOfParticlesString, // y-axis label
         heavyVisibleProperty,
         lightVisibleProperty,
         options
