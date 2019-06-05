@@ -27,7 +27,7 @@ define( require => {
      */
     constructor( model, samplePeriod ) {
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
-              `invalid samplePeriod: ${samplePeriod}` );
+        `invalid samplePeriod: ${samplePeriod}` );
 
       // @private
       this.model = model;
@@ -44,6 +44,7 @@ define( require => {
       this.heavyAverageSpeedSum = 0; // sum of samples for heavy particles
       this.lightAverageSpeedSum = 0; // sum of samples for light particles
 
+      // Reset accumulators when the play state changes, so that we can update immediately if manually stepping.
       model.isPlayingProperty.link( isPlaying => {
         this.resetAccumulators();
       } );
@@ -74,29 +75,21 @@ define( require => {
      */
     step( dt ) {
 
-      if ( this.model.isPlayingProperty.value ) {
+      this.heavyAverageSpeedSum += getAverageSpeed( this.model.heavyParticles );
+      this.lightAverageSpeedSum += getAverageSpeed( this.model.lightParticles );
+      this.numberOfAverageSpeedSamples++;
 
-        this.heavyAverageSpeedSum += getAverageSpeed( this.model.heavyParticles );
-        this.lightAverageSpeedSum += getAverageSpeed( this.model.lightParticles );
-        this.numberOfAverageSpeedSamples++;
+      this.dtAccumulator += dt;
 
-        this.dtAccumulator += dt;
+      // Update now if we've reached the end of the sample period, or if we're manually stepping
+      if ( this.dtAccumulator >= this.samplePeriod || !this.model.isPlayingProperty.value ) {
 
-        if ( this.dtAccumulator >= this.samplePeriod ) {
+        // update the average speed Properties
+        this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
+        this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
 
-          // update the average speed Properties
-          this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfAverageSpeedSamples;
-          this.lightAverageSpeedProperty.value = this.lightAverageSpeedSum / this.numberOfAverageSpeedSamples;
-
-          // Reset accumulators in preparation for the next sample period.
-          this.resetAccumulators();
-        }
-      }
-      else {
-
-        // if the sim is paused, update immediately
-        this.heavyAverageSpeedProperty.value = getAverageSpeed( this.model.heavyParticles );
-        this.lightAverageSpeedProperty.value = getAverageSpeed( this.model.lightParticles );
+        // Reset accumulators in preparation for the next sample period.
+        this.resetAccumulators();
       }
     }
   }
