@@ -2,7 +2,7 @@
 
 /**
  * HistogramsModel is a sub-model in the Energy screen, responsible for the Speed and Kinetic Energy histograms.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -24,7 +24,7 @@ define( require => {
     constructor( model, samplePeriod ) {
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
-      
+
       // @public (read-only) values chosen in https://github.com/phetsims/gas-properties/issues/52
       this.numberOfBins = 19;
       this.speedBinWidth = 170; // pm/ps
@@ -57,7 +57,7 @@ define( require => {
 
       // @public emits when the bin counts have been updated
       this.binCountsUpdatedEmitter = new Emitter();
-      
+
       // @private
       this.model = model;
       this.samplePeriod = samplePeriod;
@@ -91,13 +91,13 @@ define( require => {
      * @private
      */
     resetAccumulators() {
-      
+
       this.dtAccumulator = 0;
-      
+
       // clear Speed samples
       this.heavySpeedSamples.length = 0;
       this.lightSpeedSamples.length = 0;
-      
+
       // clear Kinetic Energy samples
       this.heavyKineticEnergySamples.length = 0;
       this.lightKineticEnergySamples.length = 0;
@@ -111,16 +111,12 @@ define( require => {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       // take a Speed sample
-      const heavySpeedSamples = this.model.getHeavyParticleSpeedValues();
-      const lightSpeedSamples = this.model.getLightParticleSpeedValues();
-      this.heavySpeedSamples.push( heavySpeedSamples );
-      this.lightSpeedSamples.push( lightSpeedSamples );
+      this.heavySpeedSamples.push( getSpeedValues( this.model.heavyParticles ) );
+      this.lightSpeedSamples.push( getSpeedValues( this.model.lightParticles ) );
 
       // take a Kinetic Energy sample
-      const heavyKineticEnergySamples = this.model.getHeavyParticleKineticEnergyValues();
-      const lightKineticEnergySamples = this.model.getLightParticleKineticEnergyValues();
-      this.heavyKineticEnergySamples.push( heavyKineticEnergySamples );
-      this.lightKineticEnergySamples.push( lightKineticEnergySamples );
+      this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.model.heavyParticles ) );
+      this.lightKineticEnergySamples.push( getKineticEnergyValues( this.model.lightParticles ) );
 
       // Accumulate dt
       this.dtAccumulator += dt;
@@ -165,7 +161,37 @@ define( require => {
       }
     }
   }
-  
+
+  /**
+   * Gets the speed values for a set of particles, in pm/ps.
+   * @param {Particle[]} particles
+   * @returns {number[]}
+   */
+  function getSpeedValues( particles ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
+    const values = [];
+    for ( let i = 0; i < particles.length; i++ ) {
+      values.push( particles[ i ].velocity.magnitude );
+    }
+    return values;
+  }
+
+  /**
+   * Gets the kinetic energy values for a set of particles, in in AMU * pm^2 / ps^2.
+   * @param {Particle[]} particles
+   * @returns {number[]}
+   */
+  function getKineticEnergyValues( particles ) {
+    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+
+    const values = [];
+    for ( let i = 0; i < particles.length; i++ ) {
+      values.push( particles[ i ].getKineticEnergy() );
+    }
+    return values;
+  }
+
   /**
    * Converts a collection of samples to bin counts.
    * @param {number[][]} sampleArrays
@@ -190,7 +216,7 @@ define( require => {
       const values = sampleArrays[ i ];
       for ( let j = 0; j < values.length; j++ ) {
         const index = Math.floor( values[ j ] / binWidth ); // bin range is [min,max)
-        if ( index >=0 && index < binCounts.length ) {
+        if ( index >= 0 && index < binCounts.length ) {
           binCounts[ index ]++;
         }
       }
@@ -202,7 +228,7 @@ define( require => {
         `invalid binCount: ${binCounts[ i ]}` );
       binCounts[ i ] = binCounts[ i ] / sampleArrays.length;
     }
-    
+
     assert && assert( binCounts.length === numberOfBins, `unexpected number of binCounts: ${binCounts.length}` );
     return binCounts;
   }
@@ -214,9 +240,9 @@ define( require => {
    * @returns {number[]}
    */
   function sumBinCounts( heavyBinCounts, lightBinCounts ) {
-    assert && assert(  Array.isArray( heavyBinCounts ), `invalid heavyBinCounts: ${heavyBinCounts}` );
-    assert && assert(  Array.isArray( lightBinCounts ), `invalid heavyBinCounts: ${lightBinCounts}` );
-    assert && assert(  heavyBinCounts.length === lightBinCounts.length, 'lengths should be the same' );
+    assert && assert( Array.isArray( heavyBinCounts ), `invalid heavyBinCounts: ${heavyBinCounts}` );
+    assert && assert( Array.isArray( lightBinCounts ), `invalid heavyBinCounts: ${lightBinCounts}` );
+    assert && assert( heavyBinCounts.length === lightBinCounts.length, 'lengths should be the same' );
 
     const sumBinCounts = [];
     for ( let i = 0; i < heavyBinCounts.length; i++ ) {
