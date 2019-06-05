@@ -1,8 +1,11 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for all types of particles. A particle is a perfect sphere.
- * NOTE: Since there can be a large number of Particles, all Vector2 fields herein are mutated for performance reasons.
+ * Model for all types of particles. A particle is a perfect rigid sphere.
+ *
+ * Since there can be a large number of particles, properties of particles are not implemented as observable
+ * Properties.  Instead, the entire particle system is inspected to derive the current state of the system.
+ * To optimize performance, all Vector2 fields herein are mutated.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
