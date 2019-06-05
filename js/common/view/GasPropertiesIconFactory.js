@@ -83,11 +83,10 @@ define( require => {
         centerY: gaugeNode.centerY
       } );
 
-      // Scale set empirically to make particles look desired size
-      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 2 );
+      const modelViewTransform = ModelViewTransform2.createIdentity();
 
       // Particles, locations determined empirically in view coordinates
-      const particleLocations = [ new Vector2( -50, 0 ), new Vector2( 600, 450 ), new Vector2( -550, 600 ) ];
+      const particleLocations = [ new Vector2( 0, 300 ), new Vector2( 250, 0 ), new Vector2( 575, 225 ) ];
       const particleNodes = [];
       for ( let i = 0; i < particleLocations.length; i++ ) {
         particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
@@ -96,7 +95,7 @@ define( require => {
       }
       const particlesParent = new Node( {
         children: particleNodes,
-        scale: 0.1,
+        scale: 0.2,
         center: containerNode.center
       } );
 
@@ -130,31 +129,33 @@ define( require => {
         centerY: wallNode.centerY
       } );
 
-      // Scale set empirically to make particles look desired size
-      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
+      const modelViewTransform = ModelViewTransform2.createIdentity();
 
-      // Particles, locations determined empirically
+      // Particles, locations determined empirically relative to center of wall
       const particlesNode = new Node( {
+        scale: 0.25,
+        x: wallNode.right,
+        y: wallNode.centerY,
         children: [
 
           // 2 particles against the wall
           GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
-            left: wallNode.right,
-            bottom: wallNode.centerY
+            left: 0,
+            bottom: 0
           } ),
           GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
-            left: wallNode.right,
-            top: wallNode.centerY
+            left: 0,
+            top: 0
           } ),
 
           // 2 particles away from the wall
           GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
-            left: wallNode.right + 200,
-            centerY: wallNode.centerY + 85
+            left: 800,
+            centerY: 340
           } ),
           GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
-             left: wallNode.right + 150,
-             centerY: wallNode.centerY - 50
+             left: 600,
+             centerY: -200
           } )
         ]
       } );
@@ -225,29 +226,34 @@ define( require => {
       // Scale set empirically to make particles look desired size
       const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.25 );
 
-      // DiffusionParticle1 particles, locations determined empirically
+      // Particles, locations determined empirically
       const centerX = dividerNode.centerX;
-      const particle1Locations = [ new Vector2( centerX - 100, 75 ), new Vector2( centerX - 150, 150 ), new Vector2( centerX - 85, 200 )  ];
-      const particles1Nodes = new Node();
+      const particle1Locations = [
+        new Vector2( centerX - 100, 75 ), new Vector2( centerX - 150, 150 ), new Vector2( centerX - 85, 200 )
+      ];
+      const particle2Locations = [
+        new Vector2( centerX + 100, 75 ), new Vector2( centerX + 165, 185 )
+      ];
+
+      // Create particle icons
+      const particleNodes = [];
       for ( let i = 0; i < particle1Locations.length; i++ ) {
-        const particle = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform, {
+        particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform, {
           center: particle1Locations[ i ]
-        } );
-        particles1Nodes.addChild( particle );
+        } ) );
+      }
+      for ( let i = 0; i < particle2Locations.length; i++ ) {
+        particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform, {
+          center: particle2Locations[ i ]
+        } ) );
       }
 
-      // DiffusionParticle2 particles, locations determined empirically
-      const particle2Locations = [ new Vector2( centerX + 100, 75 ), new Vector2( centerX + 165, 185 ) ];
-      const particle2Nodes = new Node();
-      for ( let i = 0; i < particle2Locations.length; i++ ) {
-        const particle = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform, {
-          center: particle2Locations[ i ]
-        } );
-        particle2Nodes.addChild( particle );
-      }
+      const particlesParent = new Node( {
+        children: particleNodes
+      } );
 
       const iconNode = new Node( {
-        children: [ containerNode, dividerNode, particles1Nodes, particle2Nodes ]
+        children: [ containerNode, dividerNode, particlesParent ]
       });
 
       return new ScreenIcon( iconNode, {
