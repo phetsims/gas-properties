@@ -351,7 +351,7 @@ define( require => {
         const jitterEnabled = !( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
                                  this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
 
-        // Step the gauge regardless of whether we've changed pressure, since the gauge updates on a sample period.
+        // Step the gauge regardless of whether pressure has changed, since the gauge updates on a sample period.
         this.pressureGauge.step( dt, jitterEnabled );
 
         // If pressure exceeds the maximum, blow the lid off of the container.
