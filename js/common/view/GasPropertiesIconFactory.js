@@ -86,7 +86,7 @@ define( require => {
         centerY: gaugeNode.centerY
       } );
 
-      // Particles, locations determined empirically in view coordinates
+      // Particles, locations determined empirically in view coordinates, specified left to right
       const particleLocations = [ new Vector2( 0, 300 ), new Vector2( 250, 0 ), new Vector2( 575, 225 ) ];
       const particleNodes = [];
       for ( let i = 0; i < particleLocations.length; i++ ) {
@@ -221,7 +221,7 @@ define( require => {
         center: containerNode.center
       } );
 
-      // Particles, locations determined empirically, relative to centerX of divider
+      // Particles, locations determined empirically, relative to centerX of divider, specified left to right
       const particle1Locations = [
         new Vector2( -400, 300 ), new Vector2( -600, 600 ), new Vector2( -340, 800 )
       ];
@@ -271,7 +271,7 @@ define( require => {
         stroke: phet.chipper.queryParameters.dev ? 'red' : null
       } );
 
-      // Particles, locations determined empirically in view coordinates
+      // Particles, locations determined empirically in view coordinates, specified left to right
       const heavyParticleLocations = [
         new Vector2( 0, 850 ), new Vector2( 110, 105 ), new Vector2( 555, 945 ),
         new Vector2( 670, 425 ), new Vector2( 1000, 125 ), new Vector2( 1220, 1050 ) ];
