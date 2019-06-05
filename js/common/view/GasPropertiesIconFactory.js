@@ -179,14 +179,14 @@ define( require => {
       // histogram shape
       const iconWidth = 300;
       const iconHeight = 200;
-      const bins = [ 0.8, 1.0, 0.85, 0.53, 0.33, 0.21, 0.13, 0.08, 0.05, 0.03 ];
-      const deltaX = iconWidth / bins.length;
+      const binCounts= [ 0.8, 1.0, 0.85, 0.53, 0.33, 0.21, 0.13, 0.08, 0.05, 0.03 ];
+      const deltaX = iconWidth / binCounts.length;
       let x = 0;
       let y = 0;
       const iconShape = new Shape().moveTo( x, y );
-      for ( let i = 0; i < bins.length; i++ ) {
+      for ( let i = 0; i < binCounts.length; i++ ) {
         x = i * deltaX;
-        y = -iconHeight * bins[ i ];
+        y = -iconHeight * binCounts[ i ];
         iconShape.lineTo( x, y );
         x = ( i + 1 ) * deltaX;
         iconShape.lineTo( x, y );
