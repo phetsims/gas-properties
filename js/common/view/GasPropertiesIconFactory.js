@@ -273,33 +273,31 @@ define( require => {
         stroke: phet.chipper.queryParameters.dev ? 'red' : null
       } );
 
-      // Scale set empirically to make particles look desired size
-      const modelViewTransform = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 0.45 );
-
       // Particles, locations determined empirically in view coordinates
       const heavyParticleLocations = [
-        new Vector2( 0, 400 ), new Vector2( 50, 50 ), new Vector2( 250, 450 ),
-        new Vector2( 300, 200 ), new Vector2( 450, 60 ), new Vector2( 550, 500 )  ];
+        new Vector2( 0, 850 ), new Vector2( 110, 105 ), new Vector2( 555, 945 ),
+        new Vector2( 670, 425 ), new Vector2( 1000, 125 ), new Vector2( 1220, 1050 )  ];
       const lightParticleLocations = [
-        new Vector2( 125, 225 ), new Vector2( 450, 325 ), new Vector2( 650, 100 )
+        new Vector2( 278, 475 ), new Vector2( 1000, 680 ), new Vector2( 1450, 210 )
       ];
 
       // Create particle icons
       const particleNodes = [];
       for ( let i = 0; i < heavyParticleLocations.length; i++ ) {
-        particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+        particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
           center: heavyParticleLocations[ i ]
         } ) );
       }
       for ( let i = 0; i < lightParticleLocations.length; i++ ) {
-        particleNodes.push( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform, {
+        particleNodes.push( GasPropertiesIconFactory.createLightParticleIcon( SCREEN_ICONS_TRANSFORM, {
           center: lightParticleLocations[ i ]
         } ) );
       }
 
       const particlesParent = new Node( {
-        children: particleNodes,
-        center: containerNode.center
+        scale: 0.45,
+        center: containerNode.center,
+        children: particleNodes
       } );
 
       const iconNode = new Node( {
