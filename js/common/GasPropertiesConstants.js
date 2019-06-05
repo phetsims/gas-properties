@@ -21,7 +21,8 @@ define( require => {
 
   const GasPropertiesConstants = {
 
-    // Used by gas-properties-main.js and diffusion-main.js, see https://github.com/phetsims/gas-properties/issues/28
+    // Shared by gas-properties-main.js and its derivatives (gases-intro.main.js, and diffusion-main.js)
+    // See https://github.com/phetsims/gas-properties/issues/28
     CREDITS: {
       leadDesign: 'Amy Rouinfar',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
