@@ -149,7 +149,8 @@ define( require => {
 
         // Notify listeners that the bin counts have been update
         this.binCountsUpdatedEmitter.emit();
-        
+
+        // Reset accumulators in preparation for the next sample period.
         this.resetAccumulators();
       }
     }
