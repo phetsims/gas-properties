@@ -20,6 +20,5 @@ Things to update when #particles changes:
 
 
 #52 delete query parameters related to histograms
-#88 delete maxDeltaTN and console.log for heat/cool bucket animation
 
 Gases Intro - screen icons
