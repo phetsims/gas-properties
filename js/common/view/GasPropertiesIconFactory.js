@@ -152,8 +152,8 @@ define( require => {
             centerY: 340
           } ),
           GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
-             left: 600,
-             centerY: -200
+            left: 600,
+            centerY: -200
           } )
         ]
       } );
@@ -212,7 +212,7 @@ define( require => {
 
       // Invisible container, so that divider is centered
       const containerNode = new Rectangle( 0, 0, 425, 300, {
-        stroke: phet.chipper.queryParameters.dev ? 'red' : null 
+        stroke: phet.chipper.queryParameters.dev ? 'red' : null
       } );
 
       const dividerNode = new Line( 0, 0, 0, containerNode.height, {
@@ -250,7 +250,7 @@ define( require => {
 
       const iconNode = new Node( {
         children: [ containerNode, dividerNode, particlesParent ]
-      });
+      } );
 
       return new ScreenIcon( iconNode, {
         maxIconWidthProportion: 1,
@@ -274,7 +274,7 @@ define( require => {
       // Particles, locations determined empirically in view coordinates
       const heavyParticleLocations = [
         new Vector2( 0, 850 ), new Vector2( 110, 105 ), new Vector2( 555, 945 ),
-        new Vector2( 670, 425 ), new Vector2( 1000, 125 ), new Vector2( 1220, 1050 )  ];
+        new Vector2( 670, 425 ), new Vector2( 1000, 125 ), new Vector2( 1220, 1050 ) ];
       const lightParticleLocations = [
         new Vector2( 278, 475 ), new Vector2( 1000, 680 ), new Vector2( 1450, 210 )
       ];
@@ -469,7 +469,7 @@ define( require => {
       const scaleLength = 30;
       const tickLength = 6;
       const numberOfTicks = 5;
-      const tickInterval =  scaleLength / ( numberOfTicks - 1 );
+      const tickInterval = scaleLength / ( numberOfTicks - 1 );
 
       const shape = new Shape().moveTo( 0, 0 ).lineTo( scaleLength, 0 );
       for ( let i = 0; i < numberOfTicks; i++ ) {
