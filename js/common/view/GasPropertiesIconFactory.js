@@ -39,6 +39,9 @@ define( require => {
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  const SCREEN_ICONS_TRANSFORM = ModelViewTransform2.createIdentity();
+
   const GasPropertiesIconFactory = {
 
     /**
@@ -83,13 +86,11 @@ define( require => {
         centerY: gaugeNode.centerY
       } );
 
-      const modelViewTransform = ModelViewTransform2.createIdentity();
-
       // Particles, locations determined empirically in view coordinates
       const particleLocations = [ new Vector2( 0, 300 ), new Vector2( 250, 0 ), new Vector2( 575, 225 ) ];
       const particleNodes = [];
       for ( let i = 0; i < particleLocations.length; i++ ) {
-        particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+        particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
           center: particleLocations[ i ]
         } ) );
       }
@@ -129,8 +130,6 @@ define( require => {
         centerY: wallNode.centerY
       } );
 
-      const modelViewTransform = ModelViewTransform2.createIdentity();
-
       // Particles, locations determined empirically relative to center of wall
       const particlesNode = new Node( {
         scale: 0.25,
@@ -139,21 +138,21 @@ define( require => {
         children: [
 
           // 2 particles against the wall
-          GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+          GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
             left: 0,
             bottom: 0
           } ),
-          GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+          GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
             left: 0,
             top: 0
           } ),
 
           // 2 particles away from the wall
-          GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+          GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
             left: 800,
             centerY: 340
           } ),
-          GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+          GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
              left: 600,
              centerY: -200
           } )
