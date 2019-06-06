@@ -197,16 +197,16 @@ define( require => {
 
             // Temperature can't be held constant when the container is empty.
             phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
-            this.oopsEmitters.temperatureEmptyEmitter.emit();
             this.holdConstantProperty.value = HoldConstant.NOTHING;
+            this.oopsEmitters.temperatureEmptyEmitter.emit();
           }
           else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
                     this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) {
 
             // Pressure can't be held constant when the container is empty.
             phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
-            this.oopsEmitters.pressureEmptyEmitter.emit();
             this.holdConstantProperty.value = HoldConstant.NOTHING;
+            this.oopsEmitters.pressureEmptyEmitter.emit();
           }
         }
 
@@ -534,6 +534,9 @@ define( require => {
         // If the desired container width is out of range ...
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
+          // Switch to the 'Nothing' mode
+          this.holdConstantProperty.value = HoldConstant.NOTHING;
+
           // This results in an OopsDialog being displayed
           phet.log && phet.log( 'Oops! P cannot be held constant when V exceeds range, ' +
                                 `containerWidth=${containerWidth} widthRange=${this.container.widthRange}` );
@@ -544,10 +547,7 @@ define( require => {
             this.oopsEmitters.pressureSmallEmitter.emit();
           }
 
-          // Switch to the 'Nothing' mode
-          this.holdConstantProperty.value = HoldConstant.NOTHING;
-
-          // Set the container width to its min or max.
+          // Constrain the container width to its min or max.
           containerWidth = this.container.widthRange.constrainValue( containerWidth );
         }
 
