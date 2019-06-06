@@ -47,13 +47,10 @@ define( require => {
 
       // @public width of the lid, in pm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
-        units: 'pm'
-        // see below for validation
-      } );
 
-      // Validate lidWidth, whose range changes dynamically.
-      assert && this.lidWidthProperty.link( lidWidth => {
-        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.getMaxLidWidth(), `invalid lidWidth: ${lidWidth}` );
+        // lidWidth range changes dynamically with width of container
+        isValidValue: value => ( value >= this.minLidWidth && value <= this.getMaxLidWidth() ),
+        units: 'pm'
       } );
 
       // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in pm
