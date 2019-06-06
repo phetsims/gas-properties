@@ -40,14 +40,11 @@ define( require => {
   // used to compute the initial velocity angle for particles, in radians
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
 
-  // temperature used to compute initial speed of particles, in K
+  // temperature used to compute the initial speed for particles, in K
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
   // maximum pressure in kPa, when exceeded the lid blows off of the container
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
-
-  // multiplier for converting pressure from AMU/(pm * ps^2) to kPa, provided by @arouinfar
-  const PRESSURE_CONVERSION_SCALE = 1.66E6;
 
   class GasPropertiesModel extends BaseModel {
 
@@ -585,7 +582,7 @@ define( require => {
       const P = ( N * k * T / V );
 
       // converted to kPa
-      return P * PRESSURE_CONVERSION_SCALE;
+      return P * GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
     }
 
     /**
@@ -597,7 +594,7 @@ define( require => {
       const N = this.totalNumberOfParticlesProperty.value;
       const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
       const T = this.computeActualTemperature(); // in K, this.temperatureProperty has not been updated, so compute T
-      const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+      const P = this.pressureProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
       assert && assert( P !== 0, 'zero pressure not supported' );
       return ( N * k * T ) / P;
     }
@@ -608,7 +605,7 @@ define( require => {
      * @private
      */
     computeDesiredTemperature() {
-      const P = this.pressureProperty.value / PRESSURE_CONVERSION_SCALE;
+      const P = this.pressureProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
       assert && assert( P !== 0, 'zero pressure not supported' );
       const N = this.totalNumberOfParticlesProperty.value;
       assert && assert( N !== 0, 'empty container not supported' );

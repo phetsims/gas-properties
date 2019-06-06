@@ -116,9 +116,10 @@ define( require => {
     // physical constants
     BOLTZMANN: 8.316E3, // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K) by @arouinfar
 
-    // conversion factors
+    // conversion factors, provided by @arouinfar
     KG_PER_AMU: 1.66E-27, // mass conversion: kg per 1 AMU (atomic mass unit)
-    ATM_PER_KPA: 0.00986923 // pressure conversion: atm (atmospheres) per 1 kPa (kilopascal)
+    ATM_PER_KPA: 0.00986923, // pressure conversion: atm (atmospheres) per 1 kPa (kilopascal)
+    PRESSURE_CONVERSION_SCALE: 1.66E6 // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
   };
 
   return gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );
