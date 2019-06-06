@@ -185,7 +185,7 @@ define( require => {
       container.lidIsOnProperty.link( lidIsOn => {
         if ( lidIsOn ) {
 
-          // restore the lid in the fully-closed position
+          // restore the lid to the fully-closed position
           container.lidWidthProperty.value = container.getMaxLidWidth();
           lidNode.visible = true;
           lidNode.setRotation( 0 );
