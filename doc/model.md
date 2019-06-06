@@ -80,10 +80,6 @@ Describe "Hold Constant" modes for _Ideal_ screen.
 
 ### Misc
 
-TODO include calculations for conversions between SI and our units, specifically:
-* Boltzmann constant
-* pressure in kPa
-
 Temperature and particles added to container, Gaussian distribution
 
 
