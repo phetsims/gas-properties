@@ -231,13 +231,13 @@ define( require => {
         ( holdConstant === HoldConstant.TEMPERATURE ||
           holdConstant === HoldConstant.PRESSURE_T ||
           holdConstant === HoldConstant.PRESSURE_V ) ),
-          `bad holdConstant state, ${holdConstant} with totalNumberOfParticles=${this.totalNumberOfParticlesProperty.value}` );
+          `bad holdConstant state: ${holdConstant} with totalNumberOfParticles=${this.totalNumberOfParticlesProperty.value}` );
 
         // values that are incompatible with zero pressure
         assert && assert( !( this.pressureProperty.value === 0 &&
         ( holdConstant === HoldConstant.PRESSURE_V ||
           holdConstant === HoldConstant.PRESSURE_T ) ),
-          `bad holdConstant state, ${holdConstant} with pressure=${this.pressureProperty.value}` );
+          `bad holdConstant state: ${holdConstant} with pressure=${this.pressureProperty.value}` );
       } );
     }
 
