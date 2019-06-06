@@ -31,7 +31,7 @@ First, a description of the constants, symbols, and units used in this sim. Use 
 
 The model does not use typical SI units. Units where chosen so that we would be working with values that have a 
 significant integer component, and not working with very small values.  Working with very small values tends to 
-result in floating-point errors. So (for example) dimensions are in pm rather than m.
+result in floating-point errors. So (for example) dimensions are in picometers (pm) rather than meters (m).
 
 The units used in this sim are:
 * angle: radians
