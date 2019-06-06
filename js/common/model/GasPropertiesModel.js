@@ -210,9 +210,10 @@ define( require => {
           }
         }
 
-        // If the container is empty, disable pressure updates.
-        // It will be enabled when 1 particle has collided with the container.
+        // If the container is empty, set pressure to zero and disable pressure updates.
+        // Updates will be enabled when 1 particle has collided with the container.
         if ( totalNumberOfParticles === 0 ) {
+          this.pressureProperty.value = 0;
           this.stepPressureEnabled = false;
         }
 
