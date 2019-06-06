@@ -1,6 +1,5 @@
 TODO list for gas-properties
 
-#60 update view on Step button and when #particles changes while paused
 #60 disable pressure noise on manual Step?
 
 Things to update when #particles changes:
