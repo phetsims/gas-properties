@@ -42,13 +42,14 @@ define( require => {
       // @private the right coordinate of the opening in the top of the container, in pm
       this.openingRight = this.location.y - this.openingRightInset;
 
-      // @public width of the lid, in pm
-      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
-        units: 'pm'
-      } );
-
       // @private minimum width of the lid, overlaps the left wall, in pm.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
+
+      // @public width of the lid, in pm
+      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
+        isValidValue: value => ( value >= this.minLidWidth ),
+        units: 'pm'
+      } );
 
       // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in pm
       this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 5 );
