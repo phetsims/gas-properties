@@ -219,10 +219,16 @@ define( require => {
           this.updatePressureEnabled = false;
         }
 
-        // If the number of particles changes while the sim is paused, update immediately to reflect the current state.
-        // Using the pressure gauge's refresh period causes it to update immediately.
+        // If the number of particles changes while the sim is paused, update immediately.
         if ( !this.isPlayingProperty.value ) {
-          this.updateModel( PressureGauge.REFRESH_PERIOD, 0 /* numberOfCollisions */ );
+          this.updateWhenPaused();
+        }
+      } );
+
+      // If the container's width changes while the sim is paused, update immediately.
+      this.container.widthProperty.link( width => {
+        if ( !this.isPlayingProperty.value ) {
+          this.updateWhenPaused();
         }
       } );
 
@@ -388,6 +394,17 @@ define( require => {
           this.container.lidIsOnProperty.value = false;
         }
       }
+    }
+
+    /**
+     * Updates when the sim is paused.
+     * @private
+     */
+    updateWhenPaused() {
+      assert && assert( !this.isPlayingProperty.value, 'call this method only when paused' );
+
+      // Using the pressure gauge's refresh period causes it to update immediately.
+      this.updateModel( PressureGauge.REFRESH_PERIOD, 0 /* numberOfCollisions */ );
     }
 
     /**
