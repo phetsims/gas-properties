@@ -348,8 +348,7 @@ define( require => {
 
     /**
      * Updates parts of the model that are dependent on the state of the particle system.  This is separated from
-     * stepParticleSystem so that we can step dependencies if the number of particles changes while the simulation
-     * is paused.
+     * stepParticleSystem so that we can update if the number of particles changes while the simulation is paused.
      * @param {number} dtPressureGauge - time delta used to step the pressure gauge, in ps
      * @param {number} numberOfCollisions - number of collisions on the most recent time step
      * @private
