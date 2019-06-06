@@ -17,7 +17,7 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
-  const SAMPLE_PERIOD = 1; // ps
+  const SAMPLE_PERIOD = 1; // sample period for Average Speed and histograms, in ps
 
   class EnergyModel extends GasPropertiesModel {
 
@@ -50,7 +50,7 @@ define( require => {
     }
 
     /**
-     * Resets the model.
+     * Resets this model.
      * @public
      * @override
      */

@@ -90,6 +90,7 @@ define( require => {
     }
 
     /**
+     * Resets this model.
      * @public
      */
     reset() {

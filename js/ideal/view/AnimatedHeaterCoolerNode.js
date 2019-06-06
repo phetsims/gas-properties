@@ -170,6 +170,7 @@ define( require => {
     /**
      * Steps the animation.
      * @param {number} dt - time delta, in seconds
+     * @public
      */
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
