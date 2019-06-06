@@ -37,16 +37,16 @@ define( require => {
 
   // constants
 
-  // radians, used to compute initial velocity angle for particles
+  // used to compute the initial velocity angle for particles, in radians
   const PUMP_DISPERSION_ANGLE = Math.PI / 2;
 
-  // K, temperature used to compute initial speed of particles
+  // temperature used to compute initial speed of particles, in K
   const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
-  // maximum pressure in kPa, when exceeded the lid blows off
+  // maximum pressure in kPa, when exceeded the lid blows off of the container
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 
-  // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
+  // multiplier for converting pressure from AMU/(pm * ps^2) to kPa, provided by @arouinfar
   const PRESSURE_CONVERSION_SCALE = 1.66E6;
 
   class GasPropertiesModel extends BaseModel {
