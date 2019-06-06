@@ -145,7 +145,7 @@ define( require => {
         units: 'K'
       } );
 
-      // @public (read-only)
+      // @public (read-only) thermometer that display temperatureProperty with a choice of units
       this.thermometer = new Thermometer( this.temperatureProperty );
 
       // @public pressure in the container, in kPa
@@ -154,11 +154,11 @@ define( require => {
         units: 'kPa'
       } );
 
-      // @public (read-only)
+      // @public (read-only) gauge that display pressureProperty with a choice of units
       this.pressureGauge = new PressureGauge( this.pressureProperty, this.temperatureProperty );
 
-      // @private whether to call stepPressure
-      this.stepPressureEnabled = false;
+      // @private whether to update pressure
+      this.updatePressureEnabled = false;
 
       // @public (read-only)
       this.collisionCounter = null;
@@ -216,7 +216,7 @@ define( require => {
         // Updates will be enabled when 1 particle has collided with the container.
         if ( totalNumberOfParticles === 0 ) {
           this.pressureProperty.value = 0;
-          this.stepPressureEnabled = false;
+          this.updatePressureEnabled = false;
         }
 
         // If the number of particles changes while the sim is paused, update immediately to reflect the current state.
@@ -381,12 +381,14 @@ define( require => {
       this.temperatureProperty.value = this.computeActualTemperature();
 
       // When adding particles to an empty container, don't compute pressure until 1 particle has collided with the container.
-      if ( !this.stepPressureEnabled && numberOfCollisions > 0 ) {
-        this.stepPressureEnabled = true;
+      if ( !this.updatePressureEnabled && numberOfCollisions > 0 ) {
+        this.updatePressureEnabled = true;
       }
 
       // Compute pressure
-      if ( this.stepPressureEnabled ) {
+      if ( this.updatePressureEnabled ) {
+
+        // Compute the actual pressure, based on the state of the particle system
         this.pressureProperty.value = this.computePressure();
 
         // Disable jitter when we're holding pressure constant.
