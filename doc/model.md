@@ -59,7 +59,7 @@ The units used in this sim are:
 Particles have mass, radius, location, and velocity.
 
 The particle system has the following qualities:
-* rigid body collision model
+* rigid-body collision model
 * perfectly elastic (no net loss of KE)
 * particle-particle collisions use an impulse-based contact model
 * no rotational kinematics
