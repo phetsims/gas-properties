@@ -53,7 +53,10 @@ define( require => {
       this.unitsProperty = new EnumerationProperty( Thermometer.Units, Thermometer.Units.KELVIN );
     }
 
-    // @public
+    /**
+     * Resets the thermometer.
+     * @public
+     */
     reset() {
       this.unitsProperty.reset();
     }

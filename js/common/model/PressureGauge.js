@@ -81,7 +81,10 @@ define( require => {
       this.dtAccumulator = 0;
     }
 
-    // @public
+    /**
+     * Resets the pressure gauge.
+     * @public
+     */
     reset() {
       this.unitsProperty.reset();
       this.dtAccumulator = 0;

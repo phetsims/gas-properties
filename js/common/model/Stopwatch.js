@@ -49,7 +49,10 @@ define( require => {
       } );
     }
 
-    // @public
+    /**
+     * Resets the stopwatch.
+     * @public
+     */
     reset() {
       this.locationProperty.reset();
       this.visibleProperty.reset();
