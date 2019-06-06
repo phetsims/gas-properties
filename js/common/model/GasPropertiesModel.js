@@ -188,40 +188,38 @@ define( require => {
         pressureSmallEmitter: new Emitter()
       };
 
-      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
+      // When the number of particles in the container changes ...
       this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+
+        // If the container is empty, check for 'hold constant' conditions that can't be satisfied.
+        if ( totalNumberOfParticles === 0 ) {
+          if ( this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
+
+            // Temperature can't be held constant when the container is empty.
+            phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
+            this.oopsEmitters.temperatureEmptyEmitter.emit();
+            this.holdConstantProperty.value = HoldConstant.NOTHING;
+          }
+          else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
+                    this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) {
+
+            // Pressure can't be held constant when the container is empty.
+            phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
+            this.oopsEmitters.pressureEmptyEmitter.emit();
+            this.holdConstantProperty.value = HoldConstant.NOTHING;
+          }
+        }
+
+        // If the container is empty, disable pressure updates.
+        // It will be enabled when 1 particle has collided with the container.
         if ( totalNumberOfParticles === 0 ) {
           this.stepPressureEnabled = false;
-          this.pressureProperty.value = 0;
         }
-      } );
 
-      // When the container becomes empty, check for 'hold constant' conditions that can't be satisfied.
-      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
-
-          // Temperature can't be held constant when the container is empty.
-          phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
-          this.oopsEmitters.temperatureEmptyEmitter.emit();
-          this.holdConstantProperty.value = HoldConstant.NOTHING;
-        }
-        else if ( totalNumberOfParticles === 0 &&
-                  ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
-                    this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) ) {
-
-          // Pressure can't be held constant when the container is empty.
-          phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
-          this.oopsEmitters.pressureEmptyEmitter.emit();
-          this.holdConstantProperty.value = HoldConstant.NOTHING;
-        }
-      } );
-
-      // If the number of particles changes while the sim is paused, update immediately to reflect the current state.
-      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        // If the number of particles changes while the sim is paused, update immediately to reflect the current state.
+        // Using the pressure gauge's refresh period causes it to update immediately.
         if ( !this.isPlayingProperty.value ) {
-
-          // using the pressure gauge's refresh period causes it to update immediately
-          this.stepDependencies( PressureGauge.REFRESH_PERIOD );
+          this.updateDependencies( PressureGauge.REFRESH_PERIOD, 0 /* numberOfCollisions */ );
         }
       } );
 
@@ -306,8 +304,8 @@ define( require => {
       // step the particle system
       this.stepParticleSystem( dt );
 
-      // step things that are dependent on the state of the particle system
-      this.stepDependencies( dt );
+      // update things that are dependent on the state of the particle system
+      this.updateDependencies( dt, this.collisionDetector.numberOfParticleContainerCollisions );
     }
 
     /**
@@ -359,14 +357,17 @@ define( require => {
     }
 
     /**
-     * Steps things that are dependent on the state of the particle system.  This is separated from stepParticleSystem
+     * Update things that are dependent on the state of the particle system.  This is separated from stepParticleSystem
      * so that we can step dependencies if the number of particles changes while the simulation is paused.
      * @param {number} dtPressureGauge - time delta used to step the pressure gauge, in ps
+     * @param {number} numberOfCollisions - number of collisions on the most recent time step
      * @private
      */
-    stepDependencies( dtPressureGauge ) {
+    updateDependencies( dtPressureGauge, numberOfCollisions ) {
       assert && assert( typeof dtPressureGauge === 'number' && dtPressureGauge > 0,
         `invalid dtPressureGauge: ${dtPressureGauge}` );
+      assert && assert( typeof numberOfCollisions === 'number' && numberOfCollisions >= 0,
+        `invalid numberOfCollisions: ${numberOfCollisions}` );
 
       // Adjust quantities to compensate for holdConstant mode. Do this before computing temperature or pressure.
       this.compensateForHoldConstant();
@@ -375,7 +376,7 @@ define( require => {
       this.temperatureProperty.value = this.computeActualTemperature();
 
       // When adding particles to an empty container, don't compute pressure until 1 particle has collided with the container.
-      if ( !this.stepPressureEnabled && this.collisionDetector.numberOfParticleContainerCollisions > 0 ) {
+      if ( !this.stepPressureEnabled && numberOfCollisions > 0 ) {
         this.stepPressureEnabled = true;
       }
 
