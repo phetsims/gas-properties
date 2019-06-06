@@ -1,14 +1,5 @@
 TODO list for gas-properties
 
-Things to update when #particles changes:
-* Thermometer [DONE]
-* Pressure gauge [DONE]
-* Average Speed Display [DONE]
-* Histograms [DONE]
-* COM indicators [DONE]
-* Data display [DONE]
-* PFR indicators [NO, REQUIRES UPDATE ONLY ON PARTICLE MOVEMENT]
-
 #103 test for memory leaks
 #106 better way of specifying particle locations for screen icons
 
