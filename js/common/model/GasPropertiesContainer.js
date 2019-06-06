@@ -209,6 +209,7 @@ define( require => {
     /**
      * Is the container's lid open?
      * @returns {boolean}
+     * @public
      */
     isLidOpen() {
       return ( this.getOpeningWidth() !== 0 );

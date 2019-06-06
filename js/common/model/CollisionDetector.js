@@ -130,7 +130,7 @@ define( require => {
     }
 
     /**
-     * Detects and handles particle-container collisions for the system for one time step.
+     * Detects and handles particle-container collisions for the system.
      * This is overridden by subclass DiffusionCollisionDetector to implement collision detection with the divider
      * that appears in the container in the 'Diffusion' screen.
      * @returns {number} the number of collisions
@@ -371,7 +371,7 @@ define( require => {
     return numberOfCollisions;
   }
 
-  // @protected
+  // @protected for uses in subclasses
   CollisionDetector.doParticleContainerCollisions = doParticleContainerCollisions;
 
   return gasProperties.register( 'CollisionDetector', CollisionDetector );

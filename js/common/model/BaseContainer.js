@@ -96,6 +96,7 @@ define( require => {
     }
 
     /**
+     * Steps the container.
      * @param {number} dt - the time step, in ps
      * @public
      */

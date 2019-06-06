@@ -650,6 +650,7 @@ define( require => {
     /**
      * Gets the average kinetic energy of the particles in the container.
      * @returns {number} in AMU * pm^2 / ps^2
+     * @private
      */
     getAverageKineticEnergy() {
       return this.getTotalKineticEnergy() / this.totalNumberOfParticlesProperty.value;
@@ -658,6 +659,7 @@ define( require => {
     /**
      * Gets the total kinetic energy of the particles in the container.
      * @returns {number} in AMU * pm^2 / ps^2
+     * @private
      */
     getTotalKineticEnergy() {
       return ParticleUtils.getTotalKineticEnergy( this.heavyParticles ) +
@@ -668,6 +670,7 @@ define( require => {
      * Adjusts velocities of particle inside the container so that the resulting temperature matches
      * a specified temperature.
      * @param {number} temperature
+     * @private
      */
     adjustParticleVelocitiesForTemperature( temperature ) {
       assert && assert( typeof temperature === 'number', `invalid temperature: ${temperature}` );

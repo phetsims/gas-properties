@@ -63,15 +63,18 @@ define( require => {
         units: 'ps'
       } );
 
-      // Changing the running state resets the count.
+      // Changing the running state resets the collision count.
       this.isRunningProperty.link( isRunning => this.resetCount() );
 
-      // Changing visibility or sample period stops the counter and resets the count.
+      // Changing visibility or sample period stops the counter and resets the collision count.
       this.visibleProperty.link( visible => this.stopAndResetCount() );
       this.samplePeriodProperty.link( samplePeriodProperty => this.stopAndResetCount() );
     }
 
-    // @public
+    /**
+     * Resets the collision counter.
+     * @public
+     */
     reset() {
       this.locationProperty.reset();
       this.numberOfCollisionsProperty.reset();
@@ -80,13 +83,19 @@ define( require => {
       this.samplePeriodProperty.reset();
     }
 
-    // @private
+    /**
+     * Resets the collision count and set its run-time to zero.
+     * @private
+     */
     resetCount() {
       this.numberOfCollisionsProperty.value = 0;
       this.timeRunning = 0;
     }
 
-    // @private
+    /**
+     * Stops the collision counter and does resetCount.
+     * @private
+     */
     stopAndResetCount() {
       this.isRunningProperty.value = false;
       this.resetCount();
