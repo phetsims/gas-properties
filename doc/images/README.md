@@ -1,0 +1,1 @@
+The directory contains images that are used in documents. 
