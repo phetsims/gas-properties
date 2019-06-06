@@ -46,14 +46,11 @@ define( require => {
      * @param {NumberProperty} yScaleProperty - scale of the y axis
      * @param {string} xAxisString - label on the x axis
      * @param {string} yAxisString - label on the y axis
-     * @param {BooleanProperty} heavyPlotVisibleProperty - whether the plot for heavy particles is visible
-     * @param {BooleanProperty} lightPlotVisibleProperty - whether the plot for light particles is visible
      * @param {Object} [options]
      */
     constructor( numberOfBins, binWidth, binCountsUpdatedEmitter,
                  allBinCountsProperty, heavyBinCountsProperty, lightBinCountsProperty,
                  yScaleProperty, xAxisString, yAxisString,
-                 heavyPlotVisibleProperty, lightPlotVisibleProperty,
                  options ) {
       assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
       assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
@@ -69,10 +66,6 @@ define( require => {
         `invalid yScaleProperty: ${yScaleProperty}` );
       assert && assert( typeof xAxisString === 'string', `invalid xAxisString: ${xAxisString}` );
       assert && assert( typeof yAxisString === 'string', `invalid yAxisString: ${yAxisString}` );
-      assert && assert( heavyPlotVisibleProperty instanceof BooleanProperty,
-        `invalid heavyPlotVisibleProperty: ${heavyPlotVisibleProperty}` );
-      assert && assert( lightPlotVisibleProperty instanceof BooleanProperty,
-        `invalid lightPlotVisibleProperty: ${lightPlotVisibleProperty}` );
 
       options = _.extend( {
         chartSize: new Dimension2( 150, 130 ),   // size of the Rectangle that is the histogram background
@@ -151,16 +144,20 @@ define( require => {
 
       super( options );
 
+      // @public visibility of species-specific plots
+      this.heavyPlotVisibleProperty = new BooleanProperty( false );
+      this.lightPlotVisibleProperty = new BooleanProperty( false );
+
       // Update plots to display the current bin counts. Update species-specific plots only if they are visible.
       const updatePlots = () => {
 
         allPlotNode.plot( allBinCountsProperty.value );
 
-        if ( heavyPlotVisibleProperty.value ) {
+        if ( this.heavyPlotVisibleProperty.value ) {
           heavyPlotNode.plot( heavyBinCountsProperty.value );
         }
 
-        if ( lightPlotVisibleProperty.value ) {
+        if ( this.lightPlotVisibleProperty.value ) {
           lightPlotNode.plot( lightBinCountsProperty.value );
         }
       };
@@ -210,7 +207,7 @@ define( require => {
       } );
 
       // Visibility of heavy plot, update immediately when it's made visible
-      heavyPlotVisibleProperty.link( visible => {
+      this.heavyPlotVisibleProperty.link( visible => {
         heavyPlotNode.visible = visible;
         if ( visible ) {
           heavyPlotNode.plot( heavyBinCountsProperty.value );
@@ -218,12 +215,21 @@ define( require => {
       } );
 
       // Visibility of light plot, update immediately when it's made visible
-      lightPlotVisibleProperty.link( visible => {
+      this.lightPlotVisibleProperty.link( visible => {
         lightPlotNode.visible = visible;
         if ( visible ) {
           lightPlotNode.plot( lightBinCountsProperty.value );
         }
       } );
+    }
+
+    /**
+     * Resets the histogram view.
+     * @public
+     */
+    reset() {
+      this.heavyPlotVisibleProperty.reset();
+      this.lightPlotVisibleProperty.reset();
     }
   }
 

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * KineticEnergyHistogramNode shows the distribution of kinetic energy of the particles in the container.
+ * KineticEnergyHistogramNode shows the distribution of the kinetic energy of particles in the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HistogramNode = require( 'GAS_PROPERTIES/energy/view/HistogramNode' );
@@ -23,17 +22,10 @@ define( require => {
 
     /**
      * @param {HistogramsModel} histogramsModel
-     * @param {BooleanProperty} heavyVisibleProperty - visibility of the histogram for heavy particles
-     * @param {BooleanProperty} lightVisibleProperty - visibility of the histogram for light particles
      * @param {Object} [options]
      */
-    constructor( histogramsModel, heavyVisibleProperty, lightVisibleProperty, options ) {
-      assert && assert( histogramsModel instanceof HistogramsModel,
-        `invalid histogramModel: ${histogramsModel}` );
-      assert && assert( heavyVisibleProperty instanceof BooleanProperty,
-        `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
-      assert && assert( lightVisibleProperty instanceof BooleanProperty,
-        `invalid lightVisibleProperty: ${lightVisibleProperty}` );
+    constructor( histogramsModel, options ) {
+      assert && assert( histogramsModel instanceof HistogramsModel, `invalid histogramModel: ${histogramsModel}` );
 
       options = _.extend( {
 
@@ -51,8 +43,6 @@ define( require => {
         histogramsModel.yScaleProperty,
         kineticEnergyString, // x-axis label
         numberOfParticlesString, // y-axis label
-        heavyVisibleProperty,
-        lightVisibleProperty,
         options
       );
     }
