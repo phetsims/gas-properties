@@ -101,8 +101,7 @@ define( require => {
     }
 
     /**
-     * Steps the model using real time units.
-     * Intended to be overridden by subclasses and called when the Step button is pressed.
+     * Steps the model using real time units. Intended to be overridden by subclasses.
      * @param {number} dt - time delta, in seconds
      * @public
      */
