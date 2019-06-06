@@ -38,7 +38,7 @@ The units used in this sim are:
 * distance: pm
 * kinetic energy: AMU * pm<sup>2</sup> / ps<sup>2</sup>
 * location: (pm, pm)
-* mass: AMU (atomic mass unit, 1 AMU === 1.66E-27 kg)
+* mass: AMU (atomic mass unit, 1 AMU = 1.66E-27 kg)
 * pressure: kPa (and atm in view)
 * temperature: K (and °C in view)
 * time: ps
