@@ -463,7 +463,7 @@ define( require => {
     },
 
     /**
-     * Creates the icon used for the 'Scale' checkbox.
+     * Creates the icon used on the 'Scale' checkbox.
      * @returns {Node}
      * @public
      */
