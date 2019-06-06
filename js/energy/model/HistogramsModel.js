@@ -84,8 +84,7 @@ define( require => {
       // If the number of particles changes while paused, sample the current state and update immediately.
       model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( !model.isPlayingProperty.value ) {
-          this.sample();
-          this.update();
+          this.step( this.samplePeriod ); // using the sample period causes an immediate update
         }
       } );
     }

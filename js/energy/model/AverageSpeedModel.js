@@ -54,8 +54,7 @@ define( require => {
       // If the number of particles changes while paused, sample the current state and update immediately.
       model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( !model.isPlayingProperty.value ) {
-          this.sample();
-          this.update();
+          this.step( this.samplePeriod ); // using the sample period causes an immediate update
         }
       } );
     }
@@ -106,7 +105,7 @@ define( require => {
     sample() {
       assert && assert( !( this.numberOfSamples !== 0 && !this.model.isPlayingProperty.value ),
         'numberOfSamples should be 0 if called while the sim is paused' );
-      
+
       this.heavyAverageSpeedSum += getAverageSpeed( this.model.heavyParticles );
       this.lightAverageSpeedSum += getAverageSpeed( this.model.lightParticles );
       this.numberOfSamples++;
@@ -117,7 +116,7 @@ define( require => {
      * @private
      */
     update() {
-      assert && assert( !( this.numberOfSamples !== 1 && !this.model.isPlayingProperty.value ), 
+      assert && assert( !( this.numberOfSamples !== 1 && !this.model.isPlayingProperty.value ),
         'numberOfSamples should be 1 if called while the sim is paused' );
 
       // heavy particles
@@ -127,7 +126,7 @@ define( require => {
       else {
         this.heavyAverageSpeedProperty.value = this.heavyAverageSpeedSum / this.numberOfSamples;
       }
-      
+
       // light particles
       if ( this.model.lightParticles.length === 0 ) {
         this.lightAverageSpeedProperty.value = null;
