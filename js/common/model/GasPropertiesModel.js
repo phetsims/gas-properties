@@ -166,14 +166,6 @@ define( require => {
         } );
       }
 
-      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
-      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        if ( totalNumberOfParticles === 0 ) {
-          this.stepPressureEnabled = false;
-          this.pressureProperty.value = 0;
-        }
-      } );
-
       // @public (read-only) Emitters for conditions related to the 'Hold Constant' feature.
       // When holding a quantity constant would break the model, the model switches to 'Nothing' mode, the model
       // notifies the view via an Emitter, and the view notifies the user via a dialog. This is called oopsEmitters
@@ -196,6 +188,15 @@ define( require => {
         pressureSmallEmitter: new Emitter()
       };
 
+      // When adding particles to an empty container, don't update pressure until 1 particle has collided with the container.
+      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        if ( totalNumberOfParticles === 0 ) {
+          this.stepPressureEnabled = false;
+          this.pressureProperty.value = 0;
+        }
+      } );
+
+      // When the container becomes empty, check for 'hold constant' conditions that can't be satisfied.
       this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
         if ( totalNumberOfParticles === 0 && this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
 
@@ -215,8 +216,17 @@ define( require => {
         }
       } );
 
+      // If the number of particles changes while the sim is paused, update immediately to reflect the current state.
+      this.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+        if ( !this.isPlayingProperty.value ) {
+
+          // using the pressure gauge's refresh period causes it to update immediately
+          this.stepDependencies( PressureGauge.REFRESH_PERIOD );
+        }
+      } );
+
       // Verify that we're not in a bad state.
-      this.holdConstantProperty.link( holdConstant => {
+      assert && this.holdConstantProperty.link( holdConstant => {
 
         // values that are incompatible with an empty container
         assert && assert( !( this.totalNumberOfParticlesProperty.value === 0 &&
@@ -293,6 +303,21 @@ define( require => {
 
       super.stepModelTime( dt );
 
+      // step the particle system
+      this.stepParticleSystem( dt );
+
+      // step things that are dependent on the state of the particle system
+      this.stepDependencies( dt );
+    }
+
+    /**
+     * Steps the things that affect the location and velocity of particles.
+     * @param {number} dt - time delta, in ps
+     * @private
+     */
+    stepParticleSystem( dt ) {
+      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
       // Apply heat/cool
       if ( this.heatCoolFactorProperty.value !== 0 ) {
         ParticleUtils.heatCoolParticles( this.heavyParticles, this.heatCoolFactorProperty.value );
@@ -331,6 +356,17 @@ define( require => {
 
       // Do this after collision detection, so that the number of collisions detected has been recorded.
       this.collisionCounter && this.collisionCounter.step( dt );
+    }
+
+    /**
+     * Steps things that are dependent on the state of the particle system.  This is separated from stepParticleSystem
+     * so that we can step dependencies if the number of particles changes while the simulation is paused.
+     * @param {number} dtPressureGauge - time delta used to step the pressure gauge, in ps
+     * @private
+     */
+    stepDependencies( dtPressureGauge ) {
+      assert && assert( typeof dtPressureGauge === 'number' && dtPressureGauge > 0,
+        `invalid dtPressureGauge: ${dtPressureGauge}` );
 
       // Adjust quantities to compensate for holdConstant mode. Do this before computing temperature or pressure.
       this.compensateForHoldConstant();
@@ -352,7 +388,7 @@ define( require => {
                                  this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
 
         // Step the gauge regardless of whether pressure has changed, since the gauge updates on a sample period.
-        this.pressureGauge.step( dt, jitterEnabled );
+        this.pressureGauge.step( dtPressureGauge, jitterEnabled );
 
         // If pressure exceeds the maximum, blow the lid off of the container.
         if ( this.pressureProperty.value > MAX_PRESSURE ) {
