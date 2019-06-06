@@ -47,8 +47,13 @@ define( require => {
 
       // @public width of the lid, in pm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
-        isValidValue: value => ( value >= this.minLidWidth ),
         units: 'pm'
+        // see below for validation
+      } );
+
+      // Validate lidWidth, whose range changes dynamically.
+      assert && this.lidWidthProperty.link( lidWidth => {
+        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.getMaxLidWidth(), `invalid lidWidth: ${lidWidth}` );
       } );
 
       // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in pm
@@ -57,11 +62,6 @@ define( require => {
       // @public {number} desired width of the container, in pm.
       // Set this to animate width change with a speed limit. See #90.
       this.desiredWidth = this.widthProperty.value;
-
-      // Validate lidWidth, whose range changes dynamically.
-      assert && this.lidWidthProperty.link( lidWidth => {
-        assert && assert( lidWidth >= this.minLidWidth && lidWidth <= this.getMaxLidWidth(), `invalid lidWidth: ${lidWidth}` );
-      } );
     }
 
     /**
