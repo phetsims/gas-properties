@@ -199,7 +199,8 @@ define( require => {
         }
       } );
 
-      // Update the histogram when the bin counts have been updated.
+      // Update the histogram when the bin counts have been updated. We do this instead of observing the
+      // individual bin count Properties to improve performance because the histogram should be updated atomically.
       binCountsUpdatedEmitter.addListener( () => {
         if ( this.updateEnabledProperty.value ) {
           update();
