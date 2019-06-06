@@ -531,6 +531,7 @@ define( require => {
         // Address floating-point error, see https://github.com/phetsims/gas-properties/issues/89
         containerWidth = Util.toFixedNumber( containerWidth, 5 );
 
+        // If the desired container width is out of range ...
         if ( !this.container.widthRange.contains( containerWidth ) ) {
 
           // This results in an OopsDialog being displayed
