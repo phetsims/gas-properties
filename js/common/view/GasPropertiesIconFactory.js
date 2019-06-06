@@ -94,6 +94,8 @@ define( require => {
           center: particleLocations[ i ]
         } ) );
       }
+
+      // Parent for particles, scale empirically
       const particlesParent = new Node( {
         scale: 0.2,
         center: containerNode.center,
@@ -242,6 +244,7 @@ define( require => {
         } ) );
       }
 
+      // Parent for particles, scale empirically
       const particlesParent = new Node( {
         scale: 0.25,
         translation: dividerNode.centerTop,
