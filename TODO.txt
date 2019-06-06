@@ -1,7 +1,5 @@
 TODO list for gas-properties
 
-#60 disable pressure noise on manual Step?
-
 Things to update when #particles changes:
 * Thermometer
 * Pressure gauge
