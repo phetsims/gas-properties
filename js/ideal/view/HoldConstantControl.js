@@ -53,6 +53,8 @@ define( require => {
         `invalid pressureProperty: ${pressureProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         align: 'left',
         spacing: SPACING
       }, options );

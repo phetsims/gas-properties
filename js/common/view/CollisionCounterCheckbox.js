@@ -33,6 +33,8 @@ define( require => {
       }
 
       options = _.extend( {
+
+        // superclass options
         text: collisionCounterString,
         textMaxWidth: 125, // determined empirically
         icon: GasPropertiesIconFactory.createCollisionCounterIcon()

@@ -64,6 +64,8 @@ define( require => {
         `invalid temperatureProperty: ${temperatureProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         pickable: false
       }, options );
 

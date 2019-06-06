@@ -38,6 +38,8 @@ define( require => {
       assert && assert( typeof title === 'string', `invalid title: ${title}` );
 
       options = _.extend( {
+
+        // superclass options
         align: 'left',
         spacing: 10
       }, options );

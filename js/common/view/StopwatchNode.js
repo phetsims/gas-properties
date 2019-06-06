@@ -35,7 +35,7 @@ define( require => {
 
       options = _.extend( {
 
-        // TimerNode options
+        // superclass options
         backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
         maxValue: 999.99,
         timerReadoutNodeOptions: {

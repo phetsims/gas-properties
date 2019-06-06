@@ -28,6 +28,8 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
+
+        // superclass options
         backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
 
         // put a gray border around unselected icons on the home screen

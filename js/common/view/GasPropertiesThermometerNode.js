@@ -29,6 +29,8 @@ define( require => {
       assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
       options = _.extend( {
+
+        // superclass options
         spacing: 5,
         align: 'center'
       }, options );

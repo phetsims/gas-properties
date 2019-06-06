@@ -50,7 +50,7 @@ define( require => {
         collisionsEnabledProperty: null // {null|BooleanProperty} no checkbox if null
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // AccordionBox options
+        // superclass options
         titleNode: new Text( particlesString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty

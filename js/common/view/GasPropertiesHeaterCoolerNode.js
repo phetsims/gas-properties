@@ -34,6 +34,8 @@ define( require => {
         `invalid isPlayingProperty: ${isPlayingProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         scale: 0.81
       }, options );
 

@@ -31,6 +31,8 @@ define( require => {
         `invalid hasDividerProperty: ${hasDividerProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         baseColor: GasPropertiesColorProfile.dividerColorProperty
       }, options );
 

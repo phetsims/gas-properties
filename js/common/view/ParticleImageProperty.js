@@ -32,8 +32,10 @@ define( require => {
       assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
 
       options = _.extend( {
-        isValidValue: value => ( value === null || value instanceof HTMLCanvasElement ),
-        radiusProperty: null
+        radiusProperty: null,
+
+        // superclass options
+        isValidValue: value => ( value === null || value instanceof HTMLCanvasElement )
       }, options );
 
       // Create a prototypical Particle

@@ -41,6 +41,8 @@ define( require => {
         `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
+
+        // superclass options
         spacing: 10,
         align: 'left'
       }, options );

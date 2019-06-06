@@ -40,7 +40,7 @@ define( require => {
 
       options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // AccordionBox options
+        // superclass options
         contentYSpacing: 0,
         titleNode: new Text( dataString, {
           font: GasPropertiesConstants.TITLE_FONT,

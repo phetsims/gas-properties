@@ -22,6 +22,8 @@ define( require => {
      */
     constructor( options ) {
       super( _.extend( {
+
+        // superclass options
         radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue,
         colorProperty: GasPropertiesColorProfile.particle1ColorProperty,
         highlightColorProperty: GasPropertiesColorProfile.particle1HighlightColorProperty

@@ -28,6 +28,8 @@ define( require => {
         `invalid isPlayingProperty: ${isPlayingProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         baseColor: '#DFE0E1'
       }, options );
 

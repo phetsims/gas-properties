@@ -28,6 +28,8 @@ define( require => {
         `invalid centerOfMassVisibleProperty: ${centerOfMassVisibleProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         textIconSpacing: 12
       }, options );
 

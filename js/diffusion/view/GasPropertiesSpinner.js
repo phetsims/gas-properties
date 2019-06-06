@@ -26,6 +26,8 @@ define( require => {
       assert && assert( numberProperty.range, 'numberProperty is missing range' );
 
       options = _.extend( {
+
+        // superclass options
         font: GasPropertiesConstants.CONTROL_FONT,
         xMargin: 8,
         yMargin: 6,

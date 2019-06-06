@@ -36,6 +36,8 @@ define( require => {
         `invalid lightVisibleProperty: ${lightVisibleProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         barColor: GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty
       }, options );
 

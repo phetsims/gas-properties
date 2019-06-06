@@ -26,6 +26,8 @@ define( require => {
     constructor( message, options ) {
 
       options = _.extend( {
+
+        // superclass options
         iconNode: new Image( phetGirlLabCoatImage, {
           maxHeight: 132 // determined empirically
         } ),

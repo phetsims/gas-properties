@@ -44,7 +44,7 @@ define( require => {
         contentXMargin: 0
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // AccordionBox options
+        // superclass options
         contentYSpacing: 0,
         titleNode: new Text( kineticEnergyString, {
           font: GasPropertiesConstants.TITLE_FONT,

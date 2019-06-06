@@ -43,6 +43,8 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
+
+        // superclass options
         hasHoldConstantControls: true,
         resizeGripColor: GasPropertiesColorProfile.idealResizeGripColorProperty
       }, options );

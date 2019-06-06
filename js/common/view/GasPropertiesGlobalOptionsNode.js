@@ -29,8 +29,10 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        spacing: 12,
-        hasPressureNoiseCheckbox: true // whether to include the 'Pressure Noise' checkbox
+        hasPressureNoiseCheckbox: true, // whether to include the 'Pressure Noise' checkbox
+
+        // superclass options
+        spacing: 12
       }, options );
 
       const children = [];

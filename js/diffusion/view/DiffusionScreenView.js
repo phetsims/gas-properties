@@ -39,6 +39,8 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
+
+        // superclass options
         hasSlowMotion: true // adds Normal/Slow radio buttons to the time controls
       }, options );
 

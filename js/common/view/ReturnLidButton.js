@@ -28,6 +28,8 @@ define( require => {
       assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
 
       options = _.extend( {
+
+        // superclass options
         baseColor: PhetColorScheme.BUTTON_YELLOW
       }, options );
 

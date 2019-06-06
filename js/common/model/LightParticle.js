@@ -21,6 +21,8 @@ define( require => {
      */
     constructor( options ) {
       super( _.extend( {
+
+        // superclass options
         mass: 4, // equivalent to He (helium), in AMU, rounded to the closest integer
         radius: GasPropertiesConstants.LIGHT_PARTICLES_RADIUS, // pm
         colorProperty: GasPropertiesColorProfile.lightParticleColorProperty,

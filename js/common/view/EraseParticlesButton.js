@@ -32,6 +32,8 @@ define( require => {
                  `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         baseColor: GasPropertiesColorProfile.eraserButtonColorProperty
       }, options );
 

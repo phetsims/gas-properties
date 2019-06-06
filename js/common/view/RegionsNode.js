@@ -29,6 +29,8 @@ define( require => {
         `invalid modelViewTransform: ${modelViewTransform}` );
 
       options = _.extend( {
+
+        // superclass options
         pickable: false
       }, options );
 

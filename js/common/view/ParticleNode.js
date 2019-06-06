@@ -29,6 +29,8 @@ define( require => {
 
       assert && assert( !options || !options.mainColor, 'ParticleNode sets mainColor' );
       options = _.extend( {
+
+        // superclass options
         mainColor: particle.colorProperty,
         highlightColor: particle.highlightColorProperty
       }, options );

@@ -50,6 +50,8 @@ define( require => {
       assert && assert( enabledProperty instanceof BooleanProperty, `invalid enabledProperty: ${enabledProperty}` );
 
       options = _.extend( {
+
+        // superclass options
         spacing: 20,
         align: 'left'
       }, options );

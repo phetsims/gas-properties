@@ -64,7 +64,7 @@ define( require => {
         contentXMargin: 0
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // AccordionBox options
+        // superclass options
         titleNode: new Text( injectionTemperatureString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty

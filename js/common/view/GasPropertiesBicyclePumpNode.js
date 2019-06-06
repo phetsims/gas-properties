@@ -27,6 +27,8 @@ define( require => {
       assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
 
       options = _.extend( {
+
+        // superclass options
         height: 230,
         bodyTopFill: 'white',
         hoseCurviness: 0.75,

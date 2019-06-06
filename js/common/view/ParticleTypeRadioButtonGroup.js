@@ -32,7 +32,7 @@ define( require => {
 
       options = _.extend( {
 
-        // RadioButtonGroup options
+        // superclass options
         orientation: 'horizontal',
         baseColor: GasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
         disabledBaseColor: GasPropertiesColorProfile.radioButtonGroupBaseColorProperty,

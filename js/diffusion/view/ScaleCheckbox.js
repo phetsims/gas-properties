@@ -27,11 +27,11 @@ define( require => {
       assert && assert( scaleVisibleProperty instanceof BooleanProperty,
         `invalid scaleVisibleProperty: ${scaleVisibleProperty}` );
 
-      if ( options ) {
-        assert && assert( !options.text, 'ScaleCheckbox sets text' );
-      }
+      assert && assert( !options || !options.text, 'ScaleCheckbox sets text' );
 
       options = _.extend( {
+
+        // superclass options
         text: scaleString,
         textMaxWidth: 100, // determined empirically
         icon: GasPropertiesIconFactory.createScaleIcon()

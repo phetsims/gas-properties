@@ -29,6 +29,8 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
+
+        // superclass options
         name: screenIdealString,
         homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
         hasHoldConstantControls: true
