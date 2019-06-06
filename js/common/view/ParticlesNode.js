@@ -30,7 +30,6 @@ define( require => {
      * @param {Property.<HTMLCanvasElement>[]} imageProperties - an image for each array in particleArrays
      * @param {ModelViewTransform2} modelViewTransform
      * @param {ColorDef} debugFill - fill the canvas when ?canvasBounds, for debugging
-     * @param {Object} [options]
      */
     constructor( particleArrays, imageProperties, modelViewTransform, debugFill ) {
 
