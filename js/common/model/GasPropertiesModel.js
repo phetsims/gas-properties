@@ -219,7 +219,7 @@ define( require => {
         // If the number of particles changes while the sim is paused, update immediately to reflect the current state.
         // Using the pressure gauge's refresh period causes it to update immediately.
         if ( !this.isPlayingProperty.value ) {
-          this.updateDependencies( PressureGauge.REFRESH_PERIOD, 0 /* numberOfCollisions */ );
+          this.updateModel( PressureGauge.REFRESH_PERIOD, 0 /* numberOfCollisions */ );
         }
       } );
 
@@ -305,11 +305,12 @@ define( require => {
       this.stepParticleSystem( dt );
 
       // update things that are dependent on the state of the particle system
-      this.updateDependencies( dt, this.collisionDetector.numberOfParticleContainerCollisions );
+      this.updateModel( dt, this.collisionDetector.numberOfParticleContainerCollisions );
     }
 
     /**
-     * Steps the things that affect the location and velocity of particles.
+     * Steps the things that affect the location and velocity of particles, including heating/cooling
+     * and collision detection/response.
      * @param {number} dt - time delta, in ps
      * @private
      */
@@ -357,13 +358,14 @@ define( require => {
     }
 
     /**
-     * Update things that are dependent on the state of the particle system.  This is separated from stepParticleSystem
-     * so that we can step dependencies if the number of particles changes while the simulation is paused.
+     * Updates parts of the model that are dependent on the state of the particle system.  This is separated from
+     * stepParticleSystem so that we can step dependencies if the number of particles changes while the simulation
+     * is paused.
      * @param {number} dtPressureGauge - time delta used to step the pressure gauge, in ps
      * @param {number} numberOfCollisions - number of collisions on the most recent time step
      * @private
      */
-    updateDependencies( dtPressureGauge, numberOfCollisions ) {
+    updateModel( dtPressureGauge, numberOfCollisions ) {
       assert && assert( typeof dtPressureGauge === 'number' && dtPressureGauge > 0,
         `invalid dtPressureGauge: ${dtPressureGauge}` );
       assert && assert( typeof numberOfCollisions === 'number' && numberOfCollisions >= 0,
