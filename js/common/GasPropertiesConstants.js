@@ -113,13 +113,19 @@ define( require => {
     // spacing of the horizontal lines in the histograms, in number of particles
     HISTOGRAM_LINE_SPACING: 50,
 
-    // physical constants
-    BOLTZMANN: 8.316E3, // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K) by @arouinfar
+    // mass conversion: kg per 1 AMU (atomic mass unit)
+    KG_PER_AMU: 1.66E-27,
 
-    // conversion factors, provided by @arouinfar
-    KG_PER_AMU: 1.66E-27, // mass conversion: kg per 1 AMU (atomic mass unit)
-    ATM_PER_KPA: 0.00986923, // pressure conversion: atm (atmospheres) per 1 kPa (kilopascal)
-    PRESSURE_CONVERSION_SCALE: 1.66E6 // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
+    // pressure conversion: atm (atmospheres) per 1 kPa (kilopascal)
+    ATM_PER_KPA: 0.00986923,
+
+    // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K)
+    // see https://github.com/phetsims/gas-properties/blob/master/doc/images/boltzmann-conversion.png
+    BOLTZMANN: 8.316E3,
+
+    // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
+    // see https://github.com/phetsims/gas-properties/blob/master/doc/images/pressure-conversion.png
+    PRESSURE_CONVERSION_SCALE: 1.66E6
   };
 
   return gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );
