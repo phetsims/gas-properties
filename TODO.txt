@@ -1,7 +1,6 @@
 TODO list for gas-properties
 
 #103 test for memory leaks
-#106 better way of specifying particle locations for screen icons
 
 #79 model.md
 #80 implementation-notes.md
