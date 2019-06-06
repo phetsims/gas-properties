@@ -554,8 +554,7 @@ define( require => {
       }
       else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
 
-        // hold pressure constant by changing temperature
-        // adjust particle velocities
+        // Hold pressure constant by adjusting particle velocities to result in a desired temperature.
         const desiredTemperature = this.computeDesiredTemperature();
         this.adjustParticleVelocitiesForTemperature( desiredTemperature );
         this.temperatureProperty.value = desiredTemperature;
