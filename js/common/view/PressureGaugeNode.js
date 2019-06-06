@@ -71,7 +71,7 @@ define( require => {
     }
 
     /**
-     * Creates the gradient for the post that connects the gauge to the container.
+     * Creates the vertical gradient for the post that connects the gauge to the container.
      * @param {number} postHeight
      * @returns {Gradient}
      * @public
