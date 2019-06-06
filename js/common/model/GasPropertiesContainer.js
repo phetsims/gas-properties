@@ -48,7 +48,7 @@ define( require => {
       // @public width of the lid, in pm
       this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
 
-        // lidWidth range changes dynamically with width of container
+        // range changes dynamically with width of container
         isValidValue: value => ( value >= this.minLidWidth && value <= this.getMaxLidWidth() ),
         units: 'pm'
       } );
