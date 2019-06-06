@@ -551,6 +551,7 @@ define( require => {
           containerWidth = this.container.widthRange.constrainValue( containerWidth );
         }
 
+        // Resize the container with no animation.
         this.container.resizeImmediately( containerWidth );
       }
       else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
