@@ -49,15 +49,15 @@ define( require => {
 
 
           const desiredWidth = container.widthRange.constrainValue( container.right - modelX );
-          if ( desiredWidth > container.widthProperty.value ) {
-
-            // When making the container larger, there is no speed limit, see #90.
-            container.resizeImmediately( desiredWidth );
-          }
-          else {
+          if ( container.leftWallDoesWork && desiredWidth < container.widthProperty.value ) {
 
             // When making the container smaller, limit the speed.  See #90.
             container.desiredWidth = container.widthRange.constrainValue( container.right - modelX );
+          }
+          else {
+
+            // When making the container larger, there is no speed limit, see #90.
+            container.resizeImmediately( desiredWidth );
           }
         },
 

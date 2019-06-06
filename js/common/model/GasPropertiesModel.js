@@ -276,24 +276,6 @@ define( require => {
     }
 
     /**
-     * Steps the model using real time units.
-     * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
-     * @param {number} dt - time delta, in seconds
-     * @public
-     * @override
-     */
-    step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-
-      // Animate the container's width with a speed limit, regardless of whether the sim is paused.
-      // Do this before super.step because it affects the subsequent computation of wall velocity.
-      // See #90.
-      this.container.stepWidth( this.timeTransform( dt ) );
-
-      super.step( dt );
-    }
-
-    /**
      * Steps the model using model time units.
      * @param {number} dt - time delta, in ps
      * @protected
@@ -301,6 +283,10 @@ define( require => {
      */
     stepModelTime( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+
+      // Animate the container's width with a speed limit. Do this before super.step because it affects
+      // the subsequent computation of wall velocity. See #90.
+      this.container.stepWidth( this.timeTransform( dt ) );
 
       super.stepModelTime( dt );
 
