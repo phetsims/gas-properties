@@ -13,7 +13,7 @@ First, a description of the constants, symbols, and units used in this sim. Use 
 
 #### Constants
 
-* k = Boltzmann constant, 8.316E-3 (pm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K)
+* k = Boltzmann constant, 8.316E-3 (pm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K), [click here](https://github.com/phetsims/gas-properties/blob/master/doc/images/boltzmann-conversion.png) for conversion computation
 
 #### Symbols
 
