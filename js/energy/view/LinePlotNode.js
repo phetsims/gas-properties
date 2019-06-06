@@ -61,6 +61,7 @@ define( require => {
 
         const lineHeight = ( binCount / this.yScaleProperty.value ) * this.chartSize.height;
         const y = this.chartSize.height - lineHeight;
+
         if ( binCount !== previousCount ) {
           shape.lineTo( i * binWidth, y );
         }

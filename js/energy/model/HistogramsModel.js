@@ -53,8 +53,8 @@ define( require => {
       this.allKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
 
       // @public (read-only) the y-axis scale for all histograms
-      this.yScaleProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 )
+      this.yScaleProperty = new NumberProperty( GasPropertiesConstants.HISTOGRAM_LINE_SPACING, {
+        isValidValue: value => ( value >= GasPropertiesConstants.HISTOGRAM_LINE_SPACING )
       } );
 
       // @public emits when the bin counts have been updated
