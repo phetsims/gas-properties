@@ -1,7 +1,6 @@
 # Gas Properties - model description
 
-This is a high-level description of the model used in Gas Property. It's intended for audiences
-that are not necessarily technical.
+This is a high-level description of the model used in Gas Property.
 
 The model is based on the application of the _Ideal Gas Law_ to the state of a particle system. The particle
 system is engaged in rigid-body collision behavior between particles and a container.
