@@ -50,10 +50,10 @@ This section enumerates the primary equations used in the sim. Use this section 
 
 * Ideal Gas Law: PV = NkT  
 * Pressure: P = NkT/V
-* Kinetic Energy: KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
 * Temperature: T = (2/3)KE/k
-* Particle Speed: |v| = sqrt( 3kT / m )
 * Container Volume: V = width * height * depth
+* Kinetic Energy: KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
+* Particle Speed: |v| = sqrt( 3kT / m ) = sqrt( 2 * KE / m )
 
 ##  Particle System
 
