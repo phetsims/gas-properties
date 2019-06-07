@@ -93,8 +93,9 @@ When particles are added to an empty container, pressure remains zero until 1 pa
 the container. Then all particles `N` contribute to the pressure `P` via `P = NkT/V`.
 
 On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure gauge is given a bit of 
-"noise" to make it look more realistic.  The noise is a function to pressure and temperaure. More noise 
-is added at lower pressures, but the noise is surpressed as temperature decreases.  
+"noise" to make it look more realistic.  The noise is a function of pressure and temperaure. More noise 
+is added at lower pressures, but the noise is surpressed as temperature decreases. Noise is disabled 
+when pressure is being held constant.
 See [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
 if you'd like more specifics. If desired, the noise can be disabled via the `pressureNoise` query paramter.
 
