@@ -87,7 +87,7 @@ make it too easy to blow the lid off of the container.
 
 TODO
 
-### Pressure
+## Pressure
 
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with
 the container. Then all particles `N` contribute to the pressure `P` via `P = NkT/V`.
