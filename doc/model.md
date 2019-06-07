@@ -44,7 +44,7 @@ The units used in this sim are:
 * velocity: pm / ps
 * volume: pm<sup>3</sup>
 
-### Equations
+## Equations
 
 * Ideal Gas Law: PV = NkT  
 * Pressure: P = NkT/V
@@ -53,7 +53,7 @@ The units used in this sim are:
 * Particle Speed: |v| = sqrt( 3kT / m )
 * Container Volume: V = width * height * depth
 
-### Particle System
+##  Particle System
 
 Particles have mass, radius, location, and velocity.
 
@@ -67,7 +67,7 @@ The particle system has the following qualities:
 TODO: Describe how initial velocity of particles is determined. Angle is random for a "dispersion" range.
 Speed is based on a Gaussian distribution of temperature.
 
-### Container
+## Container
 
 The left wall of the container is movable in the _Ideal_ and _Explore_ screens. Use it to resize the container,
 which changes volume `V`.
@@ -83,11 +83,11 @@ When resizing the container in the _Explore_ screen, there is a speed limit on t
 the container smaller.  This speed limit prevents pressure from changing too dramatically, which would 
 make it too easy to blow the lid off of the container.
 
-### Collision Detection and Response
+## Collision Detection and Response
 
 TODO
 
-### Hold Constant
+## Hold Constant
 
 TODO: Describe the "Hold Constant" modes for _Ideal_ screen, which determines which quantity is held constant.
 
