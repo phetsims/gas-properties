@@ -46,6 +46,8 @@ The units used in this sim are:
 
 ## Equations
 
+This section enumerates the primary equations used in the sim. Use this section as a reference.
+
 * Ideal Gas Law: PV = NkT  
 * Pressure: P = NkT/V
 * Kinetic Energy: KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
