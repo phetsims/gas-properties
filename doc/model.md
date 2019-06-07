@@ -91,7 +91,7 @@ Collision detection occurs only within the container. There is no collision dete
 that have escaped the container through the open lid.
 
 The _Diffusion_ screen adds a removable vertical divider to the container.  When the divider is in place,
-collision detection treats the container as 2 separate containers, where the divider plays the role of 
+collision detection treats the container as 2 separate containers, where the divider functions as 
 a container wall.
 
 ## Pressure
