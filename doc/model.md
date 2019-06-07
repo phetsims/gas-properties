@@ -64,7 +64,7 @@ The particle system has the following qualities:
 * no rotational kinematics
 * no gravity
 
-TODO: Describe how initial velocity of particles is determined. Angle is random for a "dispersion" range.
+TODO: Describe how initial velocity of particles is determined. Angle is randomly chosen from a "dispersion" range.
 Speed is based on a Gaussian distribution of temperature.
 
 ## Container
