@@ -64,8 +64,8 @@ The particle system has the following qualities:
 * no rotational kinematics
 * no gravity
 
-TODO: Describe how initial velocity of particles is determined. Angle is random for a "dispersion" range.
-Speed is based on a Gaussian distribution of temperature.
+TODO: Describe how initial velocity of particles is determined. Angle is randomly chosen from a "dispersion" range.
+Speed is based on a Gaussian distribution of mean temperature. Mean temperature is 300K for an empty container, the temperature in the container for a non-empty container, or settable by the user in the _Energy_ screen.
 
 ## Container
 
@@ -86,6 +86,17 @@ make it too easy to blow the lid off of the container.
 ## Collision Detection and Response
 
 TODO
+
+### Pressure
+
+When particles are added to an empty container, pressure remains zero until 1 particle has collided with
+the container. Then all particles `N` contribute to the pressure via `P = NkT/V`.
+
+On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure gauge is given a bit of 
+"noise" to make it look more realistic.  The noise is a function to pressure and temperaure. More noise 
+is added at lower pressures, but the noise is surpressed as temperature decreases.  
+See [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
+if you'd like more specifics. If desired, the noise can be disabled via the `pressureNoise` query paramter.
 
 ## Hold Constant
 
