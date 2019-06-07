@@ -115,7 +115,7 @@ On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure 
 is added at lower pressures, but the noise is surpressed as temperature decreases. Noise is disabled 
 when pressure is being held constant.
 See [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
-if you'd like more specifics. If desired, the noise can be disabled via the `pressureNoise` query paramter.
+if you'd like more specifics. If desired, the noise can be disabled via query parameter `pressureNoise=false`.
 
 ## Hold Constant
 
