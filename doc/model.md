@@ -90,7 +90,7 @@ TODO
 ### Pressure
 
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with
-the container. Then all particles `N` contribute to the pressure via `P = NkT/V`.
+the container. Then all particles `N` contribute to the pressure `P` via `P = NkT/V`.
 
 On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure gauge is given a bit of 
 "noise" to make it look more realistic.  The noise is a function to pressure and temperaure. More noise 
