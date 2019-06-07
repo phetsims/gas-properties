@@ -379,12 +379,12 @@ define( require => {
         // Compute the actual pressure, based on the state of the particle system
         this.pressureProperty.value = this.computePressure();
 
-        // Disable jitter when we're holding pressure constant.
-        const jitterEnabled = !( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
-                                 this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
+        // Disable noise when we're holding pressure constant.
+        const noiseEnabled = !( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
+                                this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
 
         // Step the gauge regardless of whether pressure has changed, since the gauge updates on a sample period.
-        this.pressureGauge.step( dtPressureGauge, jitterEnabled );
+        this.pressureGauge.step( dtPressureGauge, noiseEnabled );
 
         // If pressure exceeds the maximum, blow the lid off of the container.
         if ( this.pressureProperty.value > MAX_PRESSURE ) {

@@ -2,7 +2,7 @@
 
 /**
  * Model of the pressure gauge. Responsible for determining what units will be used to present the pressure,
- * and for deriving pressure in those units. Optionally add a bit of jitter to the displayed values, to make
+ * and for deriving pressure in those units. Optionally add a bit of noise to the displayed values, to make
  * the gauge look more realistic.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -25,9 +25,9 @@ define( require => {
 
   // constants
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
-  const MIN_JITTER = 0; // minimum amount of jitter, in kPa
-  const MAX_JITTER = 50; // maximum amount of jitter, in kPa
-  assert && assert( MIN_JITTER < MAX_JITTER, 'MIN_JITTER must be < MAX_JITTER' );
+  const MIN_NOISE = 0; // minimum amount of noise, in kPa
+  const MAX_NOISE = 50; // maximum amount of noise, in kPa
+  assert && assert( MIN_NOISE < MAX_NOISE, 'MIN_NOISE must be < MAX_NOISE' );
 
   class PressureGauge {
 
@@ -41,8 +41,8 @@ define( require => {
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
 
-      // @public pressure in kPa with jitter added. This is not derived from pressureProperty,
-      // because it needs to jitter on step, not when pressureProperty changes.
+      // @public pressure in kPa with noise added. This is not derived from pressureProperty,
+      // because it needs to noise on step, not when pressureProperty changes.
       this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
         units: 'kPa',
         isValidValue: value => ( value >= 0 )
@@ -55,7 +55,7 @@ define( require => {
         }
       } );
 
-      // @public pressure in atmospheres (atm) with jitter added
+      // @public pressure in atmospheres (atm) with noise added
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
         pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
           units: 'atm',
@@ -66,11 +66,11 @@ define( require => {
       // @public (read-only) pressure range in kPa
       this.pressureRange = new Range( 0, MAX_PRESSURE );
 
-      // @private amount of jitter in kPa is inversely proportional to pressure
-      this.pressureJitterFunction = new LinearFunction( 0, this.pressureRange.max, MAX_JITTER, MIN_JITTER, true );
+      // @private amount of noise in kPa is inversely proportional to pressure
+      this.pressureNoiseFunction = new LinearFunction( 0, this.pressureRange.max, MAX_NOISE, MIN_NOISE, true );
 
-      // @private map from temperature (K) to jitter scale factor, so that jitter falls off at low temperatures
-      this.scaleJitterFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
+      // @private map from temperature (K) to noise scale factor, so that noise falls off at low temperatures
+      this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
       // @public pressure units displayed by the pressure gauge
       this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES );
@@ -93,30 +93,30 @@ define( require => {
     /**
      * Steps the pressure gauge.
      * @param {number} dt - time step, in ps
-     * @param {boolean} jitterEnabled - whether jitter should be added to make the gauge look more realistic
+     * @param {boolean} noiseEnabled - whether noise should be added to make the gauge look more realistic
      * @public
      */
-    step( dt, jitterEnabled ) {
+    step( dt, noiseEnabled ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      assert && assert( typeof jitterEnabled === 'boolean', `invalid jitterEnabled: ${jitterEnabled}` );
+      assert && assert( typeof noiseEnabled === 'boolean', `invalid noiseEnabled: ${noiseEnabled}` );
 
       this.dtAccumulator += dt;
 
       if ( this.dtAccumulator >= PressureGauge.REFRESH_PERIOD ) {
 
-        // Add jitter (kPa) to the displayed value, more jitter with lower pressure.
-        // Jitter is added if we're not holding pressure constant.
-        let jitter = 0;
-        if ( jitterEnabled && GasPropertiesGlobalOptions.pressureNoiseProperty.value ) {
-          jitter = this.pressureJitterFunction( this.pressureProperty.value ) *
-                   this.scaleJitterFunction( this.temperatureProperty.value ) *
+        // Add noise (kPa) to the displayed value, more noise with lower pressure.
+        // Noise is added if we're not holding pressure constant.
+        let noise = 0;
+        if ( noiseEnabled && GasPropertiesGlobalOptions.pressureNoiseProperty.value ) {
+          noise = this.pressureNoiseFunction( this.pressureProperty.value ) *
+                   this.scaleNoiseFunction( this.temperatureProperty.value ) *
                    phet.joist.random.nextDouble();
         }
 
         // random sign
-        const sign = ( jitter >= this.pressureProperty.value || phet.joist.random.nextBoolean() ) ? 1 : -1;
+        const sign = ( noise >= this.pressureProperty.value || phet.joist.random.nextBoolean() ) ? 1 : -1;
 
-        this.pressureKilopascalsProperty.value = this.pressureProperty.value + ( sign * jitter );
+        this.pressureKilopascalsProperty.value = this.pressureProperty.value + ( sign * noise );
         this.dtAccumulator = 0;
       }
     }
