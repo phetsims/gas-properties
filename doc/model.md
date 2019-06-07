@@ -87,6 +87,17 @@ make it too easy to blow the lid off of the container.
 
 TODO
 
+### Pressure
+
+When particles are added to an empty container, pressure remains zero until 1 particle has collided with
+the container. Then all particles `N` contribute to the pressure via `P = NkT/V`.
+
+On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure gauge is given a bit of 
+"noise" to make it look more realistic.  The noise is a function to pressure and temperaure. More noise 
+is added at lower pressures, but the noise is surpressed as temperature decreases.  
+See [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
+if you'd like more specifics. If desired, the noise can be disabled via the `pressureNoise` query paramter.
+
 ## Hold Constant
 
 TODO: Describe the "Hold Constant" modes for _Ideal_ screen, which determines which quantity is held constant.
