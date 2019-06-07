@@ -65,7 +65,7 @@ The particle system has the following qualities:
 * no gravity
 
 TODO: Describe how initial velocity of particles is determined. Angle is randomly chosen from a "dispersion" range.
-Speed is based on a Gaussian distribution of temperature.
+Speed is based on a Gaussian distribution of a mean temperature, when the mean temperature is 300K for an empty container, the temperature in the container for a non-empty container, or settable by the user in the _Energy_ screen.
 
 ## Container
 
