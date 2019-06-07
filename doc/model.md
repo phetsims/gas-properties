@@ -2,9 +2,8 @@
 
 This is a high-level description of the model used in Gas Property.
 
-The model is based on the application of the _Ideal Gas Law_ to the state of a particle system. The particle
-system is engaged in rigid-body collision behavior between particles and a container.
-All quantities (pressure, temperature, kinetic energy) are derived from the statue of the particle system.
+The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, temperature, kinetic energy) are derived from the state of the particle system and the container using 
+the _Ideal Gas Law_.
 
 ## Constants, Symbols, and Units
 
@@ -68,7 +67,7 @@ The particle system has the following qualities:
 
 There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and 
 the gauge on the
-bicycle pump. When particles escape the containers through its open lid, they are immediately returned to the
+bicycle pump. When particles escape the container through its open lid, they are immediately returned to the
 inventory. Since there is no gravity, they float upwards, and are deleted from the sim when they disappear from view.
 
 TODO: Describe how initial velocity of particles is determined. Angle is randomly chosen from a "dispersion" range.
