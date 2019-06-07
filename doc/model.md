@@ -2,7 +2,7 @@
 
 This is a high-level description of the model used in Gas Property.
 
-The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, temperature, volume, kinetic energy) are derived from the state of the particle system and the container using 
+The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container using 
 the _Ideal Gas Law_.
 
 ## Constants, Symbols, and Units
