@@ -55,14 +55,18 @@ The units used in this sim are:
 
 ##  Particle System
 
-Particles have mass, radius, location, and velocity.
+Particles represent gas molecules. Particles have mass, radius, location, and velocity.
 
-The particle system has the following qualities:
-* rigid-body collision model
-* perfectly elastic (no net loss of KE)
-* particle-particle collisions use an impulse-based contact model
+The collection of all particles is referred to as the particle system. The particle system has the following qualities:
+* `N` is the number of particles in the container
+* rigid bodies
 * no rotational kinematics
 * no gravity
+
+There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and 
+the gauge on the
+bicycle pump. When particles escape the containers through its open lid, they are immediately returned to the
+inventory. Since there is no gravity, they float upwards, and are deleted from the sim when they disappear from view.
 
 TODO: Describe how initial velocity of particles is determined. Angle is randomly chosen from a "dispersion" range.
 Speed is based on a Gaussian distribution of mean temperature. Mean temperature is 300K for an empty container, the temperature in the container for a non-empty container, or settable by the user in the _Energy_ screen.
@@ -86,6 +90,10 @@ make it too easy to blow the lid off of the container.
 ## Collision Detection and Response
 
 TODO
+
+* rigid-body collision model
+* perfectly elastic (no net loss of KE)
+* particle-particle collisions use an impulse-based contact model
 
 Collision detection occurs only within the container. There is no collision detection performed for particles
 that have escaped the container through the open lid.
