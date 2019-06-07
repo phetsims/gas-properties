@@ -57,9 +57,10 @@ This section enumerates the primary equations used in the sim. Use this section 
 
 ##  Particle System
 
+The collection of all particles is referred to as the particle system. 
 Particles represent gas molecules. Particles have mass, radius, location, and velocity.
 
-The collection of all particles is referred to as the particle system. The particle system has the following qualities:
+The particle system has the following qualities:
 * `N` is the number of particles in the container
 * rigid bodies
 * no rotational kinematics
