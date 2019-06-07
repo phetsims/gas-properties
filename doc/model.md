@@ -65,6 +65,9 @@ The particle system has the following qualities:
 * no rotational kinematics
 * no gravity
 
+TODO: Describe how initial velocity of particles is determined. Angle is random for a "dispersion" range.
+Speed is based on a Gaussian distribution of temperature.
+
 ### Container
 
 The left wall of the container is movable in the _Ideal_ and _Explore_ screens. Use it to resize the container,
@@ -81,14 +84,15 @@ When resizing the container in the _Explore_ screen, there is a speed limit on t
 the container smaller.  This speed limit prevents pressure from changing too dramatically, which would 
 make it too easy to blow the lid off of the container.
 
+### Collision Detection and Response
+
+TODO
+
 ### Hold Constant
 
-TODO: Describe "Hold Constant" modes for _Ideal_ screen.
+TODO: Describe the "Hold Constant" modes for _Ideal_ screen, which determines which quantity is held constant.
 
-### Misc
 
-TODO: Describe how initial velocity of particles is determined. Angle is random for a "dispersion" range.
-Speed is based on a Gaussian distribution of temperature.
 
 
 
