@@ -52,8 +52,8 @@ This section enumerates the primary equations used in the sim. Use this section 
 * Pressure: P = NkT/V
 * Temperature: T = (2/3)KE/k
 * Container Volume: V = width * height * depth
-* Kinetic Energy: KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
-* Particle Speed: |v| = sqrt( 3kT / m ) = sqrt( 2 * KE / m )
+* Kinetic Energy: KE = (3/2)kT = (1/2)m|v|<sup>2</sup>
+* Particle Speed: |v| = sqrt( 3kT / m ) = sqrt( 2KE/m )
 
 ##  Particle System
 
