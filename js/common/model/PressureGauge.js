@@ -43,7 +43,7 @@ define( require => {
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
-              `invalid holdConstantProperty: ${holdConstantProperty}` );
+        `invalid holdConstantProperty: ${holdConstantProperty}` );
 
       // @public pressure in kPa with noise added. This is not derived from pressureProperty,
       // because it needs to noise on step, not when pressureProperty changes.
@@ -105,15 +105,18 @@ define( require => {
 
       this.dtAccumulator += dt;
 
-      // Disable noise when pressure is held constant.
-      const noiseEnabled = !( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
-                              this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
-
       if ( this.dtAccumulator >= PressureGauge.REFRESH_PERIOD ) {
+
+        // Are we in a mode that holds pressure constant?
+        const constantPressure = ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
+                                   this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
+
+        // Disable noise when pressure is held constant, or via global options.
+        const noiseEnabled = ( !constantPressure && GasPropertiesGlobalOptions.pressureNoiseProperty.value );
 
         // Add noise (kPa) to the displayed value
         let noise = 0;
-        if ( noiseEnabled && GasPropertiesGlobalOptions.pressureNoiseProperty.value ) {
+        if ( noiseEnabled ) {
 
           // compute noise
           noise = this.pressureNoiseFunction( this.pressureProperty.value ) *
