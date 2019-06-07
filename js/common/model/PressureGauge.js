@@ -18,6 +18,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
@@ -34,12 +35,15 @@ define( require => {
     /**
      * @param {NumberProperty} pressureProperty - pressure in the container, in kPa
      * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K, null if empty container
+     * @param {EnumerationProperty} holdConstantProperty - quantity to be held constant, influences noise
      */
-    constructor( pressureProperty, temperatureProperty ) {
+    constructor( pressureProperty, temperatureProperty, holdConstantProperty ) {
       assert && assert( pressureProperty instanceof NumberProperty,
         `invalid pressureProperty: ${pressureProperty}` );
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
+      assert && assert( holdConstantProperty instanceof EnumerationProperty,
+              `invalid holdConstantProperty: ${holdConstantProperty}` );
 
       // @public pressure in kPa with noise added. This is not derived from pressureProperty,
       // because it needs to noise on step, not when pressureProperty changes.
@@ -66,7 +70,7 @@ define( require => {
       // @public (read-only) pressure range in kPa
       this.pressureRange = new Range( 0, MAX_PRESSURE );
 
-      // @private amount of noise in kPa is inversely proportional to pressure
+      // @private amount of noise in kPa is inversely proportional to pressure, so more noise at lower pressure
       this.pressureNoiseFunction = new LinearFunction( 0, this.pressureRange.max, MAX_NOISE, MIN_NOISE, true );
 
       // @private map from temperature (K) to noise scale factor, so that noise falls off at low temperatures
@@ -78,6 +82,7 @@ define( require => {
       // @private
       this.pressureProperty = pressureProperty;
       this.temperatureProperty = temperatureProperty;
+      this.holdConstantProperty = holdConstantProperty;
       this.dtAccumulator = 0;
     }
 
@@ -93,30 +98,35 @@ define( require => {
     /**
      * Steps the pressure gauge.
      * @param {number} dt - time step, in ps
-     * @param {boolean} noiseEnabled - whether noise should be added to make the gauge look more realistic
      * @public
      */
-    step( dt, noiseEnabled ) {
+    step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      assert && assert( typeof noiseEnabled === 'boolean', `invalid noiseEnabled: ${noiseEnabled}` );
 
       this.dtAccumulator += dt;
 
+      // Disable noise when pressure is held constant.
+      const noiseEnabled = !( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
+                              this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
+
       if ( this.dtAccumulator >= PressureGauge.REFRESH_PERIOD ) {
 
-        // Add noise (kPa) to the displayed value, more noise with lower pressure.
-        // Noise is added if we're not holding pressure constant.
+        // Add noise (kPa) to the displayed value
         let noise = 0;
         if ( noiseEnabled && GasPropertiesGlobalOptions.pressureNoiseProperty.value ) {
+
+          // compute noise
           noise = this.pressureNoiseFunction( this.pressureProperty.value ) *
-                   this.scaleNoiseFunction( this.temperatureProperty.value ) *
-                   phet.joist.random.nextDouble();
+                  this.scaleNoiseFunction( this.temperatureProperty.value ) *
+                  phet.joist.random.nextDouble();
+
+          // randomly apply a sign if doing so doesn't make the pressure become <= 0
+          if ( noise > this.pressureProperty.value ) {
+            noise *= ( phet.joist.random.nextBoolean() ? 1 : -1 );
+          }
         }
 
-        // random sign
-        const sign = ( noise >= this.pressureProperty.value || phet.joist.random.nextBoolean() ) ? 1 : -1;
-
-        this.pressureKilopascalsProperty.value = this.pressureProperty.value + ( sign * noise );
+        this.pressureKilopascalsProperty.value = this.pressureProperty.value + noise;
         this.dtAccumulator = 0;
       }
     }

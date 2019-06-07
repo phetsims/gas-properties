@@ -152,7 +152,7 @@ define( require => {
       } );
 
       // @public (read-only) gauge that display pressureProperty with a choice of units
-      this.pressureGauge = new PressureGauge( this.pressureProperty, this.temperatureProperty );
+      this.pressureGauge = new PressureGauge( this.pressureProperty, this.temperatureProperty, this.holdConstantProperty );
 
       // @private whether to update pressure
       this.updatePressureEnabled = false;
@@ -379,12 +379,8 @@ define( require => {
         // Compute the actual pressure, based on the state of the particle system
         this.pressureProperty.value = this.computePressure();
 
-        // Disable noise when we're holding pressure constant.
-        const noiseEnabled = !( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
-                                this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
-
         // Step the gauge regardless of whether pressure has changed, since the gauge updates on a sample period.
-        this.pressureGauge.step( dtPressureGauge, noiseEnabled );
+        this.pressureGauge.step( dtPressureGauge );
 
         // If pressure exceeds the maximum, blow the lid off of the container.
         if ( this.pressureProperty.value > MAX_PRESSURE ) {
