@@ -90,6 +90,10 @@ TODO
 Collision detection occurs only within the container. There is no collision detection performed for particles
 that have escaped the container through the open lid.
 
+The _Diffusion_ screen adds a removable vertical divider to the container.  When the divider is in place,
+collision detection treats the container as 2 separate containers, where the divider plays the role of 
+a container wall.
+
 ## Pressure
 
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with
