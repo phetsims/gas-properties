@@ -87,6 +87,9 @@ make it too easy to blow the lid off of the container.
 
 TODO
 
+Collision detection occurs only within the container. There is no collision detection performed for particles
+that have escaped the container through the open lid.
+
 ## Pressure
 
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with
