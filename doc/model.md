@@ -67,20 +67,28 @@ The particle system has the following qualities:
 
 ### Container
 
-work, no work
+The left wall of the container is movable in the _Ideal_ and _Explore_ screens. Use it to resize the container,
+which changes volume `V`.
 
-In the _Explore_ screen, the left (movable) wall does work on particles. After a collision with the left wall
-occurs, the new X component of a particle's velocity is `-( particleVelocity.x - leftWallVelocity.x )`.
+In the _Ideal_ screen, the movable wall does no work. While the container is being resized, the sim is paused. 
+After completing the resize, particles are redistributed in the new volume.
 
-Speed limit on _Explore_ wall.
+In the _Explore_ screen, the movable wall does work on particles. It changes the kinetic energy of particles
+by changing their speed. After a collision with the left wall occurs, the new X component of a particle's 
+velocity is `-( particleVelocity.x - leftWallVelocity.x )`.
+
+When resizing the container in the _Explore_ screen, there is a speed limit on the wall when making
+the container smaller.  This speed limit prevents pressure from changing too dramatically, which would 
+make it too easy to blow the lid off of the container.
 
 ### Hold Constant
 
-Describe "Hold Constant" modes for _Ideal_ screen.
+TODO: Describe "Hold Constant" modes for _Ideal_ screen.
 
 ### Misc
 
-Temperature and particles added to container, Gaussian distribution
+TODO: Describe how initial velocity of particles is determined. Angle is random for a "dispersion" range.
+Speed is based on a Gaussian distribution of temperature.
 
 
 
