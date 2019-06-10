@@ -26,7 +26,7 @@ define( require => {
   // constants
 
   // used to compute the initial velocity angle for particles, in radians
-  const PUMP_DISPERSION_ANGLE = Math.PI / 2;
+  const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
 
   class ParticleSystem {
 
@@ -49,12 +49,13 @@ define( require => {
       this.particleEntryLocation = particleEntryLocation;
 
       // @public (read-only) together these arrays make up the 'particle system'
+      // Separate arrays are kept to optimize performance.
       this.heavyParticles = []; // {HeavyParticle[]} heavy particles inside the container
       this.lightParticles = []; // {LightParticle[]} light particles inside the container
       this.heavyParticlesOutside = []; // {HeavyParticle[]} heavy particles outside the container
       this.lightParticlesOutside = []; // {LightParticle[]} light particles outside the container
 
-      // @public for iterating over all particles inside the container
+      // @public performance optimization, for iterating over all particles inside the container
       this.insideParticleArrays = [ this.heavyParticles, this.lightParticles ];
 
       // @public the number of heavy particles inside the container
@@ -69,6 +70,16 @@ define( require => {
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
       } );
 
+      // @public N, the total number of particles in the container
+      this.numberOfParticlesProperty = new DerivedProperty(
+        [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
+        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
+          numberType: 'Integer',
+          valueType: 'number',
+          isValidValue: value => value >= 0
+        }
+      );
+
       // Synchronize particle counts and arrays
       const createHeavyParticle = ( options ) => new HeavyParticle( options );
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
@@ -82,16 +93,6 @@ define( require => {
         assert && assert( GasPropertiesUtils.isArrayOf( this.lightParticles, LightParticle ),
           'lightParticles should contain only LightParticle' );
       } );
-
-      // @public N, the total number of particles in the container
-      this.numberOfParticlesProperty = new DerivedProperty(
-        [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
-        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
-          numberType: 'Integer',
-          valueType: 'number',
-          isValidValue: value => value >= 0
-        }
-      );
     }
 
     /**
@@ -126,7 +127,7 @@ define( require => {
     }
 
     /**
-     * Applies heat or cool to the particle system.
+     * Heats or cools the particle system.
      * @param {number} heatCoolFactor - [-1,1] see HeaterCoolerNode heatCoolAmountProperty
      * @public
      */
@@ -252,7 +253,7 @@ define( require => {
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
 
           // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
-          Math.PI - PUMP_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PUMP_DISPERSION_ANGLE
+          Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PARTICLE_DISPERSION_ANGLE
         );
 
         particles.push( particle );
@@ -260,7 +261,8 @@ define( require => {
     }
 
     /**
-     * Redistributes the particles horizontally in the container, called in response to changing the container width.
+     * Redistributes the particles horizontally in the container.  This is used in the Ideal screen, where resizing
+     * the container results in the particles being redistributed in the new container width.
      * @param {number} scaleX - amount to scale the x location
      * @public
      */
@@ -275,7 +277,7 @@ define( require => {
      * Adjusts velocities of particle inside the container so that the resulting temperature matches
      * a specified temperature.
      * @param {number} temperature - in K
-     * @private
+     * @public
      */
     setTemperature( temperature ) {
       assert && assert( typeof temperature === 'number', `invalid temperature: ${temperature}` );
