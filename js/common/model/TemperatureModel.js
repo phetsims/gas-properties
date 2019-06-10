@@ -92,9 +92,9 @@ define( require => {
         // User's setting
         initialTemperature = this.initialTemperatureProperty.value;
       }
-      else if ( this.temperatureProperty.value !== null ) {
+      else if ( this.temperatureProperty.value !== null && this.temperatureProperty.value !== 0 ) {
 
-        // Current temperature in a non-empty container
+        // Current temperature in the container
         initialTemperature = this.temperatureProperty.value;
       }
       else {
