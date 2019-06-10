@@ -47,12 +47,11 @@ define( require => {
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
 
-
           const desiredWidth = container.widthRange.constrainValue( container.right - modelX );
           if ( container.leftWallDoesWork && desiredWidth < container.widthProperty.value ) {
 
             // When making the container smaller, limit the speed.  See #90.
-            container.desiredWidth = container.widthRange.constrainValue( container.right - modelX );
+            container.desiredWidth = desiredWidth;
           }
           else {
 

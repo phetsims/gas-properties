@@ -88,9 +88,6 @@ define( require => {
 
       // @public (read-only) whether the left wall does work on particles
       this.leftWallDoesWork = options.leftWallDoesWork;
-
-      // @private {number} previous location of the left wall
-      this.previousLeft = this.left;
     }
 
     /**
@@ -99,30 +96,6 @@ define( require => {
      */
     reset() {
       this.widthProperty.reset();
-    }
-
-    /**
-     * Steps the container.
-     * @param {number} dt - the time step, in ps
-     * @public
-     */
-    step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      assert && assert( !( !this.leftWallDoesWork && this.leftWallVelocity.magnitude !== 0 ),
-        'if wall does not do work, then its velocity should be zero' );
-
-      // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
-      // velocity is irrelevant and should remain set to zero, so that it doesn't contribute to collision detection.
-      if ( this.leftWallDoesWork ) {
-
-        const previousX = this.leftWallVelocity.x;
-        const x = ( this.left - this.previousLeft ) / dt;
-        if ( x !== previousX ) {
-          this.leftWallVelocity.setXY( x, 0 );
-        }
-
-        this.previousLeft = this.left;
-      }
     }
 
     /**

@@ -215,10 +215,6 @@ define( require => {
     stepModelTime( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
-      // Animate the container's width with a speed limit. Do this before super.stepModelTime because it affects
-      // the subsequent computation of wall velocity. See #90.
-      this.container.stepWidth( this.timeTransform( dt ) );
-
       super.stepModelTime( dt );
 
       // step the system
@@ -246,7 +242,7 @@ define( require => {
       // Allow particles to escape from the opening in the top of the container
       this.particleSystem.escapeParticles( this.container );
 
-      // Step container, to compute velocity of movable left wall.
+      // Step container, to animate resizing of left wall and compute velocity of left wall.
       this.container.step( dt );
 
       // Collision detection and response

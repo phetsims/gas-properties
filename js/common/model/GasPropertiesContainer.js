@@ -62,6 +62,9 @@ define( require => {
       // @public {number} desired width of the container, in pm.
       // Set this to animate width change with a speed limit. See #90.
       this.desiredWidth = this.widthProperty.value;
+      
+      // @private {number} previous location of the left wall
+      this.previousLeft = this.left;
     }
 
     /**
@@ -77,11 +80,11 @@ define( require => {
     }
 
     /**
-     * Animates the container's width one step towards desiredWidth.
+     * Animates the container's width one step towards desiredWidth. Computes wall velocity if the wall does work.
      * @param {number} dt - time delta, in ps
      * @public
      */
-    stepWidth( dt ) {
+    step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
       const widthDifference = this.desiredWidth - this.widthProperty.value;
@@ -108,6 +111,17 @@ define( require => {
         }
 
         this.setWidth( newWidth );
+      }
+
+      // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
+      // velocity is irrelevant and should remain set to zero, so that it doesn't contribute to collision detection.
+      if ( this.leftWallDoesWork ) {
+        const velocityX = ( this.left - this.previousLeft ) / dt;
+        this.leftWallVelocity.setXY( velocityX, 0 );
+        this.previousLeft = this.left;
+      }
+      else {
+        assert && assert( this.leftWallVelocity.magnitude === 0, 'wall velocity should be zero' );
       }
     }
 
