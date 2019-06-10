@@ -15,6 +15,11 @@ which provides a high-level description of the simulation model.
 
 The design document for this sim is [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit).
 
+Terminology TODO
+
+Memory management: With the exception of Particle instances, all object instances persist for the 
+lifetime of the sim.  There is no need to `unlink`, `removeListener`, `dispose`, etc. 
+
 Collision detection:
 * reference: https://en.wikipedia.org/wiki/Collision_detection
 * detected after collision occurs (a posteriori, discrete)
