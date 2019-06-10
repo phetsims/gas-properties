@@ -176,7 +176,7 @@ define( require => {
     }
 
     /**
-     * Steps the model using model time units.
+     * Steps the model using model time units. Order is very important here!
      * @param {number} dt - time delta, in ps
      * @protected
      * @override
