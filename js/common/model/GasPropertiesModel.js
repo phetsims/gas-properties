@@ -5,10 +5,10 @@
  *
  * This model has subcomponents that handle the quantities involved in the Ideal Gas Law, PV = NkT.  They are:
  *
- * PressureModel - P, pressure
- * BaseContainer - V, volume
- * ParticleSystem - N, number of particles
- * TemperatureModel - T, temperature
+ * P (pressure) - see PressureModel pressureProperty
+ * V (volume) - see BaseContainer volumeProperty
+ * N (number of particles) - see ParticleSystem numberOfParticlesProperty
+ * T (temperature) - see TemperatureModel temperatureProperty
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
