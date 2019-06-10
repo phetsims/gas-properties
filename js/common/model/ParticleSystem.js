@@ -277,7 +277,7 @@ define( require => {
      * @param {number} temperature - in K
      * @private
      */
-    adjustParticleVelocitiesForTemperature( temperature ) {
+    setTemperature( temperature ) {
       assert && assert( typeof temperature === 'number', `invalid temperature: ${temperature}` );
 
       const desiredAverageKE = ( 3 / 2 ) * temperature * GasPropertiesConstants.BOLTZMANN; // KE = (3/2)Tk

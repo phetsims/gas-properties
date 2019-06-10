@@ -215,7 +215,7 @@ define( require => {
     stepModelTime( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
-      // Animate the container's width with a speed limit. Do this before super.step because it affects
+      // Animate the container's width with a speed limit. Do this before super.stepModelTime because it affects
       // the subsequent computation of wall velocity. See #90.
       this.container.stepWidth( this.timeTransform( dt ) );
 
@@ -273,7 +273,7 @@ define( require => {
       assert && assert( typeof numberOfCollisions === 'number' && numberOfCollisions >= 0,
         `invalid numberOfCollisions: ${numberOfCollisions}` );
 
-      // Adjust quantities to compensate for holdConstant mode. Do this before computing temperature or pressure.
+      // Adjust quantities to compensate for 'Hold Constant' mode. Do this before computing temperature or pressure.
       this.compensateForHoldConstant();
 
       // Update temperature. Do this before pressure, because pressure depends on temperature.
@@ -336,7 +336,7 @@ define( require => {
         // Hold pressure constant by adjusting particle velocities to result in a desired temperature.
         const desiredTemperature = this.computeIdealTemperature();
 
-        this.particleSystem.adjustParticleVelocitiesForTemperature( desiredTemperature );
+        this.particleSystem.setTemperature( desiredTemperature );
         assert && assert( Math.abs( desiredTemperature - this.computeIdealTemperature() < 1E-3 ),
           'actual temperature does not match desired temperature' );
 
