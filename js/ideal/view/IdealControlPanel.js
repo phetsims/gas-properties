@@ -88,4 +88,3 @@ define( require => {
 
   return gasProperties.register( 'IdealControlPanel', IdealControlPanel );
 } );
- 

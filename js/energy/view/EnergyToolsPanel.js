@@ -53,4 +53,3 @@ define( require => {
 
   return gasProperties.register( 'EnergyToolsPanel', EnergyToolsPanel );
 } );
- 

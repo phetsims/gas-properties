@@ -94,4 +94,3 @@ define( require => {
 
   return gasProperties.register( 'ParticlesAccordionBox', ParticlesAccordionBox );
 } );
- 

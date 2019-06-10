@@ -56,4 +56,3 @@ define( require => {
 
   return gasProperties.register( 'ParticleTypeRadioButtonGroup', ParticleTypeRadioButtonGroup );
 } );
- 

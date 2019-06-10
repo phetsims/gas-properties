@@ -86,4 +86,3 @@ define( require => {
 
   return gasProperties.register( 'StopwatchNode', StopwatchNode );
 } );
- 

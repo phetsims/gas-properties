@@ -44,4 +44,3 @@ define( require => {
 
   return gasProperties.register( 'GasPropertiesBicyclePumpNode', GasPropertiesBicyclePumpNode );
 } );
- 

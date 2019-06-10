@@ -58,4 +58,3 @@ define( require => {
 
   return gasProperties.register( 'ExploreToolsPanel', ExploreToolsPanel );
 } );
- 

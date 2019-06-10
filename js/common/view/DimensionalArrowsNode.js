@@ -98,4 +98,4 @@ define( require => {
   }
 
   return gasProperties.register( 'DimensionalArrowsNode', DimensionalArrowsNode );
-} ); 
+} );

@@ -179,4 +179,4 @@ define( require => {
   }
 
   return gasProperties.register( 'AnimatedHeaterCoolerNode', AnimatedHeaterCoolerNode );
-} ); 
+} );

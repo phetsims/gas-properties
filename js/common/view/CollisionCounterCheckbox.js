@@ -45,4 +45,4 @@ define( require => {
   }
 
   return gasProperties.register( 'CollisionCounterCheckbox', CollisionCounterCheckbox );
-} ); 
+} );
