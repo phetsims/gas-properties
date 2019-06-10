@@ -11,6 +11,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionParticle1 = require( 'GAS_PROPERTIES/diffusion/model/DiffusionParticle1' );
@@ -34,7 +35,7 @@ define( require => {
       assert && assert( GasPropertiesUtils.isArrayOf( particles2, DiffusionParticle2 ),
         `invalid particles2: ${particles2}` );
 
-      super( container, [ particles1, particles2 ], options );
+      super( container, [ particles1, particles2 ], new BooleanProperty( true ), options );
     }
 
     /**

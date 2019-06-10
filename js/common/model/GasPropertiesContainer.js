@@ -53,8 +53,11 @@ define( require => {
         units: 'pm'
       } );
 
-      // @public (read-only) bicycle pump hose is connected to the bottom right side of the container, in pm
-      this.hoseLocation = new Vector2( this.location.x + this.wallThickness, this.location.y + this.height / 5 );
+      // @public (read-only) particles enter the container here, on the inside of the container, in pm
+      this.particleEntryLocation = new Vector2( this.location.x, this.location.y + this.height / 5 );
+
+      // @public (read-only) bicycle pump hose connects here, on outside of the container, in pm
+      this.hoseLocation = this.particleEntryLocation.plusXY( this.wallThickness, 0 );
 
       // @public {number} desired width of the container, in pm.
       // Set this to animate width change with a speed limit. See #90.
@@ -213,6 +216,14 @@ define( require => {
      */
     isLidOpen() {
       return ( this.getOpeningWidth() !== 0 );
+    }
+
+    /**
+     * Blows the lid off of the container.
+     * @public
+     */
+    blowLidOff() {
+      this.lidIsOnProperty.value = false;
     }
   }
 

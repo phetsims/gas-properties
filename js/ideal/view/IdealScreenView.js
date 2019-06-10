@@ -58,8 +58,8 @@ define( require => {
       // The user is not controlling the heat, and we animate the bucket to correspond to the temperature change.
       const animatedHeaterCoolerNode = new AnimatedHeaterCoolerNode(
         model.holdConstantProperty, 
-        model.totalNumberOfParticlesProperty,
-        model.temperatureProperty, {
+        model.particleSystem.numberOfParticlesProperty,
+        model.temperatureModel.temperatureProperty, {
           translation: this.heaterCoolerNode.translation,
           scale: GasPropertiesConstants.HEATER_COOLER_NODE_SCALE
         } );
@@ -74,8 +74,8 @@ define( require => {
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
         model.holdConstantProperty,
-        model.totalNumberOfParticlesProperty,
-        model.pressureProperty,
+        model.particleSystem.numberOfParticlesProperty,
+        model.pressureModel.pressureProperty,
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
@@ -89,8 +89,8 @@ define( require => {
 
       // Particles accordion box
       const particlesAccordionBox = new ParticlesAccordionBox(
-        model.numberOfHeavyParticlesProperty,
-        model.numberOfLightParticlesProperty,
+        model.particleSystem.numberOfHeavyParticlesProperty,
+        model.particleSystem.numberOfLightParticlesProperty,
         model.modelViewTransform, {
           fixedWidth: RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,

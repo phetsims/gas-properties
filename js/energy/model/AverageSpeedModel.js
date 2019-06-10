@@ -10,8 +10,9 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
+  const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
   const Property = require( 'AXON/Property' );
 
   // constants
@@ -23,16 +24,19 @@ define( require => {
   class AverageSpeedModel {
 
     /**
-     * @param {GasPropertiesModel} model
+     * @param {ParticleSystem} particleSystem
+     * @param {BooleanProperty} isPlayingProperty
      * @param {number} samplePeriod - data is averaged over this period, in ps
      */
-    constructor( model, samplePeriod ) {
-      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
+    constructor( particleSystem, isPlayingProperty, samplePeriod ) {
+      assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
+      assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
 
       // @private
-      this.model = model;
+      this.particleSystem = particleSystem;
+      this.isPlayingProperty = isPlayingProperty;
       this.samplePeriod = samplePeriod;
 
       // @public (read-only) {Property.<number|null>}
@@ -47,13 +51,13 @@ define( require => {
       this.lightAverageSpeedSum = 0; // sum of samples for light particles
 
       // Reset sample data when the play state changes, so that we can update immediately if manually stepping.
-      model.isPlayingProperty.link( isPlaying => {
+      isPlayingProperty.link( isPlaying => {
         this.clearSamples();
       } );
 
       // If the number of particles changes while paused, sample the current state and update immediately.
-      model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        if ( !model.isPlayingProperty.value ) {
+      particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
+        if ( !isPlayingProperty.value ) {
           this.step( this.samplePeriod ); // using the sample period causes an immediate update
         }
       } );
@@ -93,7 +97,7 @@ define( require => {
       this.sample();
 
       // Update now if we've reached the end of the sample period, or if we're manually stepping
-      if ( this.dtAccumulator >= this.samplePeriod || !this.model.isPlayingProperty.value ) {
+      if ( this.dtAccumulator >= this.samplePeriod || !this.isPlayingProperty.value ) {
         this.update();
       }
     }
@@ -103,11 +107,11 @@ define( require => {
      * @private
      */
     sample() {
-      assert && assert( !( this.numberOfSamples !== 0 && !this.model.isPlayingProperty.value ),
+      assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
         'numberOfSamples should be 0 if called while the sim is paused' );
 
-      this.heavyAverageSpeedSum += getAverageSpeed( this.model.heavyParticles );
-      this.lightAverageSpeedSum += getAverageSpeed( this.model.lightParticles );
+      this.heavyAverageSpeedSum += getAverageSpeed( this.particleSystem.heavyParticles );
+      this.lightAverageSpeedSum += getAverageSpeed( this.particleSystem.lightParticles );
       this.numberOfSamples++;
     }
 
@@ -116,11 +120,11 @@ define( require => {
      * @private
      */
     update() {
-      assert && assert( !( this.numberOfSamples !== 1 && !this.model.isPlayingProperty.value ),
+      assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
         'numberOfSamples should be 1 if called while the sim is paused' );
 
       // heavy particles
-      if ( this.model.heavyParticles.length === 0 ) {
+      if ( this.particleSystem.heavyParticles.length === 0 ) {
         this.heavyAverageSpeedProperty.value = null;
       }
       else {
@@ -128,7 +132,7 @@ define( require => {
       }
 
       // light particles
-      if ( this.model.lightParticles.length === 0 ) {
+      if ( this.particleSystem.lightParticles.length === 0 ) {
         this.lightAverageSpeedProperty.value = null;
       }
       else {

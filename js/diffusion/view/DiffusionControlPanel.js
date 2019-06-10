@@ -34,21 +34,21 @@ define( require => {
      * @param {DiffusionSettings} rightSettings - setting for the right side of the container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {BooleanProperty} hasDividerProperty
-     * @param {Property.<number>} totalNumberOfParticlesProperty
+     * @param {Property.<number>} numberOfParticlesProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {DiffusionViewProperties} viewProperties
      * @param {Object} [options]
      */
     constructor( leftSettings, rightSettings, modelViewTransform, hasDividerProperty,
-                 totalNumberOfParticlesProperty, stopwatchVisibleProperty, viewProperties, options ) {
+                 numberOfParticlesProperty, stopwatchVisibleProperty, viewProperties, options ) {
       assert && assert( leftSettings instanceof DiffusionSettings,
         `invalid leftSettings: ${leftSettings}` );
       assert && assert( rightSettings instanceof DiffusionSettings,
         `invalid rightSettings: ${rightSettings}` );
       assert && assert( hasDividerProperty instanceof BooleanProperty,
         `invalid hasDividerProperty: ${hasDividerProperty}` );
-      assert && assert( totalNumberOfParticlesProperty instanceof Property,
-        `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( numberOfParticlesProperty instanceof Property,
+        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
         `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
       assert && assert( viewProperties instanceof DiffusionViewProperties,
@@ -100,8 +100,8 @@ define( require => {
       super( content, options );
 
       // Disable the button when the container is empty.
-      totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        dividerToggleButton.enabled = ( totalNumberOfParticles !== 0 );
+      numberOfParticlesProperty.link( numberOfParticles => {
+        dividerToggleButton.enabled = ( numberOfParticles !== 0 );
       } );
     }
   }

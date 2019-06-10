@@ -61,8 +61,8 @@ define( require => {
       this.leftSettings = new DiffusionSettings();
       this.rightSettings = new DiffusionSettings();
 
-      // @public {Property.<number>} total number of particles in the container
-      this.totalNumberOfParticlesProperty = new DerivedProperty(
+      // @public {Property.<number>} N, the total number of particles in the container
+      this.numberOfParticlesProperty = new DerivedProperty(
         [ this.leftSettings.numberOfParticlesProperty, this.rightSettings.numberOfParticlesProperty ],
         ( leftNumberOfParticles, rightNumberOfParticles ) => leftNumberOfParticles + rightNumberOfParticles, {
           numberType: 'Integer',

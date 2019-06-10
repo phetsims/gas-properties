@@ -18,14 +18,14 @@ define( require => {
   class EraseParticlesButton extends EraserButton {
 
     /**
-     * @param {Property.<number>} totalNumberOfParticlesProperty
+     * @param {Property.<number>} numberOfParticlesProperty
      * @param {NumberProperty} numberOfHeavyParticlesProperty
      * @param {NumberProperty} numberOfLightParticlesProperty
      * @param {Object} [options]
      */
-    constructor( totalNumberOfParticlesProperty, numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, options ) {
-      assert && assert( totalNumberOfParticlesProperty instanceof Property,
-        `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+    constructor( numberOfParticlesProperty, numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, options ) {
+      assert && assert( numberOfParticlesProperty instanceof Property,
+        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty,
              `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
       assert && assert( numberOfLightParticlesProperty instanceof NumberProperty,
@@ -47,8 +47,8 @@ define( require => {
       super( options );
       
       // Disables the button when the container is empty.
-      totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        this.enabled = ( totalNumberOfParticles !== 0 );
+      numberOfParticlesProperty.link( numberOfParticles => {
+        this.enabled = ( numberOfParticles !== 0 );
       } );
     }
   }

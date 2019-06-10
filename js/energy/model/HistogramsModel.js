@@ -9,23 +9,31 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
   const Property = require( 'AXON/Property' );
 
   class HistogramsModel {
 
     /**
-     * @param {GasPropertiesModel} model
+     * @param {ParticleSystem} particleSystem
+     * @param {BooleanProperty} isPlayingProperty
      * @param {number} samplePeriod - data is averaged over this period, in ps
      */
-    constructor( model, samplePeriod ) {
-      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
+    constructor( particleSystem, isPlayingProperty, samplePeriod ) {
+      assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
+      assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
+
+      // @private
+      this.particleSystem = particleSystem;
+      this.isPlayingProperty = isPlayingProperty;
+      this.samplePeriod = samplePeriod;
 
       // @public (read-only) values chosen in https://github.com/phetsims/gas-properties/issues/52
       this.numberOfBins = 19;  // number of bins, common to both histograms
@@ -60,10 +68,6 @@ define( require => {
       // @public emits when the bin counts have been updated
       this.binCountsUpdatedEmitter = new Emitter();
 
-      // @private
-      this.model = model;
-      this.samplePeriod = samplePeriod;
-
       // @private Speed samples
       this.heavySpeedSamples = []; // {number[][]} Speed samples for heavy particles
       this.lightSpeedSamples = []; // {number[][]} Speed samples for light particles
@@ -77,13 +81,13 @@ define( require => {
       this.numberOfSamples = 0;
 
       // Clear sample data when the play state changes, so that we can update immediately if manually stepping.
-      model.isPlayingProperty.link( isPlaying => {
+      isPlayingProperty.link( isPlaying => {
         this.clearSamples();
       } );
 
       // If the number of particles changes while paused, sample the current state and update immediately.
-      model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
-        if ( !model.isPlayingProperty.value ) {
+      particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
+        if ( !isPlayingProperty.value ) {
           this.step( this.samplePeriod ); // using the sample period causes an immediate update
         }
       } );
@@ -129,7 +133,7 @@ define( require => {
       this.sample();
 
       // Update now if we've reached the end of the sample period, or if we're manually stepping
-      if ( this.dtAccumulator >= this.samplePeriod || !this.model.isPlayingProperty.value ) {
+      if ( this.dtAccumulator >= this.samplePeriod || !this.isPlayingProperty.value ) {
         this.update();
       }
     }
@@ -139,16 +143,16 @@ define( require => {
      * @private
      */
     sample() {
-      assert && assert( !( this.numberOfSamples !== 0 && !this.model.isPlayingProperty.value ),
+      assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
         'numberOfSamples should be 0 if called while the sim is paused' );
       
       // take a Speed sample
-      this.heavySpeedSamples.push( getSpeedValues( this.model.heavyParticles ) );
-      this.lightSpeedSamples.push( getSpeedValues( this.model.lightParticles ) );
+      this.heavySpeedSamples.push( getSpeedValues( this.particleSystem.heavyParticles ) );
+      this.lightSpeedSamples.push( getSpeedValues( this.particleSystem.lightParticles ) );
 
       // take a Kinetic Energy sample
-      this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.model.heavyParticles ) );
-      this.lightKineticEnergySamples.push( getKineticEnergyValues( this.model.lightParticles ) );
+      this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.heavyParticles ) );
+      this.lightKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.lightParticles ) );
       
       this.numberOfSamples++;
     }
@@ -158,7 +162,7 @@ define( require => {
      * @private
      */
     update() {
-      assert && assert( !( this.numberOfSamples !== 1 && !this.model.isPlayingProperty.value ),
+      assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
         'numberOfSamples should be 1 if called while the sim is paused' );
 
       // update Speed bin counts

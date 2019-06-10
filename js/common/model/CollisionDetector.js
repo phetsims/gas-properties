@@ -39,10 +39,13 @@ define( require => {
     /**
      * @param {BaseContainer} container - the container inside which collision occur
      * @param {Particle[][]} particleArrays - collections of particles inside the container
+     * @param {BooleanProperty} particleParticleCollisionsEnabledProperty - whether particle-particle collisions occur
      * @param {Object} [options]
      */
-    constructor( container, particleArrays, options ) {
+    constructor( container, particleArrays, particleParticleCollisionsEnabledProperty, options ) {
       assert && assert( container instanceof BaseContainer, `invalid container: ${container}` );
+      assert && assert( particleParticleCollisionsEnabledProperty instanceof BooleanProperty,
+        `invalid particleParticleCollisionsEnabledProperty: ${particleParticleCollisionsEnabledProperty}` );
       assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0,
         `invalid particleArrays: ${particleArrays}` );
 
@@ -57,14 +60,14 @@ define( require => {
       const regionLength = options.regionLength || container.height / 4;
       assert && assert( regionLength > 0, `invalid regionLength: ${regionLength}` );
 
+      // @private
+      this.particleParticleCollisionsEnabledProperty = particleParticleCollisionsEnabledProperty;
+
       // @public (read-only) {Region[]} 2D grid of Regions
       this.regions = createRegions( container, regionLength );
 
       // @public (read-only) number of wall collisions on the most recent call to update
       this.numberOfParticleContainerCollisions = 0;
-
-      // @public determines whether particle-particle collisions occur
-      this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true );
 
       // @private mutable vectors, reused in critical code
       this.mutableVectors = {
@@ -79,14 +82,6 @@ define( require => {
       this.container = container;
       this.particleArrays = particleArrays;
       this.numberOfParticleContainerCollisions = 0;
-    }
-
-    /**
-     * Resets the collision detector.
-     * @public
-     */
-    reset() {
-      this.particleParticleCollisionsEnabledProperty.reset();
     }
 
     /**

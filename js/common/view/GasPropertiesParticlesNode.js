@@ -11,15 +11,18 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleImageProperty = require( 'GAS_PROPERTIES/common/view/ParticleImageProperty' );
   const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
+  const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
+  const Property = require( 'AXON/Property' );
 
   // constants
   const INSIDE_DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )'; // canvas fill for particles INSIDE container
@@ -28,49 +31,56 @@ define( require => {
   class GasPropertiesParticlesNode extends Node {
 
     /**
-     * @param {GasPropertiesModel} model - passing in the entire model since we use so much of its public API
+     * @param {ParticleSystem} particleSystem
+     * @param {ModelViewTransform2} modelViewTransform
+     * @param {Property.<Bounds2>} modelBoundsProperty
+     * @param {Bounds2} containerMaxBounds
      */
-    constructor( model ) {
-      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
+    constructor( particleSystem, modelViewTransform, modelBoundsProperty, containerMaxBounds ) {
+      assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
+      assert && assert( modelViewTransform instanceof ModelViewTransform2,
+        `invalid modelViewTransform: ${modelViewTransform}` );
+      assert && assert( modelBoundsProperty instanceof Property, `invalid modelBoundsProperty: ${modelBoundsProperty}` );
+      assert && assert( containerMaxBounds instanceof Bounds2, `invalid containerMaxBounds: ${containerMaxBounds}` );
 
       // generated image for HeavyParticle species
       const heavyParticleImageProperty = new ParticleImageProperty(
         options => new HeavyParticle( options ),
-        model.modelViewTransform,
+        modelViewTransform,
         new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS )
       );
 
       // generated image for LightParticle species
       const lightParticleImageProperty = new ParticleImageProperty(
         options => new LightParticle( options ),
-        model.modelViewTransform,
+        modelViewTransform,
         new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS )
       );
 
       // particles inside the container
       const insideParticlesNode = new ParticlesNode(
-        [ model.heavyParticles, model.lightParticles ],
+        [ particleSystem.heavyParticles, particleSystem.lightParticles ],
         [ heavyParticleImageProperty, lightParticleImageProperty ],
-        model.modelViewTransform,
+        modelViewTransform,
         INSIDE_DEBUG_FILL
       );
 
       // Size the inside canvas to the maximum bounds for the container.
-      insideParticlesNode.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.maxBounds ) );
+      insideParticlesNode.setCanvasBounds( modelViewTransform.modelToViewBounds( containerMaxBounds ) );
 
       // particles outside the container
       const outsideParticlesNode = new ParticlesNode(
-        [ model.heavyParticlesOutside, model.lightParticlesOutside ],
+        [ particleSystem.heavyParticlesOutside, particleSystem.lightParticlesOutside ],
         [ heavyParticleImageProperty, lightParticleImageProperty ],
-        model.modelViewTransform,
+        modelViewTransform,
         OUTSIDE_DEBUG_FILL
       );
 
       // When particles escape through the container's lid, they float up, since there is no gravity.
       // So size the outside canvas to the portion of the model bounds that is above the container.
-      model.modelBoundsProperty.link( modelBounds => {
-        const canvasBounds = modelBounds.withMinY( model.container.top );
-        outsideParticlesNode.setCanvasBounds( model.modelViewTransform.modelToViewBounds( canvasBounds ) );
+      modelBoundsProperty.link( modelBounds => {
+        const canvasBounds = modelBounds.withMinY( containerMaxBounds.maxY );
+        outsideParticlesNode.setCanvasBounds( modelViewTransform.modelToViewBounds( canvasBounds ) );
       } );
 
       super( {

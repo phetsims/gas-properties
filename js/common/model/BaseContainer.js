@@ -59,6 +59,12 @@ define( require => {
       // @private (read-only) depth of the container, in pm
       this.depth = 4000;
 
+      // @public V, volume of the container, in pm^3
+      this.volumeProperty = new DerivedProperty( [ this.widthProperty ],
+        width => width * this.height * this.depth, {
+          isValidValue: value => ( typeof value === 'number' && value > 0 )
+        } );
+
       // @public (read-only) wall thickness, in pm
       this.wallThickness = 75;
 
@@ -146,13 +152,6 @@ define( require => {
     get bottom() { return this.bounds.minY; }
 
     get top() { return this.bounds.maxY; }
-
-    /**
-     * Gets the volume of the container.
-     * @returns {number} in pm^3
-     * @public
-     */
-    getVolume() { return this.widthProperty.value * this.height * this.depth; }
 
     /**
      * Determines whether the container fully contains a particle.

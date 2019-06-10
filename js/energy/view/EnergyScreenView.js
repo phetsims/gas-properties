@@ -85,8 +85,8 @@ define( require => {
 
       // Particles accordion box
       const particlesAccordionBox = new ParticlesAccordionBox(
-        model.numberOfHeavyParticlesProperty,
-        model.numberOfLightParticlesProperty,
+        model.particleSystem.numberOfHeavyParticlesProperty,
+        model.particleSystem.numberOfLightParticlesProperty,
         model.modelViewTransform, {
           collisionsEnabledProperty: model.collisionDetector.particleParticleCollisionsEnabledProperty,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
@@ -95,8 +95,8 @@ define( require => {
 
       // Injection Temperature accordion box
       const injectionTemperatureAccordionBox = new InjectionTemperatureAccordionBox(
-        model.controlTemperatureEnabledProperty,
-        model.initialTemperatureProperty, {
+        model.temperatureModel.controlTemperatureEnabledProperty,
+        model.temperatureModel.initialTemperatureProperty, {
           expandedProperty: viewProperties.particleToolsExpandedProperty,
           fixedWidth: RIGHT_PANEL_WIDTH
         }

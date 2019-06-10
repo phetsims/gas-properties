@@ -1,8 +1,5 @@
 TODO list for gas-properties
 
-rename totalNumberOfParticlesProperty to numberOfParticlesProperty
-
-#112 break up GasPropertiesModel
 #108 openingLeft must be <= openingRight
 #79 model.md
 #80 implementation-notes.md

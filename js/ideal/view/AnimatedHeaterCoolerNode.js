@@ -51,15 +51,15 @@ define( require => {
 
     /**
      * @param {EnumerationProperty} holdConstantProperty
-     * @param {Property.<number>} totalNumberOfParticlesProperty
+     * @param {Property.<number>} numberOfParticlesProperty
      * @param {Property.<number|null>} temperatureProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, totalNumberOfParticlesProperty, temperatureProperty, options ) {
+    constructor( holdConstantProperty, numberOfParticlesProperty, temperatureProperty, options ) {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
-      assert && assert( totalNumberOfParticlesProperty instanceof Property,
-              `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( numberOfParticlesProperty instanceof Property,
+              `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
 
@@ -94,7 +94,7 @@ define( require => {
       temperatureProperty.link( ( temperature, previousTemperature ) => {
         if ( holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
 
-          const numberOfParticles = totalNumberOfParticlesProperty.value;
+          const numberOfParticles = numberOfParticlesProperty.value;
 
           if ( temperature === null || previousTemperature === null || numberOfParticles === 0 ) {
             stopAnimation();

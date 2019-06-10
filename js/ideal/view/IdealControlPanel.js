@@ -29,19 +29,19 @@ define( require => {
 
     /**
      * @param {EnumerationProperty} holdConstantProperty
-     * @param {Property.<number>>} totalNumberOfParticlesProperty
+     * @param {Property.<number>>} numberOfParticlesProperty
      * @param {NumberProperty} pressureProperty
      * @param {BooleanProperty} sizeVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {BooleanProperty} collisionCounterVisibleProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, sizeVisibleProperty,
+    constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, sizeVisibleProperty,
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
-      assert && assert( totalNumberOfParticlesProperty instanceof Property,
-        `invalid totalNumberOfParticlesProperty: ${totalNumberOfParticlesProperty}` );
+      assert && assert( numberOfParticlesProperty instanceof Property,
+        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( pressureProperty instanceof NumberProperty,
         `invalid pressureProperty: ${pressureProperty}` );
       assert && assert( sizeVisibleProperty instanceof BooleanProperty,
@@ -63,7 +63,7 @@ define( require => {
 
       // Optional HoldConstantControl and separator
       if ( options.hasHoldConstantControls ) {
-        children.push( new HoldConstantControl( holdConstantProperty, totalNumberOfParticlesProperty, pressureProperty, {
+        children.push( new HoldConstantControl( holdConstantProperty, numberOfParticlesProperty, pressureProperty, {
           maxWidth: contentWidth
         } ) );
         children.push( new HSeparator( contentWidth, {

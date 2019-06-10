@@ -43,10 +43,10 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.histogramsModel = new HistogramsModel( this, SAMPLE_PERIOD );
+      this.histogramsModel = new HistogramsModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD );
 
       // @public
-      this.averageSpeedModel = new AverageSpeedModel( this, SAMPLE_PERIOD );
+      this.averageSpeedModel = new AverageSpeedModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD );
     }
 
     /**

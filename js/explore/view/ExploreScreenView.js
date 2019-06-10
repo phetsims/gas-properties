@@ -49,8 +49,8 @@ define( require => {
 
       // Particles accordion box
       const particlesAccordionBox = new ParticlesAccordionBox(
-        model.numberOfHeavyParticlesProperty,
-        model.numberOfLightParticlesProperty,
+        model.particleSystem.numberOfHeavyParticlesProperty,
+        model.particleSystem.numberOfLightParticlesProperty,
         model.modelViewTransform, {
           fixedWidth: RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,

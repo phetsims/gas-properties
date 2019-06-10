@@ -107,7 +107,7 @@ define( require => {
       const controlPanel = new DiffusionControlPanel( model.leftSettings, model.rightSettings,
         model.modelViewTransform,
         model.container.hasDividerProperty,
-        model.totalNumberOfParticlesProperty,
+        model.numberOfParticlesProperty,
         model.stopwatch.visibleProperty,
         viewProperties, {
           fixedWidth: 300,
@@ -119,7 +119,7 @@ define( require => {
       const particlesNode = new DiffusionParticlesNode( model );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
-      model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+      model.numberOfParticlesProperty.link( numberOfParticles => {
         if ( !this.model.isPlayingProperty.value ) {
           particlesNode.update();
         }

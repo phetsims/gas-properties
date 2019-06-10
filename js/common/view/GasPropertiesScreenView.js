@@ -131,7 +131,7 @@ define( require => {
             particlesNode.opacity = 1;
 
             // redistribute the particle
-            model.redistributeParticles( model.container.widthProperty.value / startContainerWidth );
+            model.particleSystem.redistributeParticles( model.container.widthProperty.value / startContainerWidth );
           }
         };
       }
@@ -175,13 +175,13 @@ define( require => {
       };
 
       // Bicycle pump for heavy particles
-      const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfHeavyParticlesProperty,
+      const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
         _.extend( {
           bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty
         }, bicyclePumpOptions ) );
 
       // Bicycle pump for light particles
-      const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.numberOfLightParticlesProperty,
+      const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
         _.extend( {
           bodyFill: GasPropertiesColorProfile.lightParticleColorProperty
         }, bicyclePumpOptions ) );
@@ -198,22 +198,23 @@ define( require => {
       } );
 
       // Thermometer
-      const thermometerNode = new GasPropertiesThermometerNode( model.thermometer, comboBoxListParent, {
+      const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel.thermometer, comboBoxListParent, {
         right: containerNode.right,
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
       // Pressure Gauge
-      const pressureGaugeNode = new PressureGaugeNode( model.pressureGauge, comboBoxListParent, {
+      const pressureGaugeNode = new PressureGaugeNode( model.pressureModel.pressureGauge, comboBoxListParent, {
         left: containerNode.right - 2,
         centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30
       } );
 
       // The complete system of particles, inside and outside the container
-      const particlesNode = new GasPropertiesParticlesNode( model );
+      const particlesNode = new GasPropertiesParticlesNode( model.particleSystem, model.modelViewTransform,
+        model.modelBoundsProperty, model.container.maxBounds );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
-      model.totalNumberOfParticlesProperty.link( totalNumberOfParticles => {
+      model.particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
         if ( !this.model.isPlayingProperty.value ) {
           particlesNode.update();
         }
@@ -230,8 +231,10 @@ define( require => {
         } );
 
       // Button to erase all particles from container
-      const eraseParticlesButton = new EraseParticlesButton( model.totalNumberOfParticlesProperty,
-        model.numberOfHeavyParticlesProperty, model.numberOfLightParticlesProperty, {
+      const eraseParticlesButton = new EraseParticlesButton(
+        model.particleSystem.numberOfParticlesProperty,
+        model.particleSystem.numberOfHeavyParticlesProperty,
+        model.particleSystem.numberOfLightParticlesProperty, {
           right: containerNode.right,
           top: containerWidthNode.bottom + 5
         } );

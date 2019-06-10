@@ -98,15 +98,15 @@ define( require => {
     /**
      * Redistributes particles in the horizontal dimension.
      * @param {Particle[]} particles
-     * @param {number} ratio
+     * @param {number} scaleX - amount to scale the location's x component
      * @public
      */
-    redistributeParticles: function( particles, ratio ) {
+    redistributeParticles: function( particles, scaleX ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-      assert && assert( ratio > 0, `invalid ratio: ${ratio}` );
+      assert && assert( typeof scaleX === 'number' && scaleX > 0, `invalid scaleX: ${scaleX}` );
 
       for ( let i = 0; i < particles.length; i++ ) {
-        particles[ i ].location.setX( ratio * particles[ i ].location.x );
+        particles[ i ].location.setX( scaleX * particles[ i ].location.x );
       }
     },
 
