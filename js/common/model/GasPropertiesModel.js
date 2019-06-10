@@ -86,13 +86,13 @@ define( require => {
         this.particleParticleCollisionsEnabledProperty
       );
 
-      // @public (read-only) sub-model responsible for temperature
+      // @public (read-only) sub-model responsible for temperature T
       this.temperatureModel = new TemperatureModel(
         this.particleSystem.numberOfParticlesProperty, // N
         () => this.particleSystem.getAverageKineticEnergy() // KE
       );
 
-      // @public (read-only) sub-model responsible for pressure
+      // @public (read-only) sub-model responsible for pressure P
       this.pressureModel = new PressureModel(
         this.holdConstantProperty,
         this.particleSystem.numberOfParticlesProperty, // N
