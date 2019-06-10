@@ -161,6 +161,7 @@ define( require => {
         }
 
         // If the number of particles changes while the sim is paused, update immediately.
+        // Do this after checking holdConstantProperty, in case it gets switched to HoldConstant.NOTHING.
         if ( !this.isPlayingProperty.value ) {
           this.updateWhenPaused();
         }
