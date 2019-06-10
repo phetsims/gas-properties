@@ -1,10 +1,10 @@
 # Gas Properties - model description
 
-This is a high-level description of the model used in Gas Property.
+This document is a high-level description of the model used in PhET's _Gas Properties_, _Gases Intro_, and _Diffusion_
+simulations.
 
-The model is based on the application of the _Ideal Gas Law_ to the state of a particle system. The particle
-system is engaged in rigid-body collision behavior between particles and a container.
-All quantities (pressure, temperature, kinetic energy) are derived from the statue of the particle system.
+The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container using 
+the _Ideal Gas Law_.  The model may also designate one quantity to hold constant while the other quantities are varied.
 
 ## Constants, Symbols, and Units
 
@@ -46,23 +46,30 @@ The units used in this sim are:
 
 ## Equations
 
+This section enumerates the primary equations used in the sim. Use this section as a reference.
+
 * Ideal Gas Law: PV = NkT  
 * Pressure: P = NkT/V
-* Kinetic Energy: KE = (3/2)kT = (1/2) * m * |v|<sup>2</sup>
-* Temperature: T = (2/3)KE/k
-* Particle Speed: |v| = sqrt( 3kT / m )
-* Container Volume: V = width * height * depth
+* Temperature: T = (PV)/(Nk) = (2/3)KE/k
+* Volume: V = NkT/P = width * height * depth
+* Kinetic Energy: KE = (3/2)kT = (1/2)m|v|<sup>2</sup>
+* Particle Speed: |v| = sqrt( 3kT / m ) = sqrt( 2KE/m )
 
 ##  Particle System
 
-Particles have mass, radius, location, and velocity.
+The collection of all particles is referred to as the particle system. 
+Particles represent gas molecules. Particles have mass, radius, location, and velocity.
 
 The particle system has the following qualities:
-* rigid-body collision model
-* perfectly elastic (no net loss of KE)
-* particle-particle collisions use an impulse-based contact model
+* `N` is the number of particles in the container
+* rigid bodies
 * no rotational kinematics
 * no gravity
+
+There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and 
+the gauge on the
+bicycle pump. When particles escape the container through its open lid, they are immediately returned to the
+inventory. Since there is no gravity, they float upwards, and are deleted from the sim when they disappear from view.
 
 TODO: Describe how initial velocity of particles is determined. Angle is randomly chosen from a "dispersion" range.
 Speed is based on a Gaussian distribution of mean temperature. Mean temperature is 300K for an empty container, the temperature in the container for a non-empty container, or settable by the user in the _Energy_ screen.
@@ -87,16 +94,28 @@ make it too easy to blow the lid off of the container.
 
 TODO
 
-### Pressure
+* rigid-body collision model
+* perfectly elastic (no net loss of KE)
+* particle-particle collisions use an impulse-based contact model
+
+Collision detection occurs only within the container. There is no collision detection performed for particles
+that have escaped the container through the open lid.
+
+The _Diffusion_ screen adds a removable vertical divider to the container.  When the divider is in place,
+collision detection treats the container as 2 separate containers, where the divider functions as 
+a container wall.
+
+## Pressure
 
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with
-the container. Then all particles `N` contribute to the pressure via `P = NkT/V`.
+the container. Then all particles `N` contribute to the pressure `P` via `P = NkT/V`.
 
 On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure gauge is given a bit of 
-"noise" to make it look more realistic.  The noise is a function to pressure and temperaure. More noise 
-is added at lower pressures, but the noise is surpressed as temperature decreases.  
+"noise" to make it look more realistic.  The noise is a function of pressure and temperaure. More noise 
+is added at lower pressures, but the noise is surpressed as temperature decreases. Noise is disabled 
+when pressure is being held constant.
 See [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
-if you'd like more specifics. If desired, the noise can be disabled via the `pressureNoise` query paramter.
+if you'd like more specifics. If desired, noise can be disabled via query parameter `pressureNoise=false`.
 
 ## Hold Constant
 
