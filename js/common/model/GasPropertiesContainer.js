@@ -45,8 +45,10 @@ define( require => {
       // @private minimum width of the lid, overlaps the left wall, in pm.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
+      const initialLidWidth = this.widthProperty.value - this.openingRightInset + this.wallThickness;
+
       // @public width of the lid, in pm
-      this.lidWidthProperty = new NumberProperty( this.widthProperty.value - this.openingRightInset + this.wallThickness, {
+      this.lidWidthProperty = new NumberProperty( initialLidWidth, {
 
         // range changes dynamically with width of container
         isValidValue: value => ( value >= this.minLidWidth && value <= this.getMaxLidWidth() ),
@@ -62,7 +64,7 @@ define( require => {
       // @public {number} desired width of the container, in pm.
       // Set this to animate width change with a speed limit. See #90.
       this.desiredWidth = this.widthProperty.value;
-      
+
       // @private {number} previous location of the left wall
       this.previousLeft = this.left;
     }
@@ -184,7 +186,7 @@ define( require => {
       if ( this.lidIsOnProperty.value ) {
         openingLeft = this.left - this.wallThickness + this.lidWidthProperty.value;
 
-        // Round to the nearest pm to avoid floating-point error, see https://github.com/phetsims/gas-properties/issues/63.
+        // Round to nearest pm to avoid floating-point error, see https://github.com/phetsims/gas-properties/issues/63
         openingLeft = Util.roundSymmetric( openingLeft );
       }
       else {
@@ -199,7 +201,7 @@ define( require => {
         `\nthis.lidWidthProperty.value=${this.lidWidthProperty.value}` +
         `\nthis.openingLeftInset=${this.openingLeftInset}`
       );
-      
+
       return openingLeft;
     }
 

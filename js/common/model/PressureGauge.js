@@ -143,4 +143,3 @@ define( require => {
 
   return gasProperties.register( 'PressureGauge', PressureGauge );
 } );
- 

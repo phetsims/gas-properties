@@ -129,7 +129,7 @@ define( require => {
         top: background.bottom + 5
       } ) );
 
-      // y-axis label 
+      // y-axis label
       const yAxisLabelNode = new Text( yAxisString, _.extend( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
         rotation: -Math.PI / 2,
         maxWidth: 0.9 * background.height,

@@ -353,7 +353,7 @@ define( require => {
       const T = this.temperatureModel.computeTemperature(); // temperature has not been updated, so compute it
       const P = this.pressureModel.pressureProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
       assert && assert( P !== 0, 'zero pressure not supported' );
-      
+
       return ( N * k * T ) / P;
     }
 

@@ -51,10 +51,10 @@ define( require => {
 
         // If the divider is in place, treat the 2 sides of the container as 2 separate containers.
         const leftWallVelocity = Vector2.ZERO;
-        numberOfParticleContainerCollisions +=
-          CollisionDetector.doParticleContainerCollisions( this.particleArrays[ 0 ], this.container.leftBounds, leftWallVelocity );
-        numberOfParticleContainerCollisions +=
-          CollisionDetector.doParticleContainerCollisions( this.particleArrays[ 1 ], this.container.rightBounds, leftWallVelocity );
+        numberOfParticleContainerCollisions += CollisionDetector.doParticleContainerCollisions(
+          this.particleArrays[ 0 ], this.container.leftBounds, leftWallVelocity );
+        numberOfParticleContainerCollisions += CollisionDetector.doParticleContainerCollisions(
+          this.particleArrays[ 1 ], this.container.rightBounds, leftWallVelocity );
       }
       else {
 

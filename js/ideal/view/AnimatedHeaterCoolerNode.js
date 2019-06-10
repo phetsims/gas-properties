@@ -42,7 +42,7 @@ define( require => {
   const MAX_DELTA_T_N = 20000;
 
   // Mapping of deltaT * N to heat factor.
-  const TO_HEAT_FACTOR = new LinearFunction( 0, MAX_DELTA_T_N, MIN_HEAT_COOL_FACTOR, 1, true /* clamp */ );
+  const toHeatFactor = new LinearFunction( 0, MAX_DELTA_T_N, MIN_HEAT_COOL_FACTOR, 1, true /* clamp */ );
 
   // Animations will be controlled by calling step
   const STEP_EMITTER = null;
@@ -110,7 +110,7 @@ define( require => {
 
               // compute heat/cool factor, relative to temperature change and number of particles
               const deltaTN = deltaT * numberOfParticles; // deltaT * N
-              const heatCoolFactor = Util.sign( deltaT ) * TO_HEAT_FACTOR( Math.abs( deltaTN ) );
+              const heatCoolFactor = Util.sign( deltaT ) * toHeatFactor( Math.abs( deltaTN ) );
               assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
 
               // Animation that moves the flame/ice up

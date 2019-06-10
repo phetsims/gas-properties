@@ -86,7 +86,7 @@ define( require => {
      */
     update( dtPressureGauge, numberOfCollisions ) {
 
-      // When adding particles to an empty container, don't compute pressure until 1 particle has collided with the container.
+      // When adding particles to empty container, don't compute pressure until 1 particle has collided with container
       if ( !this.updatePressureEnabled && numberOfCollisions > 0 ) {
         this.updatePressureEnabled = true;
       }

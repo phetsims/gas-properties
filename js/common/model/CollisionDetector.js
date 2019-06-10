@@ -134,8 +134,8 @@ define( require => {
     updateParticleContainerCollisions() {
       let numberOfParticleContainerCollisions = 0;
       for ( let i = 0; i < this.particleArrays.length; i++ ) {
-        numberOfParticleContainerCollisions +=
-          doParticleContainerCollisions( this.particleArrays[ i ], this.container.bounds, this.container.leftWallVelocity );
+        numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ],
+          this.container.bounds, this.container.leftWallVelocity );
       }
       return numberOfParticleContainerCollisions;
     }
