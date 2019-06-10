@@ -39,23 +39,23 @@ define( require => {
       this.numberOfParticlesProperty = numberOfParticlesProperty;
       this.getAverageKineticEnergy = getAverageKineticEnergy;
 
-      // @public {Property.<number|null>} T, temperature in the container, in K. Value is null when the container is empty.
+      // @public {Property.<number|null>} T, temperature in the container, in K, null when the container is empty
       this.temperatureProperty = new Property( null, {
         isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
         units: 'K'
       } );
 
-      // @public whether initial temperature is controlled by the user or determined by what's in the container
+      // @public whether initial temperature is controlled by the user
       this.controlTemperatureEnabledProperty = new BooleanProperty( false );
 
-      // @public initial temperature of particles added to the container, in K.
+      // @public initial temperature of particles added to the container, in K
       // Ignored if !controlTemperatureEnabledProperty.value
       this.initialTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
         range: INITIAL_TEMPERATURE_RANGE,
         units: 'K'
       } );
 
-      // @public (read-only) thermometer that display temperatureProperty with a choice of units
+      // @public (read-only) thermometer that displays temperatureProperty with a choice of units
       this.thermometer = new Thermometer( this.temperatureProperty );
     }
 
