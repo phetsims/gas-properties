@@ -12,7 +12,7 @@
  * https://github.com/phetsims/gas-properties/issues/40
  *
  * While code comments attempt to describe this implementation clearly, fully understanding the implementation may
- * require some general backgriound in collisions detection and response. Some useful references include:
+ * require some general background in collisions detection and response. Some useful references include:
  * https://en.wikipedia.org/wiki/Collision_detection
  * https://en.wikipedia.org/wiki/Collision_response
  * https://en.wikipedia.org/wiki/Elastic_collision
