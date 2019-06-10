@@ -141,11 +141,6 @@ define( require => {
       // When the number of particles in the container changes ...
       this.particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
 
-        // If the number of particles changes while the sim is paused, update immediately.
-        if ( !this.isPlayingProperty.value ) {
-          this.updateWhenPaused();
-        }
-
         // If the container is empty, check for 'Hold Constant' conditions that can't be satisfied.
         if ( numberOfParticles === 0 ) {
           if ( this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
@@ -163,6 +158,11 @@ define( require => {
             this.holdConstantProperty.value = HoldConstant.NOTHING;
             this.oopsEmitters.pressureEmptyEmitter.emit();
           }
+        }
+
+        // If the number of particles changes while the sim is paused, update immediately.
+        if ( !this.isPlayingProperty.value ) {
+          this.updateWhenPaused();
         }
       } );
 
