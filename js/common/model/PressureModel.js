@@ -95,7 +95,7 @@ define( require => {
       if ( this.updatePressureEnabled ) {
 
         // Compute the actual pressure, based on the state of the particle system
-        this.pressureProperty.value = this.computeIdealPressure();
+        this.pressureProperty.value = this.computePressure();
 
         // Step the gauge regardless of whether pressure has changed, since the gauge updates on a sample period.
         this.pressureGauge.step( dtPressureGauge );
@@ -112,7 +112,7 @@ define( require => {
      * @returns {number} in kPa
      * @private
      */
-    computeIdealPressure() {
+    computePressure() {
 
       const N = this.numberOfParticlesProperty.value;
       const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
