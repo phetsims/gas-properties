@@ -1,5 +1,7 @@
 TODO list for gas-properties
 
+factor out DiffusionParticleSystem?
+#113 bad initialTemperature: 0
 #108 openingLeft must be <= openingRight
 #79 model.md
 #80 implementation-notes.md
