@@ -27,7 +27,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
-  
+
   // Options for all histogram axis labels
   const HISTOGRAM_AXIS_LABEL_OPTIONS = {
     fill: GasPropertiesColorProfile.textFillProperty,

@@ -85,7 +85,7 @@ define( require => {
         numberFill: GasPropertiesColorProfile.textFillProperty,
         backgroundFill: null,
         backgroundStroke: null,
-        maxWidth: 150                                                        
+        maxWidth: 150
       };
 
       // These Properties are in pm/ps, and we want to display in m/s.  There is no need to convert the values,

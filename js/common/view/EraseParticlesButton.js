@@ -27,9 +27,9 @@ define( require => {
       assert && assert( numberOfParticlesProperty instanceof Property,
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty,
-             `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
+        `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
       assert && assert( numberOfLightParticlesProperty instanceof NumberProperty,
-                 `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
+        `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
 
       options = _.extend( {
 
@@ -45,7 +45,7 @@ define( require => {
       };
 
       super( options );
-      
+
       // Disables the button when the container is empty.
       numberOfParticlesProperty.link( numberOfParticles => {
         this.enabled = ( numberOfParticles !== 0 );

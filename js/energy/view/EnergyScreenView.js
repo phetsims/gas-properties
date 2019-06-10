@@ -46,7 +46,7 @@ define( require => {
       // Average Speed
       const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
         model.averageSpeedModel.heavyAverageSpeedProperty,
-        model.averageSpeedModel.lightAverageSpeedProperty, 
+        model.averageSpeedModel.lightAverageSpeedProperty,
         model.modelViewTransform, {
           expandedProperty: viewProperties.averageSpeedExpandedProperty,
           fixedWidth: LEFT_PANEL_WIDTH

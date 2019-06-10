@@ -58,7 +58,7 @@ define( require => {
         this.interruptSubtreeInput(); // interrupt user interactions
         this.visible = visible;
       } );
-      
+
       // Move to the stopwatch's location
       stopwatch.locationProperty.link( location => {
         this.translation = location;

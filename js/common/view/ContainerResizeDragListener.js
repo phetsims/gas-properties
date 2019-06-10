@@ -36,7 +36,7 @@ define( require => {
 
         start: ( event, listener ) => {
           assert && assert( event instanceof Event, `invalid event: ${event}` );
-          
+
           const viewWidth = modelViewTransform.modelToViewX( container.left );
           startXOffset = viewWidth - parentNode.globalToParentPoint( event.pointer.point ).x;
         },

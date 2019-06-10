@@ -74,7 +74,7 @@ define( require => {
           this.location.x - width, this.location.y,
           this.location.x, this.location.y + this.height
         ), {
-        valueType: Bounds2
+          valueType: Bounds2
         } );
 
       // @public (read-only) maximum inside bounds, in pm.  Used for sizing CanvasNode.
@@ -133,8 +133,8 @@ define( require => {
      * @public
      */
     containsParticle( particle ) {
-      assert  && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-      
+      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+
       return particle.left >= this.bounds.minX &&
              particle.right <= this.bounds.maxX &&
              particle.bottom >= this.bounds.minY &&
@@ -147,7 +147,7 @@ define( require => {
      * @returns {boolean}
      */
     containsParticles( particleArrays ) {
-      assert  && assert( Array.isArray( particleArrays ), `invalid particlesArray: ${particleArrays}` );
+      assert && assert( Array.isArray( particleArrays ), `invalid particlesArray: ${particleArrays}` );
 
       for ( let i = 0; i < particleArrays.length; i++ ) {
         const particles = particleArrays[ i ];

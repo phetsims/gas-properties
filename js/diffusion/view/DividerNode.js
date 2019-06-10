@@ -32,27 +32,27 @@ define( require => {
       }, options );
 
       // Solid divider
-       const solidLineNode = new Line( 0, 0, 0, options.length, {
-         stroke: GasPropertiesColorProfile.dividerColorProperty,
-         lineWidth: options.solidLineWidth
-       } );
+      const solidLineNode = new Line( 0, 0, 0, options.length, {
+        stroke: GasPropertiesColorProfile.dividerColorProperty,
+        lineWidth: options.solidLineWidth
+      } );
 
-       // Vertical dashed line to indicate the center of the container when the divider is not present.
-       const dashedLineNode = new Line( 0, 0, 0, options.length, {
-         stroke: GasPropertiesColorProfile.dividerColorProperty,
-         lineWidth: options.dashedLineWidth,
-         lineDash: [ 10, 24 ],
-         opacity: 0.5,
-         center: solidLineNode.center
-       } );
+      // Vertical dashed line to indicate the center of the container when the divider is not present.
+      const dashedLineNode = new Line( 0, 0, 0, options.length, {
+        stroke: GasPropertiesColorProfile.dividerColorProperty,
+        lineWidth: options.dashedLineWidth,
+        lineDash: [ 10, 24 ],
+        opacity: 0.5,
+        center: solidLineNode.center
+      } );
 
       assert && assert( !options || !options.children, 'DividerNode sets children' );
       options = _.extend( {
         children: [ dashedLineNode, solidLineNode ]
       }, options );
-      
+
       super( options );
-      
+
       // Switch between solid and dashed divider
       hasDividerProperty.link( hasDivider => {
         solidLineNode.visible = hasDivider;

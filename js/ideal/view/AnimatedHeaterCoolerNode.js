@@ -59,7 +59,7 @@ define( require => {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
       assert && assert( numberOfParticlesProperty instanceof Property,
-              `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
+        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
 

@@ -147,7 +147,7 @@ define( require => {
    *
    *   < number >
    *  -----|------
-   * 
+   *
    * @param {Node} titleNode
    * @param {NumberDisplay} numberDisplay
    * @param {Slider} slider

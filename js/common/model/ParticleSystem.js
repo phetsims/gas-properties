@@ -38,9 +38,9 @@ define( require => {
     constructor( getInitialTemperature, collisionsEnabledProperty, particleEntryLocation ) {
       assert && assert( typeof getInitialTemperature === 'function',
         `invalid getInitialTemperature: ${getInitialTemperature}` );
-      assert && assert( collisionsEnabledProperty instanceof BooleanProperty, 
+      assert && assert( collisionsEnabledProperty instanceof BooleanProperty,
         `invalid collisionsEnabledProperty: ${collisionsEnabledProperty}` );
-      assert && assert( particleEntryLocation instanceof Vector2, 
+      assert && assert( particleEntryLocation instanceof Vector2,
         `invalid particleEntryLocation: ${particleEntryLocation}` );
 
       // @private
@@ -298,24 +298,24 @@ define( require => {
       }
     }
 
-     /**
-      * Gets the average kinetic energy of the particles in the container.
-      * @returns {number} in AMU * pm^2 / ps^2
-      * @public
-      */
-     getAverageKineticEnergy() {
-       return this.getTotalKineticEnergy() / this.numberOfParticlesProperty.value;
-     }
+    /**
+     * Gets the average kinetic energy of the particles in the container.
+     * @returns {number} in AMU * pm^2 / ps^2
+     * @public
+     */
+    getAverageKineticEnergy() {
+      return this.getTotalKineticEnergy() / this.numberOfParticlesProperty.value;
+    }
 
-     /**
-      * Gets the total kinetic energy of the particles in the container.
-      * @returns {number} in AMU * pm^2 / ps^2
-      * @private
-      */
-     getTotalKineticEnergy() {
-       return ParticleUtils.getTotalKineticEnergy( this.heavyParticles ) +
-              ParticleUtils.getTotalKineticEnergy( this.lightParticles );
-     }
+    /**
+     * Gets the total kinetic energy of the particles in the container.
+     * @returns {number} in AMU * pm^2 / ps^2
+     * @private
+     */
+    getTotalKineticEnergy() {
+      return ParticleUtils.getTotalKineticEnergy( this.heavyParticles ) +
+             ParticleUtils.getTotalKineticEnergy( this.lightParticles );
+    }
   }
 
   return gasProperties.register( 'ParticleSystem', ParticleSystem );

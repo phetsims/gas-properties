@@ -145,7 +145,7 @@ define( require => {
     sample() {
       assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
         'numberOfSamples should be 0 if called while the sim is paused' );
-      
+
       // take a Speed sample
       this.heavySpeedSamples.push( getSpeedValues( this.particleSystem.heavyParticles ) );
       this.lightSpeedSamples.push( getSpeedValues( this.particleSystem.lightParticles ) );
@@ -153,7 +153,7 @@ define( require => {
       // take a Kinetic Energy sample
       this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.heavyParticles ) );
       this.lightKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.lightParticles ) );
-      
+
       this.numberOfSamples++;
     }
 
