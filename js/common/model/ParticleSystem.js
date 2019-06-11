@@ -70,8 +70,7 @@ define( require => {
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
       } );
 
-      // Synchronize particle counts and arrays. Add these listener before defining numberOfParticlesProperty,
-      // so that particles get added to arrays before numberOfParticlesProperty changes.
+      // Synchronize particle counts and arrays.
       const createHeavyParticle = ( options ) => new HeavyParticle( options );
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
@@ -85,10 +84,20 @@ define( require => {
           'lightParticles should contain only LightParticle' );
       } );
 
-      // @public N, the total number of particles in the container
+      // @public N, the total number of particles in the container.
       this.numberOfParticlesProperty = new DerivedProperty(
         [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
-        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
+        ( numberOfHeavyParticles, numberOfLightParticles ) =>  {
+
+          // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
+          // If you hit these assertions, then you need to add this listener later.  This is a trade-off
+          // for using plain old Arrays instead of ObservableArray.
+          assert && assert( this.heavyParticles.length === numberOfHeavyParticles,
+            'heavyParticles has not been populated yet' );
+          assert && assert( this.lightParticles.length === numberOfLightParticles,
+            'lightParticles not been populated yet' );
+          return numberOfHeavyParticles + numberOfLightParticles;
+        }, {
           numberType: 'Integer',
           valueType: 'number',
           isValidValue: value => value >= 0
