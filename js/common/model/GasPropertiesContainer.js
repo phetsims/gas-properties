@@ -134,16 +134,18 @@ define( require => {
      * @private
      */
     setWidth( width ) {
-      assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
+      if ( width !== this.widthProperty.value ) {
+        assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
 
-      // Get opening width before changing widthProperty
-      const openingWidth = this.getOpeningWidth();
+        // Get opening width before changing widthProperty
+        const openingWidth = this.getOpeningWidth();
 
-      // resize the container
-      this.widthProperty.value = width;
+        // resize the container
+        this.widthProperty.value = width;
 
-      // resize the lid, maintaining the opening width if possible
-      this.lidWidthProperty.value = Math.max( this.getMaxLidWidth() - openingWidth, this.minLidWidth );
+        // resize the lid, maintaining the opening width if possible
+        this.lidWidthProperty.value = Math.max( this.getMaxLidWidth() - openingWidth, this.minLidWidth );
+      }
     }
 
     /**
@@ -197,6 +199,7 @@ define( require => {
         //TODO #108 delete below here after resolving issue
         `\nlidIsOnProperty.value=${this.lidIsOnProperty.value}` +
         `\nthis.left=${this.left}` +
+        `\nthis.widthProperty.value=${this.widthProperty.value}` +
         `\nthis.wallThickness=${this.wallThickness}` +
         `\nthis.lidWidthProperty.value=${this.lidWidthProperty.value}` +
         `\nthis.openingLeftInset=${this.openingLeftInset}`
