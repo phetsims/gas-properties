@@ -92,7 +92,7 @@ define( require => {
         // User's setting
         initialTemperature = this.initialTemperatureProperty.value;
       }
-      else if ( this.temperatureProperty.value !== null && this.temperatureProperty.value !== 0 ) {
+      else if ( this.temperatureProperty.value !== null ) {
 
         // Current temperature in the container
         initialTemperature = this.temperatureProperty.value;
@@ -103,7 +103,7 @@ define( require => {
         initialTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
       }
 
-      assert && assert( typeof initialTemperature === 'number' && initialTemperature > 0,
+      assert && assert( typeof initialTemperature === 'number' && initialTemperature >= 0,
         `bad initialTemperature: ${initialTemperature}` );
       return initialTemperature;
     }
