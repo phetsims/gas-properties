@@ -70,17 +70,8 @@ define( require => {
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
       } );
 
-      // @public N, the total number of particles in the container
-      this.numberOfParticlesProperty = new DerivedProperty(
-        [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
-        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
-          numberType: 'Integer',
-          valueType: 'number',
-          isValidValue: value => value >= 0
-        }
-      );
-
-      // Synchronize particle counts and arrays
+      // Synchronize particle counts and arrays. Add these listener before defining numberOfParticlesProperty,
+      // so that particles get added to arrays before numberOfParticlesProperty changes.
       const createHeavyParticle = ( options ) => new HeavyParticle( options );
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
@@ -93,6 +84,16 @@ define( require => {
         assert && assert( GasPropertiesUtils.isArrayOf( this.lightParticles, LightParticle ),
           'lightParticles should contain only LightParticle' );
       } );
+
+      // @public N, the total number of particles in the container
+      this.numberOfParticlesProperty = new DerivedProperty(
+        [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
+        ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
+          numberType: 'Integer',
+          valueType: 'number',
+          isValidValue: value => value >= 0
+        }
+      );
     }
 
     /**

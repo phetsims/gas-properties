@@ -61,6 +61,30 @@ define( require => {
       this.leftSettings = new DiffusionSettings();
       this.rightSettings = new DiffusionSettings();
 
+      // Add/remove DiffusionParticle1
+       const createDiffusionParticle1 = ( options ) => new DiffusionParticle1( options );
+       this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
+         this.updateNumberOfParticles( numberOfParticles,
+           this.container.leftBounds,
+           this.leftSettings,
+           this.particles1,
+           createDiffusionParticle1 );
+         assert && assert( GasPropertiesUtils.isArrayOf( this.particles1, DiffusionParticle1 ),
+           'particles1 should contain only DiffusionParticle1' );
+       } );
+
+       // Add/remove DiffusionParticle2
+       const createDiffusionParticle2 = ( options ) => new DiffusionParticle2( options );
+       this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
+         this.updateNumberOfParticles( numberOfParticles,
+           this.container.rightBounds,
+           this.rightSettings,
+           this.particles2,
+           createDiffusionParticle2 );
+         assert && assert( GasPropertiesUtils.isArrayOf( this.particles2, DiffusionParticle2 ),
+           'particles2 should contain only DiffusionParticle2' );
+       } );
+
       // @public {Property.<number>} N, the total number of particles in the container
       this.numberOfParticlesProperty = new DerivedProperty(
         [ this.leftSettings.numberOfParticlesProperty, this.rightSettings.numberOfParticlesProperty ],
@@ -85,30 +109,6 @@ define( require => {
 
       // @public (read-only)
       this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
-
-      // Add/remove DiffusionParticle1
-      const createDiffusionParticle1 = ( options ) => new DiffusionParticle1( options );
-      this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
-        this.updateNumberOfParticles( numberOfParticles,
-          this.container.leftBounds,
-          this.leftSettings,
-          this.particles1,
-          createDiffusionParticle1 );
-        assert && assert( GasPropertiesUtils.isArrayOf( this.particles1, DiffusionParticle1 ),
-          'particles1 should contain only DiffusionParticle1' );
-      } );
-
-      // Add/remove DiffusionParticle2
-      const createDiffusionParticle2 = ( options ) => new DiffusionParticle2( options );
-      this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
-        this.updateNumberOfParticles( numberOfParticles,
-          this.container.rightBounds,
-          this.rightSettings,
-          this.particles2,
-          createDiffusionParticle2 );
-        assert && assert( GasPropertiesUtils.isArrayOf( this.particles2, DiffusionParticle2 ),
-          'particles2 should contain only DiffusionParticle2' );
-      } );
 
       // Update mass and temperature of existing particles. This adjusts speed of the particles.
       Property.multilink(
