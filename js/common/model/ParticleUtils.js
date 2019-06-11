@@ -88,7 +88,8 @@ define( require => {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
       assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
 
-      for ( let i = 0; i < particles.length; i++ ) {
+      // Iterate backwards, since we're modifying the array, so we don't skip any particles.
+      for ( let i = particles.length - 1; i >= 0; i-- ) {
         if ( !particles[ i ].intersectsBounds( bounds ) ) {
           ParticleUtils.removeParticle( particles[ i ], particles );
         }
@@ -143,7 +144,8 @@ define( require => {
       assert && assert( Array.isArray( insideParticles ), `invalid insideParticles: ${insideParticles}` );
       assert && assert( Array.isArray( outsideParticles ), `invalid outsideParticles: ${outsideParticles}` );
 
-      for ( let i = 0; i < insideParticles.length; i++ ) {
+      // Iterate backwards, since we're modifying the array, so we don't skip any particles.
+      for ( let i = insideParticles.length - 1; i >= 0; i-- ) {
         const particle = insideParticles[ i ];
         assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
         if ( particle.top > container.top &&
