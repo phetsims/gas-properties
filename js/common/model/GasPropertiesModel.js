@@ -299,6 +299,8 @@ define( require => {
       if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) {
 
         // hold pressure constant by changing volume
+        const previousContainerWidth = this.container.widthProperty.value;
+
         let containerWidth = this.computeIdealVolume() / ( this.container.height * this.container.depth );
 
         // Address floating-point error, see https://github.com/phetsims/gas-properties/issues/89
@@ -326,6 +328,9 @@ define( require => {
 
         // Change the container's width immediately, with no animation.
         this.container.resizeImmediately( containerWidth );
+
+        // Redistribute particles in the new width
+        this.particleSystem.redistributeParticles( containerWidth / previousContainerWidth );
       }
       else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
 
