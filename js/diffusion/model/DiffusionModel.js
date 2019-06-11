@@ -254,7 +254,6 @@ define( require => {
       this.leftData.update( this.particles1, this.particles2 );
       this.rightData.update( this.particles1, this.particles2 );
     }
-
   }
 
   /**
