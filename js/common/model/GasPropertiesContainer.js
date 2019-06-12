@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Container for the 'Ideal', 'Explore', and 'Energy' screens.  It has a (re)movable lid.
