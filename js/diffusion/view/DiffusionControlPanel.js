@@ -65,7 +65,7 @@ define( require => {
       const dividerToggleButton = new DividerToggleButton( hasDividerProperty );
 
       const checkboxOptions = {
-        textMaxWidth: 175, // determined empirically
+        textMaxWidth: 175 // determined empirically
       };
 
       const content = new FixedWidthNode( contentWidth, new VBox( {
