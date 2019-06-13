@@ -12,24 +12,16 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
-  const Property = require( 'AXON/Property' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
+  const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
 
   class EraseParticlesButton extends EraserButton {
 
     /**
-     * @param {Property.<number>} numberOfParticlesProperty
-     * @param {NumberProperty} numberOfHeavyParticlesProperty
-     * @param {NumberProperty} numberOfLightParticlesProperty
+     * @param {ParticleSystem} particleSystem
      * @param {Object} [options]
      */
-    constructor( numberOfParticlesProperty, numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, options ) {
-      assert && assert( numberOfParticlesProperty instanceof Property,
-        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-      assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty,
-        `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
-      assert && assert( numberOfLightParticlesProperty instanceof NumberProperty,
-        `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
+    constructor( particleSystem, options ) {
+      assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
 
       options = _.extend( {
 
@@ -40,14 +32,13 @@ define( require => {
       // Deletes all particles when the button fires.
       assert && assert( !options.listener, 'EraseParticlesButton sets listener' );
       options.listener = () => {
-        numberOfHeavyParticlesProperty.value = 0;
-        numberOfLightParticlesProperty.value = 0;
+        particleSystem.removeAllParticles();
       };
 
       super( options );
 
       // Disables the button when the container is empty.
-      numberOfParticlesProperty.link( numberOfParticles => {
+      particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
         this.enabled = ( numberOfParticles !== 0 );
       } );
     }

@@ -231,13 +231,10 @@ define( require => {
         } );
 
       // Button to erase all particles from container
-      const eraseParticlesButton = new EraseParticlesButton(
-        model.particleSystem.numberOfParticlesProperty,
-        model.particleSystem.numberOfHeavyParticlesProperty,
-        model.particleSystem.numberOfLightParticlesProperty, {
-          right: containerNode.right,
-          top: containerWidthNode.bottom + 5
-        } );
+      const eraseParticlesButton = new EraseParticlesButton( model.particleSystem, {
+        right: containerNode.right,
+        top: containerWidthNode.bottom + 5
+      } );
 
       // Collision Counter
       let collisionCounterNode = null;

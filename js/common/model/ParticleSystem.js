@@ -110,14 +110,23 @@ define( require => {
      * @public
      */
     reset() {
+      this.removeAllParticles();
+    }
 
-      // Remove and dispose of particles
+    /**
+     * Removes and disposes of all particles.
+     * @public
+     */
+    removeAllParticles() {
       this.numberOfHeavyParticlesProperty.reset();
       assert && assert( this.heavyParticles.length === 0, 'there should be no heavyParticles' );
+
       this.numberOfLightParticlesProperty.reset();
       assert && assert( this.lightParticles.length === 0, 'there should be no lightParticles' );
+
       ParticleUtils.removeAllParticles( this.heavyParticlesOutside );
       assert && assert( this.heavyParticlesOutside.length === 0, 'there should be no heavyParticlesOutside' );
+
       ParticleUtils.removeAllParticles( this.lightParticlesOutside );
       assert && assert( this.lightParticlesOutside.length === 0, 'there should be no lightParticlesOutside' );
     }
