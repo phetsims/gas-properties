@@ -150,6 +150,11 @@ define( require => {
       // Move particle-flow rate indicators to the back, so they go behind time controls.
       particleFlowRateNode1.moveToBack();
 
+      // Vertical space is tight. So set a maxHeight for the control panel, since font height does vary on some
+      // platforms, and may make the control panel taller.  See https://github.com/phetsims/gas-properties/issues/130.
+      controlPanel.maxHeight = this.layoutBounds.height - this.timeControlNode.height -
+                               ( 2 * GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN ) - 25;
+
       // @private
       this.model = model;
       this.viewProperties = viewProperties;
