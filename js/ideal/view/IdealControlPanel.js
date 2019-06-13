@@ -73,7 +73,7 @@ define( require => {
       }
 
       const checkboxOptions = {
-        textMaxWidth: 110, // determined empirically
+        textMaxWidth: 110 // determined empirically
       };
 
       children.push( new WidthCheckbox( sizeVisibleProperty, checkboxOptions ) );

@@ -43,7 +43,7 @@ define( require => {
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
       const checkboxOptions = {
-        textMaxWidth: 110, // determined empirically
+        textMaxWidth: 110 // determined empirically
       };
 
       const content = new FixedWidthNode( contentWidth, new VBox( {
