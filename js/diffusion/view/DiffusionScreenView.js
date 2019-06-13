@@ -147,8 +147,8 @@ define( require => {
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
-      // Move time controls to front, so that long particle-flow rate indicators go behind time controls.
-      this.timeControlNode.moveToFront();
+      // Move particle-flow rate indicators to the back, so they go behind time controls.
+      particleFlowRateNode1.moveToBack();
 
       // @private
       this.model = model;

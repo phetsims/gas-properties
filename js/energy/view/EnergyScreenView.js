@@ -116,7 +116,9 @@ define( require => {
 
       // Rendering order
       this.addChild( leftPanels );
+      leftPanels.moveToBack();
       this.addChild( rightPanels );
+      rightPanels.moveToBack();
 
       // @private used in methods
       this.viewProperties = viewProperties;
