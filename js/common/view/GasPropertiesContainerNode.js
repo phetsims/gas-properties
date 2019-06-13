@@ -133,8 +133,10 @@ define( require => {
         resizeHandleNode.right = wallsNode.left + 1; // hide the overlap
         resizeHandleNode.centerY = wallsNode.centerY;
 
-        // reposition the lid
-        updateLidPosition();
+        // reposition the lid if it's on the container
+        if ( container.lidIsOnProperty.value ) {
+          updateLidPosition();
+        }
       } );
 
       // Update the lid width

@@ -143,8 +143,10 @@ define( require => {
         // resize the container
         this.widthProperty.value = width;
 
-        // resize the lid, maintaining the opening width if possible
-        this.lidWidthProperty.value = Math.max( this.getMaxLidWidth() - openingWidth, this.minLidWidth );
+        // resize the lid if it's on the container, maintaining the opening width if possible
+        if ( this.lidIsOnProperty.value ) {
+          this.lidWidthProperty.value = Math.max( this.getMaxLidWidth() - openingWidth, this.minLidWidth );
+        }
       }
     }
 
