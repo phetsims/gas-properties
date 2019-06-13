@@ -1,5 +1,0 @@
-TODO list for gas-properties
-
-#79 model.md
-#80 implementation-notes.md
-
