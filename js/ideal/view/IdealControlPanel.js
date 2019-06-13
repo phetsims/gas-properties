@@ -72,9 +72,13 @@ define( require => {
         } ) );
       }
 
-      children.push( new WidthCheckbox( sizeVisibleProperty ) );
-      children.push( new StopwatchCheckbox( stopwatchVisibleProperty ) );
-      children.push( new CollisionCounterCheckbox( collisionCounterVisibleProperty ) );
+      const checkboxOptions = {
+        textMaxWidth: 110, // determined empirically
+      };
+
+      children.push( new WidthCheckbox( sizeVisibleProperty, checkboxOptions ) );
+      children.push( new StopwatchCheckbox( stopwatchVisibleProperty, checkboxOptions ) );
+      children.push( new CollisionCounterCheckbox( collisionCounterVisibleProperty, checkboxOptions ) );
 
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',

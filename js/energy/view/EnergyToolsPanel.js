@@ -38,12 +38,16 @@ define( require => {
 
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
+      const checkboxOptions = {
+        textMaxWidth: 110, // determined empirically
+      };
+
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 12,
         children: [
-          new WidthCheckbox( sizeVisibleProperty ),
-          new StopwatchCheckbox( stopwatchVisibleProperty )
+          new WidthCheckbox( sizeVisibleProperty, checkboxOptions ),
+          new StopwatchCheckbox( stopwatchVisibleProperty, checkboxOptions )
         ]
       } ) );
 

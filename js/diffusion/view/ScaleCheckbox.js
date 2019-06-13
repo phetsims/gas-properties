@@ -33,7 +33,6 @@ define( require => {
 
         // superclass options
         text: scaleString,
-        textMaxWidth: 100, // determined empirically
         icon: GasPropertiesIconFactory.createScaleIcon()
       }, options );
 

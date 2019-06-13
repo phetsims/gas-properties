@@ -36,7 +36,6 @@ define( require => {
 
         // superclass options
         text: stopwatchString,
-        textMaxWidth: 100, // determined empirically
         icon: GasPropertiesIconFactory.createStopwatchIcon()
       }, options );
 

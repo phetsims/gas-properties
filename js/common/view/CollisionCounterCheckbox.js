@@ -36,7 +36,6 @@ define( require => {
 
         // superclass options
         text: collisionCounterString,
-        textMaxWidth: 125, // determined empirically
         icon: GasPropertiesIconFactory.createCollisionCounterIcon()
       }, options );
 

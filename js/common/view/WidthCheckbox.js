@@ -36,7 +36,6 @@ define( require => {
 
         // superclass options
         text: widthString,
-        textMaxWidth: 100, // determined empirically
         icon: GasPropertiesIconFactory.createContainerWidthIcon()
       }, options );
 
