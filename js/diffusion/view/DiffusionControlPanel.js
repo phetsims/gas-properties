@@ -64,6 +64,10 @@ define( require => {
 
       const dividerToggleButton = new DividerToggleButton( hasDividerProperty );
 
+      const checkboxOptions = {
+        textMaxWidth: 175, // determined empirically
+      };
+
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 18,
@@ -88,10 +92,10 @@ define( require => {
             align: 'left',
             spacing: 12,
             children: [
-              new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty ),
-              new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty ),
-              new ScaleCheckbox( viewProperties.scaleVisibleProperty ),
-              new StopwatchCheckbox( stopwatchVisibleProperty )
+              new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, checkboxOptions ),
+              new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, checkboxOptions ),
+              new ScaleCheckbox( viewProperties.scaleVisibleProperty, checkboxOptions ),
+              new StopwatchCheckbox( stopwatchVisibleProperty, checkboxOptions )
             ]
           } )
         ]
