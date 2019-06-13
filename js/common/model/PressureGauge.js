@@ -124,7 +124,7 @@ define( require => {
                   phet.joist.random.nextDouble();
 
           // randomly apply a sign if doing so doesn't make the pressure become <= 0
-          if ( noise > this.pressureProperty.value ) {
+          if ( noise < this.pressureProperty.value ) {
             noise *= ( phet.joist.random.nextBoolean() ? 1 : -1 );
           }
         }
