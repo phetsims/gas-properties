@@ -85,9 +85,10 @@ define( require => {
         this.clearSamples();
       } );
 
-      // If the number of particles changes while paused, sample the current state and update immediately.
+      // If the number of particles becomes zero, or changes while paused, update immediately.
       particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
-        if ( !isPlayingProperty.value ) {
+        if ( numberOfParticles === 0 || !isPlayingProperty.value ) {
+          this.clearSamples();
           this.step( this.samplePeriod ); // using the sample period causes an immediate update
         }
       } );
@@ -240,7 +241,7 @@ define( require => {
    * @returns {number[]}
    */
   function samplesToBinCounts( sampleArrays, numberOfBins, binWidth ) {
-    assert && assert( Array.isArray( sampleArrays ) && sampleArrays.length > 0, `invalid sampleArrays: ${sampleArrays}` );
+    assert && assert( Array.isArray( sampleArrays ), `invalid sampleArrays: ${sampleArrays}` );
     assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
     assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
 
