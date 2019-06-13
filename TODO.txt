@@ -3,5 +3,3 @@ TODO list for gas-properties
 #79 model.md
 #80 implementation-notes.md
 
-ParticleUtils.removeParticlesOutOfBounds may skip over particles
-ParticleUtils.escapeParticles may skip over particles
