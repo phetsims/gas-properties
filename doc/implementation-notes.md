@@ -28,7 +28,7 @@ Collision Detector, Particle Flow Rate, Divider, ...)  Here's the relatively sho
 
 ## General Considerations
 
-This section describes how this simulation addresses implementation considerations that are typically encountered in most PhET simulations.
+This section describes how this simulation addresses implementation considerations that are typically encountered in PhET simulations.
 
 **Coordinate Transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) for specifics.
 
