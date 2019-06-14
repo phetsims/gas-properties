@@ -60,7 +60,8 @@ This section enumerates the primary equations used in the sim. Use this section 
 
 ##  Particle System
 
-Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity.
+Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity - all
+of which may be modified.
    
 The collection of all particles is referred to as the particle system. It has the following qualities:
 * `N` is the number of particles in the container
