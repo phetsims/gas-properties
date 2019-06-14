@@ -2,7 +2,7 @@
 
 /**
  * Sub-model of GasPropertiesModel that is responsible for the P (pressure) component of the
- * Ideal Gas Law, PV = NkT.
+ * Ideal Gas Law (PV = NkT) and for the pressure gauge.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
