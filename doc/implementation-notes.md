@@ -47,37 +47,25 @@ As an experiment, this sim performs type-checking for almost all function argume
 
 ## _Ideal_, _Explore_, and _Energy_ screens
 
-The _Ideal_, _Explore_, and _Energy_ screens have much in common, as they are all based on application of 
-the Ideal Gas Law. So there is much sharing of model and view components. 
+The _Ideal_, _Explore_, and _Energy_ screens have much in common, as they are all based on application of the Ideal Gas Law. So there is much sharing of model and view components. Code shared by these screens lives in `js/common/`.
 
 ### Model
 
-Collision detection:
-* reference: https://en.wikipedia.org/wiki/Collision_detection
-* detected after collision occurs (a posteriori, discrete)
-* pruning via spatial partitioning (regions)
+[BaseModel](TODO) is the model base class for all screen (including _Diffusion_). It provides functionality that is NOT related to the Ideal Gas Law. 
 
-Collision response:
-* reference: https://en.wikipedia.org/wiki/Collision_response
-* impulse-based contact model
+[GasPropertiesModel](TODO) is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some responsibilites to the following sub-models:
 
-Most important classes are [GasPropertiesModel](TODO), [DiffusionModel](TODO) and [CollisionDetector](TODO)
+* [ParticleSystem](https://github.com/phetsims/gas-properties/blob/master/js/common/model/ParticleSystem.js) - responsible the particle system, including the number of particles `N`
+* [BaseContainer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseContainer.js) - responsible for the container, including its volume `V`
+* [PressureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureModel.js) - responsible for pressure `P`, and the "noise" in the [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
+* [TemperatureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TemperatureModel.js) - responsible for temperature `T` and the [Thermometer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Thermometer.js) 
 
-Important class hierarchies, note symmetry:
+Each screen has its own subclass of `GasPropertiesModel`. They are [IdealModel](https://github.com/phetsims/gas-properties/blob/master/js/ideal/model/IdealModel.js), [ExploreMode](https://github.com/phetsims/gas-properties/blob/master/js/explore/model/ExploreModel.js), and [EnergyModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/EnergyModel.js).  
 
-Model:
-```
-BaseModel
-  GasPropertiesModel
-    IdealModel
-    ExploreModel
-    EnergyModel
-  DiffusionModel
-  
-BaseContainer
-  GasPropertiesContainer
-  DiffusionContainer
-```
+While `IdealModel` and `ExploreMode` have no significant differences or minor variations, the _Energy_ screen has additional features that are implemented by these sub-models of `EnergyModel`:
+
+* [AverageSpeedModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/AverageSpeedModel.js) - responsible for data in the "Average Speed" accordion box
+* [HistogramsModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/HistogramsModel.js) - responsible for data on the "Speed" and "Kinetic Energy" histograms
 
 All other model components in these screens are straightforward and will not be described here.
 
