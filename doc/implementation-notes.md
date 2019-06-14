@@ -53,11 +53,23 @@ As an experiment, this sim performs type-checking for almost all function argume
 
 ## Common to all screens
 
+This section describes base classes that are common to all screens.  You'll find these classes in `js/common/`.
+
 ### Model
 
-[BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) is the model base class for all screens. It provides functionality that unrelated to the Ideal Gas Law, `PV = NkT`. 
+[BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) is the model base class for all screens. It provides functionality that is unrelated to the Ideal Gas Law, `PV = NkT`. 
+
+[BaseContainer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseContainer.js) is the base class for the container in all screens.
+
+[Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js) is the base class for particles.  While mass and radius are mutable, only the _Diffusion_ screen uses this feature.
+
+[CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js) implements collision detection and response for all screens. See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) and code comments for more details.
 
 ### View
+
+[BaseScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/BaseScreenView.js) is the base `ScreenView` for all screens. As you can see, there are relatively few components that are shared by all screens.
+
+[ParticlesNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/ParticleNode.js) renders a collection of particles using the `Canvas` API.
 
 ## _Ideal_, _Explore_, and _Energy_ screens
 
@@ -77,9 +89,7 @@ Each screen has its own subclass of `GasPropertiesModel`. They are [IdealModel](
 * [AverageSpeedModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/AverageSpeedModel.js) - responsible for data in the "Average Speed" accordion box
 * [HistogramsModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/HistogramsModel.js) - responsible for data on the "Speed" and "Kinetic Energy" histograms
 
-Collision detection and response is implemented in [CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js), used by all screens (including _Diffusion_). See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) and code comments for more details.
-
-The two species of particles are [HeavyParticle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/HeavyParticle.js) and [LightParticle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/LightParticle.js), subclasses of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js). While `Particle` supports mutable mass and radius, only the _Diffusion_ exercises this feature.
+The two species of particles are [HeavyParticle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/HeavyParticle.js) and [LightParticle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/LightParticle.js), subclasses of `Particle`, with fixed mass and radius.
 
 All other model components in these screens are straightforward and will not be described here.
 
@@ -123,7 +133,7 @@ Collision detection is handled in [DiffusionCollisionDetector](https://github.co
 [CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js) used in the other screens. When the divider is in place, `DiffusionCollisionDetector` treats the container as 2 separate containers, with the divider playing the role of a container's wall.  All other aspects of collision detection and response are 
 identical.
 
-The two species of particles are (for lack of better names) [DiffusionParticle1](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle1.js) and [DiffusionParticle2](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle2.js), subclasses of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js).  While `Particle` supports mutable mass and radius,  _Diffusion_ is the only screen that exercises this feature.
+The two species of particles are (for lack of better names) [DiffusionParticle1](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle1.js) and [DiffusionParticle2](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle2.js), subclasses of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js), with mutable mass and radius.
 
 All other model components in this screen are straightforward and will not be described here.
 
@@ -132,10 +142,11 @@ All other model components in this screen are straightforward and will not be de
 The main view class is [DiffusionScreenView](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionScreenView.js). Like the other screens, it is a subclass of [BaseScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/BaseScreenView.js), which
 provides view functionality that is common to all screens.
 
+View-specific axon Properties are found in [DiffusionViewProperties](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionViewProperties.js).
+
 The container view is [DiffusionContainerNode](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionContainerNode.js). It is unique to this screen, and shares nothing with the previous screens. 
 
-The particle system view is [DiffusionParticleSystemNode](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionParticleSystemNode.js), a subclass of the same [ParticlesNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/ParticlesNode.js) used 
-by the other screens, and based `Canvas`.  Since all particles are confined to the container, a since `Canvas` is used.
+The particle system view is [DiffusionParticleSystemNode](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionParticleSystemNode.js), a subclass `ParticlesNode`, and based `Canvas`.  Since all particles are confined to the container, a since `Canvas` is used.
 
 All other view components in this screen are straightforward and will not be described here.
 
