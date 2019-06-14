@@ -13,6 +13,14 @@ In addition to this document, you are incouraged to be read:
 
 ## Terminology
 
+This section defines terminology that you'll see used throughout the internal and external documentation. Skim this section once, and refer back to it as you explore the implementation.
+
+* container - the box that contains the particles
+* resize handle - handle on the left wall of the container, used to change the container's volume
+* lid - the cover on the top of the container, used to open/close an opening in the top of the container
+* particle - a gas molecule
+* particle system - the complete collection of particles, inside and outside the container
+
 ## Common Patterns
 
 **Model-view transforms**:
