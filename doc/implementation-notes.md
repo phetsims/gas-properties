@@ -6,15 +6,28 @@ to provide a high-level overview, and to supplement the internal documentation
 (source code comments) and external documentation (design documents).  
 
 In addition to this document, you are incouraged to be read: 
-* [PhET Development Overview](http://bit.ly/phet-html5-development-overview).  
+* [PhET Development Overview](http://bit.ly/phet-html5-development-overview)  
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
 * [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the design document
 [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md), a high-level description of the simulation model
 
-Terminology TODO
+## Terminology
 
-Memory management: With the exception of Particle instances, all object instances persist for the 
+## Common Patterns
+
+**Model-view transforms**:
+
+**Time transforms**: 
+
+**Memory management**: With the exception of `Particle` instances, all object instances (model and view) persist for the 
 lifetime of the sim.  There is no need to `unlink`, `removeListener`, `dispose`, etc. 
+
+**Query parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and
+testing. Sim-specific query parameters are documented in
+[GasPropertiesQueryParameters](https://github.com/phetsims/gas-properties/blob/master/js/common/GasPropertiesQueryParameters.js).
+
+**Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. I experimented with type-checking all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do 
+so with assertions enabled via the `ea` query parameter.
 
 Collision detection:
 * reference: https://en.wikipedia.org/wiki/Collision_detection
@@ -71,6 +84,4 @@ GasPropertiesViewProperties
 DiffusionViewProperties
 ```
 
-I experimented with type-checking all function arguments via `assert`.  Feels like
-overkill, but it did catch quite a few things during refactoring, so probably was 
-a net gain.
+
