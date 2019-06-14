@@ -51,7 +51,7 @@ The _Ideal_, _Explore_, and _Energy_ screens have much in common, as they are al
 
 ### Model
 
-[BaseModel](TODO) is the model base class for all screen (including _Diffusion_). It provides functionality that is NOT related to the Ideal Gas Law. 
+[BaseModel](TODO) is the model base class for all screen (including _Diffusion_). It provides functionality that is NOT related to the Ideal Gas Law, `PV = NkT`. 
 
 [GasPropertiesModel](TODO) is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some responsibilites to the following sub-models:
 
