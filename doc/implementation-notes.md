@@ -95,4 +95,11 @@ GasPropertiesViewProperties
 DiffusionViewProperties
 ```
 
+## Related Simulations
 
+**Gases Intro**: This sim consists of 2 screen, both of which are based on the _Ideal_ screen.  The _Intro_ screen
+is the _Ideal_ screen with the "Hold Constant" radio buttons removed.  The _Laws_ screen is the _Ideal_ screen with
+no modifications.  While _Gas Properties_ has noise turned on for the pressure gauge, the _Gases Intro_ sim has it
+turned off by default.  See `Options > Pressure Node` or the `pressureNoise` query parameter.
+
+**Diffusion**: This is sim consists of the _Diffusion_ screen with no modifications.
