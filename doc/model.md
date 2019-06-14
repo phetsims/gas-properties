@@ -148,8 +148,6 @@ if you'd like more specifics. If desired, noise can be disabled via query parame
 In the _Ideal_ screen, the user may specify which quantity in `PV = NkT` is to be held 
 constant.  The table below summarizes the behavior.  
 
-The _Ideal_ screen has a default setting of "Nothing". The _Explore_ screen has a fixed setting of "Nothing". The _Energy_ screen has a fixed setting of "Volume".  (This feature is irrelevant in the _Diffusion_ screen.) 
-
 | Hold Constant | change N | change T  | change V |
 | --- | --- | --- | --- |
 | Nothing | P changes | P changes | P changes |
@@ -157,6 +155,8 @@ The _Ideal_ screen has a default setting of "Nothing". The _Explore_ screen has 
 | Temperature (T) | P changes | - | P changes |
 | Pressure ↕V | V changes | V changes | - |
 | Pressure ↕T | T changes | - | T changes |
+
+The _Ideal_ screen has a default setting of "Nothing". The _Explore_ screen has a fixed setting of "Nothing". The _Energy_ screen has a fixed setting of "Volume".  (This feature is irrelevant in the _Diffusion_ screen.) 
 
 If a change would result in a situation that is nonsensical (e.g. holding temperature contant with no particles)
 or violates the constraints of the simulation (e.g. requires a larger container volume than supported),
