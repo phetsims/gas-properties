@@ -39,7 +39,8 @@ lifetime of the sim.  There is no need to call `unlink`, `removeListener`, `disp
 testing. Sim-specific query parameters are documented in
 [GasPropertiesQueryParameters](https://github.com/phetsims/gas-properties/blob/master/js/common/GasPropertiesQueryParameters.js).
 
-**Color Profiles**: This sim has 2 color profiles: "default" and "projector", defined in [GasPropertiesColorProfile](https://github.com/phetsims/gas-properties/blob/master/js/common/GasPropertiesColorProfile.js). The "projector" profile is used when the sim is switched into projector mode via `PhET menu > Options > Projector Mode`.  
+**Color Profiles**: This sim has 2 color profiles: "default" and "projector", defined in [GasPropertiesColorProfile](https://github.com/phetsims/gas-properties/blob/master/js/common/GasPropertiesColorProfile.js). The "projector" profile is used when the sim is switched into projector mode via `PhET menu > Options > Projector Mode`.  The majority of colors in this sim are therefore axon `Properties` that are part of `GasPropertiesColorProfile`.  You can experiment with 
+different colors in your working copy using [gas-properties-colors.html](https://github.com/phetsims/gas-properties/blob/master/gas-properties-colors.html). 
 
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
 As an experiment, this sim performs type-checking almost all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
