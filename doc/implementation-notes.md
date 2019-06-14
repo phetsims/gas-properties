@@ -104,7 +104,8 @@ base-level code, it has less in common with the other screens, and has some comp
 ### Model
 
 The main model class is [DiffusionModel](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionModel.js). Like the model in the other screens, it is a subclass of [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js), which provides
-model functionality that is _not_ related to the Ideal Gas Law. `DiffusionModel` has the following submodels:
+model functionality that is _not_ related to the Ideal Gas Law. `DiffusionModel` delegates some responsibilities
+to these sub-models:
 
 * [DiffusionData](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionData.js) - responsible for the information shown in the "Data" accordion box
 * [ParticleFlowRateModel](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/ParticleFlowRate.js) - responsible for computing particle flow rates
