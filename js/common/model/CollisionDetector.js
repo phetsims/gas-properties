@@ -196,7 +196,9 @@ define( require => {
   }
 
   /**
-   * Detects and handles particle-particle collisions.
+   * Detects and handles particle-particle collisions. Particle-particle collision are based solely whether they
+   * intersect at their current locations. Is is possible (and acceptable) for two particles to pass through the
+   * same point on the way to those location and not collide. 
    * @param {Particle[]} particles
    * @param {*} mutableVectors - collection of mutable vectors, see this.mutableVectors in CollisionDetector constructor
    */
@@ -314,7 +316,8 @@ define( require => {
   }
 
   /**
-   * Detects and handles particle-container collisions.
+   * Detects and handles particle-container collisions. These collisions occur if a particle contacted a wall on
+   * its way to its current location.
    * @param {Particle[]} particles
    * @param {Bounds2} containerBounds
    * @param {Vector2} leftWallVelocity - velocity of the container's left (movable) wall
