@@ -146,8 +146,9 @@ if you'd like more specifics. If desired, noise can be disabled via query parame
 ## Hold Constant
 
 In the _Ideal_ screen, the user may specify which quantity in `PV = NkT` is to be held 
-constant.  The table below summarizes the behavior.  The _Explore_ screen has a fixed setting of "Nothing", while
-the _Energy_ screen has a fixed setting of "Volume".  (This feature is irrelevant in the _Diffusion_ screen.) 
+constant.  The table below summarizes the behavior.  
+
+The _Ideal_ screen has a default setting of "Nothing". The _Explore_ screen has a fixed setting of "Nothing". The _Energy_ screen has a fixed setting of "Volume".  (This feature is irrelevant in the _Diffusion_ screen.) 
 
 | Hold Constant | change N | change T  | change V |
 | --- | --- | --- | --- |
