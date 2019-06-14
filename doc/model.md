@@ -64,8 +64,8 @@ This section enumerates the primary equations used in the sim. Use this section 
 ##  Particle System
 
 Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity. Radius
-and mass may be modifed in the _Diffusion_ screen.  Location and velocity are modified indirectly, as a result of 
-heating/cooling, changing volume, collisions, etc.
+and mass may be modifed in the _Diffusion_ screen, and are fixed in the other screens.  Location and velocity 
+are modified indirectly, as a result of heating/cooling, changing volume, collisions, etc.
    
 The collection of all particles is referred to as the particle system. It has the following qualities:
 * `N` is the number of particles in the container
