@@ -3,7 +3,8 @@
 This document is a high-level description of the model used in PhET's _Gas Properties_, _Gases Intro_, and _Diffusion_
 simulations.
 
-The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container using 
+The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, 
+temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container using 
 the _Ideal Gas Law_.  The model may also designate one quantity to hold constant while the other quantities are varied.
 
 ## Constants, Symbols, and Units
@@ -12,7 +13,9 @@ First, a description of the constants, symbols, and units used in this sim. Use 
 
 #### Constants
 
-* k = Boltzmann constant, 8.316E3 (pm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K), [click here](https://github.com/phetsims/gas-properties/blob/master/doc/images/boltzmann-conversion.png) for conversion computation
+* k = Boltzmann constant, 8.316E3 (pm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K), 
+[click here](https://github.com/phetsims/gas-properties/blob/master/doc/images/boltzmann-conversion.png) 
+for conversion computation
 
 #### Symbols
 
