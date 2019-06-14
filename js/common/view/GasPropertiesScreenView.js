@@ -38,7 +38,7 @@ define( require => {
   const GasPropertiesContainerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesContainerNode' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
-  const GasPropertiesParticlesNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesParticlesNode' );
+  const GasPropertiesParticleSystemNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesParticleSystemNode' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -116,7 +116,7 @@ define( require => {
             }
 
             // gray out the particles
-            particlesNode.opacity = 0.6;
+            particleSystemNode.opacity = 0.6;
 
             // remember width of container
             startContainerWidth = model.container.widthProperty.value;
@@ -128,7 +128,7 @@ define( require => {
             model.isPlayingProperty.value = wasPlaying;
 
             // make particles opaque
-            particlesNode.opacity = 1;
+            particleSystemNode.opacity = 1;
 
             // redistribute the particle
             model.particleSystem.redistributeParticles( model.container.widthProperty.value / startContainerWidth );
@@ -210,13 +210,13 @@ define( require => {
       } );
 
       // The complete system of particles, inside and outside the container
-      const particlesNode = new GasPropertiesParticlesNode( model.particleSystem, model.modelViewTransform,
+      const particleSystemNode = new GasPropertiesParticleSystemNode( model.particleSystem, model.modelViewTransform,
         model.modelBoundsProperty, model.container.maxBounds );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
       model.particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
         if ( !this.model.isPlayingProperty.value ) {
-          particlesNode.update();
+          particleSystemNode.update();
         }
       } );
 
@@ -270,7 +270,7 @@ define( require => {
       this.addChild( eraseParticlesButton );
       this.addChild( thermometerNode );
       this.addChild( containerWidthNode );
-      this.addChild( particlesNode );
+      this.addChild( particleSystemNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
       collisionCounterNode && this.addChild( collisionCounterNode );
@@ -287,7 +287,7 @@ define( require => {
 
       // @private used in methods
       this.containerNode = containerNode;
-      this.particlesNode = particlesNode;
+      this.particleSystemNode = particleSystemNode;
       this.regionsNode = regionsNode;
       this.heavyBicyclePumpNode = heavyBicyclePumpNode;
       this.lightBicyclePumpNode = lightBicyclePumpNode;
@@ -317,7 +317,7 @@ define( require => {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       super.stepView( dt );
       this.containerNode.step( dt );
-      this.particlesNode.update();
+      this.particleSystemNode.update();
       this.regionsNode && this.regionsNode.update();
     }
   }

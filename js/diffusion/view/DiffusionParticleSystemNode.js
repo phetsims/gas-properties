@@ -20,7 +20,7 @@ define( require => {
   // constants
   const DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )';
 
-  class DiffusionParticlesNode extends ParticlesNode {
+  class DiffusionParticleSystemNode extends ParticlesNode {
 
     /**
      * @param {DiffusionModel} model - passing in the entire model since we use so much of its public API
@@ -55,5 +55,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'DiffusionParticlesNode', DiffusionParticlesNode );
+  return gasProperties.register( 'DiffusionParticleSystemNode', DiffusionParticleSystemNode );
 } );

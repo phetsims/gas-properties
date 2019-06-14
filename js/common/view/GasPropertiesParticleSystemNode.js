@@ -28,7 +28,7 @@ define( require => {
   const INSIDE_DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )'; // canvas fill for particles INSIDE container
   const OUTSIDE_DEBUG_FILL = 'rgba( 0, 255, 0, 0.1 )'; // canvas fill for particles OUTSIDE container
 
-  class GasPropertiesParticlesNode extends Node {
+  class GasPropertiesParticleSystemNode extends Node {
 
     /**
      * @param {ParticleSystem} particleSystem
@@ -102,5 +102,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesParticlesNode', GasPropertiesParticlesNode );
+  return gasProperties.register( 'GasPropertiesParticleSystemNode', GasPropertiesParticleSystemNode );
 } );

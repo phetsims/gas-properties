@@ -15,7 +15,7 @@ define( require => {
   const DiffusionContainerNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionContainerNode' );
   const DiffusionControlPanel = require( 'GAS_PROPERTIES/diffusion/view/DiffusionControlPanel' );
   const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
-  const DiffusionParticlesNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionParticlesNode' );
+  const DiffusionParticleSystemNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionParticleSystemNode' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -116,12 +116,12 @@ define( require => {
         } );
 
       // The complete system of particles
-      const particlesNode = new DiffusionParticlesNode( model );
+      const particleSystemNode = new DiffusionParticleSystemNode( model );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
       model.numberOfParticlesProperty.link( numberOfParticles => {
         if ( !this.model.isPlayingProperty.value ) {
-          particlesNode.update();
+          particleSystemNode.update();
         }
       } );
 
@@ -134,7 +134,7 @@ define( require => {
       this.addChild( controlPanel );
       this.addChild( scaleNode );
       this.addChild( containerNode );
-      this.addChild( particlesNode );
+      this.addChild( particleSystemNode );
       this.addChild( centerOfMassNode1 );
       this.addChild( centerOfMassNode2 );
       this.addChild( particleFlowRateNode1 );
@@ -159,7 +159,7 @@ define( require => {
       this.model = model;
       this.viewProperties = viewProperties;
       this.regionsNode = regionsNode;
-      this.particlesNode = particlesNode;
+      this.particleSystemNode = particleSystemNode;
     }
 
     /**
@@ -181,7 +181,7 @@ define( require => {
     stepView( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       super.stepView( dt );
-      this.particlesNode.update();
+      this.particleSystemNode.update();
       this.regionsNode && this.regionsNode.update();
     }
   }

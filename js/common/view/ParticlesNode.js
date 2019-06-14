@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Base class for rendering a particle system, used in all screens.
+ * Base class for rendering a collection of particles using Canvas. Used in all screens.
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
