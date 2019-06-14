@@ -103,14 +103,22 @@ which would make it too easy to blow the lid off of the container.
 
 ## Collision Detection and Response
 
-TODO
-
-* rigid-body collision model
-* perfectly elastic (no net loss of KE)
-* particle-particle collisions use an impulse-based contact model
+This sim uses a rigid-body, perfectly-elastic (no net loss of kinetic energy) collision model.
+Collision detection identifies when two objects in motion intersect. When a collison has been 
+detected between two objects, collision response determines what affect that collision has on their motion.   
 
 Collision detection occurs only within the container. There is no collision detection performed for particles
 that have escaped the container through the open lid.
+
+Collision detection is optimized using a technique called [spatial partitioning](https://en.wikipedia.org/wiki/Space_partitioning). The collision detection
+space is partitioned into a 2D grid of cells that we refer to as regions. Rather than having to consider 
+collisions between every object in the system, only objects within the same region need to be considered.
+This greatly reduces the number of tests required.
+
+Two types of collisions are supported: particle-particle, and particle-container. Particle-particle collisions
+occur between 2 particles, and use an [impulse-based contact model](https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model). They may be disabled in 
+the _Energy_ screen.  Particle-container collisions occur between a particle and a wall of the container, 
+and are counted for display by the Collision Counter.
 
 The _Diffusion_ screen adds a removable vertical divider to the container.  When the divider is in place,
 collision detection treats the container as 2 separate containers, where the divider functions as 
@@ -119,7 +127,7 @@ a container wall.
 ## Pressure
 
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with
-the container. Then all particles `N` contribute to the pressure `P` via `P = NkT/V`.
+the container. Then all `N` particles contribute to the pressure `P` via `P = NkT/V`.
 
 On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure gauge is given a bit of 
 "noise" to make it look more realistic.  The noise is a function of pressure and temperaure. More noise 
