@@ -5,7 +5,7 @@ simulations.
 
 The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, 
 temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container, using 
-the _Ideal Gas Law_.  The model also supports hold one quantity constant while the other quantities are varied.
+the _Ideal Gas Law_.  The model also supports holding one quantity constant while the other quantities are varied.
 
 ## Constants, Symbols, and Units
 
