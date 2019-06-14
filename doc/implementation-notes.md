@@ -15,6 +15,9 @@ In addition to this document, you are incouraged to be read:
 
 This section defines terminology that you'll see used throughout the internal and external documentation. Skim this section once, and refer back to it as you explore the implementation.
 
+Much of the terminology for this sim is identified by labels that are visible in the user interface (Stopwatch, 
+Collision Detector, Particle Flow Rate,...)  Here's the relatively short list of other terminology:
+
 * container - the box that contains the particles
 * resize handle - handle on the left wall of the container, used to change the container's volume
 * lid - the cover on the top of the container, used to open/close an opening in the top of the container
