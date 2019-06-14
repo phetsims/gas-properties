@@ -51,7 +51,7 @@ As an experiment, this sim performs type-checking for almost all function argume
 
 ### Model
 
-[BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) is the model base class for all screens. It provides functionality that is NOT related to the Ideal Gas Law, `PV = NkT`. 
+[BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) is the model base class for all screens. It provides functionality that is unrelated to the Ideal Gas Law, `PV = NkT`. 
 
 ### View
 
