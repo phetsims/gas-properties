@@ -143,10 +143,16 @@ if you'd like more specifics. If desired, noise can be disabled via query parame
 
 ## Hold Constant
 
-TODO: Describe the "Hold Constant" modes for _Ideal_ screen, which determines which quantity is held constant.
+In the _Ideal_ screen, the user may specify which quantity in the Ideal Gas Law `PV = NkT` is to be held 
+constant.  The table below summarizes the behavior.  The _Explore_ screen uses "Nothing", while
+the _Energy_ screen uses "Volume".  (This feature is irrelevant in the _Diffusion_ screen.) 
 
-
-
-
+| Hold Constant | change N | change T  | change V |
+| --- | --- | --- | --- |
+| Nothing | P changes | P changes | P changes |
+| Volume (V) | P changes | P changes | - |
+| Temperature (T) | P changes | - | P changes |
+| Pressure ↕V | V changes | V changes | - |
+| Pressure ↕T | T changes | - | T changes |
 
 
