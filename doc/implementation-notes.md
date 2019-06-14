@@ -16,13 +16,13 @@ In addition to this document, you are incouraged to be read:
 This section defines terminology that you'll see used throughout the internal and external documentation. Skim this section once, and refer back to it as you explore the implementation.
 
 Much of the terminology for this sim is identified by labels that are visible in the user interface (Stopwatch, 
-Collision Detector, Particle Flow Rate,...)  Here's the relatively short list of other terms:
+Collision Detector, Particle Flow Rate, Divider, ...)  Here's the relatively short list of other terms:
 
-* container - the box that contains the particles
-* resize handle - handle on the left wall of the container, used to change the container's volume
-* lid - the cover on the top of the container, used to open/close an opening in the top of the container
-* particle - a gas molecule
-* particle system - the complete collection of particles, inside and outside the container
+* _container_ - the box that contains the particles
+* _resize handle_ - handle on the left wall of the container, used to change the container's volume
+* _lid_ - the cover on the top of the container, used to open/close an opening in the top of the container
+* _particle_ - a gas molecule
+* _particle system_ - the complete collection of particles, inside and outside the container
 
 ## Common Patterns
 
