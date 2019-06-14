@@ -95,21 +95,13 @@ All other model components in these screens are straightforward and will not be 
 
 ### View
   
-View:
-```
-BaseScreenView
-  GasPropertiesScreenView( GasPropertiesModel )
-    IdealScreenView( IdealModel ), IdealViewProperties
-    ExploreScreenView( ExploreModel ), ExploreViewProperties
-    EnergyScreenView( EnergyModel ), EnergyViewProperties
-  DiffusionScreenView( DiffusionModel ), DiffusionViewProperties
-  
-GasPropertiesViewProperties
-  IdealViewProperties
-  ExploreViewProperties
-  EnergyViewProperties
-DiffusionViewProperties
-```
+[GasPropertiesScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesScreenView.js) is the base `ScreenView` for these screens, a subclass of `BaseScreenView`.  Each screen has its own subclass of `GasPropertiesScreenView`.
+
+[GasPropertiesContainerNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesContainerNode.js) is the container view for these screens.
+
+[GasPropertiesParticleSystemNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesParticleSystemNode.js) renders the particles system for these screens. To miminize `Canvas` size, it uses two `ParticleNode` instances, one for particles inside the container, one for particles outside the container.  If you're interested in visualizing the `Canvas` bounds, see the `canvasBounds` query parameter.
+
+[GasPropertiesViewProperties](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesViewProperties.js) is the base class for view-specific axon Properties. Each screen has its own subclass of `GasPropertiesViewProperties`.
 
 All other view components in these screens are straightforward and will not be described here.
 
