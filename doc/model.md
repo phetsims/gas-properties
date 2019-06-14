@@ -7,6 +7,9 @@ The model consists of a particle system and a container, engaged in rigid-body c
 temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container, using 
 the _Ideal Gas Law_.  The model also supports holding one quantity constant while the other quantities are varied.
 
+This description pertains mostly to the _Ideal_, _Explore_, and _Energy_ screens. The _Diffusion_ screen has a simpler
+model that does not involve the Ideal Gas Law.
+
 ## Constants, Symbols, and Units
 
 First, a description of the constants, symbols, and units used in this sim. Use this section as a reference.
