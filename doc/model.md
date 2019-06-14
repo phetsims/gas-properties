@@ -53,42 +53,47 @@ This section enumerates the primary equations used in the sim. Use this section 
 * Temperature: T = (PV)/(Nk) = (2/3)KE/k
 * Volume: V = NkT/P = width * height * depth
 * Kinetic Energy: KE = (3/2)kT = (1/2)m|v|<sup>2</sup>
-* Particle Speed: |v| = sqrt( 3kT / m ) = sqrt( 2KE/m )
+* Particle Speed: |v| = sqrt( 3kT/m ) = sqrt( 2KE/m )
 
 ##  Particle System
 
-The collection of all particles is referred to as the particle system. 
-Particles represent gas molecules. Particles have mass, radius, location, and velocity.
-
-The particle system has the following qualities:
+Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity.
+   
+The collection of all particles is referred to as the particle system. It has the following qualities:
 * `N` is the number of particles in the container
-* rigid bodies
-* no rotational kinematics
-* no gravity
+* no rotational kinematics (particles do not rotate)
+* no gravity (so no acceleration)
 
 There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and 
 the gauge on the
 bicycle pump. When particles escape the container through its open lid, they are immediately returned to the
 inventory. Since there is no gravity, they float upwards, and are deleted from the sim when they disappear from view.
 
-TODO: Describe how initial velocity of particles is determined. Angle is randomly chosen from a "dispersion" range.
-Speed is based on a Gaussian distribution of mean temperature. Mean temperature is 300K for an empty container, the temperature in the container for a non-empty container, or settable by the user in the _Energy_ screen.
+The initial angle of particles is randomly chosen from from the dispersion angle
+range of the bicycle pump.  
+
+The initial speed of particles is based on a desired amount of kinetic energy that would result in a desired
+temperature.  By default, the current temperature of the container is used.  If the container is empty (and thus has 
+no temperarture) then 300K is used. On the Energy screen, the user may optionally set this temperature.   
+When multiple particles are added to the container simultaneously, this temperature is treated as a mean temperature, 
+and individual particle speeds are based on a Gaussian distribution of the mean temperature.  Temperature is used
+to compute kinetic energy via `KE = (3/2)Tk`, and speed is then computed via `|v| = Math.sqrt( 2KE/m )`.
 
 ## Container
 
-The left wall of the container is movable in the _Ideal_ and _Explore_ screens. Use it to resize the container,
+The left wall of the container is movable in the _Ideal_ and _Explore_ screens. Moving the wall resizes the container,
 which changes volume `V`.
 
 In the _Ideal_ screen, the movable wall does no work. While the container is being resized, the sim is paused. 
 After completing the resize, particles are redistributed in the new volume.
 
 In the _Explore_ screen, the movable wall does work on particles. It changes the kinetic energy of particles
-by changing their speed. After a collision with the left wall occurs, the new X component of a particle's 
+by changing their speed. After a collision with the left wall occurs, the new x-component of a particle's 
 velocity is `-( particleVelocity.x - leftWallVelocity.x )`.
 
 When resizing the container in the _Explore_ screen, there is a speed limit on the wall when making
-the container smaller.  This speed limit prevents pressure from changing too dramatically, which would 
-make it too easy to blow the lid off of the container.
+the container smaller.  This speed limit (800 pm/ps) prevents pressure from changing too dramatically, 
+which would make it too easy to blow the lid off of the container.
 
 ## Collision Detection and Response
 
