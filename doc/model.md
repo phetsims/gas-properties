@@ -104,8 +104,8 @@ which would make it too easy to blow the lid off of the container.
 ## Collision Detection and Response
 
 This sim uses a rigid-body, perfectly-elastic (no net loss of kinetic energy) collision model.
-Collision detection identifies when two objects in motion intersect. When a collison has been 
-detected between two objects, collision response determines what affect that collision has on their motion.   
+_Collision detection_ identifies when two objects in motion intersect. When a collison has been 
+detected between two objects, _collision response_ determines what affect that collision has on their motion.   
 
 Collision detection occurs only within the container. There is no collision detection performed for particles
 that have escaped the container through the open lid.
@@ -115,10 +115,15 @@ space is partitioned into a 2D grid of cells that we refer to as regions. Rather
 collisions between every object in the system, only objects within the same region need to be considered.
 This greatly reduces the number of tests required.
 
-Two types of collisions are supported: particle-particle, and particle-container. Particle-particle collisions
-occur between 2 particles, and use an [impulse-based contact model](https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model). They may be disabled in 
-the _Energy_ screen.  Particle-container collisions occur between a particle and a wall of the container, 
-and are counted for display by the Collision Counter.
+Two types of collisions are supported: particle-particle, and particle-container. 
+* Particle-particle collisions
+occur between 2 particles, and use an [impulse-based contact model](https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model). Particle-particle
+collision are based solely whether they intersect at their current locations. Is is possible (and acceptable)
+for two particles to pass through the same point on the way to those location and not collide. 
+Particle-particle may be disabled in the _Energy_ screen.  
+* Particle-container collisions occur between a particle and a wall of the container, 
+and are counted for display by the Collision Counter.  These collisions occur if a particle contacted a wall
+on its way to its current location.
 
 The _Diffusion_ screen adds a removable vertical divider to the container.  When the divider is in place,
 collision detection treats the container as 2 separate containers, where the divider functions as 
