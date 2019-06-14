@@ -47,13 +47,19 @@ different colors in your working copy using [gas-properties-colors.html](https:/
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
 As an experiment, this sim performs type-checking for almost all function arguments via `assert`.  While this may look like overkill, it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
+## Common
+
+### Model
+
+[BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) is the model base class for all screens. It provides functionality that is NOT related to the Ideal Gas Law, `PV = NkT`. 
+
+### View
+
 ## _Ideal_, _Explore_, and _Energy_ screens
 
 The _Ideal_, _Explore_, and _Energy_ screens have much in common, as they are all based on application of the Ideal Gas Law. So there is much sharing of model and view components. Code shared by these screens lives in `js/common/`.
 
 ### Model
-
-[BaseModel](TODO) is the model base class for all screen (including _Diffusion_). It provides functionality that is NOT related to the Ideal Gas Law, `PV = NkT`. 
 
 [GasPropertiesModel](TODO) is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some responsibilites to the following sub-models:
 
