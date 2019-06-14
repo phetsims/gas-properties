@@ -42,7 +42,10 @@ testing. Sim-specific query parameters are documented in
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
 As an experiment, this sim performs type-checking almost all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
-## Ideal_, _Explore_, and _Energy_ screens
+## _Ideal_, _Explore_, and _Energy_ screens
+
+The _Ideal_, _Explore_, and _Energy_ screens have much in common, as they are all based on application of 
+the Ideal Gas Law. So there is much sharing of model and view components. 
 
 ### Model
 
@@ -94,6 +97,9 @@ DiffusionViewProperties
 ```
 
 ## _Diffusion_ screen
+ 
+Unblike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some 
+base-level code, it has less in common with the other screens, and has some components that are unique to it. 
 
 ### Model
 
