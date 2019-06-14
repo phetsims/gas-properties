@@ -47,7 +47,7 @@ different colors in your working copy using [gas-properties-colors.html](https:/
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
 As an experiment, this sim performs type-checking for almost all function arguments via `assert`.  While this may look like overkill, it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
-## Common
+## Common to all screens
 
 ### Model
 
