@@ -1,7 +1,9 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Renders the particle system for the 'Diffusion' screens.
+ * Renders the particle system for the 'Diffusion' screens.  Since all particles are confined to the container,
+ * we only need one Canvas, and therefore use ParticlesNode via inheritance.
+ * 
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
