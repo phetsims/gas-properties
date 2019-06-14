@@ -26,18 +26,20 @@ Collision Detector, Particle Flow Rate, Divider, ...)  Here's the relatively sho
 
 ## Common Patterns
 
-**Coordinate transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) for specifics.
+**Coordinate Transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) for specifics.
 
-**Time transforms**: Real time (seconds) is scaled to sim time (picoseconds) by [TimeTransform](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TimeTransform.js). Transforms are provided for "normal" and "slow" sim times.  The `dt` for all top-level ScreenView and Model classes is in seconds, because that's 
+**Time Transforms**: Real time (seconds) is scaled to sim time (picoseconds) by [TimeTransform](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TimeTransform.js). Transforms are provided for "normal" and "slow" sim times.  The `dt` for all top-level ScreenView and Model classes is in seconds, because that's 
 what is provided by `Sim.js` when it steps the simulation. The `dt` values for all other methods are in picoseconds.
 (The units for `dt` are clearly documented throughout the code.)
 
-**Memory management**: With the exception of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js) instances, all object instances (model and view) persist for the 
+**Memory Management**: With the exception of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js) instances, all object instances (model and view) persist for the 
 lifetime of the sim.  There is no need to call `unlink`, `removeListener`, `dispose`, etc. 
 
-**Query parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and
+**Query Parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and
 testing. Sim-specific query parameters are documented in
 [GasPropertiesQueryParameters](https://github.com/phetsims/gas-properties/blob/master/js/common/GasPropertiesQueryParameters.js).
+
+**Color Profiles**: This sim has 2 color profiles: "default" and "projector", defined in [GasPropertiesColorProfile](https://github.com/phetsims/gas-properties/blob/master/js/common/GasPropertiesColorProfile.js). The "projector" profile is used when the sim is switched into projector mode via `PhET menu > Options > Projector Mode`.  
 
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
 As an experiment, this sim performs type-checking almost all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
@@ -119,6 +121,9 @@ identical.
 The two species of particles are (for lack of better names) [DiffusionParticle1](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle1.js) and [DiffusionParticle2](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle2.js).  While all `Particles` support mutable mass and radius,  _Diffusion_ is the only screen that exercises this feature.
 
 ### View
+
+The main view class is [DiffusionScreenView](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionScreenView.js). Like the other screens, it is a subclass of [BaseScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/BaseScreenView.js), which
+provides view functionality that is common to all screens.
 
 ## Related Simulations
 
