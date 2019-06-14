@@ -28,6 +28,8 @@ Collision Detector, Particle Flow Rate, Divider, ...)  Here's the relatively sho
 
 ## General Considerations
 
+This section describes how this simulation addresses implementation considerations that are typically encountered in most PhET simulations.
+
 **Coordinate Transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) for specifics.
 
 **Time Transforms**: Real time (seconds) is scaled to sim time (picoseconds) by [TimeTransform](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TimeTransform.js). Transforms are provided for "normal" and "slow" sim times.  The `dt` for all top-level ScreenView and Model classes is in seconds, because that's 
