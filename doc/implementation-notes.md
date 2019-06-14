@@ -79,7 +79,7 @@ The _Ideal_, _Explore_, and _Energy_ screens are all based on application of the
 
 [GasPropertiesModel](TODO) is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some responsibilites to the following sub-models:
 
-* [ParticleSystem](https://github.com/phetsims/gas-properties/blob/master/js/common/model/ParticleSystem.js) - responsible the particle system, including the number of particles `N`
+* [ParticleSystem](https://github.com/phetsims/gas-properties/blob/master/js/common/model/ParticleSystem.js) - responsible for the particle system, including the number of particles `N`
 * [BaseContainer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseContainer.js) - responsible for the container, including its volume `V`
 * [PressureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureModel.js) - responsible for pressure `P`, and the "noise" in the [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
 * [TemperatureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TemperatureModel.js) - responsible for temperature `T` and the [Thermometer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Thermometer.js) 
