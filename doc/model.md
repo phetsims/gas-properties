@@ -72,20 +72,19 @@ The collection of all particles is referred to as the particle system. It has th
 * no rotational kinematics (particles do not rotate)
 * no gravity (so no acceleration)
 
-All quantities (pressure, temperature, volume, speed, kinetic energy) are derived from the state of the particle 
-system and the container.
+All quantities (P, T, V, v, KE) are derived from the state of the particle system and the container.
 
 There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and 
 the gauge on the bicycle pump. When particles escape the container through its open lid, they are immediately 
-returned to the inventory. Since there is no gravity, they float upwards, and are deleted from the sim when 
-they disappear from view.
+returned to the inventory. Since there is no gravity, particles that escape the container float upwards, and 
+are deleted from the sim when they disappear from view.
 
-The initial angle of particles is randomly chosen from from the dispersion
+When a particle is added to the container:
+* Initial angle is randomly chosen from the dispersion
 range of the bicycle pump, which is `MATH.PI/2`.  
-
-The initial speed of particles is based on a desired amount of kinetic energy that would result in a desired
-temperature.  By default, the current temperature of the container is used.  If the container is empty (and thus has 
-no temperarture) then 300K is used. On the Energy screen, the user may optionally set this temperature.   
+* Initial speed of particles is based on a desired amount of kinetic energy that would result in a desired
+temperature. By default, the current temperature of the container is used.  If the container is empty (and thus has 
+no temperarture) then 300K is used. On the _Energy_ screen, the user may optionally set this temperature.   
 When multiple particles are added to the container simultaneously, this temperature is treated as a mean temperature, 
 and individual particle speeds are based on a Gaussian distribution of the mean temperature.  Temperature is used
 to compute kinetic energy via `KE = (3/2)Tk`, and speed is then computed via `|v| = Math.sqrt( 2KE/m )`.
