@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Base class for models in all screens. Primarily responsibilities are:
+ * Base class for models in all screens. It provides functionality that is NOT related to the Ideal Gas Law.
+ * Primarily responsibilities are:
  *
  * - model-view transform
  * - model bounds
