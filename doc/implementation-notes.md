@@ -69,7 +69,7 @@ This section describes base classes that are common to all screens.  You'll find
 
 [BaseScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/BaseScreenView.js) is the base `ScreenView` for all screens. As you can see, there are relatively few components that are shared by all screens.
 
-[ParticlesNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/ParticleNode.js) renders a collection of particles using the `Canvas` API.
+[ParticlesNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/ParticlesNode.js) renders a collection of particles using the `Canvas` API.
 
 ## _Ideal_, _Explore_, and _Energy_ screens
 
