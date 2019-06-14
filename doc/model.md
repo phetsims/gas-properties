@@ -145,7 +145,10 @@ if you'd like more specifics. If desired, noise can be disabled via query parame
 
 In the _Ideal_ screen, the user may specify which quantity in the Ideal Gas Law `PV = NkT` is to be held 
 constant.  The table below summarizes the behavior.  The _Explore_ screen uses "Nothing", while
-the _Energy_ screen uses "Volume".  (This feature is irrelevant in the _Diffusion_ screen.) 
+the _Energy_ screen uses "Volume".  (This feature is irrelevant in the _Diffusion_ screen.)  If a change 
+would result in a situation that is nonsensical (e.g. holding temperature contant with no particles)
+or violates the constraints of the simulation (e.g. requires a larger container volume than supported),
+the sim automatically switches to "Nothing" and notifies the user via a dialog.
 
 | Hold Constant | change N | change T  | change V |
 | --- | --- | --- | --- |
