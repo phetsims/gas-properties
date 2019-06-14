@@ -72,7 +72,7 @@ The collection of all particles is referred to as the particle system. It has th
 * no rotational kinematics (particles do not rotate)
 * no gravity (so no acceleration)
 
-All quantities (P, T, V, v, KE) are derived from the state of the particle system and the container.
+All quantities (`P`, `T`, `V`, `v`, `KE`) are derived from the state of the particle system and the container.
 
 There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and 
 the gauge on the bicycle pump. When particles escape the container through its open lid, they are immediately 
