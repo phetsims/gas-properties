@@ -23,19 +23,19 @@ This section defines terminology that you'll see used throughout the internal an
 
 ## Common Patterns
 
-**Model-view transforms**:
+**Coordinate transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) for specifics.
 
-**Time transforms**: 
+**Time transforms**: Real time (seconds) is scaled to sim time (picoseconds) by [TimeTransform](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TimeTransform.js). Transforms are provided for "normal" and "slow" sim times.    
 
-**Memory management**: With the exception of `Particle` instances, all object instances (model and view) persist for the 
-lifetime of the sim.  There is no need to `unlink`, `removeListener`, `dispose`, etc. 
+**Memory management**: With the exception of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js) instances, all object instances (model and view) persist for the 
+lifetime of the sim.  There is no need to call `unlink`, `removeListener`, `dispose`, etc. 
 
 **Query parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and
 testing. Sim-specific query parameters are documented in
 [GasPropertiesQueryParameters](https://github.com/phetsims/gas-properties/blob/master/js/common/GasPropertiesQueryParameters.js).
 
-**Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. I experimented with type-checking all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do 
-so with assertions enabled via the `ea` query parameter.
+**Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
+As an experiment, this sim performs type-checking almost all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
 Collision detection:
 * reference: https://en.wikipedia.org/wiki/Collision_detection
