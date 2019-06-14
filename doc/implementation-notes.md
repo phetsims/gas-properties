@@ -28,7 +28,9 @@ Collision Detector, Particle Flow Rate,...)  Here's the relatively short list of
 
 **Coordinate transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) for specifics.
 
-**Time transforms**: Real time (seconds) is scaled to sim time (picoseconds) by [TimeTransform](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TimeTransform.js). Transforms are provided for "normal" and "slow" sim times.    
+**Time transforms**: Real time (seconds) is scaled to sim time (picoseconds) by [TimeTransform](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TimeTransform.js). Transforms are provided for "normal" and "slow" sim times.  The `dt` for all top-level ScreenView and Model classes is in seconds, because that's 
+what is provided by `Sim.js` when it steps the simulation. The `dt` values for all other methods are in picoseconds.
+(The units for `dt` are clearly documented throughout the code.)
 
 **Memory management**: With the exception of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js) instances, all object instances (model and view) persist for the 
 lifetime of the sim.  There is no need to call `unlink`, `removeListener`, `dispose`, etc. 
@@ -40,6 +42,8 @@ testing. Sim-specific query parameters are documented in
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
 As an experiment, this sim performs type-checking almost all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
+## Model (_Ideal_, _Explore_, and _Energy_ screens)
+
 Collision detection:
 * reference: https://en.wikipedia.org/wiki/Collision_detection
 * detected after collision occurs (a posteriori, discrete)
@@ -49,17 +53,7 @@ Collision response:
 * reference: https://en.wikipedia.org/wiki/Collision_response
 * impulse-based contact model
 
-The `dt` for all top-level ScreenView and Model classes is in seconds, because that's what is 
-provided by `Sim` when it steps the simulation. All other `dt` values are in picoseconds.
 
-To avoid working with very small numbers and encountering potential 
-float-point errors, we are not using SI units in the model.  For example,
-KE (Kinetic Energy) is typically in J, which is _kg * m<sup>2</sup> / s<sup>2</sup>_.
-We're using _AMU * pm<sup>2</sup> / ps<sup>2</sup>_.  
-See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) 
-for the full list of units used in the model.
-
-Diffusion screen vs the other 3 screens
 
 Most important classes are [GasPropertiesModel](TODO), [DiffusionModel](TODO) and [CollisionDetector](TODO)
 
@@ -78,6 +72,8 @@ BaseContainer
   GasPropertiesContainer
   DiffusionContainer
 ```
+
+## View (_Ideal_, _Explore_, and _Energy_ screens)
   
 View:
 ```
@@ -94,6 +90,8 @@ GasPropertiesViewProperties
   EnergyViewProperties
 DiffusionViewProperties
 ```
+
+## _Diffusion_ screen
 
 ## Related Simulations
 
