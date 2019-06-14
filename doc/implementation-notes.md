@@ -5,14 +5,11 @@ This is not an exhaustive description of the implementation.  The intention is
 to provide a high-level overview, and to supplement the internal documentation 
 (source code comments) and external documentation (design documents).  
 
-The audience for this document is software developers who are familiar with JavaScript 
-and PhET simulation development, as described in 
-[PhET Development Overview](http://bit.ly/phet-html5-development-overview).  The reader should also be familiar with [design patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md) used in PhET simulations.
-
-Before reading this document, see [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md), 
-which provides a high-level description of the simulation model.
-
-The design document for this sim is [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit).
+The audience for this document, you are incouraged to be read: 
+* [PhET Development Overview](http://bit.ly/phet-html5-development-overview).  
+* [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
+* [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the design document
+[model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md), a high-level description of the simulation model
 
 Terminology TODO
 
