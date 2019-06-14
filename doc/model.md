@@ -10,27 +10,9 @@ the _Ideal Gas Law_.  The model also supports holding one quantity constant whil
 This description pertains mostly to the _Ideal_, _Explore_, and _Energy_ screens. The _Diffusion_ screen has a simpler
 model that does not involve the Ideal Gas Law.
 
-## Constants, Symbols, and Units
+## Units, Constants, and Symbols
 
-First, a description of the constants, symbols, and units used in this sim. Use this section as a reference.
-
-#### Constants
-
-* k = Boltzmann constant, 8.316E3 (pm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K), 
-[click here](https://github.com/phetsims/gas-properties/blob/master/doc/images/boltzmann-conversion.png) 
-for conversion computation
-
-#### Symbols
-
-* KE = Kinetic Energy
-* m = mass
-* N = number of gas molecules (aka particles)
-* P = pressure
-* t = time
-* T = temperature
-* v = velocity
-* |v| = velocity magnitude (aka speed)
-* V = volume of the container
+First, a description of the units, constants, and symbols used in this sim. Use this section as a reference.
 
 #### Units
 
@@ -49,6 +31,24 @@ The units used in this sim are:
 * time: ps
 * velocity: pm / ps
 * volume: pm<sup>3</sup>
+
+#### Constants
+
+* k = Boltzmann constant, 8.316E3 (pm<sup>2</sup> * AMU)/(ps<sup>2</sup> * K), 
+[click here](https://github.com/phetsims/gas-properties/blob/master/doc/images/boltzmann-conversion.png) 
+for conversion computation
+
+#### Symbols
+
+* KE = Kinetic Energy
+* m = mass
+* N = number of gas molecules (aka particles)
+* P = pressure
+* t = time
+* T = temperature
+* v = velocity
+* |v| = velocity magnitude (aka speed)
+* V = volume of the container
 
 ## Equations
 
