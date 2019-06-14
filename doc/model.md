@@ -4,7 +4,7 @@ This document is a high-level description of the model used in PhET's _Gas Prope
 simulations.
 
 The model consists of a particle system and a container, engaged in rigid-body collisions.  All quantities (pressure, 
-temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container using 
+temperature, volume, speed, kinetic energy) are derived from the state of the particle system and the container, using 
 the _Ideal Gas Law_.  The model may also designate one quantity to hold constant while the other quantities are varied.
 
 ## Constants, Symbols, and Units
