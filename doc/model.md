@@ -82,12 +82,9 @@ are deleted from the sim when they disappear from view.
 When a particle is added to the container:
 * Initial angle is randomly chosen from the dispersion
 range of the bicycle pump, which is `MATH.PI/2`.  
-* Initial speed is based on a desired amount of kinetic energy that would result in a desired
+* Initial speed is based on a desired amount of kinetic energy that will result in a desired
 temperature. By default, the current temperature of the container is used.  If the container is empty (and thus has 
-no temperarture) then `300K` is used. On the _Energy_ screen, the user may optionally set this temperature.   
-When multiple particles are added to the container simultaneously, this temperature is treated as a mean temperature, 
-and individual particle speeds are based on a Gaussian distribution of the mean temperature.  Temperature is used
-to compute kinetic energy via `KE = (3/2)Tk`, and speed is then computed via `|v| = Math.sqrt( 2KE/m )`.
+no temperarture) then `300K` is used. On the _Energy_ screen, the user may optionally set this temperature. When multiple particles are added to the container simultaneously, this temperature is treated as a mean temperature, and individual particle speeds are based on a Gaussian distribution of the mean temperature.  Temperature is used to compute kinetic energy via `KE = (3/2)Tk`, and speed is then computed via `|v| = Math.sqrt( 2KE/m )`.
 
 ## Container
 
