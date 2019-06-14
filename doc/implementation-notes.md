@@ -57,7 +57,7 @@ This section describes base classes that are common to all screens.  You'll find
 
 ### Model
 
-[BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) is the model base class for all screens. It provides functionality that is unrelated to the Ideal Gas Law, `PV = NkT`. 
+[BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) is the model base class for all screens. It provides functionality that is unrelated to `PV = NkT`, the Ideal Gas Law. 
 
 [BaseContainer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseContainer.js) is the base class for the container in all screens.
 
