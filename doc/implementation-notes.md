@@ -26,7 +26,7 @@ Collision Detector, Particle Flow Rate, Divider, ...)  Here's the relatively sho
 * _particle_ - a gas molecule
 * _particle system_ - the complete collection of particles, inside and outside the container
 
-## Common Patterns
+## Design Patterns
 
 **Coordinate Transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js) for specifics.
 
