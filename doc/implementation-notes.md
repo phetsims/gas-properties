@@ -62,12 +62,14 @@ The _Ideal_, _Explore_, and _Energy_ screens have much in common, as they are al
 * [PressureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureModel.js) - responsible for pressure `P`, and the "noise" in the [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
 * [TemperatureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TemperatureModel.js) - responsible for temperature `T` and the [Thermometer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Thermometer.js) 
 
-Each screen has its own subclass of `GasPropertiesModel`. They are [IdealModel](https://github.com/phetsims/gas-properties/blob/master/js/ideal/model/IdealModel.js), [ExploreMode](https://github.com/phetsims/gas-properties/blob/master/js/explore/model/ExploreModel.js), and [EnergyModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/EnergyModel.js).  
-
-While `IdealModel` and `ExploreMode` have no significant differences or minor variations, the _Energy_ screen has additional features that are implemented by these sub-models of `EnergyModel`:
+Each screen has its own subclass of `GasPropertiesModel`. They are [IdealModel](https://github.com/phetsims/gas-properties/blob/master/js/ideal/model/IdealModel.js), [ExploreMode](https://github.com/phetsims/gas-properties/blob/master/js/explore/model/ExploreModel.js), and [EnergyModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/EnergyModel.js). While `IdealModel` and `ExploreModel` have no significant differences or minor variations, the _Energy_ screen has additional features that are implemented by these sub-models of `EnergyModel`:
 
 * [AverageSpeedModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/AverageSpeedModel.js) - responsible for data in the "Average Speed" accordion box
 * [HistogramsModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/HistogramsModel.js) - responsible for data on the "Speed" and "Kinetic Energy" histograms
+
+Collision detection and response is implemented in [CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js), used by all screens (including _Diffusion_). See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) and code comments for more details.
+
+The two species of particles are [HeavyParticle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/HeavyParticle.js) and [LightParticle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/LightParticle.js), subclasses of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js). While `Particle` supports mutable mass and radius, only the _Diffusion_ exercises this feature.
 
 All other model components in these screens are straightforward and will not be described here.
 
@@ -111,7 +113,7 @@ Collision detection is handled in [DiffusionCollisionDetector](https://github.co
 [CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js) used in the other screens. When the divider is in place, `DiffusionCollisionDetector` treats the container as 2 separate containers, with the divider playing the role of a container's wall.  All other aspects of collision detection and response are 
 identical.
 
-The two species of particles are (for lack of better names) [DiffusionParticle1](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle1.js) and [DiffusionParticle2](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle2.js).  While all `Particles` support mutable mass and radius,  _Diffusion_ is the only screen that exercises this feature.
+The two species of particles are (for lack of better names) [DiffusionParticle1](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle1.js) and [DiffusionParticle2](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle2.js), subclasses of [Particle](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Particle.js).  While `Particle` supports mutable mass and radius,  _Diffusion_ is the only screen that exercises this feature.
 
 All other model components in this screen are straightforward and will not be described here.
 
