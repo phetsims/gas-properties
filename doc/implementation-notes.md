@@ -105,11 +105,10 @@ base-level code, it has less in common with the other screens, and has some comp
 
 The main model class is [DiffusionModel](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionModel.js). Like the model in the other screens, it is a subclass of [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js).
 
-The _Diffusion_ screen introduces a removable vertical divider to the container. Collision detection is handled
-in [DiffusionCollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionCollisionDetector.js), a subclass of the same 
-[CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js) used in the other screens. 
-When the divider is in place, `DiffusionCollisionDetector` treats the container as 2 separate containers, with
-the divider playing the role of a container's wall.  All other aspects of collision detection and response are 
+The container, [DiffusionContainer](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionContainer.js), has no lid, but adds a removable vertical divider. 
+
+Collision detection is handled in [DiffusionCollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionCollisionDetector.js), a subclass of the same 
+[CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js) used in the other screens. When the divider is in place, `DiffusionCollisionDetector` treats the container as 2 separate containers, with the divider playing the role of a container's wall.  All other aspects of collision detection and response are 
 identical.
 
 ### View
