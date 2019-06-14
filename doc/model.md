@@ -112,7 +112,8 @@ _Collision detection_ identifies when two objects in motion intersect. When a co
 detected between two objects, _collision response_ determines what affect that collision has on their motion.   
 
 Collision detection occurs only within the container. There is no collision detection performed for particles
-that have escaped the container through the open lid.
+that have escaped the container through the open lid. Collision detection is a posteriori (detected after a
+collision occurs).
 
 Collision detection is optimized using a technique called [spatial partitioning](https://en.wikipedia.org/wiki/Space_partitioning). The collision detection
 space is partitioned into a 2D grid of cells that we refer to as regions. Rather than having to consider 
