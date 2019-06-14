@@ -98,10 +98,19 @@ DiffusionViewProperties
 
 ## _Diffusion_ screen
  
-Unblike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some 
+Unlike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some 
 base-level code, it has less in common with the other screens, and has some components that are unique to it. 
 
 ### Model
+
+The main model class is [DiffusionModel](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionModel.js). Like the model in the other screens, it is a subclass of [BaseModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseModel.js).
+
+The _Diffusion_ screen introduces a removable vertical divider to the container. Collision detection is handled
+in [DiffusionCollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionCollisionDetector.js), a subclass of the same 
+[CollisionDetector](https://github.com/phetsims/gas-properties/blob/master/js/common/model/CollisionDetector.js) used in the other screens. 
+When the divider is in place, `DiffusionCollisionDetector` treats the container as 2 separate containers, with
+the divider playing the role of a container's wall.  All other aspects of collision detection and response are 
+identical.
 
 ### View
 
