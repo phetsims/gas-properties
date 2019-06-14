@@ -18,7 +18,9 @@ In addition to this document, you are encouraged to be read:
 This section defines terminology that you'll see used throughout the internal and external documentation. Skim this section once, and refer back to it as you explore the implementation.
 
 Much of the terminology for this sim is identified by labels that are visible in the user interface (Stopwatch, 
-Collision Detector, Particle Flow Rate, Divider, ...)  Here's the relatively short list of other terms:
+Collision Detector, Particle Flow Rate, Divider, ...) and those terms are not included here.
+
+Here's the (relatively short) list of terms that might be unclear:
 
 * _container_ - the box that contains the particles
 * _resize handle_ - handle on the left wall of the container, used to change the container's volume
