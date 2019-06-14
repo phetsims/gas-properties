@@ -108,7 +108,7 @@ All other view components in these screens are straightforward and will not be d
 ## _Diffusion_ screen
  
 Unlike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some 
-base-level code, it has less in common with the other screens, and has some components that are unique to it. 
+base classes, it has less in common with the other screens, and it has some components that are unique to it. 
 
 ### Model
 
