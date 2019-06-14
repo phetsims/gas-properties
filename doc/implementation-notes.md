@@ -9,7 +9,7 @@ In addition to this document, you are incouraged to be read:
 * [PhET Development Overview](http://bit.ly/phet-html5-development-overview)  
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
 * [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the design document
-[model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md), a high-level description of the simulation model
+* [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md), a high-level description of the simulation model
 
 ## Terminology
 
@@ -61,8 +61,6 @@ Collision response:
 * reference: https://en.wikipedia.org/wiki/Collision_response
 * impulse-based contact model
 
-
-
 Most important classes are [GasPropertiesModel](TODO), [DiffusionModel](TODO) and [CollisionDetector](TODO)
 
 Important class hierarchies, note symmetry:
@@ -81,6 +79,8 @@ BaseContainer
   DiffusionContainer
 ```
 
+All other model components in these screens are straightforward and will not be described here.
+
 ### View
   
 View:
@@ -98,6 +98,8 @@ GasPropertiesViewProperties
   EnergyViewProperties
 DiffusionViewProperties
 ```
+
+All other view components in these screens are straightforward and will not be described here.
 
 ## _Diffusion_ screen
  
@@ -121,6 +123,8 @@ identical.
 
 The two species of particles are (for lack of better names) [DiffusionParticle1](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle1.js) and [DiffusionParticle2](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/model/DiffusionParticle2.js).  While all `Particles` support mutable mass and radius,  _Diffusion_ is the only screen that exercises this feature.
 
+All other model components in this screen are straightforward and will not be described here.
+
 ### View
 
 The main view class is [DiffusionScreenView](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionScreenView.js). Like the other screens, it is a subclass of [BaseScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/BaseScreenView.js), which
@@ -128,10 +132,10 @@ provides view functionality that is common to all screens.
 
 The container view is [DiffusionContainerNode](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionContainerNode.js). It is unique to this screen, and shares nothing with the previous screens. 
 
-The particle system view is [DiffusionParticlesNode](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionParticlesNode.js), a subclass of the same [ParticlesNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/ParticlesNode.js) used 
-by the other screens, and based `Canvas`.  Since all particles are confined to the container, a since `Canvas` is used. 
+The particle system view is [DiffusionParticleSystemNode](https://github.com/phetsims/gas-properties/blob/master/js/diffusion/view/DiffusionParticleSystemNode.js), a subclass of the same [ParticlesNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/ParticlesNode.js) used 
+by the other screens, and based `Canvas`.  Since all particles are confined to the container, a since `Canvas` is used.
 
-All other view components in the screen are straightforward and will not be described here.
+All other view components in this screen are straightforward and will not be described here.
 
 ## Related Simulations
 
