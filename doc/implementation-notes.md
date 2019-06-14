@@ -42,7 +42,9 @@ testing. Sim-specific query parameters are documented in
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. 
 As an experiment, this sim performs type-checking almost all function arguments via `assert`.  In retrospect, this feels like overkill, but it did catch quite a few problems during refactoring, and was a net gain.  If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
-## Model (_Ideal_, _Explore_, and _Energy_ screens)
+## Ideal_, _Explore_, and _Energy_ screens
+
+### Model
 
 Collision detection:
 * reference: https://en.wikipedia.org/wiki/Collision_detection
@@ -73,7 +75,7 @@ BaseContainer
   DiffusionContainer
 ```
 
-## View (_Ideal_, _Explore_, and _Energy_ screens)
+### View
   
 View:
 ```
@@ -92,6 +94,10 @@ DiffusionViewProperties
 ```
 
 ## _Diffusion_ screen
+
+### Model
+
+### View
 
 ## Related Simulations
 
