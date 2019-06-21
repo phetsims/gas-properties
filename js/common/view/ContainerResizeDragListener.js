@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO parts of this will be rewritten to address https://github.com/phetsims/gas-properties/issues/125
 /**
  * Drag listener for resizing the container by changing its width.
  *

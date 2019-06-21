@@ -1,5 +1,6 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
+//TODO parts of this will be rewritten to address https://github.com/phetsims/gas-properties/issues/125
 /**
  * View of the container in the 'Ideal', 'Explorer', and 'Energy' screens.
  * This container has mutable width, and a lid that can be moved/removed.
