@@ -197,14 +197,7 @@ define( require => {
         openingLeft = this.left + this.openingLeftInset;
       }
       assert && assert( openingLeft <= this.getOpeningRight(),
-        `openingLeft ${openingLeft} must be <= openingRight ${this.getOpeningRight()}` +
-        //TODO #108 delete below here after resolving issue
-        `\nlidIsOnProperty.value=${this.lidIsOnProperty.value}` +
-        `\nthis.left=${this.left}` +
-        `\nthis.widthProperty.value=${this.widthProperty.value}` +
-        `\nthis.wallThickness=${this.wallThickness}` +
-        `\nthis.lidWidthProperty.value=${this.lidWidthProperty.value}` +
-        `\nthis.openingLeftInset=${this.openingLeftInset}`
+        `openingLeft ${openingLeft} must be <= openingRight ${this.getOpeningRight()}`
       );
 
       return openingLeft;
