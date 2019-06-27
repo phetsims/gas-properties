@@ -84,7 +84,7 @@ define( require => {
               // Remove/Reset Divider button
               new DividerToggleButton( hasDividerProperty ),
 
-              // separator
+              // separator, which effectively determines min content width
               new HSeparator( contentWidth, {
                 stroke: GasPropertiesColorProfile.separatorColorProperty,
                 maxWidth: contentWidth
