@@ -15,6 +15,7 @@ define( require => {
   const DiffusionSettingsNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionSettingsNode' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
+  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -53,7 +54,6 @@ define( require => {
       assert && assert( viewProperties instanceof DiffusionViewProperties,
         `invalid viewProperties: ${viewProperties}` );
 
-
       options = _.extend( {
         fixedWidth: 100,
         xMargin: 0
@@ -67,29 +67,23 @@ define( require => {
         textMaxWidth: 175 // determined empirically
       };
 
-      const content = new VBox( {
+      const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',
         spacing: 18,
-        maxWidth: contentWidth,
         children: [
 
           // spinners
           new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty ),
 
-          new VBox( {
-            align: 'center',
-            spacing: 15,
-            children: [
+          // Remove/Reset Divider button, centered
+          new FixedWidthNode( contentWidth, dividerToggleButton, {
+            align: 'center'
+          } ),
 
-              // Remove/Reset Divider button
-              dividerToggleButton,
-
-              // separator, which effectively determines min content width
-              new HSeparator( contentWidth, {
-                stroke: GasPropertiesColorProfile.separatorColorProperty,
-                maxWidth: contentWidth
-              } )
-            ]
+          // ------------
+          new HSeparator( contentWidth, {
+            stroke: GasPropertiesColorProfile.separatorColorProperty,
+            maxWidth: contentWidth
           } ),
 
           // checkboxes
@@ -104,7 +98,7 @@ define( require => {
             ]
           } )
         ]
-      } );
+      } ) );
 
       super( content, options );
 
