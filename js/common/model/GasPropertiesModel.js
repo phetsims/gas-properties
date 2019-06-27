@@ -375,6 +375,7 @@ define( require => {
         // Put the lid on the container
         this.container.lidIsOnProperty.value = true;
 
+        // Notify listeners that maximum temperature was exceeded.
         phet.log && phet.log( `Oops! Maximum temperature reached: ${this.temperatureModel.temperatureProperty.value}` );
         this.oopsEmitters.maximumTemperatureEmitter.emit();
       }
