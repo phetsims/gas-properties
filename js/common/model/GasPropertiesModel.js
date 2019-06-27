@@ -284,7 +284,7 @@ define( require => {
       this.pressureModel.update( dtPressureGauge, numberOfCollisions );
 
       // Do this last.
-      this.verifyState();
+      this.verifyModel();
     }
 
     /**
@@ -357,7 +357,7 @@ define( require => {
      * Verify that the model is in a good state after having been updated. If it's not, adjust accordingly.
      * @private
      */
-    verifyState() {
+    verifyModel() {
 
       // If the maximum temperature was exceeded, reset the state of the container.
       // See https://github.com/phetsims/gas-properties/issues/128
