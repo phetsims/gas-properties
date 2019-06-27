@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Utility methods related to Particles and collections of Particles.
+ * Utility methods related to collections of Particles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
