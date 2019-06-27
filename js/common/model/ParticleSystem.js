@@ -238,16 +238,7 @@ define( require => {
 
       // Create a set of temperature values that will be used to compute initial speed.
       let temperatures = null;
-      if ( n !== 1 && this.collisionsEnabledProperty.value ) {
-
-        // For groups of particles with particle-particle collisions enabled, create some deviation in the
-        // temperature used to compute speed, but maintain the desired mean.  This makes the motion of a group
-        // of particles look less wave-like. We do this for temperature instead of speed because temperature
-        // in the container is T = (2/3)KE/k, and KE is a function of speed^2, so deviation in speed would
-        // change the desired temperature.
-        temperatures = GasPropertiesUtils.getGaussianValues( n, initialTemperature, 0.2 * initialTemperature, 1E-3 );
-      }
-      else {
+      if ( n === 1 || !this.collisionsEnabledProperty.value ) {
 
         // For single particles, or if particle-particle collisions are disabled, use the same temperature
         // for all particles. For groups of particles, this yields wave-like motion.
@@ -255,6 +246,15 @@ define( require => {
         for ( let i = 0; i < n; i++ ) {
           temperatures[ i ] = initialTemperature;
         }
+      }
+      else {
+
+        // For groups of particles with particle-particle collisions enabled, create some deviation in the
+        // temperature used to compute speed, but maintain the desired mean.  This makes the motion of a group
+        // of particles look less wave-like. We do this for temperature instead of speed because temperature
+        // in the container is T = (2/3)KE/k, and KE is a function of speed^2, so deviation in speed would
+        // change the desired temperature.
+        temperatures = GasPropertiesUtils.getGaussianValues( n, initialTemperature, 0.2 * initialTemperature, 1E-3 );
       }
 
       // Create n particles
