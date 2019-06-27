@@ -164,6 +164,7 @@ define( require => {
     /**
      * Gets the minimum lid width. This is constant, independent of the container width.
      * @returns {number} in pm
+     * @public
      */
     getMinLidWidth() {
       return this.minLidWidth;

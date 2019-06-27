@@ -369,7 +369,7 @@ define( require => {
     return numberOfCollisions;
   }
 
-  // @protected for uses in subclasses
+  // @protected for use in subclasses
   CollisionDetector.doParticleContainerCollisions = doParticleContainerCollisions;
 
   return gasProperties.register( 'CollisionDetector', CollisionDetector );
