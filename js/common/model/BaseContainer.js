@@ -145,6 +145,7 @@ define( require => {
      * Determines whether the container fully contains one or more collections of particles.
      * @param {Particle[][]} particleArrays
      * @returns {boolean}
+     * @public
      */
     containsParticles( particleArrays ) {
       assert && assert( Array.isArray( particleArrays ), `invalid particlesArray: ${particleArrays}` );
