@@ -256,10 +256,11 @@ define( require => {
         // change the desired temperature.
         temperatures = GasPropertiesUtils.getGaussianValues( n, initialTemperature, 0.2 * initialTemperature, 1E-3 );
       }
+      assert && assert( temperatures.length === n,
+        `incorrect number of temperature values ${temperatures.length}, expected ${n}` );
 
       // Create n particles
       for ( let i = 0; i < n; i++ ) {
-        assert && assert( i < temperatures.length, `index out of range, i: ${i}` );
 
         const particle = createParticle();
 
