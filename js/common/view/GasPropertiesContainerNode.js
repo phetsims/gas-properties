@@ -2,7 +2,7 @@
 
 //TODO parts of this will be rewritten to address https://github.com/phetsims/gas-properties/issues/125
 /**
- * View of the container in the 'Ideal', 'Explorer', and 'Energy' screens.
+ * GasPropertiesContainerNode is the view of the container in the 'Ideal', 'Explorer', and 'Energy' screens.
  * This container has mutable width, and a lid that can be moved/removed.
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *

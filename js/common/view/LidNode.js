@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.
+ * LidNode is the lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.
  * Origin is at the bottom-left of the base.
  *
  * @author Chris Malley (PixelZoom, Inc.)

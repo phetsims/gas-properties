@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The view for the 'Ideal' screen.
+ * IdealScreenView is the view for the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

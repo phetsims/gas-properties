@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Toggle button for whether the container has a vertical divider, color-code to the divider.
+ * DividerToggleButton is used to toggle the container's vertical divider. It is color-coded to the divider.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

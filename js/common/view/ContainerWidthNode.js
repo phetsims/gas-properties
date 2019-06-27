@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Dimensional arrows that show the width of the container.
+ * ContainerWidthNode displays dimensional arrows that correspond to the width of the container.
  * Origin is at the right end of the arrows, which corresponds to the container's origin.
  * This is not an expensive UI component, so it's updated regardless of whether it's visible.
  *

@@ -2,7 +2,7 @@
 
 //TODO https://github.com/phetsims/gas-properties/issues/137, move to common code?
 /**
- * A Node that has a fixed width. This is used for the content in Panels and AccordionBoxes.
+ * FixedWidthNode is a Node that has a fixed width. This is used for the content in Panels and AccordionBoxes.
  *
  * A solution using AlignGroup and AlignBox was investigated, but they do not address horizontal separators
  * they do not handle container margins, and their width is dictated by the largest component vs a specified width.

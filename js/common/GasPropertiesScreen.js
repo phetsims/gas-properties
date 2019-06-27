@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Base class for all Screens in this sim.
+ * GasPropertiesScreen is the base class for all Screens in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

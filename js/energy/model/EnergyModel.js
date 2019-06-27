@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Energy' screen.
+ * EnergyModel is the top-level model for the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

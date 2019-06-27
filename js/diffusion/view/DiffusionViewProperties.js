@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Properties that are specific to the view in the 'Diffusion' screen.
+ * DiffusionViewProperties defines Properties that are specific to the view in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

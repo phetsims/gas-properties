@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Control for selecting between heavy and light particle types.
+ * ParticleTypeRadioButtonGroup is a pair of radio buttons for selecting between heavy and light particle types.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

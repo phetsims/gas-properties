@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Checkbox to show/hide the particle flow rate indicators on the container.
+ * ParticleFlowRateCheckbox is the checkbox used to show/hide the particle flow rate indicators on the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

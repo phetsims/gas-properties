@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Base class for ScreenViews in the Intro, Explore, and Energy screens.
+ * GasPropertiesScreenView is the base class for ScreenViews in the Intro, Explore, and Energy screens.
  *
  * Contains these UI components:
  *

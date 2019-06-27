@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Settings that initialize one side of the container in the 'Diffusion' screen.
+ * DiffusionSettings defines the settings that initialize one side of the container in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

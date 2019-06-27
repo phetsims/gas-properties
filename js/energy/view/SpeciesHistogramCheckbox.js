@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Checkbox for a particle species, for a histogram in the 'Energy' screen.
+ * SpeciesHistogramCheckbox is the base class for checkboxes that show histogram data for a specific particle species.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

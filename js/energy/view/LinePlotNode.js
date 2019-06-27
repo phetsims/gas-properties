@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Plots histogram data as a set of connected line segments. Used for the specifies-specific histogram data.
+ * LinePlotNode plots histogram data as a set of connected line segments. It is used to overlay specifies-specific
+ * histogram data on top of a more typical bar-style histogram.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

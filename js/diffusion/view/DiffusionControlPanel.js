@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Control panel that appears on the right side of the 'Diffusion' screen.
+ * DiffusionControlPanel is the control panel that appears on the right side of the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

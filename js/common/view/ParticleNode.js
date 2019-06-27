@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Particle view.
+ * ParticleNode displays a particle as a shaded sphere.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

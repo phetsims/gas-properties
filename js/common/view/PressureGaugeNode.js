@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * View component for the pressure gauge.
+ * PressureDisplay displays a pressure gauge, pressure value, and a control for selecting temperature units.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

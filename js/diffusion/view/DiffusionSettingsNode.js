@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Controls for the settings in the 'Diffusion' screen.
+ * DiffusionSettingsNode is the user interface for setting initial conditions in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

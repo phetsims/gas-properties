@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The 'Diffusion' screen.
+ * DiffusionScreen is the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Displays the average speed (in m/s) for each type of particle in the container.
+ * AverageSpeedAccordionBox displays the average speed (in m/s) for each type of particle in the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

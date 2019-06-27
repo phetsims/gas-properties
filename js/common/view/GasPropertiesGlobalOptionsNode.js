@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * User interface for global options, shown in the 'Options' dialog, accessed from the PhET Menu.
+ * GasPropertiesGlobalOptionsNode is the user interface for global options, accessed via PhET > Options.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

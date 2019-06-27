@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Global options for this simulation, accessed via the Options menu item in the PhET menu.
+ * GasPropertiesGlobalOptions defines the global options for this simulation, accessed via PhET > Options.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

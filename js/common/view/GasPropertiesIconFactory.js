@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Factory methods for creating the various icons that appear in the sim.
+ * GasPropertiesIconFactory is a set of factory methods for creating the various icons that appear in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

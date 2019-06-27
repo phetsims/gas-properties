@@ -1,8 +1,9 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Vectors that indicate the flow rate of one particle species between the left and right sides of the container.
- * Higher flow rate results in a bigger vector.  Vectors are color-coded to the particle color.
+ * ParticleFlowRateNode is a pair of vectors that indicate the flow rate of one particle species between the left and
+ * right sides of the container. Higher flow rate results in a bigger vector. Vectors are color-coded to the particle
+ * color.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

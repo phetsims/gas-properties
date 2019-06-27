@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Display for one side of the container in the 'Data' accordion box.
+ * DiffusionDataNode display data for one side of the container in the 'Data' accordion box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

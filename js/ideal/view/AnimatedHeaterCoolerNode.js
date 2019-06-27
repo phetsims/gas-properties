@@ -2,8 +2,8 @@
 
 /**
  * When holding pressure constant by varying temperature (HoldConstant.PRESSURE_T mode), the speed of particles is
- * adjusted to result in the temperature required to keep pressure constant. This class animates a Property to
- * reflect the speed adjustment, and that Property is observed by a SCENERY_PHET/HeaterCoolerNode.
+ * adjusted to result in the temperature required to keep pressure constant. AnimatedHeaterCoolerNode animates a
+ * Property to reflect the speed adjustment, and that Property is observed by a SCENERY_PHET/HeaterCoolerNode.
  * This animation has no affect on the model, it is pure 'Hollywood'.
  *
  * @author Chris Malley (PixelZoom, Inc.)

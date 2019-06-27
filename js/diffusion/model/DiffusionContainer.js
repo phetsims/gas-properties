@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * The container in the 'Diffusion' screen. It has a fixed width, no lid, and a removable vertical divider.
+ * DiffusionContainer is the container in the 'Diffusion' screen.
+ * It has a fixed width, no lid, and a removable vertical divider.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

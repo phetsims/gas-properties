@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * 'Stopwatch' check box, used to control visibility of the stopwatch.
+ * StopwatchCheckbox is the 'Stopwatch' check box, used to control visibility of the stopwatch.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

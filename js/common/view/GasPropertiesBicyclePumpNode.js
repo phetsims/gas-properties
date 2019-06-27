@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Bicycle pump, used to add particles to the container.
+ * GasPropertiesBicyclePumpNode is a specialization of BicyclePumpNode for this sim.
+ * It is used to add particles to the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

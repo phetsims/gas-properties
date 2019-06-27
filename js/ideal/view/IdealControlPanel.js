@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Control panel that appears in the upper-right corner of the 'Ideal' screen.
+ * IdealControlPanel is the control panel that appears in the upper-right corner of the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Base class for all ScreenViews in this sim.
+ * BaseScreenView is the base class for all ScreenViews in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

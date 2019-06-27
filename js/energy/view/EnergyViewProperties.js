@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Properties that are specific to the view in the 'Energy' screen.
+ * EnergyViewProperties defines Properties that are specific to the view in the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

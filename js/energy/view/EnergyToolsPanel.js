@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Panel that appears in the upper-right corner of the 'Energy' screen.
+ * EnergyToolsPanel is the panel that appears in the upper-right corner of the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

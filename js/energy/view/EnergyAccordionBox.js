@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Base class for the 'Speed' and 'Kinetic Energy' accordion boxes in the 'Energy' screen.
+ * EnergyAccordionBox is the base class for the 'Speed' and 'Kinetic Energy' accordion boxes in the 'Energy' screen.
  * These accordion boxes are identical, except for their title and HistogramNode.
  *
  * @author Chris Malley (PixelZoom, Inc.)

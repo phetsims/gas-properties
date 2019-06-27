@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Checkbox to show/hide the width of the container.
+ * WidthCheckbox is a checkbox to show/hide the width of the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

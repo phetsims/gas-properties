@@ -1,8 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Specialization of Checkbox for this sim.  It can be labeled with text and/or and icon, and has the correct
- * options and color profiling for this sim.
+ * GasPropertiesCheckbox is a specialization of Checkbox for this sim.  It can be labeled with text and/or and icon,
+ * and has the correct options and color profiling for this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

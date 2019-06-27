@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * The scale that appears along the bottom of the container in the Diffusion screen.
+ * ScaleNode displays the scale that appears along the bottom of the container in the Diffusion screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

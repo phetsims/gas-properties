@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * A digital stopwatch
+ * StopwatchNode is a specialization of TimerNode for this sim, a digital stopwatch.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

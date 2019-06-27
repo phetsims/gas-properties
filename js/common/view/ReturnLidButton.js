@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * The 'Return Lid' button, used to return the container's lid after it has been blown off.
+ * ReturnLidButton is used to return the container's lid after it has been blown off.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {

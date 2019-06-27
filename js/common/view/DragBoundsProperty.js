@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Derives drag bounds that will keep an entire Node inside the visible bounds of a ScreenView.
+ * DragBoundsProperty derives drag bounds that will keep an entire Node inside the visible bounds of a ScreenView.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

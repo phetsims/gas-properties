@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * View of the container in the 'Diffusion' screen.
+ * DiffusionContainerNode is the view of the container in the 'Diffusion' screen.
  * This container has a fixed width and a removable vertical divider.
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *

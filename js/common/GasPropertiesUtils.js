@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Utility functions used in this sim.
+ * GasPropertiesUtils is a collection of utility functions used in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

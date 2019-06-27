@@ -1,7 +1,10 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * A horizontal dimensional arrow, looks like this, but with solid arrow heads:  |<- - - ->|
+ * DimensionalArrowsNode is a horizontal dimensional arrow. It looks like this, but with solid arrow heads:
+ *
+ * |<- - - ->|
+ *
  * NOTE! This implementation is specific to Gas Properties in that the arrow grows to the left,
  * which prevents 'strobing' of the dashed line.
  *

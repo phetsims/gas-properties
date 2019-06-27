@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Displays dynamic temperature values, with the ability to switch units via a combo box.
+ * TemperatureDisplay displays the temperature value, with the ability to switch units via a combo box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

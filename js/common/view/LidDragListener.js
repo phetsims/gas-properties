@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Drag listener for the container's lid, determines the size of the opening in the top of the container.
+ * LidDragListener is the drag listener for the container's lid. It determines the size of the opening in the top of
+ * the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

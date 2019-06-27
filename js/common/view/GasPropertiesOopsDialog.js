@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Specialization of OopsDialog, with a custom icon and options.
+ * GasPropertiesOopsDialog is a specialization of OopsDialog, with a custom icon and options.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

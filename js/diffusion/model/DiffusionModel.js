@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model for the 'Diffusion' screen.
+ * DiffusionModel is the top-level model for the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The accordion box titled 'Particles'.
+ * ParticlesAccordionBox is the accordion box titled 'Particles'.  It contains controls for setting the number
+ * of particles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Collision Counter, displays the number of collisions between particles and the container walls.
+ * CollisionCounterNode displays the number of collisions between particles and the container walls, during
+ * some sample period.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,9 +1,9 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Shows how the collision detection space is partitioned into a 2D grid of Regions.
- * A number in the center of the region indicates how many particles are in that region.
- * Used for debugging, not visible to the user, see GasPropertiesQueryParameters.regions.
+ * RegionsNode shows how the collision detection space is partitioned into a 2D grid of Regions.
+ * A number in the center of each region indicates how many particles are in that region.
+ * This is used for debugging, and is not visible to the user. See GasPropertiesQueryParameters.regions.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

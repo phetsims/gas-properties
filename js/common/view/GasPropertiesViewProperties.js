@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Base class for view-specific Properties that are common to the Intro, Explore, and Energy screens.
+ * GasPropertiesViewProperties is the base class for view-specific Properties that are common to the
+ * Intro, Explore, and Energy screens.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

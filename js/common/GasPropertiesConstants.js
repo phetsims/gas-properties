@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Constants used throughout this simulation.
+ * GasPropertiesConstants is a collection of constants used throughout this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

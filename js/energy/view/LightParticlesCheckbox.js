@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Checkbox for light particles histogram in the 'Energy' screen.
+ * LightParticlesCheckbox is a checkbox used to show histogram data for light particles in the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

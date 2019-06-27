@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Displays dynamic pressure values, with the ability to switch units via a combo box.
+ * PressureDisplay displays the pressure value, with the ability to switch units via a combo box.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

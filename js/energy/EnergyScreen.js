@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * The 'Energy' screen.
+ * EnergyScreen is the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

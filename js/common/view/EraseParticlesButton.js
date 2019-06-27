@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Button for erasing (deleting) all particles from the container.
+ * EraseParticlesButton is the button for erasing (deleting) all particles from the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

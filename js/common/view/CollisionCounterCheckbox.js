@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * 'Collision Counter' check box, used to control visibility of the collision counter.
+ * CollisionCounterCheckbox is the 'Collision Counter' check box, used to control visibility of the collision counter.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

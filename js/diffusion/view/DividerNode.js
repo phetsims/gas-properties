@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * The vertical divider in the Diffusion screen's container.
+ * DividerNode is the vertical divider in the Diffusion screen's container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

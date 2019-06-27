@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Plots histogram data in the familiar 'bars' style.
+ * BarPlotNode plots histogram data in the familiar 'bars' style.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

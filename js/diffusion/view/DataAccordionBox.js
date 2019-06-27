@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * The 'Data' accordion box in the 'Diffusion' screen.
+ * DataAccordionBox is the 'Data' accordion box in the 'Diffusion' screen.  It displays data for the left and right
+ * sides of the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
