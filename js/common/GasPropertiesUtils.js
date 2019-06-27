@@ -24,8 +24,8 @@ define( require => {
      */
     getGaussianValues: function( n, mean, deviation, threshold ) {
       assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
-      assert && assert( typeof mean === 'number', `invalid mean: ${mean}` );
-      assert && assert( typeof deviation === 'number', `invalid deviation: ${deviation}` );
+      assert && assert( typeof mean === 'number' && isFinite( mean ), `invalid mean: ${mean}` );
+      assert && assert( typeof deviation === 'number' && isFinite( deviation ), `invalid deviation: ${deviation}` );
       assert && assert( typeof threshold === 'number' && threshold >= 0, `invalid threshold: ${threshold}` );
 
       const values = [];
@@ -34,6 +34,7 @@ define( require => {
       // Generate a random Gaussian sample whose values have the desired mean and standard deviation.
       for ( let i = 0; i < n; i++ ) {
         const speed = Util.boxMullerTransform( mean, deviation, phet.joist.random );
+        assert && assert( isFinite( speed ), `invalid speed: ${speed}` );
         values.push( speed );
         sum += speed;
       }
@@ -45,6 +46,7 @@ define( require => {
       sum = 0;
       for ( let i = 0; i < values.length; i++ ) {
         const speed = values[ i ] + deltaMean;
+        assert && assert( isFinite( speed ), `invalid speed: ${speed}` );
         values[ i ] = speed;
         sum += speed;
       }
