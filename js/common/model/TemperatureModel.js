@@ -1,8 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Sub-model of GasPropertiesModel that is responsible for the T (temperature) component of the
- * Ideal Gas Law (PV = NkT) and for the thermometer.
+ * TemperatureModel is a sub-model of GasPropertiesModel. It is responsible for the T (temperature) component of
+ * the Ideal Gas Law (PV = NkT) and for the thermometer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

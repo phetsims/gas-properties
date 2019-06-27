@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for heavy particles.
+ * HeavyParticle is the model for 'heavy' particles, as they are named in the design document.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

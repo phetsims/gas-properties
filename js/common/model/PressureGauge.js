@@ -1,9 +1,9 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Model of the pressure gauge. Responsible for determining what units will be used to present the pressure,
- * and for deriving pressure in those units. Optionally adds a bit of noise to the displayed values, to make
- * the gauge look more realistic.
+ * PressureGauge is the model of the pressure gauge. It is responsible for determining what units will be used to
+ * present the pressure, and for deriving pressure in those units. Optionally adds a bit of noise to the displayed
+ * values, to make the gauge look more realistic.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

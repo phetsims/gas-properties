@@ -1,9 +1,9 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Base class for containers in all screens.
- * This is a rectangular container for particles, with fixed location, fixed height and depth, and mutable width.
- * The origin is at the bottom-right corner, and width expands to the left.
+ * BaseContainer is the base class for containers in all screens. This is a rectangular container for particles,
+ * with fixed location, fixed height and depth, and mutable width. The origin is at the bottom-right corner, and
+ * width expands to the left.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * An enumeration of which quantity should be held constant when applying the Ideal Gas Law, PV = NkT, where:
+ * HoldConstant is an enumeration that identifies which quantity should be held constant when applying
+ * the Ideal Gas Law, PV = NkT, where:
  *
  * P = pressure
  * V = volume

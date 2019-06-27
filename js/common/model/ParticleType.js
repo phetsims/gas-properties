@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * Enumeration for particle types in the 'Ideal', 'Explore', and 'Energy' screens.
+ * ParticleType is an enumeration for particle types in the 'Ideal', 'Explore', and 'Energy' screens.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

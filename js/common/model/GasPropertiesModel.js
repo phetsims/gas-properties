@@ -1,8 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Base class for models in the Intro, Explore, and Energy screens.  It adds functionality related to the
- * Ideal Gas Law.
+ * GasPropertiesModel is the base class for models in the Intro, Explore, and Energy screens.  It adds functionality
+ * related to the Ideal Gas Law.
  *
  * This model has subcomponents that handle the quantities involved in the Ideal Gas Law, PV = NkT.  They are:
  *

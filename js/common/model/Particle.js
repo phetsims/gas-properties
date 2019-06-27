@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for all types of particles. A particle is a perfect rigid sphere.
+ * Particle is the model for all types of particles. A particle is a perfect rigid sphere.
  *
  * Since there can be a large number of particles, properties of particles are not implemented as observable
  * Properties.  Instead, the entire particle system is inspected to derive the current state of the system.

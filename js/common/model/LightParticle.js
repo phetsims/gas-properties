@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Model for light particles.
+ * LightParticle is the model for 'light' particles, as they are named in the design document.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

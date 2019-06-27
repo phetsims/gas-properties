@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Transform between real and sim time, with instances for the transforms used in this sim.
+ * TimeTransform is the transform between real and sim time, with instances for the transforms used in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

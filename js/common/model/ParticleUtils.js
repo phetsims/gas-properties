@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * Utility methods related to collections of Particles.
+ * ParticleUtils is a set of utility methods related to collections of Particles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
