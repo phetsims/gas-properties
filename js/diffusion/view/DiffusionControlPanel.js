@@ -15,7 +15,6 @@ define( require => {
   const DiffusionSettingsNode = require( 'GAS_PROPERTIES/diffusion/view/DiffusionSettingsNode' );
   const DiffusionViewProperties = require( 'GAS_PROPERTIES/diffusion/view/DiffusionViewProperties' );
   const DividerToggleButton = require( 'GAS_PROPERTIES/diffusion/view/DividerToggleButton' );
-  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
@@ -68,23 +67,29 @@ define( require => {
         textMaxWidth: 175 // determined empirically
       };
 
-      const content = new FixedWidthNode( contentWidth, new VBox( {
+      const content = new VBox( {
         align: 'left',
         spacing: 18,
+        maxWidth: contentWidth,
         children: [
 
           // spinners
           new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty ),
 
-          // Remove/Reset Divider button, centered
-          new FixedWidthNode( contentWidth, dividerToggleButton, {
-            align: 'center'
-          } ),
+          new VBox( {
+            align: 'center',
+            spacing: 15,
+            children: [
 
-          // ------------
-          new HSeparator( contentWidth, {
-            stroke: GasPropertiesColorProfile.separatorColorProperty,
-            maxWidth: contentWidth
+              // Remove/Reset Divider button
+              new DividerToggleButton( hasDividerProperty ),
+
+              // separator
+              new HSeparator( contentWidth, {
+                stroke: GasPropertiesColorProfile.separatorColorProperty,
+                maxWidth: contentWidth
+              } )
+            ]
           } ),
 
           // checkboxes
@@ -99,7 +104,7 @@ define( require => {
             ]
           } )
         ]
-      } ) );
+      } );
 
       super( content, options );
 
