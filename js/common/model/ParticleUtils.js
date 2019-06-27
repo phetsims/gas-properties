@@ -183,6 +183,7 @@ define( require => {
     getCenterXOfMass: function( particles ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
+      let centerXOfMass = null;
       if ( particles.length > 0 ) {
         let numerator = 0;
         let totalMass = 0;
@@ -191,11 +192,9 @@ define( require => {
           numerator += ( particle.mass * particle.location.x );
           totalMass += particle.mass;
         }
-        return numerator / totalMass;
+        centerXOfMass = numerator / totalMass;
       }
-      else {
-        return null;
-      }
+      return centerXOfMass;
     }
   };
 
