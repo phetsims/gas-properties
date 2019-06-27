@@ -82,7 +82,7 @@ define( require => {
             children: [
 
               // Remove/Reset Divider button
-              new DividerToggleButton( hasDividerProperty ),
+              dividerToggleButton,
 
               // separator, which effectively determines min content width
               new HSeparator( contentWidth, {
