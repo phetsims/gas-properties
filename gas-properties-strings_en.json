@@ -157,5 +157,8 @@
   },
   "oopsPressureSmall": {
     "value": "Oops!<br><br>Pressure cannot be held constant.<br>Volume would be too small."
+  },
+  "oopsMaximumTemperature": {
+    "value": "Oops!<br><br>Maximum temperature reached."
   }
 }

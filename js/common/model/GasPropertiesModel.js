@@ -26,6 +26,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
+  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
@@ -136,7 +137,10 @@ define( require => {
         pressureLargeEmitter: new Emitter(),
 
         // Oops! Pressure cannot be held constant. Volume would be too small.
-        pressureSmallEmitter: new Emitter()
+        pressureSmallEmitter: new Emitter(),
+
+        // Oops! Maximum temperature reached
+        maximumTemperatureEmitter: new Emitter()
       };
 
       // When the number of particles in the container changes ...
@@ -278,6 +282,9 @@ define( require => {
 
       // Update pressure.
       this.pressureModel.update( dtPressureGauge, numberOfCollisions );
+
+      // Do this last.
+      this.verifyState();
     }
 
     /**
@@ -343,6 +350,35 @@ define( require => {
           'actual temperature does not match desired temperature' );
 
         this.temperatureModel.temperatureProperty.value = desiredTemperature;
+      }
+    }
+
+    /**
+     * Verify that the model is in a good state after having been updated. If it's not, adjust accordingly.
+     * @private
+     */
+    verifyState() {
+
+      // If we exceed the maximum temperature, reset the state of the container.
+      // See https://github.com/phetsims/gas-properties/issues/128
+      if ( this.temperatureModel.temperatureProperty.value >= GasPropertiesQueryParameters.maxTemperature ) {
+
+        // Remove all particles
+        this.particleSystem.removeAllParticles();
+
+        // Switch to a 'Hold Constant' setting that supports an empty container
+        if ( this.holdConstantProperty.value !== HoldConstant.NOTHING &&
+             this.holdConstantProperty.value !== HoldConstant.VOLUME ) {
+          this.holdConstantProperty.value = HoldConstant.NOTHING;
+        }
+
+        // Put the lid on the container
+        if ( !this.container.lidIsOnProperty.value ) {
+          this.container.lidIsOnProperty.value = true;
+        }
+
+        phet.log && phet.log( `Oops! Maximum temperature reached: ${this.temperatureModel.temperatureProperty.value}` );
+        this.oopsEmitters.maximumTemperatureEmitter.emit();
       }
     }
 

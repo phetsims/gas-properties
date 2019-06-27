@@ -65,6 +65,14 @@ define( require => {
       defaultValue: 20000
     },
 
+    // Maximum temperature in K. Exceeding this results in an Oops dialog.
+    // For internal use only.
+    maxTemperature: {
+      type: 'number',
+      isValidValue: value => ( value > 0 ),
+      defaultValue: 100000
+    },
+
     // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
     // For internal use only.
     wallSpeedLimit: {

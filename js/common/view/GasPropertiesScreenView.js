@@ -38,6 +38,7 @@ define( require => {
   const GasPropertiesContainerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesContainerNode' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
   const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
+  const GasPropertiesOopsDialog = require( 'GAS_PROPERTIES/common/view/GasPropertiesOopsDialog' );
   const GasPropertiesParticleSystemNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesParticleSystemNode' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
@@ -53,6 +54,9 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  const oopsMaximumTemperatureString = require( 'string!GAS_PROPERTIES/oopsMaximumTemperature' );
 
   class GasPropertiesScreenView extends BaseScreenView {
 
@@ -284,6 +288,10 @@ define( require => {
         left: containerViewLocation.x - defaultWidth,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
+
+      // Oops dialog when maximum temperature is exceeded.
+      const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( oopsMaximumTemperatureString );
+      model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { oopsMaximumTemperatureDialog.show(); } );
 
       // @private used in methods
       this.containerNode = containerNode;

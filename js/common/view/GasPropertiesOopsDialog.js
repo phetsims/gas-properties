@@ -17,7 +17,7 @@ define( require => {
   // images
   const phetGirlLabCoatImage = require( 'image!GAS_PROPERTIES/phet-girl-lab-coat.png' );
 
-  class IdealOopsDialog extends OopsDialog {
+  class GasPropertiesOopsDialog extends OopsDialog {
 
     /**
      * @param {string} message
@@ -40,5 +40,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'IdealOopsDialog', IdealOopsDialog );
+  return gasProperties.register( 'GasPropertiesOopsDialog', GasPropertiesOopsDialog );
 } );
