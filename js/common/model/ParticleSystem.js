@@ -272,7 +272,7 @@ define( require => {
           // Speed is |v| = sqrt( 3kT / m )
           Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
 
-          // Velocity angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
+          // Angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
           Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PARTICLE_DISPERSION_ANGLE
         );
 
