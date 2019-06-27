@@ -63,9 +63,11 @@ This section enumerates the primary equations used in the sim. Use this section 
 
 ##  Particle System
 
-Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity. Radius
-and mass may be modifed in the _Diffusion_ screen, and are fixed in the other screens.  Location and velocity 
-are modified indirectly, as a result of heating/cooling, changing volume, collisions, etc.
+Particles represent gas molecules. They are rigid bodies that have mass,
+radius, location, and velocity. Radius and mass may be modified in the
+_Diffusion_ screen, and are fixed in the other screens. Location and
+velocity are modified indirectly, as a result of heating/cooling,
+changing volume, collisions, etc.
    
 The collection of all particles is referred to as the particle system. It has the following qualities:
 * `N` is the number of particles in the container
@@ -104,9 +106,11 @@ which would make it too easy to blow the lid off of the container.
 
 ## Collision Detection and Response
 
-This sim uses a rigid-body, perfectly-elastic (no net loss of kinetic energy) collision model.
-_Collision detection_ identifies when two objects in motion intersect. When a collison has been 
-detected between two objects, _collision response_ determines what affect that collision has on their motion.   
+This sim uses a rigid-body, perfectly-elastic (no net loss of kinetic
+energy) collision model. _Collision detection_ identifies when two
+objects in motion intersect. When a collision has been detected between
+two objects, _collision response_ determines what affect that collision
+has on their motion.
 
 Collision detection occurs only within the container. There is no collision detection performed for particles
 that have escaped the container through the open lid. Collision detection is a posteriori (detected after a
@@ -136,12 +140,14 @@ a container wall.
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with
 the container. Then all `N` particles contribute to the pressure `P` via `P = NkT/V`.
 
-On each time step, pressure is computed precisely as `P = NkT/V`.  The pressure gauge is given a bit of 
-"noise" to make it look more realistic.  The noise is a function of pressure and temperaure. More noise 
-is added at lower pressures, but the noise is surpressed as temperature decreases. Noise is disabled 
-when pressure is being held constant.
-See [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
-if you'd like more specifics. If desired, noise can be disabled via query parameter `pressureNoise=false`.
+On each time step, pressure is computed precisely as `P = NkT/V`. The
+pressure gauge is given a bit of "noise" to make it look more realistic.
+The noise is a function of pressure and temperature. More noise is added
+at lower pressures, but the noise is suppressed as temperature
+decreases. Noise is disabled when pressure is being held constant. See
+[PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
+if you'd like more specifics. If desired, noise can be disabled via
+query parameter `pressureNoise=false`.
 
 ## Hold Constant
 
@@ -158,6 +164,8 @@ constant.  The table below summarizes the behavior.
 
 The _Ideal_ screen has a default setting of "Nothing". The _Explore_ screen has a fixed setting of "Nothing". The _Energy_ screen has a fixed setting of "Volume".  (This feature is irrelevant in the _Diffusion_ screen.) 
 
-If a change would result in a situation that is nonsensical (e.g. holding temperature contant with no particles)
-or violates the constraints of the simulation (e.g. requires a larger container volume than supported),
-the sim automatically switches to "Nothing" and notifies the user via a dialog.
+If a change would result in a situation that is nonsensical (e.g.
+holding temperature constant with no particles) or violates the
+constraints of the simulation (e.g. requires a larger container volume
+than supported), the sim automatically switches to "Nothing" and
+notifies the user via a dialog.
