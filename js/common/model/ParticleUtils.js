@@ -61,9 +61,8 @@ define( require => {
         `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
-      const particlesToRemove = particles.slice( particles.length - n, particles.length );
-      for ( let i = 0; i < particlesToRemove.length; i++ ) {
-        ParticleUtils.removeParticle( particlesToRemove[ i ], particles );
+      for ( let i = 0; i < n; i++ ) {
+        ParticleUtils.removeParticle( particles[ particles.length - 1 ], particles );
       }
     },
 
