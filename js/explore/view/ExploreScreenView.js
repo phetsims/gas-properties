@@ -19,9 +19,6 @@ define( require => {
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
   const Tandem = require( 'TANDEM/Tandem' );
 
-  // constants
-  const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
-
   class ExploreScreenView extends GasPropertiesScreenView {
 
     /**
@@ -42,7 +39,7 @@ define( require => {
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
-          fixedWidth: RIGHT_PANEL_WIDTH,
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
@@ -52,7 +49,7 @@ define( require => {
         model.particleSystem.numberOfHeavyParticlesProperty,
         model.particleSystem.numberOfLightParticlesProperty,
         model.modelViewTransform, {
-          fixedWidth: RIGHT_PANEL_WIDTH,
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
           right: toolsPanel.right,
           top: toolsPanel.bottom + 15

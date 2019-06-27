@@ -28,9 +28,6 @@ define( require => {
   const oopsPressureLargeString = require( 'string!GAS_PROPERTIES/oopsPressureLarge' );
   const oopsPressureSmallString = require( 'string!GAS_PROPERTIES/oopsPressureSmall' );
 
-  // constants
-  const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
-
   class IdealScreenView extends GasPropertiesScreenView {
 
     /**
@@ -80,7 +77,7 @@ define( require => {
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
           hasHoldConstantControls: options.hasHoldConstantControls,
-          fixedWidth: RIGHT_PANEL_WIDTH,
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
@@ -92,7 +89,7 @@ define( require => {
         model.particleSystem.numberOfHeavyParticlesProperty,
         model.particleSystem.numberOfLightParticlesProperty,
         model.modelViewTransform, {
-          fixedWidth: RIGHT_PANEL_WIDTH,
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
           right: controlPanel.right,
           top: controlPanel.bottom + 15

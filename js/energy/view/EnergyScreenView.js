@@ -25,7 +25,6 @@ define( require => {
 
   // constants
   const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
-  const RIGHT_PANEL_WIDTH = 225; // width of panels on the right side of the container, determined empirically
   const VBOX_SPACING = 10;
 
   class EnergyScreenView extends GasPropertiesScreenView {
@@ -80,7 +79,7 @@ define( require => {
       const toolsPanel = new EnergyToolsPanel(
         viewProperties.sizeVisibleProperty,
         model.stopwatch.visibleProperty, {
-          fixedWidth: RIGHT_PANEL_WIDTH
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
         } );
 
       // Particles accordion box
@@ -90,7 +89,7 @@ define( require => {
         model.modelViewTransform, {
           collisionsEnabledProperty: model.collisionDetector.particleParticleCollisionsEnabledProperty,
           expandedProperty: viewProperties.particleCountsExpandedProperty,
-          fixedWidth: RIGHT_PANEL_WIDTH
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
         } );
 
       // Injection Temperature accordion box
@@ -98,7 +97,7 @@ define( require => {
         model.temperatureModel.controlTemperatureEnabledProperty,
         model.temperatureModel.initialTemperatureProperty, {
           expandedProperty: viewProperties.particleToolsExpandedProperty,
-          fixedWidth: RIGHT_PANEL_WIDTH
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
         }
       );
 

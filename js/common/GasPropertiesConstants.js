@@ -101,6 +101,9 @@ define( require => {
       boxWidth: 16
     },
 
+    // width of panels on the right side of the Ideal, Explore, and Energy screens
+    RIGHT_PANEL_WIDTH: 225,
+
     // default font for titles (accordion boxes, groups of controls, ...)
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
 
