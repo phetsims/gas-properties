@@ -283,7 +283,7 @@ define( require => {
     /**
      * Redistributes the particles horizontally in the container.  This is used in the Ideal screen, where resizing
      * the container results in the particles being redistributed in the new container width.
-     * @param {number} scaleX - amount to scale the x location
+     * @param {number} scaleX - amount to scale each particle's x location
      * @public
      */
     redistributeParticles( scaleX ) {
