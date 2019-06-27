@@ -86,7 +86,7 @@ define( require => {
     /**
      * Computes the average speed for each particle type, smoothed over an interval.
      * @param {number} dt - time delta, in ps
-     * @private
+     * @public
      */
     step( dt ) {
 

@@ -123,6 +123,7 @@ define( require => {
     /**
      * Steps the histograms.
      * @param {number} dt - time delta, in ps
+     * @public
      */
     step( dt ) {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );

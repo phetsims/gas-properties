@@ -29,10 +29,7 @@ define( require => {
       this.scaleVisibleProperty = new BooleanProperty( false );
     }
 
-    /**
-     * @public
-     * @override
-     */
+    // @public
     reset() {
       this.dataExpandedProperty.reset();
       this.particleFlowRateVisibleProperty.reset();
