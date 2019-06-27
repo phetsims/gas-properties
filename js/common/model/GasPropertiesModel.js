@@ -359,7 +359,7 @@ define( require => {
      */
     verifyState() {
 
-      // If we exceed the maximum temperature, reset the state of the container.
+      // If the maximum temperature was exceeded, reset the state of the container.
       // See https://github.com/phetsims/gas-properties/issues/128
       if ( this.temperatureModel.temperatureProperty.value >= GasPropertiesQueryParameters.maxTemperature ) {
 
