@@ -115,9 +115,6 @@ define( require => {
             wasPlaying = model.isPlayingProperty.value;
             model.isPlayingProperty.value = false;
             this.timeControlNode.enabledProperty.value = false;
-            if ( model.collisionCounter ) {
-              model.collisionCounter.isRunningProperty.value = false;
-            }
 
             // gray out the particles
             particleSystemNode.opacity = 0.6;
@@ -136,6 +133,11 @@ define( require => {
 
             // redistribute the particle
             model.particleSystem.redistributeParticles( model.container.widthProperty.value / startContainerWidth );
+          }
+
+          // Interacting with the container's resize handle stops the collision counter.
+          if ( model.collisionCounter ) {
+            model.collisionCounter.isRunningProperty.value = false;
           }
         };
       }
