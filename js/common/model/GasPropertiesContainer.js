@@ -24,6 +24,9 @@ define( require => {
 
   class GasPropertiesContainer extends BaseContainer {
 
+    /**
+     * @param {Object} [options]
+     */
     constructor( options ) {
 
       options = _.extend( {
