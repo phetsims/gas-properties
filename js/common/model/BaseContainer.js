@@ -32,10 +32,8 @@ define( require => {
         location: Vector2.ZERO,
 
         // range and initial value of the container's width, in pm
-        widthRange: new RangeWithValue( 5000, 15000, 10000 ),
+        widthRange: new RangeWithValue( 5000, 15000, 10000 )
 
-        // true if the left wall does work on particles, as in the Explore screen
-        leftWallDoesWork: false
       }, options );
 
       assert && assert( options.location instanceof Vector2,
@@ -85,9 +83,6 @@ define( require => {
 
       // @public (read-only) velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
       this.leftWallVelocity = new Vector2( 0, 0 );
-
-      // @public (read-only) whether the left wall does work on particles
-      this.leftWallDoesWork = options.leftWallDoesWork;
     }
 
     /**

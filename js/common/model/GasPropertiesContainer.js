@@ -25,7 +25,17 @@ define( require => {
   class GasPropertiesContainer extends BaseContainer {
 
     constructor( options ) {
+
+      options = _.extend( {
+
+        // true if the left wall does work on particles, as in the Explore screen
+        leftWallDoesWork: false
+      }, options );
+
       super( options );
+
+      // @public (read-only)
+      this.leftWallDoesWork = options.leftWallDoesWork;
 
       // @public whether the lid is on the container
       this.lidIsOnProperty = new BooleanProperty( true );

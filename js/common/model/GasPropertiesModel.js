@@ -49,10 +49,11 @@ define( require => {
 
       options = _.extend( {
 
+        leftWallDoesWork: false, // {boolean} does the container's left wall do work on particles?
+
         // superclass options
         holdConstant: HoldConstant.NOTHING,
-        hasCollisionCounter: true,
-        leftWallDoesWork: false
+        hasCollisionCounter: true
       }, options );
 
       super( tandem );
