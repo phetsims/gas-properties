@@ -181,7 +181,7 @@ define( require => {
       // histogram shape
       const iconWidth = 300;
       const iconHeight = 200;
-      const binCounts= [ 0.8, 1.0, 0.85, 0.53, 0.33, 0.21, 0.13, 0.08, 0.05, 0.03 ];
+      const binCounts = [ 0.8, 1.0, 0.85, 0.53, 0.33, 0.21, 0.13, 0.08, 0.05, 0.03 ];
       const deltaX = iconWidth / binCounts.length;
       let x = 0;
       let y = 0;

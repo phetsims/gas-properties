@@ -87,7 +87,7 @@ define( require => {
       // @public N, the total number of particles in the container.
       this.numberOfParticlesProperty = new DerivedProperty(
         [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
-        ( numberOfHeavyParticles, numberOfLightParticles ) =>  {
+        ( numberOfHeavyParticles, numberOfLightParticles ) => {
 
           // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
           // If you hit these assertions, then you need to add this listener later.  This is a trade-off

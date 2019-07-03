@@ -223,7 +223,7 @@ define( require => {
           const dy = LID_Y_SPEED * dt;
           this.lidNode.centerX += dx;
           this.lidNode.centerY += dy;
-          const dr = Util.toRadians( LID_ROTATION_SPEED) * dt;
+          const dr = Util.toRadians( LID_ROTATION_SPEED ) * dt;
           this.lidNode.rotateAround( this.lidNode.center, dr );
         }
         else {

@@ -46,8 +46,8 @@ define( require => {
       // play icon
       const playIconNode = new Path( new PlayIconShape( 0.8 * resetIconNode.height, resetIconNode.height ),
         _.extend( {}, iconOptions, {
-        fill: 'rgb( 0, 179, 0 )'
-      } ) );
+          fill: 'rgb( 0, 179, 0 )'
+        } ) );
 
       super( resetIconNode, playIconNode, isPlayingProperty, options );
     }

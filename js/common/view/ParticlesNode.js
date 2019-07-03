@@ -74,7 +74,7 @@ define( require => {
       if ( GasPropertiesQueryParameters.canvasBounds ) {
         const canvasBounds = this.getCanvasBounds();
         context.fillStyle = this.debugFill;
-        context.fillRect(  canvasBounds.x, canvasBounds.y, canvasBounds.width, canvasBounds.height );
+        context.fillRect( canvasBounds.x, canvasBounds.y, canvasBounds.width, canvasBounds.height );
       }
 
       // Draw the particles

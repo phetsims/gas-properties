@@ -8,6 +8,10 @@
  * NOTE! This implementation is specific to Gas Properties in that the arrow grows to the left,
  * which prevents 'strobing' of the dashed line.
  *
+ * REVIEW: Can the comment above be clarified?  This seems like something that might be useful in other sims, but there
+ * is an explanation as to why it is specific to Gas Properties, but I (jbphet) don't understand what "strobing of the
+ * dashed lines means".
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {

@@ -3,7 +3,7 @@
 /**
  * DiffusionParticleSystemNode renders the particle system for the 'Diffusion' screen.  Since all particles are
  * confined to the container, it requires only one Canvas, and therefore uses ParticlesNode via inheritance.
- * 
+ *
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
