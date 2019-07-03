@@ -37,9 +37,9 @@ define( require => {
 
       // Outside border of the container
       const borderNode = new Rectangle( viewBounds, {
-          stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
-          lineWidth: modelViewTransform.modelToViewDeltaX( container.wallThickness )
-        } );
+        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+        lineWidth: modelViewTransform.modelToViewDeltaX( container.wallThickness )
+      } );
 
       // Vertical divider
       const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );

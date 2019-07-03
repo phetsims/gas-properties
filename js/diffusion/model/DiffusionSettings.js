@@ -80,7 +80,7 @@ define( require => {
     mass: 1, // AMU
     radius: 5, // pm
     initialTemperature: 50 // K
-    };
+  };
 
   return gasProperties.register( 'DiffusionSettings', DiffusionSettings );
 } );

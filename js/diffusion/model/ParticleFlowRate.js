@@ -92,7 +92,7 @@ define( require => {
 
       // All sample arrays should have the same length
       assert && assert( this.leftCounts.length === this.rightCounts.length && this.leftCounts.length === this.dts.length,
-        'all arrays should have the same length');
+        'all arrays should have the same length' );
 
       // Update flow-rate Properties with an average of the current samples.
       const leftAverage = _.sum( this.leftCounts ) / this.leftCounts.length;

@@ -81,7 +81,7 @@ define( require => {
         stroke: null,
         centerX: dx / 2,
         centerY: TICK_LENGTH / 2
-      });
+      } );
 
       assert && assert( !options.children, 'ScaleNode sets children' );
       options.children = [ ticksPath, labelNode, arrowNode ];

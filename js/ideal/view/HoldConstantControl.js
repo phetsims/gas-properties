@@ -118,7 +118,7 @@ define( require => {
       pressureProperty.link( pressure => {
         pressureVRadioButton.enabledProperty.value = ( pressure !== 0 );
         pressureTRadioButton.enabledProperty.value = ( pressure !== 0 );
-      });
+      } );
     }
   }
 
