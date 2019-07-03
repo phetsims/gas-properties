@@ -45,6 +45,9 @@ define( require => {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
 
+      // REVIEW: Since this links to properties that originate externally, and is something that has a fair likelihood
+      // of being reused, it should have a dispose with unlinks or documentation that explains why it isn't needed.
+
       // @public pressure in kPa with noise added. This is not derived from pressureProperty,
       // because it needs to noise on step, not when pressureProperty changes.
       this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
