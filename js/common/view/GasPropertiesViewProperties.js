@@ -2,7 +2,7 @@
 
 /**
  * GasPropertiesViewProperties is the base class for view-specific Properties that are common to the
- * Intro, Explore, and Energy screens.
+ * Ideal, Explore, and Energy screens.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
