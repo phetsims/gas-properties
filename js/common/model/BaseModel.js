@@ -33,6 +33,10 @@ define( require => {
    */
   class BaseModel {
 
+    /**
+     * @param {Tandem} tandem
+     * @param {Object} [options]
+     */
     constructor( tandem, options ) {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
