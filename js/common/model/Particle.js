@@ -39,6 +39,7 @@ define( require => {
 
       // @public these are mutated in the Diffusion screen
       this.mass = options.mass; // AMU
+      // REVIEW: is the "radians" comment correct?  Seems odd, and is specified as pm in the options above.
       this.radius = options.radius; // radians
 
       // @public (read-only) colors are Properties to support ColorProfiles and projector mode
