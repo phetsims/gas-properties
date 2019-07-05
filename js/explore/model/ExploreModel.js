@@ -10,11 +10,11 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
+  const IdealGasLawModel = require( 'GAS_PROPERTIES/common/model/IdealGasLawModel' );
   const Tandem = require( 'TANDEM/Tandem' );
 
-  class ExploreModel extends GasPropertiesModel {
+  class ExploreModel extends IdealGasLawModel {
 
     /**
      * @param {Tandem} tandem

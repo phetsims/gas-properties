@@ -14,12 +14,12 @@ define( require => {
   const ExploreViewProperties = require( 'GAS_PROPERTIES/explore/view/ExploreViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
+  const IdealGasLawScreenView = require( 'GAS_PROPERTIES/common/view/IdealGasLawScreenView' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
   const Tandem = require( 'TANDEM/Tandem' );
 
-  class ExploreScreenView extends GasPropertiesScreenView {
+  class ExploreScreenView extends IdealGasLawScreenView {
 
     /**
      * @param {ExploreModel} model

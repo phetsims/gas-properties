@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * GasPropertiesParticleSystemNode renders the particle system for the 'Ideal', 'Explore', and 'Energy' screens.
+ * IdealGasLawParticleSystemNode renders the particle system for screens that are based on the Ideal Gas Law.
  * To optimize the size of canvases, this consists of 2 CanvasNodes; one for particles inside the container, one for
  * particles outside the container. So we use 2 instances of ParticlesNode via composition.
  *
@@ -30,7 +30,7 @@ define( require => {
   const INSIDE_DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )'; // canvas fill for particles INSIDE container
   const OUTSIDE_DEBUG_FILL = 'rgba( 0, 255, 0, 0.1 )'; // canvas fill for particles OUTSIDE container
 
-  class GasPropertiesParticleSystemNode extends Node {
+  class IdealGasLawParticleSystemNode extends Node {
 
     /**
      * @param {ParticleSystem} particleSystem
@@ -104,5 +104,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesParticleSystemNode', GasPropertiesParticleSystemNode );
+  return gasProperties.register( 'IdealGasLawParticleSystemNode', IdealGasLawParticleSystemNode );
 } );

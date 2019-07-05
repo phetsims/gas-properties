@@ -77,14 +77,14 @@ The _Ideal_, _Explore_, and _Energy_ screens are all based on application of the
 
 ### Model
 
-[GasPropertiesModel](TODO) is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some responsibilites to the following sub-models:
+[IdealGasLawModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/IdealGasLawModel.js) is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some responsibilities to the following sub-models:
 
 * [ParticleSystem](https://github.com/phetsims/gas-properties/blob/master/js/common/model/ParticleSystem.js) - responsible for the particle system, including the number of particles `N`
 * [BaseContainer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/BaseContainer.js) - responsible for the container, including its volume `V`
 * [PressureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureModel.js) - responsible for pressure `P`, and the "noise" in the [PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
 * [TemperatureModel](https://github.com/phetsims/gas-properties/blob/master/js/common/model/TemperatureModel.js) - responsible for temperature `T`, and the [Thermometer](https://github.com/phetsims/gas-properties/blob/master/js/common/model/Thermometer.js) 
 
-Each screen has its own subclass of `GasPropertiesModel`. They are [IdealModel](https://github.com/phetsims/gas-properties/blob/master/js/ideal/model/IdealModel.js), [ExploreMode](https://github.com/phetsims/gas-properties/blob/master/js/explore/model/ExploreModel.js), and [EnergyModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/EnergyModel.js). While `IdealModel` and `ExploreModel` have no significant differences or minor variations, the _Energy_ screen has additional features that are implemented by these sub-models of `EnergyModel`:
+Each screen has its own subclass of `IdealGasLawModel`. They are [IdealModel](https://github.com/phetsims/gas-properties/blob/master/js/ideal/model/IdealModel.js), [ExploreMode](https://github.com/phetsims/gas-properties/blob/master/js/explore/model/ExploreModel.js), and [EnergyModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/EnergyModel.js). While `IdealModel` and `ExploreModel` have no significant differences or minor variations, the _Energy_ screen has additional features that are implemented by these sub-models of `EnergyModel`:
 
 * [AverageSpeedModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/AverageSpeedModel.js) - responsible for data in the "Average Speed" accordion box
 * [HistogramsModel](https://github.com/phetsims/gas-properties/blob/master/js/energy/model/HistogramsModel.js) - responsible for data on the "Speed" and "Kinetic Energy" histograms
@@ -95,13 +95,13 @@ All other model components in these screens are straightforward and will not be 
 
 ### View
   
-[GasPropertiesScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesScreenView.js) is the base `ScreenView` for these screens, a subclass of `BaseScreenView`.  Each screen has its own subclass of `GasPropertiesScreenView`.
+[IdealGasLawScreenView](https://github.com/phetsims/gas-properties/blob/master/js/common/view/IdealGasLawScreenView.js) is the base `ScreenView` for these screens, a subclass of `BaseScreenView`.  Each screen has its own subclass of `IdealGasLawScreenView`.
 
-[GasPropertiesContainerNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesContainerNode.js) is the container view for these screens.
+[IdealGasLawContainerNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/IdealGasLawContainerNode.js) is the container view for these screens.
 
-[GasPropertiesParticleSystemNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesParticleSystemNode.js) renders the particles system for these screens. To miminize `Canvas` size, it uses two `ParticleNode` instances, one for particles inside the container, one for particles outside the container.  If you're interested in visualizing the `Canvas` bounds, see the `canvasBounds` query parameter.
+[IdealGasLawParticleSystemNode](https://github.com/phetsims/gas-properties/blob/master/js/common/view/IdealGasLawParticleSystemNode.js) renders the particles system for these screens. To miminize `Canvas` size, it uses two `ParticleNode` instances, one for particles inside the container, one for particles outside the container.  If you're interested in visualizing the `Canvas` bounds, see the `canvasBounds` query parameter.
 
-[GasPropertiesViewProperties](https://github.com/phetsims/gas-properties/blob/master/js/common/view/GasPropertiesViewProperties.js) is the base class for view-specific axon Properties. Each screen has its own subclass of `GasPropertiesViewProperties`.
+[IdealGasLawViewProperties](https://github.com/phetsims/gas-properties/blob/master/js/common/view/IdealGasLawViewProperties.js) is the base class for view-specific axon Properties. Each screen has its own subclass of `IdealGasLawViewProperties`.
 
 All other view components in these screens are straightforward and will not be described here.
 

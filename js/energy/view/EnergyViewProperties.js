@@ -11,9 +11,9 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesViewProperties = require( 'GAS_PROPERTIES/common/view/GasPropertiesViewProperties' );
+  const IdealGasLawViewProperties = require( 'GAS_PROPERTIES/common/view/IdealGasLawViewProperties' );
 
-  class EnergyViewProperties extends GasPropertiesViewProperties {
+  class EnergyViewProperties extends IdealGasLawViewProperties {
 
     constructor() {
       super();

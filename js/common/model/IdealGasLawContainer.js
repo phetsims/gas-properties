@@ -1,7 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * GasPropertiesContainer is the container for the 'Ideal', 'Explore', and 'Energy' screens.  It has a (re)movable lid.
+ * IdealGasLawContainer is the container used in screens that are based on the Ideal Gas Law.
+ * This container has a (re)movable lid.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -22,7 +23,7 @@ define( require => {
   // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
   const WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
 
-  class GasPropertiesContainer extends BaseContainer {
+  class IdealGasLawContainer extends BaseContainer {
 
     /**
      * @param {Object} [options]
@@ -255,5 +256,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesContainer', GasPropertiesContainer );
+  return gasProperties.register( 'IdealGasLawContainer', IdealGasLawContainer );
 } );

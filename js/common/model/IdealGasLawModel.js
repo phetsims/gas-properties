@@ -1,8 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * GasPropertiesModel is the base class for models in the Ideal, Explore, and Energy screens.  It adds functionality
- * related to the Ideal Gas Law.
+ * IdealGasLawModel extends the base model with functionality related to the Ideal Gas Law.
  *
  * This model has subcomponents that handle the quantities involved in the Ideal Gas Law, PV = NkT.  They are:
  *
@@ -25,9 +24,9 @@ define( require => {
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
+  const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
@@ -38,7 +37,7 @@ define( require => {
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  class GasPropertiesModel extends BaseModel {
+  class IdealGasLawModel extends BaseModel {
 
     /**
      * @param {Tandem} tandem
@@ -71,7 +70,7 @@ define( require => {
       this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true );
 
       // @public (read-only)
-      this.container = new GasPropertiesContainer( {
+      this.container = new IdealGasLawContainer( {
         leftWallDoesWork: options.leftWallDoesWork
       } );
 
@@ -420,5 +419,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesModel', GasPropertiesModel );
+  return gasProperties.register( 'IdealGasLawModel', IdealGasLawModel );
 } );

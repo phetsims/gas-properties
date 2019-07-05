@@ -13,19 +13,19 @@ define( require => {
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const Event = require( 'SCENERY/input/Event' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
+  const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   class ContainerResizeDragListener extends DragListener {
 
     /**
-     * @param {GasPropertiesContainer} container
+     * @param {IdealGasLawContainer} container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Node} parentNode
      */
     constructor( container, modelViewTransform, parentNode ) {
-      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );

@@ -1,7 +1,7 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * GasPropertiesScreenView is the base class for ScreenViews in the Ideal, Explore, and Energy screens.
+ * IdealGasLawScreenView is the ScreenView base class for screens that are based on the Ideal Gas Law.
  *
  * Contains these UI components:
  *
@@ -35,13 +35,13 @@ define( require => {
   const GasPropertiesBicyclePumpNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesBicyclePumpNode' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesContainerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesContainerNode' );
   const GasPropertiesHeaterCoolerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesHeaterCoolerNode' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const GasPropertiesOopsDialog = require( 'GAS_PROPERTIES/common/view/GasPropertiesOopsDialog' );
-  const GasPropertiesParticleSystemNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesParticleSystemNode' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GasPropertiesThermometerNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesThermometerNode' );
+  const IdealGasLawContainerNode = require( 'GAS_PROPERTIES/common/view/IdealGasLawContainerNode' );
+  const IdealGasLawModel = require( 'GAS_PROPERTIES/common/model/IdealGasLawModel' );
+  const IdealGasLawParticleSystemNode = require( 'GAS_PROPERTIES/common/view/IdealGasLawParticleSystemNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
@@ -58,17 +58,17 @@ define( require => {
   // strings
   const oopsMaximumTemperatureString = require( 'string!GAS_PROPERTIES/oopsMaximumTemperature' );
 
-  class GasPropertiesScreenView extends BaseScreenView {
+  class IdealGasLawScreenView extends BaseScreenView {
 
     /**
-     * @param {GasPropertiesModel} model
+     * @param {IdealGasLawModel} model
      * @param {Property.<ParticleType>} particleTypeProperty
      * @param {BooleanProperty} sizeVisibleProperty
      * @param {Tandem} tandem
      * @param {Object} [options]
      */
     constructor( model, particleTypeProperty, sizeVisibleProperty, tandem, options ) {
-      assert && assert( model instanceof GasPropertiesModel, `invalid model: ${model}` );
+      assert && assert( model instanceof IdealGasLawModel, `invalid model: ${model}` );
       assert && assert( particleTypeProperty instanceof Property,
         `invalid particleTypeProperty: ${particleTypeProperty}` );
       assert && assert( sizeVisibleProperty instanceof BooleanProperty,
@@ -143,7 +143,7 @@ define( require => {
       }
 
       // Container
-      const containerNode = new GasPropertiesContainerNode( model.container, model.modelViewTransform,
+      const containerNode = new IdealGasLawContainerNode( model.container, model.modelViewTransform,
         model.holdConstantProperty, this.visibleBoundsProperty, {
           resizeGripColor: options.resizeGripColor,
           resizeHandleIsPressedListener: resizeHandleIsPressedListener
@@ -216,7 +216,7 @@ define( require => {
       } );
 
       // The complete system of particles, inside and outside the container
-      const particleSystemNode = new GasPropertiesParticleSystemNode( model.particleSystem, model.modelViewTransform,
+      const particleSystemNode = new IdealGasLawParticleSystemNode( model.particleSystem, model.modelViewTransform,
         model.modelBoundsProperty, model.container.maxBounds );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
@@ -332,5 +332,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesScreenView', GasPropertiesScreenView );
+  return gasProperties.register( 'IdealGasLawScreenView', IdealGasLawScreenView );
 } );

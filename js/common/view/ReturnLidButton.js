@@ -11,7 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
+  const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -22,11 +22,11 @@ define( require => {
   class ReturnLidButton extends RectangularPushButton {
 
     /**
-     * @param {GasPropertiesContainer} container
+     * @param {IdealGasLawContainer} container
      * @param {Object} [options]
      */
     constructor( container, options ) {
-      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
 
       options = _.extend( {
 

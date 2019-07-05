@@ -14,7 +14,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesOopsDialog = require( 'GAS_PROPERTIES/common/view/GasPropertiesOopsDialog' );
-  const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
+  const IdealGasLawScreenView = require( 'GAS_PROPERTIES/common/view/IdealGasLawScreenView' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
@@ -28,7 +28,7 @@ define( require => {
   const oopsPressureLargeString = require( 'string!GAS_PROPERTIES/oopsPressureLarge' );
   const oopsPressureSmallString = require( 'string!GAS_PROPERTIES/oopsPressureSmall' );
 
-  class IdealScreenView extends GasPropertiesScreenView {
+  class IdealScreenView extends IdealGasLawScreenView {
 
     /**
      * @param {IdealModel} model
