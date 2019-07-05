@@ -73,7 +73,7 @@ This section describes base classes that are common to all screens.  You'll find
 
 ## _Ideal_, _Explore_, and _Energy_ screens
 
-The _Ideal_, _Explore_, and _Energy_ screens are all based on application of the Ideal Gas Law. (The _Diffusion_ screen is _not_ based on the Ideal Gas Law.) Code shared by these screens lives in `js/common/`.
+The _Ideal_, _Explore_, and _Energy_ screens are all based on application of the Ideal Gas Law, and their base class names therefore have the prefix "IdealGasLaw". (The _Diffusion_ screen is _not_ based on the Ideal Gas Law.) Code shared by these screens lives in `js/common/`.  
 
 ### Model
 
