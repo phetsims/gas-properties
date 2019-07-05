@@ -200,6 +200,7 @@ define( require => {
    * intersect at their current locations. Is is possible (and acceptable) for two particles to pass through the
    * same point on the way to those location and not collide.
    * @param {Particle[]} particles
+   * REVIEW - is the following type spec correct?
    * @param {*} mutableVectors - collection of mutable vectors, see this.mutableVectors in CollisionDetector constructor
    */
   function doParticleParticleCollisions( particles, mutableVectors ) {
