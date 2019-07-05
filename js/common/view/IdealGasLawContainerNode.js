@@ -2,7 +2,7 @@
 
 //TODO parts of this will be rewritten to address https://github.com/phetsims/gas-properties/issues/125
 /**
- * GasPropertiesContainerNode is the view of the container in the 'Ideal', 'Explorer', and 'Energy' screens.
+ * IdealGasLawContainerNode is the view of the container used in screens that are based on the Ideal Gas Law.
  * This container has mutable width, and a lid that can be moved/removed.
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
@@ -16,9 +16,9 @@ define( require => {
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
+  const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const LidDragListener = require( 'GAS_PROPERTIES/common/view/LidDragListener' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -34,10 +34,10 @@ define( require => {
   const LID_Y_SPEED = -150; // pixels/second
   const LID_ROTATION_SPEED = -50; // degrees/second
 
-  class GasPropertiesContainerNode extends Node {
+  class IdealGasLawContainerNode extends Node {
 
     /**
-     * @param {GasPropertiesContainer} container
+     * @param {IdealGasLawContainer} container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {EnumerationProperty} holdConstantProperty
      * @param {Property.<Bounds2>} visibleBoundsProperty
@@ -45,7 +45,7 @@ define( require => {
      * @constructor
      */
     constructor( container, modelViewTransform, holdConstantProperty, visibleBoundsProperty, options ) {
-      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
@@ -95,7 +95,7 @@ define( require => {
         handleColor: options.lidGripColor
       } );
 
-      assert && assert( !options.children, 'GasPropertiesContainerNode sets children' );
+      assert && assert( !options.children, 'IdealGasLawContainerNode sets children' );
       options = _.extend( {
         children: [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ]
       }, options );
@@ -235,5 +235,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesContainerNode', GasPropertiesContainerNode );
+  return gasProperties.register( 'IdealGasLawContainerNode', IdealGasLawContainerNode );
 } );

@@ -11,15 +11,15 @@ define( require => {
   // modules
   const AverageSpeedModel = require( 'GAS_PROPERTIES/energy/model/AverageSpeedModel' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesModel = require( 'GAS_PROPERTIES/common/model/GasPropertiesModel' );
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
+  const IdealGasLawModel = require( 'GAS_PROPERTIES/common/model/IdealGasLawModel' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const SAMPLE_PERIOD = 1; // sample period for Average Speed and histograms, in ps
 
-  class EnergyModel extends GasPropertiesModel {
+  class EnergyModel extends IdealGasLawModel {
 
     /**
      * @param {Tandem} tandem

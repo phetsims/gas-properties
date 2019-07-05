@@ -11,8 +11,8 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
@@ -130,14 +130,14 @@ define( require => {
     /**
      * Identifies particles that have escaped via the opening in the top of the container, and
      * moves them from insideParticles to outsideParticles.
-     * @param {GasPropertiesContainer} container
+     * @param {IdealGasLawContainer} container
      * @param {NumberProperty} numberOfParticlesProperty - number of particles inside the container
      * @param {Particle[]} insideParticles - particles inside the container
      * @param {Particle[]} outsideParticles - particles outside the container
      * @public
      */
     escapeParticles: function( container, numberOfParticlesProperty, insideParticles, outsideParticles ) {
-      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
       assert && assert( numberOfParticlesProperty instanceof NumberProperty,
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( Array.isArray( insideParticles ), `invalid insideParticles: ${insideParticles}` );

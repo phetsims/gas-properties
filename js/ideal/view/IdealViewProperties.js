@@ -11,9 +11,9 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesViewProperties = require( 'GAS_PROPERTIES/common/view/GasPropertiesViewProperties' );
+  const IdealGasLawViewProperties = require( 'GAS_PROPERTIES/common/view/IdealGasLawViewProperties' );
 
-  class IdealViewProperties extends GasPropertiesViewProperties {
+  class IdealViewProperties extends IdealGasLawViewProperties {
 
     constructor() {
       super();

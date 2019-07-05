@@ -15,7 +15,7 @@ define( require => {
   const EnergyViewProperties = require( 'GAS_PROPERTIES/energy/view/EnergyViewProperties' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesScreenView = require( 'GAS_PROPERTIES/common/view/GasPropertiesScreenView' );
+  const IdealGasLawScreenView = require( 'GAS_PROPERTIES/common/view/IdealGasLawScreenView' );
   const InjectionTemperatureAccordionBox = require( 'GAS_PROPERTIES/energy/view/InjectionTemperatureAccordionBox' );
   const KineticEnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/KineticEnergyAccordionBox' );
   const ParticlesAccordionBox = require( 'GAS_PROPERTIES/common/view/ParticlesAccordionBox' );
@@ -27,7 +27,7 @@ define( require => {
   const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
   const VBOX_SPACING = 10;
 
-  class EnergyScreenView extends GasPropertiesScreenView {
+  class EnergyScreenView extends IdealGasLawScreenView {
 
     /**
      * @param {EnergyModel} model

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ParticleSystem is a sub-model of GasPropertiesModel. It is responsible for the particle system, including
+ * ParticleSystem is a sub-model of IdealGasModel. It is responsible for the particle system, including
  * the N (number of particles) component of the Ideal Gas Law, PV = NkT.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -15,9 +15,9 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesContainer = require( 'GAS_PROPERTIES/common/model/GasPropertiesContainer' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
+  const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
@@ -162,11 +162,11 @@ define( require => {
 
     /**
      * Allows particles to escape from the opening in the top of the container.
-     * @param {GasPropertiesContainer} container
+     * @param {IdealGasLawContainer} container
      * @public
      */
     escapeParticles( container ) {
-      assert && assert( container instanceof GasPropertiesContainer, `invalid container: ${container}` );
+      assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
 
       if ( container.isLidOpen() ) {
 

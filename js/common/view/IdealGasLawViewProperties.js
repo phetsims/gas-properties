@@ -1,8 +1,8 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
 /**
- * GasPropertiesViewProperties is the base class for view-specific Properties that are common to the
- * Intro, Explore, and Energy screens.
+ * IdealGasLawViewProperties is the base class for view-specific Properties that are common to the
+ * screens that are based on the Ideal Gas Law.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,7 +15,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
 
-  class GasPropertiesViewProperties {
+  class IdealGasLawViewProperties {
 
     constructor() {
 
@@ -37,5 +37,5 @@ define( require => {
     }
   }
 
-  return gasProperties.register( 'GasPropertiesViewProperties', GasPropertiesViewProperties );
+  return gasProperties.register( 'IdealGasLawViewProperties', IdealGasLawViewProperties );
 } );

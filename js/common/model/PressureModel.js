@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PressureModel is a sub-model of GasPropertiesModel. It is responsible for the P (pressure) component of the
+ * PressureModel is a sub-model of IdealGasModel. It is responsible for the P (pressure) component of the
  * Ideal Gas Law (PV = NkT) and for the pressure gauge.
  *
  * @author Chris Malley (PixelZoom, Inc.)
