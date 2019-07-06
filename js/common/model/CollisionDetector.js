@@ -5,7 +5,7 @@
  * rigid bodies. It is a perfectly-elastic collision model, where there is no net loss of kinetic energy.
  *
  * The algorithms for particle-particle collisions and particle-container collisions were adapted from the Java
- * implementation of Gas Properties. They differs from the standard rigid-body collision model as described in (e.g.)
+ * implementation of Gas Properties. They differ from the standard rigid-body collision model as described in (e.g.)
  * http://web.mst.edu/~reflori/be150/Dyn%20Lecture%20Videos/Impact%20Particles%201/Impact%20Particles%201.pdf.
  * For historical background on how the Java implementation informed this implementation, see:
  * https://github.com/phetsims/gas-properties/issues/37
@@ -200,6 +200,7 @@ define( require => {
    * intersect at their current locations. Is is possible (and acceptable) for two particles to pass through the
    * same point on the way to those location and not collide.
    * @param {Particle[]} particles
+   * REVIEW - is the following type spec correct?
    * @param {*} mutableVectors - collection of mutable vectors, see this.mutableVectors in CollisionDetector constructor
    */
   function doParticleParticleCollisions( particles, mutableVectors ) {

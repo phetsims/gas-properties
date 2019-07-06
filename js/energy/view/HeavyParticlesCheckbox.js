@@ -17,6 +17,7 @@ define( require => {
 
   class HeavyParticlesCheckbox extends SpeciesHistogramCheckbox {
 
+    // REVIEW: options don't appear to be used
     /**
      * @param {BooleanProperty} heavyVisibleProperty
      * @param {ModelViewTransform2} modelViewTransform
