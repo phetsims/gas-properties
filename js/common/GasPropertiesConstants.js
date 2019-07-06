@@ -66,7 +66,9 @@ define( require => {
       fill: GasPropertiesColorProfile.panelFillProperty,
       stroke: GasPropertiesColorProfile.panelStrokeProperty,
       expandCollapseButtonOptions: {
-        sideLength: 20
+        sideLength: 20,
+        touchAreaXDilation: 6,
+        touchAreaYDilation: 6
       }
     },
 
