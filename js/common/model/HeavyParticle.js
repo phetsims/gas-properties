@@ -16,6 +16,9 @@ define( require => {
 
   class HeavyParticle extends Particle {
 
+    // REVIEW: This seems like it has potential to be abused, such as passing in options that would make this "Heavy"
+    // particle lighter than LightParticle.  As far as I could tell, the code doesn't vary these options, at least not
+    // all of them.  Perhaps a factory function on the Particle class would be better.
     /**
      * @param {Object} [options] see Particle
      */
