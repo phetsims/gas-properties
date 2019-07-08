@@ -50,6 +50,7 @@ define( require => {
       particle.dispose();
     },
 
+    // REVIEW: The name of this is a little inconsistent with removeParticle - maybe something like 'removeRecentParticles'
     /**
      * Removes the last n particles from an array and disposes them.
      * @param {number} n

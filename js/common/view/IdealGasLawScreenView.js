@@ -220,6 +220,7 @@ define( require => {
         model.modelBoundsProperty, model.container.maxBounds );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
+      // REVIEW: another unused param (if we decide to remove these).
       model.particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
         if ( !this.model.isPlayingProperty.value ) {
           particleSystemNode.update();
