@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/137, move to common code?
 /**
  * FixedWidthNode is a Node that has a fixed width. This is used for the content in Panels and AccordionBoxes.
  * It does not support dynamic content bounds, and does not support decoration via addChild.
