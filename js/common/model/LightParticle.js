@@ -16,10 +16,7 @@ define( require => {
 
   class LightParticle extends Particle {
 
-    // REVIEW: This seems like it has potential to be abused, such as passing in options that would make this "Light"
-    // particle heavier than HeavyParticle.  As far as I could tell, the code doesn't vary these options, at least not
-    // all of them.  Perhaps a factory function on the Particle class would be better.
-
+    // TODO #143 prevent override of any options
     /**
      * @param {Object} [options] see Particle
      */

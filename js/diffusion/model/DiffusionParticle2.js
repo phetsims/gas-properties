@@ -18,6 +18,7 @@ define( require => {
 
   class DiffusionParticle2 extends Particle {
 
+    //TODO #143 prevent override of colorProperty and highlightColorProperty
     /**
      * @param {Object} [options] see Particle
      */
