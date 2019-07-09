@@ -42,8 +42,8 @@ define( require => {
 
       options = _.extend( {
 
-        // REVIEW: It'd be nice to have an idea of where these value came from, and perhaps even derive them from the expected layout bounds
         // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
+        // Determined empirically, and dependent on the ScreenView's layoutBounds.
         modelOriginOffset: new Vector2( 645, 475 ),
 
         // Stopwatch initial location (in view coordinates!), determined empirically.
