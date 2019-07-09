@@ -15,6 +15,7 @@ define( require => {
   // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -26,8 +27,8 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {
-        mass: 1, // AMU
-        radius: 100, // pm
+        mass: GasPropertiesConstants.MASS_RANGE.defaultValue, // AMU
+        radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue, // pm
         colorProperty: null, // {Property.<ColorDef>|null}
         highlightColorProperty: null // {Property.<ColorDef>|null} color for specular highlight
       }, options );
