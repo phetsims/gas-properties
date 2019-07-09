@@ -131,7 +131,7 @@ define( require => {
       // Update data if initial temperature settings are changed while the sim is paused.
       Property.multilink(
         [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
-        ( leftInitialTemperature, rightInitialTemperature ) => {
+        () => {
           if ( !this.isPlayingProperty.value ) {
             this.updateData();
           }
