@@ -6,7 +6,7 @@
  * values, to make the gauge look more realistic.
  *
  * NOTE: In #111 (code review), it was noted that this class has "a fair likelihood of being reused". If you do
- * review this, you will need to add support for dispose.  It is not included here because instances of this
+ * reuse this class, you will need to add support for dispose.  It is not included here because instances of this
  * class persist for the lifetime of the sim, as noted in implementation-notes.md.
  *
  * @author Chris Malley (PixelZoom, Inc.)
