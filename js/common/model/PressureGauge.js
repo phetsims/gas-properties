@@ -5,6 +5,10 @@
  * present the pressure, and for deriving pressure in those units. Optionally adds a bit of noise to the displayed
  * values, to make the gauge look more realistic.
  *
+ * NOTE: In #111 (code review), it was noted that this class has "a fair likelihood of being reused". If you do
+ * review this, you will need to add support for dispose.  It is not included here because instances of this
+ * class persist for the lifetime of the sim, as noted in implementation-notes.md.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -44,9 +48,6 @@ define( require => {
         `invalid temperatureProperty: ${temperatureProperty}` );
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
-
-      // REVIEW: Since this links to properties that originate externally, and is something that has a fair likelihood
-      // of being reused, it should have a dispose with unlinks or documentation that explains why it isn't needed.
 
       // @public pressure in kPa with noise added. This is not derived from pressureProperty,
       // because it needs to noise on step, not when pressureProperty changes.
