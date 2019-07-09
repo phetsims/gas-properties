@@ -16,19 +16,15 @@ define( require => {
 
   class HeavyParticle extends Particle {
 
-    // TODO #143 prevent override of any options
-    /**
-     * @param {Object} [options] see Particle
-     */
-    constructor( options ) {
-      super( _.extend( {
+    constructor() {
+      super( {
 
         // superclass options
         mass: 28, // equivalent to N2 (nitrogen), in AMU, rounded to the closest integer
         radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS, // pm
         colorProperty: GasPropertiesColorProfile.heavyParticleColorProperty,
         highlightColorProperty: GasPropertiesColorProfile.heavyParticleHighlightColorProperty
-      }, options ) );
+      } );
     }
   }
 

@@ -71,13 +71,13 @@ define( require => {
       } );
 
       // Synchronize particle counts and arrays.
-      const createHeavyParticle = ( options ) => new HeavyParticle( options );
+      const createHeavyParticle = () => new HeavyParticle();
       this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
         assert && assert( GasPropertiesUtils.isArrayOf( this.heavyParticles, HeavyParticle ),
           'heavyParticles should contain only HeavyParticle' );
       } );
-      const createLightParticle = ( options ) => new LightParticle( options );
+      const createLightParticle = () => new LightParticle();
       this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
         this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, createLightParticle );
         assert && assert( GasPropertiesUtils.isArrayOf( this.lightParticles, LightParticle ),

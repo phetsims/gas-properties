@@ -18,11 +18,16 @@ define( require => {
 
   class DiffusionParticle2 extends Particle {
 
-    //TODO #143 prevent override of colorProperty and highlightColorProperty
     /**
      * @param {Object} [options] see Particle
      */
     constructor( options ) {
+
+      if ( options ) {
+        assert && assert( options.colorProperty === undefined, 'DiffusionParticle2 sets colorProperty' );
+        assert && assert( options.highlightColorProperty === undefined, 'DiffusionParticle2 sets highlightColorProperty' );
+      }
+
       super( _.extend( {
 
         // superclass options

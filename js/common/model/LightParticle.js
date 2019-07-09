@@ -16,19 +16,15 @@ define( require => {
 
   class LightParticle extends Particle {
 
-    // TODO #143 prevent override of any options
-    /**
-     * @param {Object} [options] see Particle
-     */
-    constructor( options ) {
-      super( _.extend( {
+    constructor() {
+      super( {
 
         // superclass options
         mass: 4, // equivalent to He (helium), in AMU, rounded to the closest integer
         radius: GasPropertiesConstants.LIGHT_PARTICLES_RADIUS, // pm
         colorProperty: GasPropertiesColorProfile.lightParticleColorProperty,
         highlightColorProperty: GasPropertiesColorProfile.lightParticleHighlightColorProperty
-      }, options ) );
+      } );
     }
   }
 
