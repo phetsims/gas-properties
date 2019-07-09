@@ -215,7 +215,7 @@ define( require => {
           this.addParticles( delta, particles, createParticle );
         }
         else if ( delta < 0 ) {
-          ParticleUtils.removeParticles( -delta, particles );
+          ParticleUtils.removeLastParticles( -delta, particles );
         }
         assert && assert( particles.length === newValue, 'particles array is out of sync' );
       }

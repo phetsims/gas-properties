@@ -57,7 +57,7 @@ define( require => {
      * @param {Particle[]} particles
      * @public
      */
-    removeParticles: function( n, particles ) {
+    removeLastParticles: function( n, particles ) {
       assert && assert( n <= particles.length,
         `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
@@ -75,7 +75,7 @@ define( require => {
     removeAllParticles: function( particles ) {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
-      ParticleUtils.removeParticles( particles.length, particles );
+      ParticleUtils.removeLastParticles( particles.length, particles );
     },
 
     /**

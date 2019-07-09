@@ -232,7 +232,7 @@ define( require => {
           addParticles( delta, locationBounds, settings, particles, createParticle );
         }
         else {
-          ParticleUtils.removeParticles( -delta, particles );
+          ParticleUtils.removeLastParticles( -delta, particles );
         }
 
         // If paused, update things that would normally be handled by step.
