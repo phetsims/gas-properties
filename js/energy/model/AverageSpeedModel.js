@@ -51,12 +51,12 @@ define( require => {
       this.lightAverageSpeedSum = 0; // sum of samples for light particles
 
       // Reset sample data when the play state changes, so that we can update immediately if manually stepping.
-      isPlayingProperty.link( isPlaying => {
+      isPlayingProperty.link( () => {
         this.clearSamples();
       } );
 
       // If the number of particles changes while paused, sample the current state and update immediately.
-      particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
+      particleSystem.numberOfParticlesProperty.link( () => {
         if ( !isPlayingProperty.value ) {
           this.step( this.samplePeriod ); // using the sample period causes an immediate update
         }

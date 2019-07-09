@@ -43,8 +43,7 @@ define( require => {
       } );
 
       // When the stopwatch visibility changes, stop it and reset its value.
-      // REVIEW: visible param is unused, can be removed
-      this.visibleProperty.link( visible => {
+      this.visibleProperty.link( () => {
         this.isRunningProperty.value = false;
         this.timeProperty.value = 0;
       } );

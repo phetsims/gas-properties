@@ -81,7 +81,7 @@ define( require => {
       this.numberOfSamples = 0;
 
       // Clear sample data when the play state changes, so that we can update immediately if manually stepping.
-      isPlayingProperty.link( isPlaying => {
+      isPlayingProperty.link( () => {
         this.clearSamples();
       } );
 

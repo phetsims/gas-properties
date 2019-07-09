@@ -119,7 +119,7 @@ define( require => {
       const particleSystemNode = new DiffusionParticleSystemNode( model );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
-      model.numberOfParticlesProperty.link( numberOfParticles => {
+      model.numberOfParticlesProperty.link( () => {
         if ( !this.model.isPlayingProperty.value ) {
           particleSystemNode.update();
         }

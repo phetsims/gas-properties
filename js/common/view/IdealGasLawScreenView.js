@@ -199,7 +199,7 @@ define( require => {
       ] );
 
       // Cancel interaction with the pump when particle type changes.
-      particleTypeProperty.link( particleType => {
+      particleTypeProperty.link( () => {
         bicyclePumpsToggleNode.interruptSubtreeInput();
       } );
 
@@ -220,8 +220,7 @@ define( require => {
         model.modelBoundsProperty, model.container.maxBounds );
 
       // If the number of particles changes while the sim is paused, redraw the particle system.
-      // REVIEW: another unused param (if we decide to remove these).
-      model.particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
+      model.particleSystem.numberOfParticlesProperty.link( () => {
         if ( !this.model.isPlayingProperty.value ) {
           particleSystemNode.update();
         }

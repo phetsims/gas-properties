@@ -64,13 +64,11 @@ define( require => {
       } );
 
       // Changing the running state resets the collision count.
-      // REVIEW: could omit the param and just use () => this.resetCount()
-      this.isRunningProperty.link( isRunning => this.resetCount() );
+      this.isRunningProperty.link( () => this.resetCount() );
 
       // Changing visibility or sample period stops the counter and resets the collision count.
-      // REVIEW: could omit params in both linked function below.
-      this.visibleProperty.link( visible => this.stopAndResetCount() );
-      this.samplePeriodProperty.link( samplePeriod => this.stopAndResetCount() );
+      this.visibleProperty.link( () => this.stopAndResetCount() );
+      this.samplePeriodProperty.link( () => this.stopAndResetCount() );
     }
 
     /**
