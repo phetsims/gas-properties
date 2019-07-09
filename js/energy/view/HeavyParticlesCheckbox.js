@@ -17,13 +17,11 @@ define( require => {
 
   class HeavyParticlesCheckbox extends SpeciesHistogramCheckbox {
 
-    // REVIEW: options don't appear to be used
     /**
      * @param {BooleanProperty} heavyVisibleProperty
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
      */
-    constructor( heavyVisibleProperty, modelViewTransform, options ) {
+    constructor( heavyVisibleProperty, modelViewTransform ) {
       assert && assert( heavyVisibleProperty instanceof BooleanProperty,
         `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
