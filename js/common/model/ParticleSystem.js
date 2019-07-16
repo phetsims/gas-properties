@@ -267,14 +267,15 @@ define( require => {
         // Position the particle just inside the container, accounting for radius.
         particle.setLocationXY( this.particleEntryLocation.x - particle.radius, this.particleEntryLocation.y );
 
-        // Set the initial velocity
-        particle.setVelocityPolar(
-          // Speed is |v| = sqrt( 3kT / m )
-          Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass ),
+        // Initial speed, |v| = sqrt( 3kT / m )
+        const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass );
+        assert && assert( typeof speed === 'number' && isFinite( speed ) && speed >= 0,
+          `invalid speed: ${speed}, computed using temperature=${temperatures[ i ]}, mass=${particle.mass}` );
 
-          // Angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
-          Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PARTICLE_DISPERSION_ANGLE
-        );
+        // Angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
+        const angle = Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PARTICLE_DISPERSION_ANGLE;
+
+        particle.setVelocityPolar( speed, angle );
 
         particles.push( particle );
       }
