@@ -93,7 +93,7 @@ define( require => {
       // redistribute particles in the new container width.
       let startContainerWidth = model.container.widthProperty.value;
 
-      // Listener for when the container's resize handle is pressed.
+      // Listener for when the container's resize handle is pressed or released.
       let resizeHandleIsPressedListener = null;
       if ( model.container.leftWallDoesWork ) {
 
