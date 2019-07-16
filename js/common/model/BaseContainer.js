@@ -75,7 +75,8 @@ define( require => {
           valueType: Bounds2
         } );
 
-      // @public (read-only) maximum inside bounds, in pm.  Used for sizing CanvasNode.
+      // @public (read-only) maximum inside bounds, in pm.
+      // Used for sizing the CanvasNode that draws the particle system inside the container.
       this.maxBounds = new Bounds2(
         this.location.x - this.widthRange.max, this.location.y,
         this.location.x, this.location.y + this.height
