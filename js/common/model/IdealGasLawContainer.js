@@ -76,7 +76,7 @@ define( require => {
       this.hoseLocation = this.particleEntryLocation.plusXY( this.wallThickness, 0 );
 
       // @public {number} desired width of the container, in pm.
-      // Set this to animate width change with a speed limit. See #90.
+      // Set this to impose an animated speed limit on decreasing width. See #90.
       this.desiredWidth = this.widthProperty.value;
 
       // @private {number} previous location of the left wall
