@@ -43,10 +43,14 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.histogramsModel = new HistogramsModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD );
+      this.histogramsModel = new HistogramsModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD, {
+        tandem: tandem.createTandem( 'histogramsModel' )
+      } );
 
       // @public
-      this.averageSpeedModel = new AverageSpeedModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD );
+      this.averageSpeedModel = new AverageSpeedModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD, {
+        tandem: tandem.createTandem( 'averageSpeedModel' )
+      } );
     }
 
     /**

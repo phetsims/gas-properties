@@ -58,27 +58,36 @@ define( require => {
       super( tandem );
 
       // @public the quantity to hold constant
-      this.holdConstantProperty = new EnumerationProperty( HoldConstant, options.holdConstant );
+      this.holdConstantProperty = new EnumerationProperty( HoldConstant, options.holdConstant, {
+        tandem: tandem.createTandem( 'holdConstantProperty' )
+      } );
 
       // @public the factor to heat or cool the contents of the container.
       // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
       this.heatCoolFactorProperty = new NumberProperty( 0, {
-        range: new Range( -1, 1 )
+        range: new Range( -1, 1 ),
+        tandem: tandem.createTandem( 'heatCoolFactorProperty' ),
+        phetioStudioControl: false
       } );
 
       // @public whether particle-particle collisions are enabled
-      this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true );
+      this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'particleParticleCollisionsEnabledProperty' )
+      } );
 
       // @public (read-only)
       this.container = new IdealGasLawContainer( {
-        leftWallDoesWork: options.leftWallDoesWork
+        leftWallDoesWork: options.leftWallDoesWork,
+        tandem: tandem.createTandem( 'container' )
       } );
 
       // @public (read-only)
       this.particleSystem = new ParticleSystem(
         () => this.temperatureModel.getInitialTemperature(),
         this.particleParticleCollisionsEnabledProperty,
-        this.container.particleEntryLocation
+        this.container.particleEntryLocation, {
+          tandem: tandem.createTandem( 'particleSystem' )
+        }
       );
 
       // @public (read-only)
@@ -91,7 +100,9 @@ define( require => {
       // @public (read-only) sub-model responsible for temperature T
       this.temperatureModel = new TemperatureModel(
         this.particleSystem.numberOfParticlesProperty, // N
-        () => this.particleSystem.getAverageKineticEnergy() // KE
+        () => this.particleSystem.getAverageKineticEnergy(), { // KE
+          tandem: tandem.createTandem( 'temperatureModel' )
+        }
       );
 
       // @public (read-only) sub-model responsible for pressure P
@@ -100,14 +111,17 @@ define( require => {
         this.particleSystem.numberOfParticlesProperty, // N
         this.container.volumeProperty, // V
         this.temperatureModel.temperatureProperty, // T
-        () => { this.container.blowLidOff(); }
+        () => { this.container.blowLidOff(); }, {
+          tandem: tandem.createTandem( 'pressureModel' )
+        }
       );
 
       // @public (read-only)
       this.collisionCounter = null;
       if ( options.hasCollisionCounter ) {
         this.collisionCounter = new CollisionCounter( this.collisionDetector, {
-          location: new Vector2( 40, 15 ) // view coordinates! determined empirically
+          location: new Vector2( 40, 15 ), // view coordinates! determined empirically
+          tandem: tandem.createTandem( 'collisionCounter' )
         } );
       }
 

@@ -12,13 +12,19 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const NullableIO = require( 'TANDEM/types/NullableIO' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
   const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const AVERAGE_SPEED_PROPERTY_OPTIONS = {
+    units: 'pm/ps',
     isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
-    units: 'pm/ps'
+    phetioType: PropertyIO( NullableIO( NumberIO ) ),
+    phetioReadOnly: true // derived from the state of the particle system
   };
 
   class AverageSpeedModel {
@@ -27,12 +33,19 @@ define( require => {
      * @param {ParticleSystem} particleSystem
      * @param {BooleanProperty} isPlayingProperty
      * @param {number} samplePeriod - data is averaged over this period, in ps
+     * @param {Object} [options]
      */
-    constructor( particleSystem, isPlayingProperty, samplePeriod ) {
+    constructor( particleSystem, isPlayingProperty, samplePeriod, options ) {
       assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
       assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       // @private
       this.particleSystem = particleSystem;
@@ -41,8 +54,14 @@ define( require => {
 
       // @public (read-only) {Property.<number|null>}
       // average speed of particle species in the container, in pm/ps, null when the container is empty
-      this.heavyAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
-      this.lightAverageSpeedProperty = new Property( null, AVERAGE_SPEED_PROPERTY_OPTIONS );
+      this.heavyAverageSpeedProperty = new Property( null, _.extend( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'heavyAverageSpeedProperty' ),
+        phetioDocumentation: 'average speed of heavy particles in the container'
+      } ) );
+      this.lightAverageSpeedProperty = new Property( null, _.extend( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'lightAverageSpeedProperty' ),
+        phetioDocumentation: 'average speed of light particles in the container'
+      } ) );
 
       // @private used internally to smooth the average speed computation
       this.dtAccumulator = 0; // accumulated dts while samples were taken

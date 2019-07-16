@@ -12,6 +12,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
 
@@ -24,22 +25,33 @@ define( require => {
 
       options = _.extend( {
         location: Vector2.ZERO,
-        visible: false
+        visible: false,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // @public location of the stopwatch, in view coordinates
-      this.locationProperty = new Vector2Property( options.location );
+      this.locationProperty = new Vector2Property( options.location, {
+        tandem: options.tandem.createTandem( 'locationProperty' )
+      } );
 
       // @public whether the stopwatch is visible
-      this.visibleProperty = new BooleanProperty( options.visible );
+      this.visibleProperty = new BooleanProperty( options.visible, {
+        tandem: options.tandem.createTandem( 'visibleProperty' )
+      } );
 
       // @public whether the stopwatch is running
-      this.isRunningProperty = new BooleanProperty( false );
+      this.isRunningProperty = new BooleanProperty( false, {
+        tandem: options.tandem.createTandem( 'isRunningProperty' )
+      } );
 
       // @public (read-only) time displayed on the stopwatch, in ps
       this.timeProperty = new NumberProperty( 0, {
         isValidValue: value => ( value >= 0 ),
-        units: 'ps'
+        units: 'ps',
+        tandem: options.tandem.createTandem( 'timeProperty' ),
+        phetioReadOnly: true
       } );
 
       // When the stopwatch visibility changes, stop it and reset its value.

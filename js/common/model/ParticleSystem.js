@@ -13,14 +13,17 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -34,14 +37,21 @@ define( require => {
      * @param {function:number} getInitialTemperature - gets the temperature used to compute initial velocity magnitude
      * @param {BooleanProperty} collisionsEnabledProperty - where particle-particle collisions are enabled
      * @param {Vector2} particleEntryLocation - point where the particles enter the container
+     * @param {Object} [options]
      */
-    constructor( getInitialTemperature, collisionsEnabledProperty, particleEntryLocation ) {
+    constructor( getInitialTemperature, collisionsEnabledProperty, particleEntryLocation, options ) {
       assert && assert( typeof getInitialTemperature === 'function',
         `invalid getInitialTemperature: ${getInitialTemperature}` );
       assert && assert( collisionsEnabledProperty instanceof BooleanProperty,
         `invalid collisionsEnabledProperty: ${collisionsEnabledProperty}` );
       assert && assert( particleEntryLocation instanceof Vector2,
         `invalid particleEntryLocation: ${particleEntryLocation}` );
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       // @private
       this.getInitialTemperature = getInitialTemperature;
@@ -61,13 +71,15 @@ define( require => {
       // @public the number of heavy particles inside the container
       this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
-        range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE
+        range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
+        tandem: options.tandem.createTandem( 'numberOfHeavyParticlesProperty' )
       } );
 
       // @public the number of light particles inside the container
       this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
-        range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE
+        range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
+        tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' )
       } );
 
       // Synchronize particle counts and arrays.
@@ -98,9 +110,10 @@ define( require => {
             'lightParticles not been populated yet' );
           return numberOfHeavyParticles + numberOfLightParticles;
         }, {
-          numberType: 'Integer',
+          phetioType: DerivedPropertyIO( NumberIO ),
           valueType: 'number',
-          isValidValue: value => value >= 0
+          isValidValue: value => value >= 0,
+          tandem: options.tandem.createTandem( 'numberOfParticlesProperty' )
         }
       );
     }

@@ -15,6 +15,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -33,7 +34,10 @@ define( require => {
       options = _.extend( {
 
         // true if the left wall does work on particles, as in the Explore screen
-        leftWallDoesWork: false
+        leftWallDoesWork: false,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       super( options );
@@ -42,7 +46,10 @@ define( require => {
       this.leftWallDoesWork = options.leftWallDoesWork;
 
       // @public whether the lid is on the container
-      this.lidIsOnProperty = new BooleanProperty( true );
+      this.lidIsOnProperty = new BooleanProperty( true, {
+        tandem: options.tandem.createTandem( 'lidIsOnProperty' ),
+        phetioReadOnly: true
+      } );
 
       // @public (read-only) lid thickness, in pm
       this.lidThickness = 175;
@@ -66,7 +73,9 @@ define( require => {
 
         // range changes dynamically with width of container
         isValidValue: value => ( value >= this.minLidWidth && value <= this.getMaxLidWidth() ),
-        units: 'pm'
+        units: 'pm',
+        tandem: options.tandem.createTandem( 'lidWidthProperty' ),
+        phetioStudioControl: false // because the range is dynamic
       } );
 
       // @public (read-only) particles enter the container here, on the inside of the container, in pm

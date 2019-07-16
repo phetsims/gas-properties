@@ -9,13 +9,17 @@ define( require => {
   'use strict';
 
   // modules
+  const ArrayIO = require( 'TANDEM/types/ArrayIO' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
   const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class HistogramsModel {
 
@@ -23,12 +27,19 @@ define( require => {
      * @param {ParticleSystem} particleSystem
      * @param {BooleanProperty} isPlayingProperty
      * @param {number} samplePeriod - data is averaged over this period, in ps
+     * @param {Object} [options]
      */
-    constructor( particleSystem, isPlayingProperty, samplePeriod ) {
+    constructor( particleSystem, isPlayingProperty, samplePeriod, options ) {
       assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
       assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       // @private
       this.particleSystem = particleSystem;
@@ -47,22 +58,45 @@ define( require => {
       }
 
       const binCountsPropertyOptions = {
-        isValidValue: value => ( Array.isArray( value ) && value.length === this.numberOfBins )
+        isValidValue: value => ( Array.isArray( value ) && value.length === this.numberOfBins ),
+        phetioType: PropertyIO( ArrayIO( NumberIO ) ),
+        phetioReadOnly: true // derived from the state of the particle system
       };
 
       // @public (read-only) Speed bin counts
-      this.heavySpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
-      this.lightSpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
-      this.allSpeedBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
+      this.heavySpeedBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+        tandem: options.tandem.createTandem( 'heavySpeedBinCountsProperty' ),
+        phetioDocumentation: 'Speed histogram bin counts for heavy particles'
+      } ) );
+      this.lightSpeedBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+        tandem: options.tandem.createTandem( 'lightSpeedBinCountsProperty' ),
+        phetioDocumentation: 'Speed histogram bin counts for light particles'
+      } ) );
+      this.allSpeedBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+        tandem: options.tandem.createTandem( 'allSpeedBinCountsProperty' ),
+        phetioDocumentation: 'Speed histogram bin counts for all particles'
+      } ) );
 
       // @public (read-only) Kinetic Energy bin counts
-      this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
-      this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
-      this.allKineticEnergyBinCountsProperty = new Property( emptyBins, binCountsPropertyOptions );
+      this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+        tandem: options.tandem.createTandem( 'heavyKineticEnergyBinCountsProperty' ),
+        phetioDocumentation: 'Kinetic Energy histogram bin counts for heavy particles'
+      } ) );
+      this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+        tandem: options.tandem.createTandem( 'lightKineticEnergyBinCountsProperty' ),
+        phetioDocumentation: 'Kinetic Energy histogram bin counts for light particles'
+      } ) );
+      this.allKineticEnergyBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+        tandem: options.tandem.createTandem( 'allKineticEnergyBinCountsProperty' ),
+        phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
+      } ) );
 
       // @public (read-only) the y-axis scale for all histograms
       this.yScaleProperty = new NumberProperty( GasPropertiesConstants.HISTOGRAM_LINE_SPACING, {
-        isValidValue: value => ( value >= GasPropertiesConstants.HISTOGRAM_LINE_SPACING )
+        isValidValue: value => ( value >= GasPropertiesConstants.HISTOGRAM_LINE_SPACING ),
+        tandem: options.tandem.createTandem( 'yScaleProperty' ),
+        phetioReadOnly: true,
+        phetioDocumentation: 'scale of the y axis for the Speed and Kinetic Energy histograms'
       } );
 
       // @public emits when the bin counts have been updated

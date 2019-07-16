@@ -13,9 +13,13 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const NullableIO = require( 'TANDEM/types/NullableIO' );
   const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
 
   // constants
@@ -28,12 +32,19 @@ define( require => {
     /**
      * @param {Property.<number>} numberOfParticlesProperty
      * @param {function:number} getAverageKineticEnergy
+     * @param {Object} [options]
      */
-    constructor( numberOfParticlesProperty, getAverageKineticEnergy ) {
+    constructor( numberOfParticlesProperty, getAverageKineticEnergy, options ) {
       assert && assert( numberOfParticlesProperty instanceof Property,
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( typeof getAverageKineticEnergy === 'function',
         `invalid getAverageKineticEnergy: ${getAverageKineticEnergy}` );
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       // @private
       this.numberOfParticlesProperty = numberOfParticlesProperty;
@@ -41,22 +52,33 @@ define( require => {
 
       // @public {Property.<number|null>} T, temperature in the container, in K, null when the container is empty
       this.temperatureProperty = new Property( null, {
+        units: 'K',
         isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
-        units: 'K'
+        phetioType: PropertyIO( NullableIO( NumberIO ) ),
+        tandem: options.tandem.createTandem( 'temperatureProperty' ) ,
+        phetioReadOnly: true, // value is derived from state of particle system
+        phetioDocumentation: 'temperature in K'
       } );
 
       // @public whether initial temperature is controlled by the user
-      this.controlTemperatureEnabledProperty = new BooleanProperty( false );
+      this.controlTemperatureEnabledProperty = new BooleanProperty( false, {
+        tandem: options.tandem.createTandem( 'controlTemperatureEnabledProperty' ),
+        phetioDocumentation: 'indicates whether initial temperature is controlled by the user'
+      } );
 
       // @public initial temperature of particles added to the container, in K
       // Ignored if !controlTemperatureEnabledProperty.value
       this.initialTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
         range: INITIAL_TEMPERATURE_RANGE,
-        units: 'K'
+        units: 'K',
+        tandem: options.tandem.createTandem( 'initialTemperatureProperty' ),
+        phetioDocumentation: 'temperature used to determine the initial speed of particles when controlled by the user'
       } );
 
       // @public (read-only) thermometer that displays temperatureProperty with a choice of units
-      this.thermometer = new Thermometer( this.temperatureProperty );
+      this.thermometer = new Thermometer( this.temperatureProperty, {
+        tandem: options.tandem.createTandem( 'thermometer' )
+      } );
     }
 
     /**

@@ -64,10 +64,14 @@ define( require => {
       } );
 
       // @public is the sim playing?
-      this.isPlayingProperty = new BooleanProperty( true );
+      this.isPlayingProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'isPlayingProperty' )
+      } );
 
       // @public is the sim running in slow motion?
-      this.isSlowMotionProperty = new BooleanProperty( false );
+      this.isSlowMotionProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'isSlowMotionProperty' )
+      } );
 
       // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
       this.timeTransform = null;
@@ -79,7 +83,8 @@ define( require => {
 
       // @public (read-only)
       this.stopwatch = new Stopwatch( {
-        location: options.stopwatchLocation
+        location: options.stopwatchLocation,
+        tandem: tandem.createTandem( 'stopwatch' )
       } );
     }
 

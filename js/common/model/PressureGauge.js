@@ -16,6 +16,7 @@ define( require => {
 
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -24,9 +25,11 @@ define( require => {
   const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const LinearFunction = require( 'DOT/LinearFunction' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
@@ -40,8 +43,9 @@ define( require => {
      * @param {NumberProperty} pressureProperty - pressure in the container, in kPa
      * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K, null if empty container
      * @param {EnumerationProperty} holdConstantProperty - quantity to be held constant, influences noise
+     * @param {Object} [options]
      */
-    constructor( pressureProperty, temperatureProperty, holdConstantProperty ) {
+    constructor( pressureProperty, temperatureProperty, holdConstantProperty, options ) {
       assert && assert( pressureProperty instanceof NumberProperty,
         `invalid pressureProperty: ${pressureProperty}` );
       assert && assert( temperatureProperty instanceof Property,
@@ -49,11 +53,20 @@ define( require => {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
 
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
+
       // @public pressure in kPa with noise added. This is not derived from pressureProperty,
       // because it needs to noise on step, not when pressureProperty changes.
       this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
         units: 'kPa',
-        isValidValue: value => ( value >= 0 )
+        isValidValue: value => ( value >= 0 ),
+        tandem: options.tandem.createTandem( 'pressureKilopascalsProperty' ),
+        phetioReadOnly: true, // value is derived from pressureProperty on step, with noise added
+        phetioDocumentation: 'pressure in K with optional noise added'
       } );
 
       // When pressure goes to zero, update the gauge immediately.
@@ -67,8 +80,11 @@ define( require => {
       this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
         pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
           units: 'atm',
+          isValidValue: value => ( value >= 0 ),
           valueType: 'number',
-          isValidValue: value => ( value >= 0 )
+          phetioType: DerivedPropertyIO( NumberIO ),
+          tandem: options.tandem.createTandem( 'pressureAtmospheresProperty' ),
+          phetioDocumentation: 'pressure in atm with optional noise added'
         } );
 
       // @public (read-only) pressure range in kPa
@@ -81,7 +97,9 @@ define( require => {
       this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
       // @public pressure units displayed by the pressure gauge
-      this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES );
+      this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES, {
+        tandem: options.tandem.createTandem( 'unitsProperty' )
+      } );
 
       // @private
       this.pressureProperty = pressureProperty;

@@ -13,6 +13,7 @@ define( require => {
   const CollisionDetector = require( 'GAS_PROPERTIES/common/model/CollisionDetector' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
 
@@ -28,29 +29,39 @@ define( require => {
 
       options = _.extend( {
         location: Vector2.ZERO,
-        visible: false
+        visible: false,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // @private
       this.collisionDetector = collisionDetector;
 
       // @public location of the collision counter, in view coordinates
-      this.locationProperty = new Vector2Property( options.location );
+      this.locationProperty = new Vector2Property( options.location, {
+        tandem: options.tandem.createTandem( 'locationProperty' )
+      } );
 
       // @public (read-only) the number of particle-container collisions
       this.numberOfCollisionsProperty = new NumberProperty( 0, {
         numberType: 'Integer',
-        isValidValue: value => ( value >= 0 )
+        isValidValue: value => ( value >= 0 ),
+        tandem: options.tandem.createTandem( 'numberOfCollisionsProperty' )
       } );
 
       // @public whether the collision counter is running
-      this.isRunningProperty = new BooleanProperty( false );
+      this.isRunningProperty = new BooleanProperty( false, {
+        tandem: options.tandem.createTandem( 'isRunningProperty' )
+      } );
 
       // @private time that the counter has been running, in ps
       this.timeRunning = 0;
 
       // @public whether the collision counter is visible
-      this.visibleProperty = new BooleanProperty( options.visible );
+      this.visibleProperty = new BooleanProperty( options.visible, {
+        tandem: options.tandem.createTandem( 'visibleProperty' )
+      } );
 
       // @public (read-only) valid values for samplePeriodProperty, in ps
       this.samplePeriods = [ 5, 10, 20 ];
@@ -60,7 +71,9 @@ define( require => {
       this.samplePeriodProperty = new NumberProperty( this.samplePeriods[ 1 ], {
         numberType: 'Integer',
         validValues: this.samplePeriods,
-        units: 'ps'
+        units: 'ps',
+        tandem: options.tandem.createTandem( 'samplePeriodProperty' ),
+        phetioStudioControl: false
       } );
 
       // Changing the running state resets the collision count.

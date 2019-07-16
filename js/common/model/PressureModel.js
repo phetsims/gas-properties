@@ -17,6 +17,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Property = require( 'AXON/Property' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // maximum pressure in kPa, when exceeded the lid blows off of the container
   const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
@@ -29,8 +30,9 @@ define( require => {
      * @param {Property.<number>} volumeProperty
      * @param {Property.<number|null>} temperatureProperty
      * @param {function} blowLidOff
+     * @param {Object} [options]
      */
-    constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff ) {
+    constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff, options ) {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
       assert && assert( numberOfParticlesProperty instanceof Property,
@@ -38,6 +40,12 @@ define( require => {
       assert && assert( volumeProperty instanceof Property, `invalid volumeProperty: ${volumeProperty}` );
       assert && assert( temperatureProperty instanceof Property, `invalid temperatureProperty: ${temperatureProperty}` );
       assert && assert( typeof blowLidOff === 'function', `invalid blowLidOff: ${blowLidOff}` );
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       // @private
       this.holdConstantProperty = holdConstantProperty;
@@ -48,12 +56,17 @@ define( require => {
 
       // @public P, pressure in the container, in kPa
       this.pressureProperty = new NumberProperty( 0, {
+        units: 'kPa',
         isValidValue: value => ( value >= 0 ),
-        units: 'kPa'
+        tandem: options.tandem.createTandem( 'pressureProperty' ),
+        phetioReadOnly: true, // value is derived from state of particle system,
+        phetioDocumentation: 'pressure in K with no noise'
       } );
 
       // @public (read-only) gauge that display pressureProperty with a choice of units
-      this.pressureGauge = new PressureGauge( this.pressureProperty, temperatureProperty, holdConstantProperty );
+      this.pressureGauge = new PressureGauge( this.pressureProperty, temperatureProperty, holdConstantProperty, {
+        tandem: options.tandem.createTandem( 'pressureGauge' )
+      } );
 
       // @private whether to update pressure
       this.updatePressureEnabled = false;

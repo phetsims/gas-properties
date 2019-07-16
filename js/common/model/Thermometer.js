@@ -11,11 +11,15 @@ define( require => {
 
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
+  const NullableIO = require( 'TANDEM/types/NullableIO' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const DEFAULT_RANGE = new Range( 0, 1000 ); // in K
@@ -31,7 +35,10 @@ define( require => {
         `invalid temperatureKelvinProperty: ${temperatureKelvinProperty}` );
 
       options = _.extend( {
-        range: DEFAULT_RANGE
+        range: DEFAULT_RANGE,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // @public {Range} range of thermometer display, in K. temperatureProperty is expected to exceed this.
@@ -46,11 +53,16 @@ define( require => {
       this.temperatureCelsiusProperty = new DerivedProperty( [ this.temperatureKelvinProperty ],
         temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15, {
           units: '\u00B0C',
-          isValidValue: value => ( value === null || ( typeof value === 'number' && value !== 0 ) )
+          isValidValue: value => ( value === null || ( typeof value === 'number' && value !== 0 ) ),
+          phetioType: DerivedPropertyIO( NullableIO( NumberIO ) ),
+          tandem: options.tandem.createTandem( 'temperatureCelsiusProperty' ),
+          phetioDocumentation: 'temperature in degrees C'
         } );
 
       // @public temperature units displayed by the thermometer
-      this.unitsProperty = new EnumerationProperty( Thermometer.Units, Thermometer.Units.KELVIN );
+      this.unitsProperty = new EnumerationProperty( Thermometer.Units, Thermometer.Units.KELVIN, {
+        tandem: options.tandem.createTandem( 'unitsProperty' )
+      } );
     }
 
     /**
