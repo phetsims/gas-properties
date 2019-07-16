@@ -13,17 +13,18 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
+  const NullableIO = require( 'TANDEM/types/NullableIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS = {
     numberType: 'Integer',
-    isValidValue: value => ( value >= 0 )
-  };
-  const AVERAGE_TEMPERATURE_PROPERTY_OPTIONS = {
-    isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
-    units: 'K'
+    isValidValue: value => ( value >= 0 ),
+    phetioReadOnly: true // derived from the state of the particle system
   };
 
   class DiffusionData {
@@ -32,24 +33,42 @@ define( require => {
      * @param {Bounds2} bounds - bounds of one side of the container
      * @param {DiffusionParticle1[]} particles1
      * @param {DiffusionParticle2[]} particles2
+     * @param {Object} [options]
      */
-    constructor( bounds, particles1, particles2 ) {
+    constructor( bounds, particles1, particles2, options ) {
       assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
       assert && assert( Array.isArray( particles1 ), `invalid particles1: ${particles1}` );
       assert && assert( Array.isArray( particles2 ), `invalid particles1: ${particles2}` );
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required,
+        phetioState: false
+      }, options );
 
       // @private
       this.bounds = bounds;
 
       // @public number of DiffusionParticle1 in this side of the container
-      this.numberOfParticles1Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS );
+      this.numberOfParticles1Property = new NumberProperty( 0, _.extend( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'numberOfParticles1Property' )
+      } ) );
 
       // @public number of DiffusionParticle2 in this side of the container
-      this.numberOfParticles2Property = new NumberProperty( 0, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS );
+      this.numberOfParticles2Property = new NumberProperty( 0, _.extend( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'numberOfParticles2Property' )
+      } ) );
 
       // @public {Property.<number|null>} average temperature in this side of the container, in K
       // null when there are no particles in this side of the container.
-      this.averageTemperatureProperty = new Property( null, AVERAGE_TEMPERATURE_PROPERTY_OPTIONS );
+      this.averageTemperatureProperty = new Property( null, {
+        units: 'K',
+        isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
+        phetioType: PropertyIO( NullableIO( NumberIO ) ),
+        phetioReadOnly: true, // derived from the state of the particle system
+        tandem: options.tandem.createTandem( 'averageTemperatureProperty' )
+      } );
 
       this.update( particles1, particles2 );
     }

@@ -12,17 +12,29 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class DiffusionSettings {
 
-    constructor() {
+    /**
+     * @param {Object} [options]
+     */
+    constructor( options ) {
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       // @public
       this.numberOfParticlesProperty =
         new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
           numberType: 'Integer',
           range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE,
-          isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 )
+          isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
+          tandem: options.tandem.createTandem( 'numberOfParticlesProperty' ),
+          phetStudioControl: false // because value must be a multiple of delta
         } );
 
       // @public mass, in AMU
@@ -30,7 +42,9 @@ define( require => {
         numberType: 'Integer',
         range: GasPropertiesConstants.MASS_RANGE,
         units: 'AMU',
-        isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 )
+        isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 ),
+        tandem: options.tandem.createTandem( 'massProperty' ),
+        phetStudioControl: false // because value must be a multiple of delta
       } );
 
       // @public radius, in pm
@@ -38,7 +52,9 @@ define( require => {
         numberType: 'Integer',
         range: GasPropertiesConstants.RADIUS_RANGE,
         units: 'pm',
-        isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 )
+        isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 ),
+        tandem: options.tandem.createTandem( 'radiusProperty' ),
+        phetStudioControl: false // because value must be a multiple of delta
       } );
 
       // @public initial temperature, in K, used to compute initial velocity
@@ -47,7 +63,9 @@ define( require => {
           numberType: 'Integer',
           range: GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE,
           units: 'K',
-          isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 )
+          isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
+          tandem: options.tandem.createTandem( 'initialTemperatureProperty' ),
+          phetStudioControl: false // because value must be a multiple of delta
         } );
     }
 

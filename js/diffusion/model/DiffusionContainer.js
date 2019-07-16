@@ -15,13 +15,23 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const CONTAINER_WIDTH = 16000; // pm
 
   class DiffusionContainer extends BaseContainer {
 
-    constructor() {
+    /**
+     * @param {Object} [options]
+     */
+    constructor( options ) {
+
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       super( {
         widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ) // effectively fixed width
@@ -47,7 +57,9 @@ define( require => {
       this.rightBounds = new Bounds2( this.dividerX, this.bottom, this.right, this.top );
 
       // @public whether the divider is in place
-      this.hasDividerProperty = new BooleanProperty( true );
+      this.hasDividerProperty = new BooleanProperty( true, {
+        tandem: options.tandem.createTandem( 'hasDividerProperty' )
+      } );
 
       // Adjust the bounds of the left and right sides of the container to account for divider thickness
       this.hasDividerProperty.link( hasDivider => {

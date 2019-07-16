@@ -13,11 +13,13 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const FLOW_RATE_PROPERTY_OPTIONS = {
     isValidValue: value => ( value >= 0 ),
-    units: 'particles/ps'
+    units: 'particles/ps',
+    phetioReadOnly: true // derived from state of the particle system
   };
 
   // number of samples used to compute running average, see https://github.com/phetsims/gas-properties/issues/51
@@ -28,20 +30,34 @@ define( require => {
     /**
      * @param {number} dividerX - x location of the container's divider
      * @param {Particle[]} particles - particles to be monitored
+     * @param {Object} [options]
      */
-    constructor( dividerX, particles ) {
+    constructor( dividerX, particles, options ) {
       assert && assert( typeof dividerX === 'number', `invalid dividerX: ${dividerX}` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
-      // @private 
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required,
+        phetioState: false
+      }, options );
+
+      // @private
       this.dividerX = dividerX;
       this.particles = particles;
 
       // @public flow rate to left side of container, in particles/ps
-      this.leftFlowRateProperty = new NumberProperty( 0, FLOW_RATE_PROPERTY_OPTIONS );
+      this.leftFlowRateProperty = new NumberProperty( 0, _.extend( {}, FLOW_RATE_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'leftFlowRateProperty' ),
+        phetioDocumentation: 'flow rate of particles to the left side of the container'
+      } ) );
 
       // @public flow rate to right side of container, in particles/ps
-      this.rightFlowRateProperty = new NumberProperty( 0, FLOW_RATE_PROPERTY_OPTIONS );
+      this.rightFlowRateProperty = new NumberProperty( 0, _.extend( {}, FLOW_RATE_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'rightFlowRateProperty' ),
+        phetioDocumentation: 'flow rate of particles to the right side of the container'
+      } ) );
 
       // @private {number[]} samples of number of particles that have crossed the container's divider
       this.leftCounts = []; // particles that crossed from right to left <--

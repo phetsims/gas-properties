@@ -12,6 +12,7 @@ define( require => {
   const BaseModel = require( 'GAS_PROPERTIES/common/model/BaseModel' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const DiffusionCollisionDetector = require( 'GAS_PROPERTIES/diffusion/model/DiffusionCollisionDetector' );
   const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
   const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
@@ -22,15 +23,20 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
   const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
+  const NullableIO = require( 'TANDEM/types/NullableIO' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   const CENTER_OF_MASS_PROPERTY_OPTIONS = {
+    units: 'pm',
     isValidValue: value => ( value === null || typeof value === 'number' ),
-    units: 'pm'
+    phetioType: PropertyIO( NullableIO( NumberIO ) ),
+    phetioReadOnly: true // derived from the state of the particle system
   };
 
   class DiffusionModel extends BaseModel {
@@ -55,11 +61,17 @@ define( require => {
       this.particles2 = []; // {DiffusionParticle2[]}
 
       // @public
-      this.container = new DiffusionContainer();
+      this.container = new DiffusionContainer( {
+        tandem: tandem.createTandem( 'container' )
+      } );
 
       // @public settings for the left and right sides of the container, before the divider is removed
-      this.leftSettings = new DiffusionSettings();
-      this.rightSettings = new DiffusionSettings();
+      this.leftSettings = new DiffusionSettings( {
+        tandem: tandem.createTandem( 'leftSettings' )
+      } );
+      this.rightSettings = new DiffusionSettings( {
+        tandem: tandem.createTandem( 'rightSettings' )
+      } );
 
       // Synchronize particle counts and arrays.
       const createDiffusionParticle1 = ( options ) => new DiffusionParticle1( options );
@@ -96,22 +108,39 @@ define( require => {
           return leftNumberOfParticles + rightNumberOfParticles;
         }, {
           numberType: 'Integer',
+          isValidValue: value => value >= 0,
           valueType: 'number',
-          isValidValue: value => value >= 0
+          phetioType: DerivedPropertyIO( NumberIO ),
+          tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
+          phetioDocumentation: 'total number of particles in the container'
         } );
 
       // @public data for the left and right sides of the container, appears in Data accordion box
-      this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2 );
-      this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2 );
+      this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, {
+        tandem: tandem.createTandem( 'leftData' )
+      } );
+      this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, {
+        tandem: tandem.createTandem( 'rightData' )
+      } );
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
       // null when there are no particles in the container.
-      this.centerOfMass1Property = new Property( null, CENTER_OF_MASS_PROPERTY_OPTIONS );
-      this.centerOfMass2Property = new Property( null, CENTER_OF_MASS_PROPERTY_OPTIONS );
+      this.centerOfMass1Property = new Property( null, _.extend( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+        tandem: tandem.createTandem( 'centerOfMass1Property' ),
+        phetioDocumentation: 'center of mass for particles species 1'
+      } ) );
+      this.centerOfMass2Property = new Property( null, _.extend( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+        tandem: tandem.createTandem( 'centerOfMass2Property' ),
+        phetioDocumentation: 'center of mass for particles species 2'
+      } ) );
 
       // @public flow rate model for each particle species
-      this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1 );
-      this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2 );
+      this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1, {
+        tandem: tandem.createTandem( 'particleFlowRate1' )
+      } );
+      this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2, {
+        tandem: tandem.createTandem( 'particleFlowRate2' )
+      } );
 
       // @public (read-only)
       this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
