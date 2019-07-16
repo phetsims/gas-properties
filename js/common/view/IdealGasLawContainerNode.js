@@ -174,6 +174,8 @@ define( require => {
         previousBoundsNode.visible = isPressed && !container.leftWallDoesWork;
         previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY,
           wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
+
+        // Notify the listener provided by the client.
         options.resizeHandleIsPressedListener( isPressed );
 
         // when the handle is released, log the opening
