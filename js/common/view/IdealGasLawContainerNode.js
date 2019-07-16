@@ -185,7 +185,16 @@ define( require => {
       } );
 
       // Dragging the lid horizontally changes the size of the opening in the top of the container
-      lidNode.addInputListener( new LidDragListener( container, modelViewTransform, this ) );
+      const lidDragListener = new LidDragListener( container, modelViewTransform, this );
+      lidNode.addInputListener( lidDragListener );
+
+      // This implementation assumes that the lid is not interactive while the container is being resized.
+      // This is handled in resizeDragListener.isPressedProperty listener above.
+      // The lid will behave badly if this is not the case, so verify.
+      lidDragListener.isPressedProperty.lazyLink( isPressed => {
+        assert && assert( !isPressed || !resizeDragListener.isPressedProperty.value,
+          'the lid should be not interactive while the container is being resized' );
+      } );
 
       container.lidIsOnProperty.link( lidIsOn => {
         if ( lidIsOn ) {
