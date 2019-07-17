@@ -1,6 +1,5 @@
 // Copyright 2018-2019, University of Colorado Boulder
 
-//TODO parts of this will be rewritten to address https://github.com/phetsims/gas-properties/issues/125
 /**
  * IdealGasLawContainerNode is the view of the container used in screens that are based on the Ideal Gas Law.
  * This container has mutable width, and a lid that can be moved/removed.
