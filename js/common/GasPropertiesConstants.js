@@ -13,7 +13,6 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
-  const Tandem = require( 'TANDEM/Tandem' );
 
   // for all panel-like containers
   const PANEL_CORNER_RADIUS = 5;
@@ -131,10 +130,7 @@ define( require => {
 
     // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
     // see https://github.com/phetsims/gas-properties/blob/master/doc/images/pressure-conversion.png
-    PRESSURE_CONVERSION_SCALE: 1.66E6,
-
-    // tandem for global model and view elements
-    GLOBALS_TANDEM: Tandem.rootTandem.createTandem( 'globals' )
+    PRESSURE_CONVERSION_SCALE: 1.66E6
   };
 
   return gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );
