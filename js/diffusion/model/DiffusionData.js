@@ -52,12 +52,14 @@ define( require => {
 
       // @public number of DiffusionParticle1 in this side of the container
       this.numberOfParticles1Property = new NumberProperty( 0, _.extend( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
-        tandem: options.tandem.createTandem( 'numberOfParticles1Property' )
+        tandem: options.tandem.createTandem( 'numberOfParticles1Property' ),
+        phetioDocumentation: 'the number of particle of type 1 that are in this side of the container'
       } ) );
 
       // @public number of DiffusionParticle2 in this side of the container
       this.numberOfParticles2Property = new NumberProperty( 0, _.extend( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
-        tandem: options.tandem.createTandem( 'numberOfParticles2Property' )
+        tandem: options.tandem.createTandem( 'numberOfParticles2Property' ),
+        phetioDocumentation: 'the number of particle of type 2 that are in this side of the container'
       } ) );
 
       // @public {Property.<number|null>} average temperature in this side of the container, in K
@@ -67,7 +69,8 @@ define( require => {
         isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
         phetioType: PropertyIO( NullableIO( NumberIO ) ),
         phetioReadOnly: true, // derived from the state of the particle system
-        tandem: options.tandem.createTandem( 'averageTemperatureProperty' )
+        tandem: options.tandem.createTandem( 'averageTemperatureProperty' ),
+        phetioDocumentation: 'average temperature in this side of the container'
       } );
 
       this.update( particles1, particles2 );

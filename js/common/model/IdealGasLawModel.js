@@ -59,7 +59,8 @@ define( require => {
 
       // @public the quantity to hold constant
       this.holdConstantProperty = new EnumerationProperty( HoldConstant, options.holdConstant, {
-        tandem: tandem.createTandem( 'holdConstantProperty' )
+        tandem: tandem.createTandem( 'holdConstantProperty' ),
+        phetioDocumentation: 'determines which quantity will be held constant'
       } );
 
       // @public the factor to heat or cool the contents of the container.
@@ -67,12 +68,15 @@ define( require => {
       this.heatCoolFactorProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 ),
         tandem: tandem.createTandem( 'heatCoolFactorProperty' ),
-        phetioStudioControl: false
+        phetioStudioControl: false,
+        phetioDocumentation: 'The amount of heat or cool applied to particles in the container. ' +
+                             '-1 is maximum cooling, +1 is maximum heat, 0 is off'
       } );
 
       // @public whether particle-particle collisions are enabled
       this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'particleParticleCollisionsEnabledProperty' )
+        tandem: tandem.createTandem( 'particleParticleCollisionsEnabledProperty' ),
+        phetioDocumentation: 'determines whether collisions between particles are enabled'
       } );
 
       // @public (read-only)

@@ -48,7 +48,8 @@ define( require => {
       // @public whether the lid is on the container
       this.lidIsOnProperty = new BooleanProperty( true, {
         tandem: options.tandem.createTandem( 'lidIsOnProperty' ),
-        phetioReadOnly: true
+        phetioReadOnly: true, // derived from state of the particle system
+        phetioDocumentation: 'whether the lid is on the container, or has been blown off'
       } );
 
       // @public (read-only) lid thickness, in pm

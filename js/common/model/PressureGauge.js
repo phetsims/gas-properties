@@ -66,7 +66,7 @@ define( require => {
         isValidValue: value => ( value >= 0 ),
         tandem: options.tandem.createTandem( 'pressureKilopascalsProperty' ),
         phetioReadOnly: true, // value is derived from pressureProperty on step, with noise added
-        phetioDocumentation: 'pressure in K with optional noise added'
+        phetioDocumentation: 'pressure in K, with optional noise added'
       } );
 
       // When pressure goes to zero, update the gauge immediately.
@@ -84,7 +84,7 @@ define( require => {
           valueType: 'number',
           phetioType: DerivedPropertyIO( NumberIO ),
           tandem: options.tandem.createTandem( 'pressureAtmospheresProperty' ),
-          phetioDocumentation: 'pressure in atm with optional noise added'
+          phetioDocumentation: 'pressure in atm, with optional noise added'
         } );
 
       // @public (read-only) pressure range in kPa
@@ -98,7 +98,8 @@ define( require => {
 
       // @public pressure units displayed by the pressure gauge
       this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES, {
-        tandem: options.tandem.createTandem( 'unitsProperty' )
+        tandem: options.tandem.createTandem( 'unitsProperty' ),
+        phetioDocumentation: 'units displayed by the pressure gauge'
       } );
 
       // @private

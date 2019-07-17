@@ -65,7 +65,8 @@ define( require => {
           units: 'K',
           isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
           tandem: options.tandem.createTandem( 'initialTemperatureProperty' ),
-          phetStudioControl: false // because value must be a multiple of delta
+          phetStudioControl: false, // because value must be a multiple of delta
+          phetioDocumentation: 'temperature used to determine initial speed of particles'
         } );
     }
 

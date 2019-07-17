@@ -127,11 +127,11 @@ define( require => {
       // null when there are no particles in the container.
       this.centerOfMass1Property = new Property( null, _.extend( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass1Property' ),
-        phetioDocumentation: 'center of mass for particles species 1'
+        phetioDocumentation: 'center of mass for particles of type 1'
       } ) );
       this.centerOfMass2Property = new Property( null, _.extend( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass2Property' ),
-        phetioDocumentation: 'center of mass for particles species 2'
+        phetioDocumentation: 'center of mass for particles of type 2'
       } ) );
 
       // @public flow rate model for each particle species

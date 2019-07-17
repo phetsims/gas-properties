@@ -24,7 +24,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.diffusionScreen.model.centerOfMass1Property": {
-      "phetioDocumentation": "center of mass for particles species 1",
+      "phetioDocumentation": "center of mass for particles of type 1",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -35,7 +35,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.diffusionScreen.model.centerOfMass2Property": {
-      "phetioDocumentation": "center of mass for particles species 2",
+      "phetioDocumentation": "center of mass for particles of type 2",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -46,7 +46,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.diffusionScreen.model.container.hasDividerProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the container's divider is in place",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -79,7 +79,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.diffusionScreen.model.leftData.averageTemperatureProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "average temperature in this side of the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -90,7 +90,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.diffusionScreen.model.leftData.numberOfParticles1Property": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of particle of type 1 that are in this side of the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -101,7 +101,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.diffusionScreen.model.leftData.numberOfParticles2Property": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of particle of type 2 that are in this side of the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -112,7 +112,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.diffusionScreen.model.leftSettings.initialTemperatureProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "temperature used to determine initial speed of particles",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -211,7 +211,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.diffusionScreen.model.rightData.averageTemperatureProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "average temperature in this side of the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -222,7 +222,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.diffusionScreen.model.rightData.numberOfParticles1Property": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of particle of type 1 that are in this side of the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -233,7 +233,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.diffusionScreen.model.rightData.numberOfParticles2Property": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of particle of type 2 that are in this side of the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -244,7 +244,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.diffusionScreen.model.rightSettings.initialTemperatureProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "temperature used to determine initial speed of particles",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -1872,7 +1872,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.energyScreen.model.container.lidIsOnProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the lid is on the container, or has been blown off",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -1894,7 +1894,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.energyScreen.model.heatCoolFactorProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "The amount of heat or cool applied to particles in the container. -1 is maximum cooling, +1 is maximum heat, 0 is off",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -1982,7 +1982,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.energyScreen.model.holdConstantProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "determines which quantity will be held constant",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2015,7 +2015,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.energyScreen.model.particleParticleCollisionsEnabledProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "determines whether collisions between particles are enabled",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2026,7 +2026,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.energyScreen.model.particleSystem.numberOfHeavyParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of heavy particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2037,7 +2037,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.energyScreen.model.particleSystem.numberOfLightParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of light particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2048,7 +2048,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.energyScreen.model.particleSystem.numberOfParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the total number of particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2059,7 +2059,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NumberIO>"
     },
     "gasProperties.energyScreen.model.pressureModel.pressureGauge.pressureAtmospheresProperty": {
-      "phetioDocumentation": "pressure in atm with optional noise added",
+      "phetioDocumentation": "pressure in atm, with optional noise added",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2070,7 +2070,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NumberIO>"
     },
     "gasProperties.energyScreen.model.pressureModel.pressureGauge.pressureKilopascalsProperty": {
-      "phetioDocumentation": "pressure in K with optional noise added",
+      "phetioDocumentation": "pressure in K, with optional noise added",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2081,7 +2081,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.energyScreen.model.pressureModel.pressureGauge.unitsProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "units displayed by the pressure gauge",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2092,7 +2092,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<EnumerationIO.<>>"
     },
     "gasProperties.energyScreen.model.pressureModel.pressureProperty": {
-      "phetioDocumentation": "pressure in K with no noise",
+      "phetioDocumentation": "pressure in K, with no noise",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -2191,7 +2191,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.energyScreen.model.temperatureModel.thermometer.unitsProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "units displayed by the thermometer",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4127,7 +4127,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.exploreScreen.model.container.lidIsOnProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the lid is on the container, or has been blown off",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4149,7 +4149,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.exploreScreen.model.heatCoolFactorProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "The amount of heat or cool applied to particles in the container. -1 is maximum cooling, +1 is maximum heat, 0 is off",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4160,7 +4160,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.exploreScreen.model.holdConstantProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "determines which quantity will be held constant",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4193,7 +4193,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.exploreScreen.model.particleParticleCollisionsEnabledProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "determines whether collisions between particles are enabled",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4204,7 +4204,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.exploreScreen.model.particleSystem.numberOfHeavyParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of heavy particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4215,7 +4215,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.exploreScreen.model.particleSystem.numberOfLightParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of light particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4226,7 +4226,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.exploreScreen.model.particleSystem.numberOfParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the total number of particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4237,7 +4237,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NumberIO>"
     },
     "gasProperties.exploreScreen.model.pressureModel.pressureGauge.pressureAtmospheresProperty": {
-      "phetioDocumentation": "pressure in atm with optional noise added",
+      "phetioDocumentation": "pressure in atm, with optional noise added",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4248,7 +4248,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NumberIO>"
     },
     "gasProperties.exploreScreen.model.pressureModel.pressureGauge.pressureKilopascalsProperty": {
-      "phetioDocumentation": "pressure in K with optional noise added",
+      "phetioDocumentation": "pressure in K, with optional noise added",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4259,7 +4259,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.exploreScreen.model.pressureModel.pressureGauge.unitsProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "units displayed by the pressure gauge",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4270,7 +4270,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<EnumerationIO.<>>"
     },
     "gasProperties.exploreScreen.model.pressureModel.pressureProperty": {
-      "phetioDocumentation": "pressure in K with no noise",
+      "phetioDocumentation": "pressure in K, with no noise",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4369,7 +4369,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.exploreScreen.model.temperatureModel.thermometer.unitsProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "units displayed by the thermometer",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -6811,7 +6811,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.globals.options.projectorModeEnabledProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "Projector Mode is a color profile that is suitable for displaying on a classroom projector",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8054,7 +8054,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.idealScreen.model.container.lidIsOnProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the lid is on the container, or has been blown off",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8076,7 +8076,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.idealScreen.model.heatCoolFactorProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "The amount of heat or cool applied to particles in the container. -1 is maximum cooling, +1 is maximum heat, 0 is off",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8087,7 +8087,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.idealScreen.model.holdConstantProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "determines which quantity will be held constant",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8120,7 +8120,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.idealScreen.model.particleParticleCollisionsEnabledProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "determines whether collisions between particles are enabled",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8131,7 +8131,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.idealScreen.model.particleSystem.numberOfHeavyParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of heavy particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8142,7 +8142,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.idealScreen.model.particleSystem.numberOfLightParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the number of light particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8153,7 +8153,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.idealScreen.model.particleSystem.numberOfParticlesProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the total number of particles in the container",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8164,7 +8164,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NumberIO>"
     },
     "gasProperties.idealScreen.model.pressureModel.pressureGauge.pressureAtmospheresProperty": {
-      "phetioDocumentation": "pressure in atm with optional noise added",
+      "phetioDocumentation": "pressure in atm, with optional noise added",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8175,7 +8175,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NumberIO>"
     },
     "gasProperties.idealScreen.model.pressureModel.pressureGauge.pressureKilopascalsProperty": {
-      "phetioDocumentation": "pressure in K with optional noise added",
+      "phetioDocumentation": "pressure in K, with optional noise added",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8186,7 +8186,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "gasProperties.idealScreen.model.pressureModel.pressureGauge.unitsProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "units displayed by the pressure gauge",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8197,7 +8197,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<EnumerationIO.<>>"
     },
     "gasProperties.idealScreen.model.pressureModel.pressureProperty": {
-      "phetioDocumentation": "pressure in K with no noise",
+      "phetioDocumentation": "pressure in K, with no noise",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8296,7 +8296,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO.<NullableIO.<NumberIO>>"
     },
     "gasProperties.idealScreen.model.temperatureModel.thermometer.unitsProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "units displayed by the thermometer",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,

@@ -60,7 +60,7 @@ define( require => {
         isValidValue: value => ( value >= 0 ),
         tandem: options.tandem.createTandem( 'pressureProperty' ),
         phetioReadOnly: true, // value is derived from state of particle system,
-        phetioDocumentation: 'pressure in K with no noise'
+        phetioDocumentation: 'pressure in K, with no noise'
       } );
 
       // @public (read-only) gauge that display pressureProperty with a choice of units

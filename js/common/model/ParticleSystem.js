@@ -72,14 +72,16 @@ define( require => {
       this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
         range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
-        tandem: options.tandem.createTandem( 'numberOfHeavyParticlesProperty' )
+        tandem: options.tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
+        phetioDocumentation: 'the number of heavy particles in the container'
       } );
 
       // @public the number of light particles inside the container
       this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
         range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
-        tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' )
+        tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' ),
+        phetioDocumentation: 'the number of light particles in the container'
       } );
 
       // Synchronize particle counts and arrays.
@@ -113,7 +115,8 @@ define( require => {
           phetioType: DerivedPropertyIO( NumberIO ),
           valueType: 'number',
           isValidValue: value => value >= 0,
-          tandem: options.tandem.createTandem( 'numberOfParticlesProperty' )
+          tandem: options.tandem.createTandem( 'numberOfParticlesProperty' ),
+          phetioDocumentation: 'the total number of particles in the container'
         }
       );
     }

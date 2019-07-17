@@ -58,7 +58,8 @@ define( require => {
 
       // @public whether the divider is in place
       this.hasDividerProperty = new BooleanProperty( true, {
-        tandem: options.tandem.createTandem( 'hasDividerProperty' )
+        tandem: options.tandem.createTandem( 'hasDividerProperty' ),
+        phetioDocumentation: 'whether the container\'s divider is in place'
       } );
 
       // Adjust the bounds of the left and right sides of the container to account for divider thickness

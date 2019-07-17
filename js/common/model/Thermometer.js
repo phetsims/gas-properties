@@ -61,7 +61,8 @@ define( require => {
 
       // @public temperature units displayed by the thermometer
       this.unitsProperty = new EnumerationProperty( Thermometer.Units, Thermometer.Units.KELVIN, {
-        tandem: options.tandem.createTandem( 'unitsProperty' )
+        tandem: options.tandem.createTandem( 'unitsProperty' ),
+        phetioDocumentation: 'units displayed by the thermometer'
       } );
     }
 
