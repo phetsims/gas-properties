@@ -11,6 +11,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -84,6 +85,11 @@ define( require => {
 
       // @public (read-only) velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
       this.leftWallVelocity = new Vector2( 0, 0 );
+
+      // @public Indicates whether the user is adjusting widthProperty. The width will also change automatically in
+      // HoldConstant.PRESSURE_V mode. This is used to suppress model updates in the Ideal screen, when the user
+      // is resizing the container with the sim paused.  See #125.
+      this.userIsAdjustingWidthProperty = new BooleanProperty( false );
     }
 
     /**

@@ -129,9 +129,10 @@ define( require => {
         } );
       }
 
-      // If the container's width changes while the sim is paused, update immediately.
+      // If the container's width changes while the sim is paused, and it's not due to the user
+      // resizing the container, then update immediately. See #125.
       this.container.widthProperty.lazyLink( width => {
-        if ( !this.isPlayingProperty.value ) {
+        if ( !this.isPlayingProperty.value && !this.container.userIsAdjustingWidthProperty.value ) {
           this.updateWhenPaused();
         }
       } );

@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO parts of this will be rewritten to address https://github.com/phetsims/gas-properties/issues/125
 /**
  * ContainerResizeDragListener is the drag listener for resizing the container by changing its width.
  *
@@ -38,6 +37,8 @@ define( require => {
         start: ( event, listener ) => {
           assert && assert( event instanceof Event, `invalid event: ${event}` );
 
+          container.userIsAdjustingWidthProperty.value = true;
+
           const viewWidth = modelViewTransform.modelToViewX( container.left );
           startXOffset = viewWidth - parentNode.globalToParentPoint( event.pointer.point ).x;
         },
@@ -65,6 +66,8 @@ define( require => {
 
           // Stop the animation wherever the container width happens to be when the drag ends.
           container.desiredWidth = container.widthProperty.value;
+
+          container.userIsAdjustingWidthProperty.value = false;
         }
       } );
     }
