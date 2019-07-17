@@ -6811,7 +6811,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
     "gasProperties.global.options.projectorModeEnabledProperty": {
-      "phetioDocumentation": "Projector Mode is a color profile that is suitable for displaying on a classroom projector",
+      "phetioDocumentation": "Projector Mode is a color profile that is suitable for display on a classroom projector",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
