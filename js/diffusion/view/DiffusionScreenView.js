@@ -100,7 +100,8 @@ define( require => {
       const dataAccordionBox = new DataAccordionBox( model.leftData, model.rightData, model.modelViewTransform, {
         expandedProperty: viewProperties.dataExpandedProperty,
         centerX: containerNode.centerX,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+        tandem: tandem.createTandem( 'dataAccordionBox' )
       } );
 
       // Control panel at right side of screen
@@ -112,7 +113,8 @@ define( require => {
         viewProperties, {
           fixedWidth: 300,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+          tandem: tandem.createTandem( 'controlPanel' )
         } );
 
       // The complete system of particles

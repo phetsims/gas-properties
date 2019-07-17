@@ -22,6 +22,7 @@ define( require => {
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -53,7 +54,10 @@ define( require => {
 
         // superclass options
         spacing: 20,
-        align: 'left'
+        align: 'left',
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // To make all spinners have the same bounds width
@@ -68,7 +72,8 @@ define( require => {
             enabledProperty: enabledProperty,
             deltaValue: DiffusionSettings.DELTAS.numberOfParticles,
             decimalPlaces: 0
-          }
+          },
+          tandem: options.tandem.createTandem( 'numberOfParticlesControl' )
         } );
 
       // Mass (AMU)
@@ -79,7 +84,8 @@ define( require => {
             deltaValue: DiffusionSettings.DELTAS.mass,
             decimalPlaces: 0,
             xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
-          }
+          },
+          tandem: options.tandem.createTandem( 'massControl' )
         } );
 
       // Radius (pm)
@@ -89,7 +95,8 @@ define( require => {
             enabledProperty: enabledProperty,
             deltaValue: DiffusionSettings.DELTAS.radius,
             decimalPlaces: 0
-          }
+          },
+          tandem: options.tandem.createTandem( 'radiusControl' )
         } );
 
       // Initial Temperature (K)
@@ -99,7 +106,8 @@ define( require => {
             enabledProperty: enabledProperty,
             deltaValue: DiffusionSettings.DELTAS.initialTemperature,
             decimalPlaces: 0
-          }
+          },
+          tandem: options.tandem.createTandem( 'initialTemperatureControl' )
         } );
 
       assert && assert( !options.children, 'DiffusionSettingsNode sets children' );
@@ -143,7 +151,10 @@ define( require => {
 
         // VBox options
         spacing: 12,
-        align: 'left'
+        align: 'left',
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // title

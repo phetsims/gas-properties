@@ -18,6 +18,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VSeparator = require( 'SUN/VSeparator' );
 
@@ -47,7 +48,10 @@ define( require => {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty,
           maxWidth: 200 // determined empirically
-        } )
+        } ),
+
+        // phet-io
+        tandem: Tandem.required
 
       }, options );
 

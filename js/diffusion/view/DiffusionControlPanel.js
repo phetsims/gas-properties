@@ -25,6 +25,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const ScaleCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ScaleCheckbox' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   class DiffusionControlPanel extends Panel {
@@ -56,12 +57,17 @@ define( require => {
 
       options = _.extend( {
         fixedWidth: 100,
-        xMargin: 0
+        xMargin: 0,
+
+        // phet-io
+        tandem: Tandem.required
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-      const dividerToggleButton = new DividerToggleButton( hasDividerProperty );
+      const dividerToggleButton = new DividerToggleButton( hasDividerProperty, {
+        tandem: options.tandem.createTandem( 'dividerToggleButton' )
+      } );
 
       const checkboxOptions = {
         textMaxWidth: 175 // determined empirically
@@ -73,7 +79,9 @@ define( require => {
         children: [
 
           // spinners
-          new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty ),
+          new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty, {
+            tandem: options.tandem.createTandem( 'settingsNode' )
+          } ),
 
           // Remove/Reset Divider button, centered
           new FixedWidthNode( contentWidth, dividerToggleButton, {
@@ -91,10 +99,18 @@ define( require => {
             align: 'left',
             spacing: 12,
             children: [
-              new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, checkboxOptions ),
-              new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, checkboxOptions ),
-              new ScaleCheckbox( viewProperties.scaleVisibleProperty, checkboxOptions ),
-              new StopwatchCheckbox( stopwatchVisibleProperty, checkboxOptions )
+              new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, _.extend( {}, checkboxOptions, {
+                tandem: options.tandem.createTandem( 'centerOfMassCheckbox' )
+              } ) ),
+              new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, _.extend( {}, checkboxOptions, {
+                tandem: options.tandem.createTandem( 'particleFlowRateCheckbox' )
+              } ) ),
+              new ScaleCheckbox( viewProperties.scaleVisibleProperty, _.extend( {}, checkboxOptions, {
+                tandem: options.tandem.createTandem( 'scaleCheckbox' )
+              } ) ),
+              new StopwatchCheckbox( stopwatchVisibleProperty, _.extend( {}, checkboxOptions, {
+                tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
+              } ) )
             ]
           } )
         ]
