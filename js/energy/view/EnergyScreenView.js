@@ -48,19 +48,22 @@ define( require => {
         model.averageSpeedModel.lightAverageSpeedProperty,
         model.modelViewTransform, {
           expandedProperty: viewProperties.averageSpeedExpandedProperty,
-          fixedWidth: LEFT_PANEL_WIDTH
+          fixedWidth: LEFT_PANEL_WIDTH,
+          tandem: tandem.createTandem( 'averageSpeedAccordionBox' )
         } );
 
       // Speed accordion box with histogram and related controls
       const speedAccordionBox = new SpeedAccordionBox( model.histogramsModel, model.modelViewTransform, {
         expandedProperty: viewProperties.speedExpandedProperty,
-        fixedWidth: LEFT_PANEL_WIDTH
+        fixedWidth: LEFT_PANEL_WIDTH,
+        tandem: tandem.createTandem( 'speedAccordionBox' )
       } );
 
       // Kinetic Energy accordion box with histogram
       const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model.histogramsModel, model.modelViewTransform, {
         expandedProperty: viewProperties.kineticEnergyExpandedProperty,
-        fixedWidth: LEFT_PANEL_WIDTH
+        fixedWidth: LEFT_PANEL_WIDTH,
+        tandem: tandem.createTandem( 'kineticEnergyAccordionBox' )
       } );
 
       // Panels on the left side of the screen
@@ -79,7 +82,8 @@ define( require => {
       const toolsPanel = new EnergyToolsPanel(
         viewProperties.widthVisibleProperty,
         model.stopwatch.visibleProperty, {
-          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
+          tandem: tandem.createTandem( 'toolsPanel' )
         } );
 
       // Particles accordion box
@@ -89,7 +93,8 @@ define( require => {
         model.modelViewTransform, {
           collisionsEnabledProperty: model.collisionDetector.particleParticleCollisionsEnabledProperty,
           expandedProperty: viewProperties.particlesExpandedProperty,
-          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
+          tandem: tandem.createTandem( 'particlesAccordionBox' )
         } );
 
       // Injection Temperature accordion box
@@ -97,7 +102,8 @@ define( require => {
         model.temperatureModel.controlTemperatureEnabledProperty,
         model.temperatureModel.initialTemperatureProperty, {
           expandedProperty: viewProperties.particleToolsExpandedProperty,
-          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
+          tandem: tandem.createTandem( 'injectionTemperatureAccordionBox' )
         }
       );
 

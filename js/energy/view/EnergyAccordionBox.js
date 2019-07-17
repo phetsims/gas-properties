@@ -20,6 +20,7 @@ define( require => {
   const HistogramNode = require( 'GAS_PROPERTIES/energy/view/HistogramNode' );
   const LightParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/LightParticlesCheckbox' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -46,7 +47,10 @@ define( require => {
         titleNode: new Text( titleString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
-        } )
+        } ),
+
+        // phet-io
+        tandem: Tandem.required
 
       }, options );
 
@@ -56,8 +60,12 @@ define( require => {
       // Checkboxes
       const checkboxes = new HBox( {
         children: [
-          new HeavyParticlesCheckbox( histogramNode.heavyPlotVisibleProperty, modelViewTransform ),
-          new LightParticlesCheckbox( histogramNode.lightPlotVisibleProperty, modelViewTransform )
+          new HeavyParticlesCheckbox( histogramNode.heavyPlotVisibleProperty, modelViewTransform, {
+            tandem: options.tandem.createTandem( 'heavyParticlesCheckbox' )
+          } ),
+          new LightParticlesCheckbox( histogramNode.lightPlotVisibleProperty, modelViewTransform, {
+            tandem: options.tandem.createTandem( 'lightParticlesCheckbox' )
+          } )
         ],
         align: 'center',
         spacing: 25

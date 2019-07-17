@@ -28,7 +28,7 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
 
-      super( lightVisibleProperty, new LightParticle(), modelViewTransform );
+      super( lightVisibleProperty, new LightParticle(), modelViewTransform, options);
     }
   }
 

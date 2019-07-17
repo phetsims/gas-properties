@@ -24,6 +24,7 @@ define( require => {
   const Range = require( 'DOT/Range' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const SunConstants = require( 'SUN/SunConstants' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -58,7 +59,10 @@ define( require => {
         titleNode: new Text( averageSpeedString, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
-        } )
+        } ),
+
+        // phet-io
+        tandem: Tandem.required
 
       }, options );
 

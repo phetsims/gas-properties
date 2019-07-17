@@ -25,6 +25,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
 
@@ -83,7 +84,10 @@ define( require => {
           stroke: 'white', // {ColorDef}
           opacity: 0.5, // (0,1)
           lineWidth: 0.5
-        }
+        },
+
+        // phet-io
+        tandem: Tandem.required
 
       }, options );
 
@@ -145,8 +149,14 @@ define( require => {
       super( options );
 
       // @public visibility of species-specific plots
-      this.heavyPlotVisibleProperty = new BooleanProperty( false );
-      this.lightPlotVisibleProperty = new BooleanProperty( false );
+      this.heavyPlotVisibleProperty = new BooleanProperty( false, {
+        tandem: options.tandem.createTandem( 'heavyPlotVisibleProperty' ),
+        phetioDocumentation: 'whether the plot for heavy particles is visible on the histogram'
+      } );
+      this.lightPlotVisibleProperty = new BooleanProperty( false, {
+        tandem: options.tandem.createTandem( 'lightPlotVisibleProperty' ),
+        phetioDocumentation: 'whether the plot for light particles is visible on the histogram'
+      } );
 
       // Update plots to display the current bin counts. Update species-specific plots only if they are visible.
       const updatePlots = () => {

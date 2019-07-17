@@ -15,6 +15,7 @@ define( require => {
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 
@@ -31,11 +32,18 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
 
-      super( speciesVisibleProperty, {
+      options = _.extend( {
         align: 'center',
         spacing: 5,
-        icon: GasPropertiesIconFactory.createSpeciesHistogramIcon( particle, modelViewTransform )
-      } );
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
+
+      assert && assert( !options.icon, 'SpeciesHistogramCheckbox sets icon' );
+      options.icon = GasPropertiesIconFactory.createSpeciesHistogramIcon( particle, modelViewTransform );
+
+      super( speciesVisibleProperty, options );
     }
   }
 

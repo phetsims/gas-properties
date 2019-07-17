@@ -15,6 +15,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const Panel = require( 'SUN/Panel' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const WidthCheckbox = require( 'GAS_PROPERTIES/common/view/WidthCheckbox' );
 
@@ -33,7 +34,10 @@ define( require => {
 
       options = _.extend( {
         fixedWidth: 100,
-        xMargin: 0
+        xMargin: 0,
+
+        // phet-io
+        tandem: Tandem.required
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
@@ -46,8 +50,12 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
-          new WidthCheckbox( widthVisibleProperty, checkboxOptions ),
-          new StopwatchCheckbox( stopwatchVisibleProperty, checkboxOptions )
+          new WidthCheckbox( widthVisibleProperty, _.extend( {}, checkboxOptions, {
+            tandem: options.tandem.createTandem( 'widthCheckbox' )
+          } ) ),
+          new StopwatchCheckbox( stopwatchVisibleProperty, _.extend( {}, checkboxOptions, {
+            tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
+          } ) )
         ]
       } ) );
 

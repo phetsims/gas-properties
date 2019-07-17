@@ -25,6 +25,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Slider = require( 'SUN/Slider' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -61,7 +62,10 @@ define( require => {
 
       options = _.extend( {
         fixedWidth: 100,
-        contentXMargin: 0
+        contentXMargin: 0,
+
+        // phet-io
+        tandem: Tandem.required
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // superclass options

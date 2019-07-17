@@ -20,14 +20,15 @@ define( require => {
     /**
      * @param {BooleanProperty} heavyVisibleProperty
      * @param {ModelViewTransform2} modelViewTransform
+     * @param {Object} [options]
      */
-    constructor( heavyVisibleProperty, modelViewTransform ) {
+    constructor( heavyVisibleProperty, modelViewTransform, options ) {
       assert && assert( heavyVisibleProperty instanceof BooleanProperty,
         `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
 
-      super( heavyVisibleProperty, new HeavyParticle(), modelViewTransform );
+      super( heavyVisibleProperty, new HeavyParticle(), modelViewTransform, options );
     }
   }
 

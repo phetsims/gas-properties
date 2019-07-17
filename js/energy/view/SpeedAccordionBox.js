@@ -14,6 +14,7 @@ define( require => {
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const SpeedHistogramNode = require( 'GAS_PROPERTIES/energy/view/SpeedHistogramNode' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   const speedString = require( 'string!GAS_PROPERTIES/speed' );
@@ -29,7 +30,17 @@ define( require => {
       assert && assert( histogramsModel instanceof HistogramsModel, `invalid model: ${histogramsModel}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
-      super( speedString, modelViewTransform, new SpeedHistogramNode( histogramsModel ), options );
+      options = _.extend( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
+
+      const histogramNode = new SpeedHistogramNode( histogramsModel, {
+        tandem: options.tandem.createTandem( 'histogramNode' )
+      } );
+
+      super( speedString, modelViewTransform, histogramNode, options );
     }
   }
 
