@@ -19,13 +19,13 @@ define( require => {
 
   const GasPropertiesGlobalOptions = {
 
-    // Projector Mode is a color profile that is suitable for displaying on a classroom projector
+    // Projector Mode is a color profile that is suitable for displaying on a classroom projector.
     projectorModeEnabledProperty:
       new BooleanProperty( phet.chipper.queryParameters.colorProfile === 'projector', {
         tandem: optionsTandem.createTandem( 'projectorModeEnabledProperty' )
       } ),
 
-    // Projector Mode is a color profile that is suitable for displaying on a classroom projector
+    // Pressure noise is added to the pressure gauge to make it behave more like a real gauge.
     pressureNoiseProperty:
       new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
         tandem: optionsTandem.createTandem( 'pressureNoiseProperty' ),
