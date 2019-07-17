@@ -46,7 +46,7 @@ define( require => {
 
       super( model, tandem, options );
 
-      const viewProperties = new DiffusionViewProperties();
+      const viewProperties = new DiffusionViewProperties( tandem.createTandem( 'viewProperties' ) );
 
       // Container
       const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );

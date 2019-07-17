@@ -15,20 +15,36 @@ define( require => {
 
   class EnergyViewProperties extends IdealGasLawViewProperties {
 
-    constructor() {
-      super();
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-      // @public whether the Average Speed accordion box is expanded
-      this.averageSpeedExpandedProperty = new BooleanProperty( true );
+      super( tandem );
 
-      // @public whether the Speed accordion box is expanded
-      this.speedExpandedProperty = new BooleanProperty( true );
+      // @public
+      this.averageSpeedExpandedProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'averageSpeedExpandedProperty' ),
+        phetioDocumentation: 'whether the Average Speed accordion box is expanded'
+      } );
 
-      // @public whether the Kinetic Energy accordion box is expanded
-      this.kineticEnergyExpandedProperty = new BooleanProperty( false );
+      // @public
+      this.speedExpandedProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'speedExpandedProperty' ),
+        phetioDocumentation: 'whether the Speed accordion box is expanded'
+      } );
 
-      // @public whether the 'Particles Tools' accordion box is expanded
-      this.particleToolsExpandedProperty = new BooleanProperty( false );
+      // @public
+      this.kineticEnergyExpandedProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'kineticEnergyExpandedProperty' ),
+        phetioDocumentation: 'whether the Kinetic Energy accordion box is expanded'
+      } );
+
+      // @public
+      this.particleToolsExpandedProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'particleToolsExpandedProperty' ),
+        phetioDocumentation: 'whether the Particles Tools accordion box is expanded'
+      } );
     }
 
     /**

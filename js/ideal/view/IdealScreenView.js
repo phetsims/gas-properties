@@ -47,7 +47,7 @@ define( require => {
       }, options );
 
       // view-specific Properties
-      const viewProperties = new IdealViewProperties();
+      const viewProperties = new IdealViewProperties( tandem.createTandem( 'viewProperties' ) );
 
       super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem, options );
 
@@ -90,7 +90,7 @@ define( require => {
         model.particleSystem.numberOfLightParticlesProperty,
         model.modelViewTransform, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-          expandedProperty: viewProperties.particleCountsExpandedProperty,
+          expandedProperty: viewProperties.particlesExpandedProperty,
           right: controlPanel.right,
           top: controlPanel.bottom + 15
         } );

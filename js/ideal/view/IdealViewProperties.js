@@ -15,8 +15,11 @@ define( require => {
 
   class IdealViewProperties extends IdealGasLawViewProperties {
 
-    constructor() {
-      super();
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
+      super( tandem );
     }
   }
 

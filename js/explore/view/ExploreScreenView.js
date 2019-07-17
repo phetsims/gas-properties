@@ -30,7 +30,7 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       // view-specific Properties
-      const viewProperties = new ExploreViewProperties();
+      const viewProperties = new ExploreViewProperties( tandem.createTandem( 'viewProperties' ) );
 
       super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem );
 
@@ -50,7 +50,7 @@ define( require => {
         model.particleSystem.numberOfLightParticlesProperty,
         model.modelViewTransform, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-          expandedProperty: viewProperties.particleCountsExpandedProperty,
+          expandedProperty: viewProperties.particlesExpandedProperty,
           right: toolsPanel.right,
           top: toolsPanel.bottom + 15
         } );

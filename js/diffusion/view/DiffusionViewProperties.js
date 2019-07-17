@@ -14,19 +14,34 @@ define( require => {
 
   class DiffusionViewProperties {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-      // @public whether the Data accordion box is expanded
-      this.dataExpandedProperty = new BooleanProperty( false );
+      // @public
+      this.dataExpandedProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'dataExpandedProperty' ),
+        phetioDocumentation: 'whether the Data accordion box is expanded'
+      } );
 
-      // @public whether particle flow rate vectors are visible below the container
-      this.particleFlowRateVisibleProperty = new BooleanProperty( false );
+      // @public
+      this.particleFlowRateVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'particleFlowRateVisibleProperty' ),
+        phetioDocumentation: 'whether particle flow rate vectors are visible below the container'
+      } );
 
-      // @public whether the center-of-mass indicators are visible on the container
-      this.centerOfMassVisibleProperty = new BooleanProperty( false );
+      // @public
+      this.centerOfMassVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'centerOfMassVisibleProperty' ),
+        phetioDocumentation: 'whether the center-of-mass indicators are visible on the container'
+      } );
 
-      // @public whether the scale is visible on the container
-      this.scaleVisibleProperty = new BooleanProperty( false );
+      // @public
+      this.scaleVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'scaleVisibleProperty' ),
+        phetioDocumentation: 'whether the scale is visible on the container'
+      } );
     }
 
     // @public

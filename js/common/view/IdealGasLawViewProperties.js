@@ -17,23 +17,35 @@ define( require => {
 
   class IdealGasLawViewProperties {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-      // @public whether dimensional arrows are visible for the width of the container
-      this.sizeVisibleProperty = new BooleanProperty( false );
+      // @public
+      this.sizeVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'sizeVisibleProperty' ),
+        phetioDocumentation: 'whether dimensional arrows are visible for the width of the container'
+      } );
 
-      // @public whether the 'Particles Counts' accordion box is expanded
-      this.particleCountsExpandedProperty = new BooleanProperty( false );
+      // @public
+      this.particlesExpandedProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'particlesExpandedProperty' ),
+        phetioDocumentation: 'whether the Particles accordion box is expanded'
+      } );
 
-      // @public the particle type that will be dispensed by the bicycle pump
-      this.particleTypeProperty = new EnumerationProperty( ParticleType, ParticleType.HEAVY );
+      // @public
+      this.particleTypeProperty = new EnumerationProperty( ParticleType, ParticleType.HEAVY, {
+        tandem: tandem.createTandem( 'particleTypeProperty' ),
+        phetioDocumentation: 'the particle type that will be dispensed by the bicycle pump'
+      } );
     }
 
     // @public
     reset() {
-      this.particleTypeProperty.reset();
       this.sizeVisibleProperty.reset();
-      this.particleCountsExpandedProperty.reset();
+      this.particlesExpandedProperty.reset();
+      this.particleTypeProperty.reset();
     }
   }
 
