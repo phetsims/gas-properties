@@ -41,7 +41,8 @@ define( require => {
         model.collisionCounter.visibleProperty, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+          tandem: tandem.createTandem( 'toolsPanel' )
         } );
 
       // Particles accordion box
@@ -52,7 +53,8 @@ define( require => {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particlesExpandedProperty,
           right: toolsPanel.right,
-          top: toolsPanel.bottom + 15
+          top: toolsPanel.bottom + 15,
+          tandem: tandem.createTandem( 'particlesAccordionBox' )
         } );
 
       // Rendering order. Everything we add should be behind what is created by super.
