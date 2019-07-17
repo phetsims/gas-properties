@@ -1,11 +1,11 @@
 {
-  "comment": "# gas-properties 1.0.0-dev.40 Tue Jul 16 2019 20:28:07 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-dev.41 Wed Jul 17 2019 12:10:34 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "master"
   },
   "axon": {
-    "sha": "4fa1c57e3410befc2111ab635d7b983c15e75f6c",
+    "sha": "ce896b93b1bb62547d6fa2a1273f593b0ca5ad02",
     "branch": "master"
   },
   "brand": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "16364ce98ee61038917ea21c21ce4566edbebd65",
+    "sha": "3def9d747ed699a69e2fb6cd5f5d52d33e6d2aa1",
     "branch": "master"
   },
   "joist": {
