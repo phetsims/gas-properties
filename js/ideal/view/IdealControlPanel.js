@@ -22,6 +22,7 @@ define( require => {
   const Panel = require( 'SUN/Panel' );
   const Property = require( 'AXON/Property' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const WidthCheckbox = require( 'GAS_PROPERTIES/common/view/WidthCheckbox' );
 
@@ -54,7 +55,10 @@ define( require => {
       options = _.extend( {
         hasHoldConstantControls: true,
         fixedWidth: 100,
-        xMargin: 0
+        xMargin: 0,
+
+        // phet-io
+        tandem: Tandem.required
       }, GasPropertiesConstants.PANEL_OPTIONS, options );
 
       const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
@@ -64,7 +68,8 @@ define( require => {
       // Optional HoldConstantControl and separator
       if ( options.hasHoldConstantControls ) {
         children.push( new HoldConstantControl( holdConstantProperty, numberOfParticlesProperty, pressureProperty, {
-          maxWidth: contentWidth
+          maxWidth: contentWidth,
+          tandem: options.tandem.createTandem( 'holdConstantControl' )
         } ) );
         children.push( new HSeparator( contentWidth, {
           stroke: GasPropertiesColorProfile.separatorColorProperty,
@@ -76,9 +81,15 @@ define( require => {
         textMaxWidth: 110 // determined empirically
       };
 
-      children.push( new WidthCheckbox( sizeVisibleProperty, checkboxOptions ) );
-      children.push( new StopwatchCheckbox( stopwatchVisibleProperty, checkboxOptions ) );
-      children.push( new CollisionCounterCheckbox( collisionCounterVisibleProperty, checkboxOptions ) );
+      children.push( new WidthCheckbox( sizeVisibleProperty, _.extend( {}, checkboxOptions, {
+        tandem: options.tandem.createTandem( 'widthCheckbox' )
+      } ) ) );
+      children.push( new StopwatchCheckbox( stopwatchVisibleProperty, _.extend( {}, checkboxOptions, {
+        tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
+      } ) ) );
+      children.push( new CollisionCounterCheckbox( collisionCounterVisibleProperty, _.extend( {}, checkboxOptions, {
+        tandem: options.tandem.createTandem( 'collisionCounterCheckbox' )
+      } ) ) );
 
       const content = new FixedWidthNode( contentWidth, new VBox( {
         align: 'left',

@@ -79,7 +79,8 @@ define( require => {
           hasHoldConstantControls: options.hasHoldConstantControls,
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+          top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+          tandem: tandem.createTandem( 'controlPanel' )
         } );
       this.addChild( controlPanel );
       controlPanel.moveToBack();
@@ -92,7 +93,8 @@ define( require => {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           expandedProperty: viewProperties.particlesExpandedProperty,
           right: controlPanel.right,
-          top: controlPanel.bottom + 15
+          top: controlPanel.bottom + 15,
+          tandem: tandem.createTandem( 'particlesAccordionBox' )
         } );
       this.addChild( particlesAccordionBox );
       particlesAccordionBox.moveToBack();

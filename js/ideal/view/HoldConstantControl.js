@@ -17,6 +17,7 @@ define( require => {
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const Property = require( 'AXON/Property' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -56,7 +57,10 @@ define( require => {
 
         // superclass options
         align: 'left',
-        spacing: SPACING
+        spacing: SPACING,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       const titleNode = new Text( holdConstantString, {

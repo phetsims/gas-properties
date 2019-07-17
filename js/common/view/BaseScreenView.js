@@ -61,7 +61,8 @@ define( require => {
             model.stepModel( seconds );
             this.stepView( seconds );
           }
-        }
+        },
+        tandem: tandem.createTandem( 'timeControlNode' )
       } );
       this.addChild( this.timeControlNode );
 
@@ -69,7 +70,8 @@ define( require => {
       const resetAllButton = new ResetAllButton( {
         listener: () => { this.reset(); },
         right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+        tandem: tandem.createTandem( 'resetAllButton' )
       } );
       this.addChild( resetAllButton );
 
