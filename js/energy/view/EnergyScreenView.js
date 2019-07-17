@@ -101,7 +101,7 @@ define( require => {
       const injectionTemperatureAccordionBox = new InjectionTemperatureAccordionBox(
         model.temperatureModel.controlTemperatureEnabledProperty,
         model.temperatureModel.initialTemperatureProperty, {
-          expandedProperty: viewProperties.particleToolsExpandedProperty,
+          expandedProperty: viewProperties.injectionTemperatureExpandedProperty,
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           tandem: tandem.createTandem( 'injectionTemperatureAccordionBox' )
         }

@@ -41,9 +41,9 @@ define( require => {
       } );
 
       // @public
-      this.particleToolsExpandedProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'particleToolsExpandedProperty' ),
-        phetioDocumentation: 'whether the Particles Tools accordion box is expanded'
+      this.injectionTemperatureExpandedProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'injectionTemperatureExpandedProperty' ),
+        phetioDocumentation: 'whether the Injection Temperature accordion box is expanded'
       } );
     }
 
@@ -56,7 +56,7 @@ define( require => {
       this.averageSpeedExpandedProperty.reset();
       this.speedExpandedProperty.reset();
       this.kineticEnergyExpandedProperty.reset();
-      this.particleToolsExpandedProperty.reset();
+      this.injectionTemperatureExpandedProperty.reset();
     }
   }
 

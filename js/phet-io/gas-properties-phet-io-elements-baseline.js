@@ -3983,8 +3983,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
-    "gasProperties.energyScreen.view.viewProperties.kineticEnergyExpandedProperty": {
-      "phetioDocumentation": "whether the Kinetic Energy accordion box is expanded",
+    "gasProperties.energyScreen.view.viewProperties.injectionTemperatureExpandedProperty": {
+      "phetioDocumentation": "whether the Injection Temperature accordion box is expanded",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3994,8 +3994,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
-    "gasProperties.energyScreen.view.viewProperties.particleToolsExpandedProperty": {
-      "phetioDocumentation": "whether the Particles Tools accordion box is expanded",
+    "gasProperties.energyScreen.view.viewProperties.kineticEnergyExpandedProperty": {
+      "phetioDocumentation": "whether the Kinetic Energy accordion box is expanded",
       "phetioEventType": "model",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
