@@ -31,6 +31,7 @@ define( require => {
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const PressureModel = require( 'GAS_PROPERTIES/common/model/PressureModel' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Tandem = require( 'TANDEM/Tandem' );
   const TemperatureModel = require( 'GAS_PROPERTIES/common/model/TemperatureModel' );
@@ -131,11 +132,13 @@ define( require => {
 
       // If the container's width changes while the sim is paused, and it's not due to the user
       // resizing the container, then update immediately. See #125.
-      this.container.widthProperty.lazyLink( width => {
-        if ( !this.isPlayingProperty.value && !this.container.userIsAdjustingWidthProperty.value ) {
-          this.updateWhenPaused();
-        }
-      } );
+      Property.multilink(
+        [ this.container.widthProperty, this.container.userIsAdjustingWidthProperty ],
+        ( width, userIsAdjustingWidth ) => {
+          if ( !userIsAdjustingWidth && !this.isPlayingProperty.value ) {
+            this.updateWhenPaused();
+          }
+        } );
 
       // @public (read-only) Emitters for conditions related to the 'Hold Constant' feature.
       // When holding a quantity constant would break the model, the model switches to 'Nothing' mode, the model
