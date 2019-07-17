@@ -11,11 +11,11 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
-  const optionsTandem = GasPropertiesConstants.GLOBALS_TANDEM.createTandem( 'options' );
+  const optionsTandem = Tandem.globalTandem.createTandem( 'options' );
 
   const GasPropertiesGlobalOptions = {
 

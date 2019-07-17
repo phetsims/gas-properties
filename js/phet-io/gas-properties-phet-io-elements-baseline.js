@@ -1,17 +1,6 @@
 /* eslint-disable */
 window.phet.phetio.phetioElementsBaseline = assert &&
   {
-    "gasProperties.colorProfile.profileNameProperty": {
-      "phetioDocumentation": "",
-      "phetioEventType": "model",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": false,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<StringIO>"
-    },
     "gasProperties.diffusionScreen.activeProperty": {
       "phetioDocumentation": "Indicates whether the screen is active.  For single-screen simulations, the screen is always active.",
       "phetioEventType": "model",
@@ -6799,7 +6788,18 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO.<NumberIO>"
     },
-    "gasProperties.globals.options.pressureNoiseProperty": {
+    "gasProperties.global.colorProfile.profileNameProperty": {
+      "phetioDocumentation": "",
+      "phetioEventType": "model",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO.<StringIO>"
+    },
+    "gasProperties.global.options.pressureNoiseProperty": {
       "phetioDocumentation": "turns noise on and off for the pressure gauge",
       "phetioEventType": "model",
       "phetioFeatured": false,
@@ -6810,7 +6810,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO.<BooleanIO>"
     },
-    "gasProperties.globals.options.projectorModeEnabledProperty": {
+    "gasProperties.global.options.projectorModeEnabledProperty": {
       "phetioDocumentation": "Projector Mode is a color profile that is suitable for displaying on a classroom projector",
       "phetioEventType": "model",
       "phetioFeatured": false,
