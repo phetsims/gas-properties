@@ -21,13 +21,13 @@ define( require => {
   class EnergyToolsPanel extends Panel {
 
     /**
-     * @param {BooleanProperty} sizeVisibleProperty
+     * @param {BooleanProperty} widthVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {Object} [options]
      */
-    constructor( sizeVisibleProperty, stopwatchVisibleProperty, options ) {
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
-        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+    constructor( widthVisibleProperty, stopwatchVisibleProperty, options ) {
+      assert && assert( widthVisibleProperty instanceof BooleanProperty,
+        `invalid widthVisibleProperty: ${widthVisibleProperty}` );
       assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
         `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
 
@@ -46,7 +46,7 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
-          new WidthCheckbox( sizeVisibleProperty, checkboxOptions ),
+          new WidthCheckbox( widthVisibleProperty, checkboxOptions ),
           new StopwatchCheckbox( stopwatchVisibleProperty, checkboxOptions )
         ]
       } ) );

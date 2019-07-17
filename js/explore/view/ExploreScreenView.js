@@ -32,11 +32,11 @@ define( require => {
       // view-specific Properties
       const viewProperties = new ExploreViewProperties( tandem.createTandem( 'viewProperties' ) );
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem );
+      super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem );
 
       // Panel at upper right
       const toolsPanel = new ExploreToolsPanel(
-        viewProperties.sizeVisibleProperty,
+        viewProperties.widthVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,

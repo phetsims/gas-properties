@@ -63,16 +63,16 @@ define( require => {
     /**
      * @param {IdealGasLawModel} model
      * @param {Property.<ParticleType>} particleTypeProperty
-     * @param {BooleanProperty} sizeVisibleProperty
+     * @param {BooleanProperty} widthVisibleProperty
      * @param {Tandem} tandem
      * @param {Object} [options]
      */
-    constructor( model, particleTypeProperty, sizeVisibleProperty, tandem, options ) {
+    constructor( model, particleTypeProperty, widthVisibleProperty, tandem, options ) {
       assert && assert( model instanceof IdealGasLawModel, `invalid model: ${model}` );
       assert && assert( particleTypeProperty instanceof Property,
         `invalid particleTypeProperty: ${particleTypeProperty}` );
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
-        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+      assert && assert( widthVisibleProperty instanceof BooleanProperty,
+        `invalid widthVisibleProperty: ${widthVisibleProperty}` );
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       options = _.extend( {
@@ -158,7 +158,7 @@ define( require => {
 
       // Dimensional arrows that indicate container size
       const containerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
-        model.modelViewTransform, sizeVisibleProperty );
+        model.modelViewTransform, widthVisibleProperty );
 
       // Radio buttons for selecting particle type
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,

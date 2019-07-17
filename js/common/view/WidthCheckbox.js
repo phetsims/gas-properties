@@ -20,12 +20,12 @@ define( require => {
   class WidthCheckbox extends GasPropertiesCheckbox {
 
     /**
-     * @param {BooleanProperty} sizeVisibleProperty
+     * @param {BooleanProperty} widthVisibleProperty
      * @param {Object} [options]
      */
-    constructor( sizeVisibleProperty, options ) {
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
-        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+    constructor( widthVisibleProperty, options ) {
+      assert && assert( widthVisibleProperty instanceof BooleanProperty,
+        `invalid widthVisibleProperty: ${widthVisibleProperty}` );
 
       if ( options ) {
         assert && assert( !options.text, 'WidthCheckbox sets text' );
@@ -39,7 +39,7 @@ define( require => {
         icon: GasPropertiesIconFactory.createContainerWidthIcon()
       }, options );
 
-      super( sizeVisibleProperty, options );
+      super( widthVisibleProperty, options );
     }
   }
 

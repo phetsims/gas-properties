@@ -23,14 +23,14 @@ define( require => {
   class ExploreToolsPanel extends Panel {
 
     /**
-     * @param {BooleanProperty} sizeVisibleProperty
+     * @param {BooleanProperty} widthVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {BooleanProperty} collisionCounterVisibleProperty
      * @param {Object} [options]
      */
-    constructor( sizeVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
-        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+    constructor( widthVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
+      assert && assert( widthVisibleProperty instanceof BooleanProperty,
+        `invalid widthVisibleProperty: ${widthVisibleProperty}` );
       assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
         `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
       assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty,
@@ -54,7 +54,7 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
-          new WidthCheckbox( sizeVisibleProperty, _.extend( {}, checkboxOptions, {
+          new WidthCheckbox( widthVisibleProperty, _.extend( {}, checkboxOptions, {
             tandem: options.tandem.createTandem( 'widthCheckbox' )
           } ) ),
           new StopwatchCheckbox( stopwatchVisibleProperty, _.extend( {}, checkboxOptions, {

@@ -40,7 +40,7 @@ define( require => {
       // view-specific Properties
       const viewProperties = new EnergyViewProperties( tandem.createTandem( 'viewProperties' ) );
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem );
+      super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem );
 
       // Average Speed
       const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
@@ -77,7 +77,7 @@ define( require => {
 
       // Tools panel
       const toolsPanel = new EnergyToolsPanel(
-        viewProperties.sizeVisibleProperty,
+        viewProperties.widthVisibleProperty,
         model.stopwatch.visibleProperty, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
         } );

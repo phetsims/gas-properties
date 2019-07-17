@@ -23,8 +23,8 @@ define( require => {
     constructor( tandem ) {
 
       // @public
-      this.sizeVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'sizeVisibleProperty' ),
+      this.widthVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'widthVisibleProperty' ),
         phetioDocumentation: 'whether dimensional arrows are visible for the width of the container'
       } );
 
@@ -43,7 +43,7 @@ define( require => {
 
     // @public
     reset() {
-      this.sizeVisibleProperty.reset();
+      this.widthVisibleProperty.reset();
       this.particlesExpandedProperty.reset();
       this.particleTypeProperty.reset();
     }

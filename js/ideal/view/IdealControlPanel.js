@@ -32,12 +32,12 @@ define( require => {
      * @param {EnumerationProperty} holdConstantProperty
      * @param {Property.<number>>} numberOfParticlesProperty
      * @param {NumberProperty} pressureProperty
-     * @param {BooleanProperty} sizeVisibleProperty
+     * @param {BooleanProperty} widthVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {BooleanProperty} collisionCounterVisibleProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, sizeVisibleProperty,
+    constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, widthVisibleProperty,
                  stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
@@ -45,8 +45,8 @@ define( require => {
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( pressureProperty instanceof NumberProperty,
         `invalid pressureProperty: ${pressureProperty}` );
-      assert && assert( sizeVisibleProperty instanceof BooleanProperty,
-        `invalid sizeVisibleProperty: ${sizeVisibleProperty}` );
+      assert && assert( widthVisibleProperty instanceof BooleanProperty,
+        `invalid widthVisibleProperty: ${widthVisibleProperty}` );
       assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
         `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
       assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty,
@@ -81,7 +81,7 @@ define( require => {
         textMaxWidth: 110 // determined empirically
       };
 
-      children.push( new WidthCheckbox( sizeVisibleProperty, _.extend( {}, checkboxOptions, {
+      children.push( new WidthCheckbox( widthVisibleProperty, _.extend( {}, checkboxOptions, {
         tandem: options.tandem.createTandem( 'widthCheckbox' )
       } ) ) );
       children.push( new StopwatchCheckbox( stopwatchVisibleProperty, _.extend( {}, checkboxOptions, {

@@ -49,7 +49,7 @@ define( require => {
       // view-specific Properties
       const viewProperties = new IdealViewProperties( tandem.createTandem( 'viewProperties' ) );
 
-      super( model, viewProperties.particleTypeProperty, viewProperties.sizeVisibleProperty, tandem, options );
+      super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem, options );
 
       // Flame/ice is animated when holding pressure constant and adjusting temperature (HoldConstant.PRESSURE_T).
       // The user is not controlling the heat, and we animate the bucket to correspond to the temperature change.
@@ -73,7 +73,7 @@ define( require => {
         model.holdConstantProperty,
         model.particleSystem.numberOfParticlesProperty,
         model.pressureModel.pressureProperty,
-        viewProperties.sizeVisibleProperty,
+        viewProperties.widthVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
           hasHoldConstantControls: options.hasHoldConstantControls,
