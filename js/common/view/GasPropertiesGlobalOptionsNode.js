@@ -60,8 +60,12 @@ define( require => {
       super( options );
 
       // Switch between default and projector color profiles.
+      // This requires keeping 2 Properties in sync, a workaround for https://github.com/phetsims/joist/issues/569.
       GasPropertiesGlobalOptions.projectorModeEnabledProperty.link( projectorModeEnabled => {
         GasPropertiesColorProfile.profileNameProperty.set( projectorModeEnabled ? 'projector' : 'default' );
+      } );
+      GasPropertiesColorProfile.profileNameProperty.link( profileName => {
+        GasPropertiesGlobalOptions.projectorModeEnabledProperty.value = ( profileName === 'projector' );
       } );
     }
   }
