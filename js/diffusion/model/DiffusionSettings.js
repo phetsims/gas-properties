@@ -34,7 +34,7 @@ define( require => {
           range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE,
           isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
           tandem: options.tandem.createTandem( 'numberOfParticlesProperty' ),
-          phetStudioControl: false // because value must be a multiple of delta
+          phetioStudioControl: false // because value must be a multiple of delta
         } );
 
       // @public mass, in AMU
@@ -44,7 +44,7 @@ define( require => {
         units: 'AMU',
         isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 ),
         tandem: options.tandem.createTandem( 'massProperty' ),
-        phetStudioControl: false // because value must be a multiple of delta
+        phetioStudioControl: false // because value must be a multiple of delta
       } );
 
       // @public radius, in pm
@@ -54,7 +54,7 @@ define( require => {
         units: 'pm',
         isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 ),
         tandem: options.tandem.createTandem( 'radiusProperty' ),
-        phetStudioControl: false // because value must be a multiple of delta
+        phetioStudioControl: false // because value must be a multiple of delta
       } );
 
       // @public initial temperature, in K, used to compute initial velocity
@@ -65,7 +65,7 @@ define( require => {
           units: 'K',
           isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
           tandem: options.tandem.createTandem( 'initialTemperatureProperty' ),
-          phetStudioControl: false, // because value must be a multiple of delta
+          phetioStudioControl: false, // because value must be a multiple of delta
           phetioDocumentation: 'temperature used to determine initial speed of particles'
         } );
     }
