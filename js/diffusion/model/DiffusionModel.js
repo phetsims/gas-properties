@@ -34,7 +34,7 @@ define( require => {
   // constants
   const CENTER_OF_MASS_PROPERTY_OPTIONS = {
     units: 'pm',
-    isValidValue: value => ( value === null || typeof value === 'number' ),
+    valueType: [ 'number', null ],
     phetioType: PropertyIO( NullableIO( NumberIO ) ),
     phetioReadOnly: true // derived from the state of the particle system
   };

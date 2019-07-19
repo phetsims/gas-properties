@@ -34,7 +34,7 @@ define( require => {
       options = _.extend( {
 
         // superclass options
-        isValidValue: value => ( value === null || value instanceof HTMLCanvasElement )
+        valueType: [ HTMLCanvasElement, null ]
       }, options );
 
       // Create a prototypical Particle
