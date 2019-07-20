@@ -15,6 +15,7 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesGlobalOptions = require( 'GAS_PROPERTIES/common/GasPropertiesGlobalOptions' );
   const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -32,7 +33,10 @@ define( require => {
         hasPressureNoiseCheckbox: true, // whether to include the 'Pressure Noise' checkbox
 
         // superclass options
-        spacing: 12
+        spacing: 12,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       const children = [];
@@ -40,7 +44,8 @@ define( require => {
       // Projector Mode checkbox
       const projectorModeCheckbox = new ProjectorModeCheckbox( GasPropertiesColorProfile,
         _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-          font: GasPropertiesConstants.CONTROL_FONT
+          font: GasPropertiesConstants.CONTROL_FONT,
+          tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
         } ) );
       children.push( projectorModeCheckbox );
 
@@ -49,7 +54,9 @@ define( require => {
         const pressureNoiseCheckbox = new Checkbox(
           new Text( pressureNoiseString, { font: GasPropertiesConstants.CONTROL_FONT } ),
           GasPropertiesGlobalOptions.pressureNoiseProperty,
-          GasPropertiesConstants.CHECKBOX_OPTIONS
+          _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
+            tandem: options.tandem.createTandem( 'pressureNoiseCheckbox' )
+          } )
         );
         children.push( pressureNoiseCheckbox );
       }

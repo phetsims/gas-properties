@@ -24,8 +24,10 @@ define( require => {
 
   const simOptions = {
 
-    // Contents of the Options dialog, accessible via the PhET menu
-    optionsNode: new GasPropertiesGlobalOptionsNode(),
+    // Creates content for the Options dialog, accessible via the PhET menu
+    createOptionsDialogContent: tandem => new GasPropertiesGlobalOptionsNode( {
+      tandem: tandem
+    } ),
 
     // Credits appear in the About dialog, accessible via the PhET menu
     credits: GasPropertiesConstants.CREDITS
