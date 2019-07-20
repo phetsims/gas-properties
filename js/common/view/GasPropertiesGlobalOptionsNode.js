@@ -38,10 +38,10 @@ define( require => {
       const children = [];
 
       // Projector Mode checkbox
-      const projectorModeCheckbox = new ProjectorModeCheckbox( _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-        font: GasPropertiesConstants.CONTROL_FONT,
-        projectorModeEnabledProperty: GasPropertiesGlobalOptions.projectorModeEnabledProperty
-      } ) );
+      const projectorModeCheckbox = new ProjectorModeCheckbox( GasPropertiesColorProfile,
+        _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
+          font: GasPropertiesConstants.CONTROL_FONT
+        } ) );
       children.push( projectorModeCheckbox );
 
       // Pressure Noise checkbox
@@ -58,15 +58,6 @@ define( require => {
       options.children = children;
 
       super( options );
-
-      // Switch between default and projector color profiles.
-      // This requires keeping 2 Properties in sync, a workaround for https://github.com/phetsims/joist/issues/569.
-      GasPropertiesGlobalOptions.projectorModeEnabledProperty.link( projectorModeEnabled => {
-        GasPropertiesColorProfile.profileNameProperty.set( projectorModeEnabled ? 'projector' : 'default' );
-      } );
-      GasPropertiesColorProfile.profileNameProperty.link( profileName => {
-        GasPropertiesGlobalOptions.projectorModeEnabledProperty.value = ( profileName === 'projector' );
-      } );
     }
   }
 

@@ -20,13 +20,6 @@ define( require => {
   const GasPropertiesGlobalOptions = {
 
     // @public
-    projectorModeEnabledProperty:
-      new BooleanProperty( phet.chipper.queryParameters.colorProfile === 'projector', {
-        tandem: optionsTandem.createTandem( 'projectorModeEnabledProperty' ),
-        phetioDocumentation: 'Projector Mode is a color profile that is suitable for display on a classroom projector'
-      } ),
-
-    // @public
     pressureNoiseProperty:
       new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
         tandem: optionsTandem.createTandem( 'pressureNoiseProperty' ),
