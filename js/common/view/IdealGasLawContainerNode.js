@@ -26,6 +26,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Util = require( 'DOT/Util' );
 
   // constants
@@ -55,7 +56,8 @@ define( require => {
       options = _.extend( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
         lidGripColor: GasPropertiesColorProfile.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
-        resizeHandleIsPressedListener: isPressed => {} // function(isPressed: boolean)
+        resizeHandleIsPressedListener: isPressed => {}, // function(isPressed: boolean)
+        tandem: Tandem.required
       }, options );
 
       // Constant aspects of the container, in view coordinates
@@ -159,7 +161,8 @@ define( require => {
       resizeHandleNode.on( 'visibility', () => resizeHandleNode.interruptSubtreeInput() );
 
       // Dragging the resize handle horizontally changes the container's width
-      const resizeDragListener = new ContainerResizeDragListener( container, modelViewTransform, this );
+      const resizeDragListener = new ContainerResizeDragListener( container, modelViewTransform, this,
+        options.tandem.createTandem( 'resizeDragListener' ) );
       resizeHandleNode.addInputListener( resizeDragListener );
 
       // While interacting with the resize handle...
@@ -184,7 +187,8 @@ define( require => {
       } );
 
       // Dragging the lid horizontally changes the size of the opening in the top of the container
-      const lidDragListener = new LidDragListener( container, modelViewTransform, this );
+      const lidDragListener = new LidDragListener( container, modelViewTransform, this,
+        options.tandem.createTandem( 'lidDragListener' ) );
       lidNode.addInputListener( lidDragListener );
 
       // This implementation assumes that the lid is not interactive while the container is being resized.

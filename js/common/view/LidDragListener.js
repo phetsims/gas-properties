@@ -16,6 +16,7 @@ define( require => {
   const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class LidDragListener extends DragListener {
 
@@ -23,12 +24,14 @@ define( require => {
      * @param {IdealGasLawContainer} container
      * @param {ModelViewTransform2} modelViewTransform
      * @param {Node} parentNode
+     * @param {Tandem} tandem
      */
-    constructor( container, modelViewTransform, parentNode ) {
+    constructor( container, modelViewTransform, parentNode, tandem ) {
       assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
+      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       // pointer's x offset from container.getOpeningLeft(), when a drag starts
       let startXOffset = 0;
@@ -67,7 +70,9 @@ define( require => {
                                 `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
                                 'Lid is closed'
           );
-        }
+        },
+
+        tandem: tandem
       } );
     }
   }

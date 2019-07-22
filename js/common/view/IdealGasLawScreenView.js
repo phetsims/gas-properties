@@ -147,13 +147,15 @@ define( require => {
       const containerNode = new IdealGasLawContainerNode( model.container, model.modelViewTransform,
         model.holdConstantProperty, this.visibleBoundsProperty, {
           resizeGripColor: options.resizeGripColor,
-          resizeHandleIsPressedListener: resizeHandleIsPressedListener
+          resizeHandleIsPressedListener: resizeHandleIsPressedListener,
+          tandem: tandem.createTandem( 'containerNode' )
         } );
 
       // Return Lid button
       const returnLidButton = new ReturnLidButton( model.container, {
         right: model.modelViewTransform.modelToViewX( model.container.right - model.container.openingRightInset ) - 30,
-        bottom: model.modelViewTransform.modelToViewY( model.container.top ) - 15
+        bottom: model.modelViewTransform.modelToViewY( model.container.top ) - 15,
+        tandem: tandem.createTandem( 'returnLidButton' )
       } );
 
       // Dimensional arrows that indicate container size
