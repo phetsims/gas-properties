@@ -25,8 +25,8 @@ define( require => {
     'NOTHING',     // change N, T, or V => change P
     'VOLUME',      // change N or T => change P
     'TEMPERATURE', // change N or V => change P
-    'PRESSURE_T',  // change N or V => change T
-    'PRESSURE_V'   // change N or T => change V
+    'PRESSURE_V',  // change N or T => change V
+    'PRESSURE_T'   // change N or V => change T
   ] );
 
   return gasProperties.register( 'HoldConstant', HoldConstant );
