@@ -36,6 +36,7 @@ define( require => {
   const ScreenIcon = require( 'JOIST/ScreenIcon' );
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -73,7 +74,8 @@ define( require => {
         majorTickStroke: 'black',
         minorTickStroke: 'black',
         left: containerNode.right + 15,
-        top: containerNode.top
+        top: containerNode.top,
+        tandem: Tandem.optOut
       } );
 
       // Post that connects the gauge to the container
