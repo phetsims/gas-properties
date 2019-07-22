@@ -46,8 +46,16 @@ define( require => {
       }, options );
 
       const content = [
-        { value: ParticleType.HEAVY, node: GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ) },
-        { value: ParticleType.LIGHT, node: GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ) }
+        {
+          value: ParticleType.HEAVY,
+          node: GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
+          tandemName: 'heavyParticles'
+        },
+        {
+          value: ParticleType.LIGHT,
+          node: GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
+          tandemName: 'lightParticles'
+        }
       ];
 
       super( particleTypeProperty, content, options );

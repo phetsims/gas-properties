@@ -166,7 +166,8 @@ define( require => {
       const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,
         model.modelViewTransform, {
           left: containerNode.right + 20,
-          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+          tandem: tandem.createTandem( 'particleTypeRadioButtonGroup' )
         } );
 
       // Bicycle pump is centered above the radio buttons.
