@@ -186,15 +186,17 @@ define( require => {
 
       // Bicycle pump for heavy particles
       const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
-        _.extend( {
-          bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty
-        }, bicyclePumpOptions ) );
+        _.extend( {}, bicyclePumpOptions, {
+          bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty,
+          tandem: tandem.createTandem( 'heavyBicyclePumpNode' )
+        } ) );
 
       // Bicycle pump for light particles
       const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
-        _.extend( {
-          bodyFill: GasPropertiesColorProfile.lightParticleColorProperty
-        }, bicyclePumpOptions ) );
+        _.extend( {}, bicyclePumpOptions, {
+          bodyFill: GasPropertiesColorProfile.lightParticleColorProperty,
+          tandem: tandem.createTandem( 'lightBicyclePumpNode' )
+        } ) );
 
       // Toggle button for switching between heavy and light bicycle pumps
       const bicyclePumpsToggleNode = new ToggleNode( particleTypeProperty, [
