@@ -128,6 +128,35 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
     },
+    "ActionIO.<EventIO>": {
+      "documentation": "Emits when an event occurs. The arguments are:<br><ol><li>event: EventIO</li></ol>",
+      "events": [
+        "emitted"
+      ],
+      "methodOrder": [],
+      "methods": {
+        "addListener": {
+          "documentation": "Adds a listener which will be called when the emitter emits.",
+          "parameterTypes": [
+            "FunctionIO.<EventIO>"
+          ],
+          "returnType": "VoidIO"
+        },
+        "execute": {
+          "documentation": "Executes the function the Action is wrapping.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "EventIO"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "EventIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "ActionIO.<EventIO>"
+    },
     "ActionIO.<NullableIO.<EventIO>, VoidIO>": {
       "documentation": "Emits when an event occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
       "events": [
@@ -405,7 +434,7 @@ window.phet.phetio.phetioTypes = assert &&
       "typeName": "EmitterIO.<>"
     },
     "EnumerationIO.<>": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values",
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: NOTHING,VOLUME,TEMPERATURE,PRESSURE_V,PRESSURE_T",
       "events": [],
       "methodOrder": [],
       "methods": {
@@ -544,6 +573,17 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "FunctionIO.<EventIO, VoidIO, VoidIO>"
+    },
+    "FunctionIO.<EventIO>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EventIO<br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EventIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO.<EventIO>"
     },
     "FunctionIO.<NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>>>": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>><br><strong>Return Type:</strong> VoidIO",
