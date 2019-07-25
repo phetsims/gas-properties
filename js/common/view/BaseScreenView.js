@@ -58,7 +58,7 @@ define( require => {
           // when the Step button is pressed
           listener: () => {
             const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
-            model.stepModel( seconds );
+            model.stepRealTime( seconds );
             this.stepView( seconds );
           }
         },
