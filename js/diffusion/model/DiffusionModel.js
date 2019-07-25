@@ -344,7 +344,7 @@ define( require => {
     assert && assert( typeof temperature === 'number' && temperature >= 0, `invalid temperature: ${temperature}` );
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
-    for ( let i = 0; i < particles.length; i++ ) {
+    for ( let i = particles.length - 1; i >= 0; i-- ) {
       particles[ i ].mass = mass;
 
       // |v| = sqrt( 3kT / m )
@@ -365,7 +365,7 @@ define( require => {
     assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
     assert && assert( typeof isPlaying === 'boolean', `invalid isPlaying: ${isPlaying}` );
 
-    for ( let i = 0; i < particles.length; i++ ) {
+    for ( let i = particles.length - 1; i >= 0; i-- ) {
 
       const particle = particles[ i ];
       particle.radius = radius;

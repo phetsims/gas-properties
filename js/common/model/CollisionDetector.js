@@ -89,7 +89,7 @@ define( require => {
      * @private
      */
     clearRegions() {
-      for ( let i = 0; i < this.regions.length; i++ ) {
+      for ( let i = this.regions.length - 1; i >= 0; i-- ) {
         this.regions[ i ].clear();
       }
     }
@@ -111,7 +111,7 @@ define( require => {
 
       // particle-particle collisions, within each region
       if ( this.particleParticleCollisionsEnabledProperty.value ) {
-        for ( let i = 0; i < containerRegions.length; i++ ) {
+        for ( let i = containerRegions.length - 1; i >= 0; i-- ) {
           doParticleParticleCollisions( containerRegions[ i ].particles, this.mutableVectors );
         }
       }
@@ -133,7 +133,7 @@ define( require => {
      */
     updateParticleContainerCollisions() {
       let numberOfParticleContainerCollisions = 0;
-      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+      for ( let i = this.particleArrays.length - 1; i >= 0; i-- ) {
         numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ],
           this.container.bounds, this.container.leftWallVelocity );
       }
@@ -181,11 +181,11 @@ define( require => {
     assert && assert( Array.isArray( particleArrays ), `invalid particleArrays: ${particleArrays}` );
     assert && assert( Array.isArray( regions ) && regions.length > 0, `invalid regions: ${regions}` );
 
-    for ( let i = 0; i < particleArrays.length; i++ ) {
+    for ( let i = particleArrays.length - 1; i >= 0; i-- ) {
       const particles = particleArrays[ i ];
-      for ( let j = 0; j < particles.length; j++ ) {
+      for ( let j = particles.length - 1; j >= 0; j-- ) {
         const particle = particles[ j ];
-        for ( let k = 0; k < regions.length; k++ ) {
+        for ( let k = regions.length - 1; k >= 0; k-- ) {
           const region = regions[ k ];
           if ( particle.intersectsBounds( region.bounds ) ) {
             region.addParticle( particle );
@@ -205,11 +205,11 @@ define( require => {
   function doParticleParticleCollisions( particles, mutableVectors ) {
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
-    for ( let i = 0; i < particles.length - 1; i++ ) {
+    for ( let i = particles.length - 1; i >= 1; i-- ) {
 
       const particle1 = particles[ i ];
 
-      for ( let j = i + 1; j < particles.length; j++ ) {
+      for ( let j = i - 1; j >= 0; j-- ) {
 
         const particle2 = particles[ j ];
         assert && assert( particle1 !== particle2, 'particle cannot collide with itself' );
@@ -330,7 +330,7 @@ define( require => {
 
     let numberOfCollisions = 0;
 
-    for ( let i = 0; i < particles.length; i++ ) {
+    for ( let i = particles.length - 1; i >= 0; i-- ) {
 
       const particle = particles[ i ];
       let collided = false;

@@ -53,7 +53,7 @@ define( require => {
 
       // Initialize histograms with 0 in all bins
       const emptyBins = [];
-      for ( let i = 0; i < this.numberOfBins; i++ ) {
+      for ( let i = this.numberOfBins - 1; i >= 0; i-- ) {
         emptyBins[ i ] = 0;
       }
 
@@ -247,7 +247,7 @@ define( require => {
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
     const values = [];
-    for ( let i = 0; i < particles.length; i++ ) {
+    for ( let i = particles.length - 1; i >= 0; i-- ) {
       values.push( particles[ i ].velocity.magnitude );
     }
     return values;
@@ -262,7 +262,7 @@ define( require => {
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
     const values = [];
-    for ( let i = 0; i < particles.length; i++ ) {
+    for ( let i = particles.length - 1; i >= 0; i-- ) {
       values.push( particles[ i ].getKineticEnergy() );
     }
     return values;
@@ -287,9 +287,9 @@ define( require => {
     }
 
     // Bin all of the sample data, for total binCounts
-    for ( let i = 0; i < sampleArrays.length; i++ ) {
+    for ( let i = sampleArrays.length - 1; i >= 0; i-- ) {
       const values = sampleArrays[ i ];
-      for ( let j = 0; j < values.length; j++ ) {
+      for ( let j = values.length - 1; j >= 0; j-- ) {
         const index = Math.floor( values[ j ] / binWidth ); // bin range is [min,max)
         if ( index >= 0 && index < binCounts.length ) {
           binCounts[ index ]++;
@@ -298,7 +298,7 @@ define( require => {
     }
 
     // Average the bin counts
-    for ( let i = 0; i < binCounts.length; i++ ) {
+    for ( let i = binCounts.length - 1; i >= 0; i-- ) {
       assert && assert( typeof binCounts[ i ] === 'number' && binCounts[ i ] >= 0,
         `invalid binCount: ${binCounts[ i ]}` );
       binCounts[ i ] = binCounts[ i ] / sampleArrays.length;
@@ -320,7 +320,7 @@ define( require => {
     assert && assert( heavyBinCounts.length === lightBinCounts.length, 'lengths should be the same' );
 
     const sumBinCounts = [];
-    for ( let i = 0; i < heavyBinCounts.length; i++ ) {
+    for ( let i = heavyBinCounts.length - 1; i >= 0; i-- ) {
       sumBinCounts[ i ] = heavyBinCounts[ i ] + lightBinCounts[ i ];
     }
     return sumBinCounts;

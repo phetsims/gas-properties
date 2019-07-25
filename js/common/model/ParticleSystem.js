@@ -323,9 +323,9 @@ define( require => {
       const actualAverageKE = this.getAverageKineticEnergy();
       const ratio = desiredAverageKE / actualAverageKE;
 
-      for ( let i = 0; i < this.insideParticleArrays.length; i++ ) {
+      for ( let i = this.insideParticleArrays.length - 1; i >= 0; i-- ) {
         const particles = this.insideParticleArrays[ i ];
-        for ( let j = 0; j < particles.length; j++ ) {
+        for ( let j = particles.length - 1; j >= 0; j-- ) {
           const particle = particles[ j ];
           const actualParticleKE = particle.getKineticEnergy();
           const desiredParticleKE = ratio * actualParticleKE;

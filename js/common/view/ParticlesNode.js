@@ -78,7 +78,7 @@ define( require => {
       }
 
       // Draw the particles
-      for ( let i = 0; i < this.particleArrays.length; i++ ) {
+      for ( let i = this.particleArrays.length - 1; i >= 0; i-- ) {
         drawParticles( context, this.modelViewTransform, this.particleArrays[ i ], this.imageProperties[ i ].value );
       }
     }
@@ -125,13 +125,12 @@ define( require => {
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
     assert && assert( image instanceof HTMLCanvasElement, `invalid image: ${image}` );
 
-    const numberOfParticles = particles.length;
     const xOffset = ( image.width / 2 ) / IMAGE_SCALE;
     const yOffset = ( image.height / 2 ) / IMAGE_SCALE;
     const dWidth = image.width / IMAGE_SCALE;
     const dHeight = image.height / IMAGE_SCALE;
 
-    for ( let i = 0; i < numberOfParticles; i++ ) {
+    for ( let i = particles.length - 1; i >= 0; i-- ) {
       context.drawImage( image,
 
         // Be careful about how dx, dy args are computed. Content is centered and padded in HTMLCanvasElement

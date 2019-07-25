@@ -86,7 +86,7 @@ define( require => {
       // Take a sample.
       let leftCount = 0; // <--
       let rightCount = 0; // -->
-      for ( let i = 0; i < this.particles.length; i++ ) {
+      for ( let i = this.particles.length - 1; i >= 0; i-- ) {
         const particle = this.particles[ i ];
         if ( particle.previousLocation.x >= this.dividerX && particle.location.x < this.dividerX ) {
           leftCount++;

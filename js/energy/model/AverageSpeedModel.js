@@ -174,7 +174,7 @@ define( require => {
     let averageSpeed = 0;
     if ( particles.length > 0 ) {
       let totalSpeed = 0;
-      for ( let i = 0; i < particles.length; i++ ) {
+      for ( let i = particles.length - 1; i >= 0; i-- ) {
         totalSpeed += particles[ i ].velocity.magnitude;
       }
       averageSpeed = totalSpeed / particles.length;

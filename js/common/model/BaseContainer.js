@@ -152,9 +152,9 @@ define( require => {
     containsParticles( particleArrays ) {
       assert && assert( Array.isArray( particleArrays ), `invalid particlesArray: ${particleArrays}` );
 
-      for ( let i = 0; i < particleArrays.length; i++ ) {
+      for ( let i = particleArrays.length - 1; i >= 0; i-- ) {
         const particles = particleArrays[ i ];
-        for ( let j = 0; j < particles.length; j++ ) {
+        for ( let j = particles.length - 1; j >= 0; j-- ) {
           const particle = particles[ j ];
           if ( !this.containsParticle( particle ) ) {
             return false;

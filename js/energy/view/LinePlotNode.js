@@ -50,11 +50,12 @@ define( require => {
     plot( binCounts ) {
       assert && assert( Array.isArray( binCounts ) && binCounts.length > 0, `invalid binCounts: ${binCounts}` );
 
-      const binWidth = this.chartSize.width / binCounts.length;
+      const numberOfBins = binCounts.length;
+      const binWidth = this.chartSize.width / numberOfBins;
 
       const shape = new Shape().moveTo( 0, this.chartSize.height );
       let previousCount = 0;
-      for ( let i = 0; i < binCounts.length; i++ ) {
+      for ( let i = 0; i < numberOfBins; i++ ) {
 
         const binCount = binCounts[ i ];
         assert && assert( binCount <= this.yScaleProperty.value,

@@ -36,7 +36,7 @@ define( require => {
 
       // {RegionNode[]}
       const regionNodes = [];
-      for ( let i = 0; i < regions.length; i++ ) {
+      for ( let i = regions.length - 1; i >= 0; i-- ) {
         const regionNode = new RegionNode( regions[ i ], modelViewTransform );
         regionNodes.push( regionNode );
       }
@@ -57,7 +57,7 @@ define( require => {
      * @public
      */
     update() {
-      for ( let i = 0; i < this.regionNodes.length; i++ ) {
+      for ( let i = this.regionNodes.length - 1; i >= 0; i-- ) {
         this.regionNodes[ i ].update();
       }
     }

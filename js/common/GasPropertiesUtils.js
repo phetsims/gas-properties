@@ -44,7 +44,7 @@ define( require => {
       const emergentMean = sum / n;
       const deltaMean = mean - emergentMean;
       sum = 0;
-      for ( let i = 0; i < values.length; i++ ) {
+      for ( let i = values.length - 1; i >= 0; i-- ) {
         const speed = values[ i ] + deltaMean;
         assert && assert( isFinite( speed ), `invalid speed: ${speed}` );
         values[ i ] = speed;

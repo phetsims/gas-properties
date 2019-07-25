@@ -28,7 +28,7 @@ define( require => {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
 
-      for ( let i = 0; i < particles.length; i++ ) {
+      for ( let i = particles.length - 1; i >= 0; i-- ) {
         particles[ i ].step( dt );
       }
     },
@@ -105,7 +105,7 @@ define( require => {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
       assert && assert( typeof scaleX === 'number' && scaleX > 0, `invalid scaleX: ${scaleX}` );
 
-      for ( let i = 0; i < particles.length; i++ ) {
+      for ( let i = particles.length - 1; i >= 0; i-- ) {
         particles[ i ].location.setX( scaleX * particles[ i ].location.x );
       }
     },
@@ -122,7 +122,7 @@ define( require => {
         `invalid heatCoolFactor: ${heatCoolFactor}` );
 
       const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
-      for ( let i = 0; i < particles.length; i++ ) {
+      for ( let i = particles.length - 1; i >= 0; i-- ) {
         particles[ i ].scaleVelocity( velocityScale );
       }
     },
@@ -167,7 +167,7 @@ define( require => {
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
       let totalKineticEnergy = 0;
-      for ( let i = 0; i < particles.length; i++ ) {
+      for ( let i = particles.length - 1; i >= 0; i-- ) {
         totalKineticEnergy += particles[ i ].getKineticEnergy();
       }
       return totalKineticEnergy;
@@ -186,7 +186,7 @@ define( require => {
       if ( particles.length > 0 ) {
         let numerator = 0;
         let totalMass = 0;
-        for ( let i = 0; i < particles.length; i++ ) {
+        for ( let i = particles.length - 1; i >= 0; i-- ) {
           const particle = particles[ i ];
           numerator += ( particle.mass * particle.location.x );
           totalMass += particle.mass;
