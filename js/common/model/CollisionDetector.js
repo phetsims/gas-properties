@@ -34,6 +34,11 @@ define( require => {
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
   const Vector2 = require( 'DOT/Vector2' );
 
+  // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
+  // after they collide. It normally ranges from 0 to 1, where 1 is a perfectly elastic collision.
+  // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
+  const e = 1;
+
   class CollisionDetector {
 
     /**
@@ -251,11 +256,6 @@ define( require => {
           // Adjust particle velocities using impulse-based contact model.
           // See https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model
           //-----------------------------------------------------------------------------------------
-
-          // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
-          // after they collide. It normally ranges from 0 to 1, where 1 is a perfectly elastic collision.
-          // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
-          const e = 1;
 
           // Compute the impulse, j.
           // There is no angular velocity in our model, so the denominator involves only mass.
