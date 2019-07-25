@@ -125,15 +125,21 @@ define( require => {
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
     assert && assert( image instanceof HTMLCanvasElement, `invalid image: ${image}` );
 
-    for ( let i = 0; i < particles.length; i++ ) {
+    const numberOfParticles = particles.length;
+    const xOffset = ( image.width / 2 ) / IMAGE_SCALE;
+    const yOffset = ( image.height / 2 ) / IMAGE_SCALE;
+    const dWidth = image.width / IMAGE_SCALE;
+    const dHeight = image.height / IMAGE_SCALE;
+
+    for ( let i = 0; i < numberOfParticles; i++ ) {
       context.drawImage( image,
 
         // Be careful about how dx, dy args are computed. Content is centered and padded in HTMLCanvasElement
         // because we provided integer bounds in particleToCanvas.
-        modelViewTransform.modelToViewX( particles[ i ].location.x ) - ( image.width / 2 ) / IMAGE_SCALE,
-        modelViewTransform.modelToViewY( particles[ i ].location.y ) - ( image.height / 2 ) / IMAGE_SCALE,
-        image.width / IMAGE_SCALE,
-        image.height / IMAGE_SCALE
+        modelViewTransform.modelToViewX( particles[ i ].location.x ) - xOffset,  // dx
+        modelViewTransform.modelToViewY( particles[ i ].location.y ) - yOffset,  // dy
+        dWidth,
+        dHeight
       );
     }
   }
