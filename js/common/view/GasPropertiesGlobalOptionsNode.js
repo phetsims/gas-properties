@@ -22,6 +22,9 @@ define( require => {
   // strings
   const pressureNoiseString = require( 'string!GAS_PROPERTIES/pressureNoise' );
 
+  // constants
+  const CHECKBOX_TEXT_MAX_WIDTH = 350;
+
   class GasPropertiesGlobalOptionsNode extends VBox {
 
     /**
@@ -45,6 +48,7 @@ define( require => {
       const projectorModeCheckbox = new ProjectorModeCheckbox( GasPropertiesColorProfile,
         _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
           font: GasPropertiesConstants.CONTROL_FONT,
+          maxTextWidth: CHECKBOX_TEXT_MAX_WIDTH,
           tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
         } ) );
       children.push( projectorModeCheckbox );
@@ -52,7 +56,10 @@ define( require => {
       // Pressure Noise checkbox
       if ( options.hasPressureNoiseCheckbox ) {
         const pressureNoiseCheckbox = new Checkbox(
-          new Text( pressureNoiseString, { font: GasPropertiesConstants.CONTROL_FONT } ),
+          new Text( pressureNoiseString, {
+            font: GasPropertiesConstants.CONTROL_FONT,
+            maxWidth: CHECKBOX_TEXT_MAX_WIDTH
+          } ),
           GasPropertiesGlobalOptions.pressureNoiseProperty,
           _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
             tandem: options.tandem.createTandem( 'pressureNoiseCheckbox' )
