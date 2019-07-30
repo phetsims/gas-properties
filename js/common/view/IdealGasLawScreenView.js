@@ -299,7 +299,7 @@ define( require => {
 
       // Oops dialog when maximum temperature is exceeded.
       const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( oopsMaximumTemperatureString );
-      model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { oopsMaximumTemperatureDialog.show(); } );
+      model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { this.showDialog( oopsMaximumTemperatureDialog ); } );
 
       // @private used in methods
       this.containerNode = containerNode;
@@ -335,6 +335,15 @@ define( require => {
       this.containerNode.step( dt );
       this.particleSystemNode.update();
       this.regionsNode && this.regionsNode.update();
+    }
+
+    /**
+     * Shows a dialog, and cancels any in-progress interactions.
+     * @param {Dialog} dialog
+     */
+    showDialog( dialog ) {
+      this.interruptSubtreeInput();
+      dialog.show();
     }
   }
 

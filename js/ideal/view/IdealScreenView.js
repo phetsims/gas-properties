@@ -104,16 +104,16 @@ define( require => {
       // notifies the user via a dialog. The student is almost certain to encounter these conditions, so dialogs are
       // created eagerly and reused.
       const oopsTemperatureEmptyDialog = new GasPropertiesOopsDialog( oopsTemperatureEmptyString );
-      model.oopsEmitters.temperatureEmptyEmitter.addListener( () => { oopsTemperatureEmptyDialog.show(); } );
+      model.oopsEmitters.temperatureEmptyEmitter.addListener( () => { this.showDialog( oopsTemperatureEmptyDialog ); } );
 
       const oopsPressureEmptyDialog = new GasPropertiesOopsDialog( oopsPressureEmptyString );
-      model.oopsEmitters.pressureEmptyEmitter.addListener( () => { oopsPressureEmptyDialog.show(); } );
+      model.oopsEmitters.pressureEmptyEmitter.addListener( () => { this.showDialog( oopsPressureEmptyDialog ); } );
 
       const oopsPressureLargeDialog = new GasPropertiesOopsDialog( oopsPressureLargeString );
-      model.oopsEmitters.pressureLargeEmitter.addListener( () => { oopsPressureLargeDialog.show(); } );
+      model.oopsEmitters.pressureLargeEmitter.addListener( () => { this.showDialog( oopsPressureLargeDialog ); } );
 
       const oopsPressureSmallDialog = new GasPropertiesOopsDialog( oopsPressureSmallString );
-      model.oopsEmitters.pressureSmallEmitter.addListener( () => { oopsPressureSmallDialog.show(); } );
+      model.oopsEmitters.pressureSmallEmitter.addListener( () => { this.showDialog( oopsPressureSmallDialog ); } );
 
       // @private used in methods
       this.viewProperties = viewProperties;
