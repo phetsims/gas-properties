@@ -57,6 +57,9 @@ define( require => {
       stopwatch.visibleProperty.link( visible => {
         this.interruptSubtreeInput(); // interrupt user interactions
         this.visible = visible;
+        if ( visible ) {
+          this.moveToFront();
+        }
       } );
 
       // Move to the stopwatch's location
@@ -79,7 +82,8 @@ define( require => {
       this.dragTarget.addInputListener( new DragListener( {
         targetNode: this,
         locationProperty: stopwatch.locationProperty,
-        dragBoundsProperty: dragBoundsProperty
+        dragBoundsProperty: dragBoundsProperty,
+        start: () => { this.moveToFront(); }
       } ) );
     }
   }

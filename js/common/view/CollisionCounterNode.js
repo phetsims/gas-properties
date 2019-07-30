@@ -163,6 +163,9 @@ define( require => {
       collisionCounter.visibleProperty.link( visible => {
         this.interruptSubtreeInput(); // interrupt user interactions
         this.visible = visible;
+        if ( visible ) {
+          this.moveToFront();
+        }
       } );
 
       // Move to the collision counter's location
@@ -186,7 +189,8 @@ define( require => {
       backgroundNode.addInputListener( new DragListener( {
         targetNode: this,
         locationProperty: collisionCounter.locationProperty,
-        dragBoundsProperty: dragBoundsProperty
+        dragBoundsProperty: dragBoundsProperty,
+        start: () => { this.moveToFront(); }
       } ) );
     }
   }
