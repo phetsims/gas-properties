@@ -248,15 +248,16 @@ define( require => {
         top: containerWidthNode.bottom + 5
       } );
 
+      // Common parent for all tools, so we can move the selected tool to the front without affecting other things.
+      const toolsParent = new Node();
+
       // Collision Counter
-      let collisionCounterNode = null;
       if ( model.collisionCounter ) {
-        collisionCounterNode =
-          new CollisionCounterNode( model.collisionCounter, comboBoxListParent, this.visibleBoundsProperty );
+        toolsParent.addChild( new CollisionCounterNode( model.collisionCounter, comboBoxListParent, this.visibleBoundsProperty ) );
       }
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, this.visibleBoundsProperty );
+      toolsParent.addChild( new StopwatchNode( model.stopwatch, this.visibleBoundsProperty ) );
 
       // Show how the collision detection space is partitioned into regions
       let regionsNode = null;
@@ -285,8 +286,7 @@ define( require => {
       this.addChild( particleSystemNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
-      collisionCounterNode && this.addChild( collisionCounterNode );
-      this.addChild( stopwatchNode );
+      this.addChild( toolsParent );
       this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
 

@@ -66,7 +66,9 @@ define( require => {
       assert && assert( visibleBoundsProperty instanceof Property,
         `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
-      options = options || {};
+      options = _.extend( {
+        cursor: 'pointer'
+      }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
         font: LABEL_FONT,

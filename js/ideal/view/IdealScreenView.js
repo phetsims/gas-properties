@@ -61,6 +61,7 @@ define( require => {
           scale: GasPropertiesConstants.HEATER_COOLER_NODE_SCALE
         } );
       this.addChild( animatedHeaterCoolerNode );
+      animatedHeaterCoolerNode.moveToBack();
 
       // Swap visibility of HeaterCoolerNodes
       model.holdConstantProperty.link( holdConstant => {
