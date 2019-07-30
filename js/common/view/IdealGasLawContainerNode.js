@@ -212,6 +212,9 @@ define( require => {
         else {
           this.interruptSubtreeInput(); // cancel interactions with the container, because we're blowing the lid off
         }
+
+        // Lid is only interactive when it's on the container.
+        lidNode.pickable = lidIsOn;
       } );
 
       // @private
