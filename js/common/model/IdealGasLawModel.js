@@ -385,14 +385,15 @@ define( require => {
       // See https://github.com/phetsims/gas-properties/issues/128
       if ( this.temperatureModel.temperatureProperty.value >= GasPropertiesQueryParameters.maxTemperature ) {
 
-        // Remove all particles
-        this.particleSystem.removeAllParticles();
-
         // Switch to a 'Hold Constant' setting that supports an empty container
         if ( this.holdConstantProperty.value !== HoldConstant.NOTHING &&
              this.holdConstantProperty.value !== HoldConstant.VOLUME ) {
           this.holdConstantProperty.value = HoldConstant.NOTHING;
         }
+
+        // Remove all particles. Do this after changing holdConstantProperty, so that that we don't trigger
+        // multiple oopsEmitters.  See https://github.com/phetsims/gas-properties/issues/150.
+        this.particleSystem.removeAllParticles();
 
         // Put the lid on the container
         this.container.lidIsOnProperty.value = true;
