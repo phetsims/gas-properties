@@ -70,6 +70,7 @@ define( require => {
         font: new PhetFont( 12 ),
         cornerRadius: 3,
         numberFill: 'black',
+        numberMaxWidth: 100,
         backgroundFill: 'white',
         backgroundStroke: 'black',
         backgroundLineWidth: 0.5
