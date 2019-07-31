@@ -170,7 +170,7 @@ define( require => {
 
         // disable interaction with the lid, to simplify implementation
         lidNode.interruptSubtreeInput();
-        lidNode.pickable = !isPressed;
+        lidNode.pickable = !isPressed && container.lidIsOnProperty.value;
 
         // display the previous bounds of the container if the wall doesn't do work
         previousBoundsNode.visible = isPressed && !container.leftWallDoesWork;
