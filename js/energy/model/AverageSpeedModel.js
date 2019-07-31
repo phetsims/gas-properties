@@ -75,8 +75,8 @@ define( require => {
       } );
 
       // If the number of particles changes while paused, sample the current state and update immediately.
-      particleSystem.numberOfParticlesProperty.link( () => {
-        if ( !isPlayingProperty.value ) {
+      particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
+        if ( numberOfParticles === 0 || !isPlayingProperty.value ) {
           this.step( this.samplePeriod ); // using the sample period causes an immediate update
         }
       } );
