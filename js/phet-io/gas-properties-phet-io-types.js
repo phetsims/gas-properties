@@ -363,7 +363,49 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ActionIO.<>",
       "typeName": "EmitterIO.<>"
     },
-    "EnumerationIO.<>": {
+    "EnumerationIO(HEAVY|LIGHT)": {
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: HEAVY,LIGHT",
+      "events": [],
+      "methodOrder": [],
+      "methods": {
+        "getValues": {
+          "documentation": "Gets the possible values of the enumeration.",
+          "parameterTypes": [],
+          "returnType": "ArrayIO.<StringIO>"
+        }
+      },
+      "supertype": "ObjectIO",
+      "typeName": "EnumerationIO(HEAVY|LIGHT)"
+    },
+    "EnumerationIO(KELVIN|CELSIUS)": {
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: KELVIN,CELSIUS",
+      "events": [],
+      "methodOrder": [],
+      "methods": {
+        "getValues": {
+          "documentation": "Gets the possible values of the enumeration.",
+          "parameterTypes": [],
+          "returnType": "ArrayIO.<StringIO>"
+        }
+      },
+      "supertype": "ObjectIO",
+      "typeName": "EnumerationIO(KELVIN|CELSIUS)"
+    },
+    "EnumerationIO(KILOPASCALS|ATMOSPHERES)": {
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: KILOPASCALS,ATMOSPHERES",
+      "events": [],
+      "methodOrder": [],
+      "methods": {
+        "getValues": {
+          "documentation": "Gets the possible values of the enumeration.",
+          "parameterTypes": [],
+          "returnType": "ArrayIO.<StringIO>"
+        }
+      },
+      "supertype": "ObjectIO",
+      "typeName": "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+    },
+    "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)": {
       "documentation": "Enumeration pattern that provides a fixed set of possible values: NOTHING,VOLUME,TEMPERATURE,PRESSURE_V,PRESSURE_T",
       "events": [],
       "methodOrder": [],
@@ -374,9 +416,8 @@ window.phet.phetio.phetioTypes = assert &&
           "returnType": "ArrayIO.<StringIO>"
         }
       },
-      "parameterTypes": [],
       "supertype": "ObjectIO",
-      "typeName": "EnumerationIO.<>"
+      "typeName": "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
     },
     "EventIO": {
       "documentation": "An event, with a point",
@@ -457,28 +498,97 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO.<BooleanIO>"
     },
-    "FunctionIO.<EnumerationIO.<>, NullableIO.<EnumerationIO.<>>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.<>, NullableIO.<EnumerationIO.<>><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO.<>",
-        "NullableIO.<EnumerationIO.<>>"
+        "EnumerationIO(HEAVY|LIGHT)",
+        "NullableIO.<EnumerationIO(HEAVY|LIGHT)>"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO.<>, NullableIO.<EnumerationIO.<>>>"
+      "typeName": "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>"
     },
-    "FunctionIO.<EnumerationIO.<>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.<><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO.<EnumerationIO(HEAVY|LIGHT)>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(HEAVY|LIGHT)<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO.<>"
+        "EnumerationIO(HEAVY|LIGHT)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO.<>>"
+      "typeName": "FunctionIO.<EnumerationIO(HEAVY|LIGHT)>"
+    },
+    "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(KELVIN|CELSIUS)",
+        "NullableIO.<EnumerationIO(KELVIN|CELSIUS)>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>"
+    },
+    "FunctionIO.<EnumerationIO(KELVIN|CELSIUS)>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KELVIN|CELSIUS)<br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(KELVIN|CELSIUS)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO.<EnumerationIO(KELVIN|CELSIUS)>"
+    },
+    "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(KILOPASCALS|ATMOSPHERES)",
+        "NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>"
+    },
+    "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KILOPASCALS|ATMOSPHERES)<br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+    },
+    "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)",
+        "NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>"
+    },
+    "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)<br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "FunctionIO.<NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>>>": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>><br><strong>Return Type:</strong> VoidIO",
@@ -692,16 +802,49 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO.<BooleanIO>"
     },
-    "NullableIO.<EnumerationIO.<>>": {
+    "NullableIO.<EnumerationIO(HEAVY|LIGHT)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO.<>"
+        "EnumerationIO(HEAVY|LIGHT)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO.<EnumerationIO.<>>"
+      "typeName": "NullableIO.<EnumerationIO(HEAVY|LIGHT)>"
+    },
+    "NullableIO.<EnumerationIO(KELVIN|CELSIUS)>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(KELVIN|CELSIUS)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<EnumerationIO(KELVIN|CELSIUS)>"
+    },
+    "NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+    },
+    "NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "NullableIO.<EventIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1159,7 +1302,7 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PropertyIO.<BooleanIO>"
     },
-    "PropertyIO.<EnumerationIO.<>>": {
+    "PropertyIO.<EnumerationIO(HEAVY|LIGHT)>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [
         "changed"
@@ -1172,19 +1315,19 @@ window.phet.phetio.phetioTypes = assert &&
         "getValue": {
           "documentation": "Gets the current value.",
           "parameterTypes": [],
-          "returnType": "EnumerationIO.<>"
+          "returnType": "EnumerationIO(HEAVY|LIGHT)"
         },
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO.<>, NullableIO.<EnumerationIO.<>>>"
+            "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO.<>, NullableIO.<EnumerationIO.<>>>"
+            "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>"
           ],
           "returnType": "VoidIO"
         },
@@ -1192,23 +1335,176 @@ window.phet.phetio.phetioTypes = assert &&
           "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "EnumerationIO.<>"
+            "EnumerationIO(HEAVY|LIGHT)"
           ],
           "returnType": "VoidIO"
         },
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO.<>>"
+            "FunctionIO.<EnumerationIO(HEAVY|LIGHT)>"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "EnumerationIO.<>"
+        "EnumerationIO(HEAVY|LIGHT)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PropertyIO.<EnumerationIO.<>>"
+      "typeName": "PropertyIO.<EnumerationIO(HEAVY|LIGHT)>"
+    },
+    "PropertyIO.<EnumerationIO(KELVIN|CELSIUS)>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "EnumerationIO(KELVIN|CELSIUS)"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "EnumerationIO(KELVIN|CELSIUS)"
+          ],
+          "returnType": "VoidIO"
+        },
+        "unlink": {
+          "documentation": "Removes a listener.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(KELVIN|CELSIUS)>"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "EnumerationIO(KELVIN|CELSIUS)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO.<EnumerationIO(KELVIN|CELSIUS)>"
+    },
+    "PropertyIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+          ],
+          "returnType": "VoidIO"
+        },
+        "unlink": {
+          "documentation": "Removes a listener.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+    },
+    "PropertyIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+          ],
+          "returnType": "VoidIO"
+        },
+        "unlink": {
+          "documentation": "Removes a listener.",
+          "parameterTypes": [
+            "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "PropertyIO.<NullableIO.<BooleanIO>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
