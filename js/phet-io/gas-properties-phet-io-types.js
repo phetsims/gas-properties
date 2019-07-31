@@ -364,7 +364,7 @@ window.phet.phetio.phetioTypes = assert &&
       "typeName": "EmitterIO.<>"
     },
     "EnumerationIO(HEAVY|LIGHT)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: HEAVY,LIGHT",
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: HEAVY,LIGHT.",
       "events": [],
       "methodOrder": [],
       "methods": {
@@ -378,7 +378,7 @@ window.phet.phetio.phetioTypes = assert &&
       "typeName": "EnumerationIO(HEAVY|LIGHT)"
     },
     "EnumerationIO(KELVIN|CELSIUS)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: KELVIN,CELSIUS",
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: KELVIN,CELSIUS.",
       "events": [],
       "methodOrder": [],
       "methods": {
@@ -392,7 +392,7 @@ window.phet.phetio.phetioTypes = assert &&
       "typeName": "EnumerationIO(KELVIN|CELSIUS)"
     },
     "EnumerationIO(KILOPASCALS|ATMOSPHERES)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: KILOPASCALS,ATMOSPHERES",
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: KILOPASCALS,ATMOSPHERES.",
       "events": [],
       "methodOrder": [],
       "methods": {
@@ -406,7 +406,7 @@ window.phet.phetio.phetioTypes = assert &&
       "typeName": "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
     },
     "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: NOTHING,VOLUME,TEMPERATURE,PRESSURE_V,PRESSURE_T",
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: NOTHING,VOLUME,TEMPERATURE,PRESSURE_V,PRESSURE_T.",
       "events": [],
       "methodOrder": [],
       "methods": {
