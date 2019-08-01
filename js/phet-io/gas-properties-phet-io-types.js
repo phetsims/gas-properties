@@ -348,7 +348,7 @@ window.phet.phetio.phetioTypes = assert &&
         "addListener": {
           "documentation": "Adds a listener which will be called when the emitter emits.",
           "parameterTypes": [
-            "FunctionIO.<>"
+            "FunctionIO()=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -363,61 +363,37 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ActionIO.<>",
       "typeName": "EmitterIO.<>"
     },
-    "EnumerationIO(HEAVY|LIGHT)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: HEAVY,LIGHT",
+    "EnumerationIO.(HEAVY|LIGHT)": {
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: HEAVY,LIGHT.",
       "events": [],
       "methodOrder": [],
-      "methods": {
-        "getValues": {
-          "documentation": "Gets the possible values of the enumeration.",
-          "parameterTypes": [],
-          "returnType": "ArrayIO.<StringIO>"
-        }
-      },
+      "methods": {},
       "supertype": "ObjectIO",
-      "typeName": "EnumerationIO(HEAVY|LIGHT)"
+      "typeName": "EnumerationIO.(HEAVY|LIGHT)"
     },
-    "EnumerationIO(KELVIN|CELSIUS)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: KELVIN,CELSIUS",
+    "EnumerationIO.(KELVIN|CELSIUS)": {
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: KELVIN,CELSIUS.",
       "events": [],
       "methodOrder": [],
-      "methods": {
-        "getValues": {
-          "documentation": "Gets the possible values of the enumeration.",
-          "parameterTypes": [],
-          "returnType": "ArrayIO.<StringIO>"
-        }
-      },
+      "methods": {},
       "supertype": "ObjectIO",
-      "typeName": "EnumerationIO(KELVIN|CELSIUS)"
+      "typeName": "EnumerationIO.(KELVIN|CELSIUS)"
     },
-    "EnumerationIO(KILOPASCALS|ATMOSPHERES)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: KILOPASCALS,ATMOSPHERES",
+    "EnumerationIO.(KILOPASCALS|ATMOSPHERES)": {
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: KILOPASCALS,ATMOSPHERES.",
       "events": [],
       "methodOrder": [],
-      "methods": {
-        "getValues": {
-          "documentation": "Gets the possible values of the enumeration.",
-          "parameterTypes": [],
-          "returnType": "ArrayIO.<StringIO>"
-        }
-      },
+      "methods": {},
       "supertype": "ObjectIO",
-      "typeName": "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+      "typeName": "EnumerationIO.(KILOPASCALS|ATMOSPHERES)"
     },
-    "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)": {
-      "documentation": "Enumeration pattern that provides a fixed set of possible values: NOTHING,VOLUME,TEMPERATURE,PRESSURE_V,PRESSURE_T",
+    "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)": {
+      "documentation": "Enumeration pattern that provides a fixed set of possible values: NOTHING,VOLUME,TEMPERATURE,PRESSURE_V,PRESSURE_T.",
       "events": [],
       "methodOrder": [],
-      "methods": {
-        "getValues": {
-          "documentation": "Gets the possible values of the enumeration.",
-          "parameterTypes": [],
-          "returnType": "ArrayIO.<StringIO>"
-        }
-      },
+      "methods": {},
       "supertype": "ObjectIO",
-      "typeName": "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+      "typeName": "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
     },
     "EventIO": {
       "documentation": "An event, with a point",
@@ -443,269 +419,305 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FontIO"
     },
-    "FunctionIO.<>": {
+    "FunctionIO()=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> VoidIO<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "parameterTypes": [],
+      "parameterTypes": [
+        "VoidIO"
+      ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<>"
+      "typeName": "FunctionIO()=>VoidIO"
     },
-    "FunctionIO.<ArrayIO.<NumberIO>, NullableIO.<ArrayIO.<NumberIO>>>": {
+    "FunctionIO(ArrayIO.<NumberIO>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> ArrayIO.<NumberIO><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "ArrayIO.<NumberIO>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(ArrayIO.<NumberIO>)=>VoidIO"
+    },
+    "FunctionIO(ArrayIO.<NumberIO>,NullableIO.<ArrayIO.<NumberIO>>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> ArrayIO.<NumberIO>, NullableIO.<ArrayIO.<NumberIO>><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "ArrayIO.<NumberIO>",
-        "NullableIO.<ArrayIO.<NumberIO>>"
+        "NullableIO.<ArrayIO.<NumberIO>>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<ArrayIO.<NumberIO>, NullableIO.<ArrayIO.<NumberIO>>>"
+      "typeName": "FunctionIO(ArrayIO.<NumberIO>,NullableIO.<ArrayIO.<NumberIO>>)=>VoidIO"
     },
-    "FunctionIO.<ArrayIO.<NumberIO>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> ArrayIO.<NumberIO><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(BooleanIO)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> BooleanIO<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "ArrayIO.<NumberIO>"
+        "BooleanIO",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<ArrayIO.<NumberIO>>"
+      "typeName": "FunctionIO(BooleanIO)=>VoidIO"
     },
-    "FunctionIO.<BooleanIO, NullableIO.<BooleanIO>>": {
+    "FunctionIO(BooleanIO,NullableIO.<BooleanIO>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> BooleanIO, NullableIO.<BooleanIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "BooleanIO",
-        "NullableIO.<BooleanIO>"
+        "NullableIO.<BooleanIO>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<BooleanIO, NullableIO.<BooleanIO>>"
+      "typeName": "FunctionIO(BooleanIO,NullableIO.<BooleanIO>)=>VoidIO"
     },
-    "FunctionIO.<BooleanIO>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> BooleanIO<br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(HEAVY|LIGHT))=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(HEAVY|LIGHT)<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "BooleanIO"
+        "EnumerationIO.(HEAVY|LIGHT)",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<BooleanIO>"
+      "typeName": "FunctionIO(EnumerationIO.(HEAVY|LIGHT))=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(HEAVY|LIGHT),NullableIO.<EnumerationIO.(HEAVY|LIGHT)>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(HEAVY|LIGHT), NullableIO.<EnumerationIO.(HEAVY|LIGHT)><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(HEAVY|LIGHT)",
-        "NullableIO.<EnumerationIO(HEAVY|LIGHT)>"
+        "EnumerationIO.(HEAVY|LIGHT)",
+        "NullableIO.<EnumerationIO.(HEAVY|LIGHT)>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>"
+      "typeName": "FunctionIO(EnumerationIO.(HEAVY|LIGHT),NullableIO.<EnumerationIO.(HEAVY|LIGHT)>)=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(HEAVY|LIGHT)>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(HEAVY|LIGHT)<br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(KELVIN|CELSIUS))=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(KELVIN|CELSIUS)<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(HEAVY|LIGHT)"
+        "EnumerationIO.(KELVIN|CELSIUS)",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(HEAVY|LIGHT)>"
+      "typeName": "FunctionIO(EnumerationIO.(KELVIN|CELSIUS))=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(KELVIN|CELSIUS),NullableIO.<EnumerationIO.(KELVIN|CELSIUS)>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(KELVIN|CELSIUS), NullableIO.<EnumerationIO.(KELVIN|CELSIUS)><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(KELVIN|CELSIUS)",
-        "NullableIO.<EnumerationIO(KELVIN|CELSIUS)>"
+        "EnumerationIO.(KELVIN|CELSIUS)",
+        "NullableIO.<EnumerationIO.(KELVIN|CELSIUS)>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>"
+      "typeName": "FunctionIO(EnumerationIO.(KELVIN|CELSIUS),NullableIO.<EnumerationIO.(KELVIN|CELSIUS)>)=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(KELVIN|CELSIUS)>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KELVIN|CELSIUS)<br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(KILOPASCALS|ATMOSPHERES))=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(KILOPASCALS|ATMOSPHERES)<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(KELVIN|CELSIUS)"
+        "EnumerationIO.(KILOPASCALS|ATMOSPHERES)",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(KELVIN|CELSIUS)>"
+      "typeName": "FunctionIO(EnumerationIO.(KILOPASCALS|ATMOSPHERES))=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(KILOPASCALS|ATMOSPHERES),NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(KILOPASCALS|ATMOSPHERES)",
-        "NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+        "EnumerationIO.(KILOPASCALS|ATMOSPHERES)",
+        "NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>"
+      "typeName": "FunctionIO(EnumerationIO.(KILOPASCALS|ATMOSPHERES),NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>)=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(KILOPASCALS|ATMOSPHERES)<br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T))=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+        "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+      "typeName": "FunctionIO(EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T))=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T),NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)",
-        "NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+        "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)",
+        "NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>"
+      "typeName": "FunctionIO(EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T),NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>)=>VoidIO"
     },
-    "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)<br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(NullableIO.<BooleanIO>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<BooleanIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+        "NullableIO.<BooleanIO>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+      "typeName": "FunctionIO(NullableIO.<BooleanIO>)=>VoidIO"
     },
-    "FunctionIO.<NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>>>": {
+    "FunctionIO(NullableIO.<BooleanIO>,NullableIO.<NullableIO.<BooleanIO>>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "NullableIO.<BooleanIO>",
-        "NullableIO.<NullableIO.<BooleanIO>>"
+        "NullableIO.<NullableIO.<BooleanIO>>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>>>"
+      "typeName": "FunctionIO(NullableIO.<BooleanIO>,NullableIO.<NullableIO.<BooleanIO>>)=>VoidIO"
     },
-    "FunctionIO.<NullableIO.<BooleanIO>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<BooleanIO><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(NullableIO.<FocusIO>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<FocusIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "NullableIO.<BooleanIO>"
+        "NullableIO.<FocusIO>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NullableIO.<BooleanIO>>"
+      "typeName": "FunctionIO(NullableIO.<FocusIO>)=>VoidIO"
     },
-    "FunctionIO.<NullableIO.<FocusIO>, NullableIO.<NullableIO.<FocusIO>>>": {
+    "FunctionIO(NullableIO.<FocusIO>,NullableIO.<NullableIO.<FocusIO>>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<FocusIO>, NullableIO.<NullableIO.<FocusIO>><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "NullableIO.<FocusIO>",
-        "NullableIO.<NullableIO.<FocusIO>>"
+        "NullableIO.<NullableIO.<FocusIO>>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NullableIO.<FocusIO>, NullableIO.<NullableIO.<FocusIO>>>"
+      "typeName": "FunctionIO(NullableIO.<FocusIO>,NullableIO.<NullableIO.<FocusIO>>)=>VoidIO"
     },
-    "FunctionIO.<NullableIO.<FocusIO>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<FocusIO><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(NullableIO.<NumberIO>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<NumberIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "NullableIO.<FocusIO>"
+        "NullableIO.<NumberIO>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NullableIO.<FocusIO>>"
+      "typeName": "FunctionIO(NullableIO.<NumberIO>)=>VoidIO"
     },
-    "FunctionIO.<NullableIO.<NumberIO>, NullableIO.<NullableIO.<NumberIO>>>": {
+    "FunctionIO(NullableIO.<NumberIO>,NullableIO.<NullableIO.<NumberIO>>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<NumberIO>, NullableIO.<NullableIO.<NumberIO>><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "NullableIO.<NumberIO>",
-        "NullableIO.<NullableIO.<NumberIO>>"
+        "NullableIO.<NullableIO.<NumberIO>>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NullableIO.<NumberIO>, NullableIO.<NullableIO.<NumberIO>>>"
+      "typeName": "FunctionIO(NullableIO.<NumberIO>,NullableIO.<NullableIO.<NumberIO>>)=>VoidIO"
     },
-    "FunctionIO.<NullableIO.<NumberIO>>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO.<NumberIO><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(NumberIO)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NumberIO<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "NullableIO.<NumberIO>"
+        "NumberIO",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NullableIO.<NumberIO>>"
+      "typeName": "FunctionIO(NumberIO)=>VoidIO"
     },
-    "FunctionIO.<NumberIO, NullableIO.<NumberIO>>": {
+    "FunctionIO(NumberIO,NullableIO.<NumberIO>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NumberIO, NullableIO.<NumberIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "NumberIO",
-        "NullableIO.<NumberIO>"
+        "NullableIO.<NumberIO>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NumberIO, NullableIO.<NumberIO>>"
+      "typeName": "FunctionIO(NumberIO,NullableIO.<NumberIO>)=>VoidIO"
     },
-    "FunctionIO.<NumberIO>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NumberIO<br><strong>Return Type:</strong> VoidIO",
-      "events": [],
-      "methodOrder": [],
-      "methods": {},
-      "parameterTypes": [
-        "NumberIO"
-      ],
-      "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<NumberIO>"
-    },
-    "FunctionIO.<ObjectIO>": {
+    "FunctionIO(ObjectIO)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> ObjectIO<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "ObjectIO"
+        "ObjectIO",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<ObjectIO>"
+      "typeName": "FunctionIO(ObjectIO)=>VoidIO"
     },
-    "FunctionIO.<StringIO, NullableIO.<StringIO>>": {
+    "FunctionIO(StringIO)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> StringIO<br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "StringIO",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(StringIO)=>VoidIO"
+    },
+    "FunctionIO(StringIO,NullableIO.<StringIO>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> StringIO, NullableIO.<StringIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "StringIO",
-        "NullableIO.<StringIO>"
+        "NullableIO.<StringIO>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<StringIO, NullableIO.<StringIO>>"
+      "typeName": "FunctionIO(StringIO,NullableIO.<StringIO>)=>VoidIO"
     },
-    "FunctionIO.<StringIO, ObjectIO, ObjectIO>": {
+    "FunctionIO(StringIO,ObjectIO,ObjectIO)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> StringIO, ObjectIO, ObjectIO<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
@@ -713,56 +725,49 @@ window.phet.phetio.phetioTypes = assert &&
       "parameterTypes": [
         "StringIO",
         "ObjectIO",
-        "ObjectIO"
+        "ObjectIO",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<StringIO, ObjectIO, ObjectIO>"
+      "typeName": "FunctionIO(StringIO,ObjectIO,ObjectIO)=>VoidIO"
     },
-    "FunctionIO.<StringIO, StringIO>": {
+    "FunctionIO(StringIO,StringIO)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> StringIO, StringIO<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "StringIO",
-        "StringIO"
+        "StringIO",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<StringIO, StringIO>"
+      "typeName": "FunctionIO(StringIO,StringIO)=>VoidIO"
     },
-    "FunctionIO.<StringIO>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> StringIO<br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(Vector2IO)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> Vector2IO<br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "StringIO"
+        "Vector2IO",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<StringIO>"
+      "typeName": "FunctionIO(Vector2IO)=>VoidIO"
     },
-    "FunctionIO.<Vector2IO, NullableIO.<Vector2IO>>": {
+    "FunctionIO(Vector2IO,NullableIO.<Vector2IO>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> Vector2IO, NullableIO.<Vector2IO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
         "Vector2IO",
-        "NullableIO.<Vector2IO>"
+        "NullableIO.<Vector2IO>",
+        "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<Vector2IO, NullableIO.<Vector2IO>>"
-    },
-    "FunctionIO.<Vector2IO>": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> Vector2IO<br><strong>Return Type:</strong> VoidIO",
-      "events": [],
-      "methodOrder": [],
-      "methods": {},
-      "parameterTypes": [
-        "Vector2IO"
-      ],
-      "supertype": "ObjectIO",
-      "typeName": "FunctionIO.<Vector2IO>"
+      "typeName": "FunctionIO(Vector2IO,NullableIO.<Vector2IO>)=>VoidIO"
     },
     "LinkedElementIO": {
       "documentation": "A LinkedElement",
@@ -802,49 +807,49 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO.<BooleanIO>"
     },
-    "NullableIO.<EnumerationIO(HEAVY|LIGHT)>": {
+    "NullableIO.<EnumerationIO.(HEAVY|LIGHT)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(HEAVY|LIGHT)"
+        "EnumerationIO.(HEAVY|LIGHT)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO.<EnumerationIO(HEAVY|LIGHT)>"
+      "typeName": "NullableIO.<EnumerationIO.(HEAVY|LIGHT)>"
     },
-    "NullableIO.<EnumerationIO(KELVIN|CELSIUS)>": {
+    "NullableIO.<EnumerationIO.(KELVIN|CELSIUS)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(KELVIN|CELSIUS)"
+        "EnumerationIO.(KELVIN|CELSIUS)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO.<EnumerationIO(KELVIN|CELSIUS)>"
+      "typeName": "NullableIO.<EnumerationIO.(KELVIN|CELSIUS)>"
     },
-    "NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>": {
+    "NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+        "EnumerationIO.(KILOPASCALS|ATMOSPHERES)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+      "typeName": "NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>"
     },
-    "NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
+    "NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+        "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+      "typeName": "NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "NullableIO.<EventIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1024,21 +1029,21 @@ window.phet.phetio.phetioTypes = assert &&
         "addEventListener": {
           "documentation": "Adds a listener to the PhET-iO dataStream, which can be used to respond to events or for data analysis. Unlike Client.launchSim( {onEvent} ) which is called recursively for each child event, this is only called with top-level events.",
           "parameterTypes": [
-            "FunctionIO.<ObjectIO>"
+            "FunctionIO(ObjectIO)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "addPhetioElementAddedListener": {
           "documentation": "Adds a listener that receives a callback when a PhET-iO Element has been added.Arguments for the function: \n<ul><li><strong>phetioID:</strong> {String}\n</li><li><strong>metadata:</strong> {Object} - element specific metadata like documentation and type, see PhetioEngineIO.getPhetioElementMetadata().</li><li><strong>state:</strong> {Object} - a snapshot of the initial state of the PhET-iO Element.</li></ul>",
           "parameterTypes": [
-            "FunctionIO.<StringIO, ObjectIO, ObjectIO>"
+            "FunctionIO(StringIO,ObjectIO,ObjectIO)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "addPhetioElementRemovedListener": {
           "documentation": "Removes a listener that was added with addPhetioElementAddedListener",
           "parameterTypes": [
-            "FunctionIO.<StringIO, StringIO>"
+            "FunctionIO(StringIO,StringIO)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1218,14 +1223,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<ArrayIO.<NumberIO>, NullableIO.<ArrayIO.<NumberIO>>>"
+            "FunctionIO(ArrayIO.<NumberIO>,NullableIO.<ArrayIO.<NumberIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<ArrayIO.<NumberIO>, NullableIO.<ArrayIO.<NumberIO>>>"
+            "FunctionIO(ArrayIO.<NumberIO>,NullableIO.<ArrayIO.<NumberIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1240,7 +1245,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<ArrayIO.<NumberIO>>"
+            "FunctionIO(ArrayIO.<NumberIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
@@ -1269,14 +1274,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<BooleanIO, NullableIO.<BooleanIO>>"
+            "FunctionIO(BooleanIO,NullableIO.<BooleanIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<BooleanIO, NullableIO.<BooleanIO>>"
+            "FunctionIO(BooleanIO,NullableIO.<BooleanIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1291,7 +1296,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<BooleanIO>"
+            "FunctionIO(BooleanIO)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
@@ -1302,7 +1307,7 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PropertyIO.<BooleanIO>"
     },
-    "PropertyIO.<EnumerationIO(HEAVY|LIGHT)>": {
+    "PropertyIO.<EnumerationIO.(HEAVY|LIGHT)>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [
         "changed"
@@ -1315,19 +1320,19 @@ window.phet.phetio.phetioTypes = assert &&
         "getValue": {
           "documentation": "Gets the current value.",
           "parameterTypes": [],
-          "returnType": "EnumerationIO(HEAVY|LIGHT)"
+          "returnType": "EnumerationIO.(HEAVY|LIGHT)"
         },
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>"
+            "FunctionIO(EnumerationIO.(HEAVY|LIGHT),NullableIO.<EnumerationIO.(HEAVY|LIGHT)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(HEAVY|LIGHT), NullableIO.<EnumerationIO(HEAVY|LIGHT)>>"
+            "FunctionIO(EnumerationIO.(HEAVY|LIGHT),NullableIO.<EnumerationIO.(HEAVY|LIGHT)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1335,25 +1340,25 @@ window.phet.phetio.phetioTypes = assert &&
           "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "EnumerationIO(HEAVY|LIGHT)"
+            "EnumerationIO.(HEAVY|LIGHT)"
           ],
           "returnType": "VoidIO"
         },
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(HEAVY|LIGHT)>"
+            "FunctionIO(EnumerationIO.(HEAVY|LIGHT))=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "EnumerationIO(HEAVY|LIGHT)"
+        "EnumerationIO.(HEAVY|LIGHT)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PropertyIO.<EnumerationIO(HEAVY|LIGHT)>"
+      "typeName": "PropertyIO.<EnumerationIO.(HEAVY|LIGHT)>"
     },
-    "PropertyIO.<EnumerationIO(KELVIN|CELSIUS)>": {
+    "PropertyIO.<EnumerationIO.(KELVIN|CELSIUS)>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [
         "changed"
@@ -1366,19 +1371,19 @@ window.phet.phetio.phetioTypes = assert &&
         "getValue": {
           "documentation": "Gets the current value.",
           "parameterTypes": [],
-          "returnType": "EnumerationIO(KELVIN|CELSIUS)"
+          "returnType": "EnumerationIO.(KELVIN|CELSIUS)"
         },
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>"
+            "FunctionIO(EnumerationIO.(KELVIN|CELSIUS),NullableIO.<EnumerationIO.(KELVIN|CELSIUS)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(KELVIN|CELSIUS), NullableIO.<EnumerationIO(KELVIN|CELSIUS)>>"
+            "FunctionIO(EnumerationIO.(KELVIN|CELSIUS),NullableIO.<EnumerationIO.(KELVIN|CELSIUS)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1386,25 +1391,25 @@ window.phet.phetio.phetioTypes = assert &&
           "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "EnumerationIO(KELVIN|CELSIUS)"
+            "EnumerationIO.(KELVIN|CELSIUS)"
           ],
           "returnType": "VoidIO"
         },
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(KELVIN|CELSIUS)>"
+            "FunctionIO(EnumerationIO.(KELVIN|CELSIUS))=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "EnumerationIO(KELVIN|CELSIUS)"
+        "EnumerationIO.(KELVIN|CELSIUS)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PropertyIO.<EnumerationIO(KELVIN|CELSIUS)>"
+      "typeName": "PropertyIO.<EnumerationIO.(KELVIN|CELSIUS)>"
     },
-    "PropertyIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>": {
+    "PropertyIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [
         "changed"
@@ -1417,19 +1422,19 @@ window.phet.phetio.phetioTypes = assert &&
         "getValue": {
           "documentation": "Gets the current value.",
           "parameterTypes": [],
-          "returnType": "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+          "returnType": "EnumerationIO.(KILOPASCALS|ATMOSPHERES)"
         },
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>"
+            "FunctionIO(EnumerationIO.(KILOPASCALS|ATMOSPHERES),NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES), NullableIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>>"
+            "FunctionIO(EnumerationIO.(KILOPASCALS|ATMOSPHERES),NullableIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1437,25 +1442,25 @@ window.phet.phetio.phetioTypes = assert &&
           "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+            "EnumerationIO.(KILOPASCALS|ATMOSPHERES)"
           ],
           "returnType": "VoidIO"
         },
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+            "FunctionIO(EnumerationIO.(KILOPASCALS|ATMOSPHERES))=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "EnumerationIO(KILOPASCALS|ATMOSPHERES)"
+        "EnumerationIO.(KILOPASCALS|ATMOSPHERES)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PropertyIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+      "typeName": "PropertyIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>"
     },
-    "PropertyIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
+    "PropertyIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [
         "changed"
@@ -1468,19 +1473,19 @@ window.phet.phetio.phetioTypes = assert &&
         "getValue": {
           "documentation": "Gets the current value.",
           "parameterTypes": [],
-          "returnType": "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+          "returnType": "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
         },
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>"
+            "FunctionIO(EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T),NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T), NullableIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>>"
+            "FunctionIO(EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T),NullableIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1488,23 +1493,23 @@ window.phet.phetio.phetioTypes = assert &&
           "documentation": "Sets the value of the property. If the value differs from the previous value, listeners are notified with the new value.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+            "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
           ],
           "returnType": "VoidIO"
         },
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+            "FunctionIO(EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T))=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
+        "EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PropertyIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+      "typeName": "PropertyIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "PropertyIO.<NullableIO.<BooleanIO>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
@@ -1524,14 +1529,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>>>"
+            "FunctionIO(NullableIO.<BooleanIO>,NullableIO.<NullableIO.<BooleanIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<BooleanIO>, NullableIO.<NullableIO.<BooleanIO>>>"
+            "FunctionIO(NullableIO.<BooleanIO>,NullableIO.<NullableIO.<BooleanIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1546,7 +1551,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<BooleanIO>>"
+            "FunctionIO(NullableIO.<BooleanIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
@@ -1575,14 +1580,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<FocusIO>, NullableIO.<NullableIO.<FocusIO>>>"
+            "FunctionIO(NullableIO.<FocusIO>,NullableIO.<NullableIO.<FocusIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<FocusIO>, NullableIO.<NullableIO.<FocusIO>>>"
+            "FunctionIO(NullableIO.<FocusIO>,NullableIO.<NullableIO.<FocusIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1597,7 +1602,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<FocusIO>>"
+            "FunctionIO(NullableIO.<FocusIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
@@ -1626,14 +1631,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<NumberIO>, NullableIO.<NullableIO.<NumberIO>>>"
+            "FunctionIO(NullableIO.<NumberIO>,NullableIO.<NullableIO.<NumberIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<NumberIO>, NullableIO.<NullableIO.<NumberIO>>>"
+            "FunctionIO(NullableIO.<NumberIO>,NullableIO.<NullableIO.<NumberIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1648,7 +1653,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<NullableIO.<NumberIO>>"
+            "FunctionIO(NullableIO.<NumberIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
@@ -1677,14 +1682,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NumberIO, NullableIO.<NumberIO>>"
+            "FunctionIO(NumberIO,NullableIO.<NumberIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<NumberIO, NullableIO.<NumberIO>>"
+            "FunctionIO(NumberIO,NullableIO.<NumberIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1699,7 +1704,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<NumberIO>"
+            "FunctionIO(NumberIO)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
@@ -1728,14 +1733,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<StringIO, NullableIO.<StringIO>>"
+            "FunctionIO(StringIO,NullableIO.<StringIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<StringIO, NullableIO.<StringIO>>"
+            "FunctionIO(StringIO,NullableIO.<StringIO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1750,7 +1755,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<StringIO>"
+            "FunctionIO(StringIO)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }
@@ -1779,14 +1784,14 @@ window.phet.phetio.phetioTypes = assert &&
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<Vector2IO, NullableIO.<Vector2IO>>"
+            "FunctionIO(Vector2IO,NullableIO.<Vector2IO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO.<Vector2IO, NullableIO.<Vector2IO>>"
+            "FunctionIO(Vector2IO,NullableIO.<Vector2IO>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1801,7 +1806,7 @@ window.phet.phetio.phetioTypes = assert &&
         "unlink": {
           "documentation": "Removes a listener.",
           "parameterTypes": [
-            "FunctionIO.<Vector2IO>"
+            "FunctionIO(Vector2IO)=>VoidIO"
           ],
           "returnType": "VoidIO"
         }

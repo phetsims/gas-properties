@@ -2159,7 +2159,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "gasProperties.energyScreen.model.isPlayingProperty": {
       "phetioDocumentation": "",
@@ -2267,7 +2267,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>"
     },
     "gasProperties.energyScreen.model.pressureModel.pressureProperty": {
       "phetioDocumentation": "pressure in K, with no noise",
@@ -2387,7 +2387,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(KELVIN|CELSIUS)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(KELVIN|CELSIUS)>"
     },
     "gasProperties.energyScreen.view": {
       "phetioDocumentation": "",
@@ -4991,7 +4991,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(HEAVY|LIGHT)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(HEAVY|LIGHT)>"
     },
     "gasProperties.energyScreen.view.viewProperties.particlesExpandedProperty": {
       "phetioDocumentation": "whether the Particles accordion box is expanded",
@@ -5159,7 +5159,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "gasProperties.exploreScreen.model.isPlayingProperty": {
       "phetioDocumentation": "",
@@ -5267,7 +5267,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>"
     },
     "gasProperties.exploreScreen.model.pressureModel.pressureProperty": {
       "phetioDocumentation": "pressure in K, with no noise",
@@ -5387,7 +5387,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(KELVIN|CELSIUS)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(KELVIN|CELSIUS)>"
     },
     "gasProperties.exploreScreen.view": {
       "phetioDocumentation": "",
@@ -6935,7 +6935,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(HEAVY|LIGHT)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(HEAVY|LIGHT)>"
     },
     "gasProperties.exploreScreen.view.viewProperties.particlesExpandedProperty": {
       "phetioDocumentation": "whether the Particles accordion box is expanded",
@@ -10067,7 +10067,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(NOTHING|VOLUME|TEMPERATURE|PRESSURE_V|PRESSURE_T)>"
     },
     "gasProperties.idealScreen.model.isPlayingProperty": {
       "phetioDocumentation": "",
@@ -10175,7 +10175,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(KILOPASCALS|ATMOSPHERES)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(KILOPASCALS|ATMOSPHERES)>"
     },
     "gasProperties.idealScreen.model.pressureModel.pressureProperty": {
       "phetioDocumentation": "pressure in K, with no noise",
@@ -10295,7 +10295,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(KELVIN|CELSIUS)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(KELVIN|CELSIUS)>"
     },
     "gasProperties.idealScreen.view": {
       "phetioDocumentation": "",
@@ -11891,7 +11891,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO.<EnumerationIO(HEAVY|LIGHT)>"
+      "phetioTypeName": "PropertyIO.<EnumerationIO.(HEAVY|LIGHT)>"
     },
     "gasProperties.idealScreen.view.viewProperties.particlesExpandedProperty": {
       "phetioDocumentation": "whether the Particles accordion box is expanded",
