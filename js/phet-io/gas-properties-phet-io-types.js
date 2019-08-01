@@ -74,32 +74,6 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "ActionIO.<DOMEventIO>"
     },
-    "ActionIO.<EventIO, VoidIO, VoidIO>": {
-      "documentation": "Executes when an event occurs.",
-      "events": [
-        "emitted"
-      ],
-      "methodOrder": [],
-      "methods": {
-        "execute": {
-          "documentation": "Executes the function the Action is wrapping.",
-          "invocableForReadOnlyElements": false,
-          "parameterTypes": [
-            "EventIO",
-            "VoidIO",
-            "VoidIO"
-          ],
-          "returnType": "VoidIO"
-        }
-      },
-      "parameterTypes": [
-        "EventIO",
-        "VoidIO",
-        "VoidIO"
-      ],
-      "supertype": "ObjectIO",
-      "typeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
-    },
     "ActionIO.<EventIO>": {
       "documentation": "Executes when an event occurs.",
       "events": [
@@ -122,7 +96,7 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "ActionIO.<EventIO>"
     },
-    "ActionIO.<NullableIO.<EventIO>, VoidIO>": {
+    "ActionIO.<NullableIO.<EventIO>>": {
       "documentation": "Executes when an event occurs.",
       "events": [
         "emitted"
@@ -133,18 +107,16 @@ window.phet.phetio.phetioTypes = assert &&
           "documentation": "Executes the function the Action is wrapping.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "NullableIO.<EventIO>",
-            "VoidIO"
+            "NullableIO.<EventIO>"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "NullableIO.<EventIO>",
-        "VoidIO"
+        "NullableIO.<EventIO>"
       ],
       "supertype": "ObjectIO",
-      "typeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "typeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "ActionIO.<NumberIO, NumberIO>": {
       "documentation": "Executes when an event occurs.",

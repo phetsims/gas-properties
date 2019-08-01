@@ -506,7 +506,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.diffusionScreen.view.controlPanel.dividerToggleButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -515,10 +515,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.diffusionScreen.view.controlPanel.dividerToggleButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -527,7 +527,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.diffusionScreen.view.controlPanel.dividerToggleButton.property": {
       "phetioDocumentation": "",
@@ -1154,7 +1154,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.diffusionScreen.view.dataAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1163,10 +1163,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.diffusionScreen.view.dataAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1175,7 +1175,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.diffusionScreen.view.dataAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -1346,7 +1346,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.diffusionScreen.view.resetAllButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1355,10 +1355,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.diffusionScreen.view.resetAllButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1367,7 +1367,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.diffusionScreen.view.resetAllButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -1478,7 +1478,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.playPauseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1487,10 +1487,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.playPauseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1499,7 +1499,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.playPauseButton.property": {
       "phetioDocumentation": "",
@@ -1634,7 +1634,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.normal.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1643,10 +1643,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.normal.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1655,7 +1655,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.normal.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -1754,7 +1754,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.slow.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1763,10 +1763,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.slow.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1775,7 +1775,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.slow.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -1886,7 +1886,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.stepForwardButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1895,10 +1895,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.stepForwardButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -1907,7 +1907,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.diffusionScreen.view.timeControlNode.stepForwardButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -2462,7 +2462,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.averageSpeedAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2471,10 +2471,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.averageSpeedAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2483,7 +2483,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.averageSpeedAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -2582,7 +2582,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.containerNode.lidDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2591,10 +2591,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.containerNode.lidDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2603,7 +2603,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.containerNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -2642,7 +2642,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.containerNode.resizeDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2651,10 +2651,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.containerNode.resizeDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2663,7 +2663,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.containerNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -2702,7 +2702,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.heavyBicyclePumpNode.handleDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2711,10 +2711,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.heavyBicyclePumpNode.handleDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2723,7 +2723,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.heavyBicyclePumpNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -2822,7 +2822,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2831,10 +2831,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2843,7 +2843,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -2978,7 +2978,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2987,10 +2987,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -2999,7 +2999,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -3338,7 +3338,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.lightBicyclePumpNode.handleDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3347,10 +3347,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.lightBicyclePumpNode.handleDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3359,7 +3359,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.lightBicyclePumpNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -3482,7 +3482,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.heavyParticles.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3491,10 +3491,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.heavyParticles.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3503,7 +3503,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.heavyParticles.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -3578,7 +3578,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3587,10 +3587,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3599,7 +3599,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -3710,7 +3710,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.particlesAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3719,10 +3719,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.particlesAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3731,7 +3731,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.particlesAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -3890,7 +3890,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.resetAllButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3899,10 +3899,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.resetAllButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3911,7 +3911,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.resetAllButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -3986,7 +3986,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.returnLidButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -3995,10 +3995,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.returnLidButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -4007,7 +4007,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.returnLidButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -4082,7 +4082,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.speedAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -4091,10 +4091,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.speedAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -4103,7 +4103,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.speedAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -4514,7 +4514,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.timeControlNode.playPauseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -4523,10 +4523,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.timeControlNode.playPauseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -4535,7 +4535,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.timeControlNode.playPauseButton.property": {
       "phetioDocumentation": "",
@@ -4682,7 +4682,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.energyScreen.view.timeControlNode.stepForwardButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -4691,10 +4691,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.energyScreen.view.timeControlNode.stepForwardButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -4703,7 +4703,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.energyScreen.view.timeControlNode.stepForwardButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -5426,7 +5426,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.containerNode.lidDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5435,10 +5435,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.containerNode.lidDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5447,7 +5447,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.containerNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -5486,7 +5486,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.containerNode.resizeDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5495,10 +5495,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.containerNode.resizeDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5507,7 +5507,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.containerNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -5546,7 +5546,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.heavyBicyclePumpNode.handleDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5555,10 +5555,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.heavyBicyclePumpNode.handleDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5567,7 +5567,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.heavyBicyclePumpNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -5630,7 +5630,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.lightBicyclePumpNode.handleDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5639,10 +5639,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.lightBicyclePumpNode.handleDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5651,7 +5651,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.lightBicyclePumpNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -5774,7 +5774,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.heavyParticles.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5783,10 +5783,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.heavyParticles.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5795,7 +5795,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.heavyParticles.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -5870,7 +5870,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.lightParticles.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5879,10 +5879,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.lightParticles.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -5891,7 +5891,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.lightParticles.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -6002,7 +6002,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6011,10 +6011,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6023,7 +6023,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -6182,7 +6182,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.exploreScreen.view.resetAllButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6191,10 +6191,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.resetAllButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6203,7 +6203,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.resetAllButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -6278,7 +6278,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.exploreScreen.view.returnLidButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6287,10 +6287,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.returnLidButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6299,7 +6299,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.returnLidButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -6410,7 +6410,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6419,10 +6419,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6431,7 +6431,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.property": {
       "phetioDocumentation": "",
@@ -6578,7 +6578,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.exploreScreen.view.timeControlNode.stepForwardButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6587,10 +6587,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.exploreScreen.view.timeControlNode.stepForwardButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -6599,7 +6599,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.exploreScreen.view.timeControlNode.stepForwardButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -7010,7 +7010,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.general.barrierRectangle.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7019,10 +7019,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.barrierRectangle.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7031,7 +7031,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.barrierRectangle.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -7382,7 +7382,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.general.navigationBar.diffusionScreenButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7391,10 +7391,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.diffusionScreenButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7403,7 +7403,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.diffusionScreenButton.text": {
       "phetioDocumentation": "",
@@ -7586,7 +7586,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.general.navigationBar.energyScreenButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7595,10 +7595,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.energyScreenButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7607,7 +7607,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.energyScreenButton.text": {
       "phetioDocumentation": "",
@@ -7790,7 +7790,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.general.navigationBar.exploreScreenButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7799,10 +7799,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.exploreScreenButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7811,7 +7811,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.exploreScreenButton.text": {
       "phetioDocumentation": "",
@@ -7946,7 +7946,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.general.navigationBar.homeButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7955,10 +7955,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.homeButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -7967,7 +7967,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.homeButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -8090,7 +8090,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.general.navigationBar.idealScreenButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8099,10 +8099,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.idealScreenButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8111,7 +8111,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.idealScreenButton.text": {
       "phetioDocumentation": "",
@@ -8258,7 +8258,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8267,10 +8267,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8279,7 +8279,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -8342,7 +8342,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsMenuItem.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8351,10 +8351,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsMenuItem.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8363,7 +8363,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsMenuItem.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -8426,7 +8426,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.screenshotMenuItem.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8435,10 +8435,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.screenshotMenuItem.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8447,7 +8447,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.phetButton.phetMenu.screenshotMenuItem.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -8498,7 +8498,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.general.navigationBar.phetButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8507,10 +8507,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.general.navigationBar.phetButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8519,7 +8519,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.general.navigationBar.titleTextNode": {
       "phetioDocumentation": "Displays the title of the simulation in the navigation bar (bottom left)",
@@ -8726,7 +8726,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.diffusionScreenLargeButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8735,10 +8735,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.diffusionScreenLargeButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8747,7 +8747,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.diffusionScreenLargeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -8870,7 +8870,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.diffusionScreenSmallButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8879,10 +8879,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.diffusionScreenSmallButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -8891,7 +8891,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.diffusionScreenSmallButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -9014,7 +9014,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.energyScreenLargeButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9023,10 +9023,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.energyScreenLargeButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9035,7 +9035,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.energyScreenLargeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -9158,7 +9158,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.energyScreenSmallButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9167,10 +9167,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.energyScreenSmallButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9179,7 +9179,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.energyScreenSmallButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -9302,7 +9302,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.exploreScreenLargeButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9311,10 +9311,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.exploreScreenLargeButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9323,7 +9323,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.exploreScreenLargeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -9446,7 +9446,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.exploreScreenSmallButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9455,10 +9455,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.exploreScreenSmallButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9467,7 +9467,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.exploreScreenSmallButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -9590,7 +9590,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.idealScreenLargeButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9599,10 +9599,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.idealScreenLargeButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9611,7 +9611,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.idealScreenLargeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -9734,7 +9734,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "EmitterIO.<>"
     },
     "gasProperties.homeScreen.view.idealScreenSmallButton.inputListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9743,10 +9743,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.homeScreen.view.idealScreenSmallButton.inputListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -9755,7 +9755,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.homeScreen.view.idealScreenSmallButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -10334,7 +10334,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.containerNode.lidDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10343,10 +10343,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.containerNode.lidDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10355,7 +10355,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.containerNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -10394,7 +10394,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.containerNode.resizeDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10403,10 +10403,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.containerNode.resizeDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10415,7 +10415,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.containerNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -10802,7 +10802,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.heavyBicyclePumpNode.handleDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10811,10 +10811,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.heavyBicyclePumpNode.handleDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10823,7 +10823,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.heavyBicyclePumpNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -10886,7 +10886,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.lightBicyclePumpNode.handleDragListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10895,10 +10895,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.lightBicyclePumpNode.handleDragListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -10907,7 +10907,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.lightBicyclePumpNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
@@ -11030,7 +11030,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.idealScreen.view.particleTypeRadioButtonGroup.heavyParticles.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11039,10 +11039,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.particleTypeRadioButtonGroup.heavyParticles.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11051,7 +11051,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.particleTypeRadioButtonGroup.heavyParticles.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -11126,7 +11126,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.idealScreen.view.particleTypeRadioButtonGroup.lightParticles.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11135,10 +11135,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.particleTypeRadioButtonGroup.lightParticles.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11147,7 +11147,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.particleTypeRadioButtonGroup.lightParticles.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -11258,7 +11258,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.idealScreen.view.particlesAccordionBox.expandCollapseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11267,10 +11267,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.particlesAccordionBox.expandCollapseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11279,7 +11279,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.particlesAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
@@ -11438,7 +11438,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.idealScreen.view.resetAllButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11447,10 +11447,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.resetAllButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11459,7 +11459,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.resetAllButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -11534,7 +11534,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.idealScreen.view.returnLidButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11543,10 +11543,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.returnLidButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11555,7 +11555,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.returnLidButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
@@ -11666,7 +11666,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.idealScreen.view.timeControlNode.playPauseButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11675,10 +11675,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.timeControlNode.playPauseButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11687,7 +11687,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.timeControlNode.playPauseButton.property": {
       "phetioDocumentation": "",
@@ -11834,7 +11834,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO.<NullableIO.<BooleanIO>>"
     },
     "gasProperties.idealScreen.view.timeControlNode.stepForwardButton.pressListener.pressAction": {
-      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li>\n<li>targetNode: VoidIO</li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11843,10 +11843,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<EventIO, VoidIO, VoidIO>"
+      "phetioTypeName": "ActionIO.<EventIO>"
     },
     "gasProperties.idealScreen.view.timeControlNode.stepForwardButton.pressListener.releaseAction": {
-      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li>\n<li>callback: VoidIO</li></ol>",
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br><ol><li>event: NullableIO.<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
@@ -11855,7 +11855,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>, VoidIO>"
+      "phetioTypeName": "ActionIO.<NullableIO.<EventIO>>"
     },
     "gasProperties.idealScreen.view.timeControlNode.stepForwardButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
