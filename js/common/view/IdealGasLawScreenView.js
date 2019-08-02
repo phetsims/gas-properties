@@ -83,9 +83,6 @@ define( require => {
 
       const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
 
-      // Parent for combo box popup lists
-      const comboBoxListParent = new Node();
-
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
 
@@ -209,14 +206,20 @@ define( require => {
         bicyclePumpsToggleNode.interruptSubtreeInput();
       } );
 
+      // Parent for the thermometer's listbox
+      const thermometerListboxParent = new Node();
+
       // Thermometer
-      const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel.thermometer, comboBoxListParent, {
+      const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel.thermometer, thermometerListboxParent, {
         right: containerNode.right,
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
+      // Parent for the pressure gauge's listbox
+      const pressureGaugeListboxParent = new Node();
+
       // Pressure Gauge
-      const pressureGaugeNode = new PressureGaugeNode( model.pressureModel.pressureGauge, comboBoxListParent, {
+      const pressureGaugeNode = new PressureGaugeNode( model.pressureModel.pressureGauge, pressureGaugeListboxParent, {
         left: containerNode.right - 2,
         centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30
       } );
@@ -253,7 +256,9 @@ define( require => {
 
       // Collision Counter
       if ( model.collisionCounter ) {
-        toolsParent.addChild( new CollisionCounterNode( model.collisionCounter, comboBoxListParent, this.visibleBoundsProperty ) );
+        const collisionCounterListboxParent = new Node();
+        toolsParent.addChild( new CollisionCounterNode( model.collisionCounter, collisionCounterListboxParent, this.visibleBoundsProperty ) );
+        toolsParent.addChild( collisionCounterListboxParent );
       }
 
       // Stopwatch
@@ -279,15 +284,16 @@ define( require => {
       this.addChild( particleTypeRadioButtonGroup );
       this.addChild( bicyclePumpsToggleNode );
       this.addChild( pressureGaugeNode );
+      this.addChild( pressureGaugeListboxParent );
       this.addChild( containerNode );
       this.addChild( eraseParticlesButton );
       this.addChild( thermometerNode );
+      this.addChild( thermometerListboxParent );
       this.addChild( containerWidthNode );
       this.addChild( particleSystemNode );
       this.addChild( returnLidButton );
       this.addChild( heaterCoolerNode );
       this.addChild( toolsParent );
-      this.addChild( comboBoxListParent ); // comboBox listbox in front of everything else
       pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
 
       // Time controls are created by the superclass, but subclass is responsible for positioning them
