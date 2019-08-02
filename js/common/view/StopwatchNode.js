@@ -82,7 +82,13 @@ define( require => {
       this.dragTarget.addInputListener( new DragListener( {
         targetNode: this,
         locationProperty: stopwatch.locationProperty,
-        dragBoundsProperty: dragBoundsProperty,
+        dragBoundsProperty: dragBoundsProperty
+      } ) );
+
+      // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
+      // This needs to be a DragListener so that touchSnag works.
+      this.addInputListener( new DragListener( {
+        attach: false, // so that this DragListener won't be ignored
         start: () => { this.moveToFront(); }
       } ) );
     }

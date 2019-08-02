@@ -54,15 +54,15 @@ define( require => {
 
     /**
      * @param {CollisionCounter} collisionCounter
-     * @param {Node} comboBoxListParent
+     * @param {Node} listboxParent  - parent for the ComboBox's listbox
      * @param {Property.<Bounds2>} visibleBoundsProperty - visible bounds of the ScreenView
      * @param {Object} [options]
      */
-    constructor( collisionCounter, comboBoxListParent, visibleBoundsProperty, options ) {
+    constructor( collisionCounter, listboxParent, visibleBoundsProperty, options ) {
       assert && assert( collisionCounter instanceof CollisionCounter,
         `invalid collisionCounter: ${collisionCounter}` );
-      assert && assert( comboBoxListParent instanceof Node,
-        `invalid comboBoxListParent: ${comboBoxListParent}` );
+      assert && assert( listboxParent instanceof Node,
+        `invalid listboxParent: ${listboxParent}` );
       assert && assert( visibleBoundsProperty instanceof Property,
         `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
@@ -71,6 +71,7 @@ define( require => {
       }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
+        pickable: false,
         font: LABEL_FONT,
         maxWidth: 110 // determined empirically
       } );
@@ -87,6 +88,7 @@ define( require => {
       const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty );
 
       const samplePeriodTextNode = new Text( samplePeriodString, {
+        pickable: false,
         font: LABEL_FONT,
         left: X_MARGIN,
         maxWidth: 110 // determined empirically
@@ -108,7 +110,7 @@ define( require => {
       } );
 
       // Combo box
-      const comboBox = new ComboBox( comboBoxItems, collisionCounter.samplePeriodProperty, comboBoxListParent, {
+      const comboBox = new ComboBox( comboBoxItems, collisionCounter.samplePeriodProperty, listboxParent, {
         listPosition: 'below',
         align: 'right',
         xMargin: 6,
@@ -133,25 +135,31 @@ define( require => {
       } );
 
       // Background, sized to fit the content
-      const backgroundNode = new Rectangle( 0, 0, content.width + ( 2 * X_MARGIN ), content.height + ( 2 * Y_MARGIN ), {
+      const rectangleNode = new Rectangle( 0, 0, content.width + ( 2 * X_MARGIN ), content.height + ( 2 * Y_MARGIN ), {
         cornerRadius: 6,
         fill: GasPropertiesColorProfile.collisionCounterBackgroundColorProperty,
         stroke: 'black'
       } );
 
-      // Pseudo-3D bezel around the outside edge of the counter
+      // Pseudo-3D bezel around the outside edge of the rectangle
       const bezelBounds = new Bounds2( 0, 0,
-        backgroundNode.width + ( 2 * BEZEL_WIDTH ), backgroundNode.height + ( 2 * BEZEL_WIDTH ) );
+        rectangleNode.width + ( 2 * BEZEL_WIDTH ), rectangleNode.height + ( 2 * BEZEL_WIDTH ) );
       const bezelNode = new ShadedRectangle( bezelBounds, {
         baseColor: GasPropertiesColorProfile.collisionCounterBezelColorProperty
       } );
 
-      backgroundNode.center = bezelNode.center;
+      rectangleNode.center = bezelNode.center;
+
+      // The background include the bezel and rectangle.
+      const backgroundNode = new Node( {
+        children: [ bezelNode, rectangleNode ]
+      } );
+
       content.center = backgroundNode.center;
 
       assert && assert( !options.children, 'CollisionCounterNode sets children' );
       options = _.extend( {
-        children: [ bezelNode, backgroundNode, content ]
+        children: [ backgroundNode, content ]
       }, options );
 
       super( options );
@@ -167,6 +175,7 @@ define( require => {
         this.visible = visible;
         if ( visible ) {
           this.moveToFront();
+          listboxParent.moveToFront();
         }
       } );
 
@@ -191,8 +200,17 @@ define( require => {
       backgroundNode.addInputListener( new DragListener( {
         targetNode: this,
         locationProperty: collisionCounter.locationProperty,
-        dragBoundsProperty: dragBoundsProperty,
-        start: () => { this.moveToFront(); }
+        dragBoundsProperty: dragBoundsProperty
+      } ) );
+
+      // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
+      // This needs to be a DragListener so that touchSnag works.
+      this.addInputListener( new DragListener( {
+        attach: false, // so that this DragListener won't be ignored
+        start: () => {
+          this.moveToFront();
+          listboxParent.moveToFront();
+        }
       } ) );
     }
   }
