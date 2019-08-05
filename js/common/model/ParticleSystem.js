@@ -345,6 +345,20 @@ define( require => {
     }
 
     /**
+     * Sets the average kinetic energy of particles in the container.
+     * @param {number} kineticEnergy
+     */
+    setAverageKineticEnergy( kineticEnergy ) {
+      assert && assert( typeof kineticEnergy === 'number', `invalid kineticEnergy: ${kineticEnergy}` );
+      
+      const currentKineticEnergy = this.getAverageKineticEnergy();
+      const scale = kineticEnergy / currentKineticEnergy;
+
+      ParticleUtils.scaleKineticEnergy( this.heavyParticles, scale );
+      ParticleUtils.scaleKineticEnergy( this.lightParticles, scale );
+    }
+
+    /**
      * Gets the total kinetic energy of the particles in the container.
      * @returns {number} in AMU * pm^2 / ps^2
      * @private
