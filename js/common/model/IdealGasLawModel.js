@@ -194,11 +194,15 @@ define( require => {
         }
       } );
 
-      // When the number of particles is decreased while holding temperature constant, adjust the speed of
-      // particles to result in the desired temperature.
+      // When the number of particles (N) is decreased while holding temperature (T) constant, adjust the speed of
+      // particles to result in the desired temperature.  We only need to do this when N decreases because particles
+      // that are added have their initial speed set based on T of the container, and therefore result in no change
+      // to T. See https://github.com/phetsims/gas-properties/issues/159
       this.particleSystem.numberOfParticlesProperty.link( ( numberOfParticles, previousNumberOfParticles ) => {
         if ( numberOfParticles > 0 && numberOfParticles < previousNumberOfParticles &&
              this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
+          assert && assert( !this.temperatureModel.controlTemperatureEnabledProperty.value,
+            'this feature is not compatible with user-controlled particle temperature' );
 
           // Determine the average KE that will result in the desired T.
           const desiredT = this.temperatureModel.temperatureProperty.value;
