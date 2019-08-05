@@ -194,6 +194,21 @@ define( require => {
         }
       } );
 
+      // When the number of particles is decreased while holding temperature constant, adjust the speed of
+      // particles to result in the desired temperature.
+      this.particleSystem.numberOfParticlesProperty.link( ( numberOfParticles, previousNumberOfParticles ) => {
+        if ( numberOfParticles > 0 && numberOfParticles < previousNumberOfParticles &&
+             this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
+
+          // Determine the average KE that will result in the desired T.
+          const desiredT = this.temperatureModel.temperatureProperty.value;
+          const desiredKE = ( 3 / 2 ) * desiredT * GasPropertiesConstants.BOLTZMANN; // K = (3/2)Tk
+
+          // Set the average KE of the particle system
+          this.particleSystem.setAverageKineticEnergy( desiredKE );
+        }
+      } );
+
       // Verify that we're not in a bad 'Hold Constant' state.
       assert && this.holdConstantProperty.link( holdConstant => {
 
