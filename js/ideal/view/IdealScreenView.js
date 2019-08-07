@@ -23,10 +23,11 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
-  const oopsTemperatureEmptyString = require( 'string!GAS_PROPERTIES/oopsTemperatureEmpty' );
   const oopsPressureEmptyString = require( 'string!GAS_PROPERTIES/oopsPressureEmpty' );
   const oopsPressureLargeString = require( 'string!GAS_PROPERTIES/oopsPressureLarge' );
   const oopsPressureSmallString = require( 'string!GAS_PROPERTIES/oopsPressureSmall' );
+  const oopsTemperatureEmptyString = require( 'string!GAS_PROPERTIES/oopsTemperatureEmpty' );
+  const oopsTemperatureOpenString = require( 'string!GAS_PROPERTIES/oopsTemperatureOpen' );
 
   class IdealScreenView extends IdealGasLawScreenView {
 
@@ -74,6 +75,7 @@ define( require => {
         model.holdConstantProperty,
         model.particleSystem.numberOfParticlesProperty,
         model.pressureModel.pressureProperty,
+        model.container.isOpenProperty,
         viewProperties.widthVisibleProperty,
         model.stopwatch.visibleProperty,
         model.collisionCounter.visibleProperty, {
@@ -106,6 +108,9 @@ define( require => {
       // created eagerly and reused.
       const oopsTemperatureEmptyDialog = new GasPropertiesOopsDialog( oopsTemperatureEmptyString );
       model.oopsEmitters.temperatureEmptyEmitter.addListener( () => { this.showDialog( oopsTemperatureEmptyDialog ); } );
+
+      const oopsTemperatureOpenDialog = new GasPropertiesOopsDialog( oopsTemperatureOpenString );
+      model.oopsEmitters.temperatureOpenEmitter.addListener( () => { this.showDialog( oopsTemperatureOpenDialog ); } );
 
       const oopsPressureEmptyDialog = new GasPropertiesOopsDialog( oopsPressureEmptyString );
       model.oopsEmitters.pressureEmptyEmitter.addListener( () => { this.showDialog( oopsPressureEmptyDialog ); } );

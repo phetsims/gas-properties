@@ -184,7 +184,7 @@ define( require => {
     escapeParticles( container ) {
       assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
 
-      if ( container.isLidOpen() ) {
+      if ( container.isOpenProperty.value ) {
 
         ParticleUtils.escapeParticles( container, this.numberOfHeavyParticlesProperty,
           this.heavyParticles, this.heavyParticlesOutside, );

@@ -66,10 +66,9 @@ define( require => {
 
         // when the lid handle is released, log the opening
         end: ( listener ) => {
-          phet.log && phet.log( container.isLidOpen() ?
+          phet.log && phet.log( container.isOpenProperty.value ?
                                 `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
-                                'Lid is closed'
-          );
+                                'Lid is closed' );
         },
 
         tandem: tandem

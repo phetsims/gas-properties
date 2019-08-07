@@ -149,6 +149,9 @@
   "oopsTemperatureEmpty": {
     "value": "Oops!<br><br>Temperature cannot be held constant<br>when the container is empty."
   },
+  "oopsTemperatureOpen": {
+    "value": "Oops!<br><br>Temperature cannot be held constant<br>when the container is open."
+  },
   "oopsPressureEmpty": {
     "value": "Oops!<br><br>Pressure cannot be held constant<br>when the container is empty."
   },
