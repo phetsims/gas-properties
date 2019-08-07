@@ -152,6 +152,9 @@ define( require => {
         // Oops! Temperature cannot be held constant when the container is empty.
         temperatureEmptyEmitter: new Emitter(),
 
+        // Oops! Temperature cannot be held constant when the container is open.
+        temperatureOpenEmitter: new Emitter(),
+
         // Oops! Pressure cannot be held constant when the container is empty.
         pressureEmptyEmitter: new Emitter(),
 
@@ -192,6 +195,16 @@ define( require => {
         if ( !this.isPlayingProperty.value ) {
           this.updateWhenPaused();
         }
+      } );
+
+      // Temperature can't be held constant when the container is open, because we don't want to deal with
+      // counteracting evaporative cooling. See https://github.com/phetsims/gas-properties/issues/159
+      this.container.isOpenProperty.link( isOpen => {
+         if ( isOpen && this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
+           phet.log && phet.log( 'Oops! T cannot be held constant when the container is open' );
+           this.holdConstantProperty.value = HoldConstant.NOTHING;
+           this.oopsEmitters.temperatureOpenEmitter.emit();
+         }
       } );
 
       // When the number of particles (N) is decreased while holding temperature (T) constant, adjust the speed of

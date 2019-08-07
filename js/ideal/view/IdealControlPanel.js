@@ -32,19 +32,22 @@ define( require => {
      * @param {EnumerationProperty} holdConstantProperty
      * @param {Property.<number>>} numberOfParticlesProperty
      * @param {NumberProperty} pressureProperty
+     * @param {BooleanProperty} isContainerOpenProperty
      * @param {BooleanProperty} widthVisibleProperty
      * @param {BooleanProperty} stopwatchVisibleProperty
      * @param {BooleanProperty} collisionCounterVisibleProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, widthVisibleProperty,
-                 stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
+    constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty,
+                 widthVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
       assert && assert( numberOfParticlesProperty instanceof Property,
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( pressureProperty instanceof NumberProperty,
         `invalid pressureProperty: ${pressureProperty}` );
+      assert && assert( isContainerOpenProperty instanceof Property,
+        `invalid isContainerOpenProperty: ${isContainerOpenProperty}` );
       assert && assert( widthVisibleProperty instanceof BooleanProperty,
         `invalid widthVisibleProperty: ${widthVisibleProperty}` );
       assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
@@ -67,10 +70,11 @@ define( require => {
 
       // Optional HoldConstantControl and separator
       if ( options.hasHoldConstantControls ) {
-        children.push( new HoldConstantControl( holdConstantProperty, numberOfParticlesProperty, pressureProperty, {
-          maxWidth: contentWidth,
-          tandem: options.tandem.createTandem( 'holdConstantControl' )
-        } ) );
+        children.push( new HoldConstantControl(
+          holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty, {
+            maxWidth: contentWidth,
+            tandem: options.tandem.createTandem( 'holdConstantControl' )
+          } ) );
         children.push( new HSeparator( contentWidth, {
           stroke: GasPropertiesColorProfile.separatorColorProperty,
           maxWidth: contentWidth

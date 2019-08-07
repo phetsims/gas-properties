@@ -10,9 +10,11 @@ define( require => {
   'use strict';
 
   // modules
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
+  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -23,9 +25,12 @@ define( require => {
   class LidNode extends Node {
 
     /**
+     * @param {EnumerationProperty} holdConstantProperty
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( holdConstantProperty, options ) {
+      assert && assert( holdConstantProperty instanceof EnumerationProperty,
+        `invalid holdConstantProperty: ${holdConstantProperty}` );
 
       options = _.extend( {
         baseWidth: 1,
@@ -40,6 +45,7 @@ define( require => {
       } );
 
       const handleNode = new HandleNode( {
+        cursor: 'pointer',
         hasLeftAttachment: false,
         gripBaseColor: options.gripColor,
         attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
@@ -57,9 +63,18 @@ define( require => {
 
       super( options );
 
+      // Hide the handle when holding temperature constant.  We don't want to deal with counteracting evaporative
+      // cooling, which will occur when the lid is open. See https://github.com/phetsims/gas-properties/issues/159
+      holdConstantProperty.link( holdConstant => {
+        this.interruptSubtreeInput();
+        handleNode.visible = ( holdConstant !== HoldConstant.TEMPERATURE );
+      } );
+
+      // @public (read-only)
+      this.handleNode = handleNode;
+
       // @private
       this.baseNode = baseNode;
-      this.handleNode = handleNode;
     }
 
     /**

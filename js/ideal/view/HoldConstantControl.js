@@ -43,15 +43,18 @@ define( require => {
      * @param {EnumerationProperty} holdConstantProperty
      * @param {Property.<number>>} numberOfParticlesProperty
      * @param {NumberProperty} pressureProperty
+     * @param {BooleanProperty} isContainerOpenProperty
      * @param {Object} [options]
      */
-    constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, options ) {
+    constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty, options ) {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
       assert && assert( numberOfParticlesProperty instanceof Property,
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( pressureProperty instanceof NumberProperty,
         `invalid pressureProperty: ${pressureProperty}` );
+      assert && assert( isContainerOpenProperty instanceof Property,
+              `invalid isContainerOpenProperty: ${isContainerOpenProperty}` );
 
       options = _.extend( {
 
@@ -113,10 +116,12 @@ define( require => {
 
       super( options );
 
-      // Disable radio buttons for selections that are not possible when the container is empty.
-      numberOfParticlesProperty.link( numberOfParticles => {
-        temperatureRadioButton.enabledProperty.value = ( numberOfParticles !== 0 );
-      } );
+      // Disable "Temperature (T)" radio button for conditions that are not possible.
+      Property.multilink(
+        [ numberOfParticlesProperty, isContainerOpenProperty ],
+        ( numberOfParticles, isContainerOpen ) => {
+          temperatureRadioButton.enabledProperty.value = ( numberOfParticles !== 0 ) && !isContainerOpen;
+        } );
 
       // Disable radio buttons for selections that are not possible with zero pressure.
       pressureProperty.link( pressure => {

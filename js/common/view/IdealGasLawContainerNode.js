@@ -89,8 +89,7 @@ define( require => {
       } );
 
       // Lid on the top of the container
-      const lidNode = new LidNode( {
-        cursor: 'pointer',
+      const lidNode = new LidNode( holdConstantProperty, {
         baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
         baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
         handleColor: options.lidGripColor
@@ -181,15 +180,15 @@ define( require => {
         options.resizeHandleIsPressedListener( isPressed );
 
         // when the handle is released, log the opening
-        if ( !isPressed && container.isLidOpen() ) {
+        if ( !isPressed && container.isOpenProperty.value ) {
           phet.log && phet.log( `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` );
         }
       } );
 
-      // Dragging the lid horizontally changes the size of the opening in the top of the container
+      // Dragging the lid's handle horizontally changes the size of the opening in the top of the container
       const lidDragListener = new LidDragListener( container, modelViewTransform, this,
         options.tandem.createTandem( 'lidDragListener' ) );
-      lidNode.addInputListener( lidDragListener );
+      lidNode.handleNode.addInputListener( lidDragListener );
 
       // This implementation assumes that the lid is not interactive while the container is being resized.
       // This is handled in resizeDragListener.isPressedProperty listener above.

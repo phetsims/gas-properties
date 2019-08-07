@@ -12,6 +12,7 @@ define( require => {
   // modules
   const BaseContainer = require( 'GAS_PROPERTIES/common/model/BaseContainer' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -91,6 +92,12 @@ define( require => {
 
       // @private {number} previous location of the left wall
       this.previousLeft = this.left;
+
+      // @public {boolean} is the container open?
+      this.isOpenProperty = new DerivedProperty( [ this.lidIsOnProperty, this.lidWidthProperty ],
+        ( lidIsOn, lidWidth ) => {
+            return !lidIsOn || this.getOpeningWidth() !== 0;
+      } );
     }
 
     /**
@@ -246,15 +253,6 @@ define( require => {
       const openingWidth = this.getOpeningRight() - this.getOpeningLeft();
       assert && assert( openingWidth >= 0, `invalid openingWidth: ${openingWidth}` );
       return openingWidth;
-    }
-
-    /**
-     * Is the container's lid open?
-     * @returns {boolean}
-     * @public
-     */
-    isLidOpen() {
-      return ( this.getOpeningWidth() !== 0 );
     }
 
     /**
