@@ -216,13 +216,8 @@ define( require => {
              this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
           assert && assert( !this.temperatureModel.controlTemperatureEnabledProperty.value,
             'this feature is not compatible with user-controlled particle temperature' );
-
-          // Determine the average KE that will result in the desired T.
-          const desiredT = this.temperatureModel.temperatureProperty.value;
-          const desiredKE = ( 3 / 2 ) * desiredT * GasPropertiesConstants.BOLTZMANN; // K = (3/2)Tk
-
-          // Set the average KE of the particle system
-          this.particleSystem.setAverageKineticEnergy( desiredKE );
+          
+          this.particleSystem.setTemperature( this.temperatureModel.temperatureProperty.value );
         }
       } );
 
