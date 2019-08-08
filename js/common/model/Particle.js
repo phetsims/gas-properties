@@ -176,16 +176,6 @@ define( require => {
     }
 
     /**
-     * Scales the kinetic energy of this particle by scaling its velocity.
-     * @param {number} scale
-     */
-    scaleKineticEnergy( scale ) {
-
-      // v = Math.sqrt( 2 * KE / m )
-      this.velocity.setMagnitude( Math.sqrt( 2 * this.getKineticEnergy() * scale / this.mass ) );
-    }
-
-    /**
      * Does this particle contact another particle now?
      * @param {Particle} particle
      * @returns {boolean}

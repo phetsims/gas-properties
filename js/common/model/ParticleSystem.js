@@ -286,7 +286,7 @@ define( require => {
         // Initial speed, |v| = sqrt( 3kT / m )
         const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass );
         assert && assert( typeof speed === 'number' && isFinite( speed ) && speed >= 0,
-          `invalid speed: ${speed}, computed using temperature=${temperatures[ i ]}, mass=${particle.mass}` );
+          `invalid speed: ${speed}, computed using n=${n} meanTemperature=${meanTemperature} temperature=${temperatures[ i ]}, mass=${particle.mass}` );
 
         // Angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
         const angle = Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PARTICLE_DISPERSION_ANGLE;
@@ -342,20 +342,6 @@ define( require => {
      */
     getAverageKineticEnergy() {
       return this.getTotalKineticEnergy() / this.numberOfParticlesProperty.value;
-    }
-
-    /**
-     * Sets the average kinetic energy of particles in the container.
-     * @param {number} kineticEnergy
-     */
-    setAverageKineticEnergy( kineticEnergy ) {
-      assert && assert( typeof kineticEnergy === 'number', `invalid kineticEnergy: ${kineticEnergy}` );
-      
-      const currentKineticEnergy = this.getAverageKineticEnergy();
-      const scale = kineticEnergy / currentKineticEnergy;
-
-      ParticleUtils.scaleKineticEnergy( this.heavyParticles, scale );
-      ParticleUtils.scaleKineticEnergy( this.lightParticles, scale );
     }
 
     /**
