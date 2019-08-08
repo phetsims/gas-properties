@@ -55,6 +55,7 @@ define( require => {
       } );
       assert && assert( handleNode.width <= baseNode.width,
         `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );
+      handleNode.touchArea = handleNode.localBounds.dilatedXY( 25, 20 );
 
       assert && assert( !options.children, 'LidNode sets children' );
       options = _.extend( {
