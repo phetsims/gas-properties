@@ -128,20 +128,6 @@ define( require => {
     },
 
     /**
-     * Scales the kinetic energy for a collection of particles.
-     * @param {Particle[]} particles
-     * @param {number} scale
-     */
-    scaleKineticEnergy( particles, scale ) {
-      assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-      assert && assert( typeof scale === 'number' && scale > 0, `invalid scale: ${scale}` );
-
-      for ( let i = particles.length - 1; i >= 0; i-- ) {
-         particles[ i ].scaleKineticEnergy( scale );
-      }
-    },
-
-    /**
      * Identifies particles that have escaped via the opening in the top of the container, and
      * moves them from insideParticles to outsideParticles.
      * @param {IdealGasLawContainer} container
