@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.0-rc.2 Wed Jul 31 2019 18:10:44 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.0-rc.3 Thu Aug 08 2019 16:47:34 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "201c50a840e082354b013f4ab9e9d45006f98cfe",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "10d14e5e495e91bcdeaa7f3c059068617a707730",
+    "sha": "03d282874008de9b05ab119d79f7b314a8baf685",
     "branch": "1.0"
   },
   "joist": {
