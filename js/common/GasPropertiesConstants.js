@@ -112,9 +112,6 @@ define( require => {
     // default font for controls (buttons, checkboxes, ...)
     CONTROL_FONT: new PhetFont( 16 ),
 
-    // scale for HeaterCoolerNode
-    HEATER_COOLER_NODE_SCALE: 0.8,
-
     // spacing of the horizontal lines in the histograms, in number of particles
     HISTOGRAM_LINE_SPACING: 50,
 

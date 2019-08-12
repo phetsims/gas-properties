@@ -239,8 +239,11 @@ define( require => {
       const heaterCoolerNodeLeft = containerViewLocation.x -
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
-        model.heatCoolFactorProperty, model.holdConstantProperty, model.isPlayingProperty, {
-          scale: GasPropertiesConstants.HEATER_COOLER_NODE_SCALE,
+        model.heatCoolFactorProperty,
+        model.holdConstantProperty,
+        model.isPlayingProperty,
+        model.particleSystem.numberOfParticlesProperty,
+        model.temperatureModel.temperatureProperty, {
           left: heaterCoolerNodeLeft,
           bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
         } );
@@ -313,8 +316,6 @@ define( require => {
       this.regionsNode = regionsNode;
       this.heavyBicyclePumpNode = heavyBicyclePumpNode;
       this.lightBicyclePumpNode = lightBicyclePumpNode;
-
-      // @protected use by subclasses, primarily for layout
       this.heaterCoolerNode = heaterCoolerNode;
     }
 
@@ -341,6 +342,7 @@ define( require => {
       this.containerNode.step( dt );
       this.particleSystemNode.update();
       this.regionsNode && this.regionsNode.update();
+      this.heaterCoolerNode.step( dt );
     }
 
     /**
