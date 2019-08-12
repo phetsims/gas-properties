@@ -9,13 +9,11 @@ define( require => {
   'use strict';
 
   // modules
-  const AnimatedHeaterCoolerNode = require( 'GAS_PROPERTIES/ideal/view/AnimatedHeaterCoolerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesOopsDialog = require( 'GAS_PROPERTIES/common/view/GasPropertiesOopsDialog' );
   const IdealGasLawScreenView = require( 'GAS_PROPERTIES/common/view/IdealGasLawScreenView' );
-  const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const IdealControlPanel = require( 'GAS_PROPERTIES/ideal/view/IdealControlPanel' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealViewProperties = require( 'GAS_PROPERTIES/ideal/view/IdealViewProperties' );
@@ -51,24 +49,6 @@ define( require => {
       const viewProperties = new IdealViewProperties( tandem.createTandem( 'viewProperties' ) );
 
       super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem, options );
-
-      // Flame/ice is animated when holding pressure constant and adjusting temperature (HoldConstant.PRESSURE_T).
-      // The user is not controlling the heat, and we animate the bucket to correspond to the temperature change.
-      const animatedHeaterCoolerNode = new AnimatedHeaterCoolerNode(
-        model.holdConstantProperty,
-        model.particleSystem.numberOfParticlesProperty,
-        model.temperatureModel.temperatureProperty, {
-          translation: this.heaterCoolerNode.translation,
-          scale: GasPropertiesConstants.HEATER_COOLER_NODE_SCALE
-        } );
-      this.addChild( animatedHeaterCoolerNode );
-      animatedHeaterCoolerNode.moveToBack();
-
-      // Swap visibility of HeaterCoolerNodes
-      model.holdConstantProperty.link( holdConstant => {
-        animatedHeaterCoolerNode.visible = ( holdConstant === HoldConstant.PRESSURE_T );
-        this.heaterCoolerNode.visible = ( holdConstant !== HoldConstant.PRESSURE_T );
-      } );
 
       // Control panel at upper right
       const controlPanel = new IdealControlPanel(
@@ -123,7 +103,6 @@ define( require => {
 
       // @private used in methods
       this.viewProperties = viewProperties;
-      this.animatedHeaterCoolerNode = animatedHeaterCoolerNode;
     }
 
     /**
@@ -134,18 +113,6 @@ define( require => {
     reset() {
       super.reset();
       this.viewProperties.reset();
-    }
-
-    /**
-     * Steps the view using real time units.
-     * @param {number} dt - delta time, in seconds
-     * @public
-     * @override
-     */
-    stepView( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      super.stepView( dt );
-      this.animatedHeaterCoolerNode.step( dt );
     }
   }
 
