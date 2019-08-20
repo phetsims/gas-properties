@@ -108,12 +108,14 @@ define( require => {
         lidNode.y = wallsNode.top + viewWallThickness;
       }
 
+      // Half the wall thickness, in view coordinates.
+      const viewHalfWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 );
+
       // Update the container when its bounds change.
       container.boundsProperty.link( bounds => {
 
         // Account for wall thickness, so that container walls are drawn around the container's model bounds.
-        const viewBounds = modelViewTransform.modelToViewBounds( bounds )
-          .dilated( modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 ) );
+        const viewBounds = modelViewTransform.modelToViewBounds( bounds ).dilate( viewHalfWallThickness );
 
         // Update the walls, start at top-left, origin at bottom-right. Shape looks like:
         //  __               ___
