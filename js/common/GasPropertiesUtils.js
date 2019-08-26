@@ -33,10 +33,10 @@ define( require => {
 
       // Generate a random Gaussian sample whose values have the desired mean and standard deviation.
       for ( let i = 0; i < n; i++ ) {
-        const speed = Util.boxMullerTransform( mean, deviation, phet.joist.random );
-        assert && assert( isFinite( speed ), `invalid speed: ${speed}` );
-        values.push( speed );
-        sum += speed;
+        const value = Util.boxMullerTransform( mean, deviation, phet.joist.random );
+        assert && assert( isFinite( value ), `invalid value: ${value}` );
+        values.push( value );
+        sum += value;
       }
       assert && assert( values.length === n, 'wrong number of values' );
 
@@ -45,10 +45,10 @@ define( require => {
       const deltaMean = mean - emergentMean;
       sum = 0;
       for ( let i = values.length - 1; i >= 0; i-- ) {
-        const speed = values[ i ] + deltaMean;
-        assert && assert( isFinite( speed ), `invalid speed: ${speed}` );
-        values[ i ] = speed;
-        sum += speed;
+        const value = values[ i ] + deltaMean;
+        assert && assert( isFinite( value ), `invalid value: ${value}` );
+        values[ i ] = value;
+        sum += value;
       }
 
       // Verify that the actual mean is within the tolerance.
