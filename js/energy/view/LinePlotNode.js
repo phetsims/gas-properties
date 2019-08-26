@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * LinePlotNode plots histogram data as a set of connected line segments. It is used to overlay specifies-specific
+ * LinePlotNode plots histogram data as a set of connected line segments. It is used to overlay species-specific
  * histogram data on top of a more typical bar-style histogram.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const ColorDef = require( 'SCENERY/util/ColorDef' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -32,14 +33,15 @@ define( require => {
       assert && assert( typeof lineWidth === 'number' && lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
 
       super( new Shape(), {
-        fill: null,
-        stroke: color, // to hide seams
+        fill: null, // because we're drawing lines
+        stroke: color,
         lineWidth: lineWidth
       } );
 
       // @private
       this.chartSize = chartSize;
       this.yScaleProperty = yScaleProperty;
+      this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
     }
 
     /**
@@ -72,6 +74,17 @@ define( require => {
         previousCount = binCount;
       }
       this.shape = shape;
+    }
+
+    /**
+     * Always use the full chart bounds, as a performance optimization.
+     * See https://github.com/phetsims/gas-properties/issues/146
+     * @returns {Bounds2}
+     * @public
+     * @override
+     */
+    computeShapeBounds() {
+      return this.shapeBounds;
     }
   }
 

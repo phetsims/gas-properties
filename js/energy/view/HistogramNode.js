@@ -16,18 +16,15 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const IntervalLinesNode = require( 'GAS_PROPERTIES/energy/view/IntervalLinesNode' );
   const LinePlotNode = require( 'GAS_PROPERTIES/energy/view/LinePlotNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Shape = require( 'KITE/Shape' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
 
   // Options for all histogram axis labels
   const HISTOGRAM_AXIS_LABEL_OPTIONS = {
@@ -76,16 +73,6 @@ define( require => {
         plotLineWidth: 2, // lineWidth for line segment plots
         barColor: 'white', // {ColorDef}
 
-        // {number} space between the interval lines, in number of particles
-        intervalLinesSpacing: GasPropertiesConstants.HISTOGRAM_LINE_SPACING,
-
-        // options that style the interval lines
-        intervalLineOptions: {
-          stroke: 'white', // {ColorDef}
-          opacity: 0.5, // (0,1)
-          lineWidth: 0.5
-        },
-
         // phet-io
         tandem: Tandem.required
 
@@ -93,8 +80,6 @@ define( require => {
 
       assert && assert( options.barColor !== null && ColorDef.isColorDef( options.barColor ),
         `invalid barColor: ${options.barColor}` );
-      assert && assert( options.intervalLinesSpacing > 0 && Util.isInteger( options.intervalLinesSpacing ),
-        'intervalLinesSpacing must be a positive integer: ' + options.intervalLinesSpacing );
 
       // Background appears behind plotted data
       const background = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
@@ -121,10 +106,8 @@ define( require => {
         children: [ allPlotNode, heavyPlotNode, lightPlotNode ]
       } );
 
-      // Horizontal lines that appear at equally-spaced intervals based on y-axis scale.
-      // These lines are intended to cue the student about the relative scale of the y axis.
-      // More lines means a larger value for 'Number of Particles'.
-      const intervalLines = new Path( null, options.intervalLineOptions );
+      // Horizontal lines that indicate y-axis scale.
+      const intervalLines = new IntervalLinesNode( options.chartSize );
 
       // x-axis label
       const xAxisLabelNode = new Text( xAxisString, _.extend( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
@@ -172,35 +155,13 @@ define( require => {
         }
       };
 
-      // Update the interval lines if the y-axis scale has changed.
-      let previousMaxY = null;
-      const updateIntervalLines = () => {
-        const maxY = yScaleProperty.value;
-        if ( previousMaxY === null || previousMaxY !== maxY ) {
-
-          const shape = new Shape();
-
-          const numberOfLines = Math.floor( maxY / options.intervalLinesSpacing );
-          const ySpacing = ( options.intervalLinesSpacing / maxY ) * options.chartSize.height;
-
-          for ( let i = 1; i <= numberOfLines; i++ ) {
-            const y = options.chartSize.height - ( i * ySpacing );
-            shape.moveTo( 0, y ).lineTo( options.chartSize.width, y );
-          }
-
-          intervalLines.shape = shape;
-
-          previousMaxY = maxY;
-        }
-      };
-
       // Update everything
       const update = () => {
         updatePlots();
-        updateIntervalLines();
+        intervalLines.update( yScaleProperty.value );
       };
 
-      // @public whether update are enabled, false ignores binCountsUpdatedEmitter.
+      // @public whether updates are enabled, false ignores binCountsUpdatedEmitter.
       // This is used to prevent updates when the accordion box containing a histogram is collapsed.
       this.updateEnabledProperty = new BooleanProperty( true );
       this.updateEnabledProperty.lazyLink( updateEnabled => {

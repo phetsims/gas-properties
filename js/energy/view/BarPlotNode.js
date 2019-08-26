@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Bounds2 = require( 'DOT/Bounds2' );
   const ColorDef = require( 'SCENERY/util/ColorDef' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
@@ -36,6 +37,7 @@ define( require => {
       // @private
       this.chartSize = chartSize;
       this.yScaleProperty = yScaleProperty;
+      this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
     }
 
     /**
@@ -66,6 +68,17 @@ define( require => {
         }
       }
       this.shape = shape;
+    }
+
+    /**
+     * Always use the full chart bounds, as a performance optimization.
+     * See https://github.com/phetsims/gas-properties/issues/146
+     * @returns {Bounds2}
+     * @public
+     * @override
+     */
+    computeShapeBounds() {
+      return this.shapeBounds;
     }
   }
 
