@@ -51,14 +51,20 @@ define( require => {
       this.particleArrays = particleArrays;
       this.imageProperties = imageProperties;
       this.debugFill = debugFill;
+      this.previousNumberOfParticles = 0;
     }
 
     /**
      * Redraws the particle system.
+     * This is a no-op if nothing needs to be redrawn, see https://github.com/phetsims/gas-properties/issues/146.
      * @public
      */
     update() {
-      this.invalidatePaint(); // results in a call to paintCanvas
+      const numberOfParticles = _.sumBy( this.particleArrays, particleArray => particleArray.length );
+      if ( this.previousNumberOfParticles !== 0 || numberOfParticles !== 0 ) {
+        this.invalidatePaint(); // results in a call to paintCanvas
+        this.previousNumberOfParticles = numberOfParticles;
+      }
     }
 
     /**
