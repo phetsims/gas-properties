@@ -251,6 +251,7 @@ define( require => {
 
       // Get the mean temperature that will be used to compute initial speed.
       const meanTemperature = this.getInitialTemperature();
+      assert && assert( meanTemperature > 0, `invalid meanTemperature: ${meanTemperature}` );
 
       // Create n temperature values that will be used to compute initial speed.
       let temperatures = null;
@@ -272,8 +273,15 @@ define( require => {
         // change the desired temperature.
         temperatures = GasPropertiesUtils.getGaussianValues( n, meanTemperature, 0.2 * meanTemperature, 1E-3 );
       }
+
       assert && assert( temperatures.length === n,
         `incorrect number of temperature values ${temperatures.length}, expected ${n}` );
+
+      // Verify that all temperature values are > 0 Kelvin.
+      assert && assert( _.every( temperatures, temperature => temperature > 0 ),
+        'invalid temperature: ' +
+        _.find( temperatures, temperature => temperature <= 0 ) +
+        `n=${n}, meanTemperature=${meanTemperature}, collisionsEnabled=${this.collisionsEnabledProperty.value}` );
 
       // Create n particles
       for ( let i = 0; i < n; i++ ) {
@@ -285,8 +293,6 @@ define( require => {
 
         // Initial speed, |v| = sqrt( 3kT / m )
         const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass );
-        assert && assert( typeof speed === 'number' && isFinite( speed ) && speed >= 0,
-          `invalid speed: ${speed}, computed using n=${n} meanTemperature=${meanTemperature} temperature=${temperatures[ i ]}, mass=${particle.mass}` );
 
         // Angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
         const angle = Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PARTICLE_DISPERSION_ANGLE;
