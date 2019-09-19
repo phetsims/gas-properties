@@ -28,7 +28,7 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       const createModel = () => new ExploreModel( tandem.createTandem( 'model' ) );
-      const createView = ( model ) => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
+      const createView = model => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
 
       super( createModel, createView, tandem, {
         name: screenExploreString,

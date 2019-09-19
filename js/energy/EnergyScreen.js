@@ -28,7 +28,7 @@ define( require => {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
       const createModel = () => new EnergyModel( tandem.createTandem( 'model' ) );
-      const createView = ( model ) => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
+      const createView = model => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
 
       super( createModel, createView, tandem, {
         name: screenEnergyString,

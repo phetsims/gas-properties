@@ -37,7 +37,7 @@ define( require => {
       }, options );
 
       const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
-      const createView = ( model ) => new IdealScreenView( model, tandem.createTandem( 'view' ), {
+      const createView = model => new IdealScreenView( model, tandem.createTandem( 'view' ), {
         hasHoldConstantControls: options.hasHoldConstantControls
       } );
 

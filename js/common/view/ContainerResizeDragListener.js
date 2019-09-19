@@ -65,7 +65,7 @@ define( require => {
           }
         },
 
-        end: ( listener ) => {
+        end: listener => {
 
           // Stop the animation wherever the container width happens to be when the drag ends.
           container.desiredWidth = container.widthProperty.value;

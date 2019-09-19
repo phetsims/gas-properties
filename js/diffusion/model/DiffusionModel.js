@@ -74,7 +74,7 @@ define( require => {
       } );
 
       // Synchronize particle counts and arrays.
-      const createDiffusionParticle1 = ( options ) => new DiffusionParticle1( options );
+      const createDiffusionParticle1 = options => new DiffusionParticle1( options );
       this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
           this.container.leftBounds,
@@ -84,7 +84,7 @@ define( require => {
         assert && assert( GasPropertiesUtils.isArrayOf( this.particles1, DiffusionParticle1 ),
           'particles1 should contain only DiffusionParticle1' );
       } );
-      const createDiffusionParticle2 = ( options ) => new DiffusionParticle2( options );
+      const createDiffusionParticle2 = options => new DiffusionParticle2( options );
       this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
         this.updateNumberOfParticles( numberOfParticles,
           this.container.rightBounds,

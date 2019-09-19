@@ -51,7 +51,7 @@ define( require => {
           ParticlesNode.particleToCanvas( particle, modelViewTransform, privateProperty );
         } );
 
-      super( [ privateProperty ], ( value ) => value, options );
+      super( [ privateProperty ], value => value, options );
     }
   }
 
