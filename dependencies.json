@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.1 Thu Sep 19 2019 01:55:27 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.0.1 Mon Sep 23 2019 15:45:59 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "201c50a840e082354b013f4ab9e9d45006f98cfe",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "dde3b37aac0c7808b4f397e314b73869840a52d3",
+    "sha": "8cb8b4060890224a0cda7fe4482e109b63af6bcc",
     "branch": "1.0"
   },
   "joist": {
@@ -57,8 +57,8 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "e4372eec02ab2a72a5c45de5ff7e99c5fbf35adf",
-    "branch": "HEAD"
+    "sha": "ce9c59f525cabf182a871b70ef600b9c0569795a",
+    "branch": "gas-properties-1.0"
   },
   "scenery-phet": {
     "sha": "d8bd82ef61dea2a2fca0f104dbef078c210b782c",
