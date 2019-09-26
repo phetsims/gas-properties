@@ -182,7 +182,7 @@ define( require => {
      * @public
      */
     contactsParticle( particle ) {
-      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+      assert && assert( particle instanceof Particle, 'invalid particle' );
       return this.location.distance( particle.location ) <= ( this.radius + particle.radius );
     }
 
@@ -195,7 +195,7 @@ define( require => {
      * @public
      */
     contactedParticle( particle ) {
-      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+      assert && assert( particle instanceof Particle, 'invalid particle' );
       return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
     }
 
@@ -208,7 +208,7 @@ define( require => {
      * @public
      */
     intersectsBounds( bounds ) {
-      assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
+      assert && assert( bounds instanceof Bounds2, 'invalid bounds' );
 
       const minX = ( this.left > bounds.minX ) ? this.left : bounds.minX;
       const minY = ( this.bottom > bounds.minY ) ? this.bottom : bounds.minY;
