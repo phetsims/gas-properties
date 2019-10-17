@@ -15,8 +15,9 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -27,7 +28,7 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {
+      options = merge( {
 
         // location of the container's bottom right corner, in pm
         location: Vector2.ZERO,

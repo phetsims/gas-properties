@@ -12,6 +12,7 @@ define( require => {
   const ComboBoxDisplay = require( 'SCENERY_PHET/ComboBoxDisplay' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Range = require( 'DOT/Range' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
@@ -34,7 +35,7 @@ define( require => {
       assert && assert( thermometer instanceof Thermometer, `invalid thermometer: ${thermometer}` );
       assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
-      options = _.extend( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
+      options = merge( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
 
       const items = [
         {

@@ -18,6 +18,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const IntervalLinesNode = require( 'GAS_PROPERTIES/energy/view/IntervalLinesNode' );
   const LinePlotNode = require( 'GAS_PROPERTIES/energy/view/LinePlotNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -65,7 +66,7 @@ define( require => {
       assert && assert( typeof xAxisString === 'string', `invalid xAxisString: ${xAxisString}` );
       assert && assert( typeof yAxisString === 'string', `invalid yAxisString: ${yAxisString}` );
 
-      options = _.extend( {
+      options = merge( {
         chartSize: new Dimension2( 150, 130 ),   // size of the Rectangle that is the histogram background
         backgroundFill: 'black', // {ColorDef} histogram background color
         borderStroke: GasPropertiesColorProfile.panelStrokeProperty,// {ColorDef}
@@ -110,14 +111,14 @@ define( require => {
       const intervalLines = new IntervalLinesNode( options.chartSize );
 
       // x-axis label
-      const xAxisLabelNode = new Text( xAxisString, _.extend( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
+      const xAxisLabelNode = new Text( xAxisString, merge( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
         maxWidth: 0.9 * background.width,
         centerX: background.centerX,
         top: background.bottom + 5
       } ) );
 
       // y-axis label
-      const yAxisLabelNode = new Text( yAxisString, _.extend( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
+      const yAxisLabelNode = new Text( yAxisString, merge( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
         rotation: -Math.PI / 2,
         maxWidth: 0.9 * background.height,
         right: background.left - 8,
@@ -125,7 +126,7 @@ define( require => {
       } ) );
 
       assert && assert( !options.children, 'HistogramNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ background, intervalLines, plotNodesParent, border, xAxisLabelNode, yAxisLabelNode ]
       }, options );
 

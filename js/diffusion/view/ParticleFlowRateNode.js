@@ -13,8 +13,9 @@ define( require => {
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
 
   // constants
   const X_SPACING = 5; // space between the tails of the left and right arrows
@@ -29,11 +30,11 @@ define( require => {
     constructor( model, options ) {
       assert && assert( model instanceof ParticleFlowRate, `invalid model: ${model}` );
 
-      options = _.extend( {
+      options = merge( {
         arrowNodeOptions: null // nested options, set below
       }, options );
 
-      options.arrowNodeOptions = _.extend( {
+      options.arrowNodeOptions = merge( {
         headHeight: 15,
         headWidth: 15,
         tailWidth: 8,
@@ -52,7 +53,7 @@ define( require => {
       rightArrowNode.x = X_SPACING / 2;
 
       assert && assert( !options.children, 'ParticleFlowRateNode sets options' );
-      options = _.extend( {
+      options = merge( {
         children: [ leftArrowNode, rightArrowNode ]
       }, options );
 

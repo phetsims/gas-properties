@@ -16,6 +16,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const RichText = require( 'SCENERY/nodes/RichText' );
 
   class GasPropertiesCheckbox extends Checkbox {
@@ -27,7 +28,7 @@ define( require => {
     constructor( booleanProperty, options ) {
       assert && assert( booleanProperty instanceof BooleanProperty, `invalid booleanProperty: ${booleanProperty}` );
 
-      options = _.extend( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
+      options = merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
         text: null, // {string|null} optional text label
         icon: null, // {Node|null} optional icon, to the right of text
         textFill: GasPropertiesColorProfile.textFillProperty,

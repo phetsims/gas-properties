@@ -14,6 +14,7 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
@@ -35,7 +36,7 @@ define( require => {
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required
@@ -64,29 +65,29 @@ define( require => {
       };
 
       // @public (read-only) Speed bin counts
-      this.heavySpeedBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+      this.heavySpeedBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
         tandem: options.tandem.createTandem( 'heavySpeedBinCountsProperty' ),
         phetioDocumentation: 'Speed histogram bin counts for heavy particles'
       } ) );
-      this.lightSpeedBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+      this.lightSpeedBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
         tandem: options.tandem.createTandem( 'lightSpeedBinCountsProperty' ),
         phetioDocumentation: 'Speed histogram bin counts for light particles'
       } ) );
-      this.allSpeedBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+      this.allSpeedBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
         tandem: options.tandem.createTandem( 'allSpeedBinCountsProperty' ),
         phetioDocumentation: 'Speed histogram bin counts for all particles'
       } ) );
 
       // @public (read-only) Kinetic Energy bin counts
-      this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+      this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
         tandem: options.tandem.createTandem( 'heavyKineticEnergyBinCountsProperty' ),
         phetioDocumentation: 'Kinetic Energy histogram bin counts for heavy particles'
       } ) );
-      this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+      this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
         tandem: options.tandem.createTandem( 'lightKineticEnergyBinCountsProperty' ),
         phetioDocumentation: 'Kinetic Energy histogram bin counts for light particles'
       } ) );
-      this.allKineticEnergyBinCountsProperty = new Property( emptyBins, _.extend( {}, binCountsPropertyOptions, {
+      this.allKineticEnergyBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
         tandem: options.tandem.createTandem( 'allKineticEnergyBinCountsProperty' ),
         phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
       } ) );

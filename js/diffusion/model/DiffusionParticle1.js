@@ -13,6 +13,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const merge = require( 'PHET_CORE/merge' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
 
   class DiffusionParticle1 extends Particle {
@@ -27,7 +28,7 @@ define( require => {
         assert && assert( options.highlightColorProperty === undefined, 'DiffusionParticle1 sets highlightColorProperty' );
       }
 
-      super( _.extend( {
+      super( merge( {
 
         // superclass options
         colorProperty: GasPropertiesColorProfile.particle1ColorProperty,

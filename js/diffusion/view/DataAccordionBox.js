@@ -17,6 +17,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -40,7 +41,7 @@ define( require => {
         `invalid modelViewTransform: ${modelViewTransform}` );
 
 
-      options = _.extend( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
+      options = merge( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // superclass options
         contentYSpacing: 0,

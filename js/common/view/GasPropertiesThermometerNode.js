@@ -11,6 +11,7 @@ define( require => {
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const TemperatureDisplay = require( 'GAS_PROPERTIES/common/view/TemperatureDisplay' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
@@ -28,7 +29,7 @@ define( require => {
       assert && assert( thermometer instanceof Thermometer, `invalid thermometer: ${thermometer}` );
       assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         spacing: 5,
@@ -62,7 +63,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'GasPropertiesThermometerNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ temperatureDisplay, thermometerNode ]
       }, options );
 

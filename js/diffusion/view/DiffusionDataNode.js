@@ -15,14 +15,15 @@ define( require => {
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const Range = require( 'DOT/Range' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  const tAvgString = require( 'string!GAS_PROPERTIES/tAvg' );
   const tAvgKString = require( 'string!GAS_PROPERTIES/tAvgK' );
+  const tAvgString = require( 'string!GAS_PROPERTIES/tAvg' );
 
   // constants
   const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
@@ -40,7 +41,7 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         spacing: 10,
@@ -76,7 +77,7 @@ define( require => {
       } );
 
       const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
-        _.extend( {}, numberDisplayOptions, {
+        merge( {}, numberDisplayOptions, {
           align: 'left',
           valuePattern: tAvgKString,
           noValuePattern: tAvgString,
@@ -85,7 +86,7 @@ define( require => {
         } ) );
 
       assert && assert( !options.children, 'DiffusionDataNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ particle1CountNode, particle2CountNode, averageTemperatureNode ]
       }, options );
 

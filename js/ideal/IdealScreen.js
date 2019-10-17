@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
   const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
   const IdealScreenView = require( 'GAS_PROPERTIES/ideal/view/IdealScreenView' );
+  const merge = require( 'PHET_CORE/merge' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
@@ -28,7 +29,7 @@ define( require => {
     constructor( tandem, options ) {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         name: screenIdealString,

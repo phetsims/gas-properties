@@ -42,6 +42,7 @@ define( require => {
   const IdealGasLawContainerNode = require( 'GAS_PROPERTIES/common/view/IdealGasLawContainerNode' );
   const IdealGasLawModel = require( 'GAS_PROPERTIES/common/model/IdealGasLawModel' );
   const IdealGasLawParticleSystemNode = require( 'GAS_PROPERTIES/common/view/IdealGasLawParticleSystemNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ParticleType = require( 'GAS_PROPERTIES/common/model/ParticleType' );
   const ParticleTypeRadioButtonGroup = require( 'GAS_PROPERTIES/common/view/ParticleTypeRadioButtonGroup' );
@@ -75,7 +76,7 @@ define( require => {
         `invalid widthVisibleProperty: ${widthVisibleProperty}` );
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = _.extend( {
+      options = merge( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
       }, options );
 
@@ -183,14 +184,14 @@ define( require => {
 
       // Bicycle pump for heavy particles
       const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
-        _.extend( {}, bicyclePumpOptions, {
+        merge( {}, bicyclePumpOptions, {
           bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty,
           tandem: tandem.createTandem( 'heavyBicyclePumpNode' )
         } ) );
 
       // Bicycle pump for light particles
       const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
-        _.extend( {}, bicyclePumpOptions, {
+        merge( {}, bicyclePumpOptions, {
           bodyFill: GasPropertiesColorProfile.lightParticleColorProperty,
           tandem: tandem.createTandem( 'lightBicyclePumpNode' )
         } ) );

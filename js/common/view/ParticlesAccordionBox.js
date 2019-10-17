@@ -17,6 +17,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberOfParticlesControl = require( 'GAS_PROPERTIES/common/view/NumberOfParticlesControl' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -45,7 +46,7 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = _.extend( {
+      options = merge( {
         fixedWidth: 100,
         contentXMargin: 0,
         collisionsEnabledProperty: null // {null|BooleanProperty} no checkbox if null

@@ -13,8 +13,9 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const NumberIO = require( 'TANDEM/types/NumberIO' );
+  const merge = require( 'PHET_CORE/merge' );
   const NullableIO = require( 'TANDEM/types/NullableIO' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
@@ -40,7 +41,7 @@ define( require => {
       assert && assert( Array.isArray( particles1 ), `invalid particles1: ${particles1}` );
       assert && assert( Array.isArray( particles2 ), `invalid particles1: ${particles2}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required,
@@ -51,13 +52,13 @@ define( require => {
       this.bounds = bounds;
 
       // @public number of DiffusionParticle1 in this side of the container
-      this.numberOfParticles1Property = new NumberProperty( 0, _.extend( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
+      this.numberOfParticles1Property = new NumberProperty( 0, merge( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'numberOfParticles1Property' ),
         phetioDocumentation: 'the number of particle of type 1 that are in this side of the container'
       } ) );
 
       // @public number of DiffusionParticle2 in this side of the container
-      this.numberOfParticles2Property = new NumberProperty( 0, _.extend( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
+      this.numberOfParticles2Property = new NumberProperty( 0, merge( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'numberOfParticles2Property' ),
         phetioDocumentation: 'the number of particle of type 2 that are in this side of the container'
       } ) );

@@ -20,6 +20,7 @@ define( require => {
   const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const LidDragListener = require( 'GAS_PROPERTIES/common/view/LidDragListener' );
   const LidNode = require( 'GAS_PROPERTIES/common/view/LidNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -53,7 +54,7 @@ define( require => {
       assert && assert( visibleBoundsProperty instanceof Property,
         `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
-      options = _.extend( {
+      options = merge( {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
         lidGripColor: GasPropertiesColorProfile.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
         resizeHandleIsPressedListener: isPressed => {}, // function(isPressed: boolean)
@@ -96,7 +97,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'IdealGasLawContainerNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ]
       }, options );
 

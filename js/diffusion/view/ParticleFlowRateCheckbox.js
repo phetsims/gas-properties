@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
+  const merge = require( 'PHET_CORE/merge' );
 
   // strings
   const particleFlowRateString = require( 'string!GAS_PROPERTIES/particleFlowRate' );
@@ -27,7 +28,7 @@ define( require => {
       assert && assert( particleFlowRateVisibleProperty instanceof BooleanProperty,
         `invalid particleFlowRateVisibleProperty: ${particleFlowRateVisibleProperty}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         textIconSpacing: 12
@@ -35,7 +36,7 @@ define( require => {
 
       assert && assert( !options.text, 'ParticleFlowRateCheckbox sets text' );
       assert && assert( !options.icon, 'ParticleFlowRateCheckbox sets icon' );
-      options = _.extend( {
+      options = merge( {
         text: particleFlowRateString,
         icon: GasPropertiesIconFactory.createParticleFlowRateIcon()
       }, options );

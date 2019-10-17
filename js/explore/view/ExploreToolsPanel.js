@@ -14,6 +14,7 @@ define( require => {
   const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const StopwatchCheckbox = require( 'GAS_PROPERTIES/common/view/StopwatchCheckbox' );
   const Tandem = require( 'TANDEM/Tandem' );
@@ -36,7 +37,7 @@ define( require => {
       assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty,
         `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
 
-      options = _.extend( {
+      options = merge( {
         fixedWidth: 100,
         xMargin: 0,
 
@@ -54,13 +55,13 @@ define( require => {
         align: 'left',
         spacing: 12,
         children: [
-          new WidthCheckbox( widthVisibleProperty, _.extend( {}, checkboxOptions, {
+          new WidthCheckbox( widthVisibleProperty, merge( {}, checkboxOptions, {
             tandem: options.tandem.createTandem( 'widthCheckbox' )
           } ) ),
-          new StopwatchCheckbox( stopwatchVisibleProperty, _.extend( {}, checkboxOptions, {
+          new StopwatchCheckbox( stopwatchVisibleProperty, merge( {}, checkboxOptions, {
             tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
           } ) ),
-          new CollisionCounterCheckbox( collisionCounterVisibleProperty, _.extend( {}, checkboxOptions, {
+          new CollisionCounterCheckbox( collisionCounterVisibleProperty, merge( {}, checkboxOptions, {
             tandem: options.tandem.createTandem( 'collisionCounterCheckbox' )
           } ) )
         ]

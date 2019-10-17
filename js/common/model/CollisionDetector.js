@@ -30,6 +30,7 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
+  const merge = require( 'PHET_CORE/merge' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const Region = require( 'GAS_PROPERTIES/common/model/Region' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -54,7 +55,7 @@ define( require => {
       assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0,
         `invalid particleArrays: ${particleArrays}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // {number|null} Regions are square, length of one side, pm. If null, default will be set below.
         regionLength: null

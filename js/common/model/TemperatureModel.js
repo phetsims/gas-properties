@@ -13,9 +13,10 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
+  const merge = require( 'PHET_CORE/merge' );
+  const NullableIO = require( 'TANDEM/types/NullableIO' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const NullableIO = require( 'TANDEM/types/NullableIO' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -40,7 +41,7 @@ define( require => {
       assert && assert( typeof getAverageKineticEnergy === 'function',
         `invalid getAverageKineticEnergy: ${getAverageKineticEnergy}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required

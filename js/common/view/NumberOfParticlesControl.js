@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -37,7 +38,7 @@ define( require => {
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( typeof title === 'string', `invalid title: ${title}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         align: 'left',
@@ -73,7 +74,7 @@ define( require => {
       titleNode.maxWidth = spinner.width - icon.width - X_SPACING;
 
       assert && assert( !options.children, 'NumberOfParticlesControl sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ titleBox, spinner ]
       }, options );
 

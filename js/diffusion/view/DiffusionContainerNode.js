@@ -15,6 +15,7 @@ define( require => {
   const DividerNode = require( 'GAS_PROPERTIES/diffusion/view/DividerNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -52,7 +53,7 @@ define( require => {
       } );
 
       assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ dividerNode, borderNode ]
       }, options );
 

@@ -14,6 +14,7 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PressureDisplay = require( 'GAS_PROPERTIES/common/view/PressureDisplay' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
@@ -58,7 +59,7 @@ define( require => {
       } );
 
       assert && assert( !options || !options.children, 'PressureGaugeNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ postNode, dialNode, pressureDisplay ]
       }, options );
 

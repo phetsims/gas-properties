@@ -15,10 +15,11 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HeavyParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/HeavyParticlesCheckbox' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const HeavyParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/HeavyParticlesCheckbox' );
   const HistogramNode = require( 'GAS_PROPERTIES/energy/view/HistogramNode' );
   const LightParticlesCheckbox = require( 'GAS_PROPERTIES/energy/view/LightParticlesCheckbox' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -37,7 +38,7 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( histogramNode instanceof HistogramNode, `invalid model: ${histogramNode}` );
 
-      options = _.extend( {
+      options = merge( {
         fixedWidth: 100,
         contentXMargin: 0
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {

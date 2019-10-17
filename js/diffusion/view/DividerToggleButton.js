@@ -10,10 +10,11 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
+  const merge = require( 'PHET_CORE/merge' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -30,7 +31,7 @@ define( require => {
       assert && assert( hasDividerProperty instanceof BooleanProperty,
         `invalid hasDividerProperty: ${hasDividerProperty}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         baseColor: GasPropertiesColorProfile.dividerColorProperty

@@ -12,8 +12,9 @@ define( require => {
   const EnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/EnergyAccordionBox' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const KineticEnergyHistogramNode = require( 'GAS_PROPERTIES/energy/view/KineticEnergyHistogramNode' );
+  const merge = require( 'PHET_CORE/merge' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
@@ -30,7 +31,7 @@ define( require => {
       assert && assert( histogramsModel instanceof HistogramsModel, `invalid model: ${histogramsModel}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required

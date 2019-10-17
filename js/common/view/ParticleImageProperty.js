@@ -12,9 +12,10 @@ define( require => {
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
   const Property = require( 'AXON/Property' );
 
   class ParticleImageProperty extends DerivedProperty {
@@ -31,7 +32,7 @@ define( require => {
         `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         valueType: [ HTMLCanvasElement, null ]

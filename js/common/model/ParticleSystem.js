@@ -20,6 +20,7 @@ define( require => {
   const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
   const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
@@ -47,7 +48,7 @@ define( require => {
       assert && assert( particleEntryLocation instanceof Vector2,
         `invalid particleEntryLocation: ${particleEntryLocation}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required

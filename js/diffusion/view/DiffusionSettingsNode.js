@@ -20,6 +20,7 @@ define( require => {
   const GasPropertiesSpinner = require( 'GAS_PROPERTIES/diffusion/view/GasPropertiesSpinner' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Tandem = require( 'TANDEM/Tandem' );
@@ -50,7 +51,7 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( enabledProperty instanceof BooleanProperty, `invalid enabledProperty: ${enabledProperty}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         spacing: 20,
@@ -111,7 +112,7 @@ define( require => {
         } );
 
       assert && assert( !options.children, 'DiffusionSettingsNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [
           numberOfParticlesControl,
           massControl,
@@ -146,7 +147,7 @@ define( require => {
       assert && assert( rightProperty instanceof NumberProperty, `invalid rightProperty: ${rightProperty}` );
       assert && assert( spinnersAlignGroup instanceof AlignGroup, `invalid spinnersAlignGroup: ${spinnersAlignGroup}` );
 
-      options = _.extend( {
+      options = merge( {
         spinnerOptions: null, // {*} see NumberSpinner
 
         // VBox options
@@ -196,7 +197,7 @@ define( require => {
 
       // title and controls
       assert && assert( !options.children, 'DataNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ titleNode, hBox ]
       }, options );
 

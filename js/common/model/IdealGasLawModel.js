@@ -27,6 +27,7 @@ define( require => {
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
@@ -47,7 +48,7 @@ define( require => {
     constructor( tandem, options ) {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = _.extend( {
+      options = merge( {
 
         leftWallDoesWork: false, // {boolean} does the container's left wall do work on particles?
 

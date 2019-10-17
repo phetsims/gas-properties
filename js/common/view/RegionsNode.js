@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const RegionNode = require( 'GAS_PROPERTIES/common/view/RegionNode' );
@@ -28,7 +29,7 @@ define( require => {
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         pickable: false
@@ -42,7 +43,7 @@ define( require => {
       }
 
       assert && assert( !options.children, 'RegionsNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: regionNodes
       }, options );
 

@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   class DividerNode extends Node {
@@ -25,7 +26,7 @@ define( require => {
       assert && assert( hasDividerProperty instanceof BooleanProperty,
         `invalid hasDividerProperty: ${hasDividerProperty}` );
 
-      options = _.extend( {
+      options = merge( {
         length: 100,
         solidLineWidth: 1,
         dashedLineWidth: 1
@@ -47,7 +48,7 @@ define( require => {
       } );
 
       assert && assert( !options || !options.children, 'DividerNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ dashedLineNode, solidLineNode ]
       }, options );
 

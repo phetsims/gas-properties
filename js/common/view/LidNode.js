@@ -15,6 +15,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HandleNode = require( 'SCENERY_PHET/HandleNode' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -32,7 +33,7 @@ define( require => {
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
         `invalid holdConstantProperty: ${holdConstantProperty}` );
 
-      options = _.extend( {
+      options = merge( {
         baseWidth: 1,
         baseHeight: 1,
         gripColor: GasPropertiesColorProfile.lidGripColorProperty // {ColorDef}
@@ -58,7 +59,7 @@ define( require => {
       handleNode.touchArea = handleNode.localBounds.dilatedXY( 25, 20 );
 
       assert && assert( !options.children, 'LidNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ handleNode, baseNode ]
       }, options );
 

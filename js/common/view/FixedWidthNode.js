@@ -15,6 +15,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   // constants
@@ -31,7 +32,7 @@ define( require => {
       assert && assert( typeof fixedWidth === 'number' && fixedWidth > 0, `invalid fixedWidth: ${fixedWidth}` );
       assert && assert( content instanceof Node, `invalid content: ${content}` );
 
-      options = _.extend( {
+      options = merge( {
         align: 'left' // horizontal alignment of content in fixedWidth, see ALIGN_VALUES
       }, options );
 
@@ -42,7 +43,7 @@ define( require => {
 
       assert && assert( options.maxWidth === undefined, 'FixedWidthNode sets maxWidth' );
       assert && assert( !options.children, 'FixedWidthNode sets children' );
-      options = _.extend( {
+      options = merge( {
         maxWidth: fixedWidth, // prevents the content from getting wider than fixedWidth
         children: [ strut, content ]
       }, options );

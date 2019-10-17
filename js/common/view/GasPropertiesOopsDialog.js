@@ -11,6 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Image = require( 'SCENERY/nodes/Image' );
+  const merge = require( 'PHET_CORE/merge' );
   const OopsDialog = require( 'SCENERY_PHET/OopsDialog' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
@@ -25,7 +26,7 @@ define( require => {
      */
     constructor( message, options ) {
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         iconNode: new Image( phetGirlLabCoatImage, {

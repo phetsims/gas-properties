@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -36,7 +37,7 @@ define( require => {
       assert && assert( typeof dividerX === 'number', `invalid dividerX: ${dividerX}` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required,
@@ -48,13 +49,13 @@ define( require => {
       this.particles = particles;
 
       // @public flow rate to left side of container, in particles/ps
-      this.leftFlowRateProperty = new NumberProperty( 0, _.extend( {}, FLOW_RATE_PROPERTY_OPTIONS, {
+      this.leftFlowRateProperty = new NumberProperty( 0, merge( {}, FLOW_RATE_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'leftFlowRateProperty' ),
         phetioDocumentation: 'flow rate of particles to the left side of the container'
       } ) );
 
       // @public flow rate to right side of container, in particles/ps
-      this.rightFlowRateProperty = new NumberProperty( 0, _.extend( {}, FLOW_RATE_PROPERTY_OPTIONS, {
+      this.rightFlowRateProperty = new NumberProperty( 0, merge( {}, FLOW_RATE_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'rightFlowRateProperty' ),
         phetioDocumentation: 'flow rate of particles to the right side of the container'
       } ) );

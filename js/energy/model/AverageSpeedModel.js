@@ -12,6 +12,7 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
   const NullableIO = require( 'TANDEM/types/NullableIO' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
@@ -41,7 +42,7 @@ define( require => {
       assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
         `invalid samplePeriod: ${samplePeriod}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required
@@ -54,11 +55,11 @@ define( require => {
 
       // @public (read-only) {Property.<number|null>}
       // average speed of particle species in the container, in pm/ps, null when the container is empty
-      this.heavyAverageSpeedProperty = new Property( null, _.extend( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+      this.heavyAverageSpeedProperty = new Property( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'heavyAverageSpeedProperty' ),
         phetioDocumentation: 'average speed of heavy particles in the container'
       } ) );
-      this.lightAverageSpeedProperty = new Property( null, _.extend( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+      this.lightAverageSpeedProperty = new Property( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'lightAverageSpeedProperty' ),
         phetioDocumentation: 'average speed of light particles in the container'
       } ) );

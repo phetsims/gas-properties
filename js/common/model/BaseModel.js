@@ -17,11 +17,12 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const TimeTransform = require( 'GAS_PROPERTIES/common/model/TimeTransform' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Property = require( 'AXON/Property' );
-  const Tandem = require( 'TANDEM/Tandem' );
   const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
+  const Tandem = require( 'TANDEM/Tandem' );
+  const TimeTransform = require( 'GAS_PROPERTIES/common/model/TimeTransform' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -40,7 +41,7 @@ define( require => {
     constructor( tandem, options ) {
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
         // Determined empirically, and dependent on the ScreenView's layoutBounds.

@@ -16,8 +16,9 @@ define( require => {
   const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const Node = require( 'SCENERY/nodes/Node' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -77,7 +78,7 @@ define( require => {
       } );
 
       assert && assert( !options || !options.children, 'ContainerWidthNode sets children' );
-      options = _.extend( {}, options, {
+      options = merge( {}, options, {
         children: [ dimensionalArrowNode, widthDisplay ]
       } );
 

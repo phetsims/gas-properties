@@ -19,6 +19,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
@@ -60,7 +61,7 @@ define( require => {
 
       assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );
 
-      options = _.extend( {
+      options = merge( {
         fixedWidth: 100,
         contentXMargin: 0,
 

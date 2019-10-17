@@ -21,6 +21,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
+  const merge = require( 'PHET_CORE/merge' );
   const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ScaleNode = require( 'GAS_PROPERTIES/diffusion/view/ScaleNode' );
@@ -38,7 +39,7 @@ define( require => {
       assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         hasSlowMotion: true // adds Normal/Slow radio buttons to the time controls

@@ -11,6 +11,7 @@ define( require => {
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
+  const merge = require( 'PHET_CORE/merge' );
   const Screen = require( 'JOIST/Screen' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -27,7 +28,7 @@ define( require => {
       assert && assert( typeof createView === 'function', `invalid createView: ${createView}` );
       assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,

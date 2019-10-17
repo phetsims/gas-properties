@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
   const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
+  const merge = require( 'PHET_CORE/merge' );
 
   // strings
   const stopwatchString = require( 'string!GAS_PROPERTIES/stopwatch' );
@@ -32,7 +33,7 @@ define( require => {
         assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
       }
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         text: stopwatchString,

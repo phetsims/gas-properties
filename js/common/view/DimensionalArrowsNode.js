@@ -19,6 +19,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const Line = require( 'SCENERY/nodes/Line' );
   const Matrix3 = require( 'DOT/Matrix3' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Property = require( 'AXON/Property' );
@@ -37,7 +38,7 @@ define( require => {
     constructor( lengthProperty, options ) {
       assert && assert( lengthProperty instanceof Property, `invalid lengthProperty: ${lengthProperty}` );
 
-      options = _.extend( {
+      options = merge( {
         color: 'black',
         horizontalLineWidth: 2,
         horizontalLineDash: [ 5, 5 ],
@@ -86,7 +87,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'DimensionalArrowsNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ]
       }, options );
 

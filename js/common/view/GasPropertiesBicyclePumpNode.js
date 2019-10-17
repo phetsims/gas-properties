@@ -11,8 +11,9 @@ define( require => {
 
   // modules
   const BicyclePumpNode = require( 'SCENERY_PHET/BicyclePumpNode' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
 
   class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
@@ -27,7 +28,7 @@ define( require => {
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
       assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         height: 230,

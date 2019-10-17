@@ -15,8 +15,9 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const NumberIO = require( 'TANDEM/types/NumberIO' );
+  const merge = require( 'PHET_CORE/merge' );
   const NullableIO = require( 'TANDEM/types/NullableIO' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Tandem = require( 'TANDEM/Tandem' );
@@ -34,7 +35,7 @@ define( require => {
       assert && assert( temperatureKelvinProperty instanceof Property,
         `invalid temperatureKelvinProperty: ${temperatureKelvinProperty}` );
 
-      options = _.extend( {
+      options = merge( {
         range: DEFAULT_RANGE,
 
         // phet-io

@@ -9,9 +9,10 @@ define( require => {
   'use strict';
 
   // modules
+  const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
+  const merge = require( 'PHET_CORE/merge' );
   const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
 
   class EraseParticlesButton extends EraserButton {
@@ -23,7 +24,7 @@ define( require => {
     constructor( particleSystem, options ) {
       assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         baseColor: GasPropertiesColorProfile.eraserButtonColorProperty

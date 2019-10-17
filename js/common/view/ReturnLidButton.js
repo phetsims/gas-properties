@@ -12,6 +12,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
+  const merge = require( 'PHET_CORE/merge' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -28,7 +29,7 @@ define( require => {
     constructor( container, options ) {
       assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         baseColor: PhetColorScheme.BUTTON_YELLOW
@@ -45,7 +46,7 @@ define( require => {
 
       assert && assert( !options.content, 'ReturnLidButton sets content' );
       assert && assert( !options.listener, 'ReturnLidButton sets listener' );
-      options = _.extend( {
+      options = merge( {
         content: textNode,
         listener: buttonListener
       }, options );

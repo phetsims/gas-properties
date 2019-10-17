@@ -21,6 +21,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -66,7 +67,7 @@ define( require => {
       assert && assert( visibleBoundsProperty instanceof Property,
         `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
-      options = _.extend( {
+      options = merge( {
         cursor: 'pointer'
       }, options );
 
@@ -158,7 +159,7 @@ define( require => {
       content.center = backgroundNode.center;
 
       assert && assert( !options.children, 'CollisionCounterNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ backgroundNode, content ]
       }, options );
 

@@ -20,6 +20,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HSeparator = require( 'SUN/HSeparator' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const ParticleFlowRateCheckbox = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateCheckbox' );
   const Property = require( 'AXON/Property' );
@@ -55,7 +56,7 @@ define( require => {
       assert && assert( viewProperties instanceof DiffusionViewProperties,
         `invalid viewProperties: ${viewProperties}` );
 
-      options = _.extend( {
+      options = merge( {
         fixedWidth: 100,
         xMargin: 0,
 
@@ -99,16 +100,16 @@ define( require => {
             align: 'left',
             spacing: 12,
             children: [
-              new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, _.extend( {}, checkboxOptions, {
+              new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, merge( {}, checkboxOptions, {
                 tandem: options.tandem.createTandem( 'centerOfMassCheckbox' )
               } ) ),
-              new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, _.extend( {}, checkboxOptions, {
+              new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, merge( {}, checkboxOptions, {
                 tandem: options.tandem.createTandem( 'particleFlowRateCheckbox' )
               } ) ),
-              new ScaleCheckbox( viewProperties.scaleVisibleProperty, _.extend( {}, checkboxOptions, {
+              new ScaleCheckbox( viewProperties.scaleVisibleProperty, merge( {}, checkboxOptions, {
                 tandem: options.tandem.createTandem( 'scaleCheckbox' )
               } ) ),
-              new StopwatchCheckbox( stopwatchVisibleProperty, _.extend( {}, checkboxOptions, {
+              new StopwatchCheckbox( stopwatchVisibleProperty, merge( {}, checkboxOptions, {
                 tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
               } ) )
             ]

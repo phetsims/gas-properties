@@ -15,8 +15,9 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
-  const Property = require( 'AXON/Property' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -56,7 +57,7 @@ define( require => {
       assert && assert( isContainerOpenProperty instanceof Property,
               `invalid isContainerOpenProperty: ${isContainerOpenProperty}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         align: 'left',
@@ -110,7 +111,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'HoldConstantControl sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ titleNode, radioButtonGroup ]
       }, options );
 

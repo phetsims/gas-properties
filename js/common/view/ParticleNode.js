@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
@@ -28,7 +29,7 @@ define( require => {
         `invalid modelViewTransform: ${modelViewTransform}` );
 
       assert && assert( !options || !options.mainColor, 'ParticleNode sets mainColor' );
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         mainColor: particle.colorProperty,

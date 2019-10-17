@@ -24,6 +24,7 @@ define( require => {
   const HeaterCoolerNode = require( 'SCENERY_PHET/HeaterCoolerNode' );
   const HoldConstant = require( 'GAS_PROPERTIES/common/model/HoldConstant' );
   const LinearFunction = require( 'DOT/LinearFunction' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
@@ -75,7 +76,7 @@ define( require => {
       assert && assert( temperatureProperty instanceof Property,
         `invalid temperatureProperty: ${temperatureProperty}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         scale: 0.8

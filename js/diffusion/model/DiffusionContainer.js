@@ -14,6 +14,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -27,7 +28,7 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {
+      options = merge( {
 
         // phet-io
         tandem: Tandem.required

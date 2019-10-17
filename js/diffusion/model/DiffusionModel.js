@@ -22,9 +22,10 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
   const GasPropertiesUtils = require( 'GAS_PROPERTIES/common/GasPropertiesUtils' );
-  const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
+  const merge = require( 'PHET_CORE/merge' );
   const NullableIO = require( 'TANDEM/types/NullableIO' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
+  const ParticleFlowRate = require( 'GAS_PROPERTIES/diffusion/model/ParticleFlowRate' );
   const ParticleUtils = require( 'GAS_PROPERTIES/common/model/ParticleUtils' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
@@ -125,11 +126,11 @@ define( require => {
 
       // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
       // null when there are no particles in the container.
-      this.centerOfMass1Property = new Property( null, _.extend( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+      this.centerOfMass1Property = new Property( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass1Property' ),
         phetioDocumentation: 'center of mass for particles of type 1'
       } ) );
-      this.centerOfMass2Property = new Property( null, _.extend( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+      this.centerOfMass2Property = new Property( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass2Property' ),
         phetioDocumentation: 'center of mass for particles of type 2'
       } ) );

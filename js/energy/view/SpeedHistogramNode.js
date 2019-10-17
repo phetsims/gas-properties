@@ -13,6 +13,7 @@ define( require => {
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
   const HistogramNode = require( 'GAS_PROPERTIES/energy/view/HistogramNode' );
   const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
+  const merge = require( 'PHET_CORE/merge' );
 
   // strings
   const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
@@ -27,7 +28,7 @@ define( require => {
     constructor( histogramsModel, options ) {
       assert && assert( histogramsModel instanceof HistogramsModel, `invalid histogramModel: ${histogramsModel}` );
 
-      options = _.extend( {
+      options = merge( {
 
         // superclass options
         barColor: GasPropertiesColorProfile.speedHistogramBarColorProperty

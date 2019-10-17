@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -50,7 +51,7 @@ define( require => {
       } );
 
       assert && assert( !options || !options.children, 'RegionNode sets children' );
-      options = _.extend( {
+      options = merge( {
         children: [ cellNode, countNode ]
       }, options );
 
