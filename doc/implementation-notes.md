@@ -9,7 +9,7 @@ Before reading this document, you must read:
 * [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md), a high-level description of the simulation model
 
 In addition to this document, you are encouraged to read: 
-* [PhET Development Overview](http://bit.ly/phet-html5-development-overview)  
+* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/master/doc/phet-development-overview.md)  
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
 * [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the design document
 
