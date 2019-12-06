@@ -77,7 +77,7 @@ define( require => {
   }
 
   // @public Choice of temperature units that the thermometer can display
-  Thermometer.Units = new Enumeration( [ 'KELVIN', 'CELSIUS' ] );
+  Thermometer.Units = Enumeration.byKeys( [ 'KELVIN', 'CELSIUS' ] );
 
   return gasProperties.register( 'Thermometer', Thermometer );
 } );

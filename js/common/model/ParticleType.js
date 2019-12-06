@@ -12,7 +12,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  const ParticleType = new Enumeration( [ 'HEAVY', 'LIGHT' ] );
+  const ParticleType = Enumeration.byKeys( [ 'HEAVY', 'LIGHT' ] );
 
   return gasProperties.register( 'ParticleType', ParticleType );
 } );

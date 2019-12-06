@@ -21,7 +21,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
 
-  const HoldConstant = new Enumeration( [
+  const HoldConstant = Enumeration.byKeys( [
     'NOTHING',     // change N, T, or V => change P
     'VOLUME',      // change N or T => change P
     'TEMPERATURE', // change N or V => change P

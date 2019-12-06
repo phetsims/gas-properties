@@ -163,7 +163,7 @@ define( require => {
   PressureGauge.REFRESH_PERIOD = 0.75;
 
   // @public Choice of pressure units that the gauge can display
-  PressureGauge.Units = new Enumeration( [ 'KILOPASCALS', 'ATMOSPHERES' ] );
+  PressureGauge.Units = Enumeration.byKeys( [ 'KILOPASCALS', 'ATMOSPHERES' ] );
 
   return gasProperties.register( 'PressureGauge', PressureGauge );
 } );
