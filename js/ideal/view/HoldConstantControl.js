@@ -64,7 +64,7 @@ define( require => {
         spacing: SPACING,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       const titleNode = new Text( holdConstantString, {

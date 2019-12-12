@@ -66,7 +66,7 @@ define( require => {
         contentXMargin: 0,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // superclass options

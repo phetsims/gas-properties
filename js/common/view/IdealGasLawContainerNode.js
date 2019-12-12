@@ -58,7 +58,7 @@ define( require => {
         resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
         lidGripColor: GasPropertiesColorProfile.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
         resizeHandleIsPressedListener: isPressed => {}, // function(isPressed: boolean)
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // Constant aspects of the container, in view coordinates

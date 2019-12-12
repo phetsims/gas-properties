@@ -75,7 +75,7 @@ define( require => {
         minorTickStroke: 'black',
         left: containerNode.right + 15,
         top: containerNode.top,
-        tandem: Tandem.optOut
+        tandem: Tandem.OPT_OUT
       } );
 
       // Post that connects the gauge to the container

@@ -58,7 +58,7 @@ define( require => {
         align: 'left',
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // To make all spinners have the same bounds width
@@ -155,7 +155,7 @@ define( require => {
         align: 'left',
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // title

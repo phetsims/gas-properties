@@ -39,7 +39,7 @@ define( require => {
         leftWallDoesWork: false,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       super( options );

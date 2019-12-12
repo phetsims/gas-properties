@@ -39,7 +39,7 @@ define( require => {
         range: DEFAULT_RANGE,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // @public {Range} range of thermometer display, in K. temperatureProperty is expected to exceed this.

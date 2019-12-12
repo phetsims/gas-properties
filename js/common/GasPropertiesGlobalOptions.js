@@ -15,7 +15,7 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
-  const optionsTandem = Tandem.globalTandem.createTandem( 'options' );
+  const optionsTandem = Tandem.GLOBAL.createTandem( 'options' );
 
   const GasPropertiesGlobalOptions = {
 

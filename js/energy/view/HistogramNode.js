@@ -75,7 +75,7 @@ define( require => {
         barColor: 'white', // {ColorDef}
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
 
       }, options );
 

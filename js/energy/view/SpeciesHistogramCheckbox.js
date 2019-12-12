@@ -38,7 +38,7 @@ define( require => {
         spacing: 5,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       assert && assert( !options.icon, 'SpeciesHistogramCheckbox sets icon' );

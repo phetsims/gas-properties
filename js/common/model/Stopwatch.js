@@ -29,7 +29,7 @@ define( require => {
         visible: false,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // @public location of the stopwatch, in view coordinates

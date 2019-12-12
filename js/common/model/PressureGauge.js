@@ -57,7 +57,7 @@ define( require => {
       options = merge( {
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // @public pressure in kPa with noise added. This is not derived from pressureProperty,

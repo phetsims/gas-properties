@@ -35,10 +35,10 @@ define( require => {
 
   SimLauncher.launch( () => {
     const screens = [
-      new IdealScreen( Tandem.rootTandem.createTandem( 'idealScreen' ) ),
-      new ExploreScreen( Tandem.rootTandem.createTandem( 'exploreScreen' ) ),
-      new EnergyScreen( Tandem.rootTandem.createTandem( 'energyScreen' ) ),
-      new DiffusionScreen( Tandem.rootTandem.createTandem( 'diffusionScreen' ) )
+      new IdealScreen( Tandem.ROOT.createTandem( 'idealScreen' ) ),
+      new ExploreScreen( Tandem.ROOT.createTandem( 'exploreScreen' ) ),
+      new EnergyScreen( Tandem.ROOT.createTandem( 'energyScreen' ) ),
+      new DiffusionScreen( Tandem.ROOT.createTandem( 'diffusionScreen' ) )
     ];
     const sim = new Sim( gasPropertiesTitleString, screens, simOptions );
     sim.start();
