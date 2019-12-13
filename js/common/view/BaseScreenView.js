@@ -54,7 +54,7 @@ define( require => {
           font: GasPropertiesConstants.CONTROL_FONT,
           fill: GasPropertiesColorProfile.textFillProperty
         },
-        stepOptions: {
+        stepForwardOptions: {
 
           // when the Step button is pressed
           listener: () => {
