@@ -282,7 +282,7 @@ define( require => {
       assert && assert( _.every( temperatures, temperature => temperature > 0 ),
         'invalid temperature: ' +
         _.find( temperatures, temperature => temperature <= 0 ) +
-        `n=${n}, meanTemperature=${meanTemperature}, collisionsEnabled=${this.collisionsEnabledProperty.value}` );
+        `, n=${n}, meanTemperature=${meanTemperature}, collisionsEnabled=${this.collisionsEnabledProperty.value}` );
 
       // Create n particles
       for ( let i = 0; i < n; i++ ) {
