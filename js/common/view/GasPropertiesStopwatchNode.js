@@ -15,7 +15,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const Text = require( 'SCENERY/nodes/Text' );
   const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
-  const TimerReadoutNode = require( 'SCENERY_PHET/TimerReadoutNode' );
+  const StopwatchReadoutNode = require( 'SCENERY_PHET/StopwatchReadoutNode' );
 
   // strings
   const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
@@ -33,9 +33,9 @@ define( require => {
         // Customizations for Gas Properties
         backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
         maxValue: 999.99,
-        timerReadoutNodeOptions: {
+        stopwatchReadoutNodeOptions: {
           unitsNode: new Text( picosecondsString, {
-            font: TimerReadoutNode.DEFAULT_SMALL_FONT,
+            font: StopwatchReadoutNode.DEFAULT_SMALL_FONT,
             maxWidth: 30 // determined empirically
           } )
         }
