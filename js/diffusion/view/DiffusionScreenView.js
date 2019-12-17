@@ -25,7 +25,7 @@ define( require => {
   const ParticleFlowRateNode = require( 'GAS_PROPERTIES/diffusion/view/ParticleFlowRateNode' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ScaleNode = require( 'GAS_PROPERTIES/diffusion/view/ScaleNode' );
-  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
+  const GasPropertiesStopwatchNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesStopwatchNode' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   class DiffusionScreenView extends BaseScreenView {
@@ -110,7 +110,7 @@ define( require => {
         model.modelViewTransform,
         model.container.hasDividerProperty,
         model.numberOfParticlesProperty,
-        model.stopwatch.visibleProperty,
+        model.stopwatch.isVisibleProperty,
         viewProperties, {
           fixedWidth: 300,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
@@ -129,7 +129,9 @@ define( require => {
       } );
 
       // Stopwatch
-      const stopwatchNode = new StopwatchNode( model.stopwatch, this.visibleBoundsProperty );
+      const stopwatchNode = new GasPropertiesStopwatchNode( model.stopwatch, {
+        visibleBoundsProperty: this.visibleBoundsProperty
+      } );
 
       // Rendering order
       regionsNode && this.addChild( regionsNode );

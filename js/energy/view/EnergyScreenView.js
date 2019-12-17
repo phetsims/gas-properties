@@ -81,7 +81,7 @@ define( require => {
       // Tools panel
       const toolsPanel = new EnergyToolsPanel(
         viewProperties.widthVisibleProperty,
-        model.stopwatch.visibleProperty, {
+        model.stopwatch.isVisibleProperty, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           tandem: tandem.createTandem( 'toolsPanel' )
         } );

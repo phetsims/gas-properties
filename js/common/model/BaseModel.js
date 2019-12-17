@@ -20,7 +20,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Property = require( 'AXON/Property' );
-  const Stopwatch = require( 'GAS_PROPERTIES/common/model/Stopwatch' );
+  const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Tandem = require( 'TANDEM/Tandem' );
   const TimeTransform = require( 'GAS_PROPERTIES/common/model/TimeTransform' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -85,6 +85,9 @@ define( require => {
       // @public (read-only)
       this.stopwatch = new Stopwatch( {
         location: options.stopwatchLocation,
+        timePropertyOptions: {
+          units: 'ps'
+        },
         tandem: tandem.createTandem( 'stopwatch' )
       } );
     }

@@ -51,7 +51,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const RegionsNode = require( 'GAS_PROPERTIES/common/view/RegionsNode' );
   const ReturnLidButton = require( 'GAS_PROPERTIES/common/view/ReturnLidButton' );
-  const StopwatchNode = require( 'GAS_PROPERTIES/common/view/StopwatchNode' );
+  const GasPropertiesStopwatchNode = require( 'GAS_PROPERTIES/common/view/GasPropertiesStopwatchNode' );
   const Tandem = require( 'TANDEM/Tandem' );
   const ToggleNode = require( 'SUN/ToggleNode' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -266,7 +266,9 @@ define( require => {
       }
 
       // Stopwatch
-      toolsParent.addChild( new StopwatchNode( model.stopwatch, this.visibleBoundsProperty ) );
+      toolsParent.addChild( new GasPropertiesStopwatchNode( model.stopwatch, {
+        visibleBoundsProperty: this.visibleBoundsProperty
+      } ) );
 
       // Show how the collision detection space is partitioned into regions
       let regionsNode = null;

@@ -37,7 +37,7 @@ define( require => {
       // Panel at upper right
       const toolsPanel = new ExploreToolsPanel(
         viewProperties.widthVisibleProperty,
-        model.stopwatch.visibleProperty,
+        model.stopwatch.isVisibleProperty,
         model.collisionCounter.visibleProperty, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
           right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,

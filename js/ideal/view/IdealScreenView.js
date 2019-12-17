@@ -58,7 +58,7 @@ define( require => {
         model.pressureModel.pressureProperty,
         model.container.isOpenProperty,
         viewProperties.widthVisibleProperty,
-        model.stopwatch.visibleProperty,
+        model.stopwatch.isVisibleProperty,
         model.collisionCounter.visibleProperty, {
           hasHoldConstantControls: options.hasHoldConstantControls,
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
