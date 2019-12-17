@@ -23,6 +23,7 @@ define( require => {
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Tandem = require( 'TANDEM/Tandem' );
   const TimeTransform = require( 'GAS_PROPERTIES/common/model/TimeTransform' );
+  const units = require( 'AXON/units' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -86,7 +87,7 @@ define( require => {
       this.stopwatch = new Stopwatch( {
         location: options.stopwatchLocation,
         timePropertyOptions: {
-          units: 'ps'
+          units: units.ps
         },
         tandem: tandem.createTandem( 'stopwatch' )
       } );

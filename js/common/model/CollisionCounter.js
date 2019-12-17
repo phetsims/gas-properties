@@ -15,6 +15,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Tandem = require( 'TANDEM/Tandem' );
+  const units = require( 'AXON/units' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
 
@@ -72,7 +73,7 @@ define( require => {
       this.samplePeriodProperty = new NumberProperty( this.samplePeriods[ 1 ], {
         numberType: 'Integer',
         validValues: this.samplePeriods,
-        units: 'ps',
+        units: units.ps,
         tandem: options.tandem.createTandem( 'samplePeriodProperty' ),
         phetioStudioControl: false
       } );
