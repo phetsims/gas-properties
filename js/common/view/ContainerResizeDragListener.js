@@ -10,11 +10,11 @@ define( require => {
 
   // modules
   const DragListener = require( 'SCENERY/listeners/DragListener' );
-  const Event = require( 'SCENERY/input/Event' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const SceneryEvent = require( 'SCENERY/input/SceneryEvent' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   class ContainerResizeDragListener extends DragListener {
@@ -38,7 +38,7 @@ define( require => {
       super( {
 
         start: ( event, listener ) => {
-          assert && assert( event instanceof Event, `invalid event: ${event}` );
+          assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
           container.userIsAdjustingWidthProperty.value = true;
 
@@ -47,7 +47,7 @@ define( require => {
         },
 
         drag: ( event, listener ) => {
-          assert && assert( event instanceof Event, `invalid event: ${event}` );
+          assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
           const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
           const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
