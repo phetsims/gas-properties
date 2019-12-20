@@ -48,7 +48,7 @@ define( require => {
         modelOriginOffset: new Vector2( 645, 475 ),
 
         // Stopwatch initial location (in view coordinates!), determined empirically.
-        stopwatchLocation: new Vector2( 240, 15 )
+        stopwatchPosition: new Vector2( 240, 15 )
       }, options );
 
       // @public (read-only) {ModelViewTransform2} transform between model and view coordinate frames
@@ -84,7 +84,7 @@ define( require => {
 
       // @public (read-only)
       this.stopwatch = new Stopwatch( {
-        location: options.stopwatchLocation,
+        position: options.stopwatchPosition,
         timePropertyOptions: {
           units: 'ps'
         },

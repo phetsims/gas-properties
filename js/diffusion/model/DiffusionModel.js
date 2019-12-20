@@ -54,7 +54,7 @@ define( require => {
         modelOriginOffset: new Vector2( 670, 520 ),
 
         // Stopwatch initial location (in view coordinates!), determined empirically.
-        stopwatchLocation: new Vector2( 60, 50 )
+        stopwatchPosition: new Vector2( 60, 50 )
       } );
 
       // @public (read-only) particles of each species, together these make up the 'particle system'
