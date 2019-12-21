@@ -326,6 +326,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": false,
       "phetioTypeName": "NumberPropertyIO"
     },
+    "gasProperties.diffusionScreen.model.stopwatch": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
+    },
     "gasProperties.diffusionScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2496,6 +2509,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.energyScreen.model.stopwatch": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
     },
     "gasProperties.energyScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
@@ -5759,6 +5785,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.exploreScreen.model.stopwatch": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
     },
     "gasProperties.exploreScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
@@ -11960,6 +11999,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.idealScreen.model.stopwatch": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
     },
     "gasProperties.idealScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
