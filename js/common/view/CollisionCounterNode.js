@@ -188,9 +188,11 @@ define( require => {
       // drag bounds, adjusted to keep this entire Node inside visible bounds
       const dragBoundsProperty = new DragBoundsProperty( this, visibleBoundsProperty );
 
+      // interrupt user interactions when the visible bounds changes, such as a device orientation change or window resize
+      visibleBoundsProperty.link( () => this.interruptSubtreeInput() );
+
       // If the collision counter is outside the drag bounds, move it inside.
       dragBoundsProperty.link( dragBounds => {
-        this.interruptSubtreeInput(); // interrupt user interactions
         if ( !dragBounds.containsPoint( collisionCounter.locationProperty ) ) {
           collisionCounter.locationProperty.value =
             dragBounds.closestPointTo( collisionCounter.locationProperty.value );
