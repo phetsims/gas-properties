@@ -20,7 +20,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const nanometersString = require( 'string!GAS_PROPERTIES/nanometers' );
@@ -39,7 +39,7 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( containerWidth, modelViewTransform, visibleProperty, options ) {
-      assert && assert( Util.isInteger( containerWidth ), `containerWidth must be an integer: ${containerWidth}` );
+      assert && assert( Utils.isInteger( containerWidth ), `containerWidth must be an integer: ${containerWidth}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
         `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );

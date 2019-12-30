@@ -18,7 +18,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Tandem = require( 'TANDEM/Tandem' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -224,7 +224,7 @@ define( require => {
         openingLeft = this.left - this.wallThickness + this.lidWidthProperty.value;
 
         // Round to nearest pm to avoid floating-point error, see https://github.com/phetsims/gas-properties/issues/63
-        openingLeft = Util.roundSymmetric( openingLeft );
+        openingLeft = Utils.roundSymmetric( openingLeft );
       }
       else {
         openingLeft = this.left + this.openingLeftInset;

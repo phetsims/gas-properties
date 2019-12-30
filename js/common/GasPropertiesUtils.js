@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   const GasPropertiesUtils = {
 
@@ -33,7 +33,7 @@ define( require => {
 
       // Generate a random Gaussian sample whose values have the desired mean and standard deviation.
       for ( let i = 0; i < n; i++ ) {
-        const value = Util.boxMullerTransform( mean, deviation, phet.joist.random );
+        const value = Utils.boxMullerTransform( mean, deviation, phet.joist.random );
         assert && assert( isFinite( value ), `invalid value: ${value}` );
         values.push( value );
         sum += value;

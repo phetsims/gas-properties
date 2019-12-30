@@ -36,7 +36,7 @@ define( require => {
   const Range = require( 'DOT/Range' );
   const Tandem = require( 'TANDEM/Tandem' );
   const TemperatureModel = require( 'GAS_PROPERTIES/common/model/TemperatureModel' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class IdealGasLawModel extends BaseModel {
@@ -362,7 +362,7 @@ define( require => {
         let containerWidth = this.computeIdealVolume() / ( this.container.height * this.container.depth );
 
         // Address floating-point error, see https://github.com/phetsims/gas-properties/issues/89
-        containerWidth = Util.toFixedNumber( containerWidth, 5 );
+        containerWidth = Utils.toFixedNumber( containerWidth, 5 );
 
         // If the desired container width is out of range ...
         if ( !this.container.widthRange.contains( containerWidth ) ) {

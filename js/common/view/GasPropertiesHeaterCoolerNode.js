@@ -28,7 +28,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // constants
 
@@ -132,7 +132,7 @@ define( require => {
 
               // compute heat/cool factor, relative to temperature change and number of particles
               const deltaTN = deltaT * numberOfParticles; // deltaT * N
-              const heatCoolFactor = Util.sign( deltaT ) * toHeatFactor( Math.abs( deltaTN ) );
+              const heatCoolFactor = Utils.sign( deltaT ) * toHeatFactor( Math.abs( deltaTN ) );
               assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
 
               // Animation that moves the flame/ice up

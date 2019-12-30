@@ -28,7 +28,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
   const Tandem = require( 'TANDEM/Tandem' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // constants
   const LID_X_SPEED = -50; // pixels/second
@@ -242,7 +242,7 @@ define( require => {
           const dy = LID_Y_SPEED * dt;
           this.lidNode.centerX += dx;
           this.lidNode.centerY += dy;
-          const dr = Util.toRadians( LID_ROTATION_SPEED ) * dt;
+          const dr = Utils.toRadians( LID_ROTATION_SPEED ) * dt;
           this.lidNode.rotateAround( this.lidNode.center, dr );
         }
         else {

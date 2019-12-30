@@ -28,7 +28,7 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
 
@@ -125,7 +125,7 @@ define( require => {
           majorTicks: majorTicks,
           majorTickStroke: GasPropertiesColorProfile.textFillProperty,
           constrainValue: value => {
-            return Util.roundToInterval( value, 50 );
+            return Utils.roundToInterval( value, 50 );
           }
         }
       } );
