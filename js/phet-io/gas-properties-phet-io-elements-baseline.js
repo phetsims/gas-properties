@@ -2952,6 +2952,370 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "gasProperties.energyScreen.view.heaterCoolerNode": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "SliderIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.enabledProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.enabledRangeProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<RangeIO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumb": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumb.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumb.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumb.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumbInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumbInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumbInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumbInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.thumbInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.track.trackInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
+      "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.track.trackInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.valueProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "LinkedElementIO"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.slider.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.energyScreen.view.heaterCoolerNode.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
     "gasProperties.energyScreen.view.heavyBicyclePumpNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2968,6 +3332,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.heavyBicyclePumpNode.handleDragListener.dragAction": {
       "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
@@ -2981,6 +3347,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.heavyBicyclePumpNode.handleDragListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3020,7 +3387,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.heavyBicyclePumpNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -3059,6 +3430,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.expandCollapseButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3072,6 +3445,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.expandCollapseButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -3111,7 +3485,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.expandCollapseButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -3150,7 +3528,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.expandCollapseButton.toggledEmitter": {
       "phetioDocumentation": "Emits when the button is toggled No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -3167,6 +3549,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.energyScreen.view.kineticEnergyAccordionBox.histogramNode.lightPlotVisibleProperty": {
+      "phetioDocumentation": "whether the plot for light particles is visible on the histogram",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -3228,6 +3626,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.expandCollapseButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3241,6 +3641,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.expandCollapseButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -3293,6 +3694,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.expandCollapseButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3306,6 +3709,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.expandCollapseButton.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3345,7 +3749,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.heavyParticlesCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -3397,9 +3805,15 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.heavyParticlesCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": true,
@@ -3423,8 +3837,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.heavyParticlesCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -3505,6 +3924,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.heavyParticles.enabledProperty": {
+      "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -3527,6 +3962,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.lightParticlesCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -3540,6 +3977,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.lightParticlesCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3566,7 +4004,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.lightParticlesCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -3631,8 +4073,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.kineticEnergyAccordionBox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -3657,9 +4104,15 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.lightBicyclePumpNode.handleDragListener.dragAction": {
       "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -3693,7 +4146,24 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
+<<<<<<< HEAD
+    "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.opacityProperty": {
+=======
     "gasProperties.energyScreen.view.lightBicyclePumpNode.opacityProperty": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3748,7 +4218,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -3787,6 +4261,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.heavyParticles.firedEmitter": {
       "phetioDocumentation": "Emits when the radio button is pressed No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3800,6 +4276,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.heavyParticles.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3865,7 +4342,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -3891,6 +4372,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.firedEmitter": {
       "phetioDocumentation": "Emits when the radio button is pressed No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3904,6 +4387,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3943,6 +4427,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -3956,6 +4442,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.lightParticles.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -3995,6 +4482,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4008,6 +4497,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particleTypeRadioButtonGroup.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -4047,6 +4537,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particlesAccordionBox.expandCollapseButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -4060,6 +4552,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particlesAccordionBox.expandCollapseButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4125,7 +4618,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particlesAccordionBox.expandCollapseButton.toggledEmitter": {
       "phetioDocumentation": "Emits when the button is toggled No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -4151,7 +4648,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.particlesAccordionBox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -4190,7 +4691,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -4203,7 +4708,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.resetAllButton": {
       "phetioDocumentation": "The orange, round button that can be used to restore the initial state",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -4246,6 +4755,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ToggleButtonIO"
+    },
+    "gasProperties.energyScreen.view.speedAccordionBox.expandCollapseButton.enabledProperty": {
+      "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -4281,6 +4806,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.resetAllButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4385,6 +4912,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.returnLidButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4398,6 +4926,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.returnLidButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -4502,6 +5032,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.energyScreen.view.speedAccordionBox.expandCollapseButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -6059,6 +6590,414 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "gasProperties.exploreScreen.view.heaterCoolerNode": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "SliderIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.enabledProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.enabledRangeProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<RangeIO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+<<<<<<< HEAD
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.exploreScreen.view.lightBicyclePumpNode.handleDragListener.dragAction": {
+      "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+=======
+      "phetioState": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumb": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "gasProperties.exploreScreen.view.lightBicyclePumpNode.handleDragListener.releaseAction": {
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumb.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumb.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumb.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumbInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
+      "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumbInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+<<<<<<< HEAD
+      "phetioHighFrequency": false,
+=======
+      "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumbInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumbInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.thumbInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.track.trackInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
+      "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+<<<<<<< HEAD
+      "phetioHighFrequency": false,
+=======
+      "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.track.trackInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.valueProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "LinkedElementIO"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.slider.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.heaterCoolerNode.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
     "gasProperties.exploreScreen.view.heavyBicyclePumpNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -6075,9 +7014,15 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.heavyBicyclePumpNode.handleDragListener.dragAction": {
       "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -6111,7 +7056,24 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
+<<<<<<< HEAD
+    "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.lightParticles.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.opacityProperty": {
+=======
     "gasProperties.exploreScreen.view.heavyBicyclePumpNode.opacityProperty": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6168,7 +7130,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
+<<<<<<< HEAD
+      "phetioHighFrequency": false,
+=======
       "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -6176,7 +7142,63 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
+<<<<<<< HEAD
+    "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ToggleButtonIO"
+    },
+    "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.enabledProperty": {
+      "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.pressListener.pressAction": {
+=======
     "gasProperties.exploreScreen.view.lightBicyclePumpNode.handleDragListener.pressAction": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -6218,7 +7240,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.lightBicyclePumpNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -6261,6 +7287,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.exploreScreen.view.particlesAccordionBox.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -6274,6 +7316,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.exploreScreen.view.resetAllButton": {
+      "phetioDocumentation": "The orange, round button that can be used to restore the initial state",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -6306,7 +7364,24 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
+<<<<<<< HEAD
+    "gasProperties.exploreScreen.view.resetAllButton.isFiringProperty": {
+      "phetioDocumentation": "Temporarily becomes true while the Reset All button is firing.  Commonly used to disable audio effects during reset.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "DerivedPropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.resetAllButton.opacityProperty": {
+=======
     "gasProperties.exploreScreen.view.particleTypeRadioButtonGroup.heavyParticles.opacityProperty": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6530,7 +7605,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.particlesAccordionBox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -6543,6 +7622,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -6556,6 +7637,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -6634,7 +7716,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.toggledEmitter": {
       "phetioDocumentation": "Emits when the button is toggled No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -6647,6 +7733,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.particlesAccordionBox.expandCollapseButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -6660,6 +7748,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.particlesAccordionBox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -6699,10 +7788,30 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<>"
+    },
+    "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -6751,6 +7860,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.resetAllButton.isFiringProperty": {
       "phetioDocumentation": "Temporarily becomes true while the Reset All button is firing.  Commonly used to disable audio effects during reset.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -6764,6 +7875,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.resetAllButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -6820,6 +7932,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": true,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.timeControlNode.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -6842,8 +7970,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.returnLidButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -6855,8 +7988,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.returnLidButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -6894,7 +8032,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.returnLidButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -6959,7 +8101,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -6998,6 +8144,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
@@ -7011,6 +8159,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -7050,8 +8199,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -7076,7 +8230,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.toggleNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -7086,7 +8244,24 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
+<<<<<<< HEAD
+    "gasProperties.exploreScreen.view.toolsPanel.widthCheckbox.enabledProperty": {
+      "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.exploreScreen.view.toolsPanel.widthCheckbox.opacityProperty": {
+=======
     "gasProperties.exploreScreen.view.timeControlNode.playPauseButton.toggleNode.opacityProperty": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -7180,7 +8355,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.stepForwardButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -7245,8 +8424,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.stepForwardButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -7258,7 +8442,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.timeControlNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -7284,7 +8472,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.exploreScreen.view.toolsPanel.collisionCounterCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -7314,6 +8506,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+<<<<<<< HEAD
+=======
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -7756,6 +8950,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": true,
@@ -7948,6 +9143,12 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioDocumentation": "Emits when the mouse wheel scrolls The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
+<<<<<<< HEAD
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": true,
+=======
       "phetioFeatured": false,
       "phetioHighFrequency": true,
       "phetioIsArchetype": false,
@@ -8173,6 +9374,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
@@ -8584,6 +9786,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.exploreScreenButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8688,6 +9892,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.homeButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -8701,7 +9906,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.homeButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -8714,7 +9923,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.homeButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -8997,13 +10210,47 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "gasProperties.general.navigationBar.phetButton.phetMenu": {
-      "phetioDocumentation": "This menu is displayed when the PhET button is pressed.",
+<<<<<<< HEAD
+    "gasProperties.general.navigationBar.homeButton.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.general.navigationBar.homeButton.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+=======
+    "gasProperties.general.navigationBar.phetButton.phetMenu": {
+      "phetioDocumentation": "This menu is displayed when the PhET button is pressed.",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.general.navigationBar.homeButton.pressListener.pressAction": {
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9013,7 +10260,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -9029,7 +10280,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9042,7 +10297,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9055,7 +10314,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9068,20 +10331,84 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.closeButton.opacityProperty": {
+<<<<<<< HEAD
+    "gasProperties.general.navigationBar.idealScreenButton.icon": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.general.navigationBar.idealScreenButton.icon.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.general.navigationBar.idealScreenButton.icon.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.general.navigationBar.idealScreenButton.icon.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.general.navigationBar.idealScreenButton.opacityProperty": {
+=======
+    "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.closeButton.opacityProperty": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9094,7 +10421,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9107,7 +10438,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9120,7 +10455,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9146,7 +10485,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9159,7 +10502,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9172,7 +10519,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": false,
@@ -9185,7 +10536,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9198,7 +10553,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9211,7 +10570,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9224,7 +10587,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9237,7 +10604,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9247,10 +10618,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.thirdPartyCreditsLinkText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9263,7 +10641,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9276,7 +10658,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9290,6 +10676,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "DialogIO"
+    },
+    "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.closeButton": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9312,7 +10714,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.translationCreditsLinkText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9351,7 +10757,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.translationCreditsLinkText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9364,7 +10774,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.translationCreditsLinkText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9390,10 +10804,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem": {
       "phetioDocumentation": "This menu item shows a dialog with information about the simulation.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9403,10 +10824,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.firedEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9416,10 +10844,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9429,10 +10864,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9445,7 +10887,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9458,20 +10904,45 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
+<<<<<<< HEAD
+    "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.termsPrivacyAndLicensingText.textProperty": {
+      "phetioDocumentation": "Property for the displayed text",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<StringIO>"
+    },
+    "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.termsPrivacyAndLicensingText.visibleProperty": {
+=======
     "gasProperties.general.navigationBar.phetButton.phetMenu.aboutMenuItem.visibleProperty": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9484,7 +10955,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9498,6 +10973,22 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
+<<<<<<< HEAD
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.general.navigationBar.phetButton.phetMenu.aboutDialogCapsule.archetype.thirdPartyCreditsLinkText.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9533,7 +11024,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.closeButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9572,7 +11067,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.closeButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9585,7 +11084,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.closeButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9611,10 +11114,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.content": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9624,10 +11134,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.content.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9637,10 +11154,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.content.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9653,7 +11177,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9679,7 +11207,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9692,7 +11224,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -9705,7 +11241,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": false,
+=======
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": true,
       "phetioState": true,
@@ -9715,10 +11255,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.content.pressureNoiseCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9741,7 +11288,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.content.projectorModeCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9767,6 +11318,9 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.content.projectorModeCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -9781,6 +11335,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9832,8 +11387,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.content.projectorModeCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
       "phetioPlayback": false,
@@ -9897,7 +11457,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.title": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": true,
@@ -9962,6 +11526,12 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsDialogCapsule.archetype.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -9979,6 +11549,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -9988,10 +11559,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsMenuItem.inputListener.firedEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10004,7 +11582,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10014,10 +11596,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.optionsMenuItem.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10030,7 +11619,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10043,7 +11636,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10056,7 +11653,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10066,10 +11667,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.phetMenu.screenshotMenuItem": {
       "phetioDocumentation": "This menu item captures a screenshot from the simulation and saves it to the file system.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10082,7 +11690,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10134,7 +11746,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10147,7 +11763,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10160,7 +11780,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10170,10 +11794,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10183,10 +11814,17 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.navigationBar.phetButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10199,7 +11837,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": false,
@@ -10212,7 +11854,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10225,7 +11871,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10238,7 +11888,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10251,7 +11905,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+=======
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10264,8 +11922,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+<<<<<<< HEAD
+      "phetioIsArchetype": true,
+      "phetioPlayback": false,
+=======
       "phetioIsArchetype": false,
       "phetioPlayback": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
@@ -10274,11 +11937,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.resizeAction": {
       "phetioDocumentation": "Executes when the sim is resized The arguments are:<br/><ol><li>width: NumberIO</li><br/><li>height: NumberIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
@@ -10287,8 +11958,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.screenIndexProperty": {
       "phetioDocumentation": "Indicates which sim screen is selected (0-indexed). Note that the home screen does not have an index. To control the home screen see \"showHomeScreenProperty\".",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -10300,8 +11976,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.showHomeScreenProperty": {
       "phetioDocumentation": "Whether or not home screen is displayed. This is independent of the \"current sim screen\" stored in the \"screenIndexProperty.\"",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -10313,7 +11994,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.soundManager.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -10326,6 +12011,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.general.stepSimulationAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>dt: NumberIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
@@ -10339,6 +12026,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.global.colorProfile.profileNameProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -10378,6 +12066,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.homeScreen.view": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -10391,6 +12081,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.homeScreen.view.diffusionScreenLargeButton": {
       "phetioDocumentation": "A pressable button in the simulation, in the home screen",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -10495,10 +12186,30 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.homeScreen.view.diffusionScreenLargeButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "gasProperties.general.navigationBar.phetButton.pressListener.releaseAction": {
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
@@ -10547,7 +12258,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.homeScreen.view.diffusionScreenSmallButton": {
       "phetioDocumentation": "A pressable button in the simulation, in the home screen",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -10560,7 +12275,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.homeScreen.view.diffusionScreenSmallButton.inputListener.firedEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -10573,11 +12292,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.homeScreen.view.diffusionScreenSmallButton.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
@@ -10586,11 +12313,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.homeScreen.view.diffusionScreenSmallButton.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": true,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
@@ -10640,9 +12375,15 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
+<<<<<<< HEAD
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": true,
+=======
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
@@ -11636,7 +13377,63 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+<<<<<<< HEAD
+    "gasProperties.homeScreen.view.idealScreenLargeButton": {
+      "phetioDocumentation": "A pressable button in the simulation, in the home screen",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.homeScreen.view.idealScreenLargeButton.inputListener.firedEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<NullableIO<SceneryEventIO>>"
+    },
+    "gasProperties.homeScreen.view.idealScreenLargeButton.inputListener.pressAction": {
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "gasProperties.homeScreen.view.idealScreenLargeButton.inputListener.releaseAction": {
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
+    },
+    "gasProperties.homeScreen.view.idealScreenLargeButton.opacityProperty": {
+=======
     "gasProperties.homeScreen.view.opacityProperty": {
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -11756,7 +13553,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.model.collisionCounter.isRunningProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -11769,7 +13570,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.model.collisionCounter.locationProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -11782,7 +13587,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.model.collisionCounter.numberOfCollisionsProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -11795,7 +13604,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.model.collisionCounter.samplePeriodProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12055,6 +13868,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.model.stopwatch.timeProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
@@ -12068,6 +13883,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.model.temperatureModel.controlTemperatureEnabledProperty": {
       "phetioDocumentation": "indicates whether initial temperature is controlled by the user",
       "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
@@ -12159,9 +13975,15 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.containerNode.lidDragListener.dragAction": {
       "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -12172,7 +13994,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.containerNode.lidDragListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12185,7 +14011,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.containerNode.lidDragListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12224,9 +14054,15 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.containerNode.resizeDragListener.dragAction": {
       "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+=======
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -12237,7 +14073,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.containerNode.resizeDragListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12250,7 +14090,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.containerNode.resizeDragListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12289,7 +14133,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.controlPanel.collisionCounterCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12343,7 +14191,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
+<<<<<<< HEAD
+      "phetioHighFrequency": true,
+=======
       "phetioHighFrequency": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": true,
@@ -12354,7 +14206,11 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.controlPanel.collisionCounterCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
       "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12445,9 +14301,15 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.controlPanel.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioIsArchetype": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
@@ -12471,8 +14333,13 @@ window.phet.phetio.phetioElementsBaseline = assert &&
     "gasProperties.idealScreen.view.controlPanel.stopwatchCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
@@ -12507,10 +14374,30 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
+<<<<<<< HEAD
+    "gasProperties.idealScreen.view.containerNode.resizeDragListener.dragAction": {
+      "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "gasProperties.idealScreen.view.containerNode.resizeDragListener.pressAction": {
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+=======
     "gasProperties.idealScreen.view.controlPanel.stopwatchCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
@@ -12642,6 +14529,359 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+<<<<<<< HEAD
+=======
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "SliderIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.enabledProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.enabledRangeProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<RangeIO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumb": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumb.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumb.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumb.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumbInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "MODEL",
+=======
+      "phetioEventType": "USER",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumbInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumbInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumbInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.thumbInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.track.trackInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+<<<<<<< HEAD
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+=======
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.track.trackInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.track.trackInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.valueProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "LinkedElementIO"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.slider.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+<<<<<<< HEAD
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+=======
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+>>>>>>> Instrumentation for HeaterCoolerNode, see https://github.com/phetsims/scenery-phet/issues/568
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "gasProperties.idealScreen.view.heaterCoolerNode.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,

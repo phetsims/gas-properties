@@ -246,7 +246,8 @@ define( require => {
         model.particleSystem.numberOfParticlesProperty,
         model.temperatureModel.temperatureProperty, {
           left: heaterCoolerNodeLeft,
-          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+          bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+          tandem: tandem.createTandem( 'heaterCoolerNode' )
         } );
 
       // Button to erase all particles from container

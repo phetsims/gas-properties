@@ -2,10 +2,10 @@
 
 /**
  * GasPropertiesHeaterCoolerNode is a specialization of HeaterCoolerNode for this sim.  Responsibilities include:
- * 
+ *
  * - Disables the slider when the sim is paused, and hides the slider for some of the 'Hold Constant' modes.
  *
- * - When holding pressure constant by varying temperature (HoldConstant.PRESSURE_T mode), the flame/ice is 
+ * - When holding pressure constant by varying temperature (HoldConstant.PRESSURE_T mode), the flame/ice is
  *   animated to correspond to the amount of heating/cooling needed to vary the temperature.  This is a "Hollywood"
  *   animation, because the model does not apply any heat/cool in this situation.  It adjusts particles speeds to
  *   result in the desired temperature.
@@ -63,8 +63,8 @@ define( require => {
      * @param {Property.<number|null>} temperatureProperty
      * @param {Object} [options]
      */
-    constructor( heatCoolAmountProperty, holdConstantProperty, isPlayingProperty,
-                 numberOfParticlesProperty, temperatureProperty, options ) {
+    constructor( heatCoolAmountProperty, holdConstantProperty, isPlayingProperty, numberOfParticlesProperty,
+                 temperatureProperty, options ) {
       assert && assert( heatCoolAmountProperty instanceof NumberProperty,
         `invalid heatCoolAmountProperty: ${heatCoolAmountProperty}` );
       assert && assert( holdConstantProperty instanceof EnumerationProperty,
@@ -79,7 +79,15 @@ define( require => {
       options = merge( {
 
         // superclass options
-        scale: 0.8
+        scale: 0.8,
+
+        // Link to the corresponding model property, not the private implementation-detail Property which is supplied to
+        // the slider to support animation.
+        frontOptions: {
+          sliderOptions: {
+            phetioLinkedProperty: heatCoolAmountProperty
+          }
+        }
       }, options );
 
       // Private Property that either corresponds to the model or is animated, depending on the Hold Constant mode.
@@ -87,7 +95,7 @@ define( require => {
       const privateHeatCoolAmountProperty = new NumberProperty( 0, {
         range: new Range( -1, 1 )
       } );
-      
+
       super( privateHeatCoolAmountProperty, options );
 
       // When the model applies heat/cool, update the private Property.
