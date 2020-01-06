@@ -81,8 +81,7 @@ define( require => {
         // superclass options
         scale: 0.8,
 
-        // Link to the corresponding model property, not the private implementation-detail Property which is supplied to
-        // the slider to support animation.
+        // Link to the corresponding model Property, not privateHeatCoolAmountProperty.
         frontOptions: {
           sliderOptions: {
             phetioLinkedProperty: heatCoolAmountProperty
