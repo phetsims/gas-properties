@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * IdealGasLawModel extends the base model with functionality related to the Ideal Gas Law.

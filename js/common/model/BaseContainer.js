@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * BaseContainer is the base class for containers in all screens. This is a rectangular container for particles,
