@@ -141,8 +141,8 @@ define( require => {
 
         // Be careful about how dx, dy args are computed. Content is centered and padded in HTMLCanvasElement
         // because we provided integer bounds in particleToCanvas.
-        modelViewTransform.modelToViewX( particles[ i ].location.x ) - xOffset,  // dx
-        modelViewTransform.modelToViewY( particles[ i ].location.y ) - yOffset,  // dy
+        modelViewTransform.modelToViewX( particles[ i ].position.x ) - xOffset,  // dx
+        modelViewTransform.modelToViewY( particles[ i ].position.y ) - yOffset,  // dy
         dWidth,
         dHeight
       );

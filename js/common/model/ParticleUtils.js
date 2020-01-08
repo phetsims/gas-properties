@@ -98,7 +98,7 @@ define( require => {
     /**
      * Redistributes particles in the horizontal dimension.
      * @param {Particle[]} particles
-     * @param {number} scaleX - amount to scale the location's x component
+     * @param {number} scaleX - amount to scale the position's x component
      * @public
      */
     redistributeParticles: function( particles, scaleX ) {
@@ -106,7 +106,7 @@ define( require => {
       assert && assert( typeof scaleX === 'number' && scaleX > 0, `invalid scaleX: ${scaleX}` );
 
       for ( let i = particles.length - 1; i >= 0; i-- ) {
-        particles[ i ].location.setX( scaleX * particles[ i ].location.x );
+        particles[ i ].position.setX( scaleX * particles[ i ].position.x );
       }
     },
 
@@ -188,7 +188,7 @@ define( require => {
         let totalMass = 0;
         for ( let i = particles.length - 1; i >= 0; i-- ) {
           const particle = particles[ i ];
-          numerator += ( particle.mass * particle.location.x );
+          numerator += ( particle.mass * particle.position.x );
           totalMass += particle.mass;
         }
         centerXOfMass = numerator / totalMass;

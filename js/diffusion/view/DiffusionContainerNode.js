@@ -49,7 +49,7 @@ define( require => {
         solidLineWidth: viewDividerThickness,
         dashedLineWidth: viewDividerThickness / 2,
         centerX: modelViewTransform.modelToViewX( container.dividerX ),
-        bottom: modelViewTransform.modelToViewY( container.location.y )
+        bottom: modelViewTransform.modelToViewY( container.position.y )
       } );
 
       assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );

@@ -35,8 +35,8 @@ define( require => {
       }, options );
 
       // @public (read-only)
-      this.location = new Vector2( 0, 0 ); // center of the particle, pm, MUTATED!
-      this.previousLocation = this.location.copy(); // location on previous time step, MUTATED!
+      this.position = new Vector2( 0, 0 ); // center of the particle, pm, MUTATED!
+      this.previousPosition = this.position.copy(); // position on previous time step, MUTATED!
       this.velocity = new Vector2( 0, 0 ); // pm/ps, initially at rest, MUTATED!
 
       // @public these are mutated in the Diffusion screen
@@ -52,41 +52,41 @@ define( require => {
     }
 
     /**
-     * ES5 getters for particle location.
+     * ES5 getters for particle position.
      * @returns {number}
      * @public
      */
-    get left() { return this.location.x - this.radius; }
+    get left() { return this.position.x - this.radius; }
 
-    get right() { return this.location.x + this.radius; }
+    get right() { return this.position.x + this.radius; }
 
-    get top() { return this.location.y + this.radius; }
+    get top() { return this.position.y + this.radius; }
 
-    get bottom() { return this.location.y - this.radius; }
+    get bottom() { return this.position.y - this.radius; }
 
     /**
-     * ES5 setters for particle location.
+     * ES5 setters for particle position.
      * @param {number} value
      * @public
      */
     set left( value ) {
       assert && assert( typeof value === 'number', `invalid value: ${value}` );
-      this.setLocationXY( value + this.radius, this.location.y );
+      this.setPositionXY( value + this.radius, this.position.y );
     }
 
     set right( value ) {
       assert && assert( typeof value === 'number', `invalid value: ${value}` );
-      this.setLocationXY( value - this.radius, this.location.y );
+      this.setPositionXY( value - this.radius, this.position.y );
     }
 
     set top( value ) {
       assert && assert( typeof value === 'number', `invalid value: ${value}` );
-      this.setLocationXY( this.location.x, value - this.radius );
+      this.setPositionXY( this.position.x, value - this.radius );
     }
 
     set bottom( value ) {
       assert && assert( typeof value === 'number', `invalid value: ${value}` );
-      this.setLocationXY( this.location.x, value + this.radius );
+      this.setPositionXY( this.position.x, value + this.radius );
     }
 
     /**
@@ -116,20 +116,20 @@ define( require => {
       assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
       assert && assert( !this.isDisposed, 'attempted to step a disposed Particle' );
 
-      this.setLocationXY( this.location.x + dt * this.velocity.x, this.location.y + dt * this.velocity.y );
+      this.setPositionXY( this.position.x + dt * this.velocity.x, this.position.y + dt * this.velocity.y );
     }
 
     /**
-     * Sets this particle's location and remembers the previous location.
+     * Sets this particle's position and remembers the previous position.
      * @param {number} x
      * @param {number} y
      * @public
      */
-    setLocationXY( x, y ) {
+    setPositionXY( x, y ) {
       assert && assert( typeof x === 'number', `invalid x: ${x}` );
       assert && assert( typeof y === 'number', `invalid y: ${y}` );
-      this.previousLocation.setXY( this.location.x, this.location.y );
-      this.location.setXY( x, y );
+      this.previousPosition.setXY( this.position.x, this.position.y );
+      this.position.setXY( x, y );
     }
 
     /**
@@ -184,7 +184,7 @@ define( require => {
      */
     contactsParticle( particle ) {
       assert && assert( particle instanceof Particle, 'invalid particle' );
-      return this.location.distance( particle.location ) <= ( this.radius + particle.radius );
+      return this.position.distance( particle.position ) <= ( this.radius + particle.radius );
     }
 
     /**
@@ -197,7 +197,7 @@ define( require => {
      */
     contactedParticle( particle ) {
       assert && assert( particle instanceof Particle, 'invalid particle' );
-      return this.previousLocation.distance( particle.previousLocation ) <= ( this.radius + particle.radius );
+      return this.previousPosition.distance( particle.previousPosition ) <= ( this.radius + particle.radius );
     }
 
     /**
@@ -224,7 +224,7 @@ define( require => {
      * @public
      */
     toString() {
-      return `Particle[location:(${this.location.x},${this.location.y}) mass:${this.mass} radius:${this.radius}]`;
+      return `Particle[position:(${this.position.x},${this.position.y}) mass:${this.mass} radius:${this.radius}]`;
     }
   }
 

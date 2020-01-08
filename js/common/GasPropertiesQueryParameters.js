@@ -45,7 +45,7 @@ define( require => {
     // For internal use only.
     regions: { type: 'flag' },
 
-    // Shows the model and view coordinates that correspond to the cursor location.
+    // Shows the model and view coordinates that correspond to the cursor position.
     // For internal use only.
     pointerCoordinates: { type: 'flag' },
 

@@ -47,7 +47,7 @@ define( require => {
         // Determined empirically, and dependent on the ScreenView's layoutBounds.
         modelOriginOffset: new Vector2( 645, 475 ),
 
-        // Stopwatch initial location (in view coordinates!), determined empirically.
+        // Stopwatch initial position (in view coordinates!), determined empirically.
         stopwatchPosition: new Vector2( 240, 15 )
       }, options );
 

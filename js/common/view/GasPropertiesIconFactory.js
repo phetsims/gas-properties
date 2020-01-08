@@ -88,12 +88,12 @@ define( require => {
         centerY: gaugeNode.centerY
       } );
 
-      // Particles, locations determined empirically in view coordinates, specified left to right
-      const particleLocations = [ new Vector2( 0, 300 ), new Vector2( 250, 0 ), new Vector2( 575, 225 ) ];
+      // Particles, positions determined empirically in view coordinates, specified left to right
+      const particlePositions = [ new Vector2( 0, 300 ), new Vector2( 250, 0 ), new Vector2( 575, 225 ) ];
       const particleNodes = [];
-      for ( let i = 0; i < particleLocations.length; i++ ) {
+      for ( let i = 0; i < particlePositions.length; i++ ) {
         particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
-          center: particleLocations[ i ]
+          center: particlePositions[ i ]
         } ) );
       }
 
@@ -134,7 +134,7 @@ define( require => {
         centerY: wallNode.centerY
       } );
 
-      // Particles, locations determined empirically, relative to rightCenter of wall
+      // Particles, positions determined empirically, relative to rightCenter of wall
       const particlesNode = new Node( {
         scale: 0.25,
         translation: wallNode.rightCenter,
@@ -225,24 +225,24 @@ define( require => {
         center: containerNode.center
       } );
 
-      // Particles, locations determined empirically, relative to centerX of divider, specified left to right
-      const particle1Locations = [
+      // Particles, positions determined empirically, relative to centerX of divider, specified left to right
+      const particle1Positions = [
         new Vector2( -400, 300 ), new Vector2( -600, 600 ), new Vector2( -340, 800 )
       ];
-      const particle2Locations = [
+      const particle2Positions = [
         new Vector2( 400, 300 ), new Vector2( 660, 740 )
       ];
 
       // Create particle icons, relative to centerTop of divider
       const particleNodes = [];
-      for ( let i = 0; i < particle1Locations.length; i++ ) {
+      for ( let i = 0; i < particle1Positions.length; i++ ) {
         particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle1Icon( SCREEN_ICONS_TRANSFORM, {
-          center: particle1Locations[ i ]
+          center: particle1Positions[ i ]
         } ) );
       }
-      for ( let i = 0; i < particle2Locations.length; i++ ) {
+      for ( let i = 0; i < particle2Positions.length; i++ ) {
         particleNodes.push( GasPropertiesIconFactory.createDiffusionParticle2Icon( SCREEN_ICONS_TRANSFORM, {
-          center: particle2Locations[ i ]
+          center: particle2Positions[ i ]
         } ) );
       }
 
@@ -276,24 +276,24 @@ define( require => {
         stroke: phet.chipper.queryParameters.dev ? 'red' : null
       } );
 
-      // Particles, locations determined empirically in view coordinates, specified left to right
-      const heavyParticleLocations = [
+      // Particles, positions determined empirically in view coordinates, specified left to right
+      const heavyParticlePositions = [
         new Vector2( 0, 850 ), new Vector2( 110, 105 ), new Vector2( 555, 945 ),
         new Vector2( 670, 425 ), new Vector2( 1000, 125 ), new Vector2( 1220, 1050 ) ];
-      const lightParticleLocations = [
+      const lightParticlePositions = [
         new Vector2( 278, 475 ), new Vector2( 1000, 680 ), new Vector2( 1450, 210 )
       ];
 
       // Create particle icons
       const particleNodes = [];
-      for ( let i = 0; i < heavyParticleLocations.length; i++ ) {
+      for ( let i = 0; i < heavyParticlePositions.length; i++ ) {
         particleNodes.push( GasPropertiesIconFactory.createHeavyParticleIcon( SCREEN_ICONS_TRANSFORM, {
-          center: heavyParticleLocations[ i ]
+          center: heavyParticlePositions[ i ]
         } ) );
       }
-      for ( let i = 0; i < lightParticleLocations.length; i++ ) {
+      for ( let i = 0; i < lightParticlePositions.length; i++ ) {
         particleNodes.push( GasPropertiesIconFactory.createLightParticleIcon( SCREEN_ICONS_TRANSFORM, {
-          center: lightParticleLocations[ i ]
+          center: lightParticlePositions[ i ]
         } ) );
       }
 

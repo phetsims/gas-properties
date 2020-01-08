@@ -94,7 +94,7 @@ define( require => {
       // Contribution by DiffusionParticle1 species
       for ( let i = particles1.length - 1; i >= 0; i-- ) {
         const particle = particles1[ i ];
-        if ( this.bounds.containsPoint( particle.location ) ) {
+        if ( this.bounds.containsPoint( particle.position ) ) {
           numberOfParticles1++;
           totalKE += particle.getKineticEnergy();
         }
@@ -104,7 +104,7 @@ define( require => {
       // Note that there's a wee bit of code duplication here, but it gains use some iteration efficiency.
       for ( let i = particles2.length - 1; i >= 0; i-- ) {
         const particle = particles2[ i ];
-        if ( this.bounds.containsPoint( particle.location ) ) {
+        if ( this.bounds.containsPoint( particle.position ) ) {
           numberOfParticles2++;
           totalKE += particle.getKineticEnergy();
         }

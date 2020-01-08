@@ -29,7 +29,7 @@ define( require => {
   class ParticleFlowRate {
 
     /**
-     * @param {number} dividerX - x location of the container's divider
+     * @param {number} dividerX - x position of the container's divider
      * @param {Particle[]} particles - particles to be monitored
      * @param {Object} [options]
      */
@@ -89,10 +89,10 @@ define( require => {
       let rightCount = 0; // -->
       for ( let i = this.particles.length - 1; i >= 0; i-- ) {
         const particle = this.particles[ i ];
-        if ( particle.previousLocation.x >= this.dividerX && particle.location.x < this.dividerX ) {
+        if ( particle.previousPosition.x >= this.dividerX && particle.position.x < this.dividerX ) {
           leftCount++;
         }
-        else if ( particle.previousLocation.x <= this.dividerX && particle.location.x > this.dividerX ) {
+        else if ( particle.previousPosition.x <= this.dividerX && particle.position.x > this.dividerX ) {
           rightCount++;
         }
       }

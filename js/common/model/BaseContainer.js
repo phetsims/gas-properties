@@ -2,7 +2,7 @@
 
 /**
  * BaseContainer is the base class for containers in all screens. This is a rectangular container for particles,
- * with fixed location, fixed height and depth, and mutable width. The origin is at the bottom-right corner, and
+ * with fixed position, fixed height and depth, and mutable width. The origin is at the bottom-right corner, and
  * width expands to the left.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -30,21 +30,21 @@ define( require => {
 
       options = merge( {
 
-        // location of the container's bottom right corner, in pm
-        location: Vector2.ZERO,
+        // position of the container's bottom right corner, in pm
+        position: Vector2.ZERO,
 
         // range and initial value of the container's width, in pm
         widthRange: new RangeWithValue( 5000, 15000, 10000 )
 
       }, options );
 
-      assert && assert( options.location instanceof Vector2,
-        'invalid location type: ' + options.location );
+      assert && assert( options.position instanceof Vector2,
+        'invalid position type: ' + options.position );
       assert && assert( options.widthRange instanceof RangeWithValue,
         'invalid widthRange type: ' + options.widthRange );
 
       // @public (read-only)
-      this.location = options.location;
+      this.position = options.position;
       this.widthRange = options.widthRange;
 
       // @public width of the container, in pm
@@ -71,8 +71,8 @@ define( require => {
       // @public inside bounds, in pm
       this.boundsProperty = new DerivedProperty( [ this.widthProperty ],
         width => new Bounds2(
-          this.location.x - width, this.location.y,
-          this.location.x, this.location.y + this.height
+          this.position.x - width, this.position.y,
+          this.position.x, this.position.y + this.height
         ), {
           valueType: Bounds2
         } );
@@ -80,8 +80,8 @@ define( require => {
       // @public (read-only) maximum inside bounds, in pm.
       // Used for sizing the CanvasNode that draws the particle system inside the container.
       this.maxBounds = new Bounds2(
-        this.location.x - this.widthRange.max, this.location.y,
-        this.location.x, this.location.y + this.height
+        this.position.x - this.widthRange.max, this.position.y,
+        this.position.x, this.position.y + this.height
       );
 
       // @public (read-only) velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!

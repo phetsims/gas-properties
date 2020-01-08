@@ -29,7 +29,7 @@ define( require => {
         `invalid collisionDetector: ${collisionDetector}` );
 
       options = merge( {
-        location: Vector2.ZERO,
+        position: Vector2.ZERO,
         visible: false,
 
         // phet-io
@@ -39,9 +39,9 @@ define( require => {
       // @private
       this.collisionDetector = collisionDetector;
 
-      // @public location of the collision counter, in view coordinates
-      this.locationProperty = new Vector2Property( options.location, {
-        tandem: options.tandem.createTandem( 'locationProperty' )
+      // @public position of the collision counter, in view coordinates
+      this.positionProperty = new Vector2Property( options.position, {
+        tandem: options.tandem.createTandem( 'positionProperty' )
       } );
 
       // @public (read-only) the number of particle-container collisions
@@ -90,7 +90,7 @@ define( require => {
      * @public
      */
     reset() {
-      this.locationProperty.reset();
+      this.positionProperty.reset();
       this.numberOfCollisionsProperty.reset();
       this.isRunningProperty.reset();
       this.visibleProperty.reset();

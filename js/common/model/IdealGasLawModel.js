@@ -91,7 +91,7 @@ define( require => {
       this.particleSystem = new ParticleSystem(
         () => this.temperatureModel.getInitialTemperature(),
         this.particleParticleCollisionsEnabledProperty,
-        this.container.particleEntryLocation, {
+        this.container.particleEntryPosition, {
           tandem: tandem.createTandem( 'particleSystem' )
         }
       );
@@ -126,7 +126,7 @@ define( require => {
       this.collisionCounter = null;
       if ( options.hasCollisionCounter ) {
         this.collisionCounter = new CollisionCounter( this.collisionDetector, {
-          location: new Vector2( 40, 15 ), // view coordinates! determined empirically
+          position: new Vector2( 40, 15 ), // view coordinates! determined empirically
           tandem: tandem.createTandem( 'collisionCounter' )
         } );
       }

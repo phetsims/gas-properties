@@ -180,9 +180,9 @@ define( require => {
         }
       } );
 
-      // Move to the collision counter's location
-      collisionCounter.locationProperty.link( location => {
-        this.translation = location;
+      // Move to the collision counter's position
+      collisionCounter.positionProperty.link( position => {
+        this.translation = position;
       } );
 
       // drag bounds, adjusted to keep this entire Node inside visible bounds
@@ -193,16 +193,16 @@ define( require => {
 
       // If the collision counter is outside the drag bounds, move it inside.
       dragBoundsProperty.link( dragBounds => {
-        if ( !dragBounds.containsPoint( collisionCounter.locationProperty ) ) {
-          collisionCounter.locationProperty.value =
-            dragBounds.closestPointTo( collisionCounter.locationProperty.value );
+        if ( !dragBounds.containsPoint( collisionCounter.positionProperty ) ) {
+          collisionCounter.positionProperty.value =
+            dragBounds.closestPointTo( collisionCounter.positionProperty.value );
         }
       } );
 
       // dragging, added to background so that other UI components get input events on touch devices
       backgroundNode.addInputListener( new DragListener( {
         targetNode: this,
-        locationProperty: collisionCounter.locationProperty,
+        locationProperty: collisionCounter.positionProperty,
         dragBoundsProperty: dragBoundsProperty
       } ) );
 

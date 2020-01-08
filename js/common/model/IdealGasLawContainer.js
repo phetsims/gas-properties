@@ -64,7 +64,7 @@ define( require => {
         'widthRange.min is too small to accommodate insets' );
 
       // @private the right coordinate of the opening in the top of the container, in pm
-      this.openingRight = this.location.y - this.openingRightInset;
+      this.openingRight = this.position.y - this.openingRightInset;
 
       // @private minimum width of the lid, overlaps the left wall, in pm.
       this.minLidWidth = this.openingLeftInset + this.wallThickness;
@@ -82,16 +82,16 @@ define( require => {
       } );
 
       // @public (read-only) particles enter the container here, on the inside of the container, in pm
-      this.particleEntryLocation = new Vector2( this.location.x, this.location.y + this.height / 5 );
+      this.particleEntryPosition = new Vector2( this.position.x, this.position.y + this.height / 5 );
 
       // @public (read-only) bicycle pump hose connects here, on outside of the container, in pm
-      this.hoseLocation = this.particleEntryLocation.plusXY( this.wallThickness, 0 );
+      this.hosePosition = this.particleEntryPosition.plusXY( this.wallThickness, 0 );
 
       // @public {number} desired width of the container, in pm.
       // Set this to impose an animated speed limit on decreasing width. See #90.
       this.desiredWidth = this.widthProperty.value;
 
-      // @private {number} previous location of the left wall
+      // @private {number} previous position of the left wall
       this.previousLeft = this.left;
 
       // @public {boolean} is the container open?

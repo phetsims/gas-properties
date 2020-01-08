@@ -203,8 +203,8 @@ define( require => {
 
   /**
    * Detects and handles particle-particle collisions. Particle-particle collision are based solely whether they
-   * intersect at their current locations. Is is possible (and acceptable) for two particles to pass through the
-   * same point on the way to those location and not collide.
+   * intersect at their current positions. Is is possible (and acceptable) for two particles to pass through the
+   * same point on the way to those position and not collide.
    * @param {Particle[]} particles
    * @param {Object} mutableVectors - set of mutable vectors, see this.mutableVectors in CollisionDetector constructor
    */
@@ -228,14 +228,14 @@ define( require => {
           // Determine where the particles made contact.
           //-----------------------------------------------------------------------------------------
 
-          const dx = particle1.location.x - particle2.location.x;
-          const dy = particle1.location.y - particle2.location.y;
-          const contactRatio = particle1.radius / particle1.location.distance( particle2.location );
-          const contactPointX = particle1.location.x - dx * contactRatio;
-          const contactPointY = particle1.location.y - dy * contactRatio;
+          const dx = particle1.position.x - particle2.position.x;
+          const dy = particle1.position.y - particle2.position.y;
+          const contactRatio = particle1.radius / particle1.position.distance( particle2.position );
+          const contactPointX = particle1.position.x - dx * contactRatio;
+          const contactPointY = particle1.position.y - dy * contactRatio;
 
           //-----------------------------------------------------------------------------------------
-          // Adjust particle locations by reflecting across the line of impact.
+          // Adjust particle positions by reflecting across the line of impact.
           //-----------------------------------------------------------------------------------------
 
           // Normal vector, aka 'line of impact'
@@ -247,10 +247,10 @@ define( require => {
           // Angle of the plane of contact
           const lineAngle = Math.atan2( mutableVectors.tangent.y, mutableVectors.tangent.x );
 
-          // Adjust locations
-          adjustParticleLocation( particle1, contactPointX, contactPointY, lineAngle,
+          // Adjust positions
+          adjustParticlePosition( particle1, contactPointX, contactPointY, lineAngle,
             mutableVectors.pointOnLine, mutableVectors.reflectedPoint );
-          adjustParticleLocation( particle2, contactPointX, contactPointY, lineAngle,
+          adjustParticlePosition( particle2, contactPointX, contactPointY, lineAngle,
             mutableVectors.pointOnLine, mutableVectors.reflectedPoint );
 
           //-----------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ define( require => {
   }
 
   /**
-   * Adjusts the location of a particle in response to a collision with another particle.
+   * Adjusts the position of a particle in response to a collision with another particle.
    * @param {Particle} particle
    * @param {number} contactPointX - x coordinate where collision occurred
    * @param {number} contactPointY - y coordinate where collision occurred
@@ -282,7 +282,7 @@ define( require => {
    * @param {Vector2} pointOnLine - used to compute a point of line of contact, will be mutated!
    * @param {Vector2} reflectedPoint - used to compute reflected point, will be mutated!
    */
-  function adjustParticleLocation( particle, contactPointX, contactPointY, lineAngle, pointOnLine, reflectedPoint ) {
+  function adjustParticlePosition( particle, contactPointX, contactPointY, lineAngle, pointOnLine, reflectedPoint ) {
     assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
     assert && assert( typeof contactPointX === 'number', `invalid contactPointX: ${contactPointX}` );
     assert && assert( typeof contactPointY === 'number', `invalid contactPointY: ${contactPointY}` );
@@ -290,14 +290,14 @@ define( require => {
     assert && assert( pointOnLine instanceof Vector2, `invalid pointOnLine: ${pointOnLine}` );
     assert && assert( reflectedPoint instanceof Vector2, `invalid reflectedPoint: ${reflectedPoint}` );
 
-    const previousDistance = particle.previousLocation.distanceXY( contactPointX, contactPointY );
-    const locationRatio = particle.radius / previousDistance;
+    const previousDistance = particle.previousPosition.distanceXY( contactPointX, contactPointY );
+    const positionRatio = particle.radius / previousDistance;
     pointOnLine.setXY(
-      contactPointX - ( contactPointX - particle.previousLocation.x ) * locationRatio,
-      contactPointY - ( contactPointY - particle.previousLocation.y ) * locationRatio
+      contactPointX - ( contactPointX - particle.previousPosition.x ) * positionRatio,
+      contactPointY - ( contactPointY - particle.previousPosition.y ) * positionRatio
     );
-    GasPropertiesUtils.reflectPointAcrossLine( particle.location, pointOnLine, lineAngle, reflectedPoint );
-    particle.setLocationXY( reflectedPoint.x, reflectedPoint.y );
+    GasPropertiesUtils.reflectPointAcrossLine( particle.position, pointOnLine, lineAngle, reflectedPoint );
+    particle.setPositionXY( reflectedPoint.x, reflectedPoint.y );
   }
 
   /**
@@ -318,7 +318,7 @@ define( require => {
 
   /**
    * Detects and handles particle-container collisions. These collisions occur if a particle contacted a wall on
-   * its way to its current location.
+   * its way to its current position.
    * @param {Particle[]} particles
    * @param {Bounds2} containerBounds
    * @param {Vector2} leftWallVelocity - velocity of the container's left (movable) wall

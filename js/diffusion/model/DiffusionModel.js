@@ -53,7 +53,7 @@ define( require => {
         // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
         modelOriginOffset: new Vector2( 670, 520 ),
 
-        // Stopwatch initial location (in view coordinates!), determined empirically.
+        // Stopwatch initial position (in view coordinates!), determined empirically.
         stopwatchPosition: new Vector2( 60, 50 )
       } );
 
@@ -243,15 +243,15 @@ define( require => {
     /**
      * Adjusts an array of particles to have the desired number of elements.
      * @param {number} numberOfParticles - desired number of particles
-     * @param {Bounds2} locationBounds - initial location will be inside this bounds
+     * @param {Bounds2} positionBounds - initial position will be inside this bounds
      * @param {DiffusionSettings} settings
      * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
      * @param {function(options:*):Particle} createParticle - creates a Particle instance
      * @private
      */
-    updateNumberOfParticles( numberOfParticles, locationBounds, settings, particles, createParticle ) {
+    updateNumberOfParticles( numberOfParticles, positionBounds, settings, particles, createParticle ) {
       assert && assert( typeof numberOfParticles === 'number', `invalid numberOfParticles: ${numberOfParticles}` );
-      assert && assert( locationBounds instanceof Bounds2, `invalid locationBounds: ${locationBounds}` );
+      assert && assert( positionBounds instanceof Bounds2, `invalid positionBounds: ${positionBounds}` );
       assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
       assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
       assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
@@ -259,7 +259,7 @@ define( require => {
       const delta = numberOfParticles - particles.length;
       if ( delta !== 0 ) {
         if ( delta > 0 ) {
-          addParticles( delta, locationBounds, settings, particles, createParticle );
+          addParticles( delta, positionBounds, settings, particles, createParticle );
         }
         else {
           ParticleUtils.removeLastParticles( -delta, particles );
@@ -295,14 +295,14 @@ define( require => {
   /**
    * Adds n particles to the end of the specified array.
    * @param {number} n
-   * @param {Bounds2} locationBounds - initial location will be inside this bounds
+   * @param {Bounds2} positionBounds - initial position will be inside this bounds
    * @param {DiffusionSettings} settings
    * @param {Particle[]} particles
    * @param {function(options:*):Particle} createParticle - creates a Particle instance
    */
-  function addParticles( n, locationBounds, settings, particles, createParticle ) {
+  function addParticles( n, positionBounds, settings, particles, createParticle ) {
     assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
-    assert && assert( locationBounds instanceof Bounds2, `invalid location: ${location}` );
+    assert && assert( positionBounds instanceof Bounds2, `invalid positionBounds: ${positionBounds}` );
     assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
     assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
     assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
@@ -315,11 +315,11 @@ define( require => {
         radius: settings.radiusProperty.value
       } );
 
-      // Position the particle at a random location within locationBounds, accounting for particle radius.
-      const x = phet.joist.random.nextDoubleBetween( locationBounds.minX + particle.radius, locationBounds.maxX - particle.radius );
-      const y = phet.joist.random.nextDoubleBetween( locationBounds.minY + particle.radius, locationBounds.maxY - particle.radius );
-      particle.setLocationXY( x, y );
-      assert && assert( locationBounds.containsPoint( particle.location ), 'particle is outside of locationBounds' );
+      // Position the particle at a random position within positionBounds, accounting for particle radius.
+      const x = phet.joist.random.nextDoubleBetween( positionBounds.minX + particle.radius, positionBounds.maxX - particle.radius );
+      const y = phet.joist.random.nextDoubleBetween( positionBounds.minY + particle.radius, positionBounds.maxY - particle.radius );
+      particle.setPositionXY( x, y );
+      assert && assert( positionBounds.containsPoint( particle.position ), 'particle is outside of positionBounds' );
 
       // Set the initial velocity, based on initial temperature and mass.
       particle.setVelocityPolar(
@@ -371,7 +371,7 @@ define( require => {
       const particle = particles[ i ];
       particle.radius = radius;
 
-      // If the sim is paused, then adjust the location of any particles are not fully inside the bounds.
+      // If the sim is paused, then adjust the position of any particles are not fully inside the bounds.
       // While the sim is playing, this adjustment will be handled by collision detection.
       if ( !isPlaying ) {
 

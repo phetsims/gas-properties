@@ -82,7 +82,7 @@ define( require => {
 
       super( model, tandem, options );
 
-      const containerViewLocation = model.modelViewTransform.modelToViewPosition( model.container.location );
+      const containerViewPosition = model.modelViewTransform.modelToViewPosition( model.container.position );
 
       // Whether the sim was playing before it was programmatically paused.
       let wasPlaying = model.isPlayingProperty.value;
@@ -157,7 +157,7 @@ define( require => {
       } );
 
       // Dimensional arrows that indicate container size
-      const containerWidthNode = new ContainerWidthNode( model.container.location, model.container.widthProperty,
+      const containerWidthNode = new ContainerWidthNode( model.container.position, model.container.widthProperty,
         model.modelViewTransform, widthVisibleProperty );
 
       // Radio buttons for selecting particle type
@@ -169,15 +169,15 @@ define( require => {
         } );
 
       // Bicycle pump is centered above the radio buttons.
-      const bicyclePumpLocation =
+      const bicyclePumpPosition =
         new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 15 );
 
       // Bicycle pump hose attaches to the container.
-      const hoseLocation = model.modelViewTransform.modelToViewPosition( model.container.hoseLocation );
+      const hosePosition = model.modelViewTransform.modelToViewPosition( model.container.hosePosition );
 
       const bicyclePumpOptions = {
-        translation: bicyclePumpLocation,
-        hoseAttachmentOffset: hoseLocation.minus( bicyclePumpLocation ),
+        translation: bicyclePumpPosition,
+        hoseAttachmentOffset: hosePosition.minus( bicyclePumpPosition ),
         handleTouchAreaXDilation: 35,
         handleTouchAreaYDilation: 35
       };
@@ -237,7 +237,7 @@ define( require => {
       } );
 
       // Device to heat/cool the contents of the container
-      const heaterCoolerNodeLeft = containerViewLocation.x -
+      const heaterCoolerNodeLeft = containerViewPosition.x -
                                    model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.min );
       const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
         model.heatCoolFactorProperty,
@@ -277,7 +277,7 @@ define( require => {
         regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
       }
 
-      // model and view coordinates for pointer location
+      // model and view coordinates for pointer position
       let pointerCoordinatesNode = null;
       if ( GasPropertiesQueryParameters.pointerCoordinates ) {
         pointerCoordinatesNode = new PointerCoordinatesNode( model.modelViewTransform, {
@@ -306,7 +306,7 @@ define( require => {
       // Time controls are created by the superclass, but subclass is responsible for positioning them
       const defaultWidth = model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
       this.timeControlNode.mutate( {
-        left: containerViewLocation.x - defaultWidth,
+        left: containerViewPosition.x - defaultWidth,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
       } );
 

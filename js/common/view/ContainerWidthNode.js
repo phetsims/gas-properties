@@ -33,14 +33,14 @@ define( require => {
   class ContainerWidthNode extends Node {
 
     /**
-     * @param {Vector2} containerLocation - location of the container, in model coordinates
+     * @param {Vector2} containerPosition - position of the container, in model coordinates
      * @param {NumberProperty} widthProperty - width of the container, in model coordinates
      * @param {ModelViewTransform2} modelViewTransform
      * @param {BooleanProperty} visibleProperty
      * @param {Object} [options]
      */
-    constructor( containerLocation, widthProperty, modelViewTransform, visibleProperty, options ) {
-      assert && assert( containerLocation instanceof Vector2, `invalid containerLocation: ${containerLocation}` );
+    constructor( containerPosition, widthProperty, modelViewTransform, visibleProperty, options ) {
+      assert && assert( containerPosition instanceof Vector2, `invalid containerPosition: ${containerPosition}` );
       assert && assert( widthProperty instanceof NumberProperty, `invalid widthProperty: ${widthProperty}` );
       assert && assert( widthProperty.range, 'widthProperty must have range' );
       assert && assert( modelViewTransform instanceof ModelViewTransform2,
@@ -87,12 +87,12 @@ define( require => {
       visibleProperty.linkAttribute( this, 'visible' );
 
       // right justify with the container
-      const containerViewLocation = modelViewTransform.modelToViewPosition( containerLocation );
+      const containerViewPosition = modelViewTransform.modelToViewPosition( containerPosition );
       const updateLayout = () => {
         widthDisplay.right = dimensionalArrowNode.right - 28;
         widthDisplay.centerY = dimensionalArrowNode.centerY;
-        this.right = containerViewLocation.x;
-        this.top = containerViewLocation.y + 8;
+        this.right = containerViewPosition.x;
+        this.top = containerViewPosition.y + 8;
       };
       updateLayout();
       dimensionalArrowNode.on( 'bounds', () => { updateLayout(); } );

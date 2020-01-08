@@ -37,16 +37,16 @@ define( require => {
     /**
      * @param {function:number} getInitialTemperature - gets the temperature used to compute initial velocity magnitude
      * @param {BooleanProperty} collisionsEnabledProperty - where particle-particle collisions are enabled
-     * @param {Vector2} particleEntryLocation - point where the particles enter the container
+     * @param {Vector2} particleEntryPosition - point where the particles enter the container
      * @param {Object} [options]
      */
-    constructor( getInitialTemperature, collisionsEnabledProperty, particleEntryLocation, options ) {
+    constructor( getInitialTemperature, collisionsEnabledProperty, particleEntryPosition, options ) {
       assert && assert( typeof getInitialTemperature === 'function',
         `invalid getInitialTemperature: ${getInitialTemperature}` );
       assert && assert( collisionsEnabledProperty instanceof BooleanProperty,
         `invalid collisionsEnabledProperty: ${collisionsEnabledProperty}` );
-      assert && assert( particleEntryLocation instanceof Vector2,
-        `invalid particleEntryLocation: ${particleEntryLocation}` );
+      assert && assert( particleEntryPosition instanceof Vector2,
+        `invalid particleEntryPosition: ${particleEntryPosition}` );
 
       options = merge( {
 
@@ -57,7 +57,7 @@ define( require => {
       // @private
       this.getInitialTemperature = getInitialTemperature;
       this.collisionsEnabledProperty = collisionsEnabledProperty;
-      this.particleEntryLocation = particleEntryLocation;
+      this.particleEntryPosition = particleEntryPosition;
 
       // @public (read-only) together these arrays make up the 'particle system'
       // Separate arrays are kept to optimize performance.
@@ -290,7 +290,7 @@ define( require => {
         const particle = createParticle();
 
         // Position the particle just inside the container, accounting for radius.
-        particle.setLocationXY( this.particleEntryLocation.x - particle.radius, this.particleEntryLocation.y );
+        particle.setPositionXY( this.particleEntryPosition.x - particle.radius, this.particleEntryPosition.y );
 
         // Initial speed, |v| = sqrt( 3kT / m )
         const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass );
@@ -307,7 +307,7 @@ define( require => {
     /**
      * Redistributes the particles horizontally in the container.  This is used in the Ideal screen, where resizing
      * the container results in the particles being redistributed in the new container width.
-     * @param {number} scaleX - amount to scale each particle's x location
+     * @param {number} scaleX - amount to scale each particle's x position
      * @public
      */
     redistributeParticles( scaleX ) {
