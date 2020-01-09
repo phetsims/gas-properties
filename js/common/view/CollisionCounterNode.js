@@ -202,7 +202,7 @@ define( require => {
       // dragging, added to background so that other UI components get input events on touch devices
       backgroundNode.addInputListener( new DragListener( {
         targetNode: this,
-        locationProperty: collisionCounter.positionProperty,
+        positionProperty: collisionCounter.positionProperty,
         dragBoundsProperty: dragBoundsProperty
       } ) );
 
