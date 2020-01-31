@@ -188,7 +188,7 @@ define( require => {
       if ( container.isOpenProperty.value ) {
 
         ParticleUtils.escapeParticles( container, this.numberOfHeavyParticlesProperty,
-          this.heavyParticles, this.heavyParticlesOutside, );
+          this.heavyParticles, this.heavyParticlesOutside );
         assert && assert( GasPropertiesUtils.isArrayOf( this.heavyParticlesOutside, HeavyParticle ),
           'heavyParticlesOutside should contain only HeavyParticle' );
 

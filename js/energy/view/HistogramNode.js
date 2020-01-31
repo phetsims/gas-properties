@@ -98,7 +98,7 @@ define( require => {
 
       // Species-specific plots
       const heavyPlotNode = new LinePlotNode( options.chartSize, yScaleProperty,
-        GasPropertiesColorProfile.heavyParticleColorProperty, options.plotLineWidth, );
+        GasPropertiesColorProfile.heavyParticleColorProperty, options.plotLineWidth );
       const lightPlotNode = new LinePlotNode( options.chartSize, yScaleProperty,
         GasPropertiesColorProfile.lightParticleColorProperty, options.plotLineWidth );
 
