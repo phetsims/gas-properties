@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const AquaRadioButtonGroup = require( 'SUN/AquaRadioButtonGroup' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
@@ -73,41 +73,19 @@ define( require => {
         maxWidth: 200 // determined empirically
       } );
 
-      // Nothing
-      const nothingRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.NOTHING,
-        new Text( holdConstantNothingString, TEXT_OPTIONS ),
-        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
+      const items = [
+        { value: HoldConstant.NOTHING, node: new Text( holdConstantNothingString, TEXT_OPTIONS ) },
+        { value: HoldConstant.VOLUME, node: new Text( holdConstantVolumeString, TEXT_OPTIONS ) },
+        { value: HoldConstant.TEMPERATURE, node: new Text( holdConstantTemperatureString, TEXT_OPTIONS ) },
+        { value: HoldConstant.PRESSURE_V, node: new Text( holdConstantPressureVString, TEXT_OPTIONS ) },
+        { value: HoldConstant.PRESSURE_T, node: new Text( holdConstantPressureTString, TEXT_OPTIONS ) }
+      ];
 
-      // Volume (V)
-      const volumeRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.VOLUME,
-        new Text( holdConstantVolumeString, TEXT_OPTIONS ),
-        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
-
-      // Temperature (T)
-      const temperatureRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.TEMPERATURE,
-        new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
-        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
-
-      // Pressure V
-      const pressureVRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.PRESSURE_V,
-        new Text( holdConstantPressureVString, TEXT_OPTIONS ),
-        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
-
-      // Pressure T
-      const pressureTRadioButton = new AquaRadioButton( holdConstantProperty, HoldConstant.PRESSURE_T,
-        new Text( holdConstantPressureTString, TEXT_OPTIONS ),
-        GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS );
-
-      const radioButtonGroup = new VBox( {
+      const radioButtonGroup = new AquaRadioButtonGroup( holdConstantProperty, items, {
+        radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS,
+        orientation: 'vertical',
         align: 'left',
-        spacing: SPACING,
-        children: [
-          nothingRadioButton,
-          volumeRadioButton,
-          temperatureRadioButton,
-          pressureVRadioButton,
-          pressureTRadioButton
-        ]
+        spacing: SPACING
       } );
 
       assert && assert( !options.children, 'HoldConstantControl sets children' );
@@ -118,6 +96,7 @@ define( require => {
       super( options );
 
       // Disable "Temperature (T)" radio button for conditions that are not possible.
+      const temperatureRadioButton = radioButtonGroup.getButton( HoldConstant.TEMPERATURE );
       Property.multilink(
         [ numberOfParticlesProperty, isContainerOpenProperty ],
         ( numberOfParticles, isContainerOpen ) => {
@@ -125,6 +104,8 @@ define( require => {
         } );
 
       // Disable radio buttons for selections that are not possible with zero pressure.
+      const pressureVRadioButton = radioButtonGroup.getButton( HoldConstant.PRESSURE_V );
+      const pressureTRadioButton = radioButtonGroup.getButton( HoldConstant.PRESSURE_T );
       pressureProperty.link( pressure => {
         pressureVRadioButton.enabledProperty.value = ( pressure !== 0 );
         pressureTRadioButton.enabledProperty.value = ( pressure !== 0 );
