@@ -26,7 +26,7 @@ define( require => {
   const holdConstantNothingString = require( 'string!GAS_PROPERTIES/holdConstant.nothing' );
   const holdConstantPressureTString = require( 'string!GAS_PROPERTIES/holdConstant.pressureT' );
   const holdConstantPressureVString = require( 'string!GAS_PROPERTIES/holdConstant.pressureV' );
-  const holdConstantString = require( 'string!GAS_PROPERTIES/holdConstant' );
+  const holdConstantTitleString = require( 'string!GAS_PROPERTIES/holdConstant.title' );
   const holdConstantTemperatureString = require( 'string!GAS_PROPERTIES/holdConstant.temperature' );
   const holdConstantVolumeString = require( 'string!GAS_PROPERTIES/holdConstant.volume' );
 
@@ -67,7 +67,7 @@ define( require => {
         tandem: Tandem.REQUIRED
       }, options );
 
-      const titleNode = new Text( holdConstantString, {
+      const titleNode = new Text( holdConstantTitleString, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColorProfile.textFillProperty,
         maxWidth: 200 // determined empirically
