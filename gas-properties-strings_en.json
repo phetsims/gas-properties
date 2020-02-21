@@ -14,7 +14,7 @@
   "screen.diffusion": {
     "value": "Diffusion"
   },
-  "holdConstant": {
+  "holdConstant.title": {
     "value": "Hold Constant"
   },
   "holdConstant.nothing": {
