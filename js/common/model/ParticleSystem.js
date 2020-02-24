@@ -110,7 +110,7 @@ define( require => {
           assert && assert( this.heavyParticles.length === numberOfHeavyParticles,
             'heavyParticles has not been populated yet' );
           assert && assert( this.lightParticles.length === numberOfLightParticles,
-            'lightParticles not been populated yet' );
+            'lightParticles has not been populated yet' );
           return numberOfHeavyParticles + numberOfLightParticles;
         }, {
           phetioType: DerivedPropertyIO( NumberIO ),
