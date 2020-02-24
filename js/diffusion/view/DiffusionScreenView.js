@@ -184,7 +184,7 @@ define( require => {
      * @override
      */
     stepView( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+      assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
       super.stepView( dt );
       this.particleSystemNode.update();
       this.regionsNode && this.regionsNode.update();

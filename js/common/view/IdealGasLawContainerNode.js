@@ -231,7 +231,7 @@ define( require => {
      * @public
      */
     step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+      assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
 
       // Blow the lid off the container
       if ( !this.container.lidIsOnProperty.value && this.lidNode.visible ) {

@@ -97,7 +97,7 @@ define( require => {
      * @public
      */
     step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+      assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
       if ( this.model.isPlayingProperty.value ) {
         this.stepView( dt );
       }
@@ -109,7 +109,7 @@ define( require => {
      * @public
      */
     stepView( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+      assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
     }
   }
 
