@@ -19,6 +19,7 @@ define( require => {
   const PressureDisplay = require( 'GAS_PROPERTIES/common/view/PressureDisplay' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   const pressureString = require( 'string!GAS_PROPERTIES/pressure' );
@@ -38,30 +39,34 @@ define( require => {
       assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
       assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
+      options = merge( {
+        tandem: Tandem.REQUIRED
+      }, options );
+
       // circular dial with needle
-      const dialNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,
+      const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,
         pressureGauge.pressureRange, {
-          radius: DIAL_RADIUS
+          radius: DIAL_RADIUS,
+          tandem: Tandem.OPTIONAL
         } );
 
       // horizontal post the sticks out of the left side of the gauge
       const postNode = new Rectangle( 0, 0, DIAL_RADIUS + 15, POST_HEIGHT, {
         fill: PressureGaugeNode.createPostGradient( POST_HEIGHT ),
-        right: dialNode.centerX,
-        centerY: dialNode.centerY
+        right: gaugeNode.centerX,
+        centerY: gaugeNode.centerY
       } );
 
       // combo box to display value and choose units
-      const pressureDisplay = new PressureDisplay( pressureGauge, listParent, {
-        centerX: dialNode.centerX,
-        bottom: dialNode.bottom,
-        maxWidth: dialNode.width
+      const comboBox = new PressureDisplay( pressureGauge, listParent, {
+        centerX: gaugeNode.centerX,
+        bottom: gaugeNode.bottom,
+        maxWidth: gaugeNode.width,
+        tandem: options.tandem.createTandem( 'comboBox' )
       } );
 
-      assert && assert( !options || !options.children, 'PressureGaugeNode sets children' );
-      options = merge( {
-        children: [ postNode, dialNode, pressureDisplay ]
-      }, options );
+      assert && assert( !options.children, 'PressureGaugeNode sets children' );
+      options.children = [ postNode, gaugeNode, comboBox ];
 
       super( options );
 

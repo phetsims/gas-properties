@@ -15,6 +15,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Range = require( 'DOT/Range' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
 
   // strings
@@ -35,7 +36,9 @@ define( require => {
       assert && assert( thermometer instanceof Thermometer, `invalid thermometer: ${thermometer}` );
       assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
-      options = merge( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
+      options = merge( {
+        tandem: Tandem.REQUIRED
+      }, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
 
       const items = [
         {

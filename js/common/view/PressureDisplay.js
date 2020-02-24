@@ -17,6 +17,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
   const Range = require( 'DOT/Range' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   const atmospheresString = require( 'string!GAS_PROPERTIES/atmospheres' );
@@ -36,7 +37,9 @@ define( require => {
       assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
       assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
-      options = merge( {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
+      options = merge( {
+        tandem: Tandem.REQUIRED
+      }, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
 
       const items = [
         {

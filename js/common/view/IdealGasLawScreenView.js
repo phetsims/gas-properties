@@ -213,7 +213,8 @@ define( require => {
       // Thermometer
       const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel.thermometer, thermometerListboxParent, {
         right: containerNode.right,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+        tandem: tandem.createTandem( 'thermometerNode' )
       } );
 
       // Parent for the pressure gauge's listbox
@@ -222,7 +223,8 @@ define( require => {
       // Pressure Gauge
       const pressureGaugeNode = new PressureGaugeNode( model.pressureModel.pressureGauge, pressureGaugeListboxParent, {
         left: containerNode.right - 2,
-        centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30
+        centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30,
+        tandem: tandem.createTandem( 'pressureGaugeNode' )
       } );
 
       // The complete system of particles, inside and outside the container
@@ -253,7 +255,8 @@ define( require => {
       // Button to erase all particles from container
       const eraseParticlesButton = new EraseParticlesButton( model.particleSystem, {
         right: containerNode.right,
-        top: containerWidthNode.bottom + 5
+        top: containerWidthNode.bottom + 5,
+        tandem: tandem.createTandem( 'eraseParticlesButton' )
       } );
 
       // Common parent for all tools, so we can move the selected tool to the front without affecting other things.
@@ -262,13 +265,16 @@ define( require => {
       // Collision Counter
       if ( model.collisionCounter ) {
         const collisionCounterListboxParent = new Node();
-        toolsParent.addChild( new CollisionCounterNode( model.collisionCounter, collisionCounterListboxParent, this.visibleBoundsProperty ) );
+        toolsParent.addChild( new CollisionCounterNode( model.collisionCounter, collisionCounterListboxParent, this.visibleBoundsProperty, {
+          tandem: tandem.createTandem( 'collisionCounterNode' )
+        } ) );
         toolsParent.addChild( collisionCounterListboxParent );
       }
 
       // Stopwatch
       toolsParent.addChild( new GasPropertiesStopwatchNode( model.stopwatch, {
-        visibleBoundsProperty: this.visibleBoundsProperty
+        visibleBoundsProperty: this.visibleBoundsProperty,
+        tandem: tandem.createTandem( 'stopwatchNode' )
       } ) );
 
       // Show how the collision detection space is partitioned into regions

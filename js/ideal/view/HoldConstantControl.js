@@ -74,18 +74,39 @@ define( require => {
       } );
 
       const items = [
-        { value: HoldConstant.NOTHING, node: new Text( holdConstantNothingString, TEXT_OPTIONS ) },
-        { value: HoldConstant.VOLUME, node: new Text( holdConstantVolumeString, TEXT_OPTIONS ) },
-        { value: HoldConstant.TEMPERATURE, node: new Text( holdConstantTemperatureString, TEXT_OPTIONS ) },
-        { value: HoldConstant.PRESSURE_V, node: new Text( holdConstantPressureVString, TEXT_OPTIONS ) },
-        { value: HoldConstant.PRESSURE_T, node: new Text( holdConstantPressureTString, TEXT_OPTIONS ) }
+        {
+          value: HoldConstant.NOTHING,
+          node: new Text( holdConstantNothingString, TEXT_OPTIONS ),
+          tandemName: 'nothingRadioButton'
+        },
+        {
+          value: HoldConstant.VOLUME,
+          node: new Text( holdConstantVolumeString, TEXT_OPTIONS ),
+          tandemName: 'volumeRadioButton'
+        },
+        {
+          value: HoldConstant.TEMPERATURE,
+          node: new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
+          tandemName: 'temperatureRadioButton'
+        },
+        {
+          value: HoldConstant.PRESSURE_V,
+          node: new Text( holdConstantPressureVString, TEXT_OPTIONS ),
+          tandemName: 'pressureVRadioButton'
+        },
+        {
+          value: HoldConstant.PRESSURE_T,
+          node: new Text( holdConstantPressureTString, TEXT_OPTIONS ),
+          tandemName: 'pressureTRadioButton'
+        }
       ];
 
       const radioButtonGroup = new AquaRadioButtonGroup( holdConstantProperty, items, {
         radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS,
         orientation: 'vertical',
         align: 'left',
-        spacing: SPACING
+        spacing: SPACING,
+        tandem: options.tandem.createTandem( 'radioButtonGroup' )
       } );
 
       assert && assert( !options.children, 'HoldConstantControl sets children' );

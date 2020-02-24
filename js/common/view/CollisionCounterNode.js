@@ -31,6 +31,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
@@ -68,7 +69,10 @@ define( require => {
         `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
       options = merge( {
-        cursor: 'pointer'
+        cursor: 'pointer',
+
+        // phet-io
+        tandem: Tandem.REQUIRED
       }, options );
 
       const wallCollisionsTextNode = new Text( wallCollisionsString, {
@@ -86,7 +90,9 @@ define( require => {
         cornerRadius: 3
       } );
 
-      const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty );
+      const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty, {
+        tandem: options.tandem.createTandem( 'playResetButton' )
+      } );
 
       const samplePeriodTextNode = new Text( samplePeriodString, {
         pickable: false,
@@ -111,12 +117,13 @@ define( require => {
       } );
 
       // Combo box
-      const comboBox = new ComboBox( comboBoxItems, collisionCounter.samplePeriodProperty, listboxParent, {
+      const samplePeriodComboBox = new ComboBox( comboBoxItems, collisionCounter.samplePeriodProperty, listboxParent, {
         listPosition: 'below',
         align: 'right',
         xMargin: 6,
         yMargin: 3,
-        cornerRadius: 5
+        cornerRadius: 5,
+        tandem: options.tandem.createTandem( 'samplePeriodComboBox' )
       } );
 
       // all of the stuff that appears on the counter
@@ -131,7 +138,7 @@ define( require => {
           } ),
           new VStrut( 2 ),
           samplePeriodTextNode,
-          comboBox
+          samplePeriodComboBox
         ]
       } );
 
@@ -203,7 +210,8 @@ define( require => {
       backgroundNode.addInputListener( new DragListener( {
         targetNode: this,
         positionProperty: collisionCounter.positionProperty,
-        dragBoundsProperty: dragBoundsProperty
+        dragBoundsProperty: dragBoundsProperty,
+        tandem: options.tandem.createTandem( 'dragListener' )
       } ) );
 
       // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
@@ -213,7 +221,8 @@ define( require => {
         start: () => {
           this.moveToFront();
           listboxParent.moveToFront();
-        }
+        },
+        tandem: options.tandem.createTandem( 'moveToFrontListener' )
       } ) );
     }
   }

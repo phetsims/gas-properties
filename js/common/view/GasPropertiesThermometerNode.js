@@ -13,6 +13,7 @@ define( require => {
   const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
   const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const TemperatureDisplay = require( 'GAS_PROPERTIES/common/view/TemperatureDisplay' );
   const Thermometer = require( 'GAS_PROPERTIES/common/model/Thermometer' );
   const ThermometerNode = require( 'SCENERY_PHET/ThermometerNode' );
@@ -33,7 +34,10 @@ define( require => {
 
         // superclass options
         spacing: 5,
-        align: 'center'
+        align: 'center',
+
+        // phet-io
+        tandem: Tandem.REQUIRED
       }, options );
 
       // temperatureProperty is null when there are no particles in the container.
@@ -58,13 +62,14 @@ define( require => {
         } );
 
       // ComboBox that displays dynamic temperature for various units, centered above the thermometer
-      const temperatureDisplay = new TemperatureDisplay( thermometer, listParent, {
-        maxWidth: 4 * thermometerNode.width
+      const comboBox = new TemperatureDisplay( thermometer, listParent, {
+        maxWidth: 4 * thermometerNode.width,
+        tandem: options.tandem.createTandem( 'comboBox' )
       } );
 
       assert && assert( !options.children, 'GasPropertiesThermometerNode sets children' );
       options = merge( {
-        children: [ temperatureDisplay, thermometerNode ]
+        children: [ comboBox, thermometerNode ]
       }, options );
 
       super( options );
