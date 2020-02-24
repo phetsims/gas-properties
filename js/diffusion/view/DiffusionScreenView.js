@@ -130,7 +130,8 @@ define( require => {
 
       // Stopwatch
       const stopwatchNode = new GasPropertiesStopwatchNode( model.stopwatch, {
-        visibleBoundsProperty: this.visibleBoundsProperty
+        visibleBoundsProperty: this.visibleBoundsProperty,
+        tandem: tandem.createTandem( 'stopwatchNode' )
       } );
 
       // Rendering order

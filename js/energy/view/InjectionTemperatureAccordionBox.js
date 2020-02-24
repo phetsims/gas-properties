@@ -81,11 +81,20 @@ define( require => {
 
       // Radio buttons
       const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
-        { value: false, node: new Text( matchContainerString, TEXT_OPTIONS ) },
-        { value: true, node: new Text( setToString, TEXT_OPTIONS ) }
+        {
+          value: false,
+          node: new Text( matchContainerString, TEXT_OPTIONS ),
+          tandemName: 'matchContainerRadioButton'
+        },
+        {
+          value: true,
+          node: new Text( setToString, TEXT_OPTIONS ),
+          tandemName: 'setToRadioButton'
+        }
       ], {
         spacing: 12,
-        radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS
+        radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS,
+        tandem: options.tandem.createTandem( 'radioButtonGroup' )
       } );
 
       // Major ticks for temperature slider
@@ -127,7 +136,8 @@ define( require => {
           constrainValue: value => {
             return Utils.roundToInterval( value, 50 );
           }
-        }
+        },
+        tandem: options.tandem.createTandem( 'temperatureControl' )
       } );
 
       const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );

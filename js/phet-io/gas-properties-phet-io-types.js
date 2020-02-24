@@ -959,6 +959,25 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO<Vector2IO>"
     },
+    "NumberControlIO": {
+      "documentation": "A number control with a title, slider and +/- buttons",
+      "events": [],
+      "methodOrder": [],
+      "methods": {
+        "moveBackward": {
+          "documentation": "Move this node one index backward in each of its parents.  If the node is already at the back, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        },
+        "moveForward": {
+          "documentation": "Move this node one index forward in each of its parents.  If the node is already at the front, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        }
+      },
+      "supertype": "NodeIO",
+      "typeName": "NumberControlIO"
+    },
     "NumberDisplayIO": {
       "documentation": "A numeric readout with a background",
       "events": [],

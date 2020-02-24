@@ -88,7 +88,8 @@ define( require => {
         // optional Collisions checkbox, prepended so that it appears at top
         children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
           text: collisionsString,
-          textMaxWidth: 175 // determined empirically
+          textMaxWidth: 175, // determined empirically
+          tandem: options.tandem.createTandem( 'collisionsCheckbox' )
         } ) );
       }
 

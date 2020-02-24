@@ -128,20 +128,20 @@ define( require => {
   gasProperties.register( 'DiffusionSettingsNode', DiffusionSettingsNode );
 
   /**
-   * A title and two spinners, for changing the same quantity for the left and right sides of the container.
+   * A label and two spinners, for changing the same quantity for the left and right sides of the container.
    */
   class QuantityControl extends VBox {
 
     /**
-     * @param {string} title
+     * @param {string} label
      * @param {ModelViewTransform2} modelViewTransform
      * @param {NumberProperty} leftProperty - quantity for the left side of the container
      * @param {NumberProperty} rightProperty - quantity for the right side of the container
      * @param {AlignGroup} spinnersAlignGroup
      * @param {Object} [options]
      */
-    constructor( title, modelViewTransform, leftProperty, rightProperty, spinnersAlignGroup, options ) {
-      assert && assert( typeof title === 'string', `invalid title: ${title}` );
+    constructor( label, modelViewTransform, leftProperty, rightProperty, spinnersAlignGroup, options ) {
+      assert && assert( typeof label === 'string', `invalid label: ${label}` );
       assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
       assert && assert( leftProperty instanceof NumberProperty, `invalid leftProperty: ${leftProperty}` );
       assert && assert( rightProperty instanceof NumberProperty, `invalid rightProperty: ${rightProperty}` );
@@ -158,11 +158,12 @@ define( require => {
         tandem: Tandem.REQUIRED
       }, options );
 
-      // title
-      const titleNode = new Text( title, {
+      // label
+      const labelNode = new Text( label, {
         font: GasPropertiesConstants.CONTROL_FONT,
         fill: GasPropertiesColorProfile.textFillProperty,
-        maxWidth: 200 // determined empirically
+        maxWidth: 200, // determined empirically
+        tandem: options.tandem.createTandem( 'labelNode' )
       } );
 
       // icons
@@ -174,8 +175,12 @@ define( require => {
         group: spinnersAlignGroup,
         xAlign: 'left'
       };
-      const leftSpinner = new AlignBox( new GasPropertiesSpinner( leftProperty, options.spinnerOptions ), alignBoxOptions );
-      const rightSpinner = new AlignBox( new GasPropertiesSpinner( rightProperty, options.spinnerOptions ), alignBoxOptions );
+      const leftSpinner = new AlignBox( new GasPropertiesSpinner( leftProperty, merge( {
+        tandem: options.tandem.createTandem( 'leftSpinner' )
+      }, options.spinnerOptions ) ), alignBoxOptions );
+      const rightSpinner = new AlignBox( new GasPropertiesSpinner( rightProperty, merge( {
+        tandem: options.tandem.createTandem( 'rightSpinner' )
+      }, options.spinnerOptions ) ), alignBoxOptions );
 
       // left icon and spinner
       const leftBox = new HBox( {
@@ -195,10 +200,10 @@ define( require => {
         children: [ new HStrut( 1 ), leftBox, rightBox ]
       } );
 
-      // title and controls
+      // label and controls
       assert && assert( !options.children, 'DataNode sets children' );
       options = merge( {
-        children: [ titleNode, hBox ]
+        children: [ labelNode, hBox ]
       }, options );
 
       super( options );
