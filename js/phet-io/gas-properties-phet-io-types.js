@@ -959,6 +959,25 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO<Vector2IO>"
     },
+    "NumberDisplayIO": {
+      "documentation": "A numeric readout with a background",
+      "events": [],
+      "methodOrder": [],
+      "methods": {
+        "moveBackward": {
+          "documentation": "Move this node one index backward in each of its parents.  If the node is already at the back, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        },
+        "moveForward": {
+          "documentation": "Move this node one index forward in each of its parents.  If the node is already at the front, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        }
+      },
+      "supertype": "NodeIO",
+      "typeName": "NumberDisplayIO"
+    },
     "NumberIO": {
       "documentation": "Wrapper for the built-in JS number type (floating point, but also represents integers)",
       "events": [],

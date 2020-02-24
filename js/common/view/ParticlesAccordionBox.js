@@ -21,6 +21,7 @@ define( require => {
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const NumberOfParticlesControl = require( 'GAS_PROPERTIES/common/view/NumberOfParticlesControl' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -49,7 +50,10 @@ define( require => {
       options = merge( {
         fixedWidth: 100,
         contentXMargin: 0,
-        collisionsEnabledProperty: null // {null|BooleanProperty} no checkbox if null
+        collisionsEnabledProperty: null, // {null|BooleanProperty} no checkbox if null
+
+        // phet-io
+        tandem: Tandem.REQUIRED
       }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // superclass options
@@ -68,11 +72,15 @@ define( require => {
 
         // Heavy
         new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-          heavyString, numberOfHeavyParticlesProperty ),
+          heavyString, numberOfHeavyParticlesProperty, {
+          tandem: options.tandem.createTandem( 'numberOfHeavyParticlesControl' )
+          } ),
 
         // Light
         new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-          lightString, numberOfLightParticlesProperty )
+          lightString, numberOfLightParticlesProperty, {
+            tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
+          } )
       ];
 
       if ( options.collisionsEnabledProperty ) {

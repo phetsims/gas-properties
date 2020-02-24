@@ -18,6 +18,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -34,15 +35,18 @@ define( require => {
      */
     constructor( icon, title, numberOfParticlesProperty, options ) {
       assert && assert( icon instanceof Node, `invalid icon: ${icon}` );
+      assert && assert( typeof title === 'string', `invalid title: ${title}` );
       assert && assert( numberOfParticlesProperty instanceof NumberProperty,
         `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-      assert && assert( typeof title === 'string', `invalid title: ${title}` );
 
       options = merge( {
 
         // superclass options
         align: 'left',
-        spacing: 10
+        spacing: 10,
+
+        // phet-io
+        tandem: Tandem.REQUIRED
       }, options );
 
       assert && assert( numberOfParticlesProperty instanceof NumberProperty,
@@ -53,7 +57,8 @@ define( require => {
       const titleNode = new Text( title, {
         font: GasPropertiesConstants.CONTROL_FONT,
         fill: GasPropertiesColorProfile.textFillProperty,
-        maxWidth: 150 // determined empirically
+        maxWidth: 150, // determined empirically,
+        tandem: options.tandem.createTandem( 'titleNode' )
       } );
 
       const titleBox = new HBox( {
@@ -67,7 +72,8 @@ define( require => {
         numberDisplayOptions: {
           font: new PhetFont( 18 )
         },
-        maxWidth: 190 // determined empirically
+        maxWidth: 190, // determined empirically
+        tandem: options.tandem.createTandem( 'spinner' )
       } );
 
       // Limit width of text

@@ -70,7 +70,8 @@ define( require => {
       const titleNode = new Text( holdConstantTitleString, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColorProfile.textFillProperty,
-        maxWidth: 200 // determined empirically
+        maxWidth: 200, // determined empirically
+        tandem: options.tandem.createTandem( 'titleNode' )
       } );
 
       const items = [
