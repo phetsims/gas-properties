@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * DiffusionSettingsNode is the user interface for setting initial conditions in the 'Diffusion' screen.
