@@ -5,46 +5,43 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
-  const IdealModel = require( 'GAS_PROPERTIES/ideal/model/IdealModel' );
-  const IdealScreenView = require( 'GAS_PROPERTIES/ideal/view/IdealScreenView' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import merge from '../../../phet-core/js/merge.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
+import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../gas-properties-strings.js';
+import gasProperties from '../gasProperties.js';
+import IdealModel from './model/IdealModel.js';
+import IdealScreenView from './view/IdealScreenView.js';
 
-  // strings
-  const screenIdealString = require( 'string!GAS_PROPERTIES/screen.ideal' );
+const screenIdealString = gasPropertiesStrings.screen.ideal;
 
-  class IdealScreen extends GasPropertiesScreen {
+class IdealScreen extends GasPropertiesScreen {
 
-    /**
-     * @param {Tandem} tandem
-     * @param {Object} [options]
-     */
-    constructor( tandem, options ) {
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  /**
+   * @param {Tandem} tandem
+   * @param {Object} [options]
+   */
+  constructor( tandem, options ) {
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        name: screenIdealString,
-        homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
-        hasHoldConstantControls: true
-      }, options );
+      // superclass options
+      name: screenIdealString,
+      homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
+      hasHoldConstantControls: true
+    }, options );
 
-      const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
-      const createView = model => new IdealScreenView( model, tandem.createTandem( 'view' ), {
-        hasHoldConstantControls: options.hasHoldConstantControls
-      } );
+    const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
+    const createView = model => new IdealScreenView( model, tandem.createTandem( 'view' ), {
+      hasHoldConstantControls: options.hasHoldConstantControls
+    } );
 
-      super( createModel, createView, tandem, options );
-    }
+    super( createModel, createView, tandem, options );
   }
+}
 
-  return gasProperties.register( 'IdealScreen', IdealScreen );
-} );
+gasProperties.register( 'IdealScreen', IdealScreen );
+export default IdealScreen;

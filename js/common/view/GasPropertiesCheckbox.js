@@ -6,72 +6,69 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const Checkbox = require( 'SUN/Checkbox' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const merge = require( 'PHET_CORE/merge' );
-  const RichText = require( 'SCENERY/nodes/RichText' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
-  class GasPropertiesCheckbox extends Checkbox {
+class GasPropertiesCheckbox extends Checkbox {
 
-    /**
-     * @param {BooleanProperty} booleanProperty
-     * @param {Object} [options]
-     */
-    constructor( booleanProperty, options ) {
-      assert && assert( booleanProperty instanceof BooleanProperty, `invalid booleanProperty: ${booleanProperty}` );
+  /**
+   * @param {BooleanProperty} booleanProperty
+   * @param {Object} [options]
+   */
+  constructor( booleanProperty, options ) {
+    assert && assert( booleanProperty instanceof BooleanProperty, `invalid booleanProperty: ${booleanProperty}` );
 
-      options = merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-        text: null, // {string|null} optional text label
-        icon: null, // {Node|null} optional icon, to the right of text
-        textFill: GasPropertiesColorProfile.textFillProperty,
-        textMaxWidth: null,
-        textIconSpacing: 10, // horizontal space between text and icon
-        font: GasPropertiesConstants.CONTROL_FONT,
+    options = merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
+      text: null, // {string|null} optional text label
+      icon: null, // {Node|null} optional icon, to the right of text
+      textFill: GasPropertiesColorProfile.textFillProperty,
+      textMaxWidth: null,
+      textIconSpacing: 10, // horizontal space between text and icon
+      font: GasPropertiesConstants.CONTROL_FONT,
 
-        // superclass options
-        checkboxColor: GasPropertiesColorProfile.checkboxStrokeProperty,
-        checkboxColorBackground: GasPropertiesColorProfile.checkboxFillProperty
-      }, options );
+      // superclass options
+      checkboxColor: GasPropertiesColorProfile.checkboxStrokeProperty,
+      checkboxColorBackground: GasPropertiesColorProfile.checkboxFillProperty
+    }, options );
 
-      assert && assert( options.text || options.icon, 'text or icon is required' );
+    assert && assert( options.text || options.icon, 'text or icon is required' );
 
-      const contentChildren = [];
+    const contentChildren = [];
 
-      if ( options.text ) {
-        contentChildren.push( new RichText( options.text, {
-          fill: options.textFill,
-          font: options.font,
-          maxWidth: options.textMaxWidth
-        } ) );
-      }
-
-      if ( options.icon ) {
-        contentChildren.push( options.icon );
-      }
-
-      let content = null;
-      if ( contentChildren.length === 1 ) {
-        content = contentChildren[ 0 ];
-      }
-      else {
-        content = new HBox( {
-          align: 'center',
-          spacing: options.textIconSpacing,
-          children: contentChildren
-        } );
-      }
-
-      super( content, booleanProperty, options );
+    if ( options.text ) {
+      contentChildren.push( new RichText( options.text, {
+        fill: options.textFill,
+        font: options.font,
+        maxWidth: options.textMaxWidth
+      } ) );
     }
-  }
 
-  return gasProperties.register( 'GasPropertiesCheckbox', GasPropertiesCheckbox );
-} );
+    if ( options.icon ) {
+      contentChildren.push( options.icon );
+    }
+
+    let content = null;
+    if ( contentChildren.length === 1 ) {
+      content = contentChildren[ 0 ];
+    }
+    else {
+      content = new HBox( {
+        align: 'center',
+        spacing: options.textIconSpacing,
+        children: contentChildren
+      } );
+    }
+
+    super( content, booleanProperty, options );
+  }
+}
+
+gasProperties.register( 'GasPropertiesCheckbox', GasPropertiesCheckbox );
+export default GasPropertiesCheckbox;

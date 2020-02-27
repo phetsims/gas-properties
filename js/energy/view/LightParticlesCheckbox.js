@@ -5,32 +5,29 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const LightParticle = require( 'GAS_PROPERTIES/common/model/LightParticle' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const SpeciesHistogramCheckbox = require( 'GAS_PROPERTIES/energy/view/SpeciesHistogramCheckbox' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import LightParticle from '../../common/model/LightParticle.js';
+import gasProperties from '../../gasProperties.js';
+import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
 
-  class LightParticlesCheckbox extends SpeciesHistogramCheckbox {
+class LightParticlesCheckbox extends SpeciesHistogramCheckbox {
 
-    /**
-     * @param {BooleanProperty} lightVisibleProperty
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( lightVisibleProperty, modelViewTransform, options ) {
-      assert && assert( lightVisibleProperty instanceof BooleanProperty,
-        `invalid lightVisibleProperty: ${lightVisibleProperty}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {BooleanProperty} lightVisibleProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( lightVisibleProperty, modelViewTransform, options ) {
+    assert && assert( lightVisibleProperty instanceof BooleanProperty,
+      `invalid lightVisibleProperty: ${lightVisibleProperty}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
 
-      super( lightVisibleProperty, new LightParticle(), modelViewTransform, options);
-    }
+    super( lightVisibleProperty, new LightParticle(), modelViewTransform, options );
   }
+}
 
-  return gasProperties.register( 'LightParticlesCheckbox', LightParticlesCheckbox );
-} );
+gasProperties.register( 'LightParticlesCheckbox', LightParticlesCheckbox );
+export default LightParticlesCheckbox;

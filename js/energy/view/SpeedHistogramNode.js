@@ -5,49 +5,46 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const HistogramNode = require( 'GAS_PROPERTIES/energy/view/HistogramNode' );
-  const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
-  const merge = require( 'PHET_CORE/merge' );
+import merge from '../../../../phet-core/js/merge.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import HistogramsModel from '../model/HistogramsModel.js';
+import HistogramNode from './HistogramNode.js';
 
-  // strings
-  const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
-  const speedString = require( 'string!GAS_PROPERTIES/speed' );
+const numberOfParticlesString = gasPropertiesStrings.numberOfParticles;
+const speedString = gasPropertiesStrings.speed;
 
-  class SpeedHistogramNode extends HistogramNode {
+class SpeedHistogramNode extends HistogramNode {
 
-    /**
-     * @param {HistogramsModel} histogramsModel
-     * @param {Object} [options]
-     */
-    constructor( histogramsModel, options ) {
-      assert && assert( histogramsModel instanceof HistogramsModel, `invalid histogramModel: ${histogramsModel}` );
+  /**
+   * @param {HistogramsModel} histogramsModel
+   * @param {Object} [options]
+   */
+  constructor( histogramsModel, options ) {
+    assert && assert( histogramsModel instanceof HistogramsModel, `invalid histogramModel: ${histogramsModel}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        barColor: GasPropertiesColorProfile.speedHistogramBarColorProperty
-      }, options );
+      // superclass options
+      barColor: GasPropertiesColorProfile.speedHistogramBarColorProperty
+    }, options );
 
-      super(
-        histogramsModel.numberOfBins,
-        histogramsModel.speedBinWidth,
-        histogramsModel.binCountsUpdatedEmitter,
-        histogramsModel.allSpeedBinCountsProperty,
-        histogramsModel.heavySpeedBinCountsProperty,
-        histogramsModel.lightSpeedBinCountsProperty,
-        histogramsModel.yScaleProperty,
-        speedString, // x-axis label
-        numberOfParticlesString, // y-axis label
-        options
-      );
-    }
+    super(
+      histogramsModel.numberOfBins,
+      histogramsModel.speedBinWidth,
+      histogramsModel.binCountsUpdatedEmitter,
+      histogramsModel.allSpeedBinCountsProperty,
+      histogramsModel.heavySpeedBinCountsProperty,
+      histogramsModel.lightSpeedBinCountsProperty,
+      histogramsModel.yScaleProperty,
+      speedString, // x-axis label
+      numberOfParticlesString, // y-axis label
+      options
+    );
   }
+}
 
-  return gasProperties.register( 'SpeedHistogramNode', SpeedHistogramNode );
-} );
+gasProperties.register( 'SpeedHistogramNode', SpeedHistogramNode );
+export default SpeedHistogramNode;

@@ -14,20 +14,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import gasProperties from '../../gasProperties.js';
 
-  const HoldConstant = Enumeration.byKeys( [
-    'NOTHING',     // change N, T, or V => change P
-    'VOLUME',      // change N or T => change P
-    'TEMPERATURE', // change N or V => change P
-    'PRESSURE_V',  // change N or T => change V
-    'PRESSURE_T'   // change N or V => change T
-  ] );
+const HoldConstant = Enumeration.byKeys( [
+  'NOTHING',     // change N, T, or V => change P
+  'VOLUME',      // change N or T => change P
+  'TEMPERATURE', // change N or V => change P
+  'PRESSURE_V',  // change N or T => change V
+  'PRESSURE_T'   // change N or V => change T
+] );
 
-  return gasProperties.register( 'HoldConstant', HoldConstant );
-} );
+gasProperties.register( 'HoldConstant', HoldConstant );
+export default HoldConstant;

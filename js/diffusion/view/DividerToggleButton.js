@@ -5,50 +5,47 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
 
-  // strings
-  const removeDividerString = require( 'string!GAS_PROPERTIES/removeDivider' );
-  const resetDividerString = require( 'string!GAS_PROPERTIES/resetDivider' );
+const removeDividerString = gasPropertiesStrings.removeDivider;
+const resetDividerString = gasPropertiesStrings.resetDivider;
 
-  class DividerToggleButton extends BooleanRectangularToggleButton {
+class DividerToggleButton extends BooleanRectangularToggleButton {
 
-    /**
-     * @param {BooleanProperty} hasDividerProperty
-     * @param {Object} [options]
-     */
-    constructor( hasDividerProperty, options ) {
-      assert && assert( hasDividerProperty instanceof BooleanProperty,
-        `invalid hasDividerProperty: ${hasDividerProperty}` );
+  /**
+   * @param {BooleanProperty} hasDividerProperty
+   * @param {Object} [options]
+   */
+  constructor( hasDividerProperty, options ) {
+    assert && assert( hasDividerProperty instanceof BooleanProperty,
+      `invalid hasDividerProperty: ${hasDividerProperty}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        baseColor: GasPropertiesColorProfile.dividerColorProperty
-      }, options );
+      // superclass options
+      baseColor: GasPropertiesColorProfile.dividerColorProperty
+    }, options );
 
-      const textOptions = {
-        font: GasPropertiesConstants.CONTROL_FONT,
-        fill: 'black',
-        maxWidth: 150 // determined empirically
-      };
+    const textOptions = {
+      font: GasPropertiesConstants.CONTROL_FONT,
+      fill: 'black',
+      maxWidth: 150 // determined empirically
+    };
 
-      const trueNode = new Text( removeDividerString, textOptions );
-      const falseNode = new Text( resetDividerString, textOptions );
+    const trueNode = new Text( removeDividerString, textOptions );
+    const falseNode = new Text( resetDividerString, textOptions );
 
-      super( trueNode, falseNode, hasDividerProperty, options );
-    }
+    super( trueNode, falseNode, hasDividerProperty, options );
   }
+}
 
-  return gasProperties.register( 'DividerToggleButton', DividerToggleButton );
-} );
+gasProperties.register( 'DividerToggleButton', DividerToggleButton );
+export default DividerToggleButton;

@@ -7,97 +7,94 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const DimensionalArrowsNode = require( 'GAS_PROPERTIES/common/view/DimensionalArrowsNode' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Range = require( 'DOT/Range' );
-  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  const Vector2 = require( 'DOT/Vector2' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Range from '../../../../dot/js/Range.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
-  // strings
-  const nanometersString = require( 'string!GAS_PROPERTIES/nanometers' );
-  const valueUnitsString = require( 'string!GAS_PROPERTIES/valueUnits' );
+const nanometersString = gasPropertiesStrings.nanometers;
+const valueUnitsString = gasPropertiesStrings.valueUnits;
 
-  class ContainerWidthNode extends Node {
+class ContainerWidthNode extends Node {
 
-    /**
-     * @param {Vector2} containerPosition - position of the container, in model coordinates
-     * @param {NumberProperty} widthProperty - width of the container, in model coordinates
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {BooleanProperty} visibleProperty
-     * @param {Object} [options]
-     */
-    constructor( containerPosition, widthProperty, modelViewTransform, visibleProperty, options ) {
-      assert && assert( containerPosition instanceof Vector2, `invalid containerPosition: ${containerPosition}` );
-      assert && assert( widthProperty instanceof NumberProperty, `invalid widthProperty: ${widthProperty}` );
-      assert && assert( widthProperty.range, 'widthProperty must have range' );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
+  /**
+   * @param {Vector2} containerPosition - position of the container, in model coordinates
+   * @param {NumberProperty} widthProperty - width of the container, in model coordinates
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {BooleanProperty} visibleProperty
+   * @param {Object} [options]
+   */
+  constructor( containerPosition, widthProperty, modelViewTransform, visibleProperty, options ) {
+    assert && assert( containerPosition instanceof Vector2, `invalid containerPosition: ${containerPosition}` );
+    assert && assert( widthProperty instanceof NumberProperty, `invalid widthProperty: ${widthProperty}` );
+    assert && assert( widthProperty.range, 'widthProperty must have range' );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
+    assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
 
-      // Convert the width from model to view coordinates
-      const viewWidthProperty = new DerivedProperty( [ widthProperty ],
-        width => modelViewTransform.modelToViewDeltaX( width ), {
-          valueType: 'number'
-        } );
-
-      // Dimensional arrows, in view coordinates
-      const dimensionalArrowNode = new DimensionalArrowsNode( viewWidthProperty, {
-        color: GasPropertiesColorProfile.sizeArrowColorProperty
-      } );
-
-      // Convert from pm to nm
-      const nmWidthProperty = new DerivedProperty( [ widthProperty ], width => width / 1000, {
+    // Convert the width from model to view coordinates
+    const viewWidthProperty = new DerivedProperty( [ widthProperty ],
+      width => modelViewTransform.modelToViewDeltaX( width ), {
         valueType: 'number'
       } );
-      const nmWidthRange = new Range( widthProperty.range.min / 1000, widthProperty.range.max / 1000 );
 
-      // Display the width in nm
-      const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
-        decimalPlaces: 1,
-        valuePattern: StringUtils.fillIn( valueUnitsString, { units: nanometersString } ),
-        font: new PhetFont( 12 ),
-        cornerRadius: 3,
-        numberFill: 'black',
-        numberMaxWidth: 100,
-        backgroundFill: 'white',
-        backgroundStroke: 'black',
-        backgroundLineWidth: 0.5
-      } );
+    // Dimensional arrows, in view coordinates
+    const dimensionalArrowNode = new DimensionalArrowsNode( viewWidthProperty, {
+      color: GasPropertiesColorProfile.sizeArrowColorProperty
+    } );
 
-      assert && assert( !options || !options.children, 'ContainerWidthNode sets children' );
-      options = merge( {}, options, {
-        children: [ dimensionalArrowNode, widthDisplay ]
-      } );
+    // Convert from pm to nm
+    const nmWidthProperty = new DerivedProperty( [ widthProperty ], width => width / 1000, {
+      valueType: 'number'
+    } );
+    const nmWidthRange = new Range( widthProperty.range.min / 1000, widthProperty.range.max / 1000 );
 
-      super( options );
+    // Display the width in nm
+    const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
+      decimalPlaces: 1,
+      valuePattern: StringUtils.fillIn( valueUnitsString, { units: nanometersString } ),
+      font: new PhetFont( 12 ),
+      cornerRadius: 3,
+      numberFill: 'black',
+      numberMaxWidth: 100,
+      backgroundFill: 'white',
+      backgroundStroke: 'black',
+      backgroundLineWidth: 0.5
+    } );
 
-      visibleProperty.linkAttribute( this, 'visible' );
+    assert && assert( !options || !options.children, 'ContainerWidthNode sets children' );
+    options = merge( {}, options, {
+      children: [ dimensionalArrowNode, widthDisplay ]
+    } );
 
-      // right justify with the container
-      const containerViewPosition = modelViewTransform.modelToViewPosition( containerPosition );
-      const updateLayout = () => {
-        widthDisplay.right = dimensionalArrowNode.right - 28;
-        widthDisplay.centerY = dimensionalArrowNode.centerY;
-        this.right = containerViewPosition.x;
-        this.top = containerViewPosition.y + 8;
-      };
-      updateLayout();
-      dimensionalArrowNode.on( 'bounds', () => { updateLayout(); } );
-    }
+    super( options );
+
+    visibleProperty.linkAttribute( this, 'visible' );
+
+    // right justify with the container
+    const containerViewPosition = modelViewTransform.modelToViewPosition( containerPosition );
+    const updateLayout = () => {
+      widthDisplay.right = dimensionalArrowNode.right - 28;
+      widthDisplay.centerY = dimensionalArrowNode.centerY;
+      this.right = containerViewPosition.x;
+      this.top = containerViewPosition.y + 8;
+    };
+    updateLayout();
+    dimensionalArrowNode.on( 'bounds', () => { updateLayout(); } );
   }
+}
 
-  return gasProperties.register( 'ContainerWidthNode', ContainerWidthNode );
-} );
+gasProperties.register( 'ContainerWidthNode', ContainerWidthNode );
+export default ContainerWidthNode;

@@ -5,55 +5,52 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
-  const PlayIconShape = require( 'SCENERY_PHET/PlayIconShape' );
-  const UTurnArrowShape = require( 'SCENERY_PHET/UTurnArrowShape' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import PlayIconShape from '../../../../scenery-phet/js/PlayIconShape.js';
+import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
+import gasProperties from '../../gasProperties.js';
 
-  class PlayResetButton extends BooleanRectangularToggleButton {
+class PlayResetButton extends BooleanRectangularToggleButton {
 
-    /**
-     * @param {BooleanProperty} isPlayingProperty
-     * @param {Object} [options]
-     */
-    constructor( isPlayingProperty, options ) {
-      assert && assert( isPlayingProperty instanceof BooleanProperty,
-        `invalid isPlayingProperty: ${isPlayingProperty}` );
+  /**
+   * @param {BooleanProperty} isPlayingProperty
+   * @param {Object} [options]
+   */
+  constructor( isPlayingProperty, options ) {
+    assert && assert( isPlayingProperty instanceof BooleanProperty,
+      `invalid isPlayingProperty: ${isPlayingProperty}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        baseColor: '#DFE0E1'
-      }, options );
+      // superclass options
+      baseColor: '#DFE0E1'
+    }, options );
 
-      const iconOptions = {
-        stroke: 'black',
-        lineWidth: 0.5
-      };
+    const iconOptions = {
+      stroke: 'black',
+      lineWidth: 0.5
+    };
 
-      // reset icon
-      const resetIconNode = new Path( new UTurnArrowShape( 10 ), merge( {}, iconOptions, {
-        fill: PhetColorScheme.RED_COLORBLIND
-      } ) );
+    // reset icon
+    const resetIconNode = new Path( new UTurnArrowShape( 10 ), merge( {}, iconOptions, {
+      fill: PhetColorScheme.RED_COLORBLIND
+    } ) );
 
-      // play icon
-      const playIconNode = new Path( new PlayIconShape( 0.8 * resetIconNode.height, resetIconNode.height ),
-        merge( {}, iconOptions, {
-          fill: 'rgb( 0, 179, 0 )'
-        } )
-      );
+    // play icon
+    const playIconNode = new Path( new PlayIconShape( 0.8 * resetIconNode.height, resetIconNode.height ),
+      merge( {}, iconOptions, {
+        fill: 'rgb( 0, 179, 0 )'
+      } )
+    );
 
-      super( resetIconNode, playIconNode, isPlayingProperty, options );
-    }
+    super( resetIconNode, playIconNode, isPlayingProperty, options );
   }
+}
 
-  return gasProperties.register( 'PlayResetButton', PlayResetButton );
-} );
+gasProperties.register( 'PlayResetButton', PlayResetButton );
+export default PlayResetButton;

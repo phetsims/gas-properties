@@ -5,32 +5,29 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const HeavyParticle = require( 'GAS_PROPERTIES/common/model/HeavyParticle' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const SpeciesHistogramCheckbox = require( 'GAS_PROPERTIES/energy/view/SpeciesHistogramCheckbox' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import HeavyParticle from '../../common/model/HeavyParticle.js';
+import gasProperties from '../../gasProperties.js';
+import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
 
-  class HeavyParticlesCheckbox extends SpeciesHistogramCheckbox {
+class HeavyParticlesCheckbox extends SpeciesHistogramCheckbox {
 
-    /**
-     * @param {BooleanProperty} heavyVisibleProperty
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( heavyVisibleProperty, modelViewTransform, options ) {
-      assert && assert( heavyVisibleProperty instanceof BooleanProperty,
-        `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {BooleanProperty} heavyVisibleProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( heavyVisibleProperty, modelViewTransform, options ) {
+    assert && assert( heavyVisibleProperty instanceof BooleanProperty,
+      `invalid heavyVisibleProperty: ${heavyVisibleProperty}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
 
-      super( heavyVisibleProperty, new HeavyParticle(), modelViewTransform, options );
-    }
+    super( heavyVisibleProperty, new HeavyParticle(), modelViewTransform, options );
   }
+}
 
-  return gasProperties.register( 'HeavyParticlesCheckbox', HeavyParticlesCheckbox );
-} );
+gasProperties.register( 'HeavyParticlesCheckbox', HeavyParticlesCheckbox );
+export default HeavyParticlesCheckbox;

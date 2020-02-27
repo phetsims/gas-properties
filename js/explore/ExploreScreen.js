@@ -5,37 +5,34 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ExploreModel = require( 'GAS_PROPERTIES/explore/model/ExploreModel' );
-  const ExploreScreenView = require( 'GAS_PROPERTIES/explore/view/ExploreScreenView' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Tandem from '../../../tandem/js/Tandem.js';
+import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
+import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../gas-properties-strings.js';
+import gasProperties from '../gasProperties.js';
+import ExploreModel from './model/ExploreModel.js';
+import ExploreScreenView from './view/ExploreScreenView.js';
 
-  // strings
-  const screenExploreString = require( 'string!GAS_PROPERTIES/screen.explore' );
+const screenExploreString = gasPropertiesStrings.screen.explore;
 
-  class ExploreScreen extends GasPropertiesScreen {
+class ExploreScreen extends GasPropertiesScreen {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      const createModel = () => new ExploreModel( tandem.createTandem( 'model' ) );
-      const createView = model => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
+    const createModel = () => new ExploreModel( tandem.createTandem( 'model' ) );
+    const createView = model => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
 
-      super( createModel, createView, tandem, {
-        name: screenExploreString,
-        homeScreenIcon: GasPropertiesIconFactory.createExploreScreenIcon()
-      } );
-    }
+    super( createModel, createView, tandem, {
+      name: screenExploreString,
+      homeScreenIcon: GasPropertiesIconFactory.createExploreScreenIcon()
+    } );
   }
+}
 
-  return gasProperties.register( 'ExploreScreen', ExploreScreen );
-} );
+gasProperties.register( 'ExploreScreen', ExploreScreen );
+export default ExploreScreen;

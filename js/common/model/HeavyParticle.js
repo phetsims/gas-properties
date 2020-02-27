@@ -5,28 +5,25 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import Particle from './Particle.js';
 
-  class HeavyParticle extends Particle {
+class HeavyParticle extends Particle {
 
-    constructor() {
-      super( {
+  constructor() {
+    super( {
 
-        // superclass options
-        mass: 28, // equivalent to N2 (nitrogen), in AMU, rounded to the closest integer
-        radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS, // pm
-        colorProperty: GasPropertiesColorProfile.heavyParticleColorProperty,
-        highlightColorProperty: GasPropertiesColorProfile.heavyParticleHighlightColorProperty
-      } );
-    }
+      // superclass options
+      mass: 28, // equivalent to N2 (nitrogen), in AMU, rounded to the closest integer
+      radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS, // pm
+      colorProperty: GasPropertiesColorProfile.heavyParticleColorProperty,
+      highlightColorProperty: GasPropertiesColorProfile.heavyParticleHighlightColorProperty
+    } );
   }
+}
 
-  return gasProperties.register( 'HeavyParticle', HeavyParticle );
-} );
+gasProperties.register( 'HeavyParticle', HeavyParticle );
+export default HeavyParticle;

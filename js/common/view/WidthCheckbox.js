@@ -5,44 +5,41 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const merge = require( 'PHET_CORE/merge' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
+import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-  // strings
-  const widthString = require( 'string!GAS_PROPERTIES/width' );
+const widthString = gasPropertiesStrings.width;
 
-  class WidthCheckbox extends GasPropertiesCheckbox {
+class WidthCheckbox extends GasPropertiesCheckbox {
 
-    /**
-     * @param {BooleanProperty} widthVisibleProperty
-     * @param {Object} [options]
-     */
-    constructor( widthVisibleProperty, options ) {
-      assert && assert( widthVisibleProperty instanceof BooleanProperty,
-        `invalid widthVisibleProperty: ${widthVisibleProperty}` );
+  /**
+   * @param {BooleanProperty} widthVisibleProperty
+   * @param {Object} [options]
+   */
+  constructor( widthVisibleProperty, options ) {
+    assert && assert( widthVisibleProperty instanceof BooleanProperty,
+      `invalid widthVisibleProperty: ${widthVisibleProperty}` );
 
-      if ( options ) {
-        assert && assert( !options.text, 'WidthCheckbox sets text' );
-        assert && assert( !options.icon, 'WidthCheckbox sets icon' );
-      }
-
-      options = merge( {
-
-        // superclass options
-        text: widthString,
-        icon: GasPropertiesIconFactory.createContainerWidthIcon()
-      }, options );
-
-      super( widthVisibleProperty, options );
+    if ( options ) {
+      assert && assert( !options.text, 'WidthCheckbox sets text' );
+      assert && assert( !options.icon, 'WidthCheckbox sets icon' );
     }
-  }
 
-  return gasProperties.register( 'WidthCheckbox', WidthCheckbox );
-} );
+    options = merge( {
+
+      // superclass options
+      text: widthString,
+      icon: GasPropertiesIconFactory.createContainerWidthIcon()
+    }, options );
+
+    super( widthVisibleProperty, options );
+  }
+}
+
+gasProperties.register( 'WidthCheckbox', WidthCheckbox );
+export default WidthCheckbox;

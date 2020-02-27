@@ -5,41 +5,38 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const merge = require( 'PHET_CORE/merge' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const NumberSpinner = require( 'SUN/NumberSpinner' );
-  const Property = require( 'AXON/Property' );
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import merge from '../../../../phet-core/js/merge.js';
+import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import gasProperties from '../../gasProperties.js';
 
-  class GasPropertiesSpinner extends NumberSpinner {
+class GasPropertiesSpinner extends NumberSpinner {
 
-    /**
-     * @param {NumberProperty} numberProperty
-     * @param {Object} [options]
-     */
-    constructor( numberProperty, options ) {
-      assert && assert( numberProperty instanceof NumberProperty, `invalid numberProperty: ${numberProperty}` );
-      assert && assert( numberProperty.range, 'numberProperty is missing range' );
+  /**
+   * @param {NumberProperty} numberProperty
+   * @param {Object} [options]
+   */
+  constructor( numberProperty, options ) {
+    assert && assert( numberProperty instanceof NumberProperty, `invalid numberProperty: ${numberProperty}` );
+    assert && assert( numberProperty.range, 'numberProperty is missing range' );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        font: GasPropertiesConstants.CONTROL_FONT,
-        xMargin: 8,
-        yMargin: 6,
-        valueAlign: 'right',
-        touchAreaXDilation: 15,
-        touchAreaYDilation: 15
-      }, options );
+      // superclass options
+      font: GasPropertiesConstants.CONTROL_FONT,
+      xMargin: 8,
+      yMargin: 6,
+      valueAlign: 'right',
+      touchAreaXDilation: 15,
+      touchAreaYDilation: 15
+    }, options );
 
-      super( numberProperty, new Property( numberProperty.range ), options );
-    }
+    super( numberProperty, new Property( numberProperty.range ), options );
   }
+}
 
-  return gasProperties.register( 'GasPropertiesSpinner', GasPropertiesSpinner );
-} );
+gasProperties.register( 'GasPropertiesSpinner', GasPropertiesSpinner );
+export default GasPropertiesSpinner;

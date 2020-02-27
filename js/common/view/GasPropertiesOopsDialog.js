@@ -5,41 +5,36 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const merge = require( 'PHET_CORE/merge' );
-  const OopsDialog = require( 'SCENERY_PHET/OopsDialog' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+import merge from '../../../../phet-core/js/merge.js';
+import OopsDialog from '../../../../scenery-phet/js/OopsDialog.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import phetGirlLabCoatImage from '../../../images/phet-girl-lab-coat_png.js';
+import gasProperties from '../../gasProperties.js';
 
-  // images
-  const phetGirlLabCoatImage = require( 'image!GAS_PROPERTIES/phet-girl-lab-coat.png' );
+class GasPropertiesOopsDialog extends OopsDialog {
 
-  class GasPropertiesOopsDialog extends OopsDialog {
+  /**
+   * @param {string} message
+   * @param {Object} [options]
+   */
+  constructor( message, options ) {
 
-    /**
-     * @param {string} message
-     * @param {Object} [options]
-     */
-    constructor( message, options ) {
+    options = merge( {
 
-      options = merge( {
+      // superclass options
+      iconNode: new Image( phetGirlLabCoatImage, {
+        maxHeight: 132 // determined empirically
+      } ),
+      richTextOptions: {
+        font: new PhetFont( 16 )
+      }
+    }, options );
 
-        // superclass options
-        iconNode: new Image( phetGirlLabCoatImage, {
-          maxHeight: 132 // determined empirically
-        } ),
-        richTextOptions: {
-          font: new PhetFont( 16 )
-        }
-      }, options );
-
-      super( message, options );
-    }
+    super( message, options );
   }
+}
 
-  return gasProperties.register( 'GasPropertiesOopsDialog', GasPropertiesOopsDialog );
-} );
+gasProperties.register( 'GasPropertiesOopsDialog', GasPropertiesOopsDialog );
+export default GasPropertiesOopsDialog;

@@ -5,28 +5,25 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import Particle from './Particle.js';
 
-  class LightParticle extends Particle {
+class LightParticle extends Particle {
 
-    constructor() {
-      super( {
+  constructor() {
+    super( {
 
-        // superclass options
-        mass: 4, // equivalent to He (helium), in AMU, rounded to the closest integer
-        radius: GasPropertiesConstants.LIGHT_PARTICLES_RADIUS, // pm
-        colorProperty: GasPropertiesColorProfile.lightParticleColorProperty,
-        highlightColorProperty: GasPropertiesColorProfile.lightParticleHighlightColorProperty
-      } );
-    }
+      // superclass options
+      mass: 4, // equivalent to He (helium), in AMU, rounded to the closest integer
+      radius: GasPropertiesConstants.LIGHT_PARTICLES_RADIUS, // pm
+      colorProperty: GasPropertiesColorProfile.lightParticleColorProperty,
+      highlightColorProperty: GasPropertiesColorProfile.lightParticleHighlightColorProperty
+    } );
   }
+}
 
-  return gasProperties.register( 'LightParticle', LightParticle );
-} );
+gasProperties.register( 'LightParticle', LightParticle );
+export default LightParticle;

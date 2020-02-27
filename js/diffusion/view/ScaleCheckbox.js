@@ -5,41 +5,38 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const merge = require( 'PHET_CORE/merge' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
+import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
 
-  // strings
-  const scaleString = require( 'string!GAS_PROPERTIES/scale' );
+const scaleString = gasPropertiesStrings.scale;
 
-  class ScaleCheckbox extends GasPropertiesCheckbox {
+class ScaleCheckbox extends GasPropertiesCheckbox {
 
-    /**
-     * @param {BooleanProperty} scaleVisibleProperty
-     * @param {Object} [options]
-     */
-    constructor( scaleVisibleProperty, options ) {
-      assert && assert( scaleVisibleProperty instanceof BooleanProperty,
-        `invalid scaleVisibleProperty: ${scaleVisibleProperty}` );
+  /**
+   * @param {BooleanProperty} scaleVisibleProperty
+   * @param {Object} [options]
+   */
+  constructor( scaleVisibleProperty, options ) {
+    assert && assert( scaleVisibleProperty instanceof BooleanProperty,
+      `invalid scaleVisibleProperty: ${scaleVisibleProperty}` );
 
-      assert && assert( !options || !options.text, 'ScaleCheckbox sets text' );
+    assert && assert( !options || !options.text, 'ScaleCheckbox sets text' );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        text: scaleString,
-        icon: GasPropertiesIconFactory.createScaleIcon()
-      }, options );
+      // superclass options
+      text: scaleString,
+      icon: GasPropertiesIconFactory.createScaleIcon()
+    }, options );
 
-      super( scaleVisibleProperty, options );
-    }
+    super( scaleVisibleProperty, options );
   }
+}
 
-  return gasProperties.register( 'ScaleCheckbox', ScaleCheckbox );
-} );
+gasProperties.register( 'ScaleCheckbox', ScaleCheckbox );
+export default ScaleCheckbox;

@@ -7,71 +7,68 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
-  const Dimension2 = require( 'DOT/Dimension2' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const Shape = require( 'KITE/Shape' );
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Shape from '../../../../kite/js/Shape.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import gasProperties from '../../gasProperties.js';
 
-  class IntervalLinesNode extends Path {
+class IntervalLinesNode extends Path {
 
-    /**
-     * @param {Dimension2} chartSize - dimensions of the chart
-     */
-    constructor( chartSize ) {
-      assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
+  /**
+   * @param {Dimension2} chartSize - dimensions of the chart
+   */
+  constructor( chartSize ) {
+    assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
 
-      super( new Shape(), {
-        stroke: 'white', // {ColorDef}
-        opacity: 0.5, // (0,1)
-        lineWidth: 0.5
-      } );
+    super( new Shape(), {
+      stroke: 'white', // {ColorDef}
+      opacity: 0.5, // (0,1)
+      lineWidth: 0.5
+    } );
 
-      // @private
-      this.chartSize = chartSize;
-      this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
-    }
+    // @private
+    this.chartSize = chartSize;
+    this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
+  }
 
-    /**
-     * Updates the lines to match the current y scale.
-     * @param {number} maxY
-     * @public
-     */
-    update( maxY ) {
-      if ( this.previousMaxY === null || this.previousMaxY !== maxY ) {
+  /**
+   * Updates the lines to match the current y scale.
+   * @param {number} maxY
+   * @public
+   */
+  update( maxY ) {
+    if ( this.previousMaxY === null || this.previousMaxY !== maxY ) {
 
-        const shape = new Shape();
+      const shape = new Shape();
 
-        const numberOfLines = Math.floor( maxY / GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
-        const ySpacing = ( GasPropertiesConstants.HISTOGRAM_LINE_SPACING / maxY ) * this.chartSize.height;
+      const numberOfLines = Math.floor( maxY / GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
+      const ySpacing = ( GasPropertiesConstants.HISTOGRAM_LINE_SPACING / maxY ) * this.chartSize.height;
 
-        for ( let i = 1; i <= numberOfLines; i++ ) {
-          const y = this.chartSize.height - ( i * ySpacing );
-          shape.moveTo( 0, y ).lineTo( this.chartSize.width, y );
-        }
-
-        this.shape = shape;
-
-        this.previousMaxY = maxY;
+      for ( let i = 1; i <= numberOfLines; i++ ) {
+        const y = this.chartSize.height - ( i * ySpacing );
+        shape.moveTo( 0, y ).lineTo( this.chartSize.width, y );
       }
-    }
 
-    /**
-     * Always use the full chart bounds, as a performance optimization.
-     * See https://github.com/phetsims/gas-properties/issues/146
-     * @returns {Bounds2}
-     * @public
-     * @override
-     */
-    computeShapeBounds() {
-      return this.shapeBounds;
+      this.shape = shape;
+
+      this.previousMaxY = maxY;
     }
   }
 
-  return gasProperties.register( 'IntervalLinesNode', IntervalLinesNode );
-} );
+  /**
+   * Always use the full chart bounds, as a performance optimization.
+   * See https://github.com/phetsims/gas-properties/issues/146
+   * @returns {Bounds2}
+   * @public
+   * @override
+   */
+  computeShapeBounds() {
+    return this.shapeBounds;
+  }
+}
+
+gasProperties.register( 'IntervalLinesNode', IntervalLinesNode );
+export default IntervalLinesNode;

@@ -5,45 +5,42 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/EnergyAccordionBox' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
-  const KineticEnergyHistogramNode = require( 'GAS_PROPERTIES/energy/view/KineticEnergyHistogramNode' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import HistogramsModel from '../model/HistogramsModel.js';
+import EnergyAccordionBox from './EnergyAccordionBox.js';
+import KineticEnergyHistogramNode from './KineticEnergyHistogramNode.js';
 
-  // strings
-  const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
+const kineticEnergyString = gasPropertiesStrings.kineticEnergy;
 
-  class KineticEnergyAccordionBox extends EnergyAccordionBox {
+class KineticEnergyAccordionBox extends EnergyAccordionBox {
 
-    /**
-     * @param {HistogramsModel} histogramsModel
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( histogramsModel, modelViewTransform, options ) {
-      assert && assert( histogramsModel instanceof HistogramsModel, `invalid model: ${histogramsModel}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {HistogramsModel} histogramsModel
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( histogramsModel, modelViewTransform, options ) {
+    assert && assert( histogramsModel instanceof HistogramsModel, `invalid model: ${histogramsModel}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = merge( {
+    options = merge( {
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, options );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      const histogramNode = new KineticEnergyHistogramNode( histogramsModel, {
-        tandem: options.tandem.createTandem( 'histogramNode' )
-      } );
+    const histogramNode = new KineticEnergyHistogramNode( histogramsModel, {
+      tandem: options.tandem.createTandem( 'histogramNode' )
+    } );
 
-      super( kineticEnergyString, modelViewTransform, histogramNode, options );
-    }
+    super( kineticEnergyString, modelViewTransform, histogramNode, options );
   }
+}
 
-  return gasProperties.register( 'KineticEnergyAccordionBox', KineticEnergyAccordionBox );
-} );
+gasProperties.register( 'KineticEnergyAccordionBox', KineticEnergyAccordionBox );
+export default KineticEnergyAccordionBox;

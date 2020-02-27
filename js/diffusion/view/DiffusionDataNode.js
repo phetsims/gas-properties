@@ -5,94 +5,91 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DiffusionData = require( 'GAS_PROPERTIES/diffusion/model/DiffusionData' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
-  const Range = require( 'DOT/Range' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import Range from '../../../../dot/js/Range.js';
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import DiffusionData from '../model/DiffusionData.js';
 
-  // strings
-  const tAvgKString = require( 'string!GAS_PROPERTIES/tAvgK' );
-  const tAvgString = require( 'string!GAS_PROPERTIES/tAvg' );
+const tAvgKString = gasPropertiesStrings.tAvgK;
+const tAvgString = gasPropertiesStrings.tAvg;
 
-  // constants
-  const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
-  const AVERAGE_TEMPERATURE_RANGE = new Range( 0, 1000 );
+// constants
+const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
+const AVERAGE_TEMPERATURE_RANGE = new Range( 0, 1000 );
 
-  class DiffusionDataNode extends VBox {
+class DiffusionDataNode extends VBox {
 
-    /**
-     * @param {DiffusionData} data
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( data, modelViewTransform, options ) {
-      assert && assert( data instanceof DiffusionData, `invalid data: ${data}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {DiffusionData} data
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( data, modelViewTransform, options ) {
+    assert && assert( data instanceof DiffusionData, `invalid data: ${data}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        spacing: 10,
-        align: 'left'
-      }, options );
+      // superclass options
+      spacing: 10,
+      align: 'left'
+    }, options );
 
-      const numberDisplayOptions = {
-        align: 'right',
-        numberFill: GasPropertiesColorProfile.textFillProperty,
-        font: GasPropertiesConstants.CONTROL_FONT,
-        backgroundFill: null,
-        backgroundStroke: null,
-        xMargin: 0,
-        yMargin: 0
-      };
+    const numberDisplayOptions = {
+      align: 'right',
+      numberFill: GasPropertiesColorProfile.textFillProperty,
+      font: GasPropertiesConstants.CONTROL_FONT,
+      backgroundFill: null,
+      backgroundStroke: null,
+      xMargin: 0,
+      yMargin: 0
+    };
 
-      // number of DiffusionParticle1
-      const particle1CountNode = new HBox( {
-        spacing: 3,
-        children: [
-          GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform ),
-          new NumberDisplay( data.numberOfParticles1Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
-        ]
-      } );
+    // number of DiffusionParticle1
+    const particle1CountNode = new HBox( {
+      spacing: 3,
+      children: [
+        GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform ),
+        new NumberDisplay( data.numberOfParticles1Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
+      ]
+    } );
 
-      // number of DiffusionParticle2
-      const particle2CountNode = new HBox( {
-        spacing: 3,
-        children: [
-          GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform ),
-          new NumberDisplay( data.numberOfParticles2Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
-        ]
-      } );
+    // number of DiffusionParticle2
+    const particle2CountNode = new HBox( {
+      spacing: 3,
+      children: [
+        GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform ),
+        new NumberDisplay( data.numberOfParticles2Property, PARTICLE_COUNT_RANGE, numberDisplayOptions )
+      ]
+    } );
 
-      const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
-        merge( {}, numberDisplayOptions, {
-          align: 'left',
-          valuePattern: tAvgKString,
-          noValuePattern: tAvgString,
-          useRichText: true,
-          maxWidth: 100 // determined empirically
-        } ) );
+    const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
+      merge( {}, numberDisplayOptions, {
+        align: 'left',
+        valuePattern: tAvgKString,
+        noValuePattern: tAvgString,
+        useRichText: true,
+        maxWidth: 100 // determined empirically
+      } ) );
 
-      assert && assert( !options.children, 'DiffusionDataNode sets children' );
-      options = merge( {
-        children: [ particle1CountNode, particle2CountNode, averageTemperatureNode ]
-      }, options );
+    assert && assert( !options.children, 'DiffusionDataNode sets children' );
+    options = merge( {
+      children: [ particle1CountNode, particle2CountNode, averageTemperatureNode ]
+    }, options );
 
-      super( options );
-    }
+    super( options );
   }
+}
 
-  return gasProperties.register( 'DiffusionDataNode', DiffusionDataNode );
-} );
+gasProperties.register( 'DiffusionDataNode', DiffusionDataNode );
+export default DiffusionDataNode;

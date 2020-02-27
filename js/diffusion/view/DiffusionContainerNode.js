@@ -7,59 +7,56 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DiffusionContainer = require( 'GAS_PROPERTIES/diffusion/model/DiffusionContainer' );
-  const DividerNode = require( 'GAS_PROPERTIES/diffusion/view/DividerNode' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import gasProperties from '../../gasProperties.js';
+import DiffusionContainer from '../model/DiffusionContainer.js';
+import DividerNode from './DividerNode.js';
 
-  class DiffusionContainerNode extends Node {
+class DiffusionContainerNode extends Node {
 
-    /**
-     * @param {DiffusionContainer} container
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( container, modelViewTransform, options ) {
-      assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {DiffusionContainer} container
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( container, modelViewTransform, options ) {
+    assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
 
-      // Expand the container bounds to account for wall thickness.
-      const viewBounds = modelViewTransform.modelToViewBounds( container.bounds )
-        .dilated( modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 ) );
+    // Expand the container bounds to account for wall thickness.
+    const viewBounds = modelViewTransform.modelToViewBounds( container.bounds )
+      .dilated( modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 ) );
 
-      // Outside border of the container
-      const borderNode = new Rectangle( viewBounds, {
-        stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
-        lineWidth: modelViewTransform.modelToViewDeltaX( container.wallThickness )
-      } );
+    // Outside border of the container
+    const borderNode = new Rectangle( viewBounds, {
+      stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+      lineWidth: modelViewTransform.modelToViewDeltaX( container.wallThickness )
+    } );
 
-      // Vertical divider
-      const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
-      const dividerNode = new DividerNode( container.hasDividerProperty, {
-        length: modelViewTransform.modelToViewDeltaX( container.height ),
-        solidLineWidth: viewDividerThickness,
-        dashedLineWidth: viewDividerThickness / 2,
-        centerX: modelViewTransform.modelToViewX( container.dividerX ),
-        bottom: modelViewTransform.modelToViewY( container.position.y )
-      } );
+    // Vertical divider
+    const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
+    const dividerNode = new DividerNode( container.hasDividerProperty, {
+      length: modelViewTransform.modelToViewDeltaX( container.height ),
+      solidLineWidth: viewDividerThickness,
+      dashedLineWidth: viewDividerThickness / 2,
+      centerX: modelViewTransform.modelToViewX( container.dividerX ),
+      bottom: modelViewTransform.modelToViewY( container.position.y )
+    } );
 
-      assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );
-      options = merge( {
-        children: [ dividerNode, borderNode ]
-      }, options );
+    assert && assert( !options || !options.children, 'DiffusionContainerNodeNode sets children' );
+    options = merge( {
+      children: [ dividerNode, borderNode ]
+    }, options );
 
-      super( options );
-    }
+    super( options );
   }
+}
 
-  return gasProperties.register( 'DiffusionContainerNode', DiffusionContainerNode );
-} );
+gasProperties.register( 'DiffusionContainerNode', DiffusionContainerNode );
+export default DiffusionContainerNode;

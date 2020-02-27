@@ -5,62 +5,59 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const Line = require( 'SCENERY/nodes/Line' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Node = require( 'SCENERY/nodes/Node' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import gasProperties from '../../gasProperties.js';
 
-  class DividerNode extends Node {
+class DividerNode extends Node {
 
-    /**
-     * @param {BooleanProperty} hasDividerProperty
-     * @param {Object} [options]
-     */
-    constructor( hasDividerProperty, options ) {
-      assert && assert( hasDividerProperty instanceof BooleanProperty,
-        `invalid hasDividerProperty: ${hasDividerProperty}` );
+  /**
+   * @param {BooleanProperty} hasDividerProperty
+   * @param {Object} [options]
+   */
+  constructor( hasDividerProperty, options ) {
+    assert && assert( hasDividerProperty instanceof BooleanProperty,
+      `invalid hasDividerProperty: ${hasDividerProperty}` );
 
-      options = merge( {
-        length: 100,
-        solidLineWidth: 1,
-        dashedLineWidth: 1
-      }, options );
+    options = merge( {
+      length: 100,
+      solidLineWidth: 1,
+      dashedLineWidth: 1
+    }, options );
 
-      // Solid divider
-      const solidLineNode = new Line( 0, 0, 0, options.length, {
-        stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: options.solidLineWidth
-      } );
+    // Solid divider
+    const solidLineNode = new Line( 0, 0, 0, options.length, {
+      stroke: GasPropertiesColorProfile.dividerColorProperty,
+      lineWidth: options.solidLineWidth
+    } );
 
-      // Vertical dashed line to indicate the center of the container when the divider is not present.
-      const dashedLineNode = new Line( 0, 0, 0, options.length, {
-        stroke: GasPropertiesColorProfile.dividerColorProperty,
-        lineWidth: options.dashedLineWidth,
-        lineDash: [ 10, 24 ],
-        opacity: 0.5,
-        center: solidLineNode.center
-      } );
+    // Vertical dashed line to indicate the center of the container when the divider is not present.
+    const dashedLineNode = new Line( 0, 0, 0, options.length, {
+      stroke: GasPropertiesColorProfile.dividerColorProperty,
+      lineWidth: options.dashedLineWidth,
+      lineDash: [ 10, 24 ],
+      opacity: 0.5,
+      center: solidLineNode.center
+    } );
 
-      assert && assert( !options || !options.children, 'DividerNode sets children' );
-      options = merge( {
-        children: [ dashedLineNode, solidLineNode ]
-      }, options );
+    assert && assert( !options || !options.children, 'DividerNode sets children' );
+    options = merge( {
+      children: [ dashedLineNode, solidLineNode ]
+    }, options );
 
-      super( options );
+    super( options );
 
-      // Switch between solid and dashed divider
-      hasDividerProperty.link( hasDivider => {
-        solidLineNode.visible = hasDivider;
-        dashedLineNode.visible = !hasDivider;
-      } );
-    }
+    // Switch between solid and dashed divider
+    hasDividerProperty.link( hasDivider => {
+      solidLineNode.visible = hasDivider;
+      dashedLineNode.visible = !hasDivider;
+    } );
   }
+}
 
-  return gasProperties.register( 'DividerNode', DividerNode );
-} );
+gasProperties.register( 'DividerNode', DividerNode );
+export default DividerNode;

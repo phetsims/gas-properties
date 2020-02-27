@@ -7,54 +7,51 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ColorDef = require( 'SCENERY/util/ColorDef' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Property = require( 'AXON/Property' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+import Property from '../../../../axon/js/Property.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import ColorDef from '../../../../scenery/js/util/ColorDef.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import gasProperties from '../../gasProperties.js';
 
-  class CenterOfMassNode extends Node {
+class CenterOfMassNode extends Node {
 
-    /**
-     * @param {Property.<number|null>} centerOfMassProperty - centerX of mass, in pm
-     * @param {number} centerY - centerY of the indicator, in pm
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {ColorDef} fill
-     */
-    constructor( centerOfMassProperty, centerY, modelViewTransform, fill ) {
-      assert && assert( centerOfMassProperty instanceof Property,
-        `invalid centerOfMassProperty: ${centerOfMassProperty}` );
-      assert && assert( typeof centerY === 'number', `invalid centerY: ${centerY}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( ColorDef.isColorDef( fill ), `invalid fill: ${fill}` );
+  /**
+   * @param {Property.<number|null>} centerOfMassProperty - centerX of mass, in pm
+   * @param {number} centerY - centerY of the indicator, in pm
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {ColorDef} fill
+   */
+  constructor( centerOfMassProperty, centerY, modelViewTransform, fill ) {
+    assert && assert( centerOfMassProperty instanceof Property,
+      `invalid centerOfMassProperty: ${centerOfMassProperty}` );
+    assert && assert( typeof centerY === 'number', `invalid centerY: ${centerY}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
+    assert && assert( ColorDef.isColorDef( fill ), `invalid fill: ${fill}` );
 
-      const rectangle = new Rectangle( 0, 0, 5, 30, {
-        fill: fill,
-        stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
-      } );
+    const rectangle = new Rectangle( 0, 0, 5, 30, {
+      fill: fill,
+      stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
+    } );
 
-      super( {
-        children: [ rectangle ]
-      } );
+    super( {
+      children: [ rectangle ]
+    } );
 
-      centerOfMassProperty.link( centerX => {
-        if ( centerX === null ) {
-          rectangle.visible = false;
-        }
-        else {
-          rectangle.visible = true;
-          this.center = modelViewTransform.modelToViewXY( centerX, centerY );
-        }
-      } );
-    }
+    centerOfMassProperty.link( centerX => {
+      if ( centerX === null ) {
+        rectangle.visible = false;
+      }
+      else {
+        rectangle.visible = true;
+        this.center = modelViewTransform.modelToViewXY( centerX, centerY );
+      }
+    } );
   }
+}
 
-  return gasProperties.register( 'CenterOfMassNode', CenterOfMassNode );
-} );
+gasProperties.register( 'CenterOfMassNode', CenterOfMassNode );
+export default CenterOfMassNode;

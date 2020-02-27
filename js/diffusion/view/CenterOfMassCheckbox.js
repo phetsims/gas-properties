@@ -5,45 +5,42 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const merge = require( 'PHET_CORE/merge' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
+import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
 
-  // strings
-  const centerOfMassString = require( 'string!GAS_PROPERTIES/centerOfMass' );
+const centerOfMassString = gasPropertiesStrings.centerOfMass;
 
-  class CenterOfMassCheckbox extends GasPropertiesCheckbox {
+class CenterOfMassCheckbox extends GasPropertiesCheckbox {
 
-    /**
-     * @param {BooleanProperty} centerOfMassVisibleProperty
-     * @param {Object} [options]
-     */
-    constructor( centerOfMassVisibleProperty, options ) {
-      assert && assert( centerOfMassVisibleProperty instanceof BooleanProperty,
-        `invalid centerOfMassVisibleProperty: ${centerOfMassVisibleProperty}` );
+  /**
+   * @param {BooleanProperty} centerOfMassVisibleProperty
+   * @param {Object} [options]
+   */
+  constructor( centerOfMassVisibleProperty, options ) {
+    assert && assert( centerOfMassVisibleProperty instanceof BooleanProperty,
+      `invalid centerOfMassVisibleProperty: ${centerOfMassVisibleProperty}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        textIconSpacing: 12
-      }, options );
+      // superclass options
+      textIconSpacing: 12
+    }, options );
 
-      assert && assert( !options.text, 'CenterOfMassCheckbox sets text' );
-      assert && assert( !options.icon, 'CenterOfMassCheckbox sets icon' );
-      options = merge( {
-        text: centerOfMassString,
-        icon: GasPropertiesIconFactory.createCenterOfMassIcon()
-      }, options );
+    assert && assert( !options.text, 'CenterOfMassCheckbox sets text' );
+    assert && assert( !options.icon, 'CenterOfMassCheckbox sets icon' );
+    options = merge( {
+      text: centerOfMassString,
+      icon: GasPropertiesIconFactory.createCenterOfMassIcon()
+    }, options );
 
-      super( centerOfMassVisibleProperty, options );
-    }
+    super( centerOfMassVisibleProperty, options );
   }
+}
 
-  return gasProperties.register( 'CenterOfMassCheckbox', CenterOfMassCheckbox );
-} );
+gasProperties.register( 'CenterOfMassCheckbox', CenterOfMassCheckbox );
+export default CenterOfMassCheckbox;

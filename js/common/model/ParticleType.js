@@ -5,14 +5,11 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import gasProperties from '../../gasProperties.js';
 
-  const ParticleType = Enumeration.byKeys( [ 'HEAVY', 'LIGHT' ] );
+const ParticleType = Enumeration.byKeys( [ 'HEAVY', 'LIGHT' ] );
 
-  return gasProperties.register( 'ParticleType', ParticleType );
-} );
+gasProperties.register( 'ParticleType', ParticleType );
+export default ParticleType;

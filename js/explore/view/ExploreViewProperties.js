@@ -6,22 +6,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const IdealGasLawViewProperties = require( 'GAS_PROPERTIES/common/view/IdealGasLawViewProperties' );
+import IdealGasLawViewProperties from '../../common/view/IdealGasLawViewProperties.js';
+import gasProperties from '../../gasProperties.js';
 
-  class ExploreViewProperties extends IdealGasLawViewProperties {
+class ExploreViewProperties extends IdealGasLawViewProperties {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
-      super( tandem );
-    }
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
+    super( tandem );
   }
+}
 
-  return gasProperties.register( 'ExploreViewProperties', ExploreViewProperties );
-} );
+gasProperties.register( 'ExploreViewProperties', ExploreViewProperties );
+export default ExploreViewProperties;

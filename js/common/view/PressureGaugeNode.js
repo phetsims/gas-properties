@@ -5,94 +5,91 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Circle = require( 'SCENERY/nodes/Circle' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const GaugeNode = require( 'SCENERY_PHET/GaugeNode' );
-  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const PressureDisplay = require( 'GAS_PROPERTIES/common/view/PressureDisplay' );
-  const PressureGauge = require( 'GAS_PROPERTIES/common/model/PressureGauge' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import merge from '../../../../phet-core/js/merge.js';
+import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
+import PressureGauge from '../model/PressureGauge.js';
+import PressureDisplay from './PressureDisplay.js';
 
-  // strings
-  const pressureString = require( 'string!GAS_PROPERTIES/pressure' );
+const pressureString = gasPropertiesStrings.pressure;
 
-  // constants
-  const DIAL_RADIUS = 50;
-  const POST_HEIGHT = 0.6 * DIAL_RADIUS;
+// constants
+const DIAL_RADIUS = 50;
+const POST_HEIGHT = 0.6 * DIAL_RADIUS;
 
-  class PressureGaugeNode extends Node {
+class PressureGaugeNode extends Node {
 
-    /**
-     * @param {PressureGauge} pressureGauge
-     * @param {Node} listParent - parent for the combo box popup list
-     * @param {Object} [options]
-     */
-    constructor( pressureGauge, listParent, options ) {
-      assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
-      assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
+  /**
+   * @param {PressureGauge} pressureGauge
+   * @param {Node} listParent - parent for the combo box popup list
+   * @param {Object} [options]
+   */
+  constructor( pressureGauge, listParent, options ) {
+    assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
+    assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
 
-      options = merge( {
-        tandem: Tandem.REQUIRED
-      }, options );
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      // circular dial with needle
-      const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,
-        pressureGauge.pressureRange, {
-          radius: DIAL_RADIUS,
-          tandem: Tandem.OPTIONAL
-        } );
-
-      // horizontal post the sticks out of the left side of the gauge
-      const postNode = new Rectangle( 0, 0, DIAL_RADIUS + 15, POST_HEIGHT, {
-        fill: PressureGaugeNode.createPostGradient( POST_HEIGHT ),
-        right: gaugeNode.centerX,
-        centerY: gaugeNode.centerY
+    // circular dial with needle
+    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,
+      pressureGauge.pressureRange, {
+        radius: DIAL_RADIUS,
+        tandem: Tandem.OPTIONAL
       } );
 
-      // combo box to display value and choose units
-      const comboBox = new PressureDisplay( pressureGauge, listParent, {
-        centerX: gaugeNode.centerX,
-        bottom: gaugeNode.bottom,
-        maxWidth: gaugeNode.width,
-        tandem: options.tandem.createTandem( 'comboBox' )
-      } );
+    // horizontal post the sticks out of the left side of the gauge
+    const postNode = new Rectangle( 0, 0, DIAL_RADIUS + 15, POST_HEIGHT, {
+      fill: PressureGaugeNode.createPostGradient( POST_HEIGHT ),
+      right: gaugeNode.centerX,
+      centerY: gaugeNode.centerY
+    } );
 
-      assert && assert( !options.children, 'PressureGaugeNode sets children' );
-      options.children = [ postNode, gaugeNode, comboBox ];
+    // combo box to display value and choose units
+    const comboBox = new PressureDisplay( pressureGauge, listParent, {
+      centerX: gaugeNode.centerX,
+      bottom: gaugeNode.bottom,
+      maxWidth: gaugeNode.width,
+      tandem: options.tandem.createTandem( 'comboBox' )
+    } );
 
-      super( options );
+    assert && assert( !options.children, 'PressureGaugeNode sets children' );
+    options.children = [ postNode, gaugeNode, comboBox ];
 
-      // Red dot at the origin, for debugging layout
-      if ( GasPropertiesQueryParameters.origin ) {
-        this.addChild( new Circle( 3, { fill: 'red' } ) );
-      }
-    }
+    super( options );
 
-    /**
-     * Creates the vertical gradient for the post that connects the gauge to the container.
-     * @param {number} postHeight
-     * @returns {Gradient}
-     * @public
-     * @static
-     */
-    static createPostGradient( postHeight ) {
-      assert && assert( typeof postHeight === 'number' && postHeight > 0, `invalid postHeight: ${postHeight}` );
-
-      return new LinearGradient( 0, 0, 0, postHeight )
-        .addColorStop( 0, 'rgb( 120, 120, 120 )' )
-        .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
-        .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
-        .addColorStop( 1, 'rgb( 100, 100, 100 )' );
+    // Red dot at the origin, for debugging layout
+    if ( GasPropertiesQueryParameters.origin ) {
+      this.addChild( new Circle( 3, { fill: 'red' } ) );
     }
   }
 
-  return gasProperties.register( 'PressureGaugeNode', PressureGaugeNode );
-} );
+  /**
+   * Creates the vertical gradient for the post that connects the gauge to the container.
+   * @param {number} postHeight
+   * @returns {Gradient}
+   * @public
+   * @static
+   */
+  static createPostGradient( postHeight ) {
+    assert && assert( typeof postHeight === 'number' && postHeight > 0, `invalid postHeight: ${postHeight}` );
+
+    return new LinearGradient( 0, 0, 0, postHeight )
+      .addColorStop( 0, 'rgb( 120, 120, 120 )' )
+      .addColorStop( 0.3, 'rgb( 220, 220, 220 )' )
+      .addColorStop( 0.5, 'rgb( 220, 220, 220 )' )
+      .addColorStop( 1, 'rgb( 100, 100, 100 )' );
+  }
+}
+
+gasProperties.register( 'PressureGaugeNode', PressureGaugeNode );
+export default PressureGaugeNode;

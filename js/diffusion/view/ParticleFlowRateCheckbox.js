@@ -5,45 +5,42 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const merge = require( 'PHET_CORE/merge' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
+import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
 
-  // strings
-  const particleFlowRateString = require( 'string!GAS_PROPERTIES/particleFlowRate' );
+const particleFlowRateString = gasPropertiesStrings.particleFlowRate;
 
-  class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
+class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
 
-    /**
-     * @param {BooleanProperty} particleFlowRateVisibleProperty
-     * @param {Object} [options]
-     */
-    constructor( particleFlowRateVisibleProperty, options ) {
-      assert && assert( particleFlowRateVisibleProperty instanceof BooleanProperty,
-        `invalid particleFlowRateVisibleProperty: ${particleFlowRateVisibleProperty}` );
+  /**
+   * @param {BooleanProperty} particleFlowRateVisibleProperty
+   * @param {Object} [options]
+   */
+  constructor( particleFlowRateVisibleProperty, options ) {
+    assert && assert( particleFlowRateVisibleProperty instanceof BooleanProperty,
+      `invalid particleFlowRateVisibleProperty: ${particleFlowRateVisibleProperty}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        textIconSpacing: 12
-      }, options );
+      // superclass options
+      textIconSpacing: 12
+    }, options );
 
-      assert && assert( !options.text, 'ParticleFlowRateCheckbox sets text' );
-      assert && assert( !options.icon, 'ParticleFlowRateCheckbox sets icon' );
-      options = merge( {
-        text: particleFlowRateString,
-        icon: GasPropertiesIconFactory.createParticleFlowRateIcon()
-      }, options );
+    assert && assert( !options.text, 'ParticleFlowRateCheckbox sets text' );
+    assert && assert( !options.icon, 'ParticleFlowRateCheckbox sets icon' );
+    options = merge( {
+      text: particleFlowRateString,
+      icon: GasPropertiesIconFactory.createParticleFlowRateIcon()
+    }, options );
 
-      super( particleFlowRateVisibleProperty, options );
-    }
+    super( particleFlowRateVisibleProperty, options );
   }
+}
 
-  return gasProperties.register( 'ParticleFlowRateCheckbox', ParticleFlowRateCheckbox );
-} );
+gasProperties.register( 'ParticleFlowRateCheckbox', ParticleFlowRateCheckbox );
+export default ParticleFlowRateCheckbox;

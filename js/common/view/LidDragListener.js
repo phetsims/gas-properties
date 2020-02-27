@@ -6,75 +6,72 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DragListener = require( 'SCENERY/listeners/DragListener' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const IdealGasLawContainer = require( 'GAS_PROPERTIES/common/model/IdealGasLawContainer' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const SceneryEvent = require( 'SCENERY/input/SceneryEvent' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasProperties from '../../gasProperties.js';
+import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
-  class LidDragListener extends DragListener {
+class LidDragListener extends DragListener {
 
-    /**
-     * @param {IdealGasLawContainer} container
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Node} parentNode
-     * @param {Tandem} tandem
-     */
-    constructor( container, modelViewTransform, parentNode, tandem ) {
-      assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  /**
+   * @param {IdealGasLawContainer} container
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Node} parentNode
+   * @param {Tandem} tandem
+   */
+  constructor( container, modelViewTransform, parentNode, tandem ) {
+    assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
+    assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      // pointer's x offset from container.getOpeningLeft(), when a drag starts
-      let startXOffset = 0;
+    // pointer's x offset from container.getOpeningLeft(), when a drag starts
+    let startXOffset = 0;
 
-      super( {
+    super( {
 
-        start: ( event, listener ) => {
-          assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
+      start: ( event, listener ) => {
+        assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
-          startXOffset = modelViewTransform.modelToViewX( container.getOpeningLeft() ) -
-                         parentNode.globalToParentPoint( event.pointer.point ).x;
-        },
+        startXOffset = modelViewTransform.modelToViewX( container.getOpeningLeft() ) -
+                       parentNode.globalToParentPoint( event.pointer.point ).x;
+      },
 
-        drag: ( event, listener ) => {
-          assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
+      drag: ( event, listener ) => {
+        assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
-          const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
-          const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-          if ( modelX >= container.openingRight ) {
+        const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
+        const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
+        if ( modelX >= container.openingRight ) {
 
-            // the lid is fully closed
-            container.lidWidthProperty.value = container.getMaxLidWidth();
-          }
-          else {
+          // the lid is fully closed
+          container.lidWidthProperty.value = container.getMaxLidWidth();
+        }
+        else {
 
-            // the lid is open
-            const openingWidth = container.openingRight - modelX;
-            container.lidWidthProperty.value =
-              Math.max( container.getMaxLidWidth() - openingWidth, container.getMinLidWidth() );
-          }
-        },
+          // the lid is open
+          const openingWidth = container.openingRight - modelX;
+          container.lidWidthProperty.value =
+            Math.max( container.getMaxLidWidth() - openingWidth, container.getMinLidWidth() );
+        }
+      },
 
-        // when the lid handle is released, log the opening
-        end: listener => {
-          phet.log && phet.log( container.isOpenProperty.value ?
-                                `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
-                                'Lid is closed' );
-        },
+      // when the lid handle is released, log the opening
+      end: listener => {
+        phet.log && phet.log( container.isOpenProperty.value ?
+                              `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
+                              'Lid is closed' );
+      },
 
-        tandem: tandem
-      } );
-    }
+      tandem: tandem
+    } );
   }
+}
 
-  return gasProperties.register( 'LidDragListener', LidDragListener );
-} );
+gasProperties.register( 'LidDragListener', LidDragListener );
+export default LidDragListener;

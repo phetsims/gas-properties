@@ -5,45 +5,42 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EraserButton = require( 'SCENERY_PHET/buttons/EraserButton' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ParticleSystem = require( 'GAS_PROPERTIES/common/model/ParticleSystem' );
+import merge from '../../../../phet-core/js/merge.js';
+import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import ParticleSystem from '../model/ParticleSystem.js';
 
-  class EraseParticlesButton extends EraserButton {
+class EraseParticlesButton extends EraserButton {
 
-    /**
-     * @param {ParticleSystem} particleSystem
-     * @param {Object} [options]
-     */
-    constructor( particleSystem, options ) {
-      assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
+  /**
+   * @param {ParticleSystem} particleSystem
+   * @param {Object} [options]
+   */
+  constructor( particleSystem, options ) {
+    assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        baseColor: GasPropertiesColorProfile.eraserButtonColorProperty
-      }, options );
+      // superclass options
+      baseColor: GasPropertiesColorProfile.eraserButtonColorProperty
+    }, options );
 
-      // Deletes all particles when the button fires.
-      assert && assert( !options.listener, 'EraseParticlesButton sets listener' );
-      options.listener = () => {
-        particleSystem.removeAllParticles();
-      };
+    // Deletes all particles when the button fires.
+    assert && assert( !options.listener, 'EraseParticlesButton sets listener' );
+    options.listener = () => {
+      particleSystem.removeAllParticles();
+    };
 
-      super( options );
+    super( options );
 
-      // Disables the button when the container is empty.
-      particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
-        this.enabled = ( numberOfParticles !== 0 );
-      } );
-    }
+    // Disables the button when the container is empty.
+    particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
+      this.enabled = ( numberOfParticles !== 0 );
+    } );
   }
+}
 
-  return gasProperties.register( 'EraseParticlesButton', EraseParticlesButton );
-} );
+gasProperties.register( 'EraseParticlesButton', EraseParticlesButton );
+export default EraseParticlesButton;

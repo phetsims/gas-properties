@@ -5,27 +5,24 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesQueryParameters = require( 'GAS_PROPERTIES/common/GasPropertiesQueryParameters' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import BooleanProperty from '../../../axon/js/BooleanProperty.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import gasProperties from '../gasProperties.js';
+import GasPropertiesQueryParameters from './GasPropertiesQueryParameters.js';
 
-  // constants
-  const optionsTandem = Tandem.GLOBAL.createTandem( 'options' );
+// constants
+const optionsTandem = Tandem.GLOBAL.createTandem( 'options' );
 
-  const GasPropertiesGlobalOptions = {
+const GasPropertiesGlobalOptions = {
 
-    // @public
-    pressureNoiseProperty:
-      new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
-        tandem: optionsTandem.createTandem( 'pressureNoiseProperty' ),
-        phetioDocumentation: 'turns noise on and off for the pressure gauge'
-      } )
-  };
+  // @public
+  pressureNoiseProperty:
+    new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
+      tandem: optionsTandem.createTandem( 'pressureNoiseProperty' ),
+      phetioDocumentation: 'turns noise on and off for the pressure gauge'
+    } )
+};
 
-  return gasProperties.register( 'GasPropertiesGlobalOptions', GasPropertiesGlobalOptions );
-} );
+gasProperties.register( 'GasPropertiesGlobalOptions', GasPropertiesGlobalOptions );
+export default GasPropertiesGlobalOptions;

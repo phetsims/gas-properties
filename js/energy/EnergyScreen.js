@@ -5,37 +5,34 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EnergyModel = require( 'GAS_PROPERTIES/energy/model/EnergyModel' );
-  const EnergyScreenView = require( 'GAS_PROPERTIES/energy/view/EnergyScreenView' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Tandem from '../../../tandem/js/Tandem.js';
+import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
+import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../gas-properties-strings.js';
+import gasProperties from '../gasProperties.js';
+import EnergyModel from './model/EnergyModel.js';
+import EnergyScreenView from './view/EnergyScreenView.js';
 
-  // strings
-  const screenEnergyString = require( 'string!GAS_PROPERTIES/screen.energy' );
+const screenEnergyString = gasPropertiesStrings.screen.energy;
 
-  class EnergyScreen extends GasPropertiesScreen {
+class EnergyScreen extends GasPropertiesScreen {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      const createModel = () => new EnergyModel( tandem.createTandem( 'model' ) );
-      const createView = model => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
+    const createModel = () => new EnergyModel( tandem.createTandem( 'model' ) );
+    const createView = model => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
 
-      super( createModel, createView, tandem, {
-        name: screenEnergyString,
-        homeScreenIcon: GasPropertiesIconFactory.createEnergyScreenIcon()
-      } );
-    }
+    super( createModel, createView, tandem, {
+      name: screenEnergyString,
+      homeScreenIcon: GasPropertiesIconFactory.createEnergyScreenIcon()
+    } );
   }
+}
 
-  return gasProperties.register( 'EnergyScreen', EnergyScreen );
-} );
+gasProperties.register( 'EnergyScreen', EnergyScreen );
+export default EnergyScreen;

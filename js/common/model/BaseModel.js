@@ -10,139 +10,136 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const Bounds2 = require( 'DOT/Bounds2' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Property = require( 'AXON/Property' );
-  const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const TimeTransform = require( 'GAS_PROPERTIES/common/model/TimeTransform' );
-  const Vector2 = require( 'DOT/Vector2' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasProperties from '../../gasProperties.js';
+import TimeTransform from './TimeTransform.js';
 
-  // constants
-  const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
+// constants
+const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
+
+/**
+ * @param {Tandem} tandem
+ * @param {Object} [options]
+ */
+class BaseModel {
 
   /**
    * @param {Tandem} tandem
    * @param {Object} [options]
    */
-  class BaseModel {
+  constructor( tandem, options ) {
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-    /**
-     * @param {Tandem} tandem
-     * @param {Object} [options]
-     */
-    constructor( tandem, options ) {
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+    options = merge( {
 
-      options = merge( {
+      // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
+      // Determined empirically, and dependent on the ScreenView's layoutBounds.
+      modelOriginOffset: new Vector2( 645, 475 ),
 
-        // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
-        // Determined empirically, and dependent on the ScreenView's layoutBounds.
-        modelOriginOffset: new Vector2( 645, 475 ),
+      // Stopwatch initial position (in view coordinates!), determined empirically.
+      stopwatchPosition: new Vector2( 240, 15 )
+    }, options );
 
-        // Stopwatch initial position (in view coordinates!), determined empirically.
-        stopwatchPosition: new Vector2( 240, 15 )
-      }, options );
+    // @public (read-only) {ModelViewTransform2} transform between model and view coordinate frames
+    this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
+      options.modelOriginOffset,
+      MODEL_VIEW_SCALE,
+      -MODEL_VIEW_SCALE // y is inverted
+    );
 
-      // @public (read-only) {ModelViewTransform2} transform between model and view coordinate frames
-      this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
-        options.modelOriginOffset,
-        MODEL_VIEW_SCALE,
-        -MODEL_VIEW_SCALE // y is inverted
-      );
+    // @public (read-only) bounds of the entire space that the model knows about.
+    // This corresponds to the browser window, and doesn't have a valid value until the view is created.
+    this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ), {
+      valueType: Bounds2
+    } );
 
-      // @public (read-only) bounds of the entire space that the model knows about.
-      // This corresponds to the browser window, and doesn't have a valid value until the view is created.
-      this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ), {
-        valueType: Bounds2
-      } );
+    // @public is the sim playing?
+    this.isPlayingProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'isPlayingProperty' )
+    } );
 
-      // @public is the sim playing?
-      this.isPlayingProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'isPlayingProperty' )
-      } );
+    // @public is the sim running in slow motion?
+    this.isSlowMotionProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'isSlowMotionProperty' )
+    } );
 
-      // @public is the sim running in slow motion?
-      this.isSlowMotionProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'isSlowMotionProperty' )
-      } );
+    // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
+    this.timeTransform = null;
 
-      // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
-      this.timeTransform = null;
+    // Adjust the time transform
+    this.isSlowMotionProperty.link( isSlowMotion => {
+      this.timeTransform = isSlowMotion ? TimeTransform.SLOW : TimeTransform.NORMAL;
+    } );
 
-      // Adjust the time transform
-      this.isSlowMotionProperty.link( isSlowMotion => {
-        this.timeTransform = isSlowMotion ? TimeTransform.SLOW : TimeTransform.NORMAL;
-      } );
+    // @public (read-only)
+    this.stopwatch = new Stopwatch( {
+      position: options.stopwatchPosition,
+      timePropertyOptions: {
+        units: 'ps'
+      },
+      tandem: tandem.createTandem( 'stopwatch' )
+    } );
+  }
 
-      // @public (read-only)
-      this.stopwatch = new Stopwatch( {
-        position: options.stopwatchPosition,
-        timePropertyOptions: {
-          units: 'ps'
-        },
-        tandem: tandem.createTandem( 'stopwatch' )
-      } );
-    }
+  /**
+   * Resets the model.
+   * @public
+   */
+  reset() {
 
-    /**
-     * Resets the model.
-     * @public
-     */
-    reset() {
+    // Properties
+    this.isPlayingProperty.reset();
+    this.isSlowMotionProperty.reset();
 
-      // Properties
-      this.isPlayingProperty.reset();
-      this.isSlowMotionProperty.reset();
+    // model elements
+    this.stopwatch.reset();
+  }
 
-      // model elements
-      this.stopwatch.reset();
-    }
-
-    /**
-     * Steps the model using real time units.
-     * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
-     * Subclasses that need to add functionality should override stepModelTime, not this method.
-     * @param {number} dt - time delta, in seconds
-     * @public
-     */
-    step( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      if ( this.isPlayingProperty.value ) {
-        this.stepRealTime( dt );
-      }
-    }
-
-    /**
-     * Steps the model using real time units.
-     * This is intended to be called by clients that need to step the sim, e.g. Step button listener.
-     * Subclasses that need to add functionality should override stepModelTime, not this method.
-     * @param {number} dt - time delta, in seconds
-     * @public
-     */
-    stepRealTime( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      this.stepModelTime( this.timeTransform( dt ) );
-    }
-
-    /**
-     * Steps the model using model time units.
-     * Subclasses that need to add additional step functionality should override this method.
-     * @param {number} dt - time delta, in ps
-     * @protected
-     */
-    stepModelTime( dt ) {
-      assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-      this.stopwatch.step( dt );
+  /**
+   * Steps the model using real time units.
+   * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
+   * Subclasses that need to add functionality should override stepModelTime, not this method.
+   * @param {number} dt - time delta, in seconds
+   * @public
+   */
+  step( dt ) {
+    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+    if ( this.isPlayingProperty.value ) {
+      this.stepRealTime( dt );
     }
   }
 
-  return gasProperties.register( 'BaseModel', BaseModel );
-} );
+  /**
+   * Steps the model using real time units.
+   * This is intended to be called by clients that need to step the sim, e.g. Step button listener.
+   * Subclasses that need to add functionality should override stepModelTime, not this method.
+   * @param {number} dt - time delta, in seconds
+   * @public
+   */
+  stepRealTime( dt ) {
+    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+    this.stepModelTime( this.timeTransform( dt ) );
+  }
+
+  /**
+   * Steps the model using model time units.
+   * Subclasses that need to add additional step functionality should override this method.
+   * @param {number} dt - time delta, in ps
+   * @protected
+   */
+  stepModelTime( dt ) {
+    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+    this.stopwatch.step( dt );
+  }
+}
+
+gasProperties.register( 'BaseModel', BaseModel );
+export default BaseModel;

@@ -6,102 +6,99 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AccordionBox = require( 'SUN/AccordionBox' );
-  const FixedWidthNode = require( 'GAS_PROPERTIES/common/view/FixedWidthNode' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const GasPropertiesConstants = require( 'GAS_PROPERTIES/common/GasPropertiesConstants' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const NumberOfParticlesControl = require( 'GAS_PROPERTIES/common/view/NumberOfParticlesControl' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import FixedWidthNode from './FixedWidthNode.js';
+import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
+import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
+import NumberOfParticlesControl from './NumberOfParticlesControl.js';
 
-  // strings
-  const collisionsString = require( 'string!GAS_PROPERTIES/collisions' );
-  const heavyString = require( 'string!GAS_PROPERTIES/heavy' );
-  const lightString = require( 'string!GAS_PROPERTIES/light' );
-  const particlesString = require( 'string!GAS_PROPERTIES/particles' );
+const collisionsString = gasPropertiesStrings.collisions;
+const heavyString = gasPropertiesStrings.heavy;
+const lightString = gasPropertiesStrings.light;
+const particlesString = gasPropertiesStrings.particles;
 
-  class ParticlesAccordionBox extends AccordionBox {
+class ParticlesAccordionBox extends AccordionBox {
 
-    /**
-     * @param {NumberProperty} numberOfHeavyParticlesProperty
-     * @param {NumberProperty} numberOfLightParticlesProperty
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, modelViewTransform, options ) {
-      assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty,
-        `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
-      assert && assert( numberOfLightParticlesProperty instanceof NumberProperty,
-        `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {NumberProperty} numberOfHeavyParticlesProperty
+   * @param {NumberProperty} numberOfLightParticlesProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, modelViewTransform, options ) {
+    assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty,
+      `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
+    assert && assert( numberOfLightParticlesProperty instanceof NumberProperty,
+      `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = merge( {
-        fixedWidth: 100,
-        contentXMargin: 0,
-        collisionsEnabledProperty: null, // {null|BooleanProperty} no checkbox if null
+    options = merge( {
+      fixedWidth: 100,
+      contentXMargin: 0,
+      collisionsEnabledProperty: null, // {null|BooleanProperty} no checkbox if null
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // superclass options
-        titleNode: new Text( particlesString, {
-          font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColorProfile.textFillProperty
-        } )
-      }, options );
+      // superclass options
+      titleNode: new Text( particlesString, {
+        font: GasPropertiesConstants.TITLE_FONT,
+        fill: GasPropertiesColorProfile.textFillProperty
+      } )
+    }, options );
 
-      // Limit width of title
-      options.titleNode.maxWidth = 0.75 * options.fixedWidth;
+    // Limit width of title
+    options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
-      const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
+    const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
 
-      const children = [
+    const children = [
 
-        // Heavy
-        new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-          heavyString, numberOfHeavyParticlesProperty, {
+      // Heavy
+      new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
+        heavyString, numberOfHeavyParticlesProperty, {
           tandem: options.tandem.createTandem( 'numberOfHeavyParticlesControl' )
-          } ),
+        } ),
 
-        // Light
-        new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-          lightString, numberOfLightParticlesProperty, {
-            tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
-          } )
-      ];
+      // Light
+      new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
+        lightString, numberOfLightParticlesProperty, {
+          tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
+        } )
+    ];
 
-      if ( options.collisionsEnabledProperty ) {
+    if ( options.collisionsEnabledProperty ) {
 
-        // optional Collisions checkbox, prepended so that it appears at top
-        children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
-          text: collisionsString,
-          textMaxWidth: 175, // determined empirically
-          tandem: options.tandem.createTandem( 'collisionsCheckbox' )
-        } ) );
-      }
-
-      const content = new FixedWidthNode( contentWidth, new VBox( {
-        align: 'left',
-        spacing: 15,
-        children: children
+      // optional Collisions checkbox, prepended so that it appears at top
+      children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
+        text: collisionsString,
+        textMaxWidth: 175, // determined empirically
+        tandem: options.tandem.createTandem( 'collisionsCheckbox' )
       } ) );
-
-      super( content, options );
     }
-  }
 
-  return gasProperties.register( 'ParticlesAccordionBox', ParticlesAccordionBox );
-} );
+    const content = new FixedWidthNode( contentWidth, new VBox( {
+      align: 'left',
+      spacing: 15,
+      children: children
+    } ) );
+
+    super( content, options );
+  }
+}
+
+gasProperties.register( 'ParticlesAccordionBox', ParticlesAccordionBox );
+export default ParticlesAccordionBox;

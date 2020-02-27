@@ -7,35 +7,32 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
+import merge from '../../../../phet-core/js/merge.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import Particle from '../../common/model/Particle.js';
+import gasProperties from '../../gasProperties.js';
 
-  class DiffusionParticle2 extends Particle {
+class DiffusionParticle2 extends Particle {
 
-    /**
-     * @param {Object} [options] see Particle
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options] see Particle
+   */
+  constructor( options ) {
 
-      if ( options ) {
-        assert && assert( options.colorProperty === undefined, 'DiffusionParticle2 sets colorProperty' );
-        assert && assert( options.highlightColorProperty === undefined, 'DiffusionParticle2 sets highlightColorProperty' );
-      }
-
-      super( merge( {
-
-        // superclass options
-        colorProperty: GasPropertiesColorProfile.particle2ColorProperty,
-        highlightColorProperty: GasPropertiesColorProfile.particle2HighlightColorProperty
-      }, options ) );
+    if ( options ) {
+      assert && assert( options.colorProperty === undefined, 'DiffusionParticle2 sets colorProperty' );
+      assert && assert( options.highlightColorProperty === undefined, 'DiffusionParticle2 sets highlightColorProperty' );
     }
-  }
 
-  return gasProperties.register( 'DiffusionParticle2', DiffusionParticle2 );
-} );
+    super( merge( {
+
+      // superclass options
+      colorProperty: GasPropertiesColorProfile.particle2ColorProperty,
+      highlightColorProperty: GasPropertiesColorProfile.particle2HighlightColorProperty
+    }, options ) );
+  }
+}
+
+gasProperties.register( 'DiffusionParticle2', DiffusionParticle2 );
+export default DiffusionParticle2;

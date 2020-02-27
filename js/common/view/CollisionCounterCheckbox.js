@@ -5,44 +5,41 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesCheckbox = require( 'GAS_PROPERTIES/common/view/GasPropertiesCheckbox' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const merge = require( 'PHET_CORE/merge' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
+import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-  // strings
-  const collisionCounterString = require( 'string!GAS_PROPERTIES/collisionCounter' );
+const collisionCounterString = gasPropertiesStrings.collisionCounter;
 
-  class CollisionCounterCheckbox extends GasPropertiesCheckbox {
+class CollisionCounterCheckbox extends GasPropertiesCheckbox {
 
-    /**
-     * @param {BooleanProperty} collisionCounterVisibleProperty
-     * @param {Object} [options]
-     */
-    constructor( collisionCounterVisibleProperty, options ) {
-      assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty,
-        `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
+  /**
+   * @param {BooleanProperty} collisionCounterVisibleProperty
+   * @param {Object} [options]
+   */
+  constructor( collisionCounterVisibleProperty, options ) {
+    assert && assert( collisionCounterVisibleProperty instanceof BooleanProperty,
+      `invalid collisionCounterVisibleProperty: ${collisionCounterVisibleProperty}` );
 
-      if ( options ) {
-        assert && assert( !options.text, 'StopwatchCheckbox sets text' );
-        assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
-      }
-
-      options = merge( {
-
-        // superclass options
-        text: collisionCounterString,
-        icon: GasPropertiesIconFactory.createCollisionCounterIcon()
-      }, options );
-
-      super( collisionCounterVisibleProperty, options );
+    if ( options ) {
+      assert && assert( !options.text, 'StopwatchCheckbox sets text' );
+      assert && assert( !options.icon, 'StopwatchCheckbox sets icon' );
     }
-  }
 
-  return gasProperties.register( 'CollisionCounterCheckbox', CollisionCounterCheckbox );
-} );
+    options = merge( {
+
+      // superclass options
+      text: collisionCounterString,
+      icon: GasPropertiesIconFactory.createCollisionCounterIcon()
+    }, options );
+
+    super( collisionCounterVisibleProperty, options );
+  }
+}
+
+gasProperties.register( 'CollisionCounterCheckbox', CollisionCounterCheckbox );
+export default CollisionCounterCheckbox;

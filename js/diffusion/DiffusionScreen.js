@@ -5,37 +5,34 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DiffusionModel = require( 'GAS_PROPERTIES/diffusion/model/DiffusionModel' );
-  const DiffusionScreenView = require( 'GAS_PROPERTIES/diffusion/view/DiffusionScreenView' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesIconFactory = require( 'GAS_PROPERTIES/common/view/GasPropertiesIconFactory' );
-  const GasPropertiesScreen = require( 'GAS_PROPERTIES/common/GasPropertiesScreen' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Tandem from '../../../tandem/js/Tandem.js';
+import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
+import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
+import gasPropertiesStrings from '../gas-properties-strings.js';
+import gasProperties from '../gasProperties.js';
+import DiffusionModel from './model/DiffusionModel.js';
+import DiffusionScreenView from './view/DiffusionScreenView.js';
 
-  // strings
-  const screenDiffusionString = require( 'string!GAS_PROPERTIES/screen.diffusion' );
+const screenDiffusionString = gasPropertiesStrings.screen.diffusion;
 
-  class DiffusionScreen extends GasPropertiesScreen {
+class DiffusionScreen extends GasPropertiesScreen {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      const createModel = () => new DiffusionModel( tandem.createTandem( 'model' ) );
-      const createView = model => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
+    const createModel = () => new DiffusionModel( tandem.createTandem( 'model' ) );
+    const createView = model => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
 
-      super( createModel, createView, tandem, {
-        name: screenDiffusionString,
-        homeScreenIcon: GasPropertiesIconFactory.createDiffusionScreenIcon()
-      } );
-    }
+    super( createModel, createView, tandem, {
+      name: screenDiffusionString,
+      homeScreenIcon: GasPropertiesIconFactory.createDiffusionScreenIcon()
+    } );
   }
+}
 
-  return gasProperties.register( 'DiffusionScreen', DiffusionScreen );
-} );
+gasProperties.register( 'DiffusionScreen', DiffusionScreen );
+export default DiffusionScreen;

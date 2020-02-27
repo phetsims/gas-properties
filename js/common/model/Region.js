@@ -11,48 +11,45 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const Particle = require( 'GAS_PROPERTIES/common/model/Particle' );
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import gasProperties from '../../gasProperties.js';
+import Particle from './Particle.js';
 
-  class Region {
+class Region {
 
-    /**
-     * @param {Bounds2} bounds - bounds of the region, in pm
-     */
-    constructor( bounds ) {
-      assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
+  /**
+   * @param {Bounds2} bounds - bounds of the region, in pm
+   */
+  constructor( bounds ) {
+    assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
 
-      // @public (read-only) {Bounds2}
-      this.bounds = bounds;
+    // @public (read-only) {Bounds2}
+    this.bounds = bounds;
 
-      // @public (read-only) {Particle[]} the particles in this region
-      this.particles = [];
-    }
-
-    /**
-     * Adds a particle to this region.
-     * @param {Particle} particle
-     * @public
-     */
-    addParticle( particle ) {
-      assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-      assert && assert( this.particles.indexOf( particle ) === -1, 'particle is already in this Region' );
-      this.particles.push( particle );
-    }
-
-    /**
-     * Removes all particles from this Region. Does not affect existence of particles in the model.
-     * @public
-     */
-    clear() {
-      this.particles.length = 0;
-    }
+    // @public (read-only) {Particle[]} the particles in this region
+    this.particles = [];
   }
 
-  return gasProperties.register( 'Region', Region );
-} );
+  /**
+   * Adds a particle to this region.
+   * @param {Particle} particle
+   * @public
+   */
+  addParticle( particle ) {
+    assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
+    assert && assert( this.particles.indexOf( particle ) === -1, 'particle is already in this Region' );
+    this.particles.push( particle );
+  }
+
+  /**
+   * Removes all particles from this Region. Does not affect existence of particles in the model.
+   * @public
+   */
+  clear() {
+    this.particles.length = 0;
+  }
+}
+
+gasProperties.register( 'Region', Region );
+export default Region;

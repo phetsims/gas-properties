@@ -5,49 +5,46 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const HistogramNode = require( 'GAS_PROPERTIES/energy/view/HistogramNode' );
-  const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
-  const merge = require( 'PHET_CORE/merge' );
+import merge from '../../../../phet-core/js/merge.js';
+import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import HistogramsModel from '../model/HistogramsModel.js';
+import HistogramNode from './HistogramNode.js';
 
-  // strings
-  const kineticEnergyString = require( 'string!GAS_PROPERTIES/kineticEnergy' );
-  const numberOfParticlesString = require( 'string!GAS_PROPERTIES/numberOfParticles' );
+const kineticEnergyString = gasPropertiesStrings.kineticEnergy;
+const numberOfParticlesString = gasPropertiesStrings.numberOfParticles;
 
-  class KineticEnergyHistogramNode extends HistogramNode {
+class KineticEnergyHistogramNode extends HistogramNode {
 
-    /**
-     * @param {HistogramsModel} histogramsModel
-     * @param {Object} [options]
-     */
-    constructor( histogramsModel, options ) {
-      assert && assert( histogramsModel instanceof HistogramsModel, `invalid histogramModel: ${histogramsModel}` );
+  /**
+   * @param {HistogramsModel} histogramsModel
+   * @param {Object} [options]
+   */
+  constructor( histogramsModel, options ) {
+    assert && assert( histogramsModel instanceof HistogramsModel, `invalid histogramModel: ${histogramsModel}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        barColor: GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty
-      }, options );
+      // superclass options
+      barColor: GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty
+    }, options );
 
-      super(
-        histogramsModel.numberOfBins,
-        histogramsModel.kineticEnergyBinWidth,
-        histogramsModel.binCountsUpdatedEmitter,
-        histogramsModel.allKineticEnergyBinCountsProperty,
-        histogramsModel.heavyKineticEnergyBinCountsProperty,
-        histogramsModel.lightKineticEnergyBinCountsProperty,
-        histogramsModel.yScaleProperty,
-        kineticEnergyString, // x-axis label
-        numberOfParticlesString, // y-axis label
-        options
-      );
-    }
+    super(
+      histogramsModel.numberOfBins,
+      histogramsModel.kineticEnergyBinWidth,
+      histogramsModel.binCountsUpdatedEmitter,
+      histogramsModel.allKineticEnergyBinCountsProperty,
+      histogramsModel.heavyKineticEnergyBinCountsProperty,
+      histogramsModel.lightKineticEnergyBinCountsProperty,
+      histogramsModel.yScaleProperty,
+      kineticEnergyString, // x-axis label
+      numberOfParticlesString, // y-axis label
+      options
+    );
   }
+}
 
-  return gasProperties.register( 'KineticEnergyHistogramNode', KineticEnergyHistogramNode );
-} );
+gasProperties.register( 'KineticEnergyHistogramNode', KineticEnergyHistogramNode );
+export default KineticEnergyHistogramNode;

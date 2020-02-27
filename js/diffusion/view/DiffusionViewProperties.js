@@ -5,53 +5,50 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import gasProperties from '../../gasProperties.js';
 
-  class DiffusionViewProperties {
+class DiffusionViewProperties {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
-
-      // @public
-      this.dataExpandedProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'dataExpandedProperty' ),
-        phetioDocumentation: 'whether the Data accordion box is expanded'
-      } );
-
-      // @public
-      this.particleFlowRateVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'particleFlowRateVisibleProperty' ),
-        phetioDocumentation: 'whether particle flow rate vectors are visible below the container'
-      } );
-
-      // @public
-      this.centerOfMassVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'centerOfMassVisibleProperty' ),
-        phetioDocumentation: 'whether the center-of-mass indicators are visible on the container'
-      } );
-
-      // @public
-      this.scaleVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'scaleVisibleProperty' ),
-        phetioDocumentation: 'whether the scale is visible on the container'
-      } );
-    }
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
     // @public
-    reset() {
-      this.dataExpandedProperty.reset();
-      this.particleFlowRateVisibleProperty.reset();
-      this.centerOfMassVisibleProperty.reset();
-      this.scaleVisibleProperty.reset();
-    }
+    this.dataExpandedProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'dataExpandedProperty' ),
+      phetioDocumentation: 'whether the Data accordion box is expanded'
+    } );
+
+    // @public
+    this.particleFlowRateVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'particleFlowRateVisibleProperty' ),
+      phetioDocumentation: 'whether particle flow rate vectors are visible below the container'
+    } );
+
+    // @public
+    this.centerOfMassVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'centerOfMassVisibleProperty' ),
+      phetioDocumentation: 'whether the center-of-mass indicators are visible on the container'
+    } );
+
+    // @public
+    this.scaleVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'scaleVisibleProperty' ),
+      phetioDocumentation: 'whether the scale is visible on the container'
+    } );
   }
 
-  return gasProperties.register( 'DiffusionViewProperties', DiffusionViewProperties );
-} );
+  // @public
+  reset() {
+    this.dataExpandedProperty.reset();
+    this.particleFlowRateVisibleProperty.reset();
+    this.centerOfMassVisibleProperty.reset();
+    this.scaleVisibleProperty.reset();
+  }
+}
+
+gasProperties.register( 'DiffusionViewProperties', DiffusionViewProperties );
+export default DiffusionViewProperties;

@@ -5,45 +5,42 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EnergyAccordionBox = require( 'GAS_PROPERTIES/energy/view/EnergyAccordionBox' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const HistogramsModel = require( 'GAS_PROPERTIES/energy/model/HistogramsModel' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const SpeedHistogramNode = require( 'GAS_PROPERTIES/energy/view/SpeedHistogramNode' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import HistogramsModel from '../model/HistogramsModel.js';
+import EnergyAccordionBox from './EnergyAccordionBox.js';
+import SpeedHistogramNode from './SpeedHistogramNode.js';
 
-  // strings
-  const speedString = require( 'string!GAS_PROPERTIES/speed' );
+const speedString = gasPropertiesStrings.speed;
 
-  class SpeedAccordionBox extends EnergyAccordionBox {
+class SpeedAccordionBox extends EnergyAccordionBox {
 
-    /**
-     * @param {HistogramsModel} histogramsModel
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( histogramsModel, modelViewTransform, options ) {
-      assert && assert( histogramsModel instanceof HistogramsModel, `invalid model: ${histogramsModel}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {HistogramsModel} histogramsModel
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( histogramsModel, modelViewTransform, options ) {
+    assert && assert( histogramsModel instanceof HistogramsModel, `invalid model: ${histogramsModel}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
-      options = merge( {
+    options = merge( {
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, options );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      const histogramNode = new SpeedHistogramNode( histogramsModel, {
-        tandem: options.tandem.createTandem( 'histogramNode' )
-      } );
+    const histogramNode = new SpeedHistogramNode( histogramsModel, {
+      tandem: options.tandem.createTandem( 'histogramNode' )
+    } );
 
-      super( speedString, modelViewTransform, histogramNode, options );
-    }
+    super( speedString, modelViewTransform, histogramNode, options );
   }
+}
 
-  return gasProperties.register( 'SpeedAccordionBox', SpeedAccordionBox );
-} );
+gasProperties.register( 'SpeedAccordionBox', SpeedAccordionBox );
+export default SpeedAccordionBox;

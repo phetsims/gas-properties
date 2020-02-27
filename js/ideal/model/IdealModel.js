@@ -6,24 +6,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const IdealGasLawModel = require( 'GAS_PROPERTIES/common/model/IdealGasLawModel' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Tandem from '../../../../tandem/js/Tandem.js';
+import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
+import gasProperties from '../../gasProperties.js';
 
-  class IdealModel extends IdealGasLawModel {
+class IdealModel extends IdealGasLawModel {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
-      super( tandem );
-    }
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+    super( tandem );
   }
+}
 
-  return gasProperties.register( 'IdealModel', IdealModel );
-} );
+gasProperties.register( 'IdealModel', IdealModel );
+export default IdealModel;

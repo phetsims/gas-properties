@@ -5,47 +5,44 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Screen = require( 'JOIST/Screen' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Screen from '../../../joist/js/Screen.js';
+import merge from '../../../phet-core/js/merge.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import gasProperties from '../gasProperties.js';
+import GasPropertiesColorProfile from './GasPropertiesColorProfile.js';
 
-  class GasPropertiesScreen extends Screen {
+class GasPropertiesScreen extends Screen {
 
-    /**
-     * @param {function: Object} createModel
-     * @param {function( model:Object ): ScreenView } createView
-     * @param {Tandem} tandem
-     * @param {Object} [options]
-     */
-    constructor( createModel, createView, tandem, options ) {
-      assert && assert( typeof createModel === 'function', `invalid createModel: ${createModel}` );
-      assert && assert( typeof createView === 'function', `invalid createView: ${createView}` );
-      assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  /**
+   * @param {function: Object} createModel
+   * @param {function( model:Object ): ScreenView } createView
+   * @param {Tandem} tandem
+   * @param {Object} [options]
+   */
+  constructor( createModel, createView, tandem, options ) {
+    assert && assert( typeof createModel === 'function', `invalid createModel: ${createModel}` );
+    assert && assert( typeof createView === 'function', `invalid createView: ${createView}` );
+    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
+      // superclass options
+      backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
 
-        // put a gray border around unselected icons on the home screen
-        showUnselectedHomeScreenIconFrame: true,
+      // put a gray border around unselected icons on the home screen
+      showUnselectedHomeScreenIconFrame: true,
 
-        // put a gray border around screen icons when the navigation bar is black
-        showScreenIconFrameForNavigationBarFill: 'black'
-      }, options );
+      // put a gray border around screen icons when the navigation bar is black
+      showScreenIconFrameForNavigationBarFill: 'black'
+    }, options );
 
-      assert && assert( !options.tandem, 'GasPropertiesScreen sets tandem' );
-      options.tandem = tandem;
+    assert && assert( !options.tandem, 'GasPropertiesScreen sets tandem' );
+    options.tandem = tandem;
 
-      super( createModel, createView, options );
-    }
+    super( createModel, createView, options );
   }
+}
 
-  return gasProperties.register( 'GasPropertiesScreen', GasPropertiesScreen );
-} );
+gasProperties.register( 'GasPropertiesScreen', GasPropertiesScreen );
+export default GasPropertiesScreen;

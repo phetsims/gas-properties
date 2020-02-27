@@ -5,45 +5,44 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
 
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const GasPropertiesColorProfile = require( 'GAS_PROPERTIES/common/GasPropertiesColorProfile' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
-  const StopwatchReadoutNode = require( 'SCENERY_PHET/StopwatchReadoutNode' );
+// modules
 
-  // strings
-  const picosecondsString = require( 'string!GAS_PROPERTIES/picoseconds' );
+import merge from '../../../../phet-core/js/merge.js';
+import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
+import StopwatchReadoutNode from '../../../../scenery-phet/js/StopwatchReadoutNode.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 
-  class GasPropertiesStopwatchNode extends StopwatchNode {
+const picosecondsString = gasPropertiesStrings.picoseconds;
 
-    /**
-     * @param {Stopwatch} stopwatch
-     * @param {Object} [options]
-     */
-    constructor( stopwatch, options ) {
+class GasPropertiesStopwatchNode extends StopwatchNode {
 
-      options = merge( {
+  /**
+   * @param {Stopwatch} stopwatch
+   * @param {Object} [options]
+   */
+  constructor( stopwatch, options ) {
 
-        // Customizations for Gas Properties
-        backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
-        maxValue: 999.99,
-        stopwatchReadoutNodeOptions: {
-          unitsNode: new Text( picosecondsString, {
-            font: StopwatchReadoutNode.DEFAULT_SMALL_FONT,
-            maxWidth: 30 // determined empirically
-          } )
-        }
-      }, options );
+    options = merge( {
 
-      super( stopwatch, options );
-    }
+      // Customizations for Gas Properties
+      backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
+      maxValue: 999.99,
+      stopwatchReadoutNodeOptions: {
+        unitsNode: new Text( picosecondsString, {
+          font: StopwatchReadoutNode.DEFAULT_SMALL_FONT,
+          maxWidth: 30 // determined empirically
+        } )
+      }
+    }, options );
+
+    super( stopwatch, options );
   }
+}
 
-  return gasProperties.register( 'GasPropertiesStopwatchNode', GasPropertiesStopwatchNode );
-} );
+gasProperties.register( 'GasPropertiesStopwatchNode', GasPropertiesStopwatchNode );
+export default GasPropertiesStopwatchNode;

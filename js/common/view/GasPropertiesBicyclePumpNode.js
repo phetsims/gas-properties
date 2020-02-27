@@ -6,43 +6,40 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BicyclePumpNode = require( 'SCENERY_PHET/BicyclePumpNode' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const merge = require( 'PHET_CORE/merge' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const Property = require( 'AXON/Property' );
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import merge from '../../../../phet-core/js/merge.js';
+import BicyclePumpNode from '../../../../scenery-phet/js/BicyclePumpNode.js';
+import gasProperties from '../../gasProperties.js';
 
-  class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
+class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
-    /**
-     * @param {NumberProperty} numberOfParticlesProperty
-     * @param {Object} [options]
-     * @constructor
-     */
-    constructor( numberOfParticlesProperty, options ) {
-      assert && assert( numberOfParticlesProperty instanceof NumberProperty,
-        `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-      assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
+  /**
+   * @param {NumberProperty} numberOfParticlesProperty
+   * @param {Object} [options]
+   * @constructor
+   */
+  constructor( numberOfParticlesProperty, options ) {
+    assert && assert( numberOfParticlesProperty instanceof NumberProperty,
+      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
+    assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        height: 230,
-        bodyTopFill: 'white',
-        hoseCurviness: 0.75,
-        dragListenerOptions: {
-          numberOfParticlesPerPumpAction: 50,
-          addParticlesOneAtATime: false
-        }
-      }, options );
+      // superclass options
+      height: 230,
+      bodyTopFill: 'white',
+      hoseCurviness: 0.75,
+      dragListenerOptions: {
+        numberOfParticlesPerPumpAction: 50,
+        addParticlesOneAtATime: false
+      }
+    }, options );
 
-      super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
-    }
+    super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
   }
+}
 
-  return gasProperties.register( 'GasPropertiesBicyclePumpNode', GasPropertiesBicyclePumpNode );
-} );
+gasProperties.register( 'GasPropertiesBicyclePumpNode', GasPropertiesBicyclePumpNode );
+export default GasPropertiesBicyclePumpNode;

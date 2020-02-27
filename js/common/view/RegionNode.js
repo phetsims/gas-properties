@@ -6,72 +6,69 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Region = require( 'GAS_PROPERTIES/common/model/Region' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import gasProperties from '../../gasProperties.js';
+import Region from '../model/Region.js';
 
-  // constants
-  const FONT = new PhetFont( 14 );
+// constants
+const FONT = new PhetFont( 14 );
 
-  class RegionNode extends Node {
+class RegionNode extends Node {
 
-    /**
-     * @param {Region} region
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Object} [options]
-     */
-    constructor( region, modelViewTransform, options ) {
-      assert && assert( region instanceof Region, `invalid region: ${region}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
+  /**
+   * @param {Region} region
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( region, modelViewTransform, options ) {
+    assert && assert( region instanceof Region, `invalid region: ${region}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
 
-      const viewBounds = modelViewTransform.modelToViewBounds( region.bounds );
+    const viewBounds = modelViewTransform.modelToViewBounds( region.bounds );
 
-      // Cell in the 2D grid
-      const cellNode = new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
-        fill: 'rgba( 0, 255, 0, 0.1 )',
-        stroke: 'rgba( 0, 255, 0, 0.4 )',
-        lineWidth: 0.25
-      } );
+    // Cell in the 2D grid
+    const cellNode = new Rectangle( viewBounds.minX, viewBounds.minY, viewBounds.width, viewBounds.height, {
+      fill: 'rgba( 0, 255, 0, 0.1 )',
+      stroke: 'rgba( 0, 255, 0, 0.4 )',
+      lineWidth: 0.25
+    } );
 
-      // Displays the number of particles in the Region
-      const countNode = new Text( region.particles.length, {
-        fill: 'green',
-        font: FONT,
-        center: cellNode.center
-      } );
+    // Displays the number of particles in the Region
+    const countNode = new Text( region.particles.length, {
+      fill: 'green',
+      font: FONT,
+      center: cellNode.center
+    } );
 
-      assert && assert( !options || !options.children, 'RegionNode sets children' );
-      options = merge( {
-        children: [ cellNode, countNode ]
-      }, options );
+    assert && assert( !options || !options.children, 'RegionNode sets children' );
+    options = merge( {
+      children: [ cellNode, countNode ]
+    }, options );
 
-      super( options );
+    super( options );
 
-      // @private
-      this.region = region;
-      this.cellNode = cellNode;
-      this.countNode = countNode;
-    }
-
-    /**
-     * Displays the number of particles in the region.
-     * @public
-     */
-    update() {
-      this.countNode.text = this.region.particles.length;
-      this.countNode.center = this.cellNode.center;
-    }
+    // @private
+    this.region = region;
+    this.cellNode = cellNode;
+    this.countNode = countNode;
   }
 
-  return gasProperties.register( 'RegionNode', RegionNode );
-} );
+  /**
+   * Displays the number of particles in the region.
+   * @public
+   */
+  update() {
+    this.countNode.text = this.region.particles.length;
+    this.countNode.center = this.cellNode.center;
+  }
+}
+
+gasProperties.register( 'RegionNode', RegionNode );
+export default RegionNode;

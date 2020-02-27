@@ -6,55 +6,52 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const gasProperties = require( 'GAS_PROPERTIES/gasProperties' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const ParticlesNode = require( 'GAS_PROPERTIES/common/view/ParticlesNode' );
-  const Property = require( 'AXON/Property' );
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import merge from '../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import gasProperties from '../../gasProperties.js';
+import ParticlesNode from './ParticlesNode.js';
 
-  class ParticleImageProperty extends DerivedProperty {
+class ParticleImageProperty extends DerivedProperty {
 
-    /**
-     * @param {function(options:*):Particle} createParticle - creates a Particle instance
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {NumberProperty} radiusProperty
-     * @param {Object} [options]
-     */
-    constructor( createParticle, modelViewTransform, radiusProperty, options ) {
-      assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
-      assert && assert( modelViewTransform instanceof ModelViewTransform2,
-        `invalid modelViewTransform: ${modelViewTransform}` );
-      assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
+  /**
+   * @param {function(options:*):Particle} createParticle - creates a Particle instance
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {NumberProperty} radiusProperty
+   * @param {Object} [options]
+   */
+  constructor( createParticle, modelViewTransform, radiusProperty, options ) {
+    assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2,
+      `invalid modelViewTransform: ${modelViewTransform}` );
+    assert && assert( radiusProperty instanceof NumberProperty, `invalid radiusProperty: ${radiusProperty}` );
 
-      options = merge( {
+    options = merge( {
 
-        // superclass options
-        valueType: [ HTMLCanvasElement, null ]
-      }, options );
+      // superclass options
+      valueType: [ HTMLCanvasElement, null ]
+    }, options );
 
-      // Create a prototypical Particle
-      const particle = createParticle( {
-        radius: radiusProperty.value
+    // Create a prototypical Particle
+    const particle = createParticle( {
+      radius: radiusProperty.value
+    } );
+
+    // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to
+    // derive the value and act as a proxy for the DerivedProperty dependencies.
+    const privateProperty = new Property( null );
+    Property.multilink( [ radiusProperty, particle.colorProperty, particle.highlightColorProperty ],
+      ( radius, color, highlightColor ) => {
+        particle.radius = radius;
+        ParticlesNode.particleToCanvas( particle, modelViewTransform, privateProperty );
       } );
 
-      // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to
-      // derive the value and act as a proxy for the DerivedProperty dependencies.
-      const privateProperty = new Property( null );
-      Property.multilink( [ radiusProperty, particle.colorProperty, particle.highlightColorProperty ],
-        ( radius, color, highlightColor ) => {
-          particle.radius = radius;
-          ParticlesNode.particleToCanvas( particle, modelViewTransform, privateProperty );
-        } );
-
-      super( [ privateProperty ], value => value, options );
-    }
+    super( [ privateProperty ], value => value, options );
   }
+}
 
-  return gasProperties.register( 'ParticleImageProperty', ParticleImageProperty );
-} );
+gasProperties.register( 'ParticleImageProperty', ParticleImageProperty );
+export default ParticleImageProperty;
