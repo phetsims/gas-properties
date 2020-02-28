@@ -1,4 +1,4 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2018-2020, University of Colorado Boulder
 
 /**
  * CollisionCounterCheckbox is the 'Collision Counter' check box, used to control visibility of the collision counter.

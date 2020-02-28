@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * DiffusionDataNode display data for one side of the container in the 'Data' accordion box.

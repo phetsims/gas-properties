@@ -1,4 +1,4 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2018-2020, University of Colorado Boulder
 
 /**
  * PressureGauge is the model of the pressure gauge. It is responsible for determining what units will be used to

@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * DiffusionSettings defines the settings that initialize one side of the container in the 'Diffusion' screen.

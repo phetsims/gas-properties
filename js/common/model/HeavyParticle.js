@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * HeavyParticle is the model for 'heavy' particles, as they are named in the design document.

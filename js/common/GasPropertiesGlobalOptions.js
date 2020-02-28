@@ -1,4 +1,4 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2018-2020, University of Colorado Boulder
 
 /**
  * GasPropertiesGlobalOptions defines the global options for this simulation, accessed via PhET > Options.

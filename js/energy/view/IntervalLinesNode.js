@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * IntervalLinesNode renders the horizontal lines that appear at equally-spaced intervals based on a histogram's

@@ -1,4 +1,4 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2018-2020, University of Colorado Boulder
 
 /**
  * GasPropertiesGlobalOptionsNode is the user interface for global options, accessed via PhET > Options.

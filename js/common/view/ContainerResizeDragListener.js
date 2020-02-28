@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * ContainerResizeDragListener is the drag listener for resizing the container by changing its width.

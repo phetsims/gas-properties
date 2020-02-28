@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * TimeTransform is the transform between real and sim time, with instances for the transforms used in this sim.

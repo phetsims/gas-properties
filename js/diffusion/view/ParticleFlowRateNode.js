@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * ParticleFlowRateNode is a pair of vectors that indicate the flow rate of one particle species between the left and

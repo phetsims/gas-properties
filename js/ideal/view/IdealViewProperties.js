@@ -1,4 +1,4 @@
-// Copyright 2018-2019, University of Colorado Boulder
+// Copyright 2018-2020, University of Colorado Boulder
 
 /**
  * IdealViewProperties defines Properties that are specific to the view in the 'Ideal' screen.

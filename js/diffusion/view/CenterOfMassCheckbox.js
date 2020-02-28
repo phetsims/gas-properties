@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * CenterOfMassCheckbox is the checkbox used to show/hide the center-of-mass indicators on the container.

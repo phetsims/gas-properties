@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * SpeciesHistogramCheckbox is the base class for checkboxes that show histogram data for a specific particle species.

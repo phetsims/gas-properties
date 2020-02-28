@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * GasPropertiesSpinner is a specialization of NumberSpinner for this sim, with options and color profiling.

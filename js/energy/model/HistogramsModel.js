@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * HistogramsModel is a sub-model in the Energy screen, responsible for the Speed and Kinetic Energy histograms.
