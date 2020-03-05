@@ -116,7 +116,8 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
       titleNodeOptions: {
         fill: GasPropertiesColorProfile.textFillProperty,
         font: GasPropertiesConstants.CONTROL_FONT,
-        maxWidth: 125 // determined empirically
+        maxWidth: 125, // determined empirically
+        tandem: Tandem.OPTIONAL // no tandem because no title
       },
       numberDisplayOptions: {
         font: GasPropertiesConstants.CONTROL_FONT,
