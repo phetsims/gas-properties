@@ -101,13 +101,18 @@ class ParticleSystem {
       [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
       ( numberOfHeavyParticles, numberOfLightParticles ) => {
 
-        // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
-        // If you hit these assertions, then you need to add this listener later.  This is a trade-off
-        // for using plain old Arrays instead of ObservableArray.
-        assert && assert( this.heavyParticles.length === numberOfHeavyParticles,
-          'heavyParticles has not been populated yet' );
-        assert && assert( this.lightParticles.length === numberOfLightParticles,
-          'lightParticles has not been populated yet' );
+        // Skip these assertions when PhET-iO state is being restored, because at least one of the arrays will
+        // definitely not be populated. See https://github.com/phetsims/gas-properties/issues/178
+        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+
+          // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
+          // If you hit these assertions, then you need to add this listener later.  This is a trade-off
+          // for using plain old Arrays instead of ObservableArray.
+          assert && assert( this.heavyParticles.length === numberOfHeavyParticles,
+            'heavyParticles has not been populated yet' );
+          assert && assert( this.lightParticles.length === numberOfLightParticles,
+            'lightParticles has not been populated yet' );
+        }
         return numberOfHeavyParticles + numberOfLightParticles;
       }, {
         phetioType: DerivedPropertyIO( NumberIO ),
