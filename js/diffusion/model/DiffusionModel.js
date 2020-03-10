@@ -98,11 +98,16 @@ class DiffusionModel extends BaseModel {
       [ this.leftSettings.numberOfParticlesProperty, this.rightSettings.numberOfParticlesProperty ],
       ( leftNumberOfParticles, rightNumberOfParticles ) => {
 
-        // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
-        // If you hit these assertions, then you need to add this listener later.  This is a trade-off
-        // for using plain old Arrays instead of ObservableArray.
-        assert && assert( this.particles1.length === leftNumberOfParticles, 'particles1 has not been populated yet' );
-        assert && assert( this.particles2.length === rightNumberOfParticles, 'particles2 has not been populated yet' );
+        // Skip these assertions when PhET-iO state is being restored, because at least one of the arrays will
+        // definitely not be populated. See https://github.com/phetsims/gas-properties/issues/178
+        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+
+          // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
+          // If you hit these assertions, then you need to add this listener later.  This is a trade-off
+          // for using plain old Arrays instead of ObservableArray.
+          assert && assert( this.particles1.length === leftNumberOfParticles, 'particles1 has not been populated yet' );
+          assert && assert( this.particles2.length === rightNumberOfParticles, 'particles2 has not been populated yet' );
+        }
         return leftNumberOfParticles + rightNumberOfParticles;
       }, {
         numberType: 'Integer',
