@@ -45,19 +45,23 @@ class BaseScreenView extends ScreenView {
     this.timeControlNode = new TimeControlNode( model.isPlayingProperty, {
 
       // optional Normal/Slow radio buttons
-      isSlowMotionProperty: options.hasSlowMotion ? model.isSlowMotionProperty : null,
-      buttonsXSpacing: 25,
-      labelOptions: {
-        font: GasPropertiesConstants.CONTROL_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+      timeControlSpeedProperty: options.hasSlowMotion ? model.timeControlSpeedProperty : null,
+      buttonGroupXSpacing: 25,
+      speedRadioButtonGroupOptions: {
+        labelOptions: {
+          font: GasPropertiesConstants.CONTROL_FONT,
+          fill: GasPropertiesColorProfile.textFillProperty
+        }
       },
-      stepForwardOptions: {
+      playPauseStepButtonOptions: {
+        stepForwardButtonOptions: {
 
-        // when the Step button is pressed
-        listener: () => {
-          const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
-          model.stepRealTime( seconds );
-          this.stepView( seconds );
+          // when the Step button is pressed
+          listener: () => {
+            const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
+            model.stepRealTime( seconds );
+            this.stepView( seconds );
+          }
         }
       },
       tandem: tandem.createTandem( 'timeControlNode' )

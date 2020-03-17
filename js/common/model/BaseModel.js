@@ -12,12 +12,14 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import TimeTransform from './TimeTransform.js';
@@ -67,16 +69,16 @@ class BaseModel {
     } );
 
     // @public is the sim running in slow motion?
-    this.isSlowMotionProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'isSlowMotionProperty' )
+    this.timeControlSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL, {
+      tandem: tandem.createTandem( 'timeControlSpeedProperty' )
     } );
 
     // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
     this.timeTransform = null;
 
     // Adjust the time transform
-    this.isSlowMotionProperty.link( isSlowMotion => {
-      this.timeTransform = isSlowMotion ? TimeTransform.SLOW : TimeTransform.NORMAL;
+    this.timeControlSpeedProperty.link( speed => {
+      this.timeTransform = speed === TimeControlSpeed.SLOW ? TimeTransform.SLOW : TimeTransform.NORMAL;
     } );
 
     // @public (read-only)
@@ -97,7 +99,7 @@ class BaseModel {
 
     // Properties
     this.isPlayingProperty.reset();
-    this.isSlowMotionProperty.reset();
+    this.timeControlSpeedProperty.reset();
 
     // model elements
     this.stopwatch.reset();
