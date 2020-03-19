@@ -83,8 +83,10 @@ class AverageSpeedAccordionBox extends AccordionBox {
       decimalPlaces: 0,
       align: 'right',
       noValueAlign: 'left',
-      font: new PhetFont( 16 ),
-      numberFill: GasPropertiesColorProfile.textFillProperty,
+      textOptions: {
+        font: new PhetFont( 16 ),
+        fill: GasPropertiesColorProfile.textFillProperty
+      },
       backgroundFill: null,
       backgroundStroke: null,
       maxWidth: 150

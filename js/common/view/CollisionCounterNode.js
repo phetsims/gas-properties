@@ -81,7 +81,9 @@ class CollisionCounterNode extends Node {
     const valueDisplay = new NumberDisplay( collisionCounter.numberOfCollisionsProperty, NUMBER_DISPLAY_RANGE, {
       backgroundFill: 'white',
       backgroundStroke: 'black',
-      font: CONTROL_FONT,
+      textOptions: {
+        font: CONTROL_FONT
+      },
       xMargin: 8,
       yMargin: 4,
       cornerRadius: 3

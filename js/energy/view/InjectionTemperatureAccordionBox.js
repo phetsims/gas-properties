@@ -120,7 +120,9 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
         tandem: Tandem.OPTIONAL // no tandem because no title
       },
       numberDisplayOptions: {
-        font: GasPropertiesConstants.CONTROL_FONT,
+        textOptions: {
+          font: GasPropertiesConstants.CONTROL_FONT
+        },
         valuePattern: StringUtils.fillIn( valueUnitsString, {
           units: kelvinString
         } ),

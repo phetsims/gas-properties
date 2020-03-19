@@ -65,10 +65,12 @@ class ContainerWidthNode extends Node {
     const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
       decimalPlaces: 1,
       valuePattern: StringUtils.fillIn( valueUnitsString, { units: nanometersString } ),
-      font: new PhetFont( 12 ),
       cornerRadius: 3,
-      numberFill: 'black',
-      numberMaxWidth: 100,
+      textOptions: {
+        font: new PhetFont( 12 ),
+        fill: 'black',
+        maxWidth: 100
+      },
       backgroundFill: 'white',
       backgroundStroke: 'black',
       backgroundLineWidth: 0.5
