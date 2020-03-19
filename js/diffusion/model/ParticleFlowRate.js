@@ -37,8 +37,7 @@ class ParticleFlowRate {
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-      phetioState: false
+      tandem: Tandem.REQUIRED
     }, options );
 
     // @private
