@@ -47,8 +47,10 @@ class DiffusionDataNode extends VBox {
 
     const numberDisplayOptions = {
       align: 'right',
-      numberFill: GasPropertiesColorProfile.textFillProperty,
-      font: GasPropertiesConstants.CONTROL_FONT,
+      textOptions: {
+        fill: GasPropertiesColorProfile.textFillProperty,
+        font: GasPropertiesConstants.CONTROL_FONT
+      },
       backgroundFill: null,
       backgroundStroke: null,
       xMargin: 0,

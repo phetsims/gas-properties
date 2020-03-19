@@ -67,7 +67,9 @@ class NumberOfParticlesControl extends VBox {
       deltaFine: 1,
       deltaCoarse: 50,
       numberDisplayOptions: {
-        font: new PhetFont( 18 )
+        textOptions: {
+          font: new PhetFont( 18 )
+        }
       },
       maxWidth: 190, // determined empirically
       tandem: options.tandem.createTandem( 'spinner' )
