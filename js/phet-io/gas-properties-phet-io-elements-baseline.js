@@ -4668,6 +4668,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
+    "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.enabledProperty": {
+      "phetioDocumentation": "When disabled, the component is grayed out and cannot be interacted with.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
     "gasProperties.diffusionScreen.view.timeControlNode.speedRadioButtonGroup.normal": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -6474,6 +6487,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": false,
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.radioButtonGroup.enabledProperty": {
+      "phetioDocumentation": "When disabled, the component is grayed out and cannot be interacted with.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "gasProperties.energyScreen.view.injectionTemperatureAccordionBox.radioButtonGroup.matchContainerRadioButton": {
       "phetioDocumentation": "",
@@ -22672,6 +22698,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": false,
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
+    },
+    "gasProperties.idealScreen.view.controlPanel.holdConstantControl.radioButtonGroup.enabledProperty": {
+      "phetioDocumentation": "When disabled, the component is grayed out and cannot be interacted with.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "gasProperties.idealScreen.view.controlPanel.holdConstantControl.radioButtonGroup.nothingRadioButton": {
       "phetioDocumentation": "",
