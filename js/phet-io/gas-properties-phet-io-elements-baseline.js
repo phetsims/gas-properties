@@ -404,6 +404,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(FAST|NORMAL|SLOW)>"
     },
+    "gasProperties.diffusionScreen.nameProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<StringIO>>"
+    },
     "gasProperties.diffusionScreen.view": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -5473,6 +5486,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(FAST|NORMAL|SLOW)>"
+    },
+    "gasProperties.energyScreen.nameProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<StringIO>>"
     },
     "gasProperties.energyScreen.view": {
       "phetioDocumentation": "",
@@ -12676,6 +12702,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(FAST|NORMAL|SLOW)>"
     },
+    "gasProperties.exploreScreen.nameProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<StringIO>>"
+    },
     "gasProperties.exploreScreen.view": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -18365,7 +18404,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -18586,7 +18625,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -18807,7 +18846,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -19132,7 +19171,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -20749,6 +20788,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<ReferenceIO>"
     },
+    "gasProperties.homeScreen.nameProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<StringIO>>"
+    },
     "gasProperties.homeScreen.view": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -20887,7 +20939,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -21043,7 +21095,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -21199,7 +21251,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -21355,7 +21407,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": false,
+      "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
@@ -21892,6 +21944,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(FAST|NORMAL|SLOW)>"
+    },
+    "gasProperties.idealScreen.nameProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<StringIO>>"
     },
     "gasProperties.idealScreen.view": {
       "phetioDocumentation": "",
