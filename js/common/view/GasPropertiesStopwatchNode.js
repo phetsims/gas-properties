@@ -13,7 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import StopwatchReadoutNode from '../../../../scenery-phet/js/StopwatchReadoutNode.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 

@@ -20,7 +20,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
 import GasPropertiesSpinner from './GasPropertiesSpinner.js';

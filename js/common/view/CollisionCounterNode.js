@@ -27,7 +27,7 @@ import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
 import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';

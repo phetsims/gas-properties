@@ -13,7 +13,7 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
 import IdealGasLawScreenView from '../../common/view/IdealGasLawScreenView.js';
 import ParticlesAccordionBox from '../../common/view/ParticlesAccordionBox.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import IdealModel from '../model/IdealModel.js';
 import IdealControlPanel from './IdealControlPanel.js';

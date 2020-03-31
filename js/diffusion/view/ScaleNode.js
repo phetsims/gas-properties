@@ -17,7 +17,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 
 const nanometersString = gasPropertiesStrings.nanometers;

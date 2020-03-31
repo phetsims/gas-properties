@@ -24,7 +24,7 @@ import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 
 const averageSpeedString = gasPropertiesStrings.averageSpeed;

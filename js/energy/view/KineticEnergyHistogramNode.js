@@ -8,7 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode from './HistogramNode.js';

@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import ComboBoxDisplay from '../../../../scenery-phet/js/ComboBoxDisplay.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';

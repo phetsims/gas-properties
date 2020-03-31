@@ -14,7 +14,7 @@ import GasPropertiesGlobalOptionsNode from './common/view/GasPropertiesGlobalOpt
 import DiffusionScreen from './diffusion/DiffusionScreen.js';
 import EnergyScreen from './energy/EnergyScreen.js';
 import ExploreScreen from './explore/ExploreScreen.js';
-import gasPropertiesStrings from './gas-properties-strings.js';
+import gasPropertiesStrings from './gasPropertiesStrings.js';
 import IdealScreen from './ideal/IdealScreen.js';
 
 const gasPropertiesTitleString = gasPropertiesStrings[ 'gas-properties' ].title;

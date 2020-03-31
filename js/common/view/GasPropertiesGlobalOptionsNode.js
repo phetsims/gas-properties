@@ -12,7 +12,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';

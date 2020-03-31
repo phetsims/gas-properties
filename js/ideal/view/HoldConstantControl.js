@@ -17,7 +17,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import HoldConstant from '../../common/model/HoldConstant.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 
 const holdConstantNothingString = gasPropertiesStrings.holdConstant.nothing;

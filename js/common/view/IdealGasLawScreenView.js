@@ -31,7 +31,7 @@ import PointerCoordinatesNode from '../../../../scenery-phet/js/PointerCoordinat
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';

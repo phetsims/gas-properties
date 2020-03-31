@@ -10,7 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';

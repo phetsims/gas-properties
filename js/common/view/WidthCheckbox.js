@@ -8,7 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';

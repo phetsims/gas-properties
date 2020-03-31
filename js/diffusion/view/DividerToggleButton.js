@@ -12,7 +12,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 
 const removeDividerString = gasPropertiesStrings.removeDivider;

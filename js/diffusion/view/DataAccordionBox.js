@@ -16,7 +16,7 @@ import VSeparator from '../../../../sun/js/VSeparator.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionData from '../model/DiffusionData.js';
 import DiffusionDataNode from './DiffusionDataNode.js';

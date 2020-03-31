@@ -13,7 +13,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureGauge from '../model/PressureGauge.js';

@@ -15,7 +15,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionData from '../model/DiffusionData.js';
 

@@ -10,7 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 
 const scaleString = gasPropertiesStrings.scale;

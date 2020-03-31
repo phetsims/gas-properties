@@ -19,7 +19,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import gasPropertiesStrings from '../../gas-properties-strings.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
