@@ -9,10 +9,12 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import ColorDef from '../../../../scenery/js/util/ColorDef.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import gasProperties from '../../gasProperties.js';
 
@@ -23,14 +25,29 @@ class CenterOfMassNode extends Node {
    * @param {number} centerY - centerY of the indicator, in pm
    * @param {ModelViewTransform2} modelViewTransform
    * @param {ColorDef} fill
+   * @param {Object} [options]
    */
-  constructor( centerOfMassProperty, centerY, modelViewTransform, fill ) {
+  constructor( centerOfMassProperty, centerY, modelViewTransform, fill, options ) {
     assert && assert( centerOfMassProperty instanceof Property,
       `invalid centerOfMassProperty: ${centerOfMassProperty}` );
     assert && assert( typeof centerY === 'number', `invalid centerY: ${centerY}` );
     assert && assert( modelViewTransform instanceof ModelViewTransform2,
       `invalid modelViewTransform: ${modelViewTransform}` );
     assert && assert( ColorDef.isColorDef( fill ), `invalid fill: ${fill}` );
+
+    options = merge( {
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: {
+
+        // model controls visibility
+        visibleProperty: {
+          phetioReadOnly: true,
+          phetioDocumentation: 'visibility is controlled by the model'
+        }
+      }
+    }, options );
 
     const rectangle = new Rectangle( 0, 0, 5, 30, {
       fill: fill,

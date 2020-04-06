@@ -19,8 +19,9 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
@@ -43,6 +44,20 @@ class ContainerWidthNode extends Node {
     assert && assert( modelViewTransform instanceof ModelViewTransform2,
       `invalid modelViewTransform: ${modelViewTransform}` );
     assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
+
+    options = merge( {
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: {
+
+        // model controls visibility
+        visibleProperty: {
+          phetioReadOnly: true,
+          phetioDocumentation: 'visibility is controlled by the model'
+        }
+      }
+    }, options );
 
     // Convert the width from model to view coordinates
     const viewWidthProperty = new DerivedProperty( [ widthProperty ],
@@ -76,10 +91,8 @@ class ContainerWidthNode extends Node {
       backgroundLineWidth: 0.5
     } );
 
-    assert && assert( !options || !options.children, 'ContainerWidthNode sets children' );
-    options = merge( {}, options, {
-      children: [ dimensionalArrowNode, widthDisplay ]
-    } );
+    assert && assert( !options.children, 'ContainerWidthNode sets children' );
+    options.children = [ dimensionalArrowNode, widthDisplay ];
 
     super( options );
 

@@ -27,8 +27,8 @@ import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
 import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
@@ -69,7 +69,15 @@ class CollisionCounterNode extends Node {
       cursor: 'pointer',
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: {
+
+        // model controls visibility
+        visibleProperty: {
+          phetioReadOnly: true,
+          phetioDocumentation: 'visibility is controlled by the model'
+        }
+      }
     }, options );
 
     const wallCollisionsTextNode = new Text( wallCollisionsString, {

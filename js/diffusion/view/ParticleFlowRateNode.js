@@ -11,6 +11,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import ParticleFlowRate from '../model/ParticleFlowRate.js';
 
@@ -28,7 +29,18 @@ class ParticleFlowRateNode extends Node {
     assert && assert( model instanceof ParticleFlowRate, `invalid model: ${model}` );
 
     options = merge( {
-      arrowNodeOptions: null // nested options, set below
+      arrowNodeOptions: null, // nested options, set below
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: {
+
+        // model controls visibility
+        visibleProperty: {
+          phetioReadOnly: true,
+          phetioDocumentation: 'visibility is controlled by the model'
+        }
+      }
     }, options );
 
     options.arrowNodeOptions = merge( {

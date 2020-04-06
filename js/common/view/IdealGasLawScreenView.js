@@ -31,8 +31,8 @@ import PointerCoordinatesNode from '../../../../scenery-phet/js/PointerCoordinat
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
@@ -155,7 +155,9 @@ class IdealGasLawScreenView extends BaseScreenView {
 
     // Dimensional arrows that indicate container size
     const containerWidthNode = new ContainerWidthNode( model.container.position, model.container.widthProperty,
-      model.modelViewTransform, widthVisibleProperty );
+      model.modelViewTransform, widthVisibleProperty, {
+      tandem: tandem.createTandem( 'containerWidthNode' )
+      } );
 
     // Radio buttons for selecting particle type
     const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,

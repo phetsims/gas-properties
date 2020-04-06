@@ -13,8 +13,9 @@ import merge from '../../../../phet-core/js/merge.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import StopwatchReadoutNode from '../../../../scenery-phet/js/StopwatchReadoutNode.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 
 const picosecondsString = gasPropertiesStrings.picoseconds;
@@ -37,6 +38,17 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
           font: StopwatchReadoutNode.DEFAULT_SMALL_FONT,
           maxWidth: 30 // determined empirically
         } )
+      },
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: {
+
+        // model controls visibility
+        visibleProperty: {
+          phetioReadOnly: true,
+          phetioDocumentation: 'visibility is controlled by the model'
+        }
       }
     }, options );
 

@@ -53,7 +53,8 @@ class DiffusionScreenView extends BaseScreenView {
     const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform,
       viewProperties.scaleVisibleProperty, {
         centerX: model.modelViewTransform.modelToViewX( model.container.dividerX ),
-        top: model.modelViewTransform.modelToViewY( model.container.bottom - model.container.wallThickness )
+        top: model.modelViewTransform.modelToViewY( model.container.bottom - model.container.wallThickness ),
+        tandem: tandem.createTandem( 'scaleNode' )
       } );
 
     // Show how the collision detection space is partitioned into regions
@@ -64,9 +65,13 @@ class DiffusionScreenView extends BaseScreenView {
 
     // Center of Mass indicators
     const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
-      model.modelViewTransform, GasPropertiesColorProfile.particle1ColorProperty );
+      model.modelViewTransform, GasPropertiesColorProfile.particle1ColorProperty, {
+        tandem: tandem.createTandem( 'centerOfMassNode1' )
+      } );
     const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
-      model.modelViewTransform, GasPropertiesColorProfile.particle2ColorProperty );
+      model.modelViewTransform, GasPropertiesColorProfile.particle2ColorProperty, {
+        tandem: tandem.createTandem( 'centerOfMassNode2' )
+      } );
 
     viewProperties.centerOfMassVisibleProperty.link( visible => {
       centerOfMassNode1.visible = visible;
@@ -79,14 +84,16 @@ class DiffusionScreenView extends BaseScreenView {
         fill: GasPropertiesColorProfile.particle1ColorProperty
       },
       centerX: containerNode.centerX,
-      top: containerNode.bottom + 38
+      top: containerNode.bottom + 38,
+      tandem: tandem.createTandem( 'particleFlowRateNode1' )
     } );
     const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRate2, {
       arrowNodeOptions: {
         fill: GasPropertiesColorProfile.particle2ColorProperty
       },
       centerX: containerNode.centerX,
-      top: particleFlowRateNode1.bottom + 5
+      top: particleFlowRateNode1.bottom + 5,
+      tandem: tandem.createTandem( 'particleFlowRateNode2' )
     } );
 
     viewProperties.particleFlowRateVisibleProperty.link( visible => {
