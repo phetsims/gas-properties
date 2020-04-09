@@ -10,6 +10,7 @@
 
 import ColorProfile from '../../../scenery-phet/js/ColorProfile.js';
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import gasProperties from '../gasProperties.js';
 
 const GasPropertiesColorProfile = new ColorProfile( [ 'default', 'projector' ], {
@@ -227,6 +228,8 @@ const GasPropertiesColorProfile = new ColorProfile( [ 'default', 'projector' ], 
   eraserButtonColor: {
     default: 'rgb( 220, 220, 220 )'
   }
+}, {
+  tandem: Tandem.GLOBAL.createTandem( 'colorProfile' )
 } );
 
 gasProperties.register( 'GasPropertiesColorProfile', GasPropertiesColorProfile );
