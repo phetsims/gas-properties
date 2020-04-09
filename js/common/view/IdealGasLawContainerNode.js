@@ -157,7 +157,7 @@ class IdealGasLawContainerNode extends Node {
     } );
 
     // Cancel interaction when visibility of the resize handle changes.
-    resizeHandleNode.on( 'visibility', () => resizeHandleNode.interruptSubtreeInput() );
+    resizeHandleNode.visibleProperty.lazyLink( () => resizeHandleNode.interruptSubtreeInput() );
 
     // Dragging the resize handle horizontally changes the container's width
     const resizeDragListener = new ContainerResizeDragListener( container, modelViewTransform, this,

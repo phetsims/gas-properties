@@ -107,7 +107,7 @@ class ContainerWidthNode extends Node {
       this.top = containerViewPosition.y + 8;
     };
     updateLayout();
-    dimensionalArrowNode.on( 'bounds', () => { updateLayout(); } );
+    dimensionalArrowNode.boundsProperty.lazyLink( () => { updateLayout(); } );
   }
 }
 
