@@ -337,7 +337,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "gasProperties.diffusionScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
@@ -5511,7 +5511,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "gasProperties.energyScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
@@ -12778,7 +12778,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "gasProperties.exploreScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
@@ -22073,7 +22073,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "gasProperties.idealScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
