@@ -219,6 +219,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "NumberIO"
+      ],
       "supertype": "ObjectIO",
       "typeName": "ArrayIO<NumberIO>"
     },
@@ -227,6 +230,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "StringIO"
+      ],
       "supertype": "ObjectIO",
       "typeName": "ArrayIO<StringIO>"
     },
@@ -1948,6 +1954,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ObjectIO",
       "typeName": "ReferenceIO<ObjectIO>"
     },
@@ -1972,6 +1981,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "ScreenIO"
     },
