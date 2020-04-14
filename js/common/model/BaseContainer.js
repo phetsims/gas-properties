@@ -10,11 +10,14 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from './Particle.js';
 
@@ -31,7 +34,10 @@ class BaseContainer {
       position: Vector2.ZERO,
 
       // range and initial value of the container's width, in pm
-      widthRange: new RangeWithValue( 5000, 15000, 10000 )
+      widthRange: new RangeWithValue( 5000, 15000, 10000 ),
+
+      // phet-io
+      tandem: Tandem.REQUIRED
 
     }, options );
 
@@ -47,7 +53,10 @@ class BaseContainer {
     // @public width of the container, in pm
     this.widthProperty = new NumberProperty( this.widthRange.defaultValue, {
       range: this.widthRange,
-      units: 'pm'
+      units: 'pm',
+      reentrant: true, // Occurring in PhET-iO State setting
+      tandem: options.tandem.createTandem( 'widthProperty' ),
+      phetioReadOnly: true
     } );
 
     // @public (read-only) height of the container, in pm
@@ -59,7 +68,10 @@ class BaseContainer {
     // @public V, volume of the container, in pm^3
     this.volumeProperty = new DerivedProperty( [ this.widthProperty ],
       width => width * this.height * this.depth, {
-        isValidValue: value => ( typeof value === 'number' && value > 0 )
+        units: 'pm^3',
+        isValidValue: value => ( typeof value === 'number' && value > 0 ),
+        tandem: options.tandem.createTandem( 'volumeProperty' ),
+        phetioType: DerivedPropertyIO( NumberIO )
       } );
 
     // @public (read-only) wall thickness, in pm

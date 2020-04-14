@@ -26,14 +26,13 @@ class DiffusionContainer extends BaseContainer {
   constructor( options ) {
 
     options = merge( {
+      widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ), // effectively fixed width
 
       // phet-io
       tandem: Tandem.REQUIRED
     }, options );
 
-    super( {
-      widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ) // effectively fixed width
-    } );
+    super( options );
 
     // In case clients attempt to use this feature of the base class
     this.widthProperty.lazyLink( width => {

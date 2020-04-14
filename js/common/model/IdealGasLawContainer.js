@@ -75,7 +75,7 @@ class IdealGasLawContainer extends BaseContainer {
       isValidValue: value => ( value >= this.minLidWidth && value <= this.getMaxLidWidth() ),
       units: 'pm',
       tandem: options.tandem.createTandem( 'lidWidthProperty' ),
-      phetioStudioControl: false // because the range is dynamic
+      phetioReadOnly: true // because the range is dynamic
     } );
 
     // @public (read-only) particles enter the container here, on the inside of the container, in pm
