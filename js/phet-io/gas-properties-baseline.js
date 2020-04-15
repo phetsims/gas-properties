@@ -20957,7 +20957,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "gasProperties.general.view.navigationBar.titleTextNode": {
+    "gasProperties.general.view.navigationBar.titleText": {
       "phetioDocumentation": "Displays the title of the simulation in the navigation bar (bottom left)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -20970,7 +20970,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "gasProperties.general.view.navigationBar.titleTextNode.opacityProperty": {
+    "gasProperties.general.view.navigationBar.titleText.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -20983,7 +20983,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "gasProperties.general.view.navigationBar.titleTextNode.pickableProperty": {
+    "gasProperties.general.view.navigationBar.titleText.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -20996,7 +20996,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "gasProperties.general.view.navigationBar.titleTextNode.textProperty": {
+    "gasProperties.general.view.navigationBar.titleText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -21009,7 +21009,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "gasProperties.general.view.navigationBar.titleTextNode.visibleProperty": {
+    "gasProperties.general.view.navigationBar.titleText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -21789,7 +21789,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "gasProperties.homeScreen.view.title": {
+    "gasProperties.homeScreen.view.titleText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -21802,7 +21802,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "gasProperties.homeScreen.view.title.opacityProperty": {
+    "gasProperties.homeScreen.view.titleText.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -21815,7 +21815,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "gasProperties.homeScreen.view.title.pickableProperty": {
+    "gasProperties.homeScreen.view.titleText.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -21828,7 +21828,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "gasProperties.homeScreen.view.title.textProperty": {
+    "gasProperties.homeScreen.view.titleText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -21841,7 +21841,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "gasProperties.homeScreen.view.title.visibleProperty": {
+    "gasProperties.homeScreen.view.titleText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
