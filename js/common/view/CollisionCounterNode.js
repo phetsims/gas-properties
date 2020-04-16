@@ -34,11 +34,6 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
 
-const picosecondsString = gasPropertiesStrings.picoseconds;
-const samplePeriodString = gasPropertiesStrings.samplePeriod;
-const valueUnitsString = gasPropertiesStrings.valueUnits;
-const wallCollisionsString = gasPropertiesStrings.wallCollisions;
-
 // constants
 const X_MARGIN = 15;
 const Y_MARGIN = 10;
@@ -80,7 +75,7 @@ class CollisionCounterNode extends Node {
       }
     }, options );
 
-    const wallCollisionsTextNode = new Text( wallCollisionsString, {
+    const wallCollisionsTextNode = new Text( gasPropertiesStrings.wallCollisions, {
       pickable: false,
       font: LABEL_FONT,
       maxWidth: 110 // determined empirically
@@ -101,7 +96,7 @@ class CollisionCounterNode extends Node {
       tandem: options.tandem.createTandem( 'playResetButton' )
     } );
 
-    const samplePeriodTextNode = new Text( samplePeriodString, {
+    const samplePeriodTextNode = new Text( gasPropertiesStrings.samplePeriod, {
       pickable: false,
       font: LABEL_FONT,
       left: X_MARGIN,
@@ -112,9 +107,9 @@ class CollisionCounterNode extends Node {
     const comboBoxItems = collisionCounter.samplePeriods.map( samplePeriod => {
 
       // e.g. '10 ps'
-      const samplePeriodString = StringUtils.fillIn( valueUnitsString, {
+      const samplePeriodString = StringUtils.fillIn( gasPropertiesStrings.valueUnits, {
         value: samplePeriod,
-        units: picosecondsString
+        units: gasPropertiesStrings.picoseconds
       } );
       const node = new Text( samplePeriodString, {
         font: CONTROL_FONT,

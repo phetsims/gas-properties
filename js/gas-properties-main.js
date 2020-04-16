@@ -17,8 +17,6 @@ import ExploreScreen from './explore/ExploreScreen.js';
 import gasPropertiesStrings from './gasPropertiesStrings.js';
 import IdealScreen from './ideal/IdealScreen.js';
 
-const gasPropertiesTitleString = gasPropertiesStrings[ 'gas-properties' ].title;
-
 const simOptions = {
 
   // Creates content for the Options dialog, accessible via the PhET menu
@@ -37,6 +35,6 @@ SimLauncher.launch( () => {
     new EnergyScreen( Tandem.ROOT.createTandem( 'energyScreen' ) ),
     new DiffusionScreen( Tandem.ROOT.createTandem( 'diffusionScreen' ) )
   ];
-  const sim = new Sim( gasPropertiesTitleString, screens, simOptions );
+  const sim = new Sim( gasPropertiesStrings[ 'gas-properties' ].title, screens, simOptions );
   sim.start();
 } );

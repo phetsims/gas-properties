@@ -20,15 +20,10 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
 import GasPropertiesSpinner from './GasPropertiesSpinner.js';
-
-const initialTemperatureKString = gasPropertiesStrings.initialTemperatureK;
-const massAMUString = gasPropertiesStrings.massAMU;
-const numberOfParticlesString = gasPropertiesStrings.numberOfParticles;
-const radiusPmString = gasPropertiesStrings.radiusPm;
 
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
@@ -64,7 +59,7 @@ class DiffusionSettingsNode extends VBox {
     } );
 
     // Number of Particles
-    const numberOfParticlesControl = new QuantityControl( numberOfParticlesString, modelViewTransform,
+    const numberOfParticlesControl = new QuantityControl( gasPropertiesStrings.numberOfParticles, modelViewTransform,
       leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -75,7 +70,7 @@ class DiffusionSettingsNode extends VBox {
       } );
 
     // Mass (AMU)
-    const massControl = new QuantityControl( massAMUString, modelViewTransform,
+    const massControl = new QuantityControl( gasPropertiesStrings.massAMU, modelViewTransform,
       leftSettings.massProperty, rightSettings.massProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -87,7 +82,7 @@ class DiffusionSettingsNode extends VBox {
       } );
 
     // Radius (pm)
-    const radiusControl = new QuantityControl( radiusPmString, modelViewTransform,
+    const radiusControl = new QuantityControl( gasPropertiesStrings.radiusPm, modelViewTransform,
       leftSettings.radiusProperty, rightSettings.radiusProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -98,7 +93,7 @@ class DiffusionSettingsNode extends VBox {
       } );
 
     // Initial Temperature (K)
-    const initialTemperatureControl = new QuantityControl( initialTemperatureKString, modelViewTransform,
+    const initialTemperatureControl = new QuantityControl( gasPropertiesStrings.initialTemperatureK, modelViewTransform,
       leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,

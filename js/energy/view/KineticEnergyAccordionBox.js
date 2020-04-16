@@ -9,13 +9,11 @@
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import EnergyAccordionBox from './EnergyAccordionBox.js';
 import KineticEnergyHistogramNode from './KineticEnergyHistogramNode.js';
-
-const kineticEnergyString = gasPropertiesStrings.kineticEnergy;
 
 class KineticEnergyAccordionBox extends EnergyAccordionBox {
 
@@ -38,7 +36,7 @@ class KineticEnergyAccordionBox extends EnergyAccordionBox {
       tandem: options.tandem.createTandem( 'histogramNode' )
     } );
 
-    super( kineticEnergyString, modelViewTransform, histogramNode, options );
+    super( gasPropertiesStrings.kineticEnergy, modelViewTransform, histogramNode, options );
   }
 }
 

@@ -8,12 +8,10 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
-
-const collisionCounterString = gasPropertiesStrings.collisionCounter;
 
 class CollisionCounterCheckbox extends GasPropertiesCheckbox {
 
@@ -33,7 +31,7 @@ class CollisionCounterCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: collisionCounterString,
+      text: gasPropertiesStrings.collisionCounter,
       icon: GasPropertiesIconFactory.createCollisionCounterIcon()
     }, options );
 

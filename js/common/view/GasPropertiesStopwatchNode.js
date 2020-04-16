@@ -18,8 +18,6 @@ import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 
-const picosecondsString = gasPropertiesStrings.picoseconds;
-
 class GasPropertiesStopwatchNode extends StopwatchNode {
 
   /**
@@ -34,7 +32,7 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
       backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
       maxValue: 999.99,
       stopwatchReadoutNodeOptions: {
-        unitsNode: new Text( picosecondsString, {
+        unitsNode: new Text( gasPropertiesStrings.picoseconds, {
           font: StopwatchReadoutNode.DEFAULT_SMALL_FONT,
           maxWidth: 30 // determined empirically
         } )

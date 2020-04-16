@@ -24,12 +24,8 @@ import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
-
-const averageSpeedString = gasPropertiesStrings.averageSpeed;
-const metersPerSecondString = gasPropertiesStrings.metersPerSecond;
-const valueUnitsString = gasPropertiesStrings.valueUnits;
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
 class AverageSpeedAccordionBox extends AccordionBox {
 
@@ -54,7 +50,7 @@ class AverageSpeedAccordionBox extends AccordionBox {
 
       // superclass options
       contentYSpacing: 0,
-      titleNode: new Text( averageSpeedString, {
+      titleNode: new Text( gasPropertiesStrings.averageSpeed, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColorProfile.textFillProperty
       } ),
@@ -78,7 +74,7 @@ class AverageSpeedAccordionBox extends AccordionBox {
 
     const numberDisplayRange = new Range( 0, 9999 );
     const numberDisplayOptions = {
-      valuePattern: StringUtils.fillIn( valueUnitsString, { units: metersPerSecondString } ),
+      valuePattern: StringUtils.fillIn( gasPropertiesStrings.valueUnits, { units: gasPropertiesStrings.metersPerSecond } ),
       noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
       decimalPlaces: 0,
       align: 'right',

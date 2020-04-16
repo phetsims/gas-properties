@@ -13,13 +13,11 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureGauge from '../model/PressureGauge.js';
 import PressureDisplay from './PressureDisplay.js';
-
-const pressureString = gasPropertiesStrings.pressure;
 
 // constants
 const DIAL_RADIUS = 50;
@@ -41,7 +39,7 @@ class PressureGaugeNode extends Node {
     }, options );
 
     // circular dial with needle
-    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, pressureString,
+    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, gasPropertiesStrings.pressure,
       pressureGauge.pressureRange, {
         radius: DIAL_RADIUS,
         tandem: Tandem.OPTIONAL

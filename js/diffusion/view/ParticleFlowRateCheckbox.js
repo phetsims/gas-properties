@@ -10,10 +10,8 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
-
-const particleFlowRateString = gasPropertiesStrings.particleFlowRate;
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
 class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
 
@@ -34,7 +32,7 @@ class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
     assert && assert( !options.text, 'ParticleFlowRateCheckbox sets text' );
     assert && assert( !options.icon, 'ParticleFlowRateCheckbox sets icon' );
     options = merge( {
-      text: particleFlowRateString,
+      text: gasPropertiesStrings.particleFlowRate,
       icon: GasPropertiesIconFactory.createParticleFlowRateIcon()
     }, options );
 

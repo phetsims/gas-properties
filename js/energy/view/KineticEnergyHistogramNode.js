@@ -8,13 +8,10 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode from './HistogramNode.js';
-
-const kineticEnergyString = gasPropertiesStrings.kineticEnergy;
-const numberOfParticlesString = gasPropertiesStrings.numberOfParticles;
 
 class KineticEnergyHistogramNode extends HistogramNode {
 
@@ -39,8 +36,8 @@ class KineticEnergyHistogramNode extends HistogramNode {
       histogramsModel.heavyKineticEnergyBinCountsProperty,
       histogramsModel.lightKineticEnergyBinCountsProperty,
       histogramsModel.yScaleProperty,
-      kineticEnergyString, // x-axis label
-      numberOfParticlesString, // y-axis label
+      gasPropertiesStrings.kineticEnergy, // x-axis label
+      gasPropertiesStrings.numberOfParticles, // y-axis label
       options
     );
   }

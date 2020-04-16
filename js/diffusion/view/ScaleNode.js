@@ -22,9 +22,6 @@ import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
-const nanometersString = gasPropertiesStrings.nanometers;
-const valueUnitsString = gasPropertiesStrings.valueUnits;
-
 // constants
 const TICK_LENGTH = 16; // view coordinates
 const TICK_INTERVAL = 1; // nm
@@ -73,9 +70,9 @@ class ScaleNode extends Node {
     } );
 
     // '1 nm' label
-    const labelNode = new Text( StringUtils.fillIn( valueUnitsString, {
+    const labelNode = new Text( StringUtils.fillIn( gasPropertiesStrings.valueUnits, {
       value: TICK_INTERVAL,
-      units: nanometersString
+      units: gasPropertiesStrings.nanometers
     } ), {
       font: new PhetFont( 12 ),
       fill: GasPropertiesColorProfile.scaleColorProperty,

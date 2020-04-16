@@ -10,12 +10,10 @@ import merge from '../../../phet-core/js/merge.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../gasPropertiesStrings.js';
 import gasProperties from '../gasProperties.js';
+import gasPropertiesStrings from '../gasPropertiesStrings.js';
 import IdealModel from './model/IdealModel.js';
 import IdealScreenView from './view/IdealScreenView.js';
-
-const screenIdealString = gasPropertiesStrings.screen.ideal;
 
 class IdealScreen extends GasPropertiesScreen {
 
@@ -29,7 +27,7 @@ class IdealScreen extends GasPropertiesScreen {
     options = merge( {
 
       // superclass options
-      name: screenIdealString,
+      name: gasPropertiesStrings.screen.ideal,
       homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
       hasHoldConstantControls: true
     }, options );

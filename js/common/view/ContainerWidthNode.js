@@ -25,9 +25,6 @@ import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
-const nanometersString = gasPropertiesStrings.nanometers;
-const valueUnitsString = gasPropertiesStrings.valueUnits;
-
 class ContainerWidthNode extends Node {
 
   /**
@@ -79,7 +76,7 @@ class ContainerWidthNode extends Node {
     // Display the width in nm
     const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
       decimalPlaces: 1,
-      valuePattern: StringUtils.fillIn( valueUnitsString, { units: nanometersString } ),
+      valuePattern: StringUtils.fillIn( gasPropertiesStrings.valueUnits, { units: gasPropertiesStrings.nanometers } ),
       cornerRadius: 3,
       textOptions: {
         font: new PhetFont( 12 ),

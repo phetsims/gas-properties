@@ -54,8 +54,6 @@ import PressureGaugeNode from './PressureGaugeNode.js';
 import RegionsNode from './RegionsNode.js';
 import ReturnLidButton from './ReturnLidButton.js';
 
-const oopsMaximumTemperatureString = gasPropertiesStrings.oopsMaximumTemperature;
-
 class IdealGasLawScreenView extends BaseScreenView {
 
   /**
@@ -316,7 +314,7 @@ class IdealGasLawScreenView extends BaseScreenView {
     } );
 
     // Oops dialog when maximum temperature is exceeded.
-    const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( oopsMaximumTemperatureString );
+    const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( gasPropertiesStrings.oopsMaximumTemperature );
     model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { this.showDialog( oopsMaximumTemperatureDialog ); } );
 
     // @private used in methods

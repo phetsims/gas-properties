@@ -11,13 +11,10 @@ import merge from '../../../../phet-core/js/merge.js';
 import ComboBoxDisplay from '../../../../scenery-phet/js/ComboBoxDisplay.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Thermometer from '../model/Thermometer.js';
-
-const degreesCelsiusString = gasPropertiesStrings.degreesCelsius;
-const kelvinString = gasPropertiesStrings.kelvin;
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
@@ -42,13 +39,13 @@ class TemperatureDisplay extends ComboBoxDisplay {
         choice: Thermometer.Units.KELVIN,
         numberProperty: thermometer.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: kelvinString
+        units: gasPropertiesStrings.kelvin
       },
       {
         choice: Thermometer.Units.CELSIUS,
         numberProperty: thermometer.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: degreesCelsiusString
+        units: gasPropertiesStrings.degreesCelsius
       }
     ];
 

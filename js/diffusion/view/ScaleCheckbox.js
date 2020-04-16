@@ -10,10 +10,8 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
-
-const scaleString = gasPropertiesStrings.scale;
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
 class ScaleCheckbox extends GasPropertiesCheckbox {
 
@@ -30,7 +28,7 @@ class ScaleCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: scaleString,
+      text: gasPropertiesStrings.scale,
       icon: GasPropertiesIconFactory.createScaleIcon()
     }, options );
 

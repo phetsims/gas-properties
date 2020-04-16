@@ -8,12 +8,10 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
-
-const widthString = gasPropertiesStrings.width;
 
 class WidthCheckbox extends GasPropertiesCheckbox {
 
@@ -33,7 +31,7 @@ class WidthCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: widthString,
+      text: gasPropertiesStrings.width,
       icon: GasPropertiesIconFactory.createContainerWidthIcon()
     }, options );
 

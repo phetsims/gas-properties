@@ -15,12 +15,9 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
-
-const tAvgKString = gasPropertiesStrings.tAvgK;
-const tAvgString = gasPropertiesStrings.tAvg;
 
 // constants
 const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
@@ -78,8 +75,8 @@ class DiffusionDataNode extends VBox {
     const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
       merge( {}, numberDisplayOptions, {
         align: 'left',
-        valuePattern: tAvgKString,
-        noValuePattern: tAvgString,
+        valuePattern: gasPropertiesStrings.tAvgK,
+        noValuePattern: gasPropertiesStrings.tAvg,
         useRichText: true,
         maxWidth: 100 // determined empirically
       } ) );

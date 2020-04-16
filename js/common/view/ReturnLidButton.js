@@ -10,12 +10,10 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-
-const returnLidString = gasPropertiesStrings.returnLid;
 
 class ReturnLidButton extends RectangularPushButton {
 
@@ -32,7 +30,7 @@ class ReturnLidButton extends RectangularPushButton {
       baseColor: PhetColorScheme.BUTTON_YELLOW
     }, options );
 
-    const textNode = new Text( returnLidString, {
+    const textNode = new Text( gasPropertiesStrings.returnLid, {
       font: GasPropertiesConstants.CONTROL_FONT,
       maxWidth: 150 // determined empirically
     } );

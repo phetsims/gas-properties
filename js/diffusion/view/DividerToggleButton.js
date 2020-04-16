@@ -12,11 +12,8 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
-
-const removeDividerString = gasPropertiesStrings.removeDivider;
-const resetDividerString = gasPropertiesStrings.resetDivider;
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
 class DividerToggleButton extends BooleanRectangularToggleButton {
 
@@ -40,8 +37,8 @@ class DividerToggleButton extends BooleanRectangularToggleButton {
       maxWidth: 150 // determined empirically
     };
 
-    const trueNode = new Text( removeDividerString, textOptions );
-    const falseNode = new Text( resetDividerString, textOptions );
+    const trueNode = new Text( gasPropertiesStrings.removeDivider, textOptions );
+    const falseNode = new Text( gasPropertiesStrings.resetDivider, textOptions );
 
     super( trueNode, falseNode, hasDividerProperty, options );
   }

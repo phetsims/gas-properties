@@ -17,15 +17,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import HoldConstant from '../../common/model/HoldConstant.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
-
-const holdConstantNothingString = gasPropertiesStrings.holdConstant.nothing;
-const holdConstantPressureTString = gasPropertiesStrings.holdConstant.pressureT;
-const holdConstantPressureVString = gasPropertiesStrings.holdConstant.pressureV;
-const holdConstantTitleString = gasPropertiesStrings.holdConstant.title;
-const holdConstantTemperatureString = gasPropertiesStrings.holdConstant.temperature;
-const holdConstantVolumeString = gasPropertiesStrings.holdConstant.volume;
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
 // constants
 const TEXT_OPTIONS = {
@@ -64,7 +57,7 @@ class HoldConstantControl extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const titleNode = new Text( holdConstantTitleString, {
+    const titleNode = new Text( gasPropertiesStrings.holdConstant.title, {
       font: GasPropertiesConstants.TITLE_FONT,
       fill: GasPropertiesColorProfile.textFillProperty,
       maxWidth: 200, // determined empirically
@@ -74,27 +67,27 @@ class HoldConstantControl extends VBox {
     const items = [
       {
         value: HoldConstant.NOTHING,
-        node: new Text( holdConstantNothingString, TEXT_OPTIONS ),
+        node: new Text( gasPropertiesStrings.holdConstant.nothing, TEXT_OPTIONS ),
         tandemName: 'nothingRadioButton'
       },
       {
         value: HoldConstant.VOLUME,
-        node: new Text( holdConstantVolumeString, TEXT_OPTIONS ),
+        node: new Text( gasPropertiesStrings.holdConstant.volume, TEXT_OPTIONS ),
         tandemName: 'volumeRadioButton'
       },
       {
         value: HoldConstant.TEMPERATURE,
-        node: new Text( holdConstantTemperatureString, TEXT_OPTIONS ),
+        node: new Text( gasPropertiesStrings.holdConstant.temperature, TEXT_OPTIONS ),
         tandemName: 'temperatureRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_V,
-        node: new Text( holdConstantPressureVString, TEXT_OPTIONS ),
+        node: new Text( gasPropertiesStrings.holdConstant.pressureV, TEXT_OPTIONS ),
         tandemName: 'pressureVRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_T,
-        node: new Text( holdConstantPressureTString, TEXT_OPTIONS ),
+        node: new Text( gasPropertiesStrings.holdConstant.pressureT, TEXT_OPTIONS ),
         tandemName: 'pressureTRadioButton'
       }
     ];

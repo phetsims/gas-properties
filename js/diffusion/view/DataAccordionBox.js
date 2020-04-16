@@ -16,12 +16,10 @@ import VSeparator from '../../../../sun/js/VSeparator.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 import DiffusionDataNode from './DiffusionDataNode.js';
-
-const dataString = gasPropertiesStrings.data;
 
 class DataAccordionBox extends AccordionBox {
 
@@ -42,7 +40,7 @@ class DataAccordionBox extends AccordionBox {
 
       // superclass options
       contentYSpacing: 0,
-      titleNode: new Text( dataString, {
+      titleNode: new Text( gasPropertiesStrings.data, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColorProfile.textFillProperty,
         maxWidth: 200 // determined empirically

@@ -14,19 +14,14 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import FixedWidthNode from './FixedWidthNode.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 import NumberOfParticlesControl from './NumberOfParticlesControl.js';
-
-const collisionsString = gasPropertiesStrings.collisions;
-const heavyString = gasPropertiesStrings.heavy;
-const lightString = gasPropertiesStrings.light;
-const particlesString = gasPropertiesStrings.particles;
 
 class ParticlesAccordionBox extends AccordionBox {
 
@@ -54,7 +49,7 @@ class ParticlesAccordionBox extends AccordionBox {
     }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
       // superclass options
-      titleNode: new Text( particlesString, {
+      titleNode: new Text( gasPropertiesStrings.particles, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColorProfile.textFillProperty
       } )
@@ -69,13 +64,13 @@ class ParticlesAccordionBox extends AccordionBox {
 
       // Heavy
       new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-        heavyString, numberOfHeavyParticlesProperty, {
+        gasPropertiesStrings.heavy, numberOfHeavyParticlesProperty, {
           tandem: options.tandem.createTandem( 'numberOfHeavyParticlesControl' )
         } ),
 
       // Light
       new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        lightString, numberOfLightParticlesProperty, {
+        gasPropertiesStrings.light, numberOfLightParticlesProperty, {
           tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
         } )
     ];
@@ -84,7 +79,7 @@ class ParticlesAccordionBox extends AccordionBox {
 
       // optional Collisions checkbox, prepended so that it appears at top
       children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
-        text: collisionsString,
+        text: gasPropertiesStrings.collisions,
         textMaxWidth: 175, // determined empirically
         tandem: options.tandem.createTandem( 'collisionsCheckbox' )
       } ) );

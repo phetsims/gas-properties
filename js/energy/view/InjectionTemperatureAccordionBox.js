@@ -27,14 +27,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
-
-const injectionTemperatureString = gasPropertiesStrings.injectionTemperature;
-const kelvinString = gasPropertiesStrings.kelvin;
-const matchContainerString = gasPropertiesStrings.matchContainer;
-const setToString = gasPropertiesStrings.setTo;
-const valueUnitsString = gasPropertiesStrings.valueUnits;
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
 // constants
 const TEXT_OPTIONS = {
@@ -67,7 +61,7 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
       // superclass options
-      titleNode: new Text( injectionTemperatureString, {
+      titleNode: new Text( gasPropertiesStrings.injectionTemperature, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColorProfile.textFillProperty
       } )
@@ -80,12 +74,12 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
       {
         value: false,
-        node: new Text( matchContainerString, TEXT_OPTIONS ),
+        node: new Text( gasPropertiesStrings.matchContainer, TEXT_OPTIONS ),
         tandemName: 'matchContainerRadioButton'
       },
       {
         value: true,
-        node: new Text( setToString, TEXT_OPTIONS ),
+        node: new Text( gasPropertiesStrings.setTo, TEXT_OPTIONS ),
         tandemName: 'setToRadioButton'
       }
     ], {
@@ -123,8 +117,8 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
         textOptions: {
           font: GasPropertiesConstants.CONTROL_FONT
         },
-        valuePattern: StringUtils.fillIn( valueUnitsString, {
-          units: kelvinString
+        valuePattern: StringUtils.fillIn( gasPropertiesStrings.valueUnits, {
+          units: gasPropertiesStrings.kelvin
         } ),
         maxWidth: 75 // determined empirically
       },

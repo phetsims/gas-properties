@@ -12,13 +12,11 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import gasProperties from '../../gasProperties.js';
+import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesGlobalOptions from '../GasPropertiesGlobalOptions.js';
-
-const pressureNoiseString = gasPropertiesStrings.pressureNoise;
 
 // constants
 const CHECKBOX_TEXT_MAX_WIDTH = 350;
@@ -54,7 +52,7 @@ class GasPropertiesGlobalOptionsNode extends VBox {
     // Pressure Noise checkbox
     if ( options.hasPressureNoiseCheckbox ) {
       const pressureNoiseCheckbox = new Checkbox(
-        new Text( pressureNoiseString, {
+        new Text( gasPropertiesStrings.pressureNoise, {
           font: GasPropertiesConstants.CONTROL_FONT,
           maxWidth: CHECKBOX_TEXT_MAX_WIDTH
         } ),
