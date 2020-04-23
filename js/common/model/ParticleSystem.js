@@ -11,6 +11,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -117,6 +118,12 @@ class ParticleSystem {
         phetioDocumentation: 'the total number of particles in the container'
       }
     );
+
+    // The heavy/light number Properties need to fire their listeners to update their associated arrays with particles.
+    // This occurs in the "notification" step when `updateNumberOfParticles` is called. This should occur before
+    // numberOfParticlesProperty recomputes its derivation function.
+    Property.registerOrderDependency( this.numberOfHeavyParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
+    Property.registerOrderDependency( this.numberOfLightParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
   }
 
   /**
