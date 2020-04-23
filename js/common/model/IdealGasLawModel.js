@@ -235,9 +235,10 @@ class IdealGasLawModel extends BaseModel {
         holdConstant === HoldConstant.PRESSURE_T ) ),
         `bad holdConstant state: ${holdConstant} with pressure=${this.pressureModel.pressureProperty.value}` );
     }, {
-      phetioDependencies: [
 
-        // These values need to be correct before this listener fires.
+      // These values need to be correct before this listener fires.  This is not an issue when the sim is running,
+      // but is relevant when PhET-iO restores state.  See https://github.com/phetsims/gas-properties/issues/182.
+      phetioDependencies: [
         this.particleSystem.numberOfParticlesProperty,
         this.pressureModel.pressureProperty
       ]
