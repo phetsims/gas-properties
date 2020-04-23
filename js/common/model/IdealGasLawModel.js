@@ -235,9 +235,9 @@ class IdealGasLawModel extends BaseModel {
         holdConstant === HoldConstant.PRESSURE_T ) ),
         `bad holdConstant state: ${holdConstant} with pressure=${this.pressureModel.pressureProperty.value}` );
     }, {
-      phetioDependencies: [
 
-        // These values need to be correct before this listener fires.
+      // These values need to be correct before this listener fires.
+      phetioDependencies: [
         this.particleSystem.numberOfParticlesProperty,
         this.pressureModel.pressureProperty
       ]
