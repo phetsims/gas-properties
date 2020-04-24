@@ -119,9 +119,10 @@ class ParticleSystem {
       }
     );
 
-    // The heavy/light number Properties need to fire their listeners to update their associated arrays with particles.
-    // This occurs in the "notification" step when `updateNumberOfParticles` is called. This should occur before
-    // numberOfParticlesProperty recomputes its derivation function.
+    // Properties for the number of heavy and light particles need to notify listeners to update their associated
+    // particle arrays. This occurs in the "notification" step when updateNumberOfParticles is called.
+    // During PhET-iO restore state, this must occur before numberOfParticlesProperty is re-derived.
+    // See https://github.com/phetsims/gas-properties/issues/178
     Property.registerOrderDependency( this.numberOfHeavyParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
     Property.registerOrderDependency( this.numberOfLightParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
   }
