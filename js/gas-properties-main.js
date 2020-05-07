@@ -7,7 +7,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import GasPropertiesConstants from './common/GasPropertiesConstants.js';
 import GasPropertiesGlobalOptionsNode from './common/view/GasPropertiesGlobalOptionsNode.js';
@@ -28,7 +28,7 @@ const simOptions = {
   credits: GasPropertiesConstants.CREDITS
 };
 
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
   const screens = [
     new IdealScreen( Tandem.ROOT.createTandem( 'idealScreen' ) ),
     new ExploreScreen( Tandem.ROOT.createTandem( 'exploreScreen' ) ),
