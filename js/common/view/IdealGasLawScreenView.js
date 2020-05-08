@@ -355,6 +355,7 @@ class IdealGasLawScreenView extends BaseScreenView {
   /**
    * Shows a dialog, and cancels any in-progress interactions.
    * @param {Dialog} dialog
+   * @public
    */
   showDialog( dialog ) {
     this.interruptSubtreeInput();
