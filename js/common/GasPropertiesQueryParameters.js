@@ -23,7 +23,8 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
    */
   pressureNoise: {
     type: 'boolean',
-    defaultValue: true
+    defaultValue: true,
+    public: true
   },
 
   //==================================================================================================================
