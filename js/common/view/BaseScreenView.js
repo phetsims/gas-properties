@@ -45,7 +45,7 @@ class BaseScreenView extends ScreenView {
     this.timeControlNode = new TimeControlNode( model.isPlayingProperty, {
 
       // optional Normal/Slow radio buttons
-      timeControlSpeedProperty: options.hasSlowMotion ? model.timeControlSpeedProperty : null,
+      timeSpeedProperty: options.hasSlowMotion ? model.timeSpeedProperty : null,
       buttonGroupXSpacing: 25,
       speedRadioButtonGroupOptions: {
         labelOptions: {

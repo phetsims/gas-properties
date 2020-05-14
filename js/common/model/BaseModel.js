@@ -19,7 +19,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
-import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import TimeTransform from './TimeTransform.js';
@@ -68,17 +68,17 @@ class BaseModel {
       tandem: tandem.createTandem( 'isPlayingProperty' )
     } );
 
-    // @public is the sim running in slow motion?
-    this.timeControlSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL, {
-      tandem: tandem.createTandem( 'timeControlSpeedProperty' )
+    // @public the clock speed of the sim
+    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+      tandem: tandem.createTandem( 'timeSpeedProperty' )
     } );
 
     // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
     this.timeTransform = null;
 
     // Adjust the time transform
-    this.timeControlSpeedProperty.link( speed => {
-      this.timeTransform = speed === TimeControlSpeed.SLOW ? TimeTransform.SLOW : TimeTransform.NORMAL;
+    this.timeSpeedProperty.link( speed => {
+      this.timeTransform = speed === TimeSpeed.SLOW ? TimeTransform.SLOW : TimeTransform.NORMAL;
     } );
 
     // @public (read-only)
@@ -99,7 +99,7 @@ class BaseModel {
 
     // Properties
     this.isPlayingProperty.reset();
-    this.timeControlSpeedProperty.reset();
+    this.timeSpeedProperty.reset();
 
     // model elements
     this.stopwatch.reset();
