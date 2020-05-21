@@ -68,6 +68,20 @@ class GasPropertiesGlobalOptionsNode extends VBox {
     options.children = children;
 
     super( options );
+
+    // @private
+    this.disposeGasPropertiesGlobalOptionsNode = () => {
+      children.forEach( child => child.dispose() );
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeGasPropertiesGlobalOptionsNode();
+    super.dispose();
   }
 }
 
