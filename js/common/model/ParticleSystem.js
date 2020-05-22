@@ -123,8 +123,8 @@ class ParticleSystem {
     // particle arrays. This occurs in the "notification" step when updateNumberOfParticles is called.
     // During PhET-iO restore state, this must occur before numberOfParticlesProperty is re-derived.
     // See https://github.com/phetsims/gas-properties/issues/178
-    Property.registerOrderDependency( this.numberOfHeavyParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
-    Property.registerOrderDependency( this.numberOfLightParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
+    Property.registerPhetioOrderDependency( this.numberOfHeavyParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
+    Property.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, Property.Phase.NOTIFY, this.numberOfParticlesProperty, Property.Phase.UNDEFER );
   }
 
   /**
