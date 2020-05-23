@@ -11,7 +11,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import propertyStateHandlerSingleton from '../../../../axon/js/propertyStateHandlerSingleton.js';
 import PropertyStatePhase from '../../../../axon/js/PropertyStatePhase.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -124,8 +124,8 @@ class ParticleSystem {
     // particle arrays. This occurs in the "notification" step when updateNumberOfParticles is called.
     // During PhET-iO restore state, this must occur before numberOfParticlesProperty is re-derived.
     // See https://github.com/phetsims/gas-properties/issues/178
-    Property.registerPhetioOrderDependency( this.numberOfHeavyParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
-    Property.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
+    propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfHeavyParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
+    propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
   }
 
   /**
