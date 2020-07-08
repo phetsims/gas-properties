@@ -30,7 +30,6 @@ class GasPropertiesSpinner extends NumberSpinner {
         decimalPlaces: 0,
         xMargin: 8,
         yMargin: 6,
-        align: 'right',
         textOptions: {
           font: GasPropertiesConstants.CONTROL_FONT
         }
