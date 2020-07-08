@@ -26,10 +26,15 @@ class GasPropertiesSpinner extends NumberSpinner {
     options = merge( {
 
       // superclass options
-      font: GasPropertiesConstants.CONTROL_FONT,
-      xMargin: 8,
-      yMargin: 6,
-      valueAlign: 'right',
+      numberDisplayOptions: {
+        decimalPlaces: 0,
+        xMargin: 8,
+        yMargin: 6,
+        align: 'right',
+        textOptions: {
+          font: GasPropertiesConstants.CONTROL_FONT
+        }
+      },
       touchAreaXDilation: 15,
       touchAreaYDilation: 15
     }, options );
