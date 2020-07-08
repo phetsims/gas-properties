@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.0-dev.2 Wed Jul 08 2020 14:07:08 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.1.0-dev.3 Wed Jul 08 2020 16:03:58 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "master"
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "gas-properties": {
-    "sha": "1ac7b237b91e547cba68ff3acb2108807bef2ceb",
+    "sha": "c1aa84ba88fb2f3cd082e0d0f6717fd5d9f1e8cc",
     "branch": "master"
   },
   "joist": {
@@ -77,11 +77,11 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "6a4382bdf91b8f5541b1c4b5de38db6089b1f214",
+    "sha": "3087ba4444ebfba0b0021580b632021ae361fe5f",
     "branch": "master"
   },
   "tambo": {
-    "sha": "c8e586892244d13608b03ccee0883202a19b7ce0",
+    "sha": "3aeccee5a0e4c28598de7201f7310de36d69d0e5",
     "branch": "master"
   },
   "tandem": {
