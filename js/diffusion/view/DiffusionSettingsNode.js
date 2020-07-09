@@ -63,8 +63,7 @@ class DiffusionSettingsNode extends VBox {
       leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
-          deltaValue: DiffusionSettings.DELTAS.numberOfParticles,
-          decimalPlaces: 0
+          deltaValue: DiffusionSettings.DELTAS.numberOfParticles
         },
         tandem: options.tandem.createTandem( 'numberOfParticlesControl' )
       } );
@@ -75,8 +74,9 @@ class DiffusionSettingsNode extends VBox {
         spinnerOptions: {
           enabledProperty: enabledProperty,
           deltaValue: DiffusionSettings.DELTAS.mass,
-          decimalPlaces: 0,
-          xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
+          numberDisplayOptions: {
+            xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
+          }
         },
         tandem: options.tandem.createTandem( 'massControl' )
       } );
@@ -86,8 +86,7 @@ class DiffusionSettingsNode extends VBox {
       leftSettings.radiusProperty, rightSettings.radiusProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
-          deltaValue: DiffusionSettings.DELTAS.radius,
-          decimalPlaces: 0
+          deltaValue: DiffusionSettings.DELTAS.radius
         },
         tandem: options.tandem.createTandem( 'radiusControl' )
       } );
@@ -97,8 +96,7 @@ class DiffusionSettingsNode extends VBox {
       leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
-          deltaValue: DiffusionSettings.DELTAS.initialTemperature,
-          decimalPlaces: 0
+          deltaValue: DiffusionSettings.DELTAS.initialTemperature
         },
         tandem: options.tandem.createTandem( 'initialTemperatureControl' )
       } );
