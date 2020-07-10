@@ -19,7 +19,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
-import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HeaterCoolerNode from '../../../../scenery-phet/js/HeaterCoolerNode.js';
 import Animation from '../../../../twixt/js/Animation.js';
@@ -136,7 +135,7 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
             // compute heat/cool factor, relative to temperature change and number of particles
             const deltaTN = deltaT * numberOfParticles; // deltaT * N
-            const heatCoolFactor = Utils.sign( deltaT ) * toHeatFactor( Math.abs( deltaTN ) );
+            const heatCoolFactor = Math.sign( deltaT ) * toHeatFactor( Math.abs( deltaTN ) );
             assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
 
             // Animation that moves the flame/ice up
