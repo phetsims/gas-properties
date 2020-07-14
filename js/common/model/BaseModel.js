@@ -21,7 +21,9 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Range from '../../../../dot/js/Range.js';
 import gasProperties from '../../gasProperties.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import TimeTransform from './TimeTransform.js';
 
 // constants
@@ -85,6 +87,7 @@ class BaseModel {
     this.stopwatch = new Stopwatch( {
       position: options.stopwatchPosition,
       timePropertyOptions: {
+        range: new Range( 0, GasPropertiesConstants.MAX_TIME ),
         units: 'ps'
       },
       tandem: tandem.createTandem( 'stopwatch' )

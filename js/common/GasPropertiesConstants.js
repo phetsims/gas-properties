@@ -37,6 +37,9 @@ const GasPropertiesConstants = {
   // time step used when pressing the Step button, in ps
   MODEL_TIME_STEP: 0.2,
 
+  // the Stopwatch pauses at this value, and the StopwatchNode is sized for this max value
+  MAX_TIME: 999.99,
+
   // number of particles
   HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
   LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),

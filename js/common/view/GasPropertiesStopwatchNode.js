@@ -9,14 +9,15 @@
 
 // modules
 
+import StringProperty from '../../../../axon/js/StringProperty.js';
+import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
-import StopwatchReadoutNode from '../../../../scenery-phet/js/StopwatchReadoutNode.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 class GasPropertiesStopwatchNode extends StopwatchNode {
 
@@ -28,13 +29,16 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
 
     options = merge( {
 
+      // For determining an appropriate size for the font
+      numberDisplayRange: new Range( 0, GasPropertiesConstants.MAX_TIME ),
+
       // Customizations for Gas Properties
       backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
-      maxValue: 999.99,
-      stopwatchReadoutNodeOptions: {
-        unitsNode: new Text( gasPropertiesStrings.picoseconds, {
-          font: StopwatchReadoutNode.DEFAULT_SMALL_FONT,
-          maxWidth: 30 // determined empirically
+
+      stopwatchNumberDisplayOptions: {
+        numberFormatter: StopwatchNode.getRichNumberFormatter(  {
+          showAsDecimal: true,
+          unitsProperty: new StringProperty( gasPropertiesStrings.picoseconds )
         } )
       },
 
