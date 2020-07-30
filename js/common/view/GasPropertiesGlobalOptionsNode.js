@@ -32,7 +32,7 @@ class GasPropertiesGlobalOptionsNode extends VBox {
       hasPressureNoiseCheckbox: true, // whether to include the 'Pressure Noise' checkbox
 
       // superclass options
-      spacing: 12,
+      spacing: 16,
 
       // phet-io
       tandem: Tandem.REQUIRED
