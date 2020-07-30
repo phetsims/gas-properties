@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import OptionsDialog from '../../../../joist/js/OptionsDialog.js';
 import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -32,7 +33,7 @@ class GasPropertiesGlobalOptionsNode extends VBox {
       hasPressureNoiseCheckbox: true, // whether to include the 'Pressure Noise' checkbox
 
       // superclass options
-      spacing: 16,
+      spacing: OptionsDialog.DEFAULT_SPACING,
 
       // phet-io
       tandem: Tandem.REQUIRED
