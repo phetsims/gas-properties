@@ -35,7 +35,7 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
       // Customizations for Gas Properties
       backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
 
-      stopwatchNumberDisplayOptions: {
+      numberDisplayOptions: {
         numberFormatter: StopwatchNode.getRichNumberFormatter(  {
           showAsDecimal: true,
           unitsProperty: new StringProperty( gasPropertiesStrings.picoseconds )
