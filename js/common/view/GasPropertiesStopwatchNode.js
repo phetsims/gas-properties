@@ -6,10 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-
 // modules
-
-import StringProperty from '../../../../axon/js/StringProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
@@ -38,7 +35,7 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
       numberDisplayOptions: {
         numberFormatter: StopwatchNode.getRichNumberFormatter(  {
           showAsDecimal: true,
-          unitsProperty: new StringProperty( gasPropertiesStrings.picoseconds )
+          units: gasPropertiesStrings.picoseconds
         } )
       },
 
