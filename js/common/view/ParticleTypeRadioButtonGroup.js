@@ -47,12 +47,12 @@ class ParticleTypeRadioButtonGroup extends RadioButtonGroup {
       {
         value: ParticleType.HEAVY,
         node: GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-        tandemName: 'heavyParticles'
+        tandemName: 'heavyParticlesRadioButton'
       },
       {
         value: ParticleType.LIGHT,
         node: GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        tandemName: 'lightParticles'
+        tandemName: 'lightParticlesRadioButton'
       }
     ];
 
