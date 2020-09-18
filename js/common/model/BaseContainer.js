@@ -10,7 +10,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
@@ -71,7 +70,7 @@ class BaseContainer {
         units: 'pm^3',
         isValidValue: value => ( typeof value === 'number' && value > 0 ),
         tandem: options.tandem.createTandem( 'volumeProperty' ),
-        phetioType: DerivedPropertyIO( NumberIO )
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
       } );
 
     // @public (read-only) wall thickness, in pm

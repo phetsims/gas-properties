@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import propertyStateHandlerSingleton from '../../../../axon/js/propertyStateHandlerSingleton.js';
 import PropertyStatePhase from '../../../../axon/js/PropertyStatePhase.js';
@@ -112,7 +111,7 @@ class ParticleSystem {
           'lightParticles has not been populated yet' );
         return numberOfHeavyParticles + numberOfLightParticles;
       }, {
-        phetioType: DerivedPropertyIO( NumberIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         valueType: 'number',
         isValidValue: value => value >= 0,
         tandem: options.tandem.createTandem( 'numberOfParticlesProperty' ),

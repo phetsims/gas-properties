@@ -7,7 +7,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -113,7 +112,7 @@ class DiffusionModel extends BaseModel {
         numberType: 'Integer',
         isValidValue: value => value >= 0,
         valueType: 'number',
-        phetioType: DerivedPropertyIO( NumberIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
         phetioDocumentation: 'total number of particles in the container'
       } );

@@ -13,7 +13,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -80,7 +79,7 @@ class PressureGauge {
         units: 'atm',
         isValidValue: value => ( value >= 0 ),
         valueType: 'number',
-        phetioType: DerivedPropertyIO( NumberIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         tandem: options.tandem.createTandem( 'pressureAtmospheresProperty' ),
         phetioDocumentation: 'pressure in atm, with optional noise added'
       } );
