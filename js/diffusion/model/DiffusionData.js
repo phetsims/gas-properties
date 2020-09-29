@@ -9,7 +9,6 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -64,7 +63,7 @@ class DiffusionData {
     this.averageTemperatureProperty = new Property( null, {
       units: 'K',
       isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
-      phetioType: PropertyIO( NullableIO( NumberIO ) ),
+      phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
       phetioReadOnly: true, // derived from the state of the particle system
       tandem: options.tandem.createTandem( 'averageTemperatureProperty' ),
       phetioDocumentation: 'average temperature in this side of the container'

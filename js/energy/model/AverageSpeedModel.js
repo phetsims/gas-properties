@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -21,7 +20,7 @@ import gasProperties from '../../gasProperties.js';
 const AVERAGE_SPEED_PROPERTY_OPTIONS = {
   units: 'pm/ps',
   isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
-  phetioType: PropertyIO( NullableIO( NumberIO ) ),
+  phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
   phetioReadOnly: true // derived from the state of the particle system
 };
 

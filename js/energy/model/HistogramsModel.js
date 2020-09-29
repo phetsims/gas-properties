@@ -10,7 +10,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
@@ -57,7 +56,7 @@ class HistogramsModel {
 
     const binCountsPropertyOptions = {
       isValidValue: value => ( Array.isArray( value ) && value.length === this.numberOfBins ),
-      phetioType: PropertyIO( ArrayIO( NumberIO ) ),
+      phetioType: Property.PropertyIO( ArrayIO( NumberIO ) ),
       phetioReadOnly: true // derived from the state of the particle system
     };
 

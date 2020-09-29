@@ -8,7 +8,6 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -32,7 +31,7 @@ import ParticleFlowRate from './ParticleFlowRate.js';
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
   units: 'pm',
   valueType: [ 'number', null ],
-  phetioType: PropertyIO( NullableIO( NumberIO ) ),
+  phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
   phetioReadOnly: true // derived from the state of the particle system
 };
 

@@ -10,7 +10,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -52,7 +51,7 @@ class TemperatureModel {
     this.temperatureProperty = new Property( null, {
       units: 'K',
       isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
-      phetioType: PropertyIO( NullableIO( NumberIO ) ),
+      phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
       tandem: options.tandem.createTandem( 'temperatureProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system
       phetioDocumentation: 'temperature in K'
