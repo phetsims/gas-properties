@@ -104,7 +104,7 @@ class ParticleSystem {
 
         // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
         // If you hit these assertions, then you need to add this listener later.  This is a trade-off
-        // for using plain old Arrays instead of ObservableArray.
+        // for using plain old Arrays instead of ObservableArrayDefs.
         assert && assert( this.heavyParticles.length === numberOfHeavyParticles,
           'heavyParticles has not been populated yet' );
         assert && assert( this.lightParticles.length === numberOfLightParticles,

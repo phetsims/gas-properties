@@ -102,7 +102,7 @@ class DiffusionModel extends BaseModel {
 
           // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
           // If you hit these assertions, then you need to add this listener later.  This is a trade-off
-          // for using plain old Arrays instead of ObservableArray.
+          // for using plain old Arrays instead of ObservableArrayDef.
           assert && assert( this.particles1.length === leftNumberOfParticles, 'particles1 has not been populated yet' );
           assert && assert( this.particles2.length === rightNumberOfParticles, 'particles2 has not been populated yet' );
         }
