@@ -33,13 +33,11 @@ class ParticleFlowRateNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioComponentOptions: {
 
-        // model controls visibility
-        visibleProperty: {
-          phetioReadOnly: true,
-          phetioDocumentation: 'visibility is controlled by the model'
-        }
+      // model controls visibility
+      visiblePropertyOptions: {
+        phetioReadOnly: true,
+        phetioDocumentation: 'visibility is controlled by the model'
       }
     }, options );
 
