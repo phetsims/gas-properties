@@ -9,13 +9,13 @@
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import ParticleType from '../model/ParticleType.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-class ParticleTypeRadioButtonGroup extends RadioButtonGroup {
+class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
    * @param {EnumerationProperty} particleTypeProperty
