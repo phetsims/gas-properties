@@ -33,7 +33,6 @@ class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
       // superclass options
       orientation: 'horizontal',
       baseColor: GasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
-      disabledBaseColor: GasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
       selectedStroke: GasPropertiesColorProfile.radioButtonGroupSelectedStrokeProperty,
       deselectedStroke: GasPropertiesColorProfile.radioButtonGroupDeselectedStrokeProperty,
       selectedLineWidth: 3,
