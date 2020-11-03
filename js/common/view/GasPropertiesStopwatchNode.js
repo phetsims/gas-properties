@@ -35,6 +35,7 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
       numberDisplayOptions: {
         numberFormatter: StopwatchNode.getRichNumberFormatter( {
           showAsDecimal: true,
+          numberOfDecimalPlaces: 1,
           units: gasPropertiesStrings.picoseconds
         } )
       },
