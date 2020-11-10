@@ -8,6 +8,7 @@
 
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
+import Utils from '../../scenery/js/util/Utils.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import GasPropertiesConstants from './common/GasPropertiesConstants.js';
 import GasPropertiesGlobalOptionsNode from './common/view/GasPropertiesGlobalOptionsNode.js';
@@ -19,6 +20,9 @@ import IdealScreen from './ideal/IdealScreen.js';
 
 const simOptions = {
 
+  // Enabled for high-performance Sprites
+  webgl: true,
+
   // Creates content for the Options dialog, accessible via the PhET menu
   createOptionsDialogContent: tandem => new GasPropertiesGlobalOptionsNode( {
     tandem: tandem
@@ -29,12 +33,16 @@ const simOptions = {
 };
 
 simLauncher.launch( () => {
-  const screens = [
+
+  const sim = new Sim( gasPropertiesStrings[ 'gas-properties' ].title, [
     new IdealScreen( Tandem.ROOT.createTandem( 'idealScreen' ) ),
     new ExploreScreen( Tandem.ROOT.createTandem( 'exploreScreen' ) ),
     new EnergyScreen( Tandem.ROOT.createTandem( 'energyScreen' ) ),
     new DiffusionScreen( Tandem.ROOT.createTandem( 'diffusionScreen' ) )
-  ];
-  const sim = new Sim( gasPropertiesStrings[ 'gas-properties' ].title, screens, simOptions );
+  ], simOptions );
+
+  // Log whether we're using WebGL, which is the preferred rendering option for Sprites
+  phet.log && phet.log( `using WebGL = ${phet.chipper.queryParameters.webgl && Utils.isWebGLSupported}` );
+
   sim.start();
 } );

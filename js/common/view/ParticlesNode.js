@@ -1,18 +1,20 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * ParticlesNode is the base class for rendering a collection of particles using Canvas. It is used in all screens.
+ * ParticlesNode is the base class for rendering a collection of particles using Sprites. It is used in all screens.
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Property from '../../../../axon/js/Property.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
-import ColorDef from '../../../../scenery/js/util/ColorDef.js';
+import Sprites from '../../../../scenery/js/nodes/Sprites.js';
+import Sprite from '../../../../scenery/js/util/Sprite.js';
+import SpriteImage from '../../../../scenery/js/util/SpriteImage.js';
+import SpriteInstance from '../../../../scenery/js/util/SpriteInstance.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import Particle from '../model/Particle.js';
 import ParticleNode from './ParticleNode.js';
 
@@ -20,70 +22,90 @@ import ParticleNode from './ParticleNode.js';
 const IMAGE_SCALE = 2; // scale images to improve quality, see https://github.com/phetsims/gas-properties/issues/55
 const IMAGE_PADDING = 2;
 
-class ParticlesNode extends CanvasNode {
+class ParticlesNode extends Sprites {
 
   /**
    * @param {Particle[][]} particleArrays - arrays of particles to render
    * @param {Property.<HTMLCanvasElement>[]} imageProperties - an image for each array in particleArrays
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {ColorDef} debugFill - fill the canvas when ?canvasBounds, for debugging
    */
-  constructor( particleArrays, imageProperties, modelViewTransform, debugFill ) {
+  constructor( particleArrays, imageProperties, modelViewTransform ) {
 
-    assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0,
-      `invalid particleArrays: ${particleArrays}` );
-    assert && assert( particleArrays.length === imageProperties.length,
-      'must supply an image Property for each particle array' );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( ColorDef.isColorDef( debugFill ), `invalid debugFill: ${debugFill}` );
+    assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0, `invalid particleArrays: ${particleArrays}` );
+    assert && assert( particleArrays.length === imageProperties.length, 'must supply an image Property for each particle array' );
+    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
 
-    super();
+    // {Sprite[]} a Sprite for each Particle array, indexed the same as particleArrays and imageProperties
+    const sprites = imageProperties.map( imageProperty => {
+      const imageToSpriteImage = image => {
+        return new SpriteImage( image, new Vector2( image.width / 2, image.height / 2 ) );
+      };
+      const sprite = new Sprite( imageToSpriteImage( imageProperty.value ) );
+      imageProperty.lazyLink( image => {
+        sprite.imageProperty.value = imageToSpriteImage( image );
+      } );
+      return sprite;
+    } );
 
-    // If any image changes while the sim is paused, redraw the particle system.
-    Property.multilink( imageProperties, () => { this.update(); } );
+    // {SpriteInstance[]} a SpriteInstance for each Particle
+    const spriteInstances = [];
+
+    super( {
+      sprites: sprites,
+      spriteInstances: spriteInstances,
+      renderer: 'webgl'
+    } );
 
     // @private
-    this.modelViewTransform = modelViewTransform;
+    this.sprites = sprites;
+    this.spriteInstances = spriteInstances;
     this.particleArrays = particleArrays;
-    this.imageProperties = imageProperties;
-    this.debugFill = debugFill;
-    this.previousNumberOfParticles = 0;
+    this.modelViewTransform = modelViewTransform;
   }
 
   /**
    * Redraws the particle system.
-   * This is a no-op if nothing needs to be redrawn, see https://github.com/phetsims/gas-properties/issues/146.
    * @public
    */
   update() {
-    const numberOfParticles = _.sumBy( this.particleArrays, particleArray => particleArray.length );
-    if ( this.previousNumberOfParticles !== 0 || numberOfParticles !== 0 ) {
-      this.invalidatePaint(); // results in a call to paintCanvas
-      this.previousNumberOfParticles = numberOfParticles;
-    }
-  }
 
-  /**
-   * Redraws the particles to reflect their current state.
-   * @param {CanvasRenderingContext2D} context
-   * @public
-   * @override
-   */
-  paintCanvas( context ) {
-    assert && assert( context instanceof CanvasRenderingContext2D, `invalid context: ${context}` );
+    // Index into {SpriteInstance[]} this.spriteInstances
+    let spriteInstancesIndex = 0;
 
-    // Stroke the canvas bounds, for debugging.  This is a big performance hit.
-    if ( GasPropertiesQueryParameters.canvasBounds ) {
-      const canvasBounds = this.getCanvasBounds();
-      context.fillStyle = this.debugFill;
-      context.fillRect( canvasBounds.x, canvasBounds.y, canvasBounds.width, canvasBounds.height );
-    }
-
-    // Draw the particles
+    // For each array of Particles...
     for ( let i = this.particleArrays.length - 1; i >= 0; i-- ) {
-      drawParticles( context, this.modelViewTransform, this.particleArrays[ i ], this.imageProperties[ i ].value );
+
+      const particleArray = this.particleArrays[ i ]; // {Particle[]}
+      const sprite = this.sprites[ i ];
+
+      // For each Particle...
+      for ( let j = particleArray.length - 1; j >= 0; j-- ) {
+
+        const particle = particleArray[ j ]; // {Particle}
+
+        // If we've run out of SpriteInstances, allocate one.
+        if ( this.spriteInstances.length === spriteInstancesIndex ) {
+          const newInstance = SpriteInstance.dirtyFromPool();
+          newInstance.isTranslation = false;
+          newInstance.alpha = 1;
+          newInstance.matrix.setToAffine( 1 / IMAGE_SCALE, 0, 0, 0, 1 / IMAGE_SCALE, 0 );
+          this.spriteInstances.push( newInstance );
+        }
+
+        // For the next SpriteInstance, set its Sprite, and transform it to the particle's position.
+        const spriteInstance = this.spriteInstances[ spriteInstancesIndex++ ];
+        spriteInstance.sprite = sprite;
+        spriteInstance.matrix.set02( this.modelViewTransform.modelToViewX( particle.position.x ) );
+        spriteInstance.matrix.set12( this.modelViewTransform.modelToViewY( particle.position.y ) );
+      }
     }
+
+    // SpriteInstances that are not being used are freed to the pool.
+    while ( this.spriteInstances.length > spriteInstancesIndex ) {
+      this.spriteInstances.pop().freeToPool();
+    }
+
+    this.invalidatePaint(); // results in a call to paintCanvas
   }
 
   /**
@@ -111,38 +133,6 @@ class ParticlesNode extends CanvasNode {
     // Convert the particle Node to an HTMLCanvasElement
     particleNode.toCanvas( canvas => { particleImageProperty.value = canvas; },
       canvasWidth / 2, canvasHeight / 2, canvasWidth, canvasHeight );
-  }
-}
-
-/**
- * Draws a collection of particles.
- * @param {CanvasRenderingContext2D} context
- * @param {ModelViewTransform2} modelViewTransform
- * @param {Particle[]} particles
- * @param {HTMLCanvasElement} image
- */
-function drawParticles( context, modelViewTransform, particles, image ) {
-  assert && assert( context instanceof CanvasRenderingContext2D, `invalid context: ${context}` );
-  assert && assert( modelViewTransform instanceof ModelViewTransform2,
-    `invalid modelViewTransform: ${modelViewTransform}` );
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-  assert && assert( image instanceof HTMLCanvasElement, `invalid image: ${image}` );
-
-  const xOffset = ( image.width / 2 ) / IMAGE_SCALE;
-  const yOffset = ( image.height / 2 ) / IMAGE_SCALE;
-  const dWidth = image.width / IMAGE_SCALE;
-  const dHeight = image.height / IMAGE_SCALE;
-
-  for ( let i = particles.length - 1; i >= 0; i-- ) {
-    context.drawImage( image,
-
-      // Be careful about how dx, dy args are computed. Content is centered and padded in HTMLCanvasElement
-      // because we provided integer bounds in particleToCanvas.
-      modelViewTransform.modelToViewX( particles[ i ].position.x ) - xOffset,  // dx
-      modelViewTransform.modelToViewY( particles[ i ].position.y ) - yOffset,  // dy
-      dWidth,
-      dHeight
-    );
   }
 }
 

@@ -23,10 +23,6 @@ import ParticleSystem from '../model/ParticleSystem.js';
 import ParticleImageProperty from './ParticleImageProperty.js';
 import ParticlesNode from './ParticlesNode.js';
 
-// constants
-const INSIDE_DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )'; // canvas fill for particles INSIDE container
-const OUTSIDE_DEBUG_FILL = 'rgba( 0, 255, 0, 0.1 )'; // canvas fill for particles OUTSIDE container
-
 class IdealGasLawParticleSystemNode extends Node {
 
   /**
@@ -60,8 +56,7 @@ class IdealGasLawParticleSystemNode extends Node {
     const insideParticlesNode = new ParticlesNode(
       [ particleSystem.heavyParticles, particleSystem.lightParticles ],
       [ heavyParticleImageProperty, lightParticleImageProperty ],
-      modelViewTransform,
-      INSIDE_DEBUG_FILL
+      modelViewTransform
     );
 
     // Size the inside canvas to the maximum bounds for the container.
@@ -71,8 +66,7 @@ class IdealGasLawParticleSystemNode extends Node {
     const outsideParticlesNode = new ParticlesNode(
       [ particleSystem.heavyParticlesOutside, particleSystem.lightParticlesOutside ],
       [ heavyParticleImageProperty, lightParticleImageProperty ],
-      modelViewTransform,
-      OUTSIDE_DEBUG_FILL
+      modelViewTransform
     );
 
     // When particles escape through the container's lid, they float up, since there is no gravity.
