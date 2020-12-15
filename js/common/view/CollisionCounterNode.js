@@ -200,7 +200,7 @@ class CollisionCounterNode extends Node {
 
     // If the collision counter is outside the drag bounds, move it inside.
     dragBoundsProperty.link( dragBounds => {
-      if ( !dragBounds.containsPoint( collisionCounter.positionProperty ) ) {
+      if ( !dragBounds.containsPoint( collisionCounter.positionProperty.value ) ) {
         collisionCounter.positionProperty.value =
           dragBounds.closestPointTo( collisionCounter.positionProperty.value );
       }
