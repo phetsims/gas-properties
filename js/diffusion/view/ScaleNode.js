@@ -7,7 +7,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -35,7 +34,7 @@ class ScaleNode extends Node {
    * @param {Object} [options]
    */
   constructor( containerWidth, modelViewTransform, visibleProperty, options ) {
-    assert && assert( Utils.isInteger( containerWidth ), `containerWidth must be an integer: ${containerWidth}` );
+    assert && assert( Number.isInteger( containerWidth ), `containerWidth must be an integer: ${containerWidth}` );
     assert && assert( modelViewTransform instanceof ModelViewTransform2,
       `invalid modelViewTransform: ${modelViewTransform}` );
     assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
