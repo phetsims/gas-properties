@@ -116,7 +116,7 @@ class EnergyScreenView extends IdealGasLawScreenView {
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
 
-    // Rendering order
+    // Panels behind superclass UI components like the stopwatch
     this.addChild( leftPanels );
     leftPanels.moveToBack();
     this.addChild( rightPanels );
