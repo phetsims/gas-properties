@@ -53,7 +53,8 @@ class ParticlesNode extends Sprites {
     super( {
       sprites: sprites,
       spriteInstances: spriteInstances,
-      renderer: 'webgl'
+      renderer: 'webgl',
+      pickable: false
     } );
 
     // @private
