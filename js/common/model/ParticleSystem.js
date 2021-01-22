@@ -13,6 +13,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import propertyStateHandlerSingleton from '../../../../axon/js/propertyStateHandlerSingleton.js';
 import PropertyStatePhase from '../../../../axon/js/PropertyStatePhase.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -301,7 +302,7 @@ class ParticleSystem {
       const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass );
 
       // Angle is randomly chosen from pump's dispersion angle, perpendicular to right wall of container.
-      const angle = Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + phet.joist.random.nextDouble() * PARTICLE_DISPERSION_ANGLE;
+      const angle = Math.PI - PARTICLE_DISPERSION_ANGLE / 2 + dotRandom.nextDouble() * PARTICLE_DISPERSION_ANGLE;
 
       particle.setVelocityPolar( speed, angle );
 

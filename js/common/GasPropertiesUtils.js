@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import dotRandom from '../../../dot/js/dotRandom.js';
 import Utils from '../../../dot/js/Utils.js';
 import gasProperties from '../gasProperties.js';
 
@@ -30,7 +31,7 @@ const GasPropertiesUtils = {
 
     // Generate a random Gaussian sample whose values have the desired mean and standard deviation.
     for ( let i = 0; i < n; i++ ) {
-      const value = Utils.boxMullerTransform( mean, deviation, phet.joist.random );
+      const value = Utils.boxMullerTransform( mean, deviation, dotRandom );
       assert && assert( isFinite( value ), `invalid value: ${value}` );
       values.push( value );
       sum += value;

@@ -9,6 +9,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -316,8 +317,8 @@ function addParticles( n, positionBounds, settings, particles, createParticle ) 
     } );
 
     // Position the particle at a random position within positionBounds, accounting for particle radius.
-    const x = phet.joist.random.nextDoubleBetween( positionBounds.minX + particle.radius, positionBounds.maxX - particle.radius );
-    const y = phet.joist.random.nextDoubleBetween( positionBounds.minY + particle.radius, positionBounds.maxY - particle.radius );
+    const x = dotRandom.nextDoubleBetween( positionBounds.minX + particle.radius, positionBounds.maxX - particle.radius );
+    const y = dotRandom.nextDoubleBetween( positionBounds.minY + particle.radius, positionBounds.maxY - particle.radius );
     particle.setPositionXY( x, y );
     assert && assert( positionBounds.containsPoint( particle.position ), 'particle is outside of positionBounds' );
 
@@ -327,7 +328,7 @@ function addParticles( n, positionBounds, settings, particles, createParticle ) 
       Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * settings.initialTemperatureProperty.value / particle.mass ),
 
       // Random angle
-      phet.joist.random.nextDouble() * 2 * Math.PI
+      dotRandom.nextDouble() * 2 * Math.PI
     );
 
     particles.push( particle );

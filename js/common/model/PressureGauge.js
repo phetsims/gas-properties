@@ -16,6 +16,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
@@ -141,11 +142,11 @@ class PressureGauge {
         // compute noise
         noise = this.pressureNoiseFunction( this.pressureProperty.value ) *
                 this.scaleNoiseFunction( this.temperatureProperty.value ) *
-                phet.joist.random.nextDouble();
+                dotRandom.nextDouble();
 
         // randomly apply a sign if doing so doesn't make the pressure become <= 0
         if ( noise < this.pressureProperty.value ) {
-          noise *= ( phet.joist.random.nextBoolean() ? 1 : -1 );
+          noise *= ( dotRandom.nextBoolean() ? 1 : -1 );
         }
       }
 
