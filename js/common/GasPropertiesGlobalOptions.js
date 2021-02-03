@@ -12,7 +12,7 @@ import gasProperties from '../gasProperties.js';
 import GasPropertiesQueryParameters from './GasPropertiesQueryParameters.js';
 
 // constants
-const optionsTandem = Tandem.GLOBAL.createTandem( 'options' );
+const optionsTandem = Tandem.GLOBAL_MODEL.createTandem( 'options' );
 
 const GasPropertiesGlobalOptions = {
 
