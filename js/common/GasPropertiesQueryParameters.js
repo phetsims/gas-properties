@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import logGlobal from '../../../phet-core/js/logGlobal.js';
 import gasProperties from '../gasProperties.js';
 
 const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
@@ -82,7 +83,9 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 
 gasProperties.register( 'GasPropertiesQueryParameters', GasPropertiesQueryParameters );
 
-// log the values of all sim-specific query parameters
-phet.log && phet.log( 'query parameters: ' + JSON.stringify( GasPropertiesQueryParameters, null, 2 ) );
+// Log query parameters
+logGlobal( 'phet.chipper.queryParameters' );
+logGlobal( 'phet.preloads.phetio.queryParameters' );
+logGlobal( 'phet.gasProperties.GasPropertiesQueryParameters' );
 
 export default GasPropertiesQueryParameters;
