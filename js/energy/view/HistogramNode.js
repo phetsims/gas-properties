@@ -66,7 +66,7 @@ class HistogramNode extends Node {
     options = merge( {
       chartSize: new Dimension2( 150, 130 ),   // size of the Rectangle that is the histogram background
       backgroundFill: 'black', // {ColorDef} histogram background color
-      borderStroke: GasPropertiesColorProfile.panelStrokeProperty,// {ColorDef}
+      borderStroke: GasPropertiesColorProfile.panelStrokeProperty, // {ColorDef}
       borderLineWidth: 1,
       plotLineWidth: 2, // lineWidth for line segment plots
       barColor: 'white', // {ColorDef}
