@@ -47,7 +47,7 @@ class NumberOfParticlesControl extends VBox {
     }, options );
 
     assert && assert( numberOfParticlesProperty instanceof NumberProperty,
-      'invalid numberOfParticlesProperty: ' + numberOfParticlesProperty );
+      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
     assert && assert( numberOfParticlesProperty.range,
       'numberOfParticlesProperty missing range' );
 

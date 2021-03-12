@@ -41,9 +41,9 @@ class BaseContainer {
     }, options );
 
     assert && assert( options.position instanceof Vector2,
-      'invalid position type: ' + options.position );
+      `invalid position type: ${options.position}` );
     assert && assert( options.widthRange instanceof RangeWithValue,
-      'invalid widthRange type: ' + options.widthRange );
+      `invalid widthRange type: ${options.widthRange}` );
 
     // @public (read-only)
     this.position = options.position;
