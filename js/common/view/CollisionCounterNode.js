@@ -87,7 +87,8 @@ class CollisionCounterNode extends Node {
       },
       xMargin: 8,
       yMargin: 4,
-      cornerRadius: 3
+      cornerRadius: 3,
+      pickable: false // so we can drag
     } );
 
     const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty, {
