@@ -207,25 +207,26 @@ class CollisionCounterNode extends Node {
       }
     } );
 
+    // On any form of press, move everything related to this Node to the front.
+    const onPress = () => {
+      this.moveToFront();
+      listboxParent.moveToFront();
+    };
+
     // Dragging, added to background so that other UI components get input events on touch devices.
     // If added to 'this', touchSnag will lock out listeners for other UI components.
     backgroundNode.addInputListener( new DragListener( {
       targetNode: this,
       positionProperty: collisionCounter.positionProperty,
       dragBoundsProperty: dragBoundsProperty,
+      start: onPress,
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
     // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
-    // This needs to be a DragListener so that touchSnag works.
-    this.addInputListener( new DragListener( {
-      attach: false, // so that this DragListener won't be ignored
-      start: () => {
-        this.moveToFront();
-        listboxParent.moveToFront();
-      },
-      tandem: options.tandem.createTandem( 'moveToFrontListener' )
-    } ) );
+    this.addInputListener( {
+      down: onPress
+    } );
   }
 }
 
