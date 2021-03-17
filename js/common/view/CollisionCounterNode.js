@@ -207,7 +207,8 @@ class CollisionCounterNode extends Node {
       }
     } );
 
-    // dragging, added to background so that other UI components get input events on touch devices
+    // Dragging, added to background so that other UI components get input events on touch devices.
+    // If added to 'this', touchSnag will lock out listeners for other UI components.
     backgroundNode.addInputListener( new DragListener( {
       targetNode: this,
       positionProperty: collisionCounter.positionProperty,
