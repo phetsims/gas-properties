@@ -270,7 +270,7 @@ class IdealGasLawScreenView extends BaseScreenView {
 
     // Stopwatch
     toolsParent.addChild( new GasPropertiesStopwatchNode( model.stopwatch, {
-      visibleBoundsProperty: this.visibleBoundsProperty,
+      dragBoundsProperty: this.visibleBoundsProperty,
       tandem: tandem.createTandem( 'stopwatchNode' )
     } ) );
 

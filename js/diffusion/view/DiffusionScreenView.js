@@ -134,7 +134,7 @@ class DiffusionScreenView extends BaseScreenView {
 
     // Stopwatch
     const stopwatchNode = new GasPropertiesStopwatchNode( model.stopwatch, {
-      visibleBoundsProperty: this.visibleBoundsProperty,
+      dragBoundsProperty: this.visibleBoundsProperty,
       tandem: tandem.createTandem( 'stopwatchNode' )
     } );
 
