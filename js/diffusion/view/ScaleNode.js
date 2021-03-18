@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -30,25 +29,17 @@ class ScaleNode extends Node {
   /**
    * @param {number} containerWidth - the container width, in pm
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {BooleanProperty} visibleProperty
    * @param {Object} [options]
    */
-  constructor( containerWidth, modelViewTransform, visibleProperty, options ) {
+  constructor( containerWidth, modelViewTransform, options ) {
     assert && assert( Number.isInteger( containerWidth ), `containerWidth must be an integer: ${containerWidth}` );
     assert && assert( modelViewTransform instanceof ModelViewTransform2,
       `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
 
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-
-      // model controls visibility
-      visiblePropertyOptions: {
-        phetioReadOnly: true,
-        phetioDocumentation: 'visibility is controlled by the model'
-      }
+      tandem: Tandem.REQUIRED
     }, options );
 
     const pmTickInterval = TICK_INTERVAL * 1000; // adjusted for nm to pm
@@ -94,10 +85,6 @@ class ScaleNode extends Node {
     options.children = [ ticksPath, labelNode, arrowNode ];
 
     super( options );
-
-    visibleProperty.link( visible => {
-      this.visible = visible;
-    } );
   }
 }
 

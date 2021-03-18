@@ -32,13 +32,7 @@ class ParticleFlowRateNode extends Node {
       arrowNodeOptions: null, // nested options, set below
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-
-      // model controls visibility
-      visiblePropertyOptions: {
-        phetioReadOnly: true,
-        phetioDocumentation: 'visibility is controlled by the model'
-      }
+      tandem: Tandem.REQUIRED
     }, options );
 
     options.arrowNodeOptions = merge( {

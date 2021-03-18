@@ -171,6 +171,10 @@ class CollisionCounterNode extends Node {
       children: [ backgroundNode, content ]
     }, options );
 
+    // visibility of this Node
+    assert && assert( !options.visibleProperty, 'CollisionCounterNode sets visibleProperty' );
+    options.visibleProperty = collisionCounter.visibleProperty;
+
     super( options );
 
     // Put a red dot at the origin, for debugging layout.
@@ -179,9 +183,8 @@ class CollisionCounterNode extends Node {
     }
 
     // visibility
-    collisionCounter.visibleProperty.link( visible => {
+    this.visibleProperty.link( visible => {
       this.interruptSubtreeInput(); // interrupt user interactions
-      this.visible = visible;
       if ( visible ) {
         this.moveToFront();
         listboxParent.moveToFront();

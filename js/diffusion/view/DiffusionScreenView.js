@@ -50,12 +50,12 @@ class DiffusionScreenView extends BaseScreenView {
     const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );
 
     // Scale below the container
-    const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform,
-      viewProperties.scaleVisibleProperty, {
-        centerX: model.modelViewTransform.modelToViewX( model.container.dividerX ),
-        top: model.modelViewTransform.modelToViewY( model.container.bottom - model.container.wallThickness ),
-        tandem: tandem.createTandem( 'scaleNode' )
-      } );
+    const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform, {
+      visibleProperty: viewProperties.scaleVisibleProperty,
+      centerX: model.modelViewTransform.modelToViewX( model.container.dividerX ),
+      top: model.modelViewTransform.modelToViewY( model.container.bottom - model.container.wallThickness ),
+      tandem: tandem.createTandem( 'scaleNode' )
+    } );
 
     // Show how the collision detection space is partitioned into regions
     let regionsNode = null;
@@ -66,20 +66,18 @@ class DiffusionScreenView extends BaseScreenView {
     // Center of Mass indicators
     const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
       model.modelViewTransform, GasPropertiesColorProfile.particle1ColorProperty, {
+        visibleProperty: viewProperties.centerOfMassVisibleProperty,
         tandem: tandem.createTandem( 'centerOfMassNode1' )
       } );
     const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
       model.modelViewTransform, GasPropertiesColorProfile.particle2ColorProperty, {
+        visibleProperty: viewProperties.centerOfMassVisibleProperty,
         tandem: tandem.createTandem( 'centerOfMassNode2' )
       } );
 
-    viewProperties.centerOfMassVisibleProperty.link( visible => {
-      centerOfMassNode1.visible = visible;
-      centerOfMassNode2.visible = visible;
-    } );
-
     // Particle Flow Rate vectors
     const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleFlowRate1, {
+      visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColorProfile.particle1ColorProperty
       },
@@ -88,17 +86,13 @@ class DiffusionScreenView extends BaseScreenView {
       tandem: tandem.createTandem( 'particleFlowRateNode1' )
     } );
     const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRate2, {
+      visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColorProfile.particle2ColorProperty
       },
       centerX: containerNode.centerX,
       top: particleFlowRateNode1.bottom + 5,
       tandem: tandem.createTandem( 'particleFlowRateNode2' )
-    } );
-
-    viewProperties.particleFlowRateVisibleProperty.link( visible => {
-      particleFlowRateNode1.visible = visible;
-      particleFlowRateNode2.visible = visible;
     } );
 
     // Data accordion box

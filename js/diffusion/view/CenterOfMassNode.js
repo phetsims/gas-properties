@@ -38,13 +38,7 @@ class CenterOfMassNode extends Node {
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-
-      // model controls visibility
-      visiblePropertyOptions: {
-        phetioReadOnly: true,
-        phetioDocumentation: 'visibility is controlled by the model'
-      }
+      tandem: Tandem.REQUIRED
     }, options );
 
     const rectangle = new Rectangle( 0, 0, 5, 30, {
@@ -52,9 +46,10 @@ class CenterOfMassNode extends Node {
       stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
     } );
 
-    super( {
-      children: [ rectangle ]
-    } );
+    assert && assert( !options.children, 'CenterOfMassNode sets children' );
+    options.children = [ rectangle ];
+
+    super( options );
 
     centerOfMassProperty.link( centerX => {
       if ( centerX === null ) {
