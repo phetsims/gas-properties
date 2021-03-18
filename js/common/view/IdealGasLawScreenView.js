@@ -153,7 +153,8 @@ class IdealGasLawScreenView extends BaseScreenView {
 
     // Dimensional arrows that indicate container size
     const containerWidthNode = new ContainerWidthNode( model.container.position, model.container.widthProperty,
-      model.modelViewTransform, widthVisibleProperty, {
+      model.modelViewTransform, {
+        visibleProperty: widthVisibleProperty,
         tandem: tandem.createTandem( 'containerWidthNode' )
       } );
 

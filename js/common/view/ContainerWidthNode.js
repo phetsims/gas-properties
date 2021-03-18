@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
@@ -31,27 +30,19 @@ class ContainerWidthNode extends Node {
    * @param {Vector2} containerPosition - position of the container, in model coordinates
    * @param {NumberProperty} widthProperty - width of the container, in model coordinates
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {BooleanProperty} visibleProperty
    * @param {Object} [options]
    */
-  constructor( containerPosition, widthProperty, modelViewTransform, visibleProperty, options ) {
+  constructor( containerPosition, widthProperty, modelViewTransform, options ) {
     assert && assert( containerPosition instanceof Vector2, `invalid containerPosition: ${containerPosition}` );
     assert && assert( widthProperty instanceof NumberProperty, `invalid widthProperty: ${widthProperty}` );
     assert && assert( widthProperty.range, 'widthProperty must have range' );
     assert && assert( modelViewTransform instanceof ModelViewTransform2,
       `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( visibleProperty instanceof BooleanProperty, `invalid visibleProperty: ${visibleProperty}` );
 
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-
-      // model controls visibility
-      visiblePropertyOptions: {
-        phetioReadOnly: true,
-        phetioDocumentation: 'visibility is controlled by the model'
-      }
+      tandem: Tandem.REQUIRED
     }, options );
 
     // Convert the width from model to view coordinates
@@ -90,8 +81,6 @@ class ContainerWidthNode extends Node {
     options.children = [ dimensionalArrowNode, widthDisplay ];
 
     super( options );
-
-    visibleProperty.linkAttribute( this, 'visible' );
 
     // right justify with the container
     const containerViewPosition = modelViewTransform.modelToViewPosition( containerPosition );
