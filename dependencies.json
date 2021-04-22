@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.0.4 Mon Mar 08 2021 13:47:44 GMT-0500 (Eastern Standard Time)",
+  "comment": "# gas-properties 1.0.4 Thu Apr 22 2021 13:18:50 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "201c50a840e082354b013f4ab9e9d45006f98cfe",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "d1392fc00f4e3c379d45874848429e7d6b41d330",
+    "sha": "eca7ffd82ba5fee340132dc09468990354f2f61d",
     "branch": "1.0"
   },
   "joist": {
@@ -50,15 +50,15 @@
   },
   "phetmarks": {
     "sha": "73f44a7aecea34b9121b2f1775e7230a8533035a",
-    "branch": "gas-properties-1.0"
+    "branch": "HEAD"
   },
   "query-string-machine": {
     "sha": "c4c6d494b474aeb14d700a8142da81776f62a2ba",
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "ce9c59f525cabf182a871b70ef600b9c0569795a",
-    "branch": "HEAD"
+    "sha": "8e5112a4b03835db8db18d46fa860b6ae5c3667e",
+    "branch": "gas-properties-1.0"
   },
   "scenery-phet": {
     "sha": "d8bd82ef61dea2a2fca0f104dbef078c210b782c",
