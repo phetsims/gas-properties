@@ -95,8 +95,6 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
     // When the model applies heat/cool, update the private Property.
     heatCoolAmountProperty.link( heatCoolAmount => {
-      assert && assert( holdConstantProperty.value !== HoldConstant.PRESSURE_T,
-        'model should not apply heat/cool in this mode' );
       privateHeatCoolAmountProperty.value = heatCoolAmount;
     } );
 
