@@ -215,6 +215,13 @@ class IdealGasLawModel extends BaseModel {
         assert && assert( !this.temperatureModel.controlTemperatureEnabledProperty.value,
           'this feature is not compatible with user-controlled particle temperature' );
 
+        // Workaround for https://github.com/phetsims/gas-properties/issues/168. Addresses an ordering problem where
+        // the temperature model needs to update when this state occurs, but it's still null. Temperature is null
+        // when the container is empty.
+        if ( this.temperatureModel.temperatureProperty.value === null ) {
+          this.temperatureModel.update();
+        }
+
         this.particleSystem.setTemperature( this.temperatureModel.temperatureProperty.value );
       }
     } );
