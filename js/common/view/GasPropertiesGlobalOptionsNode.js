@@ -41,7 +41,7 @@ class GasPropertiesGlobalOptionsNode extends VBox {
     const children = [];
 
     // Projector Mode checkbox
-    const projectorModeCheckbox = new ProjectorModeCheckbox( null,
+    const projectorModeCheckbox = new ProjectorModeCheckbox(
       merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
         font: GasPropertiesConstants.CONTROL_FONT,
         maxTextWidth: CHECKBOX_TEXT_MAX_WIDTH,
