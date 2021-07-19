@@ -15,7 +15,6 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesGlobalOptions from '../GasPropertiesGlobalOptions.js';
 
@@ -42,7 +41,7 @@ class GasPropertiesGlobalOptionsNode extends VBox {
     const children = [];
 
     // Projector Mode checkbox
-    const projectorModeCheckbox = new ProjectorModeCheckbox( GasPropertiesColorProfile,
+    const projectorModeCheckbox = new ProjectorModeCheckbox( null,
       merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
         font: GasPropertiesConstants.CONTROL_FONT,
         maxTextWidth: CHECKBOX_TEXT_MAX_WIDTH,
