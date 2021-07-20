@@ -18,7 +18,7 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ColorDef from '../../../../scenery/js/util/ColorDef.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import BarPlotNode from './BarPlotNode.js';
 import IntervalLinesNode from './IntervalLinesNode.js';
@@ -26,7 +26,7 @@ import LinePlotNode from './LinePlotNode.js';
 
 // Options for all histogram axis labels
 const HISTOGRAM_AXIS_LABEL_OPTIONS = {
-  fill: GasPropertiesColorProfile.textFillProperty,
+  fill: GasPropertiesColors.textFillProperty,
   font: new PhetFont( 14 )
 };
 
@@ -66,7 +66,7 @@ class HistogramNode extends Node {
     options = merge( {
       chartSize: new Dimension2( 150, 130 ),   // size of the Rectangle that is the histogram background
       backgroundFill: 'black', // {ColorDef} histogram background color
-      borderStroke: GasPropertiesColorProfile.panelStrokeProperty, // {ColorDef}
+      borderStroke: GasPropertiesColors.panelStrokeProperty, // {ColorDef}
       borderLineWidth: 1,
       plotLineWidth: 2, // lineWidth for line segment plots
       barColor: 'white', // {ColorDef}
@@ -95,9 +95,9 @@ class HistogramNode extends Node {
 
     // Species-specific plots
     const heavyPlotNode = new LinePlotNode( options.chartSize, yScaleProperty,
-      GasPropertiesColorProfile.heavyParticleColorProperty, options.plotLineWidth );
+      GasPropertiesColors.heavyParticleColorProperty, options.plotLineWidth );
     const lightPlotNode = new LinePlotNode( options.chartSize, yScaleProperty,
-      GasPropertiesColorProfile.lightParticleColorProperty, options.plotLineWidth );
+      GasPropertiesColors.lightParticleColorProperty, options.plotLineWidth );
 
     // parent Node for all plotted data
     const plotNodesParent = new Node( {

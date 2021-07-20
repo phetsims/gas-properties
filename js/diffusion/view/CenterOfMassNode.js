@@ -15,7 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import ColorDef from '../../../../scenery/js/util/ColorDef.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 
 class CenterOfMassNode extends Node {
@@ -43,7 +43,7 @@ class CenterOfMassNode extends Node {
 
     const rectangle = new Rectangle( 0, 0, 5, 30, {
       fill: fill,
-      stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
+      stroke: GasPropertiesColors.centerOfMassStrokeProperty
     } );
 
     assert && assert( !options.children, 'CenterOfMassNode sets children' );

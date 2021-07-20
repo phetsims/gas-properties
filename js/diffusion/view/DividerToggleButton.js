@@ -10,7 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
@@ -28,7 +28,7 @@ class DividerToggleButton extends BooleanRectangularToggleButton {
     options = merge( {
 
       // superclass options
-      baseColor: GasPropertiesColorProfile.dividerColorProperty
+      baseColor: GasPropertiesColors.dividerColorProperty
     }, options );
 
     const textOptions = {

@@ -9,7 +9,7 @@
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import gasProperties from '../gasProperties.js';
-import GasPropertiesColorProfile from './GasPropertiesColorProfile.js';
+import GasPropertiesColors from './GasPropertiesColors.js';
 
 // for all panel-like containers
 const PANEL_CORNER_RADIUS = 5;
@@ -63,8 +63,8 @@ const GasPropertiesConstants = {
     buttonYMargin: 10,
     titleXSpacing: 10,
     titleAlignX: 'left',
-    fill: GasPropertiesColorProfile.panelFillProperty,
-    stroke: GasPropertiesColorProfile.panelStrokeProperty,
+    fill: GasPropertiesColors.panelFillProperty,
+    stroke: GasPropertiesColors.panelStrokeProperty,
     expandCollapseButtonOptions: {
       sideLength: 20,
       touchAreaXDilation: 6,
@@ -84,8 +84,8 @@ const GasPropertiesConstants = {
     cornerRadius: PANEL_CORNER_RADIUS,
     xMargin: PANEL_X_MARGIN,
     yMargin: PANEL_Y_MARGIN,
-    fill: GasPropertiesColorProfile.panelFillProperty,
-    stroke: GasPropertiesColorProfile.panelStrokeProperty
+    fill: GasPropertiesColors.panelFillProperty,
+    stroke: GasPropertiesColors.panelStrokeProperty
   },
 
   // Defaults for all ComboBoxDisplay instances

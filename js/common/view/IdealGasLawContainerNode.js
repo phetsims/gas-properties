@@ -20,7 +20,7 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import HoldConstant from '../model/HoldConstant.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 import ContainerResizeDragListener from './ContainerResizeDragListener.js';
@@ -52,8 +52,8 @@ class IdealGasLawContainerNode extends Node {
       `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
 
     options = merge( {
-      resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
-      lidGripColor: GasPropertiesColorProfile.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
+      resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
+      lidGripColor: GasPropertiesColors.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
       resizeHandleIsPressedListener: isPressed => {}, // function(isPressed: boolean)
       tandem: Tandem.REQUIRED
     }, options );
@@ -65,14 +65,14 @@ class IdealGasLawContainerNode extends Node {
 
     // Walls of the container
     const wallsNode = new Path( null, {
-      stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+      stroke: GasPropertiesColors.containerBoundsStrokeProperty,
       lineWidth: viewWallThickness
     } );
 
     // Previous bounds of the container, visible while dragging.
     // This is a simple rectangle, and does not need to show the previous opening in the top.
     const previousBoundsNode = new Rectangle( 0, 0, 1, 1, {
-      stroke: GasPropertiesColorProfile.containerPreviousBoundsStrokeProperty,
+      stroke: GasPropertiesColors.containerPreviousBoundsStrokeProperty,
       lineWidth: viewWallThickness,
       visible: false
     } );

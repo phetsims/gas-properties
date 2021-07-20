@@ -9,7 +9,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import ParticleSystem from '../model/ParticleSystem.js';
 
 class EraseParticlesButton extends EraserButton {
@@ -24,7 +24,7 @@ class EraseParticlesButton extends EraserButton {
     options = merge( {
 
       // superclass options
-      baseColor: GasPropertiesColorProfile.eraserButtonColorProperty
+      baseColor: GasPropertiesColors.eraserButtonColorProperty
     }, options );
 
     // Deletes all particles when the button fires.

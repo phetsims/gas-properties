@@ -7,7 +7,7 @@
  */
 
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle from './Particle.js';
 
@@ -19,8 +19,8 @@ class HeavyParticle extends Particle {
       // superclass options
       mass: 28, // equivalent to N2 (nitrogen), in AMU, rounded to the closest integer
       radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS, // pm
-      colorProperty: GasPropertiesColorProfile.heavyParticleColorProperty,
-      highlightColorProperty: GasPropertiesColorProfile.heavyParticleHighlightColorProperty
+      colorProperty: GasPropertiesColors.heavyParticleColorProperty,
+      highlightColorProperty: GasPropertiesColors.heavyParticleHighlightColorProperty
     } );
   }
 }

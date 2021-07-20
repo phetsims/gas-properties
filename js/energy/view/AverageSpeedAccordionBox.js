@@ -20,7 +20,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
@@ -52,7 +52,7 @@ class AverageSpeedAccordionBox extends AccordionBox {
       contentYSpacing: 0,
       titleNode: new Text( gasPropertiesStrings.averageSpeed, {
         font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColors.textFillProperty
       } ),
 
       // phet-io
@@ -81,7 +81,7 @@ class AverageSpeedAccordionBox extends AccordionBox {
       noValueAlign: 'left',
       textOptions: {
         font: new PhetFont( 16 ),
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColors.textFillProperty
       },
       backgroundFill: null,
       backgroundStroke: null,

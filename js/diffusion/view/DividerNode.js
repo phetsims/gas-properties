@@ -10,7 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 
 class DividerNode extends Node {
@@ -31,13 +31,13 @@ class DividerNode extends Node {
 
     // Solid divider
     const solidLineNode = new Line( 0, 0, 0, options.length, {
-      stroke: GasPropertiesColorProfile.dividerColorProperty,
+      stroke: GasPropertiesColors.dividerColorProperty,
       lineWidth: options.solidLineWidth
     } );
 
     // Vertical dashed line to indicate the center of the container when the divider is not present.
     const dashedLineNode = new Line( 0, 0, 0, options.length, {
-      stroke: GasPropertiesColorProfile.dividerColorProperty,
+      stroke: GasPropertiesColors.dividerColorProperty,
       lineWidth: options.dashedLineWidth,
       lineDash: [ 10, 24 ],
       opacity: 0.5,

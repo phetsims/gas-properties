@@ -12,7 +12,7 @@ import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.j
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import BaseModel from '../model/BaseModel.js';
 
@@ -50,7 +50,7 @@ class BaseScreenView extends ScreenView {
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: GasPropertiesConstants.CONTROL_FONT,
-          fill: GasPropertiesColorProfile.textFillProperty
+          fill: GasPropertiesColors.textFillProperty
         }
       },
       playPauseStepButtonOptions: {

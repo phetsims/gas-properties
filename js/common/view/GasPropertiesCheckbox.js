@@ -13,7 +13,7 @@ import HBox from '../../../../scenery/js/nodes/HBox.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 class GasPropertiesCheckbox extends Checkbox {
@@ -28,14 +28,14 @@ class GasPropertiesCheckbox extends Checkbox {
     options = merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
       text: null, // {string|null} optional text label
       icon: null, // {Node|null} optional icon, to the right of text
-      textFill: GasPropertiesColorProfile.textFillProperty,
+      textFill: GasPropertiesColors.textFillProperty,
       textMaxWidth: null,
       textIconSpacing: 10, // horizontal space between text and icon
       font: GasPropertiesConstants.CONTROL_FONT,
 
       // superclass options
-      checkboxColor: GasPropertiesColorProfile.checkboxStrokeProperty,
-      checkboxColorBackground: GasPropertiesColorProfile.checkboxFillProperty
+      checkboxColor: GasPropertiesColors.checkboxStrokeProperty,
+      checkboxColorBackground: GasPropertiesColors.checkboxFillProperty
     }, options );
 
     assert && assert( options.text || options.icon, 'text or icon is required' );

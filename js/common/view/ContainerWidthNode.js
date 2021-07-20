@@ -21,7 +21,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
 class ContainerWidthNode extends Node {
@@ -53,7 +53,7 @@ class ContainerWidthNode extends Node {
 
     // Dimensional arrows, in view coordinates
     const dimensionalArrowNode = new DimensionalArrowsNode( viewWidthProperty, {
-      color: GasPropertiesColorProfile.sizeArrowColorProperty
+      color: GasPropertiesColors.sizeArrowColorProperty
     } );
 
     // Convert from pm to nm

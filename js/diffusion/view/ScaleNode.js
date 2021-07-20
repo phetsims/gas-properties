@@ -16,7 +16,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 
@@ -53,7 +53,7 @@ class ScaleNode extends Node {
     }
 
     const ticksPath = new Path( ticksShape, {
-      stroke: GasPropertiesColorProfile.scaleColorProperty,
+      stroke: GasPropertiesColors.scaleColorProperty,
       lineWidth: 1
     } );
 
@@ -63,7 +63,7 @@ class ScaleNode extends Node {
       units: gasPropertiesStrings.nanometers
     } ), {
       font: new PhetFont( 12 ),
-      fill: GasPropertiesColorProfile.scaleColorProperty,
+      fill: GasPropertiesColors.scaleColorProperty,
       centerX: dx / 2,
       top: ticksPath.bottom,
       maxWidth: dx
@@ -75,7 +75,7 @@ class ScaleNode extends Node {
       tailWidth: 0.5,
       headHeight: 6,
       headWidth: 6,
-      fill: GasPropertiesColorProfile.scaleColorProperty,
+      fill: GasPropertiesColors.scaleColorProperty,
       stroke: null,
       centerX: dx / 2,
       centerY: TICK_LENGTH / 2

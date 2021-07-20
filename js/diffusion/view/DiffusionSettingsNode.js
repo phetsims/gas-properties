@@ -17,7 +17,7 @@ import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
@@ -151,7 +151,7 @@ class QuantityControl extends VBox {
     // label
     const labelNode = new Text( label, {
       font: GasPropertiesConstants.CONTROL_FONT,
-      fill: GasPropertiesColorProfile.textFillProperty,
+      fill: GasPropertiesColors.textFillProperty,
       maxWidth: 200, // determined empirically
       tandem: options.tandem.createTandem( 'labelNode' )
     } );

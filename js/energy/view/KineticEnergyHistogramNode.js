@@ -7,7 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
@@ -25,7 +25,7 @@ class KineticEnergyHistogramNode extends HistogramNode {
     options = merge( {
 
       // superclass options
-      barColor: GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty
+      barColor: GasPropertiesColors.kineticEnergyHistogramBarColorProperty
     }, options );
 
     super(

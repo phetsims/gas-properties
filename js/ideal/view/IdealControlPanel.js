@@ -15,7 +15,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
@@ -74,7 +74,7 @@ class IdealControlPanel extends Panel {
           tandem: options.tandem.createTandem( 'holdConstantControl' )
         } ) );
       children.push( new HSeparator( contentWidth, {
-        stroke: GasPropertiesColorProfile.separatorColorProperty,
+        stroke: GasPropertiesColors.separatorColorProperty,
         maxWidth: contentWidth
       } ) );
     }

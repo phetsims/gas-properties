@@ -14,7 +14,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import HoldConstant from '../../common/model/HoldConstant.js';
 import gasProperties from '../../gasProperties.js';
@@ -23,7 +23,7 @@ import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 // constants
 const TEXT_OPTIONS = {
   font: GasPropertiesConstants.CONTROL_FONT,
-  fill: GasPropertiesColorProfile.textFillProperty,
+  fill: GasPropertiesColors.textFillProperty,
   maxWidth: 175 // determined empirically
 };
 const SPACING = 12;
@@ -59,7 +59,7 @@ class HoldConstantControl extends VBox {
 
     const titleNode = new Text( gasPropertiesStrings.holdConstant.title, {
       font: GasPropertiesConstants.TITLE_FONT,
-      fill: GasPropertiesColorProfile.textFillProperty,
+      fill: GasPropertiesColors.textFillProperty,
       maxWidth: 200, // determined empirically
       tandem: options.tandem.createTandem( 'titleNode' )
     } );

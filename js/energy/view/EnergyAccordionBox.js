@@ -14,7 +14,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import gasProperties from '../../gasProperties.js';
@@ -44,7 +44,7 @@ class EnergyAccordionBox extends AccordionBox {
       contentYSpacing: 0,
       titleNode: new Text( titleString, {
         font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColors.textFillProperty
       } ),
 
       // phet-io

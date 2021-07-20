@@ -29,7 +29,7 @@ import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
@@ -146,7 +146,7 @@ class CollisionCounterNode extends Node {
     // Background, sized to fit the content
     const rectangleNode = new Rectangle( 0, 0, content.width + ( 2 * X_MARGIN ), content.height + ( 2 * Y_MARGIN ), {
       cornerRadius: 6,
-      fill: GasPropertiesColorProfile.collisionCounterBackgroundColorProperty,
+      fill: GasPropertiesColors.collisionCounterBackgroundColorProperty,
       stroke: 'black'
     } );
 
@@ -154,7 +154,7 @@ class CollisionCounterNode extends Node {
     const bezelBounds = new Bounds2( 0, 0,
       rectangleNode.width + ( 2 * BEZEL_WIDTH ), rectangleNode.height + ( 2 * BEZEL_WIDTH ) );
     const bezelNode = new ShadedRectangle( bezelBounds, {
-      baseColor: GasPropertiesColorProfile.collisionCounterBezelColorProperty
+      baseColor: GasPropertiesColors.collisionCounterBezelColorProperty
     } );
 
     rectangleNode.center = bezelNode.center;

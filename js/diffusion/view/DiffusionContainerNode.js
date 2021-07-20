@@ -12,7 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from '../model/DiffusionContainer.js';
 import DividerNode from './DividerNode.js';
@@ -35,7 +35,7 @@ class DiffusionContainerNode extends Node {
 
     // Outside border of the container
     const borderNode = new Rectangle( viewBounds, {
-      stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+      stroke: GasPropertiesColors.containerBoundsStrokeProperty,
       lineWidth: modelViewTransform.modelToViewDeltaX( container.wallThickness )
     } );
 

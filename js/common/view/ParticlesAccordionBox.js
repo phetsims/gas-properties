@@ -16,7 +16,7 @@ import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import FixedWidthNode from './FixedWidthNode.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
@@ -51,7 +51,7 @@ class ParticlesAccordionBox extends AccordionBox {
       // superclass options
       titleNode: new Text( gasPropertiesStrings.particles, {
         font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColors.textFillProperty
       } )
     }, options );
 

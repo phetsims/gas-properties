@@ -1,7 +1,7 @@
 // Copyright 2018-2021, University of Colorado Boulder
 
 /**
- * GasPropertiesColorProfile defines the colors for this simulation.
+ * GasPropertiesColors defines the colors for this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,7 +10,7 @@ import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import ProfileColorProperty from '../../../scenery/js/util/ProfileColorProperty.js';
 import gasProperties from '../gasProperties.js';
 
-const GasPropertiesColorProfile = {
+const GasPropertiesColors = {
 
   //------------------------------------------------------------------------------------------------------------------
   // These colors change based on which profile is selected.
@@ -227,5 +227,5 @@ const GasPropertiesColorProfile = {
   } )
 };
 
-gasProperties.register( 'GasPropertiesColorProfile', GasPropertiesColorProfile );
-export default GasPropertiesColorProfile;
+gasProperties.register( 'GasPropertiesColors', GasPropertiesColors );
+export default GasPropertiesColors;

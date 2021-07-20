@@ -10,7 +10,7 @@ import Screen from '../../../joist/js/Screen.js';
 import merge from '../../../phet-core/js/merge.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import gasProperties from '../gasProperties.js';
-import GasPropertiesColorProfile from './GasPropertiesColorProfile.js';
+import GasPropertiesColors from './GasPropertiesColors.js';
 
 class GasPropertiesScreen extends Screen {
 
@@ -28,7 +28,7 @@ class GasPropertiesScreen extends Screen {
     options = merge( {
 
       // superclass options
-      backgroundColorProperty: GasPropertiesColorProfile.screenBackgroundColorProperty,
+      backgroundColorProperty: GasPropertiesColors.screenBackgroundColorProperty,
 
       // put a gray border around unselected icons on the home screen
       showUnselectedHomeScreenIconFrame: true,

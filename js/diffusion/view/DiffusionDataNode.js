@@ -12,7 +12,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
@@ -45,7 +45,7 @@ class DiffusionDataNode extends VBox {
     const numberDisplayOptions = {
       align: 'right',
       textOptions: {
-        fill: GasPropertiesColorProfile.textFillProperty,
+        fill: GasPropertiesColors.textFillProperty,
         font: GasPropertiesConstants.CONTROL_FONT
       },
       backgroundFill: null,

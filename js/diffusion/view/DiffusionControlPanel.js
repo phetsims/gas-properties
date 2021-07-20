@@ -13,7 +13,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
@@ -88,7 +88,7 @@ class DiffusionControlPanel extends Panel {
 
         // ------------
         new HSeparator( contentWidth, {
-          stroke: GasPropertiesColorProfile.separatorColorProperty,
+          stroke: GasPropertiesColors.separatorColorProperty,
           maxWidth: contentWidth
         } ),
 

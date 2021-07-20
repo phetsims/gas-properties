@@ -8,7 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../../common/GasPropertiesQueryParameters.js';
 import BaseScreenView from '../../common/view/BaseScreenView.js';
@@ -65,12 +65,12 @@ class DiffusionScreenView extends BaseScreenView {
 
     // Center of Mass indicators
     const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
-      model.modelViewTransform, GasPropertiesColorProfile.particle1ColorProperty, {
+      model.modelViewTransform, GasPropertiesColors.particle1ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty,
         tandem: tandem.createTandem( 'centerOfMassNode1' )
       } );
     const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
-      model.modelViewTransform, GasPropertiesColorProfile.particle2ColorProperty, {
+      model.modelViewTransform, GasPropertiesColors.particle2ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty,
         tandem: tandem.createTandem( 'centerOfMassNode2' )
       } );
@@ -79,7 +79,7 @@ class DiffusionScreenView extends BaseScreenView {
     const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleFlowRate1, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
-        fill: GasPropertiesColorProfile.particle1ColorProperty
+        fill: GasPropertiesColors.particle1ColorProperty
       },
       centerX: containerNode.centerX,
       top: containerNode.bottom + 38,
@@ -88,7 +88,7 @@ class DiffusionScreenView extends BaseScreenView {
     const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRate2, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
-        fill: GasPropertiesColorProfile.particle2ColorProperty
+        fill: GasPropertiesColors.particle2ColorProperty
       },
       centerX: containerNode.centerX,
       top: particleFlowRateNode1.bottom + 5,

@@ -29,7 +29,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import DiffusionParticle1 from '../../diffusion/model/DiffusionParticle1.js';
 import DiffusionParticle2 from '../../diffusion/model/DiffusionParticle2.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import HeavyParticle from '../model/HeavyParticle.js';
 import LightParticle from '../model/LightParticle.js';
 import Particle from '../model/Particle.js';
@@ -51,7 +51,7 @@ const GasPropertiesIconFactory = {
 
     // Container
     const containerNode = new Rectangle( 0, 0, 275, 200, {
-      stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+      stroke: GasPropertiesColors.containerBoundsStrokeProperty,
       lineWidth: 5
     } );
 
@@ -106,7 +106,7 @@ const GasPropertiesIconFactory = {
     } );
 
     return new ScreenIcon( iconNode, {
-      fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      fill: GasPropertiesColors.screenBackgroundColorProperty
     } );
   },
 
@@ -119,13 +119,13 @@ const GasPropertiesIconFactory = {
 
     // Vertical section of container wall
     const wallNode = new Line( 0, 0, 0, 300, {
-      stroke: GasPropertiesColorProfile.containerBoundsStrokeProperty,
+      stroke: GasPropertiesColors.containerBoundsStrokeProperty,
       lineWidth: 10
     } );
 
     // Handle, attached to the left of the wall
     const handleNode = new HandleNode( {
-      gripBaseColor: GasPropertiesColorProfile.resizeGripColorProperty,
+      gripBaseColor: GasPropertiesColors.resizeGripColorProperty,
       rotation: -Math.PI / 2,
       right: wallNode.left + 3, // overlap
       centerY: wallNode.centerY
@@ -166,7 +166,7 @@ const GasPropertiesIconFactory = {
     return new ScreenIcon( iconNode, {
       maxIconWidthProportion: 1,
       maxIconHeightProportion: 1,
-      fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      fill: GasPropertiesColors.screenBackgroundColorProperty
     } );
   },
 
@@ -195,12 +195,12 @@ const GasPropertiesIconFactory = {
     iconShape.lineTo( iconWidth, 0 ).lineTo( 0, 0 ).close();
 
     const iconNode = new Path( iconShape, {
-      fill: GasPropertiesColorProfile.kineticEnergyHistogramBarColorProperty
+      fill: GasPropertiesColors.kineticEnergyHistogramBarColorProperty
     } );
 
     return new ScreenIcon( iconNode, {
       maxIconHeightProportion: 0.75,
-      fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      fill: GasPropertiesColors.screenBackgroundColorProperty
     } );
   },
 
@@ -217,7 +217,7 @@ const GasPropertiesIconFactory = {
     } );
 
     const dividerNode = new Line( 0, 0, 0, containerNode.height, {
-      stroke: GasPropertiesColorProfile.dividerColorProperty,
+      stroke: GasPropertiesColors.dividerColorProperty,
       lineWidth: 12,
       center: containerNode.center
     } );
@@ -257,7 +257,7 @@ const GasPropertiesIconFactory = {
     return new ScreenIcon( iconNode, {
       maxIconWidthProportion: 1,
       maxIconHeightProportion: 1,
-      fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      fill: GasPropertiesColors.screenBackgroundColorProperty
     } );
   },
 
@@ -307,7 +307,7 @@ const GasPropertiesIconFactory = {
     return new ScreenIcon( iconNode, {
       maxIconWidthProportion: 1,
       maxIconHeightProportion: 0.9,
-      fill: GasPropertiesColorProfile.screenBackgroundColorProperty
+      fill: GasPropertiesColors.screenBackgroundColorProperty
     } );
   },
 
@@ -369,7 +369,7 @@ const GasPropertiesIconFactory = {
    * @public
    */
   createStopwatchIcon() {
-    return createToolIcon( GasPropertiesColorProfile.stopwatchBackgroundColorProperty );
+    return createToolIcon( GasPropertiesColors.stopwatchBackgroundColorProperty );
   },
 
   /**
@@ -378,7 +378,7 @@ const GasPropertiesIconFactory = {
    * @public
    */
   createCollisionCounterIcon() {
-    return createToolIcon( GasPropertiesColorProfile.collisionCounterBackgroundColorProperty );
+    return createToolIcon( GasPropertiesColors.collisionCounterBackgroundColorProperty );
   },
 
   /**
@@ -407,7 +407,7 @@ const GasPropertiesIconFactory = {
    */
   createContainerWidthIcon() {
     return new DimensionalArrowsNode( new NumberProperty( 44 ), {
-      color: GasPropertiesColorProfile.widthIconColorProperty,
+      color: GasPropertiesColors.widthIconColorProperty,
       pickable: false
     } );
   },
@@ -426,12 +426,12 @@ const GasPropertiesIconFactory = {
       spacing: 12,
       children: [
         new Rectangle( 0, 0, width, height, {
-          fill: GasPropertiesColorProfile.particle1ColorProperty,
-          stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
+          fill: GasPropertiesColors.particle1ColorProperty,
+          stroke: GasPropertiesColors.centerOfMassStrokeProperty
         } ),
         new Rectangle( 0, 0, width, height, {
-          fill: GasPropertiesColorProfile.particle2ColorProperty,
-          stroke: GasPropertiesColorProfile.centerOfMassStrokeProperty
+          fill: GasPropertiesColors.particle2ColorProperty,
+          stroke: GasPropertiesColors.centerOfMassStrokeProperty
         } )
       ]
     } );
@@ -445,7 +445,7 @@ const GasPropertiesIconFactory = {
   createParticleFlowRateIcon() {
 
     const arrowOptions = {
-      fill: GasPropertiesColorProfile.particle1ColorProperty,
+      fill: GasPropertiesColors.particle1ColorProperty,
       stroke: 'black',
       headHeight: 12,
       headWidth: 12,
@@ -479,7 +479,7 @@ const GasPropertiesIconFactory = {
     }
 
     return new Path( shape, {
-      stroke: GasPropertiesColorProfile.scaleColorProperty,
+      stroke: GasPropertiesColors.scaleColorProperty,
       lineWidth: 1
     } );
   }

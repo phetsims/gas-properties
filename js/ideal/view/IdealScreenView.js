@@ -8,7 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
 import IdealGasLawScreenView from '../../common/view/IdealGasLawScreenView.js';
@@ -34,7 +34,7 @@ class IdealScreenView extends IdealGasLawScreenView {
 
       // superclass options
       hasHoldConstantControls: true,
-      resizeGripColor: GasPropertiesColorProfile.idealResizeGripColorProperty
+      resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty
     }, options );
 
     // view-specific Properties

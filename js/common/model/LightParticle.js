@@ -7,7 +7,7 @@
  */
 
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle from './Particle.js';
 
@@ -19,8 +19,8 @@ class LightParticle extends Particle {
       // superclass options
       mass: 4, // equivalent to He (helium), in AMU, rounded to the closest integer
       radius: GasPropertiesConstants.LIGHT_PARTICLES_RADIUS, // pm
-      colorProperty: GasPropertiesColorProfile.lightParticleColorProperty,
-      highlightColorProperty: GasPropertiesColorProfile.lightParticleHighlightColorProperty
+      colorProperty: GasPropertiesColors.lightParticleColorProperty,
+      highlightColorProperty: GasPropertiesColors.lightParticleHighlightColorProperty
     } );
   }
 }

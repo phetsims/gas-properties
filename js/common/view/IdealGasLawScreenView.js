@@ -33,7 +33,7 @@ import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import IdealGasLawModel from '../model/IdealGasLawModel.js';
@@ -72,7 +72,7 @@ class IdealGasLawScreenView extends BaseScreenView {
     assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
 
     options = merge( {
-      resizeGripColor: GasPropertiesColorProfile.resizeGripColorProperty
+      resizeGripColor: GasPropertiesColors.resizeGripColorProperty
     }, options );
 
     super( model, tandem, options );
@@ -183,14 +183,14 @@ class IdealGasLawScreenView extends BaseScreenView {
     // Bicycle pump for heavy particles
     const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
       merge( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColorProfile.heavyParticleColorProperty,
+        bodyFill: GasPropertiesColors.heavyParticleColorProperty,
         tandem: tandem.createTandem( 'heavyBicyclePumpNode' )
       } ) );
 
     // Bicycle pump for light particles
     const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
       merge( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColorProfile.lightParticleColorProperty,
+        bodyFill: GasPropertiesColors.lightParticleColorProperty,
         tandem: tandem.createTandem( 'lightBicyclePumpNode' )
       } ) );
 
@@ -285,8 +285,8 @@ class IdealGasLawScreenView extends BaseScreenView {
     let pointerCoordinatesNode = null;
     if ( GasPropertiesQueryParameters.pointerCoordinates ) {
       pointerCoordinatesNode = new PointerCoordinatesNode( model.modelViewTransform, {
-        textColor: GasPropertiesColorProfile.pointerCoordinatesTextColorProperty,
-        backgroundColor: GasPropertiesColorProfile.pointerCoordinatesBackgroundColorProperty
+        textColor: GasPropertiesColors.pointerCoordinatesTextColorProperty,
+        backgroundColor: GasPropertiesColors.pointerCoordinatesBackgroundColorProperty
       } );
     }
 

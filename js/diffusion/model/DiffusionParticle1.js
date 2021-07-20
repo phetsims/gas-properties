@@ -9,7 +9,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import Particle from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
 
@@ -28,8 +28,8 @@ class DiffusionParticle1 extends Particle {
     super( merge( {
 
       // superclass options
-      colorProperty: GasPropertiesColorProfile.particle1ColorProperty,
-      highlightColorProperty: GasPropertiesColorProfile.particle1HighlightColorProperty
+      colorProperty: GasPropertiesColors.particle1ColorProperty,
+      highlightColorProperty: GasPropertiesColors.particle1HighlightColorProperty
     }, options ) );
   }
 }

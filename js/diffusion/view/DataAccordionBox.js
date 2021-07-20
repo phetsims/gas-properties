@@ -14,7 +14,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import VSeparator from '../../../../sun/js/VSeparator.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
@@ -42,7 +42,7 @@ class DataAccordionBox extends AccordionBox {
       contentYSpacing: 0,
       titleNode: new Text( gasPropertiesStrings.data, {
         font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty,
+        fill: GasPropertiesColors.textFillProperty,
         maxWidth: 200 // determined empirically
       } ),
 
@@ -60,7 +60,7 @@ class DataAccordionBox extends AccordionBox {
     // Vertical separator, analogous to the container's divider
     const separator = new VSeparator( 75, {
       lineWidth: 2,
-      stroke: GasPropertiesColorProfile.dividerColorProperty
+      stroke: GasPropertiesColors.dividerColorProperty
     } );
 
     const contentNode = new HBox( {

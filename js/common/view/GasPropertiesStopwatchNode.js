@@ -13,7 +13,7 @@ import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 class GasPropertiesStopwatchNode extends StopwatchNode {
@@ -30,7 +30,7 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
       numberDisplayRange: new Range( 0, GasPropertiesConstants.MAX_TIME ),
 
       // Customizations for Gas Properties
-      backgroundBaseColor: GasPropertiesColorProfile.stopwatchBackgroundColorProperty,
+      backgroundBaseColor: GasPropertiesColors.stopwatchBackgroundColorProperty,
 
       numberDisplayOptions: {
         numberFormatter: StopwatchNode.createRichTextNumberFormatter( {

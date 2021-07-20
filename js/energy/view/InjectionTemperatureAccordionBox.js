@@ -24,7 +24,7 @@ import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import Slider from '../../../../sun/js/Slider.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import GasPropertiesColorProfile from '../../common/GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import gasProperties from '../../gasProperties.js';
@@ -33,7 +33,7 @@ import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 // constants
 const TEXT_OPTIONS = {
   font: GasPropertiesConstants.CONTROL_FONT,
-  fill: GasPropertiesColorProfile.textFillProperty,
+  fill: GasPropertiesColors.textFillProperty,
   maxWidth: 175 // determined empirically
 };
 
@@ -63,7 +63,7 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
       // superclass options
       titleNode: new Text( gasPropertiesStrings.injectionTemperature, {
         font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColorProfile.textFillProperty
+        fill: GasPropertiesColors.textFillProperty
       } )
     }, options );
 
@@ -90,7 +90,7 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
 
     // Major ticks for temperature slider
     const tickTextOptions = {
-      fill: GasPropertiesColorProfile.textFillProperty,
+      fill: GasPropertiesColors.textFillProperty,
       font: GasPropertiesConstants.CONTROL_FONT
     };
     const majorTicks = [
@@ -108,7 +108,7 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     const temperatureControl = new NumberControl( '', initialTemperatureProperty, initialTemperatureProperty.range, {
       layoutFunction: temperatureLayoutFunction,
       titleNodeOptions: {
-        fill: GasPropertiesColorProfile.textFillProperty,
+        fill: GasPropertiesColors.textFillProperty,
         font: GasPropertiesConstants.CONTROL_FONT,
         maxWidth: 125, // determined empirically
         tandem: Tandem.OPTIONAL // no tandem because no title
@@ -124,9 +124,9 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
       },
       sliderOptions: {
         trackSize: new Dimension2( 175, 5 ),
-        trackStroke: GasPropertiesColorProfile.textFillProperty,
+        trackStroke: GasPropertiesColors.textFillProperty,
         majorTicks: majorTicks,
-        majorTickStroke: GasPropertiesColorProfile.textFillProperty,
+        majorTickStroke: GasPropertiesColors.textFillProperty,
         constrainValue: value => {
           return Utils.roundToInterval( value, 50 );
         }

@@ -16,7 +16,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 // const
@@ -53,7 +53,7 @@ class NumberOfParticlesControl extends VBox {
 
     const labelNode = new Text( title, {
       font: GasPropertiesConstants.CONTROL_FONT,
-      fill: GasPropertiesColorProfile.textFillProperty,
+      fill: GasPropertiesColors.textFillProperty,
       maxWidth: 150, // determined empirically,
       tandem: options.tandem.createTandem( 'labelNode' )
     } );

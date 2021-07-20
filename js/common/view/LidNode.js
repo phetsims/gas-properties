@@ -13,7 +13,7 @@ import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import HoldConstant from '../model/HoldConstant.js';
 
 // constants
@@ -33,11 +33,11 @@ class LidNode extends Node {
     options = merge( {
       baseWidth: 1,
       baseHeight: 1,
-      gripColor: GasPropertiesColorProfile.lidGripColorProperty // {ColorDef}
+      gripColor: GasPropertiesColors.lidGripColorProperty // {ColorDef}
     }, options );
 
     const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {
-      fill: GasPropertiesColorProfile.lidBaseFillProperty,
+      fill: GasPropertiesColors.lidBaseFillProperty,
       left: 0,
       bottom: 0
     } );

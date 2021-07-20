@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesColorProfile from '../GasPropertiesColorProfile.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import ParticleType from '../model/ParticleType.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
@@ -32,9 +32,9 @@ class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 
       // superclass options
       orientation: 'horizontal',
-      baseColor: GasPropertiesColorProfile.radioButtonGroupBaseColorProperty,
-      selectedStroke: GasPropertiesColorProfile.radioButtonGroupSelectedStrokeProperty,
-      deselectedStroke: GasPropertiesColorProfile.radioButtonGroupDeselectedStrokeProperty,
+      baseColor: GasPropertiesColors.radioButtonGroupBaseColorProperty,
+      selectedStroke: GasPropertiesColors.radioButtonGroupSelectedStrokeProperty,
+      deselectedStroke: GasPropertiesColors.radioButtonGroupDeselectedStrokeProperty,
       selectedLineWidth: 3,
       deselectedLineWidth: 1.5,
       spacing: 8,
