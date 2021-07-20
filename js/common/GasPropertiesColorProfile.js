@@ -1,9 +1,7 @@
 // Copyright 2018-2021, University of Colorado Boulder
 
 /**
- * GasPropertiesColorProfile defines the color profiles for this simulation.
- * Default colors are required. Colors for other profiles are optional.
- * Profile 'projector' is used for Projector Mode, which can be set via the Options dialog.
+ * GasPropertiesColorProfile defines the colors for this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
