@@ -1,4 +1,4 @@
-// Copyright 2018-2020, University of Colorado Boulder
+// Copyright 2018-2021, University of Colorado Boulder
 
 /**
  * DiffusionControlPanel is the control panel that appears on the right side of the 'Diffusion' screen.

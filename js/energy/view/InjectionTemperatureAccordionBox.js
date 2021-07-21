@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2021, University of Colorado Boulder
 
 /**
  * InjectionTemperatureAccordionBox contains controls related to the temperature used to compute the initial velocity

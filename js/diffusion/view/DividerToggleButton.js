@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2021, University of Colorado Boulder
 
 /**
  * DividerToggleButton is used to toggle the container's vertical divider. It is color-coded to the divider.
