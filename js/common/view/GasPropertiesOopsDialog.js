@@ -10,7 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import OopsDialog from '../../../../scenery-phet/js/OopsDialog.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
-import phetGirlLabCoatImage from '../../../images/phet-girl-lab-coat_png.js';
+import phetGirlLabCoat_png from '../../../images/phetGirlLabCoat_png.js';
 import gasProperties from '../../gasProperties.js';
 
 class GasPropertiesOopsDialog extends OopsDialog {
@@ -24,7 +24,7 @@ class GasPropertiesOopsDialog extends OopsDialog {
     options = merge( {
 
       // superclass options
-      iconNode: new Image( phetGirlLabCoatImage, {
+      iconNode: new Image( phetGirlLabCoat_png, {
         maxHeight: 132 // determined empirically
       } ),
       richTextOptions: {
