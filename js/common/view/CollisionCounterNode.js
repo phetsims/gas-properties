@@ -114,7 +114,9 @@ class CollisionCounterNode extends Node {
         font: CONTROL_FONT,
         maxWidth: 100 // determined empirically
       } );
-      return new ComboBoxItem( node, samplePeriod );
+      return new ComboBoxItem( node, samplePeriod, {
+        tandemName: `samplePeriod${samplePeriod}Item`
+      } );
     } );
 
     // Combo box

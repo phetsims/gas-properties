@@ -38,6 +38,7 @@ class PressureDisplay extends ComboBoxDisplay {
     const items = [
       {
         choice: PressureGauge.Units.ATMOSPHERES,
+        tandemName: `${PressureGauge.Units.ATMOSPHERES.toString().toLowerCase()}Item`,
         numberProperty: pressureGauge.pressureAtmospheresProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: gasPropertiesStrings.atmospheres,
@@ -47,6 +48,7 @@ class PressureDisplay extends ComboBoxDisplay {
       },
       {
         choice: PressureGauge.Units.KILOPASCALS,
+        tandemName: `${PressureGauge.Units.KILOPASCALS.toString().toLowerCase()}Item`,
         numberProperty: pressureGauge.pressureKilopascalsProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: gasPropertiesStrings.kilopascals,

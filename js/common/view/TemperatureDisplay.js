@@ -37,12 +37,14 @@ class TemperatureDisplay extends ComboBoxDisplay {
     const items = [
       {
         choice: Thermometer.Units.KELVIN,
+        tandemName: `${Thermometer.Units.KELVIN.toString().toLowerCase()}Item`,
         numberProperty: thermometer.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: gasPropertiesStrings.kelvin
       },
       {
         choice: Thermometer.Units.CELSIUS,
+        tandemName: `${Thermometer.Units.CELSIUS.toString().toLowerCase()}Item`,
         numberProperty: thermometer.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: gasPropertiesStrings.degreesCelsius
