@@ -131,7 +131,7 @@ class BaseModel {
    */
   stepRealTime( dt ) {
     assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
-    this.stepModelTime( this.timeTransform( dt ) );
+    this.stepModelTime( this.timeTransform.evaluate( dt ) );
   }
 
   /**

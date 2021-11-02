@@ -133,7 +133,7 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
             // compute heat/cool factor, relative to temperature change and number of particles
             const deltaTN = deltaT * numberOfParticles; // deltaT * N
-            const heatCoolFactor = Math.sign( deltaT ) * toHeatFactor( Math.abs( deltaTN ) );
+            const heatCoolFactor = Math.sign( deltaT ) * toHeatFactor.evaluate( Math.abs( deltaTN ) );
             assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
 
             // Animation that moves the flame/ice up

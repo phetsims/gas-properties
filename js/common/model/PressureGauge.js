@@ -140,8 +140,8 @@ class PressureGauge {
       if ( noiseEnabled ) {
 
         // compute noise
-        noise = this.pressureNoiseFunction( this.pressureProperty.value ) *
-                this.scaleNoiseFunction( this.temperatureProperty.value ) *
+        noise = this.pressureNoiseFunction.evaluate( this.pressureProperty.value ) *
+                this.scaleNoiseFunction.evaluate( this.temperatureProperty.value ) *
                 dotRandom.nextDouble();
 
         // randomly apply a sign if doing so doesn't make the pressure become <= 0
