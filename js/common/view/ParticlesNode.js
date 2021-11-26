@@ -10,10 +10,10 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Sprites from '../../../../scenery/js/nodes/Sprites.js';
-import Sprite from '../../../../scenery/js/util/Sprite.js';
-import SpriteImage from '../../../../scenery/js/util/SpriteImage.js';
-import SpriteInstance from '../../../../scenery/js/util/SpriteInstance.js';
+import { Sprites } from '../../../../scenery/js/imports.js';
+import { Sprite } from '../../../../scenery/js/imports.js';
+import { SpriteImage } from '../../../../scenery/js/imports.js';
+import { SpriteInstance } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 import ParticleNode from './ParticleNode.js';

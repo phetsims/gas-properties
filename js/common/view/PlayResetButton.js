@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PlayIconShape from '../../../../scenery-phet/js/PlayIconShape.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
+import { Path } from '../../../../scenery/js/imports.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import gasProperties from '../../gasProperties.js';
 

@@ -11,7 +11,7 @@
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
+import { Path } from '../../../../scenery/js/imports.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 

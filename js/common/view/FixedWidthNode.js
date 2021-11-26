@@ -11,8 +11,8 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import HStrut from '../../../../scenery/js/nodes/HStrut.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { HStrut } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 
 // constants

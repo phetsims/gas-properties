@@ -9,7 +9,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import OopsDialog from '../../../../scenery-phet/js/OopsDialog.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
+import { Image } from '../../../../scenery/js/imports.js';
 import phetGirlLabCoat_png from '../../../images/phetGirlLabCoat_png.js';
 import gasProperties from '../../gasProperties.js';
 

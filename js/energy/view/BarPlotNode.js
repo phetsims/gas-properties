@@ -10,8 +10,8 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
-import ColorDef from '../../../../scenery/js/util/ColorDef.js';
+import { Path } from '../../../../scenery/js/imports.js';
+import { ColorDef } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 
 class BarPlotNode extends Path {

@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import IdealGasLawScreenView from '../../common/view/IdealGasLawScreenView.js';
