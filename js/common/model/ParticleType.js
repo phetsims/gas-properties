@@ -6,10 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import gasProperties from '../../gasProperties.js';
 
-const ParticleType = Enumeration.byKeys( [ 'HEAVY', 'LIGHT' ] );
+const ParticleType = EnumerationDeprecated.byKeys( [ 'HEAVY', 'LIGHT' ] );
 
 gasProperties.register( 'ParticleType', ParticleType );
 export default ParticleType;

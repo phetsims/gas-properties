@@ -11,7 +11,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -73,7 +73,7 @@ class Thermometer {
 }
 
 // @public Choice of temperature units that the thermometer can display
-Thermometer.Units = Enumeration.byKeys( [ 'KELVIN', 'CELSIUS' ] );
+Thermometer.Units = EnumerationDeprecated.byKeys( [ 'KELVIN', 'CELSIUS' ] );
 
 gasProperties.register( 'Thermometer', Thermometer );
 export default Thermometer;

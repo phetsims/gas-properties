@@ -19,7 +19,7 @@ import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -160,7 +160,7 @@ class PressureGauge {
 PressureGauge.REFRESH_PERIOD = 0.75;
 
 // @public Choice of pressure units that the gauge can display
-PressureGauge.Units = Enumeration.byKeys( [ 'KILOPASCALS', 'ATMOSPHERES' ] );
+PressureGauge.Units = EnumerationDeprecated.byKeys( [ 'KILOPASCALS', 'ATMOSPHERES' ] );
 
 gasProperties.register( 'PressureGauge', PressureGauge );
 export default PressureGauge;
