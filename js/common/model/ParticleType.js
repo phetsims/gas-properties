@@ -1,4 +1,4 @@
-// Copyright 2018-2020, University of Colorado Boulder
+// Copyright 2018-2022, University of Colorado Boulder
 
 /**
  * ParticleType is an enumeration for particle types in the 'Ideal', 'Explore', and 'Energy' screens.
