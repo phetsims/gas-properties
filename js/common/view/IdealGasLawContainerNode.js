@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Shape from '../../../../kite/js/Shape.js';
@@ -37,7 +37,7 @@ class IdealGasLawContainerNode extends Node {
   /**
    * @param {IdealGasLawContainer} container
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {EnumerationProperty} holdConstantProperty
+   * @param {EnumerationDeprecatedProperty} holdConstantProperty
    * @param {Property.<Bounds2>} visibleBoundsProperty
    * @param {Object} [options]
    * @constructor
@@ -46,7 +46,7 @@ class IdealGasLawContainerNode extends Node {
     assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
     assert && assert( modelViewTransform instanceof ModelViewTransform2,
       `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( visibleBoundsProperty instanceof Property,
       `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );

@@ -8,7 +8,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
@@ -57,7 +57,7 @@ class Thermometer {
       } );
 
     // @public temperature units displayed by the thermometer
-    this.unitsProperty = new EnumerationProperty( Thermometer.Units, Thermometer.Units.KELVIN, {
+    this.unitsProperty = new EnumerationDeprecatedProperty( Thermometer.Units, Thermometer.Units.KELVIN, {
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the thermometer'
     } );

@@ -14,7 +14,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
@@ -53,7 +53,7 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
   /**
    * @param {NumberProperty} heatCoolAmountProperty
-   * @param {EnumerationProperty} holdConstantProperty
+   * @param {EnumerationDeprecatedProperty} holdConstantProperty
    * @param {BooleanProperty} isPlayingProperty
    * @param {Property.<number>} numberOfParticlesProperty
    * @param {Property.<number|null>} temperatureProperty
@@ -63,7 +63,7 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
                temperatureProperty, options ) {
     assert && assert( heatCoolAmountProperty instanceof NumberProperty,
       `invalid heatCoolAmountProperty: ${heatCoolAmountProperty}` );
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( isPlayingProperty instanceof BooleanProperty,
       `invalid isPlayingProperty: ${isPlayingProperty}` );

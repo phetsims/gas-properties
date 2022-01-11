@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -23,11 +23,11 @@ const HANDLE_RIGHT_INSET = 3;
 class LidNode extends Node {
 
   /**
-   * @param {EnumerationProperty} holdConstantProperty
+   * @param {EnumerationDeprecatedProperty} holdConstantProperty
    * @param {Object} [options]
    */
   constructor( holdConstantProperty, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
 
     options = merge( {

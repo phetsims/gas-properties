@@ -8,7 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import gasProperties from '../../gasProperties.js';
 import ParticleType from '../model/ParticleType.js';
 
@@ -32,7 +32,7 @@ class IdealGasLawViewProperties {
     } );
 
     // @public
-    this.particleTypeProperty = new EnumerationProperty( ParticleType, ParticleType.HEAVY, {
+    this.particleTypeProperty = new EnumerationDeprecatedProperty( ParticleType, ParticleType.HEAVY, {
       tandem: tandem.createTandem( 'particleTypeProperty' ),
       phetioDocumentation: 'the particle type that will be dispensed by the bicycle pump'
     } );

@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -23,7 +23,7 @@ const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 class PressureModel {
 
   /**
-   * @param {EnumerationProperty} holdConstantProperty
+   * @param {EnumerationDeprecatedProperty} holdConstantProperty
    * @param {Property.<number>} numberOfParticlesProperty
    * @param {Property.<number>} volumeProperty
    * @param {Property.<number|null>} temperatureProperty
@@ -31,7 +31,7 @@ class PressureModel {
    * @param {Object} [options]
    */
   constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( numberOfParticlesProperty instanceof Property,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );

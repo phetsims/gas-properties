@@ -13,7 +13,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
@@ -40,7 +40,7 @@ class PressureGauge {
   /**
    * @param {NumberProperty} pressureProperty - pressure in the container, in kPa
    * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K, null if empty container
-   * @param {EnumerationProperty} holdConstantProperty - quantity to be held constant, influences noise
+   * @param {EnumerationDeprecatedProperty} holdConstantProperty - quantity to be held constant, influences noise
    * @param {Object} [options]
    */
   constructor( pressureProperty, temperatureProperty, holdConstantProperty, options ) {
@@ -48,7 +48,7 @@ class PressureGauge {
       `invalid pressureProperty: ${pressureProperty}` );
     assert && assert( temperatureProperty instanceof Property,
       `invalid temperatureProperty: ${temperatureProperty}` );
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
 
     options = merge( {
@@ -95,7 +95,7 @@ class PressureGauge {
     this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
     // @public pressure units displayed by the pressure gauge
-    this.unitsProperty = new EnumerationProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES, {
+    this.unitsProperty = new EnumerationDeprecatedProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES, {
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the pressure gauge'
     } );
