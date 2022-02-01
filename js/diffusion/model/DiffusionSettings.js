@@ -31,8 +31,7 @@ class DiffusionSettings {
         numberType: 'Integer',
         range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE,
         isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
-        tandem: options.tandem.createTandem( 'numberOfParticlesProperty' ),
-        phetioStudioControl: false // because value must be a multiple of delta
+        tandem: options.tandem.createTandem( 'numberOfParticlesProperty' )
       } );
 
     // @public mass, in AMU
@@ -41,8 +40,7 @@ class DiffusionSettings {
       range: GasPropertiesConstants.MASS_RANGE,
       units: 'AMU',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 ),
-      tandem: options.tandem.createTandem( 'massProperty' ),
-      phetioStudioControl: false // because value must be a multiple of delta
+      tandem: options.tandem.createTandem( 'massProperty' )
     } );
 
     // @public radius, in pm
@@ -51,8 +49,7 @@ class DiffusionSettings {
       range: GasPropertiesConstants.RADIUS_RANGE,
       units: 'pm',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 ),
-      tandem: options.tandem.createTandem( 'radiusProperty' ),
-      phetioStudioControl: false // because value must be a multiple of delta
+      tandem: options.tandem.createTandem( 'radiusProperty' )
     } );
 
     // @public initial temperature, in K, used to compute initial velocity
@@ -63,7 +60,6 @@ class DiffusionSettings {
         units: 'K',
         isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
         tandem: options.tandem.createTandem( 'initialTemperatureProperty' ),
-        phetioStudioControl: false, // because value must be a multiple of delta
         phetioDocumentation: 'temperature used to determine initial speed of particles'
       } );
   }

@@ -70,8 +70,7 @@ class CollisionCounter {
       numberType: 'Integer',
       validValues: this.samplePeriods,
       units: 'ps',
-      tandem: options.tandem.createTandem( 'samplePeriodProperty' ),
-      phetioStudioControl: false
+      tandem: options.tandem.createTandem( 'samplePeriodProperty' )
     } );
 
     // Changing the running state resets the collision count.

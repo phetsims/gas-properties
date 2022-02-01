@@ -67,7 +67,6 @@ class IdealGasLawModel extends BaseModel {
     this.heatCoolFactorProperty = new NumberProperty( 0, {
       range: new Range( -1, 1 ),
       tandem: tandem.createTandem( 'heatCoolFactorProperty' ),
-      phetioStudioControl: false,
       phetioDocumentation: 'The amount of heat or cool applied to particles in the container. ' +
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off'
     } );
