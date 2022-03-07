@@ -62,7 +62,7 @@ class LidDragListener extends DragListener {
       },
 
       // when the lid handle is released, log the opening
-      end: listener => {
+      end: () => {
         phet.log && phet.log( container.isOpenProperty.value ?
                               `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
                               'Lid is closed' );

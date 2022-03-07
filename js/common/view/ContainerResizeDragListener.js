@@ -62,7 +62,7 @@ class ContainerResizeDragListener extends DragListener {
         }
       },
 
-      end: listener => {
+      end: () => {
 
         // Stop the animation wherever the container width happens to be when the drag ends.
         container.desiredWidth = container.widthProperty.value;
