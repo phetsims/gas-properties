@@ -86,7 +86,7 @@ class ParticlesNode extends Sprites {
 
         // If we've run out of SpriteInstances, allocate one.
         if ( this.spriteInstances.length === spriteInstancesIndex ) {
-          const newInstance = SpriteInstance.dirtyFromPool();
+          const newInstance = SpriteInstance.pool.fetch();
           newInstance.isTranslation = false;
           newInstance.alpha = 1;
           newInstance.matrix.setToAffine( 1 / IMAGE_SCALE, 0, 0, 0, 1 / IMAGE_SCALE, 0 );
