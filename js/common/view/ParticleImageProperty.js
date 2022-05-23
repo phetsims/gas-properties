@@ -8,6 +8,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -43,7 +44,7 @@ class ParticleImageProperty extends DerivedProperty {
     // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to
     // derive the value and act as a proxy for the DerivedProperty dependencies.
     const privateProperty = new Property( null );
-    Property.multilink( [ radiusProperty, particle.colorProperty, particle.highlightColorProperty ],
+    Multilink.multilink( [ radiusProperty, particle.colorProperty, particle.highlightColorProperty ],
       ( radius, color, highlightColor ) => {
         particle.radius = radius;
         ParticlesNode.particleToCanvas( particle, modelViewTransform, privateProperty );

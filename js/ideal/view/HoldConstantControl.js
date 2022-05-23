@@ -9,6 +9,7 @@
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import { VBox } from '../../../../scenery/js/imports.js';
@@ -109,7 +110,7 @@ class HoldConstantControl extends VBox {
 
     // Disable "Temperature (T)" radio button for conditions that are not possible.
     const temperatureRadioButton = radioButtonGroup.getButton( HoldConstant.TEMPERATURE );
-    Property.multilink(
+    Multilink.multilink(
       [ numberOfParticlesProperty, isContainerOpenProperty ],
       ( numberOfParticles, isContainerOpen ) => {
         temperatureRadioButton.enabledProperty.value = ( numberOfParticles !== 0 ) && !isContainerOpen;

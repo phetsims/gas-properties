@@ -17,7 +17,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -129,7 +129,7 @@ class IdealGasLawModel extends BaseModel {
 
     // If the container's width changes while the sim is paused, and it's not due to the user
     // resizing the container, then update immediately. See #125.
-    Property.multilink(
+    Multilink.multilink(
       [ this.container.widthProperty, this.container.userIsAdjustingWidthProperty ],
       ( width, userIsAdjustingWidth ) => {
         if ( !userIsAdjustingWidth && !this.isPlayingProperty.value ) {

@@ -8,6 +8,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -148,19 +149,19 @@ class DiffusionModel extends BaseModel {
     this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
     // Update mass and temperature of existing particles. This adjusts speed of the particles.
-    Property.multilink(
+    Multilink.multilink(
       [ this.leftSettings.massProperty, this.leftSettings.initialTemperatureProperty ],
       ( mass, initialTemperature ) => {
         updateMassAndTemperature( mass, initialTemperature, this.particles1 );
       } );
-    Property.multilink(
+    Multilink.multilink(
       [ this.rightSettings.massProperty, this.rightSettings.initialTemperatureProperty ],
       ( mass, initialTemperature ) => {
         updateMassAndTemperature( mass, initialTemperature, this.particles2 );
       } );
 
     // Update data if initial temperature settings are changed while the sim is paused.
-    Property.multilink(
+    Multilink.multilink(
       [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
       () => {
         if ( !this.isPlayingProperty.value ) {
