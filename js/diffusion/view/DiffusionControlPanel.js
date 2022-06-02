@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import { AbstractProperty } from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
@@ -46,7 +46,7 @@ class DiffusionControlPanel extends Panel {
       `invalid rightSettings: ${rightSettings}` );
     assert && assert( hasDividerProperty instanceof BooleanProperty,
       `invalid hasDividerProperty: ${hasDividerProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof Property,
+    assert && assert( numberOfParticlesProperty instanceof AbstractProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
     assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
       `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );

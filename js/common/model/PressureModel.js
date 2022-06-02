@@ -9,7 +9,7 @@
 
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import Property, { AbstractProperty } from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
@@ -24,8 +24,8 @@ class PressureModel {
 
   /**
    * @param {EnumerationDeprecatedProperty} holdConstantProperty
-   * @param {Property.<number>} numberOfParticlesProperty
-   * @param {Property.<number>} volumeProperty
+   * @param {AbstractProperty.<number>} numberOfParticlesProperty
+   * @param {AbstractProperty.<number>} volumeProperty
    * @param {Property.<number|null>} temperatureProperty
    * @param {function} blowLidOff
    * @param {Object} [options]
@@ -33,9 +33,9 @@ class PressureModel {
   constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff, options ) {
     assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof Property,
+    assert && assert( numberOfParticlesProperty instanceof AbstractProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( volumeProperty instanceof Property, `invalid volumeProperty: ${volumeProperty}` );
+    assert && assert( volumeProperty instanceof AbstractProperty, `invalid volumeProperty: ${volumeProperty}` );
     assert && assert( temperatureProperty instanceof Property, `invalid temperatureProperty: ${temperatureProperty}` );
     assert && assert( typeof blowLidOff === 'function', `invalid blowLidOff: ${blowLidOff}` );
 

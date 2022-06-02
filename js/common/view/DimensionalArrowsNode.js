@@ -12,7 +12,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import { AbstractProperty } from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -29,11 +29,11 @@ const DEFAULT_ARROW_HEAD_DIMENSIONS = new Dimension2( 8, 8 );
 class DimensionalArrowsNode extends Node {
 
   /**
-   * @param {Property.<number>} lengthProperty - length in view coordinates
+   * @param {AbstractProperty.<number>} lengthProperty - length in view coordinates
    * @param {Object} [options]
    */
   constructor( lengthProperty, options ) {
-    assert && assert( lengthProperty instanceof Property, `invalid lengthProperty: ${lengthProperty}` );
+    assert && assert( lengthProperty instanceof AbstractProperty, `invalid lengthProperty: ${lengthProperty}` );
 
     options = merge( {
       color: 'black',

@@ -16,7 +16,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import Property, { AbstractProperty } from '../../../../axon/js/Property.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -55,7 +55,7 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
    * @param {NumberProperty} heatCoolAmountProperty
    * @param {EnumerationDeprecatedProperty} holdConstantProperty
    * @param {BooleanProperty} isPlayingProperty
-   * @param {Property.<number>} numberOfParticlesProperty
+   * @param {AbstractProperty.<number>} numberOfParticlesProperty
    * @param {Property.<number|null>} temperatureProperty
    * @param {Object} [options]
    */
@@ -67,7 +67,7 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( isPlayingProperty instanceof BooleanProperty,
       `invalid isPlayingProperty: ${isPlayingProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof Property,
+    assert && assert( numberOfParticlesProperty instanceof AbstractProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
     assert && assert( temperatureProperty instanceof Property,
       `invalid temperatureProperty: ${temperatureProperty}` );
