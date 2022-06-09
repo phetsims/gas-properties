@@ -9,7 +9,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property, { AbstractProperty } from '../../../../axon/js/Property.js';
+import Property, { ReadOnlyProperty } from '../../../../axon/js/Property.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -32,7 +32,7 @@ class TemperatureModel {
    * @param {Object} [options]
    */
   constructor( numberOfParticlesProperty, getAverageKineticEnergy, options ) {
-    assert && assert( numberOfParticlesProperty instanceof AbstractProperty,
+    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
     assert && assert( typeof getAverageKineticEnergy === 'function',
       `invalid getAverageKineticEnergy: ${getAverageKineticEnergy}` );

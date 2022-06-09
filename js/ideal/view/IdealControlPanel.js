@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import { AbstractProperty } from '../../../../axon/js/Property.js';
+import { ReadOnlyProperty } from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
@@ -40,11 +40,11 @@ class IdealControlPanel extends Panel {
                widthVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
     assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof AbstractProperty,
+    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
     assert && assert( pressureProperty instanceof NumberProperty,
       `invalid pressureProperty: ${pressureProperty}` );
-    assert && assert( isContainerOpenProperty instanceof AbstractProperty,
+    assert && assert( isContainerOpenProperty instanceof ReadOnlyProperty,
       `invalid isContainerOpenProperty: ${isContainerOpenProperty}` );
     assert && assert( widthVisibleProperty instanceof BooleanProperty,
       `invalid widthVisibleProperty: ${widthVisibleProperty}` );

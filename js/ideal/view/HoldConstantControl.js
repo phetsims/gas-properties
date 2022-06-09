@@ -8,7 +8,7 @@
 
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import { AbstractProperty } from '../../../../axon/js/Property.js';
+import { ReadOnlyProperty } from '../../../../axon/js/Property.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { Text } from '../../../../scenery/js/imports.js';
@@ -33,19 +33,19 @@ class HoldConstantControl extends VBox {
 
   /**
    * @param {EnumerationDeprecatedProperty} holdConstantProperty
-   * @param {AbstractProperty.<number>>} numberOfParticlesProperty
+   * @param {ReadOnlyProperty.<number>>} numberOfParticlesProperty
    * @param {NumberProperty} pressureProperty
-   * @param {AbstractProperty.<boolean>} isContainerOpenProperty
+   * @param {ReadOnlyProperty.<boolean>} isContainerOpenProperty
    * @param {Object} [options]
    */
   constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty, options ) {
     assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof AbstractProperty,
+    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
     assert && assert( pressureProperty instanceof NumberProperty,
       `invalid pressureProperty: ${pressureProperty}` );
-    assert && assert( isContainerOpenProperty instanceof AbstractProperty,
+    assert && assert( isContainerOpenProperty instanceof ReadOnlyProperty,
       `invalid isContainerOpenProperty: ${isContainerOpenProperty}` );
 
     options = merge( {
