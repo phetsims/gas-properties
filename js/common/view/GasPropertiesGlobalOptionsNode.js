@@ -51,16 +51,12 @@ class GasPropertiesGlobalOptionsNode extends VBox {
 
     // Pressure Noise checkbox
     if ( options.hasPressureNoiseCheckbox ) {
-      const pressureNoiseCheckbox = new Checkbox(
-        new Text( gasPropertiesStrings.pressureNoise, {
-          font: GasPropertiesConstants.CONTROL_FONT,
-          maxWidth: CHECKBOX_TEXT_MAX_WIDTH
-        } ),
-        GasPropertiesGlobalOptions.pressureNoiseProperty,
-        merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-          tandem: options.tandem.createTandem( 'pressureNoiseCheckbox' )
-        } )
-      );
+      const pressureNoiseCheckbox = new Checkbox( GasPropertiesGlobalOptions.pressureNoiseProperty, new Text( gasPropertiesStrings.pressureNoise, {
+        font: GasPropertiesConstants.CONTROL_FONT,
+        maxWidth: CHECKBOX_TEXT_MAX_WIDTH
+      } ), merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
+        tandem: options.tandem.createTandem( 'pressureNoiseCheckbox' )
+      } ) );
       children.push( pressureNoiseCheckbox );
     }
 

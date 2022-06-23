@@ -66,7 +66,7 @@ class GasPropertiesCheckbox extends Checkbox {
       } );
     }
 
-    super( content, booleanProperty, options );
+    super( booleanProperty, content, options );
   }
 }
 
