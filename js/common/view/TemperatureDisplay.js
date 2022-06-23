@@ -51,7 +51,7 @@ class TemperatureDisplay extends ComboBoxDisplay {
       }
     ];
 
-    super( items, thermometer.unitsProperty, listParent, options );
+    super( thermometer.unitsProperty, items, listParent, options );
   }
 }
 

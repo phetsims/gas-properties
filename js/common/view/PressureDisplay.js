@@ -58,7 +58,7 @@ class PressureDisplay extends ComboBoxDisplay {
       }
     ];
 
-    super( items, pressureGauge.unitsProperty, listParent, options );
+    super( pressureGauge.unitsProperty, items, listParent, options );
   }
 }
 
