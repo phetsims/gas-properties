@@ -120,7 +120,7 @@ class CollisionCounterNode extends Node {
     } );
 
     // Combo box
-    const samplePeriodComboBox = new ComboBox( comboBoxItems, collisionCounter.samplePeriodProperty, listboxParent, {
+    const samplePeriodComboBox = new ComboBox( collisionCounter.samplePeriodProperty, comboBoxItems, listboxParent, {
       listPosition: 'below',
       align: 'right',
       xMargin: 6,
