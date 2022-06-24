@@ -48,7 +48,7 @@ class PlayResetButton extends BooleanRectangularToggleButton {
       } )
     );
 
-    super( resetIconNode, playIconNode, isPlayingProperty, options );
+    super( isPlayingProperty, resetIconNode, playIconNode, options );
   }
 }
 
