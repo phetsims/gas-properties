@@ -56,7 +56,7 @@ const GasPropertiesIconFactory = {
     } );
 
     // Thermometer
-    const thermometerNode = new ThermometerNode( 0, 100, new NumberProperty( 40 ), {
+    const thermometerNode = new ThermometerNode( new NumberProperty( 40 ), 0, 100, {
       backgroundFill: 'white',
       glassThickness: 5,
       centerX: containerNode.right - 0.25 * containerNode.width,

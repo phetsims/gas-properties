@@ -45,18 +45,17 @@ class GasPropertiesThermometerNode extends VBox {
         valueType: 'number'
       } );
 
-    const thermometerNode = new ThermometerNode(
-      thermometer.range.min, thermometer.range.max, temperatureNumberProperty, {
-        backgroundFill: 'white',
-        bulbDiameter: 30,
-        tubeHeight: 100,
-        tubeWidth: 20,
-        glassThickness: 3,
-        tickSpacing: 6,
-        majorTickLength: 10,
-        minorTickLength: 6,
-        lineWidth: 1
-      } );
+    const thermometerNode = new ThermometerNode( temperatureNumberProperty, thermometer.range.min, thermometer.range.max, {
+      backgroundFill: 'white',
+      bulbDiameter: 30,
+      tubeHeight: 100,
+      tubeWidth: 20,
+      glassThickness: 3,
+      tickSpacing: 6,
+      majorTickLength: 10,
+      minorTickLength: 6,
+      lineWidth: 1
+    } );
 
     // ComboBox that displays dynamic temperature for various units, centered above the thermometer
     const comboBox = new TemperatureDisplay( thermometer, listParent, {
