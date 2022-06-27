@@ -16,16 +16,8 @@ import DragBoundsProperty from '../../../../scenery-phet/js/DragBoundsProperty.j
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
-import { DragListener } from '../../../../scenery/js/imports.js';
-import { Circle } from '../../../../scenery/js/imports.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import { VStrut } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, HBox, Node, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
-import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
@@ -114,9 +106,11 @@ class CollisionCounterNode extends Node {
         font: CONTROL_FONT,
         maxWidth: 100 // determined empirically
       } );
-      return new ComboBoxItem( node, samplePeriod, {
-        tandemName: `samplePeriod${samplePeriod}Item`
-      } );
+      return {
+        value: samplePeriod,
+        node: node,
+        tandemName: `samplePeriod${samplePeriod}${ComboBox.ITEM_TANDEM_NAME_SUFFIX}`
+      };
     } );
 
     // Combo box
