@@ -32,14 +32,16 @@ class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 
       // superclass options
       orientation: 'horizontal',
-      baseColor: GasPropertiesColors.radioButtonGroupBaseColorProperty,
-      selectedStroke: GasPropertiesColors.radioButtonGroupSelectedStrokeProperty,
-      deselectedStroke: GasPropertiesColors.radioButtonGroupDeselectedStrokeProperty,
-      selectedLineWidth: 3,
-      deselectedLineWidth: 1.5,
       spacing: 8,
-      buttonContentXMargin: 15,
-      buttonContentYMargin: 12
+      radioButtonOptions: {
+        baseColor: GasPropertiesColors.radioButtonGroupBaseColorProperty,
+        selectedStroke: GasPropertiesColors.radioButtonGroupSelectedStrokeProperty,
+        deselectedStroke: GasPropertiesColors.radioButtonGroupDeselectedStrokeProperty,
+        selectedLineWidth: 3,
+        deselectedLineWidth: 1.5,
+        xMargin: 15,
+        yMargin: 12
+      }
     }, options );
 
     const content = [
