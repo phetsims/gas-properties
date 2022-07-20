@@ -11,8 +11,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { ColorDef } from '../../../../scenery/js/imports.js';
+import { ColorDef, Path } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 
 class LinePlotNode extends Path {
