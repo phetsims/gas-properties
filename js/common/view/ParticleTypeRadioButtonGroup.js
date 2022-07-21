@@ -35,12 +35,14 @@ class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
       spacing: 8,
       radioButtonOptions: {
         baseColor: GasPropertiesColors.radioButtonGroupBaseColorProperty,
-        selectedStroke: GasPropertiesColors.radioButtonGroupSelectedStrokeProperty,
-        deselectedStroke: GasPropertiesColors.radioButtonGroupDeselectedStrokeProperty,
-        selectedLineWidth: 3,
-        deselectedLineWidth: 1.5,
         xMargin: 15,
-        yMargin: 12
+        yMargin: 12,
+        buttonAppearanceStrategyOptions: {
+          selectedStroke: GasPropertiesColors.radioButtonGroupSelectedStrokeProperty,
+          deselectedStroke: GasPropertiesColors.radioButtonGroupDeselectedStrokeProperty,
+          selectedLineWidth: 3,
+          deselectedLineWidth: 1.5
+        }
       }
     }, options );
 
