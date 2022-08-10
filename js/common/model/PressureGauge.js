@@ -80,7 +80,7 @@ class PressureGauge {
         units: 'atm',
         isValidValue: value => ( value >= 0 ),
         valueType: 'number',
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioValueType: NumberIO,
         tandem: options.tandem.createTandem( 'pressureAtmospheresProperty' ),
         phetioDocumentation: 'pressure in atm, with optional noise added'
       } );

@@ -33,7 +33,7 @@ import ParticleFlowRate from './ParticleFlowRate.js';
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
   units: 'pm',
   valueType: [ 'number', null ],
-  phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
+  phetioValueType: NullableIO( NumberIO ),
   phetioReadOnly: true // derived from the state of the particle system
 };
 
@@ -113,7 +113,7 @@ class DiffusionModel extends BaseModel {
         numberType: 'Integer',
         isValidValue: value => value >= 0,
         valueType: 'number',
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioValueType: NumberIO,
         tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
         phetioDocumentation: 'total number of particles in the container'
       } );

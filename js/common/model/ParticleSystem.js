@@ -112,7 +112,7 @@ class ParticleSystem {
           'lightParticles has not been populated yet' );
         return numberOfHeavyParticles + numberOfLightParticles;
       }, {
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioValueType: NumberIO,
         valueType: 'number',
         isValidValue: value => value >= 0,
         tandem: options.tandem.createTandem( 'numberOfParticlesProperty' ),

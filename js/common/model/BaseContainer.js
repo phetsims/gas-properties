@@ -70,7 +70,7 @@ class BaseContainer {
         units: 'pm^3',
         isValidValue: value => ( typeof value === 'number' && value > 0 ),
         tandem: options.tandem.createTandem( 'volumeProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+        phetioValueType: NumberIO
       } );
 
     // @public (read-only) wall thickness, in pm

@@ -52,7 +52,7 @@ class TemperatureModel {
     this.temperatureProperty = new Property( null, {
       units: 'K',
       isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
-      phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
+      phetioValueType: NullableIO( NumberIO ),
       tandem: options.tandem.createTandem( 'temperatureProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system
       phetioDocumentation: 'temperature in K'

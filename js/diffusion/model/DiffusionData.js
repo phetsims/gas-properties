@@ -63,7 +63,7 @@ class DiffusionData {
     this.averageTemperatureProperty = new Property( null, {
       units: 'K',
       isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
-      phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
+      phetioValueType: NullableIO( NumberIO ),
       phetioReadOnly: true, // derived from the state of the particle system
       tandem: options.tandem.createTandem( 'averageTemperatureProperty' ),
       phetioDocumentation: 'average temperature in this side of the container'

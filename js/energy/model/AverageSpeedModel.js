@@ -20,7 +20,7 @@ import gasProperties from '../../gasProperties.js';
 const AVERAGE_SPEED_PROPERTY_OPTIONS = {
   units: 'pm/ps',
   isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
-  phetioType: Property.PropertyIO( NullableIO( NumberIO ) ),
+  phetioValueType: NullableIO( NumberIO ),
   phetioReadOnly: true // derived from the state of the particle system
 };
 

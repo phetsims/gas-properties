@@ -56,7 +56,7 @@ class HistogramsModel {
 
     const binCountsPropertyOptions = {
       isValidValue: value => ( Array.isArray( value ) && value.length === this.numberOfBins ),
-      phetioType: Property.PropertyIO( ArrayIO( NumberIO ) ),
+      phetioValueType: ArrayIO( NumberIO ),
       phetioReadOnly: true // derived from the state of the particle system
     };
 

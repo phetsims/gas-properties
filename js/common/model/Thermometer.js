@@ -51,7 +51,7 @@ class Thermometer {
       temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15, {
         units: '\u00B0C',
         isValidValue: value => ( value === null || ( typeof value === 'number' && value !== 0 ) ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NullableIO( NumberIO ) ),
+        phetioValueType: NullableIO( NumberIO ),
         tandem: options.tandem.createTandem( 'temperatureCelsiusProperty' ),
         phetioDocumentation: 'temperature in degrees C'
       } );
