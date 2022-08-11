@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * AverageSpeedModel is a sub-model in the Energy screen, responsible for data that is displayed in the
