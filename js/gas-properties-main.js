@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import { Utils } from '../../scenery/js/imports.js';
@@ -22,10 +23,12 @@ const simOptions = {
 
   // Enabled for high-performance Sprites
   webgl: true,
-
-  // Creates content for the Options dialog, accessible via the PhET menu
-  createOptionsDialogContent: tandem => new GasPropertiesGlobalOptionsNode( {
-    tandem: tandem
+  preferencesModel: new PreferencesModel( {
+    generalOptions: {
+      customPreferences: [ {
+        createContent: tandem => new GasPropertiesGlobalOptionsNode( { tandem: tandem } )
+      } ]
+    }
   } ),
 
   // Credits appear in the About dialog, accessible via the PhET menu
