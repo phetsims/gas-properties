@@ -7,7 +7,6 @@
  */
 
 import OptionsDialog from '../../../../joist/js/OptionsDialog.js';
-import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
@@ -38,15 +37,6 @@ class GasPropertiesGlobalOptionsNode extends VBox {
     }, options );
 
     const children = [];
-
-    // Projector Mode checkbox
-    const projectorModeCheckbox = new ProjectorModeCheckbox(
-      merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-        font: GasPropertiesConstants.CONTROL_FONT,
-        maxTextWidth: CHECKBOX_TEXT_MAX_WIDTH,
-        tandem: options.tandem.createTandem( 'projectorModeCheckbox' )
-      } ) );
-    children.push( projectorModeCheckbox );
 
     // Pressure Noise checkbox
     if ( options.hasPressureNoiseCheckbox ) {

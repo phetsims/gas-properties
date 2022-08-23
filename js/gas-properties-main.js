@@ -24,6 +24,9 @@ const simOptions = {
   // Enabled for high-performance Sprites
   webgl: true,
   preferencesModel: new PreferencesModel( {
+    visualOptions: {
+      supportsProjectorMode: true
+    },
     generalOptions: {
       customPreferences: [ {
         createContent: tandem => new GasPropertiesGlobalOptionsNode( { tandem: tandem.createTandem( 'gasPropertiesPreferencesContent' ) } )
