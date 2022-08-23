@@ -29,7 +29,9 @@ const simOptions = {
     },
     generalOptions: {
       customPreferences: [ {
-        createContent: tandem => new GasPropertiesGlobalOptionsNode( { tandem: tandem.createTandem( 'gasPropertiesPreferencesContent' ) } )
+        createContent: tandem => new GasPropertiesGlobalOptionsNode( {
+          tandem: tandem.createTandem( 'gasPropertiesPreferencesContent' )
+        } )
       } ]
     }
   } ),

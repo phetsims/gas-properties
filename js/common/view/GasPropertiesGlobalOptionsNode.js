@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import OptionsDialog from '../../../../joist/js/OptionsDialog.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
@@ -27,10 +26,6 @@ class GasPropertiesGlobalOptionsNode extends VBox {
   constructor( options ) {
 
     options = merge( {
-      hasPressureNoiseCheckbox: true, // whether to include the 'Pressure Noise' checkbox
-
-      // superclass options
-      spacing: OptionsDialog.DEFAULT_SPACING,
 
       // phet-io
       tandem: Tandem.REQUIRED
@@ -39,15 +34,13 @@ class GasPropertiesGlobalOptionsNode extends VBox {
     const children = [];
 
     // Pressure Noise checkbox
-    if ( options.hasPressureNoiseCheckbox ) {
-      const pressureNoiseCheckbox = new Checkbox( GasPropertiesGlobalOptions.pressureNoiseProperty, new Text( gasPropertiesStrings.pressureNoise, {
-        font: GasPropertiesConstants.CONTROL_FONT,
-        maxWidth: CHECKBOX_TEXT_MAX_WIDTH
-      } ), merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-        tandem: options.tandem.createTandem( 'pressureNoiseCheckbox' )
-      } ) );
-      children.push( pressureNoiseCheckbox );
-    }
+    const pressureNoiseCheckbox = new Checkbox( GasPropertiesGlobalOptions.pressureNoiseProperty, new Text( gasPropertiesStrings.pressureNoise, {
+      font: GasPropertiesConstants.CONTROL_FONT,
+      maxWidth: CHECKBOX_TEXT_MAX_WIDTH
+    } ), merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
+      tandem: options.tandem.createTandem( 'pressureNoiseCheckbox' )
+    } ) );
+    children.push( pressureNoiseCheckbox );
 
     assert && assert( !options.children, 'GasPropertiesGlobalOptionsNode sets children' );
     options.children = children;
