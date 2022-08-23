@@ -26,7 +26,7 @@ const simOptions = {
   preferencesModel: new PreferencesModel( {
     generalOptions: {
       customPreferences: [ {
-        createContent: tandem => new GasPropertiesGlobalOptionsNode( { tandem: tandem.createTandem( 'gasPropertiesPreferences' ) } )
+        createContent: tandem => new GasPropertiesGlobalOptionsNode( { tandem: tandem.createTandem( 'gasPropertiesPreferencesContent' ) } )
       } ]
     }
   } ),
