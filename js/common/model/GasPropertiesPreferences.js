@@ -12,14 +12,11 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 
-// constants
-const preferencesTandem = Tandem.GLOBAL_MODEL.createTandem( 'preferences' );
-
 const GasPropertiesPreferences = {
 
   // @public
   pressureNoiseProperty: new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
-    tandem: preferencesTandem.createTandem( 'pressureNoiseProperty' ),
+    tandem: Tandem.PREFERENCES.createTandem( 'pressureNoiseProperty' ),
     phetioDocumentation: 'turns noise on and off for the pressure gauge'
   } )
 };
