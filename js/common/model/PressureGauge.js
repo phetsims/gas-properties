@@ -25,7 +25,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import GasPropertiesGlobalOptions from './GasPropertiesGlobalOptions.js';
+import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import HoldConstant from './HoldConstant.js';
 
@@ -133,7 +133,7 @@ class PressureGauge {
                                  this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
 
       // Disable noise when pressure is held constant, or via global options.
-      const noiseEnabled = ( !constantPressure && GasPropertiesGlobalOptions.pressureNoiseProperty.value );
+      const noiseEnabled = ( !constantPressure && GasPropertiesPreferences.pressureNoiseProperty.value );
 
       // Add noise (kPa) to the displayed value
       let noise = 0;

@@ -12,7 +12,7 @@ import simLauncher from '../../joist/js/simLauncher.js';
 import { Utils } from '../../scenery/js/imports.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import GasPropertiesConstants from './common/GasPropertiesConstants.js';
-import GasPropertiesGlobalOptionsNode from './common/view/GasPropertiesGlobalOptionsNode.js';
+import GasPropertiesPreferencesNode from './common/view/GasPropertiesPreferencesNode.js';
 import DiffusionScreen from './diffusion/DiffusionScreen.js';
 import EnergyScreen from './energy/EnergyScreen.js';
 import ExploreScreen from './explore/ExploreScreen.js';
@@ -29,8 +29,8 @@ const simOptions = {
     },
     generalOptions: {
       customPreferences: [ {
-        createContent: tandem => new GasPropertiesGlobalOptionsNode( {
-          tandem: tandem.createTandem( 'gasPropertiesPreferencesContent' )
+        createContent: tandem => new GasPropertiesPreferencesNode( {
+          tandem: tandem.createTandem( 'simPreferences' )
         } )
       } ]
     }
