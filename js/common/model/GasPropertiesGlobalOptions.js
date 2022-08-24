@@ -6,10 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../axon/js/BooleanProperty.js';
-import Tandem from '../../../tandem/js/Tandem.js';
-import gasProperties from '../gasProperties.js';
-import GasPropertiesQueryParameters from './GasPropertiesQueryParameters.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 
 // constants
 const optionsTandem = Tandem.GLOBAL_MODEL.createTandem( 'options' );

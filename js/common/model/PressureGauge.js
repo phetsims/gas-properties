@@ -25,7 +25,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import GasPropertiesGlobalOptions from '../GasPropertiesGlobalOptions.js';
+import GasPropertiesGlobalOptions from './GasPropertiesGlobalOptions.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import HoldConstant from './HoldConstant.js';
 

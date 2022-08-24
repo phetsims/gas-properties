@@ -13,7 +13,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import gasPropertiesStrings from '../../gasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import GasPropertiesGlobalOptions from '../GasPropertiesGlobalOptions.js';
+import GasPropertiesGlobalOptions from '../model/GasPropertiesGlobalOptions.js';
 
 // constants
 const CHECKBOX_TEXT_MAX_WIDTH = 350;
