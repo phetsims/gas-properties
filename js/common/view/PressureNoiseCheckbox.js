@@ -16,6 +16,10 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 export class PressureNoiseCheckbox extends Checkbox {
 
+  /**
+   * @param {Property.<boolean>} pressureNoiseProperty
+   * @param {Object} [options]
+   */
   constructor( pressureNoiseProperty, options ) {
 
     options = merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {

@@ -18,11 +18,10 @@ const preferencesTandem = Tandem.GLOBAL_MODEL.createTandem( 'preferences' );
 const GasPropertiesPreferences = {
 
   // @public
-  pressureNoiseProperty:
-    new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
-      tandem: preferencesTandem.createTandem( 'pressureNoiseProperty' ),
-      phetioDocumentation: 'turns noise on and off for the pressure gauge'
-    } )
+  pressureNoiseProperty: new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
+    tandem: preferencesTandem.createTandem( 'pressureNoiseProperty' ),
+    phetioDocumentation: 'turns noise on and off for the pressure gauge'
+  } )
 };
 
 gasProperties.register( 'GasPropertiesPreferences', GasPropertiesPreferences );
