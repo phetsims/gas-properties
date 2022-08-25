@@ -1,4 +1,4 @@
-// Copyright 2018-2022, University of Colorado Boulder
+// Copyright 2022, University of Colorado Boulder
 
 /**
  * GasPropertiesPreferencesNode is the user interface for sim-specific preferences, accessed via the Preferences dialog.
