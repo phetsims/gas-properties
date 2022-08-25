@@ -44,7 +44,7 @@ export default class GasPropertiesPreferencesNode extends VBox {
     super( options );
 
     // @private
-    this.disposeGasPropertiesGlobalPreferencesNode = () => {
+    this.disposeGasPropertiesPreferencesNode = () => {
       children.forEach( child => child.dispose() );
     };
   }
@@ -54,7 +54,7 @@ export default class GasPropertiesPreferencesNode extends VBox {
    * @override
    */
   dispose() {
-    this.disposeGasPropertiesGlobalPreferencesNode();
+    this.disposeGasPropertiesPreferencesNode();
     super.dispose();
   }
 }
