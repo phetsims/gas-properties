@@ -27,7 +27,7 @@ const simOptions = {
     visualOptions: {
       supportsProjectorMode: true
     },
-    generalOptions: {
+    simulationOptions: {
       customPreferences: [ {
         createContent: tandem => new GasPropertiesPreferencesNode( {
           tandem: tandem.createTandem( 'simPreferences' )
