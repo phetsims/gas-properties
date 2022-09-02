@@ -42,7 +42,7 @@ const simOptions = {
 
 simLauncher.launch( () => {
 
-  const sim = new Sim( gasPropertiesStrings[ 'gas-properties' ].title, [
+  const sim = new Sim( gasPropertiesStrings[ 'gas-properties' ].titleStringProperty, [
     new IdealScreen( Tandem.ROOT.createTandem( 'idealScreen' ) ),
     new ExploreScreen( Tandem.ROOT.createTandem( 'exploreScreen' ) ),
     new EnergyScreen( Tandem.ROOT.createTandem( 'energyScreen' ) ),
