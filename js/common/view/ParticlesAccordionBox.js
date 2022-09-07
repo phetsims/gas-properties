@@ -14,7 +14,7 @@ import { Text, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import FixedWidthNode from './FixedWidthNode.js';
@@ -48,7 +48,7 @@ class ParticlesAccordionBox extends AccordionBox {
     }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
       // superclass options
-      titleNode: new Text( gasPropertiesStrings.particles, {
+      titleNode: new Text( GasPropertiesStrings.particles, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } )
@@ -63,13 +63,13 @@ class ParticlesAccordionBox extends AccordionBox {
 
       // Heavy
       new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-        gasPropertiesStrings.heavy, numberOfHeavyParticlesProperty, {
+        GasPropertiesStrings.heavy, numberOfHeavyParticlesProperty, {
           tandem: options.tandem.createTandem( 'numberOfHeavyParticlesControl' )
         } ),
 
       // Light
       new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        gasPropertiesStrings.light, numberOfLightParticlesProperty, {
+        GasPropertiesStrings.light, numberOfLightParticlesProperty, {
           tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
         } )
     ];
@@ -78,7 +78,7 @@ class ParticlesAccordionBox extends AccordionBox {
 
       // optional Collisions checkbox, prepended so that it appears at top
       children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
-        text: gasPropertiesStrings.collisions,
+        text: GasPropertiesStrings.collisions,
         textMaxWidth: 175, // determined empirically
         tandem: options.tandem.createTandem( 'collisionsCheckbox' )
       } ) );

@@ -10,7 +10,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../gasProperties.js';
-import gasPropertiesStrings from '../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import ExploreModel from './model/ExploreModel.js';
 import ExploreScreenView from './view/ExploreScreenView.js';
 
@@ -26,7 +26,7 @@ class ExploreScreen extends GasPropertiesScreen {
     const createView = model => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
 
     super( createModel, createView, tandem, {
-      name: gasPropertiesStrings.screen.explore,
+      name: GasPropertiesStrings.screen.explore,
       homeScreenIcon: GasPropertiesIconFactory.createExploreScreenIcon()
     } );
   }

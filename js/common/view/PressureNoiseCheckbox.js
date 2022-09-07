@@ -11,7 +11,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 export class PressureNoiseCheckbox extends Checkbox {
@@ -28,7 +28,7 @@ export class PressureNoiseCheckbox extends Checkbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const pressureNoiseText = new Text( gasPropertiesStrings.pressureNoise, {
+    const pressureNoiseText = new Text( GasPropertiesStrings.pressureNoise, {
       font: GasPropertiesConstants.CONTROL_FONT,
       maxWidth: 350, // set empirically
       tandem: options.tandem.createTandem( 'pressureNoiseText' ),

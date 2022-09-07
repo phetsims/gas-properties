@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 class CenterOfMassCheckbox extends GasPropertiesCheckbox {
 
@@ -32,7 +32,7 @@ class CenterOfMassCheckbox extends GasPropertiesCheckbox {
     assert && assert( !options.text, 'CenterOfMassCheckbox sets text' );
     assert && assert( !options.icon, 'CenterOfMassCheckbox sets icon' );
     options = merge( {
-      text: gasPropertiesStrings.centerOfMass,
+      text: GasPropertiesStrings.centerOfMass,
       icon: GasPropertiesIconFactory.createCenterOfMassIcon()
     }, options );
 

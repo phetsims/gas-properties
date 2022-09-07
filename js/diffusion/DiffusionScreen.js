@@ -10,7 +10,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../gasProperties.js';
-import gasPropertiesStrings from '../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import DiffusionModel from './model/DiffusionModel.js';
 import DiffusionScreenView from './view/DiffusionScreenView.js';
 
@@ -26,7 +26,7 @@ class DiffusionScreen extends GasPropertiesScreen {
     const createView = model => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
 
     super( createModel, createView, tandem, {
-      name: gasPropertiesStrings.screen.diffusion,
+      name: GasPropertiesStrings.screen.diffusion,
       homeScreenIcon: GasPropertiesIconFactory.createDiffusionScreenIcon()
     } );
   }

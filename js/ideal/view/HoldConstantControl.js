@@ -18,7 +18,7 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import HoldConstant from '../../common/model/HoldConstant.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 // constants
 const TEXT_OPTIONS = {
@@ -57,7 +57,7 @@ class HoldConstantControl extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const titleNode = new Text( gasPropertiesStrings.holdConstant.title, {
+    const titleNode = new Text( GasPropertiesStrings.holdConstant.title, {
       font: GasPropertiesConstants.TITLE_FONT,
       fill: GasPropertiesColors.textFillProperty,
       maxWidth: 200, // determined empirically
@@ -67,27 +67,27 @@ class HoldConstantControl extends VBox {
     const items = [
       {
         value: HoldConstant.NOTHING,
-        node: new Text( gasPropertiesStrings.holdConstant.nothing, TEXT_OPTIONS ),
+        node: new Text( GasPropertiesStrings.holdConstant.nothing, TEXT_OPTIONS ),
         tandemName: 'nothingRadioButton'
       },
       {
         value: HoldConstant.VOLUME,
-        node: new Text( gasPropertiesStrings.holdConstant.volume, TEXT_OPTIONS ),
+        node: new Text( GasPropertiesStrings.holdConstant.volume, TEXT_OPTIONS ),
         tandemName: 'volumeRadioButton'
       },
       {
         value: HoldConstant.TEMPERATURE,
-        node: new Text( gasPropertiesStrings.holdConstant.temperature, TEXT_OPTIONS ),
+        node: new Text( GasPropertiesStrings.holdConstant.temperature, TEXT_OPTIONS ),
         tandemName: 'temperatureRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_V,
-        node: new Text( gasPropertiesStrings.holdConstant.pressureV, TEXT_OPTIONS ),
+        node: new Text( GasPropertiesStrings.holdConstant.pressureV, TEXT_OPTIONS ),
         tandemName: 'pressureVRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_T,
-        node: new Text( gasPropertiesStrings.holdConstant.pressureT, TEXT_OPTIONS ),
+        node: new Text( GasPropertiesStrings.holdConstant.pressureT, TEXT_OPTIONS ),
         tandemName: 'pressureTRadioButton'
       }
     ];

@@ -12,7 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
@@ -36,7 +36,7 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
         numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
           showAsMinutesAndSeconds: false,
           numberOfDecimalPlaces: 1,
-          units: gasPropertiesStrings.picoseconds
+          units: GasPropertiesStrings.picoseconds
         } )
       },
 

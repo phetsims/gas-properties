@@ -22,7 +22,7 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 class AverageSpeedAccordionBox extends AccordionBox {
 
@@ -47,7 +47,7 @@ class AverageSpeedAccordionBox extends AccordionBox {
 
       // superclass options
       contentYSpacing: 0,
-      titleNode: new Text( gasPropertiesStrings.averageSpeed, {
+      titleNode: new Text( GasPropertiesStrings.averageSpeed, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } ),
@@ -71,7 +71,7 @@ class AverageSpeedAccordionBox extends AccordionBox {
 
     const numberDisplayRange = new Range( 0, 9999 );
     const numberDisplayOptions = {
-      valuePattern: StringUtils.fillIn( gasPropertiesStrings.valueUnits, { units: gasPropertiesStrings.metersPerSecond } ),
+      valuePattern: StringUtils.fillIn( GasPropertiesStrings.valueUnits, { units: GasPropertiesStrings.metersPerSecond } ),
       noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
       decimalPlaces: 0,
       align: 'right',

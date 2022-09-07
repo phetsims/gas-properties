@@ -16,7 +16,7 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
 import GasPropertiesSpinner from './GasPropertiesSpinner.js';
 
@@ -54,7 +54,7 @@ class DiffusionSettingsNode extends VBox {
     } );
 
     // Number of Particles
-    const numberOfParticlesControl = new QuantityControl( gasPropertiesStrings.numberOfParticles, modelViewTransform,
+    const numberOfParticlesControl = new QuantityControl( GasPropertiesStrings.numberOfParticles, modelViewTransform,
       leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -64,7 +64,7 @@ class DiffusionSettingsNode extends VBox {
       } );
 
     // Mass (AMU)
-    const massControl = new QuantityControl( gasPropertiesStrings.massAMU, modelViewTransform,
+    const massControl = new QuantityControl( GasPropertiesStrings.massAMU, modelViewTransform,
       leftSettings.massProperty, rightSettings.massProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -77,7 +77,7 @@ class DiffusionSettingsNode extends VBox {
       } );
 
     // Radius (pm)
-    const radiusControl = new QuantityControl( gasPropertiesStrings.radiusPm, modelViewTransform,
+    const radiusControl = new QuantityControl( GasPropertiesStrings.radiusPm, modelViewTransform,
       leftSettings.radiusProperty, rightSettings.radiusProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -87,7 +87,7 @@ class DiffusionSettingsNode extends VBox {
       } );
 
     // Initial Temperature (K)
-    const initialTemperatureControl = new QuantityControl( gasPropertiesStrings.initialTemperatureK, modelViewTransform,
+    const initialTemperatureControl = new QuantityControl( GasPropertiesStrings.initialTemperatureK, modelViewTransform,
       leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,

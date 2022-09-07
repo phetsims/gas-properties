@@ -16,7 +16,7 @@ import { Node, Path, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 // constants
 const TICK_LENGTH = 16; // view coordinates
@@ -56,9 +56,9 @@ class ScaleNode extends Node {
     } );
 
     // '1 nm' label
-    const labelNode = new Text( StringUtils.fillIn( gasPropertiesStrings.valueUnits, {
+    const labelNode = new Text( StringUtils.fillIn( GasPropertiesStrings.valueUnits, {
       value: TICK_INTERVAL,
-      units: gasPropertiesStrings.nanometers
+      units: GasPropertiesStrings.nanometers
     } ), {
       font: new PhetFont( 12 ),
       fill: GasPropertiesColors.scaleColorProperty,

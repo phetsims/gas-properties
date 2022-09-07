@@ -16,7 +16,7 @@ import GasPropertiesPreferencesNode from './common/view/GasPropertiesPreferences
 import DiffusionScreen from './diffusion/DiffusionScreen.js';
 import EnergyScreen from './energy/EnergyScreen.js';
 import ExploreScreen from './explore/ExploreScreen.js';
-import gasPropertiesStrings from './gasPropertiesStrings.js';
+import GasPropertiesStrings from './GasPropertiesStrings.js';
 import IdealScreen from './ideal/IdealScreen.js';
 
 const simOptions = {
@@ -42,7 +42,7 @@ const simOptions = {
 
 simLauncher.launch( () => {
 
-  const sim = new Sim( gasPropertiesStrings[ 'gas-properties' ].titleStringProperty, [
+  const sim = new Sim( GasPropertiesStrings[ 'gas-properties' ].titleStringProperty, [
     new IdealScreen( Tandem.ROOT.createTandem( 'idealScreen' ) ),
     new ExploreScreen( Tandem.ROOT.createTandem( 'exploreScreen' ) ),
     new EnergyScreen( Tandem.ROOT.createTandem( 'energyScreen' ) ),

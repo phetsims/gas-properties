@@ -10,7 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import EnergyAccordionBox from './EnergyAccordionBox.js';
 import SpeedHistogramNode from './SpeedHistogramNode.js';
@@ -36,7 +36,7 @@ class SpeedAccordionBox extends EnergyAccordionBox {
       tandem: options.tandem.createTandem( 'histogramNode' )
     } );
 
-    super( gasPropertiesStrings.speed, modelViewTransform, histogramNode, options );
+    super( GasPropertiesStrings.speed, modelViewTransform, histogramNode, options );
   }
 }
 

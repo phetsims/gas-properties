@@ -9,7 +9,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode from './HistogramNode.js';
 
@@ -36,8 +36,8 @@ class SpeedHistogramNode extends HistogramNode {
       histogramsModel.heavySpeedBinCountsProperty,
       histogramsModel.lightSpeedBinCountsProperty,
       histogramsModel.yScaleProperty,
-      gasPropertiesStrings.speed, // x-axis label
-      gasPropertiesStrings.numberOfParticles, // y-axis label
+      GasPropertiesStrings.speed, // x-axis label
+      GasPropertiesStrings.numberOfParticles, // y-axis label
       options
     );
   }

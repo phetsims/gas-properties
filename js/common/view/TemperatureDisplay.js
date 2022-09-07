@@ -12,7 +12,7 @@ import ComboBoxDisplay from '../../../../scenery-phet/js/ComboBoxDisplay.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Thermometer from '../model/Thermometer.js';
 
@@ -40,14 +40,14 @@ class TemperatureDisplay extends ComboBoxDisplay {
         tandemName: `${Thermometer.Units.KELVIN.toString().toLowerCase()}Item`,
         numberProperty: thermometer.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: gasPropertiesStrings.kelvin
+        units: GasPropertiesStrings.kelvin
       },
       {
         choice: Thermometer.Units.CELSIUS,
         tandemName: `${Thermometer.Units.CELSIUS.toString().toLowerCase()}Item`,
         numberProperty: thermometer.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: gasPropertiesStrings.degreesCelsius
+        units: GasPropertiesStrings.degreesCelsius
       }
     ];
 

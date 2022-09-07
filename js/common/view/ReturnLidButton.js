@@ -11,7 +11,7 @@ import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
@@ -30,7 +30,7 @@ class ReturnLidButton extends RectangularPushButton {
       baseColor: PhetColorScheme.BUTTON_YELLOW
     }, options );
 
-    const textNode = new Text( gasPropertiesStrings.returnLid, {
+    const textNode = new Text( GasPropertiesStrings.returnLid, {
       font: GasPropertiesConstants.CONTROL_FONT,
       maxWidth: 150 // determined empirically
     } );

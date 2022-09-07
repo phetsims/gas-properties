@@ -11,7 +11,7 @@ import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
 import { Circle, LinearGradient, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureGauge from '../model/PressureGauge.js';
 import PressureDisplay from './PressureDisplay.js';
@@ -36,7 +36,7 @@ class PressureGaugeNode extends Node {
     }, options );
 
     // circular dial with needle
-    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, gasPropertiesStrings.pressure,
+    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressure,
       pressureGauge.pressureRange, {
         radius: DIAL_RADIUS,
         tandem: Tandem.OPTIONAL

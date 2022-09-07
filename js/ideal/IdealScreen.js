@@ -11,7 +11,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../gasProperties.js';
-import gasPropertiesStrings from '../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import IdealModel from './model/IdealModel.js';
 import IdealScreenView from './view/IdealScreenView.js';
 
@@ -27,7 +27,7 @@ class IdealScreen extends GasPropertiesScreen {
     options = merge( {
 
       // superclass options
-      name: gasPropertiesStrings.screen.ideal,
+      name: GasPropertiesStrings.screen.ideal,
       homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
       hasHoldConstantControls: true
     }, options );

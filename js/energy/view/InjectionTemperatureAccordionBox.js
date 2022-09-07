@@ -25,7 +25,7 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 // constants
 const TEXT_OPTIONS = {
@@ -58,7 +58,7 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
       // superclass options
-      titleNode: new Text( gasPropertiesStrings.injectionTemperature, {
+      titleNode: new Text( GasPropertiesStrings.injectionTemperature, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } )
@@ -71,12 +71,12 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
       {
         value: false,
-        node: new Text( gasPropertiesStrings.matchContainer, TEXT_OPTIONS ),
+        node: new Text( GasPropertiesStrings.matchContainer, TEXT_OPTIONS ),
         tandemName: 'matchContainerRadioButton'
       },
       {
         value: true,
-        node: new Text( gasPropertiesStrings.setTo, TEXT_OPTIONS ),
+        node: new Text( GasPropertiesStrings.setTo, TEXT_OPTIONS ),
         tandemName: 'setToRadioButton'
       }
     ], {
@@ -114,8 +114,8 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
         textOptions: {
           font: GasPropertiesConstants.CONTROL_FONT
         },
-        valuePattern: StringUtils.fillIn( gasPropertiesStrings.valueUnits, {
-          units: gasPropertiesStrings.kelvin
+        valuePattern: StringUtils.fillIn( GasPropertiesStrings.valueUnits, {
+          units: GasPropertiesStrings.kelvin
         } ),
         maxWidth: 75 // determined empirically
       },

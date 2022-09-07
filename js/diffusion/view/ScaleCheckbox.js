@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 class ScaleCheckbox extends GasPropertiesCheckbox {
 
@@ -28,7 +28,7 @@ class ScaleCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: gasPropertiesStrings.scale,
+      text: GasPropertiesStrings.scale,
       icon: GasPropertiesIconFactory.createScaleIcon()
     }, options );
 

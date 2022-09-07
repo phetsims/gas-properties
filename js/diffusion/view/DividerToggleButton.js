@@ -13,7 +13,7 @@ import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRe
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 class DividerToggleButton extends BooleanRectangularToggleButton {
 
@@ -37,8 +37,8 @@ class DividerToggleButton extends BooleanRectangularToggleButton {
       maxWidth: 150 // determined empirically
     };
 
-    const trueNode = new Text( gasPropertiesStrings.removeDivider, textOptions );
-    const falseNode = new Text( gasPropertiesStrings.resetDivider, textOptions );
+    const trueNode = new Text( GasPropertiesStrings.removeDivider, textOptions );
+    const falseNode = new Text( GasPropertiesStrings.resetDivider, textOptions );
 
     super( hasDividerProperty, trueNode, falseNode, options );
   }

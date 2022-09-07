@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
 
@@ -32,7 +32,7 @@ class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
     assert && assert( !options.text, 'ParticleFlowRateCheckbox sets text' );
     assert && assert( !options.icon, 'ParticleFlowRateCheckbox sets icon' );
     options = merge( {
-      text: gasPropertiesStrings.particleFlowRate,
+      text: GasPropertiesStrings.particleFlowRate,
       icon: GasPropertiesIconFactory.createParticleFlowRateIcon()
     }, options );
 

@@ -12,7 +12,7 @@ import ComboBoxDisplay from '../../../../scenery-phet/js/ComboBoxDisplay.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureGauge from '../model/PressureGauge.js';
@@ -41,7 +41,7 @@ class PressureDisplay extends ComboBoxDisplay {
         tandemName: `${PressureGauge.Units.ATMOSPHERES.toString().toLowerCase()}Item`,
         numberProperty: pressureGauge.pressureAtmospheresProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: gasPropertiesStrings.atmospheres,
+        units: GasPropertiesStrings.atmospheres,
         numberDisplayOptions: {
           decimalPlaces: 1
         }
@@ -51,7 +51,7 @@ class PressureDisplay extends ComboBoxDisplay {
         tandemName: `${PressureGauge.Units.KILOPASCALS.toString().toLowerCase()}Item`,
         numberProperty: pressureGauge.pressureKilopascalsProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: gasPropertiesStrings.kilopascals,
+        units: GasPropertiesStrings.kilopascals,
         numberDisplayOptions: {
           decimalPlaces: 0
         }

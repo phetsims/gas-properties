@@ -20,7 +20,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
@@ -65,7 +65,7 @@ class ContainerWidthNode extends Node {
     // Display the width in nm
     const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
       decimalPlaces: 1,
-      valuePattern: StringUtils.fillIn( gasPropertiesStrings.valueUnits, { units: gasPropertiesStrings.nanometers } ),
+      valuePattern: StringUtils.fillIn( GasPropertiesStrings.valueUnits, { units: GasPropertiesStrings.nanometers } ),
       cornerRadius: 3,
       textOptions: {
         font: new PhetFont( 12 ),

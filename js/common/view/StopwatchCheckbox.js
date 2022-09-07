@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
@@ -31,7 +31,7 @@ class StopwatchCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: gasPropertiesStrings.stopwatch,
+      text: GasPropertiesStrings.stopwatch,
       icon: GasPropertiesIconFactory.createStopwatchIcon()
     }, options );
 

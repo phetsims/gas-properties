@@ -127,8 +127,8 @@ type StringsType = {
   'oopsMaximumTemperatureStringProperty': TReadOnlyProperty<string>;
 };
 
-const gasPropertiesStrings = getStringModule( 'GAS_PROPERTIES' ) as StringsType;
+const GasPropertiesStrings = getStringModule( 'GAS_PROPERTIES' ) as StringsType;
 
-gasProperties.register( 'gasPropertiesStrings', gasPropertiesStrings );
+gasProperties.register( 'GasPropertiesStrings', GasPropertiesStrings );
 
-export default gasPropertiesStrings;
+export default GasPropertiesStrings;

@@ -15,7 +15,7 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 
 // constants
@@ -74,8 +74,8 @@ class DiffusionDataNode extends VBox {
     const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
       merge( {}, numberDisplayOptions, {
         align: 'left',
-        valuePattern: gasPropertiesStrings.tAvgK,
-        noValuePattern: gasPropertiesStrings.tAvg,
+        valuePattern: GasPropertiesStrings.tAvgK,
+        noValuePattern: GasPropertiesStrings.tAvg,
         useRichText: true,
         maxWidth: 100 // determined empirically
       } ) );

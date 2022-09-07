@@ -20,7 +20,7 @@ import { Circle, DragListener, HBox, Node, Rectangle, Text, VBox, VStrut } from 
 import ComboBox from '../../../../sun/js/ComboBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import gasPropertiesStrings from '../../gasPropertiesStrings.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
@@ -65,7 +65,7 @@ class CollisionCounterNode extends Node {
       }
     }, options );
 
-    const wallCollisionsTextNode = new Text( gasPropertiesStrings.wallCollisions, {
+    const wallCollisionsTextNode = new Text( GasPropertiesStrings.wallCollisions, {
       pickable: false,
       font: LABEL_FONT,
       maxWidth: 110 // determined empirically
@@ -87,7 +87,7 @@ class CollisionCounterNode extends Node {
       tandem: options.tandem.createTandem( 'playResetButton' )
     } );
 
-    const samplePeriodTextNode = new Text( gasPropertiesStrings.samplePeriod, {
+    const samplePeriodTextNode = new Text( GasPropertiesStrings.samplePeriod, {
       pickable: false,
       font: LABEL_FONT,
       left: X_MARGIN,
@@ -98,9 +98,9 @@ class CollisionCounterNode extends Node {
     const comboBoxItems = collisionCounter.samplePeriods.map( samplePeriod => {
 
       // e.g. '10 ps'
-      const samplePeriodString = StringUtils.fillIn( gasPropertiesStrings.valueUnits, {
+      const samplePeriodString = StringUtils.fillIn( GasPropertiesStrings.valueUnits, {
         value: samplePeriod,
-        units: gasPropertiesStrings.picoseconds
+        units: GasPropertiesStrings.picoseconds
       } );
       const node = new Text( samplePeriodString, {
         font: CONTROL_FONT,
