@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * ScaleCheckbox is the checkbox used to show/hide the scale on the Diffusion container.
