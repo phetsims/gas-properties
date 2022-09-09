@@ -31,8 +31,7 @@ export class PressureNoiseCheckbox extends Checkbox {
     const pressureNoiseText = new Text( GasPropertiesStrings.pressureNoise, {
       font: GasPropertiesConstants.CONTROL_FONT,
       maxWidth: 350, // set empirically
-      tandem: options.tandem.createTandem( 'pressureNoiseText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'pressureNoiseText' )
     } );
 
     super( pressureNoiseProperty, pressureNoiseText, options );
