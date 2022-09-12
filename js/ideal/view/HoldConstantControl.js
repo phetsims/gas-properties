@@ -57,11 +57,11 @@ class HoldConstantControl extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const titleNode = new Text( GasPropertiesStrings.holdConstant.title, {
+    const titleText = new Text( GasPropertiesStrings.holdConstant.title, {
       font: GasPropertiesConstants.TITLE_FONT,
       fill: GasPropertiesColors.textFillProperty,
       maxWidth: 200, // determined empirically
-      tandem: options.tandem.createTandem( 'titleNode' )
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     const items = [
@@ -102,7 +102,7 @@ class HoldConstantControl extends VBox {
 
     assert && assert( !options.children, 'HoldConstantControl sets children' );
     options = merge( {
-      children: [ titleNode, radioButtonGroup ]
+      children: [ titleText, radioButtonGroup ]
     }, options );
 
     super( options );

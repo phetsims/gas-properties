@@ -144,11 +144,11 @@ class QuantityControl extends VBox {
     }, options );
 
     // label
-    const labelNode = new Text( label, {
+    const labelText = new Text( label, {
       font: GasPropertiesConstants.CONTROL_FONT,
       fill: GasPropertiesColors.textFillProperty,
       maxWidth: 200, // determined empirically
-      tandem: options.tandem.createTandem( 'labelNode' )
+      tandem: options.tandem.createTandem( 'labelText' )
     } );
 
     // icons
@@ -188,7 +188,7 @@ class QuantityControl extends VBox {
     // label and controls
     assert && assert( !options.children, 'DataNode sets children' );
     options = merge( {
-      children: [ labelNode, hBox ]
+      children: [ labelText, hBox ]
     }, options );
 
     super( options );

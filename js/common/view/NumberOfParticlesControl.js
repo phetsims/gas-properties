@@ -48,16 +48,16 @@ class NumberOfParticlesControl extends VBox {
     assert && assert( numberOfParticlesProperty.range,
       'numberOfParticlesProperty missing range' );
 
-    const labelNode = new Text( title, {
+    const labelText = new Text( title, {
       font: GasPropertiesConstants.CONTROL_FONT,
       fill: GasPropertiesColors.textFillProperty,
       maxWidth: 150, // determined empirically,
-      tandem: options.tandem.createTandem( 'labelNode' )
+      tandem: options.tandem.createTandem( 'labelText' )
     } );
 
     const titleBox = new HBox( {
       spacing: X_SPACING,
-      children: [ icon, labelNode ]
+      children: [ icon, labelText ]
     } );
 
     const spinner = new FineCoarseSpinner( numberOfParticlesProperty, {
@@ -73,7 +73,7 @@ class NumberOfParticlesControl extends VBox {
     } );
 
     // Limit width of text
-    labelNode.maxWidth = spinner.width - icon.width - X_SPACING;
+    labelText.maxWidth = spinner.width - icon.width - X_SPACING;
 
     assert && assert( !options.children, 'NumberOfParticlesControl sets children' );
     options = merge( {
