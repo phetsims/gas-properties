@@ -12,7 +12,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import HSeparator from '../../../../sun/js/HSeparator.js';
+import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -73,7 +73,7 @@ class IdealControlPanel extends Panel {
           maxWidth: contentWidth,
           tandem: options.tandem.createTandem( 'holdConstantControl' )
         } ) );
-      children.push( new HSeparator( contentWidth, {
+      children.push( new HSeparatorDeprecated( contentWidth, {
         stroke: GasPropertiesColors.separatorColorProperty,
         maxWidth: contentWidth
       } ) );

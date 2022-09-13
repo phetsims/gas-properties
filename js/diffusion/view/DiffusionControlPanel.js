@@ -10,7 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import HSeparator from '../../../../sun/js/HSeparator.js';
+import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -81,13 +81,13 @@ class DiffusionControlPanel extends Panel {
           tandem: options.tandem.createTandem( 'settingsNode' )
         } ),
 
-        // Remove/Reset Divider button, centered
+        // Remove/Reset Separator button, centered
         new FixedWidthNode( contentWidth, dividerToggleButton, {
           align: 'center'
         } ),
 
         // ------------
-        new HSeparator( contentWidth, {
+        new HSeparatorDeprecated( contentWidth, {
           stroke: GasPropertiesColors.separatorColorProperty,
           maxWidth: contentWidth
         } ),
