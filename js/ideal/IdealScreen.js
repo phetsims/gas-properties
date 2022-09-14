@@ -27,7 +27,7 @@ class IdealScreen extends GasPropertiesScreen {
     options = merge( {
 
       // superclass options
-      name: GasPropertiesStrings.screen.ideal,
+      name: GasPropertiesStrings.screen.idealStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
       hasHoldConstantControls: true
     }, options );

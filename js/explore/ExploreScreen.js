@@ -26,7 +26,7 @@ class ExploreScreen extends GasPropertiesScreen {
     const createView = model => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
 
     super( createModel, createView, tandem, {
-      name: GasPropertiesStrings.screen.explore,
+      name: GasPropertiesStrings.screen.exploreStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createExploreScreenIcon()
     } );
   }
