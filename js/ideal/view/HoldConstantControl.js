@@ -67,27 +67,27 @@ class HoldConstantControl extends VBox {
     const items = [
       {
         value: HoldConstant.NOTHING,
-        node: new Text( GasPropertiesStrings.holdConstant.nothing, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.nothing, TEXT_OPTIONS ),
         tandemName: 'nothingRadioButton'
       },
       {
         value: HoldConstant.VOLUME,
-        node: new Text( GasPropertiesStrings.holdConstant.volume, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.volume, TEXT_OPTIONS ),
         tandemName: 'volumeRadioButton'
       },
       {
         value: HoldConstant.TEMPERATURE,
-        node: new Text( GasPropertiesStrings.holdConstant.temperature, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.temperature, TEXT_OPTIONS ),
         tandemName: 'temperatureRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_V,
-        node: new Text( GasPropertiesStrings.holdConstant.pressureV, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureV, TEXT_OPTIONS ),
         tandemName: 'pressureVRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_T,
-        node: new Text( GasPropertiesStrings.holdConstant.pressureT, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureT, TEXT_OPTIONS ),
         tandemName: 'pressureTRadioButton'
       }
     ];

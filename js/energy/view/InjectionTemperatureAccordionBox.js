@@ -71,12 +71,12 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
       {
         value: false,
-        node: new Text( GasPropertiesStrings.matchContainer, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.matchContainer, TEXT_OPTIONS ),
         tandemName: 'matchContainerRadioButton'
       },
       {
         value: true,
-        node: new Text( GasPropertiesStrings.setTo, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.setTo, TEXT_OPTIONS ),
         tandemName: 'setToRadioButton'
       }
     ], {
