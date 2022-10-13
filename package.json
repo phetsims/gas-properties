@@ -13,7 +13,6 @@
     "requirejsNamespace": "GAS_PROPERTIES",
     "simulation": true,
     "runnable": true,
-    "colorProfiles": [ "default", "projector" ],
     "phetLibs": [
       "twixt"
     ],
@@ -22,6 +21,12 @@
       "phet-io",
       "adapted-from-phet"
     ],
+    "simFeatures": {
+      "colorProfiles": [
+        "default",
+        "projector"
+      ]
+    },
     "supportsOutputJS": true
   },
   "eslintConfig": {
