@@ -9,8 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
+import { HSeparator, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -87,9 +86,8 @@ class DiffusionControlPanel extends Panel {
         } ),
 
         // ------------
-        new HSeparatorDeprecated( contentWidth, {
-          stroke: GasPropertiesColors.separatorColorProperty,
-          maxWidth: contentWidth
+        new HSeparator( {
+          stroke: GasPropertiesColors.separatorColorProperty
         } ),
 
         // checkboxes
