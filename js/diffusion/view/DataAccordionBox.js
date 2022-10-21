@@ -9,9 +9,8 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { HBox, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Text, VSeparator } from '../../../../scenery/js/imports.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
-import VSeparatorDeprecated from '../../../../sun/js/VSeparatorDeprecated.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -57,7 +56,7 @@ class DataAccordionBox extends AccordionBox {
     const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform );
 
     // Vertical separator, analogous to the container's divider
-    const separator = new VSeparatorDeprecated( 75, {
+    const separator = new VSeparator( {
       lineWidth: 2,
       stroke: GasPropertiesColors.dividerColorProperty
     } );
