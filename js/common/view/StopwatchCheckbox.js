@@ -31,7 +31,7 @@ class StopwatchCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: GasPropertiesStrings.stopwatch,
+      stringProperty: GasPropertiesStrings.stopwatchStringProperty,
       icon: GasPropertiesIconFactory.createStopwatchIcon()
     }, options );
 

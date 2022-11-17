@@ -36,7 +36,7 @@ class KineticEnergyAccordionBox extends EnergyAccordionBox {
       tandem: options.tandem.createTandem( 'histogramNode' )
     } );
 
-    super( GasPropertiesStrings.kineticEnergy, modelViewTransform, histogramNode, options );
+    super( GasPropertiesStrings.kineticEnergyStringProperty, modelViewTransform, histogramNode, options );
   }
 }
 

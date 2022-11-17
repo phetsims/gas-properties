@@ -31,7 +31,7 @@ class WidthCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: GasPropertiesStrings.width,
+      stringProperty: GasPropertiesStrings.widthStringProperty,
       icon: GasPropertiesIconFactory.createContainerWidthIcon()
     }, options );
 

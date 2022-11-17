@@ -38,7 +38,7 @@ class DataAccordionBox extends AccordionBox {
 
       // superclass options
       contentYSpacing: 0,
-      titleNode: new Text( GasPropertiesStrings.data, {
+      titleNode: new Text( GasPropertiesStrings.dataStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty,
         maxWidth: 200 // determined empirically

@@ -30,7 +30,7 @@ class ReturnLidButton extends RectangularPushButton {
       baseColor: PhetColorScheme.BUTTON_YELLOW
     }, options );
 
-    const textNode = new Text( GasPropertiesStrings.returnLid, {
+    const textNode = new Text( GasPropertiesStrings.returnLidStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       maxWidth: 150 // determined empirically
     } );

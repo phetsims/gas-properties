@@ -315,7 +315,7 @@ class IdealGasLawScreenView extends BaseScreenView {
     } );
 
     // Oops dialog when maximum temperature is exceeded.
-    const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperature );
+    const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperatureStringProperty );
     model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { this.showDialog( oopsMaximumTemperatureDialog ); } );
 
     // @private used in methods

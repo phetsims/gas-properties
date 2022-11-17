@@ -48,7 +48,7 @@ class ParticlesAccordionBox extends AccordionBox {
     }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
       // superclass options
-      titleNode: new Text( GasPropertiesStrings.particles, {
+      titleNode: new Text( GasPropertiesStrings.particlesStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } )
@@ -63,13 +63,13 @@ class ParticlesAccordionBox extends AccordionBox {
 
       // Heavy
       new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-        GasPropertiesStrings.heavy, numberOfHeavyParticlesProperty, {
+        GasPropertiesStrings.heavyStringProperty, numberOfHeavyParticlesProperty, {
           tandem: options.tandem.createTandem( 'numberOfHeavyParticlesControl' )
         } ),
 
       // Light
       new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        GasPropertiesStrings.light, numberOfLightParticlesProperty, {
+        GasPropertiesStrings.lightStringProperty, numberOfLightParticlesProperty, {
           tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
         } )
     ];
@@ -78,7 +78,7 @@ class ParticlesAccordionBox extends AccordionBox {
 
       // optional Collisions checkbox, prepended so that it appears at top
       children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
-        text: GasPropertiesStrings.collisions,
+        stringProperty: GasPropertiesStrings.collisionsStringProperty,
         textMaxWidth: 175, // determined empirically
         tandem: options.tandem.createTandem( 'collisionsCheckbox' )
       } ) );

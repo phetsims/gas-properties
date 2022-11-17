@@ -37,8 +37,8 @@ class DividerToggleButton extends BooleanRectangularToggleButton {
       maxWidth: 150 // determined empirically
     };
 
-    const trueNode = new Text( GasPropertiesStrings.removeDivider, textOptions );
-    const falseNode = new Text( GasPropertiesStrings.resetDivider, textOptions );
+    const trueNode = new Text( GasPropertiesStrings.removeDividerStringProperty, textOptions );
+    const falseNode = new Text( GasPropertiesStrings.resetDividerStringProperty, textOptions );
 
     super( hasDividerProperty, trueNode, falseNode, options );
   }

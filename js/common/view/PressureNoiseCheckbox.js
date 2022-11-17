@@ -28,7 +28,7 @@ export class PressureNoiseCheckbox extends Checkbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const pressureNoiseText = new Text( GasPropertiesStrings.pressureNoise, {
+    const pressureNoiseText = new Text( GasPropertiesStrings.pressureNoiseStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       maxWidth: 350, // set empirically
       tandem: options.tandem.createTandem( 'pressureNoiseText' )

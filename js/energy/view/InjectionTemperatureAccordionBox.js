@@ -58,7 +58,7 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
       // superclass options
-      titleNode: new Text( GasPropertiesStrings.injectionTemperature, {
+      titleNode: new Text( GasPropertiesStrings.injectionTemperatureStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } )
@@ -71,12 +71,12 @@ class InjectionTemperatureAccordionBox extends AccordionBox {
     const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
       {
         value: false,
-        createNode: tandem => new Text( GasPropertiesStrings.matchContainer, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.matchContainerStringProperty, TEXT_OPTIONS ),
         tandemName: 'matchContainerRadioButton'
       },
       {
         value: true,
-        createNode: tandem => new Text( GasPropertiesStrings.setTo, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.setToStringProperty, TEXT_OPTIONS ),
         tandemName: 'setToRadioButton'
       }
     ], {

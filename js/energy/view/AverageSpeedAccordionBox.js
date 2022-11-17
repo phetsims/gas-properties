@@ -47,7 +47,7 @@ class AverageSpeedAccordionBox extends AccordionBox {
 
       // superclass options
       contentYSpacing: 0,
-      titleNode: new Text( GasPropertiesStrings.averageSpeed, {
+      titleNode: new Text( GasPropertiesStrings.averageSpeedStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } ),

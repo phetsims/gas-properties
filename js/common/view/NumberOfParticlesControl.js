@@ -23,13 +23,12 @@ class NumberOfParticlesControl extends VBox {
 
   /**
    * @param {Node} icon
-   * @param {string} title
+   * @param {TReadOnlyProperty.<string>} titleStringProperty
    * @param {NumberProperty} numberOfParticlesProperty
    * @param {Object} [options]
    */
-  constructor( icon, title, numberOfParticlesProperty, options ) {
+  constructor( icon, titleStringProperty, numberOfParticlesProperty, options ) {
     assert && assert( icon instanceof Node, `invalid icon: ${icon}` );
-    assert && assert( typeof title === 'string', `invalid title: ${title}` );
     assert && assert( numberOfParticlesProperty instanceof NumberProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
 
@@ -48,14 +47,14 @@ class NumberOfParticlesControl extends VBox {
     assert && assert( numberOfParticlesProperty.range,
       'numberOfParticlesProperty missing range' );
 
-    const labelText = new Text( title, {
+    const labelText = new Text( titleStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       fill: GasPropertiesColors.textFillProperty,
       maxWidth: 150, // determined empirically,
       tandem: options.tandem.createTandem( 'labelText' )
     } );
 
-    const titleBox = new HBox( {
+    const labelBox = new HBox( {
       spacing: X_SPACING,
       children: [ icon, labelText ]
     } );
@@ -77,7 +76,7 @@ class NumberOfParticlesControl extends VBox {
 
     assert && assert( !options.children, 'NumberOfParticlesControl sets children' );
     options = merge( {
-      children: [ titleBox, spinner ]
+      children: [ labelBox, spinner ]
     }, options );
 
     super( options );

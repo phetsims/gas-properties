@@ -31,7 +31,7 @@ class CollisionCounterCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: GasPropertiesStrings.collisionCounter,
+      text: GasPropertiesStrings.collisionCounterStringProperty,
       icon: GasPropertiesIconFactory.createCollisionCounterIcon()
     }, options );
 

@@ -28,7 +28,7 @@ class ScaleCheckbox extends GasPropertiesCheckbox {
     options = merge( {
 
       // superclass options
-      text: GasPropertiesStrings.scale,
+      stringProperty: GasPropertiesStrings.scaleStringProperty,
       icon: GasPropertiesIconFactory.createScaleIcon()
     }, options );
 

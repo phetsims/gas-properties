@@ -23,13 +23,12 @@ import LightParticlesCheckbox from './LightParticlesCheckbox.js';
 class EnergyAccordionBox extends AccordionBox {
 
   /**
-   * @param {string} titleString
+   * @param {TReadOnlyProperty.<string>} titleStringProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @param {HistogramNode} histogramNode
    * @param {Object} [options]
    */
-  constructor( titleString, modelViewTransform, histogramNode, options ) {
-    assert && assert( typeof titleString === 'string', `invalid titleString: ${titleString}` );
+  constructor( titleStringProperty, modelViewTransform, histogramNode, options ) {
     assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
     assert && assert( histogramNode instanceof HistogramNode, `invalid model: ${histogramNode}` );
 
@@ -40,7 +39,7 @@ class EnergyAccordionBox extends AccordionBox {
 
       // superclass options
       contentYSpacing: 0,
-      titleNode: new Text( titleString, {
+      titleNode: new Text( titleStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } ),

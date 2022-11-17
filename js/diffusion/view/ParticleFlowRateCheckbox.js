@@ -32,7 +32,7 @@ class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
     assert && assert( !options.text, 'ParticleFlowRateCheckbox sets text' );
     assert && assert( !options.icon, 'ParticleFlowRateCheckbox sets icon' );
     options = merge( {
-      text: GasPropertiesStrings.particleFlowRate,
+      stringProperty: GasPropertiesStrings.particleFlowRateStringProperty,
       icon: GasPropertiesIconFactory.createParticleFlowRateIcon()
     }, options );
 

@@ -57,7 +57,7 @@ class HoldConstantControl extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const titleText = new Text( GasPropertiesStrings.holdConstant.title, {
+    const titleText = new Text( GasPropertiesStrings.holdConstant.titleStringProperty, {
       font: GasPropertiesConstants.TITLE_FONT,
       fill: GasPropertiesColors.textFillProperty,
       maxWidth: 200, // determined empirically
@@ -67,27 +67,27 @@ class HoldConstantControl extends VBox {
     const items = [
       {
         value: HoldConstant.NOTHING,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.nothing, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
         tandemName: 'nothingRadioButton'
       },
       {
         value: HoldConstant.VOLUME,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.volume, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
         tandemName: 'volumeRadioButton'
       },
       {
         value: HoldConstant.TEMPERATURE,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.temperature, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
         tandemName: 'temperatureRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_V,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureV, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
         tandemName: 'pressureVRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_T,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureT, TEXT_OPTIONS ),
+        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
         tandemName: 'pressureTRadioButton'
       }
     ];

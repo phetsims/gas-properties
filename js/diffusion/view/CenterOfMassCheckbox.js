@@ -32,7 +32,7 @@ class CenterOfMassCheckbox extends GasPropertiesCheckbox {
     assert && assert( !options.text, 'CenterOfMassCheckbox sets text' );
     assert && assert( !options.icon, 'CenterOfMassCheckbox sets icon' );
     options = merge( {
-      text: GasPropertiesStrings.centerOfMass,
+      stringProperty: GasPropertiesStrings.centerOfMassStringProperty,
       icon: GasPropertiesIconFactory.createCenterOfMassIcon()
     }, options );
 

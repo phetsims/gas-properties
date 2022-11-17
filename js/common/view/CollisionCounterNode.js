@@ -65,7 +65,7 @@ class CollisionCounterNode extends Node {
       }
     }, options );
 
-    const wallCollisionsTextNode = new Text( GasPropertiesStrings.wallCollisions, {
+    const wallCollisionsText = new Text( GasPropertiesStrings.wallCollisionsStringProperty, {
       pickable: false,
       font: LABEL_FONT,
       maxWidth: 110 // determined empirically
@@ -87,7 +87,7 @@ class CollisionCounterNode extends Node {
       tandem: options.tandem.createTandem( 'playResetButton' )
     } );
 
-    const samplePeriodTextNode = new Text( GasPropertiesStrings.samplePeriod, {
+    const samplePeriodText = new Text( GasPropertiesStrings.samplePeriodStringProperty, {
       pickable: false,
       font: LABEL_FONT,
       left: X_MARGIN,
@@ -128,13 +128,13 @@ class CollisionCounterNode extends Node {
       align: 'center',
       spacing: Y_SPACING,
       children: [
-        wallCollisionsTextNode,
+        wallCollisionsText,
         new HBox( {
           spacing: X_SPACING,
           children: [ valueDisplay, playResetButton ]
         } ),
         new VStrut( 2 ),
-        samplePeriodTextNode,
+        samplePeriodText,
         samplePeriodComboBox
       ]
     } );

@@ -25,7 +25,7 @@ class GasPropertiesCheckbox extends Checkbox {
     assert && assert( booleanProperty instanceof BooleanProperty, `invalid booleanProperty: ${booleanProperty}` );
 
     options = merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-      text: null, // {string|null} optional text label
+      stringProperty: null, // {TReadOnlyProperty.<string>|null} optional text label
       icon: null, // {Node|null} optional icon, to the right of text
       textFill: GasPropertiesColors.textFillProperty,
       textMaxWidth: null,
@@ -37,12 +37,12 @@ class GasPropertiesCheckbox extends Checkbox {
       checkboxColorBackground: GasPropertiesColors.checkboxFillProperty
     }, options );
 
-    assert && assert( options.text || options.icon, 'text or icon is required' );
+    assert && assert( options.stringProperty || options.icon, 'stringProperty or icon is required' );
 
     const contentChildren = [];
 
-    if ( options.text ) {
-      contentChildren.push( new RichText( options.text, {
+    if ( options.stringProperty ) {
+      contentChildren.push( new RichText( options.stringProperty, {
         fill: options.textFill,
         font: options.font,
         maxWidth: options.textMaxWidth

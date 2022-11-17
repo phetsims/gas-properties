@@ -16,10 +16,10 @@ import gasProperties from '../../gasProperties.js';
 class GasPropertiesOopsDialog extends OopsDialog {
 
   /**
-   * @param {string} message
+   * @param {TReadOnlyProperty.<string>} messageStringProperty
    * @param {Object} [options]
    */
-  constructor( message, options ) {
+  constructor( messageStringProperty, options ) {
 
     options = merge( {
 
@@ -32,7 +32,7 @@ class GasPropertiesOopsDialog extends OopsDialog {
       }
     }, options );
 
-    super( message, options );
+    super( messageStringProperty, options );
   }
 }
 

@@ -36,7 +36,7 @@ class SpeedAccordionBox extends EnergyAccordionBox {
       tandem: options.tandem.createTandem( 'histogramNode' )
     } );
 
-    super( GasPropertiesStrings.speed, modelViewTransform, histogramNode, options );
+    super( GasPropertiesStrings.speedStringProperty, modelViewTransform, histogramNode, options );
   }
 }
 
