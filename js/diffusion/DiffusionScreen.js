@@ -25,9 +25,10 @@ class DiffusionScreen extends GasPropertiesScreen {
     const createModel = () => new DiffusionModel( tandem.createTandem( 'model' ) );
     const createView = model => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
 
-    super( createModel, createView, tandem, {
+    super( createModel, createView, {
       name: GasPropertiesStrings.screen.diffusionStringProperty,
-      homeScreenIcon: GasPropertiesIconFactory.createDiffusionScreenIcon()
+      homeScreenIcon: GasPropertiesIconFactory.createDiffusionScreenIcon(),
+      tandem: tandem
     } );
   }
 }

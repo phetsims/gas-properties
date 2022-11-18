@@ -10,12 +10,9 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import GasPropertiesUtils from '../../common/GasPropertiesUtils.js';
 import CollisionDetector from '../../common/model/CollisionDetector.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from './DiffusionContainer.js';
-import DiffusionParticle1 from './DiffusionParticle1.js';
-import DiffusionParticle2 from './DiffusionParticle2.js';
 
 class DiffusionCollisionDetector extends CollisionDetector {
 
@@ -27,10 +24,6 @@ class DiffusionCollisionDetector extends CollisionDetector {
    */
   constructor( container, particles1, particles2, options ) {
     assert && assert( container instanceof DiffusionContainer, `invalid container: ${container}` );
-    assert && assert( GasPropertiesUtils.isArrayOf( particles1, DiffusionParticle1 ),
-      `invalid particles1: ${particles1}` );
-    assert && assert( GasPropertiesUtils.isArrayOf( particles2, DiffusionParticle2 ),
-      `invalid particles2: ${particles2}` );
 
     super( container, [ particles1, particles2 ], new BooleanProperty( true ), options );
   }

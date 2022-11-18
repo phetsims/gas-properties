@@ -26,10 +26,12 @@ class IdealScreen extends GasPropertiesScreen {
 
     options = merge( {
 
+      hasHoldConstantControls: true,
+
       // superclass options
       name: GasPropertiesStrings.screen.idealStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
-      hasHoldConstantControls: true
+      tandem: tandem
     }, options );
 
     const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
@@ -37,7 +39,7 @@ class IdealScreen extends GasPropertiesScreen {
       hasHoldConstantControls: options.hasHoldConstantControls
     } );
 
-    super( createModel, createView, tandem, options );
+    super( createModel, createView, options );
   }
 }
 

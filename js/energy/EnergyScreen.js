@@ -25,9 +25,10 @@ class EnergyScreen extends GasPropertiesScreen {
     const createModel = () => new EnergyModel( tandem.createTandem( 'model' ) );
     const createView = model => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
 
-    super( createModel, createView, tandem, {
+    super( createModel, createView, {
       name: GasPropertiesStrings.screen.energyStringProperty,
-      homeScreenIcon: GasPropertiesIconFactory.createEnergyScreenIcon()
+      homeScreenIcon: GasPropertiesIconFactory.createEnergyScreenIcon(),
+      tandem: tandem
     } );
   }
 }
