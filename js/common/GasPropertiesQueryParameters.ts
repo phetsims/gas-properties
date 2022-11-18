@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesQueryParameters defines the query parameters that are specific to this sim.
  * Running with ?log will print these query parameters and their values to the console at startup.

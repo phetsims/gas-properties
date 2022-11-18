@@ -1,8 +1,8 @@
 // Copyright 2018-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesColors defines the colors for this simulation.
+ * These colors change based on which profile is selected.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,10 +13,7 @@ import gasProperties from '../gasProperties.js';
 
 const GasPropertiesColors = {
 
-  //------------------------------------------------------------------------------------------------------------------
-  // These colors change based on which profile is selected.
-  //------------------------------------------------------------------------------------------------------------------
-
+  // background color for all screens
   screenBackgroundColorProperty: new ProfileColorProperty( gasProperties, 'screenBackgroundColor', {
     default: 'black',
     projector: 'white'

@@ -1,6 +1,5 @@
 // Copyright 2018-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesConstants is a collection of constants used throughout this simulation.
  *
@@ -8,7 +7,13 @@
  */
 
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
+import { CreditsData } from '../../../joist/js/CreditsNode.js';
+import { ComboBoxDisplayOptions } from '../../../scenery-phet/js/ComboBoxDisplay.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
+import { AquaRadioButtonOptions } from '../../../sun/js/AquaRadioButton.js';
+import { CheckboxOptions } from '../../../sun/js/Checkbox.js';
+import { PanelOptions } from '../../../sun/js/Panel.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesColors from './GasPropertiesColors.js';
 
@@ -17,19 +22,63 @@ const PANEL_CORNER_RADIUS = 5;
 const PANEL_X_MARGIN = 15;
 const PANEL_Y_MARGIN = 10;
 
+// Shared by gas-properties-main.js and its derivatives (gases-intro.main.js, and diffusion-main.js)
+// See https://github.com/phetsims/gas-properties/issues/28
+const CREDITS: CreditsData = {
+  leadDesign: 'Amy Rouinfar',
+  softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
+  team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
+        'Emily B. Moore, Ariel Paul, Kathy Perkins, Carl Wieman',
+  qualityAssurance: 'Jaspe Arias, Liam Mulhall, Jacob Romero, Kathryn Woessner'
+};
+
+const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
+  cornerRadius: PANEL_CORNER_RADIUS,
+  contentXMargin: PANEL_X_MARGIN,
+  contentYMargin: PANEL_Y_MARGIN,
+  buttonXMargin: 10,
+  buttonYMargin: 10,
+  titleXSpacing: 10,
+  titleAlignX: 'left',
+  fill: GasPropertiesColors.panelFillProperty,
+  stroke: GasPropertiesColors.panelStrokeProperty,
+  expandCollapseButtonOptions: {
+    sideLength: 20,
+    touchAreaXDilation: 6,
+    touchAreaYDilation: 6
+  }
+};
+
+const AQUA_RADIO_BUTTON_OPTIONS: AquaRadioButtonOptions = {
+  radius: 8,
+  xSpacing: 10
+};
+
+const CHECKBOX_OPTIONS: CheckboxOptions = {
+  spacing: 8,
+  boxWidth: 16
+};
+
+const COMBO_BOX_DISPLAY_OPTIONS: ComboBoxDisplayOptions = {
+  highlightFill: 'rgba( 255, 0, 0, 0.1 )',
+  align: 'right',
+  cornerRadius: 5,
+  xMargin: 5,
+  yMargin: 4
+};
+
+const PANEL_OPTIONS: PanelOptions = {
+  align: 'left',
+  cornerRadius: PANEL_CORNER_RADIUS,
+  xMargin: PANEL_X_MARGIN,
+  yMargin: PANEL_Y_MARGIN,
+  fill: GasPropertiesColors.panelFillProperty,
+  stroke: GasPropertiesColors.panelStrokeProperty
+};
+
 const GasPropertiesConstants = {
 
-  // Shared by gas-properties-main.js and its derivatives (gases-intro.main.js, and diffusion-main.js)
-  // See https://github.com/phetsims/gas-properties/issues/28
-  CREDITS: {
-    leadDesign: 'Amy Rouinfar',
-    softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-    team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
-          'Emily B. Moore, Ariel Paul, Kathy Perkins, Carl Wieman',
-    qualityAssurance: 'Jaspe Arias, Liam Mulhall, Jacob Romero, Kathryn Woessner',
-    graphicArts: '',
-    thanks: ''
-  },
+  CREDITS: CREDITS,
 
   // margins for all ScreenView instances
   SCREEN_VIEW_X_MARGIN: 20,
@@ -55,55 +104,6 @@ const GasPropertiesConstants = {
   RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // pm
   INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
 
-  // Defaults for all AccordionBox instances
-  ACCORDION_BOX_OPTIONS: {
-    cornerRadius: PANEL_CORNER_RADIUS,
-    contentXMargin: PANEL_X_MARGIN,
-    contentYMargin: PANEL_Y_MARGIN,
-    buttonXMargin: 10,
-    buttonYMargin: 10,
-    titleXSpacing: 10,
-    titleAlignX: 'left',
-    fill: GasPropertiesColors.panelFillProperty,
-    stroke: GasPropertiesColors.panelStrokeProperty,
-    expandCollapseButtonOptions: {
-      sideLength: 20,
-      touchAreaXDilation: 6,
-      touchAreaYDilation: 6
-    }
-  },
-
-  // Defaults for all AquaRadioButton instances
-  AQUA_RADIO_BUTTON_OPTIONS: {
-    radius: 8,
-    xSpacing: 10
-  },
-
-  // Defaults for all Panel instances
-  PANEL_OPTIONS: {
-    align: 'left',
-    cornerRadius: PANEL_CORNER_RADIUS,
-    xMargin: PANEL_X_MARGIN,
-    yMargin: PANEL_Y_MARGIN,
-    fill: GasPropertiesColors.panelFillProperty,
-    stroke: GasPropertiesColors.panelStrokeProperty
-  },
-
-  // Defaults for all ComboBoxDisplay instances
-  COMBO_BOX_DISPLAY_OPTIONS: {
-    highlightFill: 'rgba( 255, 0, 0, 0.1 )',
-    align: 'right',
-    cornerRadius: 5,
-    xMargin: 5,
-    yMargin: 4
-  },
-
-  // Defaults for all Checkbox instances
-  CHECKBOX_OPTIONS: {
-    spacing: 8,
-    boxWidth: 16
-  },
-
   // width of panels on the right side of the Ideal, Explore, and Energy screens
   RIGHT_PANEL_WIDTH: 225,
 
@@ -128,7 +128,22 @@ const GasPropertiesConstants = {
 
   // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
   // see https://github.com/phetsims/gas-properties/blob/master/doc/images/pressure-conversion.png
-  PRESSURE_CONVERSION_SCALE: 1.66E6
+  PRESSURE_CONVERSION_SCALE: 1.66E6,
+
+  // Defaults for all AccordionBox instances
+  ACCORDION_BOX_OPTIONS: ACCORDION_BOX_OPTIONS,
+
+  // Defaults for all AquaRadioButton instances
+  AQUA_RADIO_BUTTON_OPTIONS: AQUA_RADIO_BUTTON_OPTIONS,
+
+  // Defaults for all Checkbox instances
+  CHECKBOX_OPTIONS: CHECKBOX_OPTIONS,
+
+  // Defaults for all ComboBoxDisplay instances
+  COMBO_BOX_DISPLAY_OPTIONS: COMBO_BOX_DISPLAY_OPTIONS,
+
+  // Defaults for all Panel instances
+  PANEL_OPTIONS: PANEL_OPTIONS
 };
 
 gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );
