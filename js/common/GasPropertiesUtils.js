@@ -1,5 +1,6 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GasPropertiesUtils is a collection of utility functions used in this sim.
  *
