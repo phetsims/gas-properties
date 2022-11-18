@@ -16,7 +16,7 @@ import GasPropertiesColors from './GasPropertiesColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type GasPropertiesScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'name' | 'homeScreenIcon' | 'tandem'>;
+export type GasPropertiesScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'name' | 'homeScreenIcon' | 'tandem'>;
 
 export default class GasPropertiesScreen<M extends TModel, V extends ScreenView> extends Screen<M, V> {
 

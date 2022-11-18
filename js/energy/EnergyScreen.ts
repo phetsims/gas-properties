@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnergyScreen is the 'Energy' screen.
  *
@@ -15,16 +14,12 @@ import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import EnergyModel from './model/EnergyModel.js';
 import EnergyScreenView from './view/EnergyScreenView.js';
 
-class EnergyScreen extends GasPropertiesScreen {
+export default class EnergyScreen extends GasPropertiesScreen<EnergyModel, EnergyScreenView> {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  public constructor( tandem: Tandem ) {
 
     const createModel = () => new EnergyModel( tandem.createTandem( 'model' ) );
-    const createView = model => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
+    const createView = ( model: EnergyModel ) => new EnergyScreenView( model, tandem.createTandem( 'view' ) );
 
     super( createModel, createView, {
       name: GasPropertiesStrings.screen.energyStringProperty,
@@ -35,4 +30,3 @@ class EnergyScreen extends GasPropertiesScreen {
 }
 
 gasProperties.register( 'EnergyScreen', EnergyScreen );
-export default EnergyScreen;

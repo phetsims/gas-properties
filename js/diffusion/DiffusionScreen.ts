@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionScreen is the 'Diffusion' screen.
  *
@@ -15,16 +14,12 @@ import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import DiffusionModel from './model/DiffusionModel.js';
 import DiffusionScreenView from './view/DiffusionScreenView.js';
 
-class DiffusionScreen extends GasPropertiesScreen {
+export default class DiffusionScreen extends GasPropertiesScreen<DiffusionModel, DiffusionScreenView> {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  public constructor( tandem: Tandem ) {
 
     const createModel = () => new DiffusionModel( tandem.createTandem( 'model' ) );
-    const createView = model => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
+    const createView = ( model: DiffusionModel ) => new DiffusionScreenView( model, tandem.createTandem( 'view' ) );
 
     super( createModel, createView, {
       name: GasPropertiesStrings.screen.diffusionStringProperty,
@@ -35,4 +30,3 @@ class DiffusionScreen extends GasPropertiesScreen {
 }
 
 gasProperties.register( 'DiffusionScreen', DiffusionScreen );
-export default DiffusionScreen;

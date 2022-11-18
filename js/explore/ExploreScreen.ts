@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ExploreScreen is the 'Explore' screen.
  *
@@ -15,16 +14,12 @@ import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import ExploreModel from './model/ExploreModel.js';
 import ExploreScreenView from './view/ExploreScreenView.js';
 
-class ExploreScreen extends GasPropertiesScreen {
+class ExploreScreen extends GasPropertiesScreen<ExploreModel, ExploreScreenView> {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  public constructor( tandem: Tandem ) {
 
     const createModel = () => new ExploreModel( tandem.createTandem( 'model' ) );
-    const createView = model => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
+    const createView = ( model: ExploreModel ) => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
 
     super( createModel, createView, {
       name: GasPropertiesStrings.screen.exploreStringProperty,
