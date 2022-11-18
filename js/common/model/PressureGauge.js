@@ -13,20 +13,21 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
+import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import HoldConstant from './HoldConstant.js';
 
 // constants
@@ -35,12 +36,12 @@ const MIN_NOISE = 0; // minimum amount of noise, in kPa
 const MAX_NOISE = 50; // maximum amount of noise, in kPa
 assert && assert( MIN_NOISE < MAX_NOISE, 'MIN_NOISE must be < MAX_NOISE' );
 
-class PressureGauge {
+export default class PressureGauge {
 
   /**
    * @param {NumberProperty} pressureProperty - pressure in the container, in kPa
    * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K, null if empty container
-   * @param {EnumerationDeprecatedProperty} holdConstantProperty - quantity to be held constant, influences noise
+   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty - quantity to be held constant, influences noise
    * @param {Object} [options]
    */
   constructor( pressureProperty, temperatureProperty, holdConstantProperty, options ) {
@@ -48,7 +49,7 @@ class PressureGauge {
       `invalid pressureProperty: ${pressureProperty}` );
     assert && assert( temperatureProperty instanceof Property,
       `invalid temperatureProperty: ${temperatureProperty}` );
-    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
 
     options = merge( {
@@ -95,7 +96,7 @@ class PressureGauge {
     this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
     // @public pressure units displayed by the pressure gauge
-    this.unitsProperty = new EnumerationDeprecatedProperty( PressureGauge.Units, PressureGauge.Units.ATMOSPHERES, {
+    this.unitsProperty = new EnumerationProperty( PressureGaugeUnits.ATMOSPHERES, {
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the pressure gauge'
     } );
@@ -159,8 +160,16 @@ class PressureGauge {
 // @public The display is refreshed at this interval, in ps
 PressureGauge.REFRESH_PERIOD = 0.75;
 
-// @public Choice of pressure units that the gauge can display
-PressureGauge.Units = EnumerationDeprecated.byKeys( [ 'KILOPASCALS', 'ATMOSPHERES' ] );
+//TODO https://github.com/phetsims/gas-properties/issues/202 change PressureGaugeUnits to string union
+/**
+ * Choice of pressure units that the gauge can display
+ */
+class PressureGaugeUnits extends EnumerationValue {
+  static KILOPASCALS = new PressureGaugeUnits();
+  static ATMOSPHERES = new PressureGaugeUnits();
+
+  static enumeration = new Enumeration( PressureGaugeUnits );
+}
 
 gasProperties.register( 'PressureGauge', PressureGauge );
-export default PressureGauge;
+export { PressureGaugeUnits };

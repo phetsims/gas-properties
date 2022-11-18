@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
@@ -24,7 +24,7 @@ const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 class PressureModel {
 
   /**
-   * @param {EnumerationDeprecatedProperty} holdConstantProperty
+   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
    * @param {ReadOnlyProperty.<number>} numberOfParticlesProperty
    * @param {ReadOnlyProperty.<number>} volumeProperty
    * @param {Property.<number|null>} temperatureProperty
@@ -32,7 +32,7 @@ class PressureModel {
    * @param {Object} [options]
    */
   constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );

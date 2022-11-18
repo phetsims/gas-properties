@@ -14,7 +14,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import Thermometer from '../model/Thermometer.js';
+import Thermometer, { ThermometerUnits } from '../model/Thermometer.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
@@ -36,15 +36,15 @@ class TemperatureDisplay extends ComboBoxDisplay {
 
     const items = [
       {
-        choice: Thermometer.Units.KELVIN,
-        tandemName: `${Thermometer.Units.KELVIN.toString().toLowerCase()}Item`,
+        choice: ThermometerUnits.KELVIN,
+        tandemName: `${ThermometerUnits.KELVIN.toString().toLowerCase()}Item`,
         numberProperty: thermometer.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kelvin
       },
       {
-        choice: Thermometer.Units.CELSIUS,
-        tandemName: `${Thermometer.Units.CELSIUS.toString().toLowerCase()}Item`,
+        choice: ThermometerUnits.CELSIUS,
+        tandemName: `${ThermometerUnits.CELSIUS.toString().toLowerCase()}Item`,
         numberProperty: thermometer.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.degreesCelsius

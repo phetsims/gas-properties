@@ -18,7 +18,7 @@ import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
-   * @param {EnumerationDeprecatedProperty} particleTypeProperty
+   * @param {EnumerationProperty.<ParticleType>} particleTypeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
    */

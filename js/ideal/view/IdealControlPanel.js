@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -26,7 +26,7 @@ import HoldConstantControl from './HoldConstantControl.js';
 class IdealControlPanel extends Panel {
 
   /**
-   * @param {EnumerationDeprecatedProperty} holdConstantProperty
+   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
    * @param {Property.<number>>} numberOfParticlesProperty
    * @param {NumberProperty} pressureProperty
    * @param {BooleanProperty} isContainerOpenProperty
@@ -37,7 +37,7 @@ class IdealControlPanel extends Panel {
    */
   constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty,
                widthVisibleProperty, stopwatchVisibleProperty, collisionCounterVisibleProperty, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );

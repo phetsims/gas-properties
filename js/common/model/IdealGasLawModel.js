@@ -15,7 +15,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
@@ -57,7 +57,7 @@ class IdealGasLawModel extends BaseModel {
     super( tandem );
 
     // @public the quantity to hold constant
-    this.holdConstantProperty = new EnumerationDeprecatedProperty( HoldConstant, options.holdConstant, {
+    this.holdConstantProperty = new EnumerationProperty( options.holdConstant, {
       tandem: tandem.createTandem( 'holdConstantProperty' ),
       phetioDocumentation: 'determines which quantity will be held constant'
     } );

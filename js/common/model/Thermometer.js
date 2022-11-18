@@ -8,10 +8,11 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -21,7 +22,7 @@ import gasProperties from '../../gasProperties.js';
 // constants
 const DEFAULT_RANGE = new Range( 0, 1000 ); // in K
 
-class Thermometer {
+export default class Thermometer {
 
   /**
    * @param {Property.<number|null>} temperatureKelvinProperty - temperature in the container, in K
@@ -57,7 +58,7 @@ class Thermometer {
       } );
 
     // @public temperature units displayed by the thermometer
-    this.unitsProperty = new EnumerationDeprecatedProperty( Thermometer.Units, Thermometer.Units.KELVIN, {
+    this.unitsProperty = new EnumerationProperty( ThermometerUnits.KELVIN, {
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the thermometer'
     } );
@@ -72,8 +73,16 @@ class Thermometer {
   }
 }
 
-// @public Choice of temperature units that the thermometer can display
-Thermometer.Units = EnumerationDeprecated.byKeys( [ 'KELVIN', 'CELSIUS' ] );
+//TODO https://github.com/phetsims/gas-properties/issues/202 change ThermometerUnits to string union
+/**
+ * Choice of temperature units that the thermometer can display
+ */
+class ThermometerUnits extends EnumerationValue {
+  static KELVIN = new ThermometerUnits();
+  static CELSIUS = new ThermometerUnits();
+
+  static enumeration = new Enumeration( ThermometerUnits );
+}
 
 gasProperties.register( 'Thermometer', Thermometer );
-export default Thermometer;
+export { ThermometerUnits };

@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
@@ -31,14 +31,14 @@ const SPACING = 12;
 class HoldConstantControl extends VBox {
 
   /**
-   * @param {EnumerationDeprecatedProperty} holdConstantProperty
+   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
    * @param {ReadOnlyProperty.<number>>} numberOfParticlesProperty
    * @param {NumberProperty} pressureProperty
    * @param {ReadOnlyProperty.<boolean>} isContainerOpenProperty
    * @param {Object} [options]
    */
   constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
       `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
