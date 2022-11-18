@@ -19,8 +19,6 @@ import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
-import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -29,6 +27,7 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import HoldConstant from './HoldConstant.js';
+import PressureGaugeUnits from './PressureGaugeUnits.js';
 
 // constants
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
@@ -160,16 +159,4 @@ export default class PressureGauge {
 // @public The display is refreshed at this interval, in ps
 PressureGauge.REFRESH_PERIOD = 0.75;
 
-//TODO https://github.com/phetsims/gas-properties/issues/202 change PressureGaugeUnits to string union
-/**
- * Choice of pressure units that the gauge can display
- */
-class PressureGaugeUnits extends EnumerationValue {
-  static KILOPASCALS = new PressureGaugeUnits();
-  static ATMOSPHERES = new PressureGaugeUnits();
-
-  static enumeration = new Enumeration( PressureGaugeUnits );
-}
-
 gasProperties.register( 'PressureGauge', PressureGauge );
-export { PressureGaugeUnits };

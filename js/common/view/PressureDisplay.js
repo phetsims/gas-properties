@@ -15,7 +15,8 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
-import PressureGauge, { PressureGaugeUnits } from '../model/PressureGauge.js';
+import PressureGauge from '../model/PressureGauge.js';
+import PressureGaugeUnits from '../model/PressureGaugeUnits.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPressure );
