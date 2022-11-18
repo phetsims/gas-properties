@@ -19,35 +19,33 @@ import ExploreScreen from './explore/ExploreScreen.js';
 import GasPropertiesStrings from './GasPropertiesStrings.js';
 import IdealScreen from './ideal/IdealScreen.js';
 
-const simOptions = {
-
-  // Enabled for high-performance Sprites
-  webgl: true,
-  preferencesModel: new PreferencesModel( {
-    visualOptions: {
-      supportsProjectorMode: true
-    },
-    simulationOptions: {
-      customPreferences: [ {
-        createContent: tandem => new GasPropertiesPreferencesNode( {
-          tandem: tandem.createTandem( 'simPreferences' )
-        } )
-      } ]
-    }
-  } ),
-
-  // Credits appear in the About dialog, accessible via the PhET menu
-  credits: GasPropertiesConstants.CREDITS
-};
-
 simLauncher.launch( () => {
 
-  const sim = new Sim( GasPropertiesStrings[ 'gas-properties' ].titleStringProperty, [
+  const screens = [
     new IdealScreen( Tandem.ROOT.createTandem( 'idealScreen' ) ),
     new ExploreScreen( Tandem.ROOT.createTandem( 'exploreScreen' ) ),
     new EnergyScreen( Tandem.ROOT.createTandem( 'energyScreen' ) ),
     new DiffusionScreen( Tandem.ROOT.createTandem( 'diffusionScreen' ) )
-  ], simOptions );
+  ];
+
+  const sim = new Sim( GasPropertiesStrings[ 'gas-properties' ].titleStringProperty, screens, {
+    webgl: true, // Enabled for high-performance Sprites
+    preferencesModel: new PreferencesModel( {
+      visualOptions: {
+        supportsProjectorMode: true
+      },
+      simulationOptions: {
+        customPreferences: [ {
+          createContent: tandem => new GasPropertiesPreferencesNode( {
+            tandem: tandem.createTandem( 'simPreferences' )
+          } )
+        } ]
+      }
+    } ),
+
+    // Credits appear in the About dialog, accessible via the PhET menu
+    credits: GasPropertiesConstants.CREDITS
+  } );
 
   // Log whether we're using WebGL, which is the preferred rendering option for Sprites
   phet.log && phet.log( `using WebGL = ${phet.chipper.queryParameters.webgl && Utils.isWebGLSupported}` );
