@@ -12,7 +12,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 
-class DiffusionSettings {
+export default class DiffusionSettings {
 
   /**
    * @param {Object} [options]
@@ -96,4 +96,3 @@ DiffusionSettings.DELTAS = {
 };
 
 gasProperties.register( 'DiffusionSettings', DiffusionSettings );
-export default DiffusionSettings;

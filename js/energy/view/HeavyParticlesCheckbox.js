@@ -12,7 +12,7 @@ import HeavyParticle from '../../common/model/HeavyParticle.js';
 import gasProperties from '../../gasProperties.js';
 import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
 
-class HeavyParticlesCheckbox extends SpeciesHistogramCheckbox {
+export default class HeavyParticlesCheckbox extends SpeciesHistogramCheckbox {
 
   /**
    * @param {BooleanProperty} heavyVisibleProperty
@@ -30,4 +30,3 @@ class HeavyParticlesCheckbox extends SpeciesHistogramCheckbox {
 }
 
 gasProperties.register( 'HeavyParticlesCheckbox', HeavyParticlesCheckbox );
-export default HeavyParticlesCheckbox;

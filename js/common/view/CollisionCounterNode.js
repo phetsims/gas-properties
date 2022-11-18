@@ -36,7 +36,7 @@ const NUMBER_DISPLAY_RANGE = new Range( 0, 1E6 );
 const CONTROL_FONT = new PhetFont( 14 );
 const LABEL_FONT = new PhetFont( 16 );
 
-class CollisionCounterNode extends Node {
+export default class CollisionCounterNode extends Node {
 
   /**
    * @param {CollisionCounter} collisionCounter
@@ -230,4 +230,3 @@ class CollisionCounterNode extends Node {
 }
 
 gasProperties.register( 'CollisionCounterNode', CollisionCounterNode );
-export default CollisionCounterNode;

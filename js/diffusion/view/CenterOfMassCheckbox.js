@@ -13,7 +13,7 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
-class CenterOfMassCheckbox extends GasPropertiesCheckbox {
+export default class CenterOfMassCheckbox extends GasPropertiesCheckbox {
 
   /**
    * @param {BooleanProperty} centerOfMassVisibleProperty
@@ -41,4 +41,3 @@ class CenterOfMassCheckbox extends GasPropertiesCheckbox {
 }
 
 gasProperties.register( 'CenterOfMassCheckbox', CenterOfMassCheckbox );
-export default CenterOfMassCheckbox;

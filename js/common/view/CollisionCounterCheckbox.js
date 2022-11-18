@@ -13,7 +13,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-class CollisionCounterCheckbox extends GasPropertiesCheckbox {
+export default class CollisionCounterCheckbox extends GasPropertiesCheckbox {
 
   /**
    * @param {BooleanProperty} collisionCounterVisibleProperty
@@ -40,4 +40,3 @@ class CollisionCounterCheckbox extends GasPropertiesCheckbox {
 }
 
 gasProperties.register( 'CollisionCounterCheckbox', CollisionCounterCheckbox );
-export default CollisionCounterCheckbox;

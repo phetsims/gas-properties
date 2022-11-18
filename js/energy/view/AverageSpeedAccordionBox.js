@@ -24,7 +24,7 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
-class AverageSpeedAccordionBox extends AccordionBox {
+export default class AverageSpeedAccordionBox extends AccordionBox {
 
   /**
    * @param {Property.<number|null>} heavyAverageSpeedProperty - average speed of heavy particles, in pm/ps
@@ -108,4 +108,3 @@ class AverageSpeedAccordionBox extends AccordionBox {
 }
 
 gasProperties.register( 'AverageSpeedAccordionBox', AverageSpeedAccordionBox );
-export default AverageSpeedAccordionBox;

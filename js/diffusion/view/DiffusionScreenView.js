@@ -25,7 +25,7 @@ import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateNode from './ParticleFlowRateNode.js';
 import ScaleNode from './ScaleNode.js';
 
-class DiffusionScreenView extends BaseScreenView {
+export default class DiffusionScreenView extends BaseScreenView {
 
   /**
    * @param {DiffusionModel} model
@@ -191,4 +191,3 @@ class DiffusionScreenView extends BaseScreenView {
 }
 
 gasProperties.register( 'DiffusionScreenView', DiffusionScreenView );
-export default DiffusionScreenView;

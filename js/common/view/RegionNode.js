@@ -17,7 +17,7 @@ import Region from '../model/Region.js';
 // constants
 const FONT = new PhetFont( 14 );
 
-class RegionNode extends Node {
+export default class RegionNode extends Node {
 
   /**
    * @param {Region} region
@@ -69,4 +69,3 @@ class RegionNode extends Node {
 }
 
 gasProperties.register( 'RegionNode', RegionNode );
-export default RegionNode;

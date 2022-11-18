@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import gasProperties from '../../gasProperties.js';
 
-class DiffusionViewProperties {
+export default class DiffusionViewProperties {
 
   /**
    * @param {Tandem} tandem
@@ -51,4 +51,3 @@ class DiffusionViewProperties {
 }
 
 gasProperties.register( 'DiffusionViewProperties', DiffusionViewProperties );
-export default DiffusionViewProperties;

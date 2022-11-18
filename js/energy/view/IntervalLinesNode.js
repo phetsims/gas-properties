@@ -15,7 +15,7 @@ import { Path } from '../../../../scenery/js/imports.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 
-class IntervalLinesNode extends Path {
+export default class IntervalLinesNode extends Path {
 
   /**
    * @param {Dimension2} chartSize - dimensions of the chart
@@ -71,4 +71,3 @@ class IntervalLinesNode extends Path {
 }
 
 gasProperties.register( 'IntervalLinesNode', IntervalLinesNode );
-export default IntervalLinesNode;

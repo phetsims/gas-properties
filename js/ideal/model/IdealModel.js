@@ -11,7 +11,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
 
-class IdealModel extends IdealGasLawModel {
+export default class IdealModel extends IdealGasLawModel {
 
   /**
    * @param {Tandem} tandem
@@ -23,4 +23,3 @@ class IdealModel extends IdealGasLawModel {
 }
 
 gasProperties.register( 'IdealModel', IdealModel );
-export default IdealModel;

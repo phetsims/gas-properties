@@ -23,7 +23,7 @@ import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
 import HoldConstantControl from './HoldConstantControl.js';
 
-class IdealControlPanel extends Panel {
+export default class IdealControlPanel extends Panel {
 
   /**
    * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
@@ -103,4 +103,3 @@ class IdealControlPanel extends Panel {
 }
 
 gasProperties.register( 'IdealControlPanel', IdealControlPanel );
-export default IdealControlPanel;

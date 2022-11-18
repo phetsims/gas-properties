@@ -22,7 +22,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 const TICK_LENGTH = 16; // view coordinates
 const TICK_INTERVAL = 1; // nm
 
-class ScaleNode extends Node {
+export default class ScaleNode extends Node {
 
   /**
    * @param {number} containerWidth - the container width, in pm
@@ -87,4 +87,3 @@ class ScaleNode extends Node {
 }
 
 gasProperties.register( 'ScaleNode', ScaleNode );
-export default ScaleNode;

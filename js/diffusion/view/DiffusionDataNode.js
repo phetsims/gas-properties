@@ -22,7 +22,7 @@ import DiffusionData from '../model/DiffusionData.js';
 const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
 const AVERAGE_TEMPERATURE_RANGE = new Range( 0, 1000 );
 
-class DiffusionDataNode extends VBox {
+export default class DiffusionDataNode extends VBox {
 
   /**
    * @param {DiffusionData} data
@@ -90,4 +90,3 @@ class DiffusionDataNode extends VBox {
 }
 
 gasProperties.register( 'DiffusionDataNode', DiffusionDataNode );
-export default DiffusionDataNode;

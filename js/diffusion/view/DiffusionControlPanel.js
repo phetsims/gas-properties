@@ -25,7 +25,7 @@ import DividerToggleButton from './DividerToggleButton.js';
 import ParticleFlowRateCheckbox from './ParticleFlowRateCheckbox.js';
 import ScaleCheckbox from './ScaleCheckbox.js';
 
-class DiffusionControlPanel extends Panel {
+export default class DiffusionControlPanel extends Panel {
 
   /**
    * @param {DiffusionSettings} leftSettings - setting for the left side of the container
@@ -122,4 +122,3 @@ class DiffusionControlPanel extends Panel {
 }
 
 gasProperties.register( 'DiffusionControlPanel', DiffusionControlPanel );
-export default DiffusionControlPanel;

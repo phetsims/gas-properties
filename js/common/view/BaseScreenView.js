@@ -16,7 +16,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import BaseModel from '../model/BaseModel.js';
 
-class BaseScreenView extends ScreenView {
+export default class BaseScreenView extends ScreenView {
 
   /**
    * @param {BaseModel} model
@@ -115,4 +115,3 @@ class BaseScreenView extends ScreenView {
 }
 
 gasProperties.register( 'BaseScreenView', BaseScreenView );
-export default BaseScreenView;

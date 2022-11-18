@@ -12,7 +12,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import ParticleSystem from '../model/ParticleSystem.js';
 
-class EraseParticlesButton extends EraserButton {
+export default class EraseParticlesButton extends EraserButton {
 
   /**
    * @param {ParticleSystem} particleSystem
@@ -43,4 +43,3 @@ class EraseParticlesButton extends EraserButton {
 }
 
 gasProperties.register( 'EraseParticlesButton', EraseParticlesButton );
-export default EraseParticlesButton;

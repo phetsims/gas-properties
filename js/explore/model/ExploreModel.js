@@ -11,7 +11,7 @@ import HoldConstant from '../../common/model/HoldConstant.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
 
-class ExploreModel extends IdealGasLawModel {
+export default class ExploreModel extends IdealGasLawModel {
 
   /**
    * @param {Tandem} tandem
@@ -32,4 +32,3 @@ class ExploreModel extends IdealGasLawModel {
 }
 
 gasProperties.register( 'ExploreModel', ExploreModel );
-export default ExploreModel;

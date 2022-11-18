@@ -17,7 +17,7 @@ import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
 
-class EnergyToolsPanel extends Panel {
+export default class EnergyToolsPanel extends Panel {
 
   /**
    * @param {BooleanProperty} widthVisibleProperty
@@ -62,4 +62,3 @@ class EnergyToolsPanel extends Panel {
 }
 
 gasProperties.register( 'EnergyToolsPanel', EnergyToolsPanel );
-export default EnergyToolsPanel;

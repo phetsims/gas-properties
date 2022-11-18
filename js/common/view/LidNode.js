@@ -19,7 +19,7 @@ import HoldConstant from '../model/HoldConstant.js';
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 const HANDLE_RIGHT_INSET = 3;
 
-class LidNode extends Node {
+export default class LidNode extends Node {
 
   /**
    * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
@@ -91,4 +91,3 @@ class LidNode extends Node {
 }
 
 gasProperties.register( 'LidNode', LidNode );
-export default LidNode;

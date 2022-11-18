@@ -36,7 +36,7 @@ const CENTER_OF_MASS_PROPERTY_OPTIONS = {
   phetioReadOnly: true // derived from the state of the particle system
 };
 
-class DiffusionModel extends BaseModel {
+export default class DiffusionModel extends BaseModel {
 
   /**
    * @param {Tandem} tandem
@@ -392,4 +392,3 @@ function updateRadius( radius, particles, bounds, isPlaying ) {
 }
 
 gasProperties.register( 'DiffusionModel', DiffusionModel );
-export default DiffusionModel;

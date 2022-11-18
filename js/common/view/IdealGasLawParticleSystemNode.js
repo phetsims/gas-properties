@@ -23,7 +23,7 @@ import ParticleSystem from '../model/ParticleSystem.js';
 import ParticleImageProperty from './ParticleImageProperty.js';
 import ParticlesNode from './ParticlesNode.js';
 
-class IdealGasLawParticleSystemNode extends Node {
+export default class IdealGasLawParticleSystemNode extends Node {
 
   /**
    * @param {ParticleSystem} particleSystem
@@ -96,4 +96,3 @@ class IdealGasLawParticleSystemNode extends Node {
 }
 
 gasProperties.register( 'IdealGasLawParticleSystemNode', IdealGasLawParticleSystemNode );
-export default IdealGasLawParticleSystemNode;

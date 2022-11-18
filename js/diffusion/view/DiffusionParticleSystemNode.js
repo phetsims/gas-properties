@@ -19,7 +19,7 @@ import DiffusionParticle2 from '../model/DiffusionParticle2.js';
 // constants
 const DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )';
 
-class DiffusionParticleSystemNode extends ParticlesNode {
+export default class DiffusionParticleSystemNode extends ParticlesNode {
 
   /**
    * @param {DiffusionModel} model - passing in the entire model since we use so much of its public API
@@ -55,4 +55,3 @@ class DiffusionParticleSystemNode extends ParticlesNode {
 }
 
 gasProperties.register( 'DiffusionParticleSystemNode', DiffusionParticleSystemNode );
-export default DiffusionParticleSystemNode;

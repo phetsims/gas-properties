@@ -22,7 +22,7 @@ import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 import NumberOfParticlesControl from './NumberOfParticlesControl.js';
 
-class ParticlesAccordionBox extends AccordionBox {
+export default class ParticlesAccordionBox extends AccordionBox {
 
   /**
    * @param {NumberProperty} numberOfHeavyParticlesProperty
@@ -95,4 +95,3 @@ class ParticlesAccordionBox extends AccordionBox {
 }
 
 gasProperties.register( 'ParticlesAccordionBox', ParticlesAccordionBox );
-export default ParticlesAccordionBox;

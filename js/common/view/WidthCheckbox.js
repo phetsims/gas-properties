@@ -13,7 +13,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-class WidthCheckbox extends GasPropertiesCheckbox {
+export default class WidthCheckbox extends GasPropertiesCheckbox {
 
   /**
    * @param {BooleanProperty} widthVisibleProperty

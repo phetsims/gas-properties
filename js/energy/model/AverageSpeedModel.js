@@ -24,7 +24,7 @@ const AVERAGE_SPEED_PROPERTY_OPTIONS = {
   phetioReadOnly: true // derived from the state of the particle system
 };
 
-class AverageSpeedModel {
+export default class AverageSpeedModel {
 
   /**
    * @param {ParticleSystem} particleSystem
@@ -180,4 +180,3 @@ function getAverageSpeed( particles ) {
 }
 
 gasProperties.register( 'AverageSpeedModel', AverageSpeedModel );
-export default AverageSpeedModel;

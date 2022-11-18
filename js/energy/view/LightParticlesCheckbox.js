@@ -12,7 +12,7 @@ import LightParticle from '../../common/model/LightParticle.js';
 import gasProperties from '../../gasProperties.js';
 import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
 
-class LightParticlesCheckbox extends SpeciesHistogramCheckbox {
+export default class LightParticlesCheckbox extends SpeciesHistogramCheckbox {
 
   /**
    * @param {BooleanProperty} lightVisibleProperty
@@ -30,4 +30,3 @@ class LightParticlesCheckbox extends SpeciesHistogramCheckbox {
 }
 
 gasProperties.register( 'LightParticlesCheckbox', LightParticlesCheckbox );
-export default LightParticlesCheckbox;

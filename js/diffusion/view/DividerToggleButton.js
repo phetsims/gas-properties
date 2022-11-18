@@ -15,7 +15,7 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
-class DividerToggleButton extends BooleanRectangularToggleButton {
+export default class DividerToggleButton extends BooleanRectangularToggleButton {
 
   /**
    * @param {BooleanProperty} hasDividerProperty
@@ -45,4 +45,3 @@ class DividerToggleButton extends BooleanRectangularToggleButton {
 }
 
 gasProperties.register( 'DividerToggleButton', DividerToggleButton );
-export default DividerToggleButton;

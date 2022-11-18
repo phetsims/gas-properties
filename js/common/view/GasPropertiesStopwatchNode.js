@@ -16,7 +16,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
-class GasPropertiesStopwatchNode extends StopwatchNode {
+export default class GasPropertiesStopwatchNode extends StopwatchNode {
 
   /**
    * @param {Stopwatch} stopwatch
@@ -55,4 +55,3 @@ class GasPropertiesStopwatchNode extends StopwatchNode {
 }
 
 gasProperties.register( 'GasPropertiesStopwatchNode', GasPropertiesStopwatchNode );
-export default GasPropertiesStopwatchNode;

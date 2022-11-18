@@ -50,7 +50,7 @@ const toHeatFactor = new LinearFunction( 0, MAX_DELTA_T_N, MIN_HEAT_COOL_FACTOR,
 // Animations will be controlled by calling step
 const STEP_EMITTER = null;
 
-class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
+export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
   /**
    * @param {NumberProperty} heatCoolAmountProperty
@@ -216,4 +216,3 @@ class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 }
 
 gasProperties.register( 'GasPropertiesHeaterCoolerNode', GasPropertiesHeaterCoolerNode );
-export default GasPropertiesHeaterCoolerNode;

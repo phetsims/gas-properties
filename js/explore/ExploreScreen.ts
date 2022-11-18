@@ -14,7 +14,7 @@ import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import ExploreModel from './model/ExploreModel.js';
 import ExploreScreenView from './view/ExploreScreenView.js';
 
-class ExploreScreen extends GasPropertiesScreen<ExploreModel, ExploreScreenView> {
+export default class ExploreScreen extends GasPropertiesScreen<ExploreModel, ExploreScreenView> {
 
   public constructor( tandem: Tandem ) {
 
@@ -30,4 +30,3 @@ class ExploreScreen extends GasPropertiesScreen<ExploreModel, ExploreScreenView>
 }
 
 gasProperties.register( 'ExploreScreen', ExploreScreen );
-export default ExploreScreen;

@@ -14,7 +14,7 @@ import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import RegionNode from './RegionNode.js';
 
-class RegionsNode extends Node {
+export default class RegionsNode extends Node {
 
   /**
    * @param {Region[]} regions
@@ -62,4 +62,3 @@ class RegionsNode extends Node {
 }
 
 gasProperties.register( 'RegionsNode', RegionsNode );
-export default RegionsNode;

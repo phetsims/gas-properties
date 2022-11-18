@@ -13,7 +13,7 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
-class ScaleCheckbox extends GasPropertiesCheckbox {
+export default class ScaleCheckbox extends GasPropertiesCheckbox {
 
   /**
    * @param {BooleanProperty} scaleVisibleProperty
@@ -37,4 +37,3 @@ class ScaleCheckbox extends GasPropertiesCheckbox {
 }
 
 gasProperties.register( 'ScaleCheckbox', ScaleCheckbox );
-export default ScaleCheckbox;

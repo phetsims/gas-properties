@@ -54,7 +54,7 @@ import PressureGaugeNode from './PressureGaugeNode.js';
 import RegionsNode from './RegionsNode.js';
 import ReturnLidButton from './ReturnLidButton.js';
 
-class IdealGasLawScreenView extends BaseScreenView {
+export default class IdealGasLawScreenView extends BaseScreenView {
 
   /**
    * @param {IdealGasLawModel} model
@@ -365,4 +365,3 @@ class IdealGasLawScreenView extends BaseScreenView {
 }
 
 gasProperties.register( 'IdealGasLawScreenView', IdealGasLawScreenView );
-export default IdealGasLawScreenView;

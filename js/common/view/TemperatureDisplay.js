@@ -19,7 +19,7 @@ import Thermometer, { ThermometerUnits } from '../model/Thermometer.js';
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
 
-class TemperatureDisplay extends ComboBoxDisplay {
+export default class TemperatureDisplay extends ComboBoxDisplay {
 
   /**
    * @param {Thermometer} thermometer
@@ -56,4 +56,3 @@ class TemperatureDisplay extends ComboBoxDisplay {
 }
 
 gasProperties.register( 'TemperatureDisplay', TemperatureDisplay );
-export default TemperatureDisplay;

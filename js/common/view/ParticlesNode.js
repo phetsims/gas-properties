@@ -19,7 +19,7 @@ import ParticleNode from './ParticleNode.js';
 const IMAGE_SCALE = 2; // scale images to improve quality, see https://github.com/phetsims/gas-properties/issues/55
 const IMAGE_PADDING = 2;
 
-class ParticlesNode extends Sprites {
+export default class ParticlesNode extends Sprites {
 
   /**
    * @param {Particle[][]} particleArrays - arrays of particles to render
@@ -135,4 +135,3 @@ class ParticlesNode extends Sprites {
 }
 
 gasProperties.register( 'ParticlesNode', ParticlesNode );
-export default ParticlesNode;

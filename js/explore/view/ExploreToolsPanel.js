@@ -18,7 +18,7 @@ import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
 
-class ExploreToolsPanel extends Panel {
+export default class ExploreToolsPanel extends Panel {
 
   /**
    * @param {BooleanProperty} widthVisibleProperty
@@ -69,4 +69,3 @@ class ExploreToolsPanel extends Panel {
 }
 
 gasProperties.register( 'ExploreToolsPanel', ExploreToolsPanel );
-export default ExploreToolsPanel;

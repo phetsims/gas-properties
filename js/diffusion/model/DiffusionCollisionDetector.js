@@ -14,7 +14,7 @@ import CollisionDetector from '../../common/model/CollisionDetector.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from './DiffusionContainer.js';
 
-class DiffusionCollisionDetector extends CollisionDetector {
+export default class DiffusionCollisionDetector extends CollisionDetector {
 
   /**
    * @param {DiffusionContainer} container
@@ -56,4 +56,3 @@ class DiffusionCollisionDetector extends CollisionDetector {
 }
 
 gasProperties.register( 'DiffusionCollisionDetector', DiffusionCollisionDetector );
-export default DiffusionCollisionDetector;

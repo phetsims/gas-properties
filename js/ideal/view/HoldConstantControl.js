@@ -28,7 +28,7 @@ const TEXT_OPTIONS = {
 };
 const SPACING = 12;
 
-class HoldConstantControl extends VBox {
+export default class HoldConstantControl extends VBox {
 
   /**
    * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
@@ -126,4 +126,3 @@ class HoldConstantControl extends VBox {
 }
 
 gasProperties.register( 'HoldConstantControl', HoldConstantControl );
-export default HoldConstantControl;

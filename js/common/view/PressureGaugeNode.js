@@ -20,7 +20,7 @@ import PressureDisplay from './PressureDisplay.js';
 const DIAL_RADIUS = 50;
 const POST_HEIGHT = 0.6 * DIAL_RADIUS;
 
-class PressureGaugeNode extends Node {
+export default class PressureGaugeNode extends Node {
 
   /**
    * @param {PressureGauge} pressureGauge
@@ -87,4 +87,3 @@ class PressureGaugeNode extends Node {
 }
 
 gasProperties.register( 'PressureGaugeNode', PressureGaugeNode );
-export default PressureGaugeNode;

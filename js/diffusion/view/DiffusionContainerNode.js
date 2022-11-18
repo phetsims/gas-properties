@@ -16,7 +16,7 @@ import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from '../model/DiffusionContainer.js';
 import DividerNode from './DividerNode.js';
 
-class DiffusionContainerNode extends Node {
+export default class DiffusionContainerNode extends Node {
 
   /**
    * @param {DiffusionContainer} container
@@ -58,4 +58,3 @@ class DiffusionContainerNode extends Node {
 }
 
 gasProperties.register( 'DiffusionContainerNode', DiffusionContainerNode );
-export default DiffusionContainerNode;

@@ -19,7 +19,7 @@ import IdealModel from '../model/IdealModel.js';
 import IdealControlPanel from './IdealControlPanel.js';
 import IdealViewProperties from './IdealViewProperties.js';
 
-class IdealScreenView extends IdealGasLawScreenView {
+export default class IdealScreenView extends IdealGasLawScreenView {
 
   /**
    * @param {IdealModel} model
@@ -109,4 +109,3 @@ class IdealScreenView extends IdealGasLawScreenView {
 }
 
 gasProperties.register( 'IdealScreenView', IdealScreenView );
-export default IdealScreenView;

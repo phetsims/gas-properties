@@ -15,7 +15,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
-class GasPropertiesCheckbox extends Checkbox {
+export default class GasPropertiesCheckbox extends Checkbox {
 
   /**
    * @param {BooleanProperty} booleanProperty
@@ -70,4 +70,3 @@ class GasPropertiesCheckbox extends Checkbox {
 }
 
 gasProperties.register( 'GasPropertiesCheckbox', GasPropertiesCheckbox );
-export default GasPropertiesCheckbox;

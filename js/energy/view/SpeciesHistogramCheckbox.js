@@ -15,7 +15,7 @@ import GasPropertiesCheckbox from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
 
-class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
+export default class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 
   /**
    * @param {BooleanProperty} speciesVisibleProperty
@@ -46,4 +46,3 @@ class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 }
 
 gasProperties.register( 'SpeciesHistogramCheckbox', SpeciesHistogramCheckbox );
-export default SpeciesHistogramCheckbox;

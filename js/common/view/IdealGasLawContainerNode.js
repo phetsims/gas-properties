@@ -30,7 +30,7 @@ const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
 const LID_ROTATION_SPEED = -50; // degrees/second
 
-class IdealGasLawContainerNode extends Node {
+export default class IdealGasLawContainerNode extends Node {
 
   /**
    * @param {IdealGasLawContainer} container
@@ -250,4 +250,3 @@ class IdealGasLawContainerNode extends Node {
 }
 
 gasProperties.register( 'IdealGasLawContainerNode', IdealGasLawContainerNode );
-export default IdealGasLawContainerNode;

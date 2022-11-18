@@ -18,7 +18,7 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import ParticleSystem from '../../common/model/ParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
 
-class HistogramsModel {
+export default class HistogramsModel {
 
   /**
    * @param {ParticleSystem} particleSystem
@@ -324,4 +324,3 @@ function sumBinCounts( heavyBinCounts, lightBinCounts ) {
 }
 
 gasProperties.register( 'HistogramsModel', HistogramsModel );
-export default HistogramsModel;

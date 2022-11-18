@@ -15,7 +15,7 @@ import HistogramsModel from '../model/HistogramsModel.js';
 import EnergyAccordionBox from './EnergyAccordionBox.js';
 import SpeedHistogramNode from './SpeedHistogramNode.js';
 
-class SpeedAccordionBox extends EnergyAccordionBox {
+export default class SpeedAccordionBox extends EnergyAccordionBox {
 
   /**
    * @param {HistogramsModel} histogramsModel
@@ -41,4 +41,3 @@ class SpeedAccordionBox extends EnergyAccordionBox {
 }
 
 gasProperties.register( 'SpeedAccordionBox', SpeedAccordionBox );
-export default SpeedAccordionBox;

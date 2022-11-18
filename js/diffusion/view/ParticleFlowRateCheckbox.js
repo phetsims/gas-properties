@@ -13,7 +13,7 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
-class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
+export default class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
 
   /**
    * @param {BooleanProperty} particleFlowRateVisibleProperty
@@ -41,4 +41,3 @@ class ParticleFlowRateCheckbox extends GasPropertiesCheckbox {
 }
 
 gasProperties.register( 'ParticleFlowRateCheckbox', ParticleFlowRateCheckbox );
-export default ParticleFlowRateCheckbox;

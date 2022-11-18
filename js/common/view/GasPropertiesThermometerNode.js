@@ -15,7 +15,7 @@ import gasProperties from '../../gasProperties.js';
 import Thermometer from '../model/Thermometer.js';
 import TemperatureDisplay from './TemperatureDisplay.js';
 
-class GasPropertiesThermometerNode extends VBox {
+export default class GasPropertiesThermometerNode extends VBox {
 
   /**
    * @param {Thermometer} thermometer
@@ -72,4 +72,3 @@ class GasPropertiesThermometerNode extends VBox {
 }
 
 gasProperties.register( 'GasPropertiesThermometerNode', GasPropertiesThermometerNode );
-export default GasPropertiesThermometerNode;

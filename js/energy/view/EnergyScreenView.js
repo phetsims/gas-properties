@@ -24,7 +24,7 @@ import SpeedAccordionBox from './SpeedAccordionBox.js';
 const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
 const VBOX_SPACING = 10;
 
-class EnergyScreenView extends IdealGasLawScreenView {
+export default class EnergyScreenView extends IdealGasLawScreenView {
 
   /**
    * @param {EnergyModel} model
@@ -142,4 +142,3 @@ class EnergyScreenView extends IdealGasLawScreenView {
 }
 
 gasProperties.register( 'EnergyScreenView', EnergyScreenView );
-export default EnergyScreenView;

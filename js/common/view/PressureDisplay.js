@@ -20,7 +20,7 @@ import PressureGauge, { PressureGaugeUnits } from '../model/PressureGauge.js';
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPressure );
 
-class PressureDisplay extends ComboBoxDisplay {
+export default class PressureDisplay extends ComboBoxDisplay {
 
   /**
    * @param {PressureGauge} pressureGauge
@@ -63,4 +63,3 @@ class PressureDisplay extends ComboBoxDisplay {
 }
 
 gasProperties.register( 'PressureDisplay', PressureDisplay );
-export default PressureDisplay;

@@ -15,7 +15,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import ParticleType from '../model/ParticleType.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
+export default class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
    * @param {EnumerationProperty.<ParticleType>} particleTypeProperty
@@ -64,4 +64,3 @@ class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 }
 
 gasProperties.register( 'ParticleTypeRadioButtonGroup', ParticleTypeRadioButtonGroup );
-export default ParticleTypeRadioButtonGroup;

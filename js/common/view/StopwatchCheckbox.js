@@ -13,7 +13,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-class StopwatchCheckbox extends GasPropertiesCheckbox {
+export default class StopwatchCheckbox extends GasPropertiesCheckbox {
 
   /**
    * @param {BooleanProperty} stopwatchVisibleProperty
@@ -40,4 +40,3 @@ class StopwatchCheckbox extends GasPropertiesCheckbox {
 }
 
 gasProperties.register( 'StopwatchCheckbox', StopwatchCheckbox );
-export default StopwatchCheckbox;

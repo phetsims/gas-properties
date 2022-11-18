@@ -12,7 +12,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
-class ContainerResizeDragListener extends DragListener {
+export default class ContainerResizeDragListener extends DragListener {
 
   /**
    * @param {IdealGasLawContainer} container
@@ -74,4 +74,3 @@ class ContainerResizeDragListener extends DragListener {
 }
 
 gasProperties.register( 'ContainerResizeDragListener', ContainerResizeDragListener );
-export default ContainerResizeDragListener;

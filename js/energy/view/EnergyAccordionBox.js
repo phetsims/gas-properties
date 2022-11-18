@@ -20,7 +20,7 @@ import HeavyParticlesCheckbox from './HeavyParticlesCheckbox.js';
 import HistogramNode from './HistogramNode.js';
 import LightParticlesCheckbox from './LightParticlesCheckbox.js';
 
-class EnergyAccordionBox extends AccordionBox {
+export default class EnergyAccordionBox extends AccordionBox {
 
   /**
    * @param {TReadOnlyProperty.<string>} titleStringProperty
@@ -93,4 +93,3 @@ class EnergyAccordionBox extends AccordionBox {
 }
 
 gasProperties.register( 'EnergyAccordionBox', EnergyAccordionBox );
-export default EnergyAccordionBox;
