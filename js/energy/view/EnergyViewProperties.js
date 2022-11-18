@@ -1,5 +1,6 @@
 // Copyright 2018-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnergyViewProperties defines Properties that are specific to the view in the 'Energy' screen.
  *

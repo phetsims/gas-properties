@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IdealGasLawViewProperties is the base class for view-specific Properties that are common to the
  * screens that are based on the Ideal Gas Law.
