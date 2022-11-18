@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * GasPropertiesOopsDialog is a specialization of OopsDialog, with a custom icon and options.
