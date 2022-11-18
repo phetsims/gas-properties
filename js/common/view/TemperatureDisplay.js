@@ -14,7 +14,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import Thermometer, { ThermometerUnits } from '../model/Thermometer.js';
+import Thermometer from '../model/Thermometer.js';
+import ThermometerUnits from '../model/ThermometerUnits.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
