@@ -23,7 +23,7 @@ import BaseContainer from './BaseContainer.js';
 // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
 const WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
 
-class IdealGasLawContainer extends BaseContainer {
+export default class IdealGasLawContainer extends BaseContainer {
 
   /**
    * @param {Object} [options]
@@ -263,4 +263,3 @@ class IdealGasLawContainer extends BaseContainer {
 }
 
 gasProperties.register( 'IdealGasLawContainer', IdealGasLawContainer );
-export default IdealGasLawContainer;

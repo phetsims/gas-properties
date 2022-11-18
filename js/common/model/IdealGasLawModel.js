@@ -36,7 +36,7 @@ import PressureGauge from './PressureGauge.js';
 import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
 
-class IdealGasLawModel extends BaseModel {
+export default class IdealGasLawModel extends BaseModel {
 
   /**
    * @param {Tandem} tandem
@@ -482,4 +482,3 @@ class IdealGasLawModel extends BaseModel {
 }
 
 gasProperties.register( 'IdealGasLawModel', IdealGasLawModel );
-export default IdealGasLawModel;

@@ -11,7 +11,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle from './Particle.js';
 
-class LightParticle extends Particle {
+export default class LightParticle extends Particle {
 
   constructor() {
     super( {
@@ -26,4 +26,3 @@ class LightParticle extends Particle {
 }
 
 gasProperties.register( 'LightParticle', LightParticle );
-export default LightParticle;

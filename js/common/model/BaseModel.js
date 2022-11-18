@@ -29,11 +29,7 @@ import TimeTransform from './TimeTransform.js';
 // constants
 const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
 
-/**
- * @param {Tandem} tandem
- * @param {Object} [options]
- */
-class BaseModel {
+export default class BaseModel {
 
   /**
    * @param {Tandem} tandem
@@ -147,4 +143,3 @@ class BaseModel {
 }
 
 gasProperties.register( 'BaseModel', BaseModel );
-export default BaseModel;

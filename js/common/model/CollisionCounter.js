@@ -15,7 +15,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import CollisionDetector from './CollisionDetector.js';
 
-class CollisionCounter {
+export default class CollisionCounter {
 
   /**
    * @param {CollisionDetector} collisionDetector - detects collisions between particles and the container
@@ -139,4 +139,3 @@ class CollisionCounter {
 }
 
 gasProperties.register( 'CollisionCounter', CollisionCounter );
-export default CollisionCounter;

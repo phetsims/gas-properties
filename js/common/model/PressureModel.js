@@ -21,7 +21,7 @@ import PressureGauge from './PressureGauge.js';
 // maximum pressure in kPa, when exceeded the lid blows off of the container
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 
-class PressureModel {
+export default class PressureModel {
 
   /**
    * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
@@ -139,4 +139,3 @@ class PressureModel {
 }
 
 gasProperties.register( 'PressureModel', PressureModel );
-export default PressureModel;

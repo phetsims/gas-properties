@@ -25,7 +25,7 @@ import Thermometer from './Thermometer.js';
 // temperature used to compute the initial speed for particles, in K
 const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
-class TemperatureModel {
+export default class TemperatureModel {
 
   /**
    * @param {Property.<number>} numberOfParticlesProperty
@@ -148,4 +148,3 @@ class TemperatureModel {
 }
 
 gasProperties.register( 'TemperatureModel', TemperatureModel );
-export default TemperatureModel;

@@ -9,7 +9,7 @@
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import gasProperties from '../../gasProperties.js';
 
-class TimeTransform extends LinearFunction {
+export default class TimeTransform extends LinearFunction {
 
   /**
    * @param {number} picosecondsPerSecond - number of picoseconds in model time per second of real time
@@ -29,4 +29,3 @@ TimeTransform.NORMAL = new TimeTransform( 2.5 );
 TimeTransform.SLOW = new TimeTransform( 0.3 );
 
 gasProperties.register( 'TimeTransform', TimeTransform );
-export default TimeTransform;

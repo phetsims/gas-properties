@@ -17,7 +17,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
-class Particle {
+export default class Particle {
 
   /**
    * @param {Object} [options]
@@ -226,4 +226,3 @@ class Particle {
 }
 
 gasProperties.register( 'Particle', Particle );
-export default Particle;

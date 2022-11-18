@@ -31,7 +31,7 @@ import ParticleUtils from './ParticleUtils.js';
 // used to compute the initial velocity angle for particles, in radians
 const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
 
-class ParticleSystem {
+export default class ParticleSystem {
 
   /**
    * @param {function:number} getInitialTemperature - gets the temperature used to compute initial velocity magnitude
@@ -361,4 +361,3 @@ class ParticleSystem {
 }
 
 gasProperties.register( 'ParticleSystem', ParticleSystem );
-export default ParticleSystem;
