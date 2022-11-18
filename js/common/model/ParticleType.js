@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 //TODO https://github.com/phetsims/gas-properties/issues/202 change ParticleType to string union
 /**
  * ParticleType is an enumeration for particle types in the 'Ideal', 'Explore', and 'Energy' screens.

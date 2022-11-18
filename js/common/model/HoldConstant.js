@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 //TODO https://github.com/phetsims/gas-properties/issues/202 change HoldConstant to string union
 /**
  * HoldConstant is an enumeration that identifies which quantity should be held constant when applying
