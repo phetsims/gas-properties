@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * HeavyParticlesCheckbox is a checkbox used to show histogram data for heavy particles in the 'Energy' screen.
