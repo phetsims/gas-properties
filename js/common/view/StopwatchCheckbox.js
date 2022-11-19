@@ -16,7 +16,7 @@ import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 export default class StopwatchCheckbox extends GasPropertiesCheckbox {
 
   /**
-   * @param {BooleanProperty} stopwatchVisibleProperty
+   * @param {Property.<boolean>} stopwatchVisibleProperty
    * @param {Object} [options]
    */
   constructor( stopwatchVisibleProperty, options ) {

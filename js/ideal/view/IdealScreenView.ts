@@ -1,18 +1,17 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IdealScreenView is the view for the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
-import IdealGasLawScreenView from '../../common/view/IdealGasLawScreenView.js';
+import IdealGasLawScreenView, { IdealGasLawScreenViewOptions } from '../../common/view/IdealGasLawScreenView.js';
 import ParticlesAccordionBox from '../../common/view/ParticlesAccordionBox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -20,28 +19,34 @@ import IdealModel from '../model/IdealModel.js';
 import IdealControlPanel from './IdealControlPanel.js';
 import IdealViewProperties from './IdealViewProperties.js';
 
+type SelfOptions = {
+  hasHoldConstantControls?: boolean;
+};
+
+type IdealScreenViewOptions = SelfOptions & IdealGasLawScreenViewOptions;
+
 export default class IdealScreenView extends IdealGasLawScreenView {
 
-  /**
-   * @param {IdealModel} model
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   */
-  constructor( model, tandem, options ) {
-    assert && assert( model instanceof IdealModel, `invalid model: ${model}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  private readonly viewProperties: IdealViewProperties;
 
-    options = merge( {
+  public constructor( model: IdealModel, tandem: Tandem, providedOptions?: IdealScreenViewOptions ) {
 
-      // superclass options
+    const options = optionize<IdealScreenViewOptions, SelfOptions, IdealGasLawScreenViewOptions>()( {
+
+      // SelfOptions
       hasHoldConstantControls: true,
+
+      // IdealScreenViewOptions
       resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty
-    }, options );
+    }, providedOptions );
 
     // view-specific Properties
     const viewProperties = new IdealViewProperties( tandem.createTandem( 'viewProperties' ) );
 
     super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem, options );
+
+    const collisionCounter = model.collisionCounter!;
+    assert && assert( collisionCounter );
 
     // Control panel at upper right
     const controlPanel = new IdealControlPanel(
@@ -51,7 +56,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       model.container.isOpenProperty,
       viewProperties.widthVisibleProperty,
       model.stopwatch.isVisibleProperty,
-      model.collisionCounter.visibleProperty, {
+      collisionCounter.visibleProperty, {
         hasHoldConstantControls: options.hasHoldConstantControls,
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
@@ -94,16 +99,10 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     const oopsPressureSmallDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsPressureSmallStringProperty );
     model.oopsEmitters.pressureSmallEmitter.addListener( () => { this.showDialog( oopsPressureSmallDialog ); } );
 
-    // @private used in methods
     this.viewProperties = viewProperties;
   }
 
-  /**
-   * Resets the screen.
-   * @protected
-   * @override
-   */
-  reset() {
+  protected override reset(): void {
     super.reset();
     this.viewProperties.reset();
   }

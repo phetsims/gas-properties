@@ -72,7 +72,7 @@ export default class BaseModel {
     } );
 
     // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
-    this.timeTransform = null;
+    this.timeTransform = TimeTransform.NORMAL;
 
     // Adjust the time transform
     this.timeSpeedProperty.link( speed => {

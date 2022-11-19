@@ -16,7 +16,7 @@ import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 export default class CollisionCounterCheckbox extends GasPropertiesCheckbox {
 
   /**
-   * @param {BooleanProperty} collisionCounterVisibleProperty
+   * @param {Property.<boolean>} collisionCounterVisibleProperty
    * @param {Object} [options]
    */
   constructor( collisionCounterVisibleProperty, options ) {

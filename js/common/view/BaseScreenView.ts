@@ -1,14 +1,13 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BaseScreenView is the base class for all ScreenViews in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenView from '../../../../joist/js/ScreenView.js';
-import merge from '../../../../phet-core/js/merge.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -17,32 +16,39 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import BaseModel from '../model/BaseModel.js';
 
-export default class BaseScreenView extends ScreenView {
+type SelfOptions = {
+  hasSlowMotion?: boolean;
+};
 
-  /**
-   * @param {BaseModel} model
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   */
-  constructor( model, tandem, options ) {
-    assert && assert( model instanceof BaseModel, `invalid model: ${model}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+export type BaseScreenViewOptions = SelfOptions;
 
-    options = merge( {
-      hasSlowMotion: false
-    }, options );
+export default abstract class BaseScreenView extends ScreenView {
 
-    assert && assert( !options.tandem, 'BaseScreenView sets tandem' );
-    options.tandem = tandem;
+  protected readonly model: BaseModel;
+
+  // subclass is responsible for position
+  protected readonly timeControlNode: TimeControlNode;
+
+  protected constructor( model: BaseModel, tandem: Tandem, providedOptions?: BaseScreenViewOptions ) {
+
+    const options = optionize<BaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
+
+      // SelfOptions
+      hasSlowMotion: false,
+
+      // ScreenViewOptions
+      tandem: tandem
+    }, providedOptions );
 
     super( options );
+
+    this.model = model;
 
     // The model bounds are equivalent to the visible bounds of ScreenView, as fills the browser window.
     this.visibleBoundsProperty.link( visibleBounds => {
       model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
     } );
 
-    // @protected Time Controls - subclass is responsible for position
     this.timeControlNode = new TimeControlNode( model.isPlayingProperty, {
 
       // optional Normal/Slow radio buttons
@@ -77,16 +83,9 @@ export default class BaseScreenView extends ScreenView {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
     this.addChild( resetAllButton );
-
-    // @protected
-    this.model = model;
   }
 
-  /**
-   * Resets the screen.
-   * @protected
-   */
-  reset() {
+  protected reset(): void {
     this.interruptSubtreeInput(); // cancel interactions that are in progress
     this.model.reset();
   }
@@ -95,24 +94,21 @@ export default class BaseScreenView extends ScreenView {
    * Steps the model using real time units.
    * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
    * Subclasses that need to add functionality should override stepView, not this method.
-   * @param {number} dt - time delta, in seconds
-   * @public
+   * @param dt - time delta, in seconds
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
+  public override step( dt: number ): void {
+    assert && assert( dt >= 0, `invalid dt: ${dt}` );
+    super.step( dt );
     if ( this.model.isPlayingProperty.value ) {
       this.stepView( dt );
     }
   }
 
   /**
-   * Steps the model using real time units. Intended to be overridden by subclasses.
-   * @param {number} dt - time delta, in seconds
-   * @public
+   * Steps the model using real time units. To be implemented by subclasses.
+   * @param dt - time delta, in seconds
    */
-  stepView( dt ) {
-    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
-  }
+  public abstract stepView( dt: number ): void;
 }
 
 gasProperties.register( 'BaseScreenView', BaseScreenView );

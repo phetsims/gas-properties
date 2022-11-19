@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * HoldConstantControl is the control for selecting which quantity should be held constant.
  *
@@ -9,10 +8,11 @@
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -22,41 +22,31 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 // constants
-const TEXT_OPTIONS = {
+const TEXT_OPTIONS: TextOptions = {
   font: GasPropertiesConstants.CONTROL_FONT,
   fill: GasPropertiesColors.textFillProperty,
   maxWidth: 175 // determined empirically
 };
 const SPACING = 12;
 
+type SelfOptions = EmptySelfOptions;
+
+type HoldConstantControlOptions = SelfOptions & PickOptional<VBoxOptions, 'maxWidth'> & PickRequired<VBoxOptions, 'tandem'>;
+
 export default class HoldConstantControl extends VBox {
 
-  /**
-   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
-   * @param {ReadOnlyProperty.<number>>} numberOfParticlesProperty
-   * @param {NumberProperty} pressureProperty
-   * @param {ReadOnlyProperty.<boolean>} isContainerOpenProperty
-   * @param {Object} [options]
-   */
-  constructor( holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
-      `invalid holdConstantProperty: ${holdConstantProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( pressureProperty instanceof NumberProperty,
-      `invalid pressureProperty: ${pressureProperty}` );
-    assert && assert( isContainerOpenProperty instanceof ReadOnlyProperty,
-      `invalid isContainerOpenProperty: ${isContainerOpenProperty}` );
+  public constructor( holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      numberOfParticlesProperty: TReadOnlyProperty<number>,
+                      pressureProperty: TReadOnlyProperty<number>,
+                      isContainerOpenProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: HoldConstantControlOptions ) {
 
-    options = merge( {
+    const options = optionize<HoldConstantControlOptions, SelfOptions, VBoxOptions>()( {
 
-      // superclass options
+      // VBoxOptions
       align: 'left',
-      spacing: SPACING,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      spacing: SPACING
+    }, providedOptions );
 
     const titleText = new Text( GasPropertiesStrings.holdConstant.titleStringProperty, {
       font: GasPropertiesConstants.TITLE_FONT,
@@ -68,27 +58,27 @@ export default class HoldConstantControl extends VBox {
     const items = [
       {
         value: HoldConstant.NOTHING,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
+        createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
         tandemName: 'nothingRadioButton'
       },
       {
         value: HoldConstant.VOLUME,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
+        createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
         tandemName: 'volumeRadioButton'
       },
       {
         value: HoldConstant.TEMPERATURE,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
+        createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
         tandemName: 'temperatureRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_V,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
+        createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
         tandemName: 'pressureVRadioButton'
       },
       {
         value: HoldConstant.PRESSURE_T,
-        createNode: tandem => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
+        createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
         tandemName: 'pressureTRadioButton'
       }
     ];
@@ -101,10 +91,7 @@ export default class HoldConstantControl extends VBox {
       tandem: options.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    assert && assert( !options.children, 'HoldConstantControl sets children' );
-    options = merge( {
-      children: [ titleText, radioButtonGroup ]
-    }, options );
+    options.children = [ titleText, radioButtonGroup ];
 
     super( options );
 

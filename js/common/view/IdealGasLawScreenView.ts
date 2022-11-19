@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IdealGasLawScreenView is the ScreenView base class for screens that are based on the Ideal Gas Law.
  *
@@ -24,12 +23,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PointerCoordinatesNode from '../../../../scenery-phet/js/PointerCoordinatesNode.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Node, TColor } from '../../../../scenery/js/imports.js';
+import Dialog from '../../../../sun/js/Dialog.js';
 import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
@@ -39,7 +39,7 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import IdealGasLawModel from '../model/IdealGasLawModel.js';
 import ParticleType from '../model/ParticleType.js';
-import BaseScreenView from './BaseScreenView.js';
+import BaseScreenView, { BaseScreenViewOptions } from './BaseScreenView.js';
 import CollisionCounterNode from './CollisionCounterNode.js';
 import ContainerWidthNode from './ContainerWidthNode.js';
 import EraseParticlesButton from './EraseParticlesButton.js';
@@ -55,26 +55,32 @@ import PressureGaugeNode from './PressureGaugeNode.js';
 import RegionsNode from './RegionsNode.js';
 import ReturnLidButton from './ReturnLidButton.js';
 
+type SelfOptions = {
+  resizeGripColor?: TColor;
+};
+
+export type IdealGasLawScreenViewOptions = SelfOptions & BaseScreenViewOptions;
+
 export default class IdealGasLawScreenView extends BaseScreenView {
 
-  /**
-   * @param {IdealGasLawModel} model
-   * @param {Property.<ParticleType>} particleTypeProperty
-   * @param {BooleanProperty} widthVisibleProperty
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   */
-  constructor( model, particleTypeProperty, widthVisibleProperty, tandem, options ) {
-    assert && assert( model instanceof IdealGasLawModel, `invalid model: ${model}` );
-    assert && assert( particleTypeProperty instanceof Property,
-      `invalid particleTypeProperty: ${particleTypeProperty}` );
-    assert && assert( widthVisibleProperty instanceof BooleanProperty,
-      `invalid widthVisibleProperty: ${widthVisibleProperty}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  private readonly containerNode: IdealGasLawContainerNode;
+  private readonly particleSystemNode: IdealGasLawParticleSystemNode;
+  private readonly regionsNode: RegionsNode | null;
+  private readonly heavyBicyclePumpNode: GasPropertiesBicyclePumpNode;
+  private readonly lightBicyclePumpNode: GasPropertiesBicyclePumpNode;
+  private readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
 
-    options = merge( {
+  public constructor( model: IdealGasLawModel,
+                      particleTypeProperty: Property<ParticleType>,
+                      widthVisibleProperty: Property<boolean>,
+                      tandem: Tandem,
+                      providedOptions?: IdealGasLawScreenViewOptions ) {
+
+    const options = optionize<IdealGasLawScreenViewOptions, SelfOptions, BaseScreenViewOptions>()( {
+
+      // SelfOptions
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty
-    }, options );
+    }, providedOptions );
 
     super( model, tandem, options );
 
@@ -92,7 +98,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     if ( model.container.leftWallDoesWork ) {
 
       // Resizing the container un-pauses the sim, and the left wall will do work on particles that collide with it.
-      resizeHandleIsPressedListener = isPressed => {
+      resizeHandleIsPressedListener = ( isPressed: boolean ) => {
         if ( isPressed && !model.isPlayingProperty.value ) {
           model.isPlayingProperty.value = true;
         }
@@ -103,7 +109,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       // Resizing the container pauses the sim and grays out the particles. The moving wall will have
       // no affect on the velocity of the particles.  The particles will be redistributed in the new volume
       // when the resize handle is released.
-      resizeHandleIsPressedListener = isPressed => {
+      resizeHandleIsPressedListener = ( isPressed: boolean ) => {
         if ( isPressed ) {
 
           // save playing state, pause the sim, and disable time controls
@@ -245,6 +251,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       model.holdConstantProperty,
       model.isPlayingProperty,
       model.particleSystem.numberOfParticlesProperty,
+      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
       model.temperatureModel.temperatureProperty, {
         left: heaterCoolerNodeLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
@@ -319,7 +326,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperatureStringProperty );
     model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { this.showDialog( oopsMaximumTemperatureDialog ); } );
 
-    // @private used in methods
     this.containerNode = containerNode;
     this.particleSystemNode = particleSystemNode;
     this.regionsNode = regionsNode;
@@ -328,12 +334,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     this.heaterCoolerNode = heaterCoolerNode;
   }
 
-  /**
-   * Resets the screen.
-   * @protected
-   * @override
-   */
-  reset() {
+  protected override reset(): void {
     super.reset();
     this.heavyBicyclePumpNode.reset();
     this.lightBicyclePumpNode.reset();
@@ -341,13 +342,10 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
   /**
    * Steps the view using real time units.
-   * @param {number} dt - delta time, in seconds
-   * @public
-   * @override
+   * @param dt - delta time, in seconds
    */
-  stepView( dt ) {
-    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
-    super.stepView( dt );
+  public override stepView( dt: number ): void {
+    assert && assert( dt >= 0, `invalid dt: ${dt}` );
     this.containerNode.step( dt );
     this.particleSystemNode.update();
     this.regionsNode && this.regionsNode.update();
@@ -356,10 +354,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
   /**
    * Shows a dialog, and cancels any in-progress interactions.
-   * @param {Dialog} dialog
-   * @public
    */
-  showDialog( dialog ) {
+  public showDialog( dialog: Dialog ): void {
     this.interruptSubtreeInput();
     dialog.show();
   }

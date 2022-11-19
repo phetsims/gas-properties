@@ -16,7 +16,7 @@ import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 export default class WidthCheckbox extends GasPropertiesCheckbox {
 
   /**
-   * @param {BooleanProperty} widthVisibleProperty
+   * @param {Property.<boolean>} widthVisibleProperty
    * @param {Object} [options]
    */
   constructor( widthVisibleProperty, options ) {
