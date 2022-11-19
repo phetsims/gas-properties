@@ -10,6 +10,7 @@
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Font, HBox, Node, RichText, TColor } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
@@ -26,7 +27,9 @@ type SelfOptions = {
   font?: Font;
 };
 
-export type GasPropertiesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+export type GasPropertiesCheckboxOptions = SelfOptions &
+  PickOptional<CheckboxOptions, 'spacing'> &
+  PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class GasPropertiesCheckbox extends Checkbox {
 
