@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * HoldConstantControl is the control for selecting which quantity should be held constant.
  *

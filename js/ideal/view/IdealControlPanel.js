@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IdealControlPanel is the control panel that appears in the upper-right corner of the 'Ideal' screen.
  *
