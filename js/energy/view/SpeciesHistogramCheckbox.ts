@@ -1,7 +1,7 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * SpeciesHistogramCheckbox is the base class for checkboxes that show histogram data for a specific particle species.
+ * SpeciesHistogramCheckbox is the checkbox that shows histogram data for a specific particle species.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,14 +14,17 @@ import Particle from '../../common/model/Particle.js';
 import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
+import HeavyParticle from '../../common/model/HeavyParticle.js';
+import LightParticle from '../../common/model/LightParticle.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type SpeciesHistogramCheckboxOptions = SelfOptions & PickRequired<GasPropertiesCheckboxOptions, 'tandem'>;
+export type SpeciesHistogramCheckboxOptions = SelfOptions & PickRequired<GasPropertiesCheckboxOptions, 'tandem'>;
 
 export default class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 
-  public constructor( speciesVisibleProperty: Property<boolean>, particle: Particle,
+  // private - use static create methods
+  private constructor( speciesVisibleProperty: Property<boolean>, particle: Particle,
                       modelViewTransform: ModelViewTransform2, providedOptions: SpeciesHistogramCheckboxOptions ) {
 
     const options = optionize<SpeciesHistogramCheckboxOptions, SelfOptions, GasPropertiesCheckboxOptions>()( {
@@ -32,6 +35,26 @@ export default class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
     }, providedOptions );
 
     super( speciesVisibleProperty, options );
+  }
+
+  /**
+   * Creates a checkbox for heavy-particle species.
+   */
+  public static createHeavyParticlesCheckbox(
+    speciesVisibleProperty: Property<boolean>,
+    modelViewTransform: ModelViewTransform2, providedOptions: SpeciesHistogramCheckboxOptions ): SpeciesHistogramCheckbox {
+    return new SpeciesHistogramCheckbox( speciesVisibleProperty, new HeavyParticle(),
+      modelViewTransform, providedOptions );
+  }
+
+  /**
+   * Creates a checkbox for light-particle species.
+   */
+  public static createLightParticlesCheckbox(
+    speciesVisibleProperty: Property<boolean>,
+    modelViewTransform: ModelViewTransform2, providedOptions: SpeciesHistogramCheckboxOptions ): SpeciesHistogramCheckbox {
+    return new SpeciesHistogramCheckbox( speciesVisibleProperty, new LightParticle(),
+      modelViewTransform, providedOptions );
   }
 }
 
