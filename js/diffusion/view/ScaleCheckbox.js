@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ScaleCheckbox is the checkbox used to show/hide the scale on the Diffusion container.
  *

@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * CenterOfMassCheckbox is the checkbox used to show/hide the center-of-mass indicators on the container.
  *

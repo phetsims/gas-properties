@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ParticleFlowRateCheckbox is the checkbox used to show/hide the particle flow rate indicators on the container.
  *

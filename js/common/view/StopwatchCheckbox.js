@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * StopwatchCheckbox is the 'Stopwatch' check box, used to control visibility of the stopwatch.
  *

@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * WidthCheckbox is a checkbox to show/hide the width of the container.
  *

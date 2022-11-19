@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * CollisionCounterCheckbox is the 'Collision Counter' check box, used to control visibility of the collision counter.
  *
