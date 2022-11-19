@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesCheckbox is a specialization of Checkbox for this sim.  It can be labeled with text and/or an icon,
  * and has the correct options and color profiling for this sim.
@@ -8,35 +7,46 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { HBox, RichText } from '../../../../scenery/js/imports.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Font, HBox, Node, RichText, TColor } from '../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
+type SelfOptions = {
+  stringProperty?: TReadOnlyProperty<string> | null; // optional text label
+  icon?: Node | null; // optional icon, to the right of text
+  textFill?: TColor;
+  textMaxWidth?: number | null;
+  textIconSpacing?: number; // horizontal space between text and icon
+  font?: Font;
+};
+
+export type GasPropertiesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+
 export default class GasPropertiesCheckbox extends Checkbox {
 
-  /**
-   * @param {BooleanProperty} booleanProperty
-   * @param {Object} [options]
-   */
-  constructor( booleanProperty, options ) {
-    assert && assert( booleanProperty instanceof BooleanProperty, `invalid booleanProperty: ${booleanProperty}` );
+  public constructor( booleanProperty: Property<boolean>, providedOptions: GasPropertiesCheckboxOptions ) {
 
-    options = merge( {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
-      stringProperty: null, // {TReadOnlyProperty.<string>|null} optional text label
-      icon: null, // {Node|null} optional icon, to the right of text
-      textFill: GasPropertiesColors.textFillProperty,
-      textMaxWidth: null,
-      textIconSpacing: 10, // horizontal space between text and icon
-      font: GasPropertiesConstants.CONTROL_FONT,
+    const options = optionize4<GasPropertiesCheckboxOptions, SelfOptions, CheckboxOptions>()(
+      {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
 
-      // superclass options
-      checkboxColor: GasPropertiesColors.checkboxStrokeProperty,
-      checkboxColorBackground: GasPropertiesColors.checkboxFillProperty
-    }, options );
+        // SelfOptions
+        stringProperty: null,
+        icon: null,
+        textFill: GasPropertiesColors.textFillProperty,
+        textMaxWidth: null,
+        textIconSpacing: 10,
+        font: GasPropertiesConstants.CONTROL_FONT,
+
+        // CheckboxOptions
+        checkboxColor: GasPropertiesColors.checkboxStrokeProperty,
+        checkboxColorBackground: GasPropertiesColors.checkboxFillProperty
+      }, providedOptions );
 
     assert && assert( options.stringProperty || options.icon, 'stringProperty or icon is required' );
 
@@ -54,7 +64,7 @@ export default class GasPropertiesCheckbox extends Checkbox {
       contentChildren.push( options.icon );
     }
 
-    let content = null;
+    let content;
     if ( contentChildren.length === 1 ) {
       content = contentChildren[ 0 ];
     }
