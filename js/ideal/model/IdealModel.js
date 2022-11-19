@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IdealModel is the top-level model for the 'Ideal' screen.
  * It adds no additional functionality to the base class, but is provided for symmetry in the model-view type hierarchy.
