@@ -1,5 +1,6 @@
 // Copyright 2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PressureNoiseCheckbox is the checkbox labeled 'Pressure Noise' that appears in the Preferences dialog.
  *
