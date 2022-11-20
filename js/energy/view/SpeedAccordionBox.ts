@@ -7,7 +7,6 @@
  */
 
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
@@ -18,7 +17,7 @@ import SpeedHistogramNode from './SpeedHistogramNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type SpeedAccordionBoxOptions = SelfOptions & PickRequired<EnergyAccordionBoxOptions, 'tandem'>;
+type SpeedAccordionBoxOptions = SelfOptions & EnergyAccordionBoxOptions;
 
 export default class SpeedAccordionBox extends EnergyAccordionBox {
 

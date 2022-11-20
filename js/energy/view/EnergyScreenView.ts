@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnergyScreenView is the view for the 'Energy' screen.
  *
@@ -27,13 +26,11 @@ const VBOX_SPACING = 10;
 
 export default class EnergyScreenView extends IdealGasLawScreenView {
 
-  /**
-   * @param {EnergyModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
-    assert && assert( model instanceof EnergyModel, `invalid model: ${model}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  private readonly viewProperties: EnergyViewProperties;
+  private readonly speedAccordionBox: SpeedAccordionBox;
+  private readonly kineticEnergyAccordionBox: KineticEnergyAccordionBox;
+
+  public constructor( model: EnergyModel, tandem: Tandem ) {
 
     // view-specific Properties
     const viewProperties = new EnergyViewProperties( tandem.createTandem( 'viewProperties' ) );
@@ -42,6 +39,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
 
     // Average Speed
     const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
+      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
       model.averageSpeedModel.heavyAverageSpeedProperty,
       model.averageSpeedModel.lightAverageSpeedProperty,
       model.modelViewTransform, {
@@ -98,7 +96,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
     // Injection Temperature accordion box
     const injectionTemperatureAccordionBox = new InjectionTemperatureAccordionBox(
       model.temperatureModel.controlTemperatureEnabledProperty,
-      model.temperatureModel.initialTemperatureProperty, {
+      model.temperatureModel.initialTemperatureProperty.asRanged(), {
         expandedProperty: viewProperties.injectionTemperatureExpandedProperty,
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         tandem: tandem.createTandem( 'injectionTemperatureAccordionBox' )
@@ -123,22 +121,16 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
     this.addChild( rightPanels );
     rightPanels.moveToBack();
 
-    // @private used in methods
     this.viewProperties = viewProperties;
     this.speedAccordionBox = speedAccordionBox;
     this.kineticEnergyAccordionBox = kineticEnergyAccordionBox;
   }
 
-  /**
-   * Resets the screen.
-   * @protected
-   * @override
-   */
-  reset() {
-    super.reset();
+  protected override reset(): void {
     this.viewProperties.reset();
     this.speedAccordionBox.reset();
     this.kineticEnergyAccordionBox.reset();
+    super.reset();
   }
 }
 

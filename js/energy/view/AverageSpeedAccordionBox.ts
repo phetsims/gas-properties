@@ -28,7 +28,7 @@ type SelfOptions = {
   fixedWidth?: number;
 };
 
-type AverageSpeedAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+type AverageSpeedAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
 export default class AverageSpeedAccordionBox extends AccordionBox {
 

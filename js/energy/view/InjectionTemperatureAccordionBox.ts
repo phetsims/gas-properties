@@ -39,7 +39,7 @@ type SelfOptions = {
   fixedWidth?: number;
 };
 
-type InjectionTemperatureAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+type InjectionTemperatureAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
 export default class InjectionTemperatureAccordionBox extends AccordionBox {
 

@@ -25,7 +25,7 @@ type SelfOptions = {
   fixedWidth?: number;
 };
 
-export type EnergyAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+export type EnergyAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
 export default class EnergyAccordionBox extends AccordionBox {
 
