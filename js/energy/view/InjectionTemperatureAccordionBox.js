@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * InjectionTemperatureAccordionBox contains controls related to the temperature used to compute the initial velocity
  * of particles when they are injected into the container.
