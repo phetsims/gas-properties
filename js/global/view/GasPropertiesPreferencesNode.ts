@@ -1,6 +1,5 @@
 // Copyright 2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesPreferencesNode is the user interface for sim-specific preferences, accessed via the Preferences dialog.
  * These preferences are global, and affect all screens.
@@ -11,27 +10,28 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.ts';
-import { VBox } from '../../../../scenery/js/imports.ts';
-import Tandem from '../../../../tandem/js/Tandem.ts';
-import gasProperties from '../../gasProperties.ts';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import gasProperties from '../../gasProperties.js';
 import GasPropertiesPreferences from '../model/GasPropertiesPreferences.js';
-import { PressureNoiseCheckbox } from './PressureNoiseCheckbox.ts';
+import { PressureNoiseCheckbox } from './PressureNoiseCheckbox.js';
+import { Node, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type GasPropertiesPreferencesNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class GasPropertiesPreferencesNode extends VBox {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  private readonly disposeGasPropertiesPreferencesNode: () => void;
 
-    options = merge( {
+  public constructor( providedOptions: GasPropertiesPreferencesNodeOptions ) {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<GasPropertiesPreferencesNodeOptions, SelfOptions, VBoxOptions>()( {
+      // empty optionize, because we're setting options.children below
+    }, providedOptions );
 
-    const children = [];
+    const children: Node[] = [];
 
     // Pressure Noise checkbox
     const pressureNoiseCheckbox = new PressureNoiseCheckbox( GasPropertiesPreferences.pressureNoiseProperty, {
@@ -39,22 +39,16 @@ export default class GasPropertiesPreferencesNode extends VBox {
     } );
     children.push( pressureNoiseCheckbox );
 
-    assert && assert( !options.children, 'GasPropertiesPreferencesNode sets children' );
     options.children = children;
 
     super( options );
 
-    // @private
     this.disposeGasPropertiesPreferencesNode = () => {
       children.forEach( child => child.dispose() );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeGasPropertiesPreferencesNode();
     super.dispose();
   }
