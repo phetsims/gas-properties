@@ -1,4 +1,4 @@
-// Copyright 2019-2022, University of Colorado Boulder
+// Copyright 2022, University of Colorado Boulder
 
 /**
  * ParticleFlowRateCheckbox is the checkbox used to show/hide the particle flow rate indicators on the container.
