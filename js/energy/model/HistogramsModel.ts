@@ -1,53 +1,88 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * HistogramsModel is a sub-model in the Energy screen, responsible for the Speed and Kinetic Energy histograms.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import Particle from '../../common/model/Particle.js';
 import ParticleSystem from '../../common/model/ParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type HistogramsModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class HistogramsModel {
 
+  private readonly particleSystem: ParticleSystem;
+  private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
+  private readonly samplePeriod: number;
+
+  public readonly numberOfBins: number; // number of bins, common to both histograms
+  public readonly speedBinWidth: number; // bin width for the Speed histogram, in pm/ps
+  public readonly kineticEnergyBinWidth: number; // bin width for the Kinetic Energy histogram, in AMU * pm^2 / ps^2;
+
+  // Speed bin counts
+  public readonly heavySpeedBinCountsProperty: Property<number[]>;
+  public readonly lightSpeedBinCountsProperty: Property<number[]>;
+  public readonly allSpeedBinCountsProperty: Property<number[]>;
+
+  // Kinetic Energy bin counts
+  public readonly heavyKineticEnergyBinCountsProperty: Property<number[]>;
+  public readonly lightKineticEnergyBinCountsProperty: Property<number[]>;
+  public readonly allKineticEnergyBinCountsProperty: Property<number[]>;
+
+  // the y-axis scale for all histograms
+  public readonly yScaleProperty: Property<number>;
+
+  // emits when the bin counts have been updated
+  public readonly binCountsUpdatedEmitter: Emitter;
+
+  // speed samples
+  private readonly heavySpeedSamples: number[][]; // Speed samples for heavy particles
+  private readonly lightSpeedSamples: number[][]; // Speed samples for light particles
+
+  // Kinetic Energy samples
+  private readonly heavyKineticEnergySamples: number[][]; // Kinetic Energy samples for heavy particles
+  private readonly lightKineticEnergySamples: number[][]; // Kinetic Energy samples for light particles
+
+  // for measuring sample period
+  private dtAccumulator: number;
+  private numberOfSamples: number;
+
   /**
-   * @param {ParticleSystem} particleSystem
-   * @param {BooleanProperty} isPlayingProperty
-   * @param {number} samplePeriod - data is averaged over this period, in ps
-   * @param {Object} [options]
+   * @param particleSystem
+   * @param isPlayingProperty
+   * @param samplePeriod - data is averaged over this period, in ps
+   * @param providedOptions
    */
-  constructor( particleSystem, isPlayingProperty, samplePeriod, options ) {
-    assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
-    assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
-    assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
-      `invalid samplePeriod: ${samplePeriod}` );
+  public constructor( particleSystem: ParticleSystem, isPlayingProperty: TReadOnlyProperty<boolean>,
+                      samplePeriod: number, providedOptions: HistogramsModelOptions ) {
+    assert && assert( samplePeriod > 0, `invalid samplePeriod: ${samplePeriod}` );
 
-    options = merge( {
+    const options = providedOptions;
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    // @private
     this.particleSystem = particleSystem;
     this.isPlayingProperty = isPlayingProperty;
     this.samplePeriod = samplePeriod;
 
-    // @public (read-only) values chosen in https://github.com/phetsims/gas-properties/issues/52
-    this.numberOfBins = 19;  // number of bins, common to both histograms
-    this.speedBinWidth = 170; // bin width for the Speed histogram, in pm/ps
-    this.kineticEnergyBinWidth = 8E5; // bin width for the Kinetic Energy histogram, in AMU * pm^2 / ps^2;
+    // values chosen in https://github.com/phetsims/gas-properties/issues/52
+    this.numberOfBins = 19;
+    this.speedBinWidth = 170;
+    this.kineticEnergyBinWidth = 8E5;
 
     // Initialize histograms with 0 in all bins
     const emptyBins = [];
@@ -56,40 +91,41 @@ export default class HistogramsModel {
     }
 
     const binCountsPropertyOptions = {
-      isValidValue: value => ( Array.isArray( value ) && value.length === this.numberOfBins ),
+      isValidValue: ( binCounts: number[] ) => ( binCounts.length === this.numberOfBins ),
       phetioValueType: ArrayIO( NumberIO ),
       phetioReadOnly: true // derived from the state of the particle system
     };
 
-    // @public (read-only) Speed bin counts
     this.heavySpeedBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
       tandem: options.tandem.createTandem( 'heavySpeedBinCountsProperty' ),
       phetioDocumentation: 'Speed histogram bin counts for heavy particles'
     } ) );
+
     this.lightSpeedBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
       tandem: options.tandem.createTandem( 'lightSpeedBinCountsProperty' ),
       phetioDocumentation: 'Speed histogram bin counts for light particles'
     } ) );
+
     this.allSpeedBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
       tandem: options.tandem.createTandem( 'allSpeedBinCountsProperty' ),
       phetioDocumentation: 'Speed histogram bin counts for all particles'
     } ) );
 
-    // @public (read-only) Kinetic Energy bin counts
     this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
       tandem: options.tandem.createTandem( 'heavyKineticEnergyBinCountsProperty' ),
       phetioDocumentation: 'Kinetic Energy histogram bin counts for heavy particles'
     } ) );
+
     this.lightKineticEnergyBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
       tandem: options.tandem.createTandem( 'lightKineticEnergyBinCountsProperty' ),
       phetioDocumentation: 'Kinetic Energy histogram bin counts for light particles'
     } ) );
+
     this.allKineticEnergyBinCountsProperty = new Property( emptyBins, merge( {}, binCountsPropertyOptions, {
       tandem: options.tandem.createTandem( 'allKineticEnergyBinCountsProperty' ),
       phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
     } ) );
 
-    // @public (read-only) the y-axis scale for all histograms
     this.yScaleProperty = new NumberProperty( GasPropertiesConstants.HISTOGRAM_LINE_SPACING, {
       isValidValue: value => ( value >= GasPropertiesConstants.HISTOGRAM_LINE_SPACING ),
       tandem: options.tandem.createTandem( 'yScaleProperty' ),
@@ -97,18 +133,14 @@ export default class HistogramsModel {
       phetioDocumentation: 'scale of the y-axis for the Speed and Kinetic Energy histograms'
     } );
 
-    // @public emits when the bin counts have been updated
     this.binCountsUpdatedEmitter = new Emitter();
 
-    // @private Speed samples
-    this.heavySpeedSamples = []; // {number[][]} Speed samples for heavy particles
-    this.lightSpeedSamples = []; // {number[][]} Speed samples for light particles
+    this.heavySpeedSamples = [];
+    this.lightSpeedSamples = [];
 
-    // @private Kinetic Energy samples
-    this.heavyKineticEnergySamples = []; // {number[][]} Kinetic Energy samples for heavy particles
-    this.lightKineticEnergySamples = []; // {number[][]} Kinetic Energy samples for light particles
+    this.heavyKineticEnergySamples = [];
+    this.lightKineticEnergySamples = [];
 
-    // @private for measuring sample period
     this.dtAccumulator = 0;
     this.numberOfSamples = 0;
 
@@ -126,19 +158,14 @@ export default class HistogramsModel {
     } );
   }
 
-  /**
-   * Resets this model.
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.clearSamples();
   }
 
   /**
    * Clears the sample data.
-   * @private
    */
-  clearSamples() {
+  private clearSamples(): void {
 
     this.dtAccumulator = 0;
     this.numberOfSamples = 0;
@@ -154,11 +181,10 @@ export default class HistogramsModel {
 
   /**
    * Steps the histograms.
-   * @param {number} dt - time delta, in ps
-   * @public
+   * @param dt - time delta, in ps
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     // Accumulate dt
     this.dtAccumulator += dt;
@@ -174,9 +200,8 @@ export default class HistogramsModel {
 
   /**
    * Takes a data sample for histograms.
-   * @private
    */
-  sample() {
+  private sample(): void {
     assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 0 if called while the sim is paused' );
 
@@ -193,9 +218,8 @@ export default class HistogramsModel {
 
   /**
    * Updates the histograms using the current sample data.
-   * @private
    */
-  update() {
+  private update(): void {
     assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 1 if called while the sim is paused' );
 
@@ -218,8 +242,8 @@ export default class HistogramsModel {
     // Find the maximum bin count for all histograms. It's sufficient to look at the 'all' histograms.
     // This is used to determine the y-axis scale, which must be the same for both histograms.
     const maxBinCount = Math.max(
-      _.max( this.allSpeedBinCountsProperty.value ),
-      _.max( this.allKineticEnergyBinCountsProperty.value ) );
+      getMaxBinCount( this.allSpeedBinCountsProperty.value ),
+      getMaxBinCount( this.allKineticEnergyBinCountsProperty.value ) );
 
     // Adjust the y-axis scale to accommodate the maximum bin count.
     // Increase the y scale a bit so that there's always a little space above maxBinCount.
@@ -237,13 +261,20 @@ export default class HistogramsModel {
 }
 
 /**
- * Gets the speed values for a set of particles, in pm/ps.
- * @param {Particle[]} particles
- * @returns {number[]}
+ * Gets the maximum in a set of bin counts, zero if the array is empty.
  */
-function getSpeedValues( particles ) {
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+function getMaxBinCount( binCounts: number[] ): number {
+  let maxBinCount = 0;
+  if ( binCounts.length > 0 ) {
+    maxBinCount = _.max( binCounts )!;
+  }
+  return maxBinCount;
+}
 
+/**
+ * Gets the speed values for a set of particles, in pm/ps.
+ */
+function getSpeedValues( particles: Particle[] ): number[] {
   const values = [];
   for ( let i = particles.length - 1; i >= 0; i-- ) {
     values.push( particles[ i ].velocity.magnitude );
@@ -253,12 +284,8 @@ function getSpeedValues( particles ) {
 
 /**
  * Gets the kinetic energy values for a set of particles, in in AMU * pm^2 / ps^2.
- * @param {Particle[]} particles
- * @returns {number[]}
  */
-function getKineticEnergyValues( particles ) {
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-
+function getKineticEnergyValues( particles: Particle[] ): number[] {
   const values = [];
   for ( let i = particles.length - 1; i >= 0; i-- ) {
     values.push( particles[ i ].getKineticEnergy() );
@@ -268,15 +295,10 @@ function getKineticEnergyValues( particles ) {
 
 /**
  * Converts a collection of samples to bin counts.
- * @param {number[][]} sampleArrays
- * @param {number} numberOfBins
- * @param {number} binWidth
- * @returns {number[]}
  */
-function samplesToBinCounts( sampleArrays, numberOfBins, binWidth ) {
-  assert && assert( Array.isArray( sampleArrays ), `invalid sampleArrays: ${sampleArrays}` );
-  assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
-  assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
+function samplesToBinCounts( sampleArrays: number[][], numberOfBins: number, binWidth: number ): number[] {
+  assert && assert( numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
+  assert && assert( binWidth > 0, `invalid binWidth: ${binWidth}` );
 
   // Initialize the bins with 0 counts
   const binCounts = [];
@@ -284,7 +306,7 @@ function samplesToBinCounts( sampleArrays, numberOfBins, binWidth ) {
     binCounts[ i ] = 0;
   }
 
-  // Bin all of the sample data, for total binCounts
+  // Bin the sample data, for total binCounts
   for ( let i = sampleArrays.length - 1; i >= 0; i-- ) {
     const values = sampleArrays[ i ];
     for ( let j = values.length - 1; j >= 0; j-- ) {
@@ -308,13 +330,8 @@ function samplesToBinCounts( sampleArrays, numberOfBins, binWidth ) {
 
 /**
  * Sums the heavy and light bin counts to produce the bin counts for all particles.
- * @param {number[]} heavyBinCounts
- * @param {number[]} lightBinCounts
- * @returns {number[]}
  */
-function sumBinCounts( heavyBinCounts, lightBinCounts ) {
-  assert && assert( Array.isArray( heavyBinCounts ), `invalid heavyBinCounts: ${heavyBinCounts}` );
-  assert && assert( Array.isArray( lightBinCounts ), `invalid heavyBinCounts: ${lightBinCounts}` );
+function sumBinCounts( heavyBinCounts: number[], lightBinCounts: number[] ): number[] {
   assert && assert( heavyBinCounts.length === lightBinCounts.length, 'lengths should be the same' );
 
   const sumBinCounts = [];

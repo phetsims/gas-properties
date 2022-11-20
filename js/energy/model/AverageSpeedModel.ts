@@ -22,7 +22,7 @@ import gasProperties from '../../gasProperties.js';
 // constants
 const AVERAGE_SPEED_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm/ps',
-  isValidValue: value => ( value === null || value >= 0 ),
+  isValidValue: averageSpeed => ( averageSpeed === null || averageSpeed >= 0 ),
   phetioValueType: NullableIO( NumberIO ),
   phetioReadOnly: true // derived from the state of the particle system
 };
