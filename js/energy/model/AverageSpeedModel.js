@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * AverageSpeedModel is a sub-model in the Energy screen, responsible for data that is displayed in the
  * Average Speed accordion box.
