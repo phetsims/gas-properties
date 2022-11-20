@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnergyModel is the top-level model for the 'Energy' screen.
  *
@@ -19,11 +18,10 @@ const SAMPLE_PERIOD = 1; // sample period for Average Speed and histograms, in p
 
 export default class EnergyModel extends IdealGasLawModel {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  public readonly histogramsModel: HistogramsModel;
+  public readonly averageSpeedModel: AverageSpeedModel;
+
+  public constructor( tandem: Tandem ) {
 
     super( tandem, {
       holdConstant: HoldConstant.VOLUME,
@@ -40,36 +38,27 @@ export default class EnergyModel extends IdealGasLawModel {
       throw new Error( 'container width is fixed in the Energy screen' );
     } );
 
-    // @public (read-only)
     this.histogramsModel = new HistogramsModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD, {
       tandem: tandem.createTandem( 'histogramsModel' )
     } );
 
-    // @public
     this.averageSpeedModel = new AverageSpeedModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD, {
       tandem: tandem.createTandem( 'averageSpeedModel' )
     } );
   }
 
-  /**
-   * Resets this model.
-   * @public
-   * @override
-   */
-  reset() {
+  public override reset(): void {
     super.reset();
     this.averageSpeedModel.reset();
     this.histogramsModel.reset();
   }
 
   /**
-   * Steps the model using model time units.
-   * @param {number} dt - time delta, in ps
-   * @protected
-   * @override
+   * Steps the model, using model time units.
+   * @param dt - time delta, in ps
    */
-  stepModelTime( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  protected override stepModelTime( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     super.stepModelTime( dt );
     this.averageSpeedModel.step( dt );
