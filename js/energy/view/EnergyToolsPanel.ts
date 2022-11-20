@@ -1,43 +1,43 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnergyToolsPanel is the panel that appears in the upper-right corner of the 'Energy' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import Panel from '../../../../sun/js/Panel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
 
+type SelfOptions = {
+  fixedWidth?: number;
+};
+
+type EnergyToolsPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+
 export default class EnergyToolsPanel extends Panel {
 
-  /**
-   * @param {BooleanProperty} widthVisibleProperty
-   * @param {BooleanProperty} stopwatchVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( widthVisibleProperty, stopwatchVisibleProperty, options ) {
-    assert && assert( widthVisibleProperty instanceof BooleanProperty,
-      `invalid widthVisibleProperty: ${widthVisibleProperty}` );
-    assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
-      `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
+  public constructor( widthVisibleProperty: Property<boolean>, stopwatchVisibleProperty: Property<boolean>,
+                      providedOptions: EnergyToolsPanelOptions ) {
 
-    options = merge( {}, GasPropertiesConstants.PANEL_OPTIONS, {
-      fixedWidth: 100,
-      xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
+    const options = optionize4<EnergyToolsPanelOptions, SelfOptions, PanelOptions>()(
+      {}, GasPropertiesConstants.PANEL_OPTIONS, {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+        // SelfOptions
+        fixedWidth: 100,
+
+        // PanelOptions
+        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
+      }, providedOptions );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
