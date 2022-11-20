@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * AverageSpeedAccordionBox displays the average speed (in m/s) for each type of particle in the container.
  *
@@ -9,15 +8,15 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
+import NumberDisplay, { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, HStrut, Text, VBox } from '../../../../scenery/js/imports.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
@@ -25,38 +24,33 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
+type SelfOptions = {
+  fixedWidth?: number;
+};
+
+type AverageSpeedAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+
 export default class AverageSpeedAccordionBox extends AccordionBox {
 
-  /**
-   * @param {Property.<number|null>} heavyAverageSpeedProperty - average speed of heavy particles, in pm/ps
-   * @param {Property.<number|null>} lightAverageSpeedProperty - average speed of light particles, in pm/ps
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( heavyAverageSpeedProperty, lightAverageSpeedProperty, modelViewTransform, options ) {
-    assert && assert( heavyAverageSpeedProperty instanceof Property,
-      `invalid heavyAverageSpeedProperty: ${heavyAverageSpeedProperty}` );
-    assert && assert( lightAverageSpeedProperty instanceof Property,
-      `invalid lightAverageSpeedProperty: ${lightAverageSpeedProperty}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  public constructor( heavyAverageSpeedProperty: Property<number | null>,
+                      lightAverageSpeedProperty: Property<number | null>,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: AverageSpeedAccordionBoxOptions ) {
 
-    options = merge( {
+    const options = optionize4<AverageSpeedAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
+      {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
+
+      // SelfOptions
       fixedWidth: 100,
-      contentXMargin: 0
-    }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-      // superclass options
+      // AccordionBoxOptions
+      contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
       contentYSpacing: 0,
       titleNode: new Text( GasPropertiesStrings.averageSpeedStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
-      } ),
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-
-    }, options );
+      } )
+    }, providedOptions );
 
     // Limit width of title
     options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
@@ -71,7 +65,7 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     lightParticleNode.addChild( new HStrut( maxWidth, { center: lightParticleNode.center } ) );
 
     const numberDisplayRange = new Range( 0, 9999 );
-    const numberDisplayOptions = {
+    const numberDisplayOptions: NumberDisplayOptions = {
       valuePattern: StringUtils.fillIn( GasPropertiesStrings.valueUnits, { units: GasPropertiesStrings.metersPerSecond } ),
       noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
       decimalPlaces: 0,

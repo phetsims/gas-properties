@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnergyAccordionBox is the base class for the 'Speed' and 'Kinetic Energy' accordion boxes in the 'Energy' screen.
  * These accordion boxes are identical, except for their title and HistogramNode.
@@ -8,10 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { HBox, Text, VBox } from '../../../../scenery/js/imports.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -20,37 +21,40 @@ import gasProperties from '../../gasProperties.js';
 import HistogramNode from './HistogramNode.js';
 import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
 
+type SelfOptions = {
+  fixedWidth?: number;
+};
+
+export type EnergyAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+
 export default class EnergyAccordionBox extends AccordionBox {
 
-  /**
-   * @param {TReadOnlyProperty.<string>} titleStringProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {HistogramNode} histogramNode
-   * @param {Object} [options]
-   */
-  constructor( titleStringProperty, modelViewTransform, histogramNode, options ) {
-    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( histogramNode instanceof HistogramNode, `invalid model: ${histogramNode}` );
+  private readonly histogramNode: HistogramNode;
 
-    options = merge( {
-      fixedWidth: 100,
-      contentXMargin: 0
-    }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
+  protected constructor( titleStringProperty: TReadOnlyProperty<string>,
+                         modelViewTransform: ModelViewTransform2,
+                         createHistogramNode: ( tandem: Tandem ) => HistogramNode,
+                         providedOptions: EnergyAccordionBoxOptions ) {
 
-      // superclass options
-      contentYSpacing: 0,
-      titleNode: new Text( titleStringProperty, {
-        font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColors.textFillProperty
-      } ),
+    const options = optionize4<EnergyAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
+      {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
+        // SelfOptions
+        fixedWidth: 100,
 
-    }, options );
+        // AccordionBoxOptions
+        contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
+        contentYSpacing: 0,
+        titleNode: new Text( titleStringProperty, {
+          font: GasPropertiesConstants.TITLE_FONT,
+          fill: GasPropertiesColors.textFillProperty
+        } )
+      }, providedOptions );
 
     // Limit width of title, multiplier determined empirically
     options.titleNode.maxWidth = 0.75 * options.fixedWidth;
+
+    const histogramNode = createHistogramNode( options.tandem.createTandem( 'histogramNode' ) );
 
     // Checkboxes
     const checkboxes = new HBox( {
@@ -77,18 +81,17 @@ export default class EnergyAccordionBox extends AccordionBox {
 
     super( content, options );
 
+    this.histogramNode = histogramNode;
+
     // Disable updates of the histogram when the accordion box is collapsed.
     this.expandedProperty.link( expanded => {
       histogramNode.updateEnabledProperty.value = expanded;
     } );
-
-    // @private
-    this.histogramNode = histogramNode;
   }
 
-  // @public
-  reset() {
+  public override reset(): void {
     this.histogramNode.reset();
+    super.reset();
   }
 }
 

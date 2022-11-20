@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * InjectionTemperatureAccordionBox contains controls related to the temperature used to compute the initial velocity
  * of particles when they are injected into the container.
@@ -8,16 +7,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
-import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import { HBox, Node, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import Slider from '../../../../sun/js/Slider.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
@@ -29,41 +29,39 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 // constants
-const TEXT_OPTIONS = {
+const TEXT_OPTIONS: TextOptions = {
   font: GasPropertiesConstants.CONTROL_FONT,
   fill: GasPropertiesColors.textFillProperty,
   maxWidth: 175 // determined empirically
 };
 
+type SelfOptions = {
+  fixedWidth?: number;
+};
+
+type InjectionTemperatureAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+
 export default class InjectionTemperatureAccordionBox extends AccordionBox {
 
-  /**
-   * @param {BooleanProperty} controlTemperatureEnabledProperty
-   * @param {NumberProperty} initialTemperatureProperty
-   * @param {Object} [options]
-   */
-  constructor( controlTemperatureEnabledProperty, initialTemperatureProperty, options ) {
-    assert && assert( controlTemperatureEnabledProperty instanceof BooleanProperty,
-      `invalid controlTemperatureEnabledProperty: ${controlTemperatureEnabledProperty}` );
-    assert && assert( initialTemperatureProperty instanceof NumberProperty,
-      `invalid initialTemperatureProperty: ${initialTemperatureProperty}` );
+  public constructor( controlTemperatureEnabledProperty: Property<boolean>,
+                      initialTemperatureProperty: RangedProperty,
+                      providedOptions: InjectionTemperatureAccordionBoxOptions ) {
 
     assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );
 
-    options = merge( {
+    const options = optionize4<InjectionTemperatureAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
+      {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
+
+      // SelfOptions
       fixedWidth: 100,
-      contentXMargin: 0,
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
-
-      // superclass options
+      // AccordionBoxOptions
+      contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
       titleNode: new Text( GasPropertiesStrings.injectionTemperatureStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty
       } )
-    }, options );
+    }, providedOptions );
 
     // Limit width of title
     options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
@@ -154,20 +152,10 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
  *
  *   < number >
  *  -----|------
- *
- * @param {Node} titleNode
- * @param {NumberDisplay} numberDisplay
- * @param {Slider} slider
- * @param {ArrowButton} leftArrowButton
- * @param {ArrowButton} rightArrowButton
- * @returns {Node}
  */
-function temperatureLayoutFunction( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) {
-  assert && assert( titleNode instanceof Node, `invalid titleNode: ${titleNode}` );
-  assert && assert( numberDisplay instanceof NumberDisplay, `invalid numberDisplay: ${numberDisplay}` );
-  assert && assert( slider instanceof Slider, `invalid slider: ${slider}` );
-  assert && assert( leftArrowButton instanceof ArrowButton, `invalid leftArrowButton: ${leftArrowButton}` );
-  assert && assert( rightArrowButton instanceof ArrowButton, `invalid rightArrowButton: ${rightArrowButton}` );
+function temperatureLayoutFunction( titleNode: Node, numberDisplay: NumberDisplay, slider: Slider,
+                                    leftArrowButton: ArrowButton | null, rightArrowButton: ArrowButton | null ): Node {
+  assert && assert( leftArrowButton && rightArrowButton );
 
   return new VBox( {
     align: 'center',
@@ -176,7 +164,7 @@ function temperatureLayoutFunction( titleNode, numberDisplay, slider, leftArrowB
     children: [
       new HBox( {
         spacing: 5,
-        children: [ leftArrowButton, numberDisplay, rightArrowButton ]
+        children: [ leftArrowButton!, numberDisplay, rightArrowButton! ]
       } ),
       slider
     ]
