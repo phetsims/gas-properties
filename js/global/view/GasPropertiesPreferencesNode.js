@@ -1,5 +1,6 @@
 // Copyright 2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GasPropertiesPreferencesNode is the user interface for sim-specific preferences, accessed via the Preferences dialog.
  * These preferences are global, and affect all screens.
