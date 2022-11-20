@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IntervalLinesNode renders the horizontal lines that appear at equally-spaced intervals based on a histogram's
  * y-axis scale.  These lines are intended to cue the student about the relative scale of the y axis.  More lines
