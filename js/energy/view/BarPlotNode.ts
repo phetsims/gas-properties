@@ -1,37 +1,36 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BarPlotNode plots histogram data in the familiar 'bars' style.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { ColorDef, Path } from '../../../../scenery/js/imports.js';
+import { Path, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 
 export default class BarPlotNode extends Path {
 
+  private readonly chartSize: Dimension2;
+  private readonly yScaleProperty: Property<number>;
+  private readonly shapeBounds: Bounds2;
+
   /**
-   * @param {Dimension2} chartSize - dimensions of the chart
-   * @param {NumberProperty} yScaleProperty - scale of the y axis
-   * @param {ColorDef} color - color of the bars
+   * @param chartSize - dimensions of the chart
+   * @param yScaleProperty - scale of the y-axis
+   * @param color - color of the bars
    */
-  constructor( chartSize, yScaleProperty, color ) {
-    assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
-    assert && assert( yScaleProperty instanceof NumberProperty, `invalid yScaleProperty: ${yScaleProperty}` );
-    assert && assert( color !== null && ColorDef.isColorDef( color ), `invalid color: ${color}` );
+  public constructor( chartSize: Dimension2, yScaleProperty: Property<number>, color: TColor ) {
 
     super( new Shape(), {
       fill: color,
       stroke: color // to hide seams
     } );
 
-    // @private
     this.chartSize = chartSize;
     this.yScaleProperty = yScaleProperty;
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
@@ -39,11 +38,10 @@ export default class BarPlotNode extends Path {
 
   /**
    * Draws the data as a single shape consisting of a set of bars.
-   * @param {number[]} binCounts - the count for each bin
-   * @public
+   * @param binCounts - the count for each bin
    */
-  plot( binCounts ) {
-    assert && assert( Array.isArray( binCounts ) && binCounts.length > 0, `invalid binCounts: ${binCounts}` );
+  public plot( binCounts: number[] ): void {
+    assert && assert( binCounts.length > 0, `invalid binCounts: ${binCounts}` );
 
     const numberOfBins = binCounts.length;
     const barWidth = this.chartSize.width / numberOfBins;
@@ -70,11 +68,8 @@ export default class BarPlotNode extends Path {
   /**
    * Always use the full chart bounds, as a performance optimization.
    * See https://github.com/phetsims/gas-properties/issues/146
-   * @returns {Bounds2}
-   * @public
-   * @override
    */
-  computeShapeBounds() {
+  public override computeShapeBounds(): Bounds2 {
     return this.shapeBounds;
   }
 }
