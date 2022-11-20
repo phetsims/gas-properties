@@ -93,7 +93,7 @@ export default class HistogramsModel {
       isValidValue: value => ( value >= GasPropertiesConstants.HISTOGRAM_LINE_SPACING ),
       tandem: options.tandem.createTandem( 'yScaleProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'scale of the y axis for the Speed and Kinetic Energy histograms'
+      phetioDocumentation: 'scale of the y-axis for the Speed and Kinetic Energy histograms'
     } );
 
     // @public emits when the bin counts have been updated
@@ -224,7 +224,7 @@ export default class HistogramsModel {
     // Increase the y scale a bit so that there's always a little space above maxBinCount.
     // The minimum scale is determined by the spacing between horizontal lines in the histogram view.
     // We don't want to the scale to be less than one interval of the horizontal lines, so that the
-    // y axis doesn't scale for small numbers of particles.
+    // y-axis doesn't scale for small numbers of particles.
     this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
 
     // Notify listeners that the bin counts have been updated.

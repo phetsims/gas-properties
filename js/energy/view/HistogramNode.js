@@ -36,9 +36,9 @@ export default class HistogramNode extends Node {
    * @param {Property.<number[]>} allBinCountsProperty  - bin counts for all particles
    * @param {Property.<number[]>} heavyBinCountsProperty - bin counts for heavy particles
    * @param {Property.<number[]>} lightBinCountsProperty - bin counts for light particles
-   * @param {NumberProperty} yScaleProperty - scale of the y axis
-   * @param {string} xAxisString - label on the x axis
-   * @param {string} yAxisString - label on the y axis
+   * @param {NumberProperty} yScaleProperty - scale of the y-axis
+   * @param {string} xAxisString - label on the x-axis
+   * @param {string} yAxisString - label on the y-axis
    * @param {Object} [options]
    */
   constructor( numberOfBins, binWidth, binCountsUpdatedEmitter,
