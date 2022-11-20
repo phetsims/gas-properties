@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ExploreScreenView is the view for the 'Explore' screen.
  *
