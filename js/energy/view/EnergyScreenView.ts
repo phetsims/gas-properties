@@ -39,7 +39,6 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
 
     // Average Speed
     const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
-      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
       model.averageSpeedModel.heavyAverageSpeedProperty,
       model.averageSpeedModel.lightAverageSpeedProperty,
       model.modelViewTransform, {

@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * AverageSpeedModel is a sub-model in the Energy screen, responsible for data that is displayed in the
  * Average Speed accordion box.
@@ -8,64 +7,76 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import Particle from '../../common/model/Particle.js';
 import ParticleSystem from '../../common/model/ParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
 
 // constants
-const AVERAGE_SPEED_PROPERTY_OPTIONS = {
+const AVERAGE_SPEED_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm/ps',
-  isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
+  isValidValue: value => ( value === null || value >= 0 ),
   phetioValueType: NullableIO( NumberIO ),
   phetioReadOnly: true // derived from the state of the particle system
 };
 
+type SelfOptions = EmptySelfOptions;
+
+type AverageSpeedModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class AverageSpeedModel {
 
+  private readonly particleSystem: ParticleSystem;
+  private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
+  private readonly samplePeriod: number;
+
+  // average speed of particle species in the container, in pm/ps, null when the container is empty
+  public readonly heavyAverageSpeedProperty: Property<number | null>;
+  public readonly lightAverageSpeedProperty: Property<number | null>;
+
+  // used internally to smooth the average speed computation
+  private dtAccumulator: number; // accumulated dts while samples were taken
+  private numberOfSamples: number; // number of samples we've taken
+  private heavyAverageSpeedSum: number; // sum of samples for heavy particles
+  private lightAverageSpeedSum: number; // sum of samples for light particles
+
   /**
-   * @param {ParticleSystem} particleSystem
-   * @param {BooleanProperty} isPlayingProperty
-   * @param {number} samplePeriod - data is averaged over this period, in ps
-   * @param {Object} [options]
+   * @param particleSystem
+   * @param isPlayingProperty
+   * @param samplePeriod - data is averaged over this period, in ps
+   * @param providedOptions
    */
-  constructor( particleSystem, isPlayingProperty, samplePeriod, options ) {
-    assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
-    assert && assert( isPlayingProperty instanceof BooleanProperty, `invalid isPlayingProperty: ${isPlayingProperty}` );
-    assert && assert( typeof samplePeriod === 'number' && samplePeriod > 0,
-      `invalid samplePeriod: ${samplePeriod}` );
+  public constructor( particleSystem: ParticleSystem, isPlayingProperty: TReadOnlyProperty<boolean>,
+                      samplePeriod: number, providedOptions: AverageSpeedModelOptions ) {
+    assert && assert( samplePeriod > 0, `invalid samplePeriod: ${samplePeriod}` );
 
-    options = merge( {
+    const options = providedOptions;
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    // @private
     this.particleSystem = particleSystem;
     this.isPlayingProperty = isPlayingProperty;
     this.samplePeriod = samplePeriod;
 
-    // @public (read-only) {Property.<number|null>}
-    // average speed of particle species in the container, in pm/ps, null when the container is empty
-    this.heavyAverageSpeedProperty = new Property( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+    this.heavyAverageSpeedProperty = new Property<number | null>( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
       tandem: options.tandem.createTandem( 'heavyAverageSpeedProperty' ),
       phetioDocumentation: 'average speed of heavy particles in the container'
     } ) );
-    this.lightAverageSpeedProperty = new Property( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+
+    this.lightAverageSpeedProperty = new Property<number | null>( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
       tandem: options.tandem.createTandem( 'lightAverageSpeedProperty' ),
       phetioDocumentation: 'average speed of light particles in the container'
     } ) );
 
-    // @private used internally to smooth the average speed computation
-    this.dtAccumulator = 0; // accumulated dts while samples were taken
-    this.numberOfSamples = 0; // number of samples we've taken
-    this.heavyAverageSpeedSum = 0; // sum of samples for heavy particles
-    this.lightAverageSpeedSum = 0; // sum of samples for light particles
+    this.dtAccumulator = 0;
+    this.numberOfSamples = 0;
+    this.heavyAverageSpeedSum = 0;
+    this.lightAverageSpeedSum = 0;
 
     // Reset sample data when the play state changes, so that we can update immediately if manually stepping.
     isPlayingProperty.link( () => {
@@ -80,10 +91,7 @@ export default class AverageSpeedModel {
     } );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.heavyAverageSpeedProperty.reset();
     this.lightAverageSpeedProperty.reset();
     this.clearSamples();
@@ -91,9 +99,8 @@ export default class AverageSpeedModel {
 
   /**
    * Clears the sample data.
-   * @private
    */
-  clearSamples() {
+  private clearSamples(): void {
     this.dtAccumulator = 0;
     this.numberOfSamples = 0;
     this.heavyAverageSpeedSum = 0;
@@ -102,10 +109,9 @@ export default class AverageSpeedModel {
 
   /**
    * Computes the average speed for each particle type, smoothed over an interval.
-   * @param {number} dt - time delta, in ps
-   * @public
+   * @param dt - time delta, in ps
    */
-  step( dt ) {
+  public step( dt: number ): void {
 
     // Accumulate dt
     this.dtAccumulator += dt;
@@ -121,9 +127,8 @@ export default class AverageSpeedModel {
 
   /**
    * Takes a data sample.
-   * @private
    */
-  sample() {
+  private sample(): void {
     assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 0 if called while the sim is paused' );
 
@@ -134,9 +139,8 @@ export default class AverageSpeedModel {
 
   /**
    * Updates Properties using the current sample data.
-   * @private
    */
-  update() {
+  private update(): void {
     assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 1 if called while the sim is paused' );
 
@@ -162,13 +166,9 @@ export default class AverageSpeedModel {
 }
 
 /**
- * Gets the average speed for a set of particles, in pm/ps.
- * @param {Particle[]} particles
- * @returns {number} 0 if there are no particles
+ * Gets the average speed for a set of particles, in pm/ps. Returns 0 if there are no particles
  */
-function getAverageSpeed( particles ) {
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-
+function getAverageSpeed( particles: Particle[] ): number {
   let averageSpeed = 0;
   if ( particles.length > 0 ) {
     let totalSpeed = 0;
