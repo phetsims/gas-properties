@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ExploreScreenView is the view for the 'Explore' screen.
  *
@@ -19,24 +18,23 @@ import ExploreViewProperties from './ExploreViewProperties.js';
 
 export default class ExploreScreenView extends IdealGasLawScreenView {
 
-  /**
-   * @param {ExploreModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
-    assert && assert( model instanceof ExploreModel, `invalid model: ${model}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  private readonly viewProperties: ExploreViewProperties;
+
+  public constructor( model: ExploreModel, tandem: Tandem ) {
 
     // view-specific Properties
     const viewProperties = new ExploreViewProperties( tandem.createTandem( 'viewProperties' ) );
 
     super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem );
 
+    const collisionCounter = model.collisionCounter!;
+    assert && assert( collisionCounter );
+
     // Panel at upper right
     const toolsPanel = new ExploreToolsPanel(
       viewProperties.widthVisibleProperty,
       model.stopwatch.isVisibleProperty,
-      model.collisionCounter.visibleProperty, {
+      collisionCounter.visibleProperty, {
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
         top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
@@ -62,16 +60,10 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     this.addChild( parent );
     parent.moveToBack();
 
-    // @private used in methods
     this.viewProperties = viewProperties;
   }
 
-  /**
-   * Resets the screen.
-   * @protected
-   * @override
-   */
-  reset() {
+  protected override reset(): void {
     super.reset();
     this.viewProperties.reset();
   }

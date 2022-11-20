@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ExploreModel is the top-level model for the 'Explore' screen.
  *
@@ -14,11 +13,7 @@ import gasProperties from '../../gasProperties.js';
 
 export default class ExploreModel extends IdealGasLawModel {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  public constructor( tandem: Tandem ) {
 
     super( tandem, {
       holdConstant: HoldConstant.NOTHING,
