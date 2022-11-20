@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * HistogramNode is the base class for the 'Speed' and 'Kinetic Energy' histograms.
  *

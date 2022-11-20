@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * SpeedHistogramNode shows the distribution of particle speeds in the container.
  *
