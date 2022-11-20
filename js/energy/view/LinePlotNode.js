@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * LinePlotNode plots histogram data as a set of connected line segments. It is used to overlay species-specific
  * histogram data on top of a more typical bar-style histogram.
