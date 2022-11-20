@@ -30,13 +30,13 @@ export default class EnergyToolsPanel extends Panel {
     assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
       `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
 
-    options = merge( {
+    options = merge( {}, GasPropertiesConstants.PANEL_OPTIONS, {
       fixedWidth: 100,
-      xMargin: 0,
+      xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
 
       // phet-io
       tandem: Tandem.REQUIRED
-    }, GasPropertiesConstants.PANEL_OPTIONS, options );
+    }, options );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 

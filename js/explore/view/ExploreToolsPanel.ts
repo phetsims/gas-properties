@@ -35,9 +35,10 @@ export default class ExploreToolsPanel extends Panel {
     const options = optionize4<ExploreToolsPanelOptions, SelfOptions, PanelOptions>()(
       {}, GasPropertiesConstants.PANEL_OPTIONS, {
 
-      // SelfOptions
-      fixedWidth: 100
-    }, providedOptions );
+        // SelfOptions
+        fixedWidth: 100,
+        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
+      }, providedOptions );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 

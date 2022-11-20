@@ -47,7 +47,8 @@ export default class IdealControlPanel extends Panel {
 
         // SelfOptions
         hasHoldConstantControls: true,
-        fixedWidth: 100
+        fixedWidth: 100,
+        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
       }, providedOptions );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );

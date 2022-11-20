@@ -54,7 +54,7 @@ export default class DiffusionControlPanel extends Panel {
 
     options = merge( {
       fixedWidth: 100,
-      xMargin: 0,
+      xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
 
       // phet-io
       tandem: Tandem.REQUIRED
