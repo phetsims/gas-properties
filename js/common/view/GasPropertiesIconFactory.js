@@ -7,6 +7,7 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Range from '../../../../dot/js/Range.js';
@@ -59,7 +60,7 @@ const GasPropertiesIconFactory = {
     } );
 
     // Gauge
-    const gaugeNode = new GaugeNode( new NumberProperty( 30 ), '', new Range( 0, 100 ), {
+    const gaugeNode = new GaugeNode( new NumberProperty( 30 ), new Property( '' ), new Range( 0, 100 ), {
       radius: 0.25 * containerNode.height,
       needleLineWidth: 6,
       numberOfTicks: 15,

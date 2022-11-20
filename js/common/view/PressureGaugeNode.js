@@ -36,7 +36,7 @@ class PressureGaugeNode extends Node {
     }, options );
 
     // circular dial with needle
-    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressure,
+    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressureStringProperty,
       pressureGauge.pressureRange, {
         radius: DIAL_RADIUS,
         tandem: Tandem.OPTIONAL
