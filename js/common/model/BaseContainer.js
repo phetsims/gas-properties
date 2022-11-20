@@ -20,7 +20,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from './Particle.js';
 
-class BaseContainer {
+export default class BaseContainer {
 
   /**
    * @param {Object} [options]
@@ -175,4 +175,3 @@ class BaseContainer {
 }
 
 gasProperties.register( 'BaseContainer', BaseContainer );
-export default BaseContainer;

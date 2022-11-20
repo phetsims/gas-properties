@@ -13,7 +13,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode from './HistogramNode.js';
 
-class KineticEnergyHistogramNode extends HistogramNode {
+export default class KineticEnergyHistogramNode extends HistogramNode {
 
   /**
    * @param {HistogramsModel} histogramsModel
@@ -44,4 +44,3 @@ class KineticEnergyHistogramNode extends HistogramNode {
 }
 
 gasProperties.register( 'KineticEnergyHistogramNode', KineticEnergyHistogramNode );
-export default KineticEnergyHistogramNode;

@@ -12,7 +12,7 @@ import { Line, Node } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 
-class DividerNode extends Node {
+export default class DividerNode extends Node {
 
   /**
    * @param {BooleanProperty} hasDividerProperty
@@ -59,4 +59,3 @@ class DividerNode extends Node {
 }
 
 gasProperties.register( 'DividerNode', DividerNode );
-export default DividerNode;

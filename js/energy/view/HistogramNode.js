@@ -27,7 +27,7 @@ const HISTOGRAM_AXIS_LABEL_OPTIONS = {
   font: new PhetFont( 14 )
 };
 
-class HistogramNode extends Node {
+export default class HistogramNode extends Node {
 
   /**
    * @param {number} numberOfBins
@@ -201,4 +201,3 @@ class HistogramNode extends Node {
 }
 
 gasProperties.register( 'HistogramNode', HistogramNode );
-export default HistogramNode;

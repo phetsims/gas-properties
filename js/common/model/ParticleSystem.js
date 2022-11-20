@@ -31,7 +31,7 @@ import ParticleUtils from './ParticleUtils.js';
 // used to compute the initial velocity angle for particles, in radians
 const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
 
-class ParticleSystem {
+export default class ParticleSystem {
 
   /**
    * @param {function:number} getInitialTemperature - gets the temperature used to compute initial velocity magnitude
@@ -88,14 +88,10 @@ class ParticleSystem {
     const createHeavyParticle = () => new HeavyParticle();
     this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
       this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
-      assert && assert( GasPropertiesUtils.isArrayOf( this.heavyParticles, HeavyParticle ),
-        'heavyParticles should contain only HeavyParticle' );
     } );
     const createLightParticle = () => new LightParticle();
     this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
       this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, createLightParticle );
-      assert && assert( GasPropertiesUtils.isArrayOf( this.lightParticles, LightParticle ),
-        'lightParticles should contain only LightParticle' );
     } );
 
     // @public N, the total number of particles in the container.
@@ -195,13 +191,9 @@ class ParticleSystem {
 
       ParticleUtils.escapeParticles( container, this.numberOfHeavyParticlesProperty,
         this.heavyParticles, this.heavyParticlesOutside );
-      assert && assert( GasPropertiesUtils.isArrayOf( this.heavyParticlesOutside, HeavyParticle ),
-        'heavyParticlesOutside should contain only HeavyParticle' );
 
       ParticleUtils.escapeParticles( container, this.numberOfLightParticlesProperty,
         this.lightParticles, this.lightParticlesOutside );
-      assert && assert( GasPropertiesUtils.isArrayOf( this.lightParticlesOutside, LightParticle ),
-        'lightParticlesOutside should contain only LightParticle' );
     }
   }
 
@@ -369,4 +361,3 @@ class ParticleSystem {
 }
 
 gasProperties.register( 'ParticleSystem', ParticleSystem );
-export default ParticleSystem;

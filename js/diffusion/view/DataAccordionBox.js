@@ -19,7 +19,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 import DiffusionDataNode from './DiffusionDataNode.js';
 
-class DataAccordionBox extends AccordionBox {
+export default class DataAccordionBox extends AccordionBox {
 
   /**
    * @param {DiffusionData} leftData
@@ -71,4 +71,3 @@ class DataAccordionBox extends AccordionBox {
 }
 
 gasProperties.register( 'DataAccordionBox', DataAccordionBox );
-export default DataAccordionBox;

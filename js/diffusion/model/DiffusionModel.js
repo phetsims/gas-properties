@@ -17,7 +17,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import GasPropertiesUtils from '../../common/GasPropertiesUtils.js';
 import BaseModel from '../../common/model/BaseModel.js';
 import ParticleUtils from '../../common/model/ParticleUtils.js';
 import gasProperties from '../../gasProperties.js';
@@ -37,7 +36,7 @@ const CENTER_OF_MASS_PROPERTY_OPTIONS = {
   phetioReadOnly: true // derived from the state of the particle system
 };
 
-class DiffusionModel extends BaseModel {
+export default class DiffusionModel extends BaseModel {
 
   /**
    * @param {Tandem} tandem
@@ -79,8 +78,6 @@ class DiffusionModel extends BaseModel {
         this.leftSettings,
         this.particles1,
         createDiffusionParticle1 );
-      assert && assert( GasPropertiesUtils.isArrayOf( this.particles1, DiffusionParticle1 ),
-        'particles1 should contain only DiffusionParticle1' );
     } );
     const createDiffusionParticle2 = options => new DiffusionParticle2( options );
     this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
@@ -89,8 +86,6 @@ class DiffusionModel extends BaseModel {
         this.rightSettings,
         this.particles2,
         createDiffusionParticle2 );
-      assert && assert( GasPropertiesUtils.isArrayOf( this.particles2, DiffusionParticle2 ),
-        'particles2 should contain only DiffusionParticle2' );
     } );
 
     // @public {Property.<number>} N, the total number of particles in the container
@@ -397,4 +392,3 @@ function updateRadius( radius, particles, bounds, isPlaying ) {
 }
 
 gasProperties.register( 'DiffusionModel', DiffusionModel );
-export default DiffusionModel;

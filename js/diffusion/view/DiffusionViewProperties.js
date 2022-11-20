@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * DiffusionViewProperties defines Properties that are specific to the view in the 'Diffusion' screen.
@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import gasProperties from '../../gasProperties.js';
 
-class DiffusionViewProperties {
+export default class DiffusionViewProperties {
 
   /**
    * @param {Tandem} tandem
@@ -51,4 +51,3 @@ class DiffusionViewProperties {
 }
 
 gasProperties.register( 'DiffusionViewProperties', DiffusionViewProperties );
-export default DiffusionViewProperties;

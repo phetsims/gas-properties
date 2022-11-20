@@ -8,20 +8,20 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
+import ThermometerUnits from './ThermometerUnits.js';
 
 // constants
 const DEFAULT_RANGE = new Range( 0, 1000 ); // in K
 
-class Thermometer {
+export default class Thermometer {
 
   /**
    * @param {Property.<number|null>} temperatureKelvinProperty - temperature in the container, in K
@@ -57,7 +57,7 @@ class Thermometer {
       } );
 
     // @public temperature units displayed by the thermometer
-    this.unitsProperty = new EnumerationDeprecatedProperty( Thermometer.Units, Thermometer.Units.KELVIN, {
+    this.unitsProperty = new EnumerationProperty( ThermometerUnits.KELVIN, {
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the thermometer'
     } );
@@ -72,8 +72,4 @@ class Thermometer {
   }
 }
 
-// @public Choice of temperature units that the thermometer can display
-Thermometer.Units = EnumerationDeprecated.byKeys( [ 'KELVIN', 'CELSIUS' ] );
-
 gasProperties.register( 'Thermometer', Thermometer );
-export default Thermometer;

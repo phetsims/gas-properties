@@ -13,7 +13,7 @@ import { Image } from '../../../../scenery/js/imports.js';
 import phetGirlLabCoat_png from '../../../images/phetGirlLabCoat_png.js';
 import gasProperties from '../../gasProperties.js';
 
-class GasPropertiesOopsDialog extends OopsDialog {
+export default class GasPropertiesOopsDialog extends OopsDialog {
 
   /**
    * @param {TReadOnlyProperty.<string>} messageStringProperty
@@ -37,4 +37,3 @@ class GasPropertiesOopsDialog extends OopsDialog {
 }
 
 gasProperties.register( 'GasPropertiesOopsDialog', GasPropertiesOopsDialog );
-export default GasPropertiesOopsDialog;

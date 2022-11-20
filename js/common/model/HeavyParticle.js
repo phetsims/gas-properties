@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * HeavyParticle is the model for 'heavy' particles, as they are named in the design document.
@@ -11,7 +11,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle from './Particle.js';
 
-class HeavyParticle extends Particle {
+export default class HeavyParticle extends Particle {
 
   constructor() {
     super( {
@@ -26,4 +26,3 @@ class HeavyParticle extends Particle {
 }
 
 gasProperties.register( 'HeavyParticle', HeavyParticle );
-export default HeavyParticle;

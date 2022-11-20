@@ -1,4 +1,4 @@
-// Copyright 2018-2020, University of Colorado Boulder
+// Copyright 2018-2022, University of Colorado Boulder
 
 /**
  * EnergyModel is the top-level model for the 'Energy' screen.
@@ -16,7 +16,7 @@ import HistogramsModel from './HistogramsModel.js';
 // constants
 const SAMPLE_PERIOD = 1; // sample period for Average Speed and histograms, in ps
 
-class EnergyModel extends IdealGasLawModel {
+export default class EnergyModel extends IdealGasLawModel {
 
   /**
    * @param {Tandem} tandem
@@ -77,4 +77,3 @@ class EnergyModel extends IdealGasLawModel {
 }
 
 gasProperties.register( 'EnergyModel', EnergyModel );
-export default EnergyModel;

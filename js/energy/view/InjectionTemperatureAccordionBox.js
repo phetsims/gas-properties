@@ -34,7 +34,7 @@ const TEXT_OPTIONS = {
   maxWidth: 175 // determined empirically
 };
 
-class InjectionTemperatureAccordionBox extends AccordionBox {
+export default class InjectionTemperatureAccordionBox extends AccordionBox {
 
   /**
    * @param {BooleanProperty} controlTemperatureEnabledProperty
@@ -183,4 +183,3 @@ function temperatureLayoutFunction( titleNode, numberDisplay, slider, leftArrowB
 }
 
 gasProperties.register( 'InjectionTemperatureAccordionBox', InjectionTemperatureAccordionBox );
-export default InjectionTemperatureAccordionBox;

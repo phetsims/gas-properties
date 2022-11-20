@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * Region is one cell in the collection-detection space.
@@ -16,7 +16,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from './Particle.js';
 
-class Region {
+export default class Region {
 
   /**
    * @param {Bounds2} bounds - bounds of the region, in pm
@@ -52,4 +52,3 @@ class Region {
 }
 
 gasProperties.register( 'Region', Region );
-export default Region;

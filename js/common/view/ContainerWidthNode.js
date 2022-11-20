@@ -24,7 +24,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
-class ContainerWidthNode extends Node {
+export default class ContainerWidthNode extends Node {
 
   /**
    * @param {Vector2} containerPosition - position of the container, in model coordinates
@@ -96,4 +96,3 @@ class ContainerWidthNode extends Node {
 }
 
 gasProperties.register( 'ContainerWidthNode', ContainerWidthNode );
-export default ContainerWidthNode;

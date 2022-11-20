@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * LightParticle is the model for 'light' particles, as they are named in the design document.
@@ -11,7 +11,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle from './Particle.js';
 
-class LightParticle extends Particle {
+export default class LightParticle extends Particle {
 
   constructor() {
     super( {
@@ -26,4 +26,3 @@ class LightParticle extends Particle {
 }
 
 gasProperties.register( 'LightParticle', LightParticle );
-export default LightParticle;

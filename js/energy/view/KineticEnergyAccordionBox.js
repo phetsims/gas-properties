@@ -15,7 +15,7 @@ import HistogramsModel from '../model/HistogramsModel.js';
 import EnergyAccordionBox from './EnergyAccordionBox.js';
 import KineticEnergyHistogramNode from './KineticEnergyHistogramNode.js';
 
-class KineticEnergyAccordionBox extends EnergyAccordionBox {
+export default class KineticEnergyAccordionBox extends EnergyAccordionBox {
 
   /**
    * @param {HistogramsModel} histogramsModel
@@ -41,4 +41,3 @@ class KineticEnergyAccordionBox extends EnergyAccordionBox {
 }
 
 gasProperties.register( 'KineticEnergyAccordionBox', KineticEnergyAccordionBox );
-export default KineticEnergyAccordionBox;

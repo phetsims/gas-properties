@@ -14,7 +14,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import { ColorDef, Path } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 
-class LinePlotNode extends Path {
+export default class LinePlotNode extends Path {
 
   /**
    * @param {Dimension2} chartSize - dimensions of the chart
@@ -85,4 +85,3 @@ class LinePlotNode extends Path {
 }
 
 gasProperties.register( 'LinePlotNode', LinePlotNode );
-export default LinePlotNode;

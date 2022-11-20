@@ -17,7 +17,7 @@ import gasProperties from '../../gasProperties.js';
 // constants
 const ALIGN_VALUES = [ 'left', 'right', 'center' ];
 
-class FixedWidthNode extends Node {
+export default class FixedWidthNode extends Node {
 
   /**
    * @param {number} fixedWidth - this Node will be exactly this width
@@ -60,4 +60,3 @@ class FixedWidthNode extends Node {
 }
 
 gasProperties.register( 'FixedWidthNode', FixedWidthNode );
-export default FixedWidthNode;

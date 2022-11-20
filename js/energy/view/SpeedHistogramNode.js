@@ -13,7 +13,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode from './HistogramNode.js';
 
-class SpeedHistogramNode extends HistogramNode {
+export default class SpeedHistogramNode extends HistogramNode {
 
   /**
    * @param {HistogramsModel} histogramsModel
@@ -44,4 +44,3 @@ class SpeedHistogramNode extends HistogramNode {
 }
 
 gasProperties.register( 'SpeedHistogramNode', SpeedHistogramNode );
-export default SpeedHistogramNode;

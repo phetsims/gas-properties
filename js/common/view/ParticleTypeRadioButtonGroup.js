@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
@@ -15,15 +15,15 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import ParticleType from '../model/ParticleType.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
+export default class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
-   * @param {EnumerationDeprecatedProperty} particleTypeProperty
+   * @param {EnumerationProperty.<ParticleType>} particleTypeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
    */
   constructor( particleTypeProperty, modelViewTransform, options ) {
-    assert && assert( particleTypeProperty instanceof EnumerationDeprecatedProperty,
+    assert && assert( particleTypeProperty instanceof EnumerationProperty,
       `invalid particleTypeProperty: ${particleTypeProperty}` );
     assert && assert( modelViewTransform instanceof ModelViewTransform2,
       `invalid modelViewTransform: ${modelViewTransform}` );
@@ -64,4 +64,3 @@ class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
 }
 
 gasProperties.register( 'ParticleTypeRadioButtonGroup', ParticleTypeRadioButtonGroup );
-export default ParticleTypeRadioButtonGroup;

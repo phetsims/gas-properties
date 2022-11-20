@@ -24,7 +24,7 @@ const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS = {
   phetioReadOnly: true // derived from the state of the particle system
 };
 
-class DiffusionData {
+export default class DiffusionData {
 
   /**
    * @param {Bounds2} bounds - bounds of one side of the container
@@ -125,4 +125,3 @@ class DiffusionData {
 }
 
 gasProperties.register( 'DiffusionData', DiffusionData );
-export default DiffusionData;

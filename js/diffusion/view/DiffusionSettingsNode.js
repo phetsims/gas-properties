@@ -23,7 +23,7 @@ import GasPropertiesSpinner from './GasPropertiesSpinner.js';
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
 
-class DiffusionSettingsNode extends VBox {
+export default class DiffusionSettingsNode extends VBox {
 
   /**
    * @param {DiffusionSettings} leftSettings - setting for the left side of the container
@@ -110,8 +110,6 @@ class DiffusionSettingsNode extends VBox {
   }
 }
 
-gasProperties.register( 'DiffusionSettingsNode', DiffusionSettingsNode );
-
 /**
  * A label and two spinners, for changing the same quantity for the left and right sides of the container.
  */
@@ -195,4 +193,4 @@ class QuantityControl extends VBox {
   }
 }
 
-export default DiffusionSettingsNode;
+gasProperties.register( 'DiffusionSettingsNode', DiffusionSettingsNode );

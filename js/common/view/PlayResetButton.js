@@ -15,7 +15,7 @@ import { Path } from '../../../../scenery/js/imports.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import gasProperties from '../../gasProperties.js';
 
-class PlayResetButton extends BooleanRectangularToggleButton {
+export default class PlayResetButton extends BooleanRectangularToggleButton {
 
   /**
    * @param {BooleanProperty} isPlayingProperty
@@ -53,4 +53,3 @@ class PlayResetButton extends BooleanRectangularToggleButton {
 }
 
 gasProperties.register( 'PlayResetButton', PlayResetButton );
-export default PlayResetButton;

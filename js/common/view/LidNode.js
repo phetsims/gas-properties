@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import { Node, Rectangle } from '../../../../scenery/js/imports.js';
@@ -19,14 +19,14 @@ import HoldConstant from '../model/HoldConstant.js';
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 const HANDLE_RIGHT_INSET = 3;
 
-class LidNode extends Node {
+export default class LidNode extends Node {
 
   /**
-   * @param {EnumerationDeprecatedProperty} holdConstantProperty
+   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
    * @param {Object} [options]
    */
   constructor( holdConstantProperty, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationDeprecatedProperty,
+    assert && assert( holdConstantProperty instanceof EnumerationProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
 
     options = merge( {
@@ -91,4 +91,3 @@ class LidNode extends Node {
 }
 
 gasProperties.register( 'LidNode', LidNode );
-export default LidNode;

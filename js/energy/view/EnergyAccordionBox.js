@@ -16,11 +16,10 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import gasProperties from '../../gasProperties.js';
-import HeavyParticlesCheckbox from './HeavyParticlesCheckbox.js';
 import HistogramNode from './HistogramNode.js';
-import LightParticlesCheckbox from './LightParticlesCheckbox.js';
+import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
 
-class EnergyAccordionBox extends AccordionBox {
+export default class EnergyAccordionBox extends AccordionBox {
 
   /**
    * @param {TReadOnlyProperty.<string>} titleStringProperty
@@ -55,10 +54,10 @@ class EnergyAccordionBox extends AccordionBox {
     // Checkboxes
     const checkboxes = new HBox( {
       children: [
-        new HeavyParticlesCheckbox( histogramNode.heavyPlotVisibleProperty, modelViewTransform, {
+        SpeciesHistogramCheckbox.createHeavyParticlesCheckbox( histogramNode.heavyPlotVisibleProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'heavyParticlesCheckbox' )
         } ),
-        new LightParticlesCheckbox( histogramNode.lightPlotVisibleProperty, modelViewTransform, {
+        SpeciesHistogramCheckbox.createLightParticlesCheckbox( histogramNode.lightPlotVisibleProperty, modelViewTransform, {
           tandem: options.tandem.createTandem( 'lightParticlesCheckbox' )
         } )
       ],
@@ -93,4 +92,3 @@ class EnergyAccordionBox extends AccordionBox {
 }
 
 gasProperties.register( 'EnergyAccordionBox', EnergyAccordionBox );
-export default EnergyAccordionBox;

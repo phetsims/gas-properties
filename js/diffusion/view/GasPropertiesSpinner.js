@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * GasPropertiesSpinner is a specialization of NumberSpinner for this sim, with options and color profiling.
@@ -13,7 +13,7 @@ import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 
-class GasPropertiesSpinner extends NumberSpinner {
+export default class GasPropertiesSpinner extends NumberSpinner {
 
   /**
    * @param {NumberProperty} numberProperty
@@ -43,4 +43,3 @@ class GasPropertiesSpinner extends NumberSpinner {
 }
 
 gasProperties.register( 'GasPropertiesSpinner', GasPropertiesSpinner );
-export default GasPropertiesSpinner;

@@ -145,8 +145,7 @@ pressure gauge is given a bit of "noise" to make it look more realistic.
 The noise is a function of pressure and temperature. More noise is added
 at lower pressures, but the noise is suppressed as temperature
 decreases. Noise is disabled when pressure is being held constant. See
-[PressureGauge](https://github.com/phetsims/gas-properties/blob/master/js/common/model/PressureGauge.js)
-if you'd like more specifics. If desired, noise can be disabled via
+`PressureGauge` if you'd like more specifics. If desired, noise can be disabled via
 query parameter `pressureNoise=false`.
 
 ## Hold Constant

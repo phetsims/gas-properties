@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * CollisionDetector handles collision detection and response for all screens. Our collision model involves
@@ -37,7 +37,7 @@ import Region from './Region.js';
 // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
 const e = 1;
 
-class CollisionDetector {
+export default class CollisionDetector {
 
   /**
    * @param {BaseContainer} container - the container inside which collision occur
@@ -371,4 +371,3 @@ function doParticleContainerCollisions( particles, containerBounds, leftWallVelo
 CollisionDetector.doParticleContainerCollisions = doParticleContainerCollisions;
 
 gasProperties.register( 'CollisionDetector', CollisionDetector );
-export default CollisionDetector;

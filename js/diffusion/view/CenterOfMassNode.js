@@ -16,7 +16,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 
-class CenterOfMassNode extends Node {
+export default class CenterOfMassNode extends Node {
 
   /**
    * @param {Property.<number|null>} centerOfMassProperty - centerX of mass, in pm
@@ -62,4 +62,3 @@ class CenterOfMassNode extends Node {
 }
 
 gasProperties.register( 'CenterOfMassNode', CenterOfMassNode );
-export default CenterOfMassNode;

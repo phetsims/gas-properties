@@ -24,7 +24,7 @@ import gasProperties from '../../gasProperties.js';
 // constants
 const DEFAULT_ARROW_HEAD_DIMENSIONS = new Dimension2( 8, 8 );
 
-class DimensionalArrowsNode extends Node {
+export default class DimensionalArrowsNode extends Node {
 
   /**
    * @param {ReadOnlyProperty.<number>} lengthProperty - length in view coordinates
@@ -98,4 +98,3 @@ class DimensionalArrowsNode extends Node {
 }
 
 gasProperties.register( 'DimensionalArrowsNode', DimensionalArrowsNode );
-export default DimensionalArrowsNode;

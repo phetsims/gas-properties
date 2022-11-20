@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * DiffusionParticle1 is the model for particle species 1 in the 'Diffusion' screen, referred to as 'cyan particles'
@@ -13,7 +13,7 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import Particle from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
 
-class DiffusionParticle1 extends Particle {
+export default class DiffusionParticle1 extends Particle {
 
   /**
    * @param {Object} [options] see Particle
@@ -35,4 +35,3 @@ class DiffusionParticle1 extends Particle {
 }
 
 gasProperties.register( 'DiffusionParticle1', DiffusionParticle1 );
-export default DiffusionParticle1;

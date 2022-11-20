@@ -15,7 +15,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
-class ReturnLidButton extends RectangularPushButton {
+export default class ReturnLidButton extends RectangularPushButton {
 
   /**
    * @param {IdealGasLawContainer} container
@@ -56,4 +56,3 @@ class ReturnLidButton extends RectangularPushButton {
 }
 
 gasProperties.register( 'ReturnLidButton', ReturnLidButton );
-export default ReturnLidButton;

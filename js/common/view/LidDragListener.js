@@ -13,7 +13,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
-class LidDragListener extends DragListener {
+export default class LidDragListener extends DragListener {
 
   /**
    * @param {IdealGasLawContainer} container
@@ -72,4 +72,3 @@ class LidDragListener extends DragListener {
 }
 
 gasProperties.register( 'LidDragListener', LidDragListener );
-export default LidDragListener;

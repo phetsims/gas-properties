@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * ParticleNode displays a particle as a shaded sphere.
@@ -12,7 +12,7 @@ import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 
-class ParticleNode extends ShadedSphereNode {
+export default class ParticleNode extends ShadedSphereNode {
 
   /**
    * @param {Particle} particle
@@ -40,4 +40,3 @@ class ParticleNode extends ShadedSphereNode {
 }
 
 gasProperties.register( 'ParticleNode', ParticleNode );
-export default ParticleNode;

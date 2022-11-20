@@ -1,4 +1,4 @@
-// Copyright 2018-2021, University of Colorado Boulder
+// Copyright 2018-2022, University of Colorado Boulder
 
 /**
  * DiffusionScreenView is the view for the 'Diffusion' screen.
@@ -25,7 +25,7 @@ import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateNode from './ParticleFlowRateNode.js';
 import ScaleNode from './ScaleNode.js';
 
-class DiffusionScreenView extends BaseScreenView {
+export default class DiffusionScreenView extends BaseScreenView {
 
   /**
    * @param {DiffusionModel} model
@@ -184,11 +184,9 @@ class DiffusionScreenView extends BaseScreenView {
    */
   stepView( dt ) {
     assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
-    super.stepView( dt );
     this.particleSystemNode.update();
     this.regionsNode && this.regionsNode.update();
   }
 }
 
 gasProperties.register( 'DiffusionScreenView', DiffusionScreenView );
-export default DiffusionScreenView;

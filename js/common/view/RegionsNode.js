@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * RegionsNode shows how the collision detection space is partitioned into a 2D grid of Regions.
@@ -14,7 +14,7 @@ import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import RegionNode from './RegionNode.js';
 
-class RegionsNode extends Node {
+export default class RegionsNode extends Node {
 
   /**
    * @param {Region[]} regions
@@ -62,4 +62,3 @@ class RegionsNode extends Node {
 }
 
 gasProperties.register( 'RegionsNode', RegionsNode );
-export default RegionsNode;

@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * DiffusionContainer is the container in the 'Diffusion' screen.
@@ -18,7 +18,7 @@ import gasProperties from '../../gasProperties.js';
 // constants
 const CONTAINER_WIDTH = 16000; // pm
 
-class DiffusionContainer extends BaseContainer {
+export default class DiffusionContainer extends BaseContainer {
 
   /**
    * @param {Object} [options]
@@ -79,4 +79,3 @@ class DiffusionContainer extends BaseContainer {
 }
 
 gasProperties.register( 'DiffusionContainer', DiffusionContainer );
-export default DiffusionContainer;

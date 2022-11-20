@@ -1,4 +1,4 @@
-// Copyright 2018-2020, University of Colorado Boulder
+// Copyright 2018-2022, University of Colorado Boulder
 
 /**
  * GasPropertiesBicyclePumpNode is a specialization of BicyclePumpNode for this sim.
@@ -13,7 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import BicyclePumpNode from '../../../../scenery-phet/js/BicyclePumpNode.js';
 import gasProperties from '../../gasProperties.js';
 
-class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
+export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
   /**
    * @param {NumberProperty} numberOfParticlesProperty
@@ -42,4 +42,3 @@ class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 }
 
 gasProperties.register( 'GasPropertiesBicyclePumpNode', GasPropertiesBicyclePumpNode );
-export default GasPropertiesBicyclePumpNode;

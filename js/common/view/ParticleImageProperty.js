@@ -16,7 +16,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import gasProperties from '../../gasProperties.js';
 import ParticlesNode from './ParticlesNode.js';
 
-class ParticleImageProperty extends DerivedProperty {
+export default class ParticleImageProperty extends DerivedProperty {
 
   /**
    * @param {function(options:*):Particle} createParticle - creates a Particle instance
@@ -55,4 +55,3 @@ class ParticleImageProperty extends DerivedProperty {
 }
 
 gasProperties.register( 'ParticleImageProperty', ParticleImageProperty );
-export default ParticleImageProperty;

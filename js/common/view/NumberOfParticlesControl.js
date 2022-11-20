@@ -19,7 +19,7 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 // const
 const X_SPACING = 8;
 
-class NumberOfParticlesControl extends VBox {
+export default class NumberOfParticlesControl extends VBox {
 
   /**
    * @param {Node} icon
@@ -84,4 +84,3 @@ class NumberOfParticlesControl extends VBox {
 }
 
 gasProperties.register( 'NumberOfParticlesControl', NumberOfParticlesControl );
-export default NumberOfParticlesControl;

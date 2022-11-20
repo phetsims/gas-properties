@@ -1,4 +1,4 @@
-// Copyright 2018-2021, University of Colorado Boulder
+// Copyright 2018-2022, University of Colorado Boulder
 
 /**
  * ExploreScreenView is the view for the 'Explore' screen.
@@ -16,7 +16,7 @@ import ExploreModel from '../model/ExploreModel.js';
 import ExploreToolsPanel from './ExploreToolsPanel.js';
 import ExploreViewProperties from './ExploreViewProperties.js';
 
-class ExploreScreenView extends IdealGasLawScreenView {
+export default class ExploreScreenView extends IdealGasLawScreenView {
 
   /**
    * @param {ExploreModel} model
@@ -77,4 +77,3 @@ class ExploreScreenView extends IdealGasLawScreenView {
 }
 
 gasProperties.register( 'ExploreScreenView', ExploreScreenView );
-export default ExploreScreenView;

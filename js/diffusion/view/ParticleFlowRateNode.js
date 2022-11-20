@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * ParticleFlowRateNode is a pair of vectors that indicate the flow rate of one particle species between the left and
@@ -19,7 +19,7 @@ import ParticleFlowRate from '../model/ParticleFlowRate.js';
 const X_SPACING = 5; // space between the tails of the left and right arrows
 const VECTOR_SCALE = 25; // vector length per 1 particle/ps, see https://github.com/phetsims/gas-properties/issues/51
 
-class ParticleFlowRateNode extends Node {
+export default class ParticleFlowRateNode extends Node {
 
   /**
    * @param {ParticleFlowRate} model
@@ -73,4 +73,3 @@ class ParticleFlowRateNode extends Node {
 }
 
 gasProperties.register( 'ParticleFlowRateNode', ParticleFlowRateNode );
-export default ParticleFlowRateNode;
