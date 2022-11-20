@@ -1,9 +1,8 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IntervalLinesNode renders the horizontal lines that appear at equally-spaced intervals based on a histogram's
- * y-axis scale.  These lines are intended to cue the student about the relative scale of the y axis.  More lines
+ * y-axis scale.  These lines are intended to cue the student about the relative scale of the y-axis.  More lines
  * means a larger value for 'Number of Particles'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -18,29 +17,27 @@ import gasProperties from '../../gasProperties.js';
 
 export default class IntervalLinesNode extends Path {
 
-  /**
-   * @param {Dimension2} chartSize - dimensions of the chart
-   */
-  constructor( chartSize ) {
-    assert && assert( chartSize instanceof Dimension2, `invalid chartSize: ${chartSize}` );
+  private readonly chartSize: Dimension2;
+  private readonly shapeBounds: Bounds2;
+  private previousMaxY: number | null;
+
+  public constructor( chartSize: Dimension2 ) {
 
     super( new Shape(), {
-      stroke: 'white', // {ColorDef}
-      opacity: 0.5, // (0,1)
+      stroke: 'white',
+      opacity: 0.5,
       lineWidth: 0.5
     } );
 
-    // @private
     this.chartSize = chartSize;
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
+    this.previousMaxY = null;
   }
 
   /**
    * Updates the lines to match the current y scale.
-   * @param {number} maxY
-   * @public
    */
-  update( maxY ) {
+  public update( maxY: number ): void {
     if ( this.previousMaxY === null || this.previousMaxY !== maxY ) {
 
       const shape = new Shape();
@@ -62,11 +59,8 @@ export default class IntervalLinesNode extends Path {
   /**
    * Always use the full chart bounds, as a performance optimization.
    * See https://github.com/phetsims/gas-properties/issues/146
-   * @returns {Bounds2}
-   * @public
-   * @override
    */
-  computeShapeBounds() {
+  public override computeShapeBounds(): Bounds2 {
     return this.shapeBounds;
   }
 }

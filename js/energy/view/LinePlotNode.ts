@@ -30,7 +30,6 @@ export default class LinePlotNode extends Path {
     assert && assert( lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
 
     super( new Shape(), {
-      fill: null, // because we're drawing lines
       stroke: color,
       lineWidth: lineWidth
     } );
