@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnergyScreenView is the view for the 'Energy' screen.
  *
