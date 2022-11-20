@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * HistogramNode is the base class for the 'Speed' and 'Kinetic Energy' histograms.
  *
@@ -9,13 +8,13 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { ColorDef, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Rectangle, TColor, Text } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import BarPlotNode from './BarPlotNode.js';
@@ -28,54 +27,62 @@ const HISTOGRAM_AXIS_LABEL_OPTIONS = {
   font: new PhetFont( 14 )
 };
 
+type SelfOptions = {
+  chartSize?: Dimension2; // size of the Rectangle that is the histogram background
+  backgroundFill?: TColor; // histogram background color
+  borderStroke?: TColor;
+  borderLineWidth?: number;
+  plotLineWidth?: number; // lineWidth for line segment plots
+  barColor?: TColor;
+};
+
+export type HistogramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class HistogramNode extends Node {
 
+  // visibility of species-specific plots
+  public readonly heavyPlotVisibleProperty: Property<boolean>;
+  public readonly lightPlotVisibleProperty: Property<boolean>;
+
+  // Whether updates are enabled, false ignores binCountsUpdatedEmitter.
+  // This is used to prevent updates when the accordion box containing a histogram is collapsed.
+  public readonly updateEnabledProperty: Property<boolean>;
+
   /**
-   * @param {number} numberOfBins
-   * @param {number} binWidth
-   * @param {Emitter} binCountsUpdatedEmitter - notifies when the bin counts have changed
-   * @param {Property.<number[]>} allBinCountsProperty  - bin counts for all particles
-   * @param {Property.<number[]>} heavyBinCountsProperty - bin counts for heavy particles
-   * @param {Property.<number[]>} lightBinCountsProperty - bin counts for light particles
-   * @param {NumberProperty} yScaleProperty - scale of the y-axis
-   * @param {string} xAxisString - label on the x-axis
-   * @param {string} yAxisString - label on the y-axis
-   * @param {Object} [options]
+   * @param numberOfBins
+   * @param binWidth
+   * @param binCountsUpdatedEmitter - notifies when the bin counts have changed
+   * @param allBinCountsProperty  - bin counts for all particles
+   * @param heavyBinCountsProperty - bin counts for heavy particles
+   * @param lightBinCountsProperty - bin counts for light particles
+   * @param yScaleProperty - scale of the y-axis
+   * @param xAxisString - label on the x-axis
+   * @param yAxisString - label on the y-axis
+   * @param providedOptions
    */
-  constructor( numberOfBins, binWidth, binCountsUpdatedEmitter,
-               allBinCountsProperty, heavyBinCountsProperty, lightBinCountsProperty,
-               yScaleProperty, xAxisString, yAxisString,
-               options ) {
-    assert && assert( typeof numberOfBins === 'number' && numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
-    assert && assert( typeof binWidth === 'number' && binWidth > 0, `invalid binWidth: ${binWidth}` );
-    assert && assert( binCountsUpdatedEmitter instanceof Emitter,
-      `invalid binCountsUpdatedEmitter: ${binCountsUpdatedEmitter}` );
-    assert && assert( allBinCountsProperty instanceof Property,
-      `invalid allBinCountsProperty: ${allBinCountsProperty}` );
-    assert && assert( heavyBinCountsProperty instanceof Property,
-      `invalid heavyBinCountsProperty: ${heavyBinCountsProperty}` );
-    assert && assert( lightBinCountsProperty instanceof Property,
-      `invalid lightBinCountsProperty: ${lightBinCountsProperty}` );
-    assert && assert( yScaleProperty instanceof NumberProperty,
-      `invalid yScaleProperty: ${yScaleProperty}` );
-    assert && assert( typeof xAxisString === 'string', `invalid xAxisString: ${xAxisString}` );
-    assert && assert( typeof yAxisString === 'string', `invalid yAxisString: ${yAxisString}` );
+  public constructor( numberOfBins: number,
+                      binWidth: number,
+                      binCountsUpdatedEmitter: Emitter,
+                      allBinCountsProperty: Property<number[]>,
+                      heavyBinCountsProperty: Property<number[]>,
+                      lightBinCountsProperty: Property<number[]>,
+                      yScaleProperty: Property<number>,
+                      xAxisString: string,
+                      yAxisString: string,
+                      providedOptions: HistogramNodeOptions ) {
+    assert && assert( numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
+    assert && assert( binWidth > 0, `invalid binWidth: ${binWidth}` );
 
-    options = merge( {
-      chartSize: new Dimension2( 150, 130 ),   // size of the Rectangle that is the histogram background
-      backgroundFill: 'black', // {ColorDef} histogram background color
-      borderStroke: GasPropertiesColors.panelStrokeProperty, // {ColorDef}
+    const options = optionize<HistogramNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
+      chartSize: new Dimension2( 150, 130 ),
+      backgroundFill: 'black',
+      borderStroke: GasPropertiesColors.panelStrokeProperty,
       borderLineWidth: 1,
-      plotLineWidth: 2, // lineWidth for line segment plots
-      barColor: 'white', // {ColorDef}
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-
-    }, options );
-
-    assert && assert( options.barColor !== null && ColorDef.isColorDef( options.barColor ),
-      `invalid barColor: ${options.barColor}` );
+      plotLineWidth: 2,
+      barColor: 'white'
+    }, providedOptions );
 
     // Background appears behind plotted data
     const background = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
@@ -120,18 +127,15 @@ export default class HistogramNode extends Node {
       centerY: background.centerY
     } ) );
 
-    assert && assert( !options.children, 'HistogramNode sets children' );
-    options = merge( {
-      children: [ background, intervalLines, plotNodesParent, border, xAxisLabelNode, yAxisLabelNode ]
-    }, options );
+    options.children = [ background, intervalLines, plotNodesParent, border, xAxisLabelNode, yAxisLabelNode ];
 
     super( options );
 
-    // @public visibility of species-specific plots
     this.heavyPlotVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'heavyPlotVisibleProperty' ),
       phetioDocumentation: 'whether the plot for heavy particles is visible on the histogram'
     } );
+
     this.lightPlotVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'lightPlotVisibleProperty' ),
       phetioDocumentation: 'whether the plot for light particles is visible on the histogram'
@@ -157,8 +161,6 @@ export default class HistogramNode extends Node {
       intervalLines.update( yScaleProperty.value );
     };
 
-    // @public whether updates are enabled, false ignores binCountsUpdatedEmitter.
-    // This is used to prevent updates when the accordion box containing a histogram is collapsed.
     this.updateEnabledProperty = new BooleanProperty( true );
     this.updateEnabledProperty.lazyLink( updateEnabled => {
       if ( updateEnabled ) {
@@ -191,11 +193,7 @@ export default class HistogramNode extends Node {
     } );
   }
 
-  /**
-   * Resets the histogram view.
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.heavyPlotVisibleProperty.reset();
     this.lightPlotVisibleProperty.reset();
   }

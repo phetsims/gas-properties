@@ -1,33 +1,32 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SpeedHistogramNode shows the distribution of particle speeds in the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
-import HistogramNode from './HistogramNode.js';
+import HistogramNode, { HistogramNodeOptions } from './HistogramNode.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type SpeedHistogramNodeOptions = SelfOptions & PickRequired<HistogramNodeOptions, 'tandem'>;
 
 export default class SpeedHistogramNode extends HistogramNode {
 
-  /**
-   * @param {HistogramsModel} histogramsModel
-   * @param {Object} [options]
-   */
-  constructor( histogramsModel, options ) {
-    assert && assert( histogramsModel instanceof HistogramsModel, `invalid histogramModel: ${histogramsModel}` );
+  public constructor( histogramsModel: HistogramsModel, providedOptions: SpeedHistogramNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<SpeedHistogramNodeOptions, SelfOptions, HistogramNodeOptions>()( {
 
-      // superclass options
+      // HistogramNodeOptions
       barColor: GasPropertiesColors.speedHistogramBarColorProperty
-    }, options );
+    }, providedOptions );
 
     super(
       histogramsModel.numberOfBins,
