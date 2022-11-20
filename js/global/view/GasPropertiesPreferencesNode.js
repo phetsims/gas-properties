@@ -10,12 +10,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
+import merge from '../../../../phet-core/js/merge.ts';
+import { VBox } from '../../../../scenery/js/imports.ts';
+import Tandem from '../../../../tandem/js/Tandem.ts';
+import gasProperties from '../../gasProperties.ts';
 import GasPropertiesPreferences from '../model/GasPropertiesPreferences.js';
-import { PressureNoiseCheckbox } from './PressureNoiseCheckbox.js';
+import { PressureNoiseCheckbox } from './PressureNoiseCheckbox.ts';
 
 export default class GasPropertiesPreferencesNode extends VBox {
 

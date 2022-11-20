@@ -7,10 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
-import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.ts';
+import Tandem from '../../../../tandem/js/Tandem.ts';
+import gasProperties from '../../gasProperties.ts';
+import GasPropertiesQueryParameters from '../../common/GasPropertiesQueryParameters.ts';
 
 const GasPropertiesPreferences = {
 
