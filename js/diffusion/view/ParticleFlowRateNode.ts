@@ -11,7 +11,7 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import ParticleFlowRate from '../model/ParticleFlowRate.js';
 
@@ -23,7 +23,7 @@ type SelfOptions = {
   arrowNodeOptions?: ArrowNodeOptions;
 };
 
-type ParticleFlowRateNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type ParticleFlowRateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class ParticleFlowRateNode extends Node {
 

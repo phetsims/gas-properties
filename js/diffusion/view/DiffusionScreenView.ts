@@ -1,13 +1,11 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionScreenView is the view for the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -28,22 +26,15 @@ import ScaleNode from './ScaleNode.js';
 
 export default class DiffusionScreenView extends BaseScreenView {
 
-  /**
-   * @param {DiffusionModel} model
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   */
-  constructor( model, tandem, options ) {
-    assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  private readonly viewProperties: DiffusionViewProperties;
+  private readonly particleSystemNode: DiffusionParticleSystemNode;
+  private readonly regionsNode: RegionsNode | null;
 
-    options = merge( {
+  public constructor( model: DiffusionModel, tandem: Tandem ) {
 
-      // superclass options
+    super( model, tandem, {
       hasSlowMotion: true // adds Normal/Slow radio buttons to the time controls
-    }, options );
-
-    super( model, tandem, options );
+    } );
 
     const viewProperties = new DiffusionViewProperties( tandem.createTandem( 'viewProperties' ) );
 
@@ -124,7 +115,7 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // If the number of particles changes while the sim is paused, redraw the particle system.
     model.numberOfParticlesProperty.link( () => {
-      if ( !this.model.isPlayingProperty.value ) {
+      if ( !model.isPlayingProperty.value ) {
         particleSystemNode.update();
       }
     } );
@@ -162,31 +153,22 @@ export default class DiffusionScreenView extends BaseScreenView {
     controlPanel.maxHeight = this.layoutBounds.height - this.timeControlNode.height -
                              ( 2 * GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN ) - 25;
 
-    // @private
-    this.model = model;
     this.viewProperties = viewProperties;
-    this.regionsNode = regionsNode;
     this.particleSystemNode = particleSystemNode;
+    this.regionsNode = regionsNode;
   }
 
-  /**
-   * Resets the screen.
-   * @protected
-   * @override
-   */
-  reset() {
+  protected override reset(): void {
     super.reset();
     this.viewProperties.reset();
   }
 
   /**
    * Steps the view using real time units.
-   * @param {number} dt - time delta, in seconds
-   * @public
-   * @override
+   * @param dt - time delta, in seconds
    */
-  stepView( dt ) {
-    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
+  public override stepView( dt: number ): void {
+    assert && assert( dt >= 0, `invalid dt: ${dt}` );
     this.particleSystemNode.update();
     this.regionsNode && this.regionsNode.update();
   }

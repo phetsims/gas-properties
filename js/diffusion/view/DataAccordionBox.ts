@@ -10,7 +10,7 @@
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { HBox, Text, VSeparator } from '../../../../scenery/js/imports.js';
+import { HBox, NodeTranslationOptions, Text, VSeparator } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -21,7 +21,7 @@ import DiffusionDataNode from './DiffusionDataNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type DataAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+type DataAccordionBoxOptions = SelfOptions & NodeTranslationOptions & PickRequired<AccordionBoxOptions, 'tandem' | 'expandedProperty'>;
 
 export default class DataAccordionBox extends AccordionBox {
 

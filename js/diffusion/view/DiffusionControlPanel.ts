@@ -12,7 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { HSeparator, NodeOptions, VBox } from '../../../../scenery/js/imports.js';
+import { HSeparator, NodeOptions, NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -31,7 +31,7 @@ type SelfOptions = {
   fixedWidth?: number;
 };
 
-type DiffusionControlPanelOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type DiffusionControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class DiffusionControlPanel extends Panel {
 
