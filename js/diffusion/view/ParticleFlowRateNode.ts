@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ParticleFlowRateNode is a pair of vectors that indicate the flow rate of one particle species between the left and
  * right sides of the container. Higher flow rate results in a bigger vector. Vectors are color-coded to the particle
@@ -9,10 +8,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import ParticleFlowRate from '../model/ParticleFlowRate.js';
 
@@ -20,31 +19,31 @@ import ParticleFlowRate from '../model/ParticleFlowRate.js';
 const X_SPACING = 5; // space between the tails of the left and right arrows
 const VECTOR_SCALE = 25; // vector length per 1 particle/ps, see https://github.com/phetsims/gas-properties/issues/51
 
+type SelfOptions = {
+  arrowNodeOptions?: ArrowNodeOptions;
+};
+
+type ParticleFlowRateNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class ParticleFlowRateNode extends Node {
 
-  /**
-   * @param {ParticleFlowRate} model
-   * @param {Object} [options]
-   */
-  constructor( model, options ) {
-    assert && assert( model instanceof ParticleFlowRate, `invalid model: ${model}` );
+  public constructor( model: ParticleFlowRate, providedOptions: ParticleFlowRateNodeOptions ) {
 
-    options = merge( {
-      arrowNodeOptions: null, // nested options, set below
+    const options = optionize<ParticleFlowRateNodeOptions, SelfOptions, NodeOptions>()( {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      // SelfOptions
+      arrowNodeOptions: {
+        headHeight: 15,
+        headWidth: 15,
+        tailWidth: 8,
+        fill: 'white',
+        stroke: 'black'
+      }
+    }, providedOptions );
 
-    options.arrowNodeOptions = merge( {
-      headHeight: 15,
-      headWidth: 15,
-      tailWidth: 8,
-      fill: 'white',
-      stroke: 'black'
-    }, options.arrowNodeOptions );
-
-    const minTailLength = options.arrowNodeOptions.headHeight + 4;
+    const headHeight = options.arrowNodeOptions.headHeight!;
+    assert && assert( headHeight );
+    const minTailLength = headHeight + 4;
 
     // left and right arrows
     const leftArrowNode = new ArrowNode( 0, 0, -minTailLength, 0, options.arrowNodeOptions );
@@ -54,10 +53,7 @@ export default class ParticleFlowRateNode extends Node {
     leftArrowNode.x = -X_SPACING / 2;
     rightArrowNode.x = X_SPACING / 2;
 
-    assert && assert( !options.children, 'ParticleFlowRateNode sets options' );
-    options = merge( {
-      children: [ leftArrowNode, rightArrowNode ]
-    }, options );
+    options.children = [ leftArrowNode, rightArrowNode ];
 
     super( options );
 

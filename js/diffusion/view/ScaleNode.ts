@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ScaleNode displays the scale that appears along the bottom of the container in the Diffusion screen.
  *
@@ -8,13 +7,13 @@
  */
 
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Path, Text } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Path, Text } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -23,29 +22,29 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 const TICK_LENGTH = 16; // view coordinates
 const TICK_INTERVAL = 1; // nm
 
+type SelfOptions = EmptySelfOptions;
+
+type ScaleNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class ScaleNode extends Node {
 
   /**
-   * @param {number} containerWidth - the container width, in pm
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
+   * @param containerWidth - the container width, in pm
+   * @param modelViewTransform
+   * @param providedOptions
    */
-  constructor( containerWidth, modelViewTransform, options ) {
-    assert && assert( Number.isInteger( containerWidth ), `containerWidth must be an integer: ${containerWidth}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  public constructor( containerWidth: number, modelViewTransform: ModelViewTransform2, providedOptions: ScaleNodeOptions ) {
+    assert && assert( Number.isInteger( containerWidth ) && containerWidth > 0 );
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<ScaleNodeOptions, SelfOptions, NodeOptions>()( {
+      // because we're setting options.children below
+    }, providedOptions );
 
     const pmTickInterval = TICK_INTERVAL * 1000; // adjusted for nm to pm
     const dx = modelViewTransform.modelToViewDeltaX( pmTickInterval ); // pm
     const numberOfTicks = containerWidth / pmTickInterval;
 
-    // One shape to describe all of the ticks
+    // One shape to describe all ticks
     const ticksShape = new Shape();
     for ( let i = 0; i <= numberOfTicks; i++ ) {
       ticksShape.moveTo( i * dx, 0 ).lineTo( i * dx, TICK_LENGTH );
@@ -80,7 +79,6 @@ export default class ScaleNode extends Node {
       centerY: TICK_LENGTH / 2
     } );
 
-    assert && assert( !options.children, 'ScaleNode sets children' );
     options.children = [ ticksPath, labelNode, arrowNode ];
 
     super( options );
