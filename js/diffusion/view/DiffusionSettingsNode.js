@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionSettingsNode is the user interface for setting initial conditions in the 'Diffusion' screen.
  *
