@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ScaleNode displays the scale that appears along the bottom of the container in the Diffusion screen.
  *
