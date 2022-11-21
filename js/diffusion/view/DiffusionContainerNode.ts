@@ -46,7 +46,8 @@ export default class DiffusionContainerNode extends Node {
       solidLineWidth: viewDividerThickness,
       dashedLineWidth: viewDividerThickness / 2,
       centerX: modelViewTransform.modelToViewX( container.dividerX ),
-      bottom: modelViewTransform.modelToViewY( container.position.y )
+      bottom: modelViewTransform.modelToViewY( container.position.y ),
+      tandem: options.tandem.createTandem( 'dividerNode' )
     } );
 
     options.children = [ dividerNode, borderNode ];

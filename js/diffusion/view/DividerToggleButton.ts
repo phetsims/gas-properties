@@ -1,36 +1,34 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DividerToggleButton is used to toggle the container's vertical divider. It is color-coded to the divider.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
-import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
+import BooleanRectangularToggleButton, { BooleanRectangularToggleButtonOptions } from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type DividerToggleButtonOptions = SelfOptions & PickRequired<BooleanRectangularToggleButtonOptions, 'tandem'>;
+
 export default class DividerToggleButton extends BooleanRectangularToggleButton {
 
-  /**
-   * @param {Property.<boolean>} hasDividerProperty
-   * @param {Object} [options]
-   */
-  constructor( hasDividerProperty, options ) {
-    assert && assert( hasDividerProperty instanceof BooleanProperty,
-      `invalid hasDividerProperty: ${hasDividerProperty}` );
+  public constructor( hasDividerProperty: Property<boolean>, providedOptions: DividerToggleButtonOptions ) {
 
-    options = merge( {
+    const options = optionize<DividerToggleButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
 
-      // superclass options
+      // BooleanRectangularToggleButtonOptions
       baseColor: GasPropertiesColors.dividerColorProperty
-    }, options );
+    }, providedOptions );
 
     const textOptions = {
       font: GasPropertiesConstants.CONTROL_FONT,

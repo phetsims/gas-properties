@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionParticleSystemNode renders the particle system for the 'Diffusion' screen.  Since all particles are
  * confined to the container, it requires only one Canvas, and therefore uses ParticlesNode via inheritance.
@@ -17,16 +16,12 @@ import DiffusionModel from '../model/DiffusionModel.js';
 import DiffusionParticle1 from '../model/DiffusionParticle1.js';
 import DiffusionParticle2 from '../model/DiffusionParticle2.js';
 
-// constants
-const DEBUG_FILL = 'rgba( 255, 0, 0, 0.1 )';
-
 export default class DiffusionParticleSystemNode extends ParticlesNode {
 
   /**
-   * @param {DiffusionModel} model - passing in the entire model since we use so much of its public API
+   * @param model - passing in the entire model since we use so much of its public API
    */
-  constructor( model ) {
-    assert && assert( model instanceof DiffusionModel, `invalid model: ${model}` );
+  public constructor( model: DiffusionModel ) {
 
     // generated image for DiffusionParticle1 species
     const particle1ImageProperty = new ParticleImageProperty(
@@ -48,7 +43,8 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
     // {Property.<HTMLCanvasElement>[]} images for each particle species in particleArrays
     const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
 
-    super( particleArrays, imageProperties, model.modelViewTransform, DEBUG_FILL );
+    // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
+    super( particleArrays, imageProperties, model.modelViewTransform );
 
     // Size the canvas to match the container bounds. See https://github.com/phetsims/gas-properties/issues/38
     this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.bounds ) );

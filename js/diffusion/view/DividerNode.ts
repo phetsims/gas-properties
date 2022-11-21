@@ -1,33 +1,37 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DividerNode is the vertical divider in the Diffusion screen's container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Line, Node } from '../../../../scenery/js/imports.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Line, Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 
+type SelfOptions = {
+  length?: number;
+  solidLineWidth?: number;
+  dashedLineWidth?: number;
+};
+
+type DividerNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class DividerNode extends Node {
 
-  /**
-   * @param {BooleanProperty} hasDividerProperty
-   * @param {Object} [options]
-   */
-  constructor( hasDividerProperty, options ) {
-    assert && assert( hasDividerProperty instanceof BooleanProperty,
-      `invalid hasDividerProperty: ${hasDividerProperty}` );
+  public constructor( hasDividerProperty: TReadOnlyProperty<boolean>, providedOptions: DividerNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<DividerNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       length: 100,
       solidLineWidth: 1,
       dashedLineWidth: 1
-    }, options );
+    }, providedOptions );
 
     // Solid divider
     const solidLineNode = new Line( 0, 0, 0, options.length, {
@@ -44,10 +48,7 @@ export default class DividerNode extends Node {
       center: solidLineNode.center
     } );
 
-    assert && assert( !options || !options.children, 'DividerNode sets children' );
-    options = merge( {
-      children: [ dashedLineNode, solidLineNode ]
-    }, options );
+    options.children = [ dashedLineNode, solidLineNode ];
 
     super( options );
 
