@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionControlPanel is the control panel that appears on the right side of the 'Diffusion' screen.
  *

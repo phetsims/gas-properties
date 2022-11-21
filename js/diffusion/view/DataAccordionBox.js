@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DataAccordionBox is the 'Data' accordion box in the 'Diffusion' screen.  It displays data for the left and right
  * sides of the container.
