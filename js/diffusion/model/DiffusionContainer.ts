@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionContainer is the container in the 'Diffusion' screen.
  * It has a fixed width, no lid, and a removable vertical divider.
@@ -9,9 +8,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
-import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BaseContainer from '../../common/model/BaseContainer.js';
 import gasProperties from '../../gasProperties.js';
@@ -21,42 +20,41 @@ const CONTAINER_WIDTH = 16000; // pm
 
 export default class DiffusionContainer extends BaseContainer {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public readonly dividerThickness: number; // divider thickness, in pm
+  public readonly dividerX: number; // divider is horizontally centered, but no code assumes that
 
-    options = merge( {
-      widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ), // effectively fixed width
+  // inside bounds for left and right sides of the container
+  public readonly leftBounds: Bounds2;
+  public readonly rightBounds: Bounds2;
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+  // whether the divider is in place
+  public readonly hasDividerProperty: Property<boolean>;
 
-    super( options );
+  public constructor( tandem: Tandem ) {
+
+    super( {
+      widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH ),
+      tandem: tandem
+    } );
 
     // In case clients attempt to use this feature of the base class
     this.widthProperty.lazyLink( width => {
       throw new Error( 'container width is fixed in the Diffusion screen' );
     } );
 
-    // @public (read-only) divider thickness, in pm
     this.dividerThickness = 100;
 
-    // @public (read-only) divider is horizontally centered, but no code assumes that
     this.dividerX = this.left + ( this.width / 2 );
     assert && assert(
     ( this.dividerX + this.dividerThickness / 2 > this.left ) &&
     ( this.dividerX - this.dividerThickness / 2 < this.right ),
       `dividerX is not in the container: ${this.dividerX}` );
 
-    // @public (read-only) inside bounds for left and right sides of the container
     this.leftBounds = new Bounds2( this.left, this.bottom, this.dividerX, this.top );
     this.rightBounds = new Bounds2( this.dividerX, this.bottom, this.right, this.top );
 
-    // @public whether the divider is in place
     this.hasDividerProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'hasDividerProperty' ),
+      tandem: tandem.createTandem( 'hasDividerProperty' ),
       phetioDocumentation: 'whether the container\'s divider is in place'
     } );
 
@@ -68,12 +66,7 @@ export default class DiffusionContainer extends BaseContainer {
     } );
   }
 
-  /**
-   * Resets the container.
-   * @public
-   * @override
-   */
-  reset() {
+  public override reset(): void {
     super.reset();
     this.hasDividerProperty.reset();
   }

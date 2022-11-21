@@ -58,9 +58,7 @@ export default class DiffusionModel extends BaseModel {
     this.particles2 = []; // {DiffusionParticle2[]}
 
     // @public
-    this.container = new DiffusionContainer( {
-      tandem: tandem.createTandem( 'container' )
-    } );
+    this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
 
     // @public settings for the left and right sides of the container, before the divider is removed
     this.leftSettings = new DiffusionSettings( {
@@ -114,12 +112,8 @@ export default class DiffusionModel extends BaseModel {
       } );
 
     // @public data for the left and right sides of the container, appears in Data accordion box
-    this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, {
-      tandem: tandem.createTandem( 'leftData' )
-    } );
-    this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, {
-      tandem: tandem.createTandem( 'rightData' )
-    } );
+    this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, tandem.createTandem( 'leftData' ) );
+    this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, tandem.createTandem( 'rightData' ) );
 
     // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
     // null when there are no particles in the container.
