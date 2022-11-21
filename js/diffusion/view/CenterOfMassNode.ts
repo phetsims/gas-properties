@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * CenterOfMassNode is an indicator at the bottom of the container that indicates where the centerX of mass is for
  * one particle species. The indicator is color-coded to the particle color.
@@ -9,43 +8,42 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { ColorDef, Node, Rectangle } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type CenterOfMassNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class CenterOfMassNode extends Node {
 
   /**
-   * @param {Property.<number|null>} centerOfMassProperty - centerX of mass, in pm
-   * @param {number} centerY - centerY of the indicator, in pm
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {ColorDef} fill
-   * @param {Object} [options]
+   * @param centerOfMassProperty - centerX of mass, in pm
+   * @param centerY - centerY of the indicator, in pm
+   * @param modelViewTransform
+   * @param fill
+   * @param providedOptions
    */
-  constructor( centerOfMassProperty, centerY, modelViewTransform, fill, options ) {
-    assert && assert( centerOfMassProperty instanceof Property,
-      `invalid centerOfMassProperty: ${centerOfMassProperty}` );
-    assert && assert( typeof centerY === 'number', `invalid centerY: ${centerY}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( ColorDef.isColorDef( fill ), `invalid fill: ${fill}` );
+  public constructor( centerOfMassProperty: TReadOnlyProperty<number | null>,
+                      centerY: number,
+                      modelViewTransform: ModelViewTransform2,
+                      fill: TColor,
+                      providedOptions: CenterOfMassNodeOptions ) {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<CenterOfMassNodeOptions, SelfOptions, NodeOptions>()( {
+      // empty because we're setting options.children below
+    }, providedOptions );
 
     const rectangle = new Rectangle( 0, 0, 5, 30, {
       fill: fill,
       stroke: GasPropertiesColors.centerOfMassStrokeProperty
     } );
 
-    assert && assert( !options.children, 'CenterOfMassNode sets children' );
     options.children = [ rectangle ];
 
     super( options );
