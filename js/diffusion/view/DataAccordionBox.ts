@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DataAccordionBox is the 'Data' accordion box in the 'Diffusion' screen.  It displays data for the left and right
  * sides of the container.
@@ -8,11 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { HBox, Text, VSeparator } from '../../../../scenery/js/imports.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
@@ -20,41 +19,36 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 import DiffusionDataNode from './DiffusionDataNode.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type DataAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'tandem'>;
+
 export default class DataAccordionBox extends AccordionBox {
 
-  /**
-   * @param {DiffusionData} leftData
-   * @param {DiffusionData} rightData
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( leftData, rightData, modelViewTransform, options ) {
-    assert && assert( leftData instanceof DiffusionData, `invalid leftData: ${leftData}` );
-    assert && assert( rightData instanceof DiffusionData, `invalid rightData: ${rightData}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  public constructor( leftData: DiffusionData, rightData: DiffusionData, modelViewTransform: ModelViewTransform2,
+                      providedOptions: DataAccordionBoxOptions ) {
 
+    const options = optionize4<DataAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
+      {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-    options = merge( {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
-
-      // superclass options
+      // AccordionBoxOptions
       contentYSpacing: 0,
       titleNode: new Text( GasPropertiesStrings.dataStringProperty, {
         font: GasPropertiesConstants.TITLE_FONT,
         fill: GasPropertiesColors.textFillProperty,
         maxWidth: 200 // determined empirically
-      } ),
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-
-    }, options );
+      } )
+    }, providedOptions );
 
     // Data for left side of the container
-    const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform );
+    const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'leftDataNode' )
+    } );
 
     // Data for right side of container
-    const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform );
+    const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform, {
+      tandem: options.tandem.createTandem( 'rightDataNode' )
+    } );
 
     // Vertical separator, analogous to the container's divider
     const separator = new VSeparator( {

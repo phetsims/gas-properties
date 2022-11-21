@@ -18,7 +18,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 export default class DividerToggleButton extends BooleanRectangularToggleButton {
 
   /**
-   * @param {BooleanProperty} hasDividerProperty
+   * @param {Property.<boolean>} hasDividerProperty
    * @param {Object} [options]
    */
   constructor( hasDividerProperty, options ) {

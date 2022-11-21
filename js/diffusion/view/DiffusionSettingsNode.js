@@ -29,7 +29,7 @@ export default class DiffusionSettingsNode extends VBox {
    * @param {DiffusionSettings} leftSettings - setting for the left side of the container
    * @param {DiffusionSettings} rightSettings - setting for the right side of the container
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {BooleanProperty} enabledProperty
+   * @param {Property.<boolean>} enabledProperty
    * @param {Object} [options]
    */
   constructor( leftSettings, rightSettings, modelViewTransform, enabledProperty, options ) {

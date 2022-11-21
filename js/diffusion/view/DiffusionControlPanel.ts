@@ -1,18 +1,19 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionControlPanel is the control panel that appears on the right side of the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { HSeparator, VBox } from '../../../../scenery/js/imports.js';
-import Panel from '../../../../sun/js/Panel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { HSeparator, NodeOptions, VBox } from '../../../../scenery/js/imports.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import FixedWidthNode from '../../common/view/FixedWidthNode.js';
@@ -26,40 +27,42 @@ import DividerToggleButton from './DividerToggleButton.js';
 import ParticleFlowRateCheckbox from './ParticleFlowRateCheckbox.js';
 import ScaleCheckbox from './ScaleCheckbox.js';
 
+type SelfOptions = {
+  fixedWidth?: number;
+};
+
+type DiffusionControlPanelOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class DiffusionControlPanel extends Panel {
 
   /**
-   * @param {DiffusionSettings} leftSettings - setting for the left side of the container
-   * @param {DiffusionSettings} rightSettings - setting for the right side of the container
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {BooleanProperty} hasDividerProperty
-   * @param {Property.<number>} numberOfParticlesProperty
-   * @param {BooleanProperty} stopwatchVisibleProperty
-   * @param {DiffusionViewProperties} viewProperties
-   * @param {Object} [options]
+   * @param leftSettings - setting for the left side of the container
+   * @param rightSettings - setting for the right side of the container
+   * @param modelViewTransform
+   * @param hasDividerProperty
+   * @param numberOfParticlesProperty
+   * @param stopwatchVisibleProperty
+   * @param viewProperties
+   * @param providedOptions
    */
-  constructor( leftSettings, rightSettings, modelViewTransform, hasDividerProperty,
-               numberOfParticlesProperty, stopwatchVisibleProperty, viewProperties, options ) {
-    assert && assert( leftSettings instanceof DiffusionSettings,
-      `invalid leftSettings: ${leftSettings}` );
-    assert && assert( rightSettings instanceof DiffusionSettings,
-      `invalid rightSettings: ${rightSettings}` );
-    assert && assert( hasDividerProperty instanceof BooleanProperty,
-      `invalid hasDividerProperty: ${hasDividerProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( stopwatchVisibleProperty instanceof BooleanProperty,
-      `invalid stopwatchVisibleProperty: ${stopwatchVisibleProperty}` );
-    assert && assert( viewProperties instanceof DiffusionViewProperties,
-      `invalid viewProperties: ${viewProperties}` );
+  public constructor( leftSettings: DiffusionSettings,
+                      rightSettings: DiffusionSettings,
+                      modelViewTransform: ModelViewTransform2,
+                      hasDividerProperty: Property<boolean>,
+                      numberOfParticlesProperty: TReadOnlyProperty<number>,
+                      stopwatchVisibleProperty: Property<boolean>,
+                      viewProperties: DiffusionViewProperties,
+                      providedOptions: DiffusionControlPanelOptions ) {
 
-    options = merge( {
-      fixedWidth: 100,
-      xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
+    const options = optionize4<DiffusionControlPanelOptions, SelfOptions, PanelOptions>()(
+      {}, GasPropertiesConstants.PANEL_OPTIONS, {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, GasPropertiesConstants.PANEL_OPTIONS, options );
+        // SelfOptions
+        fixedWidth: 100,
+
+        // PanelOptions
+        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
+      }, providedOptions );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
