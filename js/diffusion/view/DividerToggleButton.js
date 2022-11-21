@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DividerToggleButton is used to toggle the container's vertical divider. It is color-coded to the divider.
  *

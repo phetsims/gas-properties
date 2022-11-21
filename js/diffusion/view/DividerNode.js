@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DividerNode is the vertical divider in the Diffusion screen's container.
  *
