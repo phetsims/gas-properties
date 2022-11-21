@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionCollisionDetector is a specialization of CollisionDetector that handles collisions between
  * particles and a vertical divider in a DiffusionContainer.  When the divider is present, it treats the

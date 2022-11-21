@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionContainer is the container in the 'Diffusion' screen.
  * It has a fixed width, no lid, and a removable vertical divider.

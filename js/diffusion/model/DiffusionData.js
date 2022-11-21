@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionData is responsible for information related to one side of the container.
  * This information is displayed in the 'Data' accordion box on the 'Diffusion' screen.
