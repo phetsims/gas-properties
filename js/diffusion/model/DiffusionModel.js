@@ -61,12 +61,8 @@ export default class DiffusionModel extends BaseModel {
     this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
 
     // @public settings for the left and right sides of the container, before the divider is removed
-    this.leftSettings = new DiffusionSettings( {
-      tandem: tandem.createTandem( 'leftSettings' )
-    } );
-    this.rightSettings = new DiffusionSettings( {
-      tandem: tandem.createTandem( 'rightSettings' )
-    } );
+    this.leftSettings = new DiffusionSettings( tandem.createTandem( 'leftSettings' ) );
+    this.rightSettings = new DiffusionSettings( tandem.createTandem( 'rightSettings' ) );
 
     // Synchronize particle counts and arrays.
     const createDiffusionParticle1 = options => new DiffusionParticle1( options );
@@ -127,12 +123,8 @@ export default class DiffusionModel extends BaseModel {
     } ) );
 
     // @public flow rate model for each particle species
-    this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1, {
-      tandem: tandem.createTandem( 'particleFlowRate1' )
-    } );
-    this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2, {
-      tandem: tandem.createTandem( 'particleFlowRate2' )
-    } );
+    this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1, tandem.createTandem( 'particleFlowRate1' ) );
+    this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2, tandem.createTandem( 'particleFlowRate2' ) );
 
     // @public (read-only)
     this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );

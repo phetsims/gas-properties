@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ParticleFlowRate is a sub-model of the 'Diffusion' screen model, responsible for flow rate for one set of particles.
  * Flow rate is the number of particles moving between the two sides of the container, in particles/ps.
@@ -10,12 +9,14 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Particle from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
 
 // constants
-const FLOW_RATE_PROPERTY_OPTIONS = {
+const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
   isValidValue: value => ( value >= 0 ),
   units: 'particles/ps',
   phetioReadOnly: true // derived from state of the particle system
@@ -26,47 +27,51 @@ const NUMBER_OF_SAMPLES = 300;
 
 export default class ParticleFlowRate {
 
+  private readonly dividerX: number;
+  private readonly particles: Particle[];
+
+  // flow rate to left side of container, in particles/ps
+  public readonly leftFlowRateProperty: Property<number>;
+
+  // flow rate to right side of container, in particles/ps
+  public readonly rightFlowRateProperty: Property<number>;
+
+  // samples of number of particles that have crossed the container's divider
+  private readonly leftCounts: number[]; // particles that crossed from right to left <--
+  private readonly rightCounts: number[]; // particles that crossed from left to right -->
+
+  // dt values for each sample
+  private readonly dts: number[];
+
   /**
-   * @param {number} dividerX - x position of the container's divider
-   * @param {Particle[]} particles - particles to be monitored
-   * @param {Object} [options]
+   * @param dividerX - x position of the container's divider
+   * @param particles - particles to be monitored
+   * @param tandem
    */
-  constructor( dividerX, particles, options ) {
-    assert && assert( typeof dividerX === 'number', `invalid dividerX: ${dividerX}` );
-    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+  public constructor( dividerX: number, particles: Particle[], tandem: Tandem ) {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    // @private
     this.dividerX = dividerX;
     this.particles = particles;
 
-    // @public flow rate to left side of container, in particles/ps
-    this.leftFlowRateProperty = new NumberProperty( 0, merge( {}, FLOW_RATE_PROPERTY_OPTIONS, {
-      tandem: options.tandem.createTandem( 'leftFlowRateProperty' ),
-      phetioDocumentation: 'flow rate of particles to the left side of the container'
-    } ) );
+    this.leftFlowRateProperty = new NumberProperty( 0,
+      combineOptions<PropertyOptions<number>>( {}, FLOW_RATE_PROPERTY_OPTIONS, {
+        tandem: tandem.createTandem( 'leftFlowRateProperty' ),
+        phetioDocumentation: 'flow rate of particles to the left side of the container'
+      } ) );
 
-    // @public flow rate to right side of container, in particles/ps
-    this.rightFlowRateProperty = new NumberProperty( 0, merge( {}, FLOW_RATE_PROPERTY_OPTIONS, {
-      tandem: options.tandem.createTandem( 'rightFlowRateProperty' ),
-      phetioDocumentation: 'flow rate of particles to the right side of the container'
-    } ) );
+    this.rightFlowRateProperty = new NumberProperty( 0,
+      combineOptions<PropertyOptions<number>>( {}, FLOW_RATE_PROPERTY_OPTIONS, {
+        tandem: tandem.createTandem( 'rightFlowRateProperty' ),
+        phetioDocumentation: 'flow rate of particles to the right side of the container'
+      } ) );
 
-    // @private {number[]} samples of number of particles that have crossed the container's divider
     this.leftCounts = []; // particles that crossed from right to left <--
     this.rightCounts = []; // particles that crossed from left to right -->
 
-    // @private {number[]} dt values for each sample
     this.dts = [];
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.leftFlowRateProperty.reset();
     this.rightFlowRateProperty.reset();
     this.leftCounts.length = 0;
@@ -75,11 +80,10 @@ export default class ParticleFlowRate {
   }
 
   /**
-   * @param {number} dt - time delta , in ps
-   * @public
+   * @param dt - time delta , in ps
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     // Take a sample.
     let leftCount = 0; // <--

@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionParticle1 is the model for particle species 1 in the 'Diffusion' screen, referred to as 'cyan particles'
  * in the design doc. Where you see variable names like particles1, centerOfMass1Property, etc., they are related to
@@ -9,29 +8,25 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import Particle from '../../common/model/Particle.js';
+import Particle, { ParticleOptions } from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type DiffusionParticle1Options = SelfOptions & StrictOmit<ParticleOptions, 'colorProperty' | 'highlightColorProperty'>;
 
 export default class DiffusionParticle1 extends Particle {
 
-  /**
-   * @param {Object} [options] see Particle
-   */
-  constructor( options ) {
+  public constructor( providedOptions?: DiffusionParticle1Options ) {
+    super( optionize<DiffusionParticle1Options, SelfOptions, ParticleOptions>()( {
 
-    if ( options ) {
-      assert && assert( options.colorProperty === undefined, 'DiffusionParticle1 sets colorProperty' );
-      assert && assert( options.highlightColorProperty === undefined, 'DiffusionParticle1 sets highlightColorProperty' );
-    }
-
-    super( merge( {
-
-      // superclass options
+      // ParticleOptions
       colorProperty: GasPropertiesColors.particle1ColorProperty,
       highlightColorProperty: GasPropertiesColors.particle1HighlightColorProperty
-    }, options ) );
+    }, providedOptions ) );
   }
 }
 

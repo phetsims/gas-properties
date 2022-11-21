@@ -25,6 +25,7 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
 
     // generated image for DiffusionParticle1 species
     const particle1ImageProperty = new ParticleImageProperty(
+      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
       options => new DiffusionParticle1( options ),
       model.modelViewTransform,
       model.leftSettings.radiusProperty
@@ -32,6 +33,7 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
 
     // generated image for DiffusionParticle2 species
     const particle2ImageProperty = new ParticleImageProperty(
+      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
       options => new DiffusionParticle2( options ),
       model.modelViewTransform,
       model.rightSettings.radiusProperty
