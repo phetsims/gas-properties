@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionContainerNode is the view of the container in the 'Diffusion' screen.
  * This container has a fixed width and a removable vertical divider.

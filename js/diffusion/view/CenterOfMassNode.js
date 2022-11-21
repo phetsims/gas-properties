@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * CenterOfMassNode is an indicator at the bottom of the container that indicates where the centerX of mass is for
  * one particle species. The indicator is color-coded to the particle color.
