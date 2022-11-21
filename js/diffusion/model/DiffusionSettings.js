@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionSettings defines the settings that initialize one side of the container in the 'Diffusion' screen.
  *

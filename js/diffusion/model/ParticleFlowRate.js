@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ParticleFlowRate is a sub-model of the 'Diffusion' screen model, responsible for flow rate for one set of particles.
  * Flow rate is the number of particles moving between the two sides of the container, in particles/ps.
