@@ -47,7 +47,9 @@ export default class DiffusionScreenView extends BaseScreenView {
     const viewProperties = new DiffusionViewProperties( tandem.createTandem( 'viewProperties' ) );
 
     // Container
-    const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );
+    const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform, {
+      tandem: tandem.createTandem( 'containerNode' )
+    } );
 
     // Scale below the container
     const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform, {

@@ -1,18 +1,20 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionSettingsNode is the user interface for setting initial conditions in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { AlignBox, AlignGroup, HBox, HStrut, Text, VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { NumberSpinnerOptions } from '../../../../sun/js/NumberSpinner.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
@@ -24,30 +26,29 @@ import GasPropertiesSpinner from './GasPropertiesSpinner.js';
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
 
+type SelfOptions = EmptySelfOptions;
+
+type DiffusionSettingsNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 export default class DiffusionSettingsNode extends VBox {
 
   /**
-   * @param {DiffusionSettings} leftSettings - setting for the left side of the container
-   * @param {DiffusionSettings} rightSettings - setting for the right side of the container
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Property.<boolean>} enabledProperty
-   * @param {Object} [options]
+   * @param leftSettings - setting for the left side of the container
+   * @param rightSettings - setting for the right side of the container
+   * @param modelViewTransform
+   * @param enabledProperty
+   * @param providedOptions
    */
-  constructor( leftSettings, rightSettings, modelViewTransform, enabledProperty, options ) {
-    assert && assert( leftSettings instanceof DiffusionSettings, `invalid leftSettings: ${leftSettings}` );
-    assert && assert( rightSettings instanceof DiffusionSettings, `invalid rightSettings: ${rightSettings}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( enabledProperty instanceof BooleanProperty, `invalid enabledProperty: ${enabledProperty}` );
+  public constructor( leftSettings: DiffusionSettings, rightSettings: DiffusionSettings,
+                      modelViewTransform: ModelViewTransform2, enabledProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: DiffusionSettingsNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<DiffusionSettingsNodeOptions, SelfOptions, VBoxOptions>()( {
 
-      // superclass options
+      // VBoxOptions
       spacing: 20,
-      align: 'left',
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      align: 'left'
+    }, providedOptions );
 
     // To make all spinners have the same bounds width
     const spinnersAlignGroup = new AlignGroup( {
@@ -97,15 +98,12 @@ export default class DiffusionSettingsNode extends VBox {
         tandem: options.tandem.createTandem( 'initialTemperatureControl' )
       } );
 
-    assert && assert( !options.children, 'DiffusionSettingsNode sets children' );
-    options = merge( {
-      children: [
-        numberOfParticlesControl,
-        massControl,
-        radiusControl,
-        initialTemperatureControl
-      ]
-    }, options );
+    options.children = [
+      numberOfParticlesControl,
+      massControl,
+      radiusControl,
+      initialTemperatureControl
+    ];
 
     super( options );
   }
@@ -114,33 +112,34 @@ export default class DiffusionSettingsNode extends VBox {
 /**
  * A label and two spinners, for changing the same quantity for the left and right sides of the container.
  */
+
+type QuantityControlSelfOptions = {
+  spinnerOptions?: NumberSpinnerOptions;
+};
+
+type QuantityControlOptions = QuantityControlSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 class QuantityControl extends VBox {
 
   /**
-   * @param {string} label
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {NumberProperty} leftProperty - quantity for the left side of the container
-   * @param {NumberProperty} rightProperty - quantity for the right side of the container
-   * @param {AlignGroup} spinnersAlignGroup
-   * @param {Object} [options]
+   * @param label
+   * @param modelViewTransform
+   * @param leftProperty - quantity for the left side of the container
+   * @param rightProperty - quantity for the right side of the container
+   * @param spinnersAlignGroup
+   * @param providedOptions
    */
-  constructor( label, modelViewTransform, leftProperty, rightProperty, spinnersAlignGroup, options ) {
-    assert && assert( typeof label === 'string', `invalid label: ${label}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( leftProperty instanceof NumberProperty, `invalid leftProperty: ${leftProperty}` );
-    assert && assert( rightProperty instanceof NumberProperty, `invalid rightProperty: ${rightProperty}` );
-    assert && assert( spinnersAlignGroup instanceof AlignGroup, `invalid spinnersAlignGroup: ${spinnersAlignGroup}` );
+  public constructor( label: string, modelViewTransform: ModelViewTransform2,
+                      leftProperty: RangedProperty, rightProperty: RangedProperty,
+                      spinnersAlignGroup: AlignGroup,
+                      providedOptions: QuantityControlOptions ) {
 
-    options = merge( {
-      spinnerOptions: null, // {*} see NumberSpinner
+    const options = optionize<QuantityControlOptions, StrictOmit<QuantityControlSelfOptions, 'spinnerOptions'>, VBoxOptions>()( {
 
-      // VBox options
+      // VBoxOptions
       spacing: 12,
-      align: 'left',
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      align: 'left'
+    }, providedOptions );
 
     // label
     const labelText = new Text( label, {
@@ -155,7 +154,7 @@ class QuantityControl extends VBox {
     const rightParticleIcon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
 
     // spinners, with uniform bounds width to facilitate layout
-    const alignBoxOptions = {
+    const alignBoxOptions: AlignBoxOptions = {
       group: spinnersAlignGroup,
       xAlign: 'left'
     };
@@ -184,11 +183,7 @@ class QuantityControl extends VBox {
       children: [ new HStrut( 1 ), leftBox, rightBox ]
     } );
 
-    // label and controls
-    assert && assert( !options.children, 'DataNode sets children' );
-    options = merge( {
-      children: [ labelText, hBox ]
-    }, options );
+    options.children = [ labelText, hBox ];
 
     super( options );
   }

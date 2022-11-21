@@ -25,34 +25,34 @@ export default class DiffusionSettings {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @public
+    // @public {RangedProperty}
     this.numberOfParticlesProperty =
       new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
         range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE,
         isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
         tandem: options.tandem.createTandem( 'numberOfParticlesProperty' )
-      } );
+      } ).asRanged();
 
-    // @public mass, in AMU
+    // @public {RangedProperty} mass, in AMU
     this.massProperty = new NumberProperty( GasPropertiesConstants.MASS_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.MASS_RANGE,
       units: 'AMU',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 ),
       tandem: options.tandem.createTandem( 'massProperty' )
-    } );
+    } ).asRanged();
 
-    // @public radius, in pm
+    // @public {RangedProperty} radius, in pm
     this.radiusProperty = new NumberProperty( GasPropertiesConstants.RADIUS_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.RADIUS_RANGE,
       units: 'pm',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 ),
       tandem: options.tandem.createTandem( 'radiusProperty' )
-    } );
+    } ).asRanged();
 
-    // @public initial temperature, in K, used to compute initial velocity
+    // @public {RangedProperty} initial temperature, in K, used to compute initial velocity
     this.initialTemperatureProperty =
       new NumberProperty( GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE.defaultValue, {
         numberType: 'Integer',
@@ -61,7 +61,7 @@ export default class DiffusionSettings {
         isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
         tandem: options.tandem.createTandem( 'initialTemperatureProperty' ),
         phetioDocumentation: 'temperature used to determine initial speed of particles'
-      } );
+      } ).asRanged();
   }
 
   /**

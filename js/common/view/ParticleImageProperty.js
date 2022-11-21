@@ -21,7 +21,7 @@ export default class ParticleImageProperty extends DerivedProperty {
   /**
    * @param {function(options:*):Particle} createParticle - creates a Particle instance
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {NumberProperty} radiusProperty
+   * @param {RangedProperty} radiusProperty
    * @param {Object} [options]
    */
   constructor( createParticle, modelViewTransform, radiusProperty, options ) {
