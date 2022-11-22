@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiffusionModel is the top-level model for the 'Diffusion' screen.
  *
