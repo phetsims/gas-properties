@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiffusionModel is the top-level model for the 'Diffusion' screen.
  *
@@ -10,6 +9,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -28,6 +28,8 @@ import DiffusionParticle1 from './DiffusionParticle1.js';
 import DiffusionParticle2 from './DiffusionParticle2.js';
 import DiffusionSettings from './DiffusionSettings.js';
 import ParticleFlowRate from './ParticleFlowRate.js';
+import Particle, { ParticleOptions } from '../../common/model/Particle.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 // constants
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
@@ -37,13 +39,39 @@ const CENTER_OF_MASS_PROPERTY_OPTIONS = {
   phetioReadOnly: true // derived from the state of the particle system
 };
 
+// Options to createParticle functions
+type CreateParticleOptions = PickRequired<ParticleOptions, 'mass' | 'radius'>;
+
 export default class DiffusionModel extends BaseModel {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  // particles of each species, together these make up the 'particle system'
+  public readonly particles1: DiffusionParticle1[];
+  public readonly particles2: DiffusionParticle2[];
+
+  public readonly container: DiffusionContainer;
+
+  // settings for the left and right sides of the container, before the divider is removed
+  public readonly leftSettings: DiffusionSettings;
+  public readonly rightSettings: DiffusionSettings;
+
+  // N, the total number of particles in the container
+  public readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
+
+  // data for the left and right sides of the container, appears in Data accordion box
+  public readonly leftData: DiffusionData;
+  public readonly rightData: DiffusionData;
+
+  // centerX of mass for each particle species, in pm. null when there are no particles in the container.
+  public readonly centerOfMass1Property: Property<number | null>;
+  public readonly centerOfMass2Property: Property<number | null>;
+
+  // flow rate model for each particle species
+  public readonly particleFlowRate1: ParticleFlowRate;
+  public readonly particleFlowRate2: ParticleFlowRate;
+
+  public readonly collisionDetector: DiffusionCollisionDetector;
+
+  public constructor( tandem: Tandem ) {
 
     super( tandem, {
 
@@ -54,19 +82,16 @@ export default class DiffusionModel extends BaseModel {
       stopwatchPosition: new Vector2( 60, 50 )
     } );
 
-    // @public (read-only) particles of each species, together these make up the 'particle system'
     this.particles1 = []; // {DiffusionParticle1[]}
     this.particles2 = []; // {DiffusionParticle2[]}
 
-    // @public
     this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
 
-    // @public settings for the left and right sides of the container, before the divider is removed
     this.leftSettings = new DiffusionSettings( tandem.createTandem( 'leftSettings' ) );
     this.rightSettings = new DiffusionSettings( tandem.createTandem( 'rightSettings' ) );
 
     // Synchronize particle counts and arrays.
-    const createDiffusionParticle1 = options => new DiffusionParticle1( options );
+    const createDiffusionParticle1 = ( options: CreateParticleOptions ) => new DiffusionParticle1( options );
     this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
       this.updateNumberOfParticles( numberOfParticles,
         this.container.leftBounds,
@@ -74,7 +99,7 @@ export default class DiffusionModel extends BaseModel {
         this.particles1,
         createDiffusionParticle1 );
     } );
-    const createDiffusionParticle2 = options => new DiffusionParticle2( options );
+    const createDiffusionParticle2 = ( options: CreateParticleOptions ) => new DiffusionParticle2( options );
     this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
       this.updateNumberOfParticles( numberOfParticles,
         this.container.rightBounds,
@@ -83,7 +108,6 @@ export default class DiffusionModel extends BaseModel {
         createDiffusionParticle2 );
     } );
 
-    // @public {Property.<number>} N, the total number of particles in the container
     this.numberOfParticlesProperty = new DerivedProperty(
       [ this.leftSettings.numberOfParticlesProperty, this.rightSettings.numberOfParticlesProperty ],
       ( leftNumberOfParticles, rightNumberOfParticles ) => {
@@ -100,34 +124,28 @@ export default class DiffusionModel extends BaseModel {
         }
         return leftNumberOfParticles + rightNumberOfParticles;
       }, {
-        numberType: 'Integer',
-        isValidValue: value => value >= 0,
-        valueType: 'number',
+        isValidValue: value => ( Number.isInteger( value ) && value >= 0 ),
         phetioValueType: NumberIO,
         tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
         phetioDocumentation: 'total number of particles in the container'
       } );
 
-    // @public data for the left and right sides of the container, appears in Data accordion box
     this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, tandem.createTandem( 'leftData' ) );
     this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, tandem.createTandem( 'rightData' ) );
 
-    // @public (read-only) {Property.<number|null>} centerX of mass for each particle species, in pm
-    // null when there are no particles in the container.
-    this.centerOfMass1Property = new Property( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+    this.centerOfMass1Property = new Property<number | null>( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
       tandem: tandem.createTandem( 'centerOfMass1Property' ),
       phetioDocumentation: 'center of mass for particles of type 1'
     } ) );
-    this.centerOfMass2Property = new Property( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+
+    this.centerOfMass2Property = new Property<number | null>( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
       tandem: tandem.createTandem( 'centerOfMass2Property' ),
       phetioDocumentation: 'center of mass for particles of type 2'
     } ) );
 
-    // @public flow rate model for each particle species
     this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1, tandem.createTandem( 'particleFlowRate1' ) );
     this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2, tandem.createTandem( 'particleFlowRate2' ) );
 
-    // @public (read-only)
     this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
     // Update mass and temperature of existing particles. This adjusts speed of the particles.
@@ -175,12 +193,7 @@ export default class DiffusionModel extends BaseModel {
     } );
   }
 
-  /**
-   * Resets the model.
-   * @public
-   * @override
-   */
-  reset() {
+  public override reset(): void {
     super.reset();
 
     this.container.reset();
@@ -197,12 +210,10 @@ export default class DiffusionModel extends BaseModel {
 
   /**
    * Steps the model using model time units. Order is very important here!
-   * @param {number} dt - time delta, in ps
-   * @protected
-   * @override
+   * @param dt - time delta, in ps
    */
-  stepModelTime( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  protected override stepModelTime( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     super.stepModelTime( dt );
 
@@ -226,19 +237,14 @@ export default class DiffusionModel extends BaseModel {
 
   /**
    * Adjusts an array of particles to have the desired number of elements.
-   * @param {number} numberOfParticles - desired number of particles
-   * @param {Bounds2} positionBounds - initial position will be inside this bounds
-   * @param {DiffusionSettings} settings
-   * @param {Particle[]} particles - array of particles that corresponds to newValue and oldValue
-   * @param {function(options:*):Particle} createParticle - creates a Particle instance
-   * @private
+   * @param numberOfParticles - desired number of particles
+   * @param positionBounds - initial position will be inside this bounds
+   * @param settings
+   * @param particles - array of particles that corresponds to newValue and oldValue
+   * @param createParticle - creates a Particle instance
    */
-  updateNumberOfParticles( numberOfParticles, positionBounds, settings, particles, createParticle ) {
-    assert && assert( typeof numberOfParticles === 'number', `invalid numberOfParticles: ${numberOfParticles}` );
-    assert && assert( positionBounds instanceof Bounds2, `invalid positionBounds: ${positionBounds}` );
-    assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
-    assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-    assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
+  private updateNumberOfParticles( numberOfParticles: number, positionBounds: Bounds2, settings: DiffusionSettings,
+                                   particles: Particle[], createParticle: ( options: CreateParticleOptions ) => Particle ): void {
 
     const delta = numberOfParticles - particles.length;
     if ( delta !== 0 ) {
@@ -259,37 +265,27 @@ export default class DiffusionModel extends BaseModel {
 
   /**
    * Updates the center of mass, as shown by the center-of-mass indicators.
-   * @private
    */
-  updateCenterOfMass() {
+  private updateCenterOfMass(): void {
     this.centerOfMass1Property.value = ParticleUtils.getCenterXOfMass( this.particles1 );
     this.centerOfMass2Property.value = ParticleUtils.getCenterXOfMass( this.particles2 );
   }
 
   /**
    * Updates the Data displayed for the left and right sides of the container.
-   * @private
    */
-  updateData() {
+  private updateData(): void {
     this.leftData.update( this.particles1, this.particles2 );
     this.rightData.update( this.particles1, this.particles2 );
   }
 }
 
 /**
- * Adds n particles to the end of the specified array.
- * @param {number} n
- * @param {Bounds2} positionBounds - initial position will be inside this bounds
- * @param {DiffusionSettings} settings
- * @param {Particle[]} particles
- * @param {function(options:*):Particle} createParticle - creates a Particle instance
+ * Adds n particles to the end of the specified array. Particles must be inside positionBounds.
  */
-function addParticles( n, positionBounds, settings, particles, createParticle ) {
-  assert && assert( typeof n === 'number' && n > 0, `invalid n: ${n}` );
-  assert && assert( positionBounds instanceof Bounds2, `invalid positionBounds: ${positionBounds}` );
-  assert && assert( settings instanceof DiffusionSettings, `invalid settings: ${settings}` );
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-  assert && assert( typeof createParticle === 'function', `invalid createParticle: ${createParticle}` );
+function addParticles( n: number, positionBounds: Bounds2, settings: DiffusionSettings, particles: Particle[],
+                       createParticle: ( options: CreateParticleOptions ) => Particle ): void {
+  assert && assert( n > 0, `invalid n: ${n}` );
 
   // Create n particles
   for ( let i = 0; i < n; i++ ) {
@@ -320,13 +316,10 @@ function addParticles( n, positionBounds, settings, particles, createParticle ) 
 
 /**
  * When mass or initial temperature changes, update particles and adjust their speed accordingly.
- * @param {number} mass
- * @param {number} temperature
- * @param {Particle[]} particles
  */
-function updateMassAndTemperature( mass, temperature, particles ) {
-  assert && assert( typeof mass === 'number' && mass > 0, `invalid mass: ${mass}` );
-  assert && assert( typeof temperature === 'number' && temperature >= 0, `invalid temperature: ${temperature}` );
+function updateMassAndTemperature( mass: number, temperature: number, particles: Particle[] ): void {
+  assert && assert( mass > 0, `invalid mass: ${mass}` );
+  assert && assert( temperature >= 0, `invalid temperature: ${temperature}` );
   assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
@@ -339,16 +332,13 @@ function updateMassAndTemperature( mass, temperature, particles ) {
 
 /**
  * Updates the radius for a set of particles.
- * @param {number} radius
- * @param {Particle[]} particles
- * @param {Bounds2} bounds - particles should be inside these bounds
- * @param {boolean} isPlaying
+ * @param radius
+ * @param particles
+ * @param bounds - particles should be inside these bounds
+ * @param isPlaying
  */
-function updateRadius( radius, particles, bounds, isPlaying ) {
-  assert && assert( typeof radius === 'number' && radius > 0, `invalid radius: ${radius}` );
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-  assert && assert( bounds instanceof Bounds2, `invalid bounds: ${bounds}` );
-  assert && assert( typeof isPlaying === 'boolean', `invalid isPlaying: ${isPlaying}` );
+function updateRadius( radius: number, particles: Particle[], bounds: Bounds2, isPlaying: boolean ): void {
+  assert && assert( radius > 0, `invalid radius: ${radius}` );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
 

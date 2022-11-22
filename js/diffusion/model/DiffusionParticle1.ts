@@ -16,7 +16,7 @@ import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type DiffusionParticle1Options = SelfOptions & StrictOmit<ParticleOptions, 'colorProperty' | 'highlightColorProperty'>;
+export type DiffusionParticle1Options = SelfOptions & StrictOmit<ParticleOptions, 'colorProperty' | 'highlightColorProperty'>;
 
 export default class DiffusionParticle1 extends Particle {
 
