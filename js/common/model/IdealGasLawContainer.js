@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IdealGasLawContainer is the container used in screens that are based on the Ideal Gas Law.
  * This container has a (re)movable lid.
