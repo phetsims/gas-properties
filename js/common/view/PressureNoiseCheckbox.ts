@@ -13,7 +13,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
