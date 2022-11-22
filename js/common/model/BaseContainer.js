@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BaseContainer is the base class for containers in all screens. This is a rectangular container for particles,
  * with fixed position, fixed height and depth, and mutable width. The origin is at the bottom-right corner, and
