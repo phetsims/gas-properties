@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * TemperatureModel is a sub-model of IdealGasModel. It is responsible for the T (temperature) component of
  * the Ideal Gas Law (PV = NkT) and for the thermometer.
@@ -9,11 +8,10 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
-import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -28,63 +26,55 @@ const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
 export default class TemperatureModel {
 
-  /**
-   * @param {Property.<number>} numberOfParticlesProperty
-   * @param {function:number} getAverageKineticEnergy
-   * @param {Object} [options]
-   */
-  constructor( numberOfParticlesProperty, getAverageKineticEnergy, options ) {
-    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( typeof getAverageKineticEnergy === 'function',
-      `invalid getAverageKineticEnergy: ${getAverageKineticEnergy}` );
+  private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
+  private readonly getAverageKineticEnergy: () => number;
 
-    options = merge( {
+  // T, temperature in the container, in K, null when the container is empty
+  public readonly temperatureProperty: Property<number | null>;
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+  // whether initial temperature is controlled by the user
+  public readonly controlTemperatureEnabledProperty: Property<boolean>;
 
-    // @private
+  // initial temperature of particles added to the container, in K. Ignored if !controlTemperatureEnabledProperty.value
+  public readonly initialTemperatureProperty: RangedProperty;
+
+  // thermometer that displays temperatureProperty with a choice of units
+  public readonly thermometer: Thermometer;
+
+  public constructor( numberOfParticlesProperty: TReadOnlyProperty<number>,
+                      getAverageKineticEnergy: () => number,
+                      tandem: Tandem ) {
+
     this.numberOfParticlesProperty = numberOfParticlesProperty;
     this.getAverageKineticEnergy = getAverageKineticEnergy;
 
-    // @public {Property.<number|null>} T, temperature in the container, in K, null when the container is empty
-    this.temperatureProperty = new Property( null, {
+    this.temperatureProperty = new Property<number | null>( null, {
       units: 'K',
-      isValidValue: value => ( value === null || ( typeof value === 'number' && value >= 0 ) ),
+      isValidValue: value => ( value === null || value >= 0 ),
       phetioValueType: NullableIO( NumberIO ),
-      tandem: options.tandem.createTandem( 'temperatureProperty' ),
+      tandem: tandem.createTandem( 'temperatureProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system
       phetioDocumentation: 'temperature in K'
     } );
 
-    // @public whether initial temperature is controlled by the user
     this.controlTemperatureEnabledProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'controlTemperatureEnabledProperty' ),
+      tandem: tandem.createTandem( 'controlTemperatureEnabledProperty' ),
       phetioDocumentation: 'indicates whether initial temperature is controlled by the user'
     } );
 
-    // @public initial temperature of particles added to the container, in K
-    // Ignored if !controlTemperatureEnabledProperty.value
     this.initialTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
       range: INITIAL_TEMPERATURE_RANGE,
       units: 'K',
-      tandem: options.tandem.createTandem( 'initialTemperatureProperty' ),
+      tandem: tandem.createTandem( 'initialTemperatureProperty' ),
       phetioDocumentation: 'temperature used to determine the initial speed of particles when controlled by the user'
-    } );
+    } ).asRanged();
 
-    // @public (read-only) thermometer that displays temperatureProperty with a choice of units
     this.thermometer = new Thermometer( this.temperatureProperty, {
-      tandem: options.tandem.createTandem( 'thermometer' )
+      tandem: tandem.createTandem( 'thermometer' )
     } );
   }
 
-  /**
-   * Resets this model.
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.temperatureProperty.reset();
     this.controlTemperatureEnabledProperty.reset();
     this.initialTemperatureProperty.reset();
@@ -93,18 +83,15 @@ export default class TemperatureModel {
 
   /**
    * Updates the model to match the state of the system.
-   * @public
    */
-  update() {
+  public update(): void {
     this.temperatureProperty.value = this.computeTemperature();
   }
 
   /**
    * Gets the temperature that will be used to compute initial velocity magnitude.
-   * @returns {number} in K
-   * @public
    */
-  getInitialTemperature() {
+  public getInitialTemperature(): number {
 
     let initialTemperature = null;
 
@@ -124,17 +111,15 @@ export default class TemperatureModel {
       initialTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
     }
 
-    assert && assert( typeof initialTemperature === 'number' && initialTemperature >= 0,
-      `bad initialTemperature: ${initialTemperature}` );
+    assert && assert( initialTemperature >= 0, `bad initialTemperature: ${initialTemperature}` );
     return initialTemperature;
   }
 
   /**
    * Computes the actual temperature, which is a measure of the kinetic energy of the particles in the container.
-   * @returns {number|null} in K, null if the container is empty
-   * @public
+   * Returns actual temperature in K, null if the container is empty.
    */
-  computeTemperature() {
+  public computeTemperature(): number | null {
     let temperature = null;
     const n = this.numberOfParticlesProperty.value;
     if ( n > 0 ) {

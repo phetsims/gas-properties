@@ -34,7 +34,7 @@ import IdealGasLawContainer from './IdealGasLawContainer.js';
 import ParticleSystem from './ParticleSystem.js';
 import PressureGauge from './PressureGauge.js';
 import PressureModel from './PressureModel.js';
-import TemperatureModel from './TemperatureModel.ts';
+import TemperatureModel from './TemperatureModel.js';
 
 export default class IdealGasLawModel extends BaseModel {
 
@@ -102,9 +102,8 @@ export default class IdealGasLawModel extends BaseModel {
     // @public (read-only) sub-model responsible for temperature T
     this.temperatureModel = new TemperatureModel(
       this.particleSystem.numberOfParticlesProperty, // N
-      () => this.particleSystem.getAverageKineticEnergy(), { // KE
-        tandem: tandem.createTandem( 'temperatureModel' )
-      }
+      () => this.particleSystem.getAverageKineticEnergy(), // KE
+      tandem.createTandem( 'temperatureModel' )
     );
 
     // @public (read-only) sub-model responsible for pressure P
