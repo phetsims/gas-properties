@@ -112,9 +112,8 @@ export default class IdealGasLawModel extends BaseModel {
       this.particleSystem.numberOfParticlesProperty, // N
       this.container.volumeProperty, // V
       this.temperatureModel.temperatureProperty, // T
-      () => { this.container.blowLidOff(); }, {
-        tandem: tandem.createTandem( 'pressureModel' )
-      }
+      () => { this.container.blowLidOff(); },
+      tandem.createTandem( 'pressureModel' )
     );
 
     // @public (read-only)

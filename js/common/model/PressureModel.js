@@ -11,8 +11,6 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
@@ -29,9 +27,9 @@ export default class PressureModel {
    * @param {ReadOnlyProperty.<number>} volumeProperty
    * @param {Property.<number|null>} temperatureProperty
    * @param {function} blowLidOff
-   * @param {Object} [options]
+   * @param tandem
    */
-  constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff, options ) {
+  constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff, tandem ) {
     assert && assert( holdConstantProperty instanceof EnumerationProperty,
       `invalid holdConstantProperty: ${holdConstantProperty}` );
     assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
@@ -39,12 +37,6 @@ export default class PressureModel {
     assert && assert( volumeProperty instanceof ReadOnlyProperty, `invalid volumeProperty: ${volumeProperty}` );
     assert && assert( temperatureProperty instanceof Property, `invalid temperatureProperty: ${temperatureProperty}` );
     assert && assert( typeof blowLidOff === 'function', `invalid blowLidOff: ${blowLidOff}` );
-
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
 
     // @private
     this.holdConstantProperty = holdConstantProperty;
@@ -57,15 +49,14 @@ export default class PressureModel {
     this.pressureProperty = new NumberProperty( 0, {
       units: 'kPa',
       isValidValue: value => ( value >= 0 ),
-      tandem: options.tandem.createTandem( 'pressureProperty' ),
+      tandem: tandem.createTandem( 'pressureProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system,
       phetioDocumentation: 'pressure in K, with no noise'
     } );
 
     // @public (read-only) gauge that display pressureProperty with a choice of units
-    this.pressureGauge = new PressureGauge( this.pressureProperty, temperatureProperty, holdConstantProperty, {
-      tandem: options.tandem.createTandem( 'pressureGauge' )
-    } );
+    this.pressureGauge = new PressureGauge( this.pressureProperty, temperatureProperty, holdConstantProperty,
+      tandem.createTandem( 'pressureGauge' ) );
 
     // @private whether to update pressure
     this.updatePressureEnabled = false;

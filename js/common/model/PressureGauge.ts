@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PressureGauge is the model of the pressure gauge. It is responsible for determining what units will be used to
  * present the pressure, and for deriving pressure in those units. Optionally adds a bit of noise to the displayed
@@ -17,10 +16,10 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
@@ -38,32 +37,52 @@ assert && assert( MIN_NOISE < MAX_NOISE, 'MIN_NOISE must be < MAX_NOISE' );
 
 export default class PressureGauge {
 
-  /**
-   * @param {NumberProperty} pressureProperty - pressure in the container, in kPa
-   * @param {Property.<number|null>} temperatureProperty - temperature in the container, in K, null if empty container
-   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty - quantity to be held constant, influences noise
-   * @param {Object} [options]
-   */
-  constructor( pressureProperty, temperatureProperty, holdConstantProperty, options ) {
-    assert && assert( pressureProperty instanceof NumberProperty,
-      `invalid pressureProperty: ${pressureProperty}` );
-    assert && assert( temperatureProperty instanceof Property,
-      `invalid temperatureProperty: ${temperatureProperty}` );
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
-      `invalid holdConstantProperty: ${holdConstantProperty}` );
+  // pressure in the container, in kPa
+  private readonly pressureProperty: Property<number>;
 
-    options = merge( {
+  // temperature in the container, in K, null if empty container
+  private readonly temperatureProperty: Property<number | null>;
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+  // quantity to be held constant, influences noise
+  private readonly holdConstantProperty: EnumerationProperty<HoldConstant>;
 
-    // @public pressure in kPa with noise added. This is not derived from pressureProperty,
-    // because it needs to noise on step, not when pressureProperty changes.
+  // pressure in kPa, with noise added
+  public readonly pressureKilopascalsProperty: Property<number>;
+
+  // pressure in atmospheres (atm), with noise added
+  public readonly pressureAtmospheresProperty: TReadOnlyProperty<number>;
+
+  // pressure range in kPa
+  public readonly pressureRange: Range;
+
+  // amount of noise in kPa is inversely proportional to pressure, so more noise at lower pressure
+  private readonly pressureNoiseFunction: LinearFunction;
+
+  // map from temperature (K) to noise scale factor, so that noise falls off at low temperatures
+  private readonly scaleNoiseFunction: LinearFunction;
+
+  // pressure units displayed by the pressure gauge
+  public readonly unitsProperty: EnumerationProperty<PressureUnits>;
+
+  private dtAccumulator: number;
+
+  // The display is refreshed at this interval, in ps
+  public static readonly REFRESH_PERIOD = 0.75;
+
+  public constructor( pressureProperty: Property<number>,
+                      temperatureProperty: Property<number | null>,
+                      holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      tandem: Tandem ) {
+
+    this.pressureProperty = pressureProperty;
+    this.temperatureProperty = temperatureProperty;
+    this.holdConstantProperty = holdConstantProperty;
+
+    // This is not derived from pressureProperty, because it needs to add noise on step, not when pressureProperty changes.
     this.pressureKilopascalsProperty = new NumberProperty( pressureProperty.value, {
       units: 'kPa',
       isValidValue: value => ( value >= 0 ),
-      tandem: options.tandem.createTandem( 'pressureKilopascalsProperty' ),
+      tandem: tandem.createTandem( 'pressureKilopascalsProperty' ),
       phetioReadOnly: true, // value is derived from pressureProperty on step, with noise added
       phetioDocumentation: 'pressure in K, with optional noise added'
     } );
@@ -75,55 +94,41 @@ export default class PressureGauge {
       }
     } );
 
-    // @public pressure in atmospheres (atm) with noise added
     this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
       pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
         units: 'atm',
         isValidValue: value => ( value >= 0 ),
         valueType: 'number',
         phetioValueType: NumberIO,
-        tandem: options.tandem.createTandem( 'pressureAtmospheresProperty' ),
+        tandem: tandem.createTandem( 'pressureAtmospheresProperty' ),
         phetioDocumentation: 'pressure in atm, with optional noise added'
       } );
 
-    // @public (read-only) pressure range in kPa
     this.pressureRange = new Range( 0, MAX_PRESSURE );
 
-    // @private amount of noise in kPa is inversely proportional to pressure, so more noise at lower pressure
     this.pressureNoiseFunction = new LinearFunction( 0, this.pressureRange.max, MAX_NOISE, MIN_NOISE, true );
 
-    // @private map from temperature (K) to noise scale factor, so that noise falls off at low temperatures
     this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
-    // @public pressure units displayed by the pressure gauge
     this.unitsProperty = new EnumerationProperty( PressureUnits.ATMOSPHERES, {
-      tandem: options.tandem.createTandem( 'unitsProperty' ),
+      tandem: tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the pressure gauge'
     } );
 
-    // @private
-    this.pressureProperty = pressureProperty;
-    this.temperatureProperty = temperatureProperty;
-    this.holdConstantProperty = holdConstantProperty;
     this.dtAccumulator = 0;
   }
 
-  /**
-   * Resets the pressure gauge.
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.unitsProperty.reset();
     this.dtAccumulator = 0;
   }
 
   /**
    * Steps the pressure gauge.
-   * @param {number} dt - time step, in ps
-   * @public
+   * @param dt - time step, in ps
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     this.dtAccumulator += dt;
 
@@ -142,7 +147,7 @@ export default class PressureGauge {
 
         // compute noise
         noise = this.pressureNoiseFunction.evaluate( this.pressureProperty.value ) *
-                this.scaleNoiseFunction.evaluate( this.temperatureProperty.value ) *
+                this.scaleNoiseFunction.evaluate( this.temperatureProperty.value || 0 ) *
                 dotRandom.nextDouble();
 
         // randomly apply a sign if doing so doesn't make the pressure become <= 0
@@ -156,8 +161,5 @@ export default class PressureGauge {
     }
   }
 }
-
-// @public The display is refreshed at this interval, in ps
-PressureGauge.REFRESH_PERIOD = 0.75;
 
 gasProperties.register( 'PressureGauge', PressureGauge );
