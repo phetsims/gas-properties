@@ -115,7 +115,7 @@ export default class IdealGasLawContainer extends BaseContainer {
       } );
   }
 
-  public override reset(): void {
+  public override reset() {
     super.reset();
     this.lidIsOnProperty.reset();
     this.lidWidthProperty.reset();
