@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * CollisionCounter counts collisions between particles and the walls of a container.
  *
@@ -9,64 +8,81 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import gasProperties from '../../gasProperties.js';
 import CollisionDetector from './CollisionDetector.js';
 
+type SelfOptions = {
+  position?: Vector2;
+  visible?: boolean;
+};
+
+type CollisionCounterOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class CollisionCounter {
 
-  /**
-   * @param {CollisionDetector} collisionDetector - detects collisions between particles and the container
-   * @param {Object} [options]
-   */
-  constructor( collisionDetector, options ) {
-    assert && assert( collisionDetector instanceof CollisionDetector,
-      `invalid collisionDetector: ${collisionDetector}` );
+  private readonly collisionDetector: CollisionDetector;
 
-    options = merge( {
+  // position of the collision counter, in view coordinates
+  public readonly positionProperty: Property<Vector2>;
+
+  // the number of particle-container collisions
+  public readonly numberOfCollisionsProperty: Property<number>;
+
+  // whether the collision counter is running
+  public readonly isRunningProperty: Property<boolean>;
+
+  // time that the counter has been running, in ps
+  private timeRunning: number;
+
+  // whether the collision counter is visible
+  public readonly visibleProperty: Property<boolean>;
+
+  // valid values for samplePeriodProperty, in ps
+  public readonly samplePeriods: number[];
+
+  // Sample period for counting collisions
+  // Actual sample period will be close to this value, but not exact (confirmed OK with @arouinfar).
+  public readonly samplePeriodProperty: Property<number>;
+
+  public constructor( collisionDetector: CollisionDetector, providedOptions: CollisionCounterOptions ) {
+
+    const options = optionize<CollisionCounterOptions, SelfOptions>()( {
+
+      // SelfOptions
       position: Vector2.ZERO,
-      visible: false,
+      visible: false
+    }, providedOptions );
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    // @private
     this.collisionDetector = collisionDetector;
 
-    // @public position of the collision counter, in view coordinates
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' )
     } );
 
-    // @public (read-only) the number of particle-container collisions
     this.numberOfCollisionsProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
       tandem: options.tandem.createTandem( 'numberOfCollisionsProperty' )
     } );
 
-    // @public whether the collision counter is running
     this.isRunningProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isRunningProperty' )
     } );
 
-    // @private time that the counter has been running, in ps
     this.timeRunning = 0;
 
-    // @public whether the collision counter is visible
     this.visibleProperty = new BooleanProperty( options.visible, {
       tandem: options.tandem.createTandem( 'visibleProperty' )
     } );
 
-    // @public (read-only) valid values for samplePeriodProperty, in ps
     this.samplePeriods = [ 5, 10, 20 ];
 
-    // @public sample period for counting collisions
-    // Actual sample period will be close to this value, but not exact (confirmed OK with @arouifar).
     this.samplePeriodProperty = new NumberProperty( this.samplePeriods[ 1 ], {
       numberType: 'Integer',
       validValues: this.samplePeriods,
@@ -82,11 +98,7 @@ export default class CollisionCounter {
     this.samplePeriodProperty.link( () => this.stopAndResetCount() );
   }
 
-  /**
-   * Resets the collision counter.
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.positionProperty.reset();
     this.numberOfCollisionsProperty.reset();
     this.isRunningProperty.reset();
@@ -96,29 +108,26 @@ export default class CollisionCounter {
 
   /**
    * Resets the collision count and set its run-time to zero.
-   * @private
    */
-  resetCount() {
+  private resetCount(): void {
     this.numberOfCollisionsProperty.value = 0;
     this.timeRunning = 0;
   }
 
   /**
    * Stops the collision counter and does resetCount.
-   * @private
    */
-  stopAndResetCount() {
+  private stopAndResetCount(): void {
     this.isRunningProperty.value = false;
     this.resetCount();
   }
 
   /**
    * Steps the collision counter.
-   * @param {number} dt - time step, in ps
-   * @public
+   * @param dt - time step, in ps
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
     if ( this.isRunningProperty.value ) {
 
       // record the number of collisions for this time step
