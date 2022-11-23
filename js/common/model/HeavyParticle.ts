@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * HeavyParticle is the model for 'heavy' particles, as they are named in the design document.
  *
@@ -14,10 +13,10 @@ import Particle from './Particle.js';
 
 export default class HeavyParticle extends Particle {
 
-  constructor() {
+  public constructor() {
     super( {
 
-      // superclass options
+      // ParticleOptions
       mass: 28, // equivalent to N2 (nitrogen), in AMU, rounded to the closest integer
       radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS, // pm
       colorProperty: GasPropertiesColors.heavyParticleColorProperty,

@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LightParticle is the model for 'light' particles, as they are named in the design document.
  *
@@ -14,10 +13,10 @@ import Particle from './Particle.js';
 
 export default class LightParticle extends Particle {
 
-  constructor() {
+  public constructor() {
     super( {
 
-      // superclass options
+      // ParticleOptions
       mass: 4, // equivalent to He (helium), in AMU, rounded to the closest integer
       radius: GasPropertiesConstants.LIGHT_PARTICLES_RADIUS, // pm
       colorProperty: GasPropertiesColors.lightParticleColorProperty,
