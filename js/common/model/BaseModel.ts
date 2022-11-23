@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BaseModel is the base class for models in all screens. It provides functionality that is NOT related to the
  * Ideal Gas Law. Primarily responsibilities are:
@@ -18,7 +17,7 @@ import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
@@ -30,16 +29,41 @@ import TimeTransform from './TimeTransform.js';
 // constants
 const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
 
+type SelfOptions = {
+
+  // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
+  // Determined empirically, and dependent on the ScreenView's layoutBounds.
+  modelOriginOffset?: Vector2;
+
+  // Stopwatch initial position (in view coordinates!), determined empirically.
+  stopwatchPosition?: Vector2;
+};
+
+type BaseModelOptions = SelfOptions;
+
 export default class BaseModel {
 
-  /**
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   */
-  constructor( tandem, options ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  // transform between model and view coordinate frames
+  public readonly modelViewTransform: ModelViewTransform2;
 
-    options = merge( {
+  // Bounds of the entire space that the model knows about.
+  // This corresponds to the browser window, and doesn't have a valid value until the view is created.
+  public readonly modelBoundsProperty: Property<Bounds2>;
+
+  // is the sim playing?
+  public readonly isPlayingProperty: Property<boolean>;
+
+  // the clock speed of the sim
+  public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
+
+  // transform between real time and sim time, initialized below
+  public timeTransform: TimeTransform;
+
+  public readonly stopwatch: Stopwatch;
+
+  public constructor( tandem: Tandem, providedOptions: BaseModelOptions ) {
+
+    const options = optionize<BaseModelOptions, SelfOptions>()( {
 
       // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
       // Determined empirically, and dependent on the ScreenView's layoutBounds.
@@ -47,40 +71,33 @@ export default class BaseModel {
 
       // Stopwatch initial position (in view coordinates!), determined empirically.
       stopwatchPosition: new Vector2( 240, 15 )
-    }, options );
+    }, providedOptions );
 
-    // @public (read-only) {ModelViewTransform2} transform between model and view coordinate frames
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
       options.modelOriginOffset,
       MODEL_VIEW_SCALE,
       -MODEL_VIEW_SCALE // y is inverted
     );
 
-    // @public (read-only) bounds of the entire space that the model knows about.
-    // This corresponds to the browser window, and doesn't have a valid value until the view is created.
     this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ), {
       valueType: Bounds2
     } );
 
-    // @public is the sim playing?
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isPlayingProperty' )
     } );
 
-    // @public the clock speed of the sim
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       tandem: tandem.createTandem( 'timeSpeedProperty' )
     } );
 
-    // @public (read-only) {TimeTransform} transform between real time and sim time, initialized below
     this.timeTransform = TimeTransform.NORMAL;
 
     // Adjust the time transform
     this.timeSpeedProperty.link( speed => {
-      this.timeTransform = speed === TimeSpeed.SLOW ? TimeTransform.SLOW : TimeTransform.NORMAL;
+      this.timeTransform = ( speed === TimeSpeed.SLOW ) ? TimeTransform.SLOW : TimeTransform.NORMAL;
     } );
 
-    // @public (read-only)
     this.stopwatch = new Stopwatch( {
       position: options.stopwatchPosition,
       timePropertyOptions: {
@@ -91,11 +108,7 @@ export default class BaseModel {
     } );
   }
 
-  /**
-   * Resets the model.
-   * @public
-   */
-  reset() {
+  public reset(): void {
 
     // Properties
     this.isPlayingProperty.reset();
@@ -109,11 +122,10 @@ export default class BaseModel {
    * Steps the model using real time units.
    * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
    * Subclasses that need to add functionality should override stepModelTime, not this method.
-   * @param {number} dt - time delta, in seconds
-   * @public
+   * @param dt - time delta, in seconds
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
     if ( this.isPlayingProperty.value ) {
       this.stepRealTime( dt );
     }
@@ -123,22 +135,20 @@ export default class BaseModel {
    * Steps the model using real time units.
    * This is intended to be called by clients that need to step the sim, e.g. Step button listener.
    * Subclasses that need to add functionality should override stepModelTime, not this method.
-   * @param {number} dt - time delta, in seconds
-   * @public
+   * @param dt - time delta, in seconds
    */
-  stepRealTime( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  public stepRealTime( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
     this.stepModelTime( this.timeTransform.evaluate( dt ) );
   }
 
   /**
    * Steps the model using model time units.
    * Subclasses that need to add additional step functionality should override this method.
-   * @param {number} dt - time delta, in ps
-   * @protected
+   * @param dt - time delta, in ps
    */
-  stepModelTime( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  protected stepModelTime( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
     this.stopwatch.step( dt );
   }
 }
