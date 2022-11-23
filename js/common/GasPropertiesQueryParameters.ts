@@ -42,7 +42,7 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 
   // Shows how the collision detection space is partitioned into a 2D grid of regions.
   // For internal use only.
-  showRegions: { type: 'flag' },
+  regions: { type: 'flag' },
 
   // Shows the model and view coordinates that correspond to the cursor position.
   // For internal use only.

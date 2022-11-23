@@ -9,7 +9,7 @@
  * of the region. Rather than having to consider collisions between every object in the system, only objects within
  * the same region need to be considered.
  *
- * Run with ?showRegions to display the regions.
+ * Run with ?regions to display the regions.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -53,7 +53,7 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Show how the collision detection space is partitioned into regions
     let regionsNode = null;
-    if ( GasPropertiesQueryParameters.showRegions ) {
+    if ( GasPropertiesQueryParameters.regions ) {
       regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
     }
 
