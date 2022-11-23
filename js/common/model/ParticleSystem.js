@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ParticleSystem is a sub-model of IdealGasModel. It is responsible for the particle system, including
  * the N (number of particles) component of the Ideal Gas Law, PV = NkT.
