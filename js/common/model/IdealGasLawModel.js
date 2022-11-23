@@ -34,7 +34,7 @@ import IdealGasLawContainer from './IdealGasLawContainer.js';
 import ParticleSystem from './ParticleSystem.js';
 import PressureGauge from './PressureGauge.js';
 import PressureModel from './PressureModel.js';
-import TemperatureModel from './TemperatureModel.js';
+import TemperatureModel from './TemperatureModel.ts';
 
 export default class IdealGasLawModel extends BaseModel {
 
