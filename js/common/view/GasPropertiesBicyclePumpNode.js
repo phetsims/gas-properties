@@ -16,7 +16,7 @@ import gasProperties from '../../gasProperties.js';
 export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
   /**
-   * @param {NumberProperty} numberOfParticlesProperty
+   * @param {RangedProperty} numberOfParticlesProperty
    * @param {Object} [options]
    * @constructor
    */

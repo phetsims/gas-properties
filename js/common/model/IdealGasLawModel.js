@@ -87,9 +87,8 @@ export default class IdealGasLawModel extends BaseModel {
     this.particleSystem = new ParticleSystem(
       () => this.temperatureModel.getInitialTemperature(),
       this.particleParticleCollisionsEnabledProperty,
-      this.container.particleEntryPosition, {
-        tandem: tandem.createTandem( 'particleSystem' )
-      }
+      this.container.particleEntryPosition,
+      tandem.createTandem( 'particleSystem' )
     );
 
     // @public (read-only)

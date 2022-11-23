@@ -56,7 +56,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
    * @param {NumberProperty} heatCoolAmountProperty
    * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
    * @param {BooleanProperty} isPlayingProperty
-   * @param {ReadOnlyProperty.<number>} numberOfParticlesProperty
+   * @param {RangedProperty} numberOfParticlesProperty
    * @param {Property.<number|null>} temperatureProperty
    * @param {Object} [options]
    */

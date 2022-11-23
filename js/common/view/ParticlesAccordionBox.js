@@ -25,8 +25,8 @@ import NumberOfParticlesControl from './NumberOfParticlesControl.js';
 export default class ParticlesAccordionBox extends AccordionBox {
 
   /**
-   * @param {NumberProperty} numberOfHeavyParticlesProperty
-   * @param {NumberProperty} numberOfLightParticlesProperty
+   * @param {RangedProperty} numberOfHeavyParticlesProperty
+   * @param {RangedProperty} numberOfLightParticlesProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
    */
