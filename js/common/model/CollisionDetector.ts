@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * CollisionDetector handles collision detection and response for all screens. Our collision model involves
  * rigid bodies. It is a perfectly-elastic collision model, where there is no net loss of kinetic energy.
@@ -23,10 +22,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesUtils from '../GasPropertiesUtils.js';
 import BaseContainer from './BaseContainer.js';
@@ -38,42 +36,50 @@ import Region from './Region.js';
 // See https://en.wikipedia.org/wiki/Coefficient_of_restitution
 const e = 1;
 
+type MutableVectors = {
+  normal: Vector2;
+  tangent: Vector2;
+  relativeVelocity: Vector2;
+  pointOnLine: Vector2;
+  reflectedPoint: Vector2;
+};
+
 export default class CollisionDetector {
 
+  private readonly container: BaseContainer;
+  protected readonly particleArrays: Particle[][];
+  public readonly particleParticleCollisionsEnabledProperty: TReadOnlyProperty<boolean>;
+
+  // 2D grid of Regions
+  public readonly regions: Region[];
+
+  // number of wall collisions on the most recent call to update
+  private _numberOfParticleContainerCollisions: number;
+
+  // mutable vectors, reused in critical code
+  private readonly mutableVectors: MutableVectors;
+
   /**
-   * @param {BaseContainer} container - the container inside which collision occur
-   * @param {Particle[][]} particleArrays - collections of particles inside the container
-   * @param {BooleanProperty} particleParticleCollisionsEnabledProperty - whether particle-particle collisions occur
-   * @param {Object} [options]
+   * @param container - the container inside which collision occur
+   * @param particleArrays - collections of particles inside the container
+   * @param particleParticleCollisionsEnabledProperty - whether particle-particle collisions occur
    */
-  constructor( container, particleArrays, particleParticleCollisionsEnabledProperty, options ) {
-    assert && assert( container instanceof BaseContainer, `invalid container: ${container}` );
-    assert && assert( particleParticleCollisionsEnabledProperty instanceof BooleanProperty,
-      `invalid particleParticleCollisionsEnabledProperty: ${particleParticleCollisionsEnabledProperty}` );
-    assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0,
-      `invalid particleArrays: ${particleArrays}` );
+  public constructor( container: BaseContainer,
+                      particleArrays: Particle[][],
+                      particleParticleCollisionsEnabledProperty: TReadOnlyProperty<boolean> ) {
+    assert && assert( particleArrays.length > 0, `invalid particleArrays: ${particleArrays}` );
 
-    options = merge( {
-
-      // {number|null} Regions are square, length of one side, pm. If null, default will be set below.
-      regionLength: null
-
-    }, options );
-
-    // If regionLength is not provided, the default is based on container height.
-    const regionLength = options.regionLength || container.height / 4;
-    assert && assert( regionLength > 0, `invalid regionLength: ${regionLength}` );
-
-    // @private
+    this.container = container;
+    this.particleArrays = particleArrays;
     this.particleParticleCollisionsEnabledProperty = particleParticleCollisionsEnabledProperty;
 
-    // @public (read-only) {Region[]} 2D grid of Regions
+    // Regions are square So this is the length of one side, pm.
+    const regionLength = container.height / 4;
+    assert && assert( regionLength > 0, `invalid regionLength: ${regionLength}` );
     this.regions = createRegions( container, regionLength );
 
-    // @public (read-only) number of wall collisions on the most recent call to update
-    this.numberOfParticleContainerCollisions = 0;
+    this._numberOfParticleContainerCollisions = 0;
 
-    // @private mutable vectors, reused in critical code
     this.mutableVectors = {
       normal: new Vector2( 0, 0 ),
       tangent: new Vector2( 0, 0 ),
@@ -81,18 +87,16 @@ export default class CollisionDetector {
       pointOnLine: new Vector2( 0, 0 ),
       reflectedPoint: new Vector2( 0, 0 )
     };
+  }
 
-    // @private
-    this.container = container;
-    this.particleArrays = particleArrays;
-    this.numberOfParticleContainerCollisions = 0;
+  public get numberOfParticleContainerCollisions(): number {
+    return this._numberOfParticleContainerCollisions;
   }
 
   /**
    * Clears all regions.
-   * @private
    */
-  clearRegions() {
+  private clearRegions(): void {
     for ( let i = this.regions.length - 1; i >= 0; i-- ) {
       this.regions[ i ].clear();
     }
@@ -100,9 +104,8 @@ export default class CollisionDetector {
 
   /**
    * Performs collision detection and response for the current state of the particle system.
-   * @public
    */
-  update() {
+  public update(): void {
 
     this.clearRegions();
 
@@ -121,7 +124,7 @@ export default class CollisionDetector {
     }
 
     // particle-container collisions
-    this.numberOfParticleContainerCollisions = this.updateParticleContainerCollisions();
+    this._numberOfParticleContainerCollisions = this.updateParticleContainerCollisions();
 
     // Verify that all particles are fully inside the container.
     assert && assert( this.container.containsParticles( this.particleArrays ),
@@ -132,16 +135,66 @@ export default class CollisionDetector {
    * Detects and handles particle-container collisions for the system.
    * This is overridden by subclass DiffusionCollisionDetector to implement collision detection with the divider
    * that appears in the container in the 'Diffusion' screen.
-   * @returns {number} the number of collisions
-   * @protected
+   * @returns the number of collisions
    */
-  updateParticleContainerCollisions() {
+  protected updateParticleContainerCollisions(): number {
     let numberOfParticleContainerCollisions = 0;
     for ( let i = this.particleArrays.length - 1; i >= 0; i-- ) {
-      numberOfParticleContainerCollisions += doParticleContainerCollisions( this.particleArrays[ i ],
+      numberOfParticleContainerCollisions += CollisionDetector.doParticleContainerCollisions( this.particleArrays[ i ],
         this.container.bounds, this.container.leftWallVelocity );
     }
     return numberOfParticleContainerCollisions;
+  }
+
+  /**
+   * Detects and handles particle-container collisions. These collisions occur if a particle contacted a wall on
+   * its way to its current position.
+   * @param particles
+   * @param containerBounds
+   * @param leftWallVelocity - velocity of the container's left (movable) wall
+   * @returns number of collisions
+   */
+  protected static doParticleContainerCollisions( particles: Particle[], containerBounds: Bounds2, leftWallVelocity: Vector2 ): number {
+
+    let numberOfCollisions = 0;
+
+    for ( let i = particles.length - 1; i >= 0; i-- ) {
+
+      const particle = particles[ i ];
+      let collided = false;
+
+      // adjust x
+      if ( particle.left <= containerBounds.minX ) {
+        particle.left = containerBounds.minX;
+
+        // If the left wall is moving, it will do work.
+        particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
+        collided = true;
+      }
+      else if ( particle.right >= containerBounds.maxX ) {
+        particle.right = containerBounds.maxX;
+        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
+        collided = true;
+      }
+
+      // adjust y
+      if ( particle.top >= containerBounds.maxY ) {
+        particle.top = containerBounds.maxY;
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+        collided = true;
+      }
+      else if ( particle.bottom <= containerBounds.minY ) {
+        particle.bottom = containerBounds.minY;
+        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+        collided = true;
+      }
+
+      if ( collided ) {
+        numberOfCollisions++;
+      }
+    }
+
+    return numberOfCollisions;
   }
 }
 
@@ -151,13 +204,11 @@ export default class CollisionDetector {
  * right-to-left, bottom-to-top, so that the grid is aligned with the right and bottom edges of the container.
  * Regions along the top and left edges may be outside the container, and that's OK.  Regions outside the
  * container will be excluded from collision detection.
- * @param {BaseContainer} container
- * @param {number} regionLength - regions are square, length of one side, in pm
- * @returns {Region[]}
+ * @param container
+ * @param regionLength - regions are square, length of one side, in pm
  */
-function createRegions( container, regionLength ) {
-  assert && assert( container instanceof BaseContainer, `invalid container: ${container}` );
-  assert && assert( typeof regionLength === 'number' && regionLength > 0, `invalid regionLength: ${regionLength}` );
+function createRegions( container: BaseContainer, regionLength: number ): Region[] {
+  assert && assert( regionLength > 0, `invalid regionLength: ${regionLength}` );
 
   const regions = [];
   let maxX = container.right;
@@ -178,12 +229,9 @@ function createRegions( container, regionLength ) {
 
 /**
  * Assigns each particle to the Regions that it intersects, accounting for particle radius.
- * @param {Particle[]} particleArrays - collections of particles
- * @param {Region[]} regions
  */
-function assignParticlesToRegions( particleArrays, regions ) {
-  assert && assert( Array.isArray( particleArrays ), `invalid particleArrays: ${particleArrays}` );
-  assert && assert( Array.isArray( regions ) && regions.length > 0, `invalid regions: ${regions}` );
+function assignParticlesToRegions( particleArrays: Particle[][], regions: Region[] ): void {
+  assert && assert( regions.length > 0, `invalid regions: ${regions}` );
 
   for ( let i = particleArrays.length - 1; i >= 0; i-- ) {
     const particles = particleArrays[ i ];
@@ -201,13 +249,10 @@ function assignParticlesToRegions( particleArrays, regions ) {
 
 /**
  * Detects and handles particle-particle collisions. Particle-particle collision are based solely whether they
- * intersect at their current positions. Is is possible (and acceptable) for two particles to pass through the
+ * intersect at their current positions. It is possible (and acceptable) for two particles to pass through the
  * same point on the way to those position and not collide.
- * @param {Particle[]} particles
- * @param {Object} mutableVectors - set of mutable vectors, see this.mutableVectors in CollisionDetector constructor
  */
-function doParticleParticleCollisions( particles, mutableVectors ) {
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+function doParticleParticleCollisions( particles: Particle[], mutableVectors: MutableVectors ): void {
 
   for ( let i = particles.length - 1; i >= 1; i-- ) {
 
@@ -273,20 +318,15 @@ function doParticleParticleCollisions( particles, mutableVectors ) {
 
 /**
  * Adjusts the position of a particle in response to a collision with another particle.
- * @param {Particle} particle
- * @param {number} contactPointX - x coordinate where collision occurred
- * @param {number} contactPointY - y coordinate where collision occurred
- * @param {number} lineAngle - angle of the plane of contact, in radians
- * @param {Vector2} pointOnLine - used to compute a point of line of contact, will be mutated!
- * @param {Vector2} reflectedPoint - used to compute reflected point, will be mutated!
+ * @param particle
+ * @param contactPointX - x coordinate where collision occurred
+ * @param contactPointY - y coordinate where collision occurred
+ * @param lineAngle - angle of the plane of contact, in radians
+ * @param pointOnLine - used to compute a point of line of contact, will be mutated!
+ * @param reflectedPoint - used to compute reflected point, will be mutated!
  */
-function adjustParticlePosition( particle, contactPointX, contactPointY, lineAngle, pointOnLine, reflectedPoint ) {
-  assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-  assert && assert( typeof contactPointX === 'number', `invalid contactPointX: ${contactPointX}` );
-  assert && assert( typeof contactPointY === 'number', `invalid contactPointY: ${contactPointY}` );
-  assert && assert( typeof lineAngle === 'number', `invalid lineAngle: ${lineAngle}` );
-  assert && assert( pointOnLine instanceof Vector2, `invalid pointOnLine: ${pointOnLine}` );
-  assert && assert( reflectedPoint instanceof Vector2, `invalid reflectedPoint: ${reflectedPoint}` );
+function adjustParticlePosition( particle: Particle, contactPointX: number, contactPointY: number,
+                                 lineAngle: number, pointOnLine: Vector2, reflectedPoint: Vector2 ): void {
 
   const previousDistance = particle.previousPosition.distanceXY( contactPointX, contactPointY );
   const positionRatio = particle.radius / previousDistance;
@@ -300,75 +340,11 @@ function adjustParticlePosition( particle, contactPointX, contactPointY, lineAng
 
 /**
  * Adjusts the speed of a particle in response to a collision with another particle.
- * @param {Particle} particle
- * @param {number} scale
- * @param {Vector2} normalVector
  */
-function adjustParticleSpeed( particle, scale, normalVector ) {
-  assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-  assert && assert( typeof scale === 'number', `invalid scale: ${scale}` );
-  assert && assert( normalVector instanceof Vector2, `invalid normalVector: ${normalVector}` );
-
+function adjustParticleSpeed( particle: Particle, scale: number, normalVector: Vector2 ): void {
   const vx = normalVector.x * scale;
   const vy = normalVector.y * scale;
   particle.setVelocityXY( particle.velocity.x + vx, particle.velocity.y + vy );
 }
-
-/**
- * Detects and handles particle-container collisions. These collisions occur if a particle contacted a wall on
- * its way to its current position.
- * @param {Particle[]} particles
- * @param {Bounds2} containerBounds
- * @param {Vector2} leftWallVelocity - velocity of the container's left (movable) wall
- * @returns {number} number of collisions
- */
-function doParticleContainerCollisions( particles, containerBounds, leftWallVelocity ) {
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-  assert && assert( containerBounds instanceof Bounds2, `invalid containerBounds: ${containerBounds}` );
-  assert && assert( leftWallVelocity instanceof Vector2, `invalid leftWallVelocity: ${leftWallVelocity}` );
-
-  let numberOfCollisions = 0;
-
-  for ( let i = particles.length - 1; i >= 0; i-- ) {
-
-    const particle = particles[ i ];
-    let collided = false;
-
-    // adjust x
-    if ( particle.left <= containerBounds.minX ) {
-      particle.left = containerBounds.minX;
-
-      // If the left wall is moving, it will do work.
-      particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
-      collided = true;
-    }
-    else if ( particle.right >= containerBounds.maxX ) {
-      particle.right = containerBounds.maxX;
-      particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
-      collided = true;
-    }
-
-    // adjust y
-    if ( particle.top >= containerBounds.maxY ) {
-      particle.top = containerBounds.maxY;
-      particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
-      collided = true;
-    }
-    else if ( particle.bottom <= containerBounds.minY ) {
-      particle.bottom = containerBounds.minY;
-      particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
-      collided = true;
-    }
-
-    if ( collided ) {
-      numberOfCollisions++;
-    }
-  }
-
-  return numberOfCollisions;
-}
-
-// @protected for use in subclasses
-CollisionDetector.doParticleContainerCollisions = doParticleContainerCollisions;
 
 gasProperties.register( 'CollisionDetector', CollisionDetector );
