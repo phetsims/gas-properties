@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Thermometer is the model for the thermometer. It is responsible for determining what units will be used to present
  * the temperature, and for deriving pressure in those units.
