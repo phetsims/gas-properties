@@ -38,10 +38,10 @@ assert && assert( MIN_NOISE < MAX_NOISE, 'MIN_NOISE must be < MAX_NOISE' );
 export default class PressureGauge {
 
   // pressure in the container, in kPa
-  private readonly pressureProperty: Property<number>;
+  private readonly pressureProperty: TReadOnlyProperty<number>;
 
   // temperature in the container, in K, null if empty container
-  private readonly temperatureProperty: Property<number | null>;
+  private readonly temperatureProperty: TReadOnlyProperty<number | null>;
 
   // quantity to be held constant, influences noise
   private readonly holdConstantProperty: EnumerationProperty<HoldConstant>;
@@ -69,8 +69,8 @@ export default class PressureGauge {
   // The display is refreshed at this interval, in ps
   public static readonly REFRESH_PERIOD = 0.75;
 
-  public constructor( pressureProperty: Property<number>,
-                      temperatureProperty: Property<number | null>,
+  public constructor( pressureProperty: TReadOnlyProperty<number>,
+                      temperatureProperty: TReadOnlyProperty<number | null>,
                       holdConstantProperty: EnumerationProperty<HoldConstant>,
                       tandem: Tandem ) {
 

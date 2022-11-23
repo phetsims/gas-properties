@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PressureModel is a sub-model of IdealGasModel. It is responsible for the P (pressure) component of the
  * Ideal Gas Law (PV = NkT) and for the pressure gauge.
@@ -11,42 +10,47 @@
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureGauge from './PressureGauge.js';
+import HoldConstant from './HoldConstant.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-// maximum pressure in kPa, when exceeded the lid blows off of the container
+// Maximum pressure, in kPa. When exceeded, the lid blows off of the container.
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 
 export default class PressureModel {
 
-  /**
-   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
-   * @param {ReadOnlyProperty.<number>} numberOfParticlesProperty
-   * @param {ReadOnlyProperty.<number>} volumeProperty
-   * @param {Property.<number|null>} temperatureProperty
-   * @param {function} blowLidOff
-   * @param tandem
-   */
-  constructor( holdConstantProperty, numberOfParticlesProperty, volumeProperty, temperatureProperty, blowLidOff, tandem ) {
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
-      `invalid holdConstantProperty: ${holdConstantProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( volumeProperty instanceof ReadOnlyProperty, `invalid volumeProperty: ${volumeProperty}` );
-    assert && assert( temperatureProperty instanceof Property, `invalid temperatureProperty: ${temperatureProperty}` );
-    assert && assert( typeof blowLidOff === 'function', `invalid blowLidOff: ${blowLidOff}` );
+  private readonly holdConstantProperty: EnumerationProperty<HoldConstant>;
+  private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
+  private readonly volumeProperty: TReadOnlyProperty<number>;
+  private readonly temperatureProperty: TReadOnlyProperty<number | null>;
+  private readonly blowLidOff: () => void;
 
-    // @private
+  // P, pressure in the container, in kPa
+  public readonly pressureProperty: Property<number>;
+
+  // gauge that display pressureProperty with a choice of units
+  public readonly pressureGauge: PressureGauge;
+
+  // whether to update pressure
+  private updatePressureEnabled: boolean;
+
+  public constructor( holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      numberOfParticlesProperty: TReadOnlyProperty<number>,
+                      volumeProperty: TReadOnlyProperty<number>,
+                      temperatureProperty: TReadOnlyProperty<number | null>,
+                      blowLidOff: () => void,
+                      tandem: Tandem ) {
+
     this.holdConstantProperty = holdConstantProperty;
     this.numberOfParticlesProperty = numberOfParticlesProperty;
     this.volumeProperty = volumeProperty;
     this.temperatureProperty = temperatureProperty;
     this.blowLidOff = blowLidOff;
 
-    // @public P, pressure in the container, in kPa
     this.pressureProperty = new NumberProperty( 0, {
       units: 'kPa',
       isValidValue: value => ( value >= 0 ),
@@ -55,11 +59,9 @@ export default class PressureModel {
       phetioDocumentation: 'pressure in K, with no noise'
     } );
 
-    // @public (read-only) gauge that display pressureProperty with a choice of units
     this.pressureGauge = new PressureGauge( this.pressureProperty, temperatureProperty, holdConstantProperty,
       tandem.createTandem( 'pressureGauge' ) );
 
-    // @private whether to update pressure
     this.updatePressureEnabled = false;
 
     // If the container is empty, set pressure to zero and disable pressure updates.
@@ -72,11 +74,7 @@ export default class PressureModel {
     } );
   }
 
-  /**
-   * Resets this model.
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.pressureProperty.reset();
     this.pressureGauge.reset();
     this.updatePressureEnabled = false;
@@ -84,11 +82,10 @@ export default class PressureModel {
 
   /**
    * Updates this model.
-   * @param {number} dtPressureGauge - time delta used to step the pressure gauge, in ps
-   * @param {number} numberOfCollisions - number of collisions on the most recent time step
-   * @public
+   * @param dtPressureGauge - time delta used to step the pressure gauge, in ps
+   * @param numberOfCollisions - number of collisions on the most recent time step
    */
-  update( dtPressureGauge, numberOfCollisions ) {
+  public update( dtPressureGauge: number, numberOfCollisions: number ): void {
 
     // When adding particles to empty container, don't compute pressure until 1 particle has collided with container
     if ( !this.updatePressureEnabled && numberOfCollisions > 0 ) {
@@ -112,16 +109,13 @@ export default class PressureModel {
   }
 
   /**
-   * Computes pressure using the Ideal Gas Law, P = NkT/V
-   * @returns {number} in kPa
-   * @private
+   * Computes pressure in kPa, using the Ideal Gas Law, P = NkT/V
    */
-  computePressure() {
+  private computePressure(): number {
 
     const N = this.numberOfParticlesProperty.value;
     const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
-    const T = this.temperatureProperty.value; // in K, assumes temperatureProperty has been updated
-    assert && assert( typeof T === 'number' && T >= 0, `invalid temperature: ${T}` );
+    const T = this.temperatureProperty.value || 0; // in K, assumes temperatureProperty has been updated
     const V = this.volumeProperty.value; // pm^3
     const P = ( N * k * T / V );
 
