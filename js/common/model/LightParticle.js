@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * LightParticle is the model for 'light' particles, as they are named in the design document.
  *
