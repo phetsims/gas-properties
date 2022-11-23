@@ -124,7 +124,7 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   /**
    * Animates the container's width one step towards desiredWidth. Computes wall velocity if the wall does work.
-   * @param {number} dt - time delta, in ps
+   * @param dt - time delta, in ps
    */
   public step( dt: number ): void {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
