@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * CollisionDetector handles collision detection and response for all screens. Our collision model involves
  * rigid bodies. It is a perfectly-elastic collision model, where there is no net loss of kinetic energy.
