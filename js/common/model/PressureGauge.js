@@ -27,7 +27,7 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import HoldConstant from './HoldConstant.js';
-import PressureGaugeUnits from './PressureGaugeUnits.js';
+import PressureUnits from './PressureUnits.js';
 
 // constants
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
@@ -95,7 +95,7 @@ export default class PressureGauge {
     this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
     // @public pressure units displayed by the pressure gauge
-    this.unitsProperty = new EnumerationProperty( PressureGaugeUnits.ATMOSPHERES, {
+    this.unitsProperty = new EnumerationProperty( PressureUnits.ATMOSPHERES, {
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the pressure gauge'
     } );
