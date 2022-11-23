@@ -53,7 +53,7 @@ const STEP_EMITTER = null;
 export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
   /**
-   * @param {NumberProperty} heatCoolAmountProperty
+   * @param {RangedProperty} heatCoolAmountProperty
    * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {RangedProperty} numberOfParticlesProperty

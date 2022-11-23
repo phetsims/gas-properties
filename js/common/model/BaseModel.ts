@@ -39,7 +39,7 @@ type SelfOptions = {
   stopwatchPosition?: Vector2;
 };
 
-type BaseModelOptions = SelfOptions;
+export type BaseModelOptions = SelfOptions;
 
 export default class BaseModel {
 
@@ -61,7 +61,7 @@ export default class BaseModel {
 
   public readonly stopwatch: Stopwatch;
 
-  public constructor( tandem: Tandem, providedOptions: BaseModelOptions ) {
+  public constructor( tandem: Tandem, providedOptions?: BaseModelOptions ) {
 
     const options = optionize<BaseModelOptions, SelfOptions>()( {
 

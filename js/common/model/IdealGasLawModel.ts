@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IdealGasLawModel extends the base model with functionality related to the Ideal Gas Law.
  *
@@ -18,16 +17,17 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
-import BaseModel from './BaseModel.js';
+import BaseModel, { BaseModelOptions } from './BaseModel.js';
 import CollisionCounter from './CollisionCounter.js';
 import CollisionDetector from './CollisionDetector.js';
 import HoldConstant from './HoldConstant.js';
@@ -37,54 +37,102 @@ import PressureGauge from './PressureGauge.js';
 import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
 
+type SelfOptions = {
+  leftWallDoesWork?: boolean; // does the container's left wall do work on particles?
+  holdConstant?: HoldConstant;
+  hasCollisionCounter?: boolean;
+};
+
+type IdealGasLawModelOptions = SelfOptions;
+
+type OopsEmitters = {
+
+  // Oops! Temperature cannot be held constant when the container is empty.
+  temperatureEmptyEmitter: Emitter;
+
+  // Oops! Temperature cannot be held constant when the container is open.
+  temperatureOpenEmitter: Emitter;
+
+  // Oops! Pressure cannot be held constant when the container is empty.
+  pressureEmptyEmitter: Emitter;
+
+  // Oops! Pressure cannot be held constant. Volume would be too large.
+  pressureLargeEmitter: Emitter;
+
+  // Oops! Pressure cannot be held constant. Volume would be too small.
+  pressureSmallEmitter: Emitter;
+
+  // Oops! Maximum temperature reached
+  maximumTemperatureEmitter: Emitter;
+};
+
 export default class IdealGasLawModel extends BaseModel {
 
-  /**
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   */
-  constructor( tandem, options ) {
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  // the quantity to hold constant
+  public readonly holdConstantProperty: EnumerationProperty<HoldConstant>;
 
-    options = merge( {
+  // The factor to heat or cool the contents of the container.
+  // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
+  public readonly heatCoolFactorProperty: RangedProperty;
 
-      leftWallDoesWork: false, // {boolean} does the container's left wall do work on particles?
+  // whether particle-particle collisions are enabled
+  public readonly particleParticleCollisionsEnabledProperty: Property<boolean>;
 
-      // superclass options
+  public readonly container: IdealGasLawContainer;
+  public readonly particleSystem: ParticleSystem;
+
+  // sub-model responsible for temperature T
+  public readonly temperatureModel: TemperatureModel;
+
+  // sub-model responsible for pressure P
+  public readonly pressureModel: PressureModel;
+
+  public readonly collisionDetector: CollisionDetector;
+  public readonly collisionCounter: CollisionCounter | null;
+
+  // Emitters for conditions related to the 'Hold Constant' feature.
+  // When holding a quantity constant would break the model, the model switches to 'Nothing' mode, the model
+  // notifies the view via an Emitter, and the view notifies the user via a dialog. This is called oopsEmitters
+  // because the end result is that the user sees an OopsDialog, with a message of the form 'Oops! blah blah'.
+  // It was difficult to find names for these Emitters that weren't overly verbose, so the names are
+  // highly-abbreviated versions of the messages that the user will see, and they are grouped in an object
+  // named oopsEmitters.
+  public readonly oopsEmitters: OopsEmitters;
+
+  public constructor( tandem: Tandem, providedOptions?: IdealGasLawModelOptions ) {
+
+    const options = optionize<IdealGasLawModelOptions, SelfOptions, BaseModelOptions>()( {
+
+      // SelfOptions
+      leftWallDoesWork: false,
       holdConstant: HoldConstant.NOTHING,
       hasCollisionCounter: true
-    }, options );
+    }, providedOptions );
 
     super( tandem );
 
-    // @public the quantity to hold constant
     this.holdConstantProperty = new EnumerationProperty( options.holdConstant, {
       tandem: tandem.createTandem( 'holdConstantProperty' ),
       phetioDocumentation: 'determines which quantity will be held constant'
     } );
 
-    // @public the factor to heat or cool the contents of the container.
-    // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
     this.heatCoolFactorProperty = new NumberProperty( 0, {
       range: new Range( -1, 1 ),
       tandem: tandem.createTandem( 'heatCoolFactorProperty' ),
       phetioDocumentation: 'The amount of heat or cool applied to particles in the container. ' +
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off'
-    } );
+    } ).asRanged();
 
-    // @public whether particle-particle collisions are enabled
     this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'particleParticleCollisionsEnabledProperty' ),
       phetioDocumentation: 'determines whether collisions between particles are enabled'
     } );
 
-    // @public (read-only)
     this.container = new IdealGasLawContainer( {
       leftWallDoesWork: options.leftWallDoesWork,
       tandem: tandem.createTandem( 'container' )
     } );
 
-    // @public (read-only)
     this.particleSystem = new ParticleSystem(
       () => this.temperatureModel.getInitialTemperature(),
       this.particleParticleCollisionsEnabledProperty,
@@ -92,21 +140,12 @@ export default class IdealGasLawModel extends BaseModel {
       tandem.createTandem( 'particleSystem' )
     );
 
-    // @public (read-only)
-    this.collisionDetector = new CollisionDetector(
-      this.container,
-      this.particleSystem.insideParticleArrays,
-      this.particleParticleCollisionsEnabledProperty
-    );
-
-    // @public (read-only) sub-model responsible for temperature T
     this.temperatureModel = new TemperatureModel(
       this.particleSystem.numberOfParticlesProperty, // N
       () => this.particleSystem.getAverageKineticEnergy(), // KE
       tandem.createTandem( 'temperatureModel' )
     );
 
-    // @public (read-only) sub-model responsible for pressure P
     this.pressureModel = new PressureModel(
       this.holdConstantProperty,
       this.particleSystem.numberOfParticlesProperty, // N
@@ -116,7 +155,12 @@ export default class IdealGasLawModel extends BaseModel {
       tandem.createTandem( 'pressureModel' )
     );
 
-    // @public (read-only)
+    this.collisionDetector = new CollisionDetector(
+      this.container,
+      this.particleSystem.insideParticleArrays,
+      this.particleParticleCollisionsEnabledProperty
+    );
+
     this.collisionCounter = null;
     if ( options.hasCollisionCounter ) {
       this.collisionCounter = new CollisionCounter( this.collisionDetector, {
@@ -135,31 +179,12 @@ export default class IdealGasLawModel extends BaseModel {
         }
       } );
 
-    // @public (read-only) Emitters for conditions related to the 'Hold Constant' feature.
-    // When holding a quantity constant would break the model, the model switches to 'Nothing' mode, the model
-    // notifies the view via an Emitter, and the view notifies the user via a dialog. This is called oopsEmitters
-    // because the end result is that the user sees an OopsDialog, with a message of the form 'Oops! blah blah'.
-    // It was difficult to find names for these Emitters that weren't overly verbose, so the names are
-    // highly-abbreviated versions of the messages that the user will see, and they are grouped in an object
-    // named oopsEmitters.
     this.oopsEmitters = {
-
-      // Oops! Temperature cannot be held constant when the container is empty.
       temperatureEmptyEmitter: new Emitter(),
-
-      // Oops! Temperature cannot be held constant when the container is open.
       temperatureOpenEmitter: new Emitter(),
-
-      // Oops! Pressure cannot be held constant when the container is empty.
       pressureEmptyEmitter: new Emitter(),
-
-      // Oops! Pressure cannot be held constant. Volume would be too large.
       pressureLargeEmitter: new Emitter(),
-
-      // Oops! Pressure cannot be held constant. Volume would be too small.
       pressureSmallEmitter: new Emitter(),
-
-      // Oops! Maximum temperature reached
       maximumTemperatureEmitter: new Emitter()
     };
 
@@ -207,7 +232,9 @@ export default class IdealGasLawModel extends BaseModel {
     // that are added have their initial speed set based on T of the container, and therefore result in no change
     // to T. See https://github.com/phetsims/gas-properties/issues/159
     this.particleSystem.numberOfParticlesProperty.link( ( numberOfParticles, previousNumberOfParticles ) => {
-      if ( numberOfParticles > 0 && numberOfParticles < previousNumberOfParticles &&
+      if ( previousNumberOfParticles !== null &&
+           numberOfParticles > 0 &&
+           numberOfParticles < previousNumberOfParticles &&
            this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
         assert && assert( !this.temperatureModel.controlTemperatureEnabledProperty.value,
           'this feature is not compatible with user-controlled particle temperature' );
@@ -219,7 +246,10 @@ export default class IdealGasLawModel extends BaseModel {
           this.temperatureModel.update();
         }
 
-        this.particleSystem.setTemperature( this.temperatureModel.temperatureProperty.value );
+        const temperature = this.temperatureModel.temperatureProperty.value!;
+        assert && assert( temperature !== null );
+
+        this.particleSystem.setTemperature( temperature );
       }
     } );
 
@@ -249,12 +279,7 @@ export default class IdealGasLawModel extends BaseModel {
     } );
   }
 
-  /**
-   * Resets the model.
-   * @public
-   * @override
-   */
-  reset() {
+  public override reset(): void {
     super.reset();
 
     // Properties
@@ -272,12 +297,10 @@ export default class IdealGasLawModel extends BaseModel {
 
   /**
    * Steps the model using model time units. Order is very important here!
-   * @param {number} dt - time delta, in ps
-   * @protected
-   * @override
+   * @param dt - time delta, in ps
    */
-  stepModelTime( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  protected override stepModelTime( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     super.stepModelTime( dt );
 
@@ -291,11 +314,10 @@ export default class IdealGasLawModel extends BaseModel {
   /**
    * Steps the things that affect the container and particle system, including heating/cooling
    * and collision detection/response. Order is very important here!
-   * @param {number} dt - time delta, in ps
-   * @private
+   * @param dt - time delta, in ps
    */
-  stepSystem( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  private stepSystem( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     // Apply heat/cool
     this.particleSystem.heatCool( this.heatCoolFactorProperty.value );
@@ -323,15 +345,12 @@ export default class IdealGasLawModel extends BaseModel {
    * Updates parts of the model that are dependent on the state of the particle system.  This is separated from
    * stepSystem so that we can update if the number of particles changes while the simulation is paused.
    * Order is very important here!
-   * @param {number} dtPressureGauge - time delta used to step the pressure gauge, in ps
-   * @param {number} numberOfCollisions - number of collisions on the most recent time step
-   * @private
+   * @param dtPressureGauge - time delta used to step the pressure gauge, in ps
+   * @param numberOfCollisions - number of collisions on the most recent time step
    */
-  updateModel( dtPressureGauge, numberOfCollisions ) {
-    assert && assert( typeof dtPressureGauge === 'number' && dtPressureGauge > 0,
-      `invalid dtPressureGauge: ${dtPressureGauge}` );
-    assert && assert( typeof numberOfCollisions === 'number' && numberOfCollisions >= 0,
-      `invalid numberOfCollisions: ${numberOfCollisions}` );
+  private updateModel( dtPressureGauge: number, numberOfCollisions: number ): void {
+    assert && assert( dtPressureGauge > 0, `invalid dtPressureGauge: ${dtPressureGauge}` );
+    assert && assert( numberOfCollisions >= 0, `invalid numberOfCollisions: ${numberOfCollisions}` );
 
     // Adjust quantities to compensate for 'Hold Constant' mode. Do this before computing temperature or pressure.
     this.compensateForHoldConstant();
@@ -348,9 +367,8 @@ export default class IdealGasLawModel extends BaseModel {
 
   /**
    * Updates when the sim is paused.
-   * @private
    */
-  updateWhenPaused() {
+  protected updateWhenPaused(): void {
     assert && assert( !this.isPlayingProperty.value, 'call this method only when paused' );
 
     // Using the pressure gauge's refresh period causes it to update immediately.
@@ -359,9 +377,8 @@ export default class IdealGasLawModel extends BaseModel {
 
   /**
    * Adjusts quantities to compensate for the quantity that is being held constant.
-   * @private
    */
-  compensateForHoldConstant() {
+  private compensateForHoldConstant(): void {
 
     if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) {
 
@@ -405,7 +422,7 @@ export default class IdealGasLawModel extends BaseModel {
       const desiredTemperature = this.computeIdealTemperature();
 
       this.particleSystem.setTemperature( desiredTemperature );
-      assert && assert( Math.abs( desiredTemperature - this.computeIdealTemperature() < 1E-3 ),
+      assert && assert( Math.abs( desiredTemperature - this.computeIdealTemperature() ) < 1E-3,
         'actual temperature does not match desired temperature' );
 
       this.temperatureModel.temperatureProperty.value = desiredTemperature;
@@ -414,13 +431,14 @@ export default class IdealGasLawModel extends BaseModel {
 
   /**
    * Verify that the model is in a good state after having been updated. If it's not, adjust accordingly.
-   * @private
    */
-  verifyModel() {
+  private verifyModel(): void {
+
+    const temperature = this.temperatureModel.temperatureProperty.value;
 
     // If the maximum temperature was exceeded, reset the state of the container.
     // See https://github.com/phetsims/gas-properties/issues/128
-    if ( this.temperatureModel.temperatureProperty.value >= GasPropertiesQueryParameters.maxTemperature ) {
+    if ( temperature !== null && temperature >= GasPropertiesQueryParameters.maxTemperature ) {
 
       // Switch to a 'Hold Constant' setting that supports an empty container
       if ( this.holdConstantProperty.value !== HoldConstant.NOTHING &&
@@ -442,16 +460,14 @@ export default class IdealGasLawModel extends BaseModel {
   }
 
   /**
-   * Computes volume using the Ideal Gas Law, V = NkT/P
+   * Computes volume in pm^3, using the Ideal Gas Law, V = NkT/P
    * This is used to compute the volume needed to hold pressure constant in HoldConstant.PRESSURE_V mode.
-   * @returns {number} in pm^3
-   * @private
    */
-  computeIdealVolume() {
+  private computeIdealVolume(): number {
 
     const N = this.particleSystem.numberOfParticlesProperty.value;
     const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
-    const T = this.temperatureModel.computeTemperature(); // temperature has not been updated, so compute it
+    const T = this.temperatureModel.computeTemperature() || 0; // temperature has not been updated, so compute it
     const P = this.pressureModel.pressureProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
     assert && assert( P !== 0, 'zero pressure not supported' );
 
@@ -459,12 +475,10 @@ export default class IdealGasLawModel extends BaseModel {
   }
 
   /**
-   * Computes the temperature using the Ideal Gas Law, T = (PV)/(Nk)
+   * Computes the temperature in K, using the Ideal Gas Law, T = (PV)/(Nk)
    * This is used to compute the temperature needed to hold pressure constant in HoldConstant.PRESSURE_T mode.
-   * @returns {number} in K
-   * @public
    */
-  computeIdealTemperature() {
+  public computeIdealTemperature(): number {
 
     const P = this.pressureModel.pressureProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
     assert && assert( P !== 0, 'zero pressure not supported' );
