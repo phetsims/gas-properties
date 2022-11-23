@@ -236,6 +236,7 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   /**
    * Gets the right coordinate of the opening in the top of the container, in pm.
+   * @returns {number}
    */
   public getOpeningRight(): number {
     return this.openingRight;
