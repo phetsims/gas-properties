@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * TimeTransform is the transform between real and sim time, with instances for the transforms used in this sim.
  *
