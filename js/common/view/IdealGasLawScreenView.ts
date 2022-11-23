@@ -251,7 +251,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       model.holdConstantProperty,
       model.isPlayingProperty,
       model.particleSystem.numberOfParticlesProperty,
-      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
       model.temperatureModel.temperatureProperty, {
         left: heaterCoolerNodeLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
