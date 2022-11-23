@@ -18,7 +18,7 @@ import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
-import ThermometerUnits from './ThermometerUnits.js';
+import TemperatureUnits from './TemperatureUnits.js';
 
 // constants
 const DEFAULT_RANGE = new Range( 0, 1000 ); // in K
@@ -41,7 +41,7 @@ export default class Thermometer {
   public readonly temperatureCelsiusProperty: TReadOnlyProperty<number | null>;
 
   // temperature units displayed by the thermometer
-  public readonly unitsProperty: EnumerationProperty<ThermometerUnits>;
+  public readonly unitsProperty: EnumerationProperty<TemperatureUnits>;
 
   public constructor( temperatureKelvinProperty: Property<number | null>, providedOptions: ThermometerOptions ) {
 
@@ -64,7 +64,7 @@ export default class Thermometer {
         phetioDocumentation: 'temperature in degrees C'
       } );
 
-    this.unitsProperty = new EnumerationProperty( ThermometerUnits.KELVIN, {
+    this.unitsProperty = new EnumerationProperty( TemperatureUnits.KELVIN, {
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the thermometer'
     } );
