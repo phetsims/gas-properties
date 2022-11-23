@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * CollisionCounter counts collisions between particles and the walls of a container.
  *
