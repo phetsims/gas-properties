@@ -28,7 +28,7 @@ export default class ContainerWidthNode extends Node {
 
   /**
    * @param {Vector2} containerPosition - position of the container, in model coordinates
-   * @param {NumberProperty} widthProperty - width of the container, in model coordinates
+   * @param {RangedProperty} widthProperty - width of the container, in model coordinates
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
    */

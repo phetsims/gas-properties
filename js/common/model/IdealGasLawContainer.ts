@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IdealGasLawContainer is the container used in screens that are based on the Ideal Gas Law.
  * This container has a (re)movable lid.
@@ -11,65 +10,88 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
-import BaseContainer from './BaseContainer.js';
+import BaseContainer, { BaseContainerOptions } from './BaseContainer.js';
 
 // constants
 
 // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
 const WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
 
+type SelfOptions = {
+  leftWallDoesWork?: boolean;  // true if the left wall does work on particles, as in the Explore screen
+};
+
+type IdealGasLawContainerOptions = SelfOptions & PickRequired<BaseContainerOptions, 'tandem'>;
+
 export default class IdealGasLawContainer extends BaseContainer {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public readonly leftWallDoesWork: boolean;
+  public readonly lidIsOnProperty: Property<boolean>; // whether the lid is on the container
+  public readonly lidThickness: number; // lid thickness, in pm
 
-    options = merge( {
+  // insets of the opening in the top, from the inside edges of the container, in pm
+  public readonly openingLeftInset: number;
+  public readonly openingRightInset: number;
 
-      // true if the left wall does work on particles, as in the Explore screen
-      leftWallDoesWork: false,
+  private readonly openingRight: number; // the right coordinate of the opening in the top of the container, in pm
+  private readonly minLidWidth: number; // minimum width of the lid, overlaps the left wall, in pm.
+  public readonly lidWidthProperty: Property<number>; // width of the lid, in pm
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+  // Particles enter the container here, on the inside of the container, in pm.
+  public readonly particleEntryPosition: Vector2;
+
+  // Bicycle pump hose connects here, on the outside of the container, in pm.
+  public readonly hosePosition: Vector2;
+
+  // Desired width of the container, in pm.
+  // Set this to impose an animated speed limit on decreasing width. See #90.
+  public desiredWidth: number;
+
+  // previous position of the left wall
+  private previousLeft: number;
+
+  // is the container open?
+  public readonly isOpenProperty: TReadOnlyProperty<boolean>;
+
+  public constructor( providedOptions: IdealGasLawContainerOptions ) {
+
+    const options = optionize<IdealGasLawContainerOptions, SelfOptions, BaseContainerOptions>()( {
+
+      // SelfOptions
+      leftWallDoesWork: false
+    }, providedOptions );
 
     super( options );
 
-    // @public (read-only)
     this.leftWallDoesWork = options.leftWallDoesWork;
 
-    // @public whether the lid is on the container
     this.lidIsOnProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'lidIsOnProperty' ),
       phetioReadOnly: true, // derived from state of the particle system
       phetioDocumentation: 'whether the lid is on the container, or has been blown off'
     } );
 
-    // @public (read-only) lid thickness, in pm
     this.lidThickness = 175;
 
-    // @public (read-only) insets of the opening in the top, from the inside edges of the container, in pm
     this.openingLeftInset = 1250;
     this.openingRightInset = 2000;
     assert && assert( this.widthRange.min > this.openingLeftInset + this.openingRightInset,
       'widthRange.min is too small to accommodate insets' );
 
-    // @private the right coordinate of the opening in the top of the container, in pm
     this.openingRight = this.position.y - this.openingRightInset;
 
-    // @private minimum width of the lid, overlaps the left wall, in pm.
     this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
     const initialLidWidth = this.widthProperty.value - this.openingRightInset + this.wallThickness;
 
-    // @public width of the lid, in pm
     this.lidWidthProperty = new NumberProperty( initialLidWidth, {
 
       // range changes dynamically with width of container
@@ -79,32 +101,21 @@ export default class IdealGasLawContainer extends BaseContainer {
       phetioReadOnly: true // because the range is dynamic
     } );
 
-    // @public (read-only) particles enter the container here, on the inside of the container, in pm
     this.particleEntryPosition = new Vector2( this.position.x, this.position.y + this.height / 5 );
 
-    // @public (read-only) bicycle pump hose connects here, on outside of the container, in pm
     this.hosePosition = this.particleEntryPosition.plusXY( this.wallThickness, 0 );
 
-    // @public {number} desired width of the container, in pm.
-    // Set this to impose an animated speed limit on decreasing width. See #90.
     this.desiredWidth = this.widthProperty.value;
 
-    // @private {number} previous position of the left wall
     this.previousLeft = this.left;
 
-    // @public {boolean} is the container open?
     this.isOpenProperty = new DerivedProperty( [ this.lidIsOnProperty, this.lidWidthProperty ],
       ( lidIsOn, lidWidth ) => {
         return !lidIsOn || this.getOpeningWidth() !== 0;
       } );
   }
 
-  /**
-   * Resets the container.
-   * @public
-   * @override
-   */
-  reset() {
+  public override reset(): void {
     super.reset();
     this.lidIsOnProperty.reset();
     this.lidWidthProperty.reset();
@@ -113,11 +124,10 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   /**
    * Animates the container's width one step towards desiredWidth. Computes wall velocity if the wall does work.
-   * @param {number} dt - time delta, in ps
-   * @public
+   * @param dt - time delta, in ps
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt > 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     const widthDifference = this.desiredWidth - this.widthProperty.value;
 
@@ -160,10 +170,8 @@ export default class IdealGasLawContainer extends BaseContainer {
   /**
    * Resizes the container to the specified width.
    * Maintains a constant opening size in the top of the container, if possible.
-   * @param {number} width
-   * @private
    */
-  setWidth( width ) {
+  private setWidth( width: number ): void {
     if ( width !== this.widthProperty.value ) {
       assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
 
@@ -182,39 +190,31 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   /**
    * Resizes the container immediately to the specified width.
-   * @param {number} width
-   * @public
    */
-  resizeImmediately( width ) {
+  public resizeImmediately( width: number ): void {
     assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
     this.setWidth( width );
     this.desiredWidth = width;
   }
 
   /**
-   * Gets the minimum lid width. This is constant, independent of the container width.
-   * @returns {number} in pm
-   * @public
+   * Gets the minimum lid width, in pm. This is constant, independent of the container width.
    */
-  getMinLidWidth() {
+  public getMinLidWidth(): number {
     return this.minLidWidth;
   }
 
   /**
-   * Gets the maximum lid width, when the lid is fully closed. This changes dynamically with the container width.
-   * @returns {number} in pm
-   * @public
+   * Gets the maximum lid width, in pm, when the lid is fully closed. This changes dynamically with the container width.
    */
-  getMaxLidWidth() {
+  public getMaxLidWidth(): number {
     return this.widthProperty.value - this.openingRightInset + this.wallThickness;
   }
 
   /**
-   * Gets the left coordinate of the opening in the top of the container.
-   * @returns {number} in pm
-   * @public
+   * Gets the left coordinate of the opening in the top of the container, in pm.
    */
-  getOpeningLeft() {
+  public getOpeningLeft(): number {
 
     let openingLeft = null;
 
@@ -235,20 +235,16 @@ export default class IdealGasLawContainer extends BaseContainer {
   }
 
   /**
-   * Gets the right coordinate of the opening in the top of the container.
-   * @returns {number} in pm
-   * @public
+   * Gets the right coordinate of the opening in the top of the container, in pm.
    */
-  getOpeningRight() {
+  public getOpeningRight(): number {
     return this.openingRight;
   }
 
   /**
-   * Gets the width of the opening in the top of the container.
-   * @returns {number} in pm
-   * @public
+   * Gets the width of the opening in the top of the container, in pm.
    */
-  getOpeningWidth() {
+  public getOpeningWidth(): number {
     const openingWidth = this.getOpeningRight() - this.getOpeningLeft();
     assert && assert( openingWidth >= 0, `invalid openingWidth: ${openingWidth}` );
     return openingWidth;
@@ -256,9 +252,8 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   /**
    * Blows the lid off of the container.
-   * @public
    */
-  blowLidOff() {
+  public blowLidOff(): void {
     this.lidIsOnProperty.value = false;
   }
 }
