@@ -285,7 +285,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Show how the collision detection space is partitioned into regions
     let regionsNode = null;
-    if ( GasPropertiesQueryParameters.regions ) {
+    if ( GasPropertiesQueryParameters.showRegions ) {
       regionsNode = new RegionsNode( model.collisionDetector.regions, model.modelViewTransform );
     }
 
