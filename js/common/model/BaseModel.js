@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BaseModel is the base class for models in all screens. It provides functionality that is NOT related to the
  * Ideal Gas Law. Primarily responsibilities are:
