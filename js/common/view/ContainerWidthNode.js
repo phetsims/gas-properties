@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ContainerWidthNode displays dimensional arrows that correspond to the width of the container.
  * Origin is at the right end of the arrows, which corresponds to the container's origin.
