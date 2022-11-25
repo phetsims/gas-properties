@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ThermometerNode displays a thermometer, temperature value, and control for selecting temperature units.
  *
