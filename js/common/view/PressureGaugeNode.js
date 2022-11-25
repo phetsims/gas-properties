@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PressureDisplay displays a pressure gauge, pressure value, and a control for selecting temperature units.
  *
