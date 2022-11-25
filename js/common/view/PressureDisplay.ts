@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PressureDisplay displays the pressure value, with the ability to switch units via a combo box.
  *
@@ -8,10 +7,11 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
-import ComboBoxDisplay from '../../../../scenery-phet/js/ComboBoxDisplay.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ComboBoxDisplay, { ComboBoxDisplayItem, ComboBoxDisplayOptions } from '../../../../scenery-phet/js/ComboBoxDisplay.js';
+import { Node, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
@@ -22,22 +22,20 @@ import PressureUnits from '../model/PressureUnits.js';
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPressure );
 
-export default class PressureDisplay extends ComboBoxDisplay {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {PressureGauge} pressureGauge
-   * @param {Node} listParent - parent for ComboBox list
-   * @param {Object} [options]
-   */
-  constructor( pressureGauge, listParent, options ) {
-    assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
-    assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
+type PressureDisplayOptions = SelfOptions & NodeTranslationOptions &
+  PickOptional<ComboBoxDisplayOptions, 'maxWidth'> &
+  PickRequired<ComboBoxDisplayOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
+export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
 
-    const items = [
+  public constructor( pressureGauge: PressureGauge, listboxParent: Node, providedOptions: PressureDisplayOptions ) {
+
+    const options = optionize3<PressureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
+      {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, providedOptions );
+
+    const items: ComboBoxDisplayItem<PressureUnits>[] = [
       {
         choice: PressureUnits.ATMOSPHERES,
         tandemName: `${PressureUnits.ATMOSPHERES.toString().toLowerCase()}Item`,
@@ -60,7 +58,7 @@ export default class PressureDisplay extends ComboBoxDisplay {
       }
     ];
 
-    super( pressureGauge.unitsProperty, items, listParent, options );
+    super( pressureGauge.unitsProperty, items, listboxParent, options );
   }
 }
 

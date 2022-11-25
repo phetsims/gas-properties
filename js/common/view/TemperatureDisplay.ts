@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * TemperatureDisplay displays the temperature value, with the ability to switch units via a combo box.
  *
@@ -8,35 +7,34 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
-import ComboBoxDisplay from '../../../../scenery-phet/js/ComboBoxDisplay.js';
+import ComboBoxDisplay, { ComboBoxDisplayItem, ComboBoxDisplayOptions } from '../../../../scenery-phet/js/ComboBoxDisplay.js';
 import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Thermometer from '../model/Thermometer.js';
 import TemperatureUnits from '../model/TemperatureUnits.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
 
-export default class TemperatureDisplay extends ComboBoxDisplay {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Thermometer} thermometer
-   * @param {Node} listParent - parent for the ComboBox list
-   * @param {Object} [options]
-   */
-  constructor( thermometer, listParent, options ) {
-    assert && assert( thermometer instanceof Thermometer, `invalid thermometer: ${thermometer}` );
-    assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
+type TemperatureDisplayOptions = SelfOptions &
+  PickOptional<ComboBoxDisplayOptions, 'maxWidth'> &
+  PickRequired<ComboBoxDisplayOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, options );
+export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits> {
 
-    const items = [
+  public constructor( thermometer: Thermometer, listboxParent: Node, providedOptions: TemperatureDisplayOptions ) {
+
+    const options = optionize3<TemperatureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
+      {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, providedOptions );
+
+    const items: ComboBoxDisplayItem<TemperatureUnits>[] = [
       {
         choice: TemperatureUnits.KELVIN,
         tandemName: `${TemperatureUnits.KELVIN.toString().toLowerCase()}Item`,
@@ -53,7 +51,7 @@ export default class TemperatureDisplay extends ComboBoxDisplay {
       }
     ];
 
-    super( thermometer.unitsProperty, items, listParent, options );
+    super( thermometer.unitsProperty, items, listboxParent, options );
   }
 }
 
