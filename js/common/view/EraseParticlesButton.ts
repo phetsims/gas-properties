@@ -1,38 +1,35 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EraseParticlesButton is the button for erasing (deleting) all particles from the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import EraserButton, { EraserButtonOptions } from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import ParticleSystem from '../model/ParticleSystem.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type EraseParticlesButtonOptions = SelfOptions & NodeTranslationOptions & PickRequired<EraserButtonOptions, 'tandem'>;
+
 export default class EraseParticlesButton extends EraserButton {
 
-  /**
-   * @param {ParticleSystem} particleSystem
-   * @param {Object} [options]
-   */
-  constructor( particleSystem, options ) {
-    assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
+  public constructor( particleSystem: ParticleSystem, providedOptions: EraseParticlesButtonOptions ) {
 
-    options = merge( {
+    const options = optionize<EraseParticlesButtonOptions, SelfOptions, EraserButtonOptions>()( {
 
-      // superclass options
-      baseColor: GasPropertiesColors.eraserButtonColorProperty
-    }, options );
-
-    // Deletes all particles when the button fires.
-    assert && assert( !options.listener, 'EraseParticlesButton sets listener' );
-    options.listener = () => {
-      particleSystem.removeAllParticles();
-    };
+      // EraserButtonOptions
+      baseColor: GasPropertiesColors.eraserButtonColorProperty,
+      listener: () => {
+        particleSystem.removeAllParticles(); // Deletes all particles when the button fires.
+      }
+    }, providedOptions );
 
     super( options );
 
