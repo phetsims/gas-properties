@@ -25,8 +25,8 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PointerCoordinatesNode from '../../../../scenery-phet/js/PointerCoordinatesNode.js';
 import { Node, TColor } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
@@ -43,7 +43,7 @@ import BaseScreenView, { BaseScreenViewOptions } from './BaseScreenView.js';
 import CollisionCounterNode from './CollisionCounterNode.js';
 import ContainerWidthNode from './ContainerWidthNode.js';
 import EraseParticlesButton from './EraseParticlesButton.js';
-import GasPropertiesBicyclePumpNode from './GasPropertiesBicyclePumpNode.js';
+import GasPropertiesBicyclePumpNode, { GasPropertiesBicyclePumpNodeOptions } from './GasPropertiesBicyclePumpNode.js';
 import GasPropertiesHeaterCoolerNode from './GasPropertiesHeaterCoolerNode.js';
 import GasPropertiesOopsDialog from './GasPropertiesOopsDialog.js';
 import GasPropertiesStopwatchNode from './GasPropertiesStopwatchNode.js';
@@ -180,7 +180,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // Bicycle pump hose attaches to the container.
     const hosePosition = model.modelViewTransform.modelToViewPosition( model.container.hosePosition );
 
-    const bicyclePumpOptions = {
+    const bicyclePumpOptions: StrictOmit<GasPropertiesBicyclePumpNodeOptions, 'tandem'> = {
       translation: bicyclePumpPosition,
       hoseAttachmentOffset: hosePosition.minus( bicyclePumpPosition ),
       handleTouchAreaXDilation: 35,
@@ -189,14 +189,14 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Bicycle pump for heavy particles
     const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
-      merge( {}, bicyclePumpOptions, {
+      combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
         bodyFill: GasPropertiesColors.heavyParticleColorProperty,
         tandem: tandem.createTandem( 'heavyBicyclePumpNode' )
       } ) );
 
     // Bicycle pump for light particles
     const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
-      merge( {}, bicyclePumpOptions, {
+      combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
         bodyFill: GasPropertiesColors.lightParticleColorProperty,
         tandem: tandem.createTandem( 'lightBicyclePumpNode' )
       } ) );

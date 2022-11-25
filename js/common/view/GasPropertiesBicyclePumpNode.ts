@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-//@ts-nocheck
 /**
  * GasPropertiesBicyclePumpNode is a specialization of BicyclePumpNode for this sim.
  * It is used to add particles to the container.
@@ -8,27 +7,25 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import BicyclePumpNode from '../../../../scenery-phet/js/BicyclePumpNode.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import BicyclePumpNode, { BicyclePumpNodeOptions } from '../../../../scenery-phet/js/BicyclePumpNode.js';
 import gasProperties from '../../gasProperties.js';
+
+type SelfOptions = EmptySelfOptions;
+
+export type GasPropertiesBicyclePumpNodeOptions = SelfOptions & BicyclePumpNodeOptions &
+  PickRequired<BicyclePumpNodeOptions, 'tandem'>;
 
 export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
-  /**
-   * @param {RangedProperty} numberOfParticlesProperty
-   * @param {Object} [options]
-   * @constructor
-   */
-  constructor( numberOfParticlesProperty, options ) {
-    assert && assert( numberOfParticlesProperty instanceof NumberProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( numberOfParticlesProperty.range, 'missing numberOfParticlesProperty.range' );
+  public constructor( numberOfParticlesProperty: RangedProperty, providedOptions: GasPropertiesBicyclePumpNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<GasPropertiesBicyclePumpNodeOptions, SelfOptions, BicyclePumpNodeOptions>()( {
 
-      // superclass options
+      // BicyclePumpNodeOptions
       height: 230,
       bodyTopFill: 'white',
       hoseCurviness: 0.75,
@@ -36,7 +33,7 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
         numberOfParticlesPerPumpAction: 50,
         addParticlesOneAtATime: false
       }
-    }, options );
+    }, providedOptions );
 
     super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
   }
