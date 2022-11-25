@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ContainerWidthNode displays dimensional arrows that correspond to the width of the container.
  * Origin is at the right end of the arrows, which corresponds to the container's origin.
@@ -10,41 +9,39 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type ContainerWidthNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+
 export default class ContainerWidthNode extends Node {
 
   /**
-   * @param {Vector2} containerPosition - position of the container, in model coordinates
-   * @param {RangedProperty} widthProperty - width of the container, in model coordinates
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
+   * @param containerPosition - position of the container, in model coordinates
+   * @param widthProperty - width of the container, in model coordinates
+   * @param modelViewTransform
+   * @param providedOptions
    */
-  constructor( containerPosition, widthProperty, modelViewTransform, options ) {
-    assert && assert( containerPosition instanceof Vector2, `invalid containerPosition: ${containerPosition}` );
-    assert && assert( widthProperty instanceof NumberProperty, `invalid widthProperty: ${widthProperty}` );
-    assert && assert( widthProperty.range, 'widthProperty must have range' );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  public constructor( containerPosition: Vector2, widthProperty: RangedProperty, modelViewTransform: ModelViewTransform2,
+                      providedOptions: ContainerWidthNodeOptions ) {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<ContainerWidthNodeOptions, SelfOptions, NodeOptions>()( {
+      // because we're setting options.children below
+    }, providedOptions );
 
     // Convert the width from model to view coordinates
     const viewWidthProperty = new DerivedProperty( [ widthProperty ],
@@ -78,7 +75,6 @@ export default class ContainerWidthNode extends Node {
       backgroundLineWidth: 0.5
     } );
 
-    assert && assert( !options.children, 'ContainerWidthNode sets children' );
     options.children = [ dimensionalArrowNode, widthDisplay ];
 
     super( options );
