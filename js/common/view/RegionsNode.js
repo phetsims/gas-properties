@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * RegionsNode shows how the collision detection space is partitioned into a 2D grid of Regions.
  * A number in the center of each region indicates how many particles are in that region.

@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * RegionNode displays a region in the 2D grid that spatially partitions the collision detection space.
  * This is used for debugging, and is not visible to the user. See GasPropertiesQueryParameters.regions.
