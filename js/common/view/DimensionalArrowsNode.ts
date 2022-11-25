@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DimensionalArrowsNode is a horizontal dimensional arrow. It looks like this, but with solid arrow heads:
  *
@@ -13,35 +12,50 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Line, Node, Path } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { Line, Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 
 // constants
 const DEFAULT_ARROW_HEAD_DIMENSIONS = new Dimension2( 8, 8 );
 
+type SelfOptions = {
+  color?: TColor;
+  horizontalLineWidth?: number;
+  horizontalLineDash?: number[];
+  verticalLineWidth?: number;
+  verticalLineLength?: number;
+  arrowHeadDimensions?: Dimension2;
+};
+
+type DimensionalArrowsNodeOptions = SelfOptions;
+
 export default class DimensionalArrowsNode extends Node {
 
   /**
-   * @param {ReadOnlyProperty.<number>} lengthProperty - length in view coordinates
-   * @param {Object} [options]
+   * @param lengthProperty - length in view coordinates
+   * @param providedOptions
    */
-  constructor( lengthProperty, options ) {
-    assert && assert( lengthProperty instanceof ReadOnlyProperty, `invalid lengthProperty: ${lengthProperty}` );
+  public constructor( lengthProperty: TReadOnlyProperty<number>, providedOptions: DimensionalArrowsNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<DimensionalArrowsNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       color: 'black',
       horizontalLineWidth: 2,
       horizontalLineDash: [ 5, 5 ],
       verticalLineWidth: 1,
       verticalLineLength: 12,
-      arrowHeadDimensions: DEFAULT_ARROW_HEAD_DIMENSIONS
-    }, options );
+      arrowHeadDimensions: DEFAULT_ARROW_HEAD_DIMENSIONS,
+
+      // NodeOptions
+      pickable: false
+    }, providedOptions );
 
     // horizontal dashed line in center
     const horizontalLine = new Line( 0, 0, 1, 0, {
@@ -82,10 +96,7 @@ export default class DimensionalArrowsNode extends Node {
       right: 0
     } );
 
-    assert && assert( !options.children, 'DimensionalArrowsNode sets children' );
-    options = merge( {
-      children: [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ]
-    }, options );
+    options.children = [ leftVerticalLine, rightVerticalLine, horizontalLine, leftArrowHead, rightArrowHead ];
 
     super( options );
 

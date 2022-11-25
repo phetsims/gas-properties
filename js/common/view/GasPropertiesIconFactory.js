@@ -403,8 +403,7 @@ const GasPropertiesIconFactory = {
    */
   createContainerWidthIcon() {
     return new DimensionalArrowsNode( new NumberProperty( 44 ), {
-      color: GasPropertiesColors.widthIconColorProperty,
-      pickable: false
+      color: GasPropertiesColors.widthIconColorProperty
     } );
   },
 
