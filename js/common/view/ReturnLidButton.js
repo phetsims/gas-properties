@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ReturnLidButton is used to return the container's lid after it has been blown off.
  *
