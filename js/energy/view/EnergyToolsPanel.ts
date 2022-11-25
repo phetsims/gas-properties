@@ -7,7 +7,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox } from '../../../../scenery/js/imports.js';
@@ -41,20 +40,18 @@ export default class EnergyToolsPanel extends Panel {
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-    const checkboxOptions = {
-      textMaxWidth: 110 // determined empirically
-    };
-
     const content = new FixedWidthNode( contentWidth, new VBox( {
       align: 'left',
       spacing: 12,
       children: [
-        new WidthCheckbox( widthVisibleProperty, merge( {}, checkboxOptions, {
+        new WidthCheckbox( widthVisibleProperty, {
+          textMaxWidth: 110,
           tandem: options.tandem.createTandem( 'widthCheckbox' )
-        } ) ),
-        new StopwatchCheckbox( stopwatchVisibleProperty, merge( {}, checkboxOptions, {
+        } ),
+        new StopwatchCheckbox( stopwatchVisibleProperty, {
+          textMaxWidth: 125,
           tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
-        } ) )
+        } )
       ]
     } ) );
 

@@ -7,7 +7,6 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
 import { HSeparator, NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -68,19 +67,18 @@ export default class IdealControlPanel extends Panel {
       } ) );
     }
 
-    const checkboxOptions = {
-      textMaxWidth: 110 // determined empirically
-    };
-
-    children.push( new WidthCheckbox( widthVisibleProperty, merge( {}, checkboxOptions, {
+    children.push( new WidthCheckbox( widthVisibleProperty, {
+      textMaxWidth: 110,
       tandem: options.tandem.createTandem( 'widthCheckbox' )
-    } ) ) );
-    children.push( new StopwatchCheckbox( stopwatchVisibleProperty, merge( {}, checkboxOptions, {
+    } ) );
+    children.push( new StopwatchCheckbox( stopwatchVisibleProperty, {
+      textMaxWidth: 125,
       tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
-    } ) ) );
-    children.push( new CollisionCounterCheckbox( collisionCounterVisibleProperty, merge( {}, checkboxOptions, {
+    } ) );
+    children.push( new CollisionCounterCheckbox( collisionCounterVisibleProperty, {
+      textMaxWidth: 125,
       tandem: options.tandem.createTandem( 'collisionCounterCheckbox' )
-    } ) ) );
+    } ) );
 
     const content = new FixedWidthNode( contentWidth, new VBox( {
       align: 'left',

@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Particle from '../../common/model/Particle.js';
 import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from '../../common/view/GasPropertiesCheckbox.js';
@@ -16,10 +15,11 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import HeavyParticle from '../../common/model/HeavyParticle.js';
 import LightParticle from '../../common/model/LightParticle.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type SpeciesHistogramCheckboxOptions = SelfOptions & PickRequired<GasPropertiesCheckboxOptions, 'tandem'>;
+export type SpeciesHistogramCheckboxOptions = SelfOptions & StrictOmit<GasPropertiesCheckboxOptions, 'textStringProperty' | 'icon'>;
 
 export default class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 

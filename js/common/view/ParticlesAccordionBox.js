@@ -78,7 +78,7 @@ export default class ParticlesAccordionBox extends AccordionBox {
 
       // optional Collisions checkbox, prepended so that it appears at top
       children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
-        stringProperty: GasPropertiesStrings.collisionsStringProperty,
+        textStringProperty: GasPropertiesStrings.collisionsStringProperty,
         textMaxWidth: 175, // determined empirically
         tandem: options.tandem.createTandem( 'collisionsCheckbox' )
       } ) );

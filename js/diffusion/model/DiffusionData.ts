@@ -10,7 +10,6 @@
 import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import merge from '../../../../phet-core/js/merge.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -48,18 +47,19 @@ export default class DiffusionData {
 
     this.numberOfParticles1Property = new NumberProperty( 0,
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
-      tandem: tandem.createTandem( 'numberOfParticles1Property' ),
-      phetioDocumentation: 'the number of particle of type 1 that are in this side of the container'
-    } ) );
+        tandem: tandem.createTandem( 'numberOfParticles1Property' ),
+        phetioDocumentation: 'the number of particle of type 1 that are in this side of the container'
+      } ) );
 
-    this.numberOfParticles2Property = new NumberProperty( 0, merge( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
-      tandem: tandem.createTandem( 'numberOfParticles2Property' ),
-      phetioDocumentation: 'the number of particle of type 2 that are in this side of the container'
-    } ) );
+    this.numberOfParticles2Property = new NumberProperty( 0,
+      combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
+        tandem: tandem.createTandem( 'numberOfParticles2Property' ),
+        phetioDocumentation: 'the number of particle of type 2 that are in this side of the container'
+      } ) );
 
     this.averageTemperatureProperty = new Property<number | null>( null, {
       units: 'K',
-      isValidValue: value => ( value === null || ( typeof value === 'number' && value > 0 ) ),
+      isValidValue: value => ( value === null || value > 0 ),
       phetioValueType: NullableIO( NumberIO ),
       phetioReadOnly: true, // derived from the state of the particle system
       tandem: tandem.createTandem( 'averageTemperatureProperty' ),

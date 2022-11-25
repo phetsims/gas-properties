@@ -10,11 +10,10 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Rectangle, TColor, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle, TColor, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import BarPlotNode from './BarPlotNode.js';
@@ -113,19 +112,21 @@ export default class HistogramNode extends Node {
     const intervalLines = new IntervalLinesNode( options.chartSize );
 
     // x-axis label
-    const xAxisLabelNode = new Text( xAxisString, merge( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
-      maxWidth: 0.9 * background.width,
-      centerX: background.centerX,
-      top: background.bottom + 5
-    } ) );
+    const xAxisLabelNode = new Text( xAxisString,
+      combineOptions<TextOptions>( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
+        maxWidth: 0.9 * background.width,
+        centerX: background.centerX,
+        top: background.bottom + 5
+      } ) );
 
     // y-axis label
-    const yAxisLabelNode = new Text( yAxisString, merge( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
-      rotation: -Math.PI / 2,
-      maxWidth: 0.9 * background.height,
-      right: background.left - 8,
-      centerY: background.centerY
-    } ) );
+    const yAxisLabelNode = new Text( yAxisString,
+      combineOptions<TextOptions>( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
+        rotation: -Math.PI / 2,
+        maxWidth: 0.9 * background.height,
+        right: background.left - 8,
+        centerY: background.centerY
+      } ) );
 
     options.children = [ background, intervalLines, plotNodesParent, border, xAxisLabelNode, yAxisLabelNode ];
 

@@ -8,7 +8,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
@@ -16,7 +16,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type CenterOfMassCheckboxOptions = SelfOptions & PickRequired<GasPropertiesCheckboxOptions, 'tandem'>;
+type CenterOfMassCheckboxOptions = SelfOptions & StrictOmit<GasPropertiesCheckboxOptions, 'textStringProperty' | 'icon'>;
 
 export default class CenterOfMassCheckbox extends GasPropertiesCheckbox {
 
@@ -25,7 +25,7 @@ export default class CenterOfMassCheckbox extends GasPropertiesCheckbox {
     const options = optionize<CenterOfMassCheckboxOptions, SelfOptions, GasPropertiesCheckboxOptions>()( {
 
       // GasPropertiesCheckboxOptions
-      stringProperty: GasPropertiesStrings.centerOfMassStringProperty,
+      textStringProperty: GasPropertiesStrings.centerOfMassStringProperty,
       icon: GasPropertiesIconFactory.createCenterOfMassIcon(),
       textIconSpacing: 12
     }, providedOptions );

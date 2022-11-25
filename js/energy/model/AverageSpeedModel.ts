@@ -9,8 +9,7 @@
 
 import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -63,15 +62,17 @@ export default class AverageSpeedModel {
     this.isPlayingProperty = isPlayingProperty;
     this.samplePeriod = samplePeriod;
 
-    this.heavyAverageSpeedProperty = new Property<number | null>( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
-      tandem: options.tandem.createTandem( 'heavyAverageSpeedProperty' ),
-      phetioDocumentation: 'average speed of heavy particles in the container'
-    } ) );
+    this.heavyAverageSpeedProperty = new Property<number | null>( null,
+      combineOptions<PropertyOptions<number | null>>( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'heavyAverageSpeedProperty' ),
+        phetioDocumentation: 'average speed of heavy particles in the container'
+      } ) );
 
-    this.lightAverageSpeedProperty = new Property<number | null>( null, merge( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
-      tandem: options.tandem.createTandem( 'lightAverageSpeedProperty' ),
-      phetioDocumentation: 'average speed of light particles in the container'
-    } ) );
+    this.lightAverageSpeedProperty = new Property<number | null>( null,
+      combineOptions<PropertyOptions<number | null>>( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
+        tandem: options.tandem.createTandem( 'lightAverageSpeedProperty' ),
+        phetioDocumentation: 'average speed of light particles in the container'
+      } ) );
 
     this.dtAccumulator = 0;
     this.numberOfSamples = 0;

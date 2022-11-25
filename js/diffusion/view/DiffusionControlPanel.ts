@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -70,9 +69,7 @@ export default class DiffusionControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'dividerToggleButton' )
     } );
 
-    const checkboxOptions = {
-      textMaxWidth: 175 // determined empirically
-    };
+    const textMaxWidth = 175; // determined empirically
 
     const content = new FixedWidthNode( contentWidth, new VBox( {
       align: 'left',
@@ -99,18 +96,22 @@ export default class DiffusionControlPanel extends Panel {
           align: 'left',
           spacing: 12,
           children: [
-            new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, merge( {}, checkboxOptions, {
+            new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, {
+              textMaxWidth: textMaxWidth,
               tandem: options.tandem.createTandem( 'centerOfMassCheckbox' )
-            } ) ),
-            new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, merge( {}, checkboxOptions, {
+            } ),
+            new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, {
+              textMaxWidth: textMaxWidth,
               tandem: options.tandem.createTandem( 'particleFlowRateCheckbox' )
-            } ) ),
-            new ScaleCheckbox( viewProperties.scaleVisibleProperty, merge( {}, checkboxOptions, {
+            } ),
+            new ScaleCheckbox( viewProperties.scaleVisibleProperty, {
+              textMaxWidth: textMaxWidth,
               tandem: options.tandem.createTandem( 'scaleCheckbox' )
-            } ) ),
-            new StopwatchCheckbox( stopwatchVisibleProperty, merge( {}, checkboxOptions, {
+            } ),
+            new StopwatchCheckbox( stopwatchVisibleProperty, {
+              textMaxWidth: textMaxWidth,
               tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
-            } ) )
+            } )
           ]
         } )
       ]

@@ -19,8 +19,8 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 type SelfOptions = {
-  stringProperty?: TReadOnlyProperty<string> | null; // optional text label
   icon?: Node | null; // optional icon, to the right of text
+  textStringProperty?: TReadOnlyProperty<string> | null; // optional text label
   textFill?: TColor;
   textMaxWidth?: number | null;
   textIconSpacing?: number; // horizontal space between text and icon
@@ -39,7 +39,7 @@ export default class GasPropertiesCheckbox extends Checkbox {
       {}, GasPropertiesConstants.CHECKBOX_OPTIONS, {
 
         // SelfOptions
-        stringProperty: null,
+        textStringProperty: null,
         icon: null,
         textFill: GasPropertiesColors.textFillProperty,
         textMaxWidth: null,
@@ -51,12 +51,12 @@ export default class GasPropertiesCheckbox extends Checkbox {
         checkboxColorBackground: GasPropertiesColors.checkboxFillProperty
       }, providedOptions );
 
-    assert && assert( options.stringProperty || options.icon, 'stringProperty or icon is required' );
+    assert && assert( options.textStringProperty || options.icon, 'textStringProperty or icon is required' );
 
     const contentChildren = [];
 
-    if ( options.stringProperty ) {
-      contentChildren.push( new RichText( options.stringProperty, {
+    if ( options.textStringProperty ) {
+      contentChildren.push( new RichText( options.textStringProperty, {
         fill: options.textFill,
         font: options.font,
         maxWidth: options.textMaxWidth

@@ -8,7 +8,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from './GasPropertiesCheckbox.js';
@@ -16,7 +16,7 @@ import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type StopwatchCheckboxOptions = SelfOptions & PickRequired<GasPropertiesCheckboxOptions, 'tandem'>;
+type StopwatchCheckboxOptions = SelfOptions & StrictOmit<GasPropertiesCheckboxOptions, 'textStringProperty' | 'icon'>;
 
 export default class StopwatchCheckbox extends GasPropertiesCheckbox {
 
@@ -25,7 +25,7 @@ export default class StopwatchCheckbox extends GasPropertiesCheckbox {
     const options = optionize<StopwatchCheckboxOptions, SelfOptions, GasPropertiesCheckboxOptions>()( {
 
       // GasPropertiesCheckboxOptions
-      stringProperty: GasPropertiesStrings.stopwatchStringProperty,
+      textStringProperty: GasPropertiesStrings.stopwatchStringProperty,
       icon: GasPropertiesIconFactory.createStopwatchIcon()
     }, providedOptions );
 

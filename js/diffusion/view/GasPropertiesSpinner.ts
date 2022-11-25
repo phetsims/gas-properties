@@ -16,7 +16,7 @@ import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type GasPropertiesSpinnerOptions = SelfOptions & PickRequired<NumberSpinnerOptions, 'tandem'>;
+export type GasPropertiesSpinnerOptions = SelfOptions & NumberSpinnerOptions & PickRequired<NumberSpinnerOptions, 'tandem'>;
 
 export default class GasPropertiesSpinner extends NumberSpinner {
 

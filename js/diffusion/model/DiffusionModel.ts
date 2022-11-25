@@ -8,12 +8,11 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import Property from '../../../../axon/js/Property.js';
+import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -30,6 +29,7 @@ import DiffusionSettings from './DiffusionSettings.js';
 import ParticleFlowRate from './ParticleFlowRate.js';
 import Particle, { ParticleOptions } from '../../common/model/Particle.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
@@ -133,15 +133,17 @@ export default class DiffusionModel extends BaseModel {
     this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, tandem.createTandem( 'leftData' ) );
     this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, tandem.createTandem( 'rightData' ) );
 
-    this.centerOfMass1Property = new Property<number | null>( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-      tandem: tandem.createTandem( 'centerOfMass1Property' ),
-      phetioDocumentation: 'center of mass for particles of type 1'
-    } ) );
+    this.centerOfMass1Property = new Property<number | null>( null,
+      combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+        tandem: tandem.createTandem( 'centerOfMass1Property' ),
+        phetioDocumentation: 'center of mass for particles of type 1'
+      } ) );
 
-    this.centerOfMass2Property = new Property<number | null>( null, merge( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-      tandem: tandem.createTandem( 'centerOfMass2Property' ),
-      phetioDocumentation: 'center of mass for particles of type 2'
-    } ) );
+    this.centerOfMass2Property = new Property<number | null>( null,
+      combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
+        tandem: tandem.createTandem( 'centerOfMass2Property' ),
+        phetioDocumentation: 'center of mass for particles of type 2'
+      } ) );
 
     this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1, tandem.createTandem( 'particleFlowRate1' ) );
     this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2, tandem.createTandem( 'particleFlowRate2' ) );

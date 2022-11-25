@@ -8,20 +8,18 @@
 
 import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import { NumberSpinnerOptions } from '../../../../sun/js/NumberSpinner.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
-import GasPropertiesSpinner from './GasPropertiesSpinner.js';
+import GasPropertiesSpinner, { GasPropertiesSpinnerOptions } from './GasPropertiesSpinner.js';
 
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
@@ -114,7 +112,7 @@ export default class DiffusionSettingsNode extends VBox {
  */
 
 type QuantityControlSelfOptions = {
-  spinnerOptions?: NumberSpinnerOptions;
+  spinnerOptions?: StrictOmit<GasPropertiesSpinnerOptions, 'tandem'>;
 };
 
 type QuantityControlOptions = QuantityControlSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
@@ -158,10 +156,10 @@ class QuantityControl extends VBox {
       group: spinnersAlignGroup,
       xAlign: 'left'
     };
-    const leftSpinner = new AlignBox( new GasPropertiesSpinner( leftProperty, merge( {
+    const leftSpinner = new AlignBox( new GasPropertiesSpinner( leftProperty, combineOptions<GasPropertiesSpinnerOptions>( {
       tandem: options.tandem.createTandem( 'leftSpinner' )
     }, options.spinnerOptions ) ), alignBoxOptions );
-    const rightSpinner = new AlignBox( new GasPropertiesSpinner( rightProperty, merge( {
+    const rightSpinner = new AlignBox( new GasPropertiesSpinner( rightProperty, combineOptions<GasPropertiesSpinnerOptions>( {
       tandem: options.tandem.createTandem( 'rightSpinner' )
     }, options.spinnerOptions ) ), alignBoxOptions );
 

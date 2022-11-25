@@ -8,7 +8,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
@@ -16,7 +16,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ScaleCheckboxOptions = SelfOptions & PickRequired<GasPropertiesCheckboxOptions, 'tandem'>;
+type ScaleCheckboxOptions = SelfOptions & StrictOmit<GasPropertiesCheckboxOptions, 'textStringProperty' | 'icon'>;
 
 export default class ScaleCheckbox extends GasPropertiesCheckbox {
 
@@ -25,7 +25,7 @@ export default class ScaleCheckbox extends GasPropertiesCheckbox {
     const options = optionize<ScaleCheckboxOptions, SelfOptions, GasPropertiesCheckboxOptions>()( {
 
       // GasPropertiesCheckboxOptions
-      stringProperty: GasPropertiesStrings.scaleStringProperty,
+      textStringProperty: GasPropertiesStrings.scaleStringProperty,
       icon: GasPropertiesIconFactory.createScaleIcon()
     }, providedOptions );
 
