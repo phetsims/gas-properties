@@ -1,36 +1,35 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PlayResetButton is a button that toggles between 'play' and 'reset' icons. It is used for the Collision Counter.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PlayIconShape from '../../../../scenery-phet/js/PlayIconShape.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import { Path } from '../../../../scenery/js/imports.js';
-import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
+import BooleanRectangularToggleButton, { BooleanRectangularToggleButtonOptions } from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import gasProperties from '../../gasProperties.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type PlayResetButtonOptions = SelfOptions & PickRequired<BooleanRectangularToggleButtonOptions, 'tandem'>;
 
 export default class PlayResetButton extends BooleanRectangularToggleButton {
 
-  /**
-   * @param {BooleanProperty} isPlayingProperty
-   * @param {Object} [options]
-   */
-  constructor( isPlayingProperty, options ) {
-    assert && assert( isPlayingProperty instanceof BooleanProperty,
-      `invalid isPlayingProperty: ${isPlayingProperty}` );
+  public constructor( isPlayingProperty: Property<boolean>, providedOptions: PlayResetButtonOptions ) {
 
-    options = merge( {
+    const options = optionize<PlayResetButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
 
-      // superclass options
+      // BooleanRectangularToggleButtonOptions
       baseColor: '#DFE0E1'
-    }, options );
+    }, providedOptions );
 
     const iconOptions = {
       stroke: 'black',
