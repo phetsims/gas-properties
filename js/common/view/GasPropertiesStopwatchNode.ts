@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesStopwatchNode is a specialization of StopwatchNode for this sim, a digital stopwatch.
  *
@@ -9,30 +8,28 @@
 
 // modules
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
-import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import StopwatchNode, { StopwatchNodeOptions } from '../../../../scenery-phet/js/StopwatchNode.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type GasPropertiesStopwatchNodeOptions = SelfOptions & PickRequired<StopwatchNodeOptions, 'dragBoundsProperty' | 'tandem'>;
+
 export default class GasPropertiesStopwatchNode extends StopwatchNode {
 
-  /**
-   * @param {Stopwatch} stopwatch
-   * @param {Object} [options]
-   */
-  constructor( stopwatch, options ) {
+  public constructor( stopwatch: Stopwatch, providedOptions: GasPropertiesStopwatchNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<GasPropertiesStopwatchNodeOptions, SelfOptions, StopwatchNodeOptions>()( {
 
-      // For determining an appropriate size for the font
+      // StopwatchNodeOptions
       numberDisplayRange: new Range( 0, GasPropertiesConstants.MAX_TIME ),
-
-      // Customizations for Gas Properties
       backgroundBaseColor: GasPropertiesColors.stopwatchBackgroundColorProperty,
-
       numberDisplayOptions: {
         numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
           showAsMinutesAndSeconds: false,
@@ -40,16 +37,11 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
           units: GasPropertiesStrings.picoseconds
         } )
       },
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
-
-      // model controls visibility
       visiblePropertyOptions: {
         phetioReadOnly: true,
         phetioDocumentation: 'visibility is controlled by the model'
       }
-    }, options );
+    }, providedOptions );
 
     super( stopwatch, options );
   }
