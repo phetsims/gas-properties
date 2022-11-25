@@ -1,15 +1,15 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PressureDisplay displays a pressure gauge, pressure value, and a control for selecting temperature units.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
-import { Circle, LinearGradient, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, LinearGradient, Node, NodeOptions, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -21,20 +21,17 @@ import PressureDisplay from './PressureDisplay.js';
 const DIAL_RADIUS = 50;
 const POST_HEIGHT = 0.6 * DIAL_RADIUS;
 
+type SelfOptions = EmptySelfOptions;
+
+type PressureGaugeNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class PressureGaugeNode extends Node {
 
-  /**
-   * @param {PressureGauge} pressureGauge
-   * @param {Node} listParent - parent for the combo box popup list
-   * @param {Object} [options]
-   */
-  constructor( pressureGauge, listParent, options ) {
-    assert && assert( pressureGauge instanceof PressureGauge, `invalid pressureGauge: ${pressureGauge}` );
-    assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
+  public constructor( pressureGauge: PressureGauge, listboxParent: Node, providedOptions: PressureGaugeNodeOptions ) {
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<PressureGaugeNodeOptions, SelfOptions, NodeOptions>()( {
+      // because options.children is set below
+    }, providedOptions );
 
     // circular dial with needle
     const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressureStringProperty,
@@ -51,14 +48,13 @@ export default class PressureGaugeNode extends Node {
     } );
 
     // combo box to display value and choose units
-    const comboBox = new PressureDisplay( pressureGauge, listParent, {
+    const comboBox = new PressureDisplay( pressureGauge, listboxParent, {
       centerX: gaugeNode.centerX,
       bottom: gaugeNode.bottom,
       maxWidth: gaugeNode.width,
       tandem: options.tandem.createTandem( 'comboBox' )
     } );
 
-    assert && assert( !options.children, 'PressureGaugeNode sets children' );
     options.children = [ postNode, gaugeNode, comboBox ];
 
     super( options );
@@ -71,13 +67,9 @@ export default class PressureGaugeNode extends Node {
 
   /**
    * Creates the vertical gradient for the post that connects the gauge to the container.
-   * @param {number} postHeight
-   * @returns {Gradient}
-   * @public
-   * @static
    */
-  static createPostGradient( postHeight ) {
-    assert && assert( typeof postHeight === 'number' && postHeight > 0, `invalid postHeight: ${postHeight}` );
+  public static createPostGradient( postHeight: number ): LinearGradient {
+    assert && assert( postHeight > 0, `invalid postHeight: ${postHeight}` );
 
     return new LinearGradient( 0, 0, 0, postHeight )
       .addColorStop( 0, 'rgb( 120, 120, 120 )' )
