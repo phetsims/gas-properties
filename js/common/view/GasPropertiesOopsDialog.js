@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GasPropertiesOopsDialog is a specialization of OopsDialog, with a custom icon and options.
  *
