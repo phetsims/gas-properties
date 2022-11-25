@@ -1,51 +1,43 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ReturnLidButton is used to return the container's lid after it has been blown off.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import { NodeTranslationOptions, Text } from '../../../../scenery/js/imports.js';
+import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type ReturnLidButtonOptions = SelfOptions & NodeTranslationOptions & PickRequired<RectangularPushButtonOptions, 'tandem'>;
+
 export default class ReturnLidButton extends RectangularPushButton {
 
-  /**
-   * @param {IdealGasLawContainer} container
-   * @param {Object} [options]
-   */
-  constructor( container, options ) {
-    assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
-
-    options = merge( {
-
-      // superclass options
-      baseColor: PhetColorScheme.BUTTON_YELLOW
-    }, options );
+  public constructor( container: IdealGasLawContainer, providedOptions: ReturnLidButtonOptions ) {
 
     const textNode = new Text( GasPropertiesStrings.returnLidStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       maxWidth: 150 // determined empirically
     } );
 
-    const buttonListener = () => {
-      container.lidIsOnProperty.value = true;
-    };
+    const options = optionize<ReturnLidButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
-    assert && assert( !options.content, 'ReturnLidButton sets content' );
-    assert && assert( !options.listener, 'ReturnLidButton sets listener' );
-    options = merge( {
+      // RectangularPushButtonOptions
+      baseColor: PhetColorScheme.BUTTON_YELLOW,
       content: textNode,
-      listener: buttonListener
-    }, options );
+      listener: () => {
+        container.lidIsOnProperty.value = true;
+      }
+    }, providedOptions );
 
     super( options );
 
