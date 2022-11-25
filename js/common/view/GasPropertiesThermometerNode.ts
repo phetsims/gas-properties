@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ThermometerNode displays a thermometer, temperature value, and control for selecting temperature units.
  *
@@ -8,34 +7,28 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ThermometerNode from '../../../../scenery-phet/js/ThermometerNode.js';
-import { Node, VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeTranslationOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import Thermometer from '../model/Thermometer.js';
 import TemperatureDisplay from './TemperatureDisplay.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type GasPropertiesThermometerNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 export default class GasPropertiesThermometerNode extends VBox {
 
-  /**
-   * @param {Thermometer} thermometer
-   * @param {Node} listParent - parent for the combo box list
-   * @param {Object} [options]
-   */
-  constructor( thermometer, listParent, options ) {
-    assert && assert( thermometer instanceof Thermometer, `invalid thermometer: ${thermometer}` );
-    assert && assert( listParent instanceof Node, `invalid listParent: ${listParent}` );
+  public constructor( thermometer: Thermometer, listboxParent: Node, providedOptions: GasPropertiesThermometerNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<GasPropertiesThermometerNodeOptions, SelfOptions, VBoxOptions>()( {
 
-      // superclass options
+      // VBoxOptions
       spacing: 5,
-      align: 'center',
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      align: 'center'
+    }, providedOptions );
 
     // temperatureProperty is null when there are no particles in the container.
     // Map null to zero, since ThermometerNode doesn't support null values.
@@ -58,15 +51,12 @@ export default class GasPropertiesThermometerNode extends VBox {
     } );
 
     // ComboBox that displays dynamic temperature for various units, centered above the thermometer
-    const comboBox = new TemperatureDisplay( thermometer, listParent, {
+    const comboBox = new TemperatureDisplay( thermometer, listboxParent, {
       maxWidth: 4 * thermometerNode.width,
       tandem: options.tandem.createTandem( 'comboBox' )
     } );
 
-    assert && assert( !options.children, 'GasPropertiesThermometerNode sets children' );
-    options = merge( {
-      children: [ comboBox, thermometerNode ]
-    }, options );
+    options.children = [ comboBox, thermometerNode ];
 
     super( options );
   }
