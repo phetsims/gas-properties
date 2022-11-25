@@ -88,7 +88,8 @@ export default class IdealGasLawContainerNode extends Node {
     const lidNode = new LidNode( holdConstantProperty, {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
-      handleColor: options.lidGripColor
+      handleColor: options.lidGripColor,
+      tandem: options.tandem.createTandem( 'lidNode' )
     } );
 
     assert && assert( !options.children, 'IdealGasLawContainerNode sets children' );

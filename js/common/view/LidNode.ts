@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LidNode is the lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.
  * Origin is at the bottom-left of the base.
@@ -9,9 +8,10 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import { Node, Rectangle } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import HoldConstant from '../model/HoldConstant.js';
@@ -20,21 +20,26 @@ import HoldConstant from '../model/HoldConstant.js';
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 const HANDLE_RIGHT_INSET = 3;
 
+type SelfOptions = {
+  baseWidth: number;
+  baseHeight: number;
+  gripColor?: TColor;
+};
+
+type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class LidNode extends Node {
 
-  /**
-   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
-   * @param {Object} [options]
-   */
-  constructor( holdConstantProperty, options ) {
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
-      `invalid holdConstantProperty: ${holdConstantProperty}` );
+  public readonly handleNode: HandleNode;
+  private readonly baseNode: Rectangle;
 
-    options = merge( {
-      baseWidth: 1,
-      baseHeight: 1,
-      gripColor: GasPropertiesColors.lidGripColorProperty // {ColorDef}
-    }, options );
+  public constructor( holdConstantProperty: EnumerationProperty<HoldConstant>, providedOptions: LidNodeOptions ) {
+
+    const options = optionize<LidNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
+      gripColor: GasPropertiesColors.lidGripColorProperty
+    }, providedOptions );
 
     const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {
       fill: GasPropertiesColors.lidBaseFillProperty,
@@ -55,10 +60,7 @@ export default class LidNode extends Node {
       `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );
     handleNode.touchArea = handleNode.localBounds.dilatedXY( 25, 20 );
 
-    assert && assert( !options.children, 'LidNode sets children' );
-    options = merge( {
-      children: [ handleNode, baseNode ]
-    }, options );
+    options.children = [ handleNode, baseNode ];
 
     super( options );
 
@@ -69,20 +71,15 @@ export default class LidNode extends Node {
       handleNode.visible = ( holdConstant !== HoldConstant.TEMPERATURE );
     } );
 
-    // @public (read-only)
     this.handleNode = handleNode;
-
-    // @private
     this.baseNode = baseNode;
   }
 
   /**
    * Sets the width of the lid's base.
-   * @param {number} baseWidth
-   * @public
    */
-  setBaseWidth( baseWidth ) {
-    assert && assert( typeof baseWidth === 'number' && baseWidth > 0, `invalid baseWidth: ${baseWidth}` );
+  public setBaseWidth( baseWidth: number ): void {
+    assert && assert( baseWidth > 0, `invalid baseWidth: ${baseWidth}` );
 
     this.baseNode.setRectWidth( baseWidth );
     this.baseNode.left = 0;
