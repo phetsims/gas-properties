@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+//@ts-nocheck
 /**
  * GasPropertiesBicyclePumpNode is a specialization of BicyclePumpNode for this sim.
  * It is used to add particles to the container.
