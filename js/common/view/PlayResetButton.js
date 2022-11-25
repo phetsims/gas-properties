@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PlayResetButton is a button that toggles between 'play' and 'reset' icons. It is used for the Collision Counter.
  *
