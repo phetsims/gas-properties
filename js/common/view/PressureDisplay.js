@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PressureDisplay displays the pressure value, with the ability to switch units via a combo box.
  *
