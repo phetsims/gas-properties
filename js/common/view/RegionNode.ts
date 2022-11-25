@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * RegionNode displays a region in the 2D grid that spatially partitions the collision detection space.
  * This is used for debugging, and is not visible to the user. See GasPropertiesQueryParameters.regions.
@@ -8,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -20,15 +18,11 @@ const FONT = new PhetFont( 14 );
 
 export default class RegionNode extends Node {
 
-  /**
-   * @param {Region} region
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( region, modelViewTransform, options ) {
-    assert && assert( region instanceof Region, `invalid region: ${region}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  private readonly region: Region;
+  private readonly cellNode: Node;
+  private readonly countNode: Text;
+
+  public constructor( region: Region, modelViewTransform: ModelViewTransform2 ) {
 
     const viewBounds = modelViewTransform.modelToViewBounds( region.bounds );
 
@@ -46,14 +40,10 @@ export default class RegionNode extends Node {
       center: cellNode.center
     } );
 
-    assert && assert( !options || !options.children, 'RegionNode sets children' );
-    options = merge( {
+    super( {
       children: [ cellNode, countNode ]
-    }, options );
+    } );
 
-    super( options );
-
-    // @private
     this.region = region;
     this.cellNode = cellNode;
     this.countNode = countNode;
@@ -61,9 +51,8 @@ export default class RegionNode extends Node {
 
   /**
    * Displays the number of particles in the region.
-   * @public
    */
-  update() {
+  public update(): void {
     this.countNode.text = this.region.particles.length;
     this.countNode.center = this.cellNode.center;
   }

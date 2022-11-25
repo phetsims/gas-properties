@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * RegionsNode shows how the collision detection space is partitioned into a 2D grid of Regions.
  * A number in the center of each region indicates how many particles are in that region.
@@ -9,53 +8,36 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
+import Region from '../model/Region.js';
 import RegionNode from './RegionNode.js';
 
 export default class RegionsNode extends Node {
 
-  /**
-   * @param {Region[]} regions
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( regions, modelViewTransform, options ) {
-    assert && assert( Array.isArray( regions ) && regions.length > 0, `invalid regions: ${regions}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  private readonly regionNodes: RegionNode[];
 
-    options = merge( {
+  public constructor( regions: Region[], modelViewTransform: ModelViewTransform2 ) {
 
-      // superclass options
-      pickable: false
-    }, options );
-
-    // {RegionNode[]}
-    const regionNodes = [];
+    const regionNodes: RegionNode[] = [];
     for ( let i = regions.length - 1; i >= 0; i-- ) {
       const regionNode = new RegionNode( regions[ i ], modelViewTransform );
       regionNodes.push( regionNode );
     }
 
-    assert && assert( !options.children, 'RegionsNode sets children' );
-    options = merge( {
-      children: regionNodes
-    }, options );
+    super( {
+      children: regionNodes,
+      pickable: false
+    } );
 
-    super( options );
-
-    // @private
     this.regionNodes = regionNodes;
   }
 
   /**
    * Updates each RegionNode.
-   * @public
    */
-  update() {
+  public update(): void {
     for ( let i = this.regionNodes.length - 1; i >= 0; i-- ) {
       this.regionNodes[ i ].update();
     }
