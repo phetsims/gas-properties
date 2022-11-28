@@ -19,7 +19,7 @@ import ParticlesNode from './ParticlesNode.js';
 export default class ParticleImageProperty extends DerivedProperty {
 
   /**
-   * @param {function(options:*):Particle} createParticle - creates a Particle instance
+   * @param {function():Particle} createParticle - creates a Particle instance
    * @param {ModelViewTransform2} modelViewTransform
    * @param {RangedProperty} radiusProperty
    * @param {Object} [options]
@@ -37,9 +37,7 @@ export default class ParticleImageProperty extends DerivedProperty {
     }, options );
 
     // Create a prototypical Particle
-    const particle = createParticle( {
-      radius: radiusProperty.value
-    } );
+    const particle = createParticle();
 
     // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to
     // derive the value and act as a proxy for the DerivedProperty dependencies.

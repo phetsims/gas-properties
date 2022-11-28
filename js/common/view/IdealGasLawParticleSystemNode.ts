@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IdealGasLawParticleSystemNode renders the particle system for screens that are based on the Ideal Gas Law.
  * To optimize the size of canvases, this consists of 2 CanvasNodes; one for particles inside the container, one for
@@ -12,7 +11,7 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -26,29 +25,22 @@ import ParticlesNode from './ParticlesNode.js';
 
 export default class IdealGasLawParticleSystemNode extends Node {
 
-  /**
-   * @param {ParticleSystem} particleSystem
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Property.<Bounds2>} modelBoundsProperty
-   * @param {Bounds2} containerMaxBounds
-   */
-  constructor( particleSystem, modelViewTransform, modelBoundsProperty, containerMaxBounds ) {
-    assert && assert( particleSystem instanceof ParticleSystem, `invalid particleSystem: ${particleSystem}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( modelBoundsProperty instanceof Property, `invalid modelBoundsProperty: ${modelBoundsProperty}` );
-    assert && assert( containerMaxBounds instanceof Bounds2, `invalid containerMaxBounds: ${containerMaxBounds}` );
+  private readonly insideParticlesNode: ParticlesNode;
+  private readonly outsideParticlesNode: ParticlesNode;
+
+  public constructor( particleSystem: ParticleSystem, modelViewTransform: ModelViewTransform2,
+                      modelBoundsProperty: TReadOnlyProperty<Bounds2>, containerMaxBounds: Bounds2 ) {
 
     // generated image for HeavyParticle species
     const heavyParticleImageProperty = new ParticleImageProperty(
-      options => new HeavyParticle( options ),
+      () => new HeavyParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS )
     );
 
     // generated image for LightParticle species
     const lightParticleImageProperty = new ParticleImageProperty(
-      options => new LightParticle( options ),
+      () => new LightParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS )
     );
@@ -81,16 +73,14 @@ export default class IdealGasLawParticleSystemNode extends Node {
       children: [ insideParticlesNode, outsideParticlesNode ]
     } );
 
-    // @private
     this.insideParticlesNode = insideParticlesNode;
     this.outsideParticlesNode = outsideParticlesNode;
   }
 
   /**
    * Redraws the particle system.
-   * @public
    */
-  update() {
+  public update(): void {
     this.insideParticlesNode.update();
     this.outsideParticlesNode.update();
   }

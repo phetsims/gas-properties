@@ -8,6 +8,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Sprite, SpriteImage, SpriteInstance, Sprites } from '../../../../scenery/js/imports.js';
@@ -32,7 +33,7 @@ export default class ParticlesNode extends Sprites {
    * @param modelViewTransform
    */
   public constructor( particleArrays: Particle[][],
-                      imageProperties: Property<HTMLCanvasElement>[],
+                      imageProperties: TReadOnlyProperty<HTMLCanvasElement>[],
                       modelViewTransform: ModelViewTransform2 ) {
     
     assert && assert( particleArrays.length === imageProperties.length );
