@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * LidDragListener is the drag listener for the container's lid. It determines the size of the opening in the top of
  * the container.
