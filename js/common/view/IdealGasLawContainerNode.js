@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IdealGasLawContainerNode is the view of the container used in screens that are based on the Ideal Gas Law.
  * This container has mutable width, and a lid that can be moved/removed.
