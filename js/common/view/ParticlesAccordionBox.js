@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ParticlesAccordionBox is the accordion box titled 'Particles'.  It contains controls for setting the number
  * of particles.

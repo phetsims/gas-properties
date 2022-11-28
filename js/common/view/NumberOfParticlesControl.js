@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * NumberOfParticlesControl is a control for changing the number of particles for a specific type of particle.
  *
