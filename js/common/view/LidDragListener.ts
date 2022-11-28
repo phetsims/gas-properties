@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LidDragListener is the drag listener for the container's lid. It determines the size of the opening in the top of
  * the container.
@@ -9,25 +8,15 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { DragListener, Node, SceneryEvent } from '../../../../scenery/js/imports.js';
+import { DragListener, Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
 export default class LidDragListener extends DragListener {
 
-  /**
-   * @param {IdealGasLawContainer} container
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Node} parentNode
-   * @param {Tandem} tandem
-   */
-  constructor( container, modelViewTransform, parentNode, tandem ) {
-    assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node,
+                      tandem: Tandem ) {
 
     // pointer's x offset from container.getOpeningLeft(), when a drag starts
     let startXOffset = 0;
@@ -35,18 +24,16 @@ export default class LidDragListener extends DragListener {
     super( {
 
       start: ( event, listener ) => {
-        assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
         startXOffset = modelViewTransform.modelToViewX( container.getOpeningLeft() ) -
                        parentNode.globalToParentPoint( event.pointer.point ).x;
       },
 
       drag: ( event, listener ) => {
-        assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
         const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
         const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
-        if ( modelX >= container.openingRight ) {
+        if ( modelX >= container.getOpeningRight() ) {
 
           // the lid is fully closed
           container.lidWidthProperty.value = container.getMaxLidWidth();
@@ -54,7 +41,7 @@ export default class LidDragListener extends DragListener {
         else {
 
           // the lid is open
-          const openingWidth = container.openingRight - modelX;
+          const openingWidth = container.getOpeningRight() - modelX;
           container.lidWidthProperty.value =
             Math.max( container.getMaxLidWidth() - openingWidth, container.getMinLidWidth() );
         }
@@ -63,7 +50,7 @@ export default class LidDragListener extends DragListener {
       // when the lid handle is released, log the opening
       end: () => {
         phet.log && phet.log( container.isOpenProperty.value ?
-                              `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` :
+                              `Lid is open: ${container.getOpeningLeft()} to ${container.getOpeningRight()} pm` :
                               'Lid is closed' );
       },
 
