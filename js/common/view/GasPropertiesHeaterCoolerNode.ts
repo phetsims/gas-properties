@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesHeaterCoolerNode is a specialization of HeaterCoolerNode for this sim.  Responsibilities include:
  *
@@ -14,15 +13,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
-import HeaterCoolerNode from '../../../../scenery-phet/js/HeaterCoolerNode.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import HeaterCoolerNode, { HeaterCoolerNodeOptions } from '../../../../scenery-phet/js/HeaterCoolerNode.js';
+import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
 import gasProperties from '../../gasProperties.js';
@@ -51,41 +51,34 @@ const toHeatFactor = new LinearFunction( 0, MAX_DELTA_T_N, MIN_HEAT_COOL_FACTOR,
 // Animations will be controlled by calling step
 const STEP_EMITTER = null;
 
+
+type SelfOptions = EmptySelfOptions;
+
+type GasPropertiesHeaterCoolerNodeOptions = SelfOptions & NodeTranslationOptions &
+  PickRequired<HeaterCoolerNodeOptions, 'tandem'>;
+
 export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
-  /**
-   * @param {RangedProperty} heatCoolAmountProperty
-   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
-   * @param {Property.<boolean>} isPlayingProperty
-   * @param {RangedProperty} numberOfParticlesProperty
-   * @param {Property.<number|null>} temperatureProperty
-   * @param {Object} [options]
-   */
-  constructor( heatCoolAmountProperty, holdConstantProperty, isPlayingProperty, numberOfParticlesProperty,
-               temperatureProperty, options ) {
-    assert && assert( heatCoolAmountProperty instanceof NumberProperty,
-      `invalid heatCoolAmountProperty: ${heatCoolAmountProperty}` );
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
-      `invalid holdConstantProperty: ${holdConstantProperty}` );
-    assert && assert( isPlayingProperty instanceof BooleanProperty,
-      `invalid isPlayingProperty: ${isPlayingProperty}` );
-    assert && assert( numberOfParticlesProperty instanceof ReadOnlyProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( temperatureProperty instanceof Property,
-      `invalid temperatureProperty: ${temperatureProperty}` );
+  // animation of heatCoolAmountProperty, null when no animation is running
+  private animation: Animation | null;
 
-    options = merge( {
+  public constructor( heatCoolAmountProperty: RangedProperty,
+                      holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      isPlayingProperty: TReadOnlyProperty<boolean>,
+                      numberOfParticlesProperty: TReadOnlyProperty<number>,
+                      temperatureProperty: Property<number | null>,
+                      providedOptions: GasPropertiesHeaterCoolerNodeOptions ) {
 
-      // superclass options
+    const options = optionize<GasPropertiesHeaterCoolerNodeOptions, SelfOptions, HeaterCoolerNodeOptions>()( {
+
+      // HeaterCoolerNodeOptions
       scale: 0.8,
-
-      // Link to the corresponding model Property, not privateHeatCoolAmountProperty.
       frontOptions: {
         sliderOptions: {
           phetioLinkedProperty: heatCoolAmountProperty
         }
       }
-    }, options );
+    }, providedOptions );
 
     // Private Property that either corresponds to the model or is animated, depending on the Hold Constant mode.
     // This is the Property that is actually connected to the HeaterCoolerNode.
@@ -107,7 +100,6 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       }
     } );
 
-    // @private {Animation|null} animation of privateHeatCoolAmountProperty, null when no animation is running
     this.animation = null;
 
     // stops the animation at whatever stage it's in
@@ -207,11 +199,10 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
   /**
    * Steps the animation.
-   * @param {number} dt - time delta, in seconds
-   * @public
+   * @param dt - time delta, in seconds
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt >= 0, `invalid dt: ${dt}` );
     this.animation && this.animation.step( dt );
   }
 }
