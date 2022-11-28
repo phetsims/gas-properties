@@ -1,38 +1,31 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ParticleNode displays a particle as a shaded sphere.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
+import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type ParticleNodeOptions = SelfOptions;
+
 export default class ParticleNode extends ShadedSphereNode {
 
-  /**
-   * @param {Particle} particle
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   * @constructor
-   */
-  constructor( particle, modelViewTransform, options ) {
-    assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  public constructor( particle: Particle, modelViewTransform: ModelViewTransform2, providedOptions?: ParticleNodeOptions ) {
 
-    assert && assert( !options || !options.mainColor, 'ParticleNode sets mainColor' );
-    options = merge( {
+    const options = optionize<ParticleNodeOptions, SelfOptions, ShadedSphereNodeOptions>()( {
 
-      // superclass options
+      // ShadedSphereNodeOptions
       mainColor: particle.colorProperty,
       highlightColor: particle.highlightColorProperty
-    }, options );
+    }, providedOptions );
 
     const diameter = 2 * modelViewTransform.modelToViewDeltaX( particle.radius );
 

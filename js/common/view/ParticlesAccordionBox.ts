@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ParticlesAccordionBox is the accordion box titled 'Particles'.  It contains controls for setting the number
  * of particles.
@@ -8,12 +7,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeTranslationOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
@@ -23,44 +24,41 @@ import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 import NumberOfParticlesControl from './NumberOfParticlesControl.js';
 
+type SelfOptions = {
+  fixedWidth?: number;
+  collisionsEnabledProperty?: Property<boolean> | null; // no checkbox if null
+};
+
+type ParticlesAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
+  PickOptional<AccordionBoxOptions, 'expandedProperty'> &
+  PickRequired<AccordionBoxOptions, 'tandem'>;
+
 export default class ParticlesAccordionBox extends AccordionBox {
 
-  /**
-   * @param {RangedProperty} numberOfHeavyParticlesProperty
-   * @param {RangedProperty} numberOfLightParticlesProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( numberOfHeavyParticlesProperty, numberOfLightParticlesProperty, modelViewTransform, options ) {
-    assert && assert( numberOfHeavyParticlesProperty instanceof NumberProperty,
-      `invalid numberOfHeavyParticlesProperty: ${numberOfHeavyParticlesProperty}` );
-    assert && assert( numberOfLightParticlesProperty instanceof NumberProperty,
-      `invalid numberOfLightParticlesProperty: ${numberOfLightParticlesProperty}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  public constructor( numberOfHeavyParticlesProperty: RangedProperty, numberOfLightParticlesProperty: RangedProperty,
+                      modelViewTransform: ModelViewTransform2, providedOptions: ParticlesAccordionBoxOptions ) {
 
-    options = merge( {
-      fixedWidth: 100,
-      contentXMargin: 0,
-      collisionsEnabledProperty: null, // {null|BooleanProperty} no checkbox if null
+    const options = optionize4<ParticlesAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
+      {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
+        // SelfOptions
+        fixedWidth: 100,
+        collisionsEnabledProperty: null,
 
-      // superclass options
-      titleNode: new Text( GasPropertiesStrings.particlesStringProperty, {
-        font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColors.textFillProperty
-      } )
-    }, options );
+        //  AccordionBoxOptions
+        contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
+        titleNode: new Text( GasPropertiesStrings.particlesStringProperty, {
+          font: GasPropertiesConstants.TITLE_FONT,
+          fill: GasPropertiesColors.textFillProperty
+        } )
+      }, providedOptions );
 
     // Limit width of title
     options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
     const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
 
-    const children = [
+    const children: Node[] = [
 
       // Heavy
       new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),

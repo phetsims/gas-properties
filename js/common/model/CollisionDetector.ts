@@ -22,7 +22,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import gasProperties from '../../gasProperties.js';
@@ -48,7 +48,7 @@ export default class CollisionDetector {
 
   private readonly container: BaseContainer;
   protected readonly particleArrays: Particle[][];
-  public readonly particleParticleCollisionsEnabledProperty: TReadOnlyProperty<boolean>;
+  public readonly particleParticleCollisionsEnabledProperty: Property<boolean>;
 
   // 2D grid of Regions
   public readonly regions: Region[];
@@ -66,7 +66,7 @@ export default class CollisionDetector {
    */
   public constructor( container: BaseContainer,
                       particleArrays: Particle[][],
-                      particleParticleCollisionsEnabledProperty: TReadOnlyProperty<boolean> ) {
+                      particleParticleCollisionsEnabledProperty: Property<boolean> ) {
     assert && assert( particleArrays.length > 0, `invalid particleArrays: ${particleArrays}` );
 
     this.container = container;

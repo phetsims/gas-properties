@@ -1,18 +1,18 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * NumberOfParticlesControl is a control for changing the number of particles for a specific type of particle.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import FineCoarseSpinner from '../../../../scenery-phet/js/FineCoarseSpinner.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { HBox, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
@@ -20,33 +20,23 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 // const
 const X_SPACING = 8;
 
+type SelfOptions = EmptySelfOptions;
+
+type NumberOfParticlesControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 export default class NumberOfParticlesControl extends VBox {
 
-  /**
-   * @param {Node} icon
-   * @param {TReadOnlyProperty.<string>} titleStringProperty
-   * @param {NumberProperty} numberOfParticlesProperty
-   * @param {Object} [options]
-   */
-  constructor( icon, titleStringProperty, numberOfParticlesProperty, options ) {
-    assert && assert( icon instanceof Node, `invalid icon: ${icon}` );
-    assert && assert( numberOfParticlesProperty instanceof NumberProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
+  public constructor( icon: Node,
+                      titleStringProperty: TReadOnlyProperty<string>,
+                      numberOfParticlesProperty: RangedProperty,
+                      providedOptions: NumberOfParticlesControlOptions ) {
 
-    options = merge( {
+    const options = optionize<NumberOfParticlesControlOptions, SelfOptions, VBoxOptions>()( {
 
-      // superclass options
+      // VBoxOptions
       align: 'left',
-      spacing: 10,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    assert && assert( numberOfParticlesProperty instanceof NumberProperty,
-      `invalid numberOfParticlesProperty: ${numberOfParticlesProperty}` );
-    assert && assert( numberOfParticlesProperty.range,
-      'numberOfParticlesProperty missing range' );
+      spacing: 10
+    }, providedOptions );
 
     const labelText = new Text( titleStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
@@ -75,10 +65,7 @@ export default class NumberOfParticlesControl extends VBox {
     // Limit width of text
     labelText.maxWidth = spinner.width - icon.width - X_SPACING;
 
-    assert && assert( !options.children, 'NumberOfParticlesControl sets children' );
-    options = merge( {
-      children: [ labelBox, spinner ]
-    }, options );
+    options.children = [ labelBox, spinner ];
 
     super( options );
   }
