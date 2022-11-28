@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ParticlesNode is the base class for rendering a collection of particles using Sprites. It is used in all screens.
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
@@ -22,20 +21,25 @@ const IMAGE_PADDING = 2;
 
 export default class ParticlesNode extends Sprites {
 
+  private readonly particleArrays: Particle[][];
+  private readonly modelViewTransform: ModelViewTransform2;
+  private readonly sprites: Sprite[];
+  private readonly spriteInstances: SpriteInstance[];
+
   /**
-   * @param {Particle[][]} particleArrays - arrays of particles to render
-   * @param {Property.<HTMLCanvasElement>[]} imageProperties - an image for each array in particleArrays
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param particleArrays - arrays of particles to render
+   * @param imageProperties - an image for each array in particleArrays
+   * @param modelViewTransform
    */
-  constructor( particleArrays, imageProperties, modelViewTransform ) {
+  public constructor( particleArrays: Particle[][],
+                      imageProperties: Property<HTMLCanvasElement>[],
+                      modelViewTransform: ModelViewTransform2 ) {
+    
+    assert && assert( particleArrays.length === imageProperties.length );
 
-    assert && assert( Array.isArray( particleArrays ) && particleArrays.length > 0, `invalid particleArrays: ${particleArrays}` );
-    assert && assert( particleArrays.length === imageProperties.length, 'must supply an image Property for each particle array' );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2, `invalid modelViewTransform: ${modelViewTransform}` );
-
-    // {Sprite[]} a Sprite for each Particle array, indexed the same as particleArrays and imageProperties
-    const sprites = imageProperties.map( imageProperty => {
-      const imageToSpriteImage = image => {
+    // a Sprite for each Particle array, indexed the same as particleArrays and imageProperties
+    const sprites: Sprite[] = imageProperties.map( imageProperty => {
+      const imageToSpriteImage = ( image: HTMLCanvasElement ) => {
         return new SpriteImage( image, new Vector2( image.width / 2, image.height / 2 ) );
       };
       const sprite = new Sprite( imageToSpriteImage( imageProperty.value ) );
@@ -45,8 +49,8 @@ export default class ParticlesNode extends Sprites {
       return sprite;
     } );
 
-    // {SpriteInstance[]} a SpriteInstance for each Particle
-    const spriteInstances = [];
+    // a SpriteInstance for each Particle
+    const spriteInstances: SpriteInstance[] = [];
 
     super( {
       sprites: sprites,
@@ -55,18 +59,16 @@ export default class ParticlesNode extends Sprites {
       pickable: false
     } );
 
-    // @private
-    this.sprites = sprites;
-    this.spriteInstances = spriteInstances;
     this.particleArrays = particleArrays;
     this.modelViewTransform = modelViewTransform;
+    this.sprites = sprites;
+    this.spriteInstances = spriteInstances;
   }
 
   /**
    * Redraws the particle system.
-   * @public
    */
-  update() {
+  public update(): void {
 
     // Index into {SpriteInstance[]} this.spriteInstances
     let spriteInstancesIndex = 0;
@@ -85,7 +87,6 @@ export default class ParticlesNode extends Sprites {
         // If we've run out of SpriteInstances, allocate one.
         if ( this.spriteInstances.length === spriteInstancesIndex ) {
           const newInstance = SpriteInstance.pool.fetch();
-          newInstance.isTranslation = false;
           newInstance.alpha = 1;
           newInstance.matrix.setToAffine( 1 / IMAGE_SCALE, 0, 0, 0, 1 / IMAGE_SCALE, 0 );
           this.spriteInstances.push( newInstance );
@@ -101,7 +102,9 @@ export default class ParticlesNode extends Sprites {
 
     // SpriteInstances that are not being used are freed to the pool.
     while ( this.spriteInstances.length > spriteInstancesIndex ) {
-      this.spriteInstances.pop().freeToPool();
+      const spriteInstance = this.spriteInstances.pop()!;
+      assert && assert( spriteInstance );
+      spriteInstance.freeToPool();
     }
 
     this.invalidatePaint(); // results in a call to paintCanvas
@@ -109,17 +112,9 @@ export default class ParticlesNode extends Sprites {
 
   /**
    * Converts a Particle to an HTMLCanvasElement.
-   * @param {Particle} particle
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Property.<HTMLCanvasElement>} particleImageProperty
-   * @public
    */
-  static particleToCanvas( particle, modelViewTransform, particleImageProperty ) {
-    assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( particleImageProperty instanceof Property,
-      `invalid particleImageProperty: ${particleImageProperty}` );
+  public static particleToCanvas( particle: Particle, modelViewTransform: ModelViewTransform2,
+                                  particleImageProperty: Property<HTMLCanvasElement> ): void {
 
     // Create a particle Node, scaled up to improve quality.
     const particleNode = new ParticleNode( particle, modelViewTransform );
