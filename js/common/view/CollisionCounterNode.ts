@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * CollisionCounterNode displays the number of collisions between particles and the container walls, during
  * some sample period.
@@ -8,18 +7,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import DragBoundsProperty from '../../../../scenery-phet/js/DragBoundsProperty.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
-import { Circle, DragListener, HBox, Node, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
+import { Circle, DragListener, HBox, Node, NodeOptions, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
@@ -37,34 +36,21 @@ const NUMBER_DISPLAY_RANGE = new Range( 0, 1E6 );
 const CONTROL_FONT = new PhetFont( 14 );
 const LABEL_FONT = new PhetFont( 16 );
 
+type SelfOptions = EmptySelfOptions;
+
+type CollisionCounterNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class CollisionCounterNode extends Node {
 
-  /**
-   * @param {CollisionCounter} collisionCounter
-   * @param {Node} listboxParent  - parent for the ComboBox's listbox
-   * @param {Property.<Bounds2>} visibleBoundsProperty - visible bounds of the ScreenView
-   * @param {Object} [options]
-   */
-  constructor( collisionCounter, listboxParent, visibleBoundsProperty, options ) {
-    assert && assert( collisionCounter instanceof CollisionCounter,
-      `invalid collisionCounter: ${collisionCounter}` );
-    assert && assert( listboxParent instanceof Node,
-      `invalid listboxParent: ${listboxParent}` );
-    assert && assert( visibleBoundsProperty instanceof Property,
-      `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
+  public constructor( collisionCounter: CollisionCounter, listboxParent: Node,
+                      visibleBoundsProperty: TReadOnlyProperty<Bounds2>, providedOptions: CollisionCounterNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<CollisionCounterNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       cursor: 'pointer',
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
-
-      // model controls visibility
-      visiblePropertyOptions: {
-        phetioReadOnly: true,
-        phetioDocumentation: 'visibility is controlled by the model'
-      }
-    }, options );
+      visibleProperty: collisionCounter.visibleProperty
+    }, providedOptions );
 
     const wallCollisionsText = new Text( GasPropertiesStrings.wallCollisionsStringProperty, {
       pickable: false,
@@ -124,7 +110,7 @@ export default class CollisionCounterNode extends Node {
       tandem: options.tandem.createTandem( 'samplePeriodComboBox' )
     } );
 
-    // all of the stuff that appears on the counter
+    // stuff that appears on the counter
     const content = new VBox( {
       align: 'center',
       spacing: Y_SPACING,
@@ -163,14 +149,7 @@ export default class CollisionCounterNode extends Node {
 
     content.center = backgroundNode.center;
 
-    assert && assert( !options.children, 'CollisionCounterNode sets children' );
-    options = merge( {
-      children: [ backgroundNode, content ]
-    }, options );
-
-    // visibility of this Node
-    assert && assert( !options.visibleProperty, 'CollisionCounterNode sets visibleProperty' );
-    options.visibleProperty = collisionCounter.visibleProperty;
+    options.children = [ backgroundNode, content ];
 
     super( options );
 
@@ -196,7 +175,7 @@ export default class CollisionCounterNode extends Node {
     // drag bounds, adjusted to keep this entire Node inside visible bounds
     const dragBoundsProperty = new DragBoundsProperty( this, visibleBoundsProperty );
 
-    // interrupt user interactions when the visible bounds changes, such as a device orientation change or window resize
+    // Interrupt user interactions when the visible bounds change, such as a device orientation change or window resize.
     visibleBoundsProperty.link( () => this.interruptSubtreeInput() );
 
     // If the collision counter is outside the drag bounds, move it inside.
