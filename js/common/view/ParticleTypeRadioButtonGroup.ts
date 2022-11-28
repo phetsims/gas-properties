@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ParticleTypeRadioButtonGroup is a pair of radio buttons for selecting between heavy and light particle types.
  *
@@ -8,30 +7,29 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem, RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import ParticleType from '../model/ParticleType.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
-export default class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {EnumerationProperty.<ParticleType>} particleTypeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( particleTypeProperty, modelViewTransform, options ) {
-    assert && assert( particleTypeProperty instanceof EnumerationProperty,
-      `invalid particleTypeProperty: ${particleTypeProperty}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+type ParticleTypeRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions &
+  PickRequired<RectangularRadioButtonGroupOptions, 'tandem'>;
 
-    options = merge( {
+export default class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup<ParticleType> {
 
-      // superclass options
+  public constructor( particleTypeProperty: EnumerationProperty<ParticleType>, modelViewTransform: ModelViewTransform2,
+                      providedOptions: ParticleTypeRadioButtonGroupOptions ) {
+
+    const options = optionize<ParticleTypeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
+
+      // RectangularRadioButtonGroupOptions
       orientation: 'horizontal',
       spacing: 8,
       radioButtonOptions: {
@@ -45,9 +43,9 @@ export default class ParticleTypeRadioButtonGroup extends RectangularRadioButton
           deselectedLineWidth: 1.5
         }
       }
-    }, options );
+    }, providedOptions );
 
-    const content = [
+    const content: RectangularRadioButtonGroupItem<ParticleType>[] = [
       {
         value: ParticleType.HEAVY,
         createNode: tandem => GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
