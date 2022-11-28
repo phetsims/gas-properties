@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ContainerResizeDragListener is the drag listener for resizing the container by changing its width.
  *
@@ -8,25 +7,15 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { DragListener, Node, SceneryEvent } from '../../../../scenery/js/imports.js';
+import { DragListener, Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
 export default class ContainerResizeDragListener extends DragListener {
 
-  /**
-   * @param {IdealGasLawContainer} container
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Node} parentNode
-   * @param {Tandem} tandem
-   */
-  constructor( container, modelViewTransform, parentNode, tandem ) {
-    assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( parentNode instanceof Node, `invalid parentNode: ${parentNode}` );
-    assert && assert( tandem instanceof Tandem, `invalid tandem: ${tandem}` );
+  public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node,
+                      tandem: Tandem ) {
 
     // pointer's x offset from the left edge of the container, when a drag starts
     let startXOffset = 0;
@@ -34,7 +23,6 @@ export default class ContainerResizeDragListener extends DragListener {
     super( {
 
       start: ( event, listener ) => {
-        assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
         container.userIsAdjustingWidthProperty.value = true;
 
@@ -43,7 +31,6 @@ export default class ContainerResizeDragListener extends DragListener {
       },
 
       drag: ( event, listener ) => {
-        assert && assert( event instanceof SceneryEvent, `invalid event: ${event}` );
 
         const viewX = parentNode.globalToParentPoint( event.pointer.point ).x;
         const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
