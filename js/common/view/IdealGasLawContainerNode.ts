@@ -1,6 +1,5 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IdealGasLawContainerNode is the view of the container used in screens that are based on the Ideal Gas Law.
  * This container has mutable width, and a lid that can be moved/removed.
@@ -10,14 +9,15 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import HoldConstant from '../model/HoldConstant.js';
@@ -31,31 +31,34 @@ const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
 const LID_ROTATION_SPEED = -50; // degrees/second
 
+type SelfOptions = {
+  resizeGripColor?: TColor; // color of resize handle's grip
+  lidGripColor?: TColor; // color of the lid handle's grip
+  resizeHandleIsPressedListener?: ( isPressed: boolean ) => void;
+};
+
+type IdealGasLawContainerNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class IdealGasLawContainerNode extends Node {
 
-  /**
-   * @param {IdealGasLawContainer} container
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {EnumerationProperty.<HoldConstant>} holdConstantProperty
-   * @param {Property.<Bounds2>} visibleBoundsProperty
-   * @param {Object} [options]
-   * @constructor
-   */
-  constructor( container, modelViewTransform, holdConstantProperty, visibleBoundsProperty, options ) {
-    assert && assert( container instanceof IdealGasLawContainer, `invalid container: ${container}` );
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
-    assert && assert( holdConstantProperty instanceof EnumerationProperty,
-      `invalid holdConstantProperty: ${holdConstantProperty}` );
-    assert && assert( visibleBoundsProperty instanceof Property,
-      `invalid visibleBoundsProperty: ${visibleBoundsProperty}` );
+  private readonly container: IdealGasLawContainer;
+  private readonly modelViewTransform: ModelViewTransform2;
+  private readonly visibleBoundsProperty: TReadOnlyProperty<Bounds2>;
+  private readonly lidNode: LidNode;
 
-    options = merge( {
+  public constructor( container: IdealGasLawContainer,
+                      modelViewTransform: ModelViewTransform2,
+                      holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
+                      providedOptions: IdealGasLawContainerNodeOptions ) {
+
+    const options = optionize<IdealGasLawContainerNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
       lidGripColor: GasPropertiesColors.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
-      resizeHandleIsPressedListener: isPressed => {}, // function(isPressed: boolean)
-      tandem: Tandem.REQUIRED
-    }, options );
+      resizeHandleIsPressedListener: _.noop
+    }, providedOptions );
 
     // Constant aspects of the container, in view coordinates
     const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
@@ -89,22 +92,19 @@ export default class IdealGasLawContainerNode extends Node {
     const lidNode = new LidNode( holdConstantProperty, {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
-      handleColor: options.lidGripColor,
+      gripColor: options.lidGripColor,
       tandem: options.tandem.createTandem( 'lidNode' )
     } );
 
-    assert && assert( !options.children, 'IdealGasLawContainerNode sets children' );
-    options = merge( {
-      children: [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ]
-    }, options );
+    options.children = [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ];
 
     super( options );
 
     // reposition the bottom-left corner of the lid's base, handle may extend past this to the left
-    function updateLidPosition() {
+    const updateLidPosition = () => {
       lidNode.x = wallsNode.left;
       lidNode.y = wallsNode.top + viewWallThickness;
-    }
+    };
 
     // Half the wall thickness, in view coordinates.
     const viewHalfWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness / 2 );
@@ -173,15 +173,14 @@ export default class IdealGasLawContainerNode extends Node {
 
       // display the previous bounds of the container if the wall doesn't do work
       previousBoundsNode.visible = isPressed && !container.leftWallDoesWork;
-      previousBoundsNode.setRect( wallsNode.shape.bounds.minX, wallsNode.shape.bounds.minY,
-        wallsNode.shape.bounds.width, wallsNode.shape.bounds.height );
+      previousBoundsNode.setRectBounds( wallsNode.bounds );
 
       // Notify the listener provided by the client.
       options.resizeHandleIsPressedListener( isPressed );
 
       // when the handle is released, log the opening
       if ( !isPressed && container.isOpenProperty.value ) {
-        phet.log && phet.log( `Lid is open: ${container.getOpeningLeft()} to ${container.openingRight} pm` );
+        phet.log && phet.log( `Lid is open: ${container.getOpeningLeft()} to ${container.getOpeningRight()} pm` );
       }
     } );
 
@@ -216,19 +215,17 @@ export default class IdealGasLawContainerNode extends Node {
       lidNode.pickable = lidIsOn;
     } );
 
-    // @private
     this.container = container;
-    this.lidNode = lidNode;
     this.modelViewTransform = modelViewTransform;
     this.visibleBoundsProperty = visibleBoundsProperty;
+    this.lidNode = lidNode;
   }
 
   /**
-   * @param {number} dt - delta time, in seconds
-   * @public
+   * @param dt - delta time, in seconds
    */
-  step( dt ) {
-    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
+  public step( dt: number ): void {
+    assert && assert( dt >= 0, `invalid dt: ${dt}` );
 
     // Blow the lid off the container
     if ( !this.container.lidIsOnProperty.value && this.lidNode.visible ) {
