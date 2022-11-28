@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IdealGasLawParticleSystemNode renders the particle system for screens that are based on the Ideal Gas Law.
  * To optimize the size of canvases, this consists of 2 CanvasNodes; one for particles inside the container, one for
