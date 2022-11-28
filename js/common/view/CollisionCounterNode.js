@@ -1,5 +1,6 @@
 // Copyright 2018-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * CollisionCounterNode displays the number of collisions between particles and the container walls, during
  * some sample period.
