@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ParticleImageProperty derives the HTMLCanvasElement for a Particle, used to render particles with CanvasNode.
  * This image needs to be regenerated when there is a change to the radius or colors for a particle species.
