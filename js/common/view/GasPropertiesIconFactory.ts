@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GasPropertiesIconFactory is a set of factory methods for creating the various icons that appear in the sim.
  *
@@ -21,7 +20,7 @@ import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import ThermometerNode from '../../../../scenery-phet/js/ThermometerNode.js';
-import { ColorDef, HBox, Line, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import { HBox, Line, Node, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DiffusionParticle1 from '../../diffusion/model/DiffusionParticle1.js';
 import DiffusionParticle2 from '../../diffusion/model/DiffusionParticle2.js';
@@ -31,7 +30,7 @@ import HeavyParticle from '../model/HeavyParticle.js';
 import LightParticle from '../model/LightParticle.js';
 import Particle from '../model/Particle.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
-import ParticleNode from './ParticleNode.js';
+import ParticleNode, { ParticleNodeOptions } from './ParticleNode.js';
 import PressureGaugeNode from './PressureGaugeNode.js';
 
 // constants
@@ -41,10 +40,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon for the Ideal screen.
-   * @returns {Node}
-   * @public
    */
-  createIdealScreenIcon() {
+  createIdealScreenIcon(): Node {
 
     // Container
     const containerNode = new Rectangle( 0, 0, 275, 200, {
@@ -109,10 +106,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon for the Explore screen.
-   * @returns {Node}
-   * @public
    */
-  createExploreScreenIcon() {
+  createExploreScreenIcon(): Node {
 
     // Vertical section of container wall
     const wallNode = new Line( 0, 0, 0, 300, {
@@ -169,10 +164,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon for the Energy screen.
-   * @returns {Node}
-   * @public
    */
-  createEnergyScreenIcon() {
+  createEnergyScreenIcon(): Node {
 
     // histogram shape
     const iconWidth = 300;
@@ -203,10 +196,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon for the Diffusion screen.
-   * @returns {Node}
-   * @public
    */
-  createDiffusionScreenIcon() {
+  createDiffusionScreenIcon(): Node {
 
     // Invisible container, so that divider is centered
     const containerNode = new Rectangle( 0, 0, 425, 300, {
@@ -260,10 +251,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon for the Intro screen in the Gases Intro sim.
-   * @returns {Node}
-   * @public
    */
-  createIntroScreenIcon() {
+  createIntroScreenIcon(): Node {
 
     // Invisible container
     const containerNode = new Rectangle( 0, 0, 800, 600, {
@@ -310,84 +299,50 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates an icon for a heavy particle.
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options] - see ParticleNode options
-   * @returns {Node}
-   * @public
    */
-  createHeavyParticleIcon( modelViewTransform, options ) {
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  createHeavyParticleIcon( modelViewTransform: ModelViewTransform2, options?: ParticleNodeOptions ): Node {
     return createParticleIcon( new HeavyParticle(), modelViewTransform, options );
   },
 
   /**
    * Creates an icon for a light particle.
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options] - see ParticleNode options
-   * @returns {Node}
-   * @public
    */
-  createLightParticleIcon( modelViewTransform, options ) {
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  createLightParticleIcon( modelViewTransform: ModelViewTransform2, options?: ParticleNodeOptions ): Node {
     return createParticleIcon( new LightParticle(), modelViewTransform, options );
   },
 
   /**
    * Creates an icon for particle type 1 in the Diffusion screen.
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options] - see ParticleNode options
-   * @returns {Node}
-   * @public
    */
-  createDiffusionParticle1Icon( modelViewTransform, options ) {
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  createDiffusionParticle1Icon( modelViewTransform: ModelViewTransform2, options?: ParticleNodeOptions ): Node {
     return createParticleIcon( new DiffusionParticle1(), modelViewTransform, options );
   },
 
   /**
    * Creates an icon for particle type 2 in the Diffusion screen.
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options] - see ParticleNode options
-   * @returns {Node}
-   * @public
    */
-  createDiffusionParticle2Icon( modelViewTransform, options ) {
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  createDiffusionParticle2Icon( modelViewTransform: ModelViewTransform2, options?: ParticleNodeOptions ): Node {
     return createParticleIcon( new DiffusionParticle2(), modelViewTransform, options );
   },
 
   /**
    * Creates a simplified icon for the Stopwatch.
-   * @returns {Node}
-   * @public
    */
-  createStopwatchIcon() {
+  createStopwatchIcon(): Node {
     return createToolIcon( GasPropertiesColors.stopwatchBackgroundColorProperty );
   },
 
   /**
    * Creates a simplified icon for the Collision Counter.
-   * @returns {Node}
-   * @public
    */
-  createCollisionCounterIcon() {
+  createCollisionCounterIcon(): Node {
     return createToolIcon( GasPropertiesColors.collisionCounterBackgroundColorProperty );
   },
 
   /**
    * Creates the icon that represents the histogram for a species of particle.
-   * @param {Particle} particle - a prototypical particle
-   * @param {ModelViewTransform2} modelViewTransform
-   * @returns {Node}
-   * @public
    */
-  createSpeciesHistogramIcon( particle, modelViewTransform ) {
-    assert && assert( modelViewTransform instanceof ModelViewTransform2,
-      `invalid modelViewTransform: ${modelViewTransform}` );
+  createSpeciesHistogramIcon( particle: Particle, modelViewTransform: ModelViewTransform2 ): Node {
     return new HBox( {
       spacing: 3,
       children: [
@@ -399,10 +354,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon used on the 'Width' checkbox.
-   * @returns {Node}
-   * @public
    */
-  createContainerWidthIcon() {
+  createContainerWidthIcon(): Node {
     return new DimensionalArrowsNode( new NumberProperty( 44 ), {
       color: GasPropertiesColors.widthIconColorProperty
     } );
@@ -410,10 +363,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon used on the 'Center of Mass' checkbox.
-   * @returns {Node}
-   * @public
    */
-  createCenterOfMassIcon() {
+  createCenterOfMassIcon(): Node {
 
     const width = 4;
     const height = 15;
@@ -435,10 +386,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon used on the 'Particle Flow Rate' checkbox.
-   * @returns {Node}
-   * @public
    */
-  createParticleFlowRateIcon() {
+  createParticleFlowRateIcon(): Node {
 
     const arrowOptions = {
       fill: GasPropertiesColors.particle1ColorProperty,
@@ -459,10 +408,8 @@ const GasPropertiesIconFactory = {
 
   /**
    * Creates the icon used on the 'Scale' checkbox.
-   * @returns {Node}
-   * @public
    */
-  createScaleIcon() {
+  createScaleIcon(): Node {
 
     const scaleLength = 30;
     const tickLength = 6;
@@ -483,25 +430,16 @@ const GasPropertiesIconFactory = {
 
 /**
  * Creates the icon for a particle.
- * @param {Particle} particle - a prototypical particle
- * @param {ModelViewTransform2} modelViewTransform
- * @param {Object} [options] - see ParticleNode options
- * @returns {Node}
  */
-function createParticleIcon( particle, modelViewTransform, options ) {
-  assert && assert( particle instanceof Particle, `invalid particle: ${particle}` );
-  assert && assert( modelViewTransform instanceof ModelViewTransform2,
-    `invalid modelViewTransform: ${modelViewTransform}` );
+function createParticleIcon( particle: Particle, modelViewTransform: ModelViewTransform2,
+                             options?: ParticleNodeOptions ): Node {
   return new ParticleNode( particle, modelViewTransform, options );
 }
 
 /**
  * Creates a simplified icon for a tool like the stopwatch or collision counter.
- * @param {ColorDef} color
- * @returns {Node}
  */
-function createToolIcon( color ) {
-  assert && assert( ColorDef.isColorDef( color ), `invalid color: ${color}` );
+function createToolIcon( color: TColor ): Node {
 
   const background = new ShadedRectangle( new Bounds2( 0, 0, 25, 20 ), {
     baseColor: color,
@@ -524,10 +462,8 @@ function createToolIcon( color ) {
 
 /**
  * Creates an icon for a histogram shape, used for the checkboxes on the histograms.
- * @param {ColorDef} stroke
- * @returns {Node}
  */
-function createHistogramIcon( stroke ) {
+function createHistogramIcon( stroke: TColor ): Node {
 
   // unit shape
   const shape = new Shape()

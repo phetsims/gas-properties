@@ -9,12 +9,13 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
+import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ParticleNodeOptions = SelfOptions;
+export type ParticleNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class ParticleNode extends ShadedSphereNode {
 
