@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ParticlesNode is the base class for rendering a collection of particles using Sprites. It is used in all screens.
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
