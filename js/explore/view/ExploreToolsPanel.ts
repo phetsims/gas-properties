@@ -13,7 +13,6 @@ import { NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js'
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
-import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
@@ -41,7 +40,9 @@ export default class ExploreToolsPanel extends Panel {
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
-    const content = new FixedWidthNode( contentWidth, new VBox( {
+    const content = new VBox( {
+      preferredWidth: contentWidth,
+      widthSizable: false,
       align: 'left',
       spacing: 12,
       children: [
@@ -58,7 +59,7 @@ export default class ExploreToolsPanel extends Panel {
           tandem: options.tandem.createTandem( 'collisionCounterCheckbox' )
         } )
       ]
-    } ) );
+    } );
 
     super( content, options );
   }

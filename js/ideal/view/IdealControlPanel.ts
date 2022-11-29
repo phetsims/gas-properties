@@ -11,7 +11,6 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
-import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
@@ -80,11 +79,13 @@ export default class IdealControlPanel extends Panel {
       tandem: options.tandem.createTandem( 'collisionCounterCheckbox' )
     } ) );
 
-    const content = new FixedWidthNode( contentWidth, new VBox( {
+    const content = new VBox( {
+      preferredWidth: contentWidth,
+      widthSizable: false,
       align: 'left',
       spacing: 12,
       children: children
-    } ) );
+    } );
 
     super( content, options );
   }

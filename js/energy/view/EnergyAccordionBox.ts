@@ -16,7 +16,6 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import gasProperties from '../../gasProperties.js';
 import HistogramNode from './HistogramNode.js';
 import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
@@ -73,11 +72,13 @@ export default class EnergyAccordionBox extends AccordionBox {
     const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
 
     // Checkboxes centered below histogram
-    const content = new FixedWidthNode( contentWidth, new VBox( {
+    const content = new VBox( {
+      preferredWidth: contentWidth,
+      widthSizable: false,
       align: 'center',
       spacing: 10,
       children: [ histogramNode, checkboxes ]
-    } ) );
+    } );
 
     super( content, options );
 

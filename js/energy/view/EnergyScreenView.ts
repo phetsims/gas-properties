@@ -68,6 +68,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
         speedAccordionBox,
         kineticEnergyAccordionBox
       ],
+      align: 'left',
       spacing: VBOX_SPACING,
       top: GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
       left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN
@@ -109,6 +110,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
         particlesAccordionBox,
         injectionTemperatureAccordionBox
       ],
+      align: 'left',
       spacing: VBOX_SPACING,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

@@ -19,7 +19,6 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import FixedWidthNode from './FixedWidthNode.js';
 import GasPropertiesCheckbox from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 import NumberOfParticlesControl from './NumberOfParticlesControl.js';
@@ -83,11 +82,13 @@ export default class ParticlesAccordionBox extends AccordionBox {
       } ) );
     }
 
-    const content = new FixedWidthNode( contentWidth, new VBox( {
+    const content = new VBox( {
+      preferredWidth: contentWidth,
+      widthSizable: false,
       align: 'left',
       spacing: 15,
       children: children
-    } ) );
+    } );
 
     super( content, options );
   }

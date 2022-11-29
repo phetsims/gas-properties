@@ -24,7 +24,6 @@ import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioBu
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
@@ -135,11 +134,13 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
 
     const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
 
-    const content = new FixedWidthNode( contentWidth, new VBox( {
+    const content = new VBox( {
+      preferredWidth: contentWidth,
+      widthSizable: false,
       align: 'left',
       spacing: 12,
       children: [ radioButtonGroup, temperatureControl ]
-    } ) );
+    } );
 
     super( content, options );
 
