@@ -48,7 +48,7 @@ Sim-specific query parameters are documented in `GasPropertiesQueryParameters`.
 
 **Color Profiles**: This sim has 2 color profiles, "default" and "projector", defined
 in `GasPropertiesColors`.
-The "projector" profile is used when the sim is switched into projector mode via `PhET menu > Options > Projector Mode`.
+The "projector" profile is used when the sim is switched into projector mode via the Preferences dialog.
 
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking.
 As an experiment, this sim performs type-checking for almost all function arguments via `assert`. While this may look
@@ -152,9 +152,10 @@ All other view components in this screen are straightforward and will not be des
 
 ## Related Simulations
 
-**Gases Intro**: This sim consists of 2 screens, both of which are based on the _Ideal_ screen.  The _Intro_ screen
-is the _Ideal_ screen with the "Hold Constant" radio buttons removed.  The _Laws_ screen is the _Ideal_ screen with
-no modifications.  While _Gas Properties_ has noise turned on for the pressure gauge, the _Gases Intro_ sim has it
-turned off by default.  See `PhET menu > Options... > Pressure Noise` or the `pressureNoise` query parameter.
+**Gases Intro**: This sim consists of 2 screens, both of which are based on the _Ideal_ screen. The _Intro_ screen
+is the _Ideal_ screen with the "Hold Constant" radio buttons removed. The _Laws_ screen is the _Ideal_ screen with
+no modifications. While _Gas Properties_ has noise turned on for the pressure gauge, the _Gases Intro_ sim has it
+turned off by default. See the "Pressure Noise" checkbox in the Preferences dialog, or the `pressureNoise` query
+parameter.
 
 **Diffusion**: This is sim consists of the _Diffusion_ screen with no modifications.
