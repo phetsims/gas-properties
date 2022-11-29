@@ -39,7 +39,7 @@ for "normal" and "slow" sim times. The `dt` for all top-level ScreenView and Mod
 what is provided by `Sim.js` when it steps the simulation. The `dt` values for all other methods are in picoseconds.
 (The units for `dt` are clearly documented throughout the code.)
 
-**Memory Management**: With the exception of `Particle` and `ParticleNode` instances, all object instances (model and
+**Memory Management**: With the exception of `Particle` instances, all object instances (model and
 view) persist for the
 lifetime of the sim. There is no need to call `unlink`, `removeListener`, `dispose`, etc.
 
