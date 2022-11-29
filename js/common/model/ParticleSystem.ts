@@ -12,7 +12,7 @@ import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProper
 import Property from '../../../../axon/js/Property.js';
 import propertyStateHandlerSingleton from '../../../../axon/js/propertyStateHandlerSingleton.js';
 import PropertyStatePhase from '../../../../axon/js/PropertyStatePhase.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -61,7 +61,7 @@ export default class ParticleSystem {
   public readonly numberOfLightParticlesProperty: RangedProperty;
 
   // N, the total number of particles in the container
-  public readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
+  public readonly numberOfParticlesProperty: ReadOnlyProperty<number>;
 
   public constructor( getInitialTemperature: () => number,
                       collisionsEnabledProperty: Property<boolean>,
@@ -128,9 +128,7 @@ export default class ParticleSystem {
     // particle arrays. This occurs in the "notification" step when updateNumberOfParticles is called.
     // During PhET-iO restore state, this must occur before numberOfParticlesProperty is re-derived.
     // See https://github.com/phetsims/gas-properties/issues/178
-    // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
     propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfHeavyParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
-    // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
     propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
   }
 
