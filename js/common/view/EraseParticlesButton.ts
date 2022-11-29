@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EraserButton, { EraserButtonOptions } from '../../../../scenery-phet/js/buttons/EraserButton.js';
@@ -26,17 +27,18 @@ export default class EraseParticlesButton extends EraserButton {
 
       // EraserButtonOptions
       baseColor: GasPropertiesColors.eraserButtonColorProperty,
+
+      // Deletes all particles when the button fires.
       listener: () => {
-        particleSystem.removeAllParticles(); // Deletes all particles when the button fires.
-      }
+        particleSystem.removeAllParticles();
+      },
+
+      // Disables the button when the container is empty.
+      enabledProperty: new DerivedProperty( [ particleSystem.numberOfParticlesProperty ],
+        numberOfParticles => ( numberOfParticles !== 0 ) )
     }, providedOptions );
 
     super( options );
-
-    // Disables the button when the container is empty.
-    particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
-      this.enabled = ( numberOfParticles !== 0 );
-    } );
   }
 
   public override dispose(): void {
