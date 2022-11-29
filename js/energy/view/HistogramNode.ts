@@ -115,19 +115,23 @@ export default class HistogramNode extends Node {
     // x-axis label
     const xAxisLabelNode = new Text( xAxisStringProperty,
       combineOptions<TextOptions>( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
-        maxWidth: 0.9 * background.width,
-        centerX: background.centerX,
-        top: background.bottom + 5
+        maxWidth: 0.9 * background.width
       } ) );
+    xAxisLabelNode.boundsProperty.link( bounds => {
+      xAxisLabelNode.centerX = background.centerX;
+      xAxisLabelNode.top = background.bottom + 5;
+    } );
 
     // y-axis label
     const yAxisLabelNode = new Text( yAxisStringProperty,
       combineOptions<TextOptions>( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
         rotation: -Math.PI / 2,
-        maxWidth: 0.9 * background.height,
-        right: background.left - 8,
-        centerY: background.centerY
+        maxWidth: 0.9 * background.height
       } ) );
+    yAxisLabelNode.boundsProperty.link( bounds => {
+      yAxisLabelNode.right = background.left - 8;
+      yAxisLabelNode.centerY = background.centerY;
+    } );
 
     options.children = [ background, intervalLines, plotNodesParent, border, xAxisLabelNode, yAxisLabelNode ];
 
