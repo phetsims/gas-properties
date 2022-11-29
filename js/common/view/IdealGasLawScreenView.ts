@@ -154,9 +154,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Return Lid button
     const returnLidButton = new ReturnLidButton( model.container, {
-      right: model.modelViewTransform.modelToViewX( model.container.right - model.container.openingRightInset ) - 30,
-      bottom: model.modelViewTransform.modelToViewY( model.container.top ) - 15,
       tandem: tandem.createTandem( 'returnLidButton' )
+    } );
+    returnLidButton.boundsProperty.link( bounds => {
+      returnLidButton.right = model.modelViewTransform.modelToViewX( model.container.right - model.container.openingRightInset ) - 30;
+      returnLidButton.bottom = model.modelViewTransform.modelToViewY( model.container.top ) - 15;
     } );
 
     // Dimensional arrows that indicate container size
