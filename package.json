@@ -22,6 +22,7 @@
       "adapted-from-phet"
     ],
     "simFeatures": {
+      "supportsDynamicLocale": true,
       "colorProfiles": [
         "default",
         "projector"
