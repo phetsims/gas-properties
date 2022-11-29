@@ -54,6 +54,11 @@ export default class DiffusionContainerNode extends Node {
 
     super( options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'DiffusionContainerNode', DiffusionContainerNode );

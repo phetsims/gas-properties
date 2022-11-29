@@ -48,6 +48,11 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
     // Size the canvas to match the container bounds. See https://github.com/phetsims/gas-properties/issues/38
     this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.bounds ) );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'DiffusionParticleSystemNode', DiffusionParticleSystemNode );

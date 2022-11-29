@@ -84,6 +84,11 @@ export default class InjectionTemperatureControl extends NumberControl {
 
     super( '', initialTemperatureProperty, initialTemperatureProperty.range, options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 /**

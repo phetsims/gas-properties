@@ -39,6 +39,11 @@ export default class GasPropertiesSpinner extends NumberSpinner {
 
     super( numberProperty, new Property( numberProperty.range ), options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'GasPropertiesSpinner', GasPropertiesSpinner );

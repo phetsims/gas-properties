@@ -39,6 +39,11 @@ export default class LinePlotNode extends Path {
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Draws the data as a set of line segments.
    * @param binCounts - the count for each bin

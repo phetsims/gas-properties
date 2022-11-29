@@ -36,6 +36,11 @@ export default class BarPlotNode extends Path {
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Draws the data as a single shape consisting of a set of bars.
    * @param binCounts - the count for each bin

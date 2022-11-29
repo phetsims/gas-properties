@@ -69,6 +69,10 @@ export default class DiffusionData {
     this.update( particles1, particles2 );
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
   /**
    * Updates Properties based on the contents of the particle arrays.
    */

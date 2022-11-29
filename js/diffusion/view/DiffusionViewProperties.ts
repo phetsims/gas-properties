@@ -41,6 +41,10 @@ export default class DiffusionViewProperties {
     } );
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
   public reset(): void {
     this.dataExpandedProperty.reset();
     this.particleFlowRateVisibleProperty.reset();

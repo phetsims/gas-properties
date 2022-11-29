@@ -27,6 +27,11 @@ export default class DiffusionCollisionDetector extends CollisionDetector {
     this.diffusionContainer = diffusionContainer;
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Detects and handles particle-container collisions for the system for one time step.
    * Returns the number of collisions

@@ -34,6 +34,11 @@ export default class IntervalLinesNode extends Path {
     this.previousMaxY = null;
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Updates the lines to match the current y scale.
    */

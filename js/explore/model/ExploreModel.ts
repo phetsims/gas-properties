@@ -24,6 +24,11 @@ export default class ExploreModel extends IdealGasLawModel {
       throw new Error( 'holdConstant is fixed in the Explore screen' );
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'ExploreModel', ExploreModel );

@@ -67,6 +67,11 @@ export default class ParticleFlowRateNode extends Node {
       rightArrowNode.setTip( minTailLength + flowRate * VECTOR_SCALE, 0 );
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'ParticleFlowRateNode', ParticleFlowRateNode );
