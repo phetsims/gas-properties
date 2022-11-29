@@ -37,6 +37,11 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
     super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'GasPropertiesBicyclePumpNode', GasPropertiesBicyclePumpNode );

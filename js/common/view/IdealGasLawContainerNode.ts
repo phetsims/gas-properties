@@ -220,6 +220,11 @@ export default class IdealGasLawContainerNode extends Node {
     this.lidNode = lidNode;
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * @param dt - delta time, in seconds
    */

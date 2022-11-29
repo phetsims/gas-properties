@@ -75,6 +75,11 @@ export default class LidNode extends Node {
     this.baseNode = baseNode;
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Sets the width of the lid's base.
    */

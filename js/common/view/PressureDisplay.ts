@@ -60,6 +60,11 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
 
     super( pressureGauge.unitsProperty, items, listboxParent, options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'PressureDisplay', PressureDisplay );

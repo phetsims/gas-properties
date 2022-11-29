@@ -129,6 +129,11 @@ export default class ParticlesNode extends Sprites {
     particleNode.toCanvas( canvas => { particleImageProperty.value = canvas; },
       canvasWidth / 2, canvasHeight / 2, canvasWidth, canvasHeight );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 gasProperties.register( 'ParticlesNode', ParticlesNode );

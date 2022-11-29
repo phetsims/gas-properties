@@ -49,6 +49,11 @@ export default class RegionNode extends Node {
     this.countNode = countNode;
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Displays the number of particles in the region.
    */

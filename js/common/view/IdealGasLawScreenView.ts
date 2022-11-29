@@ -341,6 +341,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     this.heaterCoolerNode = heaterCoolerNode;
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   protected override reset(): void {
     super.reset();
     this.heavyBicyclePumpNode.reset();

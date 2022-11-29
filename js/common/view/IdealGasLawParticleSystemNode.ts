@@ -77,6 +77,11 @@ export default class IdealGasLawParticleSystemNode extends Node {
     this.outsideParticlesNode = outsideParticlesNode;
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Redraws the particle system.
    */

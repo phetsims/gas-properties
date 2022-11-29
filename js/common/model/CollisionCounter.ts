@@ -98,6 +98,10 @@ export default class CollisionCounter {
     this.samplePeriodProperty.link( () => this.stopAndResetCount() );
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
   public reset(): void {
     this.positionProperty.reset();
     this.numberOfCollisionsProperty.reset();

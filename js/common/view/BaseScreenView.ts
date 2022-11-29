@@ -86,6 +86,11 @@ export default abstract class BaseScreenView extends ScreenView {
     this.addChild( resetAllButton );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   protected reset(): void {
     this.interruptSubtreeInput(); // cancel interactions that are in progress
     this.model.reset();

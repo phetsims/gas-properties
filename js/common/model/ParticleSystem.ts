@@ -132,6 +132,11 @@ export default class ParticleSystem {
     propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
+
   public reset(): void {
     this.removeAllParticles();
   }

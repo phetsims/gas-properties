@@ -155,6 +155,10 @@ export default class BaseContainer {
     }
     return true;
   }
+
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
 }
 
 gasProperties.register( 'BaseContainer', BaseContainer );
