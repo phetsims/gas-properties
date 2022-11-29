@@ -15,7 +15,6 @@ import { HSeparator, NodeOptions, NodeTranslationOptions, VBox } from '../../../
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import FixedWidthNode from '../../common/view/FixedWidthNode.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
@@ -66,12 +65,17 @@ export default class DiffusionControlPanel extends Panel {
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
     const dividerToggleButton = new DividerToggleButton( hasDividerProperty, {
+      layoutOptions: {
+        align: 'center'
+      },
       tandem: options.tandem.createTandem( 'dividerToggleButton' )
     } );
 
     const textMaxWidth = 175; // determined empirically
 
-    const content = new FixedWidthNode( contentWidth, new VBox( {
+    const content = new VBox( {
+      preferredWidth: contentWidth,
+      widthSizable: false,
       align: 'left',
       spacing: 18,
       children: [
@@ -82,9 +86,7 @@ export default class DiffusionControlPanel extends Panel {
         } ),
 
         // Remove/Reset Divider button, centered
-        new FixedWidthNode( contentWidth, dividerToggleButton, {
-          align: 'center'
-        } ),
+        dividerToggleButton,
 
         // ------------
         new HSeparator( {
@@ -115,7 +117,7 @@ export default class DiffusionControlPanel extends Panel {
           ]
         } )
       ]
-    } ) );
+    } );
 
     super( content, options );
 

@@ -8,6 +8,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import BooleanRectangularToggleButton, { BooleanRectangularToggleButtonOptions } from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
@@ -18,7 +19,9 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type DividerToggleButtonOptions = SelfOptions & PickRequired<BooleanRectangularToggleButtonOptions, 'tandem'>;
+type DividerToggleButtonOptions = SelfOptions &
+  PickOptional<BooleanRectangularToggleButtonOptions, 'layoutOptions'> &
+  PickRequired<BooleanRectangularToggleButtonOptions, 'tandem'>;
 
 export default class DividerToggleButton extends BooleanRectangularToggleButton {
 
