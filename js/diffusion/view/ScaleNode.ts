@@ -62,9 +62,11 @@ export default class ScaleNode extends Node {
     } ), {
       font: new PhetFont( 12 ),
       fill: GasPropertiesColors.scaleColorProperty,
-      centerX: dx / 2,
-      top: ticksPath.bottom,
-      maxWidth: dx
+      maxWidth: 0.85 * dx
+    } );
+    labelNode.boundsProperty.link( bounds => {
+      labelNode.centerX = dx / 2;
+      labelNode.top = ticksPath.bottom;
     } );
 
     // double-headed arrow
