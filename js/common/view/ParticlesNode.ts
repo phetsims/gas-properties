@@ -115,7 +115,7 @@ export default class ParticlesNode extends Sprites {
    * Converts a Particle to an HTMLCanvasElement.
    */
   public static particleToCanvas( particle: Particle, modelViewTransform: ModelViewTransform2,
-                                  particleImageProperty: Property<HTMLCanvasElement> ): void {
+                                  particleImageProperty: Property<HTMLCanvasElement | null> ): void {
 
     // Create a particle Node, scaled up to improve quality.
     const particleNode = new ParticleNode( particle, modelViewTransform );
