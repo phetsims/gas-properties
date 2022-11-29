@@ -57,7 +57,8 @@ export default abstract class BaseScreenView extends ScreenView {
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: GasPropertiesConstants.CONTROL_FONT,
-          fill: GasPropertiesColors.textFillProperty
+          fill: GasPropertiesColors.textFillProperty,
+          maxWidth: 80
         }
       },
       playPauseStepButtonOptions: {
