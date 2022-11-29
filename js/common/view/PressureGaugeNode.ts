@@ -9,7 +9,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
-import { Circle, LinearGradient, Node, NodeOptions, NodeTranslationOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, LinearGradient, Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -23,7 +23,7 @@ const POST_HEIGHT = 0.6 * DIAL_RADIUS;
 
 type SelfOptions = EmptySelfOptions;
 
-type PressureGaugeNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+type PressureGaugeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class PressureGaugeNode extends Node {
 
@@ -49,10 +49,12 @@ export default class PressureGaugeNode extends Node {
 
     // combo box to display value and choose units
     const comboBox = new PressureDisplay( pressureGauge, listboxParent, {
-      centerX: gaugeNode.centerX,
-      bottom: gaugeNode.bottom,
       maxWidth: gaugeNode.width,
       tandem: options.tandem.createTandem( 'comboBox' )
+    } );
+    comboBox.boundsProperty.link( bounds => {
+      comboBox.centerX = gaugeNode.centerX;
+      comboBox.bottom = gaugeNode.bottom;
     } );
 
     options.children = [ postNode, gaugeNode, comboBox ];

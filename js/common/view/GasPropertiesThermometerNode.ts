@@ -10,14 +10,14 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ThermometerNode from '../../../../scenery-phet/js/ThermometerNode.js';
-import { Node, NodeTranslationOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { Node, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import Thermometer from '../model/Thermometer.js';
 import TemperatureDisplay from './TemperatureDisplay.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type GasPropertiesThermometerNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<VBoxOptions, 'tandem'>;
+type GasPropertiesThermometerNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class GasPropertiesThermometerNode extends VBox {
 

@@ -11,7 +11,7 @@ import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ComboBoxDisplay, { ComboBoxDisplayItem, ComboBoxDisplayOptions } from '../../../../scenery-phet/js/ComboBoxDisplay.js';
-import { Node, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
@@ -24,7 +24,7 @@ const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPress
 
 type SelfOptions = EmptySelfOptions;
 
-type PressureDisplayOptions = SelfOptions & NodeTranslationOptions &
+type PressureDisplayOptions = SelfOptions &
   PickOptional<ComboBoxDisplayOptions, 'maxWidth'> &
   PickRequired<ComboBoxDisplayOptions, 'tandem'>;
 

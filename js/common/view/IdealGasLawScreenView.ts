@@ -218,9 +218,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Thermometer
     const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel.thermometer, thermometerListboxParent, {
-      right: containerNode.right,
-      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'thermometerNode' )
+    } );
+    thermometerNode.boundsProperty.link( bounds => {
+      thermometerNode.centerX = containerNode.right - 50;
+      thermometerNode.bottom = model.modelViewTransform.modelToViewY( model.container.top ) + 60;
     } );
 
     // Parent for the pressure gauge's listbox
@@ -228,9 +230,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Pressure Gauge
     const pressureGaugeNode = new PressureGaugeNode( model.pressureModel.pressureGauge, pressureGaugeListboxParent, {
-      left: containerNode.right - 2,
-      centerY: model.modelViewTransform.modelToViewY( model.container.top ) + 30,
       tandem: tandem.createTandem( 'pressureGaugeNode' )
+    } );
+    pressureGaugeNode.boundsProperty.link( bounds => {
+      pressureGaugeNode.left = containerNode.right - 2;
+      pressureGaugeNode.centerY = model.modelViewTransform.modelToViewY( model.container.top ) + 30;
     } );
 
     // The complete system of particles, inside and outside the container
