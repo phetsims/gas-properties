@@ -16,6 +16,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
@@ -27,7 +28,7 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import HoldConstant from './HoldConstant.js';
-import PressureUnits from './PressureUnits.js';
+import { PressureUnits, PressureUnitsValues } from './PressureUnits.js';
 
 // constants
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
@@ -62,7 +63,7 @@ export default class PressureGauge {
   private readonly scaleNoiseFunction: LinearFunction;
 
   // pressure units displayed by the pressure gauge
-  public readonly unitsProperty: EnumerationProperty<PressureUnits>;
+  public readonly unitsProperty: StringEnumerationProperty<PressureUnits>;
 
   private dtAccumulator: number;
 
@@ -110,7 +111,8 @@ export default class PressureGauge {
 
     this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
-    this.unitsProperty = new EnumerationProperty( PressureUnits.ATMOSPHERES, {
+    this.unitsProperty = new StringEnumerationProperty<PressureUnits>( 'atmospheres', {
+      validValues: PressureUnitsValues,
       tandem: tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the pressure gauge'
     } );

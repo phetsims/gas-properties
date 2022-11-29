@@ -13,7 +13,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Thermometer from '../model/Thermometer.js';
-import TemperatureUnits from '../model/TemperatureUnits.js';
+import { TemperatureUnits } from '../model/TemperatureUnits.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
@@ -36,15 +36,15 @@ export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits
 
     const items: ComboBoxDisplayItem<TemperatureUnits>[] = [
       {
-        choice: TemperatureUnits.KELVIN,
-        tandemName: `${TemperatureUnits.KELVIN.toString().toLowerCase()}${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        choice: 'kelvin',
+        tandemName: `kelvin${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
         numberProperty: thermometer.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kelvin
       },
       {
-        choice: TemperatureUnits.CELSIUS,
-        tandemName: `${TemperatureUnits.CELSIUS.toString().toLowerCase()}${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        choice: 'celsius',
+        tandemName: `celsius${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
         numberProperty: thermometer.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.degreesCelsius

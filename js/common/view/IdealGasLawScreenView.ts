@@ -24,6 +24,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
@@ -38,7 +39,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import IdealGasLawModel from '../model/IdealGasLawModel.js';
-import ParticleType from '../model/ParticleType.js';
+import { ParticleType } from '../model/ParticleType.js';
 import BaseScreenView, { BaseScreenViewOptions } from './BaseScreenView.js';
 import CollisionCounterNode from './CollisionCounterNode.js';
 import ContainerWidthNode from './ContainerWidthNode.js';
@@ -71,7 +72,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
   private readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
 
   public constructor( model: IdealGasLawModel,
-                      particleTypeProperty: Property<ParticleType>,
+                      particleTypeProperty: StringEnumerationProperty<ParticleType>,
                       widthVisibleProperty: Property<boolean>,
                       tandem: Tandem,
                       providedOptions?: IdealGasLawScreenViewOptions ) {
@@ -107,7 +108,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     else {
 
       // Resizing the container pauses the sim and grays out the particles. The moving wall will have
-      // no affect on the velocity of the particles.  The particles will be redistributed in the new volume
+      // no effect on the velocity of the particles.  The particles will be redistributed in the new volume
       // when the resize handle is released.
       resizeHandleIsPressedListener = ( isPressed: boolean ) => {
         if ( isPressed ) {
@@ -203,8 +204,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Toggle button for switching between heavy and light bicycle pumps
     const bicyclePumpsToggleNode = new ToggleNode( particleTypeProperty, [
-      { value: ParticleType.HEAVY, createNode: tandem => heavyBicyclePumpNode },
-      { value: ParticleType.LIGHT, createNode: tandem => lightBicyclePumpNode }
+      { value: 'heavy', createNode: tandem => heavyBicyclePumpNode },
+      { value: 'light', createNode: tandem => lightBicyclePumpNode }
     ] );
 
     // Cancel interaction with the pump when particle type changes.

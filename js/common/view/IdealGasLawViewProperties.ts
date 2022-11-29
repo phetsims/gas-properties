@@ -8,17 +8,17 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import ParticleType from '../model/ParticleType.js';
+import { ParticleType, ParticleTypeValues } from '../model/ParticleType.js';
 
 export default class IdealGasLawViewProperties {
 
   public readonly widthVisibleProperty: Property<boolean>;
   public readonly particlesExpandedProperty: Property<boolean>;
-  public readonly particleTypeProperty: EnumerationProperty<ParticleType>;
+  public readonly particleTypeProperty: StringEnumerationProperty<ParticleType>;
 
   public constructor( tandem: Tandem ) {
 
@@ -32,7 +32,8 @@ export default class IdealGasLawViewProperties {
       phetioDocumentation: 'whether the Particles accordion box is expanded'
     } );
 
-    this.particleTypeProperty = new EnumerationProperty( ParticleType.HEAVY, {
+    this.particleTypeProperty = new StringEnumerationProperty<ParticleType>( 'heavy', {
+      validValues: ParticleTypeValues,
       tandem: tandem.createTandem( 'particleTypeProperty' ),
       phetioDocumentation: 'the particle type that will be dispensed by the bicycle pump'
     } );

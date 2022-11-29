@@ -6,15 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import RectangularRadioButton from '../../../../sun/js/buttons/RectangularRadioButton.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem, RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import ParticleType from '../model/ParticleType.js';
+import { ParticleType } from '../model/ParticleType.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -24,7 +25,8 @@ type ParticleTypeRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions 
 
 export default class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup<ParticleType> {
 
-  public constructor( particleTypeProperty: EnumerationProperty<ParticleType>, modelViewTransform: ModelViewTransform2,
+  public constructor( particleTypeProperty: StringEnumerationProperty<ParticleType>,
+                      modelViewTransform: ModelViewTransform2,
                       providedOptions: ParticleTypeRadioButtonGroupOptions ) {
 
     const options = optionize<ParticleTypeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
@@ -47,14 +49,14 @@ export default class ParticleTypeRadioButtonGroup extends RectangularRadioButton
 
     const content: RectangularRadioButtonGroupItem<ParticleType>[] = [
       {
-        value: ParticleType.HEAVY,
+        value: 'heavy',
         createNode: tandem => GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-        tandemName: 'heavyParticlesRadioButton'
+        tandemName: `heavyParticles${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
-        value: ParticleType.LIGHT,
+        value: 'light',
         createNode: tandem => GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        tandemName: 'lightParticlesRadioButton'
+        tandemName: `lightParticles${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
       }
     ];
 

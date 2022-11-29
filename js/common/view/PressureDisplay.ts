@@ -17,7 +17,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureGauge from '../model/PressureGauge.js';
-import PressureUnits from '../model/PressureUnits.js';
+import { PressureUnits } from '../model/PressureUnits.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPressure );
@@ -37,8 +37,8 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
 
     const items: ComboBoxDisplayItem<PressureUnits>[] = [
       {
-        choice: PressureUnits.ATMOSPHERES,
-        tandemName: `${PressureUnits.ATMOSPHERES.toString().toLowerCase()}${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        choice: 'atmospheres',
+        tandemName: `atmospheres${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
         numberProperty: pressureGauge.pressureAtmospheresProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.atmospheres,
@@ -47,8 +47,8 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
         }
       },
       {
-        choice: PressureUnits.KILOPASCALS,
-        tandemName: `${PressureUnits.KILOPASCALS.toString().toLowerCase()}${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        choice: 'kilopascals',
+        tandemName: `kilopascals${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
         numberProperty: pressureGauge.pressureKilopascalsProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kilopascals,
