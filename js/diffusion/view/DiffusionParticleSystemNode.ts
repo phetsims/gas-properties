@@ -25,16 +25,14 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
 
     // generated image for DiffusionParticle1 species
     const particle1ImageProperty = new ParticleImageProperty(
-      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
-      options => new DiffusionParticle1( options ),
+      () => new DiffusionParticle1(),
       model.modelViewTransform,
       model.leftSettings.radiusProperty
     );
 
     // generated image for DiffusionParticle2 species
     const particle2ImageProperty = new ParticleImageProperty(
-      // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
-      options => new DiffusionParticle2( options ),
+      () => new DiffusionParticle2(),
       model.modelViewTransform,
       model.rightSettings.radiusProperty
     );
@@ -45,7 +43,6 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
     // {Property.<HTMLCanvasElement>[]} images for each particle species in particleArrays
     const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
 
-    // @ts-ignore TODO https://github.com/phetsims/gas-properties/issues/202
     super( particleArrays, imageProperties, model.modelViewTransform );
 
     // Size the canvas to match the container bounds. See https://github.com/phetsims/gas-properties/issues/38
