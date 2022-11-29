@@ -48,15 +48,17 @@ export default class FixedWidthNode extends Node {
     }, providedOptions );
 
     // align content in fixedWidth
-    if ( options.align === 'left' ) {
-      content.left = strut.left;
-    }
-    else if ( options.align === 'right' ) {
-      content.right = strut.right;
-    }
-    else {
-      content.centerX = strut.centerX;
-    }
+    content.boundsProperty.link( bounds => {
+      if ( options.align === 'left' ) {
+        content.left = strut.left;
+      }
+      else if ( options.align === 'right' ) {
+        content.right = strut.right;
+      }
+      else {
+        content.centerX = strut.centerX;
+      }
+    } );
 
     super( options );
   }
