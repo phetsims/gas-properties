@@ -34,12 +34,14 @@ This section describes how this simulation addresses implementation consideratio
 
 **Coordinate Transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See `BaseModel` for specifics.
 
-**Time Transforms**: Real time (seconds) is scaled to sim time (picoseconds) by `TimeTransform`. Transforms are provided for "normal" and "slow" sim times.  The `dt` for all top-level ScreenView and Model classes is in seconds, because that's 
+**Time Transforms**: Real time (seconds) is scaled to sim time (picoseconds) by `TimeTransform`. Transforms are provided
+for "normal" and "slow" sim times. The `dt` for all top-level ScreenView and Model classes is in seconds, because that's
 what is provided by `Sim.js` when it steps the simulation. The `dt` values for all other methods are in picoseconds.
 (The units for `dt` are clearly documented throughout the code.)
 
-**Memory Management**: With the exception of `Particle` instances, all object instances (model and view) persist for the 
-lifetime of the sim.  There is no need to call `unlink`, `removeListener`, `dispose`, etc. 
+**Memory Management**: With the exception of `Particle` and `ParticleNode` instances, all object instances (model and
+view) persist for the
+lifetime of the sim. There is no need to call `unlink`, `removeListener`, `dispose`, etc.
 
 **Query Parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and testing.
 Sim-specific query parameters are documented in `GasPropertiesQueryParameters`.
