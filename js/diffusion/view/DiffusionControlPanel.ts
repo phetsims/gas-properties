@@ -81,7 +81,7 @@ export default class DiffusionControlPanel extends Panel {
           tandem: options.tandem.createTandem( 'settingsNode' )
         } ),
 
-        // Remove/Reset Separator button, centered
+        // Remove/Reset Divider button, centered
         new FixedWidthNode( contentWidth, dividerToggleButton, {
           align: 'center'
         } ),
