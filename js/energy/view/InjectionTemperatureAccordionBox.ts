@@ -127,6 +127,9 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
           return Utils.roundToInterval( value, 50 );
         }
       },
+      layoutOptions: {
+        align: 'center'
+      },
       tandem: options.tandem.createTandem( 'temperatureControl' )
     } );
 
