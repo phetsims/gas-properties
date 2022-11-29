@@ -41,7 +41,7 @@ export default class EnergyToolsPanel extends Panel {
 
     const content = new VBox( {
       preferredWidth: contentWidth,
-      widthSizable: false,
+      widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 12,
       children: [

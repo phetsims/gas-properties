@@ -81,7 +81,7 @@ export default class IdealControlPanel extends Panel {
 
     const content = new VBox( {
       preferredWidth: contentWidth,
-      widthSizable: false,
+      widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 12,
       children: children

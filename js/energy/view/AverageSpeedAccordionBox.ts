@@ -98,7 +98,7 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
 
     const content = new VBox( {
       preferredWidth: contentWidth,
-      widthSizable: false,
+      widthSizable: false, // so that width will remain preferredWidth
       align: 'center',
       children: [ gridBox ]
     } );
