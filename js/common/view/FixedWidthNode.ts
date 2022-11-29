@@ -1,6 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/201 replace FixedWidthNode with layout options
+//TODO https://github.com/phetsims/gas-properties/issues/205 replace FixedWidthNode with scenery layout options
 /**
  * FixedWidthNode is a Node that has a fixed width. This is used for the content in Panels and AccordionBoxes.
  * It does not support dynamic content bounds, and does not support decoration via addChild.
