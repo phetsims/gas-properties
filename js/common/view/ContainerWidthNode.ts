@@ -9,6 +9,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Range from '../../../../dot/js/Range.js';
@@ -83,14 +84,12 @@ export default class ContainerWidthNode extends Node {
 
     // right justify with the container
     const containerViewPosition = modelViewTransform.modelToViewPosition( containerPosition );
-    const updateLayout = () => {
+    Multilink.multilink( [ dimensionalArrowNode.boundsProperty, widthDisplay.boundsProperty ], () => {
       widthDisplay.right = dimensionalArrowNode.right - 28;
       widthDisplay.centerY = dimensionalArrowNode.centerY;
       this.right = containerViewPosition.x;
       this.top = containerViewPosition.y + 8;
-    };
-    updateLayout();
-    dimensionalArrowNode.boundsProperty.lazyLink( () => { updateLayout(); } );
+    } );
   }
 }
 
