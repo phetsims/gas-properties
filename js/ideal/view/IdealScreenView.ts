@@ -7,6 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -59,12 +60,8 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       collisionCounter.visibleProperty, {
         hasHoldConstantControls: options.hasHoldConstantControls,
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-        right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
         tandem: tandem.createTandem( 'controlPanel' )
       } );
-    this.addChild( controlPanel );
-    controlPanel.moveToBack();
 
     // Particles accordion box
     const particlesAccordionBox = new ParticlesAccordionBox(
@@ -73,12 +70,18 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       model.modelViewTransform, {
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         expandedProperty: viewProperties.particlesExpandedProperty,
-        right: controlPanel.right,
-        top: controlPanel.bottom + 15,
         tandem: tandem.createTandem( 'particlesAccordionBox' )
       } );
-    this.addChild( particlesAccordionBox );
-    particlesAccordionBox.moveToBack();
+
+    const vBox = new VBox( {
+      align: 'left',
+      spacing: 15,
+      children: [ controlPanel, particlesAccordionBox ],
+      right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+    } );
+    this.addChild( vBox );
+    vBox.moveToBack();
 
     // OopsDialogs related to the 'Hold Constant' feature. When holding a quantity constant would break the model,
     // the model puts itself in a sane configuration, the model notifies the view via an Emitter, and the view

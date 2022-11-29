@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Node } from '../../../../scenery/js/imports.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import IdealGasLawScreenView from '../../common/view/IdealGasLawScreenView.js';
@@ -36,8 +36,6 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
       model.stopwatch.isVisibleProperty,
       collisionCounter.visibleProperty, {
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-        right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
         tandem: tandem.createTandem( 'toolsPanel' )
       } );
 
@@ -48,17 +46,19 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
       model.modelViewTransform, {
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         expandedProperty: viewProperties.particlesExpandedProperty,
-        right: toolsPanel.right,
-        top: toolsPanel.bottom + 15,
         tandem: tandem.createTandem( 'particlesAccordionBox' )
       } );
 
     // Rendering order. Everything we add should be behind what is created by super.
-    const parent = new Node();
-    parent.addChild( toolsPanel );
-    parent.addChild( particlesAccordionBox );
-    this.addChild( parent );
-    parent.moveToBack();
+    const vBox = new VBox( {
+      align: 'left',
+      spacing: 15,
+      children: [ toolsPanel, particlesAccordionBox ],
+      right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+    } );
+    this.addChild( vBox );
+    vBox.moveToBack();
 
     this.viewProperties = viewProperties;
   }
