@@ -6,18 +6,19 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
+import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
+import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import HoldConstant from '../../common/model/HoldConstant.js';
+import { HoldConstant } from '../../common/model/HoldConstant.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
@@ -35,7 +36,7 @@ type HoldConstantControlOptions = SelfOptions & PickOptional<VBoxOptions, 'maxWi
 
 export default class HoldConstantControl extends VBox {
 
-  public constructor( holdConstantProperty: EnumerationProperty<HoldConstant>,
+  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       pressureProperty: TReadOnlyProperty<number>,
                       isContainerOpenProperty: TReadOnlyProperty<boolean>,
@@ -55,31 +56,31 @@ export default class HoldConstantControl extends VBox {
       tandem: options.tandem.createTandem( 'titleText' )
     } );
 
-    const items = [
+    const items: AquaRadioButtonGroupItem<HoldConstant>[] = [
       {
-        value: HoldConstant.NOTHING,
+        value: 'nothing',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
-        tandemName: 'nothingRadioButton'
+        tandemName: `nothing${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
-        value: HoldConstant.VOLUME,
+        value: 'volume',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
-        tandemName: 'volumeRadioButton'
+        tandemName: `volume${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
-        value: HoldConstant.TEMPERATURE,
+        value: 'temperature',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
-        tandemName: 'temperatureRadioButton'
+        tandemName: `temperature${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
-        value: HoldConstant.PRESSURE_V,
+        value: 'pressureV',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
-        tandemName: 'pressureVRadioButton'
+        tandemName: `pressureV${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
-        value: HoldConstant.PRESSURE_T,
+        value: 'pressureT',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
-        tandemName: 'pressureTRadioButton'
+        tandemName: `pressureT${AquaRadioButton.TANDEM_NAME_SUFFIX}`
       }
     ];
 
@@ -96,7 +97,7 @@ export default class HoldConstantControl extends VBox {
     super( options );
 
     // Disable "Temperature (T)" radio button for conditions that are not possible.
-    const temperatureRadioButton = radioButtonGroup.getButton( HoldConstant.TEMPERATURE );
+    const temperatureRadioButton = radioButtonGroup.getButton( 'temperature' );
     Multilink.multilink(
       [ numberOfParticlesProperty, isContainerOpenProperty ],
       ( numberOfParticles, isContainerOpen ) => {
@@ -104,8 +105,8 @@ export default class HoldConstantControl extends VBox {
       } );
 
     // Disable radio buttons for selections that are not possible with zero pressure.
-    const pressureVRadioButton = radioButtonGroup.getButton( HoldConstant.PRESSURE_V );
-    const pressureTRadioButton = radioButtonGroup.getButton( HoldConstant.PRESSURE_T );
+    const pressureVRadioButton = radioButtonGroup.getButton( 'pressureV' );
+    const pressureTRadioButton = radioButtonGroup.getButton( 'pressureT' );
     pressureProperty.link( pressure => {
       pressureVRadioButton.enabledProperty.value = ( pressure !== 0 );
       pressureTRadioButton.enabledProperty.value = ( pressure !== 0 );

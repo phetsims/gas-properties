@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import { HSeparator, NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -17,11 +16,12 @@ import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
 import HoldConstantControl from './HoldConstantControl.js';
-import HoldConstant from '../../common/model/HoldConstant.js';
+import { HoldConstant } from '../../common/model/HoldConstant.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 
 type SelfOptions = {
   hasHoldConstantControls?: boolean;
@@ -32,7 +32,7 @@ type IdealControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequi
 
 export default class IdealControlPanel extends Panel {
 
-  public constructor( holdConstantProperty: EnumerationProperty<HoldConstant>,
+  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       pressureProperty: TReadOnlyProperty<number>,
                       isContainerOpenProperty: TReadOnlyProperty<boolean>,

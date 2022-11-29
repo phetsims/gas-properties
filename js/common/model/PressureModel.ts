@@ -7,23 +7,23 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureGauge from './PressureGauge.js';
-import HoldConstant from './HoldConstant.js';
+import { HoldConstant } from './HoldConstant.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 
 // Maximum pressure, in kPa. When exceeded, the lid blows off of the container.
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 
 export default class PressureModel {
 
-  private readonly holdConstantProperty: EnumerationProperty<HoldConstant>;
+  private readonly holdConstantProperty: StringEnumerationProperty<HoldConstant>;
   private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
   private readonly volumeProperty: TReadOnlyProperty<number>;
   private readonly temperatureProperty: TReadOnlyProperty<number | null>;
@@ -38,7 +38,7 @@ export default class PressureModel {
   // whether to update pressure
   private updatePressureEnabled: boolean;
 
-  public constructor( holdConstantProperty: EnumerationProperty<HoldConstant>,
+  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       volumeProperty: TReadOnlyProperty<number>,
                       temperatureProperty: TReadOnlyProperty<number | null>,

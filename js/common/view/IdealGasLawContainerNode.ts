@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -20,7 +20,7 @@ import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import { Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import HoldConstant from '../model/HoldConstant.js';
+import { HoldConstant } from '../model/HoldConstant.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 import ContainerResizeDragListener from './ContainerResizeDragListener.js';
 import LidDragListener from './LidDragListener.js';
@@ -48,7 +48,7 @@ export default class IdealGasLawContainerNode extends Node {
 
   public constructor( container: IdealGasLawContainer,
                       modelViewTransform: ModelViewTransform2,
-                      holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      holdConstantProperty: StringEnumerationProperty<HoldConstant>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: IdealGasLawContainerNodeOptions ) {
 
@@ -152,8 +152,7 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Hide the resize handle when volume is held constant
     holdConstantProperty.link( holdConstant => {
-      resizeHandleNode.visible = ( holdConstant !== HoldConstant.VOLUME &&
-                                   holdConstant !== HoldConstant.PRESSURE_V );
+      resizeHandleNode.visible = ( holdConstant !== 'volume' && holdConstant !== 'pressureV' );
     } );
 
     // Cancel interaction when visibility of the resize handle changes.

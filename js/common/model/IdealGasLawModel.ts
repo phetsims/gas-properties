@@ -15,10 +15,10 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -30,7 +30,7 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import BaseModel, { BaseModelOptions } from './BaseModel.js';
 import CollisionCounter from './CollisionCounter.js';
 import CollisionDetector from './CollisionDetector.js';
-import HoldConstant from './HoldConstant.js';
+import { HoldConstant, HoldConstantValues } from './HoldConstant.js';
 import IdealGasLawContainer from './IdealGasLawContainer.js';
 import ParticleSystem from './ParticleSystem.js';
 import PressureGauge from './PressureGauge.js';
@@ -69,7 +69,7 @@ type OopsEmitters = {
 export default class IdealGasLawModel extends BaseModel {
 
   // the quantity to hold constant
-  public readonly holdConstantProperty: EnumerationProperty<HoldConstant>;
+  public readonly holdConstantProperty: StringEnumerationProperty<HoldConstant>;
 
   // The factor to heat or cool the contents of the container.
   // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
@@ -105,13 +105,14 @@ export default class IdealGasLawModel extends BaseModel {
 
       // SelfOptions
       leftWallDoesWork: false,
-      holdConstant: HoldConstant.NOTHING,
+      holdConstant: 'nothing',
       hasCollisionCounter: true
     }, providedOptions );
 
     super( tandem );
 
-    this.holdConstantProperty = new EnumerationProperty( options.holdConstant, {
+    this.holdConstantProperty = new StringEnumerationProperty( options.holdConstant, {
+      validValues: HoldConstantValues,
       tandem: tandem.createTandem( 'holdConstantProperty' ),
       phetioDocumentation: 'determines which quantity will be held constant'
     } );
@@ -193,25 +194,25 @@ export default class IdealGasLawModel extends BaseModel {
 
       // If the container is empty, check for 'Hold Constant' conditions that can't be satisfied.
       if ( numberOfParticles === 0 ) {
-        if ( this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
+        if ( this.holdConstantProperty.value === 'temperature' ) {
 
           // Temperature can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
-          this.holdConstantProperty.value = HoldConstant.NOTHING;
+          this.holdConstantProperty.value = 'nothing';
           this.oopsEmitters.temperatureEmptyEmitter.emit();
         }
-        else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
-                  this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) {
+        else if ( this.holdConstantProperty.value === 'pressureT' ||
+                  this.holdConstantProperty.value === 'pressureV' ) {
 
           // Pressure can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
-          this.holdConstantProperty.value = HoldConstant.NOTHING;
+          this.holdConstantProperty.value = 'nothing';
           this.oopsEmitters.pressureEmptyEmitter.emit();
         }
       }
 
       // If the number of particles changes while the sim is paused, update immediately.
-      // Do this after checking holdConstantProperty, in case it gets switched to HoldConstant.NOTHING.
+      // Do this after checking holdConstantProperty, in case it gets switched to HoldConstant 'nothing'.
       if ( !this.isPlayingProperty.value ) {
         this.updateWhenPaused();
       }
@@ -220,9 +221,9 @@ export default class IdealGasLawModel extends BaseModel {
     // Temperature can't be held constant when the container is open, because we don't want to deal with
     // counteracting evaporative cooling. See https://github.com/phetsims/gas-properties/issues/159
     this.container.isOpenProperty.link( isOpen => {
-      if ( isOpen && this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
+      if ( isOpen && this.holdConstantProperty.value === 'temperature' ) {
         phet.log && phet.log( 'Oops! T cannot be held constant when the container is open' );
-        this.holdConstantProperty.value = HoldConstant.NOTHING;
+        this.holdConstantProperty.value = 'nothing';
         this.oopsEmitters.temperatureOpenEmitter.emit();
       }
     } );
@@ -235,7 +236,7 @@ export default class IdealGasLawModel extends BaseModel {
       if ( previousNumberOfParticles !== null &&
            numberOfParticles > 0 &&
            numberOfParticles < previousNumberOfParticles &&
-           this.holdConstantProperty.value === HoldConstant.TEMPERATURE ) {
+           this.holdConstantProperty.value === 'temperature' ) {
         assert && assert( !this.temperatureModel.controlTemperatureEnabledProperty.value,
           'this feature is not compatible with user-controlled particle temperature' );
 
@@ -258,15 +259,15 @@ export default class IdealGasLawModel extends BaseModel {
 
       // values that are incompatible with an empty container
       assert && assert( !( this.particleSystem.numberOfParticlesProperty.value === 0 &&
-      ( holdConstant === HoldConstant.TEMPERATURE ||
-        holdConstant === HoldConstant.PRESSURE_T ||
-        holdConstant === HoldConstant.PRESSURE_V ) ),
+      ( holdConstant === 'temperature' ||
+        holdConstant === 'pressureT' ||
+        holdConstant === 'pressureV' ) ),
         `bad holdConstant state: ${holdConstant} with numberOfParticles=${this.particleSystem.numberOfParticlesProperty.value}` );
 
       // values that are incompatible with zero pressure
       assert && assert( !( this.pressureModel.pressureProperty.value === 0 &&
-      ( holdConstant === HoldConstant.PRESSURE_V ||
-        holdConstant === HoldConstant.PRESSURE_T ) ),
+      ( holdConstant === 'pressureV' ||
+        holdConstant === 'pressureT' ) ),
         `bad holdConstant state: ${holdConstant} with pressure=${this.pressureModel.pressureProperty.value}` );
     }, {
 
@@ -380,7 +381,7 @@ export default class IdealGasLawModel extends BaseModel {
    */
   private compensateForHoldConstant(): void {
 
-    if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_V ) {
+    if ( this.holdConstantProperty.value === 'pressureV' ) {
 
       // hold pressure constant by changing volume
       const previousContainerWidth = this.container.widthProperty.value;
@@ -394,7 +395,7 @@ export default class IdealGasLawModel extends BaseModel {
       if ( !this.container.widthRange.contains( containerWidth ) ) {
 
         // Switch to the 'Nothing' mode
-        this.holdConstantProperty.value = HoldConstant.NOTHING;
+        this.holdConstantProperty.value = 'nothing';
 
         // This results in an OopsDialog being displayed
         phet.log && phet.log( 'Oops! P cannot be held constant when V exceeds range, ' +
@@ -416,7 +417,7 @@ export default class IdealGasLawModel extends BaseModel {
       // Redistribute particles in the new width
       this.particleSystem.redistributeParticles( containerWidth / previousContainerWidth );
     }
-    else if ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
+    else if ( this.holdConstantProperty.value === 'pressureT' ) {
 
       // Hold pressure constant by adjusting particle velocities to result in a desired temperature.
       const desiredTemperature = this.computeIdealTemperature();
@@ -441,9 +442,9 @@ export default class IdealGasLawModel extends BaseModel {
     if ( temperature !== null && temperature >= GasPropertiesQueryParameters.maxTemperature ) {
 
       // Switch to a 'Hold Constant' setting that supports an empty container
-      if ( this.holdConstantProperty.value !== HoldConstant.NOTHING &&
-           this.holdConstantProperty.value !== HoldConstant.VOLUME ) {
-        this.holdConstantProperty.value = HoldConstant.NOTHING;
+      if ( this.holdConstantProperty.value !== 'nothing' &&
+           this.holdConstantProperty.value !== 'volume' ) {
+        this.holdConstantProperty.value = 'nothing';
       }
 
       // Remove all particles. Do this after changing holdConstantProperty, so that that we don't trigger
@@ -461,7 +462,7 @@ export default class IdealGasLawModel extends BaseModel {
 
   /**
    * Computes volume in pm^3, using the Ideal Gas Law, V = NkT/P
-   * This is used to compute the volume needed to hold pressure constant in HoldConstant.PRESSURE_V mode.
+   * This is used to compute the volume needed to hold pressure constant in HoldConstant 'pressureV' mode.
    */
   private computeIdealVolume(): number {
 
@@ -476,7 +477,7 @@ export default class IdealGasLawModel extends BaseModel {
 
   /**
    * Computes the temperature in K, using the Ideal Gas Law, T = (PV)/(Nk)
-   * This is used to compute the temperature needed to hold pressure constant in HoldConstant.PRESSURE_T mode.
+   * This is used to compute the temperature needed to hold pressure constant in HoldConstant 'pressureT' mode.
    */
   public computeIdealTemperature(): number {
 

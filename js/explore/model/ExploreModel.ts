@@ -7,7 +7,6 @@
  */
 
 import Tandem from '../../../../tandem/js/Tandem.js';
-import HoldConstant from '../../common/model/HoldConstant.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
 
@@ -16,7 +15,7 @@ export default class ExploreModel extends IdealGasLawModel {
   public constructor( tandem: Tandem ) {
 
     super( tandem, {
-      holdConstant: HoldConstant.NOTHING,
+      holdConstant: 'nothing',
       leftWallDoesWork: true // moving the left wall does work on particles
     } );
 

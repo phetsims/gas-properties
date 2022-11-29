@@ -7,7 +7,6 @@
  */
 
 import Tandem from '../../../../tandem/js/Tandem.js';
-import HoldConstant from '../../common/model/HoldConstant.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
 import AverageSpeedModel from './AverageSpeedModel.js';
@@ -24,7 +23,7 @@ export default class EnergyModel extends IdealGasLawModel {
   public constructor( tandem: Tandem ) {
 
     super( tandem, {
-      holdConstant: HoldConstant.VOLUME,
+      holdConstant: 'volume',
       hasCollisionCounter: false
     } );
 

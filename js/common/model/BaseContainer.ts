@@ -48,7 +48,7 @@ export default class BaseContainer {
   public readonly leftWallVelocity: Vector2;
 
   // Indicates whether the user is adjusting widthProperty. The width will also change automatically in
-  // HoldConstant.PRESSURE_V mode. This is used to suppress model updates in the Ideal screen, when the user
+  // HoldConstant 'pressureV' mode. This is used to suppress model updates in the Ideal screen, when the user
   // is resizing the container with the sim paused.  See #125.
   public readonly userIsAdjustingWidthProperty: Property<boolean>;
 

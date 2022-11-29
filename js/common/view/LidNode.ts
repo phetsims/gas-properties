@@ -7,14 +7,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import HoldConstant from '../model/HoldConstant.js';
+import { HoldConstant } from '../model/HoldConstant.js';
 
 // constants
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
@@ -33,7 +33,7 @@ export default class LidNode extends Node {
   public readonly handleNode: HandleNode;
   private readonly baseNode: Rectangle;
 
-  public constructor( holdConstantProperty: EnumerationProperty<HoldConstant>, providedOptions: LidNodeOptions ) {
+  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>, providedOptions: LidNodeOptions ) {
 
     const options = optionize<LidNodeOptions, SelfOptions, NodeOptions>()( {
 
@@ -68,7 +68,7 @@ export default class LidNode extends Node {
     // cooling, which will occur when the lid is open. See https://github.com/phetsims/gas-properties/issues/159
     holdConstantProperty.link( holdConstant => {
       this.interruptSubtreeInput();
-      handleNode.visible = ( holdConstant !== HoldConstant.TEMPERATURE );
+      handleNode.visible = ( holdConstant !== 'temperature' );
     } );
 
     this.handleNode = handleNode;

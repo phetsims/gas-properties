@@ -3,9 +3,9 @@
 /**
  * GasPropertiesHeaterCoolerNode is a specialization of HeaterCoolerNode for this sim.  Responsibilities include:
  *
- * - Disables the slider when the sim is paused, and hides the slider for some of the 'Hold Constant' modes.
+ * - Disables the slider when the sim is paused, and hides the slider for some 'Hold Constant' modes.
  *
- * - When holding pressure constant by varying temperature (HoldConstant.PRESSURE_T mode), the flame/ice is
+ * - When holding pressure constant by varying temperature (HoldConstant 'pressureT' mode), the flame/ice is
  *   animated to correspond to the amount of heating/cooling needed to vary the temperature.  This is a "Hollywood"
  *   animation, because the model does not apply any heat/cool in this situation.  It adjusts particles speeds to
  *   result in the desired temperature.
@@ -13,9 +13,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
@@ -26,7 +26,7 @@ import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
 import gasProperties from '../../gasProperties.js';
-import HoldConstant from '../model/HoldConstant.js';
+import { HoldConstant } from '../model/HoldConstant.js';
 
 // constants
 
@@ -63,7 +63,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
   private animation: Animation | null;
 
   public constructor( heatCoolAmountProperty: RangedProperty,
-                      holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      holdConstantProperty: StringEnumerationProperty<HoldConstant>,
                       isPlayingProperty: TReadOnlyProperty<boolean>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       temperatureProperty: Property<number | null>,
@@ -110,9 +110,9 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       }
     };
 
-    // When temperature changes in HoldConstant.PRESSURE_T mode, animate the heater/cooler.
+    // When temperature changes in HoldConstant 'pressureT' mode, animate the heater/cooler.
     temperatureProperty.link( ( temperature, previousTemperature ) => {
-      if ( holdConstantProperty.value === HoldConstant.PRESSURE_T ) {
+      if ( holdConstantProperty.value === 'pressureT' ) {
 
         const numberOfParticles = numberOfParticlesProperty.value;
 
@@ -192,8 +192,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       stopAnimation();
 
       // Hide the slider in modes where the user does not have control of temperature.
-      this.slider.visible = ( holdConstant !== HoldConstant.TEMPERATURE &&
-                              holdConstant !== HoldConstant.PRESSURE_T );
+      this.slider.visible = ( holdConstant !== 'temperature' && holdConstant !== 'pressureT' );
     } );
   }
 

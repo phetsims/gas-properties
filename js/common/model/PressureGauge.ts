@@ -13,7 +13,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
@@ -27,7 +26,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import GasPropertiesPreferences from './GasPropertiesPreferences.js';
-import HoldConstant from './HoldConstant.js';
+import { HoldConstant } from './HoldConstant.js';
 import { PressureUnits, PressureUnitsValues } from './PressureUnits.js';
 
 // constants
@@ -45,7 +44,7 @@ export default class PressureGauge {
   private readonly temperatureProperty: TReadOnlyProperty<number | null>;
 
   // quantity to be held constant, influences noise
-  private readonly holdConstantProperty: EnumerationProperty<HoldConstant>;
+  private readonly holdConstantProperty: StringEnumerationProperty<HoldConstant>;
 
   // pressure in kPa, with noise added
   public readonly pressureKilopascalsProperty: Property<number>;
@@ -72,7 +71,7 @@ export default class PressureGauge {
 
   public constructor( pressureProperty: TReadOnlyProperty<number>,
                       temperatureProperty: TReadOnlyProperty<number | null>,
-                      holdConstantProperty: EnumerationProperty<HoldConstant>,
+                      holdConstantProperty: StringEnumerationProperty<HoldConstant>,
                       tandem: Tandem ) {
 
     this.pressureProperty = pressureProperty;
@@ -137,8 +136,8 @@ export default class PressureGauge {
     if ( this.dtAccumulator >= PressureGauge.REFRESH_PERIOD ) {
 
       // Are we in a mode that holds pressure constant?
-      const constantPressure = ( this.holdConstantProperty.value === HoldConstant.PRESSURE_T ||
-                                 this.holdConstantProperty.value === HoldConstant.PRESSURE_V );
+      const constantPressure = ( this.holdConstantProperty.value === 'pressureT' ||
+                                 this.holdConstantProperty.value === 'pressureV' );
 
       // Disable noise when pressure is held constant, or via global options.
       const noiseEnabled = ( !constantPressure && GasPropertiesPreferences.pressureNoiseProperty.value );
