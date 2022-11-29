@@ -34,7 +34,7 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
         numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
           showAsMinutesAndSeconds: false,
           numberOfDecimalPlaces: 1,
-          units: GasPropertiesStrings.picoseconds
+          units: GasPropertiesStrings.picoseconds //TODO https://github.com/phetsims/gas-properties/issues/201 dynamic locale
         } )
       },
       visiblePropertyOptions: {

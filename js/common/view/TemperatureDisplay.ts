@@ -40,14 +40,14 @@ export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits
         tandemName: `kelvin${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
         numberProperty: thermometer.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: GasPropertiesStrings.kelvin
+        units: GasPropertiesStrings.kelvinStringProperty
       },
       {
         choice: 'celsius',
         tandemName: `celsius${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
         numberProperty: thermometer.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
-        units: GasPropertiesStrings.degreesCelsius
+        units: GasPropertiesStrings.degreesCelsiusStringProperty
       }
     ];
 

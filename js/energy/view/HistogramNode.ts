@@ -9,6 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -55,8 +56,8 @@ export default class HistogramNode extends Node {
    * @param heavyBinCountsProperty - bin counts for heavy particles
    * @param lightBinCountsProperty - bin counts for light particles
    * @param yScaleProperty - scale of the y-axis
-   * @param xAxisString - label on the x-axis
-   * @param yAxisString - label on the y-axis
+   * @param xAxisStringProperty - label on the x-axis
+   * @param yAxisStringProperty - label on the y-axis
    * @param providedOptions
    */
   public constructor( numberOfBins: number,
@@ -66,8 +67,8 @@ export default class HistogramNode extends Node {
                       heavyBinCountsProperty: Property<number[]>,
                       lightBinCountsProperty: Property<number[]>,
                       yScaleProperty: Property<number>,
-                      xAxisString: string,
-                      yAxisString: string,
+                      xAxisStringProperty: TReadOnlyProperty<string>,
+                      yAxisStringProperty: TReadOnlyProperty<string>,
                       providedOptions: HistogramNodeOptions ) {
     assert && assert( numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
     assert && assert( binWidth > 0, `invalid binWidth: ${binWidth}` );
@@ -112,7 +113,7 @@ export default class HistogramNode extends Node {
     const intervalLines = new IntervalLinesNode( options.chartSize );
 
     // x-axis label
-    const xAxisLabelNode = new Text( xAxisString,
+    const xAxisLabelNode = new Text( xAxisStringProperty,
       combineOptions<TextOptions>( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
         maxWidth: 0.9 * background.width,
         centerX: background.centerX,
@@ -120,7 +121,7 @@ export default class HistogramNode extends Node {
       } ) );
 
     // y-axis label
-    const yAxisLabelNode = new Text( yAxisString,
+    const yAxisLabelNode = new Text( yAxisStringProperty,
       combineOptions<TextOptions>( {}, HISTOGRAM_AXIS_LABEL_OPTIONS, {
         rotation: -Math.PI / 2,
         maxWidth: 0.9 * background.height,

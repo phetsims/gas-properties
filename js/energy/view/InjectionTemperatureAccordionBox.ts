@@ -8,12 +8,12 @@
  */
 
 import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import { HBox, Node, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
@@ -113,8 +113,8 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
         textOptions: {
           font: GasPropertiesConstants.CONTROL_FONT
         },
-        valuePattern: StringUtils.fillIn( GasPropertiesStrings.valueUnits, {
-          units: GasPropertiesStrings.kelvin
+        valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
+          units: GasPropertiesStrings.kelvinStringProperty
         } ),
         maxWidth: 75 // determined empirically
       },

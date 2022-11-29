@@ -36,8 +36,8 @@ export default class SpeedHistogramNode extends HistogramNode {
       histogramsModel.heavySpeedBinCountsProperty,
       histogramsModel.lightSpeedBinCountsProperty,
       histogramsModel.yScaleProperty,
-      GasPropertiesStrings.speed, // x-axis label
-      GasPropertiesStrings.numberOfParticles, // y-axis label
+      GasPropertiesStrings.speedStringProperty, // x-axis label
+      GasPropertiesStrings.numberOfParticlesStringProperty, // y-axis label
       options
     );
   }

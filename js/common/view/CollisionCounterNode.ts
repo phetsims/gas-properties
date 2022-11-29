@@ -7,12 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import DragBoundsProperty from '../../../../scenery-phet/js/DragBoundsProperty.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -85,11 +85,11 @@ export default class CollisionCounterNode extends Node {
     const comboBoxItems = collisionCounter.samplePeriods.map( samplePeriod => {
 
       // e.g. '10 ps'
-      const samplePeriodString = StringUtils.fillIn( GasPropertiesStrings.valueUnits, {
+      const samplePeriodStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
         value: samplePeriod,
-        units: GasPropertiesStrings.picoseconds
+        units: GasPropertiesStrings.picosecondsStringProperty
       } );
-      const node = new Text( samplePeriodString, {
+      const node = new Text( samplePeriodStringProperty, {
         font: CONTROL_FONT,
         maxWidth: 100 // determined empirically
       } );

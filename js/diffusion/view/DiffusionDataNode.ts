@@ -71,8 +71,8 @@ export default class DiffusionDataNode extends VBox {
     const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,
       combineOptions<NumberDisplayOptions>( {}, NUMBER_DISPLAY_OPTIONS, {
         align: 'left',
-        valuePattern: GasPropertiesStrings.tAvgK,
-        noValuePattern: GasPropertiesStrings.tAvg,
+        valuePattern: GasPropertiesStrings.tAvgKStringProperty,
+        noValuePattern: GasPropertiesStrings.tAvgStringProperty,
         useRichText: true,
         maxWidth: 100 // determined empirically
       } ) );

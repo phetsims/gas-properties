@@ -6,11 +6,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay, { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -66,7 +66,9 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
 
     const numberDisplayRange = new Range( 0, 9999 );
     const numberDisplayOptions: NumberDisplayOptions = {
-      valuePattern: StringUtils.fillIn( GasPropertiesStrings.valueUnits, { units: GasPropertiesStrings.metersPerSecond } ),
+      valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
+        units: GasPropertiesStrings.metersPerSecondStringProperty
+      } ),
       noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
       decimalPlaces: 0,
       align: 'right',

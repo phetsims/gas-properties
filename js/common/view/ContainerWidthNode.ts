@@ -10,11 +10,11 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -63,7 +63,9 @@ export default class ContainerWidthNode extends Node {
     // Display the width in nm
     const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
       decimalPlaces: 1,
-      valuePattern: StringUtils.fillIn( GasPropertiesStrings.valueUnits, { units: GasPropertiesStrings.nanometers } ),
+      valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
+        units: GasPropertiesStrings.nanometersStringProperty
+      } ),
       cornerRadius: 3,
       textOptions: {
         font: new PhetFont( 12 ),

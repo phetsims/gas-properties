@@ -36,8 +36,8 @@ export default class KineticEnergyHistogramNode extends HistogramNode {
       histogramsModel.heavyKineticEnergyBinCountsProperty,
       histogramsModel.lightKineticEnergyBinCountsProperty,
       histogramsModel.yScaleProperty,
-      GasPropertiesStrings.kineticEnergy, // x-axis label
-      GasPropertiesStrings.numberOfParticles, // y-axis label
+      GasPropertiesStrings.kineticEnergyStringProperty, // x-axis label
+      GasPropertiesStrings.numberOfParticlesStringProperty, // y-axis label
       options
     );
   }

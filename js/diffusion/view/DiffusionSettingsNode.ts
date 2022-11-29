@@ -54,8 +54,8 @@ export default class DiffusionSettingsNode extends VBox {
     } );
 
     // Number of Particles
-    const numberOfParticlesControl = new QuantityControl( GasPropertiesStrings.numberOfParticles, modelViewTransform,
-      leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
+    const numberOfParticlesControl = new QuantityControl( GasPropertiesStrings.numberOfParticlesStringProperty,
+      modelViewTransform, leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
           deltaValue: DiffusionSettings.DELTAS.numberOfParticles
@@ -64,7 +64,7 @@ export default class DiffusionSettingsNode extends VBox {
       } );
 
     // Mass (AMU)
-    const massControl = new QuantityControl( GasPropertiesStrings.massAMU, modelViewTransform,
+    const massControl = new QuantityControl( GasPropertiesStrings.massAMUStringProperty, modelViewTransform,
       leftSettings.massProperty, rightSettings.massProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -77,7 +77,7 @@ export default class DiffusionSettingsNode extends VBox {
       } );
 
     // Radius (pm)
-    const radiusControl = new QuantityControl( GasPropertiesStrings.radiusPm, modelViewTransform,
+    const radiusControl = new QuantityControl( GasPropertiesStrings.radiusPmStringProperty, modelViewTransform,
       leftSettings.radiusProperty, rightSettings.radiusProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
@@ -87,8 +87,8 @@ export default class DiffusionSettingsNode extends VBox {
       } );
 
     // Initial Temperature (K)
-    const initialTemperatureControl = new QuantityControl( GasPropertiesStrings.initialTemperatureK, modelViewTransform,
-      leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
+    const initialTemperatureControl = new QuantityControl( GasPropertiesStrings.initialTemperatureKStringProperty,
+      modelViewTransform, leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: enabledProperty,
           deltaValue: DiffusionSettings.DELTAS.initialTemperature
@@ -120,14 +120,14 @@ type QuantityControlOptions = QuantityControlSelfOptions & PickRequired<VBoxOpti
 class QuantityControl extends VBox {
 
   /**
-   * @param label
+   * @param labelStringProperty
    * @param modelViewTransform
    * @param leftProperty - quantity for the left side of the container
    * @param rightProperty - quantity for the right side of the container
    * @param spinnersAlignGroup
    * @param providedOptions
    */
-  public constructor( label: string, modelViewTransform: ModelViewTransform2,
+  public constructor( labelStringProperty: TReadOnlyProperty<string>, modelViewTransform: ModelViewTransform2,
                       leftProperty: RangedProperty, rightProperty: RangedProperty,
                       spinnersAlignGroup: AlignGroup,
                       providedOptions: QuantityControlOptions ) {
@@ -140,7 +140,7 @@ class QuantityControl extends VBox {
     }, providedOptions );
 
     // label
-    const labelText = new Text( label, {
+    const labelText = new Text( labelStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       fill: GasPropertiesColors.textFillProperty,
       maxWidth: 200, // determined empirically
