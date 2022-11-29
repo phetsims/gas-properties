@@ -92,9 +92,11 @@ export default class DiffusionScreenView extends BaseScreenView {
     // Data accordion box
     const dataAccordionBox = new DataAccordionBox( model.leftData, model.rightData, model.modelViewTransform, {
       expandedProperty: viewProperties.dataExpandedProperty,
-      centerX: containerNode.centerX,
-      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'dataAccordionBox' )
+    } );
+    dataAccordionBox.boundsProperty.link( bounds => {
+      dataAccordionBox.centerX = containerNode.centerX;
+      dataAccordionBox.bottom = containerNode.top - 15;
     } );
 
     // Control panel at right side of screen
