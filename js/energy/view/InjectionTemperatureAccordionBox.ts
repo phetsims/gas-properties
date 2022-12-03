@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -36,7 +36,7 @@ type InjectionTemperatureAccordionBoxOptions = SelfOptions & PickRequired<Accord
 export default class InjectionTemperatureAccordionBox extends AccordionBox {
 
   public constructor( controlTemperatureEnabledProperty: Property<boolean>,
-                      initialTemperatureProperty: RangedProperty,
+                      initialTemperatureProperty: NumberProperty,
                       providedOptions: InjectionTemperatureAccordionBoxOptions ) {
 
     assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );

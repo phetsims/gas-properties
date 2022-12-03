@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -133,7 +133,7 @@ class QuantityControl extends VBox {
    * @param providedOptions
    */
   public constructor( labelStringProperty: TReadOnlyProperty<string>, modelViewTransform: ModelViewTransform2,
-                      leftProperty: RangedProperty, rightProperty: RangedProperty,
+                      leftProperty: NumberProperty, rightProperty: NumberProperty,
                       spinnersAlignGroup: AlignGroup,
                       providedOptions: QuantityControlOptions ) {
 

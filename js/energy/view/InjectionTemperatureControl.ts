@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
@@ -31,7 +31,7 @@ type InjectionTemperatureControlOptions = SelfOptions &
 
 export default class InjectionTemperatureControl extends NumberControl {
 
-  public constructor( initialTemperatureProperty: RangedProperty, providedOptions: InjectionTemperatureControlOptions ) {
+  public constructor( initialTemperatureProperty: NumberProperty, providedOptions: InjectionTemperatureControlOptions ) {
 
     // Major ticks for temperature slider
     const tickTextOptions = {

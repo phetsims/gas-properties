@@ -13,7 +13,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -62,7 +62,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
   // animation of heatCoolAmountProperty, null when no animation is running
   private animation: Animation | null;
 
-  public constructor( heatCoolAmountProperty: RangedProperty,
+  public constructor( heatCoolAmountProperty: NumberProperty,
                       holdConstantProperty: StringEnumerationProperty<HoldConstant>,
                       isPlayingProperty: TReadOnlyProperty<boolean>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,

@@ -10,7 +10,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -34,7 +34,7 @@ export default class BaseContainer {
 
   public readonly position: Vector2; // position of the container's bottom right corner, in pm
   public readonly widthRange: RangeWithValue; // range and initial value of the container's width, in pm
-  public readonly widthProperty: RangedProperty; // width of the container, in pm
+  public readonly widthProperty: NumberProperty; // width of the container, in pm
   public readonly height: number; // height of the container, in pm
   public readonly depth: number; // depth of the container, in pm
   public readonly wallThickness: number; // wall thickness, in pm
@@ -70,7 +70,7 @@ export default class BaseContainer {
       reentrant: true, // Occurring in PhET-iO State setting
       tandem: options.tandem.createTandem( 'widthProperty' ),
       phetioReadOnly: true
-    } ).asRanged();
+    } );
 
     this.height = 8750;
     this.depth = 4000;

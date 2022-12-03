@@ -8,7 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
@@ -36,7 +36,7 @@ export default class TemperatureModel {
   public readonly controlTemperatureEnabledProperty: Property<boolean>;
 
   // initial temperature of particles added to the container, in K. Ignored if !controlTemperatureEnabledProperty.value
-  public readonly initialTemperatureProperty: RangedProperty;
+  public readonly initialTemperatureProperty: NumberProperty;
 
   // thermometer that displays temperatureProperty with a choice of units
   public readonly thermometer: Thermometer;
@@ -67,7 +67,7 @@ export default class TemperatureModel {
       units: 'K',
       tandem: tandem.createTandem( 'initialTemperatureProperty' ),
       phetioDocumentation: 'temperature used to determine the initial speed of particles when controlled by the user'
-    } ).asRanged();
+    } );
 
     this.thermometer = new Thermometer( this.temperatureProperty, {
       tandem: tandem.createTandem( 'thermometer' )

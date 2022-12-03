@@ -8,7 +8,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import propertyStateHandlerSingleton from '../../../../axon/js/propertyStateHandlerSingleton.js';
 import PropertyStatePhase from '../../../../axon/js/PropertyStatePhase.js';
@@ -55,10 +55,10 @@ export default class ParticleSystem {
   public readonly insideParticleArrays: [ HeavyParticle[], LightParticle[] ];
 
   // the number of heavy particles inside the container
-  public readonly numberOfHeavyParticlesProperty: RangedProperty;
+  public readonly numberOfHeavyParticlesProperty: NumberProperty;
 
   // the number of light particles inside the container
-  public readonly numberOfLightParticlesProperty: RangedProperty;
+  public readonly numberOfLightParticlesProperty: NumberProperty;
 
   // N, the total number of particles in the container
   public readonly numberOfParticlesProperty: ReadOnlyProperty<number>;
@@ -84,14 +84,14 @@ export default class ParticleSystem {
       range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
       tandem: tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
       phetioDocumentation: 'the number of heavy particles in the container'
-    } ).asRanged();
+    } );
 
     this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
       tandem: tandem.createTandem( 'numberOfLightParticlesProperty' ),
       phetioDocumentation: 'the number of light particles in the container'
-    } ).asRanged();
+    } );
 
     // Synchronize particle counts and arrays.
     const createHeavyParticle = () => new HeavyParticle();

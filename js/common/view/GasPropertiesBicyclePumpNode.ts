@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -21,7 +21,7 @@ export type GasPropertiesBicyclePumpNodeOptions = SelfOptions & BicyclePumpNodeO
 
 export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
-  public constructor( numberOfParticlesProperty: RangedProperty, providedOptions: GasPropertiesBicyclePumpNodeOptions ) {
+  public constructor( numberOfParticlesProperty: NumberProperty, providedOptions: GasPropertiesBicyclePumpNodeOptions ) {
 
     const options = optionize<GasPropertiesBicyclePumpNodeOptions, SelfOptions, BicyclePumpNodeOptions>()( {
 

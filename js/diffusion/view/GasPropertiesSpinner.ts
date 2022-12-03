@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -20,7 +20,7 @@ export type GasPropertiesSpinnerOptions = SelfOptions & NumberSpinnerOptions & P
 
 export default class GasPropertiesSpinner extends NumberSpinner {
 
-  public constructor( numberProperty: RangedProperty, providedOptions: GasPropertiesSpinnerOptions ) {
+  public constructor( numberProperty: NumberProperty, providedOptions: GasPropertiesSpinnerOptions ) {
 
     const options = optionize<GasPropertiesSpinnerOptions, SelfOptions, NumberSpinnerOptions>()( {
 

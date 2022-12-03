@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -28,7 +28,7 @@ export default class NumberOfParticlesControl extends VBox {
 
   public constructor( icon: Node,
                       titleStringProperty: TReadOnlyProperty<string>,
-                      numberOfParticlesProperty: RangedProperty,
+                      numberOfParticlesProperty: NumberProperty,
                       providedOptions: NumberOfParticlesControlOptions ) {
 
     const options = optionize<NumberOfParticlesControlOptions, SelfOptions, VBoxOptions>()( {

@@ -16,7 +16,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import NumberProperty, { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Range from '../../../../dot/js/Range.js';
@@ -73,7 +73,7 @@ export default class IdealGasLawModel extends BaseModel {
 
   // The factor to heat or cool the contents of the container.
   // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
-  public readonly heatCoolFactorProperty: RangedProperty;
+  public readonly heatCoolFactorProperty: NumberProperty;
 
   // whether particle-particle collisions are enabled
   public readonly particleParticleCollisionsEnabledProperty: Property<boolean>;
@@ -122,7 +122,7 @@ export default class IdealGasLawModel extends BaseModel {
       tandem: tandem.createTandem( 'heatCoolFactorProperty' ),
       phetioDocumentation: 'The amount of heat or cool applied to particles in the container. ' +
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off'
-    } ).asRanged();
+    } );
 
     this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'particleParticleCollisionsEnabledProperty' ),

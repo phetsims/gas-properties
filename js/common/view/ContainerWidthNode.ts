@@ -10,7 +10,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -37,7 +37,7 @@ export default class ContainerWidthNode extends Node {
    * @param modelViewTransform
    * @param providedOptions
    */
-  public constructor( containerPosition: Vector2, widthProperty: RangedProperty, modelViewTransform: ModelViewTransform2,
+  public constructor( containerPosition: Vector2, widthProperty: NumberProperty, modelViewTransform: ModelViewTransform2,
                       providedOptions: ContainerWidthNodeOptions ) {
 
     const options = optionize<ContainerWidthNodeOptions, SelfOptions, NodeOptions>()( {

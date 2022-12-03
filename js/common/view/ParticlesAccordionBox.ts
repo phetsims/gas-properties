@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -34,7 +34,7 @@ type ParticlesAccordionBoxOptions = SelfOptions & NodeTranslationOptions &
 
 export default class ParticlesAccordionBox extends AccordionBox {
 
-  public constructor( numberOfHeavyParticlesProperty: RangedProperty, numberOfLightParticlesProperty: RangedProperty,
+  public constructor( numberOfHeavyParticlesProperty: NumberProperty, numberOfLightParticlesProperty: NumberProperty,
                       modelViewTransform: ModelViewTransform2, providedOptions: ParticlesAccordionBoxOptions ) {
 
     const options = optionize4<ParticlesAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
