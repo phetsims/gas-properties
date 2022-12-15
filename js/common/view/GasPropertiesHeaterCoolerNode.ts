@@ -15,7 +15,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Range from '../../../../dot/js/Range.js';
@@ -63,7 +63,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
   private animation: Animation | null;
 
   public constructor( heatCoolAmountProperty: NumberProperty,
-                      holdConstantProperty: StringEnumerationProperty<HoldConstant>,
+                      holdConstantProperty: StringUnionProperty<HoldConstant>,
                       isPlayingProperty: TReadOnlyProperty<boolean>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       temperatureProperty: Property<number | null>,

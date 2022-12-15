@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -25,7 +25,7 @@ type ParticleTypeRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions 
 
 export default class ParticleTypeRadioButtonGroup extends RectangularRadioButtonGroup<ParticleType> {
 
-  public constructor( particleTypeProperty: StringEnumerationProperty<ParticleType>,
+  public constructor( particleTypeProperty: StringUnionProperty<ParticleType>,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: ParticleTypeRadioButtonGroupOptions ) {
 

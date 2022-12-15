@@ -15,7 +15,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
@@ -44,7 +44,7 @@ export default class PressureGauge {
   private readonly temperatureProperty: TReadOnlyProperty<number | null>;
 
   // quantity to be held constant, influences noise
-  private readonly holdConstantProperty: StringEnumerationProperty<HoldConstant>;
+  private readonly holdConstantProperty: StringUnionProperty<HoldConstant>;
 
   // pressure in kPa, with noise added
   public readonly pressureKilopascalsProperty: Property<number>;
@@ -62,7 +62,7 @@ export default class PressureGauge {
   private readonly scaleNoiseFunction: LinearFunction;
 
   // pressure units displayed by the pressure gauge
-  public readonly unitsProperty: StringEnumerationProperty<PressureUnits>;
+  public readonly unitsProperty: StringUnionProperty<PressureUnits>;
 
   private dtAccumulator: number;
 
@@ -71,7 +71,7 @@ export default class PressureGauge {
 
   public constructor( pressureProperty: TReadOnlyProperty<number>,
                       temperatureProperty: TReadOnlyProperty<number | null>,
-                      holdConstantProperty: StringEnumerationProperty<HoldConstant>,
+                      holdConstantProperty: StringUnionProperty<HoldConstant>,
                       tandem: Tandem ) {
 
     this.pressureProperty = pressureProperty;
@@ -110,7 +110,7 @@ export default class PressureGauge {
 
     this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
-    this.unitsProperty = new StringEnumerationProperty<PressureUnits>( 'atmospheres', {
+    this.unitsProperty = new StringUnionProperty<PressureUnits>( 'atmospheres', {
       validValues: PressureUnitsValues,
       tandem: tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the pressure gauge'

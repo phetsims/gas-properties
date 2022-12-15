@@ -7,7 +7,7 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -36,7 +36,7 @@ type HoldConstantControlOptions = SelfOptions & PickOptional<VBoxOptions, 'maxWi
 
 export default class HoldConstantControl extends VBox {
 
-  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>,
+  public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       pressureProperty: TReadOnlyProperty<number>,
                       isContainerOpenProperty: TReadOnlyProperty<boolean>,

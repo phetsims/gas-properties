@@ -16,14 +16,14 @@ import PressureGauge from './PressureGauge.js';
 import { HoldConstant } from './HoldConstant.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 
 // Maximum pressure, in kPa. When exceeded, the lid blows off of the container.
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 
 export default class PressureModel {
 
-  private readonly holdConstantProperty: StringEnumerationProperty<HoldConstant>;
+  private readonly holdConstantProperty: StringUnionProperty<HoldConstant>;
   private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
   private readonly volumeProperty: TReadOnlyProperty<number>;
   private readonly temperatureProperty: TReadOnlyProperty<number | null>;
@@ -38,7 +38,7 @@ export default class PressureModel {
   // whether to update pressure
   private updatePressureEnabled: boolean;
 
-  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>,
+  public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       volumeProperty: TReadOnlyProperty<number>,
                       temperatureProperty: TReadOnlyProperty<number | null>,

@@ -24,7 +24,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
@@ -72,7 +72,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
   private readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
 
   public constructor( model: IdealGasLawModel,
-                      particleTypeProperty: StringEnumerationProperty<ParticleType>,
+                      particleTypeProperty: StringUnionProperty<ParticleType>,
                       widthVisibleProperty: Property<boolean>,
                       tandem: Tandem,
                       providedOptions?: IdealGasLawScreenViewOptions ) {

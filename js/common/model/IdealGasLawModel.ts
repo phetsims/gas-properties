@@ -18,7 +18,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -69,7 +69,7 @@ type OopsEmitters = {
 export default class IdealGasLawModel extends BaseModel {
 
   // the quantity to hold constant
-  public readonly holdConstantProperty: StringEnumerationProperty<HoldConstant>;
+  public readonly holdConstantProperty: StringUnionProperty<HoldConstant>;
 
   // The factor to heat or cool the contents of the container.
   // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
@@ -111,7 +111,7 @@ export default class IdealGasLawModel extends BaseModel {
 
     super( tandem );
 
-    this.holdConstantProperty = new StringEnumerationProperty( options.holdConstant, {
+    this.holdConstantProperty = new StringUnionProperty( options.holdConstant, {
       validValues: HoldConstantValues,
       tandem: tandem.createTandem( 'holdConstantProperty' ),
       phetioDocumentation: 'determines which quantity will be held constant'

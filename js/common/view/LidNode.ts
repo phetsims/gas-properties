@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
@@ -33,7 +33,7 @@ export default class LidNode extends Node {
   public readonly handleNode: HandleNode;
   private readonly baseNode: Rectangle;
 
-  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>, providedOptions: LidNodeOptions ) {
+  public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>, providedOptions: LidNodeOptions ) {
 
     const options = optionize<LidNodeOptions, SelfOptions, NodeOptions>()( {
 

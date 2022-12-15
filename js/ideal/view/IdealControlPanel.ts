@@ -20,7 +20,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 
 type SelfOptions = {
   hasHoldConstantControls?: boolean;
@@ -31,7 +31,7 @@ type IdealControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequi
 
 export default class IdealControlPanel extends Panel {
 
-  public constructor( holdConstantProperty: StringEnumerationProperty<HoldConstant>,
+  public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       pressureProperty: TReadOnlyProperty<number>,
                       isContainerOpenProperty: TReadOnlyProperty<boolean>,

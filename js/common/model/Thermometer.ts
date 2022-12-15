@@ -9,7 +9,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -41,7 +41,7 @@ export default class Thermometer {
   public readonly temperatureCelsiusProperty: TReadOnlyProperty<number | null>;
 
   // temperature units displayed by the thermometer
-  public readonly unitsProperty: StringEnumerationProperty<TemperatureUnits>;
+  public readonly unitsProperty: StringUnionProperty<TemperatureUnits>;
 
   public constructor( temperatureKelvinProperty: Property<number | null>, providedOptions: ThermometerOptions ) {
 
@@ -64,7 +64,7 @@ export default class Thermometer {
         phetioDocumentation: 'temperature in degrees C'
       } );
 
-    this.unitsProperty = new StringEnumerationProperty<TemperatureUnits>( 'kelvin', {
+    this.unitsProperty = new StringUnionProperty<TemperatureUnits>( 'kelvin', {
       validValues: TemperatureUnitsValues,
       tandem: options.tandem.createTandem( 'unitsProperty' ),
       phetioDocumentation: 'units displayed by the thermometer'

@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -48,7 +48,7 @@ export default class IdealGasLawContainerNode extends Node {
 
   public constructor( container: IdealGasLawContainer,
                       modelViewTransform: ModelViewTransform2,
-                      holdConstantProperty: StringEnumerationProperty<HoldConstant>,
+                      holdConstantProperty: StringUnionProperty<HoldConstant>,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: IdealGasLawContainerNodeOptions ) {
 
