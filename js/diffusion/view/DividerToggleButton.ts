@@ -10,7 +10,7 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, Text } from '../../../../scenery/js/imports.js';
 import BooleanRectangularToggleButton, { BooleanRectangularToggleButtonOptions } from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -39,8 +39,13 @@ export default class DividerToggleButton extends BooleanRectangularToggleButton 
       maxWidth: 150 // determined empirically
     };
 
-    const trueNode = new Text( GasPropertiesStrings.removeDividerStringProperty, textOptions );
-    const falseNode = new Text( GasPropertiesStrings.resetDividerStringProperty, textOptions );
+    const alignGroup = new AlignGroup();
+    const trueNode = new AlignBox( new Text( GasPropertiesStrings.removeDividerStringProperty, textOptions ), {
+      group: alignGroup
+    } );
+    const falseNode = new AlignBox( new Text( GasPropertiesStrings.resetDividerStringProperty, textOptions ), {
+      group: alignGroup
+    } );
 
     super( hasDividerProperty, trueNode, falseNode, options );
   }
