@@ -39,8 +39,6 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
                       initialTemperatureProperty: NumberProperty,
                       providedOptions: InjectionTemperatureAccordionBoxOptions ) {
 
-    assert && assert( initialTemperatureProperty.range, 'initialTemperatureProperty is missing range' );
-
     const options = optionize4<InjectionTemperatureAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
