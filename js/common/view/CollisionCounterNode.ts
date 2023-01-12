@@ -84,18 +84,20 @@ export default class CollisionCounterNode extends Node {
     // Combo box items
     const comboBoxItems = collisionCounter.samplePeriods.map( samplePeriod => {
 
-      // e.g. '10 ps'
-      const samplePeriodStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
-        value: samplePeriod,
-        units: GasPropertiesStrings.picosecondsStringProperty
-      } );
-      const node = new Text( samplePeriodStringProperty, {
-        font: CONTROL_FONT,
-        maxWidth: 100 // determined empirically
-      } );
       return {
         value: samplePeriod,
-        node: node,
+        createNode: () => {
+
+          // e.g. '10 ps'
+          const samplePeriodStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
+            value: samplePeriod,
+            units: GasPropertiesStrings.picosecondsStringProperty
+          } );
+          return new Text( samplePeriodStringProperty, {
+            font: CONTROL_FONT,
+            maxWidth: 100 // determined empirically
+          } );
+        },
         tandemName: `samplePeriod${samplePeriod}${ComboBox.ITEM_TANDEM_NAME_SUFFIX}`
       };
     } );
