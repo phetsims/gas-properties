@@ -206,8 +206,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Toggle button for switching between heavy and light bicycle pumps
     const bicyclePumpsToggleNode = new ToggleNode( particleTypeProperty, [
-      { value: 'heavy', createNode: tandem => heavyBicyclePumpNode },
-      { value: 'light', createNode: tandem => lightBicyclePumpNode }
+      { value: 'heavy', createNode: () => heavyBicyclePumpNode },
+      { value: 'light', createNode: () => lightBicyclePumpNode }
     ] );
 
     // Cancel interaction with the pump when particle type changes.

@@ -50,12 +50,12 @@ export default class ParticleTypeRadioButtonGroup extends RectangularRadioButton
     const content: RectangularRadioButtonGroupItem<ParticleType>[] = [
       {
         value: 'heavy',
-        createNode: tandem => GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
+        createNode: () => GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
         tandemName: `heavyParticles${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
       },
       {
         value: 'light',
-        createNode: tandem => GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
+        createNode: () => GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
         tandemName: `lightParticles${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
       }
     ];
