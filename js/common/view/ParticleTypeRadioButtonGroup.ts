@@ -1,4 +1,4 @@
-// Copyright 2018-2022, University of Colorado Boulder
+// Copyright 2018-2023, University of Colorado Boulder
 
 /**
  * ParticleTypeRadioButtonGroup is a pair of radio buttons for selecting between heavy and light particle types.
