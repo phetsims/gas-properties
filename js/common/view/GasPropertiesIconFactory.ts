@@ -41,7 +41,7 @@ const GasPropertiesIconFactory = {
   /**
    * Creates the icon for the Ideal screen.
    */
-  createIdealScreenIcon(): Node {
+  createIdealScreenIcon(): ScreenIcon {
 
     // Container
     const containerNode = new Rectangle( 0, 0, 275, 200, {
@@ -107,7 +107,7 @@ const GasPropertiesIconFactory = {
   /**
    * Creates the icon for the Explore screen.
    */
-  createExploreScreenIcon(): Node {
+  createExploreScreenIcon(): ScreenIcon {
 
     // Vertical section of container wall
     const wallNode = new Line( 0, 0, 0, 300, {
@@ -165,7 +165,7 @@ const GasPropertiesIconFactory = {
   /**
    * Creates the icon for the Energy screen.
    */
-  createEnergyScreenIcon(): Node {
+  createEnergyScreenIcon(): ScreenIcon {
 
     // histogram shape
     const iconWidth = 300;
@@ -197,7 +197,7 @@ const GasPropertiesIconFactory = {
   /**
    * Creates the icon for the Diffusion screen.
    */
-  createDiffusionScreenIcon(): Node {
+  createDiffusionScreenIcon(): ScreenIcon {
 
     // Invisible container, so that divider is centered
     const containerNode = new Rectangle( 0, 0, 425, 300, {
@@ -252,7 +252,7 @@ const GasPropertiesIconFactory = {
   /**
    * Creates the icon for the Intro screen in the Gases Intro sim.
    */
-  createIntroScreenIcon(): Node {
+  createIntroScreenIcon(): ScreenIcon {
 
     // Invisible container
     const containerNode = new Rectangle( 0, 0, 800, 600, {
