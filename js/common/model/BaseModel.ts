@@ -17,6 +17,7 @@ import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import TModel from '../../../../joist/js/TModel.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
@@ -41,7 +42,7 @@ type SelfOptions = {
 
 export type BaseModelOptions = SelfOptions;
 
-export default class BaseModel {
+export default class BaseModel implements TModel {
 
   // transform between model and view coordinate frames
   public readonly modelViewTransform: ModelViewTransform2;
