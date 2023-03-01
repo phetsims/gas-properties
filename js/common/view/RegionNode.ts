@@ -58,7 +58,7 @@ export default class RegionNode extends Node {
    * Displays the number of particles in the region.
    */
   public update(): void {
-    this.countNode.text = this.region.particles.length;
+    this.countNode.string = this.region.particles.length;
     this.countNode.center = this.cellNode.center;
   }
 }
