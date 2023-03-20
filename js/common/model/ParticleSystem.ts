@@ -83,14 +83,16 @@ export default class ParticleSystem {
       numberType: 'Integer',
       range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
       tandem: tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
-      phetioDocumentation: 'the number of heavy particles in the container'
+      phetioDocumentation: 'the number of heavy particles in the container',
+      hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/206
     } );
 
     this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
       tandem: tandem.createTandem( 'numberOfLightParticlesProperty' ),
-      phetioDocumentation: 'the number of light particles in the container'
+      phetioDocumentation: 'the number of light particles in the container',
+      hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/206
     } );
 
     // Synchronize particle counts and arrays.
