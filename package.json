@@ -21,6 +21,12 @@
       "phet",
       "phet-io",
       "adapted-from-phet"
+    ],
+    "screenNameKeys": [
+      "GAS_PROPERTIES/screen.ideal",
+      "GAS_PROPERTIES/screen.explore",
+      "GAS_PROPERTIES/screen.energy",
+      "GAS_PROPERTIES/screen.diffusion"
     ]
   },
   "eslintConfig": {
