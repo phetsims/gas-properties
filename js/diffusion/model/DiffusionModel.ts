@@ -30,6 +30,7 @@ import ParticleFlowRate from './ParticleFlowRate.js';
 import Particle, { ParticleOptions } from '../../common/model/Particle.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // constants
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
@@ -114,7 +115,7 @@ export default class DiffusionModel extends BaseModel {
 
         // Skip these assertions when PhET-iO state is being restored, because at least one of the arrays will
         // definitely not be populated. See https://github.com/phetsims/gas-properties/issues/178
-        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        if ( !isSettingPhetioStateProperty.value ) {
 
           // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
           // If you hit these assertions, then you need to add this listener later.  This is a trade-off
