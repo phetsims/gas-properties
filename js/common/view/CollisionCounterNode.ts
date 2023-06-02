@@ -25,6 +25,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const X_MARGIN = 15;
@@ -92,7 +93,7 @@ export default class CollisionCounterNode extends Node {
           const samplePeriodStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
             value: samplePeriod,
             units: GasPropertiesStrings.picosecondsStringProperty
-          } );
+          }, { tandem: Tandem.OPT_OUT } );
           return new Text( samplePeriodStringProperty, {
             font: CONTROL_FONT,
             maxWidth: 100 // determined empirically

@@ -17,6 +17,7 @@ import { Node, NodeOptions, NodeTranslationOptions, Path, Text } from '../../../
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const TICK_LENGTH = 16; // view coordinates
@@ -59,7 +60,7 @@ export default class ScaleNode extends Node {
     const labelNode = new Text( new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
       value: TICK_INTERVAL,
       units: GasPropertiesStrings.nanometersStringProperty
-    } ), {
+    }, { tandem: Tandem.OPT_OUT } ), {
       font: new PhetFont( 12 ),
       fill: GasPropertiesColors.scaleColorProperty,
       maxWidth: 0.85 * dx

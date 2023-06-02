@@ -24,6 +24,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -66,7 +67,7 @@ export default class ContainerWidthNode extends Node {
       decimalPlaces: 1,
       valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
         units: GasPropertiesStrings.nanometersStringProperty
-      } ),
+      }, { tandem: Tandem.OPT_OUT } ),
       cornerRadius: 3,
       textOptions: {
         font: new PhetFont( 12 ),

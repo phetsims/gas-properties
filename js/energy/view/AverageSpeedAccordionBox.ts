@@ -22,6 +22,7 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = {
   fixedWidth?: number;
@@ -67,7 +68,7 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     const numberDisplayOptions: NumberDisplayOptions = {
       valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
         units: GasPropertiesStrings.metersPerSecondStringProperty
-      } ),
+      }, { tandem: Tandem.OPT_OUT } ),
       noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
       decimalPlaces: 0,
       align: 'right',
