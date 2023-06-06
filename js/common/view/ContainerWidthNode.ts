@@ -24,7 +24,6 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -63,11 +62,14 @@ export default class ContainerWidthNode extends Node {
     const nmWidthRange = new Range( widthProperty.range.min / 1000, widthProperty.range.max / 1000 );
 
     // Display the width in nm
+    const widthDisplayTandem = options.tandem.createTandem( 'widthDisplay' );
     const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
       decimalPlaces: 1,
       valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
         units: GasPropertiesStrings.nanometersStringProperty
-      }, { tandem: Tandem.OPT_OUT } ),
+      }, {
+        tandem: widthDisplayTandem.createTandem( 'valuePatternStringProperty' )
+      } ),
       cornerRadius: 3,
       textOptions: {
         font: new PhetFont( 12 ),
@@ -76,7 +78,8 @@ export default class ContainerWidthNode extends Node {
       },
       backgroundFill: 'white',
       backgroundStroke: 'black',
-      backgroundLineWidth: 0.5
+      backgroundLineWidth: 0.5,
+      tandem: widthDisplayTandem
     } );
 
     options.children = [ dimensionalArrowNode, widthDisplay ];

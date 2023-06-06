@@ -9,7 +9,7 @@
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay, { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
@@ -22,7 +22,6 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = {
   fixedWidth?: number;
@@ -64,11 +63,15 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     heavyParticleNode.addChild( new HStrut( maxWidth, { center: heavyParticleNode.center } ) );
     lightParticleNode.addChild( new HStrut( maxWidth, { center: lightParticleNode.center } ) );
 
+    // Used for both NumberDisplay instances
+    const valuePatternStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
+      units: GasPropertiesStrings.metersPerSecondStringProperty
+    }, {
+      tandem: options.tandem.createTandem( 'valuePatternStringProperty' )
+    } );
     const numberDisplayRange = new Range( 0, 9999 );
     const numberDisplayOptions: NumberDisplayOptions = {
-      valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
-        units: GasPropertiesStrings.metersPerSecondStringProperty
-      }, { tandem: Tandem.OPT_OUT } ),
+      valuePattern: valuePatternStringProperty,
       noValuePattern: SunConstants.VALUE_NAMED_PLACEHOLDER,
       decimalPlaces: 0,
       align: 'right',
@@ -84,8 +87,14 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
 
     // These Properties are in pm/ps, and we want to display in m/s.  There is no need to convert the values,
     // since the conversion (1E-12) is the same for numerator and denominator.
-    const heavyNumberDisplay = new NumberDisplay( heavyAverageSpeedProperty, numberDisplayRange, numberDisplayOptions );
-    const lightNumberDisplay = new NumberDisplay( lightAverageSpeedProperty, numberDisplayRange, numberDisplayOptions );
+    const heavyNumberDisplay = new NumberDisplay( heavyAverageSpeedProperty, numberDisplayRange,
+      combineOptions<NumberDisplayOptions>( {}, numberDisplayOptions, {
+        tandem: options.tandem.createTandem( 'heavyNumberDisplay' )
+      } ) );
+    const lightNumberDisplay = new NumberDisplay( lightAverageSpeedProperty, numberDisplayRange,
+      combineOptions<NumberDisplayOptions>( {}, numberDisplayOptions, {
+        tandem: options.tandem.createTandem( 'lightNumberDisplay' )
+      } ) );
 
     const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
 

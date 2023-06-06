@@ -65,7 +65,9 @@ export default class InjectionTemperatureControl extends NumberControl {
         },
         valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
           units: GasPropertiesStrings.kelvinStringProperty
-        }, { tandem: Tandem.OPT_OUT } ),
+        }, {
+          tandem: providedOptions.tandem.createTandem( 'valuePatternStringProperty' )
+        } ),
         maxWidth: 75 // determined empirically
       },
       sliderOptions: {

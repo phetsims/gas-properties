@@ -18,7 +18,7 @@ import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import { Circle, DragListener, HBox, Node, NodeOptions, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
-import ComboBox from '../../../../sun/js/ComboBox.js';
+import ComboBox, { ComboBoxItem } from '../../../../sun/js/ComboBox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
@@ -83,17 +83,19 @@ export default class CollisionCounterNode extends Node {
     } );
 
     // Combo box items
-    const comboBoxItems = collisionCounter.samplePeriods.map( samplePeriod => {
+    const comboBoxItems: ComboBoxItem<number>[] = collisionCounter.samplePeriods.map( samplePeriod => {
 
       return {
         value: samplePeriod,
-        createNode: () => {
+        createNode: ( contentTandem: Tandem ) => {
 
           // e.g. '10 ps'
           const samplePeriodStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
             value: samplePeriod,
             units: GasPropertiesStrings.picosecondsStringProperty
-          }, { tandem: Tandem.OPT_OUT } );
+          }, {
+            tandem: contentTandem.createTandem( 'samplePeriodStringProperty' )
+          } );
           return new Text( samplePeriodStringProperty, {
             font: CONTROL_FONT,
             maxWidth: 100 // determined empirically
