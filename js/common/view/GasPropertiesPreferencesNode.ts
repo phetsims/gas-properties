@@ -23,8 +23,6 @@ type GasPropertiesPreferencesNodeOptions = SelfOptions & PickRequired<VBoxOption
 
 export default class GasPropertiesPreferencesNode extends VBox {
 
-  private readonly disposeGasPropertiesPreferencesNode: () => void;
-
   public constructor( providedOptions: GasPropertiesPreferencesNodeOptions ) {
 
     const options = optionize<GasPropertiesPreferencesNodeOptions, SelfOptions, VBoxOptions>()( {
@@ -42,15 +40,6 @@ export default class GasPropertiesPreferencesNode extends VBox {
     options.children = children;
 
     super( options );
-
-    this.disposeGasPropertiesPreferencesNode = () => {
-      children.forEach( child => child.dispose() );
-    };
-  }
-
-  public override dispose(): void {
-    this.disposeGasPropertiesPreferencesNode();
-    super.dispose();
   }
 }
 
