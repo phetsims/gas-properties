@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import CollisionDetector from '../../common/model/CollisionDetector.js';
@@ -28,7 +29,7 @@ export default class DiffusionCollisionDetector extends CollisionDetector {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 

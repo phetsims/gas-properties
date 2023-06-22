@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
@@ -26,7 +27,7 @@ export default class ExploreModel extends IdealGasLawModel {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }

@@ -9,6 +9,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import ParticleImageProperty from '../../common/view/ParticleImageProperty.js';
 import ParticlesNode from '../../common/view/ParticlesNode.js';
 import gasProperties from '../../gasProperties.js';
@@ -50,7 +51,7 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }

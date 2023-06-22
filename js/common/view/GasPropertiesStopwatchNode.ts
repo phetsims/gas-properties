@@ -16,6 +16,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import Disposable from '../../../../axon/js/Disposable.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -47,7 +48,7 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }
