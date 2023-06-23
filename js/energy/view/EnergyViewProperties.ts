@@ -1,4 +1,4 @@
-// Copyright 2018-2022, University of Colorado Boulder
+// Copyright 2018-2023, University of Colorado Boulder
 
 /**
  * EnergyViewProperties defines Properties that are specific to the view in the 'Energy' screen.

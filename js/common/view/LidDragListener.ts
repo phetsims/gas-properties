@@ -1,4 +1,4 @@
-// Copyright 2019-2022, University of Colorado Boulder
+// Copyright 2019-2023, University of Colorado Boulder
 
 /**
  * LidDragListener is the drag listener for the container's lid. It determines the size of the opening in the top of

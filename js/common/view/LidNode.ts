@@ -1,4 +1,4 @@
-// Copyright 2018-2022, University of Colorado Boulder
+// Copyright 2018-2023, University of Colorado Boulder
 
 /**
  * LidNode is the lid on the top of the container. The lid is composed of 2 pieces, a handle and a base.

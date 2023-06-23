@@ -1,4 +1,4 @@
-// Copyright 2019-2022, University of Colorado Boulder
+// Copyright 2019-2023, University of Colorado Boulder
 
 /**
  * DiffusionParticleSystemNode renders the particle system for the 'Diffusion' screen.  Since all particles are
