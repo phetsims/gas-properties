@@ -38,7 +38,7 @@ export default class PressureGaugeNode extends Node {
     const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressureStringProperty,
       pressureGauge.pressureRange, {
         radius: DIAL_RADIUS,
-        tandem: Tandem.OPTIONAL
+        tandem: Tandem.OPT_OUT
       } );
 
     // horizontal post the sticks out of the left side of the gauge

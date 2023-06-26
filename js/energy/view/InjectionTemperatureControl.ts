@@ -58,7 +58,7 @@ export default class InjectionTemperatureControl extends NumberControl {
         fill: GasPropertiesColors.textFillProperty,
         font: GasPropertiesConstants.CONTROL_FONT,
         maxWidth: 125, // determined empirically
-        tandem: Tandem.OPTIONAL // no tandem because no title
+        tandem: Tandem.OPT_OUT // no tandem because no title
       },
       numberDisplayOptions: {
         textOptions: {
