@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -35,6 +34,7 @@ export default class ParticleTypeRadioButtonGroup extends RectangularRadioButton
       // RectangularRadioButtonGroupOptions
       orientation: 'horizontal',
       spacing: 8,
+      isDisposable: false,
       radioButtonOptions: {
         baseColor: GasPropertiesColors.radioButtonGroupBaseColorProperty,
         xMargin: 15,
@@ -62,11 +62,6 @@ export default class ParticleTypeRadioButtonGroup extends RectangularRadioButton
     ];
 
     super( particleTypeProperty, content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

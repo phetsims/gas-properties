@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -43,11 +42,6 @@ export default class EnergyViewProperties extends IdealGasLawViewProperties {
       tandem: tandem.createTandem( 'injectionTemperatureExpandedProperty' ),
       phetioDocumentation: 'whether the Injection Temperature accordion box is expanded'
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

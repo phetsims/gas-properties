@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -39,7 +38,10 @@ export default class LidNode extends Node {
     const options = optionize<LidNodeOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
-      gripColor: GasPropertiesColors.lidGripColorProperty
+      gripColor: GasPropertiesColors.lidGripColorProperty,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {
@@ -74,11 +76,6 @@ export default class LidNode extends Node {
 
     this.handleNode = handleNode;
     this.baseNode = baseNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

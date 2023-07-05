@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -38,7 +37,9 @@ export default class ScaleNode extends Node {
     assert && assert( Number.isInteger( containerWidth ) && containerWidth > 0 );
 
     const options = optionize<ScaleNodeOptions, SelfOptions, NodeOptions>()( {
-      // because we're setting options.children below
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     const pmTickInterval = TICK_INTERVAL * 1000; // adjusted for nm to pm
@@ -88,11 +89,6 @@ export default class ScaleNode extends Node {
     options.children = [ ticksPath, labelNode, arrowNode ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

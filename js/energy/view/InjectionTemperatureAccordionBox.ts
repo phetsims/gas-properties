@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
@@ -51,7 +50,8 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
         titleNode: new Text( GasPropertiesStrings.injectionTemperatureStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColors.textFillProperty
-        } )
+        } ),
+        isDisposable: false
       }, providedOptions );
 
     // Limit width of title
@@ -92,11 +92,6 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
     } );
 
     super( content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

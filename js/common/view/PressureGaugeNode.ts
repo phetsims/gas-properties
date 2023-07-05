@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
@@ -31,7 +30,9 @@ export default class PressureGaugeNode extends Node {
   public constructor( pressureGauge: PressureGauge, listboxParent: Node, providedOptions: PressureGaugeNodeOptions ) {
 
     const options = optionize<PressureGaugeNodeOptions, SelfOptions, NodeOptions>()( {
-      // because options.children is set below
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // circular dial with needle
@@ -66,11 +67,6 @@ export default class PressureGaugeNode extends Node {
     if ( GasPropertiesQueryParameters.origin ) {
       this.addChild( new Circle( 3, { fill: 'red' } ) );
     }
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

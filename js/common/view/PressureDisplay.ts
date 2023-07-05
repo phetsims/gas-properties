@@ -6,9 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Range from '../../../../dot/js/Range.js';
-import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ComboBoxDisplay, { ComboBoxDisplayItem, ComboBoxDisplayOptions } from '../../../../scenery-phet/js/ComboBoxDisplay.js';
@@ -33,8 +32,10 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
 
   public constructor( pressureGauge: PressureGauge, listboxParent: Node, providedOptions: PressureDisplayOptions ) {
 
-    const options = optionize3<PressureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
-      {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, providedOptions );
+    const options = optionize4<PressureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
+      {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, {
+        isDisposable: false
+      }, providedOptions );
 
     const items: ComboBoxDisplayItem<PressureUnits>[] = [
       {
@@ -60,11 +61,6 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
     ];
 
     super( pressureGauge.unitsProperty, items, listboxParent, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

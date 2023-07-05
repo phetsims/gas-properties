@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -27,7 +26,9 @@ export default class DiffusionContainerNode extends Node {
   public constructor( container: DiffusionContainer, modelViewTransform: ModelViewTransform2, providedOptions: DiffusionContainerNodeOptions ) {
 
     const options = optionize<DiffusionContainerNodeOptions, SelfOptions, NodeOptions>()( {
-      // empty because we're setting options.children below
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // Expand the container bounds to account for wall thickness.
@@ -54,11 +55,6 @@ export default class DiffusionContainerNode extends Node {
     options.children = [ dividerNode, borderNode ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

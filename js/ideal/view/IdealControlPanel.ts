@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { HSeparator, NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -47,7 +46,10 @@ export default class IdealControlPanel extends Panel {
         // SelfOptions
         hasHoldConstantControls: true,
         fixedWidth: 100,
-        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
+        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
+
+        // PanelOptions
+        isDisposable: false
       }, providedOptions );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
@@ -89,11 +91,6 @@ export default class IdealControlPanel extends Panel {
     } );
 
     super( content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

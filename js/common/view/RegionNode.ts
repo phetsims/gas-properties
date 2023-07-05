@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -42,17 +41,13 @@ export default class RegionNode extends Node {
     } );
 
     super( {
-      children: [ cellNode, countNode ]
+      children: [ cellNode, countNode ],
+      isDisposable: false
     } );
 
     this.region = region;
     this.cellNode = cellNode;
     this.countNode = countNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

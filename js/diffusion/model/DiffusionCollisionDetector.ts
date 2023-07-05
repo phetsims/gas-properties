@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import CollisionDetector from '../../common/model/CollisionDetector.js';
@@ -26,11 +25,6 @@ export default class DiffusionCollisionDetector extends CollisionDetector {
                       particles2: DiffusionParticle2[] ) {
     super( diffusionContainer, [ particles1, particles2 ], new BooleanProperty( true ) );
     this.diffusionContainer = diffusionContainer;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
@@ -27,17 +26,13 @@ export default class IntervalLinesNode extends Path {
     super( new Shape(), {
       stroke: 'white',
       opacity: 0.5,
-      lineWidth: 0.5
+      lineWidth: 0.5,
+      isDisposable: false
     } );
 
     this.chartSize = chartSize;
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
     this.previousMaxY = null;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

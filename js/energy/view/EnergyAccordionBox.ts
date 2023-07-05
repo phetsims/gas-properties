@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -48,7 +47,8 @@ export default class EnergyAccordionBox extends AccordionBox {
         titleNode: new Text( titleStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColors.textFillProperty
-        } )
+        } ),
+        isDisposable: false
       }, providedOptions );
 
     // Limit width of title, multiplier determined empirically
@@ -89,11 +89,6 @@ export default class EnergyAccordionBox extends AccordionBox {
     this.expandedProperty.link( expanded => {
       histogramNode.updateEnabledProperty.value = expanded;
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -42,7 +41,9 @@ export default class ContainerWidthNode extends Node {
                       providedOptions: ContainerWidthNodeOptions ) {
 
     const options = optionize<ContainerWidthNodeOptions, SelfOptions, NodeOptions>()( {
-      // because we're setting options.children below
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // Convert the width from model to view coordinates
@@ -95,11 +96,6 @@ export default class ContainerWidthNode extends Node {
       this.right = containerViewPosition.x;
       this.top = containerViewPosition.y + 8;
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

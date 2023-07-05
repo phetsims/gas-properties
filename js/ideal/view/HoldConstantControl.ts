@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -47,7 +46,8 @@ export default class HoldConstantControl extends VBox {
 
       // VBoxOptions
       align: 'left',
-      spacing: SPACING
+      spacing: SPACING,
+      isDisposable: false
     }, providedOptions );
 
     const titleText = new Text( GasPropertiesStrings.holdConstant.titleStringProperty, {
@@ -112,11 +112,6 @@ export default class HoldConstantControl extends VBox {
       pressureVRadioButton.enabledProperty.value = ( pressure !== 0 );
       pressureTRadioButton.enabledProperty.value = ( pressure !== 0 );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

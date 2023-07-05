@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -32,17 +31,13 @@ export default class LinePlotNode extends Path {
 
     super( new Shape(), {
       stroke: color,
-      lineWidth: lineWidth
+      lineWidth: lineWidth,
+      isDisposable: false
     } );
 
     this.chartSize = chartSize;
     this.yScaleProperty = yScaleProperty;
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

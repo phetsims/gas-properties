@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
@@ -37,7 +36,8 @@ export default class ReturnLidButton extends RectangularPushButton {
       content: textNode,
       listener: () => {
         container.lidIsOnProperty.value = true;
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     super( options );
@@ -46,11 +46,6 @@ export default class ReturnLidButton extends RectangularPushButton {
     container.lidIsOnProperty.link( lidIsOn => {
       this.visible = !lidIsOn;
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

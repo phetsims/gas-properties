@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -27,6 +26,7 @@ export default class EraseParticlesButton extends EraserButton {
     const options = optionize<EraseParticlesButtonOptions, SelfOptions, EraserButtonOptions>()( {
 
       // EraserButtonOptions
+      isDisposable: false,
       baseColor: GasPropertiesColors.eraserButtonColorProperty,
 
       // Deletes all particles when the button fires.
@@ -40,11 +40,6 @@ export default class EraseParticlesButton extends EraserButton {
     }, providedOptions );
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

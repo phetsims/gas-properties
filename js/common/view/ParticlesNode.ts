@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -58,7 +57,8 @@ export default class ParticlesNode extends Sprites {
       sprites: sprites,
       spriteInstances: spriteInstances,
       renderer: 'webgl',
-      pickable: false
+      pickable: false,
+      isDisposable: false
     } );
 
     this.particleArrays = particleArrays;
@@ -129,11 +129,6 @@ export default class ParticlesNode extends Sprites {
     // Convert the particle Node to an HTMLCanvasElement
     particleNode.toCanvas( canvas => { particleImageProperty.value = canvas; },
       canvasWidth / 2, canvasHeight / 2, canvasWidth, canvasHeight );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

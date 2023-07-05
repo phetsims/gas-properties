@@ -23,7 +23,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -340,11 +339,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     this.heavyBicyclePumpNode = heavyBicyclePumpNode;
     this.lightBicyclePumpNode = lightBicyclePumpNode;
     this.heaterCoolerNode = heaterCoolerNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   protected override reset(): void {

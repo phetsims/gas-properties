@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -28,7 +27,8 @@ export default class GasPropertiesThermometerNode extends VBox {
 
       // VBoxOptions
       spacing: 5,
-      align: 'center'
+      align: 'center',
+      isDisposable: false
     }, providedOptions );
 
     // temperatureProperty is null when there are no particles in the container.
@@ -60,11 +60,6 @@ export default class GasPropertiesThermometerNode extends VBox {
     options.children = [ comboBox, thermometerNode ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

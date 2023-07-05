@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -38,6 +37,7 @@ export default abstract class BaseScreenView extends ScreenView {
       hasSlowMotion: false,
 
       // ScreenViewOptions
+      isDisposable: false,
       tandem: tandem
     }, providedOptions );
 
@@ -85,11 +85,6 @@ export default abstract class BaseScreenView extends ScreenView {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
     this.addChild( resetAllButton );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   protected reset(): void {

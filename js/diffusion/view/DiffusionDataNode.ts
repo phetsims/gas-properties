@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Range from '../../../../dot/js/Range.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -48,7 +47,8 @@ export default class DiffusionDataNode extends VBox {
 
       // VBoxOptions
       spacing: 10,
-      align: 'left'
+      align: 'left',
+      isDisposable: false
     }, providedOptions );
 
     // number of DiffusionParticle1
@@ -81,11 +81,6 @@ export default class DiffusionDataNode extends VBox {
     options.children = [ particle1CountNode, particle2CountNode, averageTemperatureNode ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

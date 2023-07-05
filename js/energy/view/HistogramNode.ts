@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
@@ -82,7 +81,10 @@ export default class HistogramNode extends Node {
       borderStroke: GasPropertiesColors.panelStrokeProperty,
       borderLineWidth: 1,
       plotLineWidth: 2,
-      barColor: 'white'
+      barColor: 'white',
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // Background appears behind plotted data
@@ -198,11 +200,6 @@ export default class HistogramNode extends Node {
         lightPlotNode.plot( lightBinCountsProperty.value );
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

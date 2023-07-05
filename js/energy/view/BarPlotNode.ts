@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -29,17 +28,13 @@ export default class BarPlotNode extends Path {
 
     super( new Shape(), {
       fill: color,
-      stroke: color // to hide seams
+      stroke: color, // to hide seams
+      isDisposable: false
     } );
 
     this.chartSize = chartSize;
     this.yScaleProperty = yScaleProperty;
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

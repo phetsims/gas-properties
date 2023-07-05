@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
@@ -45,11 +44,6 @@ export default class EnergyModel extends IdealGasLawModel {
     this.averageSpeedModel = new AverageSpeedModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD, {
       tandem: tandem.createTandem( 'averageSpeedModel' )
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

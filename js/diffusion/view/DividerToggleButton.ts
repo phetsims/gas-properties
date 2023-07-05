@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -31,7 +30,8 @@ export default class DividerToggleButton extends BooleanRectangularToggleButton 
     const options = optionize<DividerToggleButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
 
       // BooleanRectangularToggleButtonOptions
-      baseColor: GasPropertiesColors.dividerColorProperty
+      baseColor: GasPropertiesColors.dividerColorProperty,
+      isDisposable: false
     }, providedOptions );
 
     const textOptions = {
@@ -49,11 +49,6 @@ export default class DividerToggleButton extends BooleanRectangularToggleButton 
     } );
 
     super( hasDividerProperty, trueNode, falseNode, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

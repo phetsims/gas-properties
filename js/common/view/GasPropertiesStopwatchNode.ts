@@ -16,7 +16,6 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import Disposable from '../../../../axon/js/Disposable.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -41,15 +40,11 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
       visiblePropertyOptions: {
         phetioReadOnly: true,
         phetioDocumentation: 'visibility is controlled by the model'
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     super( stopwatch, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

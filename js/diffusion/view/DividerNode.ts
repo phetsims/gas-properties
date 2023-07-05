@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -31,7 +30,10 @@ export default class DividerNode extends Node {
       // SelfOptions
       length: 100,
       solidLineWidth: 1,
-      dashedLineWidth: 1
+      dashedLineWidth: 1,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // Solid divider
@@ -58,11 +60,6 @@ export default class DividerNode extends Node {
       solidLineNode.visible = hasDivider;
       dashedLineNode.visible = !hasDivider;
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

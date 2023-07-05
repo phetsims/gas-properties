@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -36,7 +35,8 @@ export default class NumberOfParticlesControl extends VBox {
 
       // VBoxOptions
       align: 'left',
-      spacing: 10
+      spacing: 10,
+      isDisposable: false
     }, providedOptions );
 
     const labelText = new Text( titleStringProperty, {
@@ -69,11 +69,6 @@ export default class NumberOfParticlesControl extends VBox {
     options.children = [ labelBox, spinner ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

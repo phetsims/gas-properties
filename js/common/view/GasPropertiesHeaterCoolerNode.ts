@@ -13,7 +13,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
@@ -78,7 +77,8 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
         sliderOptions: {
           phetioLinkedProperty: heatCoolAmountProperty
         }
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // Private Property that either corresponds to the model or is animated, depending on the Hold Constant mode.
@@ -195,11 +195,6 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       // Hide the slider in modes where the user does not have control of temperature.
       this.slider.visible = ( holdConstant !== 'temperature' && holdConstant !== 'pressureT' );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

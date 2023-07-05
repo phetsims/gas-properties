@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Range from '../../../../dot/js/Range.js';
 import ComboBoxDisplay, { ComboBoxDisplayItem, ComboBoxDisplayOptions } from '../../../../scenery-phet/js/ComboBoxDisplay.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -17,7 +16,7 @@ import Thermometer from '../model/Thermometer.js';
 import { TemperatureUnits } from '../model/TemperatureUnits.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
@@ -32,8 +31,10 @@ export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits
 
   public constructor( thermometer: Thermometer, listboxParent: Node, providedOptions: TemperatureDisplayOptions ) {
 
-    const options = optionize3<TemperatureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
-      {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, providedOptions );
+    const options = optionize4<TemperatureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
+      {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, {
+        isDisposable: false
+      }, providedOptions );
 
     const items: ComboBoxDisplayItem<TemperatureUnits>[] = [
       {
@@ -53,11 +54,6 @@ export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits
     ];
 
     super( thermometer.unitsProperty, items, listboxParent, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

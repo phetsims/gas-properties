@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -82,15 +81,11 @@ export default class InjectionTemperatureControl extends NumberControl {
       },
       layoutOptions: {
         align: 'center'
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     super( '', initialTemperatureProperty, initialTemperatureProperty.range, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -36,7 +35,10 @@ export default class ExploreToolsPanel extends Panel {
 
         // SelfOptions
         fixedWidth: 100,
-        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
+        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
+
+        // PanelOptions
+        isDisposable: false
       }, providedOptions );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
@@ -63,11 +65,6 @@ export default class ExploreToolsPanel extends Panel {
     } );
 
     super( content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

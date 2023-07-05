@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -46,7 +45,8 @@ export default class DiffusionSettingsNode extends VBox {
 
       // VBoxOptions
       spacing: 20,
-      align: 'left'
+      align: 'left',
+      isDisposable: false
     }, providedOptions );
 
     // To make all spinners have the same bounds width
@@ -105,11 +105,6 @@ export default class DiffusionSettingsNode extends VBox {
     ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

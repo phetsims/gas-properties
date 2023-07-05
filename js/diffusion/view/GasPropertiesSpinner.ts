@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -35,15 +34,11 @@ export default class GasPropertiesSpinner extends NumberSpinner {
         }
       },
       touchAreaXDilation: 15,
-      touchAreaYDilation: 15
+      touchAreaYDilation: 15,
+      isDisposable: false
     }, providedOptions );
 
     super( numberProperty, new Property( numberProperty.range ), options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

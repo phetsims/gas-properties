@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -159,11 +158,6 @@ export default class DiffusionScreenView extends BaseScreenView {
     this.viewProperties = viewProperties;
     this.particleSystemNode = particleSystemNode;
     this.regionsNode = regionsNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   protected override reset(): void {

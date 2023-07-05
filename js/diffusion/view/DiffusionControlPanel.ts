@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
@@ -60,6 +59,7 @@ export default class DiffusionControlPanel extends Panel {
         fixedWidth: 100,
 
         // PanelOptions
+        isDisposable: false,
         xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
       }, providedOptions );
 
@@ -126,11 +126,6 @@ export default class DiffusionControlPanel extends Panel {
     numberOfParticlesProperty.link( numberOfParticles => {
       dividerToggleButton.enabled = ( numberOfParticles !== 0 );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

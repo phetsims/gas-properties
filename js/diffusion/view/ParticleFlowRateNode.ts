@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
@@ -39,7 +38,10 @@ export default class ParticleFlowRateNode extends Node {
         tailWidth: 8,
         fill: 'white',
         stroke: 'black'
-      }
+      },
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     const headHeight = options.arrowNodeOptions.headHeight!;
@@ -67,11 +69,6 @@ export default class ParticleFlowRateNode extends Node {
       rightArrowNode.visible = ( flowRate > 0 );
       rightArrowNode.setTip( minTailLength + flowRate * VECTOR_SCALE, 0 );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

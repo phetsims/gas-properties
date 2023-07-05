@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
@@ -24,11 +23,6 @@ export default class ExploreModel extends IdealGasLawModel {
     this.holdConstantProperty.lazyLink( holdConstant => {
       throw new Error( 'holdConstant is fixed in the Explore screen' );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

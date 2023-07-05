@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -58,7 +57,10 @@ export default class IdealGasLawContainerNode extends Node {
       // SelfOptions
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
       lidGripColor: GasPropertiesColors.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
-      resizeHandleIsPressedListener: _.noop
+      resizeHandleIsPressedListener: _.noop,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // Constant aspects of the container, in view coordinates
@@ -219,11 +221,6 @@ export default class IdealGasLawContainerNode extends Node {
     this.modelViewTransform = modelViewTransform;
     this.visibleBoundsProperty = visibleBoundsProperty;
     this.lidNode = lidNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

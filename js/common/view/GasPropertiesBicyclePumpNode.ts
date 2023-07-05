@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -27,6 +26,7 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
     const options = optionize<GasPropertiesBicyclePumpNodeOptions, SelfOptions, BicyclePumpNodeOptions>()( {
 
       // BicyclePumpNodeOptions
+      isDisposable: false,
       height: 230,
       bodyTopFill: 'white',
       hoseCurviness: 0.75,
@@ -37,11 +37,6 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
     }, providedOptions );
 
     super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

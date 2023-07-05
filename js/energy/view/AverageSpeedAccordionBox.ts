@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
@@ -49,7 +48,8 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
         titleNode: new Text( GasPropertiesStrings.averageSpeedStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColors.textFillProperty
-        } )
+        } ),
+        isDisposable: false
       }, providedOptions );
 
     // Limit width of title
@@ -115,11 +115,6 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     } );
 
     super( content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

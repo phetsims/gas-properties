@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -32,14 +31,15 @@ export default class DataAccordionBox extends AccordionBox {
     const options = optionize4<DataAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-      // AccordionBoxOptions
-      contentYSpacing: 0,
-      titleNode: new Text( GasPropertiesStrings.dataStringProperty, {
-        font: GasPropertiesConstants.TITLE_FONT,
-        fill: GasPropertiesColors.textFillProperty,
-        maxWidth: 200 // determined empirically
-      } )
-    }, providedOptions );
+        // AccordionBoxOptions
+        isDisposable: false,
+        contentYSpacing: 0,
+        titleNode: new Text( GasPropertiesStrings.dataStringProperty, {
+          font: GasPropertiesConstants.TITLE_FONT,
+          fill: GasPropertiesColors.textFillProperty,
+          maxWidth: 200 // determined empirically
+        } )
+      }, providedOptions );
 
     // Data for left side of the container
     const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform, {
@@ -63,11 +63,6 @@ export default class DataAccordionBox extends AccordionBox {
     } );
 
     super( contentNode, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

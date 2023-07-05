@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -28,7 +27,8 @@ export default class PlayResetButton extends BooleanRectangularToggleButton {
     const options = optionize<PlayResetButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
 
       // BooleanRectangularToggleButtonOptions
-      baseColor: '#DFE0E1'
+      baseColor: '#DFE0E1',
+      isDisposable: false
     }, providedOptions );
 
     const iconOptions: PathOptions = {
@@ -50,11 +50,6 @@ export default class PlayResetButton extends BooleanRectangularToggleButton {
     );
 
     super( isPlayingProperty, resetIconNode, playIconNode, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

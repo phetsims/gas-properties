@@ -12,7 +12,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
@@ -55,7 +54,8 @@ export default class DimensionalArrowsNode extends Node {
       arrowHeadDimensions: DEFAULT_ARROW_HEAD_DIMENSIONS,
 
       // NodeOptions
-      pickable: false
+      pickable: false,
+      isDisposable: false
     }, providedOptions );
 
     // horizontal dashed line in center
@@ -107,11 +107,6 @@ export default class DimensionalArrowsNode extends Node {
       leftVerticalLine.centerX = -length;
       leftArrowHead.left = -length;
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

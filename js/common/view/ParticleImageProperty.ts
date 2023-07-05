@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { DerivedProperty1, DerivedPropertyOptions } from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
@@ -32,7 +31,8 @@ export default class ParticleImageProperty extends DerivedProperty1<HTMLCanvasEl
     const options = optionize<ParticleImagePropertyOptions, SelfOptions, DerivedPropertyOptions<HTMLCanvasElement>>()( {
 
       // DerivedPropertyOptions
-      valueType: [ HTMLCanvasElement ]
+      valueType: [ HTMLCanvasElement ],
+      isDisposable: false
     }, providedOptions );
 
     // Create a prototypical Particle
@@ -55,11 +55,6 @@ export default class ParticleImageProperty extends DerivedProperty1<HTMLCanvasEl
         return canvasElement;
       },
       options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

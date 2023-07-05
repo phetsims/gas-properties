@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -37,7 +36,9 @@ export default class CenterOfMassNode extends Node {
                       providedOptions: CenterOfMassNodeOptions ) {
 
     const options = optionize<CenterOfMassNodeOptions, SelfOptions, NodeOptions>()( {
-      // empty because we're setting options.children below
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     const rectangle = new Rectangle( 0, 0, 5, 30, {
@@ -58,11 +59,6 @@ export default class CenterOfMassNode extends Node {
         this.center = modelViewTransform.modelToViewXY( centerX, centerY );
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

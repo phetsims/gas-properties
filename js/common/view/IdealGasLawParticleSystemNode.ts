@@ -10,7 +10,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -71,16 +70,12 @@ export default class IdealGasLawParticleSystemNode extends Node {
     } );
 
     super( {
-      children: [ insideParticlesNode, outsideParticlesNode ]
+      children: [ insideParticlesNode, outsideParticlesNode ],
+      isDisposable: false
     } );
 
     this.insideParticlesNode = insideParticlesNode;
     this.outsideParticlesNode = outsideParticlesNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

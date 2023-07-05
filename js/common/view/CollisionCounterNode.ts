@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -51,7 +50,8 @@ export default class CollisionCounterNode extends Node {
 
       // NodeOptions
       cursor: 'pointer',
-      visibleProperty: collisionCounter.visibleProperty
+      visibleProperty: collisionCounter.visibleProperty,
+      isDisposable: false
     }, providedOptions );
 
     const wallCollisionsText = new Text( GasPropertiesStrings.wallCollisionsStringProperty, {
@@ -212,11 +212,6 @@ export default class CollisionCounterNode extends Node {
     this.addInputListener( {
       down: onPress
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

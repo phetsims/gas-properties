@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
@@ -29,15 +28,11 @@ export default class RegionsNode extends Node {
 
     super( {
       children: regionNodes,
-      pickable: false
+      pickable: false,
+      isDisposable: false
     } );
 
     this.regionNodes = regionNodes;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**
