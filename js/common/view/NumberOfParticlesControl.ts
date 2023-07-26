@@ -42,8 +42,7 @@ export default class NumberOfParticlesControl extends VBox {
     const labelText = new Text( titleStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       fill: GasPropertiesColors.textFillProperty,
-      maxWidth: 150, // determined empirically,
-      tandem: options.tandem.createTandem( 'labelText' )
+      maxWidth: 150 // determined empirically
     } );
 
     const labelBox = new HBox( {

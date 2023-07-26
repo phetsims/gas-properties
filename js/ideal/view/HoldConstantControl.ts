@@ -53,8 +53,7 @@ export default class HoldConstantControl extends VBox {
     const titleText = new Text( GasPropertiesStrings.holdConstant.titleStringProperty, {
       font: GasPropertiesConstants.TITLE_FONT,
       fill: GasPropertiesColors.textFillProperty,
-      maxWidth: 200, // determined empirically
-      tandem: options.tandem.createTandem( 'titleText' )
+      maxWidth: 200 // determined empirically
     } );
 
     const items: AquaRadioButtonGroupItem<HoldConstant>[] = [

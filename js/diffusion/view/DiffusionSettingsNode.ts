@@ -144,8 +144,7 @@ class QuantityControl extends VBox {
     const labelText = new Text( labelStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       fill: GasPropertiesColors.textFillProperty,
-      maxWidth: 200, // determined empirically
-      tandem: options.tandem.createTandem( 'labelText' )
+      maxWidth: 200 // determined empirically
     } );
 
     // icons
