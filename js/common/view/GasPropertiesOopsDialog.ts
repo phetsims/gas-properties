@@ -6,17 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import OopsDialog from '../../../../scenery-phet/js/OopsDialog.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import phetGirlLabCoat_png from '../../../images/phetGirlLabCoat_png.js';
 import gasProperties from '../../gasProperties.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 
 export default class GasPropertiesOopsDialog extends OopsDialog {
 
-  public constructor( messageStringProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
+  public constructor( messageStringProperty: ReadOnlyProperty<string>, tandem: Tandem ) {
 
     super( messageStringProperty, {
 
