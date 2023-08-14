@@ -6,11 +6,11 @@ to provide a high-level overview, and to supplement the internal documentation
 (source code comments) and external documentation (design documents).  
 
 Before reading this document, you must read:
-* [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md), a high-level description of the simulation model
+* [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md), a high-level description of the simulation model
 
 In addition to this document, you are encouraged to read: 
-* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/master/doc/phet-development-overview.md)  
-* [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
+* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)  
+* [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md)
 * [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the design document
 
 ## Terminology
@@ -67,7 +67,7 @@ This section describes base classes that are common to all screens.  You'll find
 
 `Particle` is the base class for particles.  While mass and radius are mutable, only the _Diffusion_ screen uses this feature.
 
-`CollisionDetector` implements collision detection and response for all screens. See [model.md](https://github.com/phetsims/gas-properties/blob/master/doc/model.md) and code comments for more details.
+`CollisionDetector` implements collision detection and response for all screens. See [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md) and code comments for more details.
 
 ### View
 

@@ -123,11 +123,11 @@ const GasPropertiesConstants = {
   ATM_PER_KPA: 0.00986923,
 
   // Boltzmann constant k, converted to (pm^2 * AMU)/(ps^2 * K)
-  // see https://github.com/phetsims/gas-properties/blob/master/doc/images/boltzmann-conversion.png
+  // see https://github.com/phetsims/gas-properties/blob/main/doc/images/boltzmann-conversion.png
   BOLTZMANN: 8.316E3,
 
   // multiplier for converting pressure from AMU/(pm * ps^2) to kPa
-  // see https://github.com/phetsims/gas-properties/blob/master/doc/images/pressure-conversion.png
+  // see https://github.com/phetsims/gas-properties/blob/main/doc/images/pressure-conversion.png
   PRESSURE_CONVERSION_SCALE: 1.66E6,
 
   // Defaults for all AccordionBox instances
