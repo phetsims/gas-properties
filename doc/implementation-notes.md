@@ -1,23 +1,28 @@
 # Gas Properties - implementation notes
 
-This document contains notes related to the implementation of Gas Properties. 
-This is not an exhaustive description of the implementation.  The intention is 
-to provide a high-level overview, and to supplement the internal documentation 
-(source code comments) and external documentation (design documents).  
+This document contains notes related to the implementation of Gas Properties.
+This is not an exhaustive description of the implementation. The intention is
+to provide a high-level overview, and to supplement the internal documentation
+(source code comments) and external documentation (design documents).
 
 Before reading this document, you must read:
-* [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md), a high-level description of the simulation model
 
-In addition to this document, you are encouraged to read: 
-* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)  
+* [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md), a high-level description of the
+  simulation model
+
+In addition to this document, you are encouraged to read:
+
+* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md)
-* [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the design document
+* [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the
+  design document
 
 ## Terminology
 
-This section defines terminology that you'll see used throughout the internal and external documentation. Skim this section once, and refer back to it as you explore the implementation.
+This section defines terminology that you'll see used throughout the internal and external documentation. Skim this
+section once, and refer back to it as you explore the implementation.
 
-Much of the terminology for this sim is identified by labels that are visible in the user interface (Stopwatch, 
+Much of the terminology for this sim is identified by labels that are visible in the user interface (Stopwatch,
 Collision Detector, Particle Flow Rate, Separator, ...) and those terms are not included here.
 
 Here's the (relatively short) list of terms that might be unclear:
@@ -30,9 +35,12 @@ Here's the (relatively short) list of terms that might be unclear:
 
 ## General Considerations
 
-This section describes how this simulation addresses implementation considerations that are typically encountered in PhET simulations.
+This section describes how this simulation addresses implementation considerations that are typically encountered in
+PhET simulations.
 
-**Coordinate Transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y axis. See `BaseModel` for specifics.
+**Coordinate Transforms**: The model coordinate frame is in picometers (pm), with +x right, +y up. The standard (
+scenery) view coordinate frame has +x right, +y down. The transform is therefore a scaling transform that inverts the y
+axis. See `BaseModel` for specifics.
 
 **Time Transforms**: Real time (seconds) is scaled to sim time (picoseconds) by `TimeTransform`. Transforms are provided
 for "normal" and "slow" sim times. The `dt` for all top-level ScreenView and Model classes is in seconds, because that's
@@ -57,78 +65,92 @@ to this sim, do so with assertions enabled via the `ea` query parameter.
 
 ## Common to all screens
 
-This section describes base classes that are common to all screens.  You'll find these classes in `js/common/`.
+This section describes base classes that are common to all screens. You'll find these classes in `js/common/`.
 
 ### Model
 
-`BaseModel` is the model base class for all screens. It provides functionality that is unrelated to `PV = NkT`, the Ideal Gas Law. 
+`BaseModel` is the model base class for all screens. It provides functionality that is unrelated to `PV = NkT`, the
+Ideal Gas Law.
 
 `BaseContainer` is the base class for the container in all screens.
 
-`Particle` is the base class for particles.  While mass and radius are mutable, only the _Diffusion_ screen uses this feature.
+`Particle` is the base class for particles. While mass and radius are mutable, only the _Diffusion_ screen uses this
+feature.
 
-`CollisionDetector` implements collision detection and response for all screens. See [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md) and code comments for more details.
+`CollisionDetector` implements collision detection and response for all screens.
+See [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md) and code comments for more details.
 
 ### View
 
-`BaseScreenView` is the base `ScreenView` for all screens. As you can see, there are relatively few components that are shared by all screens.
+`BaseScreenView` is the base `ScreenView` for all screens. As you can see, there are relatively few components that are
+shared by all screens.
 
 `ParticlesNode` renders a collection of particles using the `Canvas` API.
 
 ## _Ideal_, _Explore_, and _Energy_ screens
 
-The _Ideal_, _Explore_, and _Energy_ screens are all based on application of the Ideal Gas Law, and their base class names therefore have the prefix "IdealGasLaw". (The _Diffusion_ screen is _not_ based on the Ideal Gas Law.) Code shared by these screens lives in `js/common/`.  
+The _Ideal_, _Explore_, and _Energy_ screens are all based on application of the Ideal Gas Law, and their base class
+names therefore have the prefix "IdealGasLaw". (The _Diffusion_ screen is _not_ based on the Ideal Gas Law.) Code shared
+by these screens lives in `js/common/`.
 
 ### Model
 
-`IdealGasLawModel` is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some responsibilities to the following sub-models:
+`IdealGasLawModel` is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some
+responsibilities to the following sub-models:
 
 * `ParticleSystem` - responsible for the particle system, including the number of particles `N`
 * `BaseContainer` - responsible for the container, including its volume `V`
 * `PressureModel` - responsible for pressure `P`, and the "noise" in the `PressureGauge`
-* `TemperatureModel` - responsible for temperature `T`, and the `Thermometer` 
+* `TemperatureModel` - responsible for temperature `T`, and the `Thermometer`
 
 Each screen has its own subclass of `IdealGasLawModel`. They are `IdealModel`, `ExploreMode`, and `EnergyModel`.
-While `IdealModel` and `ExploreModel` have no significant differences or minor variations, the _Energy_ screen has additional features that are implemented by these sub-models of `EnergyModel`:
+While `IdealModel` and `ExploreModel` have no significant differences or minor variations, the _Energy_ screen has
+additional features that are implemented by these sub-models of `EnergyModel`:
 
 * `AverageSpeedModel` - responsible for data in the "Average Speed" accordion box
 * `HistogramsModel` - responsible for data on the "Speed" and "Kinetic Energy" histograms
 
-The two species of particles are `HeavyParticle` and `LightParticle`, subclasses of `Particle`, with fixed mass and radius.
+The two species of particles are `HeavyParticle` and `LightParticle`, subclasses of `Particle`, with fixed mass and
+radius.
 
 All other model components in these screens are straightforward and will not be described here.
 
 ### View
-  
-`IdealGasLawScreenView` is the base `ScreenView` for these screens, a subclass of `BaseScreenView`.  Each screen has its own subclass of `IdealGasLawScreenView`.
+
+`IdealGasLawScreenView` is the base `ScreenView` for these screens, a subclass of `BaseScreenView`. Each screen has its
+own subclass of `IdealGasLawScreenView`.
 
 `IdealGasLawContainerNode` is the container view for these screens.
 
-`IdealGasLawParticleSystemNode` renders the particles system for these screens. To minimize `Canvas` size, it uses two `ParticleNode` instances, one for particles inside the container, one for particles outside the container.  If you're interested in visualizing the `Canvas` bounds, see the `canvasBounds` query parameter.
+`IdealGasLawParticleSystemNode` renders the particles system for these screens. To minimize `Canvas` size, it uses
+two `ParticleNode` instances, one for particles inside the container, one for particles outside the container. If you're
+interested in visualizing the `Canvas` bounds, see the `canvasBounds` query parameter.
 
-`IdealGasLawViewProperties` is the base class for view-specific axon Properties. Each screen has its own subclass of `IdealGasLawViewProperties`.
+`IdealGasLawViewProperties` is the base class for view-specific axon Properties. Each screen has its own subclass
+of `IdealGasLawViewProperties`.
 
 All other view components in these screens are straightforward and will not be described here.
 
 ## _Diffusion_ screen
- 
-Unlike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some 
-base classes, it has less in common with the other screens, and it has some components that are unique to it. 
+
+Unlike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some
+base classes, it has less in common with the other screens, and it has some components that are unique to it.
 
 ### Model
 
-The main model class is `DiffusionModel`. Like the models for the other screens, it is a subclass of `BaseModel`, which provides
+The main model class is `DiffusionModel`. Like the models for the other screens, it is a subclass of `BaseModel`, which
+provides
 model functionality that is _not_ related to the Ideal Gas Law. `DiffusionModel` delegates some responsibilities
 to these sub-models:
 
 * `DiffusionData` - responsible for the information shown in the "Data" accordion box
 * `ParticleFlowRateModel` - responsible for computing particle flow rates
 
-The container, `DiffusionContainer`, has no lid, but adds a removable vertical divider. 
+The container, `DiffusionContainer`, has no lid, but adds a removable vertical divider.
 
-Collision detection is handled in `DiffusionCollisionDetector`, a subclass of the same `CollisionDetector` used in the 
+Collision detection is handled in `DiffusionCollisionDetector`, a subclass of the same `CollisionDetector` used in the
 other screens. When the divider is in place, `DiffusionCollisionDetector` treats the container as 2 separate containers,
-with the divider playing the role of a container's wall.  All other aspects of collision detection and response are 
+with the divider playing the role of a container's wall. All other aspects of collision detection and response are
 identical.
 
 The two species of particles are (for lack of better names) `DiffusionParticle1` and `DiffusionParticle2`, subclasses of
@@ -143,7 +165,8 @@ provides view functionality that is common to all screens.
 
 View-specific axon Properties are found in `DiffusionViewProperties`.
 
-The container view is `DiffusionContainerNode`. It is unique to this screen, and shares nothing with the previous screens. 
+The container view is `DiffusionContainerNode`. It is unique to this screen, and shares nothing with the previous
+screens.
 
 The particle system view is `DiffusionParticleSystemNode`, a subclass `ParticlesNode`, and based `Canvas`.
 Since all particles are confined to the container, a since `Canvas` is used.
