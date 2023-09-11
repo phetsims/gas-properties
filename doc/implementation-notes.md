@@ -1,8 +1,7 @@
 # Gas Properties - implementation notes
 
-This document contains notes related to the implementation of Gas Properties.
-This is not an exhaustive description of the implementation. The intention is
-to provide a high-level overview, and to supplement the internal documentation
+This document contains notes related to the implementation of Gas Properties. This is not an exhaustive description of
+the implementation. The intention is to provide a high-level overview, and to supplement the internal documentation
 (source code comments) and external documentation (design documents).
 
 Before reading this document, you must read:
@@ -47,16 +46,14 @@ for "normal" and "slow" sim times. The `dt` for all top-level ScreenView and Mod
 what is provided by `Sim.js` when it steps the simulation. The `dt` values for all other methods are in picoseconds.
 (The units for `dt` are clearly documented throughout the code.)
 
-**Memory Management**: With the exception of `Particle` instances, all object instances (model and
-view) persist for the
+**Memory Management**: With the exception of `Particle` instances, all object instances (model and view) persist for the
 lifetime of the sim. There is no need to call `unlink`, `removeListener`, `dispose`, etc.
 
 **Query Parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and testing.
 Sim-specific query parameters are documented in `GasPropertiesQueryParameters`.
 
-**Color Profiles**: This sim has 2 color profiles, "default" and "projector", defined
-in `GasPropertiesColors`.
-The "projector" profile is used when the sim is switched into projector mode via the Preferences dialog.
+**Color Profiles**: This sim has 2 color profiles, "default" and "projector", defined in `GasPropertiesColors`. The "
+projector" profile is used when the sim is switched into projector mode via the Preferences dialog.
 
 **Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking.
 As an experiment, this sim performs type-checking for almost all function arguments via `assert`. While this may look
@@ -133,15 +130,14 @@ All other view components in these screens are straightforward and will not be d
 
 ## _Diffusion_ screen
 
-Unlike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some
-base classes, it has less in common with the other screens, and it has some components that are unique to it.
+Unlike the other screens, the _Diffusion_ screen is not based on the Ideal Gas Law. So while it shares some base
+classes, it has less in common with the other screens, and it has some components that are unique to it.
 
 ### Model
 
 The main model class is `DiffusionModel`. Like the models for the other screens, it is a subclass of `BaseModel`, which
-provides
-model functionality that is _not_ related to the Ideal Gas Law. `DiffusionModel` delegates some responsibilities
-to these sub-models:
+provides model functionality that is _not_ related to the Ideal Gas Law. `DiffusionModel` delegates some
+responsibilities to these sub-models:
 
 * `DiffusionData` - responsible for the information shown in the "Data" accordion box
 * `ParticleFlowRateModel` - responsible for computing particle flow rates
@@ -168,17 +164,16 @@ View-specific axon Properties are found in `DiffusionViewProperties`.
 The container view is `DiffusionContainerNode`. It is unique to this screen, and shares nothing with the previous
 screens.
 
-The particle system view is `DiffusionParticleSystemNode`, a subclass `ParticlesNode`, and based `Canvas`.
-Since all particles are confined to the container, a since `Canvas` is used.
+The particle system view is `DiffusionParticleSystemNode`, a subclass `ParticlesNode`, and based `Canvas`. Since all
+particles are confined to the container, a since `Canvas` is used.
 
 All other view components in this screen are straightforward and will not be described here.
 
 ## Related Simulations
 
-**Gases Intro**: This sim consists of 2 screens, both of which are based on the _Ideal_ screen. The _Intro_ screen
-is the _Ideal_ screen with the "Hold Constant" radio buttons removed. The _Laws_ screen is the _Ideal_ screen with
-no modifications. While _Gas Properties_ has noise turned on for the pressure gauge, the _Gases Intro_ sim has it
-turned off by default. See the "Pressure Noise" checkbox in the Preferences dialog, or the `pressureNoise` query
-parameter.
+**Gases Intro**: This sim consists of 2 screens, both of which are based on the _Ideal_ screen. The _Intro_ screen is
+the _Ideal_ screen with the "Hold Constant" radio buttons removed. The _Laws_ screen is the _Ideal_ screen with no
+modifications. While _Gas Properties_ has noise turned on for the pressure gauge, the _Gases Intro_ sim has it turned
+off by default. See the "Pressure Noise" checkbox in the Preferences dialog, or the `pressureNoise` query parameter.
 
 **Diffusion**: This is sim consists of the _Diffusion_ screen with no modifications.
