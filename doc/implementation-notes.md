@@ -43,7 +43,7 @@ axis. See `BaseModel` for specifics.
 
 **Time Transforms**: Real time (seconds) is scaled to sim time (picoseconds) by `TimeTransform`. Transforms are provided
 for "normal" and "slow" sim times. The `dt` for all top-level ScreenView and Model classes is in seconds, because that's
-what is provided by `Sim.js` when it steps the simulation. The `dt` values for all other methods are in picoseconds.
+what is provided by `Sim` when it steps the simulation. The `dt` values for all other methods are in picoseconds.
 (The units for `dt` are clearly documented throughout the code.)
 
 **Memory Management**: With the exception of `Particle` instances, all object instances (model and view) persist for the
