@@ -114,7 +114,7 @@ const GasPropertiesConstants = {
   CONTROL_FONT: new PhetFont( 16 ),
 
   // spacing of the horizontal lines in the histograms, in number of particles
-  HISTOGRAM_LINE_SPACING: 50,
+  HISTOGRAM_LINE_SPACING: 25,
 
   // mass conversion: kg per 1 AMU (atomic mass unit)
   KG_PER_AMU: 1.66E-27,
