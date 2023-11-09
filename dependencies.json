@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.0-dev.7 Thu Nov 09 2023 11:17:01 GMT-0700 (Mountain Standard Time)",
+  "comment": "# gas-properties 1.1.0-dev.8 Thu Nov 09 2023 11:25:19 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "94831413cd4dd4dc27c2a1aebbcafd3987934a99",
     "branch": "main"
@@ -21,7 +21,7 @@
     "branch": "main"
   },
   "gas-properties": {
-    "sha": "a2e2b4b904bd053ec5d758c874d2c0100cf25602",
+    "sha": "b30c745040794febf3617b58ff3f4f8c3058d550",
     "branch": "main"
   },
   "joist": {
