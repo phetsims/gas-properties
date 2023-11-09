@@ -26,7 +26,7 @@ export default class IntervalLinesNode extends Path {
     super( new Shape(), {
       stroke: 'white',
       opacity: 0.5,
-      lineWidth: 0.5,
+      lineWidth: 1,
       isDisposable: false
     } );
 
