@@ -112,6 +112,8 @@ export default class IdealGasLawContainer extends BaseContainer {
     this.isOpenProperty = new DerivedProperty( [ this.lidIsOnProperty, this.lidWidthProperty ],
       ( lidIsOn, lidWidth ) => {
         return !lidIsOn || this.getOpeningWidth() !== 0;
+      }, {
+        accessNonDependencies: true
       } );
   }
 
