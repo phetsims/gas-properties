@@ -113,7 +113,7 @@ export default class IdealGasLawContainer extends BaseContainer {
       ( lidIsOn, lidWidth ) => {
         return !lidIsOn || this.getOpeningWidth() !== 0;
       }, {
-        accessNonDependencies: true
+        accessNonDependencies: true //TODO https://github.com/phetsims/gas-properties/issues/211
       } );
   }
 
