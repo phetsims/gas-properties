@@ -109,12 +109,10 @@ export default class IdealGasLawContainer extends BaseContainer {
 
     this.previousLeft = this.left;
 
-    this.isOpenProperty = new DerivedProperty( [ this.lidIsOnProperty, this.lidWidthProperty ],
-      ( lidIsOn, lidWidth ) => {
-        return !lidIsOn || this.getOpeningWidth() !== 0;
-      }, {
-        accessNonDependencies: true //TODO https://github.com/phetsims/gas-properties/issues/211
-      } );
+    this.isOpenProperty = new DerivedProperty(
+      [ this.lidIsOnProperty, this.lidWidthProperty, this.boundsProperty ],
+      ( lidIsOn, lidWidth, bounds ) => !lidIsOn || this.getOpeningWidth() !== 0
+    );
   }
 
   public override reset(): void {
