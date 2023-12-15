@@ -228,8 +228,7 @@ export default class IdealGasLawContainer extends BaseContainer {
       openingLeft = this.left + this.openingLeftInset;
     }
     assert && assert( openingLeft <= this.getOpeningRight(),
-      `openingLeft ${openingLeft} must be <= openingRight ${this.getOpeningRight()}`
-    );
+      `openingLeft ${openingLeft} must be <= openingRight ${this.getOpeningRight()}, lidIsOn=${this.lidIsOnProperty.value}` );
 
     return openingLeft;
   }
