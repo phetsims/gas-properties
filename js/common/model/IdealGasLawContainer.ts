@@ -90,9 +90,7 @@ export default class IdealGasLawContainer extends BaseContainer {
 
     this.minLidWidth = this.openingLeftInset + this.wallThickness;
 
-    const initialLidWidth = this.widthProperty.value - this.openingRightInset + this.wallThickness;
-
-    this.lidWidthProperty = new NumberProperty( initialLidWidth, {
+    this.lidWidthProperty = new NumberProperty( this.getMaxLidWidth(), {
 
       // range changes dynamically with width of container
       isValidValue: value => ( value >= this.minLidWidth && value <= this.getMaxLidWidth() ),
