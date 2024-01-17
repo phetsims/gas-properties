@@ -16,6 +16,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import SceneryPhetStrings from '../../../../scenery-phet/js/SceneryPhetStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -35,7 +36,11 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
           showAsMinutesAndSeconds: false,
           numberOfDecimalPlaces: 1,
           units: GasPropertiesStrings.picosecondsStringProperty
-        } )
+        } ),
+        numberFormatterDependencies: [
+          SceneryPhetStrings.stopwatchValueUnitsPatternStringProperty, // used by StopwatchNode.createRichTextNumberFormatter
+          GasPropertiesStrings.picosecondsStringProperty
+        ]
       },
       visiblePropertyOptions: {
         phetioReadOnly: true,
