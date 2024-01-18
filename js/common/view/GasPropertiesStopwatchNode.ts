@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * GasPropertiesStopwatchNode is a specialization of StopwatchNode for this sim, a digital stopwatch.
