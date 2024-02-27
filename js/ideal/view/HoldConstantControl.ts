@@ -13,7 +13,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -60,27 +59,27 @@ export default class HoldConstantControl extends VBox {
       {
         value: 'nothing',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
-        tandemName: `nothing${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'nothingRadioButton'
       },
       {
         value: 'volume',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
-        tandemName: `volume${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'volumeRadioButton'
       },
       {
         value: 'temperature',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
-        tandemName: `temperature${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'temperatureRadioButton'
       },
       {
         value: 'pressureV',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
-        tandemName: `pressureV${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'pressureVRadioButton'
       },
       {
         value: 'pressureT',
         createNode: ( tandem: Tandem ) => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
-        tandemName: `pressureT${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'pressureTRadioButton'
       }
     ];
 

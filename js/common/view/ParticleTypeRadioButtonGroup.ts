@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
-import RectangularRadioButton from '../../../../sun/js/buttons/RectangularRadioButton.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupItem, RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
@@ -52,12 +51,12 @@ export default class ParticleTypeRadioButtonGroup extends RectangularRadioButton
       {
         value: 'heavy',
         createNode: () => GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-        tandemName: `heavyParticles${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'heavyParticlesRadioButton'
       },
       {
         value: 'light',
         createNode: () => GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        tandemName: `lightParticles${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'lightParticlesRadioButton'
       }
     ];
 
