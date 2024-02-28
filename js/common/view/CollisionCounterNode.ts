@@ -102,7 +102,7 @@ export default class CollisionCounterNode extends Node {
             maxWidth: 100 // determined empirically
           } );
         },
-        tandemName: 'samplePeriodItem'
+        tandemName: `samplePeriod${samplePeriod}Item`
       };
     } );
 
