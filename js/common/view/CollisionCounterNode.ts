@@ -102,7 +102,7 @@ export default class CollisionCounterNode extends Node {
             maxWidth: 100 // determined empirically
           } );
         },
-        tandemName: `samplePeriod${samplePeriod}${ComboBox.ITEM_TANDEM_NAME_SUFFIX}`
+        tandemName: 'samplePeriodItem'
       };
     } );
 

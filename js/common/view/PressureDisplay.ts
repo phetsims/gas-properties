@@ -40,7 +40,7 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
     const items: ComboBoxDisplayItem<PressureUnits>[] = [
       {
         choice: 'atmospheres',
-        tandemName: `atmospheres${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        tandemName: 'atmospheresItem',
         numberProperty: pressureGauge.pressureAtmospheresProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.atmospheresStringProperty,
@@ -50,7 +50,7 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
       },
       {
         choice: 'kilopascals',
-        tandemName: `kilopascals${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        tandemName: 'kilopascalsItem',
         numberProperty: pressureGauge.pressureKilopascalsProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kilopascalsStringProperty,

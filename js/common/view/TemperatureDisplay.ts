@@ -39,14 +39,14 @@ export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits
     const items: ComboBoxDisplayItem<TemperatureUnits>[] = [
       {
         choice: 'kelvin',
-        tandemName: `kelvin${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        tandemName: 'kelvinItem',
         numberProperty: thermometer.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kelvinStringProperty
       },
       {
         choice: 'celsius',
-        tandemName: `celsius${ComboBoxDisplay.ITEM_TANDEM_NAME_SUFFIX}`,
+        tandemName: 'celsiusItem',
         numberProperty: thermometer.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.degreesCelsiusStringProperty
