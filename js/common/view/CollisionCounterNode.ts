@@ -1,4 +1,4 @@
-// Copyright 2018-2023, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * CollisionCounterNode displays the number of collisions between particles and the container walls, during
