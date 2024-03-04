@@ -1,7 +1,8 @@
 // Copyright 2018-2023, University of Colorado Boulder
 
 /**
- * IdealGasLawScreenView is the ScreenView base class for screens that are based on the Ideal Gas Law.
+ * IdealGasLawScreenView is the ScreenView base class for screens that are based on the Ideal Gas Law
+ * (Ideal, Explore, and Energy screens).
  *
  * Contains these UI components:
  *
@@ -71,11 +72,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
   private readonly lightBicyclePumpNode: GasPropertiesBicyclePumpNode;
   private readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
 
-  public constructor( model: IdealGasLawModel,
-                      particleTypeProperty: StringUnionProperty<ParticleType>,
-                      widthVisibleProperty: Property<boolean>,
-                      tandem: Tandem,
-                      providedOptions?: IdealGasLawScreenViewOptions ) {
+  protected constructor( model: IdealGasLawModel,
+                         particleTypeProperty: StringUnionProperty<ParticleType>,
+                         widthVisibleProperty: Property<boolean>,
+                         tandem: Tandem,
+                         providedOptions?: IdealGasLawScreenViewOptions ) {
 
     const options = optionize<IdealGasLawScreenViewOptions, SelfOptions, BaseScreenViewOptions>()( {
 
