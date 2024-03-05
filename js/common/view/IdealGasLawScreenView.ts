@@ -1,4 +1,4 @@
-// Copyright 2018-2023, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * IdealGasLawScreenView is the ScreenView base class for screens that are based on the Ideal Gas Law
