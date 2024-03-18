@@ -141,20 +141,6 @@ export default class DiffusionScreenView extends BaseScreenView {
     this.addChild( particleFlowRateNode2 );
     this.addChild( stopwatchNode );
 
-    // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
-    this.pdomPlayAreaNode.pdomOrder = [
-      //TODO https://github.com/phetsims/gas-properties/issues/213
-    ];
-
-    // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
-    this.pdomControlAreaNode.pdomOrder = [
-      //TODO https://github.com/phetsims/gas-properties/issues/213
-      dataAccordionBox,
-      controlPanel,
-      this.timeControlNode,
-      this.resetAllButton
-    ];
-
     // Position the time controls
     this.timeControlNode.mutate( {
       left: controlPanel.left,
@@ -172,6 +158,20 @@ export default class DiffusionScreenView extends BaseScreenView {
     this.viewProperties = viewProperties;
     this.particleSystemNode = particleSystemNode;
     this.regionsNode = regionsNode;
+
+    // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    this.pdomPlayAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+    ];
+
+    // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    this.pdomControlAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+      dataAccordionBox,
+      controlPanel,
+      this.timeControlNode,
+      this.resetAllButton
+    ];
   }
 
   protected override reset(): void {

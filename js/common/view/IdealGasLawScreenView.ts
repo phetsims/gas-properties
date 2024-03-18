@@ -65,12 +65,20 @@ export type IdealGasLawScreenViewOptions = SelfOptions & BaseScreenViewOptions;
 
 export default class IdealGasLawScreenView extends BaseScreenView {
 
-  private readonly containerNode: IdealGasLawContainerNode;
+  protected readonly containerNode: IdealGasLawContainerNode;
   private readonly particleSystemNode: IdealGasLawParticleSystemNode;
   private readonly regionsNode: RegionsNode | null;
-  private readonly heavyBicyclePumpNode: GasPropertiesBicyclePumpNode;
-  private readonly lightBicyclePumpNode: GasPropertiesBicyclePumpNode;
-  private readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
+  protected readonly heavyBicyclePumpNode: GasPropertiesBicyclePumpNode;
+  protected readonly lightBicyclePumpNode: GasPropertiesBicyclePumpNode;
+  protected readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
+
+  // For setting pdomOrder in subclasses
+  protected readonly returnLidButton: Node;
+  protected readonly particleTypeRadioButtonGroup: Node;
+  protected readonly eraseParticlesButton: Node;
+  protected readonly thermometerNode: Node;
+  protected readonly pressureGaugeNode: Node;
+  protected readonly collisionCounterNode?: Node;
 
   protected constructor( model: IdealGasLawModel,
                          particleTypeProperty: StringUnionProperty<ParticleType>,
@@ -276,11 +284,13 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const toolsParent = new Node();
 
     // Collision Counter
+    let collisionCounterNode: Node | undefined;
     if ( model.collisionCounter ) {
       const collisionCounterListboxParent = new Node();
-      toolsParent.addChild( new CollisionCounterNode( model.collisionCounter, collisionCounterListboxParent, this.visibleBoundsProperty, {
+      collisionCounterNode = new CollisionCounterNode( model.collisionCounter, collisionCounterListboxParent, this.visibleBoundsProperty, {
         tandem: tandem.createTandem( 'collisionCounterNode' )
-      } ) );
+      } );
+      toolsParent.addChild( collisionCounterNode );
       toolsParent.addChild( collisionCounterListboxParent );
     }
 
@@ -340,6 +350,12 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     this.heavyBicyclePumpNode = heavyBicyclePumpNode;
     this.lightBicyclePumpNode = lightBicyclePumpNode;
     this.heaterCoolerNode = heaterCoolerNode;
+    this.returnLidButton = returnLidButton;
+    this.particleTypeRadioButtonGroup = particleTypeRadioButtonGroup;
+    this.eraseParticlesButton = eraseParticlesButton;
+    this.thermometerNode = thermometerNode;
+    this.pressureGaugeNode = pressureGaugeNode;
+    this.collisionCounterNode = collisionCounterNode;
   }
 
   protected override reset(): void {
