@@ -61,6 +61,31 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     vBox.moveToBack();
 
     this.viewProperties = viewProperties;
+
+    // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    this.pdomPlayAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+    ];
+
+    // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    assert && assert( this.collisionCounterNode );
+    this.pdomControlAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+      this.collisionCounterNode!,
+      this.returnLidButton,
+      this.containerNode,
+      this.thermometerNode,
+      this.pressureGaugeNode,
+      this.timeControlNode,
+      this.heaterCoolerNode,
+      this.eraseParticlesButton,
+      this.heavyBicyclePumpNode,
+      this.lightBicyclePumpNode,
+      this.particleTypeRadioButtonGroup,
+      toolsPanel,
+      particlesAccordionBox,
+      this.resetAllButton
+    ];
   }
 
   protected override reset(): void {
