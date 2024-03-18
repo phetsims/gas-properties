@@ -8,6 +8,7 @@
 
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -26,8 +27,11 @@ export default abstract class BaseScreenView extends ScreenView {
 
   protected readonly model: BaseModel;
 
-  // subclass is responsible for position
-  protected readonly timeControlNode: TimeControlNode;
+  // subclass is responsible for position and pdomOrder
+  protected readonly timeControlNode: Node;
+
+  // subclass is responsible for pdomOrder
+  protected readonly resetAllButton: Node;
 
   protected constructor( model: BaseModel, tandem: Tandem, providedOptions?: BaseScreenViewOptions ) {
 
@@ -78,13 +82,13 @@ export default abstract class BaseScreenView extends ScreenView {
     this.addChild( this.timeControlNode );
 
     // Reset All button
-    const resetAllButton = new ResetAllButton( {
+    this.resetAllButton = new ResetAllButton( {
       listener: () => { this.reset(); },
       right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
-    this.addChild( resetAllButton );
+    this.addChild( this.resetAllButton );
   }
 
   protected reset(): void {

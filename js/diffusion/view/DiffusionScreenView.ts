@@ -141,6 +141,18 @@ export default class DiffusionScreenView extends BaseScreenView {
     this.addChild( particleFlowRateNode2 );
     this.addChild( stopwatchNode );
 
+    this.pdomPlayAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+    ];
+
+    this.pdomControlAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+      dataAccordionBox,
+      controlPanel,
+      this.timeControlNode,
+      this.resetAllButton
+    ];
+
     // Position the time controls
     this.timeControlNode.mutate( {
       left: controlPanel.left,
