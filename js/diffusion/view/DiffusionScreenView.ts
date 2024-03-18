@@ -141,10 +141,12 @@ export default class DiffusionScreenView extends BaseScreenView {
     this.addChild( particleFlowRateNode2 );
     this.addChild( stopwatchNode );
 
+    // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     this.pdomPlayAreaNode.pdomOrder = [
       //TODO https://github.com/phetsims/gas-properties/issues/213
     ];
 
+    // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     this.pdomControlAreaNode.pdomOrder = [
       //TODO https://github.com/phetsims/gas-properties/issues/213
       dataAccordionBox,
