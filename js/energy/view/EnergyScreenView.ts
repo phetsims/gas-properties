@@ -125,6 +125,31 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
     this.viewProperties = viewProperties;
     this.speedAccordionBox = speedAccordionBox;
     this.kineticEnergyAccordionBox = kineticEnergyAccordionBox;
+
+    // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    this.pdomPlayAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+    ];
+
+    // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    this.pdomControlAreaNode.pdomOrder = [
+      //TODO https://github.com/phetsims/gas-properties/issues/213
+      leftPanels,
+      this.returnLidButton,
+      this.containerNode,
+      this.thermometerNode,
+      this.pressureGaugeNode,
+      this.timeControlNode,
+      this.heaterCoolerNode,
+      this.eraseParticlesButton,
+      this.heavyBicyclePumpNode,
+      this.lightBicyclePumpNode,
+      this.particleTypeRadioButtonGroup,
+      toolsPanel,
+      particlesAccordionBox,
+      injectionTemperatureAccordionBox,
+      this.resetAllButton
+    ];
   }
 
   protected override reset(): void {
