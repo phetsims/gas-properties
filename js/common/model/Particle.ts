@@ -1,4 +1,4 @@
-// Copyright 2019-2022, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * Particle is the model for all types of particles. A particle is a perfect rigid sphere.

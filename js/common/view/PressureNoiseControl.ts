@@ -1,4 +1,4 @@
-// Copyright 2022-2023, University of Colorado Boulder
+// Copyright 2022-2024, University of Colorado Boulder
 
 /**
  * PressureNoiseControl is the checkbox labeled 'Pressure Noise' that appears in the Preferences dialog.

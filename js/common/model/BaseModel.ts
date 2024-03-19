@@ -1,4 +1,4 @@
-// Copyright 2018-2023, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * BaseModel is the base class for models in all screens. It provides functionality that is NOT related to the
