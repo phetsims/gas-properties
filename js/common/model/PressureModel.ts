@@ -24,7 +24,6 @@ const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 
 export default class PressureModel {
 
-  private readonly holdConstantProperty: StringUnionProperty<HoldConstant>;
   private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
   private readonly volumeProperty: TReadOnlyProperty<number>;
   private readonly temperatureProperty: TReadOnlyProperty<number | null>;
@@ -46,7 +45,6 @@ export default class PressureModel {
                       blowLidOff: () => void,
                       tandem: Tandem ) {
 
-    this.holdConstantProperty = holdConstantProperty;
     this.numberOfParticlesProperty = numberOfParticlesProperty;
     this.volumeProperty = volumeProperty;
     this.temperatureProperty = temperatureProperty;
