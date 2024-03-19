@@ -4,41 +4,28 @@
  * GasPropertiesPreferencesNode is the user interface for sim-specific preferences, accessed via the Preferences dialog.
  * These preferences are global, and affect all screens.
  *
- * The Preferences dialog is created on demand by joist, using a PhetioCapsule. So GasPropertiesPreferencesNode must
- * implement dispose, and all elements of GasPropertiesPreferencesNode that have tandems must be disposed.
- *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesPreferences from '../model/GasPropertiesPreferences.js';
-import PressureNoiseCheckbox from './PressureNoiseCheckbox.js';
-import { Node, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type GasPropertiesPreferencesNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+import PressureNoiseControl from './PressureNoiseControl.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class GasPropertiesPreferencesNode extends VBox {
 
-  public constructor( providedOptions: GasPropertiesPreferencesNodeOptions ) {
-
-    const options = optionize<GasPropertiesPreferencesNodeOptions, SelfOptions, VBoxOptions>()( {
-      // empty optionize, because we're setting options.children below
-    }, providedOptions );
-
-    const children: Node[] = [];
+  public constructor( tandem: Tandem ) {
 
     // Pressure Noise control
-    const pressureNoiseCheckbox = new PressureNoiseCheckbox( GasPropertiesPreferences.pressureNoiseProperty,
-      options.tandem.createTandem( 'pressureNoiseCheckbox' ) );
-    children.push( pressureNoiseCheckbox );
+    const pressureNoiseControl = new PressureNoiseControl( GasPropertiesPreferences.pressureNoiseProperty,
+      tandem.createTandem( 'pressureNoiseControl' ) );
 
-    options.children = children;
-
-    super( options );
+    super( {
+      isDisposable: false,
+      children: [ pressureNoiseControl ],
+      tandem: tandem
+    } );
   }
 }
 

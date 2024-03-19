@@ -1,7 +1,7 @@
 // Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * PressureNoiseCheckbox is the checkbox labeled 'Pressure Noise' that appears in the Preferences dialog.
+ * PressureNoiseControl is the checkbox labeled 'Pressure Noise' that appears in the Preferences dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,7 +17,7 @@ import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwit
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
-export default class PressureNoiseCheckbox extends PreferencesControl {
+export default class PressureNoiseControl extends PreferencesControl {
 
   public constructor( pressureNoiseProperty: Property<boolean>, tandem: Tandem ) {
 
@@ -52,4 +52,4 @@ export default class PressureNoiseCheckbox extends PreferencesControl {
   }
 }
 
-gasProperties.register( 'PressureNoiseCheckbox', PressureNoiseCheckbox );
+gasProperties.register( 'PressureNoiseControl', PressureNoiseControl );
