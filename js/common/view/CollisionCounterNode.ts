@@ -13,7 +13,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import DragBoundsProperty from '../../../../scenery-phet/js/DragBoundsProperty.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
@@ -28,6 +27,7 @@ import PlayResetButton from './PlayResetButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import RichKeyboardDragListener from '../../../../sun/js/RichKeyboardDragListener.js';
 import RichDragListener from '../../../../sun/js/RichDragListener.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 // constants
 const X_MARGIN = 15;
@@ -183,7 +183,10 @@ export default class CollisionCounterNode extends Node {
     } );
 
     // drag bounds, adjusted to keep this entire Node inside visible bounds
-    const dragBoundsProperty = new DragBoundsProperty( this, visibleBoundsProperty );
+    const dragBoundsProperty = new DerivedProperty( [ this.boundsProperty, visibleBoundsProperty ],
+      ( bounds, visibleBounds ) =>
+        visibleBounds.withMaxX( visibleBounds.maxX - bounds.width ).withMaxY( visibleBounds.maxY - bounds.height )
+    );
 
     // Interrupt user interactions when the visible bounds change, such as a device orientation change or window resize.
     visibleBoundsProperty.link( () => this.interruptSubtreeInput() );
