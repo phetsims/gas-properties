@@ -195,9 +195,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     const bicyclePumpOptions: StrictOmit<GasPropertiesBicyclePumpNodeOptions, 'tandem'> = {
       translation: bicyclePumpPosition,
-      hoseAttachmentOffset: hosePosition.minus( bicyclePumpPosition ),
-      handleTouchAreaXDilation: 35,
-      handleTouchAreaYDilation: 35
+      hoseAttachmentOffset: hosePosition.minus( bicyclePumpPosition )
     };
 
     // Bicycle pump for heavy particles
