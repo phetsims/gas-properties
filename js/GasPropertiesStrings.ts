@@ -63,6 +63,7 @@ type StringsType = {
   'radiusPmStringProperty': LocalizedStringProperty;
   'initialTemperatureKStringProperty': LocalizedStringProperty;
   'pressureNoiseStringProperty': LocalizedStringProperty;
+  'pressureNoiseDescriptionStringProperty': LocalizedStringProperty;
   'scaleStringProperty': LocalizedStringProperty;
   'oopsTemperatureEmptyStringProperty': LocalizedStringProperty;
   'oopsTemperatureOpenStringProperty': LocalizedStringProperty;

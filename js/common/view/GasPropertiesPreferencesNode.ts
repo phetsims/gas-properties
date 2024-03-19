@@ -14,7 +14,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesPreferences from '../model/GasPropertiesPreferences.js';
-import { PressureNoiseCheckbox } from './PressureNoiseCheckbox.js';
+import PressureNoiseCheckbox from './PressureNoiseCheckbox.js';
 import { Node, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -31,10 +31,9 @@ export default class GasPropertiesPreferencesNode extends VBox {
 
     const children: Node[] = [];
 
-    // Pressure Noise checkbox
-    const pressureNoiseCheckbox = new PressureNoiseCheckbox( GasPropertiesPreferences.pressureNoiseProperty, {
-      tandem: options.tandem.createTandem( 'pressureNoiseCheckbox' )
-    } );
+    // Pressure Noise control
+    const pressureNoiseCheckbox = new PressureNoiseCheckbox( GasPropertiesPreferences.pressureNoiseProperty,
+      options.tandem.createTandem( 'pressureNoiseCheckbox' ) );
     children.push( pressureNoiseCheckbox );
 
     options.children = children;

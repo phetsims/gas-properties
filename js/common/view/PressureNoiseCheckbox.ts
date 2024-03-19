@@ -7,41 +7,48 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { RichText, Text } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
-import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwitch.js';
+import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
-type SelfOptions = EmptySelfOptions;
+export default class PressureNoiseCheckbox extends PreferencesControl {
 
-type PressureNoiseCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+  public constructor( pressureNoiseProperty: Property<boolean>, tandem: Tandem ) {
 
-export class PressureNoiseCheckbox extends Checkbox {
-
-  private readonly disposePressureNoiseCheckbox: () => void;
-
-  public constructor( pressureNoiseProperty: Property<boolean>, providedOptions: PressureNoiseCheckboxOptions ) {
-
-    const options = providedOptions;
-
-    const pressureNoiseText = new Text( GasPropertiesStrings.pressureNoiseStringProperty, {
-      font: GasPropertiesConstants.CONTROL_FONT,
-      maxWidth: 350 // set empirically
+    const labelText = new Text( GasPropertiesStrings.pressureNoiseStringProperty, {
+      font: new PhetFont( {
+        size: 16,
+        weight: 'bold'
+      } ),
+      maxWidth: 200
     } );
 
-    super( pressureNoiseProperty, pressureNoiseText, options );
+    const toggleSwitch = new ToggleSwitch( pressureNoiseProperty, false, true,
+      combineOptions<ToggleSwitchOptions>( {}, PreferencesDialogConstants.TOGGLE_SWITCH_OPTIONS, {
+        tandem: tandem.createTandem( 'toggleSwitch' ),
+        phetioVisiblePropertyInstrumented: false
+      } ) );
 
-    this.disposePressureNoiseCheckbox = () => {
-      pressureNoiseText.dispose();
-    };
-  }
+    const descriptionText = new RichText( GasPropertiesStrings.pressureNoiseDescriptionStringProperty, {
+      lineWrap: 550,
+      maxHeight: 50,
+      font: new PhetFont( 16 )
+    } );
 
-  public override dispose(): void {
-    this.disposePressureNoiseCheckbox();
-    super.dispose();
+    super( {
+      labelNode: labelText,
+      controlNode: toggleSwitch,
+      descriptionNode: descriptionText,
+      isDisposable: false,
+      labelSpacing: 20,
+      tandem: tandem
+    } );
   }
 }
 
