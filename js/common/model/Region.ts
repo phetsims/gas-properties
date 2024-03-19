@@ -25,6 +25,7 @@ export default class Region {
   public readonly bounds: Bounds2;
 
   // the particles in this region
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly particles: Particle[];
 
   public constructor( bounds: Bounds2 ) {

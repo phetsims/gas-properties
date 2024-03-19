@@ -83,6 +83,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
     // Private Property that either corresponds to the model or is animated, depending on the Hold Constant mode.
     // This is the Property that is actually connected to the HeaterCoolerNode.
+    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
     const privateHeatCoolAmountProperty = new NumberProperty( 0, {
       range: new Range( -1, 1 )
     } );
