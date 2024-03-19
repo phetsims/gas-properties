@@ -17,7 +17,7 @@ import DragBoundsProperty from '../../../../scenery-phet/js/DragBoundsProperty.j
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
-import { Circle, DragListener, HBox, Node, NodeOptions, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
+import { Circle, HBox, Node, NodeOptions, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import ComboBox, { ComboBoxItem } from '../../../../sun/js/ComboBox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -26,6 +26,8 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import RichKeyboardDragListener from '../../../../sun/js/RichKeyboardDragListener.js';
+import RichDragListener from '../../../../sun/js/RichDragListener.js';
 
 // constants
 const X_MARGIN = 15;
@@ -150,7 +152,9 @@ export default class CollisionCounterNode extends Node {
 
     // The background include the bezel and rectangle.
     const backgroundNode = new Node( {
-      children: [ bezelNode, rectangleNode ]
+      children: [ bezelNode, rectangleNode ],
+      tagName: 'div', // for KeyboardDragListener
+      focusable: true // for KeyboardDragListener
     } );
 
     content.center = backgroundNode.center;
@@ -200,12 +204,20 @@ export default class CollisionCounterNode extends Node {
 
     // Dragging, added to background so that other UI components get input events on touch devices.
     // If added to 'this', touchSnag will lock out listeners for other UI components.
-    backgroundNode.addInputListener( new DragListener( {
+    backgroundNode.addInputListener( new RichDragListener( {
       targetNode: this,
       positionProperty: collisionCounter.positionProperty,
       dragBoundsProperty: dragBoundsProperty,
       start: onPress,
       tandem: options.tandem.createTandem( 'dragListener' )
+    } ) );
+    backgroundNode.addInputListener( new RichKeyboardDragListener( {
+      positionProperty: collisionCounter.positionProperty,
+      dragBoundsProperty: dragBoundsProperty,
+      start: onPress,
+      dragSpeed: 300,
+      shiftDragSpeed: 75,
+      tandem: options.tandem.createTandem( 'keyboardDragListener' )
     } ) );
 
     // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
