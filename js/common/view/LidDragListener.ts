@@ -8,12 +8,13 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { DragListener, Node } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
+import RichDragListener from '../../../../sun/js/RichDragListener.js';
 
-export default class LidDragListener extends DragListener {
+export default class LidDragListener extends RichDragListener {
 
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node,
                       tandem: Tandem ) {
