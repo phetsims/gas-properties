@@ -53,7 +53,7 @@ export default class BaseContainer {
   // is resizing the container with the sim paused.  See #125.
   public readonly userIsAdjustingWidthProperty: Property<boolean>;
 
-  public constructor( providedOptions: BaseContainerOptions ) {
+  protected constructor( providedOptions: BaseContainerOptions ) {
 
     const options = optionize<BaseContainerOptions, SelfOptions>()( {
 

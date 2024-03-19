@@ -60,16 +60,16 @@ export default class HistogramNode extends Node {
    * @param yAxisStringProperty - label on the y-axis
    * @param providedOptions
    */
-  public constructor( numberOfBins: number,
-                      binWidth: number,
-                      binCountsUpdatedEmitter: Emitter,
-                      allBinCountsProperty: Property<number[]>,
-                      heavyBinCountsProperty: Property<number[]>,
-                      lightBinCountsProperty: Property<number[]>,
-                      yScaleProperty: Property<number>,
-                      xAxisStringProperty: TReadOnlyProperty<string>,
-                      yAxisStringProperty: TReadOnlyProperty<string>,
-                      providedOptions: HistogramNodeOptions ) {
+  protected constructor( numberOfBins: number,
+                         binWidth: number,
+                         binCountsUpdatedEmitter: Emitter,
+                         allBinCountsProperty: Property<number[]>,
+                         heavyBinCountsProperty: Property<number[]>,
+                         lightBinCountsProperty: Property<number[]>,
+                         yScaleProperty: Property<number>,
+                         xAxisStringProperty: TReadOnlyProperty<string>,
+                         yAxisStringProperty: TReadOnlyProperty<string>,
+                         providedOptions: HistogramNodeOptions ) {
     assert && assert( numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
     assert && assert( binWidth > 0, `invalid binWidth: ${binWidth}` );
 

@@ -20,7 +20,7 @@ export type GasPropertiesScreenOptions = SelfOptions & PickRequired<ScreenOption
 
 export default class GasPropertiesScreen<M extends TModel, V extends ScreenView> extends Screen<M, V> {
 
-  public constructor( createModel: () => M, createView: ( model: M ) => V, providedOptions: GasPropertiesScreenOptions ) {
+  protected constructor( createModel: () => M, createView: ( model: M ) => V, providedOptions: GasPropertiesScreenOptions ) {
 
     const options = optionize<GasPropertiesScreenOptions, SelfOptions, ScreenOptions>()( {
 

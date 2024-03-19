@@ -63,7 +63,7 @@ export default class BaseModel implements TModel {
 
   public readonly stopwatch: Stopwatch;
 
-  public constructor( tandem: Tandem, providedOptions?: BaseModelOptions ) {
+  protected constructor( tandem: Tandem, providedOptions?: BaseModelOptions ) {
 
     const options = optionize<BaseModelOptions, SelfOptions>()( {
 

@@ -21,7 +21,7 @@ export default class IdealGasLawViewProperties {
   public readonly particlesExpandedProperty: Property<boolean>;
   public readonly particleTypeProperty: StringUnionProperty<ParticleType>;
 
-  public constructor( tandem: Tandem ) {
+  protected constructor( tandem: Tandem ) {
 
     this.widthVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'widthVisibleProperty' ),
