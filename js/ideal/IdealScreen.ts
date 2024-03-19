@@ -10,6 +10,7 @@ import optionize from '../../../phet-core/js/optionize.js';
 import PickOptional from '../../../phet-core/js/types/PickOptional.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesScreen, { GasPropertiesScreenOptions } from '../common/GasPropertiesScreen.js';
+import IdealKeyboardHelpContent from './view/IdealKeyboardHelpContent.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
@@ -22,7 +23,7 @@ type SelfOptions = {
   hasHoldConstantControls?: boolean;
 };
 
-type IdealScreenOptions = SelfOptions & PickOptional<GasPropertiesScreenOptions, 'name' | 'homeScreenIcon'>;
+type IdealScreenOptions = SelfOptions & PickOptional<GasPropertiesScreenOptions, 'name' | 'homeScreenIcon' | 'createKeyboardHelpNode'>;
 
 export default class IdealScreen extends GasPropertiesScreen<IdealModel, IdealScreenView> {
 
@@ -36,6 +37,7 @@ export default class IdealScreen extends GasPropertiesScreen<IdealModel, IdealSc
       // GasPropertiesScreenOptions
       name: GasPropertiesStrings.screen.idealStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createIdealScreenIcon(),
+      createKeyboardHelpNode: () => new IdealKeyboardHelpContent(),
       tandem: tandem
     }, providedOptions );
 

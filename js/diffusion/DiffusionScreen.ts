@@ -13,6 +13,7 @@ import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import DiffusionModel from './model/DiffusionModel.js';
 import DiffusionScreenView from './view/DiffusionScreenView.js';
+import DiffusionKeyboardHelpContent from './view/DiffusionKeyboardHelpContent.js';
 
 export default class DiffusionScreen extends GasPropertiesScreen<DiffusionModel, DiffusionScreenView> {
 
@@ -24,6 +25,7 @@ export default class DiffusionScreen extends GasPropertiesScreen<DiffusionModel,
     super( createModel, createView, {
       name: GasPropertiesStrings.screen.diffusionStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createDiffusionScreenIcon(),
+      createKeyboardHelpNode: () => new DiffusionKeyboardHelpContent(),
       tandem: tandem
     } );
   }

@@ -13,6 +13,7 @@ import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import EnergyModel from './model/EnergyModel.js';
 import EnergyScreenView from './view/EnergyScreenView.js';
+import EnergyKeyboardHelpContent from './view/EnergyKeyboardHelpContent.js';
 
 export default class EnergyScreen extends GasPropertiesScreen<EnergyModel, EnergyScreenView> {
 
@@ -24,6 +25,7 @@ export default class EnergyScreen extends GasPropertiesScreen<EnergyModel, Energ
     super( createModel, createView, {
       name: GasPropertiesStrings.screen.energyStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createEnergyScreenIcon(),
+      createKeyboardHelpNode: () => new EnergyKeyboardHelpContent(),
       tandem: tandem
     } );
   }
