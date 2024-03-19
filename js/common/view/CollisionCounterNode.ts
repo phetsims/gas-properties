@@ -182,7 +182,8 @@ export default class CollisionCounterNode extends Node {
       this.translation = position;
     } );
 
-    // drag bounds, adjusted to keep this entire Node inside visible bounds
+    // Drag bounds, adjusted to keep this entire Node inside visible bounds. This assumes that CollisionCounterNode
+    // is in the same coordinate frame as visibleBoundsProperty.
     const dragBoundsProperty = new DerivedProperty( [ this.boundsProperty, visibleBoundsProperty ],
       ( bounds, visibleBounds ) =>
         visibleBounds.withMaxX( visibleBounds.maxX - bounds.width ).withMaxY( visibleBounds.maxY - bounds.height )
