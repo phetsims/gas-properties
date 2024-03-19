@@ -42,7 +42,6 @@ type IdealGasLawContainerNodeOptions = SelfOptions & PickRequired<NodeOptions, '
 export default class IdealGasLawContainerNode extends Node {
 
   private readonly container: IdealGasLawContainer;
-  private readonly modelViewTransform: ModelViewTransform2;
   private readonly visibleBoundsProperty: TReadOnlyProperty<Bounds2>;
   private readonly lidNode: LidNode;
 
@@ -218,7 +217,6 @@ export default class IdealGasLawContainerNode extends Node {
     } );
 
     this.container = container;
-    this.modelViewTransform = modelViewTransform;
     this.visibleBoundsProperty = visibleBoundsProperty;
     this.lidNode = lidNode;
   }
