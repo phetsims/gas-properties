@@ -144,7 +144,7 @@
     "value": "Pressure Noise"
   },
   "pressureNoiseDescription": {
-    "value": "Adds a bit of noise to the pressure gauge, to make it look more realistic."
+    "value": "Adds a bit of noise to the pressure gauge to make it look more realistic."
   },
   "scale": {
     "value": "Scale"
