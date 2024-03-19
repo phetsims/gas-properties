@@ -98,8 +98,10 @@ export default class BaseContainer {
       this.position.x, this.position.y + this.height
     );
 
+    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
     this.leftWallVelocity = new Vector2( 0, 0 );
 
+    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
     this.userIsAdjustingWidthProperty = new BooleanProperty( false );
   }
 

@@ -39,6 +39,7 @@ export default class CollisionCounter {
   public readonly isRunningProperty: Property<boolean>;
 
   // time that the counter has been running, in ps
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private timeRunning: number;
 
   // whether the collision counter is visible

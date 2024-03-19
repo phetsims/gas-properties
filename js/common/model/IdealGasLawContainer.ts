@@ -53,9 +53,11 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   // Desired width of the container, in pm.
   // Set this to impose an animated speed limit on decreasing width. See #90.
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public desiredWidth: number;
 
   // previous position of the left wall
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private previousLeft: number;
 
   // is the container open?
@@ -107,6 +109,7 @@ export default class IdealGasLawContainer extends BaseContainer {
 
     this.previousLeft = this.left;
 
+    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
     this.isOpenProperty = new DerivedProperty(
       // this.widthProperty is used by this.getMaxLidWidth()
       [ this.lidIsOnProperty, this.lidWidthProperty, this.widthProperty ],

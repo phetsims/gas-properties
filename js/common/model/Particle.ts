@@ -33,6 +33,7 @@ export default class Particle {
   public mass: number; // AMU
   public radius: number; // pm
 
+  //TODO https://github.com/phetsims/gas-properties/issues/218 Can these be moved elsewhere?
   public readonly colorProperty: ProfileColorProperty;
   public readonly highlightColorProperty: ProfileColorProperty;
 

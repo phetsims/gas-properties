@@ -50,6 +50,7 @@ export default class BaseModel implements TModel {
 
   // Bounds of the entire space that the model knows about.
   // This corresponds to the browser window, and doesn't have a valid value until the view is created.
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly modelBoundsProperty: Property<Bounds2>;
 
   // is the sim playing?
