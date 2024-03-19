@@ -186,8 +186,12 @@ export default class CollisionCounterNode extends Node {
     // is in the same coordinate frame as visibleBoundsProperty.
     const dragBoundsProperty = new DerivedProperty( [ this.boundsProperty, visibleBoundsProperty ],
       ( bounds, visibleBounds ) =>
-        visibleBounds.withMaxX( visibleBounds.maxX - bounds.width ).withMaxY( visibleBounds.maxY - bounds.height )
-    );
+        visibleBounds.withMaxX( visibleBounds.maxX - bounds.width ).withMaxY( visibleBounds.maxY - bounds.height ),
+      {
+        // because ScreenView visibleBoundsProperty has additional dependencies
+        strictAxonDependencies: false,
+        valueComparisonStrategy: 'equalsFunction'
+      } );
 
     // Interrupt user interactions when the visible bounds change, such as a device orientation change or window resize.
     visibleBoundsProperty.link( () => this.interruptSubtreeInput() );
