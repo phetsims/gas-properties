@@ -46,6 +46,10 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
         phetioReadOnly: true,
         phetioDocumentation: 'visibility is controlled by the model'
       },
+      keyboardDragListenerOptions: {
+        dragSpeed: 300,
+        shiftDragSpeed: 75
+      },
       isDisposable: false
     }, providedOptions );
 
