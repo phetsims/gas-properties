@@ -43,6 +43,7 @@ export default class ParticleFlowRateModel {
   private readonly rightCounts: number[]; // particles that crossed from left to right -->
 
   // dt values for each sample
+  //TODO https://github.com/phetsims/gas-properties/issues/77 Does this need to be stateful?
   private readonly dts: number[];
 
   /**
