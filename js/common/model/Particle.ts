@@ -11,7 +11,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -55,8 +54,8 @@ export default class Particle {
 
     this.mass = options.mass;
     this.radius = options.radius;
-    this.colorProperty = options.colorProperty || new Property( 'white' );
-    this.highlightColorProperty = options.highlightColorProperty || new Property( 'white' );
+    this.colorProperty = options.colorProperty;
+    this.highlightColorProperty = options.highlightColorProperty;
 
     this.position = new Vector2( 0, 0 );
     this.previousPosition = this.position.copy();
