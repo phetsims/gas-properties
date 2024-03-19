@@ -38,12 +38,12 @@ export default class ParticleFlowRateModel {
   public readonly rightFlowRateProperty: Property<number>;
 
   // samples of number of particles that have crossed the container's divider
-  //TODO https://github.com/phetsims/gas-properties/issues/77 Do these need to be stateful?
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private readonly leftCounts: number[]; // particles that crossed from right to left <--
   private readonly rightCounts: number[]; // particles that crossed from left to right -->
 
   // dt values for each sample
-  //TODO https://github.com/phetsims/gas-properties/issues/77 Does this need to be stateful?
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private readonly dts: number[];
 
   /**

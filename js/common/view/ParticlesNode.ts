@@ -22,7 +22,7 @@ const IMAGE_PADDING = 2;
 
 export default class ParticlesNode extends Sprites {
 
-  private readonly particleArrays: Particle[][];
+  private readonly particleArrays: Particle[][]; //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly sprites: Sprite[];
   private readonly spriteInstances: SpriteInstance[];

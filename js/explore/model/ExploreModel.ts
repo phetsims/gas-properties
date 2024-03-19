@@ -20,6 +20,7 @@ export default class ExploreModel extends IdealGasLawModel {
     } );
 
     // In case clients attempt to use this feature of the base class
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Verify that holdConstantProperty is phetioReadOnly:true
     this.holdConstantProperty.lazyLink( holdConstant => {
       throw new Error( 'holdConstant is fixed in the Explore screen' );
     } );

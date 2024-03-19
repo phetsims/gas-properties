@@ -46,6 +46,7 @@ type CreateParticleOptions = PickRequired<ParticleOptions, 'mass' | 'radius'>;
 export default class DiffusionModel extends BaseModel {
 
   // particles of each species, together these make up the 'particle system'
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly particles1: DiffusionParticle1[];
   public readonly particles2: DiffusionParticle2[];
 
