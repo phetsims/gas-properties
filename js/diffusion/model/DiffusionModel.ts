@@ -26,7 +26,7 @@ import DiffusionData from './DiffusionData.js';
 import DiffusionParticle1 from './DiffusionParticle1.js';
 import DiffusionParticle2 from './DiffusionParticle2.js';
 import DiffusionSettings from './DiffusionSettings.js';
-import ParticleFlowRate from './ParticleFlowRate.js';
+import ParticleFlowRateModel from './ParticleFlowRateModel.js';
 import Particle, { ParticleOptions } from '../../common/model/Particle.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -67,8 +67,8 @@ export default class DiffusionModel extends BaseModel {
   public readonly centerOfMass2Property: Property<number | null>;
 
   // flow rate model for each particle species
-  public readonly particleFlowRate1: ParticleFlowRate;
-  public readonly particleFlowRate2: ParticleFlowRate;
+  public readonly particleFlowRateModel1: ParticleFlowRateModel;
+  public readonly particleFlowRateModel2: ParticleFlowRateModel;
 
   public readonly collisionDetector: DiffusionCollisionDetector;
 
@@ -146,8 +146,8 @@ export default class DiffusionModel extends BaseModel {
         phetioDocumentation: 'center of mass for particles of type 2'
       } ) );
 
-    this.particleFlowRate1 = new ParticleFlowRate( this.container.dividerX, this.particles1, tandem.createTandem( 'particleFlowRate1' ) );
-    this.particleFlowRate2 = new ParticleFlowRate( this.container.dividerX, this.particles2, tandem.createTandem( 'particleFlowRate2' ) );
+    this.particleFlowRateModel1 = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particleFlowRateModel1' ) );
+    this.particleFlowRateModel2 = new ParticleFlowRateModel( this.container.dividerX, this.particles2, tandem.createTandem( 'particleFlowRateModel2' ) );
 
     this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
@@ -190,8 +190,8 @@ export default class DiffusionModel extends BaseModel {
         this.rightSettings.restart();
 
         // Reset flow-rate models
-        this.particleFlowRate1.reset();
-        this.particleFlowRate2.reset();
+        this.particleFlowRateModel1.reset();
+        this.particleFlowRateModel2.reset();
       }
     } );
   }
@@ -204,8 +204,8 @@ export default class DiffusionModel extends BaseModel {
     this.rightSettings.reset();
     this.centerOfMass1Property.reset();
     this.centerOfMass2Property.reset();
-    this.particleFlowRate1.reset();
-    this.particleFlowRate2.reset();
+    this.particleFlowRateModel1.reset();
+    this.particleFlowRateModel2.reset();
 
     assert && assert( this.particles1.length === 0, 'there should be no DiffusionParticle1 particles' );
     assert && assert( this.particles2.length === 0, 'there should be no DiffusionParticle2 particles' );
@@ -226,8 +226,8 @@ export default class DiffusionModel extends BaseModel {
 
     // Particle Flow Rate model
     if ( !this.container.hasDividerProperty.value ) {
-      this.particleFlowRate1.step( dt );
-      this.particleFlowRate2.step( dt );
+      this.particleFlowRateModel1.step( dt );
+      this.particleFlowRateModel2.step( dt );
     }
 
     // Collision detection and response

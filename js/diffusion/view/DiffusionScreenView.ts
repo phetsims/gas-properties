@@ -70,7 +70,7 @@ export default class DiffusionScreenView extends BaseScreenView {
       } );
 
     // Particle Flow Rate vectors
-    const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleFlowRate1, {
+    const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleFlowRateModel1, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColors.particle1ColorProperty
@@ -79,7 +79,7 @@ export default class DiffusionScreenView extends BaseScreenView {
       top: containerNode.bottom + 38,
       tandem: tandem.createTandem( 'particleFlowRateNode1' )
     } );
-    const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRate2, {
+    const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRateModel2, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColors.particle2ColorProperty

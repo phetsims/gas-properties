@@ -1,7 +1,7 @@
 // Copyright 2019-2023, University of Colorado Boulder
 
 /**
- * ParticleFlowRate is a sub-model of the 'Diffusion' screen model, responsible for flow rate for one set of particles.
+ * ParticleFlowRateModel is a sub-model of the 'Diffusion' screen model, responsible for flow rate for one set of particles.
  * Flow rate is the number of particles moving between the two sides of the container, in particles/ps.
  * It uses a running average.
  *
@@ -26,7 +26,7 @@ const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
 // number of samples used to compute running average, see https://github.com/phetsims/gas-properties/issues/51
 const NUMBER_OF_SAMPLES = 300;
 
-export default class ParticleFlowRate {
+export default class ParticleFlowRateModel {
 
   private readonly dividerX: number;
   private readonly particles: Particle[];
@@ -126,4 +126,4 @@ export default class ParticleFlowRate {
   }
 }
 
-gasProperties.register( 'ParticleFlowRate', ParticleFlowRate );
+gasProperties.register( 'ParticleFlowRateModel', ParticleFlowRateModel );
