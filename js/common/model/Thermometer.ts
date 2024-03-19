@@ -9,7 +9,6 @@
 
 import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
@@ -36,7 +35,7 @@ export default class Thermometer {
   public readonly range: Range;
 
   // temperature in the container, in K. null when the container is empty.
-  public readonly temperatureKelvinProperty: Property<number | null>;
+  public readonly temperatureKelvinProperty: TReadOnlyProperty<number | null>;
 
   // temperature in the container, in Celsius. null when the container is empty.
   public readonly temperatureCelsiusProperty: TReadOnlyProperty<number | null>;
@@ -44,7 +43,7 @@ export default class Thermometer {
   // temperature units displayed by the thermometer
   public readonly unitsProperty: StringUnionProperty<TemperatureUnits>;
 
-  public constructor( temperatureKelvinProperty: Property<number | null>, providedOptions: ThermometerOptions ) {
+  public constructor( temperatureKelvinProperty: TReadOnlyProperty<number | null>, providedOptions: ThermometerOptions ) {
 
     const options = optionize<ThermometerOptions, SelfOptions>()( {
 
