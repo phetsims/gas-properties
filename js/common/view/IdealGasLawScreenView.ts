@@ -79,6 +79,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
   protected readonly thermometerNode: Node;
   protected readonly pressureGaugeNode: Node;
   protected readonly collisionCounterNode?: Node;
+  protected readonly stopwatchNode: Node;
 
   protected constructor( model: IdealGasLawModel,
                          particleTypeProperty: StringUnionProperty<ParticleType>,
@@ -295,10 +296,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     }
 
     // Stopwatch
-    toolsParent.addChild( new GasPropertiesStopwatchNode( model.stopwatch, {
+    const stopwatchNode = new GasPropertiesStopwatchNode( model.stopwatch, {
       dragBoundsProperty: this.visibleBoundsProperty,
       tandem: tandem.createTandem( 'stopwatchNode' )
-    } ) );
+    } );
+    toolsParent.addChild( stopwatchNode );
 
     // Show how the collision detection space is partitioned into regions
     let regionsNode = null;
@@ -356,6 +358,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     this.thermometerNode = thermometerNode;
     this.pressureGaugeNode = pressureGaugeNode;
     this.collisionCounterNode = collisionCounterNode;
+    this.stopwatchNode = stopwatchNode;
   }
 
   protected override reset(): void {

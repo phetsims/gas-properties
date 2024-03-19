@@ -53,7 +53,9 @@ export default class CollisionCounterNode extends Node {
       // NodeOptions
       cursor: 'pointer',
       visibleProperty: collisionCounter.visibleProperty,
-      isDisposable: false
+      isDisposable: false,
+      tagName: 'div', // for KeyboardDragListener
+      focusable: true // for KeyboardDragListener
     }, providedOptions );
 
     const wallCollisionsText = new Text( GasPropertiesStrings.wallCollisionsStringProperty, {
@@ -152,9 +154,7 @@ export default class CollisionCounterNode extends Node {
 
     // The background include the bezel and rectangle.
     const backgroundNode = new Node( {
-      children: [ bezelNode, rectangleNode ],
-      tagName: 'div', // for KeyboardDragListener
-      focusable: true // for KeyboardDragListener
+      children: [ bezelNode, rectangleNode ]
     } );
 
     content.center = backgroundNode.center;
@@ -211,7 +211,7 @@ export default class CollisionCounterNode extends Node {
       start: onPress,
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
-    backgroundNode.addInputListener( new RichKeyboardDragListener( {
+    this.addInputListener( new RichKeyboardDragListener( {
       positionProperty: collisionCounter.positionProperty,
       dragBoundsProperty: dragBoundsProperty,
       start: onPress,

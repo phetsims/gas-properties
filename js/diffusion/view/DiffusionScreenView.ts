@@ -167,6 +167,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     this.pdomControlAreaNode.pdomOrder = [
       //TODO https://github.com/phetsims/gas-properties/issues/213
+      stopwatchNode,
       dataAccordionBox,
       controlPanel,
       this.timeControlNode,

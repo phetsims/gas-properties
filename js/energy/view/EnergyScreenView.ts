@@ -135,6 +135,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
     this.pdomControlAreaNode.pdomOrder = [
       //TODO https://github.com/phetsims/gas-properties/issues/213
       leftPanels,
+      this.stopwatchNode,
       this.returnLidButton,
       this.containerNode,
       this.thermometerNode,
