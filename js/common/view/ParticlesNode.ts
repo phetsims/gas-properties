@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * ParticlesNode is the base class for rendering a collection of particles using Sprites. It is used in all screens.

@@ -1,4 +1,4 @@
-// Copyright 2018-2023, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * IdealGasLawContainerNode is the view of the container used in screens that are based on the Ideal Gas Law.
