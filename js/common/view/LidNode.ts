@@ -30,7 +30,7 @@ type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class LidNode extends Node {
 
-  public readonly handleNode: HandleNode;
+  public readonly handleNode: Node;
   private readonly baseNode: Rectangle;
 
   public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>, providedOptions: LidNodeOptions ) {
@@ -50,14 +50,21 @@ export default class LidNode extends Node {
       bottom: 0
     } );
 
-    const handleNode = new HandleNode( {
+    // Wrap HandleNode in a Node so that its focus highlight is not affected by scaling.
+    const handleNode = new Node( {
+      children: [
+        new HandleNode( {
+          hasLeftAttachment: false,
+          gripBaseColor: options.gripColor,
+          attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
+          scale: 0.4
+        } )
+      ],
       cursor: 'pointer',
-      hasLeftAttachment: false,
-      gripBaseColor: options.gripColor,
-      attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
-      scale: 0.4,
       right: baseNode.right - HANDLE_RIGHT_INSET,
-      bottom: baseNode.top + 1
+      bottom: baseNode.top + 1,
+      tagName: 'div',
+      focusable: true
     } );
     assert && assert( handleNode.width <= baseNode.width,
       `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );

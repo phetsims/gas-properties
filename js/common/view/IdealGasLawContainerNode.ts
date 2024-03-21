@@ -25,6 +25,7 @@ import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 import ContainerResizeDragListener from './ContainerResizeDragListener.js';
 import LidDragListener from './LidDragListener.js';
 import LidNode from './LidNode.js';
+import LidKeyboardDragListener from './LidKeyboardDragListener.js';
 
 // constants
 const LID_X_SPEED = -50; // pixels/second
@@ -189,6 +190,8 @@ export default class IdealGasLawContainerNode extends Node {
     const lidDragListener = new LidDragListener( container, modelViewTransform, this,
       options.tandem.createTandem( 'lidDragListener' ) );
     lidNode.handleNode.addInputListener( lidDragListener );
+    lidNode.handleNode.addInputListener( new LidKeyboardDragListener( container, modelViewTransform,
+      options.tandem.createTandem( 'lidKeyboardDragListener' ) ) );
 
     // This implementation assumes that the lid is not interactive while the container is being resized.
     // This is handled in resizeDragListener.isPressedProperty listener above.
