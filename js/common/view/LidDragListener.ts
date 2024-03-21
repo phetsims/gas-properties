@@ -48,13 +48,6 @@ export default class LidDragListener extends RichDragListener {
         }
       },
 
-      // When the lid handle is released, log the opening.
-      end: () => {
-        phet.log && phet.log( container.isOpenProperty.value ?
-                              `Lid is open: ${container.getOpeningLeft()} to ${container.getOpeningRight()} pm` :
-                              'Lid is closed' );
-      },
-
       isDisposable: false,
       tandem: tandem
     } );
