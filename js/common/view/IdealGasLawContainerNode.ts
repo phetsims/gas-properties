@@ -26,6 +26,8 @@ import ResizeHandleDragListener from './ResizeHandleDragListener.js';
 import LidHandleDragListener from './LidHandleDragListener.js';
 import LidNode from './LidNode.js';
 import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
+import ResizeHandleKeyboardDragListener from './ResizeHandleKeyboardDragListener.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 // constants
 const LID_X_SPEED = -50; // pixels/second
@@ -92,7 +94,9 @@ export default class IdealGasLawContainerNode extends Node {
           scale: 0.4
         } )
       ],
-      cursor: 'pointer'
+      cursor: 'pointer',
+      tagName: 'div',
+      focusable: true
     } );
 
     // Lid on the top of the container
@@ -168,6 +172,9 @@ export default class IdealGasLawContainerNode extends Node {
     const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this,
       options.tandem.createTandem( 'resizeHandleDragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleDragListener );
+    const resizeHandleKeyboardDragListener = new ResizeHandleKeyboardDragListener( container, modelViewTransform,
+      options.tandem.createTandem( 'resizeHandleKeyboardDragListener' ) );
+    resizeHandleNode.addInputListener( resizeHandleKeyboardDragListener );
 
     // While interacting with the resize handle...
     const resizeHandlePressedListener = ( isPressed: boolean ) => {
@@ -189,6 +196,7 @@ export default class IdealGasLawContainerNode extends Node {
       }
     };
     resizeHandleDragListener.isPressedProperty.lazyLink( resizeHandlePressedListener );
+    resizeHandleKeyboardDragListener.isPressedProperty.lazyLink( resizeHandlePressedListener );
 
     // Dragging the lid's handle horizontally changes the size of the opening in the top of the container.
     const lidHandleDragListener = new LidHandleDragListener( container, modelViewTransform, this,
@@ -200,12 +208,12 @@ export default class IdealGasLawContainerNode extends Node {
 
     // This implementation assumes that the lid is not interactive while the container is being resized. This is
     // handled in resizeHandlePressedListener above. The lid will behave badly if this is not the case, so verify.
-    const lidPressedListener = ( isPressed: boolean ) => {
-      assert && assert( !( isPressed && resizeHandleDragListener.isPressedProperty.value ),
-        'The lid should not be interactive while the container is being resized.' );
-    };
-    lidHandleDragListener.isPressedProperty.lazyLink( lidPressedListener );
-    lidHandleKeyboardDragListener.isPressedProperty.lazyLink( lidPressedListener );
+    Multilink.multilink( [ lidHandleDragListener.isPressedProperty, lidHandleKeyboardDragListener.isPressedProperty,
+        resizeHandleDragListener.isPressedProperty, resizeHandleKeyboardDragListener.isPressedProperty ],
+      ( lidHandlePointerPressed, lidHandleKeyboardPressed, resizeHandlePointerPressed, resizeHandleKeyboardPressed ) => {
+        assert && assert( !( ( lidHandlePointerPressed || lidHandleKeyboardPressed ) && ( resizeHandlePointerPressed || resizeHandleKeyboardPressed ) ),
+          'The lid should not be interactive while the container is being resized.' );
+      } );
 
     container.lidIsOnProperty.link( lidIsOn => {
       if ( lidIsOn ) {
