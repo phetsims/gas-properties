@@ -22,7 +22,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-import ContainerResizeDragListener from './ContainerResizeDragListener.js';
+import ResizeHandleDragListener from './ResizeHandleDragListener.js';
 import LidHandleDragListener from './LidHandleDragListener.js';
 import LidNode from './LidNode.js';
 import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
@@ -161,7 +161,7 @@ export default class IdealGasLawContainerNode extends Node {
     resizeHandleNode.visibleProperty.lazyLink( () => resizeHandleNode.interruptSubtreeInput() );
 
     // Dragging the resize handle horizontally changes the container's width
-    const resizeHandleDragListener = new ContainerResizeDragListener( container, modelViewTransform, this,
+    const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this,
       options.tandem.createTandem( 'resizeHandleDragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleDragListener );
 

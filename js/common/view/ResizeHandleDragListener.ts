@@ -1,7 +1,7 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
 /**
- * ContainerResizeDragListener is the drag listener for resizing the container by changing its width.
+ * ResizeHandleDragListener is the drag listener for resizing the container by changing its width.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,7 +13,7 @@ import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 import RichDragListener from '../../../../sun/js/RichDragListener.js';
 
-export default class ContainerResizeDragListener extends RichDragListener {
+export default class ResizeHandleDragListener extends RichDragListener {
 
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node,
                       tandem: Tandem ) {
@@ -63,4 +63,4 @@ export default class ContainerResizeDragListener extends RichDragListener {
   }
 }
 
-gasProperties.register( 'ContainerResizeDragListener', ContainerResizeDragListener );
+gasProperties.register( 'ResizeHandleDragListener', ResizeHandleDragListener );
