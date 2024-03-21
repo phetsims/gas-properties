@@ -19,7 +19,7 @@ export default class LidDragListener extends RichDragListener {
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node,
                       tandem: Tandem ) {
 
-    // pointer's x offset from container.getOpeningLeft(), when a drag starts
+    // The pointer's x offset from container.getOpeningLeft(), when a drag starts.
     let startXOffset = 0;
 
     super( {
@@ -36,19 +36,19 @@ export default class LidDragListener extends RichDragListener {
         const modelX = modelViewTransform.viewToModelX( viewX + startXOffset );
         if ( modelX >= container.getOpeningRight() ) {
 
-          // the lid is fully closed
+          // The lid is fully closed.
           container.lidWidthProperty.value = container.getMaxLidWidth();
         }
         else {
 
-          // the lid is open
+          // The lid is open.
           const openingWidth = container.getOpeningRight() - modelX;
           container.lidWidthProperty.value =
             Math.max( container.getMaxLidWidth() - openingWidth, container.getMinLidWidth() );
         }
       },
 
-      // when the lid handle is released, log the opening
+      // When the lid handle is released, log the opening.
       end: () => {
         phet.log && phet.log( container.isOpenProperty.value ?
                               `Lid is open: ${container.getOpeningLeft()} to ${container.getOpeningRight()} pm` :
