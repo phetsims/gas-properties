@@ -82,13 +82,17 @@ export default class IdealGasLawContainerNode extends Node {
       visible: false
     } );
 
-    // Resize handle on the left wall
-    const resizeHandleNode = new HandleNode( {
-      cursor: 'pointer',
-      gripBaseColor: options.resizeGripColor,
-      attachmentLineWidth: 1,
-      rotation: -Math.PI / 2,
-      scale: 0.4
+    // Resize handle on the left wall, wrapped in a Node so that its focus highlight is not affected by scaling.
+    const resizeHandleNode = new Node( {
+      children: [
+        new HandleNode( {
+          gripBaseColor: options.resizeGripColor,
+          attachmentLineWidth: 1,
+          rotation: -Math.PI / 2,
+          scale: 0.4
+        } )
+      ],
+      cursor: 'pointer'
     } );
 
     // Lid on the top of the container
