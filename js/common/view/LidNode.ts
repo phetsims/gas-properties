@@ -9,7 +9,6 @@
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
@@ -26,7 +25,7 @@ type SelfOptions = {
   gripColor?: TColor;
 };
 
-type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type LidNodeOptions = SelfOptions;
 
 export default class LidNode extends Node {
 
