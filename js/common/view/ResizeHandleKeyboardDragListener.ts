@@ -1,5 +1,6 @@
 // Copyright 2024, University of Colorado Boulder
 
+//TODO https://github.com/phetsims/gas-properties/issues/213 Duplication with ResizeHandleDragListener
 /**
  * ResizeHandleKeyboardDragListener is the drag listener for resizing the container by changing its width.
  *
