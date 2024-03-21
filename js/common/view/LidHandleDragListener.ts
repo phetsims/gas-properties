@@ -1,7 +1,7 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
 /**
- * LidDragListener is the drag listener for the container's lid. It determines the size of the opening in the top of
+ * LidHandleDragListener is the drag listener for the container's lid. It determines the size of the opening in the top of
  * the container.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -14,7 +14,7 @@ import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 import RichDragListener from '../../../../sun/js/RichDragListener.js';
 
-export default class LidDragListener extends RichDragListener {
+export default class LidHandleDragListener extends RichDragListener {
 
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node,
                       tandem: Tandem ) {
@@ -54,4 +54,4 @@ export default class LidDragListener extends RichDragListener {
   }
 }
 
-gasProperties.register( 'LidDragListener', LidDragListener );
+gasProperties.register( 'LidHandleDragListener', LidHandleDragListener );

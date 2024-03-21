@@ -23,9 +23,9 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 import ContainerResizeDragListener from './ContainerResizeDragListener.js';
-import LidDragListener from './LidDragListener.js';
+import LidHandleDragListener from './LidHandleDragListener.js';
 import LidNode from './LidNode.js';
-import LidKeyboardDragListener from './LidKeyboardDragListener.js';
+import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
 
 // constants
 const LID_X_SPEED = -50; // pixels/second
@@ -187,10 +187,10 @@ export default class IdealGasLawContainerNode extends Node {
     resizeHandleDragListener.isPressedProperty.lazyLink( resizeHandlePressedListener );
 
     // Dragging the lid's handle horizontally changes the size of the opening in the top of the container.
-    const lidHandleDragListener = new LidDragListener( container, modelViewTransform, this,
+    const lidHandleDragListener = new LidHandleDragListener( container, modelViewTransform, this,
       options.tandem.createTandem( 'lidHandleDragListener' ) );
     lidNode.handleNode.addInputListener( lidHandleDragListener );
-    const lidHandleKeyboardDragListener = new LidKeyboardDragListener( container, modelViewTransform,
+    const lidHandleKeyboardDragListener = new LidHandleKeyboardDragListener( container, modelViewTransform,
       options.tandem.createTandem( 'lidHandleKeyboardDragListener' ) );
     lidNode.handleNode.addInputListener( lidHandleKeyboardDragListener );
 
