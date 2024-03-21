@@ -162,9 +162,9 @@ export default class IdealGasLawContainerNode extends Node {
     resizeHandleNode.visibleProperty.lazyLink( () => resizeHandleNode.interruptSubtreeInput() );
 
     // Dragging the resize handle horizontally changes the container's width
-    const resizeDragListener = new ContainerResizeDragListener( container, modelViewTransform, this,
-      options.tandem.createTandem( 'resizeDragListener' ) );
-    resizeHandleNode.addInputListener( resizeDragListener );
+    const resizeHandleDragListener = new ContainerResizeDragListener( container, modelViewTransform, this,
+      options.tandem.createTandem( 'resizeHandleDragListener' ) );
+    resizeHandleNode.addInputListener( resizeHandleDragListener );
 
     // While interacting with the resize handle...
     const resizeHandlePressedListener = ( isPressed: boolean ) => {
@@ -185,24 +185,24 @@ export default class IdealGasLawContainerNode extends Node {
         phet.log && phet.log( `Lid is open: ${container.getOpeningLeft()} to ${container.getOpeningRight()} pm` );
       }
     };
-    resizeDragListener.isPressedProperty.lazyLink( resizeHandlePressedListener );
+    resizeHandleDragListener.isPressedProperty.lazyLink( resizeHandlePressedListener );
 
     // Dragging the lid's handle horizontally changes the size of the opening in the top of the container.
-    const lidDragListener = new LidDragListener( container, modelViewTransform, this,
-      options.tandem.createTandem( 'lidDragListener' ) );
-    lidNode.handleNode.addInputListener( lidDragListener );
-    const lidKeyboardDragListener = new LidKeyboardDragListener( container, modelViewTransform,
-      options.tandem.createTandem( 'lidKeyboardDragListener' ) );
-    lidNode.handleNode.addInputListener( lidKeyboardDragListener );
+    const lidHandleDragListener = new LidDragListener( container, modelViewTransform, this,
+      options.tandem.createTandem( 'lidHandleDragListener' ) );
+    lidNode.handleNode.addInputListener( lidHandleDragListener );
+    const lidHandleKeyboardDragListener = new LidKeyboardDragListener( container, modelViewTransform,
+      options.tandem.createTandem( 'lidHandleKeyboardDragListener' ) );
+    lidNode.handleNode.addInputListener( lidHandleKeyboardDragListener );
 
     // This implementation assumes that the lid is not interactive while the container is being resized. This is
     // handled in resizeHandlePressedListener above. The lid will behave badly if this is not the case, so verify.
     const lidPressedListener = ( isPressed: boolean ) => {
-      assert && assert( !( isPressed && resizeDragListener.isPressedProperty.value ),
+      assert && assert( !( isPressed && resizeHandleDragListener.isPressedProperty.value ),
         'The lid should not be interactive while the container is being resized.' );
     };
-    lidDragListener.isPressedProperty.lazyLink( lidPressedListener );
-    lidKeyboardDragListener.isPressedProperty.lazyLink( lidPressedListener );
+    lidHandleDragListener.isPressedProperty.lazyLink( lidPressedListener );
+    lidHandleKeyboardDragListener.isPressedProperty.lazyLink( lidPressedListener );
 
     container.lidIsOnProperty.link( lidIsOn => {
       if ( lidIsOn ) {
