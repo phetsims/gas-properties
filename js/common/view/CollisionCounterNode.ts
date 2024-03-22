@@ -25,8 +25,8 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import RichKeyboardDragListener from '../../../../sun/js/RichKeyboardDragListener.js';
-import RichDragListener from '../../../../sun/js/RichDragListener.js';
+import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
+import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 // constants

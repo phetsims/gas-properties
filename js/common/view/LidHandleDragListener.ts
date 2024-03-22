@@ -12,7 +12,7 @@ import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-import RichDragListener from '../../../../sun/js/RichDragListener.js';
+import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
 
 export default class LidHandleDragListener extends RichDragListener {
 

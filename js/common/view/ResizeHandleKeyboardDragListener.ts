@@ -11,7 +11,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-import RichKeyboardDragListener from '../../../../sun/js/RichKeyboardDragListener.js';
+import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
 
 export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragListener {
 
