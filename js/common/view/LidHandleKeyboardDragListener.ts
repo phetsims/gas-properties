@@ -1,4 +1,4 @@
-// Copyright 2019-2024, University of Colorado Boulder
+// Copyright 2024, University of Colorado Boulder
 
 /**
  * LidHandleKeyboardDragListener is the keyboard drag listener for the container's lid. It determines the size of the opening

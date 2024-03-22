@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 //TODO https://github.com/phetsims/gas-properties/issues/213 Duplication with ResizeHandleDragListener
 /**
