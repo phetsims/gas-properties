@@ -127,7 +127,7 @@ export default class ParticlesNode extends Sprites {
     const canvasHeight = Math.ceil( particleNode.height + IMAGE_PADDING );
 
     // Convert the particle Node to an HTMLCanvasElement
-    particleNode.toCanvas( canvas => { particleImageProperty.value = canvas; },
+    particleNode.toCanvas( ( canvas, x, y, width, height ) => { particleImageProperty.value = canvas; },
       canvasWidth / 2, canvasHeight / 2, canvasWidth, canvasHeight );
   }
 }
