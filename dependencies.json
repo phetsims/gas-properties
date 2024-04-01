@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "e82d31ce277c16ac13dfa1c3377b2ae35098b209",
+    "sha": "965088c32207dd39a60a02be3ad6173a0600bfc1",
     "branch": "1.0"
   },
   "joist": {
@@ -45,7 +45,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "78246ba066db36b890ba4ebdb8e1abcd4e670d5f",
+    "sha": "1266cf8a3c8581a3e52d81722d077dbed000dc94",
     "branch": "HEAD"
   },
   "phetmarks": {
