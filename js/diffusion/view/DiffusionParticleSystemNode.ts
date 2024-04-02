@@ -10,7 +10,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ParticleImageProperty from '../../common/view/ParticleImageProperty.js';
+import ParticleCanvasProperty from '../../common/view/ParticleCanvasProperty.js';
 import ParticlesNode from '../../common/view/ParticlesNode.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionModel from '../model/DiffusionModel.js';
@@ -25,14 +25,14 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
   public constructor( model: DiffusionModel ) {
 
     // generated image for DiffusionParticle1 species
-    const particle1ImageProperty = new ParticleImageProperty(
+    const particle1ImageProperty = new ParticleCanvasProperty(
       () => new DiffusionParticle1(),
       model.modelViewTransform,
       model.leftSettings.radiusProperty
     );
 
     // generated image for DiffusionParticle2 species
-    const particle2ImageProperty = new ParticleImageProperty(
+    const particle2ImageProperty = new ParticleCanvasProperty(
       () => new DiffusionParticle2(),
       model.modelViewTransform,
       model.rightSettings.radiusProperty

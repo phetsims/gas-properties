@@ -1,7 +1,7 @@
 // Copyright 2019-2023, University of Colorado Boulder
 
 /**
- * ParticleImageProperty derives the HTMLCanvasElement for a Particle, used to render particles with CanvasNode.
+ * ParticleCanvasProperty derives the HTMLCanvasElement for a Particle, used to render particles with CanvasNode.
  * This image needs to be regenerated when there is a change to the radius or colors for a particle species.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -21,7 +21,7 @@ type SelfOptions = EmptySelfOptions;
 
 type ParticleImagePropertyOptions = SelfOptions;
 
-export default class ParticleImageProperty extends DerivedProperty1<HTMLCanvasElement, HTMLCanvasElement | null> {
+export default class ParticleCanvasProperty extends DerivedProperty1<HTMLCanvasElement, HTMLCanvasElement | null> {
 
   public constructor( createParticle: () => Particle,
                       modelViewTransform: ModelViewTransform2,
@@ -58,4 +58,4 @@ export default class ParticleImageProperty extends DerivedProperty1<HTMLCanvasEl
   }
 }
 
-gasProperties.register( 'ParticleImageProperty', ParticleImageProperty );
+gasProperties.register( 'ParticleCanvasProperty', ParticleCanvasProperty );

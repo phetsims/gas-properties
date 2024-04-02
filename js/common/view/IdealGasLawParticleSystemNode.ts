@@ -20,7 +20,7 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import HeavyParticle from '../model/HeavyParticle.js';
 import LightParticle from '../model/LightParticle.js';
 import ParticleSystem from '../model/ParticleSystem.js';
-import ParticleImageProperty from './ParticleImageProperty.js';
+import ParticleCanvasProperty from './ParticleCanvasProperty.js';
 import ParticlesNode from './ParticlesNode.js';
 
 export default class IdealGasLawParticleSystemNode extends Node {
@@ -32,14 +32,14 @@ export default class IdealGasLawParticleSystemNode extends Node {
                       modelBoundsProperty: TReadOnlyProperty<Bounds2>, containerMaxBounds: Bounds2 ) {
 
     // generated image for HeavyParticle species
-    const heavyParticleImageProperty = new ParticleImageProperty(
+    const heavyParticleImageProperty = new ParticleCanvasProperty(
       () => new HeavyParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS )
     );
 
     // generated image for LightParticle species
-    const lightParticleImageProperty = new ParticleImageProperty(
+    const lightParticleImageProperty = new ParticleCanvasProperty(
       () => new LightParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS )
