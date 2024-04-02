@@ -84,8 +84,8 @@ export default class DiffusionModel extends BaseModel {
       stopwatchPosition: new Vector2( 60, 50 )
     } );
 
-    this.particles1 = []; // {DiffusionParticle1[]}
-    this.particles2 = []; // {DiffusionParticle2[]}
+    this.particles1 = [];
+    this.particles2 = [];
 
     this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
 

@@ -57,8 +57,8 @@ export default class IdealGasLawContainerNode extends Node {
     const options = optionize<IdealGasLawContainerNodeOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
-      resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // {ColorDef} color of resize handle's grip
-      lidGripColor: GasPropertiesColors.lidGripColorProperty, // {ColorDef} color of the lid handle's grip
+      resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // color of resize handle's grip
+      lidGripColor: GasPropertiesColors.lidGripColorProperty, // color of the lid handle's grip
       resizeHandleIsPressedListener: _.noop,
 
       // NodeOptions

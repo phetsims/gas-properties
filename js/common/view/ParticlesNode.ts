@@ -80,19 +80,19 @@ export default class ParticlesNode extends Sprites {
    */
   public update(): void {
 
-    // Index into {SpriteInstance[]} this.spriteInstances
+    // Index into this.spriteInstances
     let spriteInstancesIndex = 0;
 
     // For each array of Particles...
     for ( let i = this.particleArrays.length - 1; i >= 0; i-- ) {
 
-      const particleArray = this.particleArrays[ i ]; // {Particle[]}
+      const particleArray = this.particleArrays[ i ];
       const sprite = this.sprites[ i ];
 
       // For each Particle...
       for ( let j = particleArray.length - 1; j >= 0; j-- ) {
 
-        const particle = particleArray[ j ]; // {Particle}
+        const particle = particleArray[ j ];
 
         // If we've run out of SpriteInstances, allocate one.
         if ( this.spriteInstances.length === spriteInstancesIndex ) {

@@ -37,10 +37,10 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
       model.rightSettings.radiusProperty
     );
 
-    // {Particle[][]} arrays for each particle species
+    // Arrays for each particle species
     const particleArrays = [ model.particles1, model.particles2 ];
 
-    // {Property.<HTMLCanvasElement>[]} images for each particle species in particleArrays
+    // Images for each particle species in particleArrays
     const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
 
     super( particleArrays, imageProperties, model.modelViewTransform );
