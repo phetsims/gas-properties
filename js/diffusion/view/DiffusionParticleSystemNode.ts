@@ -26,14 +26,14 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
 
     // generated canvas for DiffusionParticle1 species
     const particle1CanvasProperty = new ParticleCanvasProperty(
-      () => new DiffusionParticle1(),
+      new DiffusionParticle1(),
       model.modelViewTransform,
       model.leftSettings.radiusProperty
     );
 
     // generated canvas for DiffusionParticle2 species
     const particle2CanvasProperty = new ParticleCanvasProperty(
-      () => new DiffusionParticle2(),
+      new DiffusionParticle2(),
       model.modelViewTransform,
       model.rightSettings.radiusProperty
     );

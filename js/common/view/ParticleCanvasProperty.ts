@@ -23,7 +23,7 @@ type ParticleImagePropertyOptions = SelfOptions;
 
 export default class ParticleCanvasProperty extends DerivedProperty1<HTMLCanvasElement, HTMLCanvasElement | null> {
 
-  public constructor( createParticle: () => Particle,
+  public constructor( particle: Particle,
                       modelViewTransform: ModelViewTransform2,
                       radiusProperty: TReadOnlyProperty<number>,
                       providedOptions?: ParticleImagePropertyOptions ) {
@@ -34,9 +34,6 @@ export default class ParticleCanvasProperty extends DerivedProperty1<HTMLCanvasE
       valueType: [ HTMLCanvasElement ],
       isDisposable: false
     }, providedOptions );
-
-    // Create a prototypical Particle
-    const particle = createParticle();
 
     // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to
     // derive the value and act as a proxy for the DerivedProperty dependencies.

@@ -33,14 +33,14 @@ export default class IdealGasLawParticleSystemNode extends Node {
 
     // generated canvas for HeavyParticle species
     const heavyParticleCanvasProperty = new ParticleCanvasProperty(
-      () => new HeavyParticle(),
+      new HeavyParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS )
     );
 
     // generated canvas for LightParticle species
     const lightParticleCanvasProperty = new ParticleCanvasProperty(
-      () => new LightParticle(),
+      new LightParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS )
     );
