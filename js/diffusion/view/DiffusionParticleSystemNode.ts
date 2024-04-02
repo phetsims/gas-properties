@@ -1,8 +1,9 @@
 // Copyright 2019-2023, University of Colorado Boulder
 
 /**
- * DiffusionParticleSystemNode renders the particle system for the 'Diffusion' screen.  Since all particles are
- * confined to the container, it requires only one Canvas, and therefore uses ParticlesNode via inheritance.
+ * DiffusionParticleSystemNode renders the particle system for the 'Diffusion' screen. Other screens require
+ * a separate instance of ParticlesNode for particles inside vs outside the container.  But since all particles are
+ * confined to the container in the Diffusion screen, a single instance of DiffusionParticleSystemNode will be needed.
  *
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *
