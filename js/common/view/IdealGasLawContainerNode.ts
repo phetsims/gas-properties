@@ -17,7 +17,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import { Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import { InteractiveHighlighting, Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
@@ -85,19 +85,7 @@ export default class IdealGasLawContainerNode extends Node {
     } );
 
     // Resize handle on the left wall, wrapped in a Node so that its focus highlight is not affected by scaling.
-    const resizeHandleNode = new Node( {
-      children: [
-        new HandleNode( {
-          gripBaseColor: options.resizeGripColor,
-          attachmentLineWidth: 1,
-          rotation: -Math.PI / 2,
-          scale: 0.4
-        } )
-      ],
-      cursor: 'pointer',
-      tagName: 'div',
-      focusable: true
-    } );
+    const resizeHandleNode = new ResizeHandleNode( options.resizeGripColor );
 
     // Lid on the top of the container
     const lidNode = new LidNode( holdConstantProperty, {
@@ -262,6 +250,28 @@ export default class IdealGasLawContainerNode extends Node {
         this.lidNode.visible = false;
       }
     }
+  }
+}
+
+/**
+ * ResizeHandleNode is the handle used to resize the container.
+ */
+class ResizeHandleNode extends InteractiveHighlighting( Node ) {
+
+  public constructor( resizeGripColor: TColor ) {
+    super( {
+      children: [
+        new HandleNode( {
+          gripBaseColor: resizeGripColor,
+          attachmentLineWidth: 1,
+          rotation: -Math.PI / 2,
+          scale: 0.4
+        } )
+      ],
+      cursor: 'pointer',
+      tagName: 'div',
+      focusable: true
+    } );
   }
 }
 
