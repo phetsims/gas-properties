@@ -8,9 +8,9 @@
  */
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
@@ -49,21 +49,9 @@ export default class LidNode extends Node {
       bottom: 0
     } );
 
-    // Wrap HandleNode in a Node so that its focus highlight is not affected by scaling.
-    const handleNode = new Node( {
-      children: [
-        new HandleNode( {
-          hasLeftAttachment: false,
-          gripBaseColor: options.gripColor,
-          attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
-          scale: 0.4
-        } )
-      ],
-      cursor: 'pointer',
+    const handleNode = new LidHandleNode( options.gripColor, {
       right: baseNode.right - HANDLE_RIGHT_INSET,
-      bottom: baseNode.top + 1,
-      tagName: 'div',
-      focusable: true
+      bottom: baseNode.top + 1
     } );
     assert && assert( handleNode.width <= baseNode.width,
       `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );
@@ -94,6 +82,29 @@ export default class LidNode extends Node {
     this.baseNode.left = 0;
     this.baseNode.bottom = 0;
     this.handleNode.right = this.baseNode.right - HANDLE_RIGHT_INSET;
+  }
+}
+
+/**
+ * LidHandleNode is the handle used to open and close the container's lid.
+ */
+class LidHandleNode extends InteractiveHighlighting( Node ) {
+
+  public constructor( gripColor: TColor, providedOptions?: NodeTranslationOptions ) {
+    super( combineOptions<NodeOptions>( {
+      children: [
+        // Wrap HandleNode so that LidHandleNode's focus highlight is not affected by scaling.
+        new HandleNode( {
+          hasLeftAttachment: false,
+          gripBaseColor: gripColor,
+          attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
+          scale: 0.4
+        } )
+      ],
+      cursor: 'pointer',
+      tagName: 'div',
+      focusable: true
+    }, providedOptions ) );
   }
 }
 

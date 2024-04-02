@@ -261,6 +261,7 @@ class ResizeHandleNode extends InteractiveHighlighting( Node ) {
   public constructor( resizeGripColor: TColor ) {
     super( {
       children: [
+        // Wrap HandleNode so that ResizeHandleNode's focus highlight is not affected by scaling.
         new HandleNode( {
           gripBaseColor: resizeGripColor,
           attachmentLineWidth: 1,
