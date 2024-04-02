@@ -31,15 +31,15 @@ export default class IdealGasLawParticleSystemNode extends Node {
   public constructor( particleSystem: ParticleSystem, modelViewTransform: ModelViewTransform2,
                       modelBoundsProperty: TReadOnlyProperty<Bounds2>, containerMaxBounds: Bounds2 ) {
 
-    // generated image for HeavyParticle species
-    const heavyParticleImageProperty = new ParticleCanvasProperty(
+    // generated canvas for HeavyParticle species
+    const heavyParticleCanvasProperty = new ParticleCanvasProperty(
       () => new HeavyParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS )
     );
 
-    // generated image for LightParticle species
-    const lightParticleImageProperty = new ParticleCanvasProperty(
+    // generated canvas for LightParticle species
+    const lightParticleCanvasProperty = new ParticleCanvasProperty(
       () => new LightParticle(),
       modelViewTransform,
       new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS )
@@ -48,7 +48,7 @@ export default class IdealGasLawParticleSystemNode extends Node {
     // particles inside the container
     const insideParticlesNode = new ParticlesNode(
       [ particleSystem.heavyParticles, particleSystem.lightParticles ],
-      [ heavyParticleImageProperty, lightParticleImageProperty ],
+      [ heavyParticleCanvasProperty, lightParticleCanvasProperty ],
       modelViewTransform
     );
 
@@ -58,7 +58,7 @@ export default class IdealGasLawParticleSystemNode extends Node {
     // particles outside the container
     const outsideParticlesNode = new ParticlesNode(
       [ particleSystem.heavyParticlesOutside, particleSystem.lightParticlesOutside ],
-      [ heavyParticleImageProperty, lightParticleImageProperty ],
+      [ heavyParticleCanvasProperty, lightParticleCanvasProperty ],
       modelViewTransform
     );
 

@@ -24,15 +24,15 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
    */
   public constructor( model: DiffusionModel ) {
 
-    // generated image for DiffusionParticle1 species
-    const particle1ImageProperty = new ParticleCanvasProperty(
+    // generated canvas for DiffusionParticle1 species
+    const particle1CanvasProperty = new ParticleCanvasProperty(
       () => new DiffusionParticle1(),
       model.modelViewTransform,
       model.leftSettings.radiusProperty
     );
 
-    // generated image for DiffusionParticle2 species
-    const particle2ImageProperty = new ParticleCanvasProperty(
+    // generated canvas for DiffusionParticle2 species
+    const particle2CanvasProperty = new ParticleCanvasProperty(
       () => new DiffusionParticle2(),
       model.modelViewTransform,
       model.rightSettings.radiusProperty
@@ -42,7 +42,7 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
     const particleArrays = [ model.particles1, model.particles2 ];
 
     // Images for each particle species in particleArrays
-    const imageProperties = [ particle1ImageProperty, particle2ImageProperty ];
+    const imageProperties = [ particle1CanvasProperty, particle2CanvasProperty ];
 
     super( particleArrays, imageProperties, model.modelViewTransform );
 
