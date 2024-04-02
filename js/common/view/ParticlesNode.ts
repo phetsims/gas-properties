@@ -17,7 +17,7 @@ import Particle from '../model/Particle.js';
 import ParticleNode from './ParticleNode.js';
 
 // Padding around the HTMLCanvasElement created using toCanvas, so we can reliably center it.
-const IMAGE_PADDING = 2;
+const CANVAS_PADDING = 2;
 
 // Scale particles up by this much to improve resolution.
 const PARTICLE_RESOLUTION_SCALE = 8;
@@ -33,27 +33,27 @@ export default class ParticlesNode extends Sprites {
   private readonly spriteInstances: SpriteInstance[];
 
   /**
-   * @param particleArrays - arrays of particles to render
-   * @param imageProperties - an image for each array in particleArrays
+   * @param particleArrays - arrays of particles to render, one array for each particle species
+   * @param canvasProperties - an HTMLCanvasElement for each array in particleArrays
    * @param modelViewTransform
    */
   public constructor( particleArrays: Particle[][],
-                      imageProperties: TReadOnlyProperty<HTMLCanvasElement>[],
+                      canvasProperties: TReadOnlyProperty<HTMLCanvasElement>[],
                       modelViewTransform: ModelViewTransform2 ) {
     
-    assert && assert( particleArrays.length === imageProperties.length );
+    assert && assert( particleArrays.length === canvasProperties.length );
 
-    // a Sprite for each Particle array, indexed the same as particleArrays and imageProperties
-    const sprites: Sprite[] = imageProperties.map( imageProperty => {
-      const imageToSpriteImage = ( image: HTMLCanvasElement ) => {
-        return new SpriteImage( image, new Vector2( image.width / 2, image.height / 2 ), {
+    // a Sprite for each Particle array, indexed the same as particleArrays and canvasProperties
+    const sprites: Sprite[] = canvasProperties.map( canvasProperty => {
+      const canvasToSpriteImage = ( canvas: HTMLCanvasElement ) => {
+        return new SpriteImage( canvas, new Vector2( canvas.width / 2, canvas.height / 2 ), {
           mipmap: true, // To make particles crisper when zooming in using pan-and-zoom feature.
           mipmapBias: -0.7 // Use a negative value to increase the displayed resolution. See Imageable.setMipmapBias.
         } );
       };
-      const sprite = new Sprite( imageToSpriteImage( imageProperty.value ) );
-      imageProperty.lazyLink( image => {
-        sprite.imageProperty.value = imageToSpriteImage( image );
+      const sprite = new Sprite( canvasToSpriteImage( canvasProperty.value ) );
+      canvasProperty.lazyLink( canvas => {
+        sprite.imageProperty.value = canvasToSpriteImage( canvas );
       } );
       return sprite;
     } );
@@ -130,11 +130,11 @@ export default class ParticlesNode extends Sprites {
     const particleNode = new ParticleNode( particle, modelViewTransform );
     particleNode.setScaleMagnitude( PARTICLE_RESOLUTION_SCALE );
 
-    // Provide our own integer width and height, so that we can reliably center the image
-    const canvasWidth = Math.ceil( particleNode.width + IMAGE_PADDING );
-    const canvasHeight = Math.ceil( particleNode.height + IMAGE_PADDING );
+    // Provide our own integer width and height, so that we can reliably center the image.
+    const canvasWidth = Math.ceil( particleNode.width + CANVAS_PADDING );
+    const canvasHeight = Math.ceil( particleNode.height + CANVAS_PADDING );
 
-    // Convert the particle Node to an HTMLCanvasElement
+    // Convert the ParticleNode to an HTMLCanvasElement.
     particleNode.toCanvas( ( canvas, x, y, width, height ) => { particleCanvasProperty.value = canvas; },
       canvasWidth / 2, canvasHeight / 2, canvasWidth, canvasHeight );
   }
