@@ -36,10 +36,6 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
   // For internal use only.
   origin: { type: 'flag' },
 
-  // Fills the canvasBounds of each CanvasNode, for debugging size and position.
-  // For internal use only.
-  canvasBounds: { type: 'flag' },
-
   // Shows how the collision detection space is partitioned into a 2D grid of regions.
   // For internal use only.
   regions: { type: 'flag' },
