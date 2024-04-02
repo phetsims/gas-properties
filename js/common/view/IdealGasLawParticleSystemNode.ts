@@ -2,8 +2,8 @@
 
 /**
  * IdealGasLawParticleSystemNode renders the particle system for screens that are based on the Ideal Gas Law.
- * To optimize the size of canvases, this consists of 2 CanvasNodes; one for particles inside the container, one for
- * particles outside the container. So we use 2 instances of ParticlesNode via composition.
+ * To optimize canvasBounds, this consists of 2 instance of ParticlesNode: one for particles inside the container,
+ * one for particles outside the container.
  *
  * Do not transform this Node! It's origin must be at the origin of the view coordinate frame.
  *

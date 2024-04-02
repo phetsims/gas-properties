@@ -42,7 +42,7 @@ export default class BaseContainer {
   public readonly volumeProperty: TReadOnlyProperty<number>; // volume of the container, in pm^3
   public readonly boundsProperty: TReadOnlyProperty<Bounds2>; // inside bounds, in pm
 
-  // maximum inside bounds, in pm. Used for sizing the CanvasNode that draws the particle system inside the container.
+  // maximum inside bounds, in pm. Used for canvasBounds for the particle system inside the container.
   public readonly maxBounds: Bounds2;
 
   // velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
