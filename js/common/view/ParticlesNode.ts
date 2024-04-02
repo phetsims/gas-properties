@@ -124,7 +124,7 @@ export default class ParticlesNode extends Sprites {
    * Converts a Particle to an HTMLCanvasElement.
    */
   public static particleToCanvas( particle: Particle, modelViewTransform: ModelViewTransform2,
-                                  particleImageProperty: Property<HTMLCanvasElement | null> ): void {
+                                  particleCanvasProperty: Property<HTMLCanvasElement | null> ): void {
 
     // Create a particle Node, scaled up to improve quality.
     const particleNode = new ParticleNode( particle, modelViewTransform );
@@ -135,7 +135,7 @@ export default class ParticlesNode extends Sprites {
     const canvasHeight = Math.ceil( particleNode.height + IMAGE_PADDING );
 
     // Convert the particle Node to an HTMLCanvasElement
-    particleNode.toCanvas( ( canvas, x, y, width, height ) => { particleImageProperty.value = canvas; },
+    particleNode.toCanvas( ( canvas, x, y, width, height ) => { particleCanvasProperty.value = canvas; },
       canvasWidth / 2, canvasHeight / 2, canvasWidth, canvasHeight );
   }
 }

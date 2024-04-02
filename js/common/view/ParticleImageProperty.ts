@@ -40,15 +40,15 @@ export default class ParticleImageProperty extends DerivedProperty1<HTMLCanvasEl
 
     // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to
     // derive the value and act as a proxy for the DerivedProperty dependencies.
-    const privateProperty = new Property<HTMLCanvasElement | null>( null );
+    const particleCanvasProperty = new Property<HTMLCanvasElement | null>( null );
     Multilink.multilink( [ radiusProperty, particle.colorProperty, particle.highlightColorProperty ],
       ( radius, color, highlightColor ) => {
         particle.radius = radius;
-        ParticlesNode.particleToCanvas( particle, modelViewTransform, privateProperty );
+        ParticlesNode.particleToCanvas( particle, modelViewTransform, particleCanvasProperty );
       } );
 
     super(
-      [ privateProperty ],
+      [ particleCanvasProperty ],
       ( value: HTMLCanvasElement | null ) => {
         const canvasElement = value!;
         assert && assert( canvasElement );
