@@ -16,8 +16,7 @@ import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
 
 export default class LidHandleDragListener extends RichDragListener {
 
-  public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node,
-                      tandem: Tandem ) {
+  public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node, tandem: Tandem ) {
 
     // The pointer's x offset from container.getOpeningLeft(), when a drag starts.
     let startXOffset = 0;
