@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * ParticleCanvasProperty derives the HTMLCanvasElement for a Particle, used to render particles with CanvasNode.
