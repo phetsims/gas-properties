@@ -16,7 +16,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
-import { Circle, HBox, InteractiveHighlighting, Node, NodeOptions, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
+import { Circle, HBox, InteractiveHighlighting, InteractiveHighlightingOptions, Node, NodeOptions, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import ComboBox, { ComboBoxItem } from '../../../../sun/js/ComboBox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -41,14 +41,16 @@ const LABEL_FONT = new PhetFont( 16 );
 
 type SelfOptions = EmptySelfOptions;
 
-type CollisionCounterNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type ParentOptions = InteractiveHighlightingOptions & NodeOptions;
+
+type CollisionCounterNodeOptions = SelfOptions & PickRequired<ParentOptions, 'tandem'>;
 
 export default class CollisionCounterNode extends InteractiveHighlighting( Node ) {
 
   public constructor( collisionCounter: CollisionCounter, listboxParent: Node,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>, providedOptions: CollisionCounterNodeOptions ) {
 
-    const options = optionize<CollisionCounterNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<CollisionCounterNodeOptions, SelfOptions, ParentOptions>()( {
 
       // NodeOptions
       cursor: 'pointer',
