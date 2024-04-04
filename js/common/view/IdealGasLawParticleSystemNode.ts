@@ -22,11 +22,15 @@ import LightParticle from '../model/LightParticle.js';
 import ParticleSystem from '../model/ParticleSystem.js';
 import ParticleCanvasProperty from './ParticleCanvasProperty.js';
 import ParticlesNode from './ParticlesNode.js';
+import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
+import ParticlePositionsNode from './ParticlePositionsNode.js';
 
 export default class IdealGasLawParticleSystemNode extends Node {
 
   private readonly insideParticlesNode: ParticlesNode;
   private readonly outsideParticlesNode: ParticlesNode;
+
+  private readonly particlePositionsNode?: ParticlePositionsNode;
 
   public constructor( particleSystem: ParticleSystem, modelViewTransform: ModelViewTransform2,
                       modelBoundsProperty: TReadOnlyProperty<Bounds2>, containerMaxBounds: Bounds2 ) {
@@ -76,6 +80,14 @@ export default class IdealGasLawParticleSystemNode extends Node {
 
     this.insideParticlesNode = insideParticlesNode;
     this.outsideParticlesNode = outsideParticlesNode;
+
+    // Debug the particle positions.
+    if ( GasPropertiesQueryParameters.showParticlePositions ) {
+      this.particlePositionsNode = new ParticlePositionsNode(
+        [ particleSystem.heavyParticles, particleSystem.lightParticles ],
+        modelViewTransform );
+      this.addChild( this.particlePositionsNode );
+    }
   }
 
   /**
@@ -84,6 +96,7 @@ export default class IdealGasLawParticleSystemNode extends Node {
   public update(): void {
     this.insideParticlesNode.update();
     this.outsideParticlesNode.update();
+    this.particlePositionsNode && this.particlePositionsNode.update();
   }
 }
 

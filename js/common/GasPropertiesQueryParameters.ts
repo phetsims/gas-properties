@@ -74,6 +74,13 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
     type: 'number',
     isValidValue: value => ( value > 0 ),
     defaultValue: 800
+  },
+
+  // Debugging tool, puts a yellow dot (small circle) where the center of each particle should.  This is done only for
+  // particles inside the container, since particles outside the container use the same implementation. If the dots are
+  // not centered on the particles, then positioning in ParticlesNode is incorrect.
+  showParticlePositions: {
+    type: 'flag'
   }
 } );
 
