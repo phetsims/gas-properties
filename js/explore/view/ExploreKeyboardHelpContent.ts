@@ -11,6 +11,7 @@ import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboar
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import gasProperties from '../../gasProperties.js';
+import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 
 export default class ExploreKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -20,7 +21,10 @@ export default class ExploreKeyboardHelpContent extends TwoColumnKeyboardHelpCon
     const leftSections = [
 
       // Move Draggable Items
-      new MoveDraggableItemsKeyboardHelpSection()
+      new MoveDraggableItemsKeyboardHelpSection(),
+
+      // Pop open menu
+      new ComboBoxKeyboardHelpSection()
     ];
 
     // Sections in the right column.
