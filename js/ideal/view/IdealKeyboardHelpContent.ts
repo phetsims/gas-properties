@@ -9,10 +9,10 @@
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import gasProperties from '../../gasProperties.js';
 import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
+import MoveHandlesKeyboardHelpSection from '../../common/view/MoveHandlesKeyboardHelpSection.js';
 
 export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -21,8 +21,8 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
     // Sections in the left column.
     const leftSections = [
 
-      // Move Draggable Items
-      new MoveDraggableItemsKeyboardHelpSection(),
+      // Move Handles
+      new MoveHandlesKeyboardHelpSection(),
 
       // Slider Controls
       new SliderControlsKeyboardHelpSection()
