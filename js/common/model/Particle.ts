@@ -43,7 +43,7 @@ export default class Particle {
 
   private _isDisposed: boolean;
 
-  protected constructor( providedOptions?: ParticleOptions ) {
+  protected constructor( providedOptions: ParticleOptions ) {
 
     const options = optionize<ParticleOptions, SelfOptions>()( {
 
