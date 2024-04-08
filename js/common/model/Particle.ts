@@ -13,14 +13,12 @@
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize from '../../../../phet-core/js/optionize.js';
 import { ProfileColorProperty } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 type SelfOptions = {
-  mass?: number; // AMU
-  radius?: number; // pm
+  mass: number; // AMU
+  radius: number; // pm
   colorProperty: ProfileColorProperty;
   highlightColorProperty: ProfileColorProperty; // color for specular highlight
 };
@@ -45,17 +43,10 @@ export default class Particle {
 
   protected constructor( providedOptions: ParticleOptions ) {
 
-    const options = optionize<ParticleOptions, SelfOptions>()( {
-
-      // SelfOptions
-      mass: GasPropertiesConstants.MASS_RANGE.defaultValue,
-      radius: GasPropertiesConstants.RADIUS_RANGE.defaultValue
-    }, providedOptions );
-
-    this.mass = options.mass;
-    this.radius = options.radius;
-    this.colorProperty = options.colorProperty;
-    this.highlightColorProperty = options.highlightColorProperty;
+    this.mass = providedOptions.mass;
+    this.radius = providedOptions.radius;
+    this.colorProperty = providedOptions.colorProperty;
+    this.highlightColorProperty = providedOptions.highlightColorProperty;
 
     this.position = new Vector2( 0, 0 );
     this.previousPosition = this.position.copy();

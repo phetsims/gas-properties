@@ -11,19 +11,20 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import Particle, { ParticleOptions } from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
+import DiffusionParticle, { DiffusionParticleOptions } from './DiffusionParticle.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type DiffusionParticle1Options = SelfOptions & StrictOmit<ParticleOptions, 'colorProperty' | 'highlightColorProperty'>;
+export type DiffusionParticle1Options = SelfOptions &
+  StrictOmit<DiffusionParticleOptions, 'colorProperty' | 'highlightColorProperty'>;
 
-export default class DiffusionParticle1 extends Particle {
+export default class DiffusionParticle1 extends DiffusionParticle {
 
   public constructor( providedOptions?: DiffusionParticle1Options ) {
-    super( optionize<DiffusionParticle1Options, SelfOptions, ParticleOptions>()( {
+    super( optionize<DiffusionParticle1Options, SelfOptions, DiffusionParticleOptions>()( {
 
-      // ParticleOptions
+      // DiffusionParticleOptions
       colorProperty: GasPropertiesColors.particle1ColorProperty,
       highlightColorProperty: GasPropertiesColors.particle1HighlightColorProperty
     }, providedOptions ) );

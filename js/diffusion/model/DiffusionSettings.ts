@@ -30,34 +30,34 @@ export default class DiffusionSettings {
   public constructor( tandem: Tandem ) {
 
     this.numberOfParticlesProperty =
-      new NumberProperty( GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE.defaultValue, {
+      new NumberProperty( GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE.defaultValue, {
         numberType: 'Integer',
-        range: GasPropertiesConstants.NUMBER_OF_PARTICLES_RANGE,
+        range: GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE,
         hasListenerOrderDependencies: true, // TODO: https://github.com/phetsims/gas-properties/issues/186
         isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
         tandem: tandem.createTandem( 'numberOfParticlesProperty' )
       } );
 
-    this.massProperty = new NumberProperty( GasPropertiesConstants.MASS_RANGE.defaultValue, {
+    this.massProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_MASS_RANGE.defaultValue, {
       numberType: 'Integer',
-      range: GasPropertiesConstants.MASS_RANGE,
+      range: GasPropertiesConstants.DIFFUSION_MASS_RANGE,
       units: 'AMU',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 ),
       tandem: tandem.createTandem( 'massProperty' )
     } );
 
-    this.radiusProperty = new NumberProperty( GasPropertiesConstants.RADIUS_RANGE.defaultValue, {
+    this.radiusProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_RADIUS_RANGE.defaultValue, {
       numberType: 'Integer',
-      range: GasPropertiesConstants.RADIUS_RANGE,
+      range: GasPropertiesConstants.DIFFUSION_RADIUS_RANGE,
       units: 'pm',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 ),
       tandem: tandem.createTandem( 'radiusProperty' )
     } );
 
     this.initialTemperatureProperty =
-      new NumberProperty( GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE.defaultValue, {
+      new NumberProperty( GasPropertiesConstants.DIFFUSION_INITIAL_TEMPERATURE_RANGE.defaultValue, {
         numberType: 'Integer',
-        range: GasPropertiesConstants.INITIAL_TEMPERATURE_RANGE,
+        range: GasPropertiesConstants.DIFFUSION_INITIAL_TEMPERATURE_RANGE,
         units: 'K',
         isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
         tandem: tandem.createTandem( 'initialTemperatureProperty' ),

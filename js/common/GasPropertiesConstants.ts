@@ -99,10 +99,10 @@ const GasPropertiesConstants = {
   LIGHT_PARTICLES_RADIUS: 87.5, // pm
 
   // Ranges for quantities in a Diffusion experiment
-  NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, 200, 0 ),
-  MASS_RANGE: new RangeWithValue( 4, 32, 28 ), // AMU
-  RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // pm
-  INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
+  DIFFUSION_NUMBER_OF_PARTICLES_RANGE: new RangeWithValue( 0, 200, 0 ),
+  DIFFUSION_MASS_RANGE: new RangeWithValue( 4, 32, 28 ), // AMU
+  DIFFUSION_RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // pm
+  DIFFUSION_INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
 
   // width of panels on the right side of the Ideal, Explore, and Energy screens
   RIGHT_PANEL_WIDTH: 225,
