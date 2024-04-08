@@ -82,8 +82,9 @@ export default class DiffusionControlPanel extends Panel {
       children: [
 
         // spinners
-        new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty,
-          options.tandem.createTandem( 'settingsNode' ) ),
+        new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty, {
+          tandem: options.tandem.createTandem( 'settingsNode' )
+        } ),
 
         // Remove/Reset Divider button, centered
         dividerToggleButton,

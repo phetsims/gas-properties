@@ -8,12 +8,11 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
@@ -25,6 +24,10 @@ import GasPropertiesSpinner, { GasPropertiesSpinnerOptions } from './GasProperti
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
 
+type SelfOptions = EmptySelfOptions;
+
+type DiffusionSettingsNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 export default class DiffusionSettingsNode extends VBox {
 
   /**
@@ -32,13 +35,19 @@ export default class DiffusionSettingsNode extends VBox {
    * @param rightSettings - setting for the right side of the container
    * @param modelViewTransform
    * @param enabledProperty
-   * @param tandem
+   * @param providedOptions
    */
-  public constructor( leftSettings: DiffusionSettings,
-                      rightSettings: DiffusionSettings,
-                      modelViewTransform: ModelViewTransform2,
-                      enabledProperty: TReadOnlyProperty<boolean>,
-                      tandem: Tandem ) {
+  public constructor( leftSettings: DiffusionSettings, rightSettings: DiffusionSettings,
+                      modelViewTransform: ModelViewTransform2, enabledProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: DiffusionSettingsNodeOptions ) {
+
+    const options = optionize<DiffusionSettingsNodeOptions, SelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
+      spacing: 20,
+      align: 'left',
+      isDisposable: false
+    }, providedOptions );
 
     // To make all spinners have the same bounds width
     const spinnersAlignGroup = new AlignGroup( {
@@ -52,7 +61,7 @@ export default class DiffusionSettingsNode extends VBox {
           enabledProperty: enabledProperty,
           deltaValue: DiffusionSettings.DELTAS.numberOfParticles
         },
-        tandem: tandem.createTandem( 'numberOfParticlesControl' )
+        tandem: options.tandem.createTandem( 'numberOfParticlesControl' )
       } );
 
     // Mass (AMU)
@@ -65,7 +74,7 @@ export default class DiffusionSettingsNode extends VBox {
             xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
           }
         },
-        tandem: tandem.createTandem( 'massControl' )
+        tandem: options.tandem.createTandem( 'massControl' )
       } );
 
     // Radius (pm)
@@ -75,7 +84,7 @@ export default class DiffusionSettingsNode extends VBox {
           enabledProperty: enabledProperty,
           deltaValue: DiffusionSettings.DELTAS.radius
         },
-        tandem: tandem.createTandem( 'radiusControl' )
+        tandem: options.tandem.createTandem( 'radiusControl' )
       } );
 
     // Initial Temperature (K)
@@ -85,21 +94,17 @@ export default class DiffusionSettingsNode extends VBox {
           enabledProperty: enabledProperty,
           deltaValue: DiffusionSettings.DELTAS.initialTemperature
         },
-        tandem: tandem.createTandem( 'initialTemperatureControl' )
+        tandem: options.tandem.createTandem( 'initialTemperatureControl' )
       } );
 
-    super( {
-      isDisposable: false,
-      spacing: 20,
-      align: 'left',
-      children: [
-        numberOfParticlesControl,
-        massControl,
-        radiusControl,
-        initialTemperatureControl
-      ],
-      tandem: tandem
-    } );
+    options.children = [
+      numberOfParticlesControl,
+      massControl,
+      radiusControl,
+      initialTemperatureControl
+    ];
+
+    super( options );
   }
 }
 
