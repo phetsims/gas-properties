@@ -18,7 +18,7 @@ import DiffusionModel from '../model/DiffusionModel.js';
 import CenterOfMassNode from './CenterOfMassNode.js';
 import DataAccordionBox from './DataAccordionBox.js';
 import DiffusionContainerNode from './DiffusionContainerNode.js';
-import DiffusionVisibilityPanel from './DiffusionVisibilityPanel.js';
+import DiffusionToolsPanel from './DiffusionToolsPanel.js';
 import DiffusionParticleSystemNode from './DiffusionParticleSystemNode.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateNode from './ParticleFlowRateNode.js';
@@ -111,7 +111,7 @@ export default class DiffusionScreenView extends BaseScreenView {
       } );
 
     // Panel for controlling visibility of 'tools'
-    const toolsPanel = new DiffusionVisibilityPanel( viewProperties, model.stopwatch.isVisibleProperty, {
+    const toolsPanel = new DiffusionToolsPanel( viewProperties, model.stopwatch.isVisibleProperty, {
       fixedWidth: 300,
       tandem: panelsTandem.createTandem( 'toolsPanel' )
     } );

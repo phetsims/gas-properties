@@ -1,7 +1,7 @@
 // Copyright 2018-2023, University of Colorado Boulder
 
 /**
- * DiffusionVisibilityPanel is the panel for setting the visibility of various things in the Diffusion screen.
+ * DiffusionToolsPanel is the panel for setting the visibility of various things in the Diffusion screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -27,7 +27,7 @@ type SelfOptions = {
 
 type DiffusionControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
-export default class DiffusionVisibilityPanel extends Panel {
+export default class DiffusionToolsPanel extends Panel {
 
   public constructor( viewProperties: DiffusionViewProperties,
                       stopwatchVisibleProperty: Property<boolean>,
@@ -73,4 +73,4 @@ export default class DiffusionVisibilityPanel extends Panel {
   }
 }
 
-gasProperties.register( 'DiffusionVisibilityPanel', DiffusionVisibilityPanel );
+gasProperties.register( 'DiffusionToolsPanel', DiffusionToolsPanel );
