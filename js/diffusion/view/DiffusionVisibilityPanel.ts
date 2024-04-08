@@ -1,7 +1,7 @@
 // Copyright 2018-2023, University of Colorado Boulder
 
 /**
- * DiffusionVisibilityPanel is the control panel that appears on the right side of the 'Diffusion' screen.
+ * DiffusionVisibilityPanel is the panel for setting the visibility of various things in the Diffusion screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
