@@ -221,6 +221,12 @@ export default class IdealGasLawContainerNode extends Node {
       lidNode.pickable = lidIsOn;
     } );
 
+    // See https://github.com/phetsims/gas-properties/issues/213
+    this.pdomOrder = [
+      resizeHandleNode,
+      lidNode.handleNode
+    ];
+
     this.container = container;
     this.visibleBoundsProperty = visibleBoundsProperty;
     this.lidNode = lidNode;
