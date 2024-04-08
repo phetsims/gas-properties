@@ -7,23 +7,19 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { HSeparator, NodeOptions, NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
+import { NodeOptions, NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import gasProperties from '../../gasProperties.js';
-import DiffusionSettings from '../model/DiffusionSettings.js';
 import CenterOfMassCheckbox from './CenterOfMassCheckbox.js';
-import DiffusionSettingsNode from './DiffusionSettingsNode.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
-import DividerToggleButton from './DividerToggleButton.js';
 import ParticleFlowRateCheckbox from './ParticleFlowRateCheckbox.js';
 import ScaleCheckbox from './ScaleCheckbox.js';
+
+const TEXT_MAX_WIDTH = 175; // determined empirically
 
 type SelfOptions = {
   fixedWidth?: number;
@@ -33,23 +29,8 @@ type DiffusionControlPanelOptions = SelfOptions & NodeTranslationOptions & PickR
 
 export default class DiffusionControlPanel extends Panel {
 
-  /**
-   * @param leftSettings - setting for the left side of the container
-   * @param rightSettings - setting for the right side of the container
-   * @param modelViewTransform
-   * @param hasDividerProperty
-   * @param numberOfParticlesProperty
-   * @param stopwatchVisibleProperty
-   * @param viewProperties
-   * @param providedOptions
-   */
-  public constructor( leftSettings: DiffusionSettings,
-                      rightSettings: DiffusionSettings,
-                      modelViewTransform: ModelViewTransform2,
-                      hasDividerProperty: Property<boolean>,
-                      numberOfParticlesProperty: TReadOnlyProperty<number>,
+  public constructor( viewProperties: DiffusionViewProperties,
                       stopwatchVisibleProperty: Property<boolean>,
-                      viewProperties: DiffusionViewProperties,
                       providedOptions: DiffusionControlPanelOptions ) {
 
     const options = optionize4<DiffusionControlPanelOptions, SelfOptions, PanelOptions>()(
@@ -63,69 +44,32 @@ export default class DiffusionControlPanel extends Panel {
         xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
       }, providedOptions );
 
-    const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
-
-    const dividerToggleButton = new DividerToggleButton( hasDividerProperty, {
-      layoutOptions: {
-        align: 'center'
-      },
-      tandem: options.tandem.createTandem( 'dividerToggleButton' )
-    } );
-
-    const textMaxWidth = 175; // determined empirically
-
     const content = new VBox( {
-      preferredWidth: contentWidth,
+      preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
       widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
-      spacing: 18,
+      spacing: 12,
       children: [
-
-        // spinners
-        new DiffusionSettingsNode( leftSettings, rightSettings, modelViewTransform, hasDividerProperty, {
-          tandem: options.tandem.createTandem( 'settingsNode' )
+        new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, {
+          textMaxWidth: TEXT_MAX_WIDTH,
+          tandem: options.tandem.createTandem( 'centerOfMassCheckbox' )
         } ),
-
-        // Remove/Reset Divider button, centered
-        dividerToggleButton,
-
-        // ------------
-        new HSeparator( {
-          stroke: GasPropertiesColors.separatorColorProperty
+        new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, {
+          textMaxWidth: TEXT_MAX_WIDTH,
+          tandem: options.tandem.createTandem( 'particleFlowRateCheckbox' )
         } ),
-
-        // checkboxes
-        new VBox( {
-          align: 'left',
-          spacing: 12,
-          children: [
-            new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, {
-              textMaxWidth: textMaxWidth,
-              tandem: options.tandem.createTandem( 'centerOfMassCheckbox' )
-            } ),
-            new ParticleFlowRateCheckbox( viewProperties.particleFlowRateVisibleProperty, {
-              textMaxWidth: textMaxWidth,
-              tandem: options.tandem.createTandem( 'particleFlowRateCheckbox' )
-            } ),
-            new ScaleCheckbox( viewProperties.scaleVisibleProperty, {
-              textMaxWidth: textMaxWidth,
-              tandem: options.tandem.createTandem( 'scaleCheckbox' )
-            } ),
-            new StopwatchCheckbox( stopwatchVisibleProperty, {
-              textMaxWidth: textMaxWidth,
-              tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
-            } )
-          ]
+        new ScaleCheckbox( viewProperties.scaleVisibleProperty, {
+          textMaxWidth: TEXT_MAX_WIDTH,
+          tandem: options.tandem.createTandem( 'scaleCheckbox' )
+        } ),
+        new StopwatchCheckbox( stopwatchVisibleProperty, {
+          textMaxWidth: TEXT_MAX_WIDTH,
+          tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
         } )
       ]
     } );
 
     super( content, options );
-
-    // Disable the button when the container is empty.
-    numberOfParticlesProperty.link( numberOfParticles => {
-      dividerToggleButton.enabled = ( numberOfParticles !== 0 );
-    } );
   }
 }
 

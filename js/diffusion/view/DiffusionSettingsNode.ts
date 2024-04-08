@@ -1,14 +1,14 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
- * DiffusionSettingsNode is the user interface for setting initial conditions in the 'Diffusion' screen.
+ * DiffusionSettingsNode is the panel for setting initial conditions in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -20,34 +20,45 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
 import GasPropertiesSpinner, { GasPropertiesSpinnerOptions } from './GasPropertiesSpinner.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import DividerToggleButton from './DividerToggleButton.js';
+import Property from '../../../../axon/js/Property.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  fixedWidth?: number;
+};
 
-type DiffusionSettingsNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type DiffusionSettingsNodeOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class DiffusionSettingsNode extends VBox {
+export default class DiffusionSettingsNode extends Panel {
 
   /**
    * @param leftSettings - setting for the left side of the container
    * @param rightSettings - setting for the right side of the container
    * @param modelViewTransform
-   * @param enabledProperty
+   * @param hasDividerProperty
    * @param providedOptions
    */
-  public constructor( leftSettings: DiffusionSettings, rightSettings: DiffusionSettings,
-                      modelViewTransform: ModelViewTransform2, enabledProperty: TReadOnlyProperty<boolean>,
+  public constructor( leftSettings: DiffusionSettings,
+                      rightSettings: DiffusionSettings,
+                      modelViewTransform: ModelViewTransform2,
+                      hasDividerProperty: Property<boolean>,
+                      numberOfParticlesProperty: TReadOnlyProperty<number>,
                       providedOptions: DiffusionSettingsNodeOptions ) {
 
-    const options = optionize<DiffusionSettingsNodeOptions, SelfOptions, VBoxOptions>()( {
+    const options = optionize4<DiffusionSettingsNodeOptions, SelfOptions, PanelOptions>()(
+      {}, GasPropertiesConstants.PANEL_OPTIONS, {
 
-      // VBoxOptions
-      spacing: 20,
-      align: 'left',
-      isDisposable: false
-    }, providedOptions );
+        // SelfOptions
+        fixedWidth: 100,
+
+        // PanelOptions
+        isDisposable: false
+      }, providedOptions );
 
     // To make all spinners have the same bounds width
     const spinnersAlignGroup = new AlignGroup( {
@@ -58,7 +69,7 @@ export default class DiffusionSettingsNode extends VBox {
     const numberOfParticlesControl = new QuantityControl( GasPropertiesStrings.numberOfParticlesStringProperty,
       modelViewTransform, leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: enabledProperty,
+          enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.numberOfParticles
         },
         tandem: options.tandem.createTandem( 'numberOfParticlesControl' )
@@ -68,7 +79,7 @@ export default class DiffusionSettingsNode extends VBox {
     const massControl = new QuantityControl( GasPropertiesStrings.massAMUStringProperty, modelViewTransform,
       leftSettings.massProperty, rightSettings.massProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: enabledProperty,
+          enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.mass,
           numberDisplayOptions: {
             xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
@@ -81,7 +92,7 @@ export default class DiffusionSettingsNode extends VBox {
     const radiusControl = new QuantityControl( GasPropertiesStrings.radiusPmStringProperty, modelViewTransform,
       leftSettings.radiusProperty, rightSettings.radiusProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: enabledProperty,
+          enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.radius
         },
         tandem: options.tandem.createTandem( 'radiusControl' )
@@ -91,20 +102,37 @@ export default class DiffusionSettingsNode extends VBox {
     const initialTemperatureControl = new QuantityControl( GasPropertiesStrings.initialTemperatureKStringProperty,
       modelViewTransform, leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: enabledProperty,
+          enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.initialTemperature
         },
         tandem: options.tandem.createTandem( 'initialTemperatureControl' )
       } );
 
-    options.children = [
-      numberOfParticlesControl,
-      massControl,
-      radiusControl,
-      initialTemperatureControl
-    ];
+    const dividerToggleButton = new DividerToggleButton( hasDividerProperty, {
+      // Enabled when the number of particles is !== 0.
+      enabledProperty: new DerivedProperty( [ numberOfParticlesProperty ], numberOfParticles => ( numberOfParticles !== 0 ) ),
+      layoutOptions: {
+        align: 'center'
+      },
+      tandem: options.tandem.createTandem( 'dividerToggleButton' )
+    } );
 
-    super( options );
+    const content = new VBox( {
+      preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
+      widthSizable: false, // so that width will remain preferredWidth
+      children: [
+        numberOfParticlesControl,
+        massControl,
+        radiusControl,
+        initialTemperatureControl,
+        dividerToggleButton
+      ],
+      spacing: 20,
+      align: 'left',
+      isDisposable: false
+    } );
+
+    super( content, options );
   }
 }
 

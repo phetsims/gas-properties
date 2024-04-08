@@ -23,6 +23,8 @@ import DiffusionParticleSystemNode from './DiffusionParticleSystemNode.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateNode from './ParticleFlowRateNode.js';
 import ScaleNode from './ScaleNode.js';
+import DiffusionSettingsNode from './DiffusionSettingsNode.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 
 export default class DiffusionScreenView extends BaseScreenView {
 
@@ -99,18 +101,29 @@ export default class DiffusionScreenView extends BaseScreenView {
       dataAccordionBox.bottom = containerNode.top - 15;
     } );
 
-    // Control panel at right side of screen
-    const controlPanel = new DiffusionControlPanel( model.leftSettings, model.rightSettings,
-      model.modelViewTransform,
-      model.container.hasDividerProperty,
-      model.numberOfParticlesProperty,
-      model.stopwatch.isVisibleProperty,
-      viewProperties, {
+    const panelsTandem = tandem.createTandem( 'settingsPanel' );
+
+    // Panel for setting initial conditions
+    const settingsPanel = new DiffusionSettingsNode( model.leftSettings, model.rightSettings, model.modelViewTransform,
+      model.container.hasDividerProperty, model.numberOfParticlesProperty, {
         fixedWidth: 300,
-        right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: tandem.createTandem( 'controlPanel' )
+        tandem: panelsTandem.createTandem( 'settingsPanel' )
       } );
+
+    // Panel for controlling visibility of things
+    const visibilityPanel = new DiffusionControlPanel( viewProperties, model.stopwatch.isVisibleProperty, {
+      fixedWidth: 300,
+      tandem: panelsTandem.createTandem( 'controlPanel' )
+    } );
+
+    const panels = new VBox( {
+      children: [ settingsPanel, visibilityPanel ],
+      align: 'left',
+      spacing: 10,
+      right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+      tandem: panelsTandem
+    } );
 
     // The complete system of particles
     const particleSystemNode = new DiffusionParticleSystemNode( model );
@@ -131,7 +144,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     // Rendering order
     regionsNode && this.addChild( regionsNode );
     this.addChild( dataAccordionBox );
-    this.addChild( controlPanel );
+    this.addChild( panels );
     this.addChild( scaleNode );
     this.addChild( containerNode );
     this.addChild( particleSystemNode );
@@ -143,7 +156,7 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Position the time controls
     this.timeControlNode.mutate( {
-      left: controlPanel.left,
+      left: panels.left,
       bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
 
@@ -152,8 +165,8 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Vertical space is tight. So set a maxHeight for the control panel, since font height does vary on some
     // platforms, and may make the control panel taller.  See https://github.com/phetsims/gas-properties/issues/130.
-    controlPanel.maxHeight = this.layoutBounds.height - this.timeControlNode.height -
-                             ( 2 * GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN ) - 25;
+    panels.maxHeight = this.layoutBounds.height - this.timeControlNode.height -
+                       ( 2 * GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN ) - 25;
 
     this.viewProperties = viewProperties;
     this.particleSystemNode = particleSystemNode;
@@ -161,15 +174,14 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     this.pdomPlayAreaNode.pdomOrder = [
-      //TODO https://github.com/phetsims/gas-properties/issues/213
+      stopwatchNode,
+      dataAccordionBox,
+      settingsPanel
     ];
 
     // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     this.pdomControlAreaNode.pdomOrder = [
-      //TODO https://github.com/phetsims/gas-properties/issues/213
-      stopwatchNode,
-      dataAccordionBox,
-      controlPanel,
+      visibilityPanel,
       this.timeControlNode,
       this.resetAllButton
     ];

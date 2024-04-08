@@ -20,7 +20,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 type SelfOptions = EmptySelfOptions;
 
 type DividerToggleButtonOptions = SelfOptions &
-  PickOptional<BooleanRectangularToggleButtonOptions, 'layoutOptions'> &
+  PickOptional<BooleanRectangularToggleButtonOptions, 'layoutOptions' | 'enabledProperty'> &
   PickRequired<BooleanRectangularToggleButtonOptions, 'tandem'>;
 
 export default class DividerToggleButton extends BooleanRectangularToggleButton {
