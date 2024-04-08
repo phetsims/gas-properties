@@ -110,14 +110,14 @@ export default class DiffusionScreenView extends BaseScreenView {
         tandem: panelsTandem.createTandem( 'settingsPanel' )
       } );
 
-    // Panel for controlling visibility of things
-    const visibilityPanel = new DiffusionVisibilityPanel( viewProperties, model.stopwatch.isVisibleProperty, {
+    // Panel for controlling visibility of 'tools'
+    const toolsPanel = new DiffusionVisibilityPanel( viewProperties, model.stopwatch.isVisibleProperty, {
       fixedWidth: 300,
-      tandem: panelsTandem.createTandem( 'visibilityPanel' )
+      tandem: panelsTandem.createTandem( 'toolsPanel' )
     } );
 
     const panels = new VBox( {
-      children: [ settingsPanel, visibilityPanel ],
+      children: [ settingsPanel, toolsPanel ],
       align: 'left',
       spacing: 10,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
@@ -181,7 +181,7 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     this.pdomControlAreaNode.pdomOrder = [
-      visibilityPanel,
+      toolsPanel,
       this.timeControlNode,
       this.resetAllButton
     ];
