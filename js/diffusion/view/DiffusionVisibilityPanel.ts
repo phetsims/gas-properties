@@ -1,7 +1,7 @@
 // Copyright 2018-2023, University of Colorado Boulder
 
 /**
- * DiffusionControlPanel is the control panel that appears on the right side of the 'Diffusion' screen.
+ * DiffusionVisibilityPanel is the control panel that appears on the right side of the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -27,7 +27,7 @@ type SelfOptions = {
 
 type DiffusionControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
-export default class DiffusionControlPanel extends Panel {
+export default class DiffusionVisibilityPanel extends Panel {
 
   public constructor( viewProperties: DiffusionViewProperties,
                       stopwatchVisibleProperty: Property<boolean>,
@@ -73,4 +73,4 @@ export default class DiffusionControlPanel extends Panel {
   }
 }
 
-gasProperties.register( 'DiffusionControlPanel', DiffusionControlPanel );
+gasProperties.register( 'DiffusionVisibilityPanel', DiffusionVisibilityPanel );

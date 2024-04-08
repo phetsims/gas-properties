@@ -18,7 +18,7 @@ import DiffusionModel from '../model/DiffusionModel.js';
 import CenterOfMassNode from './CenterOfMassNode.js';
 import DataAccordionBox from './DataAccordionBox.js';
 import DiffusionContainerNode from './DiffusionContainerNode.js';
-import DiffusionControlPanel from './DiffusionControlPanel.js';
+import DiffusionVisibilityPanel from './DiffusionVisibilityPanel.js';
 import DiffusionParticleSystemNode from './DiffusionParticleSystemNode.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateNode from './ParticleFlowRateNode.js';
@@ -101,7 +101,7 @@ export default class DiffusionScreenView extends BaseScreenView {
       dataAccordionBox.bottom = containerNode.top - 15;
     } );
 
-    const panelsTandem = tandem.createTandem( 'settingsPanel' );
+    const panelsTandem = tandem.createTandem( 'panels' );
 
     // Panel for setting initial conditions
     const settingsPanel = new DiffusionSettingsNode( model.leftSettings, model.rightSettings, model.modelViewTransform,
@@ -111,9 +111,9 @@ export default class DiffusionScreenView extends BaseScreenView {
       } );
 
     // Panel for controlling visibility of things
-    const visibilityPanel = new DiffusionControlPanel( viewProperties, model.stopwatch.isVisibleProperty, {
+    const visibilityPanel = new DiffusionVisibilityPanel( viewProperties, model.stopwatch.isVisibleProperty, {
       fixedWidth: 300,
-      tandem: panelsTandem.createTandem( 'controlPanel' )
+      tandem: panelsTandem.createTandem( 'visibilityPanel' )
     } );
 
     const panels = new VBox( {
