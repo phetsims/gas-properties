@@ -1,4 +1,4 @@
-// Copyright 2018-2023, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * DiffusionToolsPanel is the panel for setting the visibility of tools in the Diffusion screen.
