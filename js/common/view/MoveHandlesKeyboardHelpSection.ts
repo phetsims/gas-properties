@@ -20,11 +20,11 @@ export default class MoveHandlesKeyboardHelpSection extends KeyboardHelpSection 
     const leftRightArrowsIcon = KeyboardHelpIconFactory.leftRightArrowKeysRowIcon();
     const upDownArrowsIcon = KeyboardHelpIconFactory.upDownArrowKeysRowIcon();
 
-    // Move [<][>]
+    // Move [<][>] or [^][v]
     const leftRightOrUpDownArrowsIcon = KeyboardHelpIconFactory.iconOrIcon( leftRightArrowsIcon, upDownArrowsIcon );
     const moveRow = KeyboardHelpSectionRow.labelWithIcon( SceneryPhetStrings.keyboardHelpDialog.moveStringProperty, leftRightOrUpDownArrowsIcon );
 
-    // Move slower [Shift]+[<\][>]
+    // Move slower [Shift]+[<][>] or [Shift]+[^][v]
     const shiftPlusLeftRightIcon = KeyboardHelpIconFactory.shiftPlusIcon( leftRightArrowsIcon );
     const shiftPlusUpDownIcon = KeyboardHelpIconFactory.shiftPlusIcon( upDownArrowsIcon );
     const moveSlowerRow = KeyboardHelpSectionRow.labelWithIconList( SceneryPhetStrings.keyboardHelpDialog.moveSlowerStringProperty,
