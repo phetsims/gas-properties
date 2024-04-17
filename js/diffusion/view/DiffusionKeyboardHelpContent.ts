@@ -24,7 +24,7 @@ export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpC
       new MoveDraggableItemsKeyboardHelpSection(),
 
       // Spinner Controls
-      new GasPropertiesSpinnerHelpSection( 'vertical' )
+      new GasPropertiesSpinnerHelpSection( 'vertical', false /* includeShift */ )
     ];
 
     // Sections in the right column.

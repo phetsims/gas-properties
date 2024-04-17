@@ -15,30 +15,33 @@ import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/K
 
 export default class GasPropertiesSpinnerHelpSection extends KeyboardHelpSection {
 
-  public constructor( orientation: 'horizontal' | 'vertical' ) {
+  public constructor( orientation: 'horizontal' | 'vertical', includeShift = true ) {
 
     const arrowKeysIcons = ( orientation === 'vertical' ) ? KeyboardHelpIconFactory.upDownArrowKeysRowIcon() :
                            KeyboardHelpIconFactory.leftRightArrowKeysRowIcon();
 
+    const rows = [];
+
     // Adjust
     const adjustValueRow = KeyboardHelpSectionRow.labelWithIcon( 'Adjust value', arrowKeysIcons );
+    rows.push( adjustValueRow );
 
     // Adjust in smaller steps
-    const adjustInSmallerStepsRow = KeyboardHelpSectionRow.labelWithIcon( 'Adjust in smaller steps',
-      KeyboardHelpIconFactory.shiftPlusIcon( arrowKeysIcons ) );
+    if ( includeShift ) {
+      const adjustInSmallerStepsRow = KeyboardHelpSectionRow.labelWithIcon( 'Adjust in smaller steps',
+        KeyboardHelpIconFactory.shiftPlusIcon( arrowKeysIcons ) );
+      rows.push( adjustInSmallerStepsRow );
+    }
 
     // Jump to minimum
     const jumpToMinimumRow = KeyboardHelpSectionRow.labelWithIcon( 'Jump to minimum', TextKeyNode.home() );
+    rows.push( jumpToMinimumRow );
 
     // Jump to maximum
     const jumpToMaximumRow = KeyboardHelpSectionRow.labelWithIcon( 'Jump to maximum', TextKeyNode.end() );
+    rows.push( jumpToMaximumRow );
 
-    super( 'Spinner Controls', [
-      adjustValueRow,
-      adjustInSmallerStepsRow,
-      jumpToMinimumRow,
-      jumpToMaximumRow
-    ] );
+    super( 'Spinner Controls', rows );
   }
 }
 
