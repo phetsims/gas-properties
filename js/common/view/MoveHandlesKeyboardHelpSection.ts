@@ -17,13 +17,18 @@ export default class MoveHandlesKeyboardHelpSection extends KeyboardHelpSection 
 
   public constructor() {
 
+    const leftRightArrowsIcon = KeyboardHelpIconFactory.leftRightArrowKeysRowIcon();
+    const upDownArrowsIcon = KeyboardHelpIconFactory.upDownArrowKeysRowIcon();
+
     // Move [<][>]
-    const leftRightArrowKeysRowIcon = KeyboardHelpIconFactory.leftRightArrowKeysRowIcon();
-    const moveRow = KeyboardHelpSectionRow.labelWithIcon( SceneryPhetStrings.keyboardHelpDialog.moveStringProperty, leftRightArrowKeysRowIcon );
+    const leftRightOrUpDownArrowsIcon = KeyboardHelpIconFactory.iconOrIcon( leftRightArrowsIcon, upDownArrowsIcon );
+    const moveRow = KeyboardHelpSectionRow.labelWithIcon( SceneryPhetStrings.keyboardHelpDialog.moveStringProperty, leftRightOrUpDownArrowsIcon );
 
     // Move slower [Shift]+[<\][>]
-    const shiftPlusLeftRightIcon = KeyboardHelpIconFactory.shiftPlusIcon( leftRightArrowKeysRowIcon );
-    const moveSlowerRow = KeyboardHelpSectionRow.labelWithIcon( SceneryPhetStrings.keyboardHelpDialog.moveSlowerStringProperty, shiftPlusLeftRightIcon );
+    const shiftPlusLeftRightIcon = KeyboardHelpIconFactory.shiftPlusIcon( leftRightArrowsIcon );
+    const shiftPlusUpDownIcon = KeyboardHelpIconFactory.shiftPlusIcon( upDownArrowsIcon );
+    const moveSlowerRow = KeyboardHelpSectionRow.labelWithIconList( SceneryPhetStrings.keyboardHelpDialog.moveSlowerStringProperty,
+      [ shiftPlusLeftRightIcon, shiftPlusUpDownIcon ] );
 
     super( GasPropertiesStrings.keyboardHelpDialog.moveHandlesStringProperty, [ moveRow, moveSlowerRow ] );
   }
