@@ -9,20 +9,31 @@
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import gasProperties from '../../gasProperties.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
+import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 
-export default class DiffusionKeyboardHelpContent extends Node {
+export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
   public constructor() {
 
-    // Basic Actions
-    const basicActionsKeyboardHelpSection = new BasicActionsKeyboardHelpSection( {
-      withCheckboxContent: true
-    } );
+    // Sections in the left column.
+    const leftSections = [
 
-    super( {
-      isDisposable: false,
-      children: [ basicActionsKeyboardHelpSection ]
+      // Move Draggable Items
+      new MoveDraggableItemsKeyboardHelpSection()
+    ];
+
+    // Sections in the right column.
+    const rightSections = [
+
+      // Basic Actions
+      new BasicActionsKeyboardHelpSection( {
+        withCheckboxContent: true
+      } )
+    ];
+
+    super( leftSections, rightSections, {
+      isDisposable: false
     } );
   }
 }

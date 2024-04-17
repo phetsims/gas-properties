@@ -13,6 +13,7 @@ import gasProperties from '../../gasProperties.js';
 import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import MoveHandlesKeyboardHelpSection from '../../common/view/MoveHandlesKeyboardHelpSection.js';
+import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 
 export default class ExploreKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -23,6 +24,9 @@ export default class ExploreKeyboardHelpContent extends TwoColumnKeyboardHelpCon
 
       // Move Handles
       new MoveHandlesKeyboardHelpSection(),
+
+      // Move Draggable Items
+      new MoveDraggableItemsKeyboardHelpSection(),
 
       // Slider Controls
       new SliderControlsKeyboardHelpSection()
