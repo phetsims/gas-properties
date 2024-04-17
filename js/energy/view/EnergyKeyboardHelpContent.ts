@@ -14,6 +14,7 @@ import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/he
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import MoveHandlesKeyboardHelpSection from '../../common/view/MoveHandlesKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
+import GasPropertiesSpinnerHelpSection from '../../common/view/GasPropertiesSpinnerHelpSection.js';
 
 export default class EnergyKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -34,6 +35,9 @@ export default class EnergyKeyboardHelpContent extends TwoColumnKeyboardHelpCont
 
     // Sections in the right column.
     const rightSections = [
+
+      // Spinner Controls
+      new GasPropertiesSpinnerHelpSection( 'horizontal' ),
 
       // Pop open menu
       new ComboBoxKeyboardHelpSection(),

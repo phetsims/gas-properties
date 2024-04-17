@@ -11,6 +11,7 @@ import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboar
 import gasProperties from '../../gasProperties.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
+import GasPropertiesSpinnerHelpSection from '../../common/view/GasPropertiesSpinnerHelpSection.js';
 
 export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -20,7 +21,10 @@ export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpC
     const leftSections = [
 
       // Move Draggable Items
-      new MoveDraggableItemsKeyboardHelpSection()
+      new MoveDraggableItemsKeyboardHelpSection(),
+
+      // Spinner Controls
+      new GasPropertiesSpinnerHelpSection( 'vertical' )
     ];
 
     // Sections in the right column.
