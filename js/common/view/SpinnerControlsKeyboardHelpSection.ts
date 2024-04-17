@@ -1,8 +1,9 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/215 Replaces this with scenery-phet.SpinnerHelpSection
 /**
  * TODO https://github.com/phetsims/gas-properties/issues/215
+ * TODO https://github.com/phetsims/scenery-phet/issues/847
+ * This is a placeholder for the keyboard help that will exist in scenery-phet.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,7 +14,7 @@ import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/Ke
 import TextKeyNode from '../../../../scenery-phet/js/keyboard/TextKeyNode.js';
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
 
-export default class GasPropertiesSpinnerHelpSection extends KeyboardHelpSection {
+export default class SpinnerControlsKeyboardHelpSection extends KeyboardHelpSection {
 
   public constructor( orientation: 'horizontal' | 'vertical', includeShift = true ) {
 
@@ -45,4 +46,4 @@ export default class GasPropertiesSpinnerHelpSection extends KeyboardHelpSection
   }
 }
 
-gasProperties.register( 'GasPropertiesSpinnerHelpSection', GasPropertiesSpinnerHelpSection );
+gasProperties.register( 'SpinnerControlsKeyboardHelpSection', SpinnerControlsKeyboardHelpSection );
