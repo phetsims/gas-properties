@@ -32,10 +32,8 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
       hoseCurviness: 0.75,
       handleTouchAreaXDilation: 35,
       handleTouchAreaYDilation: 35,
-      dragListenerOptions: {
-        numberOfParticlesPerPumpAction: 50,
-        addParticlesOneAtATime: false
-      }
+      numberOfParticlesPerPumpAction: 50,
+      addParticlesOneAtATime: false
     }, providedOptions );
 
     super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
