@@ -1,8 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/215 Finish this, then factor out duplication.
 /**
- * EnergyKeyboardHelpContent is the keyboard help for the 'Energy' screen.
+ * IdealKeyboardHelpContent is the keyboard help for the 'Ideal' screen, and its 2 variants 'Explore' and 'Energy'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,9 +12,9 @@ import gasProperties from '../../gasProperties.js';
 import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
-import SpinnerControlsKeyboardHelpSection from '../../common/view/SpinnerControlsKeyboardHelpSection.js';
+import SpinnerControlsKeyboardHelpSection from './SpinnerControlsKeyboardHelpSection.js';
 
-export default class EnergyKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
+export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
   public constructor() {
 
@@ -50,4 +49,4 @@ export default class EnergyKeyboardHelpContent extends TwoColumnKeyboardHelpCont
   }
 }
 
-gasProperties.register( 'EnergyKeyboardHelpContent', EnergyKeyboardHelpContent );
+gasProperties.register( 'IdealKeyboardHelpContent', IdealKeyboardHelpContent );

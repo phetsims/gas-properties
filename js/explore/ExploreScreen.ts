@@ -13,7 +13,7 @@ import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import ExploreModel from './model/ExploreModel.js';
 import ExploreScreenView from './view/ExploreScreenView.js';
-import ExploreKeyboardHelpContent from './view/ExploreKeyboardHelpContent.js';
+import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
 
 export default class ExploreScreen extends GasPropertiesScreen<ExploreModel, ExploreScreenView> {
 
@@ -25,7 +25,7 @@ export default class ExploreScreen extends GasPropertiesScreen<ExploreModel, Exp
     super( createModel, createView, {
       name: GasPropertiesStrings.screen.exploreStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createExploreScreenIcon(),
-      createKeyboardHelpNode: () => new ExploreKeyboardHelpContent(),
+      createKeyboardHelpNode: () => new IdealKeyboardHelpContent(),
       tandem: tandem
     } );
   }
