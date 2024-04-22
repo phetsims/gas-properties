@@ -12,7 +12,6 @@ import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/h
 import gasProperties from '../../gasProperties.js';
 import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
-import MoveHandlesKeyboardHelpSection from '../../common/view/MoveHandlesKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import SpinnerControlsKeyboardHelpSection from '../../common/view/SpinnerControlsKeyboardHelpSection.js';
 
@@ -23,21 +22,18 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
     // Sections in the left column.
     const leftSections = [
 
-      // Move Handles
-      new MoveHandlesKeyboardHelpSection(),
-
       // Move Draggable Items
       new MoveDraggableItemsKeyboardHelpSection(),
 
       // Slider Controls
-      new SliderControlsKeyboardHelpSection()
+      new SliderControlsKeyboardHelpSection(),
+
+      // Spinner Controls
+      new SpinnerControlsKeyboardHelpSection( 'horizontal' )
     ];
 
     // Sections in the right column.
     const rightSections = [
-
-      // Spinner Controls
-      new SpinnerControlsKeyboardHelpSection( 'horizontal' ),
 
       // Pop open menu
       new ComboBoxKeyboardHelpSection(),

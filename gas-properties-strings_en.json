@@ -166,8 +166,5 @@
   },
   "oopsMaximumTemperature": {
     "value": "Oops!<br><br>Maximum temperature reached."
-  },
-  "keyboardHelpDialog.moveHandles": {
-    "value": "Move Handles"
   }
 }
