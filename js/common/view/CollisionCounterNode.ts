@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
@@ -17,17 +16,16 @@ import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import { Circle, HBox, InteractiveHighlighting, InteractiveHighlightingOptions, Node, NodeOptions, Rectangle, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
-import ComboBox, { ComboBoxItem } from '../../../../sun/js/ComboBox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
 import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import SamplePeriodComboBox from './SamplePeriodComboBox.js';
 
 // constants
 const X_MARGIN = 15;
@@ -36,7 +34,6 @@ const X_SPACING = 10;
 const Y_SPACING = 5;
 const BEZEL_WIDTH = 6;
 const NUMBER_DISPLAY_RANGE = new Range( 0, 1E6 );
-const CONTROL_FONT = new PhetFont( 14 );
 const LABEL_FONT = new PhetFont( 16 );
 
 type SelfOptions = EmptySelfOptions;
@@ -71,7 +68,7 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
       backgroundFill: 'white',
       backgroundStroke: 'black',
       textOptions: {
-        font: CONTROL_FONT
+        font: new PhetFont( 14 )
       },
       xMargin: 8,
       yMargin: 4,
@@ -90,37 +87,8 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
       maxWidth: 110 // determined empirically
     } );
 
-    // Combo box items
-    const comboBoxItems: ComboBoxItem<number>[] = collisionCounter.samplePeriods.map( samplePeriod => {
-
-      return {
-        value: samplePeriod,
-        createNode: ( contentTandem: Tandem ) => {
-
-          // e.g. '10 ps'
-          const samplePeriodStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
-            value: samplePeriod,
-            units: GasPropertiesStrings.picosecondsStringProperty
-          }, {
-            tandem: contentTandem.createTandem( 'samplePeriodStringProperty' )
-          } );
-          return new Text( samplePeriodStringProperty, {
-            font: CONTROL_FONT,
-            maxWidth: 100 // determined empirically
-          } );
-        },
-        tandemName: `samplePeriod${samplePeriod}Item`
-      };
-    } );
-
-    // Combo box
-    const samplePeriodComboBox = new ComboBox( collisionCounter.samplePeriodProperty, comboBoxItems, listboxParent, {
-      align: 'right',
-      xMargin: 6,
-      yMargin: 3,
-      cornerRadius: 5,
-      tandem: options.tandem.createTandem( 'samplePeriodComboBox' )
-    } );
+    const samplePeriodComboBox = new SamplePeriodComboBox( collisionCounter.samplePeriodProperty,
+      collisionCounter.samplePeriods, listboxParent, options.tandem.createTandem( 'samplePeriodComboBox' ) );
 
     // stuff that appears on the counter
     const content = new VBox( {
