@@ -115,7 +115,6 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
 
     // Combo box
     const samplePeriodComboBox = new ComboBox( collisionCounter.samplePeriodProperty, comboBoxItems, listboxParent, {
-      listPosition: 'below',
       align: 'right',
       xMargin: 6,
       yMargin: 3,
