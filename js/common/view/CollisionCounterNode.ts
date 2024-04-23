@@ -160,7 +160,9 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
       children: [ bezelNode, rectangleNode ]
     } );
 
-    content.center = backgroundNode.center;
+    content.boundsProperty.link( () => {
+      content.center = backgroundNode.center;
+    } );
 
     options.children = [ backgroundNode, content ];
 
