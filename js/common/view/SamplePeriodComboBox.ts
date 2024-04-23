@@ -40,6 +40,7 @@ export default class SamplePeriodComboBox extends ComboBox<number> {
     } );
 
     super( samplePeriodProperty, comboBoxItems, listboxParent, {
+      isDisposable: false,
       align: 'right',
       xMargin: 6,
       yMargin: 3,
