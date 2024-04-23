@@ -22,15 +22,14 @@ export default class SamplePeriodComboBox extends ComboBox<number> {
     const comboBoxItems: ComboBoxItem<number>[] = samplePeriods.map( samplePeriod => {
       return {
         value: samplePeriod,
-        createNode: ( contentTandem: Tandem ) => {
+        createNode: () => {
 
           // e.g. '10 ps'
           const samplePeriodStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
             value: samplePeriod,
             units: GasPropertiesStrings.picosecondsStringProperty
-          }, {
-            tandem: contentTandem.createTandem( 'samplePeriodStringProperty' )
           } );
+
           return new Text( samplePeriodStringProperty, {
             font: new PhetFont( 14 ),
             maxWidth: 100 // determined empirically
