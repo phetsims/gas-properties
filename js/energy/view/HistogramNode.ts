@@ -18,8 +18,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
-import BarPlotNode from './BarPlotNode.js';
-import LinePlotNode from './LinePlotNode.js';
 import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
 import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
 import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
@@ -29,7 +27,7 @@ import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
 import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
 import Utils from '../../../../dot/js/Utils.js';
 import HistogramsModel from '../model/HistogramsModel.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import HistogramPlot from './HistogramPlot.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
 const TICK_LABEL_FONT = new PhetFont( 12 );
@@ -46,9 +44,9 @@ export type HistogramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tand
 export default class HistogramNode extends Node {
 
   // Plots
-  private readonly allPlotNode: BarPlotNode;
-  private readonly heavyPlotNode: LinePlotNode;
-  private readonly lightPlotNode: LinePlotNode;
+  private readonly allPlotNode: HistogramPlot;
+  private readonly heavyPlotNode: HistogramPlot;
+  private readonly lightPlotNode: HistogramPlot;
 
   // Data for each plot.
   private readonly allBinCountsProperty: Property<number[]>;
@@ -164,19 +162,21 @@ export default class HistogramNode extends Node {
       } )
     } );
 
-    //TODO https://github.com/phetsims/gas-properties/issues/210 tick mark at chartTransform.modelYRange.max
-
-    const yMaxProperty = new DerivedProperty( [ zoomLevelProperty ],
-      zoomLevel => HistogramsModel.ZOOM_DESCRIPTIONS[ zoomLevel ].yMax );
-
     // Plot for all particles.
-    const allPlotNode = new BarPlotNode( options.chartSize, yMaxProperty, options.barColor );
+    const allPlotNode = new HistogramPlot( chartTransform, allBinCountsProperty.value, {
+      closeShape: true,
+      fill: options.barColor
+    } );
 
     // Plots for heavy and light particles.
-    const heavyPlotNode = new LinePlotNode( options.chartSize, yMaxProperty,
-      GasPropertiesColors.heavyParticleColorProperty, options.plotLineWidth );
-    const lightPlotNode = new LinePlotNode( options.chartSize, yMaxProperty,
-      GasPropertiesColors.lightParticleColorProperty, options.plotLineWidth );
+    const heavyPlotNode = new HistogramPlot( chartTransform, heavyBinCountsProperty.value, {
+      stroke: GasPropertiesColors.heavyParticleColorProperty,
+      lineWidth: options.plotLineWidth
+    } );
+    const lightPlotNode = new HistogramPlot( chartTransform, lightBinCountsProperty.value, {
+      stroke: GasPropertiesColors.lightParticleColorProperty,
+      lineWidth: options.plotLineWidth
+    } );
 
     // Parent for all chart elements that should be clipped to chartRectangle.
     const clippedNode = new Node( {
@@ -215,13 +215,13 @@ export default class HistogramNode extends Node {
     // Visibility of heavy plot, updated immediately when it's made visible.
     this.heavyPlotVisibleProperty.link( visible => {
       heavyPlotNode.visible = visible;
-      visible && heavyPlotNode.plot( heavyBinCountsProperty.value );
+      visible && heavyPlotNode.setDataSet( heavyBinCountsProperty.value );
     } );
 
     // Visibility of light plot, updated immediately when it's made visible.
     this.lightPlotVisibleProperty.link( visible => {
       lightPlotNode.visible = visible;
-      visible && lightPlotNode.plot( lightBinCountsProperty.value );
+      visible && lightPlotNode.setDataSet( lightBinCountsProperty.value );
     } );
 
     zoomLevelProperty.link( zoomLevel => {
@@ -257,14 +257,14 @@ export default class HistogramNode extends Node {
    */
   private update(): void {
     if ( this.updateEnabledProperty.value ) {
-      this.allPlotNode.plot( this.allBinCountsProperty.value );
+      this.allPlotNode.setDataSet( this.allBinCountsProperty.value );
 
       if ( this.heavyPlotVisibleProperty.value ) {
-        this.heavyPlotNode.plot( this.heavyBinCountsProperty.value );
+        this.heavyPlotNode.setDataSet( this.heavyBinCountsProperty.value );
       }
 
       if ( this.lightPlotVisibleProperty.value ) {
-        this.lightPlotNode.plot( this.lightBinCountsProperty.value );
+        this.lightPlotNode.setDataSet( this.lightBinCountsProperty.value );
       }
     }
   }
