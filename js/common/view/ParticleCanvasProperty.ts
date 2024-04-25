@@ -31,8 +31,8 @@ export default class ParticleCanvasProperty extends DerivedProperty1<HTMLCanvasE
     const options = optionize<ParticleImagePropertyOptions, SelfOptions, DerivedPropertyOptions<HTMLCanvasElement>>()( {
 
       // DerivedPropertyOptions
-      valueType: [ HTMLCanvasElement ],
-      isDisposable: false
+      isDisposable: false,
+      valueType: [ HTMLCanvasElement ]
     }, providedOptions );
 
     // Node.toCanvas takes a callback that doesn't return a value, so use an intermediate Property to

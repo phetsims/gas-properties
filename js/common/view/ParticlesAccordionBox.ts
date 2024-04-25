@@ -44,7 +44,7 @@ export default class ParticlesAccordionBox extends AccordionBox {
         fixedWidth: 100,
         collisionsEnabledProperty: null,
 
-        //  AccordionBoxOptions
+        // AccordionBoxOptions
         isDisposable: false,
         contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
         titleNode: new Text( GasPropertiesStrings.particlesStringProperty, {

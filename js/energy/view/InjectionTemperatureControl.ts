@@ -52,6 +52,7 @@ export default class InjectionTemperatureControl extends NumberControl {
     const options = optionize<InjectionTemperatureControlOptions, SelfOptions, NumberControlOptions>()( {
 
       // NumberControlOptions
+      isDisposable: false,
       layoutFunction: temperatureLayoutFunction,
       titleNodeOptions: {
         fill: GasPropertiesColors.textFillProperty,
@@ -79,8 +80,7 @@ export default class InjectionTemperatureControl extends NumberControl {
       },
       layoutOptions: {
         align: 'center'
-      },
-      isDisposable: false
+      }
     }, providedOptions );
 
     super( '', initialTemperatureProperty, initialTemperatureProperty.range, options );

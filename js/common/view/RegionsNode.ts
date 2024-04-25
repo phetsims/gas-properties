@@ -27,9 +27,9 @@ export default class RegionsNode extends Node {
     }
 
     super( {
+      isDisposable: false,
       children: regionNodes,
-      pickable: false,
-      isDisposable: false
+      pickable: false
     } );
 
     this.regionNodes = regionNodes;

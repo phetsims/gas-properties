@@ -30,8 +30,8 @@ export default class DividerToggleButton extends BooleanRectangularToggleButton 
     const options = optionize<DividerToggleButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
 
       // BooleanRectangularToggleButtonOptions
-      baseColor: GasPropertiesColors.dividerColorProperty,
-      isDisposable: false
+      isDisposable: false,
+      baseColor: GasPropertiesColors.dividerColorProperty
     }, providedOptions );
 
     const textOptions = {

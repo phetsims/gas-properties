@@ -74,8 +74,8 @@ export default class IdealGasLawParticleSystemNode extends Node {
     } );
 
     super( {
-      children: [ insideParticlesNode, outsideParticlesNode ],
-      isDisposable: false
+      isDisposable: false,
+      children: [ insideParticlesNode, outsideParticlesNode ]
     } );
 
     this.insideParticlesNode = insideParticlesNode;

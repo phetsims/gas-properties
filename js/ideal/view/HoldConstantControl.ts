@@ -44,9 +44,9 @@ export default class HoldConstantControl extends VBox {
     const options = optionize<HoldConstantControlOptions, SelfOptions, VBoxOptions>()( {
 
       // VBoxOptions
+      isDisposable: false,
       align: 'left',
-      spacing: SPACING,
-      isDisposable: false
+      spacing: SPACING
     }, providedOptions );
 
     const titleText = new Text( GasPropertiesStrings.holdConstant.titleStringProperty, {

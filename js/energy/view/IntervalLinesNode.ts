@@ -24,10 +24,12 @@ export default class IntervalLinesNode extends Path {
   public constructor( chartSize: Dimension2 ) {
 
     super( new Shape(), {
+
+      // PathOptions
+      isDisposable: false,
       stroke: 'white',
       opacity: 0.5,
-      lineWidth: 1,
-      isDisposable: false
+      lineWidth: 1
     } );
 
     this.chartSize = chartSize;

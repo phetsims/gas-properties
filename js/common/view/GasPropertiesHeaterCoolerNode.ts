@@ -72,13 +72,13 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
     const options = optionize<GasPropertiesHeaterCoolerNodeOptions, SelfOptions, HeaterCoolerNodeOptions>()( {
 
       // HeaterCoolerNodeOptions
+      isDisposable: false,
       scale: 0.8,
       frontOptions: {
         sliderOptions: {
           phetioLinkedProperty: heatCoolAmountProperty
         }
-      },
-      isDisposable: false
+      }
     }, providedOptions );
 
     // Private Property that either corresponds to the model or is animated, depending on the Hold Constant mode.

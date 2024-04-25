@@ -31,9 +31,9 @@ export default class ParticleTypeRadioButtonGroup extends RectangularRadioButton
     const options = optionize<ParticleTypeRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
 
       // RectangularRadioButtonGroupOptions
+      isDisposable: false,
       orientation: 'horizontal',
       spacing: 8,
-      isDisposable: false,
       radioButtonOptions: {
         baseColor: GasPropertiesColors.radioButtonGroupBaseColorProperty,
         xMargin: 15,

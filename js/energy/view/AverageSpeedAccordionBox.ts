@@ -43,13 +43,13 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
         fixedWidth: 100,
 
         // AccordionBoxOptions
+        isDisposable: false,
         contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
         contentYSpacing: 0,
         titleNode: new Text( GasPropertiesStrings.averageSpeedStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColors.textFillProperty
-        } ),
-        isDisposable: false
+        } )
       }, providedOptions );
 
     // Limit width of title

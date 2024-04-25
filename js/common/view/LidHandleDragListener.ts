@@ -23,8 +23,10 @@ export default class LidHandleDragListener extends RichDragListener {
 
     super( {
 
-      start: ( event, listener ) => {
+      // RichDragListenerOptions
+      isDisposable: false,
 
+      start: ( event, listener ) => {
         startXOffset = modelViewTransform.modelToViewX( container.getOpeningLeft() ) -
                        parentNode.globalToParentPoint( event.pointer.point ).x;
       },
@@ -46,8 +48,6 @@ export default class LidHandleDragListener extends RichDragListener {
             Math.max( container.getMaxLidWidth() - openingWidth, container.getMinLidWidth() );
         }
       },
-
-      isDisposable: false,
       tandem: tandem
     } );
   }

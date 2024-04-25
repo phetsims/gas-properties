@@ -29,6 +29,7 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
     const options = optionize<GasPropertiesStopwatchNodeOptions, SelfOptions, StopwatchNodeOptions>()( {
 
       // StopwatchNodeOptions
+      isDisposable: false,
       numberDisplayRange: new Range( 0, GasPropertiesConstants.MAX_TIME ),
       backgroundBaseColor: GasPropertiesColors.stopwatchBackgroundColorProperty,
       numberDisplayOptions: {
@@ -49,8 +50,7 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
       keyboardDragListenerOptions: {
         dragSpeed: 300,
         shiftDragSpeed: 75
-      },
-      isDisposable: false
+      }
     }, providedOptions );
 
     super( stopwatch, options );

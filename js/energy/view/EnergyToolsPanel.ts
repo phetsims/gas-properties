@@ -34,8 +34,8 @@ export default class EnergyToolsPanel extends Panel {
         fixedWidth: 100,
 
         // PanelOptions
-        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
-        isDisposable: false
+        isDisposable: false,
+        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin
       }, providedOptions );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );

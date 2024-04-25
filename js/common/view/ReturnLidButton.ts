@@ -32,12 +32,12 @@ export default class ReturnLidButton extends RectangularPushButton {
     const options = optionize<ReturnLidButtonOptions, SelfOptions, RectangularPushButtonOptions>()( {
 
       // RectangularPushButtonOptions
+      isDisposable: false,
       baseColor: PhetColorScheme.BUTTON_YELLOW,
       content: textNode,
       listener: () => {
         container.lidIsOnProperty.value = true;
-      },
-      isDisposable: false
+      }
     }, providedOptions );
 
     super( options );

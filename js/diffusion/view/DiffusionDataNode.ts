@@ -46,9 +46,9 @@ export default class DiffusionDataNode extends VBox {
     const options = optionize<DiffusionDataNodeOptions, SelfOptions, VBoxOptions>()( {
 
       // VBoxOptions
+      isDisposable: false,
       spacing: 10,
-      align: 'left',
-      isDisposable: false
+      align: 'left'
     }, providedOptions );
 
     // number of DiffusionParticle1

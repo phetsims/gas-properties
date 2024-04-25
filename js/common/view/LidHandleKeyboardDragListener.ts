@@ -19,6 +19,7 @@ export default class LidHandleKeyboardDragListener extends RichKeyboardDragListe
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, tandem: Tandem ) {
 
     super( {
+      isDisposable: false,
       transform: modelViewTransform,
       drag: ( event, listener ) => {
         container.lidWidthProperty.value = Utils.clamp( container.lidWidthProperty.value + listener.vectorDelta.x,
@@ -26,7 +27,6 @@ export default class LidHandleKeyboardDragListener extends RichKeyboardDragListe
       },
       dragSpeed: 300,
       shiftDragSpeed: 75,
-      isDisposable: false,
       tandem: tandem
     } );
   }

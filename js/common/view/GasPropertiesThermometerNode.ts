@@ -26,9 +26,9 @@ export default class GasPropertiesThermometerNode extends VBox {
     const options = optionize<GasPropertiesThermometerNodeOptions, SelfOptions, VBoxOptions>()( {
 
       // VBoxOptions
+      isDisposable: false,
       spacing: 5,
-      align: 'center',
-      isDisposable: false
+      align: 'center'
     }, providedOptions );
 
     // temperatureProperty is null when there are no particles in the container.

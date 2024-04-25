@@ -46,12 +46,12 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
         fixedWidth: 100,
 
         // AccordionBoxOptions
+        isDisposable: false,
         contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
         titleNode: new Text( GasPropertiesStrings.injectionTemperatureStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
           fill: GasPropertiesColors.textFillProperty
-        } ),
-        isDisposable: false
+        } )
       }, providedOptions );
 
     // Limit width of title

@@ -23,6 +23,9 @@ export default class ResizeHandleDragListener extends RichDragListener {
 
     super( {
 
+      // RichDragListenerOptions
+      isDisposable: false,
+
       start: ( event, listener ) => {
 
         container.userIsAdjustingWidthProperty.value = true;
@@ -56,8 +59,6 @@ export default class ResizeHandleDragListener extends RichDragListener {
 
         container.userIsAdjustingWidthProperty.value = false;
       },
-
-      isDisposable: false,
       tandem: tandem
     } );
   }

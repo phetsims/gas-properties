@@ -30,9 +30,11 @@ export default class LinePlotNode extends Path {
     assert && assert( lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
 
     super( new Shape(), {
+
+      // PathOptions
+      isDisposable: false,
       stroke: color,
-      lineWidth: lineWidth,
-      isDisposable: false
+      lineWidth: lineWidth
     } );
 
     this.chartSize = chartSize;

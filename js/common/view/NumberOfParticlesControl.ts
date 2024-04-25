@@ -34,9 +34,9 @@ export default class NumberOfParticlesControl extends VBox {
     const options = optionize<NumberOfParticlesControlOptions, SelfOptions, VBoxOptions>()( {
 
       // VBoxOptions
+      isDisposable: false,
       align: 'left',
-      spacing: 10,
-      isDisposable: false
+      spacing: 10
     }, providedOptions );
 
     const labelText = new Text( titleStringProperty, {

@@ -27,9 +27,11 @@ export default class BarPlotNode extends Path {
   public constructor( chartSize: Dimension2, yScaleProperty: Property<number>, color: TColor ) {
 
     super( new Shape(), {
+
+      // PathOptions
+      isDisposable: false,
       fill: color,
-      stroke: color, // to hide seams
-      isDisposable: false
+      stroke: color // to hide seams
     } );
 
     this.chartSize = chartSize;

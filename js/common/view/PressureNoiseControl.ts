@@ -42,10 +42,10 @@ export default class PressureNoiseControl extends PreferencesControl {
     } );
 
     super( {
+      isDisposable: false,
       labelNode: labelText,
       controlNode: toggleSwitch,
       descriptionNode: descriptionText,
-      isDisposable: false,
       labelSpacing: 20,
       tandem: tandem
     } );

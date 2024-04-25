@@ -54,8 +54,8 @@ export default class DimensionalArrowsNode extends Node {
       arrowHeadDimensions: DEFAULT_ARROW_HEAD_DIMENSIONS,
 
       // NodeOptions
-      pickable: false,
-      isDisposable: false
+      isDisposable: false,
+      pickable: false
     }, providedOptions );
 
     // horizontal dashed line in center

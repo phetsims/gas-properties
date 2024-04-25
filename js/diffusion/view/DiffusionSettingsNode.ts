@@ -118,6 +118,7 @@ export default class DiffusionSettingsNode extends Panel {
     } );
 
     const content = new VBox( {
+      isDisposable: false,
       preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
       widthSizable: false, // so that width will remain preferredWidth
       children: [
@@ -128,8 +129,7 @@ export default class DiffusionSettingsNode extends Panel {
         dividerToggleButton
       ],
       spacing: 20,
-      align: 'left',
-      isDisposable: false
+      align: 'left'
     } );
 
     super( content, options );

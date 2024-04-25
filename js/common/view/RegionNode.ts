@@ -41,8 +41,8 @@ export default class RegionNode extends Node {
     } );
 
     super( {
-      children: [ cellNode, countNode ],
-      isDisposable: false
+      isDisposable: false,
+      children: [ cellNode, countNode ]
     } );
 
     this.region = region;

@@ -25,6 +25,7 @@ export default class GasPropertiesSpinner extends NumberSpinner {
     const options = optionize<GasPropertiesSpinnerOptions, SelfOptions, NumberSpinnerOptions>()( {
 
       // NumberSpinnerOptions
+      isDisposable: false,
       numberDisplayOptions: {
         decimalPlaces: 0,
         xMargin: 8,
@@ -34,8 +35,7 @@ export default class GasPropertiesSpinner extends NumberSpinner {
         }
       },
       touchAreaXDilation: 15,
-      touchAreaYDilation: 15,
-      isDisposable: false
+      touchAreaYDilation: 15
     }, providedOptions );
 
     super( numberProperty, new Property( numberProperty.range ), options );

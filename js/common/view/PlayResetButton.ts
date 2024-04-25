@@ -27,8 +27,8 @@ export default class PlayResetButton extends BooleanRectangularToggleButton {
     const options = optionize<PlayResetButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
 
       // BooleanRectangularToggleButtonOptions
-      baseColor: '#DFE0E1',
-      isDisposable: false
+      isDisposable: false,
+      baseColor: '#DFE0E1'
     }, providedOptions );
 
     const iconOptions: PathOptions = {

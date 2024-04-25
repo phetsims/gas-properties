@@ -62,11 +62,11 @@ export default class ParticlesNode extends Sprites {
     const spriteInstances: SpriteInstance[] = [];
 
     super( {
+      isDisposable: false,
       sprites: sprites,
       spriteInstances: spriteInstances,
       renderer: 'webgl',
-      pickable: false,
-      isDisposable: false
+      pickable: false
     } );
 
     this.particleArrays = particleArrays;

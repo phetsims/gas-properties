@@ -18,6 +18,9 @@ export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragLi
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, tandem: Tandem ) {
 
     super( {
+
+      // RichKeyboardDragListenerOptions
+      isDisposable: false,
       transform: modelViewTransform,
 
       start: event => {
@@ -49,10 +52,8 @@ export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragLi
 
         container.userIsAdjustingWidthProperty.value = false;
       },
-
       dragSpeed: 300,
       shiftDragSpeed: 75,
-      isDisposable: false,
       tandem: tandem
     } );
   }

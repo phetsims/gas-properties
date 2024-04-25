@@ -50,9 +50,9 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
     const options = optionize<CollisionCounterNodeOptions, SelfOptions, ParentOptions>()( {
 
       // NodeOptions
+      isDisposable: false,
       cursor: 'pointer',
       visibleProperty: collisionCounter.visibleProperty,
-      isDisposable: false,
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
       groupFocusHighlight: true
