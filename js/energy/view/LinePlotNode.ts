@@ -17,16 +17,16 @@ import gasProperties from '../../gasProperties.js';
 export default class LinePlotNode extends Path {
 
   private readonly chartSize: Dimension2;
-  private readonly yScaleProperty: Property<number>;
+  private readonly yMaxProperty: Property<number>;
   private readonly shapeBounds: Bounds2;
 
   /**
    * @param chartSize - dimensions of the chart
-   * @param yScaleProperty - scale of the y-axis
+   * @param yMaxProperty - maximum of the y-axis range
    * @param color - color of the line segments
    * @param lineWidth - width of the line segments
    */
-  public constructor( chartSize: Dimension2, yScaleProperty: Property<number>, color: TColor, lineWidth: number ) {
+  public constructor( chartSize: Dimension2, yMaxProperty: Property<number>, color: TColor, lineWidth: number ) {
     assert && assert( lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
 
     super( new Shape(), {
@@ -38,7 +38,7 @@ export default class LinePlotNode extends Path {
     } );
 
     this.chartSize = chartSize;
-    this.yScaleProperty = yScaleProperty;
+    this.yMaxProperty = yMaxProperty;
     this.shapeBounds = new Bounds2( 0, 0, chartSize.width, chartSize.height );
   }
 
@@ -57,10 +57,10 @@ export default class LinePlotNode extends Path {
     for ( let i = 0; i < numberOfBins; i++ ) {
 
       const binCount = binCounts[ i ];
-      assert && assert( binCount <= this.yScaleProperty.value,
-        `binCount ${binCount} should be <= yScale ${this.yScaleProperty.value}` );
+      assert && assert( binCount <= this.yMaxProperty.value,
+        `binCount ${binCount} should be <= yScale ${this.yMaxProperty.value}` );
 
-      const lineHeight = ( binCount / this.yScaleProperty.value ) * this.chartSize.height;
+      const lineHeight = ( binCount / this.yMaxProperty.value ) * this.chartSize.height;
       const y = this.chartSize.height - lineHeight;
 
       if ( binCount !== previousCount ) {

@@ -11,12 +11,12 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../dot/js/Range.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import Particle from '../../common/model/Particle.js';
 import ParticleSystem from '../../common/model/ParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
@@ -45,8 +45,8 @@ export default class HistogramsModel {
   public readonly lightKineticEnergyBinCountsProperty: Property<number[]>;
   public readonly allKineticEnergyBinCountsProperty: Property<number[]>;
 
-  // the y-axis scale for all histograms
-  public readonly yScaleProperty: Property<number>;
+  // Maximum of the y-axis range for all histograms
+  public readonly yMaxProperty: NumberProperty;
 
   // emits when the bin counts have been updated
   public readonly binCountsUpdatedEmitter: Emitter;
@@ -132,11 +132,12 @@ export default class HistogramsModel {
         phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
       } ) );
 
-    this.yScaleProperty = new NumberProperty( GasPropertiesConstants.HISTOGRAM_LINE_SPACING, {
-      isValidValue: value => ( value >= GasPropertiesConstants.HISTOGRAM_LINE_SPACING ),
-      tandem: options.tandem.createTandem( 'yScaleProperty' ),
+    const yMaxRange = new Range( 25, 2000 ); //TODO https://github.com/phetsims/gas-properties/issues/210 compute yMaxRange.max
+    this.yMaxProperty = new NumberProperty( yMaxRange.min, {
+      range: yMaxRange,
+      tandem: options.tandem.createTandem( 'yMaxProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'scale of the y-axis for the Speed and Kinetic Energy histograms'
+      phetioDocumentation: 'Maximum of the y-axis for the Speed and Kinetic Energy histograms'
     } );
 
     this.binCountsUpdatedEmitter = new Emitter();
@@ -260,7 +261,7 @@ export default class HistogramsModel {
     // The minimum scale is determined by the spacing between horizontal lines in the histogram view.
     // We don't want to the scale to be less than one interval of the horizontal lines, so that the
     // y-axis doesn't scale for small numbers of particles.
-    this.yScaleProperty.value = Math.max( 1.05 * maxBinCount, GasPropertiesConstants.HISTOGRAM_LINE_SPACING );
+    this.yMaxProperty.value = Math.max( 1.05 * maxBinCount, this.yMaxProperty.range.min );
 
     // Notify listeners that the bin counts have been updated.
     this.binCountsUpdatedEmitter.emit();
