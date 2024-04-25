@@ -20,6 +20,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Particle from '../../common/model/Particle.js';
 import ParticleSystem from '../../common/model/ParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -132,8 +133,8 @@ export default class HistogramsModel {
         phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
       } ) );
 
-    //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers, compute yMaxRange.max
-    const yMaxRange = new Range( 50, 2000 );
+    //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers
+    const yMaxRange = new Range( 50, GasPropertiesConstants.HEAVY_PARTICLES_RANGE.max + GasPropertiesConstants.LIGHT_PARTICLES_RANGE.max );
     this.yMaxProperty = new NumberProperty( yMaxRange.min, {
       range: yMaxRange,
       tandem: options.tandem.createTandem( 'yMaxProperty' ),

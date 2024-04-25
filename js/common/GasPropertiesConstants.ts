@@ -140,7 +140,10 @@ const GasPropertiesConstants = {
   COMBO_BOX_DISPLAY_OPTIONS: COMBO_BOX_DISPLAY_OPTIONS,
 
   // Defaults for all Panel instances
-  PANEL_OPTIONS: PANEL_OPTIONS
+  PANEL_OPTIONS: PANEL_OPTIONS,
+
+  // Vertical space between panels
+  PANELS_Y_SPACING: 8
 };
 
 gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );

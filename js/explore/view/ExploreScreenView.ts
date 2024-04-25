@@ -52,7 +52,7 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     // Rendering order. Everything we add should be behind what is created by super.
     const vBox = new VBox( {
       align: 'left',
-      spacing: 15,
+      spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       children: [ toolsPanel, particlesAccordionBox ],
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

@@ -119,7 +119,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     const panels = new VBox( {
       children: [ settingsPanel, toolsPanel ],
       align: 'left',
-      spacing: 10,
+      spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: panelsTandem

@@ -22,7 +22,6 @@ import SpeedAccordionBox from './SpeedAccordionBox.js';
 
 // constants
 const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
-const VBOX_SPACING = 10;
 
 export default class EnergyScreenView extends IdealGasLawScreenView {
 
@@ -69,7 +68,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
         kineticEnergyAccordionBox
       ],
       align: 'left',
-      spacing: VBOX_SPACING,
+      spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       maxHeight: this.layoutBounds.height - ( 2 * GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN ),
       top: GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
       left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN
@@ -112,7 +111,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
         injectionTemperatureAccordionBox
       ],
       align: 'left',
-      spacing: VBOX_SPACING,
+      spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
