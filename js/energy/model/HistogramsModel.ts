@@ -20,7 +20,12 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Particle from '../../common/model/Particle.js';
 import ParticleSystem from '../../common/model/ParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+
+type ZoomDescription = {
+  yMax: number;
+  majorGridLineSpacing: number;
+  minorGridLineSpacing: number | null; // null means no minor grid lines
+};
 
 type SelfOptions = EmptySelfOptions;
 
@@ -46,8 +51,8 @@ export default class HistogramsModel {
   public readonly lightKineticEnergyBinCountsProperty: Property<number[]>;
   public readonly allKineticEnergyBinCountsProperty: Property<number[]>;
 
-  // Maximum of the y-axis range, shared by all histograms.
-  public readonly yMaxProperty: NumberProperty;
+  // Index into ZOOM_DESCRIPTIONS, shared by all histograms.
+  public readonly zoomLevelProperty: NumberProperty;
 
   // emits when the bin counts have been updated
   public readonly binCountsUpdatedEmitter: Emitter;
@@ -63,6 +68,25 @@ export default class HistogramsModel {
   // for measuring sample period
   private dtAccumulator: number;
   private numberOfSamples: number;
+
+  // Describes each of the zoom levels, ordered from smallest to largest yMax value.
+  // zoomLevelProperty provides the index into this array.
+  // This is brute force, but much easier to change than an algorithmic description.
+  public static readonly ZOOM_DESCRIPTIONS: ZoomDescription[] = [
+    { yMax: 50, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
+    { yMax: 100, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
+    { yMax: 150, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
+    { yMax: 200, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
+    { yMax: 400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1200, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 2000, majorGridLineSpacing: 200, minorGridLineSpacing: null }
+  ];
 
   /**
    * @param particleSystem
@@ -133,13 +157,12 @@ export default class HistogramsModel {
         phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
       } ) );
 
-    //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers
-    const yMaxRange = new Range( 50, GasPropertiesConstants.HEAVY_PARTICLES_RANGE.max + GasPropertiesConstants.LIGHT_PARTICLES_RANGE.max );
-    this.yMaxProperty = new NumberProperty( yMaxRange.min, {
-      range: yMaxRange,
-      tandem: options.tandem.createTandem( 'yMaxProperty' ),
+    this.zoomLevelProperty = new NumberProperty( 0, {
+      numberType: 'Integer',
+      range: new Range( 0, HistogramsModel.ZOOM_DESCRIPTIONS.length - 1 ),
+      tandem: options.tandem.createTandem( 'zoomLevelProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'Maximum of the y-axis for the Speed and Kinetic Energy histograms'
+      phetioDocumentation: 'Zoom level for the Speed and Kinetic Energy histograms. A larger value is more zoomed out.'
     } );
 
     this.binCountsUpdatedEmitter = new Emitter();
@@ -173,6 +196,7 @@ export default class HistogramsModel {
 
   public reset(): void {
     this.clearSamples();
+    this.zoomLevelProperty.reset();
   }
 
   /**

@@ -7,17 +7,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { Path, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class LinePlotNode extends Path {
 
   private readonly chartSize: Dimension2;
-  private readonly yMaxProperty: Property<number>;
+  private readonly yMaxProperty: TReadOnlyProperty<number>;
   private readonly shapeBounds: Bounds2;
 
   /**
@@ -26,7 +26,7 @@ export default class LinePlotNode extends Path {
    * @param color - color of the line segments
    * @param lineWidth - width of the line segments
    */
-  public constructor( chartSize: Dimension2, yMaxProperty: Property<number>, color: TColor, lineWidth: number ) {
+  public constructor( chartSize: Dimension2, yMaxProperty: TReadOnlyProperty<number>, color: TColor, lineWidth: number ) {
     assert && assert( lineWidth > 0, `invalid lineWidth: ${lineWidth}` );
 
     super( new Shape(), {

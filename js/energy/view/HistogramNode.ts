@@ -28,6 +28,8 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
 import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
 import Utils from '../../../../dot/js/Utils.js';
+import HistogramsModel from '../model/HistogramsModel.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
 const TICK_LABEL_FONT = new PhetFont( 12 );
@@ -68,7 +70,7 @@ export default class HistogramNode extends Node {
    * @param allBinCountsProperty  - bin counts for all particles
    * @param heavyBinCountsProperty - bin counts for heavy particles
    * @param lightBinCountsProperty - bin counts for light particles
-   * @param yMaxProperty - maximum of the y-axis range
+   * @param zoomLevelProperty - index into HistogramsModel.ZOOM_DESCRIPTIONS
    * @param xAxisStringProperty - label on the x-axis
    * @param yAxisStringProperty - label on the y-axis
    * @param providedOptions
@@ -79,7 +81,7 @@ export default class HistogramNode extends Node {
                          allBinCountsProperty: Property<number[]>,
                          heavyBinCountsProperty: Property<number[]>,
                          lightBinCountsProperty: Property<number[]>,
-                         yMaxProperty: NumberProperty,
+                         zoomLevelProperty: NumberProperty,
                          xAxisStringProperty: TReadOnlyProperty<string>,
                          yAxisStringProperty: TReadOnlyProperty<string>,
                          providedOptions: HistogramNodeOptions ) {
@@ -102,7 +104,7 @@ export default class HistogramNode extends Node {
       viewWidth: options.chartSize.width,
       viewHeight: options.chartSize.height,
       modelXRange: new Range( 0, numberOfBins ),
-      modelYRange: new Range( 0, yMaxProperty.value )
+      modelYRange: new Range( 0, HistogramsModel.ZOOM_DESCRIPTIONS[ zoomLevelProperty.value ].yMax )
     } );
 
     // Main body of the chart.
@@ -137,7 +139,7 @@ export default class HistogramNode extends Node {
     // Grid lines for the y-axis.
     const yMajorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 2, {
       stroke: 'white',
-      opacity: 0.5,
+      opacity: 0.75,
       lineWidth: 1
     } );
     const yMinorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 1, {
@@ -163,6 +165,9 @@ export default class HistogramNode extends Node {
     } );
 
     //TODO https://github.com/phetsims/gas-properties/issues/210 tick mark at chartTransform.modelYRange.max
+
+    const yMaxProperty = new DerivedProperty( [ zoomLevelProperty ],
+      zoomLevel => HistogramsModel.ZOOM_DESCRIPTIONS[ zoomLevel ].yMax );
 
     // Plot for all particles.
     const allPlotNode = new BarPlotNode( options.chartSize, yMaxProperty, options.barColor );
@@ -219,24 +224,25 @@ export default class HistogramNode extends Node {
       visible && lightPlotNode.plot( lightBinCountsProperty.value );
     } );
 
-    yMaxProperty.link( yMax => {
+    zoomLevelProperty.link( zoomLevel => {
 
-      // Adjust the chart transform's y-axis.
-      chartTransform.setModelYRange( new Range( 0, yMax ) );
+      const zoomDescription = HistogramsModel.ZOOM_DESCRIPTIONS[ zoomLevel ];
+
+      // Adjust the chart transform's y-axis range.
+      chartTransform.setModelYRange( new Range( 0, zoomDescription.yMax ) );
 
       // Tick mark and label at yMax only.
-      yTickMarks.setSpacing( yMax );
-      yTickLabels.setSpacing( yMax );
+      yTickMarks.setSpacing( zoomDescription.yMax );
+      yTickLabels.setSpacing( zoomDescription.yMax );
 
-      // Adjust spacing for gridlines.
-      //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers
-      if ( yMax <= 200 ) {
-        yMajorGridLines.setSpacing( 50 );
-        yMinorGridLines.setSpacing( 10 );
+      // Adjust grid lines.
+      yMajorGridLines.setSpacing( zoomDescription.majorGridLineSpacing );
+      if ( zoomDescription.minorGridLineSpacing !== null ) {
+        yMinorGridLines.visible = true;
+        yMinorGridLines.setSpacing( zoomDescription.minorGridLineSpacing );
       }
       else {
-        yMajorGridLines.setSpacing( 500 );
-        yMinorGridLines.setSpacing( 100 );
+        yMinorGridLines.visible = false;
       }
     } );
   }

@@ -6,17 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { Path, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class BarPlotNode extends Path {
 
   private readonly chartSize: Dimension2;
-  private readonly yMaxProperty: Property<number>;
+  private readonly yMaxProperty: TReadOnlyProperty<number>;
   private readonly shapeBounds: Bounds2;
 
   /**
@@ -24,7 +24,7 @@ export default class BarPlotNode extends Path {
    * @param yMaxProperty - maximum of the y-axis range
    * @param color - color of the bars
    */
-  public constructor( chartSize: Dimension2, yMaxProperty: Property<number>, color: TColor ) {
+  public constructor( chartSize: Dimension2, yMaxProperty: TReadOnlyProperty<number>, color: TColor ) {
 
     super( new Shape(), {
 

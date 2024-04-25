@@ -28,7 +28,7 @@ export default class KineticEnergyAccordionBox extends EnergyAccordionBox {
       tandem: tandem
     } );
 
-    super( GasPropertiesStrings.kineticEnergyStringProperty, modelViewTransform, histogramsModel.yMaxProperty,
+    super( GasPropertiesStrings.kineticEnergyStringProperty, modelViewTransform, histogramsModel.zoomLevelProperty,
       createHistogramNode, providedOptions );
   }
 }
