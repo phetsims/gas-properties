@@ -70,6 +70,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       ],
       align: 'left',
       spacing: VBOX_SPACING,
+      maxHeight: this.layoutBounds.height - ( 2 * GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN ),
       top: GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
       left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN
     } );

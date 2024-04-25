@@ -64,7 +64,7 @@ export default class EnergyAccordionBox extends AccordionBox {
       orientation: 'vertical',
       scale: 0.65,
       left: histogramNode.left,
-      top: histogramNode.bottom - 5,
+      top: histogramNode.bottom - 12,
       touchAreaXDilation: 10,
       touchAreaYDilation: 10,
       iconOptions: {
@@ -97,7 +97,6 @@ export default class EnergyAccordionBox extends AccordionBox {
     } );
 
     //TODO https://github.com/phetsims/gas-properties/issues/210 content shifts around as yMax tick label changes.
-    //TODO https://github.com/phetsims/gas-properties/issues/210 Kinetic Energy accordion box is outside layoutBounds.
     const content = new Node( {
       children: [ histogramNode, zoomButtonGroup, checkboxes ]
     } );

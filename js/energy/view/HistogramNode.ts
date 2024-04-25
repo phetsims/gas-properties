@@ -126,12 +126,12 @@ export default class HistogramNode extends Node {
     const yAxisLabelText = new Text( yAxisStringProperty, {
       font: AXIS_LABEL_FONT,
       fill: GasPropertiesColors.textFillProperty,
-      maxWidth: 0.9 * chartTransform.viewHeight,
+      maxWidth: 0.8 * chartTransform.viewHeight,
       rotation: -Math.PI / 2
     } );
     yAxisLabelText.boundsProperty.link( () => {
       yAxisLabelText.right = chartRectangle.left - 8;
-      yAxisLabelText.bottom = chartRectangle.bottom;
+      yAxisLabelText.bottom = chartRectangle.bottom - 10;
     } );
 
     // Grid lines for the y-axis.

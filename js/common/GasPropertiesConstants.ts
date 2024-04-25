@@ -20,7 +20,7 @@ import GasPropertiesColors from './GasPropertiesColors.js';
 // for all panel-like containers
 const PANEL_CORNER_RADIUS = 5;
 const PANEL_X_MARGIN = 15;
-const PANEL_Y_MARGIN = 10;
+const PANEL_Y_MARGIN = 8;
 
 // Shared by gas-properties-main.js and its derivatives (gases-intro.main.js, and diffusion-main.js)
 // See https://github.com/phetsims/gas-properties/issues/28
