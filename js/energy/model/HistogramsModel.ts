@@ -45,7 +45,7 @@ export default class HistogramsModel {
   public readonly lightKineticEnergyBinCountsProperty: Property<number[]>;
   public readonly allKineticEnergyBinCountsProperty: Property<number[]>;
 
-  // Maximum of the y-axis range for all histograms
+  // Maximum of the y-axis range, shared by all histograms.
   public readonly yMaxProperty: NumberProperty;
 
   // emits when the bin counts have been updated
@@ -132,7 +132,8 @@ export default class HistogramsModel {
         phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
       } ) );
 
-    const yMaxRange = new Range( 25, 2000 ); //TODO https://github.com/phetsims/gas-properties/issues/210 compute yMaxRange.max
+    //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers, compute yMaxRange.max
+    const yMaxRange = new Range( 50, 2000 );
     this.yMaxProperty = new NumberProperty( yMaxRange.min, {
       range: yMaxRange,
       tandem: options.tandem.createTandem( 'yMaxProperty' ),
@@ -250,36 +251,12 @@ export default class HistogramsModel {
     this.allKineticEnergyBinCountsProperty.value =
       sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
 
-    // Find the maximum bin count for all histograms. It's sufficient to look at the 'all' histograms.
-    // This is used to determine the y-axis scale, which must be the same for both histograms.
-    const maxBinCount = Math.max(
-      getMaxBinCount( this.allSpeedBinCountsProperty.value ),
-      getMaxBinCount( this.allKineticEnergyBinCountsProperty.value ) );
-
-    // Adjust the y-axis scale to accommodate the maximum bin count.
-    // Increase the y scale a bit so that there's always a little space above maxBinCount.
-    // The minimum scale is determined by the spacing between horizontal lines in the histogram view.
-    // We don't want to the scale to be less than one interval of the horizontal lines, so that the
-    // y-axis doesn't scale for small numbers of particles.
-    this.yMaxProperty.value = Math.max( 1.05 * maxBinCount, this.yMaxProperty.range.min );
-
     // Notify listeners that the bin counts have been updated.
     this.binCountsUpdatedEmitter.emit();
 
     // Clear sample data in preparation for the next sample period.
     this.clearSamples();
   }
-}
-
-/**
- * Gets the maximum in a set of bin counts, zero if the array is empty.
- */
-function getMaxBinCount( binCounts: number[] ): number {
-  let maxBinCount = 0;
-  if ( binCounts.length > 0 ) {
-    maxBinCount = _.max( binCounts )!;
-  }
-  return maxBinCount;
 }
 
 /**

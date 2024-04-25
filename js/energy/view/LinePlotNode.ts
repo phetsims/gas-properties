@@ -57,8 +57,6 @@ export default class LinePlotNode extends Path {
     for ( let i = 0; i < numberOfBins; i++ ) {
 
       const binCount = binCounts[ i ];
-      assert && assert( binCount <= this.yMaxProperty.value,
-        `binCount ${binCount} should be <= yScale ${this.yMaxProperty.value}` );
 
       const lineHeight = ( binCount / this.yMaxProperty.value ) * this.chartSize.height;
       const y = this.chartSize.height - lineHeight;

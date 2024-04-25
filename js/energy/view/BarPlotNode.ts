@@ -53,8 +53,6 @@ export default class BarPlotNode extends Path {
     for ( let i = 0; i < numberOfBins; i++ ) {
 
       const binCount = binCounts[ i ];
-      assert && assert( binCount <= this.yMaxProperty.value,
-        `binCount ${binCount} should be <= yScale ${this.yMaxProperty.value}` );
 
       if ( binCount > 0 ) {
 

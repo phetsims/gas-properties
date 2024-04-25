@@ -105,19 +105,15 @@ export default class HistogramNode extends Node {
       modelYRange: new Range( 0, yMaxProperty.value )
     } );
 
-    yMaxProperty.lazyLink( yMax => chartTransform.setModelYRange( new Range( 0, yMax ) ) );
-
     // Main body of the chart.
     const chartRectangle = new ChartRectangle( chartTransform, {
-      fill: options.backgroundFill,
-      cornerRadius: 6
+      fill: options.backgroundFill
     } );
 
     // Outside border appears on top of plotted data
     const chartBorder = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
       stroke: options.borderStroke,
-      lineWidth: options.borderLineWidth,
-      cornerRadius: 6
+      lineWidth: options.borderLineWidth
     } );
 
     // x-axis label
@@ -146,12 +142,12 @@ export default class HistogramNode extends Node {
     // Grid lines for the y-axis.
     const yMajorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 50, {
       stroke: 'white',
-      opacity: 1,
+      opacity: 0.5,
       lineWidth: 1
     } );
     const yMinorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 25, {
-      stroke: 'gray',
-      opacity: 1,
+      stroke: 'white',
+      opacity: 0.25,
       lineWidth: 1
     } );
 
@@ -210,6 +206,19 @@ export default class HistogramNode extends Node {
     this.lightPlotVisibleProperty.link( visible => {
       lightPlotNode.visible = visible;
       visible && lightPlotNode.plot( lightBinCountsProperty.value );
+    } );
+
+    yMaxProperty.link( yMax => {
+      chartTransform.setModelYRange( new Range( 0, yMax ) );
+      //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers
+      if ( yMax <= 200 ) {
+        yMajorGridLines.setSpacing( 50 );
+        yMinorGridLines.setSpacing( 10 );
+      }
+      else {
+        yMajorGridLines.setSpacing( 500 );
+        yMinorGridLines.setSpacing( 100 );
+      }
     } );
   }
 
