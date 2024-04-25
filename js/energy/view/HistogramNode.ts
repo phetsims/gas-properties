@@ -15,7 +15,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Rectangle, TColor, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import BarPlotNode from './BarPlotNode.js';
@@ -25,14 +25,16 @@ import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
 import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
 import Orientation from '../../../../phet-core/js/Orientation.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
+import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
+import Utils from '../../../../dot/js/Utils.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
+const TICK_LABEL_FONT = new PhetFont( 12 );
 
 type SelfOptions = {
   chartSize?: Dimension2; // size of the Rectangle that is the histogram background
   backgroundFill?: TColor; // histogram background color
-  borderStroke?: TColor;
-  borderLineWidth?: number;
   plotLineWidth?: number; // lineWidth for line segment plots
   barColor?: TColor;
 };
@@ -89,8 +91,6 @@ export default class HistogramNode extends Node {
       // SelfOptions
       chartSize: new Dimension2( 150, 130 ),
       backgroundFill: 'black',
-      borderStroke: GasPropertiesColors.panelStrokeProperty,
-      borderLineWidth: 1,
       plotLineWidth: 2,
       barColor: 'white',
 
@@ -107,13 +107,8 @@ export default class HistogramNode extends Node {
 
     // Main body of the chart.
     const chartRectangle = new ChartRectangle( chartTransform, {
-      fill: options.backgroundFill
-    } );
-
-    // Outside border appears on top of plotted data
-    const chartBorder = new Rectangle( 0, 0, options.chartSize.width, options.chartSize.height, {
-      stroke: options.borderStroke,
-      lineWidth: options.borderLineWidth
+      fill: options.backgroundFill,
+      stroke: options.backgroundFill
     } );
 
     // x-axis label
@@ -140,15 +135,31 @@ export default class HistogramNode extends Node {
     } );
 
     // Grid lines for the y-axis.
-    const yMajorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 50, {
+    const yMajorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 2, {
       stroke: 'white',
       opacity: 0.5,
       lineWidth: 1
     } );
-    const yMinorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 25, {
+    const yMinorGridLines = new GridLineSet( chartTransform, Orientation.VERTICAL, 1, {
       stroke: 'white',
       opacity: 0.25,
       lineWidth: 1
+    } );
+
+    // Tick marks and labels for y-axis.
+    const yTickMarks = new TickMarkSet( chartTransform, Orientation.VERTICAL, 2, {
+      skipCoordinates: [ 0 ],
+      edge: 'min',
+      extent: 8,
+      stroke: GasPropertiesColors.textFillProperty
+    } );
+    const yTickLabels = new TickLabelSet( chartTransform, Orientation.VERTICAL, 1, {
+      skipCoordinates: [ 0 ],
+      edge: 'min',
+      createLabel: ( value: number ) => new Text( Utils.toFixed( value, 0 ), {
+        font: TICK_LABEL_FONT,
+        fill: GasPropertiesColors.textFillProperty
+      } )
     } );
 
     //TODO https://github.com/phetsims/gas-properties/issues/210 tick mark at chartTransform.modelYRange.max
@@ -168,7 +179,7 @@ export default class HistogramNode extends Node {
       children: [ yMinorGridLines, yMajorGridLines, allPlotNode, heavyPlotNode, lightPlotNode ]
     } );
 
-    options.children = [ chartRectangle, clippedNode, chartBorder, xAxisLabelText, yAxisLabelText ];
+    options.children = [ yTickMarks, chartRectangle, clippedNode, xAxisLabelText, yAxisLabelText, yTickLabels ];
 
     super( options );
 
@@ -209,7 +220,15 @@ export default class HistogramNode extends Node {
     } );
 
     yMaxProperty.link( yMax => {
+
+      // Adjust the chart transform's y-axis.
       chartTransform.setModelYRange( new Range( 0, yMax ) );
+
+      // Tick mark and label at yMax only.
+      yTickMarks.setSpacing( yMax );
+      yTickLabels.setSpacing( yMax );
+
+      // Adjust spacing for gridlines.
       //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers
       if ( yMax <= 200 ) {
         yMajorGridLines.setSpacing( 50 );
