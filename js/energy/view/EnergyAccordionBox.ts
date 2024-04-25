@@ -77,7 +77,8 @@ export default class EnergyAccordionBox extends AccordionBox {
       },
       //TODO https://github.com/phetsims/gas-properties/issues/210 magic numbers
       applyZoomIn: yMax => yMax + ( yMax >= 200 ? 200 : 50 ),
-      applyZoomOut: yMax => yMax - ( yMax > 200 ? 200 : 50 )
+      applyZoomOut: yMax => yMax - ( yMax > 200 ? 200 : 50 ),
+      tandem: options.tandem.createTandem( 'zoomButtonGroup' )
     } );
 
     // Checkboxes
