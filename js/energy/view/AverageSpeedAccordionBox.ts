@@ -14,7 +14,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay, { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { GridBox, HStrut, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, GridBox, Text, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
@@ -55,14 +55,10 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     // Limit width of title
     options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
-    // icons for the particles
-    const heavyParticleNode = GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform );
-    const lightParticleNode = GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform );
-
-    // add a horizontal strut so that icons have the same effective width
-    const maxWidth = Math.max( heavyParticleNode.width, lightParticleNode.width );
-    heavyParticleNode.addChild( new HStrut( maxWidth, { center: heavyParticleNode.center } ) );
-    lightParticleNode.addChild( new HStrut( maxWidth, { center: lightParticleNode.center } ) );
+    // Icons for the particles, with same effective size.
+    const alignGroup = new AlignGroup();
+    const heavyParticleNode = alignGroup.createBox( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ) );
+    const lightParticleNode = alignGroup.createBox( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ) );
 
     // Used for both NumberDisplay instances
     const valuePatternStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
