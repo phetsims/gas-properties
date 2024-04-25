@@ -272,7 +272,7 @@ function getSpeedValues( particles: Particle[] ): number[] {
 }
 
 /**
- * Gets the kinetic energy values for a set of particles, in in AMU * pm^2 / ps^2.
+ * Gets the kinetic energy values for a set of particles, in AMU * pm^2 / ps^2.
  */
 function getKineticEnergyValues( particles: Particle[] ): number[] {
   const values = [];
