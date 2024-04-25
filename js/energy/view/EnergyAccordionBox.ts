@@ -63,7 +63,7 @@ export default class EnergyAccordionBox extends AccordionBox {
     const zoomButtonGroup = new PlusMinusZoomButtonGroup( yMaxProperty, {
       orientation: 'vertical',
       scale: 0.65,
-      left: histogramNode.left,
+      right: histogramNode.x - 5, // relative to the left edge of histogramNode's ChartRectangle
       top: histogramNode.bottom - 12,
       touchAreaXDilation: 10,
       touchAreaYDilation: 10,
