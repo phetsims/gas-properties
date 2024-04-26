@@ -17,7 +17,7 @@ import ParticlesAccordionBox from '../../common/view/ParticlesAccordionBox.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import IdealModel from '../model/IdealModel.js';
-import IdealControlPanel from './IdealControlPanel.js';
+import HoldConstantPanel from './HoldConstantPanel.js';
 import IdealViewProperties from './IdealViewProperties.js';
 import IdealToolsPanel from './IdealToolsPanel.js';
 
@@ -54,13 +54,13 @@ export default class IdealScreenView extends IdealGasLawScreenView {
 
     let holdConstantPanel;
     if ( options.hasHoldConstantControls ) {
-      holdConstantPanel = new IdealControlPanel(
+      holdConstantPanel = new HoldConstantPanel(
         model.holdConstantProperty,
         model.particleSystem.numberOfParticlesProperty,
         model.pressureModel.pressureProperty,
         model.container.isOpenProperty, {
           fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-          tandem: tandem.createTandem( 'controlPanel' )
+          tandem: tandem.createTandem( 'holdConstantPanel' )
         } );
       panels.push( holdConstantPanel );
     }
@@ -123,6 +123,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     this.viewProperties = viewProperties;
 
     // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    assert && assert( this.collisionCounterNode );
     this.pdomPlayAreaNode.pdomOrder = [
       this.heavyBicyclePumpNode,
       this.lightBicyclePumpNode,
@@ -137,7 +138,6 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     ];
 
     // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
-    assert && assert( this.collisionCounterNode );
     const pdomOrder = [
       this.thermometerNode,
       this.pressureGaugeNode

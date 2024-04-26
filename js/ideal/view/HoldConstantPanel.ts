@@ -1,7 +1,7 @@
 // Copyright 2018-2023, University of Colorado Boulder
 
 /**
- * IdealControlPanel is the control panel that appears in the upper-right corner of the 'Ideal' screen.
+ * HoldConstantPanel is the control panel that appears in the upper-right corner of the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,7 +23,7 @@ type SelfOptions = {
 
 type IdealControlPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class IdealControlPanel extends Panel {
+export default class HoldConstantPanel extends Panel {
 
   public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
@@ -63,4 +63,4 @@ export default class IdealControlPanel extends Panel {
   }
 }
 
-gasProperties.register( 'IdealControlPanel', IdealControlPanel );
+gasProperties.register( 'HoldConstantPanel', HoldConstantPanel );
