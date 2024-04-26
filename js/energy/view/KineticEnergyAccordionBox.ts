@@ -1,4 +1,4 @@
-// Copyright 2019-2022, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * KineticEnergyAccordionBox contains the 'Kinetic Energy' histogram and related controls.

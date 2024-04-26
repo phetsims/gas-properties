@@ -1,4 +1,4 @@
-// Copyright 2018-2023, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * DimensionalArrowsNode is a horizontal dimensional arrow. It looks like this, but with solid arrow heads:
