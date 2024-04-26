@@ -93,8 +93,6 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
         tandem: options.tandem.createTandem( 'lightNumberDisplay' )
       } ) );
 
-    const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
-
     // layout icons and NumberDisplays in a grid
     const gridBox = new GridBox( {
       rows: [
@@ -104,7 +102,7 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     } );
 
     const content = new VBox( {
-      preferredWidth: contentWidth,
+      preferredWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
       widthSizable: false, // so that width will remain preferredWidth
       align: 'center',
       children: [ gridBox ]

@@ -81,10 +81,8 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'temperatureControl' )
     } );
 
-    const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
-
     const content = new VBox( {
-      preferredWidth: contentWidth,
+      preferredWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
       widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 12,

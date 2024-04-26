@@ -41,10 +41,8 @@ export default class ExploreToolsPanel extends Panel {
         isDisposable: false
       }, providedOptions );
 
-    const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
-
     const content = new VBox( {
-      preferredWidth: contentWidth,
+      preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
       widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 12,

@@ -95,10 +95,8 @@ export default class HoldConstantPanel extends Panel {
       phetioVisiblePropertyInstrumented: false // Clients should hide the entire panel.
     } );
 
-    const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
-
     const content = new VBox( {
-      preferredWidth: contentWidth,
+      preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
       widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: SPACING,

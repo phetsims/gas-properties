@@ -56,8 +56,6 @@ export default class ParticlesAccordionBox extends AccordionBox {
     // Limit width of title
     options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
-    const contentWidth = options.fixedWidth - ( 2 * options.contentXMargin );
-
     const children: Node[] = [
 
       // Heavy
@@ -84,7 +82,7 @@ export default class ParticlesAccordionBox extends AccordionBox {
     }
 
     const content = new VBox( {
-      preferredWidth: contentWidth,
+      preferredWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
       widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 15,
