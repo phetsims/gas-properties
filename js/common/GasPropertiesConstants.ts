@@ -108,7 +108,7 @@ const GasPropertiesConstants = {
   RIGHT_PANEL_WIDTH: 225,
 
   // default font for titles (accordion boxes, groups of controls, ...)
-  TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
+  TITLE_FONT: new PhetFont( { size: 16, weight: 'bold' } ),
 
   // default font for controls (buttons, checkboxes, ...)
   CONTROL_FONT: new PhetFont( 16 ),
