@@ -75,16 +75,10 @@ export default class HistogramsModel {
   // for a designer to specify, and easier to change than an algorithmic description.
   public static readonly ZOOM_LEVELS: ZoomLevel[] = [
     { yMax: 2000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1200, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1500, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
     { yMax: 1000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 500, majorGridLineSpacing: 100, minorGridLineSpacing: 50 },
     { yMax: 200, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
-    { yMax: 150, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
     { yMax: 100, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
     { yMax: 50, majorGridLineSpacing: 50, minorGridLineSpacing: 10 }
   ];
