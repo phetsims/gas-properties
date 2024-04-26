@@ -85,7 +85,7 @@ export default class HistogramsModel {
     { yMax: 1400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
     { yMax: 1600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
     { yMax: 1800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 2000, majorGridLineSpacing: 200, minorGridLineSpacing: null }
+    { yMax: 2000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 }
   ];
 
   /**
