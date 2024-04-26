@@ -59,26 +59,36 @@ export default class HoldConstantPanel extends Panel {
     } );
 
     const items: AquaRadioButtonGroupItem<HoldConstant>[] = [
+
+      // Nothing
       {
         value: 'nothing',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
         tandemName: 'nothingRadioButton'
       },
+
+      // Volume (V)
       {
         value: 'volume',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
         tandemName: 'volumeRadioButton'
       },
+
+      // Temperature (T)
       {
         value: 'temperature',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
         tandemName: 'temperatureRadioButton'
       },
+
+      // Pressure (V)
       {
         value: 'pressureV',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
         tandemName: 'pressureVRadioButton'
       },
+
+      // Pressure (T)
       {
         value: 'pressureT',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
