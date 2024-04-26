@@ -202,14 +202,16 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
       combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
         bodyFill: GasPropertiesColors.heavyParticleColorProperty,
-        tandem: tandem.createTandem( 'heavyBicyclePumpNode' )
+        tandem: tandem.createTandem( 'heavyBicyclePumpNode' ),
+        phetioVisiblePropertyInstrumented: false // Controlled by bicyclePumpsToggleNode.
       } ) );
 
     // Bicycle pump for light particles
     const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
       combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
         bodyFill: GasPropertiesColors.lightParticleColorProperty,
-        tandem: tandem.createTandem( 'lightBicyclePumpNode' )
+        tandem: tandem.createTandem( 'lightBicyclePumpNode' ),
+        phetioVisiblePropertyInstrumented: false // Controlled by bicyclePumpsToggleNode.
       } ) );
 
     // Toggle button for switching between heavy and light bicycle pumps
