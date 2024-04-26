@@ -19,6 +19,7 @@ import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import IdealModel from '../model/IdealModel.js';
 import IdealControlPanel from './IdealControlPanel.js';
 import IdealViewProperties from './IdealViewProperties.js';
+import IdealToolsPanel from './IdealToolsPanel.js';
 
 type SelfOptions = {
   hasHoldConstantControls?: boolean;
@@ -49,19 +50,30 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     const collisionCounter = model.collisionCounter!;
     assert && assert( collisionCounter );
 
-    // Control panel at upper right
-    const controlPanel = new IdealControlPanel(
-      model.holdConstantProperty,
-      model.particleSystem.numberOfParticlesProperty,
-      model.pressureModel.pressureProperty,
-      model.container.isOpenProperty,
+    const panels = [];
+
+    let holdConstantPanel;
+    if ( options.hasHoldConstantControls ) {
+      holdConstantPanel = new IdealControlPanel(
+        model.holdConstantProperty,
+        model.particleSystem.numberOfParticlesProperty,
+        model.pressureModel.pressureProperty,
+        model.container.isOpenProperty, {
+          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
+          tandem: tandem.createTandem( 'controlPanel' )
+        } );
+      panels.push( holdConstantPanel );
+    }
+
+    const toolsPanel = new IdealToolsPanel(
       viewProperties.widthVisibleProperty,
       model.stopwatch.isVisibleProperty,
       collisionCounter.visibleProperty, {
-        hasHoldConstantControls: options.hasHoldConstantControls,
         fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-        tandem: tandem.createTandem( 'controlPanel' )
-      } );
+        tandem: tandem.createTandem( 'toolsPanel' )
+      }
+    );
+    panels.push( toolsPanel );
 
     // Particles accordion box
     const particlesAccordionBox = new ParticlesAccordionBox(
@@ -72,11 +84,12 @@ export default class IdealScreenView extends IdealGasLawScreenView {
         expandedProperty: viewProperties.particlesExpandedProperty,
         tandem: tandem.createTandem( 'particlesAccordionBox' )
       } );
+    panels.push( particlesAccordionBox );
 
     const vBox = new VBox( {
       align: 'left',
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,
-      children: [ controlPanel, particlesAccordionBox ],
+      children: panels,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
@@ -125,13 +138,15 @@ export default class IdealScreenView extends IdealGasLawScreenView {
 
     // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     assert && assert( this.collisionCounterNode );
-    this.pdomControlAreaNode.pdomOrder = [
+    const pdomOrder = [
       this.thermometerNode,
-      this.pressureGaugeNode,
-      controlPanel,
-      this.timeControlNode,
-      this.resetAllButton
+      this.pressureGaugeNode
     ];
+    holdConstantPanel && pdomOrder.push( holdConstantPanel );
+    pdomOrder.push( toolsPanel );
+    pdomOrder.push( this.timeControlNode );
+    pdomOrder.push( this.resetAllButton );
+    this.pdomControlAreaNode.pdomOrder = pdomOrder;
   }
 
   protected override reset(): void {

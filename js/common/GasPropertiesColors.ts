@@ -1,4 +1,4 @@
-// Copyright 2018-2022, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * GasPropertiesColors defines the colors for this simulation.
@@ -177,11 +177,6 @@ const GasPropertiesColors = {
   // pseudo-3D bezel around the outer edge of the collision counter
   collisionCounterBezelColorProperty: new ProfileColorProperty( gasProperties, 'collisionCounterBezelColor', {
     default: 'rgb( 90, 90, 90 )'
-  } ),
-
-  // horizontal separator in control panels
-  separatorColorProperty: new ProfileColorProperty( gasProperties, 'separatorColor', {
-    default: 'rgb( 100, 100, 100)'
   } ),
 
   // radio buttons for choosing particle type

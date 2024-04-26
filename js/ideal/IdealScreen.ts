@@ -20,7 +20,7 @@ import IdealScreenView from './view/IdealScreenView.js';
 type SelfOptions = {
 
   // Whether the control panel has the radio button group titled 'Hold Constant'
-  hasHoldConstantControls?: boolean;
+  hasHoldConstantControls?: boolean; //TODO https://github.com/phetsims/gas-properties/issues/225 rename hasHoldConstantPanel
 };
 
 type IdealScreenOptions = SelfOptions & PickOptional<GasPropertiesScreenOptions, 'name' | 'homeScreenIcon' | 'createKeyboardHelpNode'>;

@@ -1,7 +1,7 @@
-// Copyright 2018-2024, University of Colorado Boulder
+// Copyright 2024, University of Colorado Boulder
 
 /**
- * EnergyToolsPanel is the panel for controlling visibility of 'tools' in the 'Energy' screen.
+ * IdealToolsPanel is the panel for controlling visibility of 'tools' in the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,19 +15,22 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
+import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
 
 type SelfOptions = {
   fixedWidth?: number;
 };
 
-type EnergyToolsPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+type IdealToolsPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class EnergyToolsPanel extends Panel {
+export default class IdealToolsPanel extends Panel {
 
-  public constructor( widthVisibleProperty: Property<boolean>, stopwatchVisibleProperty: Property<boolean>,
-                      providedOptions: EnergyToolsPanelOptions ) {
+  public constructor( widthVisibleProperty: Property<boolean>,
+                      stopwatchVisibleProperty: Property<boolean>,
+                      collisionCounterVisibleProperty: Property<boolean>,
+                      providedOptions: IdealToolsPanelOptions ) {
 
-    const options = optionize4<EnergyToolsPanelOptions, SelfOptions, PanelOptions>()(
+    const options = optionize4<IdealToolsPanelOptions, SelfOptions, PanelOptions>()(
       {}, GasPropertiesConstants.PANEL_OPTIONS, {
 
         // SelfOptions
@@ -53,6 +56,10 @@ export default class EnergyToolsPanel extends Panel {
         new StopwatchCheckbox( stopwatchVisibleProperty, {
           textMaxWidth: 125,
           tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
+        } ),
+        new CollisionCounterCheckbox( collisionCounterVisibleProperty, {
+          textMaxWidth: 125,
+          tandem: options.tandem.createTandem( 'collisionCounterCheckbox' )
         } )
       ]
     } );
@@ -61,4 +68,4 @@ export default class EnergyToolsPanel extends Panel {
   }
 }
 
-gasProperties.register( 'EnergyToolsPanel', EnergyToolsPanel );
+gasProperties.register( 'IdealToolsPanel', IdealToolsPanel );

@@ -1,7 +1,7 @@
 // Copyright 2018-2024, University of Colorado Boulder
 
 /**
- * DiffusionToolsPanel is the panel for setting the visibility of tools in the Diffusion screen.
+ * DiffusionToolsPanel is the panel for controlling the visibility of 'tools' in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
