@@ -1,7 +1,8 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * HistogramPlot plots a histogram in the familiar 'bars' style, or as a set of connected lines.
+ * HistogramPlot plots a histogram in the familiar 'bars' style, or as a set of connected lines. The data set is the
+ * set of y values for an ordered set of bins.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
