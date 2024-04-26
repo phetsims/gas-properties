@@ -56,30 +56,31 @@ export default class ParticlesAccordionBox extends AccordionBox {
     // Limit width of title
     options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
-    const children: Node[] = [
+    const children: Node[] = [];
 
-      // Heavy
-      new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
-        GasPropertiesStrings.heavyStringProperty, numberOfHeavyParticlesProperty, {
-          tandem: options.tandem.createTandem( 'numberOfHeavyParticlesControl' )
-        } ),
-
-      // Light
-      new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
-        GasPropertiesStrings.lightStringProperty, numberOfLightParticlesProperty, {
-          tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
-        } )
-    ];
-
+    // optional Collisions checkbox
     if ( options.collisionsEnabledProperty ) {
-
-      // optional Collisions checkbox, prepended so that it appears at top
-      children.unshift( new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
+      const collisionsCheckbox = new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
         textStringProperty: GasPropertiesStrings.collisionsStringProperty,
         textMaxWidth: 175, // determined empirically
         tandem: options.tandem.createTandem( 'collisionsCheckbox' )
-      } ) );
+      } );
+      children.push( collisionsCheckbox );
     }
+
+    // Heavy
+    const numberOfHeavyParticlesControl = new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
+      GasPropertiesStrings.heavyStringProperty, numberOfHeavyParticlesProperty, {
+        tandem: options.tandem.createTandem( 'numberOfHeavyParticlesControl' )
+      } );
+    children.push( numberOfHeavyParticlesControl );
+
+    // Light
+    const numberOfLightParticlesControl = new NumberOfParticlesControl( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ),
+      GasPropertiesStrings.lightStringProperty, numberOfLightParticlesProperty, {
+        tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
+      } );
+    children.push( numberOfLightParticlesControl );
 
     const content = new VBox( {
       preferredWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
