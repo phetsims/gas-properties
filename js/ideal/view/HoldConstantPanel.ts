@@ -91,7 +91,8 @@ export default class HoldConstantPanel extends Panel {
       orientation: 'vertical',
       align: 'left',
       spacing: SPACING,
-      tandem: options.tandem.createTandem( 'radioButtonGroup' )
+      tandem: options.tandem.createTandem( 'radioButtonGroup' ),
+      phetioVisiblePropertyInstrumented: false // Clients should hide the entire panel.
     } );
 
     const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
