@@ -1,21 +1,31 @@
-// Copyright 2018-2023, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
- * HoldConstantPanel is the control panel that appears in the upper-right corner of the 'Ideal' screen.
+ * HoldConstantPanel is the panel titled 'Hold Constant' that appears in the 'Ideal' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
-import HoldConstantControl from './HoldConstantControl.js';
 import { HoldConstant } from '../../common/model/HoldConstant.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
+import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+
+const SPACING = 12;
+const TEXT_OPTIONS: TextOptions = {
+  font: GasPropertiesConstants.CONTROL_FONT,
+  fill: GasPropertiesColors.textFillProperty,
+  maxWidth: 175 // determined empirically
+};
 
 type SelfOptions = {
   fixedWidth?: number;
@@ -42,24 +52,75 @@ export default class HoldConstantPanel extends Panel {
         isDisposable: false
       }, providedOptions );
 
-    const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
+    const titleText = new Text( GasPropertiesStrings.holdConstant.titleStringProperty, {
+      font: GasPropertiesConstants.TITLE_FONT,
+      fill: GasPropertiesColors.textFillProperty,
+      maxWidth: 200 // determined empirically
+    } );
 
-    //TODO https://github.com/phetsims/gas-properties/issues/225 move HoldConstantControl into this file
-    const holdConstantControl = new HoldConstantControl(
-      holdConstantProperty, numberOfParticlesProperty, pressureProperty, isContainerOpenProperty, {
-        maxWidth: contentWidth,
-        tandem: options.tandem.createTandem( 'holdConstantControl' )
-      } );
+    const items: AquaRadioButtonGroupItem<HoldConstant>[] = [
+      {
+        value: 'nothing',
+        createNode: () => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
+        tandemName: 'nothingRadioButton'
+      },
+      {
+        value: 'volume',
+        createNode: () => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
+        tandemName: 'volumeRadioButton'
+      },
+      {
+        value: 'temperature',
+        createNode: () => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
+        tandemName: 'temperatureRadioButton'
+      },
+      {
+        value: 'pressureV',
+        createNode: () => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
+        tandemName: 'pressureVRadioButton'
+      },
+      {
+        value: 'pressureT',
+        createNode: () => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
+        tandemName: 'pressureTRadioButton'
+      }
+    ];
+
+    const radioButtonGroup = new AquaRadioButtonGroup( holdConstantProperty, items, {
+      radioButtonOptions: GasPropertiesConstants.AQUA_RADIO_BUTTON_OPTIONS,
+      orientation: 'vertical',
+      align: 'left',
+      spacing: SPACING,
+      tandem: options.tandem.createTandem( 'radioButtonGroup' )
+    } );
+
+    const contentWidth = options.fixedWidth - ( 2 * options.xMargin );
 
     const content = new VBox( {
       preferredWidth: contentWidth,
       widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
-      spacing: 12,
-      children: [ holdConstantControl ]
+      spacing: SPACING,
+      children: [ titleText, radioButtonGroup ]
     } );
 
     super( content, options );
+
+    // Disable "Temperature (T)" radio button for conditions that are not possible.
+    const temperatureRadioButton = radioButtonGroup.getButton( 'temperature' );
+    Multilink.multilink(
+      [ numberOfParticlesProperty, isContainerOpenProperty ],
+      ( numberOfParticles, isContainerOpen ) => {
+        temperatureRadioButton.enabledProperty.value = ( numberOfParticles !== 0 ) && !isContainerOpen;
+      } );
+
+    // Disable radio buttons for selections that are not possible with zero pressure.
+    const pressureVRadioButton = radioButtonGroup.getButton( 'pressureV' );
+    const pressureTRadioButton = radioButtonGroup.getButton( 'pressureT' );
+    pressureProperty.link( pressure => {
+      pressureVRadioButton.enabledProperty.value = ( pressure !== 0 );
+      pressureTRadioButton.enabledProperty.value = ( pressure !== 0 );
+    } );
   }
 }
 
