@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * HistogramPlot plots a histogram in the familiar 'bars' style, or as a set of connected lines. The data set consists
+ * BinCountsPlot plots a histogram in the familiar 'bars' style, or as a set of connected lines. The data set consists
  * of the y values for an ordered set of bins.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -19,7 +19,7 @@ type SelfOptions = {
 
 export type HistogramPlotOptions = SelfOptions & PathOptions;
 
-export default class HistogramPlot extends Path {
+export default class BinCountsPlot extends Path {
 
   private readonly chartTransform: ChartTransform;
   private binCounts: number[];
@@ -99,4 +99,4 @@ export default class HistogramPlot extends Path {
   }
 }
 
-gasProperties.register( 'HistogramPlot', HistogramPlot );
+gasProperties.register( 'BinCountsPlot', BinCountsPlot );

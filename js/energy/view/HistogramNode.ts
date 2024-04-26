@@ -27,7 +27,7 @@ import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
 import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
 import Utils from '../../../../dot/js/Utils.js';
 import HistogramsModel from '../model/HistogramsModel.js';
-import HistogramPlot from './HistogramPlot.js';
+import BinCountsPlot from './BinCountsPlot.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
 const TICK_LABEL_FONT = new PhetFont( 12 );
@@ -44,9 +44,9 @@ export type HistogramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tand
 export default class HistogramNode extends Node {
 
   // Plots
-  private readonly allPlotNode: HistogramPlot;
-  private readonly heavyPlotNode: HistogramPlot;
-  private readonly lightPlotNode: HistogramPlot;
+  private readonly allPlotNode: BinCountsPlot;
+  private readonly heavyPlotNode: BinCountsPlot;
+  private readonly lightPlotNode: BinCountsPlot;
 
   // Data for each plot.
   private readonly allBinCountsProperty: Property<number[]>;
@@ -163,17 +163,17 @@ export default class HistogramNode extends Node {
     } );
 
     // Plot for all particles.
-    const allPlotNode = new HistogramPlot( chartTransform, allBinCountsProperty.value, {
+    const allPlotNode = new BinCountsPlot( chartTransform, allBinCountsProperty.value, {
       closeShape: true,
       fill: options.barColor
     } );
 
     // Plots for heavy and light particles.
-    const heavyPlotNode = new HistogramPlot( chartTransform, heavyBinCountsProperty.value, {
+    const heavyPlotNode = new BinCountsPlot( chartTransform, heavyBinCountsProperty.value, {
       stroke: GasPropertiesColors.heavyParticleColorProperty,
       lineWidth: options.plotLineWidth
     } );
-    const lightPlotNode = new HistogramPlot( chartTransform, lightBinCountsProperty.value, {
+    const lightPlotNode = new BinCountsPlot( chartTransform, lightBinCountsProperty.value, {
       stroke: GasPropertiesColors.lightParticleColorProperty,
       lineWidth: options.plotLineWidth
     } );
