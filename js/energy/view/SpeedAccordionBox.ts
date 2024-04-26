@@ -28,7 +28,7 @@ export default class SpeedAccordionBox extends EnergyAccordionBox {
       tandem: tandem
     } );
 
-    super( GasPropertiesStrings.speedStringProperty, modelViewTransform, histogramsModel.zoomLevelProperty,
+    super( GasPropertiesStrings.speedStringProperty, modelViewTransform, histogramsModel.zoomLevelIndexProperty,
       createHistogramNode, providedOptions );
   }
 }

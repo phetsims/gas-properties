@@ -21,7 +21,8 @@ import Particle from '../../common/model/Particle.js';
 import ParticleSystem from '../../common/model/ParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
 
-type ZoomDescription = {
+// Describes the properties of the histograms at a specific zoom level.
+type ZoomLevel = {
   yMax: number;
   majorGridLineSpacing: number;
   minorGridLineSpacing: number | null; // null means no minor grid lines
@@ -51,8 +52,8 @@ export default class HistogramsModel {
   public readonly lightKineticEnergyBinCountsProperty: Property<number[]>;
   public readonly allKineticEnergyBinCountsProperty: Property<number[]>;
 
-  // Index into ZOOM_DESCRIPTIONS, shared by all histograms.
-  public readonly zoomLevelProperty: NumberProperty;
+  // Index into ZOOM_LEVELS, shared by all histograms.
+  public readonly zoomLevelIndexProperty: NumberProperty;
 
   // emits when the bin counts have been updated
   public readonly binCountsUpdatedEmitter: Emitter;
@@ -69,23 +70,23 @@ export default class HistogramsModel {
   private dtAccumulator: number;
   private numberOfSamples: number;
 
-  // Describes each of the zoom levels, ordered from smallest to largest yMax value.
-  // zoomLevelProperty provides the index into this array.
-  // This is brute force, but much easier to change than an algorithmic description.
-  public static readonly ZOOM_DESCRIPTIONS: ZoomDescription[] = [
-    { yMax: 50, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
-    { yMax: 100, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
-    { yMax: 150, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
-    { yMax: 200, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
-    { yMax: 400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1200, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 1600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+  // Describes each of the zoom levels, ordered from largest to smallest yMax value. zoomLevelIndexProperty provides
+  // the index into this array. This is a brute force specification that contains some duplication. But it's easier
+  // for a designer to specify, and easier to change than an algorithmic description.
+  public static readonly ZOOM_LEVELS: ZoomLevel[] = [
+    { yMax: 2000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
     { yMax: 1800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
-    { yMax: 2000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 }
+    { yMax: 1600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1200, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 1000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 800, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 600, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 400, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
+    { yMax: 200, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
+    { yMax: 150, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
+    { yMax: 100, majorGridLineSpacing: 50, minorGridLineSpacing: 10 },
+    { yMax: 50, majorGridLineSpacing: 50, minorGridLineSpacing: 10 }
   ];
 
   /**
@@ -157,12 +158,12 @@ export default class HistogramsModel {
         phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
       } ) );
 
-    this.zoomLevelProperty = new NumberProperty( 0, {
+    this.zoomLevelIndexProperty = new NumberProperty( HistogramsModel.ZOOM_LEVELS.length - 2, {
       numberType: 'Integer',
-      range: new Range( 0, HistogramsModel.ZOOM_DESCRIPTIONS.length - 1 ),
-      tandem: options.tandem.createTandem( 'zoomLevelProperty' ),
+      range: new Range( 0, HistogramsModel.ZOOM_LEVELS.length - 1 ),
+      tandem: options.tandem.createTandem( 'zoomLevelIndexProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'Zoom level for the Speed and Kinetic Energy histograms. A larger value is more zoomed out.'
+      phetioDocumentation: 'Zoom level for the Speed and Kinetic Energy histograms. A smaller value is more zoomed out.'
     } );
 
     this.binCountsUpdatedEmitter = new Emitter();
@@ -196,7 +197,7 @@ export default class HistogramsModel {
 
   public reset(): void {
     this.clearSamples();
-    this.zoomLevelProperty.reset();
+    this.zoomLevelIndexProperty.reset();
   }
 
   /**
@@ -353,5 +354,9 @@ function sumBinCounts( heavyBinCounts: number[], lightBinCounts: number[] ): num
   }
   return sumBinCounts;
 }
+
+assert && assert( _.every( HistogramsModel.ZOOM_LEVELS, ( zoomLevel, index ) =>
+    ( index === 0 || HistogramsModel.ZOOM_LEVELS[ index - 1 ].yMax > zoomLevel.yMax ) ),
+  'ZOOM_LEVELS must be sorted by descencing yMax' );
 
 gasProperties.register( 'HistogramsModel', HistogramsModel );

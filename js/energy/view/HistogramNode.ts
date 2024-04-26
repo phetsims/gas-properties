@@ -68,7 +68,7 @@ export default class HistogramNode extends Node {
    * @param allBinCountsProperty  - bin counts for all particles
    * @param heavyBinCountsProperty - bin counts for heavy particles
    * @param lightBinCountsProperty - bin counts for light particles
-   * @param zoomLevelProperty - index into HistogramsModel.ZOOM_DESCRIPTIONS
+   * @param zoomLevelIndexProperty - index into HistogramsModel.ZOOM_LEVELS
    * @param xAxisStringProperty - label on the x-axis
    * @param yAxisStringProperty - label on the y-axis
    * @param providedOptions
@@ -79,7 +79,7 @@ export default class HistogramNode extends Node {
                          allBinCountsProperty: Property<number[]>,
                          heavyBinCountsProperty: Property<number[]>,
                          lightBinCountsProperty: Property<number[]>,
-                         zoomLevelProperty: NumberProperty,
+                         zoomLevelIndexProperty: NumberProperty,
                          xAxisStringProperty: TReadOnlyProperty<string>,
                          yAxisStringProperty: TReadOnlyProperty<string>,
                          providedOptions: HistogramNodeOptions ) {
@@ -102,7 +102,7 @@ export default class HistogramNode extends Node {
       viewWidth: options.chartSize.width,
       viewHeight: options.chartSize.height,
       modelXRange: new Range( 0, numberOfBins ),
-      modelYRange: new Range( 0, HistogramsModel.ZOOM_DESCRIPTIONS[ zoomLevelProperty.value ].yMax )
+      modelYRange: new Range( 0, HistogramsModel.ZOOM_LEVELS[ zoomLevelIndexProperty.value ].yMax )
     } );
 
     // Main body of the chart.
@@ -224,9 +224,9 @@ export default class HistogramNode extends Node {
       visible && lightPlotNode.setBinCounts( lightBinCountsProperty.value );
     } );
 
-    zoomLevelProperty.link( zoomLevel => {
+    zoomLevelIndexProperty.link( zoomLevelIndex => {
 
-      const zoomDescription = HistogramsModel.ZOOM_DESCRIPTIONS[ zoomLevel ];
+      const zoomDescription = HistogramsModel.ZOOM_LEVELS[ zoomLevelIndex ];
 
       // Adjust the chart transform's y-axis range.
       chartTransform.setModelYRange( new Range( 0, zoomDescription.yMax ) );
