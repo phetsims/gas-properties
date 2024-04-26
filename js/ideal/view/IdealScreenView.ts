@@ -22,7 +22,7 @@ import IdealViewProperties from './IdealViewProperties.js';
 import IdealToolsPanel from './IdealToolsPanel.js';
 
 type SelfOptions = {
-  hasHoldConstantControls?: boolean;
+  hasHoldConstantPanel?: boolean;
 };
 
 type IdealScreenViewOptions = SelfOptions & IdealGasLawScreenViewOptions;
@@ -36,7 +36,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     const options = optionize<IdealScreenViewOptions, SelfOptions, IdealGasLawScreenViewOptions>()( {
 
       // SelfOptions
-      hasHoldConstantControls: true,
+      hasHoldConstantPanel: true,
 
       // IdealScreenViewOptions
       resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty
@@ -53,7 +53,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     const panels = [];
 
     let holdConstantPanel;
-    if ( options.hasHoldConstantControls ) {
+    if ( options.hasHoldConstantPanel ) {
       holdConstantPanel = new HoldConstantPanel(
         model.holdConstantProperty,
         model.particleSystem.numberOfParticlesProperty,

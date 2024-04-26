@@ -19,8 +19,8 @@ import IdealScreenView from './view/IdealScreenView.js';
 
 type SelfOptions = {
 
-  // Whether the control panel has the radio button group titled 'Hold Constant'
-  hasHoldConstantControls?: boolean; //TODO https://github.com/phetsims/gas-properties/issues/225 rename hasHoldConstantPanel
+  // Whether the sim has the panel titled 'Hold Constant'
+  hasHoldConstantPanel?: boolean;
 };
 
 type IdealScreenOptions = SelfOptions & PickOptional<GasPropertiesScreenOptions, 'name' | 'homeScreenIcon' | 'createKeyboardHelpNode'>;
@@ -32,7 +32,7 @@ export default class IdealScreen extends GasPropertiesScreen<IdealModel, IdealSc
     const options = optionize<IdealScreenOptions, SelfOptions, GasPropertiesScreenOptions>()( {
 
       // SelfOptions
-      hasHoldConstantControls: true,
+      hasHoldConstantPanel: true,
 
       // GasPropertiesScreenOptions
       name: GasPropertiesStrings.screen.idealStringProperty,
@@ -43,7 +43,7 @@ export default class IdealScreen extends GasPropertiesScreen<IdealModel, IdealSc
 
     const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
     const createView = ( model: IdealModel ) => new IdealScreenView( model, tandem.createTandem( 'view' ), {
-      hasHoldConstantControls: options.hasHoldConstantControls
+      hasHoldConstantPanel: options.hasHoldConstantPanel
     } );
 
     super( createModel, createView, options );
