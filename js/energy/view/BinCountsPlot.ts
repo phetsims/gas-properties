@@ -1,8 +1,8 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * BinCountsPlot plots a histogram in the familiar 'bars' style, or as a set of connected lines. The data set consists
- * of the y values for an ordered set of bins.
+ * BinCountsPlot plots the counts for an ordered set of bins. The bins are positioned at integer x values, while
+ * the counts are y values.  This results in a plot that looks like the familiar 'bars' style histogram.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
