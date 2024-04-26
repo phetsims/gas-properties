@@ -22,11 +22,11 @@ export type HistogramPlotOptions = SelfOptions & PathOptions;
 export default class HistogramPlot extends Path {
 
   private readonly chartTransform: ChartTransform;
-  private dataSet: number[];
+  private binCounts: number[];
   private readonly closeShape: boolean;
   private readonly disposeHistogramPlot: () => void;
 
-  public constructor( chartTransform: ChartTransform, dataSet: number[], providedOptions?: HistogramPlotOptions ) {
+  public constructor( chartTransform: ChartTransform, binCounts: number[], providedOptions?: HistogramPlotOptions ) {
 
     const options = optionize<HistogramPlotOptions, SelfOptions, PathOptions>()( {
 
@@ -37,7 +37,7 @@ export default class HistogramPlot extends Path {
     super( null, options );
 
     this.chartTransform = chartTransform;
-    this.dataSet = dataSet;
+    this.binCounts = binCounts;
     this.closeShape = options.closeShape;
 
     // Initialize
@@ -56,10 +56,10 @@ export default class HistogramPlot extends Path {
   }
 
   /**
-   * Sets the dataSet and redraws the plot.
+   * Sets the bin counts and redraws the plot.
    */
-  public setDataSet( dataSet: number[] ): void {
-    this.dataSet = dataSet;
+  public setBinCounts( binCounts: number[] ): void {
+    this.binCounts = binCounts;
     this.update();
   }
 
@@ -75,18 +75,18 @@ export default class HistogramPlot extends Path {
     // Start at the origin.
     shape.moveTo( this.chartTransform.modelToViewX( 0 ), this.chartTransform.modelToViewY( 0 ) );
 
-    for ( let i = 0; i < this.dataSet.length; i++ ) {
+    for ( let i = 0; i < this.binCounts.length; i++ ) {
 
-      const modelY = this.dataSet[ i ];
-      assert && assert( isFinite( modelY ), `The data set must contain finite numbers: ${modelY}` );
+      const binCount = this.binCounts[ i ];
+      assert && assert( isFinite( binCount ), `The data set must contain finite numbers: ${binCount}` );
 
       const viewX = this.chartTransform.modelToViewX( i );
-      const viewY = this.chartTransform.modelToViewY( modelY );
+      const viewY = this.chartTransform.modelToViewY( binCount );
       shape.lineTo( viewX, viewY );
       shape.lineTo( viewX + barWidth, viewY );
 
       // Finish at y = 0.
-      if ( i === this.dataSet.length - 1 ) {
+      if ( i === this.binCounts.length - 1 ) {
         shape.lineTo( viewX + barWidth, this.chartTransform.modelToViewY( 0 ) );
       }
     }

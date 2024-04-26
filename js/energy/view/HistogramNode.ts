@@ -215,13 +215,13 @@ export default class HistogramNode extends Node {
     // Visibility of heavy plot, updated immediately when it's made visible.
     this.heavyPlotVisibleProperty.link( visible => {
       heavyPlotNode.visible = visible;
-      visible && heavyPlotNode.setDataSet( heavyBinCountsProperty.value );
+      visible && heavyPlotNode.setBinCounts( heavyBinCountsProperty.value );
     } );
 
     // Visibility of light plot, updated immediately when it's made visible.
     this.lightPlotVisibleProperty.link( visible => {
       lightPlotNode.visible = visible;
-      visible && lightPlotNode.setDataSet( lightBinCountsProperty.value );
+      visible && lightPlotNode.setBinCounts( lightBinCountsProperty.value );
     } );
 
     zoomLevelProperty.link( zoomLevel => {
@@ -257,14 +257,14 @@ export default class HistogramNode extends Node {
    */
   private update(): void {
     if ( this.updateEnabledProperty.value ) {
-      this.allPlotNode.setDataSet( this.allBinCountsProperty.value );
+      this.allPlotNode.setBinCounts( this.allBinCountsProperty.value );
 
       if ( this.heavyPlotVisibleProperty.value ) {
-        this.heavyPlotNode.setDataSet( this.heavyBinCountsProperty.value );
+        this.heavyPlotNode.setBinCounts( this.heavyBinCountsProperty.value );
       }
 
       if ( this.lightPlotVisibleProperty.value ) {
-        this.lightPlotNode.setDataSet( this.lightBinCountsProperty.value );
+        this.lightPlotNode.setBinCounts( this.lightBinCountsProperty.value );
       }
     }
   }
