@@ -72,7 +72,7 @@ export default class HistogramsModel {
 
   // Describes each of the zoom levels, ordered from largest to smallest yMax value. zoomLevelIndexProperty provides
   // the index into this array. This is a brute force specification that contains some duplication. But it's easier
-  // for a designer to specify, and easier to change than an algorithmic description.
+  // to specify and change than an algorithmic description.
   public static readonly ZOOM_LEVELS: ZoomLevel[] = [
     { yMax: 2000, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
     { yMax: 1500, majorGridLineSpacing: 500, minorGridLineSpacing: 100 },
