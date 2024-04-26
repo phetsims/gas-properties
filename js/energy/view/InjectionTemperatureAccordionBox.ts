@@ -79,7 +79,6 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    // NumberControl
     const temperatureControl = new InjectionTemperatureControl( initialTemperatureProperty, {
       enabledProperty: controlTemperatureEnabledProperty,
       tandem: options.tandem.createTandem( 'temperatureControl' )
