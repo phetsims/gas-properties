@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * IdealToolsPanel is the panel for controlling visibility of 'tools' in the 'Ideal' screen.
