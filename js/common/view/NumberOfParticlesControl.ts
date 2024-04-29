@@ -59,7 +59,8 @@ export default class NumberOfParticlesControl extends VBox {
         }
       },
       maxWidth: 190, // determined empirically
-      tandem: options.tandem.createTandem( 'spinner' )
+      tandem: options.tandem.createTandem( 'spinner' ),
+      phetioVisiblePropertyInstrumented: false // Clients should hide the entire control.
     } );
 
     // Limit width of text
