@@ -351,6 +351,6 @@ function sumBinCounts( heavyBinCounts: number[], lightBinCounts: number[] ): num
 
 assert && assert( _.every( HistogramsModel.ZOOM_LEVELS, ( zoomLevel, index ) =>
     ( index === 0 || HistogramsModel.ZOOM_LEVELS[ index - 1 ].yMax > zoomLevel.yMax ) ),
-  'ZOOM_LEVELS must be sorted by descending yMax' );
+  'ZOOM_LEVELS must be ordered by descending yMax' );
 
 gasProperties.register( 'HistogramsModel', HistogramsModel );
