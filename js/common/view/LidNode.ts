@@ -14,6 +14,7 @@ import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, Rec
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 // constants
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
@@ -25,7 +26,7 @@ type SelfOptions = {
   gripColor?: TColor;
 };
 
-type LidNodeOptions = SelfOptions;
+type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class LidNode extends Node {
 
@@ -40,7 +41,8 @@ export default class LidNode extends Node {
       gripColor: GasPropertiesColors.lidGripColorProperty,
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
     const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {
@@ -49,15 +51,16 @@ export default class LidNode extends Node {
       bottom: 0
     } );
 
-    const handleNode = new LidHandleNode( options.gripColor, {
+    const lidHandleNode = new LidHandleNode( options.gripColor, {
       right: baseNode.right - HANDLE_RIGHT_INSET,
-      bottom: baseNode.top + 1
+      bottom: baseNode.top + 1,
+      tandem: options.tandem.createTandem( 'lidHandleNode' )
     } );
-    assert && assert( handleNode.width <= baseNode.width,
-      `handleNode.width ${handleNode.width} is wider than baseNode.width ${baseNode.width}` );
-    handleNode.touchArea = handleNode.localBounds.dilatedXY( 25, 20 );
+    assert && assert( lidHandleNode.width <= baseNode.width,
+      `handleNode.width ${lidHandleNode.width} is wider than baseNode.width ${baseNode.width}` );
+    lidHandleNode.touchArea = lidHandleNode.localBounds.dilatedXY( 25, 20 );
 
-    options.children = [ handleNode, baseNode ];
+    options.children = [ lidHandleNode, baseNode ];
 
     super( options );
 
@@ -65,10 +68,10 @@ export default class LidNode extends Node {
     // cooling, which will occur when the lid is open. See https://github.com/phetsims/gas-properties/issues/159
     holdConstantProperty.link( holdConstant => {
       this.interruptSubtreeInput();
-      handleNode.visible = ( holdConstant !== 'temperature' );
+      lidHandleNode.visible = ( holdConstant !== 'temperature' );
     } );
 
-    this.handleNode = handleNode;
+    this.handleNode = lidHandleNode;
     this.baseNode = baseNode;
   }
 
@@ -90,7 +93,7 @@ export default class LidNode extends Node {
  */
 class LidHandleNode extends InteractiveHighlighting( Node ) {
 
-  public constructor( gripColor: TColor, providedOptions?: NodeTranslationOptions ) {
+  public constructor( gripColor: TColor, providedOptions?: NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'> ) {
     super( combineOptions<NodeOptions>( {
       children: [
         // Wrap HandleNode so that LidHandleNode's focus highlight is not affected by scaling.
@@ -103,7 +106,9 @@ class LidHandleNode extends InteractiveHighlighting( Node ) {
       ],
       cursor: 'pointer',
       tagName: 'div',
-      focusable: true
+      focusable: true,
+      phetioVisiblePropertyInstrumented: false, // sim sets lidHandleNode.visibleProperty
+      phetioInputEnabledPropertyInstrumented: true
     }, providedOptions ) );
   }
 }

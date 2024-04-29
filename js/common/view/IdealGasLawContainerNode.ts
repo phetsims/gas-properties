@@ -28,6 +28,7 @@ import LidNode from './LidNode.js';
 import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
 import ResizeHandleKeyboardDragListener from './ResizeHandleKeyboardDragListener.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const LID_X_SPEED = -50; // pixels/second
@@ -85,14 +86,16 @@ export default class IdealGasLawContainerNode extends Node {
     } );
 
     // Resize handle on the left wall, wrapped in a Node so that its focus highlight is not affected by scaling.
-    const resizeHandleNode = new ResizeHandleNode( options.resizeGripColor );
+    const resizeHandleNode = new ResizeHandleNode( options.resizeGripColor, options.tandem.createTandem( 'resizeHandleNode' ) );
 
     // Lid on the top of the container
     const lidNode = new LidNode( holdConstantProperty, {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
-      gripColor: options.lidGripColor
+      gripColor: options.lidGripColor,
+      tandem: options.tandem.createTandem( 'lidNode' )
     } );
+    const lidHandleNode = lidNode.handleNode;
 
     options.children = [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ];
 
@@ -158,10 +161,10 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Dragging the resize handle horizontally changes the container's width
     const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this,
-      options.tandem.createTandem( 'resizeHandleDragListener' ) );
+      resizeHandleNode.tandem.createTandem( 'resizeHandleDragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleDragListener );
     const resizeHandleKeyboardDragListener = new ResizeHandleKeyboardDragListener( container, modelViewTransform,
-      options.tandem.createTandem( 'resizeHandleKeyboardDragListener' ) );
+      resizeHandleNode.tandem.createTandem( 'resizeHandleKeyboardDragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleKeyboardDragListener );
 
     // While interacting with the resize handle...
@@ -188,11 +191,11 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Dragging the lid's handle horizontally changes the size of the opening in the top of the container.
     const lidHandleDragListener = new LidHandleDragListener( container, modelViewTransform, this,
-      options.tandem.createTandem( 'lidHandleDragListener' ) );
-    lidNode.handleNode.addInputListener( lidHandleDragListener );
+      lidHandleNode.tandem.createTandem( 'lidHandleDragListener' ) );
+    lidHandleNode.addInputListener( lidHandleDragListener );
     const lidHandleKeyboardDragListener = new LidHandleKeyboardDragListener( container, modelViewTransform,
-      options.tandem.createTandem( 'lidHandleKeyboardDragListener' ) );
-    lidNode.handleNode.addInputListener( lidHandleKeyboardDragListener );
+      lidHandleNode.tandem.createTandem( 'lidHandleKeyboardDragListener' ) );
+    lidHandleNode.addInputListener( lidHandleKeyboardDragListener );
 
     // This implementation assumes that the lid is not interactive while the container is being resized. This is
     // handled in resizeHandlePressedListener above. The lid will behave badly if this is not the case, so verify.
@@ -264,7 +267,7 @@ export default class IdealGasLawContainerNode extends Node {
  */
 class ResizeHandleNode extends InteractiveHighlighting( Node ) {
 
-  public constructor( resizeGripColor: TColor ) {
+  public constructor( resizeGripColor: TColor, tandem: Tandem ) {
     super( {
       children: [
         // Wrap HandleNode so that ResizeHandleNode's focus highlight is not affected by scaling.
@@ -277,7 +280,10 @@ class ResizeHandleNode extends InteractiveHighlighting( Node ) {
       ],
       cursor: 'pointer',
       tagName: 'div',
-      focusable: true
+      focusable: true,
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: false, // sim sets resizeHandle.visibleProperty
+      phetioInputEnabledPropertyInstrumented: true
     } );
   }
 }
