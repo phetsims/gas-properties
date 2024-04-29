@@ -8,7 +8,7 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { HBox, Node, Text } from '../../../../scenery/js/imports.js';
@@ -23,9 +23,7 @@ import PlusMinusZoomButtonGroup from '../../../../scenery-phet/js/PlusMinusZoomB
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 
-type SelfOptions = {
-  fixedWidth?: number;
-};
+type SelfOptions = EmptySelfOptions;
 
 export type EnergyAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
@@ -42,21 +40,16 @@ export default class EnergyAccordionBox extends AccordionBox {
     const options = optionize4<EnergyAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // SelfOptions
-        fixedWidth: 100,
-
         // AccordionBoxOptions
         isDisposable: false,
         contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
         contentYSpacing: 0,
         titleNode: new Text( titleStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColors.textFillProperty
+          fill: GasPropertiesColors.textFillProperty,
+          maxWidth: 170
         } )
       }, providedOptions );
-
-    // Limit width of title, multiplier determined empirically
-    options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
     const histogramNode = createHistogramNode( options.tandem.createTandem( 'histogramNode' ) );
 

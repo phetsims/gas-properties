@@ -9,7 +9,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
@@ -27,9 +27,7 @@ const TEXT_OPTIONS: TextOptions = {
   maxWidth: 175 // determined empirically
 };
 
-type SelfOptions = {
-  fixedWidth?: number;
-};
+type SelfOptions = EmptySelfOptions;
 
 type InjectionTemperatureAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
@@ -42,20 +40,15 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
     const options = optionize4<InjectionTemperatureAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // SelfOptions
-        fixedWidth: 100,
-
         // AccordionBoxOptions
         isDisposable: false,
         contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
         titleNode: new Text( GasPropertiesStrings.injectionTemperatureStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColors.textFillProperty
+          fill: GasPropertiesColors.textFillProperty,
+          maxWidth: 170
         } )
       }, providedOptions );
-
-    // Limit width of title
-    options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
     // Radio buttons
     const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
@@ -85,8 +78,6 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
     } );
 
     const content = new VBox( {
-      preferredWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
-      widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 12,
       children: [ radioButtonGroup, temperatureControl ]

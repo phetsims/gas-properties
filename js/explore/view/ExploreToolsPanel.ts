@@ -7,57 +7,44 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import { optionize4 } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { NodeTranslationOptions, VBox } from '../../../../scenery/js/imports.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
-
-type SelfOptions = {
-  fixedWidth?: number;
-};
-
-type ExploreToolsPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class ExploreToolsPanel extends Panel {
 
   public constructor( widthVisibleProperty: Property<boolean>,
                       stopwatchVisibleProperty: Property<boolean>,
                       collisionCounterVisibleProperty: Property<boolean>,
-                      providedOptions: ExploreToolsPanelOptions ) {
+                      tandem: Tandem ) {
 
-    const options = optionize4<ExploreToolsPanelOptions, SelfOptions, PanelOptions>()(
-      {}, GasPropertiesConstants.PANEL_OPTIONS, {
-
-        // SelfOptions
-        fixedWidth: 100,
-        xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
-
-        // PanelOptions
-        isDisposable: false
-      }, providedOptions );
+    const options = combineOptions<PanelOptions>( {}, GasPropertiesConstants.PANEL_OPTIONS, {
+      isDisposable: false,
+      xMargin: GasPropertiesConstants.PANEL_OPTIONS.xMargin,
+      tandem: tandem
+    } );
 
     const content = new VBox( {
-      preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
-      widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 12,
       children: [
         new WidthCheckbox( widthVisibleProperty, {
           textMaxWidth: 110,
-          tandem: options.tandem.createTandem( 'widthCheckbox' )
+          tandem: tandem.createTandem( 'widthCheckbox' )
         } ),
         new StopwatchCheckbox( stopwatchVisibleProperty, {
           textMaxWidth: 125,
-          tandem: options.tandem.createTandem( 'stopwatchCheckbox' )
+          tandem: tandem.createTandem( 'stopwatchCheckbox' )
         } ),
         new CollisionCounterCheckbox( collisionCounterVisibleProperty, {
           textMaxWidth: 125,
-          tandem: options.tandem.createTandem( 'collisionCounterCheckbox' )
+          tandem: tandem.createTandem( 'collisionCounterCheckbox' )
         } )
       ]
     } );

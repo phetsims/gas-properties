@@ -24,7 +24,6 @@ import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
 import NumberOfParticlesControl from './NumberOfParticlesControl.js';
 
 type SelfOptions = {
-  fixedWidth?: number;
   collisionsEnabledProperty?: Property<boolean> | null; // no checkbox if null
 };
 
@@ -41,7 +40,6 @@ export default class ParticlesAccordionBox extends AccordionBox {
       {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
         // SelfOptions
-        fixedWidth: 100,
         collisionsEnabledProperty: null,
 
         // AccordionBoxOptions
@@ -49,12 +47,10 @@ export default class ParticlesAccordionBox extends AccordionBox {
         contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
         titleNode: new Text( GasPropertiesStrings.particlesStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColors.textFillProperty
+          fill: GasPropertiesColors.textFillProperty,
+          maxWidth: 170
         } )
       }, providedOptions );
-
-    // Limit width of title
-    options.titleNode.maxWidth = 0.75 * options.fixedWidth;
 
     const children: Node[] = [];
 
@@ -83,8 +79,6 @@ export default class ParticlesAccordionBox extends AccordionBox {
     children.push( numberOfLightParticlesControl );
 
     const content = new VBox( {
-      preferredWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
-      widthSizable: false, // so that width will remain preferredWidth
       align: 'left',
       spacing: 15,
       children: children

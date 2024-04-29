@@ -42,21 +42,18 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       model.averageSpeedModel.lightAverageSpeedProperty,
       model.modelViewTransform, {
         expandedProperty: viewProperties.averageSpeedExpandedProperty,
-        fixedWidth: LEFT_PANEL_WIDTH,
         tandem: tandem.createTandem( 'averageSpeedAccordionBox' )
       } );
 
     // Speed accordion box with histogram and related controls
     const speedAccordionBox = new SpeedAccordionBox( model.histogramsModel, model.modelViewTransform, {
       expandedProperty: viewProperties.speedExpandedProperty,
-      fixedWidth: LEFT_PANEL_WIDTH,
       tandem: tandem.createTandem( 'speedAccordionBox' )
     } );
 
     // Kinetic Energy accordion box with histogram
     const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model.histogramsModel, model.modelViewTransform, {
       expandedProperty: viewProperties.kineticEnergyExpandedProperty,
-      fixedWidth: LEFT_PANEL_WIDTH,
       tandem: tandem.createTandem( 'kineticEnergyAccordionBox' )
     } );
 
@@ -71,16 +68,17 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       maxHeight: this.layoutBounds.height - ( 2 * GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN ),
       top: GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-      left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN
+      left: this.layoutBounds.left + GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
+
+      // All panels have the same fixed width.
+      stretch: true,
+      minContentWidth: LEFT_PANEL_WIDTH,
+      maxWidth: LEFT_PANEL_WIDTH
     } );
 
     // Tools panel
-    const toolsPanel = new EnergyToolsPanel(
-      viewProperties.widthVisibleProperty,
-      model.stopwatch.isVisibleProperty, {
-        fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-        tandem: tandem.createTandem( 'toolsPanel' )
-      } );
+    const toolsPanel = new EnergyToolsPanel( viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
+      tandem.createTandem( 'toolsPanel' ) );
 
     // Particles accordion box
     const particlesAccordionBox = new ParticlesAccordionBox(
@@ -89,7 +87,6 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       model.modelViewTransform, {
         collisionsEnabledProperty: model.collisionDetector.particleParticleCollisionsEnabledProperty,
         expandedProperty: viewProperties.particlesExpandedProperty,
-        fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         tandem: tandem.createTandem( 'particlesAccordionBox' )
       } );
 
@@ -98,7 +95,6 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       model.temperatureModel.controlTemperatureEnabledProperty,
       model.temperatureModel.initialTemperatureProperty, {
         expandedProperty: viewProperties.injectionTemperatureExpandedProperty,
-        fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         tandem: tandem.createTandem( 'injectionTemperatureAccordionBox' )
       }
     );
@@ -113,7 +109,12 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       align: 'left',
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+
+      // All panels have the same fixed width.
+      stretch: true,
+      minContentWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
+      maxWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
     } );
 
     // Panels behind superclass UI components like the stopwatch

@@ -26,6 +26,8 @@ import ScaleNode from './ScaleNode.js';
 import DiffusionSettingsNode from './DiffusionSettingsNode.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 
+const PANELS_WIDTH = 300;
+
 export default class DiffusionScreenView extends BaseScreenView {
 
   private readonly viewProperties: DiffusionViewProperties;
@@ -101,20 +103,13 @@ export default class DiffusionScreenView extends BaseScreenView {
       dataAccordionBox.bottom = containerNode.top - 15;
     } );
 
-    const panelsTandem = tandem.createTandem( 'panels' );
-
     // Panel for setting initial conditions
     const settingsPanel = new DiffusionSettingsNode( model.leftSettings, model.rightSettings, model.modelViewTransform,
-      model.container.hasDividerProperty, model.numberOfParticlesProperty, {
-        fixedWidth: 300,
-        tandem: panelsTandem.createTandem( 'settingsPanel' )
-      } );
+      model.container.hasDividerProperty, model.numberOfParticlesProperty, tandem.createTandem( 'settingsPanel' ) );
 
     // Panel for controlling visibility of 'tools'
-    const toolsPanel = new DiffusionToolsPanel( viewProperties, model.stopwatch.isVisibleProperty, {
-      fixedWidth: 300,
-      tandem: panelsTandem.createTandem( 'toolsPanel' )
-    } );
+    const toolsPanel = new DiffusionToolsPanel( viewProperties, model.stopwatch.isVisibleProperty,
+      tandem.createTandem( 'toolsPanel' ) );
 
     const panels = new VBox( {
       children: [ settingsPanel, toolsPanel ],
@@ -122,7 +117,11 @@ export default class DiffusionScreenView extends BaseScreenView {
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: panelsTandem
+
+      // Both panels have the same fixed width.
+      stretch: true,
+      minContentWidth: PANELS_WIDTH,
+      maxWidth: PANELS_WIDTH
     } );
 
     // The complete system of particles

@@ -9,7 +9,7 @@
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay, { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
@@ -23,9 +23,7 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
-type SelfOptions = {
-  fixedWidth?: number;
-};
+type SelfOptions = EmptySelfOptions;
 
 type AverageSpeedAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, 'expandedProperty' | 'tandem'>;
 
@@ -39,21 +37,16 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     const options = optionize4<AverageSpeedAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
       {}, GasPropertiesConstants.ACCORDION_BOX_OPTIONS, {
 
-        // SelfOptions
-        fixedWidth: 100,
-
         // AccordionBoxOptions
         isDisposable: false,
         contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
         contentYSpacing: 0,
         titleNode: new Text( GasPropertiesStrings.averageSpeedStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,
-          fill: GasPropertiesColors.textFillProperty
+          fill: GasPropertiesColors.textFillProperty,
+          maxWidth: 170
         } )
       }, providedOptions );
-
-    // Limit width of title
-    options.titleNode.maxWidth = 0.75 * options.fixedWidth; // determined empirically
 
     // Icons for the particles, with same effective size.
     const alignGroup = new AlignGroup();
@@ -102,8 +95,6 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     } );
 
     const content = new VBox( {
-      preferredWidth: options.fixedWidth - ( 2 * options.contentXMargin ),
-      widthSizable: false, // so that width will remain preferredWidth
       align: 'center',
       children: [ gridBox ]
     } );

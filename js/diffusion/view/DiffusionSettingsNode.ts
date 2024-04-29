@@ -8,7 +8,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -24,15 +24,10 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import DividerToggleButton from './DividerToggleButton.js';
 import Property from '../../../../axon/js/Property.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
-
-type SelfOptions = {
-  fixedWidth?: number;
-};
-
-type DiffusionSettingsNodeOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class DiffusionSettingsNode extends Panel {
 
@@ -41,24 +36,20 @@ export default class DiffusionSettingsNode extends Panel {
    * @param rightSettings - setting for the right side of the container
    * @param modelViewTransform
    * @param hasDividerProperty
-   * @param providedOptions
+   * @param numberOfParticlesProperty
+   * @param tandem
    */
   public constructor( leftSettings: DiffusionSettings,
                       rightSettings: DiffusionSettings,
                       modelViewTransform: ModelViewTransform2,
                       hasDividerProperty: Property<boolean>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
-                      providedOptions: DiffusionSettingsNodeOptions ) {
+                      tandem: Tandem ) {
 
-    const options = optionize4<DiffusionSettingsNodeOptions, SelfOptions, PanelOptions>()(
-      {}, GasPropertiesConstants.PANEL_OPTIONS, {
-
-        // SelfOptions
-        fixedWidth: 100,
-
-        // PanelOptions
-        isDisposable: false
-      }, providedOptions );
+    const options = combineOptions<PanelOptions>( {}, GasPropertiesConstants.PANEL_OPTIONS, {
+      isDisposable: false,
+      tandem: tandem
+    } );
 
     // To make all spinners have the same bounds width
     const spinnersAlignGroup = new AlignGroup( {
@@ -72,7 +63,7 @@ export default class DiffusionSettingsNode extends Panel {
           enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.numberOfParticles
         },
-        tandem: options.tandem.createTandem( 'numberOfParticlesControl' )
+        tandem: tandem.createTandem( 'numberOfParticlesControl' )
       } );
 
     // Mass (AMU)
@@ -85,7 +76,7 @@ export default class DiffusionSettingsNode extends Panel {
             xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
           }
         },
-        tandem: options.tandem.createTandem( 'massControl' )
+        tandem: tandem.createTandem( 'massControl' )
       } );
 
     // Radius (pm)
@@ -95,7 +86,7 @@ export default class DiffusionSettingsNode extends Panel {
           enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.radius
         },
-        tandem: options.tandem.createTandem( 'radiusControl' )
+        tandem: tandem.createTandem( 'radiusControl' )
       } );
 
     // Initial Temperature (K)
@@ -105,7 +96,7 @@ export default class DiffusionSettingsNode extends Panel {
           enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.initialTemperature
         },
-        tandem: options.tandem.createTandem( 'initialTemperatureControl' )
+        tandem: tandem.createTandem( 'initialTemperatureControl' )
       } );
 
     const dividerToggleButton = new DividerToggleButton( hasDividerProperty, {
@@ -114,13 +105,11 @@ export default class DiffusionSettingsNode extends Panel {
       layoutOptions: {
         align: 'center'
       },
-      tandem: options.tandem.createTandem( 'dividerToggleButton' )
+      tandem: tandem.createTandem( 'dividerToggleButton' )
     } );
 
     const content = new VBox( {
       isDisposable: false,
-      preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
-      widthSizable: false, // so that width will remain preferredWidth
       children: [
         numberOfParticlesControl,
         massControl,
@@ -172,7 +161,7 @@ class QuantityControl extends VBox {
     const labelText = new Text( labelStringProperty, {
       font: GasPropertiesConstants.CONTROL_FONT,
       fill: GasPropertiesColors.textFillProperty,
-      maxWidth: 200 // determined empirically
+      maxWidth: 225 // determined empirically
     } );
 
     // icons

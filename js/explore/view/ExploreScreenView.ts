@@ -31,20 +31,14 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     assert && assert( collisionCounter );
 
     // Panel at upper right
-    const toolsPanel = new ExploreToolsPanel(
-      viewProperties.widthVisibleProperty,
-      model.stopwatch.isVisibleProperty,
-      collisionCounter.visibleProperty, {
-        fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-        tandem: tandem.createTandem( 'toolsPanel' )
-      } );
+    const toolsPanel = new ExploreToolsPanel( viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
+      collisionCounter.visibleProperty, tandem.createTandem( 'toolsPanel' ) );
 
     // Particles accordion box
     const particlesAccordionBox = new ParticlesAccordionBox(
       model.particleSystem.numberOfHeavyParticlesProperty,
       model.particleSystem.numberOfLightParticlesProperty,
       model.modelViewTransform, {
-        fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         expandedProperty: viewProperties.particlesExpandedProperty,
         tandem: tandem.createTandem( 'particlesAccordionBox' )
       } );
@@ -55,7 +49,12 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       children: [ toolsPanel, particlesAccordionBox ],
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+
+      // Both panels have the same fixed width.
+      stretch: true,
+      minContentWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
+      maxWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
     } );
     this.addChild( vBox );
     vBox.moveToBack();

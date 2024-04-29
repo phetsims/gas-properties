@@ -58,21 +58,16 @@ export default class IdealScreenView extends IdealGasLawScreenView {
         model.holdConstantProperty,
         model.particleSystem.numberOfParticlesProperty,
         model.pressureModel.pressureProperty,
-        model.container.isOpenProperty, {
-          fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-          tandem: tandem.createTandem( 'holdConstantPanel' )
-        } );
+        model.container.isOpenProperty,
+        tandem.createTandem( 'holdConstantPanel' ) );
       panels.push( holdConstantPanel );
     }
 
     const toolsPanel = new IdealToolsPanel(
       viewProperties.widthVisibleProperty,
       model.stopwatch.isVisibleProperty,
-      collisionCounter.visibleProperty, {
-        fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
-        tandem: tandem.createTandem( 'toolsPanel' )
-      }
-    );
+      collisionCounter.visibleProperty,
+      tandem.createTandem( 'toolsPanel' ) );
     panels.push( toolsPanel );
 
     // Particles accordion box
@@ -80,7 +75,6 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       model.particleSystem.numberOfHeavyParticlesProperty,
       model.particleSystem.numberOfLightParticlesProperty,
       model.modelViewTransform, {
-        fixedWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
         expandedProperty: viewProperties.particlesExpandedProperty,
         tandem: tandem.createTandem( 'particlesAccordionBox' )
       } );
@@ -91,7 +85,12 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,
       children: panels,
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
-      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
+      top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+
+      // All panels have the same fixed width.
+      stretch: true,
+      minContentWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH,
+      maxWidth: GasPropertiesConstants.RIGHT_PANEL_WIDTH
     } );
     this.addChild( vBox );
     vBox.moveToBack();
