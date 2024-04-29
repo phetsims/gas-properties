@@ -42,7 +42,7 @@ export default class EnergyAccordionBox extends AccordionBox {
 
         // AccordionBoxOptions
         isDisposable: false,
-        contentXMargin: GasPropertiesConstants.ACCORDION_BOX_OPTIONS.contentXMargin,
+        contentXMargin: 5,
         contentYSpacing: 0,
         titleNode: new Text( titleStringProperty, {
           font: GasPropertiesConstants.TITLE_FONT,

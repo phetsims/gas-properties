@@ -15,7 +15,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.js';
+import { Line, Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
@@ -23,11 +23,10 @@ import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
 import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
 import Orientation from '../../../../phet-core/js/Orientation.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
-import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
-import Utils from '../../../../dot/js/Utils.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import BinCountsPlot from './BinCountsPlot.js';
+import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
 const TICK_LABEL_FONT = new PhetFont( 12 );
@@ -146,20 +145,33 @@ export default class HistogramNode extends Node {
       lineWidth: 1
     } );
 
-    // Tick marks and labels for y-axis.
-    const yTickMarks = new TickMarkSet( chartTransform, Orientation.VERTICAL, 2, {
-      skipCoordinates: [ 0 ],
-      edge: 'min',
-      extent: 8,
-      stroke: GasPropertiesColors.textFillProperty
+    // Tick mark at yMax. Since we only have one tick mark, do not use bamboo.TickMarkSet.
+    const yMaxTickMark = new Line( 0, 0, 6, 0, {
+      stroke: GasPropertiesColors.textFillProperty,
+      right: chartRectangle.x,
+      top: chartRectangle.top
     } );
-    const yTickLabels = new TickLabelSet( chartTransform, Orientation.VERTICAL, 1, {
-      skipCoordinates: [ 0 ],
-      edge: 'min',
-      createLabel: ( value: number ) => new Text( Utils.toFixed( value, 0 ), {
+
+    // Tick label at yMax. Since we only have one tick mark, do not use bamboo.TickLabelSet.
+    // Use a NumberDisplay so that it has constant width.
+    const yMaxProperty = new DerivedProperty( [ zoomLevelIndexProperty ],
+      zoomLevelIndex => HistogramsModel.ZOOM_LEVELS[ zoomLevelIndex ].yMax
+    );
+    const sortedZoomLevels = _.sortBy( HistogramsModel.ZOOM_LEVELS, [ 'yMax' ] );
+    const yMaxRange = new Range( sortedZoomLevels[ 0 ].yMax, sortedZoomLevels[ sortedZoomLevels.length - 1 ].yMax );
+    const yMaxTickLabel = new NumberDisplay( yMaxProperty, yMaxRange, {
+      backgroundFill: null,
+      backgroundStroke: null,
+      xMargin: 0,
+      yMargin: 0,
+      textOptions: {
         font: TICK_LABEL_FONT,
         fill: GasPropertiesColors.textFillProperty
-      } )
+      }
+    } );
+    yMaxTickLabel.boundsProperty.link( () => {
+      yMaxTickLabel.right = yMaxTickMark.left - 3;
+      yMaxTickLabel.centerY = yMaxTickMark.centerY;
     } );
 
     // Plot for all particles.
@@ -184,7 +196,7 @@ export default class HistogramNode extends Node {
       children: [ yMinorGridLines, yMajorGridLines, allPlotNode, heavyPlotNode, lightPlotNode ]
     } );
 
-    options.children = [ yTickMarks, chartRectangle, clippedNode, xAxisLabelText, yAxisLabelText, yTickLabels ];
+    options.children = [ yMaxTickMark, chartRectangle, clippedNode, xAxisLabelText, yAxisLabelText, yMaxTickLabel ];
 
     super( options );
 
@@ -230,10 +242,6 @@ export default class HistogramNode extends Node {
 
       // Adjust the chart transform's y-axis range.
       chartTransform.setModelYRange( new Range( 0, zoomDescription.yMax ) );
-
-      // Tick mark and label at yMax only.
-      yTickMarks.setSpacing( zoomDescription.yMax );
-      yTickLabels.setSpacing( zoomDescription.yMax );
 
       // Adjust grid lines.
       yMajorGridLines.setSpacing( zoomDescription.majorGridLineSpacing );
