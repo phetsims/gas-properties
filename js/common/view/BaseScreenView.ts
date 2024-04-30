@@ -77,7 +77,8 @@ export default abstract class BaseScreenView extends ScreenView {
           }
         }
       },
-      tandem: tandem.createTandem( 'timeControlNode' )
+      tandem: tandem.createTandem( 'timeControlNode' ),
+      phetioEnabledPropertyInstrumented: false // Controlled by the sim.
     } );
     this.addChild( this.timeControlNode );
 

@@ -23,6 +23,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import HeaterCoolerNode, { HeaterCoolerNodeOptions } from '../../../../scenery-phet/js/HeaterCoolerNode.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
 import gasProperties from '../../gasProperties.js';
@@ -62,7 +63,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
   // animation of heatCoolAmountProperty, null when no animation is running
   private animation: Animation | null;
 
-  public constructor( heatCoolAmountProperty: NumberProperty,
+  public constructor( heatCoolFactorProperty: NumberProperty,
                       holdConstantProperty: StringUnionProperty<HoldConstant>,
                       isPlayingProperty: TReadOnlyProperty<boolean>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
@@ -76,7 +77,10 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       scale: 0.8,
       frontOptions: {
         sliderOptions: {
-          phetioLinkedProperty: heatCoolAmountProperty
+          tandem: Tandem.OPT_OUT
+        },
+        snapToZeroPropertyOptions: {
+          tandem: Tandem.OPT_OUT
         }
       }
     }, providedOptions );
@@ -91,14 +95,14 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
     super( privateHeatCoolAmountProperty, options );
 
     // When the model applies heat/cool, update the private Property.
-    heatCoolAmountProperty.link( heatCoolAmount => {
+    heatCoolFactorProperty.link( heatCoolAmount => {
       privateHeatCoolAmountProperty.value = heatCoolAmount;
     } );
 
     // If the user is controlling the slider, then update the model.
     privateHeatCoolAmountProperty.link( privateHeatCoolAmount => {
       if ( this.slider.visible ) {
-        heatCoolAmountProperty.value = privateHeatCoolAmount;
+        heatCoolFactorProperty.value = privateHeatCoolAmount;
       }
     } );
 
