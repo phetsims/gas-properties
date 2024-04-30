@@ -15,6 +15,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -25,12 +26,14 @@ export default class CenterOfMassNode extends Node {
   /**
    * @param centerOfMassProperty - centerX of mass, in pm
    * @param centerY - centerY of the indicator, in pm
+   * @param containerWidthProperty - in pm
    * @param modelViewTransform
    * @param fill
    * @param providedOptions
    */
   public constructor( centerOfMassProperty: TReadOnlyProperty<number | null>,
                       centerY: number,
+                      containerWidthProperty: TReadOnlyProperty<number>,
                       modelViewTransform: ModelViewTransform2,
                       fill: TColor,
                       providedOptions: CenterOfMassNodeOptions ) {
@@ -50,15 +53,16 @@ export default class CenterOfMassNode extends Node {
 
     super( options );
 
-    centerOfMassProperty.link( centerX => {
-      if ( centerX === null ) {
-        rectangle.visible = false;
-      }
-      else {
-        rectangle.visible = true;
-        this.center = modelViewTransform.modelToViewXY( centerX, centerY );
-      }
-    } );
+    Multilink.multilink( [ centerOfMassProperty, containerWidthProperty ],
+      ( centerOfMass, containerWidth ) => {
+        if ( centerOfMass === null ) {
+          rectangle.visible = false;
+        }
+        else {
+          rectangle.visible = true;
+          this.center = modelViewTransform.modelToViewXY( centerOfMass - containerWidth / 2, centerY );
+        }
+      } );
   }
 }
 

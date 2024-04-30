@@ -63,7 +63,7 @@ export default class DiffusionModel extends BaseModel {
   public readonly leftData: DiffusionData;
   public readonly rightData: DiffusionData;
 
-  // centerX of mass for each particle species, in pm, relative to the container's origin (bottom right).
+  // centerX of mass for each particle species, in pm, relative to the center (divider) of the container.
   // null when there are no particles in the container.
   public readonly centerOfMass1Property: Property<number | null>;
   public readonly centerOfMass2Property: Property<number | null>;
@@ -276,8 +276,8 @@ export default class DiffusionModel extends BaseModel {
    * Updates the center of mass, as shown by the center-of-mass indicators.
    */
   private updateCenterOfMass(): void {
-    this.centerOfMass1Property.value = ParticleUtils.getCenterXOfMass( this.particles1 );
-    this.centerOfMass2Property.value = ParticleUtils.getCenterXOfMass( this.particles2 );
+    this.centerOfMass1Property.value = ParticleUtils.getCenterXOfMass( this.particles1, this.container.width / 2 );
+    this.centerOfMass2Property.value = ParticleUtils.getCenterXOfMass( this.particles2, this.container.width / 2 );
   }
 
   /**

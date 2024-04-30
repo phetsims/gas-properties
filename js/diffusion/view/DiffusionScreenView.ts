@@ -61,11 +61,11 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Center of Mass indicators
     const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
-      model.modelViewTransform, GasPropertiesColors.particle1ColorProperty, {
+      model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.particle1ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
     const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
-      model.modelViewTransform, GasPropertiesColors.particle2ColorProperty, {
+      model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.particle2ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
 

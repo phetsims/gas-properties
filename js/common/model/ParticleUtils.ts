@@ -139,7 +139,7 @@ const ParticleUtils = {
    * Gets the centerX of mass for a collection of particles.
    * null if there are no particles and therefore no center of mass
    */
-  getCenterXOfMass: function( particles: Particle[] ): number | null {
+  getCenterXOfMass: function( particles: Particle[], xOffset = 0 ): number | null {
 
     let centerXOfMass = null;
     if ( particles.length > 0 ) {
@@ -151,6 +151,9 @@ const ParticleUtils = {
         totalMass += particle.mass;
       }
       centerXOfMass = numerator / totalMass;
+    }
+    if ( centerXOfMass !== null ) {
+      centerXOfMass += xOffset;
     }
     return centerXOfMass;
   }
