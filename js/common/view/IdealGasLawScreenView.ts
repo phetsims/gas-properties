@@ -341,10 +341,13 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
 
-    // Oops dialog when maximum temperature is exceeded.
-    const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperatureStringProperty,
-      ( options.oopsDialogsTandem || tandem ).createTandem( 'oopsMaximumTemperatureDialog' ) );
-    model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { this.showDialog( oopsMaximumTemperatureDialog ); } );
+    // OopsDialog when maximum temperature is exceeded.
+    const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperatureStringProperty, {
+      tandem: ( options.oopsDialogsTandem || tandem ).createTandem( 'oopsMaximumTemperatureDialog' ),
+      phetioDocumentation: 'Displayed when the maximum Temperature is reached. To recover, all particles are removed. ' +
+                           'If Hold Constant was set to anything other than None or Volume, it is set to None.'
+    } );
+    model.oopsEmitters.maximumTemperatureEmitter.addListener( () => this.showDialog( oopsMaximumTemperatureDialog ) );
 
     this.containerNode = containerNode;
     this.particleSystemNode = particleSystemNode;

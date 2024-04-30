@@ -48,19 +48,19 @@ type IdealGasLawModelOptions = SelfOptions;
 type OopsEmitters = {
 
   // Oops! Temperature cannot be held constant when the container is empty.
-  temperatureEmptyEmitter: Emitter;
+  temperatureContainerEmptyEmitter: Emitter;
 
   // Oops! Temperature cannot be held constant when the container is open.
-  temperatureOpenEmitter: Emitter;
+  temperatureLidOpenEmitter: Emitter;
 
   // Oops! Pressure cannot be held constant when the container is empty.
-  pressureEmptyEmitter: Emitter;
+  pressureContainerEmptyEmitter: Emitter;
 
   // Oops! Pressure cannot be held constant. Volume would be too large.
-  pressureLargeEmitter: Emitter;
+  pressureVolumeTooLargeEmitter: Emitter;
 
   // Oops! Pressure cannot be held constant. Volume would be too small.
-  pressureSmallEmitter: Emitter;
+  pressureVolumeTooSmallEmitter: Emitter;
 
   // Oops! Maximum temperature reached
   maximumTemperatureEmitter: Emitter;
@@ -184,11 +184,11 @@ export default class IdealGasLawModel extends BaseModel {
       } );
 
     this.oopsEmitters = {
-      temperatureEmptyEmitter: new Emitter(),
-      temperatureOpenEmitter: new Emitter(),
-      pressureEmptyEmitter: new Emitter(),
-      pressureLargeEmitter: new Emitter(),
-      pressureSmallEmitter: new Emitter(),
+      temperatureContainerEmptyEmitter: new Emitter(),
+      temperatureLidOpenEmitter: new Emitter(),
+      pressureContainerEmptyEmitter: new Emitter(),
+      pressureVolumeTooLargeEmitter: new Emitter(),
+      pressureVolumeTooSmallEmitter: new Emitter(),
       maximumTemperatureEmitter: new Emitter()
     };
 
@@ -202,7 +202,7 @@ export default class IdealGasLawModel extends BaseModel {
           // Temperature can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
           this.holdConstantProperty.value = 'nothing';
-          this.oopsEmitters.temperatureEmptyEmitter.emit();
+          this.oopsEmitters.temperatureContainerEmptyEmitter.emit();
         }
         else if ( this.holdConstantProperty.value === 'pressureT' ||
                   this.holdConstantProperty.value === 'pressureV' ) {
@@ -210,7 +210,7 @@ export default class IdealGasLawModel extends BaseModel {
           // Pressure can't be held constant when the container is empty.
           phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
           this.holdConstantProperty.value = 'nothing';
-          this.oopsEmitters.pressureEmptyEmitter.emit();
+          this.oopsEmitters.pressureContainerEmptyEmitter.emit();
         }
       }
 
@@ -227,7 +227,7 @@ export default class IdealGasLawModel extends BaseModel {
       if ( isOpen && this.holdConstantProperty.value === 'temperature' ) {
         phet.log && phet.log( 'Oops! T cannot be held constant when the container is open' );
         this.holdConstantProperty.value = 'nothing';
-        this.oopsEmitters.temperatureOpenEmitter.emit();
+        this.oopsEmitters.temperatureLidOpenEmitter.emit();
       }
     } );
 
@@ -404,10 +404,10 @@ export default class IdealGasLawModel extends BaseModel {
         phet.log && phet.log( 'Oops! P cannot be held constant when V exceeds range, ' +
                               `containerWidth=${containerWidth} widthRange=${this.container.widthRange}` );
         if ( containerWidth > this.container.widthRange.max ) {
-          this.oopsEmitters.pressureLargeEmitter.emit();
+          this.oopsEmitters.pressureVolumeTooLargeEmitter.emit();
         }
         else {
-          this.oopsEmitters.pressureSmallEmitter.emit();
+          this.oopsEmitters.pressureVolumeTooSmallEmitter.emit();
         }
 
         // Constrain the container width to its min or max.
@@ -450,7 +450,7 @@ export default class IdealGasLawModel extends BaseModel {
         this.holdConstantProperty.value = 'nothing';
       }
 
-      // Remove all particles. Do this after changing holdConstantProperty, so that that we don't trigger
+      // Remove all particles. Do this after changing holdConstantProperty, so that we don't trigger
       // multiple oopsEmitters.  See https://github.com/phetsims/gas-properties/issues/150.
       this.particleSystem.removeAllParticles();
 

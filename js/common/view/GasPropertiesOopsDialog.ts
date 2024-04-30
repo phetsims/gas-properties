@@ -6,19 +6,24 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import OopsDialog from '../../../../scenery-phet/js/OopsDialog.js';
+import OopsDialog, { OopsDialogOptions } from '../../../../scenery-phet/js/OopsDialog.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import phetGirlLabCoat_png from '../../../images/phetGirlLabCoat_png.js';
 import gasProperties from '../../gasProperties.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type GasPropertiesOopsDialogOptions = SelfOptions & PickRequired<OopsDialogOptions, 'tandem' | 'phetioDocumentation'>;
 
 export default class GasPropertiesOopsDialog extends OopsDialog {
 
-  public constructor( messageStringProperty: ReadOnlyProperty<string>, tandem: Tandem ) {
+  public constructor( messageStringProperty: ReadOnlyProperty<string>, providedOptions: GasPropertiesOopsDialogOptions ) {
 
-    super( messageStringProperty, {
+    const options = optionize<GasPropertiesOopsDialogOptions, SelfOptions, OopsDialogOptions>()( {
 
       // OopsDialogOptions
       iconNode: new Image( phetGirlLabCoat_png, {
@@ -26,9 +31,10 @@ export default class GasPropertiesOopsDialog extends OopsDialog {
       } ),
       richTextOptions: {
         font: new PhetFont( 16 )
-      },
-      tandem: tandem
-    } );
+      }
+    }, providedOptions );
+
+    super( messageStringProperty, options );
   }
 }
 
