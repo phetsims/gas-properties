@@ -121,19 +121,19 @@ export default class HistogramsModel {
     this.heavySpeedBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'heavySpeedBinCountsProperty' ),
-        phetioDocumentation: 'Speed histogram bin counts for heavy particles'
+        phetioDocumentation: 'Speed histogram bin counts for heavy particles (time averaged).'
       } ) );
 
     this.lightSpeedBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'lightSpeedBinCountsProperty' ),
-        phetioDocumentation: 'Speed histogram bin counts for light particles'
+        phetioDocumentation: 'Speed histogram bin counts for light particles (time averaged).'
       } ) );
 
     this.allSpeedBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'allSpeedBinCountsProperty' ),
-        phetioDocumentation: 'Speed histogram bin counts for all particles'
+        phetioDocumentation: 'Speed histogram bin counts for all particles (time averaged).'
       } ) );
 
     const kineticEnergyTandem = options.tandem.createTandem( 'kineticEnergy' );
@@ -141,19 +141,19 @@ export default class HistogramsModel {
     this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'heavyKineticEnergyBinCountsProperty' ),
-        phetioDocumentation: 'Kinetic Energy histogram bin counts for heavy particles'
+        phetioDocumentation: 'Kinetic Energy histogram bin counts for heavy particles (time averaged).'
       } ) );
 
     this.lightKineticEnergyBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'lightKineticEnergyBinCountsProperty' ),
-        phetioDocumentation: 'Kinetic Energy histogram bin counts for light particles'
+        phetioDocumentation: 'Kinetic Energy histogram bin counts for light particles (time averaged).'
       } ) );
 
     this.allKineticEnergyBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'allKineticEnergyBinCountsProperty' ),
-        phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles'
+        phetioDocumentation: 'Kinetic Energy histogram bin counts for all particles (time averaged).'
       } ) );
 
     this.zoomLevelIndexProperty = new NumberProperty( HistogramsModel.ZOOM_LEVELS.length - 2, {

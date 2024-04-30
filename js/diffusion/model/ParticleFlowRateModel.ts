@@ -59,13 +59,13 @@ export default class ParticleFlowRateModel {
     this.leftFlowRateProperty = new NumberProperty( 0,
       combineOptions<PropertyOptions<number>>( {}, FLOW_RATE_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'leftFlowRateProperty' ),
-        phetioDocumentation: 'Flow rate of particles to the left side of the container.'
+        phetioDocumentation: 'Flow rate of particles to the left side of the container (time averaged).'
       } ) );
 
     this.rightFlowRateProperty = new NumberProperty( 0,
       combineOptions<PropertyOptions<number>>( {}, FLOW_RATE_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'rightFlowRateProperty' ),
-        phetioDocumentation: 'Flow rate of particles to the right side of the container.'
+        phetioDocumentation: 'Flow rate of particles to the right side of the container (time averaged).'
       } ) );
 
     this.leftCounts = []; // particles that crossed from right to left <--
