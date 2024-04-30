@@ -87,23 +87,26 @@ export default class DiffusionScreenView extends BaseScreenView {
       top: particleFlowRateNode1.bottom + 5
     } );
 
+    // Group panels and accordion boxes in the Studio tree.
+    const panelsTandem = tandem.createTandem( 'panels' );
+
     // Data accordion box
     const dataAccordionBox = new DataAccordionBox( model.leftData, model.rightData, model.modelViewTransform, {
       expandedProperty: viewProperties.dataExpandedProperty,
-      tandem: tandem.createTandem( 'dataAccordionBox' )
+      tandem: panelsTandem.createTandem( 'dataAccordionBox' )
     } );
-    dataAccordionBox.boundsProperty.link( bounds => {
+    dataAccordionBox.boundsProperty.link( () => {
       dataAccordionBox.centerX = containerNode.centerX;
       dataAccordionBox.bottom = containerNode.top - 15;
     } );
 
     // Panel for setting initial conditions
     const settingsPanel = new DiffusionSettingsNode( model.leftSettings, model.rightSettings, model.modelViewTransform,
-      model.container.hasDividerProperty, model.numberOfParticlesProperty, tandem.createTandem( 'settingsPanel' ) );
+      model.container.hasDividerProperty, model.numberOfParticlesProperty, panelsTandem.createTandem( 'settingsPanel' ) );
 
     // Panel for controlling visibility of 'tools'
     const toolsPanel = new DiffusionToolsPanel( viewProperties, model.stopwatch.isVisibleProperty,
-      tandem.createTandem( 'toolsPanel' ) );
+      panelsTandem.createTandem( 'toolsPanel' ) );
 
     const panels = new VBox( {
       children: [ settingsPanel, toolsPanel ],

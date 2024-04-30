@@ -50,6 +50,9 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     const collisionCounter = model.collisionCounter!;
     assert && assert( collisionCounter );
 
+    // Group panels and accordion boxes in the Studio tree.
+    const panelsTandem = tandem.createTandem( 'panels' );
+
     const panels = [];
 
     let holdConstantPanel;
@@ -59,7 +62,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
         model.particleSystem.numberOfParticlesProperty,
         model.pressureModel.pressureProperty,
         model.container.isOpenProperty,
-        tandem.createTandem( 'holdConstantPanel' ) );
+        panelsTandem.createTandem( 'holdConstantPanel' ) );
       panels.push( holdConstantPanel );
     }
 
@@ -67,7 +70,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       viewProperties.widthVisibleProperty,
       model.stopwatch.isVisibleProperty,
       collisionCounter.visibleProperty,
-      tandem.createTandem( 'toolsPanel' ) );
+      panelsTandem.createTandem( 'toolsPanel' ) );
     panels.push( toolsPanel );
 
     // Particles accordion box
@@ -76,7 +79,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       model.particleSystem.numberOfLightParticlesProperty,
       model.modelViewTransform, {
         expandedProperty: viewProperties.particlesExpandedProperty,
-        tandem: tandem.createTandem( 'particlesAccordionBox' )
+        tandem: panelsTandem.createTandem( 'particlesAccordionBox' )
       } );
     panels.push( particlesAccordionBox );
 

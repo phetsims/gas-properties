@@ -36,25 +36,28 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
 
     super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem );
 
+    // Group panels and accordion boxes in the Studio tree.
+    const panelsTandem = tandem.createTandem( 'panels' );
+
     // Average Speed
     const averageSpeedAccordionBox = new AverageSpeedAccordionBox(
       model.averageSpeedModel.heavyAverageSpeedProperty,
       model.averageSpeedModel.lightAverageSpeedProperty,
       model.modelViewTransform, {
         expandedProperty: viewProperties.averageSpeedExpandedProperty,
-        tandem: tandem.createTandem( 'averageSpeedAccordionBox' )
+        tandem: panelsTandem.createTandem( 'averageSpeedAccordionBox' )
       } );
 
     // Speed accordion box with histogram and related controls
     const speedAccordionBox = new SpeedAccordionBox( model.histogramsModel, model.modelViewTransform, {
       expandedProperty: viewProperties.speedExpandedProperty,
-      tandem: tandem.createTandem( 'speedAccordionBox' )
+      tandem: panelsTandem.createTandem( 'speedAccordionBox' )
     } );
 
     // Kinetic Energy accordion box with histogram
     const kineticEnergyAccordionBox = new KineticEnergyAccordionBox( model.histogramsModel, model.modelViewTransform, {
       expandedProperty: viewProperties.kineticEnergyExpandedProperty,
-      tandem: tandem.createTandem( 'kineticEnergyAccordionBox' )
+      tandem: panelsTandem.createTandem( 'kineticEnergyAccordionBox' )
     } );
 
     // Panels on the left side of the screen
@@ -78,7 +81,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
 
     // Tools panel
     const toolsPanel = new EnergyToolsPanel( viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
-      tandem.createTandem( 'toolsPanel' ) );
+      panelsTandem.createTandem( 'toolsPanel' ) );
 
     // Particles accordion box
     const particlesAccordionBox = new ParticlesAccordionBox(
@@ -87,7 +90,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       model.modelViewTransform, {
         collisionsEnabledProperty: model.collisionDetector.particleParticleCollisionsEnabledProperty,
         expandedProperty: viewProperties.particlesExpandedProperty,
-        tandem: tandem.createTandem( 'particlesAccordionBox' )
+        tandem: panelsTandem.createTandem( 'particlesAccordionBox' )
       } );
 
     // Injection Temperature accordion box
@@ -95,7 +98,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       model.temperatureModel.controlTemperatureEnabledProperty,
       model.temperatureModel.initialTemperatureProperty, {
         expandedProperty: viewProperties.injectionTemperatureExpandedProperty,
-        tandem: tandem.createTandem( 'injectionTemperatureAccordionBox' )
+        tandem: panelsTandem.createTandem( 'injectionTemperatureAccordionBox' )
       }
     );
 
