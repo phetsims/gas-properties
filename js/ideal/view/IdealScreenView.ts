@@ -33,13 +33,16 @@ export default class IdealScreenView extends IdealGasLawScreenView {
 
   public constructor( model: IdealModel, tandem: Tandem, providedOptions?: IdealScreenViewOptions ) {
 
+    const oopsDialogsTandem = tandem.createTandem( 'oopsDialogs' );
+
     const options = optionize<IdealScreenViewOptions, SelfOptions, IdealGasLawScreenViewOptions>()( {
 
       // SelfOptions
       hasHoldConstantPanel: true,
 
       // IdealScreenViewOptions
-      resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty
+      resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty,
+      oopsDialogsTandem: oopsDialogsTandem
     }, providedOptions );
 
     // view-specific Properties
@@ -103,23 +106,23 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     // notifies the user via a dialog. The student is almost certain to encounter these conditions, so dialogs are
     // created eagerly and reused.
     const oopsTemperatureEmptyDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsTemperatureEmptyStringProperty,
-      tandem.createTandem( 'oopsTemperatureEmptyDialog' ) );
+      oopsDialogsTandem.createTandem( 'oopsTemperatureEmptyDialog' ) );
     model.oopsEmitters.temperatureEmptyEmitter.addListener( () => { this.showDialog( oopsTemperatureEmptyDialog ); } );
 
     const oopsTemperatureOpenDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsTemperatureOpenStringProperty,
-      tandem.createTandem( 'oopsTemperatureOpenDialog' ) );
+      oopsDialogsTandem.createTandem( 'oopsTemperatureOpenDialog' ) );
     model.oopsEmitters.temperatureOpenEmitter.addListener( () => { this.showDialog( oopsTemperatureOpenDialog ); } );
 
     const oopsPressureEmptyDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsPressureEmptyStringProperty,
-      tandem.createTandem( 'oopsPressureEmptyDialog' ) );
+      oopsDialogsTandem.createTandem( 'oopsPressureEmptyDialog' ) );
     model.oopsEmitters.pressureEmptyEmitter.addListener( () => { this.showDialog( oopsPressureEmptyDialog ); } );
 
     const oopsPressureLargeDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsPressureLargeStringProperty,
-      tandem.createTandem( 'oopsPressureLargeDialog' ) );
+      oopsDialogsTandem.createTandem( 'oopsPressureLargeDialog' ) );
     model.oopsEmitters.pressureLargeEmitter.addListener( () => { this.showDialog( oopsPressureLargeDialog ); } );
 
     const oopsPressureSmallDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsPressureSmallStringProperty,
-      tandem.createTandem( 'oopsPressureSmallDialog' ) );
+      oopsDialogsTandem.createTandem( 'oopsPressureSmallDialog' ) );
     model.oopsEmitters.pressureSmallEmitter.addListener( () => { this.showDialog( oopsPressureSmallDialog ); } );
 
     this.viewProperties = viewProperties;

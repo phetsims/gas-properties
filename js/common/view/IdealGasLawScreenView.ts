@@ -59,6 +59,7 @@ import ReturnLidButton from './ReturnLidButton.js';
 
 type SelfOptions = {
   resizeGripColor?: TColor;
+  oopsDialogsTandem?: Tandem | null; // parent tandem for OopsDialog instances
 };
 
 export type IdealGasLawScreenViewOptions = SelfOptions & BaseScreenViewOptions;
@@ -90,7 +91,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const options = optionize<IdealGasLawScreenViewOptions, SelfOptions, BaseScreenViewOptions>()( {
 
       // SelfOptions
-      resizeGripColor: GasPropertiesColors.resizeGripColorProperty
+      resizeGripColor: GasPropertiesColors.resizeGripColorProperty,
+      oopsDialogsTandem: null
     }, providedOptions );
 
     super( model, tandem, options );
@@ -341,7 +343,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Oops dialog when maximum temperature is exceeded.
     const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperatureStringProperty,
-      tandem.createTandem( 'oopsMaximumTemperatureDialog' ) );
+      ( options.oopsDialogsTandem || tandem ).createTandem( 'oopsMaximumTemperatureDialog' ) );
     model.oopsEmitters.maximumTemperatureEmitter.addListener( () => { this.showDialog( oopsMaximumTemperatureDialog ); } );
 
     this.containerNode = containerNode;
