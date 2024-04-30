@@ -138,7 +138,7 @@ export default class HistogramsModel {
       } ) );
 
     const kineticEnergyTandem = options.tandem.createTandem( 'kineticEnergy' );
-    const kineticEnergyBinsDocumentation = `There are ${this.numberOfBins} bins, with bin width ${this.kineticEnergyBinWidth} AMU * pm^2 / ps^2.`;
+    const kineticEnergyBinsDocumentation = `There are ${this.numberOfBins} bins, with bin width ${this.kineticEnergyBinWidth} AMU * pm<sup>2</sup> / ps<sup>2</sup>.`;
 
     this.heavyKineticEnergyBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
