@@ -37,15 +37,13 @@ export default class DiffusionScreenView extends BaseScreenView {
   public constructor( model: DiffusionModel, tandem: Tandem ) {
 
     super( model, tandem, {
-      hasSlowMotion: true // adds Normal/Slow radio buttons to the time controls
+      hasSlowMotion: true // add Normal/Slow radio buttons to the time controls
     } );
 
     const viewProperties = new DiffusionViewProperties( tandem.createTandem( 'viewProperties' ) );
 
     // Container
-    const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform, {
-      tandem: tandem.createTandem( 'containerNode' )
-    } );
+    const containerNode = new DiffusionContainerNode( model.container, model.modelViewTransform );
 
     // Scale below the container
     const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform, {

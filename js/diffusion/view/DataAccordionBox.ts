@@ -42,14 +42,10 @@ export default class DataAccordionBox extends AccordionBox {
       }, providedOptions );
 
     // Data for left side of the container
-    const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'leftDataNode' )
-    } );
+    const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform );
 
     // Data for right side of container
-    const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'rightDataNode' )
-    } );
+    const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform );
 
     // Vertical separator, analogous to the container's divider
     const separator = new VSeparator( {

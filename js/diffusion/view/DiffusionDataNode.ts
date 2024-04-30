@@ -7,11 +7,10 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay, { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
-import { HBox, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, VBox } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
@@ -35,21 +34,9 @@ const NUMBER_DISPLAY_OPTIONS: NumberDisplayOptions = {
   yMargin: 0
 };
 
-type SelfOptions = EmptySelfOptions;
-
-type DiffusionDataNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
-
 export default class DiffusionDataNode extends VBox {
 
-  public constructor( data: DiffusionData, modelViewTransform: ModelViewTransform2, providedOptions: DiffusionDataNodeOptions ) {
-
-    const options = optionize<DiffusionDataNodeOptions, SelfOptions, VBoxOptions>()( {
-
-      // VBoxOptions
-      isDisposable: false,
-      spacing: 10,
-      align: 'left'
-    }, providedOptions );
+  public constructor( data: DiffusionData, modelViewTransform: ModelViewTransform2 ) {
 
     // number of DiffusionParticle1
     const particle1CountNode = new HBox( {
@@ -78,9 +65,12 @@ export default class DiffusionDataNode extends VBox {
         maxWidth: 100 // determined empirically
       } ) );
 
-    options.children = [ particle1CountNode, particle2CountNode, averageTemperatureNode ];
-
-    super( options );
+    super( {
+      isDisposable: false,
+      children: [ particle1CountNode, particle2CountNode, averageTemperatureNode ],
+      spacing: 10,
+      align: 'left'
+    } );
   }
 }
 

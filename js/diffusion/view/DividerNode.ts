@@ -8,7 +8,6 @@
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Line, Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
@@ -19,7 +18,7 @@ type SelfOptions = {
   dashedLineWidth?: number;
 };
 
-type DividerNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+type DividerNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class DividerNode extends Node {
 
@@ -33,7 +32,8 @@ export default class DividerNode extends Node {
       dashedLineWidth: 1,
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
     // Solid divider

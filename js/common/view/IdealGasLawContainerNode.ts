@@ -63,7 +63,8 @@ export default class IdealGasLawContainerNode extends Node {
       resizeHandleIsPressedListener: _.noop,
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
     // Constant aspects of the container, in view coordinates

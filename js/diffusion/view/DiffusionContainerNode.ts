@@ -8,28 +8,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import { Node, Rectangle } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from '../model/DiffusionContainer.js';
 import DividerNode from './DividerNode.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type DiffusionContainerNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
-
 export default class DiffusionContainerNode extends Node {
 
-  public constructor( container: DiffusionContainer, modelViewTransform: ModelViewTransform2, providedOptions: DiffusionContainerNodeOptions ) {
-
-    const options = optionize<DiffusionContainerNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      isDisposable: false
-    }, providedOptions );
+  public constructor( container: DiffusionContainer, modelViewTransform: ModelViewTransform2 ) {
 
     // Expand the container bounds to account for wall thickness.
     const viewBounds = modelViewTransform.modelToViewBounds( container.bounds )
@@ -48,13 +36,13 @@ export default class DiffusionContainerNode extends Node {
       solidLineWidth: viewDividerThickness,
       dashedLineWidth: viewDividerThickness / 2,
       centerX: modelViewTransform.modelToViewX( container.dividerX ),
-      bottom: modelViewTransform.modelToViewY( container.position.y ),
-      tandem: options.tandem.createTandem( 'dividerNode' )
+      bottom: modelViewTransform.modelToViewY( container.position.y )
     } );
 
-    options.children = [ dividerNode, borderNode ];
-
-    super( options );
+    super( {
+      isDisposable: false,
+      children: [ dividerNode, borderNode ]
+    } );
   }
 }
 
