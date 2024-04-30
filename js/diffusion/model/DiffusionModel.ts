@@ -134,8 +134,10 @@ export default class DiffusionModel extends BaseModel {
       } );
 
     const dataTandem = tandem.createTandem( 'data' );
-    this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, dataTandem.createTandem( 'leftData' ) );
-    this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, dataTandem.createTandem( 'rightData' ) );
+    this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2,
+      'left', dataTandem.createTandem( 'leftData' ) );
+    this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2,
+      'right', dataTandem.createTandem( 'rightData' ) );
 
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {

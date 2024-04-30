@@ -1,7 +1,7 @@
 // Copyright 2019-2023, University of Colorado Boulder
 
 /**
- * DiffusionData is responsible for information related to one side of the container.
+ * DiffusionData is responsible for information related to one half of the container.
  * This information is displayed in the 'Data' accordion box on the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -29,33 +29,34 @@ const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS: NumberPropertyOptions = {
 
 export default class DiffusionData {
 
-  // bounds of one side of the container
+  // bounds of one half of the container
   private readonly bounds: Bounds2;
 
-  // number of DiffusionParticle1 in this side of the container
+  // number of DiffusionParticle1 in this half of the container
   public readonly numberOfParticles1Property: Property<number>;
 
-  // number of DiffusionParticle2 in this side of the container
+  // number of DiffusionParticle2 in this half of the container
   public readonly numberOfParticles2Property: Property<number>;
 
-  // average temperature in this side of the container, in K
-  // null when there are no particles in this side of the container.
+  // average temperature in this half of the container, in K
+  // null when there are no particles in this half of the container.
   public readonly averageTemperatureProperty: Property<number | null>;
 
-  public constructor( bounds: Bounds2, particles1: DiffusionParticle1[], particles2: DiffusionParticle2[], tandem: Tandem ) {
+  public constructor( bounds: Bounds2, particles1: DiffusionParticle1[], particles2: DiffusionParticle2[],
+                      leftOrRightString: 'left' | 'right', tandem: Tandem ) {
 
     this.bounds = bounds;
 
     this.numberOfParticles1Property = new NumberProperty( 0,
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles1Property' ),
-        phetioDocumentation: 'Number of particles of type 1 that are in this side of the container.'
+        phetioDocumentation: `Number of particles of type 1 that are in the ${leftOrRightString} half of the container.`
       } ) );
 
     this.numberOfParticles2Property = new NumberProperty( 0,
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles2Property' ),
-        phetioDocumentation: 'Number of particles of type 2 that are in this side of the container.'
+        phetioDocumentation: `Number of particles of type 2 that are in the ${leftOrRightString} half of the container.`
       } ) );
 
     this.averageTemperatureProperty = new Property<number | null>( null, {
@@ -64,7 +65,7 @@ export default class DiffusionData {
       phetioValueType: NullableIO( NumberIO ),
       phetioReadOnly: true, // derived from the state of the particle system
       tandem: tandem.createTandem( 'averageTemperatureProperty' ),
-      phetioDocumentation: 'Average temperature in this side of the container.'
+      phetioDocumentation: `Average temperature in the ${leftOrRightString} half of the container.`
     } );
 
     this.update( particles1, particles2 );
