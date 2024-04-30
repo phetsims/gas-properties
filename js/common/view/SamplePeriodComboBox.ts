@@ -45,7 +45,8 @@ export default class SamplePeriodComboBox extends ComboBox<number> {
       xMargin: 6,
       yMargin: 3,
       cornerRadius: 5,
-      tandem: tandem
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: false
     } );
   }
 }
