@@ -64,13 +64,11 @@ export default class DiffusionScreenView extends BaseScreenView {
     // Center of Mass indicators
     const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
       model.modelViewTransform, GasPropertiesColors.particle1ColorProperty, {
-        visibleProperty: viewProperties.centerOfMassVisibleProperty,
-        tandem: tandem.createTandem( 'centerOfMassNode1' )
+        visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
     const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
       model.modelViewTransform, GasPropertiesColors.particle2ColorProperty, {
-        visibleProperty: viewProperties.centerOfMassVisibleProperty,
-        tandem: tandem.createTandem( 'centerOfMassNode2' )
+        visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
 
     // Particle Flow Rate vectors
@@ -80,8 +78,7 @@ export default class DiffusionScreenView extends BaseScreenView {
         fill: GasPropertiesColors.particle1ColorProperty
       },
       centerX: containerNode.centerX,
-      top: containerNode.bottom + 38,
-      tandem: tandem.createTandem( 'particleFlowRateNode1' )
+      top: containerNode.bottom + 38
     } );
     const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRateModel2, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
@@ -89,8 +86,7 @@ export default class DiffusionScreenView extends BaseScreenView {
         fill: GasPropertiesColors.particle2ColorProperty
       },
       centerX: containerNode.centerX,
-      top: particleFlowRateNode1.bottom + 5,
-      tandem: tandem.createTandem( 'particleFlowRateNode2' )
+      top: particleFlowRateNode1.bottom + 5
     } );
 
     // Data accordion box

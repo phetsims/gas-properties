@@ -23,7 +23,7 @@ type SelfOptions = {
   arrowNodeOptions?: ArrowNodeOptions;
 };
 
-type ParticleFlowRateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+type ParticleFlowRateNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
 export default class ParticleFlowRateNode extends Node {
 

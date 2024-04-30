@@ -18,7 +18,7 @@ import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type CenterOfMassNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+type CenterOfMassNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
 export default class CenterOfMassNode extends Node {
 
