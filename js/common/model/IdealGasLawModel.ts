@@ -183,6 +183,8 @@ export default class IdealGasLawModel extends BaseModel {
         }
       } );
 
+    // Note that these Emitters are not instrumented for PhET-iO. Clients who want to know when one of these conditions
+    // occurs should monitor the isShowingProperty of the associated OopsDialog.
     this.oopsEmitters = {
       temperatureContainerEmptyEmitter: new Emitter(),
       temperatureLidOpenEmitter: new Emitter(),
