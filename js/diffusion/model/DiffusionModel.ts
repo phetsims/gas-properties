@@ -63,7 +63,8 @@ export default class DiffusionModel extends BaseModel {
   public readonly leftData: DiffusionData;
   public readonly rightData: DiffusionData;
 
-  // centerX of mass for each particle species, in pm. null when there are no particles in the container.
+  // centerX of mass for each particle species, in pm, relative to the container's origin (bottom right).
+  // null when there are no particles in the container.
   public readonly centerOfMass1Property: Property<number | null>;
   public readonly centerOfMass2Property: Property<number | null>;
 
@@ -142,13 +143,13 @@ export default class DiffusionModel extends BaseModel {
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass1Property' ),
-        phetioDocumentation: 'Center of mass for particles of type 1.'
+        phetioDocumentation: 'Center of mass for particles of type 1, relative to the center of the container.'
       } ) );
 
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass2Property' ),
-        phetioDocumentation: 'Center of mass for particles of type 2.'
+        phetioDocumentation: 'Center of mass for particles of type 2, relative to the center of the container.'
       } ) );
 
     this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particle1FlowRateModel' ) );
