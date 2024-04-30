@@ -33,7 +33,8 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
       handleTouchAreaXDilation: 35,
       handleTouchAreaYDilation: 35,
       numberOfParticlesPerPumpAction: 50,
-      addParticlesOneAtATime: false
+      addParticlesOneAtATime: false,
+      phetioVisiblePropertyInstrumented: false // Controlled by bicyclePumpsToggleNode.
     }, providedOptions );
 
     super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
