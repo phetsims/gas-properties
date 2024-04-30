@@ -35,7 +35,8 @@ export default class DiffusionSettings {
         range: GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE,
         hasListenerOrderDependencies: true, // TODO: https://github.com/phetsims/gas-properties/issues/186
         isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
-        tandem: tandem.createTandem( 'numberOfParticlesProperty' )
+        tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
+        phetioDocumentation: `Number of Particles must be a multiple of ${DiffusionSettings.DELTAS.numberOfParticles}.`
       } );
 
     this.massProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_MASS_RANGE.defaultValue, {
@@ -51,7 +52,8 @@ export default class DiffusionSettings {
       range: GasPropertiesConstants.DIFFUSION_RADIUS_RANGE,
       units: 'pm',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 ),
-      tandem: tandem.createTandem( 'radiusProperty' )
+      tandem: tandem.createTandem( 'radiusProperty' ),
+      phetioDocumentation: `Radius must be a multiple of ${DiffusionSettings.DELTAS.radius}.`
     } );
 
     this.initialTemperatureProperty =
@@ -61,7 +63,8 @@ export default class DiffusionSettings {
         units: 'K',
         isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
         tandem: tandem.createTandem( 'initialTemperatureProperty' ),
-        phetioDocumentation: 'Temperature used to determine initial speed of particles.'
+        phetioDocumentation: 'Temperature used to determine the initial speed of particles. ' +
+                             `Must be a multiple of ${DiffusionSettings.DELTAS.initialTemperature}.`
       } );
   }
 
