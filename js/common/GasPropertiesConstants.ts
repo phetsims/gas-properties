@@ -28,7 +28,7 @@ const CREDITS: CreditsData = {
   leadDesign: 'Amy Rouinfar',
   softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
   team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
-        'Emily B. Moore, Ariel Paul, Dennis Perepelitsa, Kathy Perkins, Tom Perkins, Carl Wieman',
+        'Emily B. Moore, Ariel Paul, Dennis Perepelitsa, Kathy Perkins, Tom Perkins, Nancy Salpepi, Carl Wieman',
   qualityAssurance: 'Jaspe Arias, Liam Mulhall, Jacob Romero, Kathryn Woessner'
 };
 
