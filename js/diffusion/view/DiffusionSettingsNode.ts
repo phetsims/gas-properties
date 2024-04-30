@@ -19,15 +19,31 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
-import GasPropertiesSpinner, { GasPropertiesSpinnerOptions } from './GasPropertiesSpinner.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import DividerToggleButton from './DividerToggleButton.js';
 import Property from '../../../../axon/js/Property.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberSpinner, { NumberSpinnerOptions } from '../../../../sun/js/NumberSpinner.js';
 
 // constants
 const ICON_SPACING = 10; // space between particle icon and spinner
+
+const NUMBER_SPINNER_OPTIONS: NumberSpinnerOptions = {
+  isDisposable: false,
+  numberDisplayOptions: {
+    decimalPlaces: 0,
+    xMargin: 8,
+    yMargin: 6,
+    textOptions: {
+      font: GasPropertiesConstants.CONTROL_FONT
+    },
+    tandem: Tandem.OPT_OUT
+  },
+  touchAreaXDilation: 15,
+  touchAreaYDilation: 15,
+  phetioVisiblePropertyInstrumented: false
+};
 
 export default class DiffusionSettingsNode extends Panel {
 
@@ -57,17 +73,17 @@ export default class DiffusionSettingsNode extends Panel {
     } );
 
     // Number of Particles
-    const numberOfParticlesControl = new QuantityControl( GasPropertiesStrings.numberOfParticlesStringProperty,
+    const numberOfParticlesControls = new QuantityControls( 'numberOfParticles', GasPropertiesStrings.numberOfParticlesStringProperty,
       modelViewTransform, leftSettings.numberOfParticlesProperty, rightSettings.numberOfParticlesProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.numberOfParticles
         },
-        tandem: tandem.createTandem( 'numberOfParticlesControl' )
+        tandem: tandem.createTandem( 'numberOfParticlesControls' )
       } );
 
     // Mass (AMU)
-    const massControl = new QuantityControl( GasPropertiesStrings.massAMUStringProperty, modelViewTransform,
+    const massControls = new QuantityControls( 'mass', GasPropertiesStrings.massAMUStringProperty, modelViewTransform,
       leftSettings.massProperty, rightSettings.massProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: hasDividerProperty,
@@ -76,27 +92,27 @@ export default class DiffusionSettingsNode extends Panel {
             xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
           }
         },
-        tandem: tandem.createTandem( 'massControl' )
+        tandem: tandem.createTandem( 'massControls' )
       } );
 
     // Radius (pm)
-    const radiusControl = new QuantityControl( GasPropertiesStrings.radiusPmStringProperty, modelViewTransform,
+    const radiusControls = new QuantityControls( 'radius', GasPropertiesStrings.radiusPmStringProperty, modelViewTransform,
       leftSettings.radiusProperty, rightSettings.radiusProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.radius
         },
-        tandem: tandem.createTandem( 'radiusControl' )
+        tandem: tandem.createTandem( 'radiusControls' )
       } );
 
     // Initial Temperature (K)
-    const initialTemperatureControl = new QuantityControl( GasPropertiesStrings.initialTemperatureKStringProperty,
+    const initialTemperatureControls = new QuantityControls( 'initialTemperature', GasPropertiesStrings.initialTemperatureKStringProperty,
       modelViewTransform, leftSettings.initialTemperatureProperty, rightSettings.initialTemperatureProperty, spinnersAlignGroup, {
         spinnerOptions: {
           enabledProperty: hasDividerProperty,
           deltaValue: DiffusionSettings.DELTAS.initialTemperature
         },
-        tandem: tandem.createTandem( 'initialTemperatureControl' )
+        tandem: tandem.createTandem( 'initialTemperatureControls' )
       } );
 
     const dividerToggleButton = new DividerToggleButton( hasDividerProperty, {
@@ -111,10 +127,10 @@ export default class DiffusionSettingsNode extends Panel {
     const content = new VBox( {
       isDisposable: false,
       children: [
-        numberOfParticlesControl,
-        massControl,
-        radiusControl,
-        initialTemperatureControl,
+        numberOfParticlesControls,
+        massControls,
+        radiusControls,
+        initialTemperatureControls,
         dividerToggleButton
       ],
       spacing: 20,
@@ -126,18 +142,19 @@ export default class DiffusionSettingsNode extends Panel {
 }
 
 /**
- * A label and two spinners, for changing the same quantity for the left and right sides of the container.
+ * QuantityControls is label and two spinners, for changing the same quantity for each particle type.
  */
 
-type QuantityControlSelfOptions = {
-  spinnerOptions?: StrictOmit<GasPropertiesSpinnerOptions, 'tandem'>;
+type QuantityControlsSelfOptions = {
+  spinnerOptions?: StrictOmit<NumberSpinnerOptions, 'tandem'>;
 };
 
-type QuantityControlOptions = QuantityControlSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type QuantityControlsOptions = QuantityControlsSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
-class QuantityControl extends VBox {
+class QuantityControls extends VBox {
 
   /**
+   * @param spinnerTandemPrefix
    * @param labelStringProperty
    * @param modelViewTransform
    * @param leftProperty - quantity for the left side of the container
@@ -145,12 +162,15 @@ class QuantityControl extends VBox {
    * @param spinnersAlignGroup
    * @param providedOptions
    */
-  public constructor( labelStringProperty: TReadOnlyProperty<string>, modelViewTransform: ModelViewTransform2,
-                      leftProperty: NumberProperty, rightProperty: NumberProperty,
+  public constructor( spinnerTandemPrefix: string,
+                      labelStringProperty: TReadOnlyProperty<string>,
+                      modelViewTransform: ModelViewTransform2,
+                      leftProperty: NumberProperty,
+                      rightProperty: NumberProperty,
                       spinnersAlignGroup: AlignGroup,
-                      providedOptions: QuantityControlOptions ) {
+                      providedOptions: QuantityControlsOptions ) {
 
-    const options = optionize<QuantityControlOptions, StrictOmit<QuantityControlSelfOptions, 'spinnerOptions'>, VBoxOptions>()( {
+    const options = optionize<QuantityControlsOptions, StrictOmit<QuantityControlsSelfOptions, 'spinnerOptions'>, VBoxOptions>()( {
 
       // VBoxOptions
       spacing: 12,
@@ -165,37 +185,39 @@ class QuantityControl extends VBox {
     } );
 
     // icons
-    const leftParticleIcon = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform );
-    const rightParticleIcon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
+    const particle1Icon = GasPropertiesIconFactory.createDiffusionParticle1Icon( modelViewTransform );
+    const particle2Icon = GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform );
 
     // spinners, with uniform bounds width to facilitate layout
     const alignBoxOptions: AlignBoxOptions = {
       group: spinnersAlignGroup,
       xAlign: 'left'
     };
-    const leftSpinner = new AlignBox( new GasPropertiesSpinner( leftProperty, combineOptions<GasPropertiesSpinnerOptions>( {
-      tandem: options.tandem.createTandem( 'leftSpinner' )
-    }, options.spinnerOptions ) ), alignBoxOptions );
-    const rightSpinner = new AlignBox( new GasPropertiesSpinner( rightProperty, combineOptions<GasPropertiesSpinnerOptions>( {
-      tandem: options.tandem.createTandem( 'rightSpinner' )
-    }, options.spinnerOptions ) ), alignBoxOptions );
+    const particle1Spinner = new AlignBox( new NumberSpinner( leftProperty, leftProperty.rangeProperty,
+      combineOptions<NumberSpinnerOptions>( {}, NUMBER_SPINNER_OPTIONS, {
+        tandem: options.tandem.createTandem( `${spinnerTandemPrefix}1Spinner` )
+      }, options.spinnerOptions ) ), alignBoxOptions );
+    const particle2Spinner = new AlignBox( new NumberSpinner( rightProperty, rightProperty.rangeProperty,
+      combineOptions<NumberSpinnerOptions>( {}, NUMBER_SPINNER_OPTIONS, {
+        tandem: options.tandem.createTandem( `${spinnerTandemPrefix}2Spinner` )
+      }, options.spinnerOptions ) ), alignBoxOptions );
 
-    // left icon and spinner
-    const leftBox = new HBox( {
+    // icon and spinner for particle type 1
+    const box1 = new HBox( {
       spacing: ICON_SPACING,
-      children: [ leftParticleIcon, leftSpinner ]
+      children: [ particle1Icon, particle1Spinner ]
     } );
 
-    // right icon and spinner
-    const rightBox = new HBox( {
+    // icon and spinner for particle type 2
+    const box2 = new HBox( {
       spacing: ICON_SPACING,
-      children: [ rightParticleIcon, rightSpinner ]
+      children: [ particle2Icon, particle2Spinner ]
     } );
 
     // both controls, indented
     const hBox = new HBox( {
       spacing: 30,
-      children: [ new HStrut( 1 ), leftBox, rightBox ]
+      children: [ new HStrut( 1 ), box1, box2 ]
     } );
 
     options.children = [ labelText, hBox ];
