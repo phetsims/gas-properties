@@ -49,13 +49,13 @@ export default class DiffusionData {
     this.numberOfParticles1Property = new NumberProperty( 0,
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles1Property' ),
-        phetioDocumentation: 'Number of particle of type 1 that are in this side of the container.'
+        phetioDocumentation: 'Number of particles of type 1 that are in this side of the container.'
       } ) );
 
     this.numberOfParticles2Property = new NumberProperty( 0,
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles2Property' ),
-        phetioDocumentation: 'Number of particle of type 2 that are in this side of the container.'
+        phetioDocumentation: 'Number of particles of type 2 that are in this side of the container.'
       } ) );
 
     this.averageTemperatureProperty = new Property<number | null>( null, {

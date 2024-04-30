@@ -70,7 +70,7 @@ export default class DiffusionScreenView extends BaseScreenView {
       } );
 
     // Particle Flow Rate vectors
-    const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleFlowRateModel1, {
+    const particleFlowRateNode1 = new ParticleFlowRateNode( model.particle1FlowRateModel, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColors.particle1ColorProperty
@@ -78,7 +78,7 @@ export default class DiffusionScreenView extends BaseScreenView {
       centerX: containerNode.centerX,
       top: containerNode.bottom + 38
     } );
-    const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleFlowRateModel2, {
+    const particleFlowRateNode2 = new ParticleFlowRateNode( model.particle2FlowRateModel, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColors.particle2ColorProperty
@@ -101,7 +101,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     } );
 
     // Panel for setting initial conditions
-    const settingsPanel = new DiffusionSettingsNode( model.leftSettings, model.rightSettings, model.modelViewTransform,
+    const settingsPanel = new DiffusionSettingsNode( model.particle1Settings, model.particle2Settings, model.modelViewTransform,
       model.container.hasDividerProperty, model.numberOfParticlesProperty, panelsTandem.createTandem( 'settingsPanel' ) );
 
     // Panel for controlling visibility of 'tools'

@@ -52,9 +52,9 @@ export default class DiffusionModel extends BaseModel {
 
   public readonly container: DiffusionContainer;
 
-  // settings for the left and right sides of the container, before the divider is removed
-  public readonly leftSettings: DiffusionSettings;
-  public readonly rightSettings: DiffusionSettings;
+  // settings for the particle types 1 and 2, before the divider is removed
+  public readonly particle1Settings: DiffusionSettings;
+  public readonly particle2Settings: DiffusionSettings;
 
   // N, the total number of particles in the container
   public readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
@@ -68,8 +68,8 @@ export default class DiffusionModel extends BaseModel {
   public readonly centerOfMass2Property: Property<number | null>;
 
   // flow rate model for each particle species
-  public readonly particleFlowRateModel1: ParticleFlowRateModel;
-  public readonly particleFlowRateModel2: ParticleFlowRateModel;
+  public readonly particle1FlowRateModel: ParticleFlowRateModel;
+  public readonly particle2FlowRateModel: ParticleFlowRateModel;
 
   public readonly collisionDetector: DiffusionCollisionDetector;
 
@@ -89,29 +89,30 @@ export default class DiffusionModel extends BaseModel {
 
     this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
 
-    this.leftSettings = new DiffusionSettings( tandem.createTandem( 'leftSettings' ) );
-    this.rightSettings = new DiffusionSettings( tandem.createTandem( 'rightSettings' ) );
+    const settingsTandem = tandem.createTandem( 'settings' );
+    this.particle1Settings = new DiffusionSettings( settingsTandem.createTandem( 'particle1Settings' ) );
+    this.particle2Settings = new DiffusionSettings( settingsTandem.createTandem( 'particle2Settings' ) );
 
     // Synchronize particle counts and arrays.
     const createDiffusionParticle1 = ( options: CreateParticleOptions ) => new DiffusionParticle1( options );
-    this.leftSettings.numberOfParticlesProperty.link( numberOfParticles => {
+    this.particle1Settings.numberOfParticlesProperty.link( numberOfParticles => {
       this.updateNumberOfParticles( numberOfParticles,
         this.container.leftBounds,
-        this.leftSettings,
+        this.particle1Settings,
         this.particles1,
         createDiffusionParticle1 );
     } );
     const createDiffusionParticle2 = ( options: CreateParticleOptions ) => new DiffusionParticle2( options );
-    this.rightSettings.numberOfParticlesProperty.link( numberOfParticles => {
+    this.particle2Settings.numberOfParticlesProperty.link( numberOfParticles => {
       this.updateNumberOfParticles( numberOfParticles,
         this.container.rightBounds,
-        this.rightSettings,
+        this.particle2Settings,
         this.particles2,
         createDiffusionParticle2 );
     } );
 
     this.numberOfParticlesProperty = new DerivedProperty(
-      [ this.leftSettings.numberOfParticlesProperty, this.rightSettings.numberOfParticlesProperty ],
+      [ this.particle1Settings.numberOfParticlesProperty, this.particle2Settings.numberOfParticlesProperty ],
       ( leftNumberOfParticles, rightNumberOfParticles ) => {
 
         // Skip these assertions when PhET-iO state is being restored, because at least one of the arrays will
@@ -132,8 +133,9 @@ export default class DiffusionModel extends BaseModel {
         phetioDocumentation: 'Total number of particles in the container.'
       } );
 
-    this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, tandem.createTandem( 'leftData' ) );
-    this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, tandem.createTandem( 'rightData' ) );
+    const dataTandem = tandem.createTandem( 'data' );
+    this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, dataTandem.createTandem( 'leftData' ) );
+    this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2, dataTandem.createTandem( 'rightData' ) );
 
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
@@ -147,26 +149,26 @@ export default class DiffusionModel extends BaseModel {
         phetioDocumentation: 'Center of mass for particles of type 2.'
       } ) );
 
-    this.particleFlowRateModel1 = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particleFlowRateModel1' ) );
-    this.particleFlowRateModel2 = new ParticleFlowRateModel( this.container.dividerX, this.particles2, tandem.createTandem( 'particleFlowRateModel2' ) );
+    this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particle1FlowRateModel' ) );
+    this.particle2FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles2, tandem.createTandem( 'particle2FlowRateModel' ) );
 
     this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
     // Update mass and temperature of existing particles. This adjusts speed of the particles.
     Multilink.multilink(
-      [ this.leftSettings.massProperty, this.leftSettings.initialTemperatureProperty ],
+      [ this.particle1Settings.massProperty, this.particle1Settings.initialTemperatureProperty ],
       ( mass, initialTemperature ) => {
         updateMassAndTemperature( mass, initialTemperature, this.particles1 );
       } );
     Multilink.multilink(
-      [ this.rightSettings.massProperty, this.rightSettings.initialTemperatureProperty ],
+      [ this.particle2Settings.massProperty, this.particle2Settings.initialTemperatureProperty ],
       ( mass, initialTemperature ) => {
         updateMassAndTemperature( mass, initialTemperature, this.particles2 );
       } );
 
     // Update data if initial temperature settings are changed while the sim is paused.
     Multilink.multilink(
-      [ this.leftSettings.initialTemperatureProperty, this.rightSettings.initialTemperatureProperty ],
+      [ this.particle1Settings.initialTemperatureProperty, this.particle2Settings.initialTemperatureProperty ],
       () => {
         if ( !this.isPlayingProperty.value ) {
           this.updateData();
@@ -174,10 +176,10 @@ export default class DiffusionModel extends BaseModel {
       } );
 
     // Update radii of existing particles.
-    this.leftSettings.radiusProperty.link( radius => {
+    this.particle1Settings.radiusProperty.link( radius => {
       updateRadius( radius, this.particles1, this.container.leftBounds, this.isPlayingProperty.value );
     } );
-    this.rightSettings.radiusProperty.link( radius => {
+    this.particle2Settings.radiusProperty.link( radius => {
       updateRadius( radius, this.particles2, this.container.rightBounds, this.isPlayingProperty.value );
     } );
 
@@ -187,12 +189,12 @@ export default class DiffusionModel extends BaseModel {
 
         // Restarts the experiment with the same settings.
         // This causes the current sets of particles to be deleted, and new sets of particles to be created.
-        this.leftSettings.restart();
-        this.rightSettings.restart();
+        this.particle1Settings.restart();
+        this.particle2Settings.restart();
 
         // Reset flow-rate models
-        this.particleFlowRateModel1.reset();
-        this.particleFlowRateModel2.reset();
+        this.particle1FlowRateModel.reset();
+        this.particle2FlowRateModel.reset();
       }
     } );
   }
@@ -201,12 +203,12 @@ export default class DiffusionModel extends BaseModel {
     super.reset();
 
     this.container.reset();
-    this.leftSettings.reset();
-    this.rightSettings.reset();
+    this.particle1Settings.reset();
+    this.particle2Settings.reset();
     this.centerOfMass1Property.reset();
     this.centerOfMass2Property.reset();
-    this.particleFlowRateModel1.reset();
-    this.particleFlowRateModel2.reset();
+    this.particle1FlowRateModel.reset();
+    this.particle2FlowRateModel.reset();
 
     assert && assert( this.particles1.length === 0, 'there should be no DiffusionParticle1 particles' );
     assert && assert( this.particles2.length === 0, 'there should be no DiffusionParticle2 particles' );
@@ -227,8 +229,8 @@ export default class DiffusionModel extends BaseModel {
 
     // Particle Flow Rate model
     if ( !this.container.hasDividerProperty.value ) {
-      this.particleFlowRateModel1.step( dt );
-      this.particleFlowRateModel2.step( dt );
+      this.particle1FlowRateModel.step( dt );
+      this.particle2FlowRateModel.step( dt );
     }
 
     // Collision detection and response
