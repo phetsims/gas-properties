@@ -135,6 +135,8 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
 
     super( options );
 
+    this.addLinkedElement( collisionCounter );
+
     // Put a red dot at the origin, for debugging layout.
     if ( GasPropertiesQueryParameters.origin ) {
       this.addChild( new Circle( 3, { fill: 'red' } ) );

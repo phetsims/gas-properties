@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -14,7 +13,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import gasProperties from '../../gasProperties.js';
 import CollisionDetector from './CollisionDetector.js';
 
@@ -25,7 +24,7 @@ type SelfOptions = {
 
 type CollisionCounterOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class CollisionCounter {
+export default class CollisionCounter extends PhetioObject {
 
   private readonly collisionDetector: CollisionDetector;
 
@@ -54,12 +53,18 @@ export default class CollisionCounter {
 
   public constructor( collisionDetector: CollisionDetector, providedOptions: CollisionCounterOptions ) {
 
-    const options = optionize<CollisionCounterOptions, SelfOptions>()( {
+    const options = optionize<CollisionCounterOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       position: Vector2.ZERO,
-      visible: false
+      visible: false,
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.collisionDetector = collisionDetector;
 
@@ -98,10 +103,6 @@ export default class CollisionCounter {
     // Changing visibility or sample period stops the counter and resets the collision count.
     this.visibleProperty.link( () => this.stopAndResetCount() );
     this.samplePeriodProperty.link( () => this.stopAndResetCount() );
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public reset(): void {
