@@ -19,6 +19,7 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { AquaRadioButtonOptions } from '../../../../sun/js/AquaRadioButton.js';
 
 const SPACING = 12;
 const TEXT_OPTIONS: TextOptions = {
@@ -47,12 +48,20 @@ export default class HoldConstantPanel extends Panel {
       maxWidth: 200 // determined empirically
     } );
 
+    const radioButtonOptions: AquaRadioButtonOptions = {
+      phetioEnabledPropertyInstrumented: false // Sim controls which buttons are enabled.
+    };
+
     const items: AquaRadioButtonGroupItem<HoldConstant>[] = [
 
       // Nothing
       {
         value: 'nothing',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.nothingStringProperty, TEXT_OPTIONS ),
+        options: combineOptions<AquaRadioButtonOptions>( {
+          // Nothing must always be visible, because it's the fallback when something goes wrong and an 'Oops' dialog is displayed.
+          phetioVisiblePropertyInstrumented: false
+        }, radioButtonOptions ),
         tandemName: 'nothingRadioButton'
       },
 
@@ -60,6 +69,7 @@ export default class HoldConstantPanel extends Panel {
       {
         value: 'volume',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.volumeStringProperty, TEXT_OPTIONS ),
+        options: radioButtonOptions,
         tandemName: 'volumeRadioButton'
       },
 
@@ -67,6 +77,7 @@ export default class HoldConstantPanel extends Panel {
       {
         value: 'temperature',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.temperatureStringProperty, TEXT_OPTIONS ),
+        options: radioButtonOptions,
         tandemName: 'temperatureRadioButton'
       },
 
@@ -74,6 +85,7 @@ export default class HoldConstantPanel extends Panel {
       {
         value: 'pressureV',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.pressureVStringProperty, TEXT_OPTIONS ),
+        options: radioButtonOptions,
         tandemName: 'pressureVRadioButton'
       },
 
@@ -81,6 +93,7 @@ export default class HoldConstantPanel extends Panel {
       {
         value: 'pressureT',
         createNode: () => new Text( GasPropertiesStrings.holdConstant.pressureTStringProperty, TEXT_OPTIONS ),
+        options: radioButtonOptions,
         tandemName: 'pressureTRadioButton'
       }
     ];
