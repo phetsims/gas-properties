@@ -174,8 +174,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // Dimensional arrows that indicate container size
     const containerWidthNode = new ContainerWidthNode( model.container.position, model.container.widthProperty,
       model.modelViewTransform, {
-        visibleProperty: widthVisibleProperty,
-        tandem: tandem.createTandem( 'containerWidthNode' )
+        visibleProperty: widthVisibleProperty
       } );
 
     // Radio buttons for selecting particle type

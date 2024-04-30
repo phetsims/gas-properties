@@ -27,7 +27,7 @@ import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ContainerWidthNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+type ContainerWidthNodeOptions = SelfOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
 export default class ContainerWidthNode extends Node {
 
@@ -64,13 +64,10 @@ export default class ContainerWidthNode extends Node {
     const nmWidthRange = new Range( widthProperty.range.min / 1000, widthProperty.range.max / 1000 );
 
     // Display the width in nm
-    const widthDisplayTandem = options.tandem.createTandem( 'widthDisplay' );
     const widthDisplay = new NumberDisplay( nmWidthProperty, nmWidthRange, {
       decimalPlaces: 1,
       valuePattern: new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
         units: GasPropertiesStrings.nanometersStringProperty
-      }, {
-        tandem: widthDisplayTandem.createTandem( 'valuePatternStringProperty' )
       } ),
       cornerRadius: 3,
       textOptions: {
@@ -80,8 +77,7 @@ export default class ContainerWidthNode extends Node {
       },
       backgroundFill: 'white',
       backgroundStroke: 'black',
-      backgroundLineWidth: 0.5,
-      tandem: widthDisplayTandem
+      backgroundLineWidth: 0.5
     } );
 
     options.children = [ dimensionalArrowNode, widthDisplay ];
