@@ -49,13 +49,13 @@ export default class DiffusionData {
     this.numberOfParticles1Property = new NumberProperty( 0,
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles1Property' ),
-        phetioDocumentation: 'the number of particle of type 1 that are in this side of the container'
+        phetioDocumentation: 'Number of particle of type 1 that are in this side of the container.'
       } ) );
 
     this.numberOfParticles2Property = new NumberProperty( 0,
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles2Property' ),
-        phetioDocumentation: 'the number of particle of type 2 that are in this side of the container'
+        phetioDocumentation: 'Number of particle of type 2 that are in this side of the container.'
       } ) );
 
     this.averageTemperatureProperty = new Property<number | null>( null, {
@@ -64,7 +64,7 @@ export default class DiffusionData {
       phetioValueType: NullableIO( NumberIO ),
       phetioReadOnly: true, // derived from the state of the particle system
       tandem: tandem.createTandem( 'averageTemperatureProperty' ),
-      phetioDocumentation: 'average temperature in this side of the container'
+      phetioDocumentation: 'Average temperature in this side of the container.'
     } );
 
     this.update( particles1, particles2 );

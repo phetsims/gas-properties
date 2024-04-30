@@ -85,7 +85,7 @@ export default class PressureGauge {
       isValidValue: value => ( value >= 0 ),
       tandem: tandem.createTandem( 'pressureKilopascalsProperty' ),
       phetioReadOnly: true, // value is derived from pressureProperty on step, with noise added
-      phetioDocumentation: 'pressure in K, with optional noise added'
+      phetioDocumentation: 'Pressure in K, with optional noise added.'
     } );
 
     // When pressure goes to zero, update the gauge immediately.
@@ -102,7 +102,7 @@ export default class PressureGauge {
         valueType: 'number',
         phetioValueType: NumberIO,
         tandem: tandem.createTandem( 'pressureAtmospheresProperty' ),
-        phetioDocumentation: 'pressure in atm, with optional noise added'
+        phetioDocumentation: 'Pressure in atm, with optional noise added.'
       } );
 
     this.pressureRange = new Range( 0, MAX_PRESSURE );
@@ -114,7 +114,7 @@ export default class PressureGauge {
     this.unitsProperty = new StringUnionProperty<PressureUnits>( 'atmospheres', {
       validValues: PressureUnitsValues,
       tandem: tandem.createTandem( 'unitsProperty' ),
-      phetioDocumentation: 'units displayed by the pressure gauge'
+      phetioDocumentation: 'Units displayed by the pressure gauge.'
     } );
 
     this.dtAccumulator = 0;

@@ -55,7 +55,7 @@ export default class PressureModel {
       isValidValue: value => ( value >= 0 ),
       tandem: tandem.createTandem( 'pressureProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system,
-      phetioDocumentation: 'pressure in K, with no noise'
+      phetioDocumentation: 'Pressure in K, with no noise.'
     } );
 
     this.pressureGauge = new PressureGauge( this.pressureProperty, temperatureProperty, holdConstantProperty,

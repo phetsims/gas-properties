@@ -129,7 +129,7 @@ export default class DiffusionModel extends BaseModel {
         isValidValue: value => ( Number.isInteger( value ) && value >= 0 ),
         phetioValueType: NumberIO,
         tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
-        phetioDocumentation: 'total number of particles in the container'
+        phetioDocumentation: 'Total number of particles in the container.'
       } );
 
     this.leftData = new DiffusionData( this.container.leftBounds, this.particles1, this.particles2, tandem.createTandem( 'leftData' ) );
@@ -138,13 +138,13 @@ export default class DiffusionModel extends BaseModel {
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass1Property' ),
-        phetioDocumentation: 'center of mass for particles of type 1'
+        phetioDocumentation: 'Center of mass for particles of type 1.'
       } ) );
 
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass2Property' ),
-        phetioDocumentation: 'center of mass for particles of type 2'
+        phetioDocumentation: 'Center of mass for particles of type 2.'
       } ) );
 
     this.particleFlowRateModel1 = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particleFlowRateModel1' ) );

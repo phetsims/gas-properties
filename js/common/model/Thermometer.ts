@@ -61,13 +61,13 @@ export default class Thermometer {
         isValidValue: value => ( value === null || value !== 0 ),
         phetioValueType: NullableIO( NumberIO ),
         tandem: options.tandem.createTandem( 'temperatureCelsiusProperty' ),
-        phetioDocumentation: 'temperature in degrees C'
+        phetioDocumentation: 'Temperature in degrees C.'
       } );
 
     this.unitsProperty = new StringUnionProperty<TemperatureUnits>( 'kelvin', {
       validValues: TemperatureUnitsValues,
       tandem: options.tandem.createTandem( 'unitsProperty' ),
-      phetioDocumentation: 'units displayed by the thermometer'
+      phetioDocumentation: 'Units displayed by the thermometer.'
     } );
   }
 

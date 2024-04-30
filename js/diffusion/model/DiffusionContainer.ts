@@ -56,7 +56,7 @@ export default class DiffusionContainer extends BaseContainer {
 
     this.hasDividerProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'hasDividerProperty' ),
-      phetioDocumentation: 'whether the container\'s divider is in place'
+      phetioDocumentation: 'Whether the container\'s divider is in place.'
     } );
 
     // Adjust the bounds of the left and right sides of the container to account for divider thickness

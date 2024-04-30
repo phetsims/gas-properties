@@ -114,19 +114,19 @@ export default class IdealGasLawModel extends BaseModel {
     this.holdConstantProperty = new StringUnionProperty( options.holdConstant, {
       validValues: HoldConstantValues,
       tandem: tandem.createTandem( 'holdConstantProperty' ),
-      phetioDocumentation: 'determines which quantity will be held constant'
+      phetioDocumentation: 'Determines which quantity will be held constant.'
     } );
 
     this.heatCoolFactorProperty = new NumberProperty( 0, {
       range: new Range( -1, 1 ),
       tandem: tandem.createTandem( 'heatCoolFactorProperty' ),
-      phetioDocumentation: 'The amount of heat or cool applied to particles in the container. ' +
+      phetioDocumentation: 'Amount of heat or cool applied to particles in the container. ' +
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off'
     } );
 
     this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'particleParticleCollisionsEnabledProperty' ),
-      phetioDocumentation: 'determines whether collisions between particles are enabled'
+      phetioDocumentation: 'Determines whether collisions between particles are enabled.'
     } );
 
     this.container = new IdealGasLawContainer( {

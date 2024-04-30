@@ -55,19 +55,19 @@ export default class TemperatureModel {
       phetioValueType: NullableIO( NumberIO ),
       tandem: tandem.createTandem( 'temperatureProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system
-      phetioDocumentation: 'temperature in K'
+      phetioDocumentation: 'Temperature in K.'
     } );
 
     this.controlTemperatureEnabledProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'controlTemperatureEnabledProperty' ),
-      phetioDocumentation: 'indicates whether initial temperature is controlled by the user'
+      phetioDocumentation: 'Indicates whether initial temperature is controlled by the user.'
     } );
 
     this.initialTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
       range: INITIAL_TEMPERATURE_RANGE,
       units: 'K',
       tandem: tandem.createTandem( 'initialTemperatureProperty' ),
-      phetioDocumentation: 'temperature used to determine the initial speed of particles when controlled by the user'
+      phetioDocumentation: 'Temperature used to determine the initial speed of particles when controlled by the user.'
     } );
 
     this.thermometer = new Thermometer( this.temperatureProperty, {

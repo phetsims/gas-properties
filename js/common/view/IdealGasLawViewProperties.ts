@@ -25,18 +25,18 @@ export default class IdealGasLawViewProperties {
 
     this.widthVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'widthVisibleProperty' ),
-      phetioDocumentation: 'whether dimensional arrows are visible for the width of the container'
+      phetioDocumentation: 'Whether dimensional arrows are visible for the width of the container.'
     } );
 
     this.particlesExpandedProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'particlesExpandedProperty' ),
-      phetioDocumentation: 'whether the Particles accordion box is expanded'
+      phetioDocumentation: 'Whether the Particles accordion box is expanded.'
     } );
 
     this.particleTypeProperty = new StringUnionProperty<ParticleType>( 'heavy', {
       validValues: ParticleTypeValues,
       tandem: tandem.createTandem( 'particleTypeProperty' ),
-      phetioDocumentation: 'the particle type that will be dispensed by the bicycle pump'
+      phetioDocumentation: 'Particle type that will be dispensed by the bicycle pump.'
     } );
   }
 

@@ -61,7 +61,7 @@ export default class DiffusionSettings {
         units: 'K',
         isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
         tandem: tandem.createTandem( 'initialTemperatureProperty' ),
-        phetioDocumentation: 'temperature used to determine initial speed of particles'
+        phetioDocumentation: 'Temperature used to determine initial speed of particles.'
       } );
   }
 

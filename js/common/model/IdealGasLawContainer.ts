@@ -78,7 +78,7 @@ export default class IdealGasLawContainer extends BaseContainer {
     this.lidIsOnProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'lidIsOnProperty' ),
       phetioReadOnly: true, // derived from state of the particle system
-      phetioDocumentation: 'whether the lid is on the container, or has been blown off'
+      phetioDocumentation: 'Indicates whether the lid is on the container, or has been blown off.'
     } );
 
     this.lidThickness = 175;
