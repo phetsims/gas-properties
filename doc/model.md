@@ -167,3 +167,11 @@ _Energy_ screen has a fixed setting of "Volume".  (This feature is irrelevant in
 If a change would result in a situation that is nonsensical (e.g. holding temperature constant with no particles) or
 violates the constraints of the simulation (e.g. requires a larger container volume than supported), the sim
 automatically switches to "Nothing" and notifies the user via a dialog.
+
+## Histograms
+
+The _Energy_ screen has two histograms: **Speed** and **Kinetic Energy**. 
+
+The **Speed** histogram has 19 bins, with bin width of 170 pm/ps. The bin values are numbers of particles, time averaged.
+
+The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup>2</sup> / ps<sup>2</sup>. The bin values are numbers of particles, time averaged.
