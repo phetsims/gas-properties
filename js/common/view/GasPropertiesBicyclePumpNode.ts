@@ -45,6 +45,8 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
         this.interruptSubtreeInput();
       }
     } );
+
+    this.addLinkedElement( numberOfParticlesProperty );
   }
 }
 

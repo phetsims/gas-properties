@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -19,7 +18,7 @@ import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from './Particle.js';
@@ -31,7 +30,7 @@ type SelfOptions = {
 
 export type BaseContainerOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class BaseContainer {
+export default class BaseContainer extends PhetioObject {
 
   public readonly position: Vector2; // position of the container's bottom right corner, in pm
   public readonly widthRange: RangeWithValue; // range and initial value of the container's width, in pm
@@ -55,12 +54,18 @@ export default class BaseContainer {
 
   protected constructor( providedOptions: BaseContainerOptions ) {
 
-    const options = optionize<BaseContainerOptions, SelfOptions>()( {
+    const options = optionize<BaseContainerOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       position: Vector2.ZERO,
-      widthRange: new RangeWithValue( 5000, 15000, 10000 )
+      widthRange: new RangeWithValue( 5000, 15000, 10000 ),
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.position = options.position;
     this.widthRange = options.widthRange;
@@ -157,10 +162,6 @@ export default class BaseContainer {
       }
     }
     return true;
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 }
 
