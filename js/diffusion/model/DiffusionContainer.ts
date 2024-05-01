@@ -37,11 +37,6 @@ export default class DiffusionContainer extends BaseContainer {
       tandem: tandem
     } );
 
-    // In case clients attempt to use this feature of the base class
-    this.widthProperty.lazyLink( width => {
-      throw new Error( 'container width is fixed in the Diffusion screen' );
-    } );
-
     this.dividerThickness = 100;
 
     this.dividerX = this.left + ( this.width / 2 );
