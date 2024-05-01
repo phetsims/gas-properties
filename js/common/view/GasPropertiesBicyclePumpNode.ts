@@ -10,14 +10,13 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import BicyclePumpNode, { BicyclePumpNodeOptions } from '../../../../scenery-phet/js/BicyclePumpNode.js';
 import gasProperties from '../../gasProperties.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type GasPropertiesBicyclePumpNodeOptions = SelfOptions & BicyclePumpNodeOptions &
-  PickRequired<BicyclePumpNodeOptions, 'tandem'>;
+export type GasPropertiesBicyclePumpNodeOptions = SelfOptions & BicyclePumpNodeOptions;
 
 export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
@@ -34,7 +33,7 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
       handleTouchAreaYDilation: 35,
       numberOfParticlesPerPumpAction: 50,
       addParticlesOneAtATime: false,
-      phetioVisiblePropertyInstrumented: false // Controlled by bicyclePumpsToggleNode.
+      tandem: Tandem.OPT_OUT
     }, providedOptions );
 
     super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );

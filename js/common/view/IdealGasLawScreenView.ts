@@ -179,12 +179,14 @@ export default class IdealGasLawScreenView extends BaseScreenView {
         visibleProperty: widthVisibleProperty
       } );
 
+    const bicyclePumpNodeTandem = tandem.createTandem( 'bicyclePumpNode' );
+
     // Radio buttons for selecting particle type
     const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,
       model.modelViewTransform, {
         left: containerNode.right + 20,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: tandem.createTandem( 'particleTypeRadioButtonGroup' )
+        tandem: bicyclePumpNodeTandem.createTandem( 'particleTypeRadioButtonGroup' )
       } );
 
     // Bicycle pump is centered above the radio buttons.
@@ -202,16 +204,13 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // Bicycle pump for heavy particles
     const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
       combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColors.heavyParticleColorProperty,
-        tandem: tandem.createTandem( 'heavyBicyclePumpNode' )
+        bodyFill: GasPropertiesColors.heavyParticleColorProperty
       } ) );
 
     // Bicycle pump for light particles
     const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
       combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColors.lightParticleColorProperty,
-        tandem: tandem.createTandem( 'lightBicyclePumpNode' ),
-        phetioVisiblePropertyInstrumented: false // Controlled by bicyclePumpsToggleNode.
+        bodyFill: GasPropertiesColors.lightParticleColorProperty
       } ) );
 
     // Toggle button for switching between heavy and light bicycle pumps
@@ -219,6 +218,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       { value: 'heavy', createNode: () => heavyBicyclePumpNode },
       { value: 'light', createNode: () => lightBicyclePumpNode }
     ] );
+
+    const bicyclePumpNode = new Node( {
+      children: [ bicyclePumpsToggleNode, particleTypeRadioButtonGroup ],
+      tandem: bicyclePumpNodeTandem
+    } );
 
     // Cancel interaction with the pump when particle type changes.
     particleTypeProperty.link( () => {
@@ -319,8 +323,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // rendering order
     regionsNode && this.addChild( regionsNode );
-    this.addChild( particleTypeRadioButtonGroup );
-    this.addChild( bicyclePumpsToggleNode );
+    this.addChild( bicyclePumpNode );
     this.addChild( pressureGaugeNode );
     this.addChild( pressureGaugeListboxParent );
     this.addChild( containerNode );
