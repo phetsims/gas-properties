@@ -1,6 +1,5 @@
 // Copyright 2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/215 Finish this, then factor out duplication.
 /**
  * DiffusionKeyboardHelpContent is the keyboard help for the 'Diffusion' screen.
  *

@@ -29,13 +29,11 @@ export default class EnergyModel extends IdealGasLawModel {
     } );
 
     // In case clients attempt to use this feature of the base class
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Verify that holdConstantProperty is phetioReadOnly:true
     this.holdConstantProperty.lazyLink( holdConstant => {
       throw new Error( 'holdConstant is fixed in the Energy screen' );
     } );
 
     // In case clients attempt to use this feature of the base class
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Verify that container.widthProperty is phetioReadOnly:true
     this.container.widthProperty.lazyLink( width => {
       throw new Error( 'container width is fixed in the Energy screen' );
     } );
