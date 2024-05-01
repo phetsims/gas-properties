@@ -63,8 +63,10 @@ export default class DiffusionModel extends BaseModel {
   public readonly leftData: DiffusionData;
   public readonly rightData: DiffusionData;
 
-  // centerX of mass for each particle species, in pm, relative to the center (divider) of the container.
-  // null when there are no particles in the container.
+  // Center of mass for each particle species, in pm, relative to the center (divider) of the container.
+  // null when there are no particles in the container. This is actually an x offset, not a 'center' Vector2.
+  // But we decided to keep these Property names so that they match the associated checkbox labels.
+  // See https://github.com/phetsims/gas-properties/issues/228
   public readonly centerOfMass1Property: Property<number | null>;
   public readonly centerOfMass2Property: Property<number | null>;
 
@@ -145,13 +147,13 @@ export default class DiffusionModel extends BaseModel {
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass1Property' ),
-        phetioDocumentation: 'Center of mass for particles of type 1, relative to the center of the container.'
+        phetioDocumentation: 'Center of mass for particles of type 1. This is the x offset from the center of the container.'
       } ) );
 
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass2Property' ),
-        phetioDocumentation: 'Center of mass for particles of type 2, relative to the center of the container.'
+        phetioDocumentation: 'Center of mass for particles of type 2. This is the x offset from the center of the container.'
       } ) );
 
     this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particle1FlowRateModel' ) );
