@@ -42,6 +42,7 @@ export default class AverageSpeedModel {
   public readonly lightAverageSpeedProperty: Property<number | null>;
 
   // used internally to smooth the average speed computation
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private dtAccumulator: number; // accumulated dts while samples were taken
   private numberOfSamples: number; // number of samples we've taken
   private heavyAverageSpeedSum: number; // sum of samples for heavy particles
