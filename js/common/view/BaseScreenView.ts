@@ -16,6 +16,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import BaseModel from '../model/BaseModel.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = {
   hasSlowMotion?: boolean;
@@ -48,9 +49,11 @@ export default abstract class BaseScreenView extends ScreenView {
 
     this.model = model;
 
-    // The model bounds are equivalent to the visible bounds of ScreenView, as fills the browser window.
+    // The model bounds are equivalent to the visible bounds of the ScreenView, transformed to model coordinates.
     this.visibleBoundsProperty.link( visibleBounds => {
-      model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
+      if ( !isSettingPhetioStateProperty.value ) {
+        model.modelBoundsProperty.value = model.modelViewTransform.viewToModelBounds( visibleBounds );
+      }
     } );
 
     this.timeControlNode = new TimeControlNode( model.isPlayingProperty, {

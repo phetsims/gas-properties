@@ -84,7 +84,9 @@ export default class BaseModel implements TModel {
     );
 
     this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ), {
-      valueType: Bounds2
+      tandem: options.tandem.createTandem( 'modelBoundsProperty' ),
+      phetioValueType: Bounds2.Bounds2IO,
+      phetioDocumentation: 'Visible bounds of the browser window in model coordinates.'
     } );
 
     this.isPlayingProperty = new BooleanProperty( true, {
