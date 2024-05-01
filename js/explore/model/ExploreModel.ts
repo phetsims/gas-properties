@@ -16,15 +16,11 @@ export default class ExploreModel extends IdealGasLawModel {
 
     super( {
       holdConstant: 'nothing',
+      holdConstantValues: [ 'nothing' ],
       containerOptions: {
         leftWallDoesWork: true // moving the left wall does work on particles
       },
       tandem: tandem
-    } );
-
-    // In case clients attempt to use this feature of the base class
-    this.holdConstantProperty.lazyLink( holdConstant => {
-      throw new Error( 'holdConstant is fixed in the Explore screen' );
     } );
   }
 }

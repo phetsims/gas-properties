@@ -25,16 +25,12 @@ export default class EnergyModel extends IdealGasLawModel {
 
     super( {
       holdConstant: 'volume',
+      holdConstantValues: [ 'volume' ],
       hasCollisionCounter: false,
       containerOptions: {
         widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH )
       },
       tandem: tandem
-    } );
-
-    // In case clients attempt to use this feature of the base class
-    this.holdConstantProperty.lazyLink( holdConstant => {
-      throw new Error( 'holdConstant is fixed in the Energy screen' );
     } );
 
     this.histogramsModel = new HistogramsModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD, {

@@ -50,6 +50,9 @@ type SelfOptions = {
   // Initial value for holdConstantProperty.
   holdConstant?: HoldConstant;
 
+  // Valid values for holdConstantProperty
+  holdConstantValues?: HoldConstant[];
+
   // Passed to IdealGasLawContainer.
   containerOptions?: PickOptional<IdealGasLawContainerOptions, 'leftWallDoesWork' | 'widthRange'>;
 };
@@ -117,13 +120,14 @@ export default class IdealGasLawModel extends BaseModel {
       // SelfOptions
       hasCollisionCounter: true,
       hasHoldConstantFeature: false,
-      holdConstant: 'nothing'
+      holdConstant: 'nothing',
+      holdConstantValues: HoldConstantValues.slice()
     }, providedOptions );
 
     super( options );
 
     this.holdConstantProperty = new StringUnionProperty( options.holdConstant, {
-      validValues: HoldConstantValues,
+      validValues: options.holdConstantValues,
       tandem: options.hasHoldConstantFeature ? options.tandem.createTandem( 'holdConstantProperty' ) : Tandem.OPT_OUT,
       phetioReadOnly: true,
       phetioDocumentation: 'Determines which quantity will be held constant.'
