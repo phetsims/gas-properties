@@ -16,6 +16,7 @@ import { CheckboxOptions } from '../../../sun/js/Checkbox.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesColors from './GasPropertiesColors.js';
+import { ScreenOptions } from '../../../joist/js/Screen.js';
 
 // for all panel-like containers
 const PANEL_CORNER_RADIUS = 5;
@@ -74,6 +75,12 @@ const PANEL_OPTIONS: PanelOptions = {
   yMargin: PANEL_Y_MARGIN,
   fill: GasPropertiesColors.panelFillProperty,
   stroke: GasPropertiesColors.panelStrokeProperty
+};
+
+const SCREEN_OPTIONS: Partial<ScreenOptions> = {
+  backgroundColorProperty: GasPropertiesColors.screenBackgroundColorProperty,
+  showUnselectedHomeScreenIconFrame: true, // put a gray border around unselected icons on the home screen
+  showScreenIconFrameForNavigationBarFill: 'black' // put a gray border around screen icons when the navigation bar is black
 };
 
 const GasPropertiesConstants = {
@@ -146,8 +153,11 @@ const GasPropertiesConstants = {
   // Defaults for all Panel instances
   PANEL_OPTIONS: PANEL_OPTIONS,
 
-  // Vertical space between panels
-  PANELS_Y_SPACING: 8
+  // Vertical space between panels and accordion boxes.
+  PANELS_Y_SPACING: 8,
+
+  // Defaults for all Screens.
+  SCREEN_OPTIONS: SCREEN_OPTIONS
 };
 
 gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );

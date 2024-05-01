@@ -7,27 +7,32 @@
  */
 
 import Tandem from '../../../tandem/js/Tandem.js';
-import GasPropertiesScreen from '../common/GasPropertiesScreen.js';
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import ExploreModel from './model/ExploreModel.js';
 import ExploreScreenView from './view/ExploreScreenView.js';
 import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
+import { combineOptions } from '../../../phet-core/js/optionize.js';
+import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 
-export default class ExploreScreen extends GasPropertiesScreen<ExploreModel, ExploreScreenView> {
+export default class ExploreScreen extends Screen<ExploreModel, ExploreScreenView> {
 
   public constructor( tandem: Tandem ) {
 
     const createModel = () => new ExploreModel( tandem.createTandem( 'model' ) );
+
     const createView = ( model: ExploreModel ) => new ExploreScreenView( model, tandem.createTandem( 'view' ) );
 
-    super( createModel, createView, {
+    const options = combineOptions<ScreenOptions>( {}, GasPropertiesConstants.SCREEN_OPTIONS, {
       name: GasPropertiesStrings.screen.exploreStringProperty,
       homeScreenIcon: GasPropertiesIconFactory.createExploreScreenIcon(),
       createKeyboardHelpNode: () => new IdealKeyboardHelpContent(),
       tandem: tandem
     } );
+
+    super( createModel, createView, options );
   }
 }
 
