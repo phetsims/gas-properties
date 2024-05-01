@@ -95,8 +95,8 @@ const GasPropertiesConstants = {
   LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
 
   // mass
-  HEAVY_PARTICLES_MASS: 28, // AMU, equivalent to N2 (nitrogen), rounded to the closest integer
-  LIGHT_PARTICLES_MASS: 4, // AMU, equivalent to He (helium), rounded to the closest integer
+  HEAVY_PARTICLES_MASS: 28, // AMU, equivalent to N2 (nitrogen)
+  LIGHT_PARTICLES_MASS: 4, // AMU, equivalent to He (helium, 4.002602), rounded to the closest integer
 
   // radii
   HEAVY_PARTICLES_RADIUS: 125, // pm
