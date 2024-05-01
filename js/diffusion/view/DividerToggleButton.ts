@@ -25,7 +25,7 @@ type DividerToggleButtonOptions = SelfOptions &
 
 export default class DividerToggleButton extends BooleanRectangularToggleButton {
 
-  public constructor( hasDividerProperty: Property<boolean>, providedOptions: DividerToggleButtonOptions ) {
+  public constructor( isDividedProperty: Property<boolean>, providedOptions: DividerToggleButtonOptions ) {
 
     const options = optionize<DividerToggleButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
 
@@ -48,7 +48,7 @@ export default class DividerToggleButton extends BooleanRectangularToggleButton 
       group: alignGroup
     } );
 
-    super( hasDividerProperty, trueNode, falseNode, options );
+    super( isDividedProperty, trueNode, falseNode, options );
   }
 }
 

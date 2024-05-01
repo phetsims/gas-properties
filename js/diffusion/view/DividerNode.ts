@@ -22,7 +22,7 @@ type DividerNodeOptions = SelfOptions & NodeTranslationOptions;
 
 export default class DividerNode extends Node {
 
-  public constructor( hasDividerProperty: TReadOnlyProperty<boolean>, providedOptions: DividerNodeOptions ) {
+  public constructor( isDividedProperty: TReadOnlyProperty<boolean>, providedOptions: DividerNodeOptions ) {
 
     const options = optionize<DividerNodeOptions, SelfOptions, NodeOptions>()( {
 
@@ -56,9 +56,9 @@ export default class DividerNode extends Node {
     super( options );
 
     // Switch between solid and dashed divider
-    hasDividerProperty.link( hasDivider => {
-      solidLineNode.visible = hasDivider;
-      dashedLineNode.visible = !hasDivider;
+    isDividedProperty.link( isDivided => {
+      solidLineNode.visible = isDivided;
+      dashedLineNode.visible = !isDivided;
     } );
   }
 }

@@ -103,7 +103,7 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Panel for setting initial conditions
     const settingsPanel = new DiffusionSettingsNode( model.particle1Settings, model.particle2Settings, model.modelViewTransform,
-      model.container.hasDividerProperty, model.numberOfParticlesProperty, panelsTandem.createTandem( 'settingsPanel' ) );
+      model.container.isDividedProperty, model.numberOfParticlesProperty, panelsTandem.createTandem( 'settingsPanel' ) );
 
     // Panel for controlling visibility of 'tools'
     const toolsPanel = new DiffusionToolsPanel( viewProperties, model.stopwatch.isVisibleProperty,

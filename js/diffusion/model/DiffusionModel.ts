@@ -189,8 +189,8 @@ export default class DiffusionModel extends BaseModel {
     } );
 
     // When the divider is restored, create a new initial state with same numbers of particles.
-    this.container.hasDividerProperty.link( hasDivider => {
-      if ( hasDivider ) {
+    this.container.isDividedProperty.link( isDivided => {
+      if ( isDivided ) {
 
         // Restarts the experiment with the same settings.
         // This causes the current sets of particles to be deleted, and new sets of particles to be created.
@@ -233,7 +233,7 @@ export default class DiffusionModel extends BaseModel {
     ParticleUtils.stepParticles( this.particles2, dt );
 
     // Particle Flow Rate model
-    if ( !this.container.hasDividerProperty.value ) {
+    if ( !this.container.isDividedProperty.value ) {
       this.particle1FlowRateModel.step( dt );
       this.particle2FlowRateModel.step( dt );
     }

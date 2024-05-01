@@ -34,7 +34,7 @@ export default class DiffusionCollisionDetector extends CollisionDetector {
   protected override updateParticleContainerCollisions(): number {
 
     let numberOfParticleContainerCollisions = 0;
-    if ( this.diffusionContainer.hasDividerProperty.value ) {
+    if ( this.diffusionContainer.isDividedProperty.value ) {
 
       // If the divider is in place, treat the 2 sides of the container as 2 separate containers.
       const leftWallVelocity = Vector2.ZERO;

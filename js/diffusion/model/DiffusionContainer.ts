@@ -28,7 +28,7 @@ export default class DiffusionContainer extends BaseContainer {
   public readonly rightBounds: Bounds2;
 
   // whether the divider is in place
-  public readonly hasDividerProperty: Property<boolean>;
+  public readonly isDividedProperty: Property<boolean>;
 
   public constructor( tandem: Tandem ) {
 
@@ -48,14 +48,14 @@ export default class DiffusionContainer extends BaseContainer {
     this.leftBounds = new Bounds2( this.left, this.bottom, this.dividerX, this.top );
     this.rightBounds = new Bounds2( this.dividerX, this.bottom, this.right, this.top );
 
-    this.hasDividerProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'hasDividerProperty' ),
+    this.isDividedProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'isDividedProperty' ),
       phetioDocumentation: 'Whether the container\'s divider is in place.'
     } );
 
     // Adjust the bounds of the left and right sides of the container to account for divider thickness
-    this.hasDividerProperty.link( hasDivider => {
-      const dividerOffset = hasDivider ? ( this.dividerThickness / 2 ) : 0;
+    this.isDividedProperty.link( isDivided => {
+      const dividerOffset = isDivided ? ( this.dividerThickness / 2 ) : 0;
       this.leftBounds.setMaxX( this.dividerX - dividerOffset );
       this.rightBounds.setMinX( this.dividerX + dividerOffset );
     } );
@@ -63,7 +63,7 @@ export default class DiffusionContainer extends BaseContainer {
 
   public override reset(): void {
     super.reset();
-    this.hasDividerProperty.reset();
+    this.isDividedProperty.reset();
   }
 }
 

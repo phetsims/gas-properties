@@ -31,7 +31,7 @@ export default class DiffusionContainerNode extends Node {
 
     // Vertical divider
     const viewDividerThickness = modelViewTransform.modelToViewDeltaX( container.dividerThickness );
-    const dividerNode = new DividerNode( container.hasDividerProperty, {
+    const dividerNode = new DividerNode( container.isDividedProperty, {
       length: modelViewTransform.modelToViewDeltaY( container.height ),
       solidLineWidth: viewDividerThickness,
       dashedLineWidth: viewDividerThickness / 2,

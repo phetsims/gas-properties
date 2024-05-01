@@ -51,14 +51,14 @@ export default class DiffusionSettingsNode extends Panel {
    * @param particle1Settings - setting for particle type 1
    * @param particle2Settings - setting for particle type 2
    * @param modelViewTransform
-   * @param hasDividerProperty
+   * @param isDividedProperty
    * @param numberOfParticlesProperty
    * @param tandem
    */
   public constructor( particle1Settings: DiffusionSettings,
                       particle2Settings: DiffusionSettings,
                       modelViewTransform: ModelViewTransform2,
-                      hasDividerProperty: Property<boolean>,
+                      isDividedProperty: Property<boolean>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       tandem: Tandem ) {
 
@@ -76,7 +76,7 @@ export default class DiffusionSettingsNode extends Panel {
     const numberOfParticlesControls = new QuantityControls( 'numberOfParticles', GasPropertiesStrings.numberOfParticlesStringProperty,
       modelViewTransform, particle1Settings.numberOfParticlesProperty, particle2Settings.numberOfParticlesProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: hasDividerProperty,
+          enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.numberOfParticles
         },
         tandem: tandem.createTandem( 'numberOfParticlesControls' )
@@ -86,7 +86,7 @@ export default class DiffusionSettingsNode extends Panel {
     const massControls = new QuantityControls( 'mass', GasPropertiesStrings.massAMUStringProperty, modelViewTransform,
       particle1Settings.massProperty, particle2Settings.massProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: hasDividerProperty,
+          enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.mass,
           numberDisplayOptions: {
             xMargin: 12.45 // mass spinners are narrower because they have fewer digits, compensate empirically
@@ -99,7 +99,7 @@ export default class DiffusionSettingsNode extends Panel {
     const radiusControls = new QuantityControls( 'radius', GasPropertiesStrings.radiusPmStringProperty, modelViewTransform,
       particle1Settings.radiusProperty, particle2Settings.radiusProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: hasDividerProperty,
+          enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.radius
         },
         tandem: tandem.createTandem( 'radiusControls' )
@@ -109,13 +109,13 @@ export default class DiffusionSettingsNode extends Panel {
     const initialTemperatureControls = new QuantityControls( 'initialTemperature', GasPropertiesStrings.initialTemperatureKStringProperty,
       modelViewTransform, particle1Settings.initialTemperatureProperty, particle2Settings.initialTemperatureProperty, spinnersAlignGroup, {
         spinnerOptions: {
-          enabledProperty: hasDividerProperty,
+          enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.initialTemperature
         },
         tandem: tandem.createTandem( 'initialTemperatureControls' )
       } );
 
-    const dividerToggleButton = new DividerToggleButton( hasDividerProperty, {
+    const dividerToggleButton = new DividerToggleButton( isDividedProperty, {
       // Enabled when the number of particles is !== 0.
       enabledProperty: new DerivedProperty( [ numberOfParticlesProperty ], numberOfParticles => ( numberOfParticles !== 0 ) ),
       layoutOptions: {
