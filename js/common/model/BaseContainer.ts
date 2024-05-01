@@ -22,6 +22,7 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from './Particle.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = {
   position?: Vector2; // position of the container's bottom right corner, in pm
@@ -103,11 +104,13 @@ export default class BaseContainer extends PhetioObject {
       this.position.x, this.position.y + this.height
     );
 
-    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
     this.leftWallVelocity = new Vector2( 0, 0 );
 
-    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
-    this.userIsAdjustingWidthProperty = new BooleanProperty( false );
+    this.userIsAdjustingWidthProperty = new BooleanProperty( false, {
+      tandem: options.widthRange.getLength() === 0 ? Tandem.OPT_OUT : options.tandem.createTandem( 'userIsAdjustingWidthProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
+    } );
   }
 
   public reset(): void {

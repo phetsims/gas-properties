@@ -106,12 +106,16 @@ export default class IdealGasLawContainer extends BaseContainer {
     this.hosePosition = this.particleEntryPosition.plusXY( this.wallThickness, 0 );
 
     this.desiredWidthProperty = new NumberProperty( this.widthProperty.value, {
+      units: 'pm',
       tandem: options.tandem.createTandem( 'desiredWidthProperty' ),
+      phetioReadOnly: true,
       phetioDocumentation: 'For internal use only.'
     } );
 
     this.previousLeftProperty = new NumberProperty( this.left, {
+      units: 'pm',
       tandem: options.tandem.createTandem( 'previousLeftProperty' ),
+      phetioReadOnly: true,
       phetioDocumentation: 'For internal use only.'
     } );
 
