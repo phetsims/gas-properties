@@ -76,13 +76,15 @@ export default class DiffusionModel extends BaseModel {
 
   public constructor( tandem: Tandem ) {
 
-    super( tandem, {
+    super( {
 
       // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
       modelOriginOffset: new Vector2( 670, 520 ),
 
       // Stopwatch initial position (in view coordinates!), determined empirically.
-      stopwatchPosition: new Vector2( 60, 50 )
+      stopwatchPosition: new Vector2( 60, 50 ),
+
+      tandem: tandem
     } );
 
     this.particles1 = [];

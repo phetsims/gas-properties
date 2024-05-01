@@ -22,9 +22,10 @@ export default class EnergyModel extends IdealGasLawModel {
 
   public constructor( tandem: Tandem ) {
 
-    super( tandem, {
+    super( {
       holdConstant: 'volume',
-      hasCollisionCounter: false
+      hasCollisionCounter: false,
+      tandem: tandem
     } );
 
     // In case clients attempt to use this feature of the base class

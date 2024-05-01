@@ -8,7 +8,6 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
@@ -22,7 +21,9 @@ import IdealViewProperties from './IdealViewProperties.js';
 import IdealToolsPanel from './IdealToolsPanel.js';
 
 type SelfOptions = {
-  hasHoldConstantPanel?: boolean;
+
+  // Whether the sim has the 'Hold Constant' feature.
+  hasHoldConstantFeature?: boolean;
 };
 
 type IdealScreenViewOptions = SelfOptions & IdealGasLawScreenViewOptions;
@@ -31,14 +32,14 @@ export default class IdealScreenView extends IdealGasLawScreenView {
 
   private readonly viewProperties: IdealViewProperties;
 
-  public constructor( model: IdealModel, tandem: Tandem, providedOptions?: IdealScreenViewOptions ) {
+  public constructor( model: IdealModel, providedOptions: IdealScreenViewOptions ) {
 
-    const oopsDialogsTandem = tandem.createTandem( 'oopsDialogs' );
+    const oopsDialogsTandem = providedOptions.tandem.createTandem( 'oopsDialogs' );
 
     const options = optionize<IdealScreenViewOptions, SelfOptions, IdealGasLawScreenViewOptions>()( {
 
       // SelfOptions
-      hasHoldConstantPanel: true,
+      hasHoldConstantFeature: false,
 
       // IdealScreenViewOptions
       resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty,
@@ -46,20 +47,20 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     }, providedOptions );
 
     // view-specific Properties
-    const viewProperties = new IdealViewProperties( tandem.createTandem( 'viewProperties' ) );
+    const viewProperties = new IdealViewProperties( options.tandem.createTandem( 'viewProperties' ) );
 
-    super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem, options );
+    super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, options );
 
     const collisionCounter = model.collisionCounter!;
     assert && assert( collisionCounter );
 
     // Group panels and accordion boxes in the Studio tree.
-    const panelsTandem = tandem.createTandem( 'panels' );
+    const panelsTandem = options.tandem.createTandem( 'panels' );
 
     const panels = [];
 
     let holdConstantPanel;
-    if ( options.hasHoldConstantPanel ) {
+    if ( options.hasHoldConstantFeature ) {
       holdConstantPanel = new HoldConstantPanel(
         model.holdConstantProperty,
         model.particleSystem.numberOfParticlesProperty,

@@ -19,8 +19,8 @@ import IdealScreenView from './view/IdealScreenView.js';
 
 type SelfOptions = {
 
-  // Whether the sim has the panel titled 'Hold Constant'
-  hasHoldConstantPanel?: boolean;
+  // Whether the sim has the 'Hold Constant' feature.
+  hasHoldConstantFeature?: boolean;
 };
 
 type IdealScreenOptions = SelfOptions & PickOptional<GasPropertiesScreenOptions, 'name' | 'homeScreenIcon' | 'createKeyboardHelpNode'>;
@@ -32,7 +32,7 @@ export default class IdealScreen extends GasPropertiesScreen<IdealModel, IdealSc
     const options = optionize<IdealScreenOptions, SelfOptions, GasPropertiesScreenOptions>()( {
 
       // SelfOptions
-      hasHoldConstantPanel: true,
+      hasHoldConstantFeature: true,
 
       // GasPropertiesScreenOptions
       name: GasPropertiesStrings.screen.idealStringProperty,
@@ -41,9 +41,13 @@ export default class IdealScreen extends GasPropertiesScreen<IdealModel, IdealSc
       tandem: tandem
     }, providedOptions );
 
-    const createModel = () => new IdealModel( tandem.createTandem( 'model' ) );
-    const createView = ( model: IdealModel ) => new IdealScreenView( model, tandem.createTandem( 'view' ), {
-      hasHoldConstantPanel: options.hasHoldConstantPanel
+    const createModel = () => new IdealModel( {
+      hasHoldConstantFeature: options.hasHoldConstantFeature,
+      tandem: tandem.createTandem( 'model' )
+    } );
+    const createView = ( model: IdealModel ) => new IdealScreenView( model, {
+      hasHoldConstantFeature: options.hasHoldConstantFeature,
+      tandem: tandem.createTandem( 'view' )
     } );
 
     super( createModel, createView, options );

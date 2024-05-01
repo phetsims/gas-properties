@@ -38,12 +38,21 @@ import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
 
 type SelfOptions = {
-  leftWallDoesWork?: boolean; // does the container's left wall do work on particles?
-  holdConstant?: HoldConstant;
+
+  // Does the container's left wall do work on particles?
+  leftWallDoesWork?: boolean;
+
+  // Whether the screen has a collision counter.
   hasCollisionCounter?: boolean;
+
+  // Whether the screen has the 'Hold Constant' feature.
+  hasHoldConstantFeature?: boolean;
+
+  // Initial value for holdConstantProperty.
+  holdConstant?: HoldConstant;
 };
 
-type IdealGasLawModelOptions = SelfOptions;
+export type IdealGasLawModelOptions = SelfOptions & BaseModelOptions;
 
 type OopsEmitters = {
 
@@ -99,54 +108,55 @@ export default class IdealGasLawModel extends BaseModel {
   // named oopsEmitters.
   public readonly oopsEmitters: OopsEmitters;
 
-  public constructor( tandem: Tandem, providedOptions?: IdealGasLawModelOptions ) {
+  public constructor( providedOptions: IdealGasLawModelOptions ) {
 
     const options = optionize<IdealGasLawModelOptions, SelfOptions, BaseModelOptions>()( {
 
       // SelfOptions
       leftWallDoesWork: false,
-      holdConstant: 'nothing',
-      hasCollisionCounter: true
+      hasCollisionCounter: true,
+      hasHoldConstantFeature: false,
+      holdConstant: 'nothing'
     }, providedOptions );
 
-    super( tandem );
+    super( options );
 
     this.holdConstantProperty = new StringUnionProperty( options.holdConstant, {
       validValues: HoldConstantValues,
-      tandem: tandem.createTandem( 'holdConstantProperty' ),
+      tandem: options.hasHoldConstantFeature ? options.tandem.createTandem( 'holdConstantProperty' ) : Tandem.OPT_OUT,
       phetioReadOnly: true,
       phetioDocumentation: 'Determines which quantity will be held constant.'
     } );
 
     this.heatCoolFactorProperty = new NumberProperty( 0, {
       range: new Range( -1, 1 ),
-      tandem: tandem.createTandem( 'heatCoolFactorProperty' ),
-      phetioReadOnly: true,
+      tandem: options.tandem.createTandem( 'heatCoolFactorProperty' ),
+      phetioReadOnly: options.hasHoldConstantFeature, // With the Hold Constant feature, the sim animates this Property.
       phetioDocumentation: 'Amount of heat or cool applied to particles in the container. ' +
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off'
     } );
 
     this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'particleParticleCollisionsEnabledProperty' ),
+      tandem: options.tandem.createTandem( 'particleParticleCollisionsEnabledProperty' ),
       phetioDocumentation: 'Determines whether collisions between particles are enabled.'
     } );
 
     this.container = new IdealGasLawContainer( {
       leftWallDoesWork: options.leftWallDoesWork,
-      tandem: tandem.createTandem( 'container' )
+      tandem: options.tandem.createTandem( 'container' )
     } );
 
     this.particleSystem = new ParticleSystem(
       () => this.temperatureModel.getInitialTemperature(),
       this.particleParticleCollisionsEnabledProperty,
       this.container.particleEntryPosition,
-      tandem.createTandem( 'particleSystem' )
+      options.tandem.createTandem( 'particleSystem' )
     );
 
     this.temperatureModel = new TemperatureModel(
       this.particleSystem.numberOfParticlesProperty, // N
       () => this.particleSystem.getAverageKineticEnergy(), // KE
-      tandem.createTandem( 'temperatureModel' )
+      options.tandem.createTandem( 'temperatureModel' )
     );
 
     this.pressureModel = new PressureModel(
@@ -155,7 +165,7 @@ export default class IdealGasLawModel extends BaseModel {
       this.container.volumeProperty, // V
       this.temperatureModel.temperatureProperty, // T
       () => { this.container.blowLidOff(); },
-      tandem.createTandem( 'pressureModel' )
+      options.tandem.createTandem( 'pressureModel' )
     );
 
     this.collisionDetector = new CollisionDetector(
@@ -168,7 +178,7 @@ export default class IdealGasLawModel extends BaseModel {
     if ( options.hasCollisionCounter ) {
       this.collisionCounter = new CollisionCounter( this.collisionDetector, {
         position: new Vector2( 40, 15 ), // view coordinates! determined empirically
-        tandem: tandem.createTandem( 'collisionCounter' ),
+        tandem: options.tandem.createTandem( 'collisionCounter' ),
         visible: true
       } );
     }

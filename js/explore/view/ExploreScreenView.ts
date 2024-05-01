@@ -25,7 +25,9 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     // view-specific Properties
     const viewProperties = new ExploreViewProperties( tandem.createTandem( 'viewProperties' ) );
 
-    super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem );
+    super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, {
+      tandem: tandem
+    } );
 
     const collisionCounter = model.collisionCounter!;
     assert && assert( collisionCounter );

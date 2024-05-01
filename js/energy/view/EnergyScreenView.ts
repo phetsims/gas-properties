@@ -34,7 +34,9 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
     // view-specific Properties
     const viewProperties = new EnergyViewProperties( tandem.createTandem( 'viewProperties' ) );
 
-    super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, tandem );
+    super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, {
+      tandem: tandem
+    } );
 
     // Group panels and accordion boxes in the Studio tree.
     const panelsTandem = tandem.createTandem( 'panels' );

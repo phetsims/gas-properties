@@ -7,14 +7,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Tandem from '../../../../tandem/js/Tandem.js';
-import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
+import IdealGasLawModel, { IdealGasLawModelOptions } from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type IdealModelOptions = SelfOptions & IdealGasLawModelOptions;
 
 export default class IdealModel extends IdealGasLawModel {
 
-  public constructor( tandem: Tandem ) {
-    super( tandem );
+  public constructor( providedOptions: IdealModelOptions ) {
+    super( providedOptions );
   }
 }
 

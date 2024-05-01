@@ -11,17 +11,17 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import BaseModel from '../model/BaseModel.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = {
   hasSlowMotion?: boolean;
 };
 
-export type BaseScreenViewOptions = SelfOptions;
+export type BaseScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
 
 export default abstract class BaseScreenView extends ScreenView {
 
@@ -33,7 +33,7 @@ export default abstract class BaseScreenView extends ScreenView {
   // subclass is responsible for pdomOrder
   protected readonly resetAllButton: Node;
 
-  protected constructor( model: BaseModel, tandem: Tandem, providedOptions?: BaseScreenViewOptions ) {
+  protected constructor( model: BaseModel, providedOptions?: BaseScreenViewOptions ) {
 
     const options = optionize<BaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
 
@@ -41,8 +41,7 @@ export default abstract class BaseScreenView extends ScreenView {
       hasSlowMotion: false,
 
       // ScreenViewOptions
-      isDisposable: false,
-      tandem: tandem
+      isDisposable: false
     }, providedOptions );
 
     super( options );
@@ -77,7 +76,7 @@ export default abstract class BaseScreenView extends ScreenView {
           }
         }
       },
-      tandem: tandem.createTandem( 'timeControlNode' ),
+      tandem: options.tandem.createTandem( 'timeControlNode' ),
       phetioEnabledPropertyInstrumented: false // Controlled by the sim.
     } );
     this.addChild( this.timeControlNode );
@@ -87,7 +86,7 @@ export default abstract class BaseScreenView extends ScreenView {
       listener: () => { this.reset(); },
       right: this.layoutBounds.maxX - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: tandem.createTandem( 'resetAllButton' )
+      tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
     this.addChild( this.resetAllButton );
   }

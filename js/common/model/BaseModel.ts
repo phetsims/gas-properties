@@ -23,10 +23,11 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import TimeTransform from './TimeTransform.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 
 // constants
 const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
@@ -41,7 +42,7 @@ type SelfOptions = {
   stopwatchPosition?: Vector2;
 };
 
-export type BaseModelOptions = SelfOptions;
+export type BaseModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class BaseModel implements TModel {
 
@@ -64,7 +65,7 @@ export default class BaseModel implements TModel {
 
   public readonly stopwatch: Stopwatch;
 
-  protected constructor( tandem: Tandem, providedOptions?: BaseModelOptions ) {
+  protected constructor( providedOptions: BaseModelOptions ) {
 
     const options = optionize<BaseModelOptions, SelfOptions>()( {
 
@@ -87,11 +88,11 @@ export default class BaseModel implements TModel {
     } );
 
     this.isPlayingProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'isPlayingProperty' )
+      tandem: options.tandem.createTandem( 'isPlayingProperty' )
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
-      tandem: tandem.createTandem( 'timeSpeedProperty' )
+      tandem: options.tandem.createTandem( 'timeSpeedProperty' )
     } );
 
     this.timeTransform = TimeTransform.NORMAL;
@@ -107,7 +108,7 @@ export default class BaseModel implements TModel {
         range: new Range( 0, GasPropertiesConstants.MAX_TIME ),
         units: 'ps'
       },
-      tandem: tandem.createTandem( 'stopwatch' )
+      tandem: options.tandem.createTandem( 'stopwatch' )
     } );
   }
 

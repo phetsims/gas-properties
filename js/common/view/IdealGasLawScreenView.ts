@@ -85,7 +85,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
   protected constructor( model: IdealGasLawModel,
                          particleTypeProperty: StringUnionProperty<ParticleType>,
                          widthVisibleProperty: Property<boolean>,
-                         tandem: Tandem,
                          providedOptions?: IdealGasLawScreenViewOptions ) {
 
     const options = optionize<IdealGasLawScreenViewOptions, SelfOptions, BaseScreenViewOptions>()( {
@@ -95,7 +94,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       oopsDialogsTandem: null
     }, providedOptions );
 
-    super( model, tandem, options );
+    super( model, options );
 
     const containerViewPosition = model.modelViewTransform.modelToViewPosition( model.container.position );
 
@@ -161,12 +160,12 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       model.holdConstantProperty, this.visibleBoundsProperty, {
         resizeGripColor: options.resizeGripColor,
         resizeHandleIsPressedListener: resizeHandleIsPressedListener,
-        tandem: tandem.createTandem( 'containerNode' )
+        tandem: options.tandem.createTandem( 'containerNode' )
       } );
 
     // Return Lid button
     const returnLidButton = new ReturnLidButton( model.container, {
-      tandem: tandem.createTandem( 'returnLidButton' )
+      tandem: options.tandem.createTandem( 'returnLidButton' )
     } );
     returnLidButton.boundsProperty.link( bounds => {
       returnLidButton.right = model.modelViewTransform.modelToViewX( model.container.right - model.container.openingRightInset ) - 30;
@@ -179,7 +178,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
         visibleProperty: widthVisibleProperty
       } );
 
-    const bicyclePumpNodeTandem = tandem.createTandem( 'bicyclePumpNode' );
+    const bicyclePumpNodeTandem = options.tandem.createTandem( 'bicyclePumpNode' );
 
     // Radio buttons for selecting particle type
     const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,
@@ -234,7 +233,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Thermometer
     const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel.thermometer, thermometerListboxParent, {
-      tandem: tandem.createTandem( 'thermometerNode' )
+      tandem: options.tandem.createTandem( 'thermometerNode' )
     } );
     thermometerNode.boundsProperty.link( bounds => {
       thermometerNode.centerX = containerNode.right - 50;
@@ -246,7 +245,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // Pressure Gauge
     const pressureGaugeNode = new PressureGaugeNode( model.pressureModel.pressureGauge, pressureGaugeListboxParent, {
-      tandem: tandem.createTandem( 'pressureGaugeNode' )
+      tandem: options.tandem.createTandem( 'pressureGaugeNode' )
     } );
     pressureGaugeNode.boundsProperty.link( bounds => {
       pressureGaugeNode.left = containerNode.right - 2;
@@ -275,14 +274,14 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       model.temperatureModel.temperatureProperty, {
         left: heaterCoolerNodeLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: tandem.createTandem( 'heaterCoolerNode' )
+        tandem: options.tandem.createTandem( 'heaterCoolerNode' )
       } );
 
     // Button to erase all particles from container
     const eraseParticlesButton = new EraseParticlesButton( model.particleSystem, {
       right: containerNode.right,
       top: containerWidthNode.bottom + 5,
-      tandem: tandem.createTandem( 'eraseParticlesButton' )
+      tandem: options.tandem.createTandem( 'eraseParticlesButton' )
     } );
 
     // Common parent for all tools, so we can move the selected tool to the front without affecting other things.
@@ -293,7 +292,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     if ( model.collisionCounter ) {
       const collisionCounterListboxParent = new Node();
       collisionCounterNode = new CollisionCounterNode( model.collisionCounter, collisionCounterListboxParent, this.visibleBoundsProperty, {
-        tandem: tandem.createTandem( 'collisionCounterNode' )
+        tandem: options.tandem.createTandem( 'collisionCounterNode' )
       } );
       toolsParent.addChild( collisionCounterNode );
       toolsParent.addChild( collisionCounterListboxParent );
@@ -302,7 +301,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // Stopwatch
     const stopwatchNode = new GasPropertiesStopwatchNode( model.stopwatch, {
       dragBoundsProperty: this.visibleBoundsProperty,
-      tandem: tandem.createTandem( 'stopwatchNode' )
+      tandem: options.tandem.createTandem( 'stopwatchNode' )
     } );
     toolsParent.addChild( stopwatchNode );
 
@@ -346,7 +345,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // OopsDialog when maximum temperature is exceeded.
     const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperatureStringProperty, {
-      tandem: ( options.oopsDialogsTandem || tandem ).createTandem( 'oopsMaximumTemperatureDialog' ),
+      tandem: ( options.oopsDialogsTandem || options.tandem ).createTandem( 'oopsMaximumTemperatureDialog' ),
       phetioDocumentation: 'Displayed when the maximum Temperature is reached. To recover, all particles are removed. ' +
                            'If Hold Constant was set to anything other than None or Volume, it is set to None.'
     } );
