@@ -13,11 +13,13 @@ import Particle from './Particle.js';
 
 export default class LightParticle extends Particle {
 
+  public static readonly MASS = 4; // equivalent to He (helium), in AMU, rounded to the closest integer
+
   public constructor() {
     super( {
 
       // ParticleOptions
-      mass: 4, // equivalent to He (helium), in AMU, rounded to the closest integer
+      mass: LightParticle.MASS,
       radius: GasPropertiesConstants.LIGHT_PARTICLES_RADIUS, // pm
       colorProperty: GasPropertiesColors.lightParticleColorProperty,
       highlightColorProperty: GasPropertiesColors.lightParticleHighlightColorProperty
