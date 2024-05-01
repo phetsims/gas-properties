@@ -13,7 +13,6 @@ import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, Rec
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
@@ -22,8 +21,7 @@ const HANDLE_RIGHT_INSET = 3;
 type SelfOptions = {
   baseWidth: number;
   baseHeight: number;
-  gripColor?: TColor;
-  lidHandleNodeTandem: Tandem;
+  lidHandleNodeOptions: LidHandleNodeOptions;
 };
 
 type LidNodeOptions = SelfOptions;
@@ -37,9 +35,6 @@ export default class LidNode extends Node {
 
     const options = optionize<LidNodeOptions, SelfOptions, NodeOptions>()( {
 
-      // SelfOptions
-      gripColor: GasPropertiesColors.lidGripColorProperty,
-
       // NodeOptions
       isDisposable: false,
       phetioVisiblePropertyInstrumented: false
@@ -51,11 +46,10 @@ export default class LidNode extends Node {
       bottom: 0
     } );
 
-    const lidHandleNode = new LidHandleNode( options.gripColor, {
+    const lidHandleNode = new LidHandleNode( combineOptions<LidHandleNodeOptions>( {
       right: baseNode.right - HANDLE_RIGHT_INSET,
-      bottom: baseNode.top + 1,
-      tandem: options.lidHandleNodeTandem
-    } );
+      bottom: baseNode.top + 1
+    }, options.lidHandleNodeOptions ) );
     assert && assert( lidHandleNode.width <= baseNode.width,
       `handleNode.width ${lidHandleNode.width} is wider than baseNode.width ${baseNode.width}` );
     lidHandleNode.touchArea = lidHandleNode.localBounds.dilatedXY( 25, 20 );
@@ -84,25 +78,40 @@ export default class LidNode extends Node {
 /**
  * LidHandleNode is the handle used to open and close the container's lid.
  */
+
+type LidHandleNodeSelfOptions = {
+  gripColor?: TColor;
+};
+type LidHandleNodeOptions = LidHandleNodeSelfOptions & NodeTranslationOptions &
+  PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+
 class LidHandleNode extends InteractiveHighlighting( Node ) {
 
-  public constructor( gripColor: TColor, providedOptions?: NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'> ) {
-    super( combineOptions<NodeOptions>( {
-      children: [
-        // Wrap HandleNode so that LidHandleNode's focus highlight is not affected by scaling.
-        new HandleNode( {
-          hasLeftAttachment: false,
-          gripBaseColor: gripColor,
-          attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
-          scale: 0.4
-        } )
-      ],
+  public constructor( providedOptions: LidHandleNodeOptions ) {
+
+    const options = optionize<LidHandleNodeOptions, LidHandleNodeSelfOptions, NodeOptions>()( {
+
+      // LidHandleNodeSelfOptions
+      gripColor: GasPropertiesColors.lidGripColorProperty,
+
+      // NodeOptions
       cursor: 'pointer',
       tagName: 'div',
       focusable: true,
-      phetioVisiblePropertyInstrumented: false, // sim sets lidHandleNode.visibleProperty
       phetioInputEnabledPropertyInstrumented: true
-    }, providedOptions ) );
+    }, providedOptions );
+
+    const handleNode = new HandleNode( {
+      hasLeftAttachment: false,
+      gripBaseColor: options.gripColor,
+      attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
+      scale: 0.4
+    } );
+
+    // Wrap HandleNode so that the focus highlight is not affected by scaling.
+    options.children = [ handleNode ];
+
+    super( options );
   }
 }
 

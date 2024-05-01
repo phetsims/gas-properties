@@ -28,7 +28,8 @@ import LidNode from './LidNode.js';
 import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
 import ResizeHandleKeyboardDragListener from './ResizeHandleKeyboardDragListener.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 // constants
 const LID_X_SPEED = -50; // pixels/second
@@ -86,15 +87,36 @@ export default class IdealGasLawContainerNode extends Node {
       visible: false
     } );
 
-    // Resize handle on the left wall, wrapped in a Node so that its focus highlight is not affected by scaling.
-    const resizeHandleNode = new ResizeHandleNode( options.resizeGripColor, options.tandem.createTandem( 'resizeHandleNode' ) );
+    // Resize handle on the left wall. The sim sets resizeHandleVisibleProperty, while the PhET-iO client can use
+    // hasResizeHandleProperty to permanently hide the handle.
+    const resizeHandleNodeTandem = options.tandem.createTandem( 'resizeHandleNode' );
+    const resizeHandleVisibleProperty = new BooleanProperty( true );
+    const hasResizeHandleProperty = new BooleanProperty( true, {
+      tandem: resizeHandleNodeTandem.createTandem( 'hasResizeHandleProperty' ),
+      phetioDocumentation: 'Use this Property to permanently hide the container\'s resize handle.'
+    } );
+    const resizeHandleNode = new ResizeHandleNode( {
+      gripColor: options.resizeGripColor,
+      visibleProperty: DerivedProperty.and( [ resizeHandleVisibleProperty, hasResizeHandleProperty ] ),
+      tandem: resizeHandleNodeTandem
+    } );
 
-    // Lid on the top of the container
+    // Lid on the top of the container. The sim sets lidHandleVisibleProperty, while the PhET-iO client can use
+    // hasLidHandleProperty to permanently hide the handle.
+    const lidHandleNodeTandem = options.tandem.createTandem( 'lidHandleNode' );
+    const lidHandleVisibleProperty = new BooleanProperty( true );
+    const hasLidHandleProperty = new BooleanProperty( true, {
+      tandem: lidHandleNodeTandem.createTandem( 'hasLidHandleProperty' ),
+      phetioDocumentation: 'Use this Property to permanently hide the container\'s lid handle.'
+    } );
     const lidNode = new LidNode( {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
-      gripColor: options.lidGripColor,
-      lidHandleNodeTandem: options.tandem.createTandem( 'lidHandleNode' )
+      lidHandleNodeOptions: {
+        gripColor: options.lidGripColor,
+        visibleProperty: DerivedProperty.and( [ lidHandleVisibleProperty, hasLidHandleProperty ] ),
+        tandem: lidHandleNodeTandem
+      }
     } );
     const lidHandleNode = lidNode.handleNode;
 
@@ -158,11 +180,11 @@ export default class IdealGasLawContainerNode extends Node {
       this.interruptSubtreeInput();
 
       // Hide the resize handle when volume is held constant
-      resizeHandleNode.visible = ( holdConstant !== 'volume' && holdConstant !== 'pressureV' );
+      resizeHandleVisibleProperty.value = ( holdConstant !== 'volume' && holdConstant !== 'pressureV' );
 
       // Hide the lid handle when holding temperature constant.  We don't want to deal with counteracting evaporative
       // cooling, which will occur when the lid is open. See https://github.com/phetsims/gas-properties/issues/159
-      lidHandleNode.visible = ( holdConstant !== 'temperature' );
+      lidHandleVisibleProperty.value = ( holdConstant !== 'temperature' );
     } );
 
     // Dragging the resize handle horizontally changes the container's width
@@ -271,26 +293,35 @@ export default class IdealGasLawContainerNode extends Node {
 /**
  * ResizeHandleNode is the handle used to resize the container.
  */
+type ResizeHandleNodeSelfOptions = {
+  gripColor: TColor;
+};
+type ResizeHandleNodeOptions = ResizeHandleNodeSelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+
 class ResizeHandleNode extends InteractiveHighlighting( Node ) {
 
-  public constructor( resizeGripColor: TColor, tandem: Tandem ) {
-    super( {
-      children: [
-        // Wrap HandleNode so that ResizeHandleNode's focus highlight is not affected by scaling.
-        new HandleNode( {
-          gripBaseColor: resizeGripColor,
-          attachmentLineWidth: 1,
-          rotation: -Math.PI / 2,
-          scale: 0.4
-        } )
-      ],
+  public constructor( providedOptions: ResizeHandleNodeOptions ) {
+
+    const options = optionize<ResizeHandleNodeOptions, ResizeHandleNodeSelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       cursor: 'pointer',
       tagName: 'div',
       focusable: true,
-      tandem: tandem,
-      phetioVisiblePropertyInstrumented: false, // sim sets resizeHandle.visibleProperty
       phetioInputEnabledPropertyInstrumented: true
+    }, providedOptions );
+
+    const handleNode = new HandleNode( {
+      gripBaseColor: options.gripColor,
+      attachmentLineWidth: 1,
+      rotation: -Math.PI / 2,
+      scale: 0.4
     } );
+
+    // Wrap HandleNode so that the focus highlight is not affected by scaling.
+    options.children = [ handleNode ];
+
+    super( options );
   }
 }
 
