@@ -36,7 +36,7 @@ export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragLi
         if ( container.leftWallDoesWork && desiredWidth < container.widthProperty.value ) {
 
           // When making the container smaller, limit the speed.  See #90.
-          container.desiredWidth = desiredWidth;
+          container.setDesiredWidth( desiredWidth );
         }
         else {
 
@@ -48,7 +48,7 @@ export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragLi
       end: () => {
 
         // Stop the animation wherever the container width happens to be when the drag ends.
-        container.desiredWidth = container.widthProperty.value;
+        container.setDesiredWidth( container.widthProperty.value );
 
         container.userIsAdjustingWidthProperty.value = false;
       },

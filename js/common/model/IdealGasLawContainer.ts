@@ -52,14 +52,13 @@ export default class IdealGasLawContainer extends BaseContainer {
   // Bicycle pump hose connects here, on the outside of the container, in pm.
   public readonly hosePosition: Vector2;
 
-  // Desired width of the container, in pm.
-  // Set this to impose an animated speed limit on decreasing width. See #90.
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
-  public desiredWidth: number;
+  // Desired width of the container, in pm. This is a Property because it needs to be PhET-iO stateful.
+  // Set this to impose an animated speed limit on decreasing width.
+  // See https://github.com/phetsims/gas-properties/issues/90.
+  private readonly desiredWidthProperty: NumberProperty;
 
-  // previous position of the left wall
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
-  private previousLeft: number;
+  // Previous x position of the left wall. This is a Property because it needs to be PhET-iO stateful.
+  private readonly previousLeftProperty: NumberProperty;
 
   // is the container open?
   public readonly isOpenProperty: TReadOnlyProperty<boolean>;
@@ -106,9 +105,15 @@ export default class IdealGasLawContainer extends BaseContainer {
 
     this.hosePosition = this.particleEntryPosition.plusXY( this.wallThickness, 0 );
 
-    this.desiredWidth = this.widthProperty.value;
+    this.desiredWidthProperty = new NumberProperty( this.widthProperty.value, {
+      tandem: options.tandem.createTandem( 'desiredWidthProperty' ),
+      phetioDocumentation: 'For internal use only.'
+    } );
 
-    this.previousLeft = this.left;
+    this.previousLeftProperty = new NumberProperty( this.left, {
+      tandem: options.tandem.createTandem( 'previousLeftProperty' ),
+      phetioDocumentation: 'For internal use only.'
+    } );
 
     this.isOpenProperty = new DerivedProperty(
       // this.widthProperty is used by this.getMaxLidWidth()
@@ -123,25 +128,27 @@ export default class IdealGasLawContainer extends BaseContainer {
     super.reset();
     this.lidIsOnProperty.reset();
     this.lidWidthProperty.reset();
-    this.desiredWidth = this.widthProperty.value;
+    this.desiredWidthProperty.reset();
+    this.previousLeftProperty.reset();
   }
 
   /**
-   * Animates the container's width one step towards desiredWidth. Computes wall velocity if the wall does work.
+   * Animates the container's width one step towards desiredWidthProperty. Computes wall velocity if the wall does work.
    * @param dt - time delta, in ps
    */
   public step( dt: number ): void {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
 
-    const widthDifference = this.desiredWidth - this.widthProperty.value;
+    const widthDifference = this.desiredWidthProperty.value - this.widthProperty.value;
 
     if ( widthDifference !== 0 ) {
 
       // Default is to move the entire distance in one step.
-      let newWidth = this.desiredWidth;
+      let newWidth = this.desiredWidthProperty.value;
 
       // If the left wall does work (as in the Explore screen), limit the wall's speed and thus how much the
-      // width changes per time step. The speed limit prevents the lid from blowing off too easily.  See #90.
+      // width changes per time step. The speed limit prevents the lid from blowing off too easily.
+      // See https://github.com/phetsims/gas-properties/issues/90.
       if ( this.leftWallDoesWork ) {
 
         const widthStep = dt * WALL_SPEED_LIMIT;
@@ -162,9 +169,9 @@ export default class IdealGasLawContainer extends BaseContainer {
     // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
     // velocity is irrelevant and should remain set to zero, so that it doesn't contribute to collision detection.
     if ( this.leftWallDoesWork ) {
-      const velocityX = ( this.left - this.previousLeft ) / dt;
+      const velocityX = ( this.left - this.previousLeftProperty.value ) / dt;
       this.leftWallVelocity.setXY( velocityX, 0 );
-      this.previousLeft = this.left;
+      this.previousLeftProperty.value = this.left;
     }
     else {
       assert && assert( this.leftWallVelocity.magnitude === 0, 'wall velocity should be zero' );
@@ -193,12 +200,19 @@ export default class IdealGasLawContainer extends BaseContainer {
   }
 
   /**
+   * Sets the desired width of the container.
+   */
+  public setDesiredWidth( desiredWidth: number ): void {
+    this.desiredWidthProperty.value = desiredWidth;
+  }
+
+  /**
    * Resizes the container immediately to the specified width.
    */
   public resizeImmediately( width: number ): void {
     assert && assert( this.widthRange.contains( width ), `width is out of range: ${width}` );
     this.setWidth( width );
-    this.desiredWidth = width;
+    this.desiredWidthProperty.value = width;
   }
 
   /**
