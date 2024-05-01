@@ -16,6 +16,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import gasProperties from '../../gasProperties.js';
 import CollisionDetector from './CollisionDetector.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 type SelfOptions = {
   position?: Vector2;
@@ -38,8 +39,7 @@ export default class CollisionCounter extends PhetioObject {
   public readonly isRunningProperty: Property<boolean>;
 
   // time that the counter has been running, in ps
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
-  private timeRunning: number;
+  private readonly timeRunningProperty: NumberProperty;
 
   // whether the collision counter is visible
   public readonly visibleProperty: Property<boolean>;
@@ -82,7 +82,10 @@ export default class CollisionCounter extends PhetioObject {
       tandem: options.tandem.createTandem( 'isRunningProperty' )
     } );
 
-    this.timeRunning = 0;
+    this.timeRunningProperty = new NumberProperty( 0, {
+      units: 'ps',
+      tandem: options.tandem.createTandem( 'timeRunningProperty' )
+    } );
 
     this.visibleProperty = new BooleanProperty( options.visible, {
       tandem: options.tandem.createTandem( 'visibleProperty' )
@@ -97,12 +100,20 @@ export default class CollisionCounter extends PhetioObject {
       tandem: options.tandem.createTandem( 'samplePeriodProperty' )
     } );
 
-    // Changing the running state resets the collision count.
-    this.isRunningProperty.link( () => this.resetCount() );
+    // Changing visibility or sample period stops the counter, and resets the count and time.
+    Multilink.multilink( [ this.visibleProperty, this.samplePeriodProperty ], () => {
+      this.isRunningProperty.value = false;
+      this.numberOfCollisionsProperty.reset();
+      this.timeRunningProperty.reset();
+    } );
 
-    // Changing visibility or sample period stops the counter and resets the collision count.
-    this.visibleProperty.link( () => this.stopAndResetCount() );
-    this.samplePeriodProperty.link( () => this.stopAndResetCount() );
+    // Starting the counter resets the count and time.
+    this.isRunningProperty.link( isRunning => {
+      if ( isRunning ) {
+        this.numberOfCollisionsProperty.reset();
+        this.timeRunningProperty.reset();
+      }
+    } );
   }
 
   public reset(): void {
@@ -111,22 +122,7 @@ export default class CollisionCounter extends PhetioObject {
     this.isRunningProperty.reset();
     this.visibleProperty.reset();
     this.samplePeriodProperty.reset();
-  }
-
-  /**
-   * Resets the collision count and set its run-time to zero.
-   */
-  private resetCount(): void {
-    this.numberOfCollisionsProperty.value = 0;
-    this.timeRunning = 0;
-  }
-
-  /**
-   * Stops the collision counter and does resetCount.
-   */
-  private stopAndResetCount(): void {
-    this.isRunningProperty.value = false;
-    this.resetCount();
+    this.timeRunningProperty.reset();
   }
 
   /**
@@ -137,19 +133,17 @@ export default class CollisionCounter extends PhetioObject {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
     if ( this.isRunningProperty.value ) {
 
-      // record the number of collisions for this time step
+      // Record the number of collisions for this time step.
       this.numberOfCollisionsProperty.value += this.collisionDetector.numberOfParticleContainerCollisions;
 
+      // Increment the time running.
+      this.timeRunningProperty.value += dt;
+
       // If we've come to the end of the sample period, stop the counter.
-      // isRunningProperty is used by the Play/Reset toggle button, and changing its state resets the count.
-      // So we need to save and restore the count here when modifying isRunningProperty.  This was simpler
-      // than other solutions that were investigated.
-      this.timeRunning += dt;
-      if ( this.timeRunning >= this.samplePeriodProperty.value ) {
-        phet.log && phet.log( `CollisionCounter sample period: desired=${this.samplePeriodProperty.value} actual=${this.timeRunning}` );
-        const numberOfCollisions = this.numberOfCollisionsProperty.value;
+      if ( this.timeRunningProperty.value >= this.samplePeriodProperty.value ) {
+        phet.log && phet.log( `CollisionCounter sample period: desired=${this.samplePeriodProperty.value} actual=${this.timeRunningProperty.value}` );
         this.isRunningProperty.value = false;
-        this.numberOfCollisionsProperty.value = numberOfCollisions;
+        this.timeRunningProperty.value = this.samplePeriodProperty.value; // To make these match in PhET-iO.
       }
     }
   }
