@@ -59,7 +59,6 @@ import ReturnLidButton from './ReturnLidButton.js';
 
 type SelfOptions = {
   resizeGripColor?: TColor;
-  oopsDialogsTandem?: Tandem | null; // parent tandem for OopsDialog instances
 };
 
 export type IdealGasLawScreenViewOptions = SelfOptions & BaseScreenViewOptions;
@@ -72,6 +71,9 @@ export default class IdealGasLawScreenView extends BaseScreenView {
   protected readonly heavyBicyclePumpNode: GasPropertiesBicyclePumpNode;
   protected readonly lightBicyclePumpNode: GasPropertiesBicyclePumpNode;
   protected readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
+
+  // Subclasses should use this Tandem when creating additional OopsDialog instances.
+  protected readonly oopsDialogsTandem: Tandem;
 
   // For setting pdomOrder in subclasses
   protected readonly returnLidButton: Node;
@@ -90,8 +92,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const options = optionize<IdealGasLawScreenViewOptions, SelfOptions, BaseScreenViewOptions>()( {
 
       // SelfOptions
-      resizeGripColor: GasPropertiesColors.resizeGripColorProperty,
-      oopsDialogsTandem: null
+      resizeGripColor: GasPropertiesColors.resizeGripColorProperty
     }, providedOptions );
 
     super( model, options );
@@ -343,9 +344,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
     } );
 
+    this.oopsDialogsTandem = options.tandem.createTandem( 'oopsDialogs' );
+
     // OopsDialog when maximum temperature is exceeded.
     const oopsMaximumTemperatureDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsMaximumTemperatureStringProperty, {
-      tandem: ( options.oopsDialogsTandem || options.tandem ).createTandem( 'oopsMaximumTemperatureDialog' ),
+      tandem: this.oopsDialogsTandem.createTandem( 'oopsMaximumTemperatureDialog' ),
       phetioDocumentation: 'Displayed when the maximum Temperature is reached. To recover, all particles are removed. ' +
                            'If Hold Constant was set to anything other than None or Volume, it is set to None.'
     } );

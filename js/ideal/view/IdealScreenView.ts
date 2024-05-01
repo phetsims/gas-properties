@@ -19,6 +19,7 @@ import IdealModel from '../model/IdealModel.js';
 import HoldConstantPanel from './HoldConstantPanel.js';
 import IdealViewProperties from './IdealViewProperties.js';
 import IdealToolsPanel from './IdealToolsPanel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = {
 
@@ -34,16 +35,13 @@ export default class IdealScreenView extends IdealGasLawScreenView {
 
   public constructor( model: IdealModel, providedOptions: IdealScreenViewOptions ) {
 
-    const oopsDialogsTandem = providedOptions.tandem.createTandem( 'oopsDialogs' );
-
     const options = optionize<IdealScreenViewOptions, SelfOptions, IdealGasLawScreenViewOptions>()( {
 
       // SelfOptions
       hasHoldConstantFeature: false,
 
       // IdealScreenViewOptions
-      resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty,
-      oopsDialogsTandem: oopsDialogsTandem
+      resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty
     }, providedOptions );
 
     // view-specific Properties
@@ -107,31 +105,31 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     // notifies the user via a dialog. The student is almost certain to encounter these conditions, so dialogs are
     // created eagerly and reused.
     const oopsTemperatureContainerEmptyDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsTemperatureEmptyStringProperty, {
-      tandem: oopsDialogsTandem.createTandem( 'oopsTemperatureContainerEmptyDialog' ),
+      tandem: options.hasHoldConstantFeature ? this.oopsDialogsTandem.createTandem( 'oopsTemperatureContainerEmptyDialog' ) : Tandem.OPT_OUT,
       phetioDocumentation: 'Displayed if holding Temperature constant when the container is empty. To recover, Hold Constant is set to Nothing.'
     } );
     model.oopsEmitters.temperatureContainerEmptyEmitter.addListener( () => this.showDialog( oopsTemperatureContainerEmptyDialog ) );
 
     const oopsTemperatureLidOpenDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsTemperatureOpenStringProperty, {
-      tandem: oopsDialogsTandem.createTandem( 'oopsTemperatureLidOpenDialog' ),
+      tandem: options.hasHoldConstantFeature ? this.oopsDialogsTandem.createTandem( 'oopsTemperatureLidOpenDialog' ) : Tandem.OPT_OUT,
       phetioDocumentation: 'Displayed if holding Temperature constant with the container lid open. To recover, Hold Constant is set to Nothing.'
     } );
     model.oopsEmitters.temperatureLidOpenEmitter.addListener( () => this.showDialog( oopsTemperatureLidOpenDialog ) );
 
     const oopsPressureContainerEmptyDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsPressureEmptyStringProperty, {
-      tandem: oopsDialogsTandem.createTandem( 'oopsPressureContainerEmptyDialog' ),
+      tandem: options.hasHoldConstantFeature ? this.oopsDialogsTandem.createTandem( 'oopsPressureContainerEmptyDialog' ) : Tandem.OPT_OUT,
       phetioDocumentation: 'Displayed if holding Pressure constant when the container is empty. To recover, Hold Constant is set to Nothing.'
     } );
     model.oopsEmitters.pressureContainerEmptyEmitter.addListener( () => this.showDialog( oopsPressureContainerEmptyDialog ) );
 
     const oopsPressureVolumeTooLargeDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsPressureLargeStringProperty, {
-      tandem: oopsDialogsTandem.createTandem( 'oopsPressureVolumeTooLargeDialog' ),
+      tandem: options.hasHoldConstantFeature ? this.oopsDialogsTandem.createTandem( 'oopsPressureVolumeTooLargeDialog' ) : Tandem.OPT_OUT,
       phetioDocumentation: 'Displayed if holding Pressure constant would result in Volume that is too large. To recover, Hold Constant is set to Nothing.'
     } );
     model.oopsEmitters.pressureVolumeTooLargeEmitter.addListener( () => this.showDialog( oopsPressureVolumeTooLargeDialog ) );
 
     const oopsPressureVolumeTooSmallDialog = new GasPropertiesOopsDialog( GasPropertiesStrings.oopsPressureSmallStringProperty, {
-      tandem: oopsDialogsTandem.createTandem( 'oopsPressureVolumeTooSmallDialog' ),
+      tandem: options.hasHoldConstantFeature ? this.oopsDialogsTandem.createTandem( 'oopsPressureVolumeTooSmallDialog' ) : Tandem.OPT_OUT,
       phetioDocumentation: 'Displayed if holding Pressure constant would result in Volume that is too small. To recover, Hold Constant is set to Nothing.'
     } );
     model.oopsEmitters.pressureVolumeTooSmallEmitter.addListener( () => this.showDialog( oopsPressureVolumeTooSmallDialog ) );
