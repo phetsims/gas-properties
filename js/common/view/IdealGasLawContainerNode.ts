@@ -90,7 +90,7 @@ export default class IdealGasLawContainerNode extends Node {
     const resizeHandleNode = new ResizeHandleNode( options.resizeGripColor, options.tandem.createTandem( 'resizeHandleNode' ) );
 
     // Lid on the top of the container
-    const lidNode = new LidNode( holdConstantProperty, {
+    const lidNode = new LidNode( {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
       gripColor: options.lidGripColor,
@@ -154,13 +154,16 @@ export default class IdealGasLawContainerNode extends Node {
       updateLidPosition();
     } );
 
-    // Hide the resize handle when volume is held constant
     holdConstantProperty.link( holdConstant => {
-      resizeHandleNode.visible = ( holdConstant !== 'volume' && holdConstant !== 'pressureV' );
-    } );
+      this.interruptSubtreeInput();
 
-    // Cancel interaction when visibility of the resize handle changes.
-    resizeHandleNode.visibleProperty.lazyLink( () => resizeHandleNode.interruptSubtreeInput() );
+      // Hide the resize handle when volume is held constant
+      resizeHandleNode.visible = ( holdConstant !== 'volume' && holdConstant !== 'pressureV' );
+
+      // Hide the lid handle when holding temperature constant.  We don't want to deal with counteracting evaporative
+      // cooling, which will occur when the lid is open. See https://github.com/phetsims/gas-properties/issues/159
+      lidHandleNode.visible = ( holdConstant !== 'temperature' );
+    } );
 
     // Dragging the resize handle horizontally changes the container's width
     const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this,

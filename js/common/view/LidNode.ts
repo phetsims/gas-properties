@@ -7,13 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import { HoldConstant } from '../model/HoldConstant.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 // constants
@@ -33,7 +31,7 @@ export default class LidNode extends Node {
   public readonly handleNode: Node;
   private readonly baseNode: Rectangle;
 
-  public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>, providedOptions: LidNodeOptions ) {
+  public constructor( providedOptions: LidNodeOptions ) {
 
     const options = optionize<LidNodeOptions, SelfOptions, NodeOptions>()( {
 
@@ -63,13 +61,6 @@ export default class LidNode extends Node {
     options.children = [ lidHandleNode, baseNode ];
 
     super( options );
-
-    // Hide the handle when holding temperature constant.  We don't want to deal with counteracting evaporative
-    // cooling, which will occur when the lid is open. See https://github.com/phetsims/gas-properties/issues/159
-    holdConstantProperty.link( holdConstant => {
-      this.interruptSubtreeInput();
-      lidHandleNode.visible = ( holdConstant !== 'temperature' );
-    } );
 
     this.handleNode = lidHandleNode;
     this.baseNode = baseNode;
