@@ -23,6 +23,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from './Particle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 type SelfOptions = {
   position?: Vector2; // position of the container's bottom right corner, in pm
@@ -59,7 +60,7 @@ export default class BaseContainer extends PhetioObject {
 
       // SelfOptions
       position: Vector2.ZERO,
-      widthRange: new RangeWithValue( 5000, 15000, 10000 ),
+      widthRange: GasPropertiesConstants.DEFAULT_CONTAINER_WIDTH,
 
       // PhetioObjectOptions
       isDisposable: false,

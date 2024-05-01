@@ -115,6 +115,9 @@ const GasPropertiesConstants = {
   DIFFUSION_RADIUS_RANGE: new RangeWithValue( 50, 250, 125 ), // pm
   DIFFUSION_INITIAL_TEMPERATURE_RANGE: new RangeWithValue( 50, 500, 300 ), // K
 
+  // default container width
+  DEFAULT_CONTAINER_WIDTH: new RangeWithValue( 5000, 15000, 10000 ),
+
   // width of panels on the right side of the Ideal, Explore, and Energy screens
   RIGHT_PANEL_WIDTH: 225,
 
