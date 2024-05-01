@@ -38,7 +38,6 @@ export default class DiffusionContainer extends BaseContainer {
     } );
 
     // In case clients attempt to use this feature of the base class
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Verify that widthProperty is phetioReadOnly:true
     this.widthProperty.lazyLink( width => {
       throw new Error( 'container width is fixed in the Diffusion screen' );
     } );

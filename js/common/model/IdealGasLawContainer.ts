@@ -19,6 +19,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import BaseContainer, { BaseContainerOptions } from './BaseContainer.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 
@@ -109,12 +110,13 @@ export default class IdealGasLawContainer extends BaseContainer {
 
     this.previousLeft = this.left;
 
-    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
     this.isOpenProperty = new DerivedProperty(
       // this.widthProperty is used by this.getMaxLidWidth()
       [ this.lidIsOnProperty, this.lidWidthProperty, this.widthProperty ],
-      ( lidIsOn, lidWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() )
-    );
+      ( lidIsOn, lidWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() ), {
+        tandem: options.tandem.createTandem( 'isOpenProperty' ),
+        phetioValueType: BooleanIO
+      } );
   }
 
   public override reset(): void {
