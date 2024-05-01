@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * DataAccordionBox is the 'Data' accordion box in the 'Diffusion' screen.  It displays data for the left and right

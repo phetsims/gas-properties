@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * CenterOfMassNode is an indicator at the bottom of the container that indicates where the centerX of mass is for
