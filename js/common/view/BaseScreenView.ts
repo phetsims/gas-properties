@@ -73,7 +73,7 @@ export default abstract class BaseScreenView extends ScreenView {
 
           // when the Step button is pressed
           listener: () => {
-            const seconds = model.timeTransform.inverse( GasPropertiesConstants.MODEL_TIME_STEP );
+            const seconds = model.getTimeTransform().inverse( GasPropertiesConstants.MODEL_TIME_STEP );
             model.stepRealTime( seconds );
             this.stepView( seconds );
           }

@@ -51,7 +51,6 @@ export default class BaseModel implements TModel {
 
   // Bounds of the entire space that the model knows about.
   // This corresponds to the browser window, and doesn't have a valid value until the view is created.
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly modelBoundsProperty: Property<Bounds2>;
 
   // is the sim playing?
@@ -59,9 +58,6 @@ export default class BaseModel implements TModel {
 
   // the clock speed of the sim
   public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
-
-  // transform between real time and sim time, initialized below
-  public timeTransform: TimeTransform;
 
   public readonly stopwatch: Stopwatch;
 
@@ -97,13 +93,6 @@ export default class BaseModel implements TModel {
       tandem: options.tandem.createTandem( 'timeSpeedProperty' )
     } );
 
-    this.timeTransform = TimeTransform.NORMAL;
-
-    // Adjust the time transform
-    this.timeSpeedProperty.link( speed => {
-      this.timeTransform = ( speed === TimeSpeed.SLOW ) ? TimeTransform.SLOW : TimeTransform.NORMAL;
-    } );
-
     this.stopwatch = new Stopwatch( {
       position: options.stopwatchPosition,
       timePropertyOptions: {
@@ -129,6 +118,13 @@ export default class BaseModel implements TModel {
   }
 
   /**
+   * Gets the transform between real time and sim time.
+   */
+  public getTimeTransform(): TimeTransform {
+    return ( this.timeSpeedProperty.value === TimeSpeed.SLOW ) ? TimeTransform.SLOW : TimeTransform.NORMAL;
+  }
+
+  /**
    * Steps the model using real time units.
    * This should be called directly only by Sim.js, and is a no-op when the sim is paused.
    * Subclasses that need to add functionality should override stepModelTime, not this method.
@@ -149,7 +145,7 @@ export default class BaseModel implements TModel {
    */
   public stepRealTime( dt: number ): void {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
-    this.stepModelTime( this.timeTransform.evaluate( dt ) );
+    this.stepModelTime( this.getTimeTransform().evaluate( dt ) );
   }
 
   /**
