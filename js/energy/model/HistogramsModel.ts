@@ -1,5 +1,6 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
+//TODO https://github.com/phetsims/gas-properties/issues/230 Add Properties for most recent sample.
 /**
  * HistogramsModel is a sub-model in the Energy screen, responsible for the Speed and Kinetic Energy histograms.
  *
@@ -58,17 +59,19 @@ export default class HistogramsModel {
   // emits when the bin counts have been updated
   public readonly binCountsUpdatedEmitter: Emitter;
 
-  // speed samples
+  // Speed samples
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private readonly heavySpeedSamples: number[][]; // Speed samples for heavy particles
   private readonly lightSpeedSamples: number[][]; // Speed samples for light particles
 
   // Kinetic Energy samples
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private readonly heavyKineticEnergySamples: number[][]; // Kinetic Energy samples for heavy particles
   private readonly lightKineticEnergySamples: number[][]; // Kinetic Energy samples for light particles
 
   // for measuring sample period
-  private dtAccumulator: number;
-  private numberOfSamples: number;
+  private dtAccumulator: number; //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  private numberOfSamples: number; //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
 
   // Describes each of the zoom levels, ordered from largest to smallest yMax value. zoomLevelIndexProperty provides
   // the index into this array. This is a brute force specification that contains some duplication. But it's easier
