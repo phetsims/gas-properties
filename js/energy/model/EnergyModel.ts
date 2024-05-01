@@ -11,9 +11,10 @@ import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
 import AverageSpeedModel from './AverageSpeedModel.js';
 import HistogramsModel from './HistogramsModel.js';
+import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 
-// constants
 const SAMPLE_PERIOD = 1; // sample period for Average Speed and histograms, in ps
+const CONTAINER_WIDTH = 10000; // pm
 
 export default class EnergyModel extends IdealGasLawModel {
 
@@ -25,17 +26,15 @@ export default class EnergyModel extends IdealGasLawModel {
     super( {
       holdConstant: 'volume',
       hasCollisionCounter: false,
+      containerOptions: {
+        widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH )
+      },
       tandem: tandem
     } );
 
     // In case clients attempt to use this feature of the base class
     this.holdConstantProperty.lazyLink( holdConstant => {
       throw new Error( 'holdConstant is fixed in the Energy screen' );
-    } );
-
-    // In case clients attempt to use this feature of the base class
-    this.container.widthProperty.lazyLink( width => {
-      throw new Error( 'container width is fixed in the Energy screen' );
     } );
 
     this.histogramsModel = new HistogramsModel( this.particleSystem, this.isPlayingProperty, SAMPLE_PERIOD, {

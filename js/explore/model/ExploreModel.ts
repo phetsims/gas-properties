@@ -16,7 +16,9 @@ export default class ExploreModel extends IdealGasLawModel {
 
     super( {
       holdConstant: 'nothing',
-      leftWallDoesWork: true, // moving the left wall does work on particles
+      containerOptions: {
+        leftWallDoesWork: true // moving the left wall does work on particles
+      },
       tandem: tandem
     } );
 

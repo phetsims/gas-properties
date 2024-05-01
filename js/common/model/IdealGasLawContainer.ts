@@ -15,11 +15,12 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import BaseContainer, { BaseContainerOptions } from './BaseContainer.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 
@@ -30,7 +31,7 @@ type SelfOptions = {
   leftWallDoesWork?: boolean;  // true if the left wall does work on particles, as in the Explore screen
 };
 
-type IdealGasLawContainerOptions = SelfOptions & PickRequired<BaseContainerOptions, 'tandem'>;
+export type IdealGasLawContainerOptions = SelfOptions & WithRequired<BaseContainerOptions, 'tandem'>;
 
 export default class IdealGasLawContainer extends BaseContainer {
 
@@ -107,14 +108,14 @@ export default class IdealGasLawContainer extends BaseContainer {
 
     this.desiredWidthProperty = new NumberProperty( this.widthProperty.value, {
       units: 'pm',
-      tandem: options.tandem.createTandem( 'desiredWidthProperty' ),
+      tandem: this.isFixedWidth ? Tandem.OPT_OUT : options.tandem.createTandem( 'desiredWidthProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'For internal use only.'
     } );
 
     this.previousLeftProperty = new NumberProperty( this.left, {
       units: 'pm',
-      tandem: options.tandem.createTandem( 'previousLeftProperty' ),
+      tandem: this.isFixedWidth ? Tandem.OPT_OUT : options.tandem.createTandem( 'previousLeftProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'For internal use only.'
     } );

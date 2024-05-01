@@ -107,7 +107,7 @@ export default class BaseContainer extends PhetioObject {
     this.leftWallVelocity = new Vector2( 0, 0 );
 
     this.userIsAdjustingWidthProperty = new BooleanProperty( false, {
-      tandem: options.widthRange.getLength() === 0 ? Tandem.OPT_OUT : options.tandem.createTandem( 'userIsAdjustingWidthProperty' ),
+      tandem: this.isFixedWidth ? Tandem.OPT_OUT : options.tandem.createTandem( 'userIsAdjustingWidthProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'For internal use only.'
     } );
@@ -121,6 +121,13 @@ export default class BaseContainer extends PhetioObject {
    * Convenience getter for width, in pm
    */
   public get width(): number { return this.widthProperty.value; }
+
+  /**
+   * Does the container have a fixed width?
+   */
+  public get isFixedWidth(): boolean {
+    return this.widthProperty.range.getLength() === 0;
+  }
 
   /**
    * Convenience getter for inside bounds, in pm.

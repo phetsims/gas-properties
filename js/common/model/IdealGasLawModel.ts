@@ -22,7 +22,7 @@ import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
@@ -31,16 +31,15 @@ import BaseModel, { BaseModelOptions } from './BaseModel.js';
 import CollisionCounter from './CollisionCounter.js';
 import CollisionDetector from './CollisionDetector.js';
 import { HoldConstant, HoldConstantValues } from './HoldConstant.js';
-import IdealGasLawContainer from './IdealGasLawContainer.js';
+import IdealGasLawContainer, { IdealGasLawContainerOptions } from './IdealGasLawContainer.js';
 import ParticleSystem from './ParticleSystem.js';
 import PressureGauge from './PressureGauge.js';
 import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = {
-
-  // Does the container's left wall do work on particles?
-  leftWallDoesWork?: boolean;
 
   // Whether the screen has a collision counter.
   hasCollisionCounter?: boolean;
@@ -50,6 +49,9 @@ type SelfOptions = {
 
   // Initial value for holdConstantProperty.
   holdConstant?: HoldConstant;
+
+  // Passed to IdealGasLawContainer.
+  containerOptions?: PickOptional<IdealGasLawContainerOptions, 'leftWallDoesWork' | 'widthRange'>;
 };
 
 export type IdealGasLawModelOptions = SelfOptions & BaseModelOptions;
@@ -110,10 +112,9 @@ export default class IdealGasLawModel extends BaseModel {
 
   public constructor( providedOptions: IdealGasLawModelOptions ) {
 
-    const options = optionize<IdealGasLawModelOptions, SelfOptions, BaseModelOptions>()( {
+    const options = optionize<IdealGasLawModelOptions, StrictOmit<SelfOptions, 'containerOptions'>, BaseModelOptions>()( {
 
       // SelfOptions
-      leftWallDoesWork: false,
       hasCollisionCounter: true,
       hasHoldConstantFeature: false,
       holdConstant: 'nothing'
@@ -141,10 +142,9 @@ export default class IdealGasLawModel extends BaseModel {
       phetioDocumentation: 'Determines whether collisions between particles are enabled.'
     } );
 
-    this.container = new IdealGasLawContainer( {
-      leftWallDoesWork: options.leftWallDoesWork,
+    this.container = new IdealGasLawContainer( combineOptions<IdealGasLawContainerOptions>( {
       tandem: options.tandem.createTandem( 'container' )
-    } );
+    }, options.containerOptions ) );
 
     this.particleSystem = new ParticleSystem(
       () => this.temperatureModel.getInitialTemperature(),
