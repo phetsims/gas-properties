@@ -94,7 +94,7 @@ export default class IdealGasLawContainerNode extends Node {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
       gripColor: options.lidGripColor,
-      tandem: options.tandem.createTandem( 'lidNode' )
+      lidHandleNodeTandem: options.tandem.createTandem( 'lidHandleNode' )
     } );
     const lidHandleNode = lidNode.handleNode;
 
@@ -167,10 +167,10 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Dragging the resize handle horizontally changes the container's width
     const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this,
-      resizeHandleNode.tandem.createTandem( 'resizeHandleDragListener' ) );
+      resizeHandleNode.tandem.createTandem( 'dragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleDragListener );
     const resizeHandleKeyboardDragListener = new ResizeHandleKeyboardDragListener( container, modelViewTransform,
-      resizeHandleNode.tandem.createTandem( 'resizeHandleKeyboardDragListener' ) );
+      resizeHandleNode.tandem.createTandem( 'keyboardDragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleKeyboardDragListener );
 
     // While interacting with the resize handle...
@@ -197,10 +197,10 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Dragging the lid's handle horizontally changes the size of the opening in the top of the container.
     const lidHandleDragListener = new LidHandleDragListener( container, modelViewTransform, this,
-      lidHandleNode.tandem.createTandem( 'lidHandleDragListener' ) );
+      lidHandleNode.tandem.createTandem( 'dragListener' ) );
     lidHandleNode.addInputListener( lidHandleDragListener );
     const lidHandleKeyboardDragListener = new LidHandleKeyboardDragListener( container, modelViewTransform,
-      lidHandleNode.tandem.createTandem( 'lidHandleKeyboardDragListener' ) );
+      lidHandleNode.tandem.createTandem( 'keyboardDragListener' ) );
     lidHandleNode.addInputListener( lidHandleKeyboardDragListener );
 
     // This implementation assumes that the lid is not interactive while the container is being resized. This is

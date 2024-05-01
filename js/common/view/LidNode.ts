@@ -13,6 +13,7 @@ import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, Rec
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
@@ -22,9 +23,10 @@ type SelfOptions = {
   baseWidth: number;
   baseHeight: number;
   gripColor?: TColor;
+  lidHandleNodeTandem: Tandem;
 };
 
-type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type LidNodeOptions = SelfOptions;
 
 export default class LidNode extends Node {
 
@@ -52,7 +54,7 @@ export default class LidNode extends Node {
     const lidHandleNode = new LidHandleNode( options.gripColor, {
       right: baseNode.right - HANDLE_RIGHT_INSET,
       bottom: baseNode.top + 1,
-      tandem: options.tandem.createTandem( 'lidHandleNode' )
+      tandem: options.lidHandleNodeTandem
     } );
     assert && assert( lidHandleNode.width <= baseNode.width,
       `handleNode.width ${lidHandleNode.width} is wider than baseNode.width ${baseNode.width}` );
