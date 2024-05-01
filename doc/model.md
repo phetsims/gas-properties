@@ -64,10 +64,14 @@ This section enumerates the primary equations used in the sim. Use this section 
 
 ## Particle System
 
-Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity. Radius and mass
-may be modified in the
-_Diffusion_ screen, and are fixed in the other screens. Location and velocity are modified indirectly, as a result of
-heating/cooling, changing volume, collisions, etc.
+Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity.
+
+Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixes masses and radii:
+
+* Heavy particles: mass = 28 AMU (equaivalent to N<sub>2</sub>), radius = 125 pm
+* Light particles: mass = 4 AMU (equaivalent to He, rounded to the closest integer), radius = 87.5 pm
+
+Location and velocity are modified indirectly, as a result of heating/cooling, changing volume, collisions, etc.
 
 The collection of all particles is referred to as the particle system. It has the following qualities:
 
