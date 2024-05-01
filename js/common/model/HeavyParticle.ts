@@ -13,15 +13,12 @@ import Particle from './Particle.js';
 
 export default class HeavyParticle extends Particle {
 
-  // equivalent to N2 (nitrogen), in AMU, rounded to the closest integer
-  public static readonly MASS = 28;
-
   public constructor() {
     super( {
 
       // ParticleOptions
-      mass: HeavyParticle.MASS,
-      radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS, // pm
+      mass: GasPropertiesConstants.HEAVY_PARTICLES_MASS,
+      radius: GasPropertiesConstants.HEAVY_PARTICLES_RADIUS,
       colorProperty: GasPropertiesColors.heavyParticleColorProperty,
       highlightColorProperty: GasPropertiesColors.heavyParticleHighlightColorProperty
     } );
