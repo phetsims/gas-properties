@@ -268,7 +268,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const heaterCoolerNodeXOffset = model.container.isFixedWidth ? GasPropertiesConstants.DEFAULT_CONTAINER_WIDTH.min : model.container.widthRange.min;
     const heaterCoolerNodeLeft = containerViewPosition.x - model.modelViewTransform.modelToViewDeltaX( heaterCoolerNodeXOffset );
     const heaterCoolerNode = new GasPropertiesHeaterCoolerNode(
-      model.heatCoolFactorProperty,
+      model.heatCoolAmountProperty,
       model.holdConstantProperty,
       model.isPlayingProperty,
       model.particleSystem.numberOfParticlesProperty,

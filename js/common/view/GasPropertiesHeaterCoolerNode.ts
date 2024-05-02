@@ -63,7 +63,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
   // animation of heatCoolAmountProperty, null when no animation is running
   private animation: Animation | null;
 
-  public constructor( heatCoolFactorProperty: NumberProperty,
+  public constructor( heatCoolAmountProperty: NumberProperty,
                       holdConstantProperty: StringUnionProperty<HoldConstant>,
                       isPlayingProperty: TReadOnlyProperty<boolean>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
@@ -95,14 +95,14 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
     super( privateHeatCoolAmountProperty, options );
 
     // When the model applies heat/cool, update the private Property.
-    heatCoolFactorProperty.link( heatCoolAmount => {
+    heatCoolAmountProperty.link( heatCoolAmount => {
       privateHeatCoolAmountProperty.value = heatCoolAmount;
     } );
 
     // If the user is controlling the slider, then update the model.
     privateHeatCoolAmountProperty.link( privateHeatCoolAmount => {
       if ( this.slider.visible ) {
-        heatCoolFactorProperty.value = privateHeatCoolAmount;
+        heatCoolAmountProperty.value = privateHeatCoolAmount;
       }
     } );
 

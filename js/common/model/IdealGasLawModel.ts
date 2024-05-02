@@ -91,9 +91,9 @@ export default class IdealGasLawModel extends BaseModel {
   // the quantity to hold constant
   public readonly holdConstantProperty: StringUnionProperty<HoldConstant>;
 
-  // The factor to heat or cool the contents of the container.
+  // The amount to heat or cool the contents of the container.
   // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
-  public readonly heatCoolFactorProperty: NumberProperty;
+  public readonly heatCoolAmountProperty: NumberProperty;
 
   // whether particle-particle collisions are enabled
   public readonly collisionsEnabledProperty: Property<boolean>;
@@ -141,12 +141,12 @@ export default class IdealGasLawModel extends BaseModel {
       phetioDocumentation: 'Determines which quantity will be held constant.'
     } );
 
-    this.heatCoolFactorProperty = new NumberProperty( 0, {
+    this.heatCoolAmountProperty = new NumberProperty( 0, {
       range: new Range( -1, 1 ),
-      tandem: options.tandem.createTandem( 'heatCoolFactorProperty' ),
+      tandem: options.tandem.createTandem( 'heatCoolAmountProperty' ),
       phetioReadOnly: options.hasHoldConstantFeature, // With the Hold Constant feature, the sim animates this Property.
       phetioDocumentation: 'Amount of heat or cool applied to particles in the container. ' +
-                           '-1 is maximum cooling, +1 is maximum heat, 0 is off'
+                           '-1 is maximum cooling, +1 is maximum heat, 0 is off.'
     } );
 
     this.collisionsEnabledProperty = new BooleanProperty( true, {
@@ -316,7 +316,7 @@ export default class IdealGasLawModel extends BaseModel {
 
     // Properties
     this.holdConstantProperty.reset();
-    this.heatCoolFactorProperty.reset();
+    this.heatCoolAmountProperty.reset();
     this.collisionsEnabledProperty.reset();
 
     // model elements
@@ -352,7 +352,7 @@ export default class IdealGasLawModel extends BaseModel {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     // Apply heat/cool
-    this.particleSystem.heatCool( this.heatCoolFactorProperty.value );
+    this.particleSystem.heatCool( this.heatCoolAmountProperty.value );
 
     // Step particles
     this.particleSystem.step( dt );
