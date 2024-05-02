@@ -223,6 +223,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       children: [ bicyclePumpsToggleNode, particleTypeRadioButtonGroup ],
       tandem: bicyclePumpNodeTandem
     } );
+    bicyclePumpNode.addLinkedElement( model.particleSystem.numberOfHeavyParticlesProperty );
+    bicyclePumpNode.addLinkedElement( model.particleSystem.numberOfLightParticlesProperty );
 
     // Cancel interaction with the pump when particle type changes.
     particleTypeProperty.link( () => {
