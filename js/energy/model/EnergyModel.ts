@@ -31,6 +31,7 @@ export default class EnergyModel extends IdealGasLawModel {
         widthRange: new RangeWithValue( CONTAINER_WIDTH, CONTAINER_WIDTH, CONTAINER_WIDTH )
       },
       phetioCollisionsEnabledPropertyInstrumented: true,
+      hasInjectionTemperatureFeature: true,
       tandem: tandem
     } );
 

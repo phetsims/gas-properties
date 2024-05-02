@@ -19,11 +19,22 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Thermometer from './Thermometer.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 
 // constants
 
 // temperature used to compute the initial speed for particles, in K
 const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
+
+type SelfOptions = {
+
+  // Determines whether Properties related to Injection Temperature will be instrumented.
+  hasInjectionTemperatureFeature?: boolean;
+};
+
+type TemperatureModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class TemperatureModel {
 
@@ -33,18 +44,24 @@ export default class TemperatureModel {
   // T, temperature in the container, in K, null when the container is empty
   public readonly temperatureProperty: Property<number | null>;
 
-  // whether initial temperature is controlled by the user
-  public readonly controlTemperatureEnabledProperty: Property<boolean>;
+  // Whether injection temperature can be set by the user.
+  public readonly setInjectionTemperatureEnabledProperty: Property<boolean>;
 
-  // initial temperature of particles added to the container, in K. Ignored if !controlTemperatureEnabledProperty.value
-  public readonly initialTemperatureProperty: NumberProperty;
+  // Injection temperature set by the user, in K. Ignored if !setInjectionTemperatureEnabledProperty.value
+  public readonly injectionTemperatureProperty: NumberProperty;
 
   // thermometer that displays temperatureProperty with a choice of units
   public readonly thermometer: Thermometer;
 
   public constructor( numberOfParticlesProperty: TReadOnlyProperty<number>,
                       getAverageKineticEnergy: () => number,
-                      tandem: Tandem ) {
+                      providedOptions: TemperatureModelOptions ) {
+
+    const options = optionize<TemperatureModelOptions, SelfOptions>()( {
+
+      // SelfOptions
+      hasInjectionTemperatureFeature: false
+    }, providedOptions );
 
     this.numberOfParticlesProperty = numberOfParticlesProperty;
     this.getAverageKineticEnergy = getAverageKineticEnergy;
@@ -53,25 +70,27 @@ export default class TemperatureModel {
       units: 'K',
       isValidValue: value => ( value === null || value >= 0 ),
       phetioValueType: NullableIO( NumberIO ),
-      tandem: tandem.createTandem( 'temperatureProperty' ),
+      tandem: options.tandem.createTandem( 'temperatureProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system
       phetioDocumentation: 'Temperature in K.'
     } );
 
-    this.controlTemperatureEnabledProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'controlTemperatureEnabledProperty' ),
-      phetioDocumentation: 'Indicates whether initial temperature is controlled by the user.'
+    this.setInjectionTemperatureEnabledProperty = new BooleanProperty( false, {
+      tandem: options.hasInjectionTemperatureFeature ?
+              options.tandem.createTandem( 'setInjectionTemperatureEnabledProperty' ) : Tandem.OPT_OUT,
+      phetioDocumentation: 'Determines whether the user can set the injection temperature.'
     } );
 
-    this.initialTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
+    this.injectionTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
       range: INITIAL_TEMPERATURE_RANGE,
       units: 'K',
-      tandem: tandem.createTandem( 'initialTemperatureProperty' ),
-      phetioDocumentation: 'Temperature used to determine the initial speed of particles when controlled by the user.'
+      tandem: options.hasInjectionTemperatureFeature ?
+              options.tandem.createTandem( 'injectionTemperatureProperty' ) : Tandem.OPT_OUT,
+      phetioDocumentation: 'Injection temperature set by the user.'
     } );
 
     this.thermometer = new Thermometer( this.temperatureProperty, {
-      tandem: tandem.createTandem( 'thermometer' )
+      tandem: options.tandem.createTandem( 'thermometer' )
     } );
   }
 
@@ -81,8 +100,8 @@ export default class TemperatureModel {
 
   public reset(): void {
     this.temperatureProperty.reset();
-    this.controlTemperatureEnabledProperty.reset();
-    this.initialTemperatureProperty.reset();
+    this.setInjectionTemperatureEnabledProperty.reset();
+    this.injectionTemperatureProperty.reset();
     this.thermometer.reset();
   }
 
@@ -100,10 +119,10 @@ export default class TemperatureModel {
 
     let initialTemperature = null;
 
-    if ( this.controlTemperatureEnabledProperty.value ) {
+    if ( this.setInjectionTemperatureEnabledProperty.value ) {
 
       // User's setting
-      initialTemperature = this.initialTemperatureProperty.value;
+      initialTemperature = this.injectionTemperatureProperty.value;
     }
     else if ( this.temperatureProperty.value !== null ) {
 

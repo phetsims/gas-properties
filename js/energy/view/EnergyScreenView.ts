@@ -97,8 +97,8 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
 
     // Injection Temperature accordion box
     const injectionTemperatureAccordionBox = new InjectionTemperatureAccordionBox(
-      model.temperatureModel.controlTemperatureEnabledProperty,
-      model.temperatureModel.initialTemperatureProperty, {
+      model.temperatureModel.setInjectionTemperatureEnabledProperty,
+      model.temperatureModel.injectionTemperatureProperty, {
         expandedProperty: viewProperties.injectionTemperatureExpandedProperty,
         tandem: panelsTandem.createTandem( 'injectionTemperatureAccordionBox' )
       }

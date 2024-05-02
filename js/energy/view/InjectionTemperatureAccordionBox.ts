@@ -33,8 +33,8 @@ type InjectionTemperatureAccordionBoxOptions = SelfOptions & PickRequired<Accord
 
 export default class InjectionTemperatureAccordionBox extends AccordionBox {
 
-  public constructor( controlTemperatureEnabledProperty: Property<boolean>,
-                      initialTemperatureProperty: NumberProperty,
+  public constructor( setInjectionTemperatureEnabledProperty: Property<boolean>,
+                      injectionTemperatureProperty: NumberProperty,
                       providedOptions: InjectionTemperatureAccordionBoxOptions ) {
 
     const options = optionize4<InjectionTemperatureAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
@@ -51,7 +51,7 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
       }, providedOptions );
 
     // Radio buttons
-    const radioButtonGroup = new VerticalAquaRadioButtonGroup( controlTemperatureEnabledProperty, [
+    const radioButtonGroup = new VerticalAquaRadioButtonGroup( setInjectionTemperatureEnabledProperty, [
 
       // Match Container
       {
@@ -72,8 +72,8 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
       tandem: options.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    const temperatureControl = new InjectionTemperatureControl( initialTemperatureProperty, {
-      enabledProperty: controlTemperatureEnabledProperty,
+    const temperatureControl = new InjectionTemperatureControl( injectionTemperatureProperty, {
+      enabledProperty: setInjectionTemperatureEnabledProperty,
       tandem: options.tandem.createTandem( 'temperatureControl' )
     } );
 

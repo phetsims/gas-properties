@@ -58,6 +58,9 @@ type SelfOptions = {
 
   // Determines whether collisionsEnabledProperty is PhET-iO instrumented.
   phetioCollisionsEnabledPropertyInstrumented?: boolean;
+
+  // Determines whether Properties related to Injection Temperature will be instrumented.
+  hasInjectionTemperatureFeature?: boolean;
 };
 
 export type IdealGasLawModelOptions = SelfOptions & BaseModelOptions;
@@ -125,7 +128,8 @@ export default class IdealGasLawModel extends BaseModel {
       hasHoldConstantFeature: false,
       holdConstant: 'nothing',
       holdConstantValues: HoldConstantValues.slice(),
-      phetioCollisionsEnabledPropertyInstrumented: false
+      phetioCollisionsEnabledPropertyInstrumented: false,
+      hasInjectionTemperatureFeature: false
     }, providedOptions );
 
     super( options );
@@ -165,7 +169,10 @@ export default class IdealGasLawModel extends BaseModel {
     this.temperatureModel = new TemperatureModel(
       this.particleSystem.numberOfParticlesProperty, // N
       () => this.particleSystem.getAverageKineticEnergy(), // KE
-      options.tandem.createTandem( 'temperatureModel' )
+      {
+        hasInjectionTemperatureFeature: options.hasInjectionTemperatureFeature,
+        tandem: options.tandem.createTandem( 'temperatureModel' )
+      }
     );
 
     this.pressureModel = new PressureModel(
@@ -261,8 +268,8 @@ export default class IdealGasLawModel extends BaseModel {
            numberOfParticles > 0 &&
            numberOfParticles < previousNumberOfParticles &&
            this.holdConstantProperty.value === 'temperature' ) {
-        assert && assert( !this.temperatureModel.controlTemperatureEnabledProperty.value,
-          'this feature is not compatible with user-controlled particle temperature' );
+        assert && assert( !this.temperatureModel.setInjectionTemperatureEnabledProperty.value,
+          'This feature is not compatible with user-controlled injection temperature' );
 
         // Workaround for https://github.com/phetsims/gas-properties/issues/168. Addresses an ordering problem where
         // the temperature model needs to update when this state occurs, but it's still null. Temperature is null
