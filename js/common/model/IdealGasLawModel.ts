@@ -55,6 +55,9 @@ type SelfOptions = {
 
   // Passed to IdealGasLawContainer.
   containerOptions?: PickOptional<IdealGasLawContainerOptions, 'leftWallDoesWork' | 'widthRange'>;
+
+  // Determines whether collisionsEnabledProperty is PhET-iO instrumented.
+  phetioCollisionsEnabledPropertyInstrumented?: boolean;
 };
 
 export type IdealGasLawModelOptions = SelfOptions & BaseModelOptions;
@@ -90,7 +93,7 @@ export default class IdealGasLawModel extends BaseModel {
   public readonly heatCoolFactorProperty: NumberProperty;
 
   // whether particle-particle collisions are enabled
-  public readonly particleParticleCollisionsEnabledProperty: Property<boolean>;
+  public readonly collisionsEnabledProperty: Property<boolean>;
 
   public readonly container: IdealGasLawContainer;
   public readonly particleSystem: ParticleSystem;
@@ -121,7 +124,8 @@ export default class IdealGasLawModel extends BaseModel {
       hasCollisionCounter: true,
       hasHoldConstantFeature: false,
       holdConstant: 'nothing',
-      holdConstantValues: HoldConstantValues.slice()
+      holdConstantValues: HoldConstantValues.slice(),
+      phetioCollisionsEnabledPropertyInstrumented: false
     }, providedOptions );
 
     super( options );
@@ -141,8 +145,9 @@ export default class IdealGasLawModel extends BaseModel {
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off'
     } );
 
-    this.particleParticleCollisionsEnabledProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'particleParticleCollisionsEnabledProperty' ),
+    this.collisionsEnabledProperty = new BooleanProperty( true, {
+      tandem: options.phetioCollisionsEnabledPropertyInstrumented ?
+              options.tandem.createTandem( 'collisionsEnabledProperty' ) : Tandem.OPT_OUT,
       phetioDocumentation: 'Determines whether collisions between particles are enabled.'
     } );
 
@@ -152,7 +157,7 @@ export default class IdealGasLawModel extends BaseModel {
 
     this.particleSystem = new ParticleSystem(
       () => this.temperatureModel.getInitialTemperature(),
-      this.particleParticleCollisionsEnabledProperty,
+      this.collisionsEnabledProperty,
       this.container.particleEntryPosition,
       options.tandem.createTandem( 'particleSystem' )
     );
@@ -175,7 +180,7 @@ export default class IdealGasLawModel extends BaseModel {
     this.collisionDetector = new CollisionDetector(
       this.container,
       this.particleSystem.insideParticleArrays,
-      this.particleParticleCollisionsEnabledProperty
+      this.collisionsEnabledProperty
     );
 
     this.collisionCounter = null;
@@ -305,7 +310,7 @@ export default class IdealGasLawModel extends BaseModel {
     // Properties
     this.holdConstantProperty.reset();
     this.heatCoolFactorProperty.reset();
-    this.particleParticleCollisionsEnabledProperty.reset();
+    this.collisionsEnabledProperty.reset();
 
     // model elements
     this.container.reset();
