@@ -50,8 +50,8 @@ export default class DiffusionScreenView extends BaseScreenView {
     const scaleNode = new ScaleNode( model.container.widthProperty.value, model.modelViewTransform, {
       visibleProperty: viewProperties.scaleVisibleProperty,
       centerX: model.modelViewTransform.modelToViewX( model.container.dividerX ),
-      top: model.modelViewTransform.modelToViewY( model.container.bottom - model.container.wallThickness ),
-      tandem: tandem.createTandem( 'scaleNode' )
+      top: model.modelViewTransform.modelToViewY( model.container.bottom - model.container.wallThickness )
+      // Not PhET-iO instrumented, nothing interesting.
     } );
 
     // Show how the collision detection space is partitioned into regions

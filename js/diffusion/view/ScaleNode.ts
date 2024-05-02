@@ -24,7 +24,7 @@ const TICK_INTERVAL = 1; // nm
 
 type SelfOptions = EmptySelfOptions;
 
-type ScaleNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+type ScaleNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'visibleProperty'>;
 
 export default class ScaleNode extends Node {
 
@@ -61,8 +61,6 @@ export default class ScaleNode extends Node {
     const labelStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
       value: TICK_INTERVAL,
       units: GasPropertiesStrings.nanometersStringProperty
-    }, {
-      tandem: options.tandem.createTandem( 'labelStringProperty' )
     } );
     const labelNode = new Text( labelStringProperty, {
       font: new PhetFont( 12 ),
