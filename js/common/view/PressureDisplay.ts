@@ -41,7 +41,7 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
       {
         choice: 'atmospheres',
         tandemName: 'atmospheresItem',
-        numberProperty: pressureModel.pressureAtmospheresProperty,
+        numberProperty: pressureModel.pressureAtmospheresNoiseProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.atmospheresStringProperty,
         numberDisplayOptions: {
@@ -51,7 +51,7 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
       {
         choice: 'kilopascals',
         tandemName: 'kilopascalsItem',
-        numberProperty: pressureModel.pressureKilopascalsProperty,
+        numberProperty: pressureModel.pressureKilopascalsNoiseProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kilopascalsStringProperty,
         numberDisplayOptions: {

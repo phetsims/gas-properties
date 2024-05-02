@@ -5,7 +5,7 @@
  *
  * This model has subcomponents that handle the quantities involved in the Ideal Gas Law, PV = NkT.  They are:
  *
- * P (pressure) - see PressureModel pressureProperty
+ * P (pressure) - see PressureModel pressureKilopascalsProperty
  * V (volume) - see BaseContainer volumeProperty
  * N (number of particles) - see ParticleSystem numberOfParticlesProperty
  * T (temperature) - see TemperatureModel temperatureKelvinProperty
@@ -283,17 +283,17 @@ export default class IdealGasLawModel extends BaseModel {
         `bad holdConstant state: ${holdConstant} with numberOfParticles=${this.particleSystem.numberOfParticlesProperty.value}` );
 
       // values that are incompatible with zero pressure
-      assert && assert( !( this.pressureModel.pressureProperty.value === 0 &&
+      assert && assert( !( this.pressureModel.pressureKilopascalsProperty.value === 0 &&
       ( holdConstant === 'pressureV' ||
         holdConstant === 'pressureT' ) ),
-        `bad holdConstant state: ${holdConstant} with pressure=${this.pressureModel.pressureProperty.value}` );
+        `bad holdConstant state: ${holdConstant} with pressure=${this.pressureModel.pressureKilopascalsProperty.value}` );
     }, {
 
       // These values need to be correct before this listener fires.  This is not an issue when the sim is running,
       // but is relevant when PhET-iO restores state.  See https://github.com/phetsims/gas-properties/issues/182.
       phetioDependencies: [
         this.particleSystem.numberOfParticlesProperty,
-        this.pressureModel.pressureProperty
+        this.pressureModel.pressureKilopascalsProperty
       ]
     } );
   }
@@ -486,7 +486,7 @@ export default class IdealGasLawModel extends BaseModel {
     const N = this.particleSystem.numberOfParticlesProperty.value;
     const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
     const T = this.temperatureModel.computeTemperature() || 0; // temperature has not been updated, so compute it
-    const P = this.pressureModel.pressureProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
+    const P = this.pressureModel.pressureKilopascalsProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
     assert && assert( P !== 0, 'zero pressure not supported' );
 
     return ( N * k * T ) / P;
@@ -498,7 +498,7 @@ export default class IdealGasLawModel extends BaseModel {
    */
   public computeIdealTemperature(): number {
 
-    const P = this.pressureModel.pressureProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
+    const P = this.pressureModel.pressureKilopascalsProperty.value / GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
     assert && assert( P !== 0, 'zero pressure not supported' );
 
     const N = this.particleSystem.numberOfParticlesProperty.value;

@@ -62,7 +62,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       holdConstantPanel = new HoldConstantPanel(
         model.holdConstantProperty,
         model.particleSystem.numberOfParticlesProperty,
-        model.pressureModel.pressureProperty,
+        model.pressureModel.pressureKilopascalsProperty,
         model.container.isOpenProperty,
         panelsTandem.createTandem( 'holdConstantPanel' ) );
       panels.push( holdConstantPanel );

@@ -43,16 +43,16 @@ export default class PressureModel extends PhetioObject {
   private readonly blowLidOff: () => void;
 
   // pressure range, in kPa
-  public readonly pressureRange: Range;
+  public readonly pressureKilopascalsRange: Range;
 
   // P, pressure in the container, in kPa
-  public readonly pressureProperty: Property<number>;
-
-  // pressure in kPa, with noise added
   public readonly pressureKilopascalsProperty: Property<number>;
 
+  // pressure in kPa, with noise added
+  public readonly pressureKilopascalsNoiseProperty: Property<number>;
+
   // pressure in atmospheres (atm), with noise added
-  public readonly pressureAtmospheresProperty: TReadOnlyProperty<number>;
+  public readonly pressureAtmospheresNoiseProperty: TReadOnlyProperty<number>;
 
   // amount of noise in kPa is inversely proportional to pressure, so more noise at lower pressure
   private readonly pressureNoiseFunction: LinearFunction;
@@ -92,36 +92,36 @@ export default class PressureModel extends PhetioObject {
     this.temperatureProperty = temperatureProperty;
     this.blowLidOff = blowLidOff;
 
-    this.pressureRange = new Range( 0, MAX_PRESSURE );
+    this.pressureKilopascalsRange = new Range( 0, MAX_PRESSURE );
 
-    this.pressureProperty = new NumberProperty( 0, {
+    this.pressureKilopascalsProperty = new NumberProperty( 0, {
       units: 'kPa',
       isValidValue: value => ( value >= 0 ),
-      tandem: tandem.createTandem( 'pressureProperty' ),
+      tandem: tandem.createTandem( 'pressureKilopascalsProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system,
       phetioDocumentation: 'Pressure in kPa, with no noise.'
     } );
 
-    // This is not derived from pressureProperty, because it needs to add noise on step, not when pressureProperty changes.
-    this.pressureKilopascalsProperty = new NumberProperty( this.pressureProperty.value, {
+    // This is not derived from pressureKilopascalsProperty, because it needs to add noise on step, not when pressureKilopascalsProperty changes.
+    this.pressureKilopascalsNoiseProperty = new NumberProperty( this.pressureKilopascalsProperty.value, {
       units: 'kPa',
       isValidValue: value => ( value >= 0 ),
-      tandem: tandem.createTandem( 'pressureKilopascalsProperty' ),
-      phetioReadOnly: true, // value is derived from pressureProperty on step, with noise added
+      tandem: tandem.createTandem( 'pressureKilopascalsNoiseProperty' ),
+      phetioReadOnly: true, // value is derived from pressureKilopascalsProperty on step, with noise added
       phetioDocumentation: 'Pressure in kPa, with optional noise added.'
     } );
 
-    this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
+    this.pressureAtmospheresNoiseProperty = new DerivedProperty( [ this.pressureKilopascalsNoiseProperty ],
       pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
         units: 'atm',
         isValidValue: value => ( value >= 0 ),
         valueType: 'number',
         phetioValueType: NumberIO,
-        tandem: tandem.createTandem( 'pressureAtmospheresProperty' ),
+        tandem: tandem.createTandem( 'pressureAtmospheresNoiseProperty' ),
         phetioDocumentation: 'Pressure in atm, with optional noise added.'
       } );
 
-    this.pressureNoiseFunction = new LinearFunction( 0, this.pressureRange.max, MAX_NOISE, MIN_NOISE, true );
+    this.pressureNoiseFunction = new LinearFunction( 0, this.pressureKilopascalsRange.max, MAX_NOISE, MIN_NOISE, true );
 
     this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
@@ -136,9 +136,9 @@ export default class PressureModel extends PhetioObject {
     this.updatePressureEnabled = false;
 
     // When pressure goes to zero, update the gauge immediately.
-    this.pressureProperty.link( pressure => {
+    this.pressureKilopascalsProperty.link( pressure => {
       if ( pressure === 0 ) {
-        this.pressureKilopascalsProperty.value = 0;
+        this.pressureKilopascalsNoiseProperty.value = 0;
       }
     } );
 
@@ -146,14 +146,14 @@ export default class PressureModel extends PhetioObject {
     // Updates will be enabled when 1 particle has collided with the container.
     this.numberOfParticlesProperty.link( numberOfParticles => {
       if ( numberOfParticles === 0 ) {
-        this.pressureProperty.value = 0;
+        this.pressureKilopascalsProperty.value = 0;
         this.updatePressureEnabled = false;
       }
     } );
   }
 
   public reset(): void {
-    this.pressureProperty.reset();
+    this.pressureKilopascalsProperty.reset();
     this.unitsProperty.reset();
     this.dtAccumulator = 0;
     this.updatePressureEnabled = false;
@@ -175,13 +175,13 @@ export default class PressureModel extends PhetioObject {
     if ( this.updatePressureEnabled ) {
 
       // Compute the actual pressure, based on the state of the particle system
-      this.pressureProperty.value = this.computePressure();
+      this.pressureKilopascalsProperty.value = this.computePressure();
 
       // Step regardless of whether pressure has changed, since the gauge updates on a sample period.
       this.step( dtPressureGauge );
 
       // If pressure exceeds the maximum, blow the lid off of the container.
-      if ( this.pressureProperty.value > MAX_PRESSURE ) {
+      if ( this.pressureKilopascalsProperty.value > MAX_PRESSURE ) {
         this.blowLidOff();
       }
     }
@@ -210,17 +210,17 @@ export default class PressureModel extends PhetioObject {
       if ( noiseEnabled ) {
 
         // compute noise
-        noise = this.pressureNoiseFunction.evaluate( this.pressureProperty.value ) *
+        noise = this.pressureNoiseFunction.evaluate( this.pressureKilopascalsProperty.value ) *
                 this.scaleNoiseFunction.evaluate( this.temperatureProperty.value || 0 ) *
                 dotRandom.nextDouble();
 
         // randomly apply a sign if doing so doesn't make the pressure become <= 0
-        if ( noise < this.pressureProperty.value ) {
+        if ( noise < this.pressureKilopascalsProperty.value ) {
           noise *= ( dotRandom.nextBoolean() ? 1 : -1 );
         }
       }
 
-      this.pressureKilopascalsProperty.value = this.pressureProperty.value + noise;
+      this.pressureKilopascalsNoiseProperty.value = this.pressureKilopascalsProperty.value + noise;
       this.dtAccumulator = 0;
     }
   }
