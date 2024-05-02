@@ -144,20 +144,23 @@ export default class DiffusionModel extends BaseModel {
     this.rightData = new DiffusionData( this.container.rightBounds, this.particles1, this.particles2,
       'right', dataTandem.createTandem( 'rightData' ) );
 
+    const centerOfMassTandem = tandem.createTandem( 'centerOfMass' );
+
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-        tandem: tandem.createTandem( 'centerOfMass1Property' ),
+        tandem: centerOfMassTandem.createTandem( 'centerOfMass1Property' ),
         phetioDocumentation: 'Center of mass for particles of type 1. This is the x offset from the center of the container.'
       } ) );
 
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-        tandem: tandem.createTandem( 'centerOfMass2Property' ),
+        tandem: centerOfMassTandem.createTandem( 'centerOfMass2Property' ),
         phetioDocumentation: 'Center of mass for particles of type 2. This is the x offset from the center of the container.'
       } ) );
 
-    this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particle1FlowRateModel' ) );
-    this.particle2FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles2, tandem.createTandem( 'particle2FlowRateModel' ) );
+    const flowRateTandem = tandem.createTandem( 'flowRate' );
+    this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, flowRateTandem.createTandem( 'particle1FlowRateModel' ) );
+    this.particle2FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles2, flowRateTandem.createTandem( 'particle2FlowRateModel' ) );
 
     this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
