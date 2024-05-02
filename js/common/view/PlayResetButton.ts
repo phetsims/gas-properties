@@ -7,29 +7,18 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PlayIconShape from '../../../../scenery-phet/js/PlayIconShape.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import { Path, PathOptions } from '../../../../scenery/js/imports.js';
-import BooleanRectangularToggleButton, { BooleanRectangularToggleButtonOptions } from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
+import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import gasProperties from '../../gasProperties.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type PlayResetButtonOptions = SelfOptions & PickRequired<BooleanRectangularToggleButtonOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class PlayResetButton extends BooleanRectangularToggleButton {
 
-  public constructor( isPlayingProperty: Property<boolean>, providedOptions: PlayResetButtonOptions ) {
-
-    const options = optionize<PlayResetButtonOptions, SelfOptions, BooleanRectangularToggleButtonOptions>()( {
-
-      // BooleanRectangularToggleButtonOptions
-      isDisposable: false,
-      baseColor: '#DFE0E1'
-    }, providedOptions );
+  public constructor( isPlayingProperty: Property<boolean>, tandem: Tandem ) {
 
     const iconOptions: PathOptions = {
       stroke: 'black',
@@ -49,7 +38,15 @@ export default class PlayResetButton extends BooleanRectangularToggleButton {
       } )
     );
 
-    super( isPlayingProperty, resetIconNode, playIconNode, options );
+    super( isPlayingProperty, resetIconNode, playIconNode, {
+
+      // BooleanRectangularToggleButtonOptions
+      isDisposable: false,
+      baseColor: '#DFE0E1',
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: false,
+      phetioEnabledPropertyInstrumented: false
+    } );
   }
 }
 

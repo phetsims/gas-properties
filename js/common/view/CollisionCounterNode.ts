@@ -76,9 +76,7 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
       pickable: false // so we can drag
     } );
 
-    const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty, {
-      tandem: options.tandem.createTandem( 'playResetButton' )
-    } );
+    const playResetButton = new PlayResetButton( collisionCounter.isRunningProperty, options.tandem.createTandem( 'playResetButton' ) );
 
     const samplePeriodText = new Text( GasPropertiesStrings.samplePeriodStringProperty, {
       pickable: false,
