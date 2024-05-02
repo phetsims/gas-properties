@@ -26,13 +26,10 @@
 
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PointerCoordinatesNode from '../../../../scenery-phet/js/PointerCoordinatesNode.js';
 import { Node, TColor } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
-import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -45,17 +42,16 @@ import BaseScreenView, { BaseScreenViewOptions } from './BaseScreenView.js';
 import CollisionCounterNode from './CollisionCounterNode.js';
 import ContainerWidthNode from './ContainerWidthNode.js';
 import EraseParticlesButton from './EraseParticlesButton.js';
-import GasPropertiesBicyclePumpNode, { GasPropertiesBicyclePumpNodeOptions } from './GasPropertiesBicyclePumpNode.js';
 import GasPropertiesHeaterCoolerNode from './GasPropertiesHeaterCoolerNode.js';
 import GasPropertiesOopsDialog from './GasPropertiesOopsDialog.js';
 import GasPropertiesStopwatchNode from './GasPropertiesStopwatchNode.js';
 import GasPropertiesThermometerNode from './GasPropertiesThermometerNode.js';
 import IdealGasLawContainerNode from './IdealGasLawContainerNode.js';
 import IdealGasLawParticleSystemNode from './IdealGasLawParticleSystemNode.js';
-import ParticleTypeRadioButtonGroup from './ParticleTypeRadioButtonGroup.js';
 import PressureGaugeNode from './PressureGaugeNode.js';
 import RegionsNode from './RegionsNode.js';
 import ReturnLidButton from './ReturnLidButton.js';
+import BicyclePumpControl from './BicyclePumpControl.js';
 
 type SelfOptions = {
   resizeGripColor?: TColor;
@@ -68,8 +64,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
   protected readonly containerNode: IdealGasLawContainerNode;
   private readonly particleSystemNode: IdealGasLawParticleSystemNode;
   private readonly regionsNode: RegionsNode | null;
-  protected readonly heavyBicyclePumpNode: GasPropertiesBicyclePumpNode;
-  protected readonly lightBicyclePumpNode: GasPropertiesBicyclePumpNode;
+  protected readonly bicyclePumpControl: BicyclePumpControl;
   protected readonly heaterCoolerNode: GasPropertiesHeaterCoolerNode;
 
   // Subclasses should use this Tandem when creating additional OopsDialog instances.
@@ -77,7 +72,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
   // For setting pdomOrder in subclasses
   protected readonly returnLidButton: Node;
-  protected readonly particleTypeRadioButtonGroup: Node;
   protected readonly eraseParticlesButton: Node;
   protected readonly thermometerNode: Node;
   protected readonly pressureGaugeNode: Node;
@@ -179,62 +173,15 @@ export default class IdealGasLawScreenView extends BaseScreenView {
         visibleProperty: widthVisibleProperty
       } );
 
-    const bicyclePumpNodeTandem = options.tandem.createTandem( 'bicyclePumpNode' );
-
-    // Radio buttons for selecting particle type
-    const particleTypeRadioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty,
+    // Bicycle pump and associated radio buttons.
+    const bicyclePumpControl = new BicyclePumpControl( particleTypeProperty,
+      model.particleSystem.numberOfHeavyParticlesProperty,
+      model.particleSystem.numberOfLightParticlesProperty,
       model.modelViewTransform, {
-        left: containerNode.right + 20,
-        bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: bicyclePumpNodeTandem.createTandem( 'particleTypeRadioButtonGroup' )
+        left: containerNode.right,
+        bottom: this.layoutBounds.maxY - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
+        tandem: options.tandem.createTandem( 'bicyclePumpControl' )
       } );
-
-    // Bicycle pump is centered above the radio buttons.
-    const bicyclePumpPosition =
-      new Vector2( particleTypeRadioButtonGroup.centerX, particleTypeRadioButtonGroup.top - 15 );
-
-    // Bicycle pump hose attaches to the container.
-    const hosePosition = model.modelViewTransform.modelToViewPosition( model.container.hosePosition );
-
-    const bicyclePumpOptions: StrictOmit<GasPropertiesBicyclePumpNodeOptions, 'tandem'> = {
-      translation: bicyclePumpPosition,
-      hoseAttachmentOffset: hosePosition.minus( bicyclePumpPosition )
-    };
-
-    // Bicycle pump for heavy particles
-    const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfHeavyParticlesProperty,
-      combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColors.heavyParticleColorProperty
-      } ) );
-
-    // Bicycle pump for light particles
-    const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( model.particleSystem.numberOfLightParticlesProperty,
-      combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColors.lightParticleColorProperty
-      } ) );
-
-    // Toggle button for switching between heavy and light bicycle pumps
-    const bicyclePumpsToggleNode = new ToggleNode( particleTypeProperty, [
-      { value: 'heavy', createNode: () => heavyBicyclePumpNode },
-      { value: 'light', createNode: () => lightBicyclePumpNode }
-    ] );
-
-    const bicyclePumpNode = new Node( {
-      children: [ bicyclePumpsToggleNode, particleTypeRadioButtonGroup ],
-      tandem: bicyclePumpNodeTandem,
-      phetioFeatured: true,
-      phetioInputEnabledPropertyInstrumented: true,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
-    } );
-    bicyclePumpNode.addLinkedElement( model.particleSystem.numberOfHeavyParticlesProperty );
-    bicyclePumpNode.addLinkedElement( model.particleSystem.numberOfLightParticlesProperty );
-
-    // Cancel interaction with the pump when particle type changes.
-    particleTypeProperty.link( () => {
-      bicyclePumpsToggleNode.interruptSubtreeInput();
-    } );
 
     // Parent for the thermometer's listbox
     const thermometerListboxParent = new Node();
@@ -330,7 +277,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // rendering order
     regionsNode && this.addChild( regionsNode );
-    this.addChild( bicyclePumpNode );
+    this.addChild( bicyclePumpControl );
     this.addChild( pressureGaugeNode );
     this.addChild( pressureGaugeListboxParent );
     this.addChild( containerNode );
@@ -364,11 +311,9 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     this.containerNode = containerNode;
     this.particleSystemNode = particleSystemNode;
     this.regionsNode = regionsNode;
-    this.heavyBicyclePumpNode = heavyBicyclePumpNode;
-    this.lightBicyclePumpNode = lightBicyclePumpNode;
+    this.bicyclePumpControl = bicyclePumpControl;
     this.heaterCoolerNode = heaterCoolerNode;
     this.returnLidButton = returnLidButton;
-    this.particleTypeRadioButtonGroup = particleTypeRadioButtonGroup;
     this.eraseParticlesButton = eraseParticlesButton;
     this.thermometerNode = thermometerNode;
     this.pressureGaugeNode = pressureGaugeNode;
@@ -378,8 +323,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
   protected override reset(): void {
     super.reset();
-    this.heavyBicyclePumpNode.reset();
-    this.lightBicyclePumpNode.reset();
+    this.bicyclePumpControl.reset();
   }
 
   /**

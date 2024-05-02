@@ -139,9 +139,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     assert && assert( this.collisionCounterNode );
     this.pdomPlayAreaNode.pdomOrder = [
-      this.heavyBicyclePumpNode,
-      this.lightBicyclePumpNode,
-      this.particleTypeRadioButtonGroup,
+      this.bicyclePumpControl,
       particlesAccordionBox,
       this.eraseParticlesButton,
       this.heaterCoolerNode,

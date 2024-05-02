@@ -50,9 +50,6 @@ export default class IdealGasLawContainer extends BaseContainer {
   // Particles enter the container here, on the inside of the container, in pm.
   public readonly particleEntryPosition: Vector2;
 
-  // Bicycle pump hose connects here, on the outside of the container, in pm.
-  public readonly hosePosition: Vector2;
-
   // Desired width of the container, in pm. This is a Property because it needs to be PhET-iO stateful.
   // Set this to impose an animated speed limit on decreasing width.
   // See https://github.com/phetsims/gas-properties/issues/90.
@@ -106,8 +103,6 @@ export default class IdealGasLawContainer extends BaseContainer {
     } );
 
     this.particleEntryPosition = new Vector2( this.position.x, this.position.y + this.height / 5 );
-
-    this.hosePosition = this.particleEntryPosition.plusXY( this.wallThickness, 0 );
 
     this.desiredWidthProperty = new NumberProperty( this.widthProperty.value, {
       units: 'pm',

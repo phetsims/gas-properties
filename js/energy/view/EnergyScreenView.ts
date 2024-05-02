@@ -134,9 +134,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
 
     // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     this.pdomPlayAreaNode.pdomOrder = [
-      this.heavyBicyclePumpNode,
-      this.lightBicyclePumpNode,
-      this.particleTypeRadioButtonGroup,
+      this.bicyclePumpControl,
       particlesAccordionBox,
       injectionTemperatureAccordionBox,
       this.eraseParticlesButton,
