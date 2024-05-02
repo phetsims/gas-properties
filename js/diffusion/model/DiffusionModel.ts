@@ -90,9 +90,9 @@ export default class DiffusionModel extends BaseModel {
 
     this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
 
-    const settingsTandem = tandem.createTandem( 'settings' );
-    this.particle1Settings = new DiffusionSettings( settingsTandem.createTandem( 'particle1Settings' ) );
-    this.particle2Settings = new DiffusionSettings( settingsTandem.createTandem( 'particle2Settings' ) );
+    const particleSettingsTandem = tandem.createTandem( 'particleSettings' );
+    this.particle1Settings = new DiffusionSettings( particleSettingsTandem.createTandem( 'particle1Settings' ) );
+    this.particle2Settings = new DiffusionSettings( particleSettingsTandem.createTandem( 'particle2Settings' ) );
 
     // Synchronize particle counts and arrays.
     const createDiffusionParticle1 = ( options: CreateParticleOptions ) => new DiffusionParticle1( options );
