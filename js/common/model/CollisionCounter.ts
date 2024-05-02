@@ -84,7 +84,9 @@ export default class CollisionCounter extends PhetioObject {
 
     this.timeRunningProperty = new NumberProperty( 0, {
       units: 'ps',
-      tandem: options.tandem.createTandem( 'timeRunningProperty' )
+      tandem: options.tandem.createTandem( 'timeRunningProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
     } );
 
     this.visibleProperty = new BooleanProperty( options.visible, {
