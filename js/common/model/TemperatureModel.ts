@@ -19,7 +19,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
@@ -41,7 +41,7 @@ type SelfOptions = {
 
 type TemperatureModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class TemperatureModel {
+export default class TemperatureModel extends PhetioObject {
 
   private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
   private readonly getAverageKineticEnergy: () => number;
@@ -67,12 +67,18 @@ export default class TemperatureModel {
                       getAverageKineticEnergy: () => number,
                       providedOptions: TemperatureModelOptions ) {
 
-    const options = optionize<TemperatureModelOptions, SelfOptions>()( {
+    const options = optionize<TemperatureModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       temperatureKelvinRange: DEFAULT_TEMPERATURE_KELVIN_RANGE,
-      hasInjectionTemperatureFeature: false
+      hasInjectionTemperatureFeature: false,
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.numberOfParticlesProperty = numberOfParticlesProperty;
     this.getAverageKineticEnergy = getAverageKineticEnergy;

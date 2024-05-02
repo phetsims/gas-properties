@@ -245,7 +245,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const pressureGaugeListboxParent = new Node();
 
     // Pressure Gauge
-    const pressureGaugeNode = new PressureGaugeNode( model.pressureModel.pressureGauge, pressureGaugeListboxParent, {
+    const pressureGaugeNode = new PressureGaugeNode( model.pressureModel, pressureGaugeListboxParent, {
       tandem: options.tandem.createTandem( 'pressureGaugeNode' )
     } );
     pressureGaugeNode.boundsProperty.link( bounds => {

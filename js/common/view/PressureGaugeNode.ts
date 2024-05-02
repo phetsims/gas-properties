@@ -14,8 +14,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
-import PressureGauge from '../model/PressureGauge.js';
 import PressureDisplay from './PressureDisplay.js';
+import PressureModel from '../model/PressureModel.js';
 
 // constants
 const DIAL_RADIUS = 50;
@@ -27,7 +27,7 @@ type PressureGaugeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'
 
 export default class PressureGaugeNode extends Node {
 
-  public constructor( pressureGauge: PressureGauge, listboxParent: Node, providedOptions: PressureGaugeNodeOptions ) {
+  public constructor( pressureModel: PressureModel, listboxParent: Node, providedOptions: PressureGaugeNodeOptions ) {
 
     const options = optionize<PressureGaugeNodeOptions, SelfOptions, NodeOptions>()( {
 
@@ -36,8 +36,8 @@ export default class PressureGaugeNode extends Node {
     }, providedOptions );
 
     // circular dial with needle
-    const gaugeNode = new GaugeNode( pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressureStringProperty,
-      pressureGauge.pressureRange, {
+    const gaugeNode = new GaugeNode( pressureModel.pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressureStringProperty,
+      pressureModel.pressureGauge.pressureRange, {
         radius: DIAL_RADIUS,
         tandem: Tandem.OPT_OUT
       } );
@@ -50,7 +50,7 @@ export default class PressureGaugeNode extends Node {
     } );
 
     // combo box to display value and choose units
-    const comboBox = new PressureDisplay( pressureGauge, listboxParent, {
+    const comboBox = new PressureDisplay( pressureModel.pressureGauge, listboxParent, {
       maxWidth: gaugeNode.width,
       tandem: options.tandem.createTandem( 'comboBox' )
     } );
@@ -62,6 +62,8 @@ export default class PressureGaugeNode extends Node {
     options.children = [ postNode, gaugeNode, comboBox ];
 
     super( options );
+
+    this.addLinkedElement( pressureModel );
 
     // Red dot at the origin, for debugging layout
     if ( GasPropertiesQueryParameters.origin ) {

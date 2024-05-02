@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import gasProperties from '../../gasProperties.js';
@@ -18,11 +17,12 @@ import { HoldConstant } from './HoldConstant.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 
 // Maximum pressure, in kPa. When exceeded, the lid blows off of the container.
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
 
-export default class PressureModel {
+export default class PressureModel extends PhetioObject {
 
   private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
   private readonly volumeProperty: TReadOnlyProperty<number>;
@@ -44,6 +44,12 @@ export default class PressureModel {
                       temperatureProperty: TReadOnlyProperty<number | null>,
                       blowLidOff: () => void,
                       tandem: Tandem ) {
+
+    super( {
+      isDisposable: false,
+      tandem: tandem,
+      phetioState: false
+    } );
 
     this.numberOfParticlesProperty = numberOfParticlesProperty;
     this.volumeProperty = volumeProperty;
@@ -71,10 +77,6 @@ export default class PressureModel {
         this.updatePressureEnabled = false;
       }
     } );
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public reset(): void {

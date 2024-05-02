@@ -12,7 +12,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -29,6 +28,7 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import { HoldConstant } from './HoldConstant.js';
 import { PressureUnits, PressureUnitsValues } from './PressureUnits.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 
 // constants
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure; // kPa
@@ -36,7 +36,7 @@ const MIN_NOISE = 0; // minimum amount of noise, in kPa
 const MAX_NOISE = 50; // maximum amount of noise, in kPa
 assert && assert( MIN_NOISE < MAX_NOISE, 'MIN_NOISE must be < MAX_NOISE' );
 
-export default class PressureGauge {
+export default class PressureGauge extends PhetioObject {
 
   // pressure in the container, in kPa
   private readonly pressureProperty: TReadOnlyProperty<number>;
@@ -74,6 +74,12 @@ export default class PressureGauge {
                       temperatureProperty: TReadOnlyProperty<number | null>,
                       holdConstantProperty: StringUnionProperty<HoldConstant>,
                       tandem: Tandem ) {
+
+    super( {
+      isDisposable: false,
+      tandem: tandem,
+      phetioState: false
+    } );
 
     this.pressureProperty = pressureProperty;
     this.temperatureProperty = temperatureProperty;
@@ -118,10 +124,6 @@ export default class PressureGauge {
     } );
 
     this.dtAccumulator = 0;
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public reset(): void {

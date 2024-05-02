@@ -61,6 +61,8 @@ export default class GasPropertiesThermometerNode extends VBox {
     options.children = [ comboBox, thermometerNode ];
 
     super( options );
+
+    this.addLinkedElement( temperatureModel );
   }
 }
 
