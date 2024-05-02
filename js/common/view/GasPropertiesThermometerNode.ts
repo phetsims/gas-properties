@@ -34,13 +34,13 @@ export default class GasPropertiesThermometerNode extends VBox {
 
     // temperatureKelvinProperty is null when there are no particles in the container.
     // Map null to zero, since ThermometerNode doesn't support null values.
-    const temperatureNumberProperty = new DerivedProperty(
+    const privateTemperatureProperty = new DerivedProperty(
       [ temperatureModel.temperatureKelvinProperty ],
       temperature => ( temperature === null ) ? 0 : temperature, {
         valueType: 'number'
       } );
 
-    const thermometerNode = new ThermometerNode( temperatureNumberProperty,
+    const thermometerNode = new ThermometerNode( privateTemperatureProperty,
       temperatureModel.temperatureKelvinRange.min, temperatureModel.temperatureKelvinRange.max, {
       backgroundFill: 'white',
       bulbDiameter: 30,

@@ -83,6 +83,7 @@ export default class BaseModel implements TModel {
 
     this.modelBoundsProperty = new Property( new Bounds2( 0, 0, 1, 1 ), {
       tandem: options.tandem.createTandem( 'modelBoundsProperty' ),
+      phetioReadOnly: true,
       phetioValueType: Bounds2.Bounds2IO,
       phetioDocumentation: 'Visible bounds of the browser window, in model coordinates. ' +
                            'The origin is at the bottom-right corner of the container.'

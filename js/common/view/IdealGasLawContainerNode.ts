@@ -93,6 +93,7 @@ export default class IdealGasLawContainerNode extends Node {
     const resizeHandleNodeTandem = options.tandem.createTandem( 'resizeHandleNode' );
     const resizeHandleVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'resizeHandleVisibleProperty' ),
+      phetioReadOnly: true, // Sim controls this.
       phetioDocumentation: 'For internal use only.'
     } );
     const hasResizeHandleProperty = new BooleanProperty( true, {
@@ -111,6 +112,7 @@ export default class IdealGasLawContainerNode extends Node {
     const lidHandleNodeTandem = options.tandem.createTandem( 'lidHandleNode' );
     const lidHandleVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'lidHandleVisibleProperty' ),
+      phetioReadOnly: true, // Sim controls this.
       phetioDocumentation: 'For internal use only.'
     } );
     const hasLidHandleProperty = new BooleanProperty( true, {

@@ -78,6 +78,7 @@ export default class CollisionCounter extends PhetioObject {
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
       tandem: options.tandem.createTandem( 'numberOfCollisionsProperty' ),
+      phetioReadOnly: true,
       phetioFeatured: true,
       phetioDocumentation: 'The number of collisions recorded, as shown on the collision counter.'
     } );

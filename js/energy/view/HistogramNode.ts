@@ -27,6 +27,7 @@ import HistogramsModel from '../model/HistogramsModel.js';
 import BinCountsPlot from './BinCountsPlot.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
 const TICK_LABEL_FONT = new PhetFont( 12 );
@@ -160,8 +161,12 @@ export default class HistogramNode extends Node {
     // Tick label at yMax. Since we only have one tick mark, do not use bamboo.TickLabelSet.
     // Use a NumberDisplay so that it has constant width.
     const yMaxProperty = new DerivedProperty( [ zoomLevelIndexProperty ],
-      zoomLevelIndex => HistogramsModel.ZOOM_LEVELS[ zoomLevelIndex ].yMax
-    );
+      zoomLevelIndex => HistogramsModel.ZOOM_LEVELS[ zoomLevelIndex ].yMax, {
+        phetioValueType: NumberIO,
+        tandem: options.tandem.createTandem( 'yMaxProperty' ),
+        phetioFeatured: true,
+        phetioDocumentation: 'The maximum y value shown on the histogram\'s y-axis.'
+      } );
     const sortedZoomLevels = _.sortBy( HistogramsModel.ZOOM_LEVELS, [ 'yMax' ] );
     const yMaxRange = new Range( sortedZoomLevels[ 0 ].yMax, sortedZoomLevels[ sortedZoomLevels.length - 1 ].yMax );
     const yMaxTickLabel = new NumberDisplay( yMaxProperty, yMaxRange, {

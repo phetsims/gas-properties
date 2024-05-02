@@ -126,6 +126,7 @@ export default class HistogramsModel {
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'heavySpeedBinCountsProperty' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the speed of heavy particles (time averaged). ${speedBinsDocumentation}`
       } ) );
 
@@ -133,6 +134,7 @@ export default class HistogramsModel {
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'lightSpeedBinCountsProperty' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the speed of light particles (time averaged). ${speedBinsDocumentation}`
       } ) );
 
@@ -140,6 +142,7 @@ export default class HistogramsModel {
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'totalSpeedBinCountsProperty' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the speed of all particles (time averaged). ${speedBinsDocumentation}`
       } ) );
 
@@ -150,6 +153,7 @@ export default class HistogramsModel {
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'heavyKineticEnergyBinCountsProperty' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the kinetic energy of heavy particles (time averaged). ${kineticEnergyBinsDocumentation}`
       } ) );
 
@@ -157,6 +161,7 @@ export default class HistogramsModel {
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'lightKineticEnergyBinCountsProperty' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the kinetic energy of light particles (time averaged). ${kineticEnergyBinsDocumentation}`
       } ) );
 
@@ -164,6 +169,7 @@ export default class HistogramsModel {
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'totalKineticEnergyBinCountsProperty' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the kinetic energy of all particles (time averaged). ${kineticEnergyBinsDocumentation}`
       } ) );
 
@@ -171,7 +177,6 @@ export default class HistogramsModel {
       numberType: 'Integer',
       range: new Range( 0, HistogramsModel.ZOOM_LEVELS.length - 1 ),
       tandem: options.tandem.createTandem( 'zoomLevelIndexProperty' ),
-      phetioReadOnly: true,
       phetioFeatured: true,
       phetioDocumentation: 'Zoom level shared by the Speed and Kinetic Energy histograms. A larger value is more zoomed in.'
     } );

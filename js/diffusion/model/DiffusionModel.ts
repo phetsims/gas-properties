@@ -146,6 +146,7 @@ export default class DiffusionModel extends BaseModel {
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: centerOfMassTandem.createTandem( 'centerOfMass1Property' ),
+        phetioReadOnly: true,
         phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 1. This is the x offset from the center of the container.'
       } ) );
@@ -153,6 +154,7 @@ export default class DiffusionModel extends BaseModel {
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: centerOfMassTandem.createTandem( 'centerOfMass2Property' ),
+        phetioReadOnly: true,
         phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 2. This is the x offset from the center of the container.'
       } ) );

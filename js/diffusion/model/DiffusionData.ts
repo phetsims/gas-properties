@@ -51,6 +51,7 @@ export default class DiffusionData {
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles1Property' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Number of particles of type 1 that are in the ${leftOrRightString} half of the container.`
       } ) );
 
@@ -58,6 +59,7 @@ export default class DiffusionData {
       combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'numberOfParticles2Property' ),
         phetioFeatured: true,
+        phetioReadOnly: true,
         phetioDocumentation: `Number of particles of type 2 that are in the ${leftOrRightString} half of the container.`
       } ) );
 
