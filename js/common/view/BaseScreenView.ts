@@ -19,7 +19,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = {
-  hasSlowMotion?: boolean;
+  hasTimeSpeedFeature?: boolean;
 };
 
 export type BaseScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
@@ -39,7 +39,7 @@ export default abstract class BaseScreenView extends ScreenView {
     const options = optionize<BaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
 
       // SelfOptions
-      hasSlowMotion: false,
+      hasTimeSpeedFeature: false,
 
       // ScreenViewOptions
       isDisposable: false
@@ -59,7 +59,7 @@ export default abstract class BaseScreenView extends ScreenView {
     this.timeControlNode = new TimeControlNode( model.isPlayingProperty, {
 
       // optional Normal/Slow radio buttons
-      timeSpeedProperty: options.hasSlowMotion ? model.timeSpeedProperty : null,
+      timeSpeedProperty: options.hasTimeSpeedFeature ? model.timeSpeedProperty : null,
       buttonGroupXSpacing: 25,
       speedRadioButtonGroupOptions: {
         labelOptions: {

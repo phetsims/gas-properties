@@ -28,6 +28,7 @@ import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import TimeTransform from './TimeTransform.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
@@ -38,8 +39,11 @@ type SelfOptions = {
   // Determined empirically, and dependent on the ScreenView's layoutBounds.
   modelOriginOffset?: Vector2;
 
-  // Stopwatch initial position (in view coordinates!), determined empirically.
+  // Stopwatch initial position, in view coordinates.
   stopwatchPosition?: Vector2;
+
+  // Whether the time controls will have radio buttons for selecting speed.
+  hasTimeSpeedFeature?: boolean;
 };
 
 export type BaseModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
@@ -65,12 +69,10 @@ export default class BaseModel implements TModel {
 
     const options = optionize<BaseModelOptions, SelfOptions>()( {
 
-      // Offset of the model's origin, in view coordinates. Determines where the container's bottom-right corner is.
-      // Determined empirically, and dependent on the ScreenView's layoutBounds.
+      // SelfOptions
       modelOriginOffset: new Vector2( 645, 475 ),
-
-      // Stopwatch initial position (in view coordinates!), determined empirically.
-      stopwatchPosition: new Vector2( 240, 15 )
+      stopwatchPosition: new Vector2( 240, 15 ),
+      hasTimeSpeedFeature: false
     }, providedOptions );
 
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
@@ -91,7 +93,8 @@ export default class BaseModel implements TModel {
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
-      tandem: options.tandem.createTandem( 'timeSpeedProperty' )
+      validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ],
+      tandem: options.hasTimeSpeedFeature ? options.tandem.createTandem( 'timeSpeedProperty' ) : Tandem.OPT_OUT
     } );
 
     this.stopwatch = new Stopwatch( {
