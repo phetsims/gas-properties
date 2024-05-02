@@ -85,6 +85,7 @@ export default class ParticleSystem {
       numberType: 'Integer',
       range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
       tandem: tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Number of heavy particles in the container. ' +
                            `(mass = ${GasPropertiesConstants.HEAVY_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.HEAVY_PARTICLES_RADIUS} pm)`,
       hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
@@ -94,6 +95,7 @@ export default class ParticleSystem {
       numberType: 'Integer',
       range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
       tandem: tandem.createTandem( 'numberOfLightParticlesProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Number of light particles in the container. ' +
                            `(mass = ${GasPropertiesConstants.LIGHT_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.LIGHT_PARTICLES_RADIUS} pm)`,
       hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
@@ -126,6 +128,7 @@ export default class ParticleSystem {
         valueType: 'number',
         isValidValue: value => value >= 0,
         tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
+        phetioFeatured: true,
         phetioDocumentation: 'Total number of particles in the container.'
       }
     );
