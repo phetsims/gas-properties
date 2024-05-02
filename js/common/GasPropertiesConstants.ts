@@ -47,6 +47,10 @@ const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
     sideLength: 20,
     touchAreaXDilation: 6,
     touchAreaYDilation: 6
+  },
+  phetioFeatured: true,
+  visiblePropertyOptions: {
+    phetioFeatured: true
   }
 };
 
@@ -57,7 +61,8 @@ const AQUA_RADIO_BUTTON_OPTIONS: AquaRadioButtonOptions = {
 
 const CHECKBOX_OPTIONS: CheckboxOptions = {
   spacing: 8,
-  boxWidth: 16
+  boxWidth: 16,
+  phetioFeatured: true
 };
 
 const COMBO_BOX_DISPLAY_OPTIONS: ComboBoxDisplayOptions = {
@@ -65,7 +70,8 @@ const COMBO_BOX_DISPLAY_OPTIONS: ComboBoxDisplayOptions = {
   align: 'right',
   cornerRadius: 5,
   xMargin: 5,
-  yMargin: 4
+  yMargin: 4,
+  phetioFeatured: true
 };
 
 const PANEL_OPTIONS: PanelOptions = {
@@ -74,7 +80,11 @@ const PANEL_OPTIONS: PanelOptions = {
   xMargin: PANEL_X_MARGIN,
   yMargin: PANEL_Y_MARGIN,
   fill: GasPropertiesColors.panelFillProperty,
-  stroke: GasPropertiesColors.panelStrokeProperty
+  stroke: GasPropertiesColors.panelStrokeProperty,
+  phetioFeatured: true,
+  visiblePropertyOptions: {
+    phetioFeatured: true
+  }
 };
 
 const SCREEN_OPTIONS: Partial<ScreenOptions> = {

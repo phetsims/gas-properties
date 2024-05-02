@@ -82,7 +82,8 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
         snapToZeroPropertyOptions: {
           tandem: Tandem.OPT_OUT
         }
-      }
+      },
+      phetioFeatured: true
     }, providedOptions );
 
     // Private Property that either corresponds to the model or is animated, depending on the Hold Constant mode.

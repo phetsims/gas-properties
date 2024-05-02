@@ -25,21 +25,25 @@ export default class EnergyViewProperties extends IdealGasLawViewProperties {
 
     this.averageSpeedExpandedProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'averageSpeedExpandedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the Average Speed accordion box is expanded'
     } );
 
     this.speedExpandedProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'speedExpandedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the Speed accordion box is expanded'
     } );
 
     this.kineticEnergyExpandedProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'kineticEnergyExpandedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the Kinetic Energy accordion box is expanded'
     } );
 
     this.injectionTemperatureExpandedProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'injectionTemperatureExpandedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the Injection Temperature accordion box is expanded'
     } );
   }

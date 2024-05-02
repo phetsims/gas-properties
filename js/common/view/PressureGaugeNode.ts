@@ -32,7 +32,8 @@ export default class PressureGaugeNode extends Node {
     const options = optionize<PressureGaugeNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      phetioFeatured: true
     }, providedOptions );
 
     // circular dial with needle

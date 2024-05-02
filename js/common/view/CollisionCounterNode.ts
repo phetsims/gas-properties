@@ -55,7 +55,8 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
       visibleProperty: collisionCounter.visibleProperty,
       tagName: 'div', // for KeyboardDragListener
       focusable: true, // for KeyboardDragListener
-      groupFocusHighlight: true
+      groupFocusHighlight: true,
+      phetioFeatured: true
     }, providedOptions );
 
     const wallCollisionsText = new Text( GasPropertiesStrings.wallCollisionsStringProperty, {

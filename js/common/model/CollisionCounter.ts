@@ -61,7 +61,8 @@ export default class CollisionCounter extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioState: false
+      phetioState: false,
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );

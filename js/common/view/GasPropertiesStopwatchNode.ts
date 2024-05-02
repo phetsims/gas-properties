@@ -50,7 +50,8 @@ export default class GasPropertiesStopwatchNode extends StopwatchNode {
       keyboardDragListenerOptions: {
         dragSpeed: 300,
         shiftDragSpeed: 75
-      }
+      },
+      phetioFeatured: true
     }, providedOptions );
 
     super( stopwatch, options );

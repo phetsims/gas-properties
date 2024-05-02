@@ -23,21 +23,25 @@ export default class DiffusionViewProperties {
 
     this.dataExpandedProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'dataExpandedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the Data accordion box is expanded.'
     } );
 
     this.particleFlowRateVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'particleFlowRateVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether particle flow rate vectors are visible below the container.'
     } );
 
     this.centerOfMassVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'centerOfMassVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the center-of-mass indicators are visible on the container.'
     } );
 
     this.scaleVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'scaleVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the scale is visible on the container.'
     } );
   }

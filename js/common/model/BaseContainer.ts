@@ -64,7 +64,8 @@ export default class BaseContainer extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioState: false
+      phetioState: false,
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );

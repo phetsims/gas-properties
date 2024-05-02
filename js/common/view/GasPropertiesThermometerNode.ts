@@ -28,7 +28,8 @@ export default class GasPropertiesThermometerNode extends VBox {
       // VBoxOptions
       isDisposable: false,
       spacing: 5,
-      align: 'center'
+      align: 'center',
+      phetioFeatured: true
     }, providedOptions );
 
     // temperatureKelvinProperty is null when there are no particles in the container.

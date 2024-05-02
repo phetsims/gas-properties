@@ -105,7 +105,8 @@ export default class BaseModel implements TModel {
         range: new Range( 0, GasPropertiesConstants.MAX_TIME ),
         units: 'ps'
       },
-      tandem: options.tandem.createTandem( 'stopwatch' )
+      tandem: options.tandem.createTandem( 'stopwatch' ),
+      phetioFeatured: true
     } );
   }
 
