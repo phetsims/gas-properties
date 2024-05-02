@@ -31,7 +31,6 @@ import CollisionDetector from './CollisionDetector.js';
 import { HoldConstant, HoldConstantValues } from './HoldConstant.js';
 import IdealGasLawContainer, { IdealGasLawContainerOptions } from './IdealGasLawContainer.js';
 import ParticleSystem from './ParticleSystem.js';
-import PressureGauge from './PressureGauge.js';
 import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -390,8 +389,8 @@ export default class IdealGasLawModel extends BaseModel {
   protected updateWhenPaused(): void {
     assert && assert( !this.isPlayingProperty.value, 'call this method only when paused' );
 
-    // Using the pressure gauge's refresh period causes it to update immediately.
-    this.updateModel( PressureGauge.REFRESH_PERIOD, 0 /* numberOfCollisions */ );
+    // Using the pressure model's refresh period causes it to update immediately.
+    this.updateModel( PressureModel.REFRESH_PERIOD, 0 /* numberOfCollisions */ );
   }
 
   /**

@@ -36,8 +36,8 @@ export default class PressureGaugeNode extends Node {
     }, providedOptions );
 
     // circular dial with needle
-    const gaugeNode = new GaugeNode( pressureModel.pressureGauge.pressureKilopascalsProperty, GasPropertiesStrings.pressureStringProperty,
-      pressureModel.pressureGauge.pressureRange, {
+    const gaugeNode = new GaugeNode( pressureModel.pressureKilopascalsProperty, GasPropertiesStrings.pressureStringProperty,
+      pressureModel.pressureRange, {
         radius: DIAL_RADIUS,
         tandem: Tandem.OPT_OUT
       } );
@@ -50,7 +50,7 @@ export default class PressureGaugeNode extends Node {
     } );
 
     // combo box to display value and choose units
-    const comboBox = new PressureDisplay( pressureModel.pressureGauge, listboxParent, {
+    const comboBox = new PressureDisplay( pressureModel, listboxParent, {
       maxWidth: gaugeNode.width,
       tandem: options.tandem.createTandem( 'comboBox' )
     } );

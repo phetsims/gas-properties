@@ -16,8 +16,8 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
-import PressureGauge from '../model/PressureGauge.js';
 import { PressureUnits } from '../model/PressureUnits.js';
+import PressureModel from '../model/PressureModel.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPressure );
@@ -30,7 +30,7 @@ type PressureDisplayOptions = SelfOptions &
 
 export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
 
-  public constructor( pressureGauge: PressureGauge, listboxParent: Node, providedOptions: PressureDisplayOptions ) {
+  public constructor( pressureModel: PressureModel, listboxParent: Node, providedOptions: PressureDisplayOptions ) {
 
     const options = optionize4<PressureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
       {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, {
@@ -41,7 +41,7 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
       {
         choice: 'atmospheres',
         tandemName: 'atmospheresItem',
-        numberProperty: pressureGauge.pressureAtmospheresProperty,
+        numberProperty: pressureModel.pressureAtmospheresProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.atmospheresStringProperty,
         numberDisplayOptions: {
@@ -51,7 +51,7 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
       {
         choice: 'kilopascals',
         tandemName: 'kilopascalsItem',
-        numberProperty: pressureGauge.pressureKilopascalsProperty,
+        numberProperty: pressureModel.pressureKilopascalsProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kilopascalsStringProperty,
         numberDisplayOptions: {
@@ -60,7 +60,7 @@ export default class PressureDisplay extends ComboBoxDisplay<PressureUnits> {
       }
     ];
 
-    super( pressureGauge.unitsProperty, items, listboxParent, options );
+    super( pressureModel.unitsProperty, items, listboxParent, options );
   }
 }
 
