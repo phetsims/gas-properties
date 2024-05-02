@@ -48,9 +48,9 @@ export default class HistogramNode extends Node {
   private readonly lightPlotNode: BinCountsPlot;
 
   // Data for each plot.
-  private readonly allBinCountsProperty: Property<number[]>;
   private readonly heavyBinCountsProperty: Property<number[]>;
   private readonly lightBinCountsProperty: Property<number[]>;
+  private readonly totalBinCountsProperty: Property<number[]>;
 
   // Visibility of species-specific plots.
   public readonly heavyPlotVisibleProperty: Property<boolean>;
@@ -60,13 +60,18 @@ export default class HistogramNode extends Node {
   // This is used to prevent updates when the accordion box containing a histogram is collapsed.
   public readonly updateEnabledProperty: Property<boolean>;
 
+  public reset(): void {
+    this.heavyPlotVisibleProperty.reset();
+    this.lightPlotVisibleProperty.reset();
+  }
+
   /**
    * @param numberOfBins
    * @param binWidth
    * @param binCountsUpdatedEmitter - notifies when the bin counts have changed
-   * @param allBinCountsProperty  - bin counts for all particles
    * @param heavyBinCountsProperty - bin counts for heavy particles
    * @param lightBinCountsProperty - bin counts for light particles
+   * @param totalBinCountsProperty  - bin counts for total particles
    * @param zoomLevelIndexProperty - index into HistogramsModel.ZOOM_LEVELS
    * @param xAxisStringProperty - label on the x-axis
    * @param yAxisStringProperty - label on the y-axis
@@ -75,9 +80,9 @@ export default class HistogramNode extends Node {
   protected constructor( numberOfBins: number,
                          binWidth: number,
                          binCountsUpdatedEmitter: Emitter,
-                         allBinCountsProperty: Property<number[]>,
                          heavyBinCountsProperty: Property<number[]>,
                          lightBinCountsProperty: Property<number[]>,
+                         totalBinCountsProperty: Property<number[]>,
                          zoomLevelIndexProperty: NumberProperty,
                          xAxisStringProperty: TReadOnlyProperty<string>,
                          yAxisStringProperty: TReadOnlyProperty<string>,
@@ -175,7 +180,7 @@ export default class HistogramNode extends Node {
     } );
 
     // Plot for all particles.
-    const allPlotNode = new BinCountsPlot( chartTransform, allBinCountsProperty.value, {
+    const allPlotNode = new BinCountsPlot( chartTransform, totalBinCountsProperty.value, {
       closeShape: true,
       fill: options.barColor
     } );
@@ -203,7 +208,7 @@ export default class HistogramNode extends Node {
     this.allPlotNode = allPlotNode;
     this.heavyPlotNode = heavyPlotNode;
     this.lightPlotNode = lightPlotNode;
-    this.allBinCountsProperty = allBinCountsProperty;
+    this.totalBinCountsProperty = totalBinCountsProperty;
     this.heavyBinCountsProperty = heavyBinCountsProperty;
     this.lightBinCountsProperty = lightBinCountsProperty;
 
@@ -255,17 +260,12 @@ export default class HistogramNode extends Node {
     } );
   }
 
-  public reset(): void {
-    this.heavyPlotVisibleProperty.reset();
-    this.lightPlotVisibleProperty.reset();
-  }
-
   /**
    * Updates plots to display the current bin counts. Update species-specific plots only if they are visible.
    */
   private update(): void {
     if ( this.updateEnabledProperty.value ) {
-      this.allPlotNode.setBinCounts( this.allBinCountsProperty.value );
+      this.allPlotNode.setBinCounts( this.totalBinCountsProperty.value );
 
       if ( this.heavyPlotVisibleProperty.value ) {
         this.heavyPlotNode.setBinCounts( this.heavyBinCountsProperty.value );
