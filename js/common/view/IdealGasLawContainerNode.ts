@@ -65,6 +65,7 @@ export default class IdealGasLawContainerNode extends Node {
 
       // NodeOptions
       isDisposable: false,
+      phetioFeatured: true,
       phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
@@ -93,6 +94,7 @@ export default class IdealGasLawContainerNode extends Node {
     const resizeHandleVisibleProperty = new BooleanProperty( true );
     const hasResizeHandleProperty = new BooleanProperty( true, {
       tandem: resizeHandleNodeTandem.createTandem( 'hasResizeHandleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Use this Property to permanently hide the container\'s resize handle.'
     } );
     const resizeHandleNode = new ResizeHandleNode( {
@@ -107,6 +109,7 @@ export default class IdealGasLawContainerNode extends Node {
     const lidHandleVisibleProperty = new BooleanProperty( true );
     const hasLidHandleProperty = new BooleanProperty( true, {
       tandem: lidHandleNodeTandem.createTandem( 'hasLidHandleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Use this Property to permanently hide the container\'s lid handle.'
     } );
     const lidNode = new LidNode( {
