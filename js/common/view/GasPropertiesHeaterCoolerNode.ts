@@ -94,6 +94,9 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
     super( privateHeatCoolAmountProperty, options );
 
+    // Create a link because the slider is controlling privateHeatCoolAmountProperty, which is not instrumented.
+    this.addLinkedElement( heatCoolAmountProperty );
+
     // When the model applies heat/cool, update the private Property.
     heatCoolAmountProperty.link( heatCoolAmount => {
       privateHeatCoolAmountProperty.value = heatCoolAmount;
