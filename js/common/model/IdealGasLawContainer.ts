@@ -79,6 +79,7 @@ export default class IdealGasLawContainer extends BaseContainer {
     this.lidIsOnProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'lidIsOnProperty' ),
       phetioReadOnly: true, // derived from state of the particle system
+      phetioFeatured: true,
       phetioDocumentation: 'Indicates whether the lid is on the container, or has been blown off.'
     } );
 
@@ -125,6 +126,7 @@ export default class IdealGasLawContainer extends BaseContainer {
       [ this.lidIsOnProperty, this.lidWidthProperty, this.widthProperty ],
       ( lidIsOn, lidWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() ), {
         tandem: options.tandem.createTandem( 'isOpenProperty' ),
+        phetioFeatured: true,
         phetioValueType: BooleanIO
       } );
   }

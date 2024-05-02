@@ -99,6 +99,7 @@ export default class PressureModel extends PhetioObject {
       isValidValue: value => ( value >= 0 ),
       tandem: tandem.createTandem( 'pressureKilopascalsProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system,
+      phetioFeatured: true,
       phetioDocumentation: 'Pressure in kPa, with no noise.'
     } );
 
@@ -108,6 +109,7 @@ export default class PressureModel extends PhetioObject {
       isValidValue: value => ( value >= 0 ),
       tandem: tandem.createTandem( 'pressureKilopascalsNoiseProperty' ),
       phetioReadOnly: true, // value is derived from pressureKilopascalsProperty on step, with noise added
+      phetioFeatured: true,
       phetioDocumentation: 'Pressure in kPa, with optional noise added.'
     } );
 
@@ -118,6 +120,7 @@ export default class PressureModel extends PhetioObject {
         valueType: 'number',
         phetioValueType: NumberIO,
         tandem: tandem.createTandem( 'pressureAtmospheresNoiseProperty' ),
+        phetioFeatured: true,
         phetioDocumentation: 'Pressure in atm, with optional noise added.'
       } );
 
@@ -128,6 +131,7 @@ export default class PressureModel extends PhetioObject {
     this.unitsProperty = new StringUnionProperty<PressureUnits>( 'atmospheres', {
       validValues: PressureUnitsValues,
       tandem: tandem.createTandem( 'unitsProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Units displayed by the pressure gauge.'
     } );
 

@@ -89,12 +89,14 @@ export default class BaseModel implements TModel {
     } );
 
     this.isPlayingProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'isPlayingProperty' )
+      tandem: options.tandem.createTandem( 'isPlayingProperty' ),
+      phetioFeatured: true
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ],
-      tandem: options.hasTimeSpeedFeature ? options.tandem.createTandem( 'timeSpeedProperty' ) : Tandem.OPT_OUT
+      tandem: options.hasTimeSpeedFeature ? options.tandem.createTandem( 'timeSpeedProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true
     } );
 
     this.stopwatch = new Stopwatch( {

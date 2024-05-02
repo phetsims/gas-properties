@@ -91,6 +91,7 @@ export default class TemperatureModel extends PhetioObject {
       phetioValueType: NullableIO( NumberIO ),
       tandem: options.tandem.createTandem( 'temperatureKelvinProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system
+      phetioFeatured: true,
       phetioDocumentation: 'Temperature in K.'
     } );
 
@@ -100,12 +101,14 @@ export default class TemperatureModel extends PhetioObject {
         isValidValue: value => ( value === null || value !== 0 ),
         phetioValueType: NullableIO( NumberIO ),
         tandem: options.tandem.createTandem( 'temperatureCelsiusProperty' ),
+        phetioFeatured: true,
         phetioDocumentation: 'Temperature in degrees C.'
       } );
 
     this.unitsProperty = new StringUnionProperty<TemperatureUnits>( 'kelvin', {
       validValues: TemperatureUnitsValues,
       tandem: options.tandem.createTandem( 'unitsProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Units displayed by the thermometer.'
     } );
 

@@ -132,6 +132,7 @@ export default class IdealGasLawModel extends BaseModel {
       validValues: options.holdConstantValues,
       tandem: options.hasHoldConstantFeature ? options.tandem.createTandem( 'holdConstantProperty' ) : Tandem.OPT_OUT,
       phetioReadOnly: true,
+      phetioFeatured: true,
       phetioDocumentation: 'Determines which quantity will be held constant.'
     } );
 
@@ -139,6 +140,7 @@ export default class IdealGasLawModel extends BaseModel {
       range: new Range( -1, 1 ),
       tandem: options.tandem.createTandem( 'heatCoolAmountProperty' ),
       phetioReadOnly: options.hasHoldConstantFeature, // With the Hold Constant feature, the sim animates this Property.
+      phetioFeatured: true,
       phetioDocumentation: 'Amount of heat or cool applied to particles in the container. ' +
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off.'
     } );
