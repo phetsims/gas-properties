@@ -91,7 +91,7 @@ export default class PressureGauge extends PhetioObject {
       isValidValue: value => ( value >= 0 ),
       tandem: tandem.createTandem( 'pressureKilopascalsProperty' ),
       phetioReadOnly: true, // value is derived from pressureProperty on step, with noise added
-      phetioDocumentation: 'Pressure in K, with optional noise added.'
+      phetioDocumentation: 'Pressure in kPa, with optional noise added.'
     } );
 
     // When pressure goes to zero, update the gauge immediately.
