@@ -77,7 +77,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       scale: 0.8,
       frontOptions: {
         sliderOptions: {
-          tandem: Tandem.OPT_OUT
+          phetioVisiblePropertyInstrumented: false // Sim controls visibleProperty.
         },
         snapToZeroPropertyOptions: {
           tandem: Tandem.OPT_OUT

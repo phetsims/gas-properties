@@ -221,7 +221,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     const bicyclePumpNode = new Node( {
       children: [ bicyclePumpsToggleNode, particleTypeRadioButtonGroup ],
-      tandem: bicyclePumpNodeTandem
+      tandem: bicyclePumpNodeTandem,
+      phetioInputEnabledPropertyInstrumented: true
     } );
     bicyclePumpNode.addLinkedElement( model.particleSystem.numberOfHeavyParticlesProperty );
     bicyclePumpNode.addLinkedElement( model.particleSystem.numberOfLightParticlesProperty );
