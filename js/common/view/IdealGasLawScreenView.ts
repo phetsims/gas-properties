@@ -233,7 +233,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const thermometerListboxParent = new Node();
 
     // Thermometer
-    const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel.thermometer, thermometerListboxParent, {
+    const thermometerNode = new GasPropertiesThermometerNode( model.temperatureModel, thermometerListboxParent, {
       tandem: options.tandem.createTandem( 'thermometerNode' )
     } );
     thermometerNode.boundsProperty.link( bounds => {
@@ -272,7 +272,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       model.holdConstantProperty,
       model.isPlayingProperty,
       model.particleSystem.numberOfParticlesProperty,
-      model.temperatureModel.temperatureProperty, {
+      model.temperatureModel.temperatureKelvinProperty, {
         left: heaterCoolerNodeLeft,
         bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
         tandem: options.tandem.createTandem( 'heaterCoolerNode' )

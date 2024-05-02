@@ -12,8 +12,8 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ThermometerNode from '../../../../scenery-phet/js/ThermometerNode.js';
 import { Node, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
-import Thermometer from '../model/Thermometer.js';
 import TemperatureDisplay from './TemperatureDisplay.js';
+import TemperatureModel from '../model/TemperatureModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -21,7 +21,7 @@ type GasPropertiesThermometerNodeOptions = SelfOptions & PickRequired<VBoxOption
 
 export default class GasPropertiesThermometerNode extends VBox {
 
-  public constructor( thermometer: Thermometer, listboxParent: Node, providedOptions: GasPropertiesThermometerNodeOptions ) {
+  public constructor( temperatureModel: TemperatureModel, listboxParent: Node, providedOptions: GasPropertiesThermometerNodeOptions ) {
 
     const options = optionize<GasPropertiesThermometerNodeOptions, SelfOptions, VBoxOptions>()( {
 
@@ -31,15 +31,16 @@ export default class GasPropertiesThermometerNode extends VBox {
       align: 'center'
     }, providedOptions );
 
-    // temperatureProperty is null when there are no particles in the container.
+    // temperatureKelvinProperty is null when there are no particles in the container.
     // Map null to zero, since ThermometerNode doesn't support null values.
     const temperatureNumberProperty = new DerivedProperty(
-      [ thermometer.temperatureKelvinProperty ],
+      [ temperatureModel.temperatureKelvinProperty ],
       temperature => ( temperature === null ) ? 0 : temperature, {
         valueType: 'number'
       } );
 
-    const thermometerNode = new ThermometerNode( temperatureNumberProperty, thermometer.range.min, thermometer.range.max, {
+    const thermometerNode = new ThermometerNode( temperatureNumberProperty,
+      temperatureModel.temperatureKelvinRange.min, temperatureModel.temperatureKelvinRange.max, {
       backgroundFill: 'white',
       bulbDiameter: 30,
       tubeHeight: 100,
@@ -52,7 +53,7 @@ export default class GasPropertiesThermometerNode extends VBox {
     } );
 
     // ComboBox that displays dynamic temperature for various units, centered above the thermometer
-    const comboBox = new TemperatureDisplay( thermometer, listboxParent, {
+    const comboBox = new TemperatureDisplay( temperatureModel, listboxParent, {
       maxWidth: 4 * thermometerNode.width,
       tandem: options.tandem.createTandem( 'comboBox' )
     } );

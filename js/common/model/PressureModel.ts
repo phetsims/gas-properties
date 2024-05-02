@@ -118,7 +118,7 @@ export default class PressureModel {
 
     const N = this.numberOfParticlesProperty.value;
     const k = GasPropertiesConstants.BOLTZMANN; // (pm^2 * AMU)/(ps^2 * K)
-    const T = this.temperatureProperty.value || 0; // in K, assumes temperatureProperty has been updated
+    const T = this.temperatureProperty.value || 0; // in K, assumes temperatureKelvinProperty has been updated
     const V = this.volumeProperty.value; // pm^3
     const P = ( N * k * T / V );
 

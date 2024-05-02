@@ -7,28 +7,33 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
+import Range from '../../../../dot/js/Range.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import Thermometer from './Thermometer.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import { TemperatureUnits, TemperatureUnitsValues } from './TemperatureUnits.js';
 
-// constants
+const DEFAULT_TEMPERATURE_KELVIN_RANGE = new Range( 0, 1000 ); // in K
 
 // temperature used to compute the initial speed for particles, in K
 const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
 
 type SelfOptions = {
+
+  // Temperature range, in K.
+  temperatureKelvinRange?: Range;
 
   // Determines whether Properties related to Injection Temperature will be instrumented.
   hasInjectionTemperatureFeature?: boolean;
@@ -41,17 +46,22 @@ export default class TemperatureModel {
   private readonly numberOfParticlesProperty: TReadOnlyProperty<number>;
   private readonly getAverageKineticEnergy: () => number;
 
-  // T, temperature in the container, in K, null when the container is empty
-  public readonly temperatureProperty: Property<number | null>;
+  public readonly temperatureKelvinRange: Range;
+
+  // Temperature in the container, in K. null when the container is empty.
+  public readonly temperatureKelvinProperty: Property<number | null>;
+
+  // Temperature in the container, in Celsius. null when the container is empty.
+  public readonly temperatureCelsiusProperty: TReadOnlyProperty<number | null>;
+
+  // Temperature units displayed by the thermometer.
+  public readonly unitsProperty: StringUnionProperty<TemperatureUnits>;
 
   // Whether injection temperature can be set by the user.
   public readonly setInjectionTemperatureEnabledProperty: Property<boolean>;
 
   // Injection temperature set by the user, in K. Ignored if !setInjectionTemperatureEnabledProperty.value
   public readonly injectionTemperatureProperty: NumberProperty;
-
-  // thermometer that displays temperatureProperty with a choice of units
-  public readonly thermometer: Thermometer;
 
   public constructor( numberOfParticlesProperty: TReadOnlyProperty<number>,
                       getAverageKineticEnergy: () => number,
@@ -60,19 +70,37 @@ export default class TemperatureModel {
     const options = optionize<TemperatureModelOptions, SelfOptions>()( {
 
       // SelfOptions
+      temperatureKelvinRange: DEFAULT_TEMPERATURE_KELVIN_RANGE,
       hasInjectionTemperatureFeature: false
     }, providedOptions );
 
     this.numberOfParticlesProperty = numberOfParticlesProperty;
     this.getAverageKineticEnergy = getAverageKineticEnergy;
 
-    this.temperatureProperty = new Property<number | null>( null, {
+    this.temperatureKelvinRange = options.temperatureKelvinRange;
+
+    this.temperatureKelvinProperty = new Property<number | null>( null, {
       units: 'K',
       isValidValue: value => ( value === null || value >= 0 ),
       phetioValueType: NullableIO( NumberIO ),
-      tandem: options.tandem.createTandem( 'temperatureProperty' ),
+      tandem: options.tandem.createTandem( 'temperatureKelvinProperty' ),
       phetioReadOnly: true, // value is derived from state of particle system
       phetioDocumentation: 'Temperature in K.'
+    } );
+
+    this.temperatureCelsiusProperty = new DerivedProperty( [ this.temperatureKelvinProperty ],
+      temperatureKelvin => ( temperatureKelvin === null ) ? null : temperatureKelvin - 273.15, {
+        units: '\u00B0C',
+        isValidValue: value => ( value === null || value !== 0 ),
+        phetioValueType: NullableIO( NumberIO ),
+        tandem: options.tandem.createTandem( 'temperatureCelsiusProperty' ),
+        phetioDocumentation: 'Temperature in degrees C.'
+      } );
+
+    this.unitsProperty = new StringUnionProperty<TemperatureUnits>( 'kelvin', {
+      validValues: TemperatureUnitsValues,
+      tandem: options.tandem.createTandem( 'unitsProperty' ),
+      phetioDocumentation: 'Units displayed by the thermometer.'
     } );
 
     this.setInjectionTemperatureEnabledProperty = new BooleanProperty( false, {
@@ -88,28 +116,19 @@ export default class TemperatureModel {
               options.tandem.createTandem( 'injectionTemperatureProperty' ) : Tandem.OPT_OUT,
       phetioDocumentation: 'Injection temperature set by the user.'
     } );
-
-    this.thermometer = new Thermometer( this.temperatureProperty, {
-      tandem: options.tandem.createTandem( 'thermometer' )
-    } );
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public reset(): void {
-    this.temperatureProperty.reset();
+    this.unitsProperty.reset();
     this.setInjectionTemperatureEnabledProperty.reset();
     this.injectionTemperatureProperty.reset();
-    this.thermometer.reset();
   }
 
   /**
    * Updates the model to match the state of the system.
    */
   public update(): void {
-    this.temperatureProperty.value = this.computeTemperature();
+    this.temperatureKelvinProperty.value = this.computeTemperature();
   }
 
   /**
@@ -124,10 +143,10 @@ export default class TemperatureModel {
       // User's setting
       initialTemperature = this.injectionTemperatureProperty.value;
     }
-    else if ( this.temperatureProperty.value !== null ) {
+    else if ( this.temperatureKelvinProperty.value !== null ) {
 
       // Current temperature in the container
-      initialTemperature = this.temperatureProperty.value;
+      initialTemperature = this.temperatureKelvinProperty.value;
     }
     else {
 

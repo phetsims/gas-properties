@@ -12,11 +12,11 @@ import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import Thermometer from '../model/Thermometer.js';
 import { TemperatureUnits } from '../model/TemperatureUnits.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import TemperatureModel from '../model/TemperatureModel.js';
 
 // constants
 const NUMBER_DISPLAY_RANGE = new Range( -99999, 99999 ); // determines how wide items in the ComboBoxDisplay will be
@@ -29,7 +29,7 @@ type TemperatureDisplayOptions = SelfOptions &
 
 export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits> {
 
-  public constructor( thermometer: Thermometer, listboxParent: Node, providedOptions: TemperatureDisplayOptions ) {
+  public constructor( temperatureModel: TemperatureModel, listboxParent: Node, providedOptions: TemperatureDisplayOptions ) {
 
     const options = optionize4<TemperatureDisplayOptions, SelfOptions, ComboBoxDisplayOptions>()(
       {}, GasPropertiesConstants.COMBO_BOX_DISPLAY_OPTIONS, {
@@ -40,20 +40,20 @@ export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits
       {
         choice: 'kelvin',
         tandemName: 'kelvinItem',
-        numberProperty: thermometer.temperatureKelvinProperty,
+        numberProperty: temperatureModel.temperatureKelvinProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.kelvinStringProperty
       },
       {
         choice: 'celsius',
         tandemName: 'celsiusItem',
-        numberProperty: thermometer.temperatureCelsiusProperty,
+        numberProperty: temperatureModel.temperatureCelsiusProperty,
         range: NUMBER_DISPLAY_RANGE,
         units: GasPropertiesStrings.degreesCelsiusStringProperty
       }
     ];
 
-    super( thermometer.unitsProperty, items, listboxParent, options );
+    super( temperatureModel.unitsProperty, items, listboxParent, options );
   }
 }
 

@@ -8,7 +8,7 @@
  * P (pressure) - see PressureModel pressureProperty
  * V (volume) - see BaseContainer volumeProperty
  * N (number of particles) - see ParticleSystem numberOfParticlesProperty
- * T (temperature) - see TemperatureModel temperatureProperty
+ * T (temperature) - see TemperatureModel temperatureKelvinProperty
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -179,7 +179,7 @@ export default class IdealGasLawModel extends BaseModel {
       this.holdConstantProperty,
       this.particleSystem.numberOfParticlesProperty, // N
       this.container.volumeProperty, // V
-      this.temperatureModel.temperatureProperty, // T
+      this.temperatureModel.temperatureKelvinProperty, // T
       () => { this.container.blowLidOff(); },
       options.tandem.createTandem( 'pressureModel' )
     );
@@ -274,11 +274,11 @@ export default class IdealGasLawModel extends BaseModel {
         // Workaround for https://github.com/phetsims/gas-properties/issues/168. Addresses an ordering problem where
         // the temperature model needs to update when this state occurs, but it's still null. Temperature is null
         // when the container is empty.
-        if ( this.temperatureModel.temperatureProperty.value === null ) {
+        if ( this.temperatureModel.temperatureKelvinProperty.value === null ) {
           this.temperatureModel.update();
         }
 
-        const temperature = this.temperatureModel.temperatureProperty.value!;
+        const temperature = this.temperatureModel.temperatureKelvinProperty.value!;
         assert && assert( temperature !== null );
 
         this.particleSystem.setTemperature( temperature );
@@ -457,7 +457,7 @@ export default class IdealGasLawModel extends BaseModel {
       assert && assert( Math.abs( desiredTemperature - this.computeIdealTemperature() ) < 1E-3,
         'actual temperature does not match desired temperature' );
 
-      this.temperatureModel.temperatureProperty.value = desiredTemperature;
+      this.temperatureModel.temperatureKelvinProperty.value = desiredTemperature;
     }
   }
 
@@ -466,7 +466,7 @@ export default class IdealGasLawModel extends BaseModel {
    */
   private verifyModel(): void {
 
-    const temperature = this.temperatureModel.temperatureProperty.value;
+    const temperature = this.temperatureModel.temperatureKelvinProperty.value;
 
     // If the maximum temperature was exceeded, reset the state of the container.
     // See https://github.com/phetsims/gas-properties/issues/128
@@ -486,7 +486,7 @@ export default class IdealGasLawModel extends BaseModel {
       this.container.lidIsOnProperty.value = true;
 
       // Notify listeners that maximum temperature was exceeded.
-      phet.log && phet.log( `Oops! Maximum temperature reached: ${this.temperatureModel.temperatureProperty.value}` );
+      phet.log && phet.log( `Oops! Maximum temperature reached: ${this.temperatureModel.temperatureKelvinProperty.value}` );
       this.oopsEmitters.maximumTemperatureEmitter.emit();
     }
   }
