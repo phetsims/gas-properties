@@ -16,6 +16,7 @@ const GasPropertiesPreferences = {
 
   pressureNoiseProperty: new BooleanProperty( GasPropertiesQueryParameters.pressureNoise, {
     tandem: Tandem.PREFERENCES.createTandem( 'pressureNoiseProperty' ),
+    phetioFeatured: true,
     phetioDocumentation: 'Turns noise on and off for the pressure gauge.'
   } )
 };

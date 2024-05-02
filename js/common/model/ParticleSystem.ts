@@ -98,6 +98,7 @@ export default class ParticleSystem extends PhetioObject {
     this.collisionsEnabledProperty = new BooleanProperty( true, {
       tandem: options.phetioCollisionsEnabledPropertyInstrumented ?
               options.tandem.createTandem( 'collisionsEnabledProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true,
       phetioDocumentation: 'Determines whether collisions between particles are enabled.'
     } );
 

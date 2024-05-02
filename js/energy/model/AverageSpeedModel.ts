@@ -67,12 +67,14 @@ export default class AverageSpeedModel {
     this.heavyAverageSpeedProperty = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'heavyAverageSpeedProperty' ),
+        phetioFeatured: true,
         phetioDocumentation: 'Average speed of heavy particles in the container'
       } ) );
 
     this.lightAverageSpeedProperty = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, AVERAGE_SPEED_PROPERTY_OPTIONS, {
         tandem: options.tandem.createTandem( 'lightAverageSpeedProperty' ),
+        phetioFeatured: true,
         phetioDocumentation: 'Average speed of light particles in the container'
       } ) );
 

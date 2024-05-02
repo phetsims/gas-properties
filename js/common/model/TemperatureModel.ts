@@ -115,6 +115,7 @@ export default class TemperatureModel extends PhetioObject {
     this.setInjectionTemperatureEnabledProperty = new BooleanProperty( false, {
       tandem: options.hasInjectionTemperatureFeature ?
               options.tandem.createTandem( 'setInjectionTemperatureEnabledProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true,
       phetioDocumentation: 'Determines whether the user can set the injection temperature.'
     } );
 
@@ -123,6 +124,7 @@ export default class TemperatureModel extends PhetioObject {
       units: 'K',
       tandem: options.hasInjectionTemperatureFeature ?
               options.tandem.createTandem( 'injectionTemperatureProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true,
       phetioDocumentation: 'Injection temperature set by the user.'
     } );
   }

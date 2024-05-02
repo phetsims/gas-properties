@@ -70,17 +70,20 @@ export default class CollisionCounter extends PhetioObject {
     this.collisionDetector = collisionDetector;
 
     this.positionProperty = new Vector2Property( options.position, {
-      tandem: options.tandem.createTandem( 'positionProperty' )
+      tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioFeatured: true
     } );
 
     this.numberOfCollisionsProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
-      tandem: options.tandem.createTandem( 'numberOfCollisionsProperty' )
+      tandem: options.tandem.createTandem( 'numberOfCollisionsProperty' ),
+      phetioFeatured: true
     } );
 
     this.isRunningProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'isRunningProperty' )
+      tandem: options.tandem.createTandem( 'isRunningProperty' ),
+      phetioFeatured: true
     } );
 
     this.timeRunningProperty = new NumberProperty( 0, {
@@ -91,7 +94,8 @@ export default class CollisionCounter extends PhetioObject {
     } );
 
     this.visibleProperty = new BooleanProperty( options.visible, {
-      tandem: options.tandem.createTandem( 'visibleProperty' )
+      tandem: options.tandem.createTandem( 'visibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.samplePeriods = [ 5, 10, 20 ];
@@ -100,7 +104,8 @@ export default class CollisionCounter extends PhetioObject {
       numberType: 'Integer',
       validValues: this.samplePeriods,
       units: 'ps',
-      tandem: options.tandem.createTandem( 'samplePeriodProperty' )
+      tandem: options.tandem.createTandem( 'samplePeriodProperty' ),
+      phetioFeatured: true
     } );
 
     // Changing visibility or sample period stops the counter, and resets the count and time.

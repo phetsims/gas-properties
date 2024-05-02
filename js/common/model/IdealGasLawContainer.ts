@@ -100,6 +100,7 @@ export default class IdealGasLawContainer extends BaseContainer {
       isValidValue: value => ( value >= this.minLidWidth && value <= this.getMaxLidWidth() ),
       units: 'pm',
       tandem: options.tandem.createTandem( 'lidWidthProperty' ),
+      phetioFeatured: true,
       phetioReadOnly: true // because the range is dynamic and the sim sets this
     } );
 

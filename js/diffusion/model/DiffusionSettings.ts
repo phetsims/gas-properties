@@ -58,17 +58,16 @@ export default class DiffusionSettings {
       phetioDocumentation: `Radius must be a multiple of ${DiffusionSettings.DELTAS.radius}.`
     } );
 
-    this.initialTemperatureProperty =
-      new NumberProperty( GasPropertiesConstants.DIFFUSION_INITIAL_TEMPERATURE_RANGE.defaultValue, {
-        numberType: 'Integer',
-        range: GasPropertiesConstants.DIFFUSION_INITIAL_TEMPERATURE_RANGE,
-        units: 'K',
-        isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
-        tandem: tandem.createTandem( 'initialTemperatureProperty' ),
-        phetioFeatured: true,
-        phetioDocumentation: 'Temperature used to determine the initial speed of particles. ' +
-                             `Must be a multiple of ${DiffusionSettings.DELTAS.initialTemperature}.`
-      } );
+    this.initialTemperatureProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_INITIAL_TEMPERATURE_RANGE.defaultValue, {
+      numberType: 'Integer',
+      range: GasPropertiesConstants.DIFFUSION_INITIAL_TEMPERATURE_RANGE,
+      units: 'K',
+      isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
+      tandem: tandem.createTandem( 'initialTemperatureProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: 'Temperature used to determine the initial speed of particles. ' +
+                           `Must be a multiple of ${DiffusionSettings.DELTAS.initialTemperature}.`
+    } );
   }
 
   public dispose(): void {

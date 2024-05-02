@@ -214,15 +214,21 @@ export default class HistogramNode extends Node {
 
     this.heavyPlotVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'heavyPlotVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the plot for heavy particles is visible on the histogram'
     } );
 
     this.lightPlotVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'lightPlotVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the plot for light particles is visible on the histogram'
     } );
 
-    this.updateEnabledProperty = new BooleanProperty( true );
+    this.updateEnabledProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'updateEnabledProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
+    } );
     this.updateEnabledProperty.lazyLink( () => this.update() );
 
     // Update the histogram when the bin counts have been updated. We do this instead of observing the
