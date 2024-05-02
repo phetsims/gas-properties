@@ -49,7 +49,9 @@ export default class CollisionDetector {
 
   private readonly container: BaseContainer;
   protected readonly particleArrays: Particle[][];
-  public readonly particleParticleCollisionsEnabledProperty: Property<boolean>;
+
+  // Determines whether collisions between particles are enabled.
+  private readonly collisionsEnabledProperty: Property<boolean>;
 
   // 2D grid of Regions
   public readonly regions: Region[];
@@ -63,16 +65,16 @@ export default class CollisionDetector {
   /**
    * @param container - the container inside which collision occur
    * @param particleArrays - collections of particles inside the container
-   * @param particleParticleCollisionsEnabledProperty - whether particle-particle collisions occur
+   * @param collisionsEnabledProperty - whether particle-particle collisions occur
    */
   public constructor( container: BaseContainer,
                       particleArrays: Particle[][],
-                      particleParticleCollisionsEnabledProperty: Property<boolean> ) {
+                      collisionsEnabledProperty: Property<boolean> ) {
     assert && assert( particleArrays.length > 0, `invalid particleArrays: ${particleArrays}` );
 
     this.container = container;
     this.particleArrays = particleArrays;
-    this.particleParticleCollisionsEnabledProperty = particleParticleCollisionsEnabledProperty;
+    this.collisionsEnabledProperty = collisionsEnabledProperty;
 
     // Regions are square So this is the length of one side, pm.
     const regionLength = container.height / 4;
@@ -122,7 +124,7 @@ export default class CollisionDetector {
     assignParticlesToRegions( this.particleArrays, containerRegions );
 
     // particle-particle collisions, within each region
-    if ( this.particleParticleCollisionsEnabledProperty.value ) {
+    if ( this.collisionsEnabledProperty.value ) {
       for ( let i = containerRegions.length - 1; i >= 0; i-- ) {
         doParticleParticleCollisions( containerRegions[ i ].particles, this.mutableVectors );
       }
