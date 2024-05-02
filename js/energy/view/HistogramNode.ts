@@ -215,13 +215,13 @@ export default class HistogramNode extends Node {
     this.heavyPlotVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'heavyPlotVisibleProperty' ),
       phetioFeatured: true,
-      phetioDocumentation: 'Whether the plot for heavy particles is visible on the histogram'
+      phetioDocumentation: 'Whether the plot for heavy particles is visible on the histogram.'
     } );
 
     this.lightPlotVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'lightPlotVisibleProperty' ),
       phetioFeatured: true,
-      phetioDocumentation: 'Whether the plot for light particles is visible on the histogram'
+      phetioDocumentation: 'Whether the plot for light particles is visible on the histogram.'
     } );
 
     this.updateEnabledProperty = new BooleanProperty( true, {

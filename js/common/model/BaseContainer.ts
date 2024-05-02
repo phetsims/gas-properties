@@ -79,7 +79,8 @@ export default class BaseContainer extends PhetioObject {
       reentrant: true, // Occurring in PhET-iO State setting
       tandem: options.tandem.createTandem( 'widthProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'Width of the container.'
     } );
 
     this.height = 8750;
@@ -92,7 +93,8 @@ export default class BaseContainer extends PhetioObject {
         isValidValue: value => ( value > 0 ),
         tandem: options.tandem.createTandem( 'volumeProperty' ),
         phetioFeatured: true,
-        phetioValueType: NumberIO
+        phetioValueType: NumberIO,
+        phetioDocumentation: 'Volume of the container.'
       } );
 
     this.boundsProperty = new DerivedProperty( [ this.widthProperty ],

@@ -91,7 +91,10 @@ export default class IdealGasLawContainerNode extends Node {
     // Resize handle on the left wall. The sim sets resizeHandleVisibleProperty, while the PhET-iO client can use
     // hasResizeHandleProperty to permanently hide the handle.
     const resizeHandleNodeTandem = options.tandem.createTandem( 'resizeHandleNode' );
-    const resizeHandleVisibleProperty = new BooleanProperty( true );
+    const resizeHandleVisibleProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'resizeHandleVisibleProperty' ),
+      phetioDocumentation: 'For internal use only.'
+    } );
     const hasResizeHandleProperty = new BooleanProperty( true, {
       tandem: resizeHandleNodeTandem.createTandem( 'hasResizeHandleProperty' ),
       phetioFeatured: true,
@@ -106,7 +109,10 @@ export default class IdealGasLawContainerNode extends Node {
     // Lid on the top of the container. The sim sets lidHandleVisibleProperty, while the PhET-iO client can use
     // hasLidHandleProperty to permanently hide the handle.
     const lidHandleNodeTandem = options.tandem.createTandem( 'lidHandleNode' );
-    const lidHandleVisibleProperty = new BooleanProperty( true );
+    const lidHandleVisibleProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'lidHandleVisibleProperty' ),
+      phetioDocumentation: 'For internal use only.'
+    } );
     const hasLidHandleProperty = new BooleanProperty( true, {
       tandem: lidHandleNodeTandem.createTandem( 'hasLidHandleProperty' ),
       phetioFeatured: true,

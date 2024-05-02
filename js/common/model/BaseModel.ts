@@ -90,13 +90,15 @@ export default class BaseModel implements TModel {
 
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isPlayingProperty' ),
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'Whether the simulation is playing (true) or paused (false).'
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ],
       tandem: options.hasTimeSpeedFeature ? options.tandem.createTandem( 'timeSpeedProperty' ) : Tandem.OPT_OUT,
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'The speed that at which the simulation is running.'
     } );
 
     this.stopwatch = new Stopwatch( {

@@ -78,12 +78,14 @@ export default class CollisionCounter extends PhetioObject {
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
       tandem: options.tandem.createTandem( 'numberOfCollisionsProperty' ),
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'The number of collisions recorded, as shown on the collision counter.'
     } );
 
     this.isRunningProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isRunningProperty' ),
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'Whether the collision counter is running.'
     } );
 
     this.timeRunningProperty = new NumberProperty( 0, {
@@ -95,7 +97,8 @@ export default class CollisionCounter extends PhetioObject {
 
     this.visibleProperty = new BooleanProperty( options.visible, {
       tandem: options.tandem.createTandem( 'visibleProperty' ),
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'Whether the collision counter is visible.'
     } );
 
     this.samplePeriods = [ 5, 10, 20 ];
@@ -105,7 +108,8 @@ export default class CollisionCounter extends PhetioObject {
       validValues: this.samplePeriods,
       units: 'ps',
       tandem: options.tandem.createTandem( 'samplePeriodProperty' ),
-      phetioFeatured: true
+      phetioFeatured: true,
+      phetioDocumentation: 'The period over which collisions will be recorded.'
     } );
 
     // Changing visibility or sample period stops the counter, and resets the count and time.

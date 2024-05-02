@@ -101,7 +101,8 @@ export default class IdealGasLawContainer extends BaseContainer {
       units: 'pm',
       tandem: options.tandem.createTandem( 'lidWidthProperty' ),
       phetioFeatured: true,
-      phetioReadOnly: true // because the range is dynamic and the sim sets this
+      phetioReadOnly: true, // because the range is dynamic and the sim sets this
+      phetioDocumentation: 'The width of the container\'s lid.'
     } );
 
     this.particleEntryPosition = new Vector2( this.position.x, this.position.y + this.height / 5 );
@@ -128,7 +129,8 @@ export default class IdealGasLawContainer extends BaseContainer {
       ( lidIsOn, lidWidth, containerWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() ), {
         tandem: options.tandem.createTandem( 'lidIsOpenProperty' ),
         phetioFeatured: true,
-        phetioValueType: BooleanIO
+        phetioValueType: BooleanIO,
+        phetioDocumentation: 'Whether the container\'s lid is open.'
       } );
   }
 
