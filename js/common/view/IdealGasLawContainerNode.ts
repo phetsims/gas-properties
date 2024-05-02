@@ -210,7 +210,7 @@ export default class IdealGasLawContainerNode extends Node {
       options.resizeHandleIsPressedListener( isPressed );
 
       // When the handle is released, log the opening.
-      if ( !isPressed && container.isOpenProperty.value ) {
+      if ( !isPressed && container.lidIsOpenProperty.value ) {
         phet.log && phet.log( `Lid is open: ${container.getOpeningLeft()} to ${container.getOpeningRight()} pm` );
       }
     };

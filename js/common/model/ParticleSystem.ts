@@ -222,7 +222,7 @@ export default class ParticleSystem extends PhetioObject {
    */
   public escapeParticles( container: IdealGasLawContainer ): void {
 
-    if ( container.isOpenProperty.value ) {
+    if ( container.lidIsOpenProperty.value ) {
 
       ParticleUtils.escapeParticles( container, this.numberOfHeavyParticlesProperty,
         this.heavyParticles, this.heavyParticlesOutside );

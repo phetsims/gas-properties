@@ -61,8 +61,8 @@ export default class IdealGasLawContainer extends BaseContainer {
   // Previous x position of the left wall. This is a Property because it needs to be PhET-iO stateful.
   private readonly previousLeftProperty: NumberProperty;
 
-  // is the container open?
-  public readonly isOpenProperty: TReadOnlyProperty<boolean>;
+  // Is the lid open?
+  public readonly lidIsOpenProperty: TReadOnlyProperty<boolean>;
 
   public constructor( providedOptions: IdealGasLawContainerOptions ) {
 
@@ -121,11 +121,11 @@ export default class IdealGasLawContainer extends BaseContainer {
       phetioDocumentation: 'For internal use only.'
     } );
 
-    this.isOpenProperty = new DerivedProperty(
+    this.lidIsOpenProperty = new DerivedProperty(
       // this.widthProperty is used by this.getMaxLidWidth()
       [ this.lidIsOnProperty, this.lidWidthProperty, this.widthProperty ],
-      ( lidIsOn, lidWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() ), {
-        tandem: options.tandem.createTandem( 'isOpenProperty' ),
+      ( lidIsOn, lidWidth, containerWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() ), {
+        tandem: options.tandem.createTandem( 'lidIsOpenProperty' ),
         phetioFeatured: true,
         phetioValueType: BooleanIO
       } );

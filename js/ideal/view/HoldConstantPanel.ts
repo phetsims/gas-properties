@@ -33,7 +33,7 @@ export default class HoldConstantPanel extends Panel {
   public constructor( holdConstantProperty: StringUnionProperty<HoldConstant>,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       pressureProperty: TReadOnlyProperty<number>,
-                      isContainerOpenProperty: TReadOnlyProperty<boolean>,
+                      lidIsOpenProperty: TReadOnlyProperty<boolean>,
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, GasPropertiesConstants.PANEL_OPTIONS, {
@@ -118,9 +118,9 @@ export default class HoldConstantPanel extends Panel {
     // Disable "Temperature (T)" radio button for conditions that are not possible.
     const temperatureRadioButton = radioButtonGroup.getButton( 'temperature' );
     Multilink.multilink(
-      [ numberOfParticlesProperty, isContainerOpenProperty ],
-      ( numberOfParticles, isContainerOpen ) => {
-        temperatureRadioButton.enabledProperty.value = ( numberOfParticles !== 0 ) && !isContainerOpen;
+      [ numberOfParticlesProperty, lidIsOpenProperty ],
+      ( numberOfParticles, lidIsOpen ) => {
+        temperatureRadioButton.enabledProperty.value = ( numberOfParticles !== 0 ) && !lidIsOpen;
       } );
 
     // Disable radio buttons for selections that are not possible with zero pressure.

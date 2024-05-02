@@ -238,10 +238,10 @@ export default class IdealGasLawModel extends BaseModel {
       }
     } );
 
-    // Temperature can't be held constant when the container is open, because we don't want to deal with
+    // Temperature can't be held constant when the lid is open, because we don't want to deal with
     // counteracting evaporative cooling. See https://github.com/phetsims/gas-properties/issues/159
-    this.container.isOpenProperty.link( isOpen => {
-      if ( isOpen && this.holdConstantProperty.value === 'temperature' ) {
+    this.container.lidIsOpenProperty.link( lidIsOpen => {
+      if ( lidIsOpen && this.holdConstantProperty.value === 'temperature' ) {
         phet.log && phet.log( 'Oops! T cannot be held constant when the container is open' );
         this.holdConstantProperty.value = 'nothing';
         this.oopsEmitters.temperatureLidOpenEmitter.emit();
