@@ -13,11 +13,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -95,9 +93,6 @@ export default class IdealGasLawModel extends BaseModel {
   // See HeaterCoolerNode: 1 is max heat, -1 is max cool, 0 is no change.
   public readonly heatCoolAmountProperty: NumberProperty;
 
-  // whether particle-particle collisions are enabled
-  public readonly collisionsEnabledProperty: Property<boolean>;
-
   public readonly container: IdealGasLawContainer;
   public readonly particleSystem: ParticleSystem;
 
@@ -149,22 +144,15 @@ export default class IdealGasLawModel extends BaseModel {
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off.'
     } );
 
-    this.collisionsEnabledProperty = new BooleanProperty( true, {
-      tandem: options.phetioCollisionsEnabledPropertyInstrumented ?
-              options.tandem.createTandem( 'collisionsEnabledProperty' ) : Tandem.OPT_OUT,
-      phetioDocumentation: 'Determines whether collisions between particles are enabled.'
-    } );
-
     this.container = new IdealGasLawContainer( combineOptions<IdealGasLawContainerOptions>( {
       tandem: options.tandem.createTandem( 'container' )
     }, options.containerOptions ) );
 
-    this.particleSystem = new ParticleSystem(
-      () => this.temperatureModel.getInitialTemperature(),
-      this.collisionsEnabledProperty,
-      this.container.particleEntryPosition,
-      options.tandem.createTandem( 'particleSystem' )
-    );
+    this.particleSystem = new ParticleSystem( () => this.temperatureModel.getInitialTemperature(),
+      this.container.particleEntryPosition, {
+        phetioCollisionsEnabledPropertyInstrumented: options.phetioCollisionsEnabledPropertyInstrumented,
+        tandem: options.tandem.createTandem( 'particleSystem' )
+      } );
 
     this.temperatureModel = new TemperatureModel(
       this.particleSystem.numberOfParticlesProperty, // N
@@ -187,7 +175,7 @@ export default class IdealGasLawModel extends BaseModel {
     this.collisionDetector = new CollisionDetector(
       this.container,
       this.particleSystem.insideParticleArrays,
-      this.collisionsEnabledProperty
+      this.particleSystem.collisionsEnabledProperty
     );
 
     this.collisionCounter = null;
@@ -317,7 +305,6 @@ export default class IdealGasLawModel extends BaseModel {
     // Properties
     this.holdConstantProperty.reset();
     this.heatCoolAmountProperty.reset();
-    this.collisionsEnabledProperty.reset();
 
     // model elements
     this.container.reset();

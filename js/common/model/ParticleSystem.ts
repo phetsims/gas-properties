@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -27,6 +26,10 @@ import IdealGasLawContainer from './IdealGasLawContainer.js';
 import LightParticle from './LightParticle.js';
 import Particle, { ParticleOptions } from './Particle.js';
 import ParticleUtils from './ParticleUtils.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 
 // constants
 
@@ -35,16 +38,24 @@ const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
 
 type CreateParticleFunction = ( options?: ParticleOptions ) => Particle;
 
-export default class ParticleSystem {
+type SelfOptions = {
 
-  // gets the temperature used to compute initial velocity magnitude
+  // Determines whether collisionsEnabledProperty is PhET-iO instrumented.
+  phetioCollisionsEnabledPropertyInstrumented?: boolean;
+};
+
+type ParticleSystemOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+export default class ParticleSystem extends PhetioObject {
+
+  // Gets the temperature used to compute initial velocity magnitude.
   private readonly getInitialTemperature: () => number;
 
-  // where particle-particle collisions are enabled
-  private readonly collisionsEnabledProperty: Property<boolean>;
-
-  // point where the particles enter the container
+  // Point where the particles enter the container.
   private readonly particleEntryPosition: Vector2;
+
+  // Determines whether collisions between particles are enabled.
+  public readonly collisionsEnabledProperty: Property<boolean>;
 
   // Together these arrays make up the 'particle system'. Separate arrays are kept to optimize performance.
   //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
@@ -53,26 +64,42 @@ export default class ParticleSystem {
   public readonly heavyParticlesOutside: HeavyParticle[]; // heavy particles outside the container
   public readonly lightParticlesOutside: LightParticle[]; // light particles outside the container
 
-  // performance optimization, for iterating over all particles inside the container
+  // Performance optimization, for iterating over all particles inside the container.
   public readonly insideParticleArrays: [ HeavyParticle[], LightParticle[] ];
 
-  // the number of heavy particles inside the container
+  // Number of heavy particles inside the container.
   public readonly numberOfHeavyParticlesProperty: NumberProperty;
 
-  // the number of light particles inside the container
+  //Number of light particles inside the container.
   public readonly numberOfLightParticlesProperty: NumberProperty;
 
-  // N, the total number of particles in the container
+  // N, the total number of particles in the container.
   public readonly numberOfParticlesProperty: ReadOnlyProperty<number>;
 
   public constructor( getInitialTemperature: () => number,
-                      collisionsEnabledProperty: Property<boolean>,
                       particleEntryPosition: Vector2,
-                      tandem: Tandem ) {
+                      providedOptions: ParticleSystemOptions ) {
+
+    const options = optionize<ParticleSystemOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // SelfOptions
+      phetioCollisionsEnabledPropertyInstrumented: false,
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioState: false
+    }, providedOptions );
+
+    super( options );
 
     this.getInitialTemperature = getInitialTemperature;
-    this.collisionsEnabledProperty = collisionsEnabledProperty;
     this.particleEntryPosition = particleEntryPosition;
+
+    this.collisionsEnabledProperty = new BooleanProperty( true, {
+      tandem: options.phetioCollisionsEnabledPropertyInstrumented ?
+              options.tandem.createTandem( 'collisionsEnabledProperty' ) : Tandem.OPT_OUT,
+      phetioDocumentation: 'Determines whether collisions between particles are enabled.'
+    } );
 
     this.heavyParticles = [];
     this.lightParticles = [];
@@ -84,7 +111,7 @@ export default class ParticleSystem {
     this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
-      tandem: tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
+      tandem: options.tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
       phetioFeatured: true,
       phetioDocumentation: 'Number of heavy particles in the container. ' +
                            `(mass = ${GasPropertiesConstants.HEAVY_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.HEAVY_PARTICLES_RADIUS} pm)`,
@@ -94,7 +121,7 @@ export default class ParticleSystem {
     this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
-      tandem: tandem.createTandem( 'numberOfLightParticlesProperty' ),
+      tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' ),
       phetioFeatured: true,
       phetioDocumentation: 'Number of light particles in the container. ' +
                            `(mass = ${GasPropertiesConstants.LIGHT_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.LIGHT_PARTICLES_RADIUS} pm)`,
@@ -127,7 +154,7 @@ export default class ParticleSystem {
         phetioValueType: NumberIO,
         valueType: 'number',
         isValidValue: value => value >= 0,
-        tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
+        tandem: options.tandem.createTandem( 'numberOfParticlesProperty' ),
         phetioFeatured: true,
         phetioDocumentation: 'Total number of particles in the container.'
       }
@@ -142,13 +169,9 @@ export default class ParticleSystem {
     propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
   }
 
-  public dispose(): void {
-    Disposable.assertNotDisposable();
-  }
-
-
   public reset(): void {
     this.removeAllParticles();
+    this.collisionsEnabledProperty.reset();
   }
 
   /**

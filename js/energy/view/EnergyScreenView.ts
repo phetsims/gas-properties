@@ -90,7 +90,7 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       model.particleSystem.numberOfHeavyParticlesProperty,
       model.particleSystem.numberOfLightParticlesProperty,
       model.modelViewTransform, {
-        collisionsEnabledProperty: model.collisionsEnabledProperty,
+        collisionsEnabledProperty: model.particleSystem.collisionsEnabledProperty,
         expandedProperty: viewProperties.particlesExpandedProperty,
         tandem: panelsTandem.createTandem( 'particlesAccordionBox' )
       } );
