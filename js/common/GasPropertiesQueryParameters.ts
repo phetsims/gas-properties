@@ -17,8 +17,7 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
   //==================================================================================================================
 
   /**
-   * Whether to add noise to the pressure gauge to make it behave more realistically. Public facing.
-   *
+   * Whether to add noise to the pressure gauge to make it behave more realistically.
    * In code, this should not be used or interrogated directly. It's sole usage is to set the initial value of
    * GasPropertiesPreferences.pressureNoiseProperty. See https://github.com/phetsims/gas-properties/issues/92
    */
@@ -33,19 +32,15 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
   //==================================================================================================================
 
   // Shows a red dot at the origin of some UI components, for debugging layout and drag listeners.
-  // For internal use only.
   origin: { type: 'flag' },
 
   // Shows how the collision detection space is partitioned into a 2D grid of regions.
-  // For internal use only.
   regions: { type: 'flag' },
 
   // Shows the model and view coordinates that correspond to the cursor position.
-  // For internal use only.
   pointerCoordinates: { type: 'flag' },
 
   // Determines how fast particles are heated or cooled. Smaller numbers result in faster heating/cooling.
-  // For internal use only.
   heatCool: {
     type: 'number',
     isValidValue: value => ( value > 0 ),
@@ -53,7 +48,6 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
   },
 
   // Pressure at which the lid blows off of the container, in kPa.
-  // For internal use only.
   maxPressure: {
     type: 'number',
     isValidValue: value => ( value > 0 ),
@@ -61,7 +55,6 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
   },
 
   // Maximum temperature in K. Exceeding this results in an Oops dialog.
-  // For internal use only.
   maxTemperature: {
     type: 'number',
     isValidValue: value => ( value > 0 ),
@@ -69,7 +62,6 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
   },
 
   // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
-  // For internal use only.
   wallSpeedLimit: {
     type: 'number',
     isValidValue: value => ( value > 0 ),
