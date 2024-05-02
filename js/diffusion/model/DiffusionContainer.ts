@@ -50,6 +50,7 @@ export default class DiffusionContainer extends BaseContainer {
 
     this.isDividedProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isDividedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'Whether the container\'s divider is in place.'
     } );
 

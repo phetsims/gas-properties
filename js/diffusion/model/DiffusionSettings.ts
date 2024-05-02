@@ -29,22 +29,23 @@ export default class DiffusionSettings {
 
   public constructor( tandem: Tandem ) {
 
-    this.numberOfParticlesProperty =
-      new NumberProperty( GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE.defaultValue, {
-        numberType: 'Integer',
-        range: GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE,
-        hasListenerOrderDependencies: true, // TODO: https://github.com/phetsims/gas-properties/issues/186
-        isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
-        tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
-        phetioDocumentation: `Number of Particles must be a multiple of ${DiffusionSettings.DELTAS.numberOfParticles}.`
-      } );
+    this.numberOfParticlesProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE.defaultValue, {
+      numberType: 'Integer',
+      range: GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE,
+      hasListenerOrderDependencies: true, // TODO: https://github.com/phetsims/gas-properties/issues/186
+      isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
+      tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: `Number of Particles must be a multiple of ${DiffusionSettings.DELTAS.numberOfParticles}.`
+    } );
 
     this.massProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_MASS_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.DIFFUSION_MASS_RANGE,
       units: 'AMU',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.mass === 0 ),
-      tandem: tandem.createTandem( 'massProperty' )
+      tandem: tandem.createTandem( 'massProperty' ),
+      phetioFeatured: true
     } );
 
     this.radiusProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_RADIUS_RANGE.defaultValue, {
@@ -53,6 +54,7 @@ export default class DiffusionSettings {
       units: 'pm',
       isValidValue: value => ( value % DiffusionSettings.DELTAS.radius === 0 ),
       tandem: tandem.createTandem( 'radiusProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: `Radius must be a multiple of ${DiffusionSettings.DELTAS.radius}.`
     } );
 
@@ -63,6 +65,7 @@ export default class DiffusionSettings {
         units: 'K',
         isValidValue: value => ( value % DiffusionSettings.DELTAS.initialTemperature === 0 ),
         tandem: tandem.createTandem( 'initialTemperatureProperty' ),
+        phetioFeatured: true,
         phetioDocumentation: 'Temperature used to determine the initial speed of particles. ' +
                              `Must be a multiple of ${DiffusionSettings.DELTAS.initialTemperature}.`
       } );
