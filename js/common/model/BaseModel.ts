@@ -11,7 +11,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -27,8 +26,9 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import TimeTransform from './TimeTransform.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 // constants
 const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
@@ -46,9 +46,11 @@ type SelfOptions = {
   hasTimeSpeedFeature?: boolean;
 };
 
-export type BaseModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type BaseModelOptions = SelfOptions &
+  PickOptional<PhetioObjectOptions, 'phetioState'> & // because subclass DiffusionModel has state
+  PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class BaseModel implements TModel {
+export default class BaseModel extends PhetioObject implements TModel {
 
   // transform between model and view coordinate frames
   public readonly modelViewTransform: ModelViewTransform2;
@@ -67,13 +69,19 @@ export default class BaseModel implements TModel {
 
   protected constructor( providedOptions: BaseModelOptions ) {
 
-    const options = optionize<BaseModelOptions, SelfOptions>()( {
+    const options = optionize<BaseModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       modelOriginOffset: new Vector2( 645, 475 ),
       stopwatchPosition: new Vector2( 240, 15 ),
-      hasTimeSpeedFeature: false
+      hasTimeSpeedFeature: false,
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
       options.modelOriginOffset,
@@ -111,10 +119,6 @@ export default class BaseModel implements TModel {
       tandem: options.tandem.createTandem( 'stopwatch' ),
       phetioFeatured: true
     } );
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public reset(): void {
