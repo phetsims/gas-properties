@@ -45,6 +45,7 @@ export default class Particle {
 
     this.mass = providedOptions.mass;
     this.radius = providedOptions.radius;
+
     this.colorProperty = providedOptions.colorProperty;
     this.highlightColorProperty = providedOptions.highlightColorProperty;
 
