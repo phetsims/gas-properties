@@ -21,15 +21,17 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesUtils from '../GasPropertiesUtils.js';
-import HeavyParticle from './HeavyParticle.js';
+import HeavyParticle, { HeavyParticleStateObject } from './HeavyParticle.js';
 import IdealGasLawContainer from './IdealGasLawContainer.js';
-import LightParticle from './LightParticle.js';
+import LightParticle, { LightParticleStateObject } from './LightParticle.js';
 import Particle, { ParticleOptions } from './Particle.js';
 import ParticleUtils from './ParticleUtils.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 
 // constants
 
@@ -45,6 +47,20 @@ type SelfOptions = {
 };
 
 type ParticleSystemOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+type ParticleSystemStateObject = {
+  heavyParticles: HeavyParticleStateObject[];
+  lightParticles: LightParticleStateObject[];
+  heavyParticlesOutside: HeavyParticleStateObject[];
+  lightParticlesOutside: LightParticleStateObject[];
+};
+
+const PARTICLE_SYSTEM_STATE_SCHEMA = {
+  heavyParticles: ArrayIO( HeavyParticle.HeavyParticleIO ),
+  lightParticles: ArrayIO( LightParticle.LightParticleIO ),
+  heavyParticlesOutside: ArrayIO( HeavyParticle.HeavyParticleIO ),
+  lightParticlesOutside: ArrayIO( LightParticle.LightParticleIO )
+};
 
 export default class ParticleSystem extends PhetioObject {
 
@@ -87,7 +103,7 @@ export default class ParticleSystem extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioState: false
+      phetioType: ParticleSystem.ParticleSystemIO
     }, providedOptions );
 
     super( options );
@@ -372,6 +388,53 @@ export default class ParticleSystem extends PhetioObject {
     return ParticleUtils.getTotalKineticEnergy( this.heavyParticles ) +
            ParticleUtils.getTotalKineticEnergy( this.lightParticles );
   }
+
+  /**
+   * Serializes an instance of ParticleSystem.
+   */
+  private toStateObject(): ParticleSystemStateObject {
+    return {
+      heavyParticles: this.heavyParticles.map( particle => HeavyParticle.HeavyParticleIO.toStateObject( particle ) ),
+      lightParticles: this.lightParticles.map( particle => LightParticle.LightParticleIO.toStateObject( particle ) ),
+      heavyParticlesOutside: this.heavyParticlesOutside.map( particle => HeavyParticle.HeavyParticleIO.toStateObject( particle ) ),
+      lightParticlesOutside: this.lightParticlesOutside.map( particle => LightParticle.LightParticleIO.toStateObject( particle ) )
+    };
+  }
+
+  /**
+   * Deserializes an instance of ParticleSystem.
+   */
+  private static applyState( particleSystem: ParticleSystem, stateObject: ParticleSystemStateObject ): void {
+
+    particleSystem.heavyParticles.length = 0;
+    particleSystem.lightParticles.length = 0;
+    particleSystem.heavyParticlesOutside.length = 0;
+    particleSystem.lightParticlesOutside.length = 0;
+
+    stateObject.heavyParticles.forEach( ( stateObject: HeavyParticleStateObject ) => {
+      particleSystem.heavyParticles.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) );
+    } );
+
+    stateObject.lightParticles.forEach( ( stateObject: LightParticleStateObject ) => {
+      particleSystem.lightParticles.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) );
+    } );
+
+    stateObject.heavyParticlesOutside.forEach( ( stateObject: HeavyParticleStateObject ) => {
+      particleSystem.heavyParticlesOutside.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) );
+    } );
+
+    stateObject.lightParticlesOutside.forEach( ( stateObject: LightParticleStateObject ) => {
+      particleSystem.lightParticlesOutside.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) );
+    } );
+  }
+
+  public static readonly ParticleSystemIO = new IOType<ParticleSystem, ParticleSystemStateObject>( 'ParticleSystemIO', {
+    valueType: ParticleSystem,
+    defaultDeserializationMethod: 'applyState',
+    stateSchema: PARTICLE_SYSTEM_STATE_SCHEMA,
+    toStateObject: particleSystem => particleSystem.toStateObject(),
+    applyState: ParticleSystem.applyState
+  } );
 }
 
 gasProperties.register( 'ParticleSystem', ParticleSystem );
