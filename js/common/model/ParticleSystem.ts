@@ -74,7 +74,6 @@ export default class ParticleSystem extends PhetioObject {
   public readonly collisionsEnabledProperty: Property<boolean>;
 
   // Together these arrays make up the 'particle system'. Separate arrays are kept to optimize performance.
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly heavyParticles: HeavyParticle[]; // heavy particles inside the container
   public readonly lightParticles: LightParticle[]; // light particles inside the container
   public readonly heavyParticlesOutside: HeavyParticle[]; // heavy particles outside the container
