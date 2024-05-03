@@ -31,6 +31,7 @@ import Particle, { ParticleOptions } from '../../common/model/Particle.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import DiffusionParticle from './DiffusionParticle.js';
 
 // constants
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
@@ -337,13 +338,13 @@ function addParticles( n: number, positionBounds: Bounds2, settings: DiffusionSe
 /**
  * When mass or initial temperature changes, update particles and adjust their speed accordingly.
  */
-function updateMassAndTemperature( mass: number, temperature: number, particles: Particle[] ): void {
+function updateMassAndTemperature( mass: number, temperature: number, particles: DiffusionParticle[] ): void {
   assert && assert( mass > 0, `invalid mass: ${mass}` );
   assert && assert( temperature >= 0, `invalid temperature: ${temperature}` );
   assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
-    particles[ i ].mass = mass;
+    particles[ i ].setMass( mass );
 
     // |v| = sqrt( 3kT / m )
     particles[ i ].setSpeed( Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass ) );
@@ -357,13 +358,13 @@ function updateMassAndTemperature( mass: number, temperature: number, particles:
  * @param bounds - particles should be inside these bounds
  * @param isPlaying
  */
-function updateRadius( radius: number, particles: Particle[], bounds: Bounds2, isPlaying: boolean ): void {
+function updateRadius( radius: number, particles: DiffusionParticle[], bounds: Bounds2, isPlaying: boolean ): void {
   assert && assert( radius > 0, `invalid radius: ${radius}` );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
 
     const particle = particles[ i ];
-    particle.radius = radius;
+    particle.setRadius( radius );
 
     // If the sim is paused, then adjust the position of any particles are not fully inside the bounds.
     // While the sim is playing, this adjustment will be handled by collision detection.

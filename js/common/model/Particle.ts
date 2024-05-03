@@ -27,9 +27,9 @@ export type ParticleOptions = SelfOptions;
 
 export default class Particle {
 
-  // these are mutated in the Diffusion screen
-  public mass: number; // AMU
-  public radius: number; // pm
+  // These are settable in the Diffusion screen
+  protected _mass: number; // AMU
+  protected _radius: number; // pm
 
   //TODO https://github.com/phetsims/gas-properties/issues/218 Can these be moved elsewhere?
   public readonly colorProperty: ProfileColorProperty;
@@ -51,8 +51,8 @@ export default class Particle {
 
   protected constructor( providedOptions: ParticleOptions ) {
 
-    this.mass = providedOptions.mass;
-    this.radius = providedOptions.radius;
+    this._mass = providedOptions.mass;
+    this._radius = providedOptions.radius;
 
     this.colorProperty = providedOptions.colorProperty;
     this.highlightColorProperty = providedOptions.highlightColorProperty;
@@ -78,6 +78,10 @@ export default class Particle {
     return this._isDisposed;
   }
 
+  public get mass(): number { return this._mass; }
+
+  public get radius(): number { return this._radius; }
+
   /**
    * ES5 getters and setters for particle position.
    */
@@ -90,28 +94,28 @@ export default class Particle {
 
   public get previousY(): number { return this._previousY; }
 
-  public get left(): number { return this._x - this.radius; }
+  public get left(): number { return this._x - this._radius; }
 
   public set left( value: number ) {
-    this.setXY( value + this.radius, this._y );
+    this.setXY( value + this._radius, this._y );
   }
 
-  public get right(): number { return this._x + this.radius; }
+  public get right(): number { return this._x + this._radius; }
 
   public set right( value: number ) {
-    this.setXY( value - this.radius, this._y );
+    this.setXY( value - this._radius, this._y );
   }
 
-  public get top(): number { return this._y + this.radius; }
+  public get top(): number { return this._y + this._radius; }
 
   public set top( value: number ) {
-    this.setXY( this._x, value - this.radius );
+    this.setXY( this._x, value - this._radius );
   }
 
-  public get bottom(): number { return this._y - this.radius; }
+  public get bottom(): number { return this._y - this._radius; }
 
   public set bottom( value: number ) {
-    this.setXY( this._x, value + this.radius );
+    this.setXY( this._x, value + this._radius );
   }
 
   /**
@@ -133,7 +137,7 @@ export default class Particle {
    * Gets the kinetic energy of this particle, in AMU * pm^2 / ps^2.
    */
   public getKineticEnergy(): number {
-    return 0.5 * this.mass * this.speed * this.speed; // KE = (1/2) * m * |v|^2
+    return 0.5 * this._mass * this.speed * this.speed; // KE = (1/2) * m * |v|^2
   }
 
   /**
@@ -203,7 +207,7 @@ export default class Particle {
    * Does this particle contact another particle now?
    */
   public contactsParticle( particle: Particle ): boolean {
-    return this.distance( particle ) <= ( this.radius + particle.radius );
+    return this.distance( particle ) <= ( this._radius + particle._radius );
   }
 
   /**
@@ -212,7 +216,7 @@ export default class Particle {
    * implementation, and makes the collision behavior more natural looking.
    */
   public contactedParticle( particle: Particle ): boolean {
-    return this.previousDistance( particle ) <= ( this.radius + particle.radius );
+    return this.previousDistance( particle ) <= ( this._radius + particle._radius );
   }
 
   /**
@@ -246,7 +250,7 @@ export default class Particle {
    * String representation of this particle. For debugging only, do not rely on format.
    */
   public toString(): string {
-    return `Particle[position:(${this._x},${this._y}) mass:${this.mass} radius:${this.radius}]`;
+    return `Particle[position:(${this._x},${this._y}) mass:${this._mass} radius:${this._radius}]`;
   }
 }
 

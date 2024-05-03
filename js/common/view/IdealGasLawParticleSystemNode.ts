@@ -10,13 +10,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
-import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import HeavyParticle from '../model/HeavyParticle.js';
 import LightParticle from '../model/LightParticle.js';
 import ParticleSystem from '../model/ParticleSystem.js';
@@ -36,18 +34,10 @@ export default class IdealGasLawParticleSystemNode extends Node {
                       modelBoundsProperty: TReadOnlyProperty<Bounds2>, containerMaxBounds: Bounds2 ) {
 
     // generated canvas for HeavyParticle species
-    const heavyParticleCanvasProperty = new ParticleCanvasProperty(
-      new HeavyParticle(),
-      modelViewTransform,
-      new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RADIUS )
-    );
+    const heavyParticleCanvasProperty = new ParticleCanvasProperty( new HeavyParticle(), modelViewTransform );
 
     // generated canvas for LightParticle species
-    const lightParticleCanvasProperty = new ParticleCanvasProperty(
-      new LightParticle(),
-      modelViewTransform,
-      new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RADIUS )
-    );
+    const lightParticleCanvasProperty = new ParticleCanvasProperty( new LightParticle(), modelViewTransform );
 
     // particles inside the container
     const insideParticlesNode = new ParticlesNode(

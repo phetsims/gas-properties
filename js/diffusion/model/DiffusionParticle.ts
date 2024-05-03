@@ -26,6 +26,20 @@ export default class DiffusionParticle extends Particle {
       radius: GasPropertiesConstants.DIFFUSION_RADIUS_RANGE.defaultValue
     }, providedOptions ) );
   }
+
+  /**
+   * Mass is settable in the Diffusion screen.
+   */
+  public setMass( mass: number ): void {
+    this._mass = mass;
+  }
+
+  /**
+   * Radius is settable in the Diffusion screen.
+   */
+  public setRadius( radius: number ): void {
+    this._radius = radius;
+  }
 }
 
 gasProperties.register( 'DiffusionParticle', DiffusionParticle );
