@@ -27,7 +27,8 @@ const PARTICLE_INVERSE_SCALE = 1 / PARTICLE_RESOLUTION_SCALE;
 
 export default class ParticlesNode extends Sprites {
 
-  private readonly particleArrays: Particle[][]; //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  private readonly particleArrays: Particle[][];
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly sprites: Sprite[];
   private readonly spriteInstances: SpriteInstance[];

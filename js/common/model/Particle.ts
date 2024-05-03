@@ -1,6 +1,5 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
 /**
  * Particle is the model for all types of particles. A particle is a perfect rigid sphere.
  *
