@@ -74,6 +74,7 @@ export default class DiffusionModel extends BaseModel {
   public readonly particle1FlowRateModel: ParticleFlowRateModel;
   public readonly particle2FlowRateModel: ParticleFlowRateModel;
 
+  // Handles collisions between particles and a vertical divider.
   public readonly collisionDetector: DiffusionCollisionDetector;
 
   public constructor( tandem: Tandem ) {
