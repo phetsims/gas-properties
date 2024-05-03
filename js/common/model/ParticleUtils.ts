@@ -81,7 +81,7 @@ const ParticleUtils = {
     assert && assert( scaleX > 0, `invalid scaleX: ${scaleX}` );
 
     for ( let i = particles.length - 1; i >= 0; i-- ) {
-      particles[ i ].position.setX( scaleX * particles[ i ].position.x );
+      particles[ i ].setX( scaleX * particles[ i ].x );
     }
   },
 
@@ -147,7 +147,7 @@ const ParticleUtils = {
       let totalMass = 0;
       for ( let i = particles.length - 1; i >= 0; i-- ) {
         const particle = particles[ i ];
-        numerator += ( particle.mass * particle.position.x );
+        numerator += ( particle.mass * particle.x );
         totalMass += particle.mass;
       }
       centerXOfMass = numerator / totalMass;

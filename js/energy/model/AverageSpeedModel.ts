@@ -184,7 +184,7 @@ function getAverageSpeed( particles: Particle[] ): number {
   if ( particles.length > 0 ) {
     let totalSpeed = 0;
     for ( let i = particles.length - 1; i >= 0; i-- ) {
-      totalSpeed += particles[ i ].velocity.magnitude;
+      totalSpeed += particles[ i ].speed;
     }
     averageSpeed = totalSpeed / particles.length;
   }

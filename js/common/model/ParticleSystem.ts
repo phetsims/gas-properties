@@ -310,7 +310,7 @@ export default class ParticleSystem extends PhetioObject {
       const particle = createParticle();
 
       // Position the particle just inside the container, accounting for radius.
-      particle.setPositionXY( this.particleEntryPosition.x - particle.radius, this.particleEntryPosition.y );
+      particle.setXY( this.particleEntryPosition.x - particle.radius, this.particleEntryPosition.y );
 
       // Initial speed, |v| = sqrt( 3kT / m )
       const speed = Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperatures[ i ] / particle.mass );
@@ -353,7 +353,7 @@ export default class ParticleSystem extends PhetioObject {
         const actualParticleKE = particle.getKineticEnergy();
         const desiredParticleKE = ratio * actualParticleKE;
         const desiredSpeed = Math.sqrt( 2 * desiredParticleKE / particle.mass ); // |v| = Math.sqrt( 2 * KE / m )
-        particle.setVelocityMagnitude( desiredSpeed );
+        particle.setSpeed( desiredSpeed );
       }
     }
   }

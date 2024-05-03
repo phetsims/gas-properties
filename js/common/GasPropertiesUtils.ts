@@ -60,19 +60,29 @@ const GasPropertiesUtils = {
   /**
    * Determines the position of a point that is the reflection of a specified point across a line.
    * Used in collision response.
-   * @param p - the point to reflect
+   * @param x - the point to reflect
+   * @param y - the point to reflect
    * @param pointOnLine - point on the line
    * @param lineAngle - angle of the line, in radians
    * @param reflectedPoint - the point to be mutated with the return value
    * @returns reflectedPoint mutated
    */
-  reflectPointAcrossLine( p: Vector2, pointOnLine: Vector2, lineAngle: number, reflectedPoint: Vector2 ): Vector2 {
+  reflectPointAcrossLineXY( x: number, y: number, pointOnLine: Vector2, lineAngle: number, reflectedPoint: Vector2 ): Vector2 {
     const alpha = lineAngle % ( Math.PI * 2 );
-    const gamma = Math.atan2( ( p.y - pointOnLine.y ), ( p.x - pointOnLine.x ) ) % ( Math.PI * 2 );
+    const gamma = Math.atan2( ( y - pointOnLine.y ), ( x - pointOnLine.x ) ) % ( Math.PI * 2 );
     const theta = ( 2 * alpha - gamma ) % ( Math.PI * 2 );
-    const d = p.distance( pointOnLine );
+    const d = GasPropertiesUtils.distanceXY( x, y, pointOnLine.x, pointOnLine.y );
     reflectedPoint.setXY( pointOnLine.x + d * Math.cos( theta ), pointOnLine.y + d * Math.sin( theta ) );
     return reflectedPoint;
+  },
+
+  /**
+   * Gets the distance between 2 points.
+   */
+  distanceXY( x1: number, y1: number, x2: number, y2: number ): number {
+    const dx = x1 - x2;
+    const dy = y1 - y2;
+    return Math.sqrt( dx * dx + dy * dy );
   }
 };
 

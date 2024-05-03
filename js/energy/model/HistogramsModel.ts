@@ -306,7 +306,7 @@ export default class HistogramsModel {
 function getSpeedValues( particles: Particle[] ): number[] {
   const values = [];
   for ( let i = particles.length - 1; i >= 0; i-- ) {
-    values.push( particles[ i ].velocity.magnitude );
+    values.push( particles[ i ].speed );
   }
   return values;
 }

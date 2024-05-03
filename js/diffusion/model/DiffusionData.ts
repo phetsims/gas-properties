@@ -92,7 +92,7 @@ export default class DiffusionData {
     // Contribution by DiffusionParticle1 species
     for ( let i = particles1.length - 1; i >= 0; i-- ) {
       const particle = particles1[ i ];
-      if ( this.bounds.containsPoint( particle.position ) ) {
+      if ( this.bounds.containsCoordinates( particle.x, particle.y ) ) {
         numberOfParticles1++;
         totalKE += particle.getKineticEnergy();
       }
@@ -102,7 +102,7 @@ export default class DiffusionData {
     // Note that there's a wee bit of code duplication here, but it gains us some iteration efficiency.
     for ( let i = particles2.length - 1; i >= 0; i-- ) {
       const particle = particles2[ i ];
-      if ( this.bounds.containsPoint( particle.position ) ) {
+      if ( this.bounds.containsCoordinates( particle.x, particle.y ) ) {
         numberOfParticles2++;
         totalKE += particle.getKineticEnergy();
       }

@@ -318,8 +318,8 @@ function addParticles( n: number, positionBounds: Bounds2, settings: DiffusionSe
     // Position the particle at a random position within positionBounds, accounting for particle radius.
     const x = dotRandom.nextDoubleBetween( positionBounds.minX + particle.radius, positionBounds.maxX - particle.radius );
     const y = dotRandom.nextDoubleBetween( positionBounds.minY + particle.radius, positionBounds.maxY - particle.radius );
-    particle.setPositionXY( x, y );
-    assert && assert( positionBounds.containsPoint( particle.position ), 'particle is outside of positionBounds' );
+    particle.setXY( x, y );
+    assert && assert( positionBounds.containsCoordinates( particle.x, particle.y ), 'particle is outside of positionBounds' );
 
     // Set the initial velocity, based on initial temperature and mass.
     particle.setVelocityPolar(
@@ -346,7 +346,7 @@ function updateMassAndTemperature( mass: number, temperature: number, particles:
     particles[ i ].mass = mass;
 
     // |v| = sqrt( 3kT / m )
-    particles[ i ].setVelocityMagnitude( Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass ) );
+    particles[ i ].setSpeed( Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass ) );
   }
 }
 

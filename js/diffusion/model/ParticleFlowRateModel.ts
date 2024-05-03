@@ -101,10 +101,10 @@ export default class ParticleFlowRateModel {
     let rightCount = 0; // -->
     for ( let i = this.particles.length - 1; i >= 0; i-- ) {
       const particle = this.particles[ i ];
-      if ( particle.previousPosition.x >= this.dividerX && particle.position.x < this.dividerX ) {
+      if ( particle.previousX >= this.dividerX && particle.x < this.dividerX ) {
         leftCount++;
       }
-      else if ( particle.previousPosition.x <= this.dividerX && particle.position.x > this.dividerX ) {
+      else if ( particle.previousX <= this.dividerX && particle.x > this.dividerX ) {
         rightCount++;
       }
     }

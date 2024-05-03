@@ -30,8 +30,8 @@ export default class ParticlePositionsNode extends Path {
   public update(): void {
     const shape = new Shape();
     this.particleArrays.forEach( particleArray => particleArray.forEach( particle => {
-      const x = this.modelViewTransform.modelToViewX( particle.position.x );
-      const y = this.modelViewTransform.modelToViewY( particle.position.y );
+      const x = this.modelViewTransform.modelToViewX( particle.x );
+      const y = this.modelViewTransform.modelToViewY( particle.y );
       shape.circle( x, y, 1 );
     } ) );
     this.shape = shape;

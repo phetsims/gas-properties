@@ -175,24 +175,24 @@ export default class CollisionDetector {
         particle.left = containerBounds.minX;
 
         // If the left wall is moving, it will do work.
-        particle.setVelocityXY( -( particle.velocity.x - leftWallVelocity.x ), particle.velocity.y );
+        particle.setVelocityXY( -( particle.vx - leftWallVelocity.x ), particle.vy );
         collided = true;
       }
       else if ( particle.right >= containerBounds.maxX ) {
         particle.right = containerBounds.maxX;
-        particle.setVelocityXY( -particle.velocity.x, particle.velocity.y );
+        particle.setVelocityXY( -particle.vx, particle.vy );
         collided = true;
       }
 
       // adjust y
       if ( particle.top >= containerBounds.maxY ) {
         particle.top = containerBounds.maxY;
-        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+        particle.setVelocityXY( particle.vx, -particle.vy );
         collided = true;
       }
       else if ( particle.bottom <= containerBounds.minY ) {
         particle.bottom = containerBounds.minY;
-        particle.setVelocityXY( particle.velocity.x, -particle.velocity.y );
+        particle.setVelocityXY( particle.vx, -particle.vy );
         collided = true;
       }
 
@@ -278,11 +278,11 @@ function doParticleParticleCollisions( particles: Particle[], mutableVectors: Mu
         // Determine where the particles made contact.
         //-----------------------------------------------------------------------------------------
 
-        const dx = particle1.position.x - particle2.position.x;
-        const dy = particle1.position.y - particle2.position.y;
-        const contactRatio = particle1.radius / particle1.position.distance( particle2.position );
-        const contactPointX = particle1.position.x - dx * contactRatio;
-        const contactPointY = particle1.position.y - dy * contactRatio;
+        const dx = particle1.x - particle2.x;
+        const dy = particle1.y - particle2.y;
+        const contactRatio = particle1.radius / particle1.distance( particle2 );
+        const contactPointX = particle1.x - dx * contactRatio;
+        const contactPointY = particle1.y - dy * contactRatio;
 
         //-----------------------------------------------------------------------------------------
         // Adjust particle positions by reflecting across the line of impact.
@@ -310,7 +310,7 @@ function doParticleParticleCollisions( particles: Particle[], mutableVectors: Mu
 
         // Compute the impulse, j.
         // There is no angular velocity in our model, so the denominator involves only mass.
-        mutableVectors.relativeVelocity.set( particle1.velocity ).subtract( particle2.velocity );
+        mutableVectors.relativeVelocity.setXY( particle1.vx, particle1.vy ).subtractXY( particle2.vx, particle2.vy );
         const vr = mutableVectors.relativeVelocity.dot( mutableVectors.normal );
         const numerator = -vr * ( 1 + e );
         const denominator = ( 1 / particle1.mass + 1 / particle2.mass );
@@ -335,23 +335,23 @@ function doParticleParticleCollisions( particles: Particle[], mutableVectors: Mu
 function adjustParticlePosition( particle: Particle, contactPointX: number, contactPointY: number,
                                  lineAngle: number, pointOnLine: Vector2, reflectedPoint: Vector2 ): void {
 
-  const previousDistance = particle.previousPosition.distanceXY( contactPointX, contactPointY );
+  const previousDistance = GasPropertiesUtils.distanceXY( particle.previousX, particle.previousY, contactPointX, contactPointY );
   const positionRatio = particle.radius / previousDistance;
   pointOnLine.setXY(
-    contactPointX - ( contactPointX - particle.previousPosition.x ) * positionRatio,
-    contactPointY - ( contactPointY - particle.previousPosition.y ) * positionRatio
+    contactPointX - ( contactPointX - particle.previousX ) * positionRatio,
+    contactPointY - ( contactPointY - particle.previousY ) * positionRatio
   );
-  GasPropertiesUtils.reflectPointAcrossLine( particle.position, pointOnLine, lineAngle, reflectedPoint );
-  particle.setPositionXY( reflectedPoint.x, reflectedPoint.y );
+  GasPropertiesUtils.reflectPointAcrossLineXY( particle.x, particle.y, pointOnLine, lineAngle, reflectedPoint );
+  particle.setXY( reflectedPoint.x, reflectedPoint.y );
 }
 
 /**
  * Adjusts the speed of a particle in response to a collision with another particle.
  */
 function adjustParticleSpeed( particle: Particle, scale: number, normalVector: Vector2 ): void {
-  const vx = normalVector.x * scale;
-  const vy = normalVector.y * scale;
-  particle.setVelocityXY( particle.velocity.x + vx, particle.velocity.y + vy );
+  const vxDelta = normalVector.x * scale;
+  const vyDelta = normalVector.y * scale;
+  particle.setVelocityXY( particle.vx + vxDelta, particle.vy + vyDelta );
 }
 
 gasProperties.register( 'CollisionDetector', CollisionDetector );

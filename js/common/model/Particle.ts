@@ -12,9 +12,9 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import { ProfileColorProperty } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
+import GasPropertiesUtils from '../GasPropertiesUtils.js';
 
 type SelfOptions = {
   mass: number; // AMU
@@ -35,9 +35,17 @@ export default class Particle {
   public readonly colorProperty: ProfileColorProperty;
   public readonly highlightColorProperty: ProfileColorProperty;
 
-  public readonly position: Vector2; // center of the particle, pm, MUTATED!
-  public readonly previousPosition: Vector2; // position on previous time step, MUTATED!
-  public readonly velocity: Vector2; // pm/ps, initially at rest, MUTATED!
+  // (x,y) position of the particle, at the center of the particle
+  private _x: number;
+  private _y: number;
+
+  // Position on the previous time step
+  private _previousX: number;
+  private _previousY: number;
+
+  // Velocity vector components, pm/ps, initially at rest
+  private _vx;
+  private _vy;
 
   private _isDisposed: boolean;
 
@@ -49,9 +57,14 @@ export default class Particle {
     this.colorProperty = providedOptions.colorProperty;
     this.highlightColorProperty = providedOptions.highlightColorProperty;
 
-    this.position = new Vector2( 0, 0 );
-    this.previousPosition = this.position.copy();
-    this.velocity = new Vector2( 0, 0 );
+    this._x = 0;
+    this._y = 0;
+
+    this._previousX = 0;
+    this._previousY = 0;
+
+    this._vx = 0;
+    this._vy = 0;
 
     this._isDisposed = false;
   }
@@ -68,36 +81,59 @@ export default class Particle {
   /**
    * ES5 getters and setters for particle position.
    */
-  public get left(): number { return this.position.x - this.radius; }
+
+  public get x(): number { return this._x; }
+
+  public get y(): number { return this._y; }
+
+  public get previousX(): number { return this._previousX; }
+
+  public get previousY(): number { return this._previousY; }
+
+  public get left(): number { return this._x - this.radius; }
 
   public set left( value: number ) {
-    this.setPositionXY( value + this.radius, this.position.y );
+    this.setXY( value + this.radius, this._y );
   }
 
-  public get right(): number { return this.position.x + this.radius; }
+  public get right(): number { return this._x + this.radius; }
 
   public set right( value: number ) {
-    this.setPositionXY( value - this.radius, this.position.y );
+    this.setXY( value - this.radius, this._y );
   }
 
-  public get top(): number { return this.position.y + this.radius; }
+  public get top(): number { return this._y + this.radius; }
 
   public set top( value: number ) {
-    this.setPositionXY( this.position.x, value - this.radius );
+    this.setXY( this._x, value - this.radius );
   }
 
-  public get bottom(): number { return this.position.y - this.radius; }
+  public get bottom(): number { return this._y - this.radius; }
 
   public set bottom( value: number ) {
-    this.setPositionXY( this.position.x, value + this.radius );
+    this.setXY( this._x, value + this.radius );
   }
 
   /**
-   * Gets the kinetic energy of this particle.
-   * @returns AMU * pm^2 / ps^2
+   * ES5 getters for particle velocity.
+   */
+
+  public get vx(): number { return this._vx; }
+
+  public get vy(): number { return this._vy; }
+
+  /**
+   * Gets the particle's speed, the velocity magnitude, in pm/ps.
+   */
+  public get speed(): number {
+    return Math.sqrt( this._vx * this._vx + this._vy * this._vy );
+  }
+
+  /**
+   * Gets the kinetic energy of this particle, in AMU * pm^2 / ps^2.
    */
   public getKineticEnergy(): number {
-    return 0.5 * this.mass * this.velocity.magnitudeSquared; // KE = (1/2) * m * |v|^2
+    return 0.5 * this.mass * this.speed * this.speed; // KE = (1/2) * m * |v|^2
   }
 
   /**
@@ -108,22 +144,32 @@ export default class Particle {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
     assert && assert( !this._isDisposed, 'attempted to step a disposed Particle' );
 
-    this.setPositionXY( this.position.x + dt * this.velocity.x, this.position.y + dt * this.velocity.y );
+    this.setXY( this._x + dt * this._vx, this._y + dt * this._vy );
   }
 
   /**
-   * Sets this particle's position and remembers the previous position.
+   * Sets this particle's xy position and remembers the previous xy position.
    */
-  public setPositionXY( x: number, y: number ): void {
-    this.previousPosition.setXY( this.position.x, this.position.y );
-    this.position.setXY( x, y );
+  public setXY( x: number, y: number ): void {
+    this._previousX = this._x;
+    this._previousY = this._y;
+    this._x = x;
+    this._y = y;
+  }
+
+  /**
+   * Sets this particle's x position and remembers the previous x position.
+   */
+  public setX( x: number ): void {
+    this.setXY( x, this._y );
   }
 
   /**
    * Sets this particle's velocity in Cartesian coordinates.
    */
-  public setVelocityXY( x: number, y: number ): void {
-    this.velocity.setXY( x, y );
+  public setVelocityXY( vx: number, vy: number ): void {
+    this._vx = vx;
+    this._vy = vy;
   }
 
   /**
@@ -137,12 +183,11 @@ export default class Particle {
   }
 
   /**
-   * Sets this particle's velocity magnitude (speed).
-   * @param magnitude - pm/ps
+   * Sets this particle's speed (velocity magnitude).
    */
-  public setVelocityMagnitude( magnitude: number ): void {
-    assert && assert( magnitude >= 0, `invalid magnitude: ${magnitude}` );
-    this.velocity.setMagnitude( magnitude );
+  public setSpeed( speed: number ): void {
+    assert && assert( speed >= 0, `invalid magnitude: ${speed}` );
+    this.scaleVelocity( speed / this.speed );
   }
 
   /**
@@ -150,14 +195,15 @@ export default class Particle {
    */
   public scaleVelocity( scale: number ): void {
     assert && assert( scale > 0, `invalid scale: ${scale}` );
-    this.velocity.multiply( scale );
+    this._vx *= scale;
+    this._vy *= scale;
   }
 
   /**
    * Does this particle contact another particle now?
    */
   public contactsParticle( particle: Particle ): boolean {
-    return this.position.distance( particle.position ) <= ( this.radius + particle.radius );
+    return this.distance( particle ) <= ( this.radius + particle.radius );
   }
 
   /**
@@ -166,7 +212,21 @@ export default class Particle {
    * implementation, and makes the collision behavior more natural looking.
    */
   public contactedParticle( particle: Particle ): boolean {
-    return this.previousPosition.distance( particle.previousPosition ) <= ( this.radius + particle.radius );
+    return this.previousDistance( particle ) <= ( this.radius + particle.radius );
+  }
+
+  /**
+   * Distance to some other particle, in pm.
+   */
+  public distance( particle: Particle ): number {
+    return GasPropertiesUtils.distanceXY( this._x, this._y, particle.x, particle.y );
+  }
+
+  /**
+   * Previous distance to some other particle, in pm.
+   */
+  private previousDistance( particle: Particle ): number {
+    return GasPropertiesUtils.distanceXY( this._previousX, this._previousY, particle.previousX, particle.previousY );
   }
 
   /**
@@ -186,7 +246,7 @@ export default class Particle {
    * String representation of this particle. For debugging only, do not rely on format.
    */
   public toString(): string {
-    return `Particle[position:(${this.position.x},${this.position.y}) mass:${this.mass} radius:${this.radius}]`;
+    return `Particle[position:(${this._x},${this._y}) mass:${this.mass} radius:${this.radius}]`;
   }
 }
 

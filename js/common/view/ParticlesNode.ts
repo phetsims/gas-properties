@@ -105,8 +105,8 @@ export default class ParticlesNode extends Sprites {
         // For the next SpriteInstance, set its Sprite, and transform it to the particle's position.
         const spriteInstance = this.spriteInstances[ spriteInstancesIndex++ ];
         spriteInstance.sprite = sprite;
-        spriteInstance.matrix.set02( this.modelViewTransform.modelToViewX( particle.position.x ) );
-        spriteInstance.matrix.set12( this.modelViewTransform.modelToViewY( particle.position.y ) );
+        spriteInstance.matrix.set02( this.modelViewTransform.modelToViewX( particle.x ) );
+        spriteInstance.matrix.set12( this.modelViewTransform.modelToViewY( particle.y ) );
       }
     }
 
