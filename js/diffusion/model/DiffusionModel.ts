@@ -94,9 +94,11 @@ export default class DiffusionModel extends BaseModel {
     // Factoring out class DiffusionParticleSystem is too complicated. So use an intermediate 'particleSystem' tandem
     // to provide that structure for the Studio tree.
     const particleSystemTandem = tandem.createTandem( 'particleSystem' );
+    const particle1Tandem = particleSystemTandem.createTandem( 'particle1' );
+    const particle2Tandem = particleSystemTandem.createTandem( 'particle2' );
 
-    this.particle1Settings = new DiffusionSettings( particleSystemTandem.createTandem( 'particle1Settings' ) );
-    this.particle2Settings = new DiffusionSettings( particleSystemTandem.createTandem( 'particle2Settings' ) );
+    this.particle1Settings = new DiffusionSettings( particle1Tandem.createTandem( 'settings' ) );
+    this.particle2Settings = new DiffusionSettings( particle2Tandem.createTandem( 'settings' ) );
 
     // Synchronize particle counts and arrays.
     const createDiffusionParticle1 = ( options: CreateParticleOptions ) => new DiffusionParticle1( options );
@@ -147,7 +149,7 @@ export default class DiffusionModel extends BaseModel {
 
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-        tandem: particleSystemTandem.createTandem( 'centerOfMass1Property' ),
+        tandem: particle1Tandem.createTandem( 'centerOfMassProperty' ),
         phetioReadOnly: true,
         phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 1. This is the x offset from the center of the container.'
@@ -155,14 +157,14 @@ export default class DiffusionModel extends BaseModel {
 
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-        tandem: particleSystemTandem.createTandem( 'centerOfMass2Property' ),
+        tandem: particle2Tandem.createTandem( 'centerOfMassProperty' ),
         phetioReadOnly: true,
         phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 2. This is the x offset from the center of the container.'
       } ) );
 
-    this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, particleSystemTandem.createTandem( 'particle1FlowRateModel' ) );
-    this.particle2FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles2, particleSystemTandem.createTandem( 'particle2FlowRateModel' ) );
+    this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, particle1Tandem );
+    this.particle2FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles2, particle2Tandem );
 
     this.collisionDetector = new DiffusionCollisionDetector( this.container, this.particles1, this.particles2 );
 
