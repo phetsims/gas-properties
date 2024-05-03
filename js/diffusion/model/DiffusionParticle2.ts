@@ -21,6 +21,8 @@ type SelfOptions = EmptySelfOptions;
 export type DiffusionParticle2Options = SelfOptions &
   StrictOmit<DiffusionParticleOptions, 'colorProperty' | 'highlightColorProperty'>;
 
+export type DiffusionParticle2StateObject = ParticleStateObject;
+
 export default class DiffusionParticle2 extends DiffusionParticle {
 
   public constructor( providedOptions?: DiffusionParticle2Options ) {
@@ -35,7 +37,7 @@ export default class DiffusionParticle2 extends DiffusionParticle {
   /**
    * Deserializes an instance of DiffusionParticle1.
    */
-  private static fromStateObject( stateObject: ParticleStateObject ): DiffusionParticle2 {
+  private static fromStateObject( stateObject: DiffusionParticle2StateObject ): DiffusionParticle2 {
     return new DiffusionParticle2( {
       x: stateObject.x,
       y: stateObject.y,
@@ -46,8 +48,8 @@ export default class DiffusionParticle2 extends DiffusionParticle {
     } );
   }
 
-  public static readonly DiffusionParticle2IO = new IOType<DiffusionParticle2, ParticleStateObject>( 'DiffusionParticle2IO', {
-    valueType: Particle,
+  public static readonly DiffusionParticle2IO = new IOType<DiffusionParticle2, DiffusionParticle2StateObject>( 'DiffusionParticle2IO', {
+    valueType: DiffusionParticle2,
     stateSchema: Particle.STATE_SCHEMA,
     fromStateObject: DiffusionParticle2.fromStateObject
   } );

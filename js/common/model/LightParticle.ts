@@ -52,7 +52,7 @@ export default class LightParticle extends Particle {
   }
 
   public static readonly LightParticleIO = new IOType<LightParticle, LightParticleStateObject>( 'LightParticleIO', {
-    valueType: Particle,
+    valueType: LightParticle,
     stateSchema: Particle.STATE_SCHEMA,
     fromStateObject: LightParticle.fromStateObject
   } );

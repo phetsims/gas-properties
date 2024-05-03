@@ -52,7 +52,7 @@ export default class HeavyParticle extends Particle {
   }
 
   public static readonly HeavyParticleIO = new IOType<HeavyParticle, HeavyParticleStateObject>( 'HeavyParticleIO', {
-    valueType: Particle,
+    valueType: HeavyParticle,
     stateSchema: Particle.STATE_SCHEMA,
     fromStateObject: HeavyParticle.fromStateObject
   } );
