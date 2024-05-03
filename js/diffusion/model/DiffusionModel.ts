@@ -45,12 +45,12 @@ type CreateParticleOptions = PickRequired<ParticleOptions, 'mass' | 'radius'>;
 
 export default class DiffusionModel extends BaseModel {
 
+  public readonly container: DiffusionContainer;
+
   // particles of each species, together these make up the 'particle system'
   //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly particles1: DiffusionParticle1[];
   public readonly particles2: DiffusionParticle2[];
-
-  public readonly container: DiffusionContainer;
 
   // settings for the particle types 1 and 2, before the divider is removed
   public readonly particle1Settings: DiffusionSettings;
@@ -86,10 +86,10 @@ export default class DiffusionModel extends BaseModel {
       tandem: tandem
     } );
 
+    this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
+
     this.particles1 = [];
     this.particles2 = [];
-
-    this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
 
     // Factoring out class DiffusionParticleSystem is too complicated. So use an intermediate 'particleSystem' tandem
     // to provide that structure for the Studio tree.
