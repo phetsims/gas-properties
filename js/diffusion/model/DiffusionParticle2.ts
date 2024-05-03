@@ -25,8 +25,8 @@ export default class DiffusionParticle2 extends DiffusionParticle {
     super( optionize<DiffusionParticle2Options, SelfOptions, DiffusionParticleOptions>()( {
 
       // ParticleOptions
-      colorProperty: GasPropertiesColors.particle2ColorProperty,
-      highlightColorProperty: GasPropertiesColors.particle2HighlightColorProperty
+      colorProperty: GasPropertiesColors.diffusionParticle2ColorProperty,
+      highlightColorProperty: GasPropertiesColors.diffusionParticle2HighlightColorProperty
     }, providedOptions ) );
   }
 }

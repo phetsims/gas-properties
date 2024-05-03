@@ -62,11 +62,11 @@ export default class DiffusionScreenView extends BaseScreenView {
 
     // Center of Mass indicators
     const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
-      model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.particle1ColorProperty, {
+      model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.diffusionParticle1ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
     const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
-      model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.particle2ColorProperty, {
+      model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.diffusionParticle2ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
 
@@ -74,7 +74,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     const particleFlowRateNode1 = new ParticleFlowRateNode( model.particle1FlowRateModel, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
-        fill: GasPropertiesColors.particle1ColorProperty
+        fill: GasPropertiesColors.diffusionParticle1ColorProperty
       },
       centerX: containerNode.centerX,
       top: containerNode.bottom + 38
@@ -82,7 +82,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     const particleFlowRateNode2 = new ParticleFlowRateNode( model.particle2FlowRateModel, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
-        fill: GasPropertiesColors.particle2ColorProperty
+        fill: GasPropertiesColors.diffusionParticle2ColorProperty
       },
       centerX: containerNode.centerX,
       top: particleFlowRateNode1.bottom + 5

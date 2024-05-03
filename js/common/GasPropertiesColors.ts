@@ -146,23 +146,23 @@ const GasPropertiesColors = {
     default: 'rgb( 255, 170, 170 )' // lighter shade of lightParticleColor
   } ),
 
-  // primary color for 1st particle type in Diffusion screen
-  particle1ColorProperty: new ProfileColorProperty( gasProperties, 'particle1Color', {
+  // primary color for particle type 1 in Diffusion screen
+  diffusionParticle1ColorProperty: new ProfileColorProperty( gasProperties, 'diffusionParticle1Color', {
     default: 'rgb( 0, 230, 255)' // cyan
   } ),
 
-  // specular highlight for 1st particle type in Diffusion screen
-  particle1HighlightColorProperty: new ProfileColorProperty( gasProperties, 'particle1HighlightColor', {
+  // specular highlight for particle type 1 in Diffusion screen
+  diffusionParticle1HighlightColorProperty: new ProfileColorProperty( gasProperties, 'diffusionParticle1HighlightColor', {
     default: 'rgb( 203, 247, 252 )' // lighter shade of particle1Color
   } ),
 
-  // primary color for 2nd particle type in Diffusion screen
-  particle2ColorProperty: new ProfileColorProperty( gasProperties, 'particle2Color', {
+  // primary color for particle type 2 in Diffusion screen
+  diffusionParticle2ColorProperty: new ProfileColorProperty( gasProperties, 'diffusionParticle2Color', {
     default: 'rgb( 232, 78, 32 )' // red
   } ),
 
-  // specular highlight for 2nd particle type in Diffusion screen
-  particle2HighlightColorProperty: new ProfileColorProperty( gasProperties, 'particle2HighlightColor', {
+  // specular highlight for particle type 2 in Diffusion screen
+  diffusionParticle2HighlightColorProperty: new ProfileColorProperty( gasProperties, 'diffusionParticle2HighlightColor', {
     default: 'rgb( 255, 170, 170 )' // lighter shade of particle2Color
   } ),
 

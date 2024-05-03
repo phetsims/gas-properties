@@ -373,11 +373,11 @@ const GasPropertiesIconFactory = {
       spacing: 12,
       children: [
         new Rectangle( 0, 0, width, height, {
-          fill: GasPropertiesColors.particle1ColorProperty,
+          fill: GasPropertiesColors.diffusionParticle1ColorProperty,
           stroke: GasPropertiesColors.centerOfMassStrokeProperty
         } ),
         new Rectangle( 0, 0, width, height, {
-          fill: GasPropertiesColors.particle2ColorProperty,
+          fill: GasPropertiesColors.diffusionParticle2ColorProperty,
           stroke: GasPropertiesColors.centerOfMassStrokeProperty
         } )
       ]
@@ -390,7 +390,7 @@ const GasPropertiesIconFactory = {
   createParticleFlowRateIcon(): Node {
 
     const arrowOptions = {
-      fill: GasPropertiesColors.particle1ColorProperty,
+      fill: GasPropertiesColors.diffusionParticle1ColorProperty,
       stroke: 'black',
       headHeight: 12,
       headWidth: 12,
