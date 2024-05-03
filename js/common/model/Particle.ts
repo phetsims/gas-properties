@@ -15,25 +15,41 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { ProfileColorProperty } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesUtils from '../GasPropertiesUtils.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = {
   mass: number; // AMU
   radius: number; // pm
+  x?: number;
+  y?: number;
+  previousX?: number;
+  previousY?: number;
+  vx?: number;
+  vy?: number;
   colorProperty: ProfileColorProperty;
   highlightColorProperty: ProfileColorProperty; // color for specular highlight
 };
 
 export type ParticleOptions = SelfOptions;
 
+// This should match Particle.STATE_SCHEMA, but with JavaScript types.
+export type ParticleStateObject = {
+  mass: number;
+  radius: number;
+  x: number;
+  y: number;
+  previousX: number;
+  previousY: number;
+  vx: number;
+  vy: number;
+};
+
 export default class Particle {
 
   // These are settable in the Diffusion screen
   protected _mass: number; // AMU
   protected _radius: number; // pm
-
-  //TODO https://github.com/phetsims/gas-properties/issues/218 Can these be moved elsewhere?
-  public readonly colorProperty: ProfileColorProperty;
-  public readonly highlightColorProperty: ProfileColorProperty;
 
   // (x,y) position of the particle, at the center of the particle
   private _x: number;
@@ -47,24 +63,51 @@ export default class Particle {
   private _vx;
   private _vy;
 
+  //TODO https://github.com/phetsims/gas-properties/issues/218 Can these be moved elsewhere?
+  public readonly colorProperty: ProfileColorProperty;
+  public readonly highlightColorProperty: ProfileColorProperty;
+
   private _isDisposed: boolean;
+
+  // This should match ParticleStateObject, but with IOTypes.
+  protected static readonly STATE_SCHEMA = {
+    mass: NumberIO,
+    radius: NumberIO,
+    x: NumberIO,
+    y: NumberIO,
+    previousX: NumberIO,
+    previousY: NumberIO,
+    vx: NumberIO,
+    vy: NumberIO
+  };
 
   protected constructor( providedOptions: ParticleOptions ) {
 
-    this._mass = providedOptions.mass;
-    this._radius = providedOptions.radius;
+    const options = optionize<ParticleOptions, SelfOptions>()( {
 
-    this.colorProperty = providedOptions.colorProperty;
-    this.highlightColorProperty = providedOptions.highlightColorProperty;
+      // SelfOptions
+      x: 0,
+      y: 0,
+      previousX: 0,
+      previousY: 0,
+      vx: 0,
+      vy: 0
+    }, providedOptions );
 
-    this._x = 0;
-    this._y = 0;
+    this._mass = options.mass;
+    this._radius = options.radius;
 
-    this._previousX = 0;
-    this._previousY = 0;
+    this._x = options.x;
+    this._y = options.y;
 
-    this._vx = 0;
-    this._vy = 0;
+    this._previousX = options.previousX;
+    this._previousY = options.previousY;
+
+    this._vx = options.vx;
+    this._vy = options.vy;
+
+    this.colorProperty = options.colorProperty;
+    this.highlightColorProperty = options.highlightColorProperty;
 
     this._isDisposed = false;
   }

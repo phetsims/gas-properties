@@ -13,6 +13,8 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionParticle, { DiffusionParticleOptions } from './DiffusionParticle.js';
+import Particle, { ParticleStateObject } from '../../common/model/Particle.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -29,6 +31,26 @@ export default class DiffusionParticle1 extends DiffusionParticle {
       highlightColorProperty: GasPropertiesColors.diffusionParticle1HighlightColorProperty
     }, providedOptions ) );
   }
+
+  /**
+   * Deserializes an instance of DiffusionParticle1.
+   */
+  private static fromStateObject( stateObject: ParticleStateObject ): DiffusionParticle1 {
+    return new DiffusionParticle1( {
+      x: stateObject.x,
+      y: stateObject.y,
+      previousX: stateObject.previousX,
+      previousY: stateObject.previousY,
+      vx: stateObject.vx,
+      vy: stateObject.vy
+    } );
+  }
+
+  public static readonly DiffusionParticle1IO = new IOType<DiffusionParticle1, ParticleStateObject>( 'DiffusionParticle1IO', {
+    valueType: Particle,
+    stateSchema: Particle.STATE_SCHEMA,
+    fromStateObject: DiffusionParticle1.fromStateObject
+  } );
 }
 
 gasProperties.register( 'DiffusionParticle1', DiffusionParticle1 );
