@@ -136,7 +136,7 @@ export default class DiffusionModel extends BaseModel {
 
     this.numberOfParticlesProperty = new DerivedProperty(
       [ this.particle1Settings.numberOfParticlesProperty, this.particle2Settings.numberOfParticlesProperty ],
-      ( leftNumberOfParticles, rightNumberOfParticles ) => {
+      ( numberOfParticles1, numberOfParticles2 ) => {
 
         // Skip these assertions when PhET-iO state is being restored, because at least one of the arrays will
         // definitely not be populated. See https://github.com/phetsims/gas-properties/issues/178
@@ -145,10 +145,10 @@ export default class DiffusionModel extends BaseModel {
           // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
           // If you hit these assertions, then you need to add this listener later.  This is a trade-off
           // for using plain old Arrays instead of ObservableArrayDef.
-          assert && assert( this.particles1.length === leftNumberOfParticles, 'particles1 has not been populated yet' );
-          assert && assert( this.particles2.length === rightNumberOfParticles, 'particles2 has not been populated yet' );
+          assert && assert( this.particles1.length === numberOfParticles1, 'particles1 has not been populated yet' );
+          assert && assert( this.particles2.length === numberOfParticles2, 'particles2 has not been populated yet' );
         }
-        return leftNumberOfParticles + rightNumberOfParticles;
+        return numberOfParticles1 + numberOfParticles2;
       }, {
         isValidValue: value => ( Number.isInteger( value ) && value >= 0 ),
         phetioValueType: NumberIO,
