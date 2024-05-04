@@ -291,7 +291,7 @@ export default class Particle {
    * String representation of this particle. For debugging only, do not rely on format.
    */
   public toString(): string {
-    return `Particle[position:(${this._x},${this._y}) mass:${this._mass} radius:${this._radius}]`;
+    return `Particle[x:${this._x} y:${this._y}) mass:${this._mass} radius:${this._radius}]`;
   }
 }
 
