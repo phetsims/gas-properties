@@ -16,7 +16,7 @@ import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Particle from '../../common/model/Particle.js';
-import ParticleSystem from '../../common/model/ParticleSystem.js';
+import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
 
 // constants
@@ -33,7 +33,7 @@ type AverageSpeedModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 
 
 export default class AverageSpeedModel {
 
-  private readonly particleSystem: ParticleSystem;
+  private readonly particleSystem: IdealGasLawParticleSystem;
   private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
   private readonly samplePeriod: number;
 
@@ -54,7 +54,7 @@ export default class AverageSpeedModel {
    * @param samplePeriod - data is averaged over this period, in ps
    * @param providedOptions
    */
-  public constructor( particleSystem: ParticleSystem, isPlayingProperty: TReadOnlyProperty<boolean>,
+  public constructor( particleSystem: IdealGasLawParticleSystem, isPlayingProperty: TReadOnlyProperty<boolean>,
                       samplePeriod: number, providedOptions: AverageSpeedModelOptions ) {
     assert && assert( samplePeriod > 0, `invalid samplePeriod: ${samplePeriod}` );
 

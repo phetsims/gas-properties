@@ -95,7 +95,7 @@ by these screens lives in `js/common/`.
 `IdealGasLawModel` is a subclass of `BaseModel` that adds functionality related to the Ideal Gas Law. It delegates some
 responsibilities to the following sub-models:
 
-* `ParticleSystem` - responsible for the particle system, including the number of particles `N`
+* `IdealGasLawParticleSystem` - responsible for the particle system, including the number of particles `N`
 * `BaseContainer` - responsible for the container, including its volume `V`
 * `PressureModel` - responsible for pressure `P`, and the "noise" in the `PressureGauge`
 * `TemperatureModel` - responsible for temperature `T`, and the `Thermometer`

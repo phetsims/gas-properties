@@ -1,7 +1,7 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
 /**
- * ParticleSystem is a sub-model of IdealGasModel. It is responsible for the particle system, including
+ * IdealGasLawParticleSystem is a sub-model of IdealGasModel. It is responsible for the particle system, including
  * the N (number of particles) component of the Ideal Gas Law, PV = NkT.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -64,7 +64,7 @@ const PARTICLE_SYSTEM_STATE_SCHEMA = {
   lightParticlesOutside: ArrayIO( LightParticle.LightParticleIO )
 };
 
-export default class ParticleSystem extends PhetioObject {
+export default class IdealGasLawParticleSystem extends PhetioObject {
 
   // Gets the temperature used to compute initial velocity magnitude.
   private readonly getInitialTemperature: () => number;
@@ -104,7 +104,7 @@ export default class ParticleSystem extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioType: ParticleSystem.ParticleSystemIO
+      phetioType: IdealGasLawParticleSystem.ParticleSystemIO
     }, providedOptions );
 
     super( options );
@@ -391,7 +391,7 @@ export default class ParticleSystem extends PhetioObject {
   }
 
   /**
-   * Serializes this instance of ParticleSystem.
+   * Serializes this instance of IdealGasLawParticleSystem.
    */
   private toStateObject(): ParticleSystemStateObject {
     return {
@@ -403,9 +403,9 @@ export default class ParticleSystem extends PhetioObject {
   }
 
   /**
-   * Deserializes an instance of ParticleSystem.
+   * Deserializes an instance of IdealGasLawParticleSystem.
    */
-  private static applyState( particleSystem: ParticleSystem, stateObject: ParticleSystemStateObject ): void {
+  private static applyState( particleSystem: IdealGasLawParticleSystem, stateObject: ParticleSystemStateObject ): void {
 
     particleSystem.heavyParticles.length = 0;
     particleSystem.lightParticles.length = 0;
@@ -433,13 +433,13 @@ export default class ParticleSystem extends PhetioObject {
    * ParticleSystemIO handles serialization of the particle arrays.
    * TODO https://github.com/phetsims/gas-properties/issues/231 What type of serialization is this?
    */
-  private static readonly ParticleSystemIO = new IOType<ParticleSystem, ParticleSystemStateObject>( 'ParticleSystemIO', {
-    valueType: ParticleSystem,
+  private static readonly ParticleSystemIO = new IOType<IdealGasLawParticleSystem, ParticleSystemStateObject>( 'ParticleSystemIO', {
+    valueType: IdealGasLawParticleSystem,
     defaultDeserializationMethod: 'applyState',
     stateSchema: PARTICLE_SYSTEM_STATE_SCHEMA,
     toStateObject: particleSystem => particleSystem.toStateObject(),
-    applyState: ParticleSystem.applyState
+    applyState: IdealGasLawParticleSystem.applyState
   } );
 }
 
-gasProperties.register( 'ParticleSystem', ParticleSystem );
+gasProperties.register( 'IdealGasLawParticleSystem', IdealGasLawParticleSystem );

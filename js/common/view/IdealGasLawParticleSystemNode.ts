@@ -17,7 +17,7 @@ import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import HeavyParticle from '../model/HeavyParticle.js';
 import LightParticle from '../model/LightParticle.js';
-import ParticleSystem from '../model/ParticleSystem.js';
+import IdealGasLawParticleSystem from '../model/IdealGasLawParticleSystem.js';
 import ParticleCanvasProperty from './ParticleCanvasProperty.js';
 import ParticlesNode from './ParticlesNode.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
@@ -30,7 +30,7 @@ export default class IdealGasLawParticleSystemNode extends Node {
 
   private readonly particlePositionsNode?: ParticlePositionsNode;
 
-  public constructor( particleSystem: ParticleSystem, modelViewTransform: ModelViewTransform2,
+  public constructor( particleSystem: IdealGasLawParticleSystem, modelViewTransform: ModelViewTransform2,
                       modelBoundsProperty: TReadOnlyProperty<Bounds2>, containerMaxBounds: Bounds2 ) {
 
     // generated canvas for HeavyParticle species

@@ -7,7 +7,7 @@
  *
  * P (pressure) - see PressureModel pressureKilopascalsProperty
  * V (volume) - see BaseContainer volumeProperty
- * N (number of particles) - see ParticleSystem numberOfParticlesProperty
+ * N (number of particles) - see IdealGasLawParticleSystem numberOfParticlesProperty
  * T (temperature) - see TemperatureModel temperatureKelvinProperty
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -30,7 +30,7 @@ import CollisionCounter from './CollisionCounter.js';
 import CollisionDetector from './CollisionDetector.js';
 import { HoldConstant, HoldConstantValues } from './HoldConstant.js';
 import IdealGasLawContainer, { IdealGasLawContainerOptions } from './IdealGasLawContainer.js';
-import ParticleSystem from './ParticleSystem.js';
+import IdealGasLawParticleSystem from './IdealGasLawParticleSystem.js';
 import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -93,7 +93,7 @@ export default class IdealGasLawModel extends BaseModel {
   public readonly heatCoolAmountProperty: NumberProperty;
 
   public readonly container: IdealGasLawContainer;
-  public readonly particleSystem: ParticleSystem;
+  public readonly particleSystem: IdealGasLawParticleSystem;
 
   // sub-model responsible for temperature T
   public readonly temperatureModel: TemperatureModel;
@@ -149,7 +149,7 @@ export default class IdealGasLawModel extends BaseModel {
       tandem: options.tandem.createTandem( 'container' )
     }, options.containerOptions ) );
 
-    this.particleSystem = new ParticleSystem(
+    this.particleSystem = new IdealGasLawParticleSystem(
       () => this.temperatureModel.getInitialTemperature(),
       this.container.particleEntryPosition, {
         phetioCollisionsEnabledPropertyInstrumented: options.phetioCollisionsEnabledPropertyInstrumented,

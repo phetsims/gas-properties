@@ -13,7 +13,7 @@ import EraserButton, { EraserButtonOptions } from '../../../../scenery-phet/js/b
 import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import ParticleSystem from '../model/ParticleSystem.js';
+import IdealGasLawParticleSystem from '../model/IdealGasLawParticleSystem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -21,7 +21,7 @@ type EraseParticlesButtonOptions = SelfOptions & NodeTranslationOptions & PickRe
 
 export default class EraseParticlesButton extends EraserButton {
 
-  public constructor( particleSystem: ParticleSystem, providedOptions: EraseParticlesButtonOptions ) {
+  public constructor( particleSystem: IdealGasLawParticleSystem, providedOptions: EraseParticlesButtonOptions ) {
 
     const options = optionize<EraseParticlesButtonOptions, SelfOptions, EraserButtonOptions>()( {
 

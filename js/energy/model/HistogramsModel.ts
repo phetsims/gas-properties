@@ -19,7 +19,7 @@ import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Particle from '../../common/model/Particle.js';
-import ParticleSystem from '../../common/model/ParticleSystem.js';
+import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
 
 // Describes the properties of the histograms at a specific zoom level.
@@ -35,7 +35,7 @@ type HistogramsModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 
 export default class HistogramsModel {
 
-  private readonly particleSystem: ParticleSystem;
+  private readonly particleSystem: IdealGasLawParticleSystem;
   private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
   private readonly samplePeriod: number;
 
@@ -92,7 +92,7 @@ export default class HistogramsModel {
    * @param samplePeriod - data is averaged over this period, in ps
    * @param providedOptions
    */
-  public constructor( particleSystem: ParticleSystem, isPlayingProperty: TReadOnlyProperty<boolean>,
+  public constructor( particleSystem: IdealGasLawParticleSystem, isPlayingProperty: TReadOnlyProperty<boolean>,
                       samplePeriod: number, providedOptions: HistogramsModelOptions ) {
     assert && assert( samplePeriod > 0, `invalid samplePeriod: ${samplePeriod}` );
 
