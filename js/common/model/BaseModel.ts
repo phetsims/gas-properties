@@ -47,7 +47,7 @@ type SelfOptions = {
 };
 
 export type BaseModelOptions = SelfOptions &
-  PickOptional<PhetioObjectOptions, 'phetioState'> & // because subclass DiffusionModel has state
+  PickOptional<PhetioObjectOptions, 'phetioState' | 'phetioType'> & // because subclass DiffusionModel has state
   PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class BaseModel extends PhetioObject implements TModel {

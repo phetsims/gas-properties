@@ -23,8 +23,8 @@ import gasProperties from '../../gasProperties.js';
 import DiffusionCollisionDetector from './DiffusionCollisionDetector.js';
 import DiffusionContainer from './DiffusionContainer.js';
 import DiffusionData from './DiffusionData.js';
-import DiffusionParticle1 from './DiffusionParticle1.js';
-import DiffusionParticle2 from './DiffusionParticle2.js';
+import DiffusionParticle1, { DiffusionParticle1StateObject } from './DiffusionParticle1.js';
+import DiffusionParticle2, { DiffusionParticle2StateObject } from './DiffusionParticle2.js';
 import DiffusionSettings from './DiffusionSettings.js';
 import ParticleFlowRateModel from './ParticleFlowRateModel.js';
 import Particle, { ParticleOptions } from '../../common/model/Particle.js';
@@ -32,6 +32,8 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import DiffusionParticle from './DiffusionParticle.js';
+import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 
 // constants
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
@@ -44,12 +46,21 @@ const CENTER_OF_MASS_PROPERTY_OPTIONS = {
 // Options to createParticle functions
 type CreateParticleOptions = PickRequired<ParticleOptions, 'mass' | 'radius'>;
 
+type DiffusionModelStateObject = {
+  particles1: DiffusionParticle1StateObject[];
+  particles2: DiffusionParticle2StateObject[];
+};
+
+const DIFFUSION_MODEL_STATE_SCHEMA = {
+  particles1: ArrayIO( DiffusionParticle1.DiffusionParticle1IO ),
+  particles2: ArrayIO( DiffusionParticle2.DiffusionParticle2IO )
+};
+
 export default class DiffusionModel extends BaseModel {
 
   public readonly container: DiffusionContainer;
 
   // particles of each species, together these make up the 'particle system'
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly particles1: DiffusionParticle1[];
   public readonly particles2: DiffusionParticle2[];
 
@@ -84,7 +95,9 @@ export default class DiffusionModel extends BaseModel {
       modelOriginOffset: new Vector2( 670, 520 ),
       stopwatchPosition: new Vector2( 60, 50 ),
       hasTimeSpeedFeature: true,
-      tandem: tandem
+      tandem: tandem,
+      phetioType: DiffusionModel.DiffusionModelIO,
+      phetioState: true // Override phetioState: false in superclass BaseModel.
     } );
 
     this.container = new DiffusionContainer( tandem.createTandem( 'container' ) );
@@ -299,6 +312,41 @@ export default class DiffusionModel extends BaseModel {
     this.leftData.update( this.particles1, this.particles2 );
     this.rightData.update( this.particles1, this.particles2 );
   }
+
+  /**
+   * Serializes an instance of DiffusionModel.
+   */
+  private toStateObject(): DiffusionModelStateObject {
+    return {
+      particles1: this.particles1.map( particle => DiffusionParticle1.DiffusionParticle1IO.toStateObject( particle ) ),
+      particles2: this.particles2.map( particle => DiffusionParticle2.DiffusionParticle2IO.toStateObject( particle ) )
+    };
+  }
+
+  /**
+   * Deserializes an instance of DiffusionModel.
+   */
+  private static applyState( diffusionModel: DiffusionModel, stateObject: DiffusionModelStateObject ): void {
+
+    diffusionModel.particles1.length = 0;
+    diffusionModel.particles2.length = 0;
+
+    stateObject.particles1.forEach( ( stateObject: DiffusionParticle1StateObject ) => {
+      diffusionModel.particles1.push( DiffusionParticle1.DiffusionParticle1IO.fromStateObject( stateObject ) );
+    } );
+
+    stateObject.particles2.forEach( ( stateObject: DiffusionParticle2StateObject ) => {
+      diffusionModel.particles2.push( DiffusionParticle2.DiffusionParticle2IO.fromStateObject( stateObject ) );
+    } );
+  }
+
+  public static readonly DiffusionModelIO = new IOType<DiffusionModel, DiffusionModelStateObject>( 'DiffusionModelIO', {
+    valueType: DiffusionModel,
+    defaultDeserializationMethod: 'applyState',
+    stateSchema: DIFFUSION_MODEL_STATE_SCHEMA,
+    toStateObject: diffusionModel => diffusionModel.toStateObject(),
+    applyState: DiffusionModel.applyState
+  } );
 }
 
 /**
