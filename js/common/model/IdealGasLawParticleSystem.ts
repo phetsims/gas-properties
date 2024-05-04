@@ -1,7 +1,7 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
 /**
- * IdealGasLawParticleSystem is a sub-model of IdealGasModel. It is responsible for the particle system, including
+ * IdealGasLawParticleSystem is a sub-model of IdealGasLawModel. It is responsible for the particle system, including
  * the N (number of particles) component of the Ideal Gas Law, PV = NkT.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -46,18 +46,18 @@ type SelfOptions = {
   phetioCollisionsEnabledPropertyInstrumented?: boolean;
 };
 
-type ParticleSystemOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+type IdealGasLawParticleSystemOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-// This should match PARTICLE_SYSTEM_STATE_SCHEMA, but with JavaScript types.
-type ParticleSystemStateObject = {
+// This should match IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA, but with JavaScript types.
+type IdealGasLawParticleSystemStateObject = {
   heavyParticles: HeavyParticleStateObject[];
   lightParticles: LightParticleStateObject[];
   heavyParticlesOutside: HeavyParticleStateObject[];
   lightParticlesOutside: LightParticleStateObject[];
 };
 
-// This should match ParticleSystemStateObject, but with IOTypes.
-const PARTICLE_SYSTEM_STATE_SCHEMA = {
+// This should match IdealGasLawParticleSystemStateObject, but with IOTypes.
+const IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA = {
   heavyParticles: ArrayIO( HeavyParticle.HeavyParticleIO ),
   lightParticles: ArrayIO( LightParticle.LightParticleIO ),
   heavyParticlesOutside: ArrayIO( HeavyParticle.HeavyParticleIO ),
@@ -95,16 +95,16 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
 
   public constructor( getInitialTemperature: () => number,
                       particleEntryPosition: Vector2,
-                      providedOptions: ParticleSystemOptions ) {
+                      providedOptions: IdealGasLawParticleSystemOptions ) {
 
-    const options = optionize<ParticleSystemOptions, SelfOptions, PhetioObjectOptions>()( {
+    const options = optionize<IdealGasLawParticleSystemOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       phetioCollisionsEnabledPropertyInstrumented: false,
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioType: IdealGasLawParticleSystem.ParticleSystemIO
+      phetioType: IdealGasLawParticleSystem.IdealGasLawParticleSystemIO
     }, providedOptions );
 
     super( options );
@@ -393,7 +393,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   /**
    * Serializes this instance of IdealGasLawParticleSystem.
    */
-  private toStateObject(): ParticleSystemStateObject {
+  private toStateObject(): IdealGasLawParticleSystemStateObject {
     return {
       heavyParticles: this.heavyParticles.map( particle => HeavyParticle.HeavyParticleIO.toStateObject( particle ) ),
       lightParticles: this.lightParticles.map( particle => LightParticle.LightParticleIO.toStateObject( particle ) ),
@@ -405,7 +405,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   /**
    * Deserializes an instance of IdealGasLawParticleSystem.
    */
-  private static applyState( particleSystem: IdealGasLawParticleSystem, stateObject: ParticleSystemStateObject ): void {
+  private static applyState( particleSystem: IdealGasLawParticleSystem, stateObject: IdealGasLawParticleSystemStateObject ): void {
 
     particleSystem.heavyParticles.length = 0;
     particleSystem.lightParticles.length = 0;
@@ -430,13 +430,13 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   }
 
   /**
-   * ParticleSystemIO handles serialization of the particle arrays.
+   * IdealGasLawParticleSystemIO handles serialization of the particle arrays.
    * TODO https://github.com/phetsims/gas-properties/issues/231 What type of serialization is this?
    */
-  private static readonly ParticleSystemIO = new IOType<IdealGasLawParticleSystem, ParticleSystemStateObject>( 'ParticleSystemIO', {
+  private static readonly IdealGasLawParticleSystemIO = new IOType<IdealGasLawParticleSystem, IdealGasLawParticleSystemStateObject>( 'IdealGasLawParticleSystemIO', {
     valueType: IdealGasLawParticleSystem,
     defaultDeserializationMethod: 'applyState',
-    stateSchema: PARTICLE_SYSTEM_STATE_SCHEMA,
+    stateSchema: IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA,
     toStateObject: particleSystem => particleSystem.toStateObject(),
     applyState: IdealGasLawParticleSystem.applyState
   } );
