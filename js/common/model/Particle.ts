@@ -62,7 +62,6 @@ export default class Particle {
   private _vx;
   private _vy;
 
-  //TODO https://github.com/phetsims/gas-properties/issues/218 Can these be moved elsewhere?
   public readonly colorProperty: ProfileColorProperty;
   public readonly highlightColorProperty: ProfileColorProperty;
 
