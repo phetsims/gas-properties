@@ -168,17 +168,11 @@ export default class Particle {
   public get vy(): number { return this._vy; }
 
   /**
-   * Gets the particle's speed, the velocity magnitude, in pm/ps.
-   */
-  public get speed(): number {
-    return Math.sqrt( this._vx * this._vx + this._vy * this._vy );
-  }
-
-  /**
    * Gets the kinetic energy of this particle, in AMU * pm^2 / ps^2.
    */
   public getKineticEnergy(): number {
-    return 0.5 * this._mass * this.speed * this.speed; // KE = (1/2) * m * |v|^2
+    const speed = this.getSpeed();
+    return 0.5 * this._mass * speed * speed; // KE = (1/2) * m * |v|^2
   }
 
   /**
@@ -228,11 +222,18 @@ export default class Particle {
   }
 
   /**
-   * Sets this particle's speed (velocity magnitude).
+   * Gets the particle's speed (velocity magnitude) in pm/ps.
+   */
+  public getSpeed(): number {
+    return Math.sqrt( this._vx * this._vx + this._vy * this._vy );
+  }
+
+  /**
+   * Sets this particle's speed (velocity magnitude) in pm/ps.
    */
   public setSpeed( speed: number ): void {
     assert && assert( speed >= 0, `invalid magnitude: ${speed}` );
-    this.scaleVelocity( speed / this.speed );
+    this.scaleVelocity( speed / this.getSpeed() );
   }
 
   /**
