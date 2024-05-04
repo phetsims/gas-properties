@@ -182,7 +182,7 @@ export default class ParticleSystem extends PhetioObject {
     // particle arrays. This occurs in the "notification" step when updateNumberOfParticles is called.
     // During PhET-iO restore state, this must occur before numberOfParticlesProperty is re-derived.
     // See https://github.com/phetsims/gas-properties/issues/178
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Review this.
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Review this. Why not also for Diffusion particle system?
     propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfHeavyParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
     propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
   }
