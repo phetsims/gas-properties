@@ -51,9 +51,14 @@ export default class HeavyParticle extends Particle {
     } );
   }
 
+  /**
+   * HeavyParticleIO handles serialization a HeavyParticle. It implements 'Data Type Serialization',
+   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
+   */
   public static readonly HeavyParticleIO = new IOType<HeavyParticle, HeavyParticleStateObject>( 'HeavyParticleIO', {
     valueType: HeavyParticle,
-    stateSchema: Particle.STATE_SCHEMA,
+    stateSchema: HeavyParticle.STATE_SCHEMA,
+    // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: HeavyParticle.fromStateObject
   } );
 }

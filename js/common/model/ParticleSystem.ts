@@ -48,6 +48,7 @@ type SelfOptions = {
 
 type ParticleSystemOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
+// This should match PARTICLE_SYSTEM_STATE_SCHEMA, but with JavaScript types.
 type ParticleSystemStateObject = {
   heavyParticles: HeavyParticleStateObject[];
   lightParticles: LightParticleStateObject[];
@@ -55,6 +56,7 @@ type ParticleSystemStateObject = {
   lightParticlesOutside: LightParticleStateObject[];
 };
 
+// This should match ParticleSystemStateObject, but with IOTypes.
 const PARTICLE_SYSTEM_STATE_SCHEMA = {
   heavyParticles: ArrayIO( HeavyParticle.HeavyParticleIO ),
   lightParticles: ArrayIO( LightParticle.LightParticleIO ),
@@ -85,7 +87,7 @@ export default class ParticleSystem extends PhetioObject {
   // Number of heavy particles inside the container.
   public readonly numberOfHeavyParticlesProperty: NumberProperty;
 
-  //Number of light particles inside the container.
+  // Number of light particles inside the container.
   public readonly numberOfLightParticlesProperty: NumberProperty;
 
   // N, the total number of particles in the container.
@@ -389,7 +391,7 @@ export default class ParticleSystem extends PhetioObject {
   }
 
   /**
-   * Serializes an instance of ParticleSystem.
+   * Serializes this instance of ParticleSystem.
    */
   private toStateObject(): ParticleSystemStateObject {
     return {
@@ -427,7 +429,11 @@ export default class ParticleSystem extends PhetioObject {
     } );
   }
 
-  public static readonly ParticleSystemIO = new IOType<ParticleSystem, ParticleSystemStateObject>( 'ParticleSystemIO', {
+  /**
+   * ParticleSystemIO handles serialization of the particle arrays.
+   * TODO https://github.com/phetsims/gas-properties/issues/231 What type of serialization is this?
+   */
+  private static readonly ParticleSystemIO = new IOType<ParticleSystem, ParticleSystemStateObject>( 'ParticleSystemIO', {
     valueType: ParticleSystem,
     defaultDeserializationMethod: 'applyState',
     stateSchema: PARTICLE_SYSTEM_STATE_SCHEMA,

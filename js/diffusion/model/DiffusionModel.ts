@@ -46,11 +46,13 @@ const CENTER_OF_MASS_PROPERTY_OPTIONS = {
 // Options to createParticle functions
 type CreateParticleOptions = PickRequired<ParticleOptions, 'mass' | 'radius'>;
 
+// This should match DIFFUSION_MODEL_STATE_SCHEMA, but with JavaScript types.
 type DiffusionModelStateObject = {
   particles1: DiffusionParticle1StateObject[];
   particles2: DiffusionParticle2StateObject[];
 };
 
+// This should match DiffusionModelStateObject, but with IOTypes.
 const DIFFUSION_MODEL_STATE_SCHEMA = {
   particles1: ArrayIO( DiffusionParticle1.DiffusionParticle1IO ),
   particles2: ArrayIO( DiffusionParticle2.DiffusionParticle2IO )
@@ -314,7 +316,7 @@ export default class DiffusionModel extends BaseModel {
   }
 
   /**
-   * Serializes an instance of DiffusionModel.
+   * Serializes this instance of DiffusionModel.
    */
   private toStateObject(): DiffusionModelStateObject {
     return {
@@ -329,18 +331,21 @@ export default class DiffusionModel extends BaseModel {
   private static applyState( diffusionModel: DiffusionModel, stateObject: DiffusionModelStateObject ): void {
 
     diffusionModel.particles1.length = 0;
-    diffusionModel.particles2.length = 0;
-
     stateObject.particles1.forEach( ( stateObject: DiffusionParticle1StateObject ) => {
       diffusionModel.particles1.push( DiffusionParticle1.DiffusionParticle1IO.fromStateObject( stateObject ) );
     } );
 
+    diffusionModel.particles2.length = 0;
     stateObject.particles2.forEach( ( stateObject: DiffusionParticle2StateObject ) => {
       diffusionModel.particles2.push( DiffusionParticle2.DiffusionParticle2IO.fromStateObject( stateObject ) );
     } );
   }
 
-  public static readonly DiffusionModelIO = new IOType<DiffusionModel, DiffusionModelStateObject>( 'DiffusionModelIO', {
+  /**
+   * DiffusionModelIO handles serialization of the particle arrays.
+   * TODO https://github.com/phetsims/gas-properties/issues/231 What type of serialization is this?
+   */
+  private static readonly DiffusionModelIO = new IOType<DiffusionModel, DiffusionModelStateObject>( 'DiffusionModelIO', {
     valueType: DiffusionModel,
     defaultDeserializationMethod: 'applyState',
     stateSchema: DIFFUSION_MODEL_STATE_SCHEMA,

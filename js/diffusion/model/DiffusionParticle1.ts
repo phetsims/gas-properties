@@ -13,7 +13,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionParticle, { DiffusionParticleOptions } from './DiffusionParticle.js';
-import Particle, { ParticleStateObject } from '../../common/model/Particle.js';
+import { ParticleStateObject } from '../../common/model/Particle.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -48,9 +48,14 @@ export default class DiffusionParticle1 extends DiffusionParticle {
     } );
   }
 
+  /**
+   * DiffusionParticle1IO handles serialization a DiffusionParticle1. It implements 'Data Type Serialization',
+   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
+   */
   public static readonly DiffusionParticle1IO = new IOType<DiffusionParticle1, DiffusionParticle1StateObject>( 'DiffusionParticle1IO', {
     valueType: DiffusionParticle1,
-    stateSchema: Particle.STATE_SCHEMA,
+    stateSchema: DiffusionParticle1.STATE_SCHEMA,
+    // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: DiffusionParticle1.fromStateObject
   } );
 }
