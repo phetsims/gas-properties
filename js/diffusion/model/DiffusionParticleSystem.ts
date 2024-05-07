@@ -103,21 +103,13 @@ export default class DiffusionParticleSystem extends PhetioObject {
     this.particle2Settings = new DiffusionSettings( particle2Tandem.createTandem( 'settings' ) );
 
     // Synchronize particle counts and arrays.
-    const createDiffusionParticle1 = ( options: CreateParticleOptions ) => new DiffusionParticle1( options );
     this.particle1Settings.numberOfParticlesProperty.link( numberOfParticles => {
-      this.updateNumberOfParticles( numberOfParticles,
-        container.leftBounds,
-        this.particle1Settings,
-        this.particles1,
-        createDiffusionParticle1 );
+      this.updateNumberOfParticles( numberOfParticles, this.particles1, this.particle1Settings, container.leftBounds,
+        ( options: CreateParticleOptions ) => new DiffusionParticle1( options ) );
     } );
-    const createDiffusionParticle2 = ( options: CreateParticleOptions ) => new DiffusionParticle2( options );
     this.particle2Settings.numberOfParticlesProperty.link( numberOfParticles => {
-      this.updateNumberOfParticles( numberOfParticles,
-        container.rightBounds,
-        this.particle2Settings,
-        this.particles2,
-        createDiffusionParticle2 );
+      this.updateNumberOfParticles( numberOfParticles, this.particles2, this.particle2Settings, container.rightBounds,
+        ( options: CreateParticleOptions ) => new DiffusionParticle2( options ) );
     } );
 
     this.numberOfParticlesProperty = new DerivedProperty(
@@ -220,18 +212,21 @@ export default class DiffusionParticleSystem extends PhetioObject {
   /**
    * Adjusts an array of particles to have the desired number of elements.
    * @param numberOfParticles - desired number of particles
-   * @param positionBounds - initial position will be inside this bounds
-   * @param settings
    * @param particles - array of particles that corresponds to newValue and oldValue
+   * @param settings
+   * @param positionBounds - initial position will be inside this bounds
    * @param createParticle - creates a Particle instance
    */
-  private updateNumberOfParticles( numberOfParticles: number, positionBounds: Bounds2, settings: DiffusionSettings,
-                                   particles: Particle[], createParticle: ( options: CreateParticleOptions ) => Particle ): void {
+  private updateNumberOfParticles( numberOfParticles: number,
+                                   particles: Particle[],
+                                   settings: DiffusionSettings,
+                                   positionBounds: Bounds2,
+                                   createParticle: ( options: CreateParticleOptions ) => Particle ): void {
 
     const delta = numberOfParticles - particles.length;
     if ( delta !== 0 ) {
       if ( delta > 0 ) {
-        addParticles( delta, positionBounds, settings, particles, createParticle );
+        addParticles( delta, particles, settings, positionBounds, createParticle );
       }
       else {
         ParticleUtils.removeLastParticles( -delta, particles );
@@ -294,7 +289,10 @@ export default class DiffusionParticleSystem extends PhetioObject {
 /**
  * Adds n particles to the end of the specified array. Particles must be inside positionBounds.
  */
-function addParticles( n: number, positionBounds: Bounds2, settings: DiffusionSettings, particles: Particle[],
+function addParticles( n: number,
+                       particles: Particle[],
+                       settings: DiffusionSettings,
+                       positionBounds: Bounds2,
                        createParticle: ( options: CreateParticleOptions ) => Particle ): void {
   assert && assert( n > 0 && Number.isInteger( n ), `invalid n: ${n}` );
 
