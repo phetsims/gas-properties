@@ -19,10 +19,7 @@ import DiffusionParticleSystem from './DiffusionParticleSystem.js';
 export default class DiffusionModel extends BaseModel {
 
   public readonly container: DiffusionContainer;
-
   public readonly particleSystem: DiffusionParticleSystem;
-
-  // Handles collisions between particles and a vertical divider.
   public readonly collisionDetector: DiffusionCollisionDetector;
 
   // data for the left and right sides of the container, appears in Data accordion box
