@@ -115,7 +115,7 @@ export default class CollisionCounter extends PhetioObject {
     // Changing visibility or sample period stops the counter, and resets the count and time.
     Multilink.multilink( [ this.visibleProperty, this.samplePeriodProperty ], () => {
       if ( !isSettingPhetioStateProperty.value ) {
-        this.isRunningProperty.value = false;
+        this.isRunningProperty.reset();
         this.numberOfCollisionsProperty.reset();
         this.timeRunningProperty.reset();
       }
