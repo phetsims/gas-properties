@@ -304,7 +304,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
     }
     else {
 
-      // For groups of particles with particle-particle collisions enabled, create some Gaussian deviation in the
+      // For groups of particles with particle-particle collisions enabled, create Gaussian deviation in the
       // temperature used to compute speed, but maintain the desired mean.  This makes the motion of a group
       // of particles look less wave-like. We do this for temperature instead of speed because temperature
       // in the container is T = (2/3)KE/k, and KE is a function of |v|^2, so deviation in speed would
