@@ -76,6 +76,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   public readonly collisionsEnabledProperty: Property<boolean>;
 
   // Together these arrays make up the 'particle system'. Separate arrays are kept to optimize performance.
+  // These are serialized by IdealGasLawParticleSystemIO.
   public readonly heavyParticles: HeavyParticle[]; // heavy particles inside the container
   public readonly lightParticles: LightParticle[]; // light particles inside the container
   public readonly heavyParticlesOutside: HeavyParticle[]; // heavy particles outside the container
