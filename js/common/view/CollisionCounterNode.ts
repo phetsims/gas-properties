@@ -87,7 +87,7 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
     } );
 
     const samplePeriodComboBox = new SamplePeriodComboBox( collisionCounter.samplePeriodProperty,
-      collisionCounter.samplePeriods, listboxParent, options.tandem.createTandem( 'samplePeriodComboBox' ) );
+      CollisionCounter.SAMPLE_PERIODS, listboxParent, options.tandem.createTandem( 'samplePeriodComboBox' ) );
 
     // stuff that appears on the counter
     const content = new VBox( {

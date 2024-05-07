@@ -44,12 +44,12 @@ export default class CollisionCounter extends PhetioObject {
   // whether the collision counter is visible
   public readonly visibleProperty: Property<boolean>;
 
-  // valid values for samplePeriodProperty, in ps
-  public readonly samplePeriods: number[];
-
   // Sample period for counting collisions
   // Actual sample period will be close to this value, but not exact (confirmed OK with @arouinfar).
   public readonly samplePeriodProperty: Property<number>;
+
+  // Valid values for samplePeriodProperty, in ps.
+  public static readonly SAMPLE_PERIODS = [ 5, 10, 20 ];
 
   public constructor( collisionDetector: CollisionDetector, providedOptions: CollisionCounterOptions ) {
 
@@ -102,11 +102,9 @@ export default class CollisionCounter extends PhetioObject {
       phetioDocumentation: 'Whether the collision counter is visible.'
     } );
 
-    this.samplePeriods = [ 5, 10, 20 ];
-
-    this.samplePeriodProperty = new NumberProperty( this.samplePeriods[ 1 ], {
+    this.samplePeriodProperty = new NumberProperty( CollisionCounter.SAMPLE_PERIODS[ 1 ], {
       numberType: 'Integer',
-      validValues: this.samplePeriods,
+      validValues: CollisionCounter.SAMPLE_PERIODS,
       units: 'ps',
       tandem: options.tandem.createTandem( 'samplePeriodProperty' ),
       phetioFeatured: true,

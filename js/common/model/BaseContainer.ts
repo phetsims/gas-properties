@@ -47,6 +47,7 @@ export default class BaseContainer extends PhetioObject {
   public readonly maxBounds: Bounds2;
 
   // velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly leftWallVelocity: Vector2;
 
   // Indicates whether the user is adjusting widthProperty. The width will also change automatically in
