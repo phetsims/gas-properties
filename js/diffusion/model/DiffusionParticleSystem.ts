@@ -233,6 +233,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
       }
 
       // If paused, update things that would normally be handled by step.
+      //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
       if ( !this.isPlayingProperty.value ) {
         this.updateCenterOfMass();
       }

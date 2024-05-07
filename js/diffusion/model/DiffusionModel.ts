@@ -53,6 +53,7 @@ export default class DiffusionModel extends BaseModel {
         this.particleSystem.particle2Settings.initialTemperatureProperty
       ],
       () => {
+        //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
         if ( !this.isPlayingProperty.value ) {
           this.updateData();
         }
@@ -60,6 +61,7 @@ export default class DiffusionModel extends BaseModel {
 
     // When the divider is restored, create a new initial state (and new sets of particles) with same settings.
     this.container.isDividedProperty.link( isDivided => {
+      //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
       if ( isDivided ) {
         this.particleSystem.restart();
       }
