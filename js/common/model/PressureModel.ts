@@ -48,10 +48,10 @@ export default class PressureModel extends PhetioObject {
   // P, pressure in the container, in kPa
   public readonly pressureKilopascalsProperty: Property<number>;
 
-  // pressure in kPa, with noise added
+  // Pressure in kPa, with optional noise added, used exclusively by the view.
   public readonly pressureKilopascalsNoiseProperty: Property<number>;
 
-  // pressure in atmospheres (atm), with noise added
+  // Pressure in atmospheres (atm), with optional noise added, used exclusively by the view.
   public readonly pressureAtmospheresNoiseProperty: TReadOnlyProperty<number>;
 
   // amount of noise in kPa is inversely proportional to pressure, so more noise at lower pressure
@@ -63,11 +63,10 @@ export default class PressureModel extends PhetioObject {
   // pressure units displayed by the pressure gauge
   public readonly unitsProperty: StringUnionProperty<PressureUnits>;
 
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
-  private dtAccumulator: number;
+  // Accumulates dt values when the model is stepped, so that we update the view at interval REFRESH_PERIOD.
+  private readonly dtAccumulatorProperty: Property<number>;
 
   // whether to update pressure
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private updatePressureEnabled: boolean;
 
   // The display is refreshed at this interval, in ps
@@ -135,7 +134,11 @@ export default class PressureModel extends PhetioObject {
       phetioDocumentation: 'Units displayed by the pressure gauge.'
     } );
 
-    this.dtAccumulator = 0;
+    this.dtAccumulatorProperty = new NumberProperty( 0, {
+      tandem: tandem.createTandem( 'dtAccumulatorProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
+    } );
 
     this.updatePressureEnabled = false;
 
@@ -159,7 +162,7 @@ export default class PressureModel extends PhetioObject {
   public reset(): void {
     this.pressureKilopascalsProperty.reset();
     this.unitsProperty.reset();
-    this.dtAccumulator = 0;
+    this.dtAccumulatorProperty.reset();
     this.updatePressureEnabled = false;
   }
 
@@ -198,9 +201,9 @@ export default class PressureModel extends PhetioObject {
   private step( dt: number ): void {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
 
-    this.dtAccumulator += dt;
+    this.dtAccumulatorProperty.value += dt;
 
-    if ( this.dtAccumulator >= PressureModel.REFRESH_PERIOD ) {
+    if ( this.dtAccumulatorProperty.value >= PressureModel.REFRESH_PERIOD ) {
 
       // Are we in a mode that holds pressure constant?
       const constantPressure = ( this.holdConstantProperty.value === 'pressureT' ||
@@ -225,7 +228,7 @@ export default class PressureModel extends PhetioObject {
       }
 
       this.pressureKilopascalsNoiseProperty.value = this.pressureKilopascalsProperty.value + noise;
-      this.dtAccumulator = 0;
+      this.dtAccumulatorProperty.value = 0;
     }
   }
 
