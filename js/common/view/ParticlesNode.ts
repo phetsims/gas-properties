@@ -79,7 +79,7 @@ export default class ParticlesNode extends Sprites {
     this.spriteInstances = spriteInstances;
     this.spriteInstances = spriteInstances;
 
-    // If the Canvas for drawing a particle species changes while the sim is paused, redraw the particle system.
+    // If any Canvas Property changes while the sim is paused, redraw the particle system.
     Multilink.multilinkAny( canvasProperties, () => {
       if ( !isPlayingProperty.value ) {
         this.update();
