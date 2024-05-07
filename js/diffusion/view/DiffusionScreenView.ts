@@ -61,17 +61,17 @@ export default class DiffusionScreenView extends BaseScreenView {
     }
 
     // Center of Mass indicators
-    const centerOfMassNode1 = new CenterOfMassNode( model.centerOfMass1Property, model.container.bottom,
+    const centerOfMassNode1 = new CenterOfMassNode( model.particleSystem.centerOfMass1Property, model.container.bottom,
       model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.diffusionParticle1ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
-    const centerOfMassNode2 = new CenterOfMassNode( model.centerOfMass2Property, model.container.bottom,
+    const centerOfMassNode2 = new CenterOfMassNode( model.particleSystem.centerOfMass2Property, model.container.bottom,
       model.container.widthProperty, model.modelViewTransform, GasPropertiesColors.diffusionParticle2ColorProperty, {
         visibleProperty: viewProperties.centerOfMassVisibleProperty
       } );
 
     // Particle Flow Rate vectors
-    const particleFlowRateNode1 = new ParticleFlowRateNode( model.particle1FlowRateModel, {
+    const particleFlowRateNode1 = new ParticleFlowRateNode( model.particleSystem.particle1FlowRateModel, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColors.diffusionParticle1ColorProperty
@@ -79,7 +79,7 @@ export default class DiffusionScreenView extends BaseScreenView {
       centerX: containerNode.centerX,
       top: containerNode.bottom + 38
     } );
-    const particleFlowRateNode2 = new ParticleFlowRateNode( model.particle2FlowRateModel, {
+    const particleFlowRateNode2 = new ParticleFlowRateNode( model.particleSystem.particle2FlowRateModel, {
       visibleProperty: viewProperties.particleFlowRateVisibleProperty,
       arrowNodeOptions: {
         fill: GasPropertiesColors.diffusionParticle2ColorProperty
@@ -102,8 +102,13 @@ export default class DiffusionScreenView extends BaseScreenView {
     } );
 
     // Panel for setting initial conditions
-    const settingsPanel = new DiffusionSettingsNode( model.particle1Settings, model.particle2Settings, model.modelViewTransform,
-      model.container.isDividedProperty, model.numberOfParticlesProperty, panelsTandem.createTandem( 'settingsPanel' ) );
+    const settingsPanel = new DiffusionSettingsNode(
+      model.particleSystem.particle1Settings,
+      model.particleSystem.particle2Settings,
+      model.particleSystem.numberOfParticlesProperty,
+      model.container.isDividedProperty,
+      model.modelViewTransform,
+      panelsTandem.createTandem( 'settingsPanel' ) );
 
     // Panel for controlling visibility of 'tools'
     const toolsPanel = new DiffusionToolsPanel( viewProperties, model.stopwatch.isVisibleProperty,
@@ -126,7 +131,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     const particleSystemNode = new DiffusionParticleSystemNode( model );
 
     // If the number of particles changes while the sim is paused, redraw the particle system.
-    model.numberOfParticlesProperty.link( () => {
+    model.particleSystem.numberOfParticlesProperty.link( () => {
       if ( !model.isPlayingProperty.value ) {
         particleSystemNode.update();
       }

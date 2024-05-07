@@ -13,17 +13,14 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import CollisionDetector from '../../common/model/CollisionDetector.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from './DiffusionContainer.js';
-import DiffusionParticle1 from './DiffusionParticle1.js';
-import DiffusionParticle2 from './DiffusionParticle2.js';
+import DiffusionParticleSystem from './DiffusionParticleSystem.js';
 
 export default class DiffusionCollisionDetector extends CollisionDetector {
 
   private readonly diffusionContainer: DiffusionContainer;
 
-  public constructor( diffusionContainer: DiffusionContainer,
-                      particles1: DiffusionParticle1[],
-                      particles2: DiffusionParticle2[] ) {
-    super( diffusionContainer, [ particles1, particles2 ], new BooleanProperty( true ) );
+  public constructor( diffusionContainer: DiffusionContainer, particleSystem: DiffusionParticleSystem ) {
+    super( diffusionContainer, [ particleSystem.particles1, particleSystem.particles2 ], new BooleanProperty( true ) );
     this.diffusionContainer = diffusionContainer;
   }
 

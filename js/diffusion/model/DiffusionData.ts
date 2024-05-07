@@ -17,8 +17,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
-import DiffusionParticle1 from './DiffusionParticle1.js';
-import DiffusionParticle2 from './DiffusionParticle2.js';
+import DiffusionParticleSystem from './DiffusionParticleSystem.js';
 
 // constants
 const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS: NumberPropertyOptions = {
@@ -42,7 +41,7 @@ export default class DiffusionData {
   // null when there are no particles in this half of the container.
   public readonly averageTemperatureProperty: Property<number | null>;
 
-  public constructor( bounds: Bounds2, particles1: DiffusionParticle1[], particles2: DiffusionParticle2[],
+  public constructor( bounds: Bounds2, particleSystem: DiffusionParticleSystem,
                       leftOrRightString: 'left' | 'right', tandem: Tandem ) {
 
     this.bounds = bounds;
@@ -73,7 +72,7 @@ export default class DiffusionData {
       phetioDocumentation: `Average temperature in the ${leftOrRightString} half of the container.`
     } );
 
-    this.update( particles1, particles2 );
+    this.update( particleSystem );
   }
 
   public dispose(): void {
@@ -83,15 +82,15 @@ export default class DiffusionData {
   /**
    * Updates Properties based on the contents of the particle arrays.
    */
-  public update( particles1: DiffusionParticle1[], particles2: DiffusionParticle2[] ): void {
+  public update( particleSystem: DiffusionParticleSystem ): void {
 
     let numberOfParticles1 = 0;
     let numberOfParticles2 = 0;
     let totalKE = 0;
 
     // Contribution by DiffusionParticle1 species
-    for ( let i = particles1.length - 1; i >= 0; i-- ) {
-      const particle = particles1[ i ];
+    for ( let i = particleSystem.particles1.length - 1; i >= 0; i-- ) {
+      const particle = particleSystem.particles1[ i ];
       if ( this.bounds.containsCoordinates( particle.x, particle.y ) ) {
         numberOfParticles1++;
         totalKE += particle.getKineticEnergy();
@@ -100,8 +99,8 @@ export default class DiffusionData {
 
     // Contribution by DiffusionParticle2 species.
     // Note that there's a wee bit of code duplication here, but it gains us some iteration efficiency.
-    for ( let i = particles2.length - 1; i >= 0; i-- ) {
-      const particle = particles2[ i ];
+    for ( let i = particleSystem.particles2.length - 1; i >= 0; i-- ) {
+      const particle = particleSystem.particles2[ i ];
       if ( this.bounds.containsCoordinates( particle.x, particle.y ) ) {
         numberOfParticles2++;
         totalKE += particle.getKineticEnergy();

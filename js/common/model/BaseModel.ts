@@ -26,7 +26,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import TimeTransform from './TimeTransform.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
@@ -50,7 +50,7 @@ export type BaseModelOptions = SelfOptions &
   PickOptional<PhetioObjectOptions, 'phetioState' | 'phetioType'> & // because subclass DiffusionModel has state
   PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class BaseModel extends PhetioObject implements TModel {
+export default class BaseModel implements TModel {
 
   // transform between model and view coordinate frames
   public readonly modelViewTransform: ModelViewTransform2;
@@ -77,11 +77,8 @@ export default class BaseModel extends PhetioObject implements TModel {
       hasTimeSpeedFeature: false,
 
       // PhetioObjectOptions
-      isDisposable: false,
-      phetioState: false
+      isDisposable: false
     }, providedOptions );
-
-    super( options );
 
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
       options.modelOriginOffset,
