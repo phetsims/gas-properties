@@ -44,10 +44,17 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
     // Images for each particle species in particleArrays
     const imageProperties = [ particle1CanvasProperty, particle2CanvasProperty ];
 
-    super( particleArrays, imageProperties, model.modelViewTransform );
+    super( particleArrays, imageProperties, model.modelViewTransform, model.isPlayingProperty );
 
     // Size the canvas to match the container bounds. See https://github.com/phetsims/gas-properties/issues/38
     this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.bounds ) );
+
+    // If the number of particles changes while the sim is paused, redraw the particle system.
+    model.particleSystem.numberOfParticlesProperty.link( () => {
+      if ( !model.isPlayingProperty.value ) {
+        this.update();
+      }
+    } );
   }
 }
 

@@ -30,8 +30,11 @@ export default class IdealGasLawParticleSystemNode extends Node {
 
   private readonly particlePositionsNode?: ParticlePositionsNode;
 
-  public constructor( particleSystem: IdealGasLawParticleSystem, modelViewTransform: ModelViewTransform2,
-                      modelBoundsProperty: TReadOnlyProperty<Bounds2>, containerMaxBounds: Bounds2 ) {
+  public constructor( particleSystem: IdealGasLawParticleSystem,
+                      isPlayingProperty: TReadOnlyProperty<boolean>,
+                      modelViewTransform: ModelViewTransform2,
+                      modelBoundsProperty: TReadOnlyProperty<Bounds2>,
+                      containerMaxBounds: Bounds2 ) {
 
     // generated canvas for HeavyParticle species
     const heavyParticleCanvasProperty = new ParticleCanvasProperty( new HeavyParticle(), modelViewTransform );
@@ -43,7 +46,8 @@ export default class IdealGasLawParticleSystemNode extends Node {
     const insideParticlesNode = new ParticlesNode(
       [ particleSystem.heavyParticles, particleSystem.lightParticles ],
       [ heavyParticleCanvasProperty, lightParticleCanvasProperty ],
-      modelViewTransform
+      modelViewTransform,
+      isPlayingProperty
     );
 
     // Size the inside canvas to the maximum bounds for the container.
@@ -53,7 +57,8 @@ export default class IdealGasLawParticleSystemNode extends Node {
     const outsideParticlesNode = new ParticlesNode(
       [ particleSystem.heavyParticlesOutside, particleSystem.lightParticlesOutside ],
       [ heavyParticleCanvasProperty, lightParticleCanvasProperty ],
-      modelViewTransform
+      modelViewTransform,
+      isPlayingProperty
     );
 
     // When particles escape through the container's lid, they float up, since there is no gravity.
@@ -70,6 +75,13 @@ export default class IdealGasLawParticleSystemNode extends Node {
 
     this.insideParticlesNode = insideParticlesNode;
     this.outsideParticlesNode = outsideParticlesNode;
+
+    // If the number of particles changes while the sim is paused, redraw the particle system.
+    particleSystem.numberOfParticlesProperty.link( () => {
+      if ( !isPlayingProperty.value ) {
+        this.update();
+      }
+    } );
 
     // Debug the particle positions.
     if ( GasPropertiesQueryParameters.showParticlePositions ) {

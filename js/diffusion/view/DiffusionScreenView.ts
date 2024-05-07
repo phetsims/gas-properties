@@ -130,13 +130,6 @@ export default class DiffusionScreenView extends BaseScreenView {
     // The complete system of particles
     const particleSystemNode = new DiffusionParticleSystemNode( model );
 
-    // If the number of particles changes while the sim is paused, redraw the particle system.
-    model.particleSystem.numberOfParticlesProperty.link( () => {
-      if ( !model.isPlayingProperty.value ) {
-        particleSystemNode.update();
-      }
-    } );
-
     // Stopwatch
     const stopwatchNode = new GasPropertiesStopwatchNode( model.stopwatch, {
       dragBoundsProperty: this.visibleBoundsProperty,

@@ -208,15 +208,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     } );
 
     // The complete system of particles, inside and outside the container
-    const particleSystemNode = new IdealGasLawParticleSystemNode( model.particleSystem, model.modelViewTransform,
-      model.modelBoundsProperty, model.container.maxBounds );
-
-    // If the number of particles changes while the sim is paused, redraw the particle system.
-    model.particleSystem.numberOfParticlesProperty.link( () => {
-      if ( !this.model.isPlayingProperty.value ) {
-        particleSystemNode.update();
-      }
-    } );
+    const particleSystemNode = new IdealGasLawParticleSystemNode( model.particleSystem, model.isPlayingProperty,
+      model.modelViewTransform, model.modelBoundsProperty, model.container.maxBounds );
 
     // Device to heat/cool the contents of the container
     const heaterCoolerNodeXOffset = model.container.isFixedWidth ? GasPropertiesConstants.DEFAULT_CONTAINER_WIDTH.min : model.container.widthRange.min;
