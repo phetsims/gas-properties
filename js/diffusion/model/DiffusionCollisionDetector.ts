@@ -25,8 +25,8 @@ export default class DiffusionCollisionDetector extends CollisionDetector {
   }
 
   /**
-   * Detects and handles particle-container collisions for the system for one time step.
-   * Returns the number of collisions
+   * Detects and handles particle-container collisions for the system for one time step. Overrides the superclass
+   * method because we must deal with the divider. Returns the number of collisions.
    */
   protected override updateParticleContainerCollisions(): number {
 
