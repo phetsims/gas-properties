@@ -54,9 +54,11 @@ export default class CollisionDetector {
   private readonly collisionsEnabledProperty: Property<boolean>;
 
   // 2D grid of Regions
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   public readonly regions: Region[];
 
   // number of wall collisions on the most recent call to update
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
   private _numberOfParticleContainerCollisions: number;
 
   // mutable vectors, reused in critical code
