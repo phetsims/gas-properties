@@ -17,6 +17,7 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import gasProperties from '../../gasProperties.js';
 import CollisionDetector from './CollisionDetector.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = {
   position?: Vector2;
@@ -113,14 +114,16 @@ export default class CollisionCounter extends PhetioObject {
 
     // Changing visibility or sample period stops the counter, and resets the count and time.
     Multilink.multilink( [ this.visibleProperty, this.samplePeriodProperty ], () => {
-      this.isRunningProperty.value = false;
-      this.numberOfCollisionsProperty.reset();
-      this.timeRunningProperty.reset();
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.isRunningProperty.value = false;
+        this.numberOfCollisionsProperty.reset();
+        this.timeRunningProperty.reset();
+      }
     } );
 
     // Starting the counter resets the count and time.
     this.isRunningProperty.link( isRunning => {
-      if ( isRunning ) {
+      if ( isRunning && !isSettingPhetioStateProperty.value ) {
         this.numberOfCollisionsProperty.reset();
         this.timeRunningProperty.reset();
       }

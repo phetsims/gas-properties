@@ -24,6 +24,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesPreferences from './GasPropertiesPreferences.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Maximum pressure, in kPa. When exceeded, the lid blows off of the container.
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
@@ -144,7 +145,7 @@ export default class PressureModel extends PhetioObject {
 
     // When pressure goes to zero, update the gauge immediately.
     this.pressureKilopascalsProperty.link( pressure => {
-      if ( pressure === 0 ) {
+      if ( pressure === 0 && !isSettingPhetioStateProperty.value ) {
         this.pressureKilopascalsNoiseProperty.value = 0;
       }
     } );
@@ -153,7 +154,9 @@ export default class PressureModel extends PhetioObject {
     // Updates will be enabled when 1 particle has collided with the container.
     this.numberOfParticlesProperty.link( numberOfParticles => {
       if ( numberOfParticles === 0 ) {
-        this.pressureKilopascalsProperty.value = 0;
+        if ( !isSettingPhetioStateProperty.value ) {
+          this.pressureKilopascalsProperty.value = 0;
+        }
         this.updatePressureEnabled = false;
       }
     } );
