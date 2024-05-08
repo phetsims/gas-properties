@@ -56,8 +56,6 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     // Used for both NumberDisplay instances
     const valuePatternStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
       units: GasPropertiesStrings.metersPerSecondStringProperty
-    }, {
-      tandem: options.tandem.createTandem( 'valuePatternStringProperty' )
     } );
     const numberDisplayRange = new Range( 0, 9999 );
     const numberDisplayOptions: NumberDisplayOptions = {
