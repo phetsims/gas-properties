@@ -10,8 +10,6 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import propertyStateHandlerSingleton from '../../../../axon/js/propertyStateHandlerSingleton.js';
-import PropertyStatePhase from '../../../../axon/js/PropertyStatePhase.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
@@ -32,6 +30,7 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import optionize from '../../../../phet-core/js/optionize.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // used to compute the initial velocity angle for particles, in radians
 const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
@@ -150,26 +149,20 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
     // Synchronize particle counts and arrays.
     const createHeavyParticle = () => new HeavyParticle();
     this.numberOfHeavyParticlesProperty.link( ( newValue, oldValue ) => {
-      this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.updateNumberOfParticles( newValue, oldValue, this.heavyParticles, createHeavyParticle );
+      }
     } );
     const createLightParticle = () => new LightParticle();
     this.numberOfLightParticlesProperty.link( ( newValue, oldValue ) => {
-      this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, createLightParticle );
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.updateNumberOfParticles( newValue, oldValue, this.lightParticles, createLightParticle );
+      }
     } );
 
     this.numberOfParticlesProperty = new DerivedProperty(
       [ this.numberOfHeavyParticlesProperty, this.numberOfLightParticlesProperty ],
-      ( numberOfHeavyParticles, numberOfLightParticles ) => {
-
-        // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
-        // If you hit these assertions, then you need to add this listener later.  This is a trade-off
-        // for using plain old Arrays instead of ObservableArrayDefs.
-        assert && assert( this.heavyParticles.length === numberOfHeavyParticles,
-          'heavyParticles has not been populated yet' );
-        assert && assert( this.lightParticles.length === numberOfLightParticles,
-          'lightParticles has not been populated yet' );
-        return numberOfHeavyParticles + numberOfLightParticles;
-      }, {
+      ( numberOfHeavyParticles, numberOfLightParticles ) => numberOfHeavyParticles + numberOfLightParticles, {
         phetioValueType: NumberIO,
         valueType: 'number',
         isValidValue: value => value >= 0,
@@ -179,13 +172,13 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
       }
     );
 
-    // Properties for the number of heavy and light particles need to notify listeners to update their associated
-    // particle arrays. This occurs in the "notification" step when updateNumberOfParticles is called.
-    // During PhET-iO restore state, this must occur before numberOfParticlesProperty is re-derived.
-    // See https://github.com/phetsims/gas-properties/issues/178
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Review this. Why not also for Diffusion particle system?
-    propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfHeavyParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
-    propertyStateHandlerSingleton.registerPhetioOrderDependency( this.numberOfLightParticlesProperty, PropertyStatePhase.NOTIFY, this.numberOfParticlesProperty, PropertyStatePhase.UNDEFER );
+    // After PhET-iO state has been restored, verify the sanity of the particle system.
+    if ( assert && Tandem.PHET_IO_ENABLED ) {
+      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+        assert && assert( this.heavyParticles.length === this.numberOfHeavyParticlesProperty.value, 'incorrect number of heavyParticles' );
+        assert && assert( this.lightParticles.length === this.numberOfLightParticlesProperty.value, 'incorrect number of lightParticles' );
+      } );
+    }
   }
 
   public reset(): void {

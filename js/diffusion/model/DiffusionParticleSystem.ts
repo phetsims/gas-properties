@@ -104,36 +104,35 @@ export default class DiffusionParticleSystem extends PhetioObject {
 
     // Synchronize particle counts and arrays.
     this.particle1Settings.numberOfParticlesProperty.link( numberOfParticles => {
-      this.updateNumberOfParticles( numberOfParticles, this.particles1, this.particle1Settings, container.leftBounds,
-        ( options: CreateParticleOptions ) => new DiffusionParticle1( options ) );
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.updateNumberOfParticles( numberOfParticles, this.particles1, this.particle1Settings, container.leftBounds,
+          ( options: CreateParticleOptions ) => new DiffusionParticle1( options ) );
+      }
     } );
     this.particle2Settings.numberOfParticlesProperty.link( numberOfParticles => {
-      this.updateNumberOfParticles( numberOfParticles, this.particles2, this.particle2Settings, container.rightBounds,
-        ( options: CreateParticleOptions ) => new DiffusionParticle2( options ) );
+      if ( !isSettingPhetioStateProperty.value ) {
+        this.updateNumberOfParticles( numberOfParticles, this.particles2, this.particle2Settings, container.rightBounds,
+          ( options: CreateParticleOptions ) => new DiffusionParticle2( options ) );
+      }
     } );
 
     this.numberOfParticlesProperty = new DerivedProperty(
       [ this.particle1Settings.numberOfParticlesProperty, this.particle2Settings.numberOfParticlesProperty ],
-      ( numberOfParticles1, numberOfParticles2 ) => {
-
-        // Skip these assertions when PhET-iO state is being restored, because at least one of the arrays will
-        // definitely not be populated. See https://github.com/phetsims/gas-properties/issues/178
-        if ( !isSettingPhetioStateProperty.value ) {
-
-          // Verify that particle arrays have been populated before numberOfParticlesProperty is updated.
-          // If you hit these assertions, then you need to add this listener later.  This is a trade-off
-          // for using plain old Arrays instead of ObservableArrayDef.
-          assert && assert( this.particles1.length === numberOfParticles1, 'particles1 has not been populated yet' );
-          assert && assert( this.particles2.length === numberOfParticles2, 'particles2 has not been populated yet' );
-        }
-        return numberOfParticles1 + numberOfParticles2;
-      }, {
+      ( numberOfParticles1, numberOfParticles2 ) => numberOfParticles1 + numberOfParticles2, {
         isValidValue: value => ( Number.isInteger( value ) && value >= 0 ),
         phetioValueType: NumberIO,
         tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
         phetioFeatured: true,
         phetioDocumentation: 'Total number of particles in the container.'
       } );
+
+    // After PhET-iO state has been restored, verify the sanity of the particle system.
+    if ( assert && Tandem.PHET_IO_ENABLED ) {
+      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+        assert && assert( this.particles1.length === this.particle1Settings.numberOfParticlesProperty.value, 'incorrect number of particles1' );
+        assert && assert( this.particles2.length === this.particle2Settings.numberOfParticlesProperty.value, 'incorrect number of particles2' );
+      } );
+    }
 
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
