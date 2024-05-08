@@ -28,8 +28,10 @@ const PARTICLE_INVERSE_SCALE = 1 / PARTICLE_RESOLUTION_SCALE;
 
 export default class ParticlesNode extends Sprites {
 
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  // Arrays of particles to render, one array for each particle species. This does not need to be stateful because
+  // the arrays are serialized elsewhere. See IdealGasLawParticleSystemIO and DiffusionParticleSystemIO.
   private readonly particleArrays: Particle[][];
+
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly sprites: Sprite[];
   private readonly spriteInstances: SpriteInstance[];
