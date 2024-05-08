@@ -32,7 +32,7 @@ export default class DiffusionSettings {
     this.numberOfParticlesProperty = new NumberProperty( GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE.defaultValue, {
       numberType: 'Integer',
       range: GasPropertiesConstants.DIFFUSION_NUMBER_OF_PARTICLES_RANGE,
-      hasListenerOrderDependencies: true, // TODO: https://github.com/phetsims/gas-properties/issues/186
+      hasListenerOrderDependencies: true, //TODO https://github.com/phetsims/gas-properties/issues/186
       isValidValue: value => ( value % DiffusionSettings.DELTAS.numberOfParticles === 0 ),
       tandem: tandem.createTandem( 'numberOfParticlesProperty' ),
       phetioFeatured: true,

@@ -146,7 +146,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
         tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' ),
         phetioDocumentation: 'Number of light particles in the container. ' +
                              `(mass = ${GasPropertiesConstants.LIGHT_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.LIGHT_PARTICLES_RADIUS} pm)`,
-        hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
+        hasListenerOrderDependencies: true //TODO https://github.com/phetsims/gas-properties/issues/186
       } ) );
 
     // Synchronize particle counts and arrays.
