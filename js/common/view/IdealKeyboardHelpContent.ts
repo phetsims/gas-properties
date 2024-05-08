@@ -12,7 +12,7 @@ import gasProperties from '../../gasProperties.js';
 import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
-import SpinnerControlsKeyboardHelpSection from './SpinnerControlsKeyboardHelpSection.js';
+import SpinnerControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SpinnerControlsKeyboardHelpSection.js';
 
 export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -28,7 +28,9 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
       new SliderControlsKeyboardHelpSection(),
 
       // Spinner Controls
-      new SpinnerControlsKeyboardHelpSection( 'horizontal' )
+      new SpinnerControlsKeyboardHelpSection( {
+        includeLargerStepsRow: false
+      } )
     ];
 
     // Sections in the right column.
