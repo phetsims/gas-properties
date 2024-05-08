@@ -75,6 +75,8 @@ export default class ParticleFlowRateModel {
     this.rightCounts = []; // particles that crossed from left to right -->
 
     this.dts = [];
+
+    //TODO https://github.com/phetsims/gas-properties/issues/77 After PhET-iO state has been restored, verify that this.leftCounts.left === this.rightCounts.length === this.dts.length
   }
 
   public dispose(): void {

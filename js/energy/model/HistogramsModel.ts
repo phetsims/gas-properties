@@ -214,6 +214,11 @@ export default class HistogramsModel {
         this.step( this.samplePeriod ); // using the sample period causes an immediate update
       }
     } );
+
+    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.heavySpeedSamples.length
+    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.lightSpeedSamples.length
+    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.heavyKineticEnergySamples.length
+    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.lightKineticEnergySamples.length
   }
 
   public dispose(): void {
