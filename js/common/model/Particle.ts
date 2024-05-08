@@ -44,6 +44,7 @@ export type ParticleStateObject = {
   vy: number;
 };
 
+//TODO https://github.com/phetsims/gas-properties/issues/231 implement TPoolable ?
 export default class Particle {
 
   // These are settable in the Diffusion screen
