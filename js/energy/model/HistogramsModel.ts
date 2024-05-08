@@ -70,8 +70,8 @@ export default class HistogramsModel {
   private readonly lightKineticEnergySamples: number[][]; // Kinetic Energy samples for light particles
 
   // for measuring sample period
-  private dtAccumulator: number; //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
-  private numberOfSamples: number; //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  private readonly dtAccumulatorProperty: Property<number>;
+  private readonly numberOfSamplesProperty: Property<number>;
 
   // Describes each of the zoom levels, ordered from largest to smallest yMax value. zoomLevelIndexProperty provides
   // the index into this array. This is a brute force specification that contains some duplication. But it's easier
@@ -189,8 +189,18 @@ export default class HistogramsModel {
     this.heavyKineticEnergySamples = [];
     this.lightKineticEnergySamples = [];
 
-    this.dtAccumulator = 0;
-    this.numberOfSamples = 0;
+    this.dtAccumulatorProperty = new NumberProperty( 0, {
+      tandem: options.tandem.createTandem( 'dtAccumulatorProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
+    } );
+
+    this.numberOfSamplesProperty = new NumberProperty( 0, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'numberOfSamplesProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
+    } );
 
     // Clear sample data when the play state changes, so that we can update immediately if manually stepping.
     isPlayingProperty.link( () => {
@@ -220,8 +230,8 @@ export default class HistogramsModel {
    */
   private clearSamples(): void {
 
-    this.dtAccumulator = 0;
-    this.numberOfSamples = 0;
+    this.dtAccumulatorProperty.value = 0;
+    this.numberOfSamplesProperty.value = 0;
 
     // clear Speed samples
     this.heavySpeedSamples.length = 0;
@@ -240,13 +250,13 @@ export default class HistogramsModel {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     // Accumulate dt
-    this.dtAccumulator += dt;
+    this.dtAccumulatorProperty.value += dt;
 
     // Takes data samples
     this.sample();
 
     // Update now if we've reached the end of the sample period, or if we're manually stepping
-    if ( this.dtAccumulator >= this.samplePeriod || !this.isPlayingProperty.value ) {
+    if ( this.dtAccumulatorProperty.value >= this.samplePeriod || !this.isPlayingProperty.value ) {
       this.update();
     }
   }
@@ -255,7 +265,7 @@ export default class HistogramsModel {
    * Takes a data sample for histograms.
    */
   private sample(): void {
-    assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
+    assert && assert( !( this.numberOfSamplesProperty.value !== 0 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 0 if called while the sim is paused' );
 
     // take a Speed sample
@@ -266,14 +276,14 @@ export default class HistogramsModel {
     this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.heavyParticles ) );
     this.lightKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.lightParticles ) );
 
-    this.numberOfSamples++;
+    this.numberOfSamplesProperty.value++;
   }
 
   /**
    * Updates the histograms using the current sample data.
    */
   private update(): void {
-    assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
+    assert && assert( !( this.numberOfSamplesProperty.value !== 1 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 1 if called while the sim is paused' );
 
     // update Speed bin counts
