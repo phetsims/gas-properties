@@ -18,7 +18,6 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
-import Range from '../../../../dot/js/Range.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import HeaterCoolerNode, { HeaterCoolerNodeOptions } from '../../../../scenery-phet/js/HeaterCoolerNode.js';
@@ -84,29 +83,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       phetioFeatured: true
     }, providedOptions );
 
-    // Private Property that either corresponds to the model or is animated, depending on the Hold Constant mode.
-    // This is the Property that is actually connected to the HeaterCoolerNode.
-    //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
-    const privateHeatCoolAmountProperty = new NumberProperty( 0, {
-      range: new Range( -1, 1 )
-    } );
-
-    super( privateHeatCoolAmountProperty, options );
-
-    // Create a link because the slider is controlling privateHeatCoolAmountProperty, which is not instrumented.
-    this.addLinkedElement( heatCoolAmountProperty );
-
-    // When the model applies heat/cool, update the private Property.
-    heatCoolAmountProperty.link( heatCoolAmount => {
-      privateHeatCoolAmountProperty.value = heatCoolAmount;
-    } );
-
-    // If the user is controlling the slider, then update the model.
-    privateHeatCoolAmountProperty.link( privateHeatCoolAmount => {
-      if ( this.slider.visible ) {
-        heatCoolAmountProperty.value = privateHeatCoolAmount;
-      }
-    } );
+    super( heatCoolAmountProperty, options );
 
     this.animation = null;
 
@@ -140,7 +117,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
             // Animation that moves the flame/ice up
             this.animation = new Animation( {
-              property: privateHeatCoolAmountProperty,
+              property: heatCoolAmountProperty,
               to: heatCoolFactor,
               duration: HEAT_COOL_DURATION / 2,
               easing: Easing.CUBIC_OUT, // accelerates
@@ -150,7 +127,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
             // If the Animation is stopped prematurely, abruptly turn off heat/cool
             this.animation.stopEmitter.addListener( () => {
               this.animation = null;
-              privateHeatCoolAmountProperty.value = 0;
+              heatCoolAmountProperty.value = 0;
             } );
 
             // When the 'up' Animation finishes...
@@ -158,7 +135,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
               // Animation that moves the flame/ice down
               this.animation = new Animation( {
-                property: privateHeatCoolAmountProperty,
+                property: heatCoolAmountProperty,
                 to: 0,
                 duration: HEAT_COOL_DURATION / 2,
                 easing: Easing.CUBIC_IN, // decelerates
@@ -167,7 +144,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
               // If the down animation is stopped, abruptly turn off heat/cool.
               this.animation.stopEmitter.addListener( () => {
-                privateHeatCoolAmountProperty.value = 0;
+                heatCoolAmountProperty.value = 0;
               } );
 
               // When the down Animation finishes, we're done.
