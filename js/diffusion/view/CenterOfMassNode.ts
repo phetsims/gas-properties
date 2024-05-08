@@ -16,6 +16,7 @@ import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imp
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -38,28 +39,24 @@ export default class CenterOfMassNode extends Node {
                       fill: TColor,
                       providedOptions: CenterOfMassNodeOptions ) {
 
+    const rectangle = new Rectangle( 0, 0, 5, 30, {
+      fill: fill,
+      stroke: GasPropertiesColors.centerOfMassStrokeProperty,
+      visibleProperty: new DerivedProperty( [ centerOfMassProperty ], centerOfMass => centerOfMass !== null )
+    } );
+
     const options = optionize<CenterOfMassNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      children: [ rectangle ]
     }, providedOptions );
-
-    const rectangle = new Rectangle( 0, 0, 5, 30, {
-      fill: fill,
-      stroke: GasPropertiesColors.centerOfMassStrokeProperty
-    } );
-
-    options.children = [ rectangle ];
 
     super( options );
 
     Multilink.multilink( [ centerOfMassProperty, containerWidthProperty ],
       ( centerOfMass, containerWidth ) => {
-        if ( centerOfMass === null ) {
-          rectangle.visible = false;
-        }
-        else {
-          rectangle.visible = true;
+        if ( centerOfMass !== null ) {
           this.center = modelViewTransform.modelToViewXY( centerOfMass - containerWidth / 2, centerY );
         }
       } );
