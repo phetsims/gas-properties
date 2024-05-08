@@ -8,7 +8,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import propertyStateHandlerSingleton from '../../../../axon/js/propertyStateHandlerSingleton.js';
 import PropertyStatePhase from '../../../../axon/js/PropertyStatePhase.js';
@@ -29,14 +29,18 @@ import ParticleUtils from './ParticleUtils.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 
-// constants
-
 // used to compute the initial velocity angle for particles, in radians
 const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
+
+const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS: NumberPropertyOptions = {
+  numberType: 'Integer',
+  isValidValue: value => ( value >= 0 ),
+  phetioFeatured: true
+};
 
 type CreateParticleFunction = ( options?: ParticleOptions ) => Particle;
 
@@ -127,25 +131,23 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
 
     this.insideParticleArrays = [ this.heavyParticles, this.lightParticles ];
 
-    this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
-      numberType: 'Integer',
-      range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
-      tandem: options.tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Number of heavy particles in the container. ' +
-                           `(mass = ${GasPropertiesConstants.HEAVY_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.HEAVY_PARTICLES_RADIUS} pm)`,
-      hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
-    } );
+    this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue,
+      combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
+        range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
+        tandem: options.tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
+        phetioDocumentation: 'Number of heavy particles in the container. ' +
+                             `(mass = ${GasPropertiesConstants.HEAVY_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.HEAVY_PARTICLES_RADIUS} pm)`,
+        hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
+      } ) );
 
-    this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
-      numberType: 'Integer',
-      range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
-      tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Number of light particles in the container. ' +
-                           `(mass = ${GasPropertiesConstants.LIGHT_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.LIGHT_PARTICLES_RADIUS} pm)`,
-      hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
-    } );
+    this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue,
+      combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
+        range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
+        tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' ),
+        phetioDocumentation: 'Number of light particles in the container. ' +
+                             `(mass = ${GasPropertiesConstants.LIGHT_PARTICLES_MASS} AMU, radius = ${GasPropertiesConstants.LIGHT_PARTICLES_RADIUS} pm)`,
+        hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
+      } ) );
 
     // Synchronize particle counts and arrays.
     const createHeavyParticle = () => new HeavyParticle();
