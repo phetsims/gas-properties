@@ -150,6 +150,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     this.addChild( stopwatchNode );
 
     // Position the time controls
+    //TODO https://github.com/phetsims/gas-properties/issues/77 is mutate really necessary here?
     this.timeControlNode.mutate( {
       left: panels.left,
       bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN

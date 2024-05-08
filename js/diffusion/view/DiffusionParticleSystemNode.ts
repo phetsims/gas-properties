@@ -51,6 +51,7 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
 
     // If the number of particles changes while the sim is paused, redraw the particle system.
     model.particleSystem.numberOfParticlesProperty.link( () => {
+      //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
       if ( !model.isPlayingProperty.value ) {
         this.update();
       }
