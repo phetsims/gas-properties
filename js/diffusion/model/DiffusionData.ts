@@ -19,7 +19,6 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionParticleSystem from './DiffusionParticleSystem.js';
 
-// constants
 const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS: NumberPropertyOptions = {
   numberType: 'Integer',
   isValidValue: value => ( value >= 0 ),
