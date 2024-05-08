@@ -21,7 +21,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import { Line, Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 
-// constants
 const DEFAULT_ARROW_HEAD_DIMENSIONS = new Dimension2( 8, 8 );
 
 type SelfOptions = {

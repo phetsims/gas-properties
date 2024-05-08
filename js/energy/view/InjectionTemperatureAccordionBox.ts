@@ -20,7 +20,6 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import InjectionTemperatureControl from './InjectionTemperatureControl.js';
 
-// constants
 const TEXT_OPTIONS: TextOptions = {
   font: GasPropertiesConstants.CONTROL_FONT,
   fill: GasPropertiesColors.textFillProperty,

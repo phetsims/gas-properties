@@ -20,7 +20,6 @@ import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSys
 import gasProperties from '../../gasProperties.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
-// constants
 const AVERAGE_SPEED_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm/ps',
   isValidValue: averageSpeed => ( averageSpeed === null || averageSpeed >= 0 ),

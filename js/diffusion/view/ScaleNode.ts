@@ -18,7 +18,6 @@ import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
-// constants
 const TICK_LENGTH = 16; // view coordinates
 const TICK_INTERVAL = 1; // nm
 

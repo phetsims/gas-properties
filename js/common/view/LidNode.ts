@@ -14,7 +14,6 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
-// constants
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 const HANDLE_RIGHT_INSET = 3;
 

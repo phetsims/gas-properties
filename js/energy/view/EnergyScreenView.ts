@@ -20,7 +20,6 @@ import InjectionTemperatureAccordionBox from './InjectionTemperatureAccordionBox
 import KineticEnergyAccordionBox from './KineticEnergyAccordionBox.js';
 import SpeedAccordionBox from './SpeedAccordionBox.js';
 
-// constants
 const LEFT_PANEL_WIDTH = 205; // width of panels on the left side of the container, determined empirically
 
 export default class EnergyScreenView extends IdealGasLawScreenView {

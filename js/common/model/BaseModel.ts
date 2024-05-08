@@ -30,7 +30,6 @@ import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
-// constants
 const MODEL_VIEW_SCALE = 0.040; // number of pixels per pm
 
 type SelfOptions = {

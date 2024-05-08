@@ -26,7 +26,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberSpinner, { NumberSpinnerOptions } from '../../../../sun/js/NumberSpinner.js';
 
-// constants
 const ICON_SPACING = 10; // space between particle icon and spinner
 
 const NUMBER_SPINNER_OPTIONS: NumberSpinnerOptions = {

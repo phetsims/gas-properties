@@ -19,7 +19,6 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import { PressureUnits } from '../model/PressureUnits.js';
 import PressureModel from '../model/PressureModel.js';
 
-// constants
 const NUMBER_DISPLAY_RANGE = new Range( 0, GasPropertiesQueryParameters.maxPressure );
 
 type SelfOptions = EmptySelfOptions;

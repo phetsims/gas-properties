@@ -18,7 +18,6 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 
-// constants
 const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
 const AVERAGE_TEMPERATURE_RANGE = new Range( 0, 1000 );
 

@@ -13,7 +13,6 @@ import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import Region from '../model/Region.js';
 
-// constants
 const FONT = new PhetFont( 14 );
 
 export default class RegionNode extends Node {

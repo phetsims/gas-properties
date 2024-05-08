@@ -16,7 +16,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import Particle from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
 
-// constants
 const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
   isValidValue: value => ( value >= 0 ),
   units: 'particles/ps',

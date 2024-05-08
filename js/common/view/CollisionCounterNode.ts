@@ -27,7 +27,6 @@ import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import SamplePeriodComboBox from './SamplePeriodComboBox.js';
 
-// constants
 const X_MARGIN = 15;
 const Y_MARGIN = 10;
 const X_SPACING = 10;

@@ -22,8 +22,6 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-// constants
-
 // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
 const WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
 

@@ -33,7 +33,6 @@ import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 import ParticleNode, { ParticleNodeOptions } from './ParticleNode.js';
 import PressureGaugeNode from './PressureGaugeNode.js';
 
-// constants
 const SCREEN_ICONS_TRANSFORM = ModelViewTransform2.createIdentity();
 
 const GasPropertiesIconFactory = {

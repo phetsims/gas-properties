@@ -15,7 +15,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import BaseContainer from '../../common/model/BaseContainer.js';
 import gasProperties from '../../gasProperties.js';
 
-// constants
 const CONTAINER_WIDTH = 16000; // pm
 
 export default class DiffusionContainer extends BaseContainer {

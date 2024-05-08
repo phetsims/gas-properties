@@ -17,7 +17,6 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureDisplay from './PressureDisplay.js';
 import PressureModel from '../model/PressureModel.js';
 
-// constants
 const DIAL_RADIUS = 50;
 const POST_HEIGHT = 0.6 * DIAL_RADIUS;
 

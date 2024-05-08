@@ -29,8 +29,6 @@ import Easing from '../../../../twixt/js/Easing.js';
 import gasProperties from '../../gasProperties.js';
 import { HoldConstant } from '../model/HoldConstant.js';
 
-// constants
-
 // Animation duration in seconds, split evenly between raising and lowering the flame/ice.
 const HEAT_COOL_DURATION = 1.5;
 
