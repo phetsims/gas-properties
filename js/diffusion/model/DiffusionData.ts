@@ -8,23 +8,15 @@
  */
 
 import Disposable from '../../../../axon/js/Disposable.js';
-import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionParticleSystem from './DiffusionParticleSystem.js';
-
-const NUMBER_OF_PARTICLES_PROPERTY_OPTIONS: NumberPropertyOptions = {
-  numberType: 'Integer',
-  isValidValue: value => ( value >= 0 ),
-  phetioReadOnly: true, // derived from the state of the particle system
-  phetioFeatured: true
-};
 
 export default class DiffusionData {
 
@@ -46,24 +38,30 @@ export default class DiffusionData {
 
     this.bounds = bounds;
 
-    this.numberOfParticles1Property = new NumberProperty( 0,
-      combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
-        tandem: tandem.createTandem( 'numberOfParticles1Property' ),
-        phetioDocumentation: `Number of particles of type 1 that are in the ${leftOrRightString} half of the container.`
-      } ) );
+    this.numberOfParticles1Property = new NumberProperty( 0, {
+      numberType: 'Integer',
+      isValidValue: value => ( value >= 0 ),
+      tandem: tandem.createTandem( 'numberOfParticles1Property' ),
+      phetioReadOnly: true, // derived from the state of the particle system
+      phetioFeatured: true,
+      phetioDocumentation: `Number of particles of type 1 that are in the ${leftOrRightString} half of the container.`
+    } );
 
-    this.numberOfParticles2Property = new NumberProperty( 0,
-      combineOptions<NumberPropertyOptions>( {}, NUMBER_OF_PARTICLES_PROPERTY_OPTIONS, {
-        tandem: tandem.createTandem( 'numberOfParticles2Property' ),
-        phetioDocumentation: `Number of particles of type 2 that are in the ${leftOrRightString} half of the container.`
-      } ) );
+    this.numberOfParticles2Property = new NumberProperty( 0, {
+      numberType: 'Integer',
+      isValidValue: value => ( value >= 0 ),
+      tandem: tandem.createTandem( 'numberOfParticles2Property' ),
+      phetioReadOnly: true, // derived from the state of the particle system
+      phetioFeatured: true,
+      phetioDocumentation: `Number of particles of type 2 that are in the ${leftOrRightString} half of the container.`
+    } );
 
     this.averageTemperatureProperty = new Property<number | null>( null, {
       units: 'K',
       isValidValue: value => ( value === null || value > 0 ),
       phetioValueType: NullableIO( NumberIO ),
-      phetioReadOnly: true, // derived from the state of the particle system
       tandem: tandem.createTandem( 'averageTemperatureProperty' ),
+      phetioReadOnly: true, // derived from the state of the particle system
       phetioFeatured: true,
       phetioDocumentation: `Average temperature in the ${leftOrRightString} half of the container.`
     } );
