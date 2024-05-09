@@ -273,7 +273,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
 
   /**
    * DiffusionParticleSystemIO handles serialization of the particle arrays.
-   * TODO https://github.com/phetsims/gas-properties/issues/231 What type of serialization is this?
+   * TODO https://github.com/phetsims/gas-properties/issues/77 What type of serialization is this?
    */
   private static readonly DiffusionParticleSystemIO = new IOType<DiffusionParticleSystem, DiffusionParticleSystemStateObject>( 'DiffusionParticleSystemIO', {
     valueType: DiffusionParticleSystem,
