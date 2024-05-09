@@ -31,7 +31,6 @@ import GasPropertiesUtils from '../GasPropertiesUtils.js';
 import BaseContainer from './BaseContainer.js';
 import Particle from './Particle.js';
 import Region from './Region.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 // Coefficient of restitution (e) is the ratio of the final to initial relative velocity between two objects
 // after they collide. It normally ranges from 0 to 1, where 1 is a perfectly elastic collision.
@@ -93,13 +92,6 @@ export default class CollisionDetector {
       pointOnLine: new Vector2( 0, 0 ),
       reflectedPoint: new Vector2( 0, 0 )
     };
-
-    // After PhET-iO state has been restored, assign particles to regions.
-    if ( assert && Tandem.PHET_IO_ENABLED ) {
-      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
-        this.assignParticlesToRegions();
-      } );
-    }
   }
 
   public dispose(): void {
@@ -124,53 +116,28 @@ export default class CollisionDetector {
    */
   public update(): void {
 
-    // Assign particles to regions.
-    this.assignParticlesToRegions();
+    this.clearRegions();
 
-    // Particle-particle collisions, within each region.
+    // Use regions that intersect the container, since collisions only occur inside the container.
+    const containerRegions = _.filter( this.regions,
+      region => this.container.bounds.intersectsBounds( region.bounds ) );
+
+    // put particles in regions
+    assignParticlesToRegions( this.particleArrays, containerRegions );
+
+    // particle-particle collisions, within each region
     if ( this.collisionsEnabledProperty.value ) {
-      for ( let i = this.regions.length - 1; i >= 0; i-- ) {
-        doParticleParticleCollisions( this.regions[ i ].particles, this.mutableVectors );
+      for ( let i = containerRegions.length - 1; i >= 0; i-- ) {
+        doParticleParticleCollisions( containerRegions[ i ].particles, this.mutableVectors );
       }
     }
 
-    // Particle-container collisions.
+    // particle-container collisions
     this._numberOfParticleContainerCollisions = this.updateParticleContainerCollisions();
 
     // Verify that all particles are fully inside the container.
     assert && assert( this.container.containsParticles( this.particleArrays ),
       'particles have leaked out of the container' );
-  }
-
-  /**
-   * Assigns each particle to the Regions that it intersects, accounting for particle radius.
-   */
-  private assignParticlesToRegions(): void {
-
-    this.clearRegions();
-
-    // Use regions that intersect the container, since collisions only occur inside the container.
-    const regions = this.getContainerRegions();
-
-    for ( let i = this.particleArrays.length - 1; i >= 0; i-- ) {
-      const particles = this.particleArrays[ i ];
-      for ( let j = particles.length - 1; j >= 0; j-- ) {
-        const particle = particles[ j ];
-        for ( let k = regions.length - 1; k >= 0; k-- ) {
-          const region = regions[ k ];
-          if ( particle.intersectsBounds( region.bounds ) ) {
-            region.addParticle( particle );
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Gets the regions that intersect the container.
-   */
-  private getContainerRegions(): Region[] {
-    return _.filter( this.regions, region => this.container.bounds.intersectsBounds( region.bounds ) );
   }
 
   /**
@@ -267,6 +234,26 @@ function createRegions( container: BaseContainer, regionLength: number ): Region
   }
   phet.log && phet.log( `created ${regions.length} regions of ${regionLength} pm each` );
   return regions;
+}
+
+/**
+ * Assigns each particle to the Regions that it intersects, accounting for particle radius.
+ */
+function assignParticlesToRegions( particleArrays: Particle[][], regions: Region[] ): void {
+  assert && assert( regions.length > 0, `invalid regions: ${regions}` );
+
+  for ( let i = particleArrays.length - 1; i >= 0; i-- ) {
+    const particles = particleArrays[ i ];
+    for ( let j = particles.length - 1; j >= 0; j-- ) {
+      const particle = particles[ j ];
+      for ( let k = regions.length - 1; k >= 0; k-- ) {
+        const region = regions[ k ];
+        if ( particle.intersectsBounds( region.bounds ) ) {
+          region.addParticle( particle );
+        }
+      }
+    }
+  }
 }
 
 /**
