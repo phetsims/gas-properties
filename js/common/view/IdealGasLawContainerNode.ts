@@ -30,6 +30,7 @@ import ResizeHandleKeyboardDragListener from './ResizeHandleKeyboardDragListener
 import Multilink from '../../../../axon/js/Multilink.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 
 const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
@@ -197,12 +198,15 @@ export default class IdealGasLawContainerNode extends Node {
       lidHandleVisibleProperty.value = ( holdConstant !== 'temperature' );
     } );
 
-    // Dragging the resize handle horizontally changes the container's width
-    const resizeHandleDragListener = new ResizeHandleDragListener( container, modelViewTransform, this,
-      resizeHandleNode.tandem.createTandem( 'dragListener' ) );
+    // Dragging the resize handle horizontally changes the container's width.
+    const resizeHandleDragDelegate = new ResizeHandleDragDelegate( container );
+
+    const resizeHandleDragListener = new ResizeHandleDragListener( resizeHandleDragDelegate,
+      modelViewTransform, this, resizeHandleNode.tandem.createTandem( 'dragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleDragListener );
-    const resizeHandleKeyboardDragListener = new ResizeHandleKeyboardDragListener( container, modelViewTransform,
-      resizeHandleNode.tandem.createTandem( 'keyboardDragListener' ) );
+
+    const resizeHandleKeyboardDragListener = new ResizeHandleKeyboardDragListener( resizeHandleDragDelegate,
+      modelViewTransform, resizeHandleNode.tandem.createTandem( 'keyboardDragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleKeyboardDragListener );
 
     // While interacting with the resize handle...
