@@ -263,14 +263,12 @@ export default class DiffusionParticleSystem extends PhetioObject {
   private static applyState( particleSystem: DiffusionParticleSystem, stateObject: DiffusionParticleSystemStateObject ): void {
 
     particleSystem.particles1.length = 0;
-    stateObject.particles1.forEach( ( stateObject: DiffusionParticle1StateObject ) => {
-      particleSystem.particles1.push( DiffusionParticle1.DiffusionParticle1IO.fromStateObject( stateObject ) );
-    } );
+    stateObject.particles1.forEach( ( stateObject: DiffusionParticle1StateObject ) =>
+      particleSystem.particles1.push( DiffusionParticle1.DiffusionParticle1IO.fromStateObject( stateObject ) ) );
 
     particleSystem.particles2.length = 0;
-    stateObject.particles2.forEach( ( stateObject: DiffusionParticle2StateObject ) => {
-      particleSystem.particles2.push( DiffusionParticle2.DiffusionParticle2IO.fromStateObject( stateObject ) );
-    } );
+    stateObject.particles2.forEach( ( stateObject: DiffusionParticle2StateObject ) =>
+      particleSystem.particles2.push( DiffusionParticle2.DiffusionParticle2IO.fromStateObject( stateObject ) ) );
   }
 
   /**

@@ -402,25 +402,20 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   private static applyState( particleSystem: IdealGasLawParticleSystem, stateObject: IdealGasLawParticleSystemStateObject ): void {
 
     particleSystem.heavyParticles.length = 0;
+    stateObject.heavyParticles.forEach( ( stateObject: HeavyParticleStateObject ) =>
+      particleSystem.heavyParticles.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) ) );
+
     particleSystem.lightParticles.length = 0;
+    stateObject.lightParticles.forEach( ( stateObject: LightParticleStateObject ) =>
+      particleSystem.lightParticles.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) ) );
+
     particleSystem.heavyParticlesOutside.length = 0;
+    stateObject.heavyParticlesOutside.forEach( ( stateObject: HeavyParticleStateObject ) =>
+      particleSystem.heavyParticlesOutside.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) ) );
+
     particleSystem.lightParticlesOutside.length = 0;
-
-    stateObject.heavyParticles.forEach( ( stateObject: HeavyParticleStateObject ) => {
-      particleSystem.heavyParticles.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) );
-    } );
-
-    stateObject.lightParticles.forEach( ( stateObject: LightParticleStateObject ) => {
-      particleSystem.lightParticles.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) );
-    } );
-
-    stateObject.heavyParticlesOutside.forEach( ( stateObject: HeavyParticleStateObject ) => {
-      particleSystem.heavyParticlesOutside.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) );
-    } );
-
-    stateObject.lightParticlesOutside.forEach( ( stateObject: LightParticleStateObject ) => {
-      particleSystem.lightParticlesOutside.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) );
-    } );
+    stateObject.lightParticlesOutside.forEach( ( stateObject: LightParticleStateObject ) =>
+      particleSystem.lightParticlesOutside.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) ) );
   }
 
   /**
