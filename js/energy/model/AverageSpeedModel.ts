@@ -7,17 +7,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Particle from '../../common/model/Particle.js';
 import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 
 const AVERAGE_SPEED_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm/ps',
@@ -30,7 +30,23 @@ type SelfOptions = EmptySelfOptions;
 
 type AverageSpeedModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class AverageSpeedModel {
+// This should match AVERAGE_SPEED_MODEL_STATE_SCHEMA, but with JavaScript types.
+type AverageSpeedModelStateObject = {
+  dtAccumulator: number;
+  numberOfSamples: number;
+  heavyAverageSpeedSum: number;
+  lightAverageSpeedSum: number;
+};
+
+// This should match AverageSpeedModelStateObject, but with IOTypes.
+const AVERAGE_SPEED_MODEL_STATE_SCHEMA = {
+  dtAccumulator: NumberIO,
+  numberOfSamples: NumberIO,
+  heavyAverageSpeedSum: NumberIO,
+  lightAverageSpeedSum: NumberIO
+};
+
+export default class AverageSpeedModel extends PhetioObject {
 
   private readonly particleSystem: IdealGasLawParticleSystem;
   private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
@@ -41,7 +57,6 @@ export default class AverageSpeedModel {
   public readonly lightAverageSpeedProperty: Property<number | null>;
 
   // used internally to smooth the average speed computation
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation
   private dtAccumulator: number; // accumulated dts while samples were taken
   private numberOfSamples: number; // number of samples we've taken
   private heavyAverageSpeedSum: number; // sum of samples for heavy particles
@@ -57,7 +72,14 @@ export default class AverageSpeedModel {
                       samplePeriod: number, providedOptions: AverageSpeedModelOptions ) {
     assert && assert( samplePeriod > 0, `invalid samplePeriod: ${samplePeriod}` );
 
-    const options = providedOptions;
+    const options = optionize<AverageSpeedModelOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
+      isDisposable: false,
+      phetioType: AverageSpeedModel.AverageSpeedModelIO
+    }, providedOptions );
+
+    super( options );
 
     this.particleSystem = particleSystem;
     this.isPlayingProperty = isPlayingProperty;
@@ -95,12 +117,6 @@ export default class AverageSpeedModel {
         this.step( this.samplePeriod ); // using the sample period causes an immediate update
       }
     } );
-
-    //TODO https://github.com/phetsims/gas-properties/issues/77 phetioStateEngine.stateSetEmitter.addListener
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
   }
 
   public reset(): void {
@@ -175,6 +191,28 @@ export default class AverageSpeedModel {
     // Clear sample data in preparation for the next sample period.
     this.clearSamples();
   }
+
+  /**
+   * Deserializes an instance of AverageSpeedModel.
+   */
+  private static applyState( averageSpeedModel: AverageSpeedModel, stateObject: AverageSpeedModelStateObject ): void {
+    averageSpeedModel.dtAccumulator = stateObject.dtAccumulator;
+    averageSpeedModel.numberOfSamples = stateObject.numberOfSamples;
+    averageSpeedModel.heavyAverageSpeedSum = stateObject.heavyAverageSpeedSum;
+    averageSpeedModel.lightAverageSpeedSum = stateObject.lightAverageSpeedSum;
+  }
+
+  /**
+   * AverageSpeedModelIO handles serialization of the average speed model.
+   * TODO https://github.com/phetsims/gas-properties/issues/77 What type of serialization is this?
+   */
+  private static readonly AverageSpeedModelIO = new IOType<AverageSpeedModel, AverageSpeedModelStateObject>( 'AverageSpeedModelIO', {
+    valueType: AverageSpeedModel,
+    defaultDeserializationMethod: 'applyState',
+    stateSchema: AVERAGE_SPEED_MODEL_STATE_SCHEMA,
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Does default toStateObject work?
+    applyState: AverageSpeedModel.applyState
+  } );
 }
 
 /**
