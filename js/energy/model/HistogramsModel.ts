@@ -117,6 +117,7 @@ export default class HistogramsModel extends PhetioObject {
     const options = optionize<HistogramsModelOptions, SelfOptions, PhetioObjectOptions>()( {
       
       // PhetioObjectOptions
+      isDisposable: false,
       phetioType: HistogramsModel.HistogramsModelIO
     }, providedOptions );
     

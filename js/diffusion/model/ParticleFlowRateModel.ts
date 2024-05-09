@@ -8,13 +8,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Particle from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 
 const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
   isValidValue: value => ( value >= 0 ),
@@ -25,7 +28,21 @@ const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
 // number of samples used to compute running average, see https://github.com/phetsims/gas-properties/issues/51
 const NUMBER_OF_SAMPLES = 300;
 
-export default class ParticleFlowRateModel {
+// This should match PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA, but with JavaScript types.
+type ParticleFlowRateModelStateObject = {
+  dts: number[];
+  leftCounts: number[];
+  rightCounts: number[];
+};
+
+// This should match ParticleFlowRateModelStateObject, but with IOTypes.
+const PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA = {
+  dts: ArrayIO( NumberIO ),
+  leftCounts: ArrayIO( NumberIO ),
+  rightCounts: ArrayIO( NumberIO )
+};
+
+export default class ParticleFlowRateModel extends PhetioObject {
 
   private readonly dividerX: number;
   private readonly particles: Particle[];
@@ -52,6 +69,12 @@ export default class ParticleFlowRateModel {
    */
   public constructor( dividerX: number, particles: Particle[], tandem: Tandem ) {
 
+    super( {
+      isDisposable: false,
+      tandem: tandem,
+      phetioType: ParticleFlowRateModel.ParticleFlowRateModelIO
+    } );
+
     this.dividerX = dividerX;
     this.particles = particles;
 
@@ -76,11 +99,13 @@ export default class ParticleFlowRateModel {
 
     this.dts = [];
 
-    //TODO https://github.com/phetsims/gas-properties/issues/77 After PhET-iO state has been restored, verify that this.leftCounts.left === this.rightCounts.length === this.dts.length
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
+    // After PhET-iO state has been restored, verify the sanity of the model.
+    if ( assert && Tandem.PHET_IO_ENABLED ) {
+      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+        assert && assert( this.dts.length === this.leftCounts.length, 'incorrect number of leftCounts' );
+        assert && assert( this.leftCounts.length === this.rightCounts.length, 'incorrect number of rightCounts' );
+      } );
+    }
   }
 
   public reset(): void {
@@ -131,6 +156,33 @@ export default class ParticleFlowRateModel {
     this.leftFlowRateProperty.value = leftAverage / dtAverage;
     this.rightFlowRateProperty.value = rightAverage / dtAverage;
   }
+
+  /**
+   * Deserializes an instance of ParticleFlowRateModel.
+   */
+  private static applyState( particleFlowRateModel: ParticleFlowRateModel, stateObject: ParticleFlowRateModelStateObject ): void {
+
+    particleFlowRateModel.dts.length = 0;
+    stateObject.dts.forEach( dt => particleFlowRateModel.dts.push( dt ) );
+
+    particleFlowRateModel.leftCounts.length = 0;
+    stateObject.leftCounts.forEach( count => particleFlowRateModel.leftCounts.push( count ) );
+
+    particleFlowRateModel.rightCounts.length = 0;
+    stateObject.rightCounts.forEach( count => particleFlowRateModel.rightCounts.push( count ) );
+  }
+
+  /**
+   * ParticleFlowRateModelIO handles serialization of the particle flow rate model.
+   * TODO https://github.com/phetsims/gas-properties/issues/231 What type of serialization is this?
+   */
+  private static readonly ParticleFlowRateModelIO = new IOType<ParticleFlowRateModel, ParticleFlowRateModelStateObject>( 'ParticleFlowRateModelIO', {
+    valueType: ParticleFlowRateModel,
+    defaultDeserializationMethod: 'applyState',
+    stateSchema: PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA,
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Does default toStateObject work?
+    applyState: ParticleFlowRateModel.applyState
+  } );
 }
 
 gasProperties.register( 'ParticleFlowRateModel', ParticleFlowRateModel );
