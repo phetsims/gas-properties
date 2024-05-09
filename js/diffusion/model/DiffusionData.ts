@@ -23,6 +23,8 @@ export default class DiffusionData {
   // bounds of one half of the container
   private readonly bounds: Bounds2;
 
+  private readonly particleSystem: DiffusionParticleSystem;
+
   // number of DiffusionParticle1 in this half of the container
   public readonly numberOfParticles1Property: Property<number>;
 
@@ -37,6 +39,7 @@ export default class DiffusionData {
                       leftOrRightString: 'left' | 'right', tandem: Tandem ) {
 
     this.bounds = bounds;
+    this.particleSystem = particleSystem;
 
     this.numberOfParticles1Property = new NumberProperty( 0, {
       numberType: 'Integer',
@@ -66,7 +69,7 @@ export default class DiffusionData {
       phetioDocumentation: `Average temperature in the ${leftOrRightString} half of the container.`
     } );
 
-    this.update( particleSystem );
+    this.update();
   }
 
   public dispose(): void {
@@ -76,15 +79,15 @@ export default class DiffusionData {
   /**
    * Updates Properties based on the contents of the particle arrays.
    */
-  public update( particleSystem: DiffusionParticleSystem ): void {
+  public update(): void {
 
     let numberOfParticles1 = 0;
     let numberOfParticles2 = 0;
     let totalKE = 0;
 
     // Contribution by DiffusionParticle1 species
-    for ( let i = particleSystem.particles1.length - 1; i >= 0; i-- ) {
-      const particle = particleSystem.particles1[ i ];
+    for ( let i = this.particleSystem.particles1.length - 1; i >= 0; i-- ) {
+      const particle = this.particleSystem.particles1[ i ];
       if ( this.bounds.containsCoordinates( particle.x, particle.y ) ) {
         numberOfParticles1++;
         totalKE += particle.getKineticEnergy();
@@ -93,8 +96,8 @@ export default class DiffusionData {
 
     // Contribution by DiffusionParticle2 species.
     // Note that there's a wee bit of code duplication here, but it gains us some iteration efficiency.
-    for ( let i = particleSystem.particles2.length - 1; i >= 0; i-- ) {
-      const particle = particleSystem.particles2[ i ];
+    for ( let i = this.particleSystem.particles2.length - 1; i >= 0; i-- ) {
+      const particle = this.particleSystem.particles2[ i ];
       if ( this.bounds.containsCoordinates( particle.x, particle.y ) ) {
         numberOfParticles2++;
         totalKE += particle.getKineticEnergy();

@@ -98,8 +98,8 @@ export default class DiffusionModel extends BaseModel {
    * Updates the Data displayed for the left and right sides of the container.
    */
   private updateData(): void {
-    this.leftData.update( this.particleSystem );
-    this.rightData.update( this.particleSystem );
+    this.leftData.update();
+    this.rightData.update();
   }
 }
 
