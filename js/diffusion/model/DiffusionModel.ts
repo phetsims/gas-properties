@@ -15,6 +15,7 @@ import DiffusionCollisionDetector from './DiffusionCollisionDetector.js';
 import DiffusionContainer from './DiffusionContainer.js';
 import DiffusionData from './DiffusionData.js';
 import DiffusionParticleSystem from './DiffusionParticleSystem.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 export default class DiffusionModel extends BaseModel {
 
@@ -53,16 +54,14 @@ export default class DiffusionModel extends BaseModel {
         this.particleSystem.particle2Settings.initialTemperatureProperty
       ],
       () => {
-        //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
-        if ( !this.isPlayingProperty.value ) {
+        if ( !this.isPlayingProperty.value && !isSettingPhetioStateProperty.value ) {
           this.updateData();
         }
       } );
 
     // When the divider is restored, create a new initial state (and new sets of particles) with same settings.
     this.container.isDividedProperty.link( isDivided => {
-      //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
-      if ( isDivided ) {
+      if ( isDivided && !isSettingPhetioStateProperty.value ) {
         this.particleSystem.restart();
       }
     } );
