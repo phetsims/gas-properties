@@ -35,6 +35,8 @@ type HistogramsModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 
 // This should match HISTOGRAMS_MODEL_STATE_SCHEMA, but with JavaScript types.
 type HistogramsModelStateObject = {
+  dtAccumulator: number;
+  numberOfSamples: number;
   heavySpeedSamples: number[][];
   lightSpeedSamples: number[][];
   heavyKineticEnergySamples: number[][];
@@ -43,6 +45,8 @@ type HistogramsModelStateObject = {
 
 // This should match HistogramsModelStateObject, but with IOTypes.
 const HISTOGRAMS_MODEL_STATE_SCHEMA = {
+  dtAccumulator: NumberIO,
+  numberOfSamples: NumberIO,
   heavySpeedSamples: ArrayIO( ArrayIO( NumberIO ) ),
   lightSpeedSamples: ArrayIO( ArrayIO( NumberIO ) ),
   heavyKineticEnergySamples: ArrayIO( ArrayIO( NumberIO ) ),
@@ -83,9 +87,9 @@ export default class HistogramsModel extends PhetioObject {
   private readonly heavyKineticEnergySamples: number[][]; // Kinetic Energy samples for heavy particles
   private readonly lightKineticEnergySamples: number[][]; // Kinetic Energy samples for light particles
 
-  // for measuring sample period
-  private readonly dtAccumulatorProperty: Property<number>;
-  private readonly numberOfSamplesProperty: Property<number>;
+  // for measuring sample periods
+  private dtAccumulator: number;
+  private numberOfSamples: number;
 
   // Describes each of the zoom levels, ordered from largest to smallest yMax value. zoomLevelIndexProperty provides
   // the index into this array. This is a brute force specification that contains some duplication. But it's easier
@@ -209,18 +213,8 @@ export default class HistogramsModel extends PhetioObject {
     this.heavyKineticEnergySamples = [];
     this.lightKineticEnergySamples = [];
 
-    this.dtAccumulatorProperty = new NumberProperty( 0, {
-      tandem: options.tandem.createTandem( 'dtAccumulatorProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'For internal use only.'
-    } );
-
-    this.numberOfSamplesProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'numberOfSamplesProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'For internal use only.'
-    } );
+    this.dtAccumulator = 0;
+    this.numberOfSamples = 0;
 
     // Clear sample data when the play state changes, so that we can update immediately if manually stepping.
     isPlayingProperty.link( () => {
@@ -238,10 +232,10 @@ export default class HistogramsModel extends PhetioObject {
     // After PhET-iO state has been restored, verify the sanity of the model.
     if ( assert && Tandem.PHET_IO_ENABLED ) {
       phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
-        assert && assert( this.numberOfSamplesProperty.value === this.heavySpeedSamples.length, 'incorrect number of heavySpeedSamples' );
-        assert && assert( this.numberOfSamplesProperty.value === this.lightSpeedSamples.length, 'incorrect number of lightSpeedSamples' );
-        assert && assert( this.numberOfSamplesProperty.value === this.heavyKineticEnergySamples.length, 'incorrect number of heavyKineticEnergySamples' );
-        assert && assert( this.numberOfSamplesProperty.value === this.lightKineticEnergySamples.length, 'incorrect number of lightKineticEnergySamples' );
+        assert && assert( this.numberOfSamples === this.heavySpeedSamples.length, 'incorrect number of heavySpeedSamples' );
+        assert && assert( this.numberOfSamples === this.lightSpeedSamples.length, 'incorrect number of lightSpeedSamples' );
+        assert && assert( this.numberOfSamples === this.heavyKineticEnergySamples.length, 'incorrect number of heavyKineticEnergySamples' );
+        assert && assert( this.numberOfSamples === this.lightKineticEnergySamples.length, 'incorrect number of lightKineticEnergySamples' );
       } );
     }
   }
@@ -256,8 +250,8 @@ export default class HistogramsModel extends PhetioObject {
    */
   private clearSamples(): void {
 
-    this.dtAccumulatorProperty.value = 0;
-    this.numberOfSamplesProperty.value = 0;
+    this.dtAccumulator = 0;
+    this.numberOfSamples = 0;
 
     // clear Speed samples
     this.heavySpeedSamples.length = 0;
@@ -276,13 +270,13 @@ export default class HistogramsModel extends PhetioObject {
     assert && assert( dt > 0, `invalid dt: ${dt}` );
 
     // Accumulate dt
-    this.dtAccumulatorProperty.value += dt;
+    this.dtAccumulator += dt;
 
     // Takes data samples
     this.sample();
 
     // Update now if we've reached the end of the sample period, or if we're manually stepping
-    if ( this.dtAccumulatorProperty.value >= this.samplePeriod || !this.isPlayingProperty.value ) {
+    if ( this.dtAccumulator >= this.samplePeriod || !this.isPlayingProperty.value ) {
       this.update();
     }
   }
@@ -291,7 +285,7 @@ export default class HistogramsModel extends PhetioObject {
    * Takes a data sample for histograms.
    */
   private sample(): void {
-    assert && assert( !( this.numberOfSamplesProperty.value !== 0 && !this.isPlayingProperty.value ),
+    assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 0 if called while the sim is paused' );
 
     // take a Speed sample
@@ -302,14 +296,14 @@ export default class HistogramsModel extends PhetioObject {
     this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.heavyParticles ) );
     this.lightKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.lightParticles ) );
 
-    this.numberOfSamplesProperty.value++;
+    this.numberOfSamples++;
   }
 
   /**
    * Updates the histograms using the current sample data.
    */
   private update(): void {
-    assert && assert( !( this.numberOfSamplesProperty.value !== 1 && !this.isPlayingProperty.value ),
+    assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 1 if called while the sim is paused' );
 
     // update Speed bin counts
@@ -340,15 +334,20 @@ export default class HistogramsModel extends PhetioObject {
    */
   private static applyState( histogramsModel: HistogramsModel, stateObject: HistogramsModelStateObject ): void {
 
-    histogramsModel.heavySpeedSamples.length = 0;
-    histogramsModel.lightSpeedSamples.length = 0;
-    histogramsModel.heavyKineticEnergySamples.length = 0;
-    histogramsModel.lightKineticEnergySamples.length = 0;
+    histogramsModel.dtAccumulator = stateObject.dtAccumulator;
+    histogramsModel.numberOfSamples = stateObject.numberOfSamples;
 
     //TODO https://github.com/phetsims/gas-properties/issues/77 Does this work correctly for number[][] ?
+    histogramsModel.heavySpeedSamples.length = 0;
     stateObject.heavySpeedSamples.forEach( samples => histogramsModel.heavySpeedSamples.push( samples ) );
+
+    histogramsModel.lightSpeedSamples.length = 0;
     stateObject.lightSpeedSamples.forEach( samples => histogramsModel.lightSpeedSamples.push( samples ) );
+
+    histogramsModel.heavyKineticEnergySamples.length = 0;
     stateObject.heavyKineticEnergySamples.forEach( samples => histogramsModel.heavyKineticEnergySamples.push( samples ) );
+
+    histogramsModel.lightKineticEnergySamples.length = 0;
     stateObject.lightKineticEnergySamples.forEach( samples => histogramsModel.lightKineticEnergySamples.push( samples ) );
   }
 
