@@ -426,6 +426,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
     valueType: IdealGasLawParticleSystem,
     defaultDeserializationMethod: 'applyState',
     stateSchema: IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA,
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Would default toStateObject work here?
     toStateObject: particleSystem => particleSystem.toStateObject(),
     applyState: IdealGasLawParticleSystem.applyState
   } );

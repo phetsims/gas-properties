@@ -279,6 +279,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
     valueType: DiffusionParticleSystem,
     defaultDeserializationMethod: 'applyState',
     stateSchema: DIFFUSION_PARTICLE_SYSTEM_SCHEMA,
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Would default toStateObject work here?
     toStateObject: particleSystem => particleSystem.toStateObject(),
     applyState: DiffusionParticleSystem.applyState
   } );

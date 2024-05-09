@@ -58,6 +58,7 @@ export default class HeavyParticle extends Particle {
   public static readonly HeavyParticleIO = new IOType<HeavyParticle, HeavyParticleStateObject>( 'HeavyParticleIO', {
     valueType: HeavyParticle,
     stateSchema: HeavyParticle.STATE_SCHEMA,
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Is this comment about toStateObject correct?
     // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: HeavyParticle.fromStateObject
   } );

@@ -55,6 +55,7 @@ export default class DiffusionParticle2 extends DiffusionParticle {
   public static readonly DiffusionParticle2IO = new IOType<DiffusionParticle2, DiffusionParticle2StateObject>( 'DiffusionParticle2IO', {
     valueType: DiffusionParticle2,
     stateSchema: DiffusionParticle2.STATE_SCHEMA,
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Is this comment about toStateObject correct?
     // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: DiffusionParticle2.fromStateObject
   } );
