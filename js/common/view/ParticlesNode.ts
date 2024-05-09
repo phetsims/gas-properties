@@ -15,7 +15,6 @@ import { Sprite, SpriteImage, SpriteInstance, Sprites } from '../../../../scener
 import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 import ParticleNode from './ParticleNode.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 
 // Padding around the HTMLCanvasElement created using toCanvas, so we can reliably center it.
 const CANVAS_PADDING = 2;
@@ -40,13 +39,11 @@ export default class ParticlesNode extends Sprites {
    * @param particleArrays - arrays of particles to render, one array for each particle species
    * @param canvasProperties - an HTMLCanvasElement for each array in particleArrays
    * @param modelViewTransform
-   * @param isPlayingProperty
    */
   public constructor( particleArrays: Particle[][],
                       canvasProperties: TReadOnlyProperty<HTMLCanvasElement>[],
-                      modelViewTransform: ModelViewTransform2,
-                      isPlayingProperty: TReadOnlyProperty<boolean> ) {
-    
+                      modelViewTransform: ModelViewTransform2 ) {
+
     assert && assert( particleArrays.length === canvasProperties.length );
 
     // a Sprite for each Particle array, indexed the same as particleArrays and canvasProperties
@@ -80,13 +77,6 @@ export default class ParticlesNode extends Sprites {
     this.sprites = sprites;
     this.spriteInstances = spriteInstances;
     this.spriteInstances = spriteInstances;
-
-    // If any Canvas Property changes while the sim is paused, redraw the particle system.
-    Multilink.multilinkAny( canvasProperties, () => {
-      if ( !isPlayingProperty.value ) {
-        this.update();
-      }
-    } );
   }
 
   /**

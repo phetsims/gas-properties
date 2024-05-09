@@ -10,18 +10,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import HeavyParticle from '../model/HeavyParticle.js';
 import LightParticle from '../model/LightParticle.js';
-import IdealGasLawParticleSystem from '../model/IdealGasLawParticleSystem.js';
 import ParticleCanvasProperty from './ParticleCanvasProperty.js';
 import ParticlesNode from './ParticlesNode.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import ParticlePositionsNode from './ParticlePositionsNode.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import IdealGasLawModel from '../model/IdealGasLawModel.js';
 
 export default class IdealGasLawParticleSystemNode extends Node {
 
@@ -30,42 +28,39 @@ export default class IdealGasLawParticleSystemNode extends Node {
 
   private readonly particlePositionsNode?: ParticlePositionsNode;
 
-  public constructor( particleSystem: IdealGasLawParticleSystem,
-                      isPlayingProperty: TReadOnlyProperty<boolean>,
-                      modelViewTransform: ModelViewTransform2,
-                      modelBoundsProperty: TReadOnlyProperty<Bounds2>,
-                      containerMaxBounds: Bounds2 ) {
+  /**
+   * @param model - Passing in the entire model since we use so much of its public API.
+   */
+  public constructor( model: IdealGasLawModel ) {
 
     // generated canvas for HeavyParticle species
-    const heavyParticleCanvasProperty = new ParticleCanvasProperty( new HeavyParticle(), modelViewTransform );
+    const heavyParticleCanvasProperty = new ParticleCanvasProperty( new HeavyParticle(), model.modelViewTransform );
 
     // generated canvas for LightParticle species
-    const lightParticleCanvasProperty = new ParticleCanvasProperty( new LightParticle(), modelViewTransform );
+    const lightParticleCanvasProperty = new ParticleCanvasProperty( new LightParticle(), model.modelViewTransform );
 
     // particles inside the container
     const insideParticlesNode = new ParticlesNode(
-      [ particleSystem.heavyParticles, particleSystem.lightParticles ],
+      [ model.particleSystem.heavyParticles, model.particleSystem.lightParticles ],
       [ heavyParticleCanvasProperty, lightParticleCanvasProperty ],
-      modelViewTransform,
-      isPlayingProperty
+      model.modelViewTransform
     );
 
     // Size the inside canvas to the maximum bounds for the container.
-    insideParticlesNode.setCanvasBounds( modelViewTransform.modelToViewBounds( containerMaxBounds ) );
+    insideParticlesNode.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.maxBounds ) );
 
     // particles outside the container
     const outsideParticlesNode = new ParticlesNode(
-      [ particleSystem.heavyParticlesOutside, particleSystem.lightParticlesOutside ],
+      [ model.particleSystem.heavyParticlesOutside, model.particleSystem.lightParticlesOutside ],
       [ heavyParticleCanvasProperty, lightParticleCanvasProperty ],
-      modelViewTransform,
-      isPlayingProperty
+      model.modelViewTransform
     );
 
     // When particles escape through the container's lid, they float up, since there is no gravity.
     // So size the outside canvas to the portion of the model bounds that is above the container.
-    modelBoundsProperty.link( modelBounds => {
-      const canvasBounds = modelBounds.withMinY( containerMaxBounds.maxY );
-      outsideParticlesNode.setCanvasBounds( modelViewTransform.modelToViewBounds( canvasBounds ) );
+    model.modelBoundsProperty.link( modelBounds => {
+      const canvasBounds = modelBounds.withMinY( model.container.maxBounds.maxY );
+      outsideParticlesNode.setCanvasBounds( model.modelViewTransform.modelToViewBounds( canvasBounds ) );
     } );
 
     super( {
@@ -76,18 +71,19 @@ export default class IdealGasLawParticleSystemNode extends Node {
     this.insideParticlesNode = insideParticlesNode;
     this.outsideParticlesNode = outsideParticlesNode;
 
-    // If the number of particles changes while the sim is paused, redraw the particle system.
-    particleSystem.numberOfParticlesProperty.link( () => {
-      if ( !isPlayingProperty.value ) {
-        this.update();
-      }
-    } );
+    // If any of these Properties change while the sim is paused, redraw the particle system.
+    Multilink.multilink( [ heavyParticleCanvasProperty, lightParticleCanvasProperty, model.particleSystem.numberOfParticlesProperty ],
+      () => {
+        if ( !model.isPlayingProperty.value ) {
+          this.update();
+        }
+      } );
 
     // Debug the particle positions.
     if ( GasPropertiesQueryParameters.showParticlePositions ) {
       this.particlePositionsNode = new ParticlePositionsNode(
-        [ particleSystem.heavyParticles, particleSystem.lightParticles ],
-        modelViewTransform );
+        [ model.particleSystem.heavyParticles, model.particleSystem.lightParticles ],
+        model.modelViewTransform );
       this.addChild( this.particlePositionsNode );
     }
   }

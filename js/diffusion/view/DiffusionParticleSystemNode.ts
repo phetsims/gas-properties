@@ -16,11 +16,12 @@ import DiffusionModel from '../model/DiffusionModel.js';
 import DiffusionParticle1 from '../model/DiffusionParticle1.js';
 import DiffusionParticle2 from '../model/DiffusionParticle2.js';
 import DiffusionParticleCanvasProperty from './DiffusionParticleCanvasProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class DiffusionParticleSystemNode extends ParticlesNode {
 
   /**
-   * @param model - passing in the entire model since we use so much of its public API
+   * @param model - Passing in the entire model since we use so much of its public API.
    */
   public constructor( model: DiffusionModel ) {
 
@@ -44,18 +45,18 @@ export default class DiffusionParticleSystemNode extends ParticlesNode {
     // Images for each particle species in particleArrays
     const imageProperties = [ particle1CanvasProperty, particle2CanvasProperty ];
 
-    super( particleArrays, imageProperties, model.modelViewTransform, model.isPlayingProperty );
+    super( particleArrays, imageProperties, model.modelViewTransform );
 
     // Size the canvas to match the container bounds. See https://github.com/phetsims/gas-properties/issues/38
     this.setCanvasBounds( model.modelViewTransform.modelToViewBounds( model.container.bounds ) );
 
-    // If the number of particles changes while the sim is paused, redraw the particle system.
-    model.particleSystem.numberOfParticlesProperty.link( () => {
-      //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
-      if ( !model.isPlayingProperty.value ) {
-        this.update();
-      }
-    } );
+    // If any of these Properties change while the sim is paused, redraw the particle system.
+    Multilink.multilink( [ particle1CanvasProperty, particle2CanvasProperty, model.particleSystem.numberOfParticlesProperty ],
+      () => {
+        if ( !model.isPlayingProperty.value ) {
+          this.update();
+        }
+      } );
   }
 }
 
