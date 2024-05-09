@@ -46,8 +46,9 @@ export default class BaseContainer extends PhetioObject {
   // maximum inside bounds, in pm. Used for canvasBounds for the particle system inside the container.
   public readonly maxBounds: Bounds2;
 
-  // velocity of the left (movable) wall, pm/ps. This vector will be MUTATED!
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  // Velocity of the left (movable) wall, pm/ps. This vector will be MUTATED! It does not need to be PhET-iO stateful
+  // because it is recomputed on each call to step (for containers where the left wall does work), then used by
+  // CollisionDetector to do container-particle collisions.
   public readonly leftWallVelocity: Vector2;
 
   // Indicates whether the user is adjusting widthProperty. The width will also change automatically in
