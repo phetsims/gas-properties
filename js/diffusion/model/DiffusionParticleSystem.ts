@@ -95,12 +95,8 @@ export default class DiffusionParticleSystem extends PhetioObject {
     this.particles1 = [];
     this.particles2 = [];
 
-    // Intermediate tandems to provide the desired structure for the Studio tree.
-    const particle1Tandem = tandem.createTandem( 'particle1' );
-    const particle2Tandem = tandem.createTandem( 'particle2' );
-
-    this.particle1Settings = new DiffusionSettings( particle1Tandem.createTandem( 'settings' ) );
-    this.particle2Settings = new DiffusionSettings( particle2Tandem.createTandem( 'settings' ) );
+    this.particle1Settings = new DiffusionSettings( tandem.createTandem( 'particle1Settings' ) );
+    this.particle2Settings = new DiffusionSettings( tandem.createTandem( 'particle2Settings' ) );
 
     // Synchronize particle counts and arrays.
     this.particle1Settings.numberOfParticlesProperty.link( numberOfParticles => {
@@ -136,7 +132,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
 
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-        tandem: particle1Tandem.createTandem( 'centerOfMassProperty' ),
+        tandem: tandem.createTandem( 'centerOfMass1Property' ),
         phetioReadOnly: true,
         phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 1. This is the x offset from the center of the container.'
@@ -144,14 +140,14 @@ export default class DiffusionParticleSystem extends PhetioObject {
 
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
-        tandem: particle2Tandem.createTandem( 'centerOfMassProperty' ),
+        tandem: tandem.createTandem( 'centerOfMass2Property' ),
         phetioReadOnly: true,
         phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 2. This is the x offset from the center of the container.'
       } ) );
 
-    this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, particle1Tandem );
-    this.particle2FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles2, particle2Tandem );
+    this.particle1FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles1, tandem.createTandem( 'particle1FlowRateModel' ) );
+    this.particle2FlowRateModel = new ParticleFlowRateModel( this.container.dividerX, this.particles2, tandem.createTandem( 'particle2FlowRateModel' ) );
 
     // Update mass and temperature of existing particles. This adjusts speed of the particles.
     Multilink.multilink(
