@@ -1,6 +1,5 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/230 Add Properties for most recent sample.
 /**
  * HistogramsModel is a sub-model in the Energy screen, responsible for the Speed and Kinetic Energy histograms.
  *
