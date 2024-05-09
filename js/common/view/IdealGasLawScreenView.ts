@@ -285,11 +285,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     pointerCoordinatesNode && this.addChild( pointerCoordinatesNode );
 
     // Time controls are created by the superclass, but subclass is responsible for positioning them
-    const defaultWidth = model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
-    this.timeControlNode.mutate( {
-      left: containerViewPosition.x - defaultWidth,
-      bottom: this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN
-    } );
+    this.timeControlNode.left = containerViewPosition.x - model.modelViewTransform.modelToViewDeltaX( model.container.widthRange.defaultValue );
+    this.timeControlNode.bottom = this.layoutBounds.bottom - GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN;
 
     this.oopsDialogsTandem = options.tandem.createTandem( 'oopsDialogs' );
 
