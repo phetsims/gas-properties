@@ -6,20 +6,21 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
-import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Particle from '../../common/model/Particle.js';
 import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // Describes the properties of the histograms at a specific zoom level.
 type ZoomLevel = {
@@ -32,7 +33,23 @@ type SelfOptions = EmptySelfOptions;
 
 type HistogramsModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class HistogramsModel {
+// This should match HISTOGRAMS_MODEL_STATE_SCHEMA, but with JavaScript types.
+type HistogramsModelStateObject = {
+  heavySpeedSamples: number[][];
+  lightSpeedSamples: number[][];
+  heavyKineticEnergySamples: number[][];
+  lightKineticEnergySamples: number[][];
+};
+
+// This should match HistogramsModelStateObject, but with IOTypes.
+const HISTOGRAMS_MODEL_STATE_SCHEMA = {
+  heavySpeedSamples: ArrayIO( ArrayIO( NumberIO ) ),
+  lightSpeedSamples: ArrayIO( ArrayIO( NumberIO ) ),
+  heavyKineticEnergySamples: ArrayIO( ArrayIO( NumberIO ) ),
+  lightKineticEnergySamples: ArrayIO( ArrayIO( NumberIO ) )
+};
+
+export default class HistogramsModel extends PhetioObject {
 
   private readonly particleSystem: IdealGasLawParticleSystem;
   private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
@@ -58,13 +75,11 @@ export default class HistogramsModel {
   // emits when the bin counts have been updated
   public readonly binCountsUpdatedEmitter: Emitter;
 
-  // Speed samples
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  // Speed samples, serialized by HistogramsModelIO.
   private readonly heavySpeedSamples: number[][]; // Speed samples for heavy particles
   private readonly lightSpeedSamples: number[][]; // Speed samples for light particles
 
-  // Kinetic Energy samples
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  // Kinetic Energy samples, serialized by HistogramsModelIO.
   private readonly heavyKineticEnergySamples: number[][]; // Kinetic Energy samples for heavy particles
   private readonly lightKineticEnergySamples: number[][]; // Kinetic Energy samples for light particles
 
@@ -95,7 +110,13 @@ export default class HistogramsModel {
                       samplePeriod: number, providedOptions: HistogramsModelOptions ) {
     assert && assert( samplePeriod > 0, `invalid samplePeriod: ${samplePeriod}` );
 
-    const options = providedOptions;
+    const options = optionize<HistogramsModelOptions, SelfOptions, PhetioObjectOptions>()( {
+      
+      // PhetioObjectOptions
+      phetioType: HistogramsModel.HistogramsModelIO
+    }, providedOptions );
+    
+    super( options );
 
     this.particleSystem = particleSystem;
     this.isPlayingProperty = isPlayingProperty;
@@ -214,14 +235,15 @@ export default class HistogramsModel {
       }
     } );
 
-    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.heavySpeedSamples.length
-    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.lightSpeedSamples.length
-    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.heavyKineticEnergySamples.length
-    //TODO https://github.com/phetsims/gas-properties/issues/77 After state is restored, verify that this.numberOfSamplesProperty.value === this.lightKineticEnergySamples.length
-  }
-
-  public dispose(): void {
-    Disposable.assertNotDisposable();
+    // After PhET-iO state has been restored, verify the sanity of the model.
+    if ( assert && Tandem.PHET_IO_ENABLED ) {
+      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+        assert && assert( this.numberOfSamplesProperty.value === this.heavySpeedSamples.length, 'incorrect number of heavySpeedSamples' );
+        assert && assert( this.numberOfSamplesProperty.value === this.lightSpeedSamples.length, 'incorrect number of lightSpeedSamples' );
+        assert && assert( this.numberOfSamplesProperty.value === this.heavyKineticEnergySamples.length, 'incorrect number of heavyKineticEnergySamples' );
+        assert && assert( this.numberOfSamplesProperty.value === this.lightKineticEnergySamples.length, 'incorrect number of lightKineticEnergySamples' );
+      } );
+    }
   }
 
   public reset(): void {
@@ -312,6 +334,35 @@ export default class HistogramsModel {
     // Clear sample data in preparation for the next sample period.
     this.clearSamples();
   }
+
+  /**
+   * Deserializes an instance of HistogramsModel.
+   */
+  private static applyState( histogramsModel: HistogramsModel, stateObject: HistogramsModelStateObject ): void {
+
+    histogramsModel.heavySpeedSamples.length = 0;
+    histogramsModel.lightSpeedSamples.length = 0;
+    histogramsModel.heavyKineticEnergySamples.length = 0;
+    histogramsModel.lightKineticEnergySamples.length = 0;
+
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Does this work correctly for number[][] ?
+    stateObject.heavySpeedSamples.forEach( samples => histogramsModel.heavySpeedSamples.push( samples ) );
+    stateObject.lightSpeedSamples.forEach( samples => histogramsModel.lightSpeedSamples.push( samples ) );
+    stateObject.heavyKineticEnergySamples.forEach( samples => histogramsModel.heavyKineticEnergySamples.push( samples ) );
+    stateObject.lightKineticEnergySamples.forEach( samples => histogramsModel.lightKineticEnergySamples.push( samples ) );
+  }
+
+  /**
+   * HistogramModelIO handles serialization of the histograms model.
+   * TODO https://github.com/phetsims/gas-properties/issues/231 What type of serialization is this?
+   */
+  private static readonly HistogramsModelIO = new IOType<HistogramsModel, HistogramsModelStateObject>( 'HistogramsModelIO', {
+    valueType: HistogramsModel,
+    defaultDeserializationMethod: 'applyState',
+    stateSchema: HISTOGRAMS_MODEL_STATE_SCHEMA,
+    //TODO https://github.com/phetsims/gas-properties/issues/77 Does default toStateObject work?
+    applyState: HistogramsModel.applyState
+  } );
 }
 
 /**
