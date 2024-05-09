@@ -18,7 +18,6 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Particle from '../../common/model/Particle.js';
 import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 const AVERAGE_SPEED_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm/ps',
@@ -42,8 +41,8 @@ export default class AverageSpeedModel {
   public readonly lightAverageSpeedProperty: Property<number | null>;
 
   // used internally to smooth the average speed computation
-  private readonly dtAccumulatorProperty: Property<number>; // accumulated dts while samples were taken
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation
+  private dtAccumulator: number; // accumulated dts while samples were taken
   private numberOfSamples: number; // number of samples we've taken
   private heavyAverageSpeedSum: number; // sum of samples for heavy particles
   private lightAverageSpeedSum: number; // sum of samples for light particles
@@ -80,12 +79,7 @@ export default class AverageSpeedModel {
         phetioDocumentation: 'Average speed of light particles in the container'
       } ) );
 
-    this.dtAccumulatorProperty = new NumberProperty( 0, {
-      tandem: options.tandem.createTandem( 'dtAccumulatorProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'For internal use only.'
-    } );
-
+    this.dtAccumulator = 0;
     this.numberOfSamples = 0;
     this.heavyAverageSpeedSum = 0;
     this.lightAverageSpeedSum = 0;
@@ -101,6 +95,8 @@ export default class AverageSpeedModel {
         this.step( this.samplePeriod ); // using the sample period causes an immediate update
       }
     } );
+
+    //TODO https://github.com/phetsims/gas-properties/issues/77 phetioStateEngine.stateSetEmitter.addListener
   }
 
   public dispose(): void {
@@ -117,7 +113,7 @@ export default class AverageSpeedModel {
    * Clears the sample data.
    */
   private clearSamples(): void {
-    this.dtAccumulatorProperty.reset();
+    this.dtAccumulator = 0;
     this.numberOfSamples = 0;
     this.heavyAverageSpeedSum = 0;
     this.lightAverageSpeedSum = 0;
@@ -130,13 +126,13 @@ export default class AverageSpeedModel {
   public step( dt: number ): void {
 
     // Accumulate dt
-    this.dtAccumulatorProperty.value += dt;
+    this.dtAccumulator += dt;
 
     // Takes data samples
     this.sample();
 
     // Update now if we've reached the end of the sample period, or if we're manually stepping
-    if ( this.dtAccumulatorProperty.value >= this.samplePeriod || !this.isPlayingProperty.value ) {
+    if ( this.dtAccumulator >= this.samplePeriod || !this.isPlayingProperty.value ) {
       this.update();
     }
   }
