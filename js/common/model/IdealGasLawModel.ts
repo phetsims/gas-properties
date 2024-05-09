@@ -353,7 +353,7 @@ export default class IdealGasLawModel extends BaseModel {
     this.container.step( dt );
 
     // Collision detection and response
-    this.collisionDetector.update();
+    this.collisionDetector.step();
 
     // Remove particles that have left the model bounds
     this.particleSystem.removeParticlesOutOfBounds( this.modelBoundsProperty.value );

@@ -24,8 +24,8 @@ export default class Region {
   // bounds of the region, in pm
   public readonly bounds: Bounds2;
 
-  // the particles in this region
-  //TODO https://github.com/phetsims/gas-properties/issues/77 PhET-iO instrumentation?
+  // The particles in this region. This does not need to be stateful because CollisionDetector.step assigns
+  // particles to regions before it performs collision detection and response.
   public readonly particles: Particle[];
 
   public constructor( bounds: Bounds2 ) {

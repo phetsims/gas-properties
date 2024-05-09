@@ -87,7 +87,7 @@ export default class DiffusionModel extends BaseModel {
     this.particleSystem.step( dt );
 
     // Collision detection and response
-    this.collisionDetector.update();
+    this.collisionDetector.step();
 
     // Update other things that are based on the current state of the particle system.
     this.particleSystem.updateCenterOfMass();
