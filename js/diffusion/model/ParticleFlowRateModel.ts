@@ -161,13 +161,13 @@ export default class ParticleFlowRateModel extends PhetioObject {
   private static applyState( particleFlowRateModel: ParticleFlowRateModel, stateObject: ParticleFlowRateModelStateObject ): void {
 
     particleFlowRateModel.dts.length = 0;
-    stateObject.dts.forEach( dt => particleFlowRateModel.dts.push( dt ) );
+    particleFlowRateModel.dts.push( ...stateObject.dts );
 
     particleFlowRateModel.leftCounts.length = 0;
-    stateObject.leftCounts.forEach( count => particleFlowRateModel.leftCounts.push( count ) );
+    particleFlowRateModel.leftCounts.push( ...stateObject.leftCounts );
 
     particleFlowRateModel.rightCounts.length = 0;
-    stateObject.rightCounts.forEach( count => particleFlowRateModel.rightCounts.push( count ) );
+    particleFlowRateModel.rightCounts.push( ...stateObject.rightCounts );
   }
 
   /**

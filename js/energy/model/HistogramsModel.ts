@@ -340,16 +340,16 @@ export default class HistogramsModel extends PhetioObject {
 
     //TODO https://github.com/phetsims/gas-properties/issues/77 Does this work correctly for number[][] ?
     histogramsModel.heavySpeedSamples.length = 0;
-    stateObject.heavySpeedSamples.forEach( samples => histogramsModel.heavySpeedSamples.push( samples ) );
+    histogramsModel.heavySpeedSamples.push( ...stateObject.heavySpeedSamples );
 
     histogramsModel.lightSpeedSamples.length = 0;
-    stateObject.lightSpeedSamples.forEach( samples => histogramsModel.lightSpeedSamples.push( samples ) );
+    histogramsModel.lightSpeedSamples.push( ...stateObject.lightSpeedSamples );
 
     histogramsModel.heavyKineticEnergySamples.length = 0;
-    stateObject.heavyKineticEnergySamples.forEach( samples => histogramsModel.heavyKineticEnergySamples.push( samples ) );
+    histogramsModel.heavyKineticEnergySamples.push( ...stateObject.heavyKineticEnergySamples );
 
     histogramsModel.lightKineticEnergySamples.length = 0;
-    stateObject.lightKineticEnergySamples.forEach( samples => histogramsModel.lightKineticEnergySamples.push( samples ) );
+    histogramsModel.lightKineticEnergySamples.push( ...stateObject.lightKineticEnergySamples );
   }
 
   /**
