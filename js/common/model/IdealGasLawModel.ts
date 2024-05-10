@@ -195,8 +195,10 @@ export default class IdealGasLawModel extends BaseModel {
     Multilink.multilink(
       [ this.container.widthProperty, this.container.userIsAdjustingWidthProperty ],
       ( width, userIsAdjustingWidth ) => {
-        if ( !userIsAdjustingWidth && !this.isPlayingProperty.value && !isSettingPhetioStateProperty.value ) {
-          this.updateWhenPaused();
+        if ( !isSettingPhetioStateProperty.value ) {
+          if ( !userIsAdjustingWidth && !this.isPlayingProperty.value ) {
+            this.updateWhenPaused();
+          }
         }
       } );
 
