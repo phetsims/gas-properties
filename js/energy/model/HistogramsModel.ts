@@ -21,6 +21,7 @@ import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSys
 import gasProperties from '../../gasProperties.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Describes the properties of the histograms at a specific zoom level.
 type ZoomLevel = {
@@ -224,9 +225,11 @@ export default class HistogramsModel extends PhetioObject {
 
     // If the number of particles becomes zero, or changes while paused, update immediately.
     particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
-      if ( numberOfParticles === 0 || !isPlayingProperty.value ) {
-        this.clearSamples();
-        this.step( this.samplePeriod ); // using the sample period causes an immediate update
+      if ( !isSettingPhetioStateProperty.value ) {
+        if ( numberOfParticles === 0 || !isPlayingProperty.value ) {
+          this.clearSamples();
+          this.step( this.samplePeriod ); // using the sample period causes an immediate update
+        }
       }
     } );
 
