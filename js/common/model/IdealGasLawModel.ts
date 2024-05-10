@@ -35,6 +35,7 @@ import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = {
 
@@ -194,7 +195,7 @@ export default class IdealGasLawModel extends BaseModel {
     Multilink.multilink(
       [ this.container.widthProperty, this.container.userIsAdjustingWidthProperty ],
       ( width, userIsAdjustingWidth ) => {
-        if ( !userIsAdjustingWidth && !this.isPlayingProperty.value ) {
+        if ( !userIsAdjustingWidth && !this.isPlayingProperty.value && !isSettingPhetioStateProperty.value ) {
           this.updateWhenPaused();
         }
       } );
@@ -212,40 +213,44 @@ export default class IdealGasLawModel extends BaseModel {
 
     // When the number of particles in the container changes ...
     this.particleSystem.numberOfParticlesProperty.link( numberOfParticles => {
+      if ( !isSettingPhetioStateProperty.value ) {
 
-      // If the container is empty, check for 'Hold Constant' conditions that can't be satisfied.
-      if ( numberOfParticles === 0 ) {
-        if ( this.holdConstantProperty.value === 'temperature' ) {
+        // If the container is empty, check for 'Hold Constant' conditions that can't be satisfied.
+        if ( numberOfParticles === 0 ) {
+          if ( this.holdConstantProperty.value === 'temperature' ) {
 
-          // Temperature can't be held constant when the container is empty.
-          phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
-          this.holdConstantProperty.value = 'nothing';
-          this.oopsEmitters.temperatureContainerEmptyEmitter.emit();
+            // Temperature can't be held constant when the container is empty.
+            phet.log && phet.log( 'Oops! T cannot be held constant when N=0' );
+            this.holdConstantProperty.value = 'nothing';
+            this.oopsEmitters.temperatureContainerEmptyEmitter.emit();
+          }
+          else if ( this.holdConstantProperty.value === 'pressureT' ||
+                    this.holdConstantProperty.value === 'pressureV' ) {
+
+            // Pressure can't be held constant when the container is empty.
+            phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
+            this.holdConstantProperty.value = 'nothing';
+            this.oopsEmitters.pressureContainerEmptyEmitter.emit();
+          }
         }
-        else if ( this.holdConstantProperty.value === 'pressureT' ||
-                  this.holdConstantProperty.value === 'pressureV' ) {
 
-          // Pressure can't be held constant when the container is empty.
-          phet.log && phet.log( 'Oops! P cannot be held constant when N=0' );
-          this.holdConstantProperty.value = 'nothing';
-          this.oopsEmitters.pressureContainerEmptyEmitter.emit();
+        // If the number of particles changes while the sim is paused, update immediately.
+        // Do this after checking holdConstantProperty, in case it gets switched to HoldConstant 'nothing'.
+        if ( !this.isPlayingProperty.value ) {
+          this.updateWhenPaused();
         }
-      }
-
-      // If the number of particles changes while the sim is paused, update immediately.
-      // Do this after checking holdConstantProperty, in case it gets switched to HoldConstant 'nothing'.
-      if ( !this.isPlayingProperty.value ) {
-        this.updateWhenPaused();
       }
     } );
 
     // Temperature can't be held constant when the lid is open, because we don't want to deal with
     // counteracting evaporative cooling. See https://github.com/phetsims/gas-properties/issues/159
     this.container.lidIsOpenProperty.link( lidIsOpen => {
-      if ( lidIsOpen && this.holdConstantProperty.value === 'temperature' ) {
-        phet.log && phet.log( 'Oops! T cannot be held constant when the container is open' );
-        this.holdConstantProperty.value = 'nothing';
-        this.oopsEmitters.temperatureLidOpenEmitter.emit();
+      if ( !isSettingPhetioStateProperty.value ) {
+        if ( lidIsOpen && this.holdConstantProperty.value === 'temperature' ) {
+          phet.log && phet.log( 'Oops! T cannot be held constant when the container is open' );
+          this.holdConstantProperty.value = 'nothing';
+          this.oopsEmitters.temperatureLidOpenEmitter.emit();
+        }
       }
     } );
 
@@ -254,50 +259,46 @@ export default class IdealGasLawModel extends BaseModel {
     // that are added have their initial speed set based on T of the container, and therefore result in no change
     // to T. See https://github.com/phetsims/gas-properties/issues/159
     this.particleSystem.numberOfParticlesProperty.link( ( numberOfParticles, previousNumberOfParticles ) => {
-      if ( previousNumberOfParticles !== null &&
-           numberOfParticles > 0 &&
-           numberOfParticles < previousNumberOfParticles &&
-           this.holdConstantProperty.value === 'temperature' ) {
-        assert && assert( !this.temperatureModel.setInjectionTemperatureEnabledProperty.value,
-          'This feature is not compatible with user-controlled injection temperature' );
+      if ( !isSettingPhetioStateProperty.value ) {
+        if ( previousNumberOfParticles !== null &&
+             numberOfParticles > 0 &&
+             numberOfParticles < previousNumberOfParticles &&
+             this.holdConstantProperty.value === 'temperature' ) {
+          assert && assert( !this.temperatureModel.setInjectionTemperatureEnabledProperty.value,
+            'This feature is not compatible with user-controlled injection temperature' );
 
-        // Workaround for https://github.com/phetsims/gas-properties/issues/168. Addresses an ordering problem where
-        // the temperature model needs to update when this state occurs, but it's still null. Temperature is null
-        // when the container is empty.
-        if ( this.temperatureModel.temperatureKelvinProperty.value === null ) {
-          this.temperatureModel.update();
+          // Workaround for https://github.com/phetsims/gas-properties/issues/168. Addresses an ordering problem where
+          // the temperature model needs to update when this state occurs, but it's still null. Temperature is null
+          // when the container is empty.
+          if ( this.temperatureModel.temperatureKelvinProperty.value === null ) {
+            this.temperatureModel.update();
+          }
+
+          const temperature = this.temperatureModel.temperatureKelvinProperty.value!;
+          assert && assert( temperature !== null );
+
+          this.particleSystem.setTemperature( temperature );
         }
-
-        const temperature = this.temperatureModel.temperatureKelvinProperty.value!;
-        assert && assert( temperature !== null );
-
-        this.particleSystem.setTemperature( temperature );
       }
     } );
 
     // Verify that we're not in a bad 'Hold Constant' state.
     assert && this.holdConstantProperty.link( holdConstant => {
+      if ( !isSettingPhetioStateProperty.value ) {
 
-      // values that are incompatible with an empty container
-      assert && assert( !( this.particleSystem.numberOfParticlesProperty.value === 0 &&
-      ( holdConstant === 'temperature' ||
-        holdConstant === 'pressureT' ||
-        holdConstant === 'pressureV' ) ),
-        `bad holdConstant state: ${holdConstant} with numberOfParticles=${this.particleSystem.numberOfParticlesProperty.value}` );
+        // values that are incompatible with an empty container
+        assert && assert( !( this.particleSystem.numberOfParticlesProperty.value === 0 &&
+        ( holdConstant === 'temperature' ||
+          holdConstant === 'pressureT' ||
+          holdConstant === 'pressureV' ) ),
+          `bad holdConstant state: ${holdConstant} with numberOfParticles=${this.particleSystem.numberOfParticlesProperty.value}` );
 
-      // values that are incompatible with zero pressure
-      assert && assert( !( this.pressureModel.pressureKilopascalsProperty.value === 0 &&
-      ( holdConstant === 'pressureV' ||
-        holdConstant === 'pressureT' ) ),
-        `bad holdConstant state: ${holdConstant} with pressure=${this.pressureModel.pressureKilopascalsProperty.value}` );
-    }, {
-
-      // These values need to be correct before this listener fires.  This is not an issue when the sim is running,
-      // but is relevant when PhET-iO restores state.  See https://github.com/phetsims/gas-properties/issues/182.
-      phetioDependencies: [
-        this.particleSystem.numberOfParticlesProperty,
-        this.pressureModel.pressureKilopascalsProperty
-      ]
+        // values that are incompatible with zero pressure
+        assert && assert( !( this.pressureModel.pressureKilopascalsProperty.value === 0 &&
+        ( holdConstant === 'pressureV' ||
+          holdConstant === 'pressureT' ) ),
+          `bad holdConstant state: ${holdConstant} with pressure=${this.pressureModel.pressureKilopascalsProperty.value}` );
+      }
     } );
   }
 
