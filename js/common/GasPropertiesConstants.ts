@@ -108,8 +108,8 @@ const GasPropertiesConstants = {
   MAX_TIME: 999.99,
 
   // number of particles
-  HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
-  LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
+  NUMBER_OF_HEAVY_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
+  NUMBER_OF_LIGHT_PARTICLES_RANGE: new RangeWithValue( 0, 1000, 0 ),
 
   // mass
   HEAVY_PARTICLES_MASS: 28, // AMU, equivalent to N2 (nitrogen)

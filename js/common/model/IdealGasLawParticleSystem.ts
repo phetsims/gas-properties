@@ -124,8 +124,8 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
 
     this.insideParticleArrays = [ this.heavyParticles, this.lightParticles ];
 
-    this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.HEAVY_PARTICLES_RANGE.defaultValue, {
-      range: GasPropertiesConstants.HEAVY_PARTICLES_RANGE,
+    this.numberOfHeavyParticlesProperty = new NumberProperty( GasPropertiesConstants.NUMBER_OF_HEAVY_PARTICLES_RANGE.defaultValue, {
+      range: GasPropertiesConstants.NUMBER_OF_HEAVY_PARTICLES_RANGE,
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
       tandem: options.tandem.createTandem( 'numberOfHeavyParticlesProperty' ),
@@ -135,8 +135,8 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
       hasListenerOrderDependencies: true // TODO: https://github.com/phetsims/gas-properties/issues/186
     } );
 
-    this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.LIGHT_PARTICLES_RANGE.defaultValue, {
-      range: GasPropertiesConstants.LIGHT_PARTICLES_RANGE,
+    this.numberOfLightParticlesProperty = new NumberProperty( GasPropertiesConstants.NUMBER_OF_LIGHT_PARTICLES_RANGE.defaultValue, {
+      range: GasPropertiesConstants.NUMBER_OF_LIGHT_PARTICLES_RANGE,
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
       tandem: options.tandem.createTandem( 'numberOfLightParticlesProperty' ),
