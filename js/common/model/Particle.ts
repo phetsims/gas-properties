@@ -78,6 +78,7 @@ export default class Particle {
     previousY: NumberIO,
     vx: NumberIO,
     vy: NumberIO
+    //TODO https://github.com/phetsims/gas-properties/issues/231 How would I add references to colorProperty and highlightColorProperty?
   };
 
   protected constructor( providedOptions: ParticleOptions ) {
