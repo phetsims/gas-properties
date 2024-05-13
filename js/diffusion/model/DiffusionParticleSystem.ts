@@ -29,8 +29,8 @@ import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import ParticleFlowRateModel from './ParticleFlowRateModel.js';
+import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
   units: 'pm',
@@ -47,8 +47,8 @@ type DiffusionParticleSystemStateObject = {
 
 // This should match DiffusionParticleSystemStateObject, but with IOTypes.
 const DIFFUSION_PARTICLE_SYSTEM_SCHEMA = {
-  particles1: ArrayIO( DiffusionParticle1.DiffusionParticle1IO ),
-  particles2: ArrayIO( DiffusionParticle2.DiffusionParticle2IO )
+  particles1: ReferenceArrayIO( DiffusionParticle1.DiffusionParticle1IO ),
+  particles2: ReferenceArrayIO( DiffusionParticle2.DiffusionParticle2IO )
 };
 
 // Options to createParticle functions
@@ -252,28 +252,14 @@ export default class DiffusionParticleSystem extends PhetioObject {
   }
 
   /**
-   * Deserializes an instance of DiffusionParticleSystem.
-   */
-  private static applyState( particleSystem: DiffusionParticleSystem, stateObject: DiffusionParticleSystemStateObject ): void {
-
-    particleSystem.particles1.length = 0;
-    stateObject.particles1.forEach( ( stateObject: DiffusionParticle1StateObject ) =>
-      particleSystem.particles1.push( DiffusionParticle1.DiffusionParticle1IO.fromStateObject( stateObject ) ) );
-
-    particleSystem.particles2.length = 0;
-    stateObject.particles2.forEach( ( stateObject: DiffusionParticle2StateObject ) =>
-      particleSystem.particles2.push( DiffusionParticle2.DiffusionParticle2IO.fromStateObject( stateObject ) ) );
-  }
-
-  /**
    * DiffusionParticleSystemIO handles serialization of the particle arrays. It implements reference-type serialization,
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly DiffusionParticleSystemIO = new IOType<DiffusionParticleSystem, DiffusionParticleSystemStateObject>( 'DiffusionParticleSystemIO', {
     valueType: DiffusionParticleSystem,
-    stateSchema: DIFFUSION_PARTICLE_SYSTEM_SCHEMA,
+    stateSchema: DIFFUSION_PARTICLE_SYSTEM_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
-    applyState: DiffusionParticleSystem.applyState
+    // applyState: Use the default, which is derived from stateSchema.
   } );
 }
 

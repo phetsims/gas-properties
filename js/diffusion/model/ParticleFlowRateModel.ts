@@ -15,9 +15,9 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import Particle from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
+import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 
 const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
   isValidValue: value => ( value >= 0 ),
@@ -37,9 +37,9 @@ type ParticleFlowRateModelStateObject = {
 
 // This should match ParticleFlowRateModelStateObject, but with IOTypes.
 const PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA = {
-  dts: ArrayIO( NumberIO ),
-  leftCounts: ArrayIO( NumberIO ),
-  rightCounts: ArrayIO( NumberIO )
+  dts: ReferenceArrayIO( NumberIO ),
+  leftCounts: ReferenceArrayIO( NumberIO ),
+  rightCounts: ReferenceArrayIO( NumberIO )
 };
 
 export default class ParticleFlowRateModel extends PhetioObject {
@@ -156,29 +156,14 @@ export default class ParticleFlowRateModel extends PhetioObject {
   }
 
   /**
-   * Deserializes an instance of ParticleFlowRateModel.
-   */
-  private static applyState( particleFlowRateModel: ParticleFlowRateModel, stateObject: ParticleFlowRateModelStateObject ): void {
-
-    particleFlowRateModel.dts.length = 0;
-    particleFlowRateModel.dts.push( ...stateObject.dts );
-
-    particleFlowRateModel.leftCounts.length = 0;
-    particleFlowRateModel.leftCounts.push( ...stateObject.leftCounts );
-
-    particleFlowRateModel.rightCounts.length = 0;
-    particleFlowRateModel.rightCounts.push( ...stateObject.rightCounts );
-  }
-
-  /**
    * ParticleFlowRateModelIO handles serialization of the particle flow rate model. It implements reference-type serialization,
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly ParticleFlowRateModelIO = new IOType<ParticleFlowRateModel, ParticleFlowRateModelStateObject>( 'ParticleFlowRateModelIO', {
     valueType: ParticleFlowRateModel,
-    stateSchema: PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA,
+    stateSchema: PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
-    applyState: ParticleFlowRateModel.applyState
+    // applyState: Use the default, which is derived from stateSchema.
   } );
 }
 

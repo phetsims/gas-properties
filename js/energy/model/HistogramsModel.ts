@@ -22,6 +22,7 @@ import gasProperties from '../../gasProperties.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 
 // Describes the properties of the histograms at a specific zoom level.
 type ZoomLevel = {
@@ -48,10 +49,10 @@ type HistogramsModelStateObject = {
 const HISTOGRAMS_MODEL_STATE_SCHEMA = {
   dtAccumulator: NumberIO,
   numberOfSamples: NumberIO,
-  heavySpeedSamples: ArrayIO( ArrayIO( NumberIO ) ),
-  lightSpeedSamples: ArrayIO( ArrayIO( NumberIO ) ),
-  heavyKineticEnergySamples: ArrayIO( ArrayIO( NumberIO ) ),
-  lightKineticEnergySamples: ArrayIO( ArrayIO( NumberIO ) )
+  heavySpeedSamples: ReferenceArrayIO( ArrayIO( NumberIO ) ),
+  lightSpeedSamples: ReferenceArrayIO( ArrayIO( NumberIO ) ),
+  heavyKineticEnergySamples: ReferenceArrayIO( ArrayIO( NumberIO ) ),
+  lightKineticEnergySamples: ReferenceArrayIO( ArrayIO( NumberIO ) )
 };
 
 export default class HistogramsModel extends PhetioObject {
@@ -334,36 +335,14 @@ export default class HistogramsModel extends PhetioObject {
   }
 
   /**
-   * Deserializes an instance of HistogramsModel.
-   */
-  private static applyState( histogramsModel: HistogramsModel, stateObject: HistogramsModelStateObject ): void {
-
-    histogramsModel.dtAccumulator = stateObject.dtAccumulator;
-    histogramsModel.numberOfSamples = stateObject.numberOfSamples;
-
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Does this work correctly for number[][] ?
-    histogramsModel.heavySpeedSamples.length = 0;
-    histogramsModel.heavySpeedSamples.push( ...stateObject.heavySpeedSamples );
-
-    histogramsModel.lightSpeedSamples.length = 0;
-    histogramsModel.lightSpeedSamples.push( ...stateObject.lightSpeedSamples );
-
-    histogramsModel.heavyKineticEnergySamples.length = 0;
-    histogramsModel.heavyKineticEnergySamples.push( ...stateObject.heavyKineticEnergySamples );
-
-    histogramsModel.lightKineticEnergySamples.length = 0;
-    histogramsModel.lightKineticEnergySamples.push( ...stateObject.lightKineticEnergySamples );
-  }
-
-  /**
    * HistogramModelIO handles serialization of the histograms model. It implements reference-type serialization,
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly HistogramsModelIO = new IOType<HistogramsModel, HistogramsModelStateObject>( 'HistogramsModelIO', {
     valueType: HistogramsModel,
-    stateSchema: HISTOGRAMS_MODEL_STATE_SCHEMA,
+    stateSchema: HISTOGRAMS_MODEL_STATE_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
-    applyState: HistogramsModel.applyState
+    // applyState: Use the default, which is derived from stateSchema.
   } );
 }
 

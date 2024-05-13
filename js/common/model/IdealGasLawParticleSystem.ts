@@ -29,8 +29,8 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 
 // used to compute the initial velocity angle for particles, in radians
 const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
@@ -55,10 +55,10 @@ type IdealGasLawParticleSystemStateObject = {
 
 // This should match IdealGasLawParticleSystemStateObject, but with IOTypes.
 const IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA = {
-  heavyParticles: ArrayIO( HeavyParticle.HeavyParticleIO ),
-  lightParticles: ArrayIO( LightParticle.LightParticleIO ),
-  heavyParticlesOutside: ArrayIO( HeavyParticle.HeavyParticleIO ),
-  lightParticlesOutside: ArrayIO( LightParticle.LightParticleIO )
+  heavyParticles: ReferenceArrayIO( HeavyParticle.HeavyParticleIO ),
+  lightParticles: ReferenceArrayIO( LightParticle.LightParticleIO ),
+  heavyParticlesOutside: ReferenceArrayIO( HeavyParticle.HeavyParticleIO ),
+  lightParticlesOutside: ReferenceArrayIO( LightParticle.LightParticleIO )
 };
 
 export default class IdealGasLawParticleSystem extends PhetioObject {
@@ -385,36 +385,14 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   }
 
   /**
-   * Deserializes an instance of IdealGasLawParticleSystem.
-   */
-  private static applyState( particleSystem: IdealGasLawParticleSystem, stateObject: IdealGasLawParticleSystemStateObject ): void {
-
-    particleSystem.heavyParticles.length = 0;
-    stateObject.heavyParticles.forEach( ( stateObject: HeavyParticleStateObject ) =>
-      particleSystem.heavyParticles.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) ) );
-
-    particleSystem.lightParticles.length = 0;
-    stateObject.lightParticles.forEach( ( stateObject: LightParticleStateObject ) =>
-      particleSystem.lightParticles.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) ) );
-
-    particleSystem.heavyParticlesOutside.length = 0;
-    stateObject.heavyParticlesOutside.forEach( ( stateObject: HeavyParticleStateObject ) =>
-      particleSystem.heavyParticlesOutside.push( HeavyParticle.HeavyParticleIO.fromStateObject( stateObject ) ) );
-
-    particleSystem.lightParticlesOutside.length = 0;
-    stateObject.lightParticlesOutside.forEach( ( stateObject: LightParticleStateObject ) =>
-      particleSystem.lightParticlesOutside.push( LightParticle.LightParticleIO.fromStateObject( stateObject ) ) );
-  }
-
-  /**
    * IdealGasLawParticleSystemIO handles serialization of the particle arrays. It implements reference-type serialization,
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly IdealGasLawParticleSystemIO = new IOType<IdealGasLawParticleSystem, IdealGasLawParticleSystemStateObject>( 'IdealGasLawParticleSystemIO', {
     valueType: IdealGasLawParticleSystem,
-    stateSchema: IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA,
+    stateSchema: IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
-    applyState: IdealGasLawParticleSystem.applyState
+    // applyState: Use the default, which is derived from stateSchema.
   } );
 }
 

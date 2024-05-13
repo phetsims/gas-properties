@@ -193,24 +193,14 @@ export default class AverageSpeedModel extends PhetioObject {
   }
 
   /**
-   * Deserializes an instance of AverageSpeedModel.
-   */
-  private static applyState( averageSpeedModel: AverageSpeedModel, stateObject: AverageSpeedModelStateObject ): void {
-    averageSpeedModel.dtAccumulator = stateObject.dtAccumulator;
-    averageSpeedModel.numberOfSamples = stateObject.numberOfSamples;
-    averageSpeedModel.heavyAverageSpeedSum = stateObject.heavyAverageSpeedSum;
-    averageSpeedModel.lightAverageSpeedSum = stateObject.lightAverageSpeedSum;
-  }
-
-  /**
    * AverageSpeedModelIO handles serialization of the average speed model. It implements reference-type serialization,
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly AverageSpeedModelIO = new IOType<AverageSpeedModel, AverageSpeedModelStateObject>( 'AverageSpeedModelIO', {
     valueType: AverageSpeedModel,
-    stateSchema: AVERAGE_SPEED_MODEL_STATE_SCHEMA,
+    stateSchema: AVERAGE_SPEED_MODEL_STATE_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
-    applyState: AverageSpeedModel.applyState
+    // applyState: Use the default, which is derived from stateSchema.
   } );
 }
 
