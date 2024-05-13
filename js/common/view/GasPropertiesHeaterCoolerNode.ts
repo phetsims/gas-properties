@@ -27,6 +27,7 @@ import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
 import gasProperties from '../../gasProperties.js';
 import { HoldConstant } from '../model/HoldConstant.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Animation duration in seconds, split evenly between raising and lowering the flame/ice.
 const HEAT_COOL_DURATION = 1.5;
@@ -89,16 +90,18 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
     // When temperature changes in HoldConstant 'pressureT' mode, animate the heater/cooler.
     temperatureProperty.link( ( temperature, previousTemperature ) => {
-      if ( holdConstantProperty.value === 'pressureT' ) {
-        if ( temperature === null || previousTemperature === null || numberOfParticlesProperty.value === 0 ) {
-          this.stopAnimation();
-        }
-        else {
-          const deltaT = temperature - previousTemperature;
-          if ( Math.abs( deltaT ) > MIN_DELTA_T ) {
-            const deltaTN = deltaT * numberOfParticlesProperty.value;
-            const heatCoolFactor = Math.sign( deltaT ) * toHeatFactor.evaluate( Math.abs( deltaTN ) );
-            this.startAnimation( heatCoolFactor );
+      if ( !isSettingPhetioStateProperty.value ) {
+        if ( holdConstantProperty.value === 'pressureT' ) {
+          if ( temperature === null || previousTemperature === null || numberOfParticlesProperty.value === 0 ) {
+            this.stopAnimation();
+          }
+          else {
+            const deltaT = temperature - previousTemperature;
+            if ( Math.abs( deltaT ) > MIN_DELTA_T ) {
+              const deltaTN = deltaT * numberOfParticlesProperty.value;
+              const heatCoolFactor = Math.sign( deltaT ) * toHeatFactor.evaluate( Math.abs( deltaTN ) );
+              this.startAnimation( heatCoolFactor );
+            }
           }
         }
       }
