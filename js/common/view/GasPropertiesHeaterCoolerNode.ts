@@ -87,14 +87,6 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
 
     this.animation = null;
 
-    // stops the animation at whatever stage it's in
-    const stopAnimation = () => {
-      if ( this.animation ) {
-        this.animation.stop();
-        this.animation = null;
-      }
-    };
-
     // When temperature changes in HoldConstant 'pressureT' mode, animate the heater/cooler.
     temperatureProperty.link( ( temperature, previousTemperature ) => {
       if ( holdConstantProperty.value === 'pressureT' ) {
@@ -102,7 +94,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
         const numberOfParticles = numberOfParticlesProperty.value;
 
         if ( temperature === null || previousTemperature === null || numberOfParticles === 0 ) {
-          stopAnimation();
+          this.stopAnimation();
         }
         else {
 
@@ -174,7 +166,7 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
       this.interruptSubtreeInput();
 
       // Stop any in-progress animation of the flame/ice
-      stopAnimation();
+      this.stopAnimation();
 
       // Hide the slider in modes where the user does not have control of temperature.
       this.slider.visible = ( holdConstant !== 'temperature' && holdConstant !== 'pressureT' );
@@ -188,6 +180,16 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
   public step( dt: number ): void {
     assert && assert( dt >= 0, `invalid dt: ${dt}` );
     this.animation && this.animation.step( dt );
+  }
+
+  /**
+   * Stops the animation at whatever stage it's in.
+   */
+  private stopAnimation(): void {
+    if ( this.animation ) {
+      this.animation.stop();
+      this.animation = null;
+    }
   }
 }
 
