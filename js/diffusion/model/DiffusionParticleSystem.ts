@@ -153,20 +153,28 @@ export default class DiffusionParticleSystem extends PhetioObject {
     Multilink.multilink(
       [ this.particle1Settings.massProperty, this.particle1Settings.initialTemperatureProperty ],
       ( mass, initialTemperature ) => {
-        updateMassAndSpeed( mass, initialTemperature, this.particles1 );
+        if ( !isSettingPhetioStateProperty.value ) {
+          updateMassAndSpeed( mass, initialTemperature, this.particles1 );
+        }
       } );
     Multilink.multilink(
       [ this.particle2Settings.massProperty, this.particle2Settings.initialTemperatureProperty ],
       ( mass, initialTemperature ) => {
-        updateMassAndSpeed( mass, initialTemperature, this.particles2 );
+        if ( !isSettingPhetioStateProperty.value ) {
+          updateMassAndSpeed( mass, initialTemperature, this.particles2 );
+        }
       } );
 
     // Update radii of existing particles.
     this.particle1Settings.radiusProperty.link( radius => {
-      updateRadius( radius, this.particles1, container.leftBounds, isPlayingProperty.value );
+      if ( !isSettingPhetioStateProperty.value ) {
+        updateRadius( radius, this.particles1, container.leftBounds, isPlayingProperty.value );
+      }
     } );
     this.particle2Settings.radiusProperty.link( radius => {
-      updateRadius( radius, this.particles2, container.rightBounds, isPlayingProperty.value );
+      if ( !isSettingPhetioStateProperty.value ) {
+        updateRadius( radius, this.particles2, container.rightBounds, isPlayingProperty.value );
+      }
     } );
   }
 
@@ -217,6 +225,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
                                    settings: DiffusionSettings,
                                    positionBounds: Bounds2,
                                    createParticle: ( options: CreateParticleOptions ) => Particle ): void {
+    assert && assert( !isSettingPhetioStateProperty.value, 'updateNumberOfParticles should not be called while setting state.' );
 
     const delta = numberOfParticles - particles.length;
     if ( delta !== 0 ) {
@@ -228,7 +237,6 @@ export default class DiffusionParticleSystem extends PhetioObject {
       }
 
       // If paused, update things that would normally be handled by step.
-      //TODO https://github.com/phetsims/gas-properties/issues/77 isSettingPhetioStateProperty check?
       if ( !this.isPlayingProperty.value ) {
         this.updateCenterOfMass();
       }
@@ -290,6 +298,7 @@ function addParticles( n: number,
                        positionBounds: Bounds2,
                        createParticle: ( options: CreateParticleOptions ) => Particle ): void {
   assert && assert( n > 0 && Number.isInteger( n ), `invalid n: ${n}` );
+  assert && assert( !isSettingPhetioStateProperty.value, 'addParticles should not be called while setting state.' );
 
   // Create n particles
   for ( let i = 0; i < n; i++ ) {
@@ -325,6 +334,7 @@ function updateMassAndSpeed( mass: number, temperature: number, particles: Diffu
   assert && assert( mass > 0, `invalid mass: ${mass}` );
   assert && assert( temperature >= 0, `invalid temperature: ${temperature}` );
   assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
+  assert && assert( !isSettingPhetioStateProperty.value, 'updateMassAndSpeed should not be called while setting state.' );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
     particles[ i ].setMass( mass );
@@ -339,6 +349,7 @@ function updateMassAndSpeed( mass: number, temperature: number, particles: Diffu
  */
 function updateRadius( radius: number, particles: DiffusionParticle[], bounds: Bounds2, isPlaying: boolean ): void {
   assert && assert( radius > 0, `invalid radius: ${radius}` );
+  assert && assert( !isSettingPhetioStateProperty.value, 'updateRadius should not be called while setting state.' );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
 
