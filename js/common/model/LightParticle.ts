@@ -58,7 +58,6 @@ export default class LightParticle extends Particle {
   public static readonly LightParticleIO = new IOType<LightParticle, LightParticleStateObject>( 'LightParticleIO', {
     valueType: LightParticle,
     stateSchema: LightParticle.STATE_SCHEMA,
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Is this comment about toStateObject correct?
     // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: LightParticle.fromStateObject
   } );
