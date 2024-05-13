@@ -252,16 +252,6 @@ export default class DiffusionParticleSystem extends PhetioObject {
   }
 
   /**
-   * Serializes this instance of DiffusionParticleSystem.
-   */
-  private toStateObject(): DiffusionParticleSystemStateObject {
-    return {
-      particles1: this.particles1.map( particle => DiffusionParticle1.DiffusionParticle1IO.toStateObject( particle ) ),
-      particles2: this.particles2.map( particle => DiffusionParticle2.DiffusionParticle2IO.toStateObject( particle ) )
-    };
-  }
-
-  /**
    * Deserializes an instance of DiffusionParticleSystem.
    */
   private static applyState( particleSystem: DiffusionParticleSystem, stateObject: DiffusionParticleSystemStateObject ): void {
@@ -283,8 +273,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
     valueType: DiffusionParticleSystem,
     defaultDeserializationMethod: 'applyState',
     stateSchema: DIFFUSION_PARTICLE_SYSTEM_SCHEMA,
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Would default toStateObject work here?
-    toStateObject: particleSystem => particleSystem.toStateObject(),
+    // toStateObject: Use the default, which is derived from stateSchema.
     applyState: DiffusionParticleSystem.applyState
   } );
 }

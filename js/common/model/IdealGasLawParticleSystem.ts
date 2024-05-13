@@ -385,18 +385,6 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   }
 
   /**
-   * Serializes this instance of IdealGasLawParticleSystem.
-   */
-  private toStateObject(): IdealGasLawParticleSystemStateObject {
-    return {
-      heavyParticles: this.heavyParticles.map( particle => HeavyParticle.HeavyParticleIO.toStateObject( particle ) ),
-      lightParticles: this.lightParticles.map( particle => LightParticle.LightParticleIO.toStateObject( particle ) ),
-      heavyParticlesOutside: this.heavyParticlesOutside.map( particle => HeavyParticle.HeavyParticleIO.toStateObject( particle ) ),
-      lightParticlesOutside: this.lightParticlesOutside.map( particle => LightParticle.LightParticleIO.toStateObject( particle ) )
-    };
-  }
-
-  /**
    * Deserializes an instance of IdealGasLawParticleSystem.
    */
   private static applyState( particleSystem: IdealGasLawParticleSystem, stateObject: IdealGasLawParticleSystemStateObject ): void {
@@ -426,8 +414,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
     valueType: IdealGasLawParticleSystem,
     defaultDeserializationMethod: 'applyState',
     stateSchema: IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA,
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Would default toStateObject work here?
-    toStateObject: particleSystem => particleSystem.toStateObject(),
+    // toStateObject: Use the default, which is derived from stateSchema.
     applyState: IdealGasLawParticleSystem.applyState
   } );
 }

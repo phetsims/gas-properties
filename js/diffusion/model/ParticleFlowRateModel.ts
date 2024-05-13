@@ -178,7 +178,7 @@ export default class ParticleFlowRateModel extends PhetioObject {
     valueType: ParticleFlowRateModel,
     defaultDeserializationMethod: 'applyState',
     stateSchema: PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA,
-    //TODO https://github.com/phetsims/gas-properties/issues/77 Does default toStateObject work?
+    // toStateObject: Use the default, which is derived from stateSchema.
     applyState: ParticleFlowRateModel.applyState
   } );
 }
