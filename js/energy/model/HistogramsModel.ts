@@ -356,8 +356,8 @@ export default class HistogramsModel extends PhetioObject {
   }
 
   /**
-   * HistogramModelIO handles serialization of the histograms model.
-   * TODO https://github.com/phetsims/gas-properties/issues/77 What type of serialization is this?
+   * HistogramModelIO handles serialization of the histograms model. It implements reference-type serialization,
+   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly HistogramsModelIO = new IOType<HistogramsModel, HistogramsModelStateObject>( 'HistogramsModelIO', {
     valueType: HistogramsModel,

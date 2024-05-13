@@ -171,8 +171,8 @@ export default class ParticleFlowRateModel extends PhetioObject {
   }
 
   /**
-   * ParticleFlowRateModelIO handles serialization of the particle flow rate model.
-   * TODO https://github.com/phetsims/gas-properties/issues/77 What type of serialization is this?
+   * ParticleFlowRateModelIO handles serialization of the particle flow rate model. It implements reference-type serialization,
+   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly ParticleFlowRateModelIO = new IOType<ParticleFlowRateModel, ParticleFlowRateModelStateObject>( 'ParticleFlowRateModelIO', {
     valueType: ParticleFlowRateModel,

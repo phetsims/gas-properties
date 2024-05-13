@@ -419,8 +419,8 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
   }
 
   /**
-   * IdealGasLawParticleSystemIO handles serialization of the particle arrays.
-   * TODO https://github.com/phetsims/gas-properties/issues/77 What type of serialization is this?
+   * IdealGasLawParticleSystemIO handles serialization of the particle arrays. It implements reference-type serialization,
+   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly IdealGasLawParticleSystemIO = new IOType<IdealGasLawParticleSystem, IdealGasLawParticleSystemStateObject>( 'IdealGasLawParticleSystemIO', {
     valueType: IdealGasLawParticleSystem,

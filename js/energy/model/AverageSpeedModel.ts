@@ -203,8 +203,8 @@ export default class AverageSpeedModel extends PhetioObject {
   }
 
   /**
-   * AverageSpeedModelIO handles serialization of the average speed model.
-   * TODO https://github.com/phetsims/gas-properties/issues/77 What type of serialization is this?
+   * AverageSpeedModelIO handles serialization of the average speed model. It implements reference-type serialization,
+   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly AverageSpeedModelIO = new IOType<AverageSpeedModel, AverageSpeedModelStateObject>( 'AverageSpeedModelIO', {
     valueType: AverageSpeedModel,
