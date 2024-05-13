@@ -271,7 +271,6 @@ export default class DiffusionParticleSystem extends PhetioObject {
    */
   private static readonly DiffusionParticleSystemIO = new IOType<DiffusionParticleSystem, DiffusionParticleSystemStateObject>( 'DiffusionParticleSystemIO', {
     valueType: DiffusionParticleSystem,
-    defaultDeserializationMethod: 'applyState',
     stateSchema: DIFFUSION_PARTICLE_SYSTEM_SCHEMA,
     // toStateObject: Use the default, which is derived from stateSchema.
     applyState: DiffusionParticleSystem.applyState

@@ -176,7 +176,6 @@ export default class ParticleFlowRateModel extends PhetioObject {
    */
   private static readonly ParticleFlowRateModelIO = new IOType<ParticleFlowRateModel, ParticleFlowRateModelStateObject>( 'ParticleFlowRateModelIO', {
     valueType: ParticleFlowRateModel,
-    defaultDeserializationMethod: 'applyState',
     stateSchema: PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA,
     // toStateObject: Use the default, which is derived from stateSchema.
     applyState: ParticleFlowRateModel.applyState

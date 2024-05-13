@@ -208,7 +208,6 @@ export default class AverageSpeedModel extends PhetioObject {
    */
   private static readonly AverageSpeedModelIO = new IOType<AverageSpeedModel, AverageSpeedModelStateObject>( 'AverageSpeedModelIO', {
     valueType: AverageSpeedModel,
-    defaultDeserializationMethod: 'applyState',
     stateSchema: AVERAGE_SPEED_MODEL_STATE_SCHEMA,
     // toStateObject: Use the default, which is derived from stateSchema.
     applyState: AverageSpeedModel.applyState

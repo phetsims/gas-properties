@@ -412,7 +412,6 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
    */
   private static readonly IdealGasLawParticleSystemIO = new IOType<IdealGasLawParticleSystem, IdealGasLawParticleSystemStateObject>( 'IdealGasLawParticleSystemIO', {
     valueType: IdealGasLawParticleSystem,
-    defaultDeserializationMethod: 'applyState',
     stateSchema: IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA,
     // toStateObject: Use the default, which is derived from stateSchema.
     applyState: IdealGasLawParticleSystem.applyState

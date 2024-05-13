@@ -361,7 +361,6 @@ export default class HistogramsModel extends PhetioObject {
    */
   private static readonly HistogramsModelIO = new IOType<HistogramsModel, HistogramsModelStateObject>( 'HistogramsModelIO', {
     valueType: HistogramsModel,
-    defaultDeserializationMethod: 'applyState',
     stateSchema: HISTOGRAMS_MODEL_STATE_SCHEMA,
     // toStateObject: Use the default, which is derived from stateSchema.
     applyState: HistogramsModel.applyState
