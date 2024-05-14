@@ -35,7 +35,7 @@ type SelfOptions = EmptySelfOptions;
 
 type HistogramsModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-// This should match HISTOGRAMS_MODEL_STATE_SCHEMA, but with JavaScript types.
+// This should match STATE_SCHEMA, but with JavaScript types.
 type HistogramsModelStateObject = {
   dtAccumulator: number;
   numberOfSamples: number;
@@ -46,7 +46,7 @@ type HistogramsModelStateObject = {
 };
 
 // This should match HistogramsModelStateObject, but with IOTypes.
-const HISTOGRAMS_MODEL_STATE_SCHEMA = {
+const STATE_SCHEMA = {
   dtAccumulator: NumberIO,
   numberOfSamples: NumberIO,
   heavySpeedSamples: ReferenceArrayIO( ArrayIO( NumberIO ) ),
@@ -340,7 +340,7 @@ export default class HistogramsModel extends PhetioObject {
    */
   private static readonly HistogramsModelIO = new IOType<HistogramsModel, HistogramsModelStateObject>( 'HistogramsModelIO', {
     valueType: HistogramsModel,
-    stateSchema: HISTOGRAMS_MODEL_STATE_SCHEMA
+    stateSchema: STATE_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );

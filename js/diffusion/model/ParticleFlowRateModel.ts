@@ -28,7 +28,7 @@ const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
 // number of samples used to compute running average, see https://github.com/phetsims/gas-properties/issues/51
 const NUMBER_OF_SAMPLES = 300;
 
-// This should match PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA, but with JavaScript types.
+// This should match STATE_SCHEMA, but with JavaScript types.
 type ParticleFlowRateModelStateObject = {
   dts: number[];
   leftCounts: number[];
@@ -36,7 +36,7 @@ type ParticleFlowRateModelStateObject = {
 };
 
 // This should match ParticleFlowRateModelStateObject, but with IOTypes.
-const PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA = {
+const STATE_SCHEMA = {
   dts: ReferenceArrayIO( NumberIO ),
   leftCounts: ReferenceArrayIO( NumberIO ),
   rightCounts: ReferenceArrayIO( NumberIO )
@@ -161,7 +161,7 @@ export default class ParticleFlowRateModel extends PhetioObject {
    */
   private static readonly ParticleFlowRateModelIO = new IOType<ParticleFlowRateModel, ParticleFlowRateModelStateObject>( 'ParticleFlowRateModelIO', {
     valueType: ParticleFlowRateModel,
-    stateSchema: PARTICLE_FLOW_RATE_MODEL_STATE_SCHEMA
+    stateSchema: STATE_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );

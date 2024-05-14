@@ -30,7 +30,7 @@ type SelfOptions = EmptySelfOptions;
 
 type AverageSpeedModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-// This should match AVERAGE_SPEED_MODEL_STATE_SCHEMA, but with JavaScript types.
+// This should match STATE_SCHEMA, but with JavaScript types.
 type AverageSpeedModelStateObject = {
   dtAccumulator: number;
   numberOfSamples: number;
@@ -39,7 +39,7 @@ type AverageSpeedModelStateObject = {
 };
 
 // This should match AverageSpeedModelStateObject, but with IOTypes.
-const AVERAGE_SPEED_MODEL_STATE_SCHEMA = {
+const STATE_SCHEMA = {
   dtAccumulator: NumberIO,
   numberOfSamples: NumberIO,
   heavyAverageSpeedSum: NumberIO,
@@ -198,7 +198,7 @@ export default class AverageSpeedModel extends PhetioObject {
    */
   private static readonly AverageSpeedModelIO = new IOType<AverageSpeedModel, AverageSpeedModelStateObject>( 'AverageSpeedModelIO', {
     valueType: AverageSpeedModel,
-    stateSchema: AVERAGE_SPEED_MODEL_STATE_SCHEMA
+    stateSchema: STATE_SCHEMA
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );
