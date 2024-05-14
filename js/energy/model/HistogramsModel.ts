@@ -341,8 +341,8 @@ export default class HistogramsModel extends PhetioObject {
   private static readonly HistogramsModelIO = new IOType<HistogramsModel, HistogramsModelStateObject>( 'HistogramsModelIO', {
     valueType: HistogramsModel,
     stateSchema: STATE_SCHEMA,
-    documentation: 'PhET-iO Type that does sampling of the Speed and Kinetic Energy of the particle system. ' +
-                   'All fields in the State Schema are for internal use only.'
+    documentation: 'PhET-iO Type that supports sampling of the Speed and Kinetic Energy of the particle system. ' +
+                   'All fields this type are for internal use only.'
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );
