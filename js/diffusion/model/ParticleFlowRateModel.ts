@@ -30,16 +30,16 @@ const NUMBER_OF_SAMPLES = 300;
 
 // This should match STATE_SCHEMA, but with JavaScript types.
 type ParticleFlowRateModelStateObject = {
-  dts: number[];
   leftCounts: number[];
   rightCounts: number[];
+  dts: number[];
 };
 
 // This should match ParticleFlowRateModelStateObject, but with IOTypes.
 const STATE_SCHEMA = {
-  dts: ReferenceArrayIO( NumberIO ),
   leftCounts: ReferenceArrayIO( NumberIO ),
-  rightCounts: ReferenceArrayIO( NumberIO )
+  rightCounts: ReferenceArrayIO( NumberIO ),
+  dts: ReferenceArrayIO( NumberIO )
 };
 
 export default class ParticleFlowRateModel extends PhetioObject {
@@ -81,7 +81,7 @@ export default class ParticleFlowRateModel extends PhetioObject {
         tandem: tandem.createTandem( 'leftFlowRateProperty' ),
         phetioFeatured: true,
         phetioReadOnly: true,
-        phetioDocumentation: 'Flow rate of particles to the left side of the container (time averaged).'
+        phetioDocumentation: 'Flow rate of particles to the left side of the container (running average).'
       } ) );
 
     this.rightFlowRateProperty = new NumberProperty( 0,
@@ -89,12 +89,11 @@ export default class ParticleFlowRateModel extends PhetioObject {
         tandem: tandem.createTandem( 'rightFlowRateProperty' ),
         phetioFeatured: true,
         phetioReadOnly: true,
-        phetioDocumentation: 'Flow rate of particles to the right side of the container (time averaged).'
+        phetioDocumentation: 'Flow rate of particles to the right side of the container (running average).'
       } ) );
 
     this.leftCounts = [];
     this.rightCounts = [];
-
     this.dts = [];
 
     // After PhET-iO state has been restored, verify the sanity of the model.
@@ -156,8 +155,9 @@ export default class ParticleFlowRateModel extends PhetioObject {
   }
 
   /**
-   * ParticleFlowRateModelIO handles serialization of the particle flow rate model. It implements reference-type serialization,
-   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
+   * ParticleFlowRateModelIO handles serialization of data that supports derivation of particle flow rate.
+   * It implements reference-type serialization, as described in
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly ParticleFlowRateModelIO = new IOType<ParticleFlowRateModel, ParticleFlowRateModelStateObject>( 'ParticleFlowRateModelIO', {
     valueType: ParticleFlowRateModel,

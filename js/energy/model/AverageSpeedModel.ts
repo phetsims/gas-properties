@@ -52,13 +52,13 @@ export default class AverageSpeedModel extends PhetioObject {
   private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
   private readonly samplePeriod: number;
 
-  // average speed of particle species in the container, in pm/ps, null when the container is empty
+  // Average speed of particle species in the container, in pm/ps. null when the container is empty
   public readonly heavyAverageSpeedProperty: Property<number | null>;
   public readonly lightAverageSpeedProperty: Property<number | null>;
 
-  // used internally to smooth the average speed computation
-  private dtAccumulator: number; // accumulated dts while samples were taken
-  private numberOfSamples: number; // number of samples we've taken
+  // Used internally to smooth the average speed computation.
+  private dtAccumulator: number; // accumulated dts during the sample period
+  private numberOfSamples: number; // number of samples taken during the sample period
   private heavyAverageSpeedSum: number; // sum of samples for heavy particles
   private lightAverageSpeedSum: number; // sum of samples for light particles
 
@@ -90,7 +90,7 @@ export default class AverageSpeedModel extends PhetioObject {
         tandem: options.tandem.createTandem( 'heavyAverageSpeedProperty' ),
         phetioReadOnly: true,
         phetioFeatured: true,
-        phetioDocumentation: 'Average speed of heavy particles in the container'
+        phetioDocumentation: 'Average speed of heavy particles in the container (time averaged).'
       } ) );
 
     this.lightAverageSpeedProperty = new Property<number | null>( null,
@@ -98,7 +98,7 @@ export default class AverageSpeedModel extends PhetioObject {
         tandem: options.tandem.createTandem( 'lightAverageSpeedProperty' ),
         phetioReadOnly: true,
         phetioFeatured: true,
-        phetioDocumentation: 'Average speed of light particles in the container'
+        phetioDocumentation: 'Average speed of light particles in the container (time averaged).'
       } ) );
 
     this.dtAccumulator = 0;
@@ -193,8 +193,9 @@ export default class AverageSpeedModel extends PhetioObject {
   }
 
   /**
-   * AverageSpeedModelIO handles serialization of the average speed model. It implements reference-type serialization,
-   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
+   * AverageSpeedModelIO handles serialization of data that supports derivation of average speed.
+   * It implements reference-type serialization, as described in
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly AverageSpeedModelIO = new IOType<AverageSpeedModel, AverageSpeedModelStateObject>( 'AverageSpeedModelIO', {
     valueType: AverageSpeedModel,

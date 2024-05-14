@@ -26,9 +26,9 @@ import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 
 // Describes the properties of the histograms at a specific zoom level.
 type ZoomLevel = {
-  yMax: number;
-  majorGridLineSpacing: number;
-  minorGridLineSpacing: number | null; // null means no minor grid lines
+  yMax: number; // maximum of the y-axis range
+  majorGridLineSpacing: number; // spacing of major grid lines
+  minorGridLineSpacing: number | null; // spacing of minor grid lines, null means no minor grid lines
 };
 
 type SelfOptions = EmptySelfOptions;
@@ -89,8 +89,10 @@ export default class HistogramsModel extends PhetioObject {
   private readonly heavyKineticEnergySamples: number[][]; // Kinetic Energy samples for heavy particles
   private readonly lightKineticEnergySamples: number[][]; // Kinetic Energy samples for light particles
 
-  // for measuring sample periods
+  // The amount of time that has elapsed in the current sample period.
   private dtAccumulator: number;
+
+  // The number of samples that have been taken in the current sample period.
   private numberOfSamples: number;
 
   // Describes each of the zoom levels, ordered from largest to smallest yMax value. zoomLevelIndexProperty provides
@@ -335,8 +337,9 @@ export default class HistogramsModel extends PhetioObject {
   }
 
   /**
-   * HistogramModelIO handles serialization of the histograms model. It implements reference-type serialization,
-   * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
+   * HistogramModelIO handles serialization of data that supports derivation of speed and kinetic energy histograms.
+   * It implements reference-type serialization, as described in
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   private static readonly HistogramsModelIO = new IOType<HistogramsModel, HistogramsModelStateObject>( 'HistogramsModelIO', {
     valueType: HistogramsModel,
