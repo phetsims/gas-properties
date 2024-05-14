@@ -198,7 +198,9 @@ export default class AverageSpeedModel extends PhetioObject {
    */
   private static readonly AverageSpeedModelIO = new IOType<AverageSpeedModel, AverageSpeedModelStateObject>( 'AverageSpeedModelIO', {
     valueType: AverageSpeedModel,
-    stateSchema: STATE_SCHEMA
+    stateSchema: STATE_SCHEMA,
+    documentation: 'PhET-iO Type that does sampling of the Average Speed of the particle system. ' +
+                   'All fields in the State Schema are for internal use only.'
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );

@@ -161,7 +161,9 @@ export default class ParticleFlowRateModel extends PhetioObject {
    */
   private static readonly ParticleFlowRateModelIO = new IOType<ParticleFlowRateModel, ParticleFlowRateModelStateObject>( 'ParticleFlowRateModelIO', {
     valueType: ParticleFlowRateModel,
-    stateSchema: STATE_SCHEMA
+    stateSchema: STATE_SCHEMA,
+    documentation: 'PhET-iO Type that does sampling of the flow rate for one type of particle. ' +
+                   'All fields in the State Schema are for internal use only.'
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );
