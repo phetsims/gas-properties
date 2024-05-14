@@ -58,7 +58,7 @@ export default class LightParticle extends Particle {
   public static readonly LightParticleIO = new IOType<LightParticle, LightParticleStateObject>( 'LightParticleIO', {
     valueType: LightParticle,
     stateSchema: LightParticle.STATE_SCHEMA,
-    documentation: 'PhET-iO Type for light particles, modeled after He.<br>' +
+    documentation: 'PhET-iO Type for light particles.<br>' +
                    '<br>' +
                    LightParticle.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
