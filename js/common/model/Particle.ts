@@ -80,8 +80,8 @@ export default class Particle {
     vy: NumberIO
   };
 
-  // This is the documentation that appears for IOTypes in Studio. Each field in STATE_SCHEMA should be described,
-  // in the same order as STATE_SCHEMA.
+  // For concrete subclasses of Particle, this is the documentation that appears for their IOTypes in Studio.
+  // Each field in STATE_SCHEMA should be described, in the same order as STATE_SCHEMA.
   protected static readonly STATE_SCHEMA_FIELDS_DOCUMENTATION =
     'Fields include:<br>' +
     '<ul>' +
