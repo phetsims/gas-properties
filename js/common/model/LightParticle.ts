@@ -44,8 +44,8 @@ export default class LightParticle extends Particle {
     return new LightParticle( {
       x: stateObject.x,
       y: stateObject.y,
-      previousX: stateObject.previousX,
-      previousY: stateObject.previousY,
+      previousX: stateObject._previousX,
+      previousY: stateObject._previousY,
       vx: stateObject.vx,
       vy: stateObject.vy
     } );

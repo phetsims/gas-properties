@@ -38,8 +38,8 @@ export type ParticleStateObject = {
   radius: number;
   x: number;
   y: number;
-  previousX: number;
-  previousY: number;
+  _previousX: number;
+  _previousY: number;
   vx: number;
   vy: number;
 };
@@ -74,8 +74,8 @@ export default class Particle {
     radius: NumberIO,
     x: NumberIO,
     y: NumberIO,
-    previousX: NumberIO,
-    previousY: NumberIO,
+    _previousX: NumberIO,
+    _previousY: NumberIO,
     vx: NumberIO,
     vy: NumberIO
   };
@@ -89,11 +89,10 @@ export default class Particle {
     '<li>radius: the radius, in pm<br>' +
     '<li>x: the x-coordinate, relative to the lower-right corner of the container, in pm<br>' +
     '<li>y: the y-coordinate, relative to the lower-right corner of the container, in pm<br>' +
-    '<li>previousX: for internal use only<br>' +
-    '<li>previousY: for internal use only<br>' +
     '<li>vx: the velocity x-component, in pm/ps<br>' +
     '<li>vx: the velocity y-component, in pm/ps' +
-    '</ul>';
+    '</ul>' +
+    'Fields with an underscore prefix are for internal use only.';
 
   protected constructor( providedOptions: ParticleOptions ) {
 

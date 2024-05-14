@@ -41,8 +41,8 @@ export default class DiffusionParticle1 extends DiffusionParticle {
     return new DiffusionParticle1( {
       x: stateObject.x,
       y: stateObject.y,
-      previousX: stateObject.previousX,
-      previousY: stateObject.previousY,
+      previousX: stateObject._previousX,
+      previousY: stateObject._previousY,
       vx: stateObject.vx,
       vy: stateObject.vy
     } );
