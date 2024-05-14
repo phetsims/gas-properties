@@ -55,6 +55,7 @@ export default class DiffusionParticle2 extends DiffusionParticle {
   public static readonly DiffusionParticle2IO = new IOType<DiffusionParticle2, DiffusionParticle2StateObject>( 'DiffusionParticle2IO', {
     valueType: DiffusionParticle2,
     stateSchema: DiffusionParticle2.STATE_SCHEMA,
+    documentation: DiffusionParticle2.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: DiffusionParticle2.fromStateObject
   } );

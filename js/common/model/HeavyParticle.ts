@@ -58,6 +58,7 @@ export default class HeavyParticle extends Particle {
   public static readonly HeavyParticleIO = new IOType<HeavyParticle, HeavyParticleStateObject>( 'HeavyParticleIO', {
     valueType: HeavyParticle,
     stateSchema: HeavyParticle.STATE_SCHEMA,
+    documentation: HeavyParticle.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: HeavyParticle.fromStateObject
   } );

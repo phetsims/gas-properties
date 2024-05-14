@@ -80,6 +80,21 @@ export default class Particle {
     vy: NumberIO
   };
 
+  // This is the documentation that appears for IOTypes in Studio. Each field in STATE_SCHEMA should be described,
+  // in the same order as STATE_SCHEMA.
+  protected static readonly STATE_SCHEMA_FIELDS_DOCUMENTATION =
+    'Fields include:<br>' +
+    '<ul>' +
+    '<li>mass: the mass, in AMU<br>' +
+    '<li>radius: the radius, in pm<br>' +
+    '<li>x: the x-coordinate, relative to the lower-right corner of the container, in pm<br>' +
+    '<li>y: the y-coordinate, relative to the lower-right corner of the container, in pm<br>' +
+    '<li>previousX: for internal use only<br>' +
+    '<li>previousY: for internal use only<br>' +
+    '<li>vx: the velocity x-component, in pm/ps<br>' +
+    '<li>vx: the velocity y-component, in pm/ps' +
+    '</ul>';
+
   protected constructor( providedOptions: ParticleOptions ) {
 
     const options = optionize<ParticleOptions, SelfOptions>()( {
