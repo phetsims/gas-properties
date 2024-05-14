@@ -45,7 +45,7 @@ type SelfOptions = {
 
 type IdealGasLawParticleSystemOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-// This should match IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA, but with JavaScript types.
+// This should match STATE_SCHEMA, but with JavaScript types.
 type IdealGasLawParticleSystemStateObject = {
   heavyParticles: HeavyParticleStateObject[];
   lightParticles: LightParticleStateObject[];
@@ -54,12 +54,23 @@ type IdealGasLawParticleSystemStateObject = {
 };
 
 // This should match IdealGasLawParticleSystemStateObject, but with IOTypes.
-const IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA = {
+const STATE_SCHEMA = {
   heavyParticles: ReferenceArrayIO( HeavyParticle.HeavyParticleIO ),
   lightParticles: ReferenceArrayIO( LightParticle.LightParticleIO ),
   heavyParticlesOutside: ReferenceArrayIO( HeavyParticle.HeavyParticleIO ),
   lightParticlesOutside: ReferenceArrayIO( LightParticle.LightParticleIO )
 };
+
+// This is the documentation that appears for IdealGasLawParticleSystemIO in Studio.
+// Each field in STATE_SCHEMA should be described, in the same order as STATE_SCHEMA.
+const IO_TYPE_DOCUMENTATION =
+  'PhET-iO Type for the particle system. Fields include:<br>' +
+  '<ul>' +
+  '<li>heavyParticles: heavy particles that are inside the container<br>' +
+  '<li>lightParticles: light particles that are inside the container<br>' +
+  '<li>heavyParticlesOutside: heavy particles that are outside the container<br>' +
+  '<li>lightParticlesOutside: light particles that are outside the container<br>' +
+  '</ul>';
 
 export default class IdealGasLawParticleSystem extends PhetioObject {
 
@@ -390,7 +401,8 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
    */
   private static readonly IdealGasLawParticleSystemIO = new IOType<IdealGasLawParticleSystem, IdealGasLawParticleSystemStateObject>( 'IdealGasLawParticleSystemIO', {
     valueType: IdealGasLawParticleSystem,
-    stateSchema: IDEAL_GAS_LAW_PARTICLE_SYSTEM_STATE_SCHEMA
+    stateSchema: STATE_SCHEMA,
+    documentation: IO_TYPE_DOCUMENTATION
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );

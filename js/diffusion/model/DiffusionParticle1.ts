@@ -55,7 +55,10 @@ export default class DiffusionParticle1 extends DiffusionParticle {
   public static readonly DiffusionParticle1IO = new IOType<DiffusionParticle1, DiffusionParticle1StateObject>( 'DiffusionParticle1IO', {
     valueType: DiffusionParticle1,
     stateSchema: DiffusionParticle1.STATE_SCHEMA,
-    documentation: DiffusionParticle1.STATE_SCHEMA_FIELDS_DOCUMENTATION,
+    documentation: 'PhET-iO Type for particles referred to as "type 1". ' +
+                   'The settings for these particles appear in the left column of the control panel.<br>' +
+                   '<br>' +
+                   DiffusionParticle1.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
     fromStateObject: DiffusionParticle1.fromStateObject
   } );

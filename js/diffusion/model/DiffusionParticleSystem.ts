@@ -39,17 +39,26 @@ const CENTER_OF_MASS_PROPERTY_OPTIONS = {
   phetioReadOnly: true // derived from the state of the particle system
 };
 
-// This should match DIFFUSION_PARTICLE_SYSTEM_SCHEMA, but with JavaScript types.
+// This should match STATE_SCHEMA, but with JavaScript types.
 type DiffusionParticleSystemStateObject = {
   particles1: DiffusionParticle1StateObject[];
   particles2: DiffusionParticle2StateObject[];
 };
 
 // This should match DiffusionParticleSystemStateObject, but with IOTypes.
-const DIFFUSION_PARTICLE_SYSTEM_SCHEMA = {
+const STATE_SCHEMA = {
   particles1: ReferenceArrayIO( DiffusionParticle1.DiffusionParticle1IO ),
   particles2: ReferenceArrayIO( DiffusionParticle2.DiffusionParticle2IO )
 };
+
+// This is the documentation that appears for DiffusionParticleSystemIO in Studio.
+// Each field in STATE_SCHEMA should be described, in the same order as STATE_SCHEMA.
+const IO_TYPE_DOCUMENTATION =
+  'PhET-iO Type for the particle system. Fields include:<br>' +
+  '<ul>' +
+  '<li>particles1: particles of type 1 that are inside the container<br>' +
+  '<li>particles2: particles of type 2 that are inside the container<br>' +
+  '</ul>';
 
 // Options to createParticle functions
 type CreateParticleOptions = PickRequired<ParticleOptions, 'mass' | 'radius'>;
@@ -257,7 +266,8 @@ export default class DiffusionParticleSystem extends PhetioObject {
    */
   private static readonly DiffusionParticleSystemIO = new IOType<DiffusionParticleSystem, DiffusionParticleSystemStateObject>( 'DiffusionParticleSystemIO', {
     valueType: DiffusionParticleSystem,
-    stateSchema: DIFFUSION_PARTICLE_SYSTEM_SCHEMA
+    stateSchema: STATE_SCHEMA,
+    documentation: IO_TYPE_DOCUMENTATION
     // toStateObject: Use the default, which is derived from stateSchema.
     // applyState: Use the default, which is derived from stateSchema.
   } );
