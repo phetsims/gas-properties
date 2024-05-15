@@ -31,9 +31,10 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ParticleFlowRateModel from './ParticleFlowRateModel.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
+import { Units } from '../../../../axon/js/units.js';
 
 const CENTER_OF_MASS_PROPERTY_OPTIONS = {
-  units: 'pm',
+  units: 'pm' as Units,
   valueType: [ 'number', null ],
   phetioValueType: NullableIO( NumberIO ),
   phetioReadOnly: true // derived from the state of the particle system
