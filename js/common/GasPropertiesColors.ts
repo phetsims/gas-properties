@@ -217,6 +217,11 @@ const GasPropertiesColors = {
   // eraser button that is used to clear particles from the container
   eraserButtonColorProperty: new ProfileColorProperty( gasProperties, 'eraserButtonColor', {
     default: 'rgb( 220, 220, 220 )'
+  } ),
+
+  // vector for indicating that the container's left wall is doing work
+  workVectorColorProperty: new ProfileColorProperty( gasProperties, 'workVectorColor', {
+    default: 'rgb( 70, 205, 85 )'
   } )
 };
 

@@ -22,8 +22,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-// Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
-const WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
+const NUMBER_OF_DX_SAMPLES = 50;
 
 type SelfOptions = {
   leftWallDoesWork?: boolean;  // true if the left wall does work on particles, as in the Explore screen
@@ -34,6 +33,12 @@ export type IdealGasLawContainerOptions = SelfOptions & WithRequired<BaseContain
 export default class IdealGasLawContainer extends BaseContainer {
 
   public readonly leftWallDoesWork: boolean;
+
+  // We will not serialize these sample arrays. It's not important that the running average is stateful, and it will
+  // self-correct after NUMBER_OF_DX_SAMPLES.
+  private readonly dxSamples: number[]; // changes in the left wall's x-coordinate
+  private readonly dtSamples: number[]; // dt values for each sample in dxSamples
+
   public readonly lidIsOnProperty: Property<boolean>; // whether the lid is on the container
   public readonly lidThickness: number; // lid thickness, in pm
 
@@ -59,6 +64,14 @@ export default class IdealGasLawContainer extends BaseContainer {
   // Is the lid open?
   public readonly lidIsOpenProperty: TReadOnlyProperty<boolean>;
 
+  // Running average of the velocity x-component for the left (movable) wall.
+  // See https://github.com/phetsims/gas-properties/issues/220
+  public readonly leftWallAverageVelocityXProperty: TReadOnlyProperty<number>;
+  public readonly _leftWallAverageVelocityXProperty: NumberProperty;
+
+  // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
+  public static readonly WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
+
   public constructor( providedOptions: IdealGasLawContainerOptions ) {
 
     const options = optionize<IdealGasLawContainerOptions, SelfOptions, BaseContainerOptions>()( {
@@ -70,6 +83,8 @@ export default class IdealGasLawContainer extends BaseContainer {
     super( options );
 
     this.leftWallDoesWork = options.leftWallDoesWork;
+    this.dxSamples = [];
+    this.dtSamples = [];
 
     this.lidIsOnProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'lidIsOnProperty' ),
@@ -125,6 +140,13 @@ export default class IdealGasLawContainer extends BaseContainer {
         phetioValueType: BooleanIO,
         phetioDocumentation: 'Whether the container\'s lid is open.'
       } );
+
+    this._leftWallAverageVelocityXProperty = new NumberProperty( 0, {
+      tandem: options.tandem.createTandem( 'leftWallAverageVelocityXProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
+    } );
+    this.leftWallAverageVelocityXProperty = this._leftWallAverageVelocityXProperty;
   }
 
   public override reset(): void {
@@ -133,6 +155,9 @@ export default class IdealGasLawContainer extends BaseContainer {
     this.lidWidthProperty.reset();
     this.desiredWidthProperty.reset();
     this.previousLeftProperty.reset();
+    this.dxSamples.length = 0;
+    this.dtSamples.length = 0;
+    this._leftWallAverageVelocityXProperty.reset();
   }
 
   /**
@@ -154,7 +179,7 @@ export default class IdealGasLawContainer extends BaseContainer {
       // See https://github.com/phetsims/gas-properties/issues/90.
       if ( this.leftWallDoesWork ) {
 
-        const widthStep = dt * WALL_SPEED_LIMIT;
+        const widthStep = dt * IdealGasLawContainer.WALL_SPEED_LIMIT;
 
         if ( widthStep < Math.abs( widthDifference ) ) {
           if ( widthDifference > 0 ) {
@@ -172,8 +197,38 @@ export default class IdealGasLawContainer extends BaseContainer {
     // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
     // velocity is irrelevant and should remain set to zero, so that it doesn't contribute to collision detection.
     if ( this.leftWallDoesWork ) {
-      this.setLeftWallVelocityX( ( this.left - this.previousLeftProperty.value ) / dt );
+
+      const dx = ( this.left - this.previousLeftProperty.value );
+      const velocityX = dx / dt;
+
+      this.setLeftWallVelocityX( velocityX );
       this.previousLeftProperty.value = this.left;
+
+      if ( dx === 0 && this.dxSamples.length > 0 && this.dxSamples[ this.dxSamples.length - 1 ] === 0 ) {
+
+        // The wall has not moved for 2 consecutive samples, so immediately set the running average to zero.
+        this.dxSamples.length = 0;
+        this.dtSamples.length = 0;
+        this._leftWallAverageVelocityXProperty.value = 0;
+      }
+      else {
+
+        // Process the current sample.
+        this.dxSamples.push( dx );
+        this.dtSamples.push( dt );
+
+        // Drop the oldest sample.
+        if ( this.dxSamples.length > NUMBER_OF_DX_SAMPLES ) {
+          this.dxSamples.shift();
+          this.dtSamples.shift();
+        }
+        assert && assert( this.dxSamples.length === this.dtSamples.length, 'Sample arrays should have the same length.' );
+
+        // Update the running average.
+        const dxAverage = _.sum( this.dxSamples ) / this.dxSamples.length;
+        const dtAverage = _.sum( this.dtSamples ) / this.dtSamples.length;
+        this._leftWallAverageVelocityXProperty.value = dxAverage / dtAverage;
+      }
     }
     else {
       assert && assert( this.getLeftWallVelocityX() === 0, 'wall velocity should be zero' );

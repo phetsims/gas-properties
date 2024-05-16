@@ -155,6 +155,8 @@ export default class BaseContainer extends PhetioObject {
 
   public get top(): number { return this.bounds.maxY; }
 
+  public get centerY(): number { return this.bounds.centerY; }
+
   /**
    * Sets the velocity x-component of the left wall, in pm/ps.
    */

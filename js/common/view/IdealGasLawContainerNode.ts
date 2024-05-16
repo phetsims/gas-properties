@@ -31,6 +31,7 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 
 const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
@@ -132,6 +133,32 @@ export default class IdealGasLawContainerNode extends Node {
     const lidHandleNode = lidNode.handleNode;
 
     options.children = [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ];
+
+    // Add a vector representation to indicates that the left wall does work.
+    // See https://github.com/phetsims/gas-properties/issues/220.
+    if ( container.leftWallDoesWork ) {
+
+      const arrowNode = new ArrowNode( 0, 0, 100, 0, {
+        headWidth: 30,
+        headHeight: 20,
+        tailWidth: 10,
+        fill: GasPropertiesColors.workVectorColorProperty
+      } );
+      options.children.push( arrowNode );
+
+      // Length of the arrow is linearly proportional to the average velocity.
+      container.leftWallAverageVelocityXProperty.link( velocityX => {
+        arrowNode.visible = ( velocityX !== 0 );
+        const length = Utils.linear( 0, IdealGasLawContainer.WALL_SPEED_LIMIT, 35, 100, Math.abs( velocityX ) );
+        arrowNode.setTip( length * Math.sign( velocityX ), 0 );
+      } );
+
+      // Keep the arrow anchored near the resize handle.
+      Multilink.multilink( [ container.widthProperty, arrowNode.localBoundsProperty ], () => {
+        arrowNode.left = modelViewTransform.modelToViewX( container.left );
+        arrowNode.centerY = modelViewTransform.modelToViewY( container.centerY );
+      } );
+    }
 
     super( options );
 
