@@ -46,11 +46,11 @@ export default class BaseContainer extends PhetioObject {
   // maximum inside bounds, in pm. Used for canvasBounds for the particle system inside the container.
   public readonly maxBounds: Bounds2;
 
-  // Speed of the left (movable) wall, pm/ps. Since the wall only moves horizontally, velocity is all x-component, and
-  // we do not need a velocity vector. This quantity does not need to be PhET-iO stateful because it is recomputed on
-  // each call to step (for containers where the left wall does work), then used by CollisionDetector to do
-  // container-particle collisions.
-  private leftWallSpeed: number;
+  // Velocity x-component of the left (movable) wall, pm/ps. Since the wall only moves horizontally, velocity is all
+  // x-component, and we do not need a velocity vector. This quantity does not need to be PhET-iO stateful because it
+  // is recomputed on each call to step (for containers where the left wall does work), then used by CollisionDetector
+  // to do container-particle collisions.
+  private leftWallVelocityX: number;
 
   // Indicates whether the user is adjusting widthProperty. The width will also change automatically in
   // HoldConstant 'pressureV' mode. This is used to suppress model updates in the Ideal screen, when the user
@@ -113,7 +113,7 @@ export default class BaseContainer extends PhetioObject {
       this.position.x, this.position.y + this.height
     );
 
-    this.leftWallSpeed = 0;
+    this.leftWallVelocityX = 0;
 
     this.userIsAdjustingWidthProperty = new BooleanProperty( false, {
       tandem: this.isFixedWidth ? Tandem.OPT_OUT : options.tandem.createTandem( 'userIsAdjustingWidthProperty' ),
@@ -156,17 +156,17 @@ export default class BaseContainer extends PhetioObject {
   public get top(): number { return this.bounds.maxY; }
 
   /**
-   * Sets the speed of the left wall, in pm/ps.
+   * Sets the velocity x-component of the left wall, in pm/ps.
    */
-  public setLeftWallSpeed( speed: number ): void {
-    this.leftWallSpeed = speed;
+  public setLeftWallVelocityX( speed: number ): void {
+    this.leftWallVelocityX = speed;
   }
 
   /**
-   * Gets the speed of the left wall, in pm/ps.
+   * Gets the velocity x-component of the left wall, in pm/ps.
    */
-  public getLeftWallSpeed(): number {
-    return this.leftWallSpeed;
+  public getLeftWallVelocityX(): number {
+    return this.leftWallVelocityX;
   }
 
   /**
