@@ -150,7 +150,7 @@ export default class CollisionDetector {
     let numberOfParticleContainerCollisions = 0;
     for ( let i = this.particleArrays.length - 1; i >= 0; i-- ) {
       numberOfParticleContainerCollisions += CollisionDetector.doParticleContainerCollisions( this.particleArrays[ i ],
-        this.container.bounds, this.container.leftWallVelocity );
+        this.container.bounds, this.container.getLeftWallSpeed() );
     }
     return numberOfParticleContainerCollisions;
   }
@@ -160,10 +160,10 @@ export default class CollisionDetector {
    * its way to its current position.
    * @param particles
    * @param containerBounds
-   * @param leftWallVelocity - velocity of the container's left (movable) wall
+   * @param leftWallSpeed - speed of the container's left (movable) wall
    * @returns number of collisions
    */
-  protected static doParticleContainerCollisions( particles: Particle[], containerBounds: Bounds2, leftWallVelocity: Vector2 ): number {
+  protected static doParticleContainerCollisions( particles: Particle[], containerBounds: Bounds2, leftWallSpeed = 0 ): number {
 
     let numberOfCollisions = 0;
 
@@ -177,7 +177,7 @@ export default class CollisionDetector {
         particle.left = containerBounds.minX;
 
         // If the left wall is moving, it will do work.
-        particle.setVelocityXY( -( particle.vx - leftWallVelocity.x ), particle.vy );
+        particle.setVelocityXY( -( particle.vx - leftWallSpeed ), particle.vy );
         collided = true;
       }
       else if ( particle.right >= containerBounds.maxX ) {

@@ -172,12 +172,11 @@ export default class IdealGasLawContainer extends BaseContainer {
     // Compute the velocity of the left (movable) wall.  If the wall does not do work on particles, the wall
     // velocity is irrelevant and should remain set to zero, so that it doesn't contribute to collision detection.
     if ( this.leftWallDoesWork ) {
-      const velocityX = ( this.left - this.previousLeftProperty.value ) / dt;
-      this.leftWallVelocity.setXY( velocityX, 0 );
+      this.setLeftWallSpeed( ( this.left - this.previousLeftProperty.value ) / dt );
       this.previousLeftProperty.value = this.left;
     }
     else {
-      assert && assert( this.leftWallVelocity.magnitude === 0, 'wall velocity should be zero' );
+      assert && assert( this.getLeftWallSpeed() === 0, 'wall velocity should be zero' );
     }
   }
 

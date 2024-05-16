@@ -46,10 +46,11 @@ export default class BaseContainer extends PhetioObject {
   // maximum inside bounds, in pm. Used for canvasBounds for the particle system inside the container.
   public readonly maxBounds: Bounds2;
 
-  // Velocity of the left (movable) wall, pm/ps. This vector will be MUTATED! It does not need to be PhET-iO stateful
-  // because it is recomputed on each call to step (for containers where the left wall does work), then used by
-  // CollisionDetector to do container-particle collisions.
-  public readonly leftWallVelocity: Vector2;
+  // Speed of the left (movable) wall, pm/ps. Since the wall only moves horizontally, velocity is all x-component, and
+  // we do not need a velocity vector. This quantity does not need to be PhET-iO stateful because it is recomputed on
+  // each call to step (for containers where the left wall does work), then used by CollisionDetector to do
+  // container-particle collisions.
+  private leftWallSpeed: number;
 
   // Indicates whether the user is adjusting widthProperty. The width will also change automatically in
   // HoldConstant 'pressureV' mode. This is used to suppress model updates in the Ideal screen, when the user
@@ -112,7 +113,7 @@ export default class BaseContainer extends PhetioObject {
       this.position.x, this.position.y + this.height
     );
 
-    this.leftWallVelocity = new Vector2( 0, 0 );
+    this.leftWallSpeed = 0;
 
     this.userIsAdjustingWidthProperty = new BooleanProperty( false, {
       tandem: this.isFixedWidth ? Tandem.OPT_OUT : options.tandem.createTandem( 'userIsAdjustingWidthProperty' ),
@@ -153,6 +154,20 @@ export default class BaseContainer extends PhetioObject {
   public get bottom(): number { return this.bounds.minY; }
 
   public get top(): number { return this.bounds.maxY; }
+
+  /**
+   * Sets the speed of the left wall, in pm/ps.
+   */
+  public setLeftWallSpeed( speed: number ): void {
+    this.leftWallSpeed = speed;
+  }
+
+  /**
+   * Gets the speed of the left wall, in pm/ps.
+   */
+  public getLeftWallSpeed(): number {
+    return this.leftWallSpeed;
+  }
 
   /**
    * Determines whether the container fully contains a particle.
