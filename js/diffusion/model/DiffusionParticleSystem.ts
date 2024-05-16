@@ -36,6 +36,7 @@ const CENTER_OF_MASS_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm',
   valueType: [ 'number', null ],
   phetioValueType: NullableIO( NumberIO ),
+  phetioFeatured: true,
   phetioReadOnly: true // derived from the state of the particle system
 };
 
@@ -142,16 +143,12 @@ export default class DiffusionParticleSystem extends PhetioObject {
     this.centerOfMass1Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass1Property' ),
-        phetioReadOnly: true,
-        phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 1. This is the x offset from the center of the container.'
       } ) );
 
     this.centerOfMass2Property = new Property<number | null>( null,
       combineOptions<PropertyOptions<number | null>>( {}, CENTER_OF_MASS_PROPERTY_OPTIONS, {
         tandem: tandem.createTandem( 'centerOfMass2Property' ),
-        phetioReadOnly: true,
-        phetioFeatured: true,
         phetioDocumentation: 'Center of mass for particles of type 2. This is the x offset from the center of the container.'
       } ) );
 
