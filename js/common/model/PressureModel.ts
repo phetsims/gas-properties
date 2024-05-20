@@ -18,7 +18,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Range from '../../../../dot/js/Range.js';
-import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import { PressureUnits, PressureUnitsValues } from './PressureUnits.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -28,10 +27,6 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 
 // Maximum pressure, in kPa. When exceeded, the lid blows off of the container.
 const MAX_PRESSURE = GasPropertiesQueryParameters.maxPressure;
-
-const MIN_NOISE = 0; // minimum amount of noise, in kPa
-const MAX_NOISE = 50; // maximum amount of noise, in kPa
-assert && assert( MIN_NOISE < MAX_NOISE, 'MIN_NOISE must be < MAX_NOISE' );
 
 export default class PressureModel extends PhetioObject {
 
@@ -54,12 +49,6 @@ export default class PressureModel extends PhetioObject {
 
   // Pressure in atmospheres (atm), with optional noise added, used exclusively by the view.
   public readonly pressureAtmospheresNoiseProperty: TReadOnlyProperty<number>;
-
-  // amount of noise in kPa is inversely proportional to pressure, so more noise at lower pressure
-  private readonly pressureNoiseFunction: LinearFunction;
-
-  // map from temperature (K) to noise scale factor, so that noise falls off at low temperatures
-  private readonly scaleNoiseFunction: LinearFunction;
 
   // pressure units displayed by the pressure gauge
   public readonly unitsProperty: StringUnionProperty<PressureUnits>;
@@ -123,10 +112,6 @@ export default class PressureModel extends PhetioObject {
         phetioFeatured: true,
         phetioDocumentation: 'Pressure in atm, with optional noise added.'
       } );
-
-    this.pressureNoiseFunction = new LinearFunction( 0, this.pressureKilopascalsRange.max, MAX_NOISE, MIN_NOISE, true );
-
-    this.scaleNoiseFunction = new LinearFunction( 5, 50, 0, 1, true /* clamp */ );
 
     this.unitsProperty = new StringUnionProperty<PressureUnits>( 'atmospheres', {
       validValues: PressureUnitsValues,
@@ -215,19 +200,14 @@ export default class PressureModel extends PhetioObject {
       // Disable noise when pressure is held constant, or via global options.
       const noiseEnabled = ( !constantPressure && GasPropertiesPreferences.pressureNoiseProperty.value );
 
-      // Add noise (kPa) to the displayed value
+      // Add noise (kPa) to the displayed value. The amount of noise is proportional to pressure, so more noise at higher pressure.
+      // We do not clamp the noise because the reading of a real gauge could be negative if the pressure is low enough.
       let noise = 0;
       if ( noiseEnabled ) {
 
-        // compute noise
-        noise = this.pressureNoiseFunction.evaluate( this.pressureKilopascalsProperty.value ) *
-                this.scaleNoiseFunction.evaluate( this.temperatureProperty.value || 0 ) *
-                dotRandom.nextDouble();
-
-        // randomly apply a sign if doing so doesn't make the pressure become <= 0
-        if ( noise < this.pressureKilopascalsProperty.value ) {
-          noise *= ( dotRandom.nextBoolean() ? 1 : -1 );
-        }
+        // Use a Gaussian distribution to generate noise. The standard deviation is proportional to the pressure.
+        // The value of 0.05 is chosen to provide a reasonable amount of noise, based on the range of pressures in the simulation.
+        noise = dotRandom.nextGaussian() * this.pressureKilopascalsProperty.value * 0.05;
       }
 
       this.pressureKilopascalsNoiseProperty.value = this.pressureKilopascalsProperty.value + noise;
