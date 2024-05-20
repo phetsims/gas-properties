@@ -20,8 +20,8 @@ import WallVelocityCheckbox from './WallVelocityCheckbox.js';
 
 export default class ExploreToolsPanel extends Panel {
 
-  public constructor( widthVisibleProperty: Property<boolean>,
-                      wallVelocityVisibleProperty: Property<boolean>,
+  public constructor( wallVelocityVisibleProperty: Property<boolean>,
+                      widthVisibleProperty: Property<boolean>,
                       stopwatchVisibleProperty: Property<boolean>,
                       collisionCounterVisibleProperty: Property<boolean>,
                       tandem: Tandem ) {

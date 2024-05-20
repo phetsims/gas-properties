@@ -52,9 +52,12 @@ import PressureGaugeNode from './PressureGaugeNode.js';
 import RegionsNode from './RegionsNode.js';
 import ReturnLidButton from './ReturnLidButton.js';
 import BicyclePumpControl from './BicyclePumpControl.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = {
   resizeGripColor?: TColor;
+  wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
 };
 
 export type IdealGasLawScreenViewOptions = SelfOptions & BaseScreenViewOptions;
@@ -83,7 +86,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
                          widthVisibleProperty: Property<boolean>,
                          providedOptions?: IdealGasLawScreenViewOptions ) {
 
-    const options = optionize<IdealGasLawScreenViewOptions, SelfOptions, BaseScreenViewOptions>()( {
+    const options = optionize<IdealGasLawScreenViewOptions, StrictOmit<SelfOptions, 'wallVelocityVisibleProperty'>, BaseScreenViewOptions>()( {
 
       // SelfOptions
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty
@@ -155,6 +158,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       model.holdConstantProperty, this.visibleBoundsProperty, {
         resizeGripColor: options.resizeGripColor,
         resizeHandleIsPressedListener: resizeHandleIsPressedListener,
+        wallVelocityVisibleProperty: options.wallVelocityVisibleProperty,
         tandem: options.tandem.createTandem( 'containerNode' )
       } );
 

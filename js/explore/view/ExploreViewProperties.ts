@@ -19,7 +19,7 @@ export default class ExploreViewProperties extends IdealGasLawViewProperties {
   public constructor( tandem: Tandem ) {
     super( tandem );
 
-    this.wallVelocityVisibleProperty = new BooleanProperty( false, {
+    this.wallVelocityVisibleProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'wallVelocityVisibleProperty' ),
       phetioFeatured: true,
       phetioDocumentation: 'Whether the velocity vector is visible when moving the container\'s left wall.'

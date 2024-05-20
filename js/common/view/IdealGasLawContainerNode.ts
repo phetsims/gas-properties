@@ -31,8 +31,8 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import WallVelocityVectorNode from './WallVelocityVectorNode.js';
 
 const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
@@ -42,6 +42,7 @@ type SelfOptions = {
   resizeGripColor?: TColor; // color of resize handle's grip
   lidGripColor?: TColor; // color of the lid handle's grip
   resizeHandleIsPressedListener?: ( isPressed: boolean ) => void;
+  wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
 };
 
 type IdealGasLawContainerNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
@@ -58,7 +59,7 @@ export default class IdealGasLawContainerNode extends Node {
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: IdealGasLawContainerNodeOptions ) {
 
-    const options = optionize<IdealGasLawContainerNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<IdealGasLawContainerNodeOptions, StrictOmit<SelfOptions, 'wallVelocityVisibleProperty'>, NodeOptions>()( {
 
       // SelfOptions
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // color of resize handle's grip
@@ -137,21 +138,16 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Add a velocity vector when the left wall does work. See https://github.com/phetsims/gas-properties/issues/220.
     if ( container.leftWallDoesWork ) {
+      assert && assert( options.wallVelocityVisibleProperty );
 
-      const arrowNode = new ArrowNode( 0, 0, 100, 0, GasPropertiesConstants.VELOCITY_ARROW_NODE_OPTIONS );
-      options.children.unshift( arrowNode ); // behind the other parts
+      const velocityVectorNode = new WallVelocityVectorNode( container.leftWallAverageVelocityXProperty,
+        options.wallVelocityVisibleProperty! );
+      options.children.unshift( velocityVectorNode ); // behind the other parts
 
-      // Length of the arrow is linearly proportional to the average velocity.
-      container.leftWallAverageVelocityXProperty.link( velocityX => {
-        arrowNode.visible = ( velocityX !== 0 );
-        const length = Utils.linear( 0, IdealGasLawContainer.WALL_SPEED_LIMIT, 35, 100, Math.abs( velocityX ) );
-        arrowNode.setTip( length * Math.sign( velocityX ), 0 );
-      } );
-
-      // Anchor the arrow above the resize handle.
+      // Anchor the vector above the resize handle.
       container.widthProperty.link( () => {
-        arrowNode.x = modelViewTransform.modelToViewX( container.left );
-        arrowNode.y = modelViewTransform.modelToViewY( container.centerY ) - resizeHandleNode.height;
+        velocityVectorNode.x = modelViewTransform.modelToViewX( container.left );
+        velocityVectorNode.y = modelViewTransform.modelToViewY( container.centerY ) - resizeHandleNode.height;
       } );
     }
 

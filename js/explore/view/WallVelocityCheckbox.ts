@@ -20,7 +20,7 @@ type WallVelocityCheckboxOptions = SelfOptions & StrictOmit<GasPropertiesCheckbo
 
 export default class WallVelocityCheckbox extends GasPropertiesCheckbox {
 
-  public constructor( widthVisibleProperty: Property<boolean>, providedOptions: WallVelocityCheckboxOptions ) {
+  public constructor( wallVelocityVisibleProperty: Property<boolean>, providedOptions: WallVelocityCheckboxOptions ) {
 
     const options = optionize<WallVelocityCheckboxOptions, SelfOptions, GasPropertiesCheckboxOptions>()( {
 
@@ -29,7 +29,7 @@ export default class WallVelocityCheckbox extends GasPropertiesCheckbox {
       icon: GasPropertiesIconFactory.createWallVelocityIcon()
     }, providedOptions );
 
-    super( widthVisibleProperty, options );
+    super( wallVelocityVisibleProperty, options );
   }
 }
 
