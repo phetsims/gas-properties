@@ -16,10 +16,12 @@ import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import WallVelocityCheckbox from './WallVelocityCheckbox.js';
 
 export default class ExploreToolsPanel extends Panel {
 
   public constructor( widthVisibleProperty: Property<boolean>,
+                      wallVelocityVisibleProperty: Property<boolean>,
                       stopwatchVisibleProperty: Property<boolean>,
                       collisionCounterVisibleProperty: Property<boolean>,
                       tandem: Tandem ) {
@@ -34,6 +36,10 @@ export default class ExploreToolsPanel extends Panel {
       align: 'left',
       spacing: 12,
       children: [
+        new WallVelocityCheckbox( wallVelocityVisibleProperty, {
+          textMaxWidth: 125,
+          tandem: tandem.createTandem( 'wallVelocityCheckbox' )
+        } ),
         new WidthCheckbox( widthVisibleProperty, {
           textMaxWidth: 110,
           tandem: tandem.createTandem( 'widthCheckbox' )

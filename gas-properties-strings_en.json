@@ -41,6 +41,9 @@
   "light": {
     "value": "Light"
   },
+  "wallVelocity": {
+    "value": "Wall Velocity"
+  },
   "width": {
     "value": "Width"
   },

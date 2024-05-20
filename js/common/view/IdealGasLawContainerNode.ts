@@ -32,6 +32,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
 const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
@@ -137,12 +138,7 @@ export default class IdealGasLawContainerNode extends Node {
     // Add a velocity vector when the left wall does work. See https://github.com/phetsims/gas-properties/issues/220.
     if ( container.leftWallDoesWork ) {
 
-      const arrowNode = new ArrowNode( 0, 0, 100, 0, {
-        headWidth: 30,
-        headHeight: 20,
-        tailWidth: 10,
-        fill: GasPropertiesColors.velocityVectorColorProperty
-      } );
+      const arrowNode = new ArrowNode( 0, 0, 100, 0, GasPropertiesConstants.VELOCITY_ARROW_NODE_OPTIONS );
       options.children.unshift( arrowNode ); // behind the other parts
 
       // Length of the arrow is linearly proportional to the average velocity.

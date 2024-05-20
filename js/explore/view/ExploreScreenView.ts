@@ -36,7 +36,8 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     const panelsTandem = tandem.createTandem( 'panels' );
 
     // Panel at upper right
-    const toolsPanel = new ExploreToolsPanel( viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
+    const toolsPanel = new ExploreToolsPanel( viewProperties.wallVelocityVisibleProperty,
+      viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
       collisionCounter.visibleProperty, panelsTandem.createTandem( 'toolsPanel' ) );
 
     // Particles accordion box

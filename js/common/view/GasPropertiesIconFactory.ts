@@ -15,7 +15,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenIcon from '../../../../joist/js/ScreenIcon.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
 import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
 import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
@@ -32,6 +32,8 @@ import Particle from '../model/Particle.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 import ParticleNode, { ParticleNodeOptions } from './ParticleNode.js';
 import PressureGaugeNode from './PressureGaugeNode.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 const SCREEN_ICONS_TRANSFORM = ModelViewTransform2.createIdentity();
 
@@ -424,6 +426,16 @@ const GasPropertiesIconFactory = {
       stroke: GasPropertiesColors.scaleColorProperty,
       lineWidth: 1
     } );
+  },
+
+  /**
+   * Creates the icons used on the 'Wall Velocity' checkbox.
+   */
+  createWallVelocityIcon(): Node {
+    return new ArrowNode( 0, 0, 50, 0,
+      combineOptions<ArrowNodeOptions>( {}, GasPropertiesConstants.VELOCITY_ARROW_NODE_OPTIONS, {
+        scale: 0.6
+      } ) );
   }
 };
 

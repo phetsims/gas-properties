@@ -170,7 +170,15 @@ const GasPropertiesConstants = {
   PANELS_Y_SPACING: 8,
 
   // Defaults for all Screens.
-  SCREEN_OPTIONS: SCREEN_OPTIONS
+  SCREEN_OPTIONS: SCREEN_OPTIONS,
+
+  // Options for the ArrowNode used to indicate the velocity of the container's left wall
+  VELOCITY_ARROW_NODE_OPTIONS: {
+    headWidth: 30,
+    headHeight: 20,
+    tailWidth: 10,
+    fill: GasPropertiesColors.velocityVectorColorProperty
+  }
 };
 
 gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );

@@ -29,6 +29,7 @@ type StringsType = {
   'particlesStringProperty': LocalizedStringProperty;
   'heavyStringProperty': LocalizedStringProperty;
   'lightStringProperty': LocalizedStringProperty;
+  'wallVelocityStringProperty': LocalizedStringProperty;
   'widthStringProperty': LocalizedStringProperty;
   'stopwatchStringProperty': LocalizedStringProperty;
   'collisionCounterStringProperty': LocalizedStringProperty;
