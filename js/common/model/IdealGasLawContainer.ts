@@ -132,9 +132,9 @@ export default class IdealGasLawContainer extends BaseContainer {
     } );
 
     this.lidIsOpenProperty = new DerivedProperty(
-      // this.widthProperty is used by this.getMaxLidWidth()
-      [ this.lidIsOnProperty, this.lidWidthProperty, this.widthProperty ],
-      ( lidIsOn, lidWidth, containerWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() ), {
+      [ this.lidIsOnProperty, this.lidWidthProperty ],
+      ( lidIsOn, lidWidth ) => !lidIsOn || ( lidWidth < this.getMaxLidWidth() ), {
+        strictAxonDependencies: false, // See https://github.com/phetsims/gas-properties/issues/246
         tandem: options.tandem.createTandem( 'lidIsOpenProperty' ),
         phetioFeatured: true,
         phetioValueType: BooleanIO,
