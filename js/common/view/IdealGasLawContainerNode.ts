@@ -134,8 +134,7 @@ export default class IdealGasLawContainerNode extends Node {
 
     options.children = [ previousBoundsNode, resizeHandleNode, wallsNode, lidNode ];
 
-    // Add a vector representation to indicates that the left wall does work.
-    // See https://github.com/phetsims/gas-properties/issues/220.
+    // Add a velocity vector when the left wall does work. See https://github.com/phetsims/gas-properties/issues/220.
     if ( container.leftWallDoesWork ) {
 
       const arrowNode = new ArrowNode( 0, 0, 100, 0, {
@@ -144,7 +143,7 @@ export default class IdealGasLawContainerNode extends Node {
         tailWidth: 10,
         fill: GasPropertiesColors.velocityVectorColorProperty
       } );
-      options.children.push( arrowNode );
+      options.children.unshift( arrowNode ); // behind the other parts
 
       // Length of the arrow is linearly proportional to the average velocity.
       container.leftWallAverageVelocityXProperty.link( velocityX => {
@@ -153,10 +152,10 @@ export default class IdealGasLawContainerNode extends Node {
         arrowNode.setTip( length * Math.sign( velocityX ), 0 );
       } );
 
-      // Keep the arrow anchored near the resize handle.
-      Multilink.multilink( [ container.widthProperty, arrowNode.localBoundsProperty ], () => {
-        arrowNode.left = modelViewTransform.modelToViewX( container.left );
-        arrowNode.centerY = modelViewTransform.modelToViewY( container.centerY );
+      // Anchor the arrow above the resize handle.
+      container.widthProperty.link( () => {
+        arrowNode.x = modelViewTransform.modelToViewX( container.left );
+        arrowNode.y = modelViewTransform.modelToViewY( container.centerY ) - resizeHandleNode.height;
       } );
     }
 
