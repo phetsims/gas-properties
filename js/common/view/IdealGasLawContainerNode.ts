@@ -142,7 +142,7 @@ export default class IdealGasLawContainerNode extends Node {
         headWidth: 30,
         headHeight: 20,
         tailWidth: 10,
-        fill: GasPropertiesColors.workVectorColorProperty
+        fill: GasPropertiesColors.velocityVectorColorProperty
       } );
       options.children.push( arrowNode );
 
