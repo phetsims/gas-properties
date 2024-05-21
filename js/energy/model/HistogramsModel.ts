@@ -273,8 +273,8 @@ export default class HistogramsModel extends PhetioObject {
   }
 
   /**
-   * Takes a data sample for both histograms. Rather than keeping these samples for later process, we adjust the
-   * cumulative bin counts immediately, then discard the samples.  This greatly reduces the size of the data serialized
+   * Takes a data sample for both histograms. Rather than keeping these samples for later processing, we adjust the
+   * cumulative bin counts immediately, then discard the samples. This greatly reduces the size of the data serialized
    * by HistogramsModelIO. See https://github.com/phetsims/gas-properties/issues/235.
    */
   private sample(): void {
