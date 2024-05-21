@@ -169,6 +169,7 @@ export default class HistogramsModel extends PhetioObject {
         phetioDocumentation: `Bin counts for the speed of light particles (time averaged). ${speedBinsDocumentation}`
       } ) );
 
+    // While this could be a DerivedProperty, it's more efficient to avoid intermediate states by setting it in update().
     this.totalSpeedBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'totalSpeedBinCountsProperty' ),
@@ -196,6 +197,7 @@ export default class HistogramsModel extends PhetioObject {
         phetioDocumentation: `Bin counts for the kinetic energy of light particles (time averaged). ${kineticEnergyBinsDocumentation}`
       } ) );
 
+    // While this could be a DerivedProperty, it's more efficient to avoid intermediate states by setting it in update().
     this.totalKineticEnergyBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'totalKineticEnergyBinCountsProperty' ),
@@ -235,6 +237,12 @@ export default class HistogramsModel extends PhetioObject {
 
   public reset(): void {
     this.clearSamples();
+    this.heavySpeedBinCountsProperty.reset();
+    this.lightSpeedBinCountsProperty.reset();
+    this.totalSpeedBinCountsProperty.reset();
+    this.heavyKineticEnergyBinCountsProperty.reset();
+    this.lightKineticEnergyBinCountsProperty.reset();
+    this.totalKineticEnergyBinCountsProperty.reset();
     this.zoomLevelIndexProperty.reset();
   }
 
