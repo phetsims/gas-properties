@@ -11,7 +11,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Range from '../../../../dot/js/Range.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -24,11 +23,20 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { TemperatureUnits, TemperatureUnitsValues } from './TemperatureUnits.js';
+import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 
 const DEFAULT_TEMPERATURE_KELVIN_RANGE = new Range( 0, 1000 ); // in K
 
-// temperature used to compute the initial speed for particles, in K
-const INITIAL_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, 300 );
+// Temperature (in K) used to compute the initial speed for particles when the container is empty and the user
+// has not set a specific injection temperature.
+const DEFAULT_INITIAL_TEMPERATURE = 300;
+
+// Range of injectionTemperatureProperty.
+const INJECTION_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, DEFAULT_INITIAL_TEMPERATURE );
+
+assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( DEFAULT_INITIAL_TEMPERATURE ) );
+assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( INJECTION_TEMPERATURE_RANGE.min ) );
+assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( INJECTION_TEMPERATURE_RANGE.max ) );
 
 type SelfOptions = {
 
@@ -119,8 +127,8 @@ export default class TemperatureModel extends PhetioObject {
       phetioDocumentation: 'Determines whether the user can set the injection temperature.'
     } );
 
-    this.injectionTemperatureProperty = new NumberProperty( INITIAL_TEMPERATURE_RANGE.defaultValue, {
-      range: INITIAL_TEMPERATURE_RANGE,
+    this.injectionTemperatureProperty = new NumberProperty( DEFAULT_INITIAL_TEMPERATURE, {
+      range: INJECTION_TEMPERATURE_RANGE,
       units: 'K',
       tandem: options.hasInjectionTemperatureFeature ?
               options.tandem.createTandem( 'injectionTemperatureProperty' ) : Tandem.OPT_OUT,
@@ -162,7 +170,7 @@ export default class TemperatureModel extends PhetioObject {
     else {
 
       // Default for empty container
-      initialTemperature = INITIAL_TEMPERATURE_RANGE.defaultValue;
+      initialTemperature = DEFAULT_INITIAL_TEMPERATURE;
     }
 
     assert && assert( initialTemperature >= 0, `bad initialTemperature: ${initialTemperature}` );
