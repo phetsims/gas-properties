@@ -205,9 +205,9 @@ export default class PressureModel extends PhetioObject {
       let noise = 0;
       if ( noiseEnabled ) {
 
-        // Use a Gaussian distribution to generate noise. The standard deviation is proportional to the pressure.
-        // The value of 0.05 is chosen to provide a reasonable amount of noise, based on the range of pressures in the simulation.
-        noise = dotRandom.nextGaussian() * this.pressureKilopascalsProperty.value * 0.05;
+        // Use a Gaussian distribution to generate noise. The standard deviation is determined by the precision of the sensor.
+        // The value of 100 is chosen to provide a reasonable amount of noise, based on the range of pressures in the simulation.
+        noise = dotRandom.nextGaussian() * 100;
       }
 
       this.pressureKilopascalsNoiseProperty.value = this.pressureKilopascalsProperty.value + noise;
