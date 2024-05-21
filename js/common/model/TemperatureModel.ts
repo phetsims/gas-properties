@@ -23,7 +23,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { TemperatureUnits, TemperatureUnitsValues } from './TemperatureUnits.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 
 const DEFAULT_TEMPERATURE_KELVIN_RANGE = new Range( 0, 1000 ); // in K
 
@@ -32,7 +31,8 @@ const DEFAULT_TEMPERATURE_KELVIN_RANGE = new Range( 0, 1000 ); // in K
 const DEFAULT_INITIAL_TEMPERATURE = 300;
 
 // Range of injectionTemperatureProperty.
-const INJECTION_TEMPERATURE_RANGE = new RangeWithValue( 50, 1000, DEFAULT_INITIAL_TEMPERATURE );
+const INJECTION_TEMPERATURE_RANGE = new Range( 50, 1000 );
+assert && assert( INJECTION_TEMPERATURE_RANGE.contains( DEFAULT_INITIAL_TEMPERATURE ) );
 
 assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( DEFAULT_INITIAL_TEMPERATURE ) );
 assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( INJECTION_TEMPERATURE_RANGE.min ) );
