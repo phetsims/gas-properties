@@ -69,6 +69,9 @@ export default class IdealGasLawContainer extends BaseContainer {
   public readonly leftWallAverageVelocityXProperty: TReadOnlyProperty<number>;
   public readonly _leftWallAverageVelocityXProperty: NumberProperty;
 
+  // Elapsed time since the wall moved, in ps.
+  private dtSinceWallMoved = 0;
+
   // Speed limit for the container's left movable wall, in pm/ps. Relevant when reducing the container size.
   public static readonly WALL_SPEED_LIMIT = GasPropertiesQueryParameters.wallSpeedLimit;
 
@@ -158,6 +161,7 @@ export default class IdealGasLawContainer extends BaseContainer {
     this.dxSamples.length = 0;
     this.dtSamples.length = 0;
     this._leftWallAverageVelocityXProperty.reset();
+    this.dtSinceWallMoved = 0;
   }
 
   /**
@@ -204,9 +208,17 @@ export default class IdealGasLawContainer extends BaseContainer {
       this.setLeftWallVelocityX( velocityX );
       this.previousLeftProperty.value = this.left;
 
-      if ( dx === 0 && this.dxSamples.length > 0 && this.dxSamples[ this.dxSamples.length - 1 ] === 0 ) {
+      if ( dx === 0 ) {
+        this.dtSinceWallMoved += dt;
+      }
+      else {
+        this.dtSinceWallMoved = 0;
+      }
 
-        // The wall has not moved for 2 consecutive samples, so immediately set the running average to zero.
+      // Tuned so that the vector behaves smoothly while dragging the resize handle, but disappears quickly after dragging ends.
+      if ( this.dtSinceWallMoved >= 0.5 ) {
+
+        // The wall has not moved for consecutive samples, so immediately set the running average to zero.
         this.dxSamples.length = 0;
         this.dtSamples.length = 0;
         this._leftWallAverageVelocityXProperty.value = 0;
