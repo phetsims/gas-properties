@@ -147,11 +147,9 @@ export default class ParticleFlowRateModel extends PhetioObject {
       'all arrays should have the same length' );
 
     // Update flow-rate Properties with an average of the current samples.
-    const leftAverage = _.sum( this.leftCounts ) / this.leftCounts.length;
-    const rightAverage = _.sum( this.rightCounts ) / this.rightCounts.length;
-    const dtAverage = _.sum( this.dts ) / this.dts.length;
-    this.leftFlowRateProperty.value = leftAverage / dtAverage;
-    this.rightFlowRateProperty.value = rightAverage / dtAverage;
+    const dtTotal = _.sum( this.dts );
+    this.leftFlowRateProperty.value = _.sum( this.leftCounts ) / dtTotal;
+    this.rightFlowRateProperty.value = _.sum( this.rightCounts ) / dtTotal;
   }
 
   /**
