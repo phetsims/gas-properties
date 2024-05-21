@@ -58,7 +58,7 @@ export default class HistogramsModel extends PhetioObject {
 
   private readonly particleSystem: IdealGasLawParticleSystem;
   private readonly isPlayingProperty: TReadOnlyProperty<boolean>;
-  private readonly samplePeriod: number;
+  private readonly samplePeriod: number; // data is collected and averaged over this period, in ps
 
   public readonly numberOfBins: number; // number of bins, common to both histograms
   public readonly speedBinWidth: number; // bin width for the Speed histogram, in pm/ps
@@ -107,23 +107,19 @@ export default class HistogramsModel extends PhetioObject {
     { yMax: 50, majorGridLineSpacing: 50, minorGridLineSpacing: 10 }
   ];
 
-  /**
-   * @param particleSystem
-   * @param isPlayingProperty
-   * @param samplePeriod - data is averaged over this period, in ps
-   * @param providedOptions
-   */
-  public constructor( particleSystem: IdealGasLawParticleSystem, isPlayingProperty: TReadOnlyProperty<boolean>,
-                      samplePeriod: number, providedOptions: HistogramsModelOptions ) {
+  public constructor( particleSystem: IdealGasLawParticleSystem,
+                      isPlayingProperty: TReadOnlyProperty<boolean>,
+                      samplePeriod: number,
+                      providedOptions: HistogramsModelOptions ) {
     assert && assert( samplePeriod > 0, `invalid samplePeriod: ${samplePeriod}` );
 
     const options = optionize<HistogramsModelOptions, SelfOptions, PhetioObjectOptions>()( {
-      
+
       // PhetioObjectOptions
       isDisposable: false,
       phetioType: HistogramsModel.HistogramsModelIO
     }, providedOptions );
-    
+
     super( options );
 
     this.particleSystem = particleSystem;
