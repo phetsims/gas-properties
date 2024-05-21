@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2022-2024, University of Colorado Boulder
 
 /**
  * WallVelocityCheckbox is a checkbox to show/hide the velocity vector for the container's left wall.

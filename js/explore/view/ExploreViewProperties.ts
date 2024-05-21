@@ -1,4 +1,4 @@
-// Copyright 2018-2022, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * ExploreViewProperties defines Properties that are specific to the view in the 'Explore' screen.
