@@ -34,10 +34,6 @@ const DEFAULT_INITIAL_TEMPERATURE = 300;
 const INJECTION_TEMPERATURE_RANGE = new Range( 50, 1000 );
 assert && assert( INJECTION_TEMPERATURE_RANGE.contains( DEFAULT_INITIAL_TEMPERATURE ) );
 
-assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( DEFAULT_INITIAL_TEMPERATURE ) );
-assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( INJECTION_TEMPERATURE_RANGE.min ) );
-assert && assert( DEFAULT_TEMPERATURE_KELVIN_RANGE.contains( INJECTION_TEMPERATURE_RANGE.max ) );
-
 type SelfOptions = {
 
   // Temperature range, in K.
@@ -85,6 +81,10 @@ export default class TemperatureModel extends PhetioObject {
       isDisposable: false,
       phetioState: false
     }, providedOptions );
+
+    assert && assert( options.temperatureKelvinRange.contains( DEFAULT_INITIAL_TEMPERATURE ) );
+    assert && assert( options.temperatureKelvinRange.contains( INJECTION_TEMPERATURE_RANGE.min ) );
+    assert && assert( options.temperatureKelvinRange.contains( INJECTION_TEMPERATURE_RANGE.max ) );
 
     super( options );
 
