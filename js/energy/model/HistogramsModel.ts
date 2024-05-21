@@ -308,13 +308,13 @@ export default class HistogramsModel extends PhetioObject {
       'numberOfSamples should be 1 if called while the sim is paused' );
 
     // average the Speed bin counts
-    this.heavySpeedBinCountsProperty.value = this.heavySpeedCumulativeBinCounts.map( count => count / this.numberOfBins );
-    this.lightSpeedBinCountsProperty.value = this.lightSpeedCumulativeBinCounts.map( count => count / this.numberOfBins );
+    this.heavySpeedBinCountsProperty.value = this.heavySpeedCumulativeBinCounts.map( count => count / this.numberOfSamples );
+    this.lightSpeedBinCountsProperty.value = this.lightSpeedCumulativeBinCounts.map( count => count / this.numberOfSamples );
     this.totalSpeedBinCountsProperty.value = sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
 
     // average the Kinetic Energy bin counts
-    this.heavyKineticEnergyBinCountsProperty.value = this.heavyKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfBins );
-    this.lightKineticEnergyBinCountsProperty.value = this.lightKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfBins );
+    this.heavyKineticEnergyBinCountsProperty.value = this.heavyKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfSamples );
+    this.lightKineticEnergyBinCountsProperty.value = this.lightKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfSamples );
     this.totalKineticEnergyBinCountsProperty.value = sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
 
     // Notify listeners that the bin counts have been updated.
