@@ -218,7 +218,7 @@ export default class IdealGasLawContainer extends BaseContainer {
       // Tuned so that the vector behaves smoothly while dragging the resize handle, but disappears quickly after dragging ends.
       if ( this.dtSinceWallMoved >= 0.5 ) {
 
-        // The wall has not moved for consecutive samples, so immediately set the running average to zero.
+        // The wall has not moved, so immediately set the running average to zero.
         this.dxSamples.length = 0;
         this.dtSamples.length = 0;
         this._leftWallAverageVelocityXProperty.value = 0;
