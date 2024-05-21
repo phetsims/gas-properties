@@ -20,7 +20,6 @@ import Particle from '../../common/model/Particle.js';
 import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import gasProperties from '../../gasProperties.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 
@@ -39,20 +38,20 @@ type HistogramsModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 type HistogramsModelStateObject = {
   dtAccumulator: number;
   numberOfSamples: number;
-  heavySpeedSamples: number[][];
-  lightSpeedSamples: number[][];
-  heavyKineticEnergySamples: number[][];
-  lightKineticEnergySamples: number[][];
+  heavySpeedCumulativeBinCounts: number[];
+  lightSpeedCumulativeBinCounts: number[];
+  heavyKineticEnergyCumulativeBinCounts: number[];
+  lightKineticEnergyCumulativeBinCounts: number[];
 };
 
 // This should match HistogramsModelStateObject, but with IOTypes.
 const STATE_SCHEMA = {
   dtAccumulator: NumberIO,
   numberOfSamples: NumberIO,
-  heavySpeedSamples: ReferenceArrayIO( ArrayIO( NumberIO ) ),
-  lightSpeedSamples: ReferenceArrayIO( ArrayIO( NumberIO ) ),
-  heavyKineticEnergySamples: ReferenceArrayIO( ArrayIO( NumberIO ) ),
-  lightKineticEnergySamples: ReferenceArrayIO( ArrayIO( NumberIO ) )
+  heavySpeedCumulativeBinCounts: ReferenceArrayIO( NumberIO ),
+  lightSpeedCumulativeBinCounts: ReferenceArrayIO( NumberIO ),
+  heavyKineticEnergyCumulativeBinCounts: ReferenceArrayIO( NumberIO ),
+  lightKineticEnergyCumulativeBinCounts: ReferenceArrayIO( NumberIO )
 };
 
 export default class HistogramsModel extends PhetioObject {
@@ -65,12 +64,20 @@ export default class HistogramsModel extends PhetioObject {
   public readonly speedBinWidth: number; // bin width for the Speed histogram, in pm/ps
   public readonly kineticEnergyBinWidth: number; // bin width for the Kinetic Energy histogram, in AMU * pm^2 / ps^2;
 
-  // Speed bin counts, in pm/ps
+  // Cumulative bin counts for Speed over samplePeriod, serialized by HistogramsModelIO.
+  private readonly heavySpeedCumulativeBinCounts: number[];
+  private readonly lightSpeedCumulativeBinCounts: number[];
+
+  // Cumulative bin counts for Kinetic Energy over samplePeriod, serialized by HistogramsModelIO.
+  private readonly heavyKineticEnergyCumulativeBinCounts: number[];
+  private readonly lightKineticEnergyCumulativeBinCounts: number[];
+
+  // Averaged bin counts for Speed, in pm/ps
   public readonly heavySpeedBinCountsProperty: Property<number[]>;
   public readonly lightSpeedBinCountsProperty: Property<number[]>;
   public readonly totalSpeedBinCountsProperty: Property<number[]>;
 
-  // Kinetic Energy bin counts, in AMU * pm^2 / ps^2
+  // Averaged bin counts for Kinetic Energy, in AMU * pm^2 / ps^2
   public readonly heavyKineticEnergyBinCountsProperty: Property<number[]>;
   public readonly lightKineticEnergyBinCountsProperty: Property<number[]>;
   public readonly totalKineticEnergyBinCountsProperty: Property<number[]>;
@@ -78,16 +85,8 @@ export default class HistogramsModel extends PhetioObject {
   // Index into ZOOM_LEVELS, shared by all histograms.
   public readonly zoomLevelIndexProperty: NumberProperty;
 
-  // emits when the bin counts have been updated
+  // emits when the averaged bin counts have been updated
   public readonly binCountsUpdatedEmitter: Emitter;
-
-  // Speed samples, serialized by HistogramsModelIO.
-  private readonly heavySpeedSamples: number[][]; // Speed samples for heavy particles
-  private readonly lightSpeedSamples: number[][]; // Speed samples for light particles
-
-  // Kinetic Energy samples, serialized by HistogramsModelIO.
-  private readonly heavyKineticEnergySamples: number[][]; // Kinetic Energy samples for heavy particles
-  private readonly lightKineticEnergySamples: number[][]; // Kinetic Energy samples for light particles
 
   // The amount of time that has elapsed in the current sample period.
   private dtAccumulator: number;
@@ -136,11 +135,14 @@ export default class HistogramsModel extends PhetioObject {
     this.speedBinWidth = 170;
     this.kineticEnergyBinWidth = 8E5;
 
-    // Initialize histograms with 0 in all bins
-    const emptyBins = [];
-    for ( let i = this.numberOfBins - 1; i >= 0; i-- ) {
-      emptyBins[ i ] = 0;
-    }
+    // Initialize all cumulative bin counts to zero.
+    this.heavySpeedCumulativeBinCounts = new Array( this.numberOfBins ).fill( 0 );
+    this.lightSpeedCumulativeBinCounts = new Array( this.numberOfBins ).fill( 0 );
+    this.heavyKineticEnergyCumulativeBinCounts = new Array( this.numberOfBins ).fill( 0 );
+    this.lightKineticEnergyCumulativeBinCounts = new Array( this.numberOfBins ).fill( 0 );
+
+    // Initialize bin count Properties with 0 in all bins
+    const emptyBins = new Array( this.numberOfBins ).fill( 0 );
 
     const binCountsPropertyOptions = {
       isValidValue: ( binCounts: number[] ) => ( binCounts.length === this.numberOfBins ),
@@ -153,7 +155,7 @@ export default class HistogramsModel extends PhetioObject {
 
     this.heavySpeedBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
-        tandem: speedTandem.createTandem( 'heavySpeedBinCountsProperty' ),
+        tandem: speedTandem.createTandem( 'heavySpeedCumulativeBinCountsProperty' ),
         phetioFeatured: true,
         phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the speed of heavy particles (time averaged). ${speedBinsDocumentation}`
@@ -212,12 +214,6 @@ export default class HistogramsModel extends PhetioObject {
 
     this.binCountsUpdatedEmitter = new Emitter();
 
-    this.heavySpeedSamples = [];
-    this.lightSpeedSamples = [];
-
-    this.heavyKineticEnergySamples = [];
-    this.lightKineticEnergySamples = [];
-
     this.dtAccumulator = 0;
     this.numberOfSamples = 0;
 
@@ -235,16 +231,6 @@ export default class HistogramsModel extends PhetioObject {
         }
       }
     } );
-
-    // After PhET-iO state has been restored, verify the sanity of the model.
-    if ( assert && Tandem.PHET_IO_ENABLED ) {
-      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
-        assert && assert( this.numberOfSamples === this.heavySpeedSamples.length, 'incorrect number of heavySpeedSamples' );
-        assert && assert( this.numberOfSamples === this.lightSpeedSamples.length, 'incorrect number of lightSpeedSamples' );
-        assert && assert( this.numberOfSamples === this.heavyKineticEnergySamples.length, 'incorrect number of heavyKineticEnergySamples' );
-        assert && assert( this.numberOfSamples === this.lightKineticEnergySamples.length, 'incorrect number of lightKineticEnergySamples' );
-      } );
-    }
   }
 
   public reset(): void {
@@ -260,13 +246,11 @@ export default class HistogramsModel extends PhetioObject {
     this.dtAccumulator = 0;
     this.numberOfSamples = 0;
 
-    // clear Speed samples
-    this.heavySpeedSamples.length = 0;
-    this.lightSpeedSamples.length = 0;
-
-    // clear Kinetic Energy samples
-    this.heavyKineticEnergySamples.length = 0;
-    this.lightKineticEnergySamples.length = 0;
+    // Reset all cumulative bin counts to zero.
+    this.heavySpeedCumulativeBinCounts.fill( 0 );
+    this.lightSpeedCumulativeBinCounts.fill( 0 );
+    this.heavyKineticEnergyCumulativeBinCounts.fill( 0 );
+    this.lightKineticEnergyCumulativeBinCounts.fill( 0 );
   }
 
   /**
@@ -289,45 +273,45 @@ export default class HistogramsModel extends PhetioObject {
   }
 
   /**
-   * Takes a data sample for histograms.
+   * Takes a data sample for both histograms. Rather than keeping these samples for later process, we adjust the
+   * cumulative bin counts immediately, then discard the samples.  This greatly reduces the size of the data serialized
+   * by HistogramsModelIO. See https://github.com/phetsims/gas-properties/issues/235.
    */
   private sample(): void {
     assert && assert( !( this.numberOfSamples !== 0 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 0 if called while the sim is paused' );
 
-    // take a Speed sample
-    this.heavySpeedSamples.push( getSpeedValues( this.particleSystem.heavyParticles ) );
-    this.lightSpeedSamples.push( getSpeedValues( this.particleSystem.lightParticles ) );
+    // Speed
+    const heavySpeedSample = getSpeedSample( this.particleSystem.heavyParticles );
+    processSample( heavySpeedSample, this.heavySpeedCumulativeBinCounts, this.speedBinWidth );
+    const lightSpeedSample = getSpeedSample( this.particleSystem.lightParticles );
+    processSample( lightSpeedSample, this.lightSpeedCumulativeBinCounts, this.speedBinWidth );
 
-    // take a Kinetic Energy sample
-    this.heavyKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.heavyParticles ) );
-    this.lightKineticEnergySamples.push( getKineticEnergyValues( this.particleSystem.lightParticles ) );
+    // Kinetic Energy
+    const heavyKineticEnergySample = getKineticEnergySample( this.particleSystem.heavyParticles );
+    processSample( heavyKineticEnergySample, this.heavyKineticEnergyCumulativeBinCounts, this.kineticEnergyBinWidth );
+    const lightKineticEnergySample = getKineticEnergySample( this.particleSystem.lightParticles );
+    processSample( lightKineticEnergySample, this.lightKineticEnergyCumulativeBinCounts, this.kineticEnergyBinWidth );
 
     this.numberOfSamples++;
   }
 
   /**
-   * Updates the histograms using the current sample data.
+   * Updates the histograms using the current bin counts.
    */
   private update(): void {
     assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 1 if called while the sim is paused' );
 
-    // update Speed bin counts
-    this.heavySpeedBinCountsProperty.value =
-      samplesToBinCounts( this.heavySpeedSamples, this.numberOfBins, this.speedBinWidth );
-    this.lightSpeedBinCountsProperty.value =
-      samplesToBinCounts( this.lightSpeedSamples, this.numberOfBins, this.speedBinWidth );
-    this.totalSpeedBinCountsProperty.value =
-      sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
+    // average the Speed bin counts
+    this.heavySpeedBinCountsProperty.value = this.heavySpeedCumulativeBinCounts.map( count => count / this.numberOfBins );
+    this.lightSpeedBinCountsProperty.value = this.lightSpeedCumulativeBinCounts.map( count => count / this.numberOfBins );
+    this.totalSpeedBinCountsProperty.value = sumBinCounts( this.heavySpeedBinCountsProperty.value, this.lightSpeedBinCountsProperty.value );
 
-    // update Kinetic Energy bin counts
-    this.heavyKineticEnergyBinCountsProperty.value =
-      samplesToBinCounts( this.heavyKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
-    this.lightKineticEnergyBinCountsProperty.value =
-      samplesToBinCounts( this.lightKineticEnergySamples, this.numberOfBins, this.kineticEnergyBinWidth );
-    this.totalKineticEnergyBinCountsProperty.value =
-      sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
+    // average the Kinetic Energy bin counts
+    this.heavyKineticEnergyBinCountsProperty.value = this.heavyKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfBins );
+    this.lightKineticEnergyBinCountsProperty.value = this.lightKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfBins );
+    this.totalKineticEnergyBinCountsProperty.value = sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
 
     // Notify listeners that the bin counts have been updated.
     this.binCountsUpdatedEmitter.emit();
@@ -354,7 +338,7 @@ export default class HistogramsModel extends PhetioObject {
 /**
  * Gets the speed values for a set of particles, in pm/ps.
  */
-function getSpeedValues( particles: Particle[] ): number[] {
+function getSpeedSample( particles: Particle[] ): number[] {
   const values = [];
   for ( let i = particles.length - 1; i >= 0; i-- ) {
     values.push( particles[ i ].getSpeed() );
@@ -365,7 +349,7 @@ function getSpeedValues( particles: Particle[] ): number[] {
 /**
  * Gets the kinetic energy values for a set of particles, in AMU * pm^2 / ps^2.
  */
-function getKineticEnergyValues( particles: Particle[] ): number[] {
+function getKineticEnergySample( particles: Particle[] ): number[] {
   const values = [];
   for ( let i = particles.length - 1; i >= 0; i-- ) {
     values.push( particles[ i ].getKineticEnergy() );
@@ -374,38 +358,15 @@ function getKineticEnergyValues( particles: Particle[] ): number[] {
 }
 
 /**
- * Converts a collection of samples to bin counts.
+ * Processes a sample (an array of values) and adjusts bin counts accordingly.
  */
-function samplesToBinCounts( sampleArrays: number[][], numberOfBins: number, binWidth: number ): number[] {
-  assert && assert( numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
-  assert && assert( binWidth > 0, `invalid binWidth: ${binWidth}` );
-
-  // Initialize the bins with 0 counts
-  const binCounts = [];
-  for ( let i = 0; i < numberOfBins; i++ ) {
-    binCounts[ i ] = 0;
-  }
-
-  // Bin the sample data, for total binCounts
-  for ( let i = sampleArrays.length - 1; i >= 0; i-- ) {
-    const values = sampleArrays[ i ];
-    for ( let j = values.length - 1; j >= 0; j-- ) {
-      const index = Math.floor( values[ j ] / binWidth ); // bin range is [min,max)
-      if ( index >= 0 && index < binCounts.length ) {
-        binCounts[ index ]++;
-      }
+function processSample( sample: number[], binCounts: number[], binWidth: number ): void {
+  for ( let i = sample.length - 1; i >= 0; i-- ) {
+    const index = Math.floor( sample[ i ] / binWidth ); // bin range is [min,max)
+    if ( index >= 0 && index < binCounts.length ) {
+      binCounts[ index ]++;
     }
   }
-
-  // Average the bin counts
-  for ( let i = binCounts.length - 1; i >= 0; i-- ) {
-    assert && assert( typeof binCounts[ i ] === 'number' && binCounts[ i ] >= 0,
-      `invalid binCount: ${binCounts[ i ]}` );
-    binCounts[ i ] = binCounts[ i ] / sampleArrays.length;
-  }
-
-  assert && assert( binCounts.length === numberOfBins, `unexpected number of binCounts: ${binCounts.length}` );
-  return binCounts;
 }
 
 /**
