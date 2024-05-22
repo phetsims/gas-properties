@@ -81,10 +81,14 @@ The collection of all particles is referred to as the particle system. It has th
 
 All quantities (`P`, `T`, `V`, `v`, `KE`) are derived from the state of the particle system and the container.
 
+In the _Diffusion_ screen, `N`, mass, radius, and initial temperature are set via spinners in the control panel.
+
+In the _Ideal_, _Explore_, and _Energy_ screens:
+
 There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and the
-gauge on the bicycle pump. When particles escape the container through its open lid, they are immediately returned to
-the inventory. Since there is no gravity, particles that escape the container float upwards, and are deleted from the
-sim when they disappear from view.
+gauge on the bicycle pump. There is a maximum of 1000 of each type of particle.  When particles escape the container 
+through its open lid, they are immediately returned to the inventory. Since there is no gravity, particles that escape
+the container float upwards, and are deleted from the sim when they disappear from view.
 
 When a particle is added to the container:
 
