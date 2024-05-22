@@ -69,8 +69,8 @@ Model time is in ps.
 In the _Ideal_, _Explore_, and _Energy_ screens, 1 ps = 0.4 seconds of real time. 
 
 In the _Diffusion_ screen, the time control radio buttons control time as follows:
-* Normal: 1 ps = 0.4 seconds of real time.  
-* Slow: 1 ps = ~3.33 second of real time.
+* Normal: 1 ps = 0.4 seconds of real time 
+* Slow: 1 ps = ~3.33 second of real time
 
 ## Particle System
 
