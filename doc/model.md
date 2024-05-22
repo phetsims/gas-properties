@@ -149,7 +149,7 @@ Then all `N` particles contribute to the pressure `P` via `P = NkT/V`.
 On each time step, pressure is computed precisely as `P = NkT/V`. The pressure gauge is given a bit of "noise" to make
 it look more realistic. The noise is a function of pressure and temperature. More noise is added at lower pressures, but
 the noise is suppressed as temperature decreases. Noise is disabled when pressure is being held constant. See
-`PressureGauge` if you'd like more specifics. If desired, noise can be disabled via query
+`PressureGauge` if you'd like more specifics. If desired, noise can be disabled in the Preferences dialog, or via query
 parameter `pressureNoise=false`.
 
 ## Hold Constant
