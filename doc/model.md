@@ -53,7 +53,7 @@ The units used in this sim are:
 
 ## Equations
 
-This section lists the primary equations used in the sim. Use this section as a reference.
+The primary equations used in the sim are:
 
 * Ideal Gas Law: PV = NkT
 * Pressure: P = NkT/V
