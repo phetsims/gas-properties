@@ -62,6 +62,16 @@ This section enumerates the primary equations used in the sim. Use this section 
 * Kinetic Energy: KE = (3/2)kT = (1/2)m|v|<sup>2</sup>
 * Particle Speed: |v| = sqrt( 3kT/m ) = sqrt( 2KE/m )
 
+## Time 
+
+Model time units are in ps.
+
+In the _Ideal_, _Explore_, and _Energy_ screens, 1 ps = 0.4 seconds of real time. 
+
+In the _Diffusion_ screen, the time control radio buttons control time as follows:
+* Normal: 1 ps = 0.4 seconds of real time.  
+* Slow: 1 ps = ~3.33 second of real time.
+
 ## Particle System
 
 Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity.
@@ -177,21 +187,14 @@ If a change would result in a situation that is nonsensical (e.g. holding temper
 violates the constraints of the simulation (e.g. requires a larger container volume than supported), the sim
 automatically switches to "Nothing" and notifies the user via a dialog.
 
-## Histograms
+## Data Collection and Sampling
 
-The _Energy_ screen has two histograms: **Speed** and **Kinetic Energy**. 
+In the _Energy_ screen:
+* The **Average Speed** accordion box displays an average of samples collected over 1 ps.
+* The **Speed** histogram has 19 bins, with bin width of 170 pm/ps. The bin values are numbers of particles, averaged over 1 ps.
+* The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup>2</sup> / ps<sup>2</sup>. The bin values are numbers of particles, averaged over 1 ps.
 
-The **Speed** histogram has 19 bins, with bin width of 170 pm/ps. The bin values are numbers of particles, time averaged.
-
-The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup>2</sup> / ps<sup>2</sup>. The bin values are numbers of particles, time averaged.
-
-## Time 
-
-Model time units are in ps.
-
-In the _Ideal_, _Explore_, and _Energy_ screens, 1 ps = 0.4 seconds of real time. 
-
-In the _Diffusion_ screen, the time control radio buttons control time as follows:
-* Normal: 1 ps = 0.4 seconds of real time.  
-* Slow: 1 ps = ~3.33 second of real time.
+In the _Diffusion_ screen:
+* **Center of Mass** is updated continuously.
+* **Particle Flow Rate** is a running average of 300 samples.
 
