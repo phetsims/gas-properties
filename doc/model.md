@@ -167,6 +167,11 @@ the noise is suppressed as temperature decreases. Noise is disabled when pressur
 `PressureGauge` if you'd like more specifics. If desired, noise can be disabled in the Preferences dialog, or via query
 parameter `pressureNoise=false`.
 
+## Temperature
+
+Temperature is updated continuous in the model and view. Unlike pressure, there is no option for introducing
+noise into the thermometer display.
+
 ## Hold Constant
 
 In the _Ideal_ screen, the user may specify which quantity in `PV = NkT` is to be held constant. The table below
