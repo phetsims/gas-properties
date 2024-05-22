@@ -45,6 +45,7 @@ The units used in this sim are:
 * m = mass
 * N = number of gas molecules (aka particles)
 * P = pressure
+* r = radius of gas molecules
 * t = time
 * T = temperature
 * v = velocity
@@ -74,12 +75,12 @@ In the _Diffusion_ screen, the time control radio buttons control time as follow
 
 ## Particle System
 
-Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity.
+Particles represent gas molecules. They are rigid bodies that have mass (`m`), radius (`r`), location, and velocity.
 
-Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixed masses and radii:
+Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixed values for `m` and `r`:
 
-* Heavy particles: mass = 28 AMU (equivalent to N<sub>2</sub>), radius = 125 pm
-* Light particles: mass = 4 AMU (equivalent to He, rounded to the closest integer), radius = 87.5 pm
+* Heavy particles: `m` = 28 AMU (equivalent to N<sub>2</sub>), `r` = 125 pm
+* Light particles: `m` = 4 AMU (equivalent to He, rounded to the closest integer), `r` = 87.5 pm
 
 Location and velocity are modified indirectly, as a result of heating/cooling, changing volume, collisions, etc.
 
@@ -91,7 +92,7 @@ The collection of all particles is referred to as the **particle system**. It ha
 
 All quantities (`P`, `T`, `V`, `v`, `KE`) are derived from the state of the particle system and the container.
 
-In the _Diffusion_ screen, `N`, mass, radius, and initial temperature are set via spinners in the control panel.
+In the _Diffusion_ screen, `N`, `m`, `r`, and initial `T` are set via spinners in the control panel.
 
 In the _Ideal_, _Explore_, and _Energy_ screens:
 
@@ -165,7 +166,7 @@ every 0.75 ps, using the model pressure at that time. The pressure gauge is give
 it look more realistic. The noise is a function of pressure and temperature. More noise is added at lower pressures, but
 the noise is suppressed as temperature decreases. Noise is disabled when pressure is being held constant. See
 `PressureGauge` if you'd like more specifics. If desired, noise can be disabled in the Preferences dialog, or via query
-parameter `pressureNoise=false`.
+parameter `pressureNoise=false`.[](url)
 
 ## Temperature
 
