@@ -48,7 +48,7 @@ The units used in this sim are:
 * t = time
 * T = temperature
 * v = velocity
-* |v| = velocity magnitude (aka speed)
+* |v| = velocity magnitude (speed)
 * V = volume of the container
 
 ## Equations
