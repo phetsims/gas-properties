@@ -67,6 +67,10 @@ export default class TemperatureModel extends PhetioObject {
   // Injection temperature set by the user, in K. Ignored if !setInjectionTemperatureEnabledProperty.value
   public readonly injectionTemperatureProperty: NumberProperty;
 
+  // Default temperature used to compute the speed of particles added to an empty container.
+  // Private because this Property is not used elsewhere in the sim; it is provided for PhET-iO only.
+  private readonly defaultInitialTemperatureProperty: NumberProperty;
+
   public constructor( numberOfParticlesProperty: TReadOnlyProperty<number>,
                       getAverageKineticEnergy: () => number,
                       providedOptions: TemperatureModelOptions ) {
@@ -135,12 +139,21 @@ export default class TemperatureModel extends PhetioObject {
       phetioFeatured: true,
       phetioDocumentation: 'Injection temperature set by the user.'
     } );
+
+    this.defaultInitialTemperatureProperty = new NumberProperty( DEFAULT_INITIAL_TEMPERATURE, {
+      range: INJECTION_TEMPERATURE_RANGE,
+      units: 'K',
+      tandem: options.tandem.createTandem( 'defaultInitialTemperatureProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: 'Default temperature used to compute the speed of particles added to an empty container.'
+    } );
   }
 
   public reset(): void {
     this.unitsProperty.reset();
     this.setInjectionTemperatureEnabledProperty.reset();
     this.injectionTemperatureProperty.reset();
+    // Do not reset this.defaultInitialTemperatureProperty, because it is provided for PhET-iO only.
   }
 
   /**
@@ -170,7 +183,7 @@ export default class TemperatureModel extends PhetioObject {
     else {
 
       // Default for empty container
-      initialTemperature = DEFAULT_INITIAL_TEMPERATURE;
+      initialTemperature = this.defaultInitialTemperatureProperty.value;
     }
 
     assert && assert( initialTemperature >= 0, `bad initialTemperature: ${initialTemperature}` );
