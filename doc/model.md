@@ -83,7 +83,7 @@ Mass and radius may be modified in the _Diffusion_ screen. In the other screens,
 
 Location and velocity are modified indirectly, as a result of heating/cooling, changing volume, collisions, etc.
 
-The collection of all particles is referred to as the particle system. It has the following qualities:
+The collection of all particles is referred to as the **particle system**. It has the following qualities:
 
 * `N` is the number of particles in the container
 * no rotational kinematics (particles do not rotate)
