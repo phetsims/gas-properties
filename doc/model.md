@@ -182,8 +182,7 @@ The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup
 
 ## Time 
 
-Some general information about how time is handled in the simulation:
+In the Ideal, Explore, and Energy screens, 1 ps is equivalent to 0.4 seconds of real time. 
 
-* In the Ideal, Explore, and Energy screens, 1 ps is equivalent to 0.4 seconds of real time. 
-* In the Diffusion screen, with the time control set to "Normal", 1 ps is equivalent to 0.4 seconds of real time.  With the time control set to "Slow", 1 ps is equivalent to ~3.33 second of real time.
+In the Diffusion screen, with the time control set to "Normal", 1 ps is equivalent to 0.4 seconds of real time.  With the time control set to "Slow", 1 ps is equivalent to ~3.33 second of real time.
 
