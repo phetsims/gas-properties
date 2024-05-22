@@ -150,7 +150,8 @@ detection treats the container as 2 separate containers, where the divider funct
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with the container.
 Then all `N` particles contribute to the pressure `P` via `P = NkT/V`.
 
-On each time step, pressure is computed precisely as `P = NkT/V`. The pressure gauge is given a bit of "noise" to make
+On each time step, pressure in the model is computed precisely as `P = NkT/V`. The pressure gauge in the view is updated
+every 0.75 ps, using the model pressure at that time. The pressure gauge is given a bit of "noise" to make
 it look more realistic. The noise is a function of pressure and temperature. More noise is added at lower pressures, but
 the noise is suppressed as temperature decreases. Noise is disabled when pressure is being held constant. See
 `PressureGauge` if you'd like more specifics. If desired, noise can be disabled in the Preferences dialog, or via query
