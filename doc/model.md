@@ -182,6 +182,8 @@ The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup
 
 ## Time 
 
+Model time units are in ps.
+
 In the _Ideal_, _Explore_, and _Energy_ screens, 1 ps = 0.4 seconds of real time. 
 
 In the _Diffusion_ screen, the time control radio buttons control time as follows:
