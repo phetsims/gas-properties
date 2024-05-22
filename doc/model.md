@@ -45,15 +45,16 @@ The units used in this sim are:
 * m = mass
 * N = number of gas molecules (aka particles)
 * P = pressure
+* r = radius of gas molecules
 * t = time
 * T = temperature
 * v = velocity
-* |v| = velocity magnitude (aka speed)
+* |v| = velocity magnitude (speed)
 * V = volume of the container
 
 ## Equations
 
-This section enumerates the primary equations used in the sim. Use this section as a reference.
+The primary equations used in the sim are:
 
 * Ideal Gas Law: PV = NkT
 * Pressure: P = NkT/V
@@ -62,18 +63,28 @@ This section enumerates the primary equations used in the sim. Use this section 
 * Kinetic Energy: KE = (3/2)kT = (1/2)m|v|<sup>2</sup>
 * Particle Speed: |v| = sqrt( 3kT/m ) = sqrt( 2KE/m )
 
+## Time 
+
+Model time is in ps.
+
+In the _Ideal_, _Explore_, and _Energy_ screens, 1 ps = 0.4 seconds of real time. 
+
+In the _Diffusion_ screen, the time control radio buttons control time as follows:
+* Normal: 1 ps = 0.4 seconds of real time 
+* Slow: 1 ps = ~3.33 second of real time
+
 ## Particle System
 
-Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity.
+Particles represent gas molecules. They are rigid bodies that have mass (`m`), radius (`r`), location, and velocity.
 
-Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixes masses and radii:
+Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixed values for `m` and `r`:
 
-* Heavy particles: mass = 28 AMU (equaivalent to N<sub>2</sub>), radius = 125 pm
-* Light particles: mass = 4 AMU (equaivalent to He, rounded to the closest integer), radius = 87.5 pm
+* Heavy particles: `m` = 28 AMU (equivalent to N<sub>2</sub>), `r` = 125 pm
+* Light particles: `m` = 4 AMU (equivalent to He, rounded to the closest integer), `r` = 87.5 pm
 
 Location and velocity are modified indirectly, as a result of heating/cooling, changing volume, collisions, etc.
 
-The collection of all particles is referred to as the particle system. It has the following qualities:
+The collection of all particles is referred to as the **particle system**. It has the following qualities:
 
 * `N` is the number of particles in the container
 * no rotational kinematics (particles do not rotate)
@@ -81,10 +92,14 @@ The collection of all particles is referred to as the particle system. It has th
 
 All quantities (`P`, `T`, `V`, `v`, `KE`) are derived from the state of the particle system and the container.
 
+In the _Diffusion_ screen, `N`, `m`, `r`, and initial `T` are set via spinners in the control panel.
+
+In the _Ideal_, _Explore_, and _Energy_ screens:
+
 There is a limited inventory of particles (limited `N`), as indicated by the "Number of Particles" spinners and the
-gauge on the bicycle pump. When particles escape the container through its open lid, they are immediately returned to
-the inventory. Since there is no gravity, particles that escape the container float upwards, and are deleted from the
-sim when they disappear from view.
+gauge on the bicycle pump. There is a maximum of 1000 of each type of particle.  When particles escape the container 
+through its open lid, they are immediately returned to the inventory. Since there is no gravity, particles that escape
+the container float upwards, and are deleted from the sim when they disappear from view.
 
 When a particle is added to the container:
 
@@ -146,11 +161,17 @@ detection treats the container as 2 separate containers, where the divider funct
 When particles are added to an empty container, pressure remains zero until 1 particle has collided with the container.
 Then all `N` particles contribute to the pressure `P` via `P = NkT/V`.
 
-On each time step, pressure is computed precisely as `P = NkT/V`. The pressure gauge is given a bit of "noise" to make
+On each time step, pressure in the model is computed precisely as `P = NkT/V`. The pressure gauge in the view is updated
+every 0.75 ps, using the model pressure at that time. The pressure gauge is given a bit of "noise" to make
 it look more realistic. The noise is a function of pressure and temperature. More noise is added at lower pressures, but
 the noise is suppressed as temperature decreases. Noise is disabled when pressure is being held constant. See
-`PressureGauge` if you'd like more specifics. If desired, noise can be disabled via query
-parameter `pressureNoise=false`.
+`PressureGauge` if you'd like more specifics. If desired, noise can be disabled in the Preferences dialog, or via query
+parameter `pressureNoise=false`.[](url)
+
+## Temperature
+
+Temperature is updated continuous in the model and view. Unlike pressure, there is no option for introducing
+noise into the thermometer display.
 
 ## Hold Constant
 
@@ -172,10 +193,14 @@ If a change would result in a situation that is nonsensical (e.g. holding temper
 violates the constraints of the simulation (e.g. requires a larger container volume than supported), the sim
 automatically switches to "Nothing" and notifies the user via a dialog.
 
-## Histograms
+## Data Collection and Sampling
 
-The _Energy_ screen has two histograms: **Speed** and **Kinetic Energy**. 
+In the _Energy_ screen:
+* The **Average Speed** accordion box displays an average of samples collected over 1 ps.
+* The **Speed** histogram has 19 bins, with bin width of 170 pm/ps. The bin values are numbers of particles, averaged over 1 ps.
+* The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup>2</sup> / ps<sup>2</sup>. The bin values are numbers of particles, averaged over 1 ps.
 
-The **Speed** histogram has 19 bins, with bin width of 170 pm/ps. The bin values are numbers of particles, time averaged.
+In the _Diffusion_ screen:
+* **Center of Mass** is updated continuously.
+* **Particle Flow Rate** is a running average of 300 samples.
 
-The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup>2</sup> / ps<sup>2</sup>. The bin values are numbers of particles, time averaged.
