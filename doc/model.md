@@ -64,7 +64,7 @@ The primary equations used in the sim are:
 
 ## Time 
 
-Model time units are in ps.
+Model time is in ps.
 
 In the _Ideal_, _Explore_, and _Energy_ screens, 1 ps = 0.4 seconds of real time. 
 
