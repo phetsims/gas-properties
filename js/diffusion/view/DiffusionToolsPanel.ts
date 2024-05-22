@@ -36,6 +36,7 @@ export default class DiffusionToolsPanel extends Panel {
     const content = new VBox( {
       align: 'left',
       spacing: 12,
+      stretch: true,
       children: [
         new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, {
           textMaxWidth: TEXT_MAX_WIDTH,

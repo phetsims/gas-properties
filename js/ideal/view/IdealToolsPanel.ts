@@ -33,6 +33,7 @@ export default class IdealToolsPanel extends Panel {
     const content = new VBox( {
       align: 'left',
       spacing: 12,
+      stretch: true,
       children: [
         new WidthCheckbox( widthVisibleProperty, {
           textMaxWidth: 110,

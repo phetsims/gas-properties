@@ -35,6 +35,7 @@ export default class ExploreToolsPanel extends Panel {
     const content = new VBox( {
       align: 'left',
       spacing: 12,
+      stretch: true,
       children: [
         new WallVelocityCheckbox( wallVelocityVisibleProperty, {
           textMaxWidth: 125,
