@@ -78,8 +78,8 @@ Particles represent gas molecules. They are rigid bodies that have mass, radius,
 
 Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixed masses and radii:
 
-* Heavy particles: mass = 28 AMU (equaivalent to N<sub>2</sub>), radius = 125 pm
-* Light particles: mass = 4 AMU (equaivalent to He, rounded to the closest integer), radius = 87.5 pm
+* Heavy particles: mass = 28 AMU (equivalent to N<sub>2</sub>), radius = 125 pm
+* Light particles: mass = 4 AMU (equivalent to He, rounded to the closest integer), radius = 87.5 pm
 
 Location and velocity are modified indirectly, as a result of heating/cooling, changing volume, collisions, etc.
 
