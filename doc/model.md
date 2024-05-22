@@ -76,7 +76,7 @@ In the _Diffusion_ screen, the time control radio buttons control time as follow
 
 Particles represent gas molecules. They are rigid bodies that have mass, radius, location, and velocity.
 
-Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixes masses and radii:
+Mass and radius may be modified in the _Diffusion_ screen. In the other screens, particles have these fixed masses and radii:
 
 * Heavy particles: mass = 28 AMU (equaivalent to N<sub>2</sub>), radius = 125 pm
 * Light particles: mass = 4 AMU (equaivalent to He, rounded to the closest integer), radius = 87.5 pm
