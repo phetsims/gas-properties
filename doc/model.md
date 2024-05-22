@@ -179,3 +179,11 @@ The _Energy_ screen has two histograms: **Speed** and **Kinetic Energy**.
 The **Speed** histogram has 19 bins, with bin width of 170 pm/ps. The bin values are numbers of particles, time averaged.
 
 The **Kinetic Energy** histogram has 19 bins, with bin width of 8E5 AMU * pm<sup>2</sup> / ps<sup>2</sup>. The bin values are numbers of particles, time averaged.
+
+## Time 
+
+Some general information about how time is handled in the simulation:
+
+* In the Ideal, Explore, and Energy screens, 1 ps is equivalent to 0.4 seconds of real time. 
+* In the Diffusion screen, with the time control set to "Normal", 1 ps is equivalent to 0.4 seconds of real time.  With the time control set to "Slow", 1 ps is equivalent to ~3.33 second of real time.
+
