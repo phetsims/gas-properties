@@ -23,7 +23,7 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
 import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
-import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
+import RichPointerDragListener from '../../../../scenery-phet/js/RichPointerDragListener.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import SamplePeriodComboBox from './SamplePeriodComboBox.js';
 
@@ -184,7 +184,7 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
 
     // Dragging, added to background so that other UI components get input events on touch devices.
     // If added to 'this', touchSnag will lock out listeners for other UI components.
-    backgroundNode.addInputListener( new RichDragListener( {
+    backgroundNode.addInputListener( new RichPointerDragListener( {
       targetNode: this,
       positionProperty: collisionCounter.positionProperty,
       dragBoundsProperty: dragBoundsProperty,
