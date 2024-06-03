@@ -31,7 +31,7 @@ export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragLi
       drag: ( event, listener ) => {
 
         // Moving to the left increases width, so flip the sign.
-        const deltaWidth = -listener.vectorDelta.x;
+        const deltaWidth = -listener.modelDelta.x;
         const desiredWidth = dragDelegate.container.widthRange.constrainValue( dragDelegate.container.widthProperty.value + deltaWidth );
         dragDelegate.resizeContainer( desiredWidth );
       },

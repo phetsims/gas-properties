@@ -22,7 +22,7 @@ export default class LidHandleKeyboardDragListener extends RichKeyboardDragListe
       isDisposable: false,
       transform: modelViewTransform,
       drag: ( event, listener ) => {
-        container.lidWidthProperty.value = Utils.clamp( container.lidWidthProperty.value + listener.vectorDelta.x,
+        container.lidWidthProperty.value = Utils.clamp( container.lidWidthProperty.value + listener.modelDelta.x,
           container.getMinLidWidth(), container.getMaxLidWidth() );
       },
       dragSpeed: 300,
