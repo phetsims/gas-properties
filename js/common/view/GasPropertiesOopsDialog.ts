@@ -31,7 +31,8 @@ export default class GasPropertiesOopsDialog extends OopsDialog {
       } ),
       richTextOptions: {
         font: new PhetFont( 16 )
-      }
+      },
+      phetioFeatured: true // see https://github.com/phetsims/gas-properties/issues/257
     }, providedOptions );
 
     super( messageStringProperty, options );
