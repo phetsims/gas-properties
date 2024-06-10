@@ -1,6 +1,5 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/gas-properties/issues/255 rename to DiffusionSettingsPanel
 /**
  * DiffusionSettingsPanel is the panel for setting initial conditions in the 'Diffusion' screen.
  *
@@ -48,8 +47,8 @@ const NUMBER_SPINNER_OPTIONS: NumberSpinnerOptions = {
 export default class DiffusionSettingsPanel extends Panel {
 
   /**
-   * @param particle1Settings - setting for particle type 1
-   * @param particle2Settings - setting for particle type 2
+   * @param particle1Settings - settings for particle type 1
+   * @param particle2Settings - settings for particle type 2
    * @param numberOfParticlesProperty
    * @param isDividedProperty
    * @param modelViewTransform
