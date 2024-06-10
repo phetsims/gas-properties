@@ -33,6 +33,8 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import WallVelocityVectorNode from './WallVelocityVectorNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
@@ -43,6 +45,7 @@ type SelfOptions = {
   lidGripColor?: TColor; // color of the lid handle's grip
   resizeHandleIsPressedListener?: ( isPressed: boolean ) => void;
   wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
+  phetioResizeHandleInstrumented?: boolean;
 };
 
 type IdealGasLawContainerNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
@@ -65,6 +68,7 @@ export default class IdealGasLawContainerNode extends Node {
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // color of resize handle's grip
       lidGripColor: GasPropertiesColors.lidGripColorProperty, // color of the lid handle's grip
       resizeHandleIsPressedListener: _.noop,
+      phetioResizeHandleInstrumented: true,
 
       // NodeOptions
       isDisposable: false,
@@ -93,9 +97,9 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Resize handle on the left wall. The sim sets resizeHandleVisibleProperty, while the PhET-iO client can use
     // hasResizeHandleProperty to permanently hide the handle.
-    const resizeHandleNodeTandem = options.tandem.createTandem( 'resizeHandleNode' );
+    const resizeHandleNodeTandem = options.phetioResizeHandleInstrumented ? options.tandem.createTandem( 'resizeHandleNode' ) : Tandem.OPT_OUT;
     const resizeHandleVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'resizeHandleVisibleProperty' ),
+      tandem: resizeHandleNodeTandem.createTandem( 'resizeHandleVisibleProperty' ),
       phetioReadOnly: true, // Sim controls this.
       phetioDocumentation: 'For internal use only.'
     } );
@@ -106,7 +110,10 @@ export default class IdealGasLawContainerNode extends Node {
     } );
     const resizeHandleNode = new ResizeHandleNode( {
       gripColor: options.resizeGripColor,
-      visibleProperty: DerivedProperty.and( [ resizeHandleVisibleProperty, hasResizeHandleProperty ] ),
+      visibleProperty: DerivedProperty.and( [ resizeHandleVisibleProperty, hasResizeHandleProperty ], {
+        tandem: resizeHandleNodeTandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
       tandem: resizeHandleNodeTandem
     } );
 
@@ -114,7 +121,7 @@ export default class IdealGasLawContainerNode extends Node {
     // hasLidHandleProperty to permanently hide the handle.
     const lidHandleNodeTandem = options.tandem.createTandem( 'lidHandleNode' );
     const lidHandleVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'lidHandleVisibleProperty' ),
+      tandem: lidHandleNodeTandem.createTandem( 'lidHandleVisibleProperty' ),
       phetioReadOnly: true, // Sim controls this.
       phetioDocumentation: 'For internal use only.'
     } );
@@ -128,7 +135,10 @@ export default class IdealGasLawContainerNode extends Node {
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
       lidHandleNodeOptions: {
         gripColor: options.lidGripColor,
-        visibleProperty: DerivedProperty.and( [ lidHandleVisibleProperty, hasLidHandleProperty ] ),
+        visibleProperty: DerivedProperty.and( [ lidHandleVisibleProperty, hasLidHandleProperty ], {
+          tandem: lidHandleNodeTandem.createTandem( 'visibleProperty' ),
+          phetioValueType: BooleanIO
+        } ),
         tandem: lidHandleNodeTandem
       }
     } );

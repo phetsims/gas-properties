@@ -58,6 +58,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 type SelfOptions = {
   resizeGripColor?: TColor;
   wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
+  phetioResizeHandleInstrumented?: boolean;
 };
 
 export type IdealGasLawScreenViewOptions = SelfOptions & BaseScreenViewOptions;
@@ -89,7 +90,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     const options = optionize<IdealGasLawScreenViewOptions, StrictOmit<SelfOptions, 'wallVelocityVisibleProperty'>, BaseScreenViewOptions>()( {
 
       // SelfOptions
-      resizeGripColor: GasPropertiesColors.resizeGripColorProperty
+      resizeGripColor: GasPropertiesColors.resizeGripColorProperty,
+      phetioResizeHandleInstrumented: true
     }, providedOptions );
 
     super( model, options );
@@ -159,7 +161,8 @@ export default class IdealGasLawScreenView extends BaseScreenView {
         resizeGripColor: options.resizeGripColor,
         resizeHandleIsPressedListener: resizeHandleIsPressedListener,
         wallVelocityVisibleProperty: options.wallVelocityVisibleProperty,
-        tandem: options.tandem.createTandem( 'containerNode' )
+        tandem: options.tandem.createTandem( 'containerNode' ),
+        phetioResizeHandleInstrumented: options.phetioResizeHandleInstrumented
       } );
 
     // Return Lid button
