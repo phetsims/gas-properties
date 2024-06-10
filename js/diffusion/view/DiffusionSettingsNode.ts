@@ -1,5 +1,6 @@
 // Copyright 2019-2024, University of Colorado Boulder
 
+//TODO https://github.com/phetsims/gas-properties/issues/255 rename to DiffusionSettingsPanel
 /**
  * DiffusionSettingsNode is the panel for setting initial conditions in the 'Diffusion' screen.
  *
@@ -52,6 +53,7 @@ export default class DiffusionSettingsNode extends Panel {
    * @param numberOfParticlesProperty
    * @param isDividedProperty
    * @param modelViewTransform
+   * @param numberOfParticleTypesProperty
    * @param tandem
    */
   public constructor( particle1Settings: DiffusionSettings,
@@ -59,6 +61,7 @@ export default class DiffusionSettingsNode extends Panel {
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
                       isDividedProperty: Property<boolean>,
                       modelViewTransform: ModelViewTransform2,
+                      numberOfParticleTypesProperty: TReadOnlyProperty<number>,
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, GasPropertiesConstants.PANEL_OPTIONS, {
@@ -73,7 +76,8 @@ export default class DiffusionSettingsNode extends Panel {
 
     // Number of Particles
     const numberOfParticlesControls = new QuantityControls( 'numberOfParticles', GasPropertiesStrings.numberOfParticlesStringProperty,
-      modelViewTransform, particle1Settings.numberOfParticlesProperty, particle2Settings.numberOfParticlesProperty, spinnersAlignGroup, {
+      modelViewTransform, particle1Settings.numberOfParticlesProperty, particle2Settings.numberOfParticlesProperty, spinnersAlignGroup,
+      numberOfParticleTypesProperty, {
         spinnerOptions: {
           enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.numberOfParticles
@@ -83,7 +87,7 @@ export default class DiffusionSettingsNode extends Panel {
 
     // Mass (AMU)
     const massControls = new QuantityControls( 'mass', GasPropertiesStrings.massAMUStringProperty, modelViewTransform,
-      particle1Settings.massProperty, particle2Settings.massProperty, spinnersAlignGroup, {
+      particle1Settings.massProperty, particle2Settings.massProperty, spinnersAlignGroup, numberOfParticleTypesProperty, {
         spinnerOptions: {
           enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.mass,
@@ -96,7 +100,7 @@ export default class DiffusionSettingsNode extends Panel {
 
     // Radius (pm)
     const radiusControls = new QuantityControls( 'radius', GasPropertiesStrings.radiusPmStringProperty, modelViewTransform,
-      particle1Settings.radiusProperty, particle2Settings.radiusProperty, spinnersAlignGroup, {
+      particle1Settings.radiusProperty, particle2Settings.radiusProperty, spinnersAlignGroup, numberOfParticleTypesProperty, {
         spinnerOptions: {
           enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.radius
@@ -106,7 +110,8 @@ export default class DiffusionSettingsNode extends Panel {
 
     // Initial Temperature (K)
     const initialTemperatureControls = new QuantityControls( 'initialTemperature', GasPropertiesStrings.initialTemperatureKStringProperty,
-      modelViewTransform, particle1Settings.initialTemperatureProperty, particle2Settings.initialTemperatureProperty, spinnersAlignGroup, {
+      modelViewTransform, particle1Settings.initialTemperatureProperty, particle2Settings.initialTemperatureProperty, spinnersAlignGroup,
+      numberOfParticleTypesProperty, {
         spinnerOptions: {
           enabledProperty: isDividedProperty,
           deltaValue: DiffusionSettings.DELTAS.initialTemperature
@@ -159,6 +164,7 @@ class QuantityControls extends VBox {
    * @param leftProperty - quantity for the left side of the container
    * @param rightProperty - quantity for the right side of the container
    * @param spinnersAlignGroup
+   * @param numberOfParticleTypesProperty
    * @param providedOptions
    */
   public constructor( spinnerTandemPrefix: string,
@@ -167,6 +173,7 @@ class QuantityControls extends VBox {
                       leftProperty: NumberProperty,
                       rightProperty: NumberProperty,
                       spinnersAlignGroup: AlignGroup,
+                      numberOfParticleTypesProperty: TReadOnlyProperty<number>,
                       providedOptions: QuantityControlsOptions ) {
 
     const options = optionize<QuantityControlsOptions, StrictOmit<QuantityControlsSelfOptions, 'spinnerOptions'>, VBoxOptions>()( {
@@ -210,7 +217,8 @@ class QuantityControls extends VBox {
     // icon and spinner for particle type 2
     const box2 = new HBox( {
       spacing: ICON_SPACING,
-      children: [ particle2Icon, particle2Spinner ]
+      children: [ particle2Icon, particle2Spinner ],
+      visibleProperty: new DerivedProperty( [ numberOfParticleTypesProperty ], n => n === 2 )
     } );
 
     // both controls, indented

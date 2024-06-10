@@ -34,6 +34,8 @@ import ParticleNode, { ParticleNodeOptions } from './ParticleNode.js';
 import PressureGaugeNode from './PressureGaugeNode.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const SCREEN_ICONS_TRANSFORM = ModelViewTransform2.createIdentity();
 
@@ -365,7 +367,7 @@ const GasPropertiesIconFactory = {
   /**
    * Creates the icon used on the 'Center of Mass' checkbox.
    */
-  createCenterOfMassIcon(): Node {
+  createCenterOfMassIcon( numberOfParticleTypesProperty: TReadOnlyProperty<number> ): Node {
 
     const width = 4;
     const height = 15;
@@ -379,7 +381,8 @@ const GasPropertiesIconFactory = {
         } ),
         new Rectangle( 0, 0, width, height, {
           fill: GasPropertiesColors.diffusionParticle2ColorProperty,
-          stroke: GasPropertiesColors.centerOfMassStrokeProperty
+          stroke: GasPropertiesColors.centerOfMassStrokeProperty,
+          visibleProperty: new DerivedProperty( [ numberOfParticleTypesProperty ], n => n === 2 )
         } )
       ]
     } );

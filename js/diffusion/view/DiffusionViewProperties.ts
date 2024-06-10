@@ -11,6 +11,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 export default class DiffusionViewProperties {
 
@@ -18,6 +19,10 @@ export default class DiffusionViewProperties {
   public readonly particleFlowRateVisibleProperty: Property<boolean>;
   public readonly centerOfMassVisibleProperty: Property<boolean>;
   public readonly scaleVisibleProperty: Property<boolean>;
+
+  // Provided for PhET-iO, to facilitate experiments with a single particle type.
+  // See https://github.com/phetsims/gas-properties/issues/255
+  public readonly numberOfParticleTypesProperty: Property<number>;
 
   public constructor( tandem: Tandem ) {
 
@@ -44,6 +49,14 @@ export default class DiffusionViewProperties {
       phetioFeatured: true,
       phetioDocumentation: 'Whether the scale is visible on the container.'
     } );
+
+    this.numberOfParticleTypesProperty = new NumberProperty( 2, {
+      numberType: 'Integer',
+      validValues: [ 1, 2 ],
+      tandem: tandem.createTandem( 'numberOfParticleTypesProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: 'The number of particle types shown in the user interface.'
+    } );
   }
 
   public dispose(): void {
@@ -55,6 +68,7 @@ export default class DiffusionViewProperties {
     this.particleFlowRateVisibleProperty.reset();
     this.centerOfMassVisibleProperty.reset();
     this.scaleVisibleProperty.reset();
+    // Do not reset numberOfParticleTypesProperty, because it is for PhET-iO only.
   }
 }
 

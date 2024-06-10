@@ -18,6 +18,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 import DiffusionDataNode from './DiffusionDataNode.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -26,6 +27,7 @@ type DataAccordionBoxOptions = SelfOptions & PickRequired<AccordionBoxOptions, '
 export default class DataAccordionBox extends AccordionBox {
 
   public constructor( leftData: DiffusionData, rightData: DiffusionData, modelViewTransform: ModelViewTransform2,
+                      numberOfParticleTypesProperty: TReadOnlyProperty<number>,
                       providedOptions: DataAccordionBoxOptions ) {
 
     const options = optionize4<DataAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()(
@@ -42,10 +44,10 @@ export default class DataAccordionBox extends AccordionBox {
       }, providedOptions );
 
     // Data for left side of the container
-    const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform );
+    const leftDataNode = new DiffusionDataNode( leftData, modelViewTransform, numberOfParticleTypesProperty );
 
     // Data for right side of container
-    const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform );
+    const rightDataNode = new DiffusionDataNode( rightData, modelViewTransform, numberOfParticleTypesProperty );
 
     // Vertical separator, analogous to the container's divider
     const separator = new VSeparator( {

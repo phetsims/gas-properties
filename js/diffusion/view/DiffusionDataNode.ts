@@ -17,6 +17,8 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const PARTICLE_COUNT_RANGE = new Range( 0, 1000 );
 const AVERAGE_TEMPERATURE_RANGE = new Range( 0, 1000 );
@@ -35,7 +37,9 @@ const NUMBER_DISPLAY_OPTIONS: NumberDisplayOptions = {
 
 export default class DiffusionDataNode extends VBox {
 
-  public constructor( data: DiffusionData, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( data: DiffusionData,
+                      modelViewTransform: ModelViewTransform2,
+                      numberOfParticleTypesProperty: TReadOnlyProperty<number> ) {
 
     // number of DiffusionParticle1
     const particle1CountNode = new HBox( {
@@ -52,7 +56,8 @@ export default class DiffusionDataNode extends VBox {
       children: [
         GasPropertiesIconFactory.createDiffusionParticle2Icon( modelViewTransform ),
         new NumberDisplay( data.numberOfParticles2Property, PARTICLE_COUNT_RANGE, NUMBER_DISPLAY_OPTIONS )
-      ]
+      ],
+      visibleProperty: new DerivedProperty( [ numberOfParticleTypesProperty ], n => n === 2 )
     } );
 
     const averageTemperatureNode = new NumberDisplay( data.averageTemperatureProperty, AVERAGE_TEMPERATURE_RANGE,

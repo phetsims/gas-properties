@@ -18,6 +18,7 @@ import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateCheckbox from './ParticleFlowRateCheckbox.js';
 import ScaleCheckbox from './ScaleCheckbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const TEXT_MAX_WIDTH = 175; // determined empirically
 
@@ -25,6 +26,7 @@ export default class DiffusionToolsPanel extends Panel {
 
   public constructor( viewProperties: DiffusionViewProperties,
                       stopwatchVisibleProperty: Property<boolean>,
+                      numberOfParticleTypesProperty: TReadOnlyProperty<number>,
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, GasPropertiesConstants.PANEL_OPTIONS, {
@@ -38,7 +40,7 @@ export default class DiffusionToolsPanel extends Panel {
       spacing: 12,
       stretch: true,
       children: [
-        new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, {
+        new CenterOfMassCheckbox( viewProperties.centerOfMassVisibleProperty, numberOfParticleTypesProperty, {
           textMaxWidth: TEXT_MAX_WIDTH,
           tandem: tandem.createTandem( 'centerOfMassCheckbox' )
         } ),

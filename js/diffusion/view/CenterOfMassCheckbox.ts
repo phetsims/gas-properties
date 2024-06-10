@@ -13,6 +13,7 @@ import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from '../../commo
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -20,13 +21,15 @@ type CenterOfMassCheckboxOptions = SelfOptions & StrictOmit<GasPropertiesCheckbo
 
 export default class CenterOfMassCheckbox extends GasPropertiesCheckbox {
 
-  public constructor( centerOfMassVisibleProperty: Property<boolean>, providedOptions: CenterOfMassCheckboxOptions ) {
+  public constructor( centerOfMassVisibleProperty: Property<boolean>,
+                      numberOfParticleTypesProperty: TReadOnlyProperty<number>,
+                      providedOptions: CenterOfMassCheckboxOptions ) {
 
     const options = optionize<CenterOfMassCheckboxOptions, SelfOptions, GasPropertiesCheckboxOptions>()( {
 
       // GasPropertiesCheckboxOptions
       textStringProperty: GasPropertiesStrings.centerOfMassStringProperty,
-      icon: GasPropertiesIconFactory.createCenterOfMassIcon(),
+      icon: GasPropertiesIconFactory.createCenterOfMassIcon( numberOfParticleTypesProperty ),
       textIconSpacing: 12
     }, providedOptions );
 
