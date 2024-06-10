@@ -185,8 +185,7 @@ export default class IdealGasLawModel extends BaseModel {
     if ( options.hasCollisionCounter ) {
       this.collisionCounter = new CollisionCounter( this.collisionDetector, {
         position: new Vector2( 40, 15 ), // view coordinates! determined empirically
-        tandem: options.tandem.createTandem( 'collisionCounter' ),
-        visible: true
+        tandem: options.tandem.createTandem( 'collisionCounter' )
       } );
     }
 
