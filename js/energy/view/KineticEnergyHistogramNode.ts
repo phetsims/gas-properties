@@ -40,6 +40,9 @@ export default class KineticEnergyHistogramNode extends HistogramNode {
       GasPropertiesStrings.numberOfParticlesStringProperty, // y-axis label
       options
     );
+
+    // See https://github.com/phetsims/gas-properties/issues/253
+    this.addLinkedElement( histogramsModel );
   }
 }
 

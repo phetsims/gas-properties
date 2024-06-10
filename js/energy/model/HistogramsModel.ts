@@ -117,7 +117,8 @@ export default class HistogramsModel extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioType: HistogramsModel.HistogramsModelIO
+      phetioType: HistogramsModel.HistogramsModelIO,
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );

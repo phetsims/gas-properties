@@ -100,7 +100,8 @@ export default class HistogramNode extends Node {
       barColor: 'white',
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+      phetioFeatured: true
     }, providedOptions );
 
     const chartTransform = new ChartTransform( {
