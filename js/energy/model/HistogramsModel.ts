@@ -151,7 +151,7 @@ export default class HistogramsModel extends PhetioObject {
 
     this.heavySpeedBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
-        tandem: speedTandem.createTandem( 'heavySpeedCumulativeBinCountsProperty' ),
+        tandem: speedTandem.createTandem( 'heavySpeedBinCountsProperty' ),
         phetioFeatured: true,
         phetioReadOnly: true,
         phetioDocumentation: `Bin counts for the speed of heavy particles (time averaged). ${speedBinsDocumentation}`
