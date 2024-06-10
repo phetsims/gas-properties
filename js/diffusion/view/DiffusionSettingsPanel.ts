@@ -2,7 +2,7 @@
 
 //TODO https://github.com/phetsims/gas-properties/issues/255 rename to DiffusionSettingsPanel
 /**
- * DiffusionSettingsNode is the panel for setting initial conditions in the 'Diffusion' screen.
+ * DiffusionSettingsPanel is the panel for setting initial conditions in the 'Diffusion' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -45,7 +45,7 @@ const NUMBER_SPINNER_OPTIONS: NumberSpinnerOptions = {
   phetioVisiblePropertyInstrumented: false
 };
 
-export default class DiffusionSettingsNode extends Panel {
+export default class DiffusionSettingsPanel extends Panel {
 
   /**
    * @param particle1Settings - setting for particle type 1
@@ -233,4 +233,4 @@ class QuantityControls extends VBox {
   }
 }
 
-gasProperties.register( 'DiffusionSettingsNode', DiffusionSettingsNode );
+gasProperties.register( 'DiffusionSettingsPanel', DiffusionSettingsPanel );

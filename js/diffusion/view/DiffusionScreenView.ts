@@ -23,7 +23,7 @@ import DiffusionParticleSystemNode from './DiffusionParticleSystemNode.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateNode from './ParticleFlowRateNode.js';
 import ScaleNode from './ScaleNode.js';
-import DiffusionSettingsNode from './DiffusionSettingsNode.js';
+import DiffusionSettingsPanel from './DiffusionSettingsPanel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 
 const PANELS_WIDTH = 300;
@@ -103,7 +103,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     } );
 
     // Panel for setting initial conditions
-    const settingsPanel = new DiffusionSettingsNode(
+    const settingsPanel = new DiffusionSettingsPanel(
       model.particleSystem.particle1Settings,
       model.particleSystem.particle2Settings,
       model.particleSystem.numberOfParticlesProperty,
