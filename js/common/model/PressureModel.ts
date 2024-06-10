@@ -49,6 +49,10 @@ export default class PressureModel extends PhetioObject {
   // P, pressure in the container, in kPa
   public readonly pressureKilopascalsProperty: Property<number>;
 
+  // P, pressure in the container, in atmospheres (atm)
+  // Added for PhET-iO only, see https://github.com/phetsims/gas-properties/issues/256
+  private readonly pressureAtmospheresProperty: TReadOnlyProperty<number>;
+
   // Pressure in kPa, with optional noise added, used exclusively by the view.
   public readonly pressureKilopascalsNoiseProperty: Property<number>;
 
@@ -102,6 +106,17 @@ export default class PressureModel extends PhetioObject {
       phetioFeatured: true,
       phetioDocumentation: 'Pressure in kPa, with no noise.'
     } );
+
+    this.pressureAtmospheresProperty = new DerivedProperty( [ this.pressureKilopascalsProperty ],
+      pressureKilopascals => pressureKilopascals * GasPropertiesConstants.ATM_PER_KPA, {
+        units: 'atm',
+        isValidValue: value => ( value >= 0 ),
+        valueType: 'number',
+        phetioValueType: NumberIO,
+        tandem: tandem.createTandem( 'pressureAtmospheresProperty' ),
+        phetioFeatured: true,
+        phetioDocumentation: 'Pressure in atm, with no noise.'
+      } );
 
     // This is not derived from pressureKilopascalsProperty, because it needs to add noise on step, not when pressureKilopascalsProperty changes.
     this.pressureKilopascalsNoiseProperty = new NumberProperty( this.pressureKilopascalsProperty.value, {
