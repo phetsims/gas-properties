@@ -96,7 +96,8 @@ export default class DiffusionParticleSystem extends PhetioObject {
     super( {
       isDisposable: true,
       tandem: tandem,
-      phetioType: DiffusionParticleSystem.DiffusionParticleSystemIO
+      phetioType: DiffusionParticleSystem.DiffusionParticleSystemIO,
+      phetioFeatured: true
     } );
 
     this.container = container;

@@ -113,7 +113,8 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioType: IdealGasLawParticleSystem.IdealGasLawParticleSystemIO
+      phetioType: IdealGasLawParticleSystem.IdealGasLawParticleSystemIO,
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );
