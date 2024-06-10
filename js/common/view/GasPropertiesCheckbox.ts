@@ -28,7 +28,7 @@ type SelfOptions = {
 };
 
 export type GasPropertiesCheckboxOptions = SelfOptions &
-  PickOptional<CheckboxOptions, 'spacing'> &
+  PickOptional<CheckboxOptions, 'spacing' | 'phetioVisiblePropertyInstrumented'> &
   PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class GasPropertiesCheckbox extends Checkbox {

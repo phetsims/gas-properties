@@ -31,7 +31,8 @@ export default class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
 
       // GasPropertiesCheckboxOptions
       icon: GasPropertiesIconFactory.createSpeciesHistogramIcon( particle, modelViewTransform ),
-      spacing: 5
+      spacing: 5,
+      phetioVisiblePropertyInstrumented: false // see https://github.com/phetsims/gas-properties/issues/254
     }, providedOptions );
 
     super( speciesVisibleProperty, options );

@@ -72,23 +72,28 @@ export default class EnergyAccordionBox extends AccordionBox {
     } );
 
     // Checkboxes
-    const checkboxes = new HBox( {
+    const checkboxGroupTandem = options.tandem.createTandem( 'checkboxGroup' );
+    const checkboxGroup = new HBox( {
       children: [
         SpeciesHistogramCheckbox.createHeavyParticlesCheckbox( histogramNode.heavyPlotVisibleProperty, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'heavyParticlesCheckbox' )
+          tandem: checkboxGroupTandem.createTandem( 'heavyParticlesCheckbox' )
         } ),
         SpeciesHistogramCheckbox.createLightParticlesCheckbox( histogramNode.lightPlotVisibleProperty, modelViewTransform, {
-          tandem: options.tandem.createTandem( 'lightParticlesCheckbox' )
+          tandem: checkboxGroupTandem.createTandem( 'lightParticlesCheckbox' )
         } )
       ],
       align: 'center',
       spacing: 25,
       right: histogramNode.right,
-      bottom: zoomButtonGroup.bottom
+      bottom: zoomButtonGroup.bottom,
+      tandem: checkboxGroupTandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true // see https://github.com/phetsims/gas-properties/issues/254
+      }
     } );
 
     const content = new Node( {
-      children: [ histogramNode, zoomButtonGroup, checkboxes ]
+      children: [ histogramNode, zoomButtonGroup, checkboxGroup ]
     } );
 
     super( content, options );
