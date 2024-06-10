@@ -140,7 +140,7 @@ export default class IdealGasLawModel extends BaseModel {
     this.heatCoolAmountProperty = new NumberProperty( 0, {
       range: new Range( -1, 1 ),
       tandem: options.tandem.createTandem( 'heatCoolAmountProperty' ),
-      phetioReadOnly: options.hasHoldConstantFeature, // With the Hold Constant feature, the sim animates this Property.
+      phetioReadOnly: true, // see https://github.com/phetsims/gas-properties/issues/250
       phetioFeatured: true,
       phetioDocumentation: 'Amount of heat or cool applied to particles in the container. ' +
                            '-1 is maximum cooling, +1 is maximum heat, 0 is off.'
