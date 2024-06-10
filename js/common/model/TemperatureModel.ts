@@ -83,7 +83,8 @@ export default class TemperatureModel extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioState: false
+      phetioState: false,
+      phetioFeatured: true
     }, providedOptions );
 
     assert && assert( options.temperatureKelvinRange.contains( DEFAULT_INITIAL_TEMPERATURE ) );

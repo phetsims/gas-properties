@@ -87,7 +87,8 @@ export default class PressureModel extends PhetioObject {
     super( {
       isDisposable: false,
       tandem: tandem,
-      phetioState: false
+      phetioState: false,
+      phetioFeatured: true
     } );
 
     this.holdConstantProperty = holdConstantProperty;

@@ -36,7 +36,11 @@ export default class NumberOfParticlesControl extends VBox {
       // VBoxOptions
       isDisposable: false,
       align: 'left',
-      spacing: 10
+      spacing: 10,
+      phetioFeatured: true,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     const labelText = new Text( titleStringProperty, {

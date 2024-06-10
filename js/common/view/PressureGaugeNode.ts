@@ -32,7 +32,10 @@ export default class PressureGaugeNode extends Node {
 
       // NodeOptions
       isDisposable: false,
-      phetioFeatured: true
+      phetioFeatured: true,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     // circular dial with needle

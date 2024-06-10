@@ -81,7 +81,10 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
           tandem: Tandem.OPT_OUT
         }
       },
-      phetioFeatured: true
+      phetioFeatured: true,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     super( heatCoolAmountProperty, options );

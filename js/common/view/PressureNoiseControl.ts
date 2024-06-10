@@ -47,7 +47,10 @@ export default class PressureNoiseControl extends PreferencesControl {
       controlNode: toggleSwitch,
       descriptionNode: descriptionText,
       labelSpacing: 20,
-      tandem: tandem
+      tandem: tandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
   }
 }
