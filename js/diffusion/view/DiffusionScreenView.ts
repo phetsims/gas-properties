@@ -107,9 +107,9 @@ export default class DiffusionScreenView extends BaseScreenView {
       model.particleSystem.particle1Settings,
       model.particleSystem.particle2Settings,
       model.particleSystem.numberOfParticlesProperty,
+      viewProperties.numberOfParticleTypesProperty,
       model.container.isDividedProperty,
       model.modelViewTransform,
-      viewProperties.numberOfParticleTypesProperty,
       panelsTandem.createTandem( 'settingsPanel' ) );
 
     // Panel for controlling visibility of 'tools'

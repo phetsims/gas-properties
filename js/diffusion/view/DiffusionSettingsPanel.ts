@@ -27,17 +27,17 @@ export default class DiffusionSettingsPanel extends Panel {
    * @param particle1Settings - settings for particle type 1
    * @param particle2Settings - settings for particle type 2
    * @param numberOfParticlesProperty
+   * @param numberOfParticleTypesProperty
    * @param isDividedProperty
    * @param modelViewTransform
-   * @param numberOfParticleTypesProperty
    * @param tandem
    */
   public constructor( particle1Settings: DiffusionSettings,
                       particle2Settings: DiffusionSettings,
                       numberOfParticlesProperty: TReadOnlyProperty<number>,
+                      numberOfParticleTypesProperty: TReadOnlyProperty<number>,
                       isDividedProperty: Property<boolean>,
                       modelViewTransform: ModelViewTransform2,
-                      numberOfParticleTypesProperty: TReadOnlyProperty<number>,
                       tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, GasPropertiesConstants.PANEL_OPTIONS, {
