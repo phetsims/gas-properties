@@ -16,8 +16,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import { InteractiveHighlighting, Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
@@ -35,6 +34,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import WallVelocityVectorNode from './WallVelocityVectorNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import ResizeHandleNode from './ResizeHandleNode.js';
 
 const LID_X_SPEED = -50; // pixels/second
 const LID_Y_SPEED = -150; // pixels/second
@@ -329,41 +329,6 @@ export default class IdealGasLawContainerNode extends Node {
         this.lidNode.visible = false;
       }
     }
-  }
-}
-
-/**
- * ResizeHandleNode is the handle used to resize the container.
- */
-type ResizeHandleNodeSelfOptions = {
-  gripColor: TColor;
-};
-type ResizeHandleNodeOptions = ResizeHandleNodeSelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
-
-class ResizeHandleNode extends InteractiveHighlighting( Node ) {
-
-  public constructor( providedOptions: ResizeHandleNodeOptions ) {
-
-    const options = optionize<ResizeHandleNodeOptions, ResizeHandleNodeSelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      cursor: 'pointer',
-      tagName: 'div',
-      focusable: true,
-      phetioInputEnabledPropertyInstrumented: true
-    }, providedOptions );
-
-    const handleNode = new HandleNode( {
-      gripBaseColor: options.gripColor,
-      attachmentLineWidth: 1,
-      rotation: -Math.PI / 2,
-      scale: 0.4
-    } );
-
-    // Wrap HandleNode so that the focus highlight is not affected by scaling.
-    options.children = [ handleNode ];
-
-    super( options );
   }
 }
 

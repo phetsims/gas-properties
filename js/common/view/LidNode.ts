@@ -8,13 +8,11 @@
  */
 
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import LidHandleNode, { LidHandleNodeOptions } from './LidHandleNode.js';
 
-const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 const HANDLE_RIGHT_INSET = 3;
 
 type SelfOptions = {
@@ -71,46 +69,6 @@ export default class LidNode extends Node {
     this.baseNode.left = 0;
     this.baseNode.bottom = 0;
     this.handleNode.right = this.baseNode.right - HANDLE_RIGHT_INSET;
-  }
-}
-
-/**
- * LidHandleNode is the handle used to open and close the container's lid.
- */
-
-type LidHandleNodeSelfOptions = {
-  gripColor?: TColor;
-};
-type LidHandleNodeOptions = LidHandleNodeSelfOptions & NodeTranslationOptions &
-  PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
-
-class LidHandleNode extends InteractiveHighlighting( Node ) {
-
-  public constructor( providedOptions: LidHandleNodeOptions ) {
-
-    const options = optionize<LidHandleNodeOptions, LidHandleNodeSelfOptions, NodeOptions>()( {
-
-      // LidHandleNodeSelfOptions
-      gripColor: GasPropertiesColors.lidGripColorProperty,
-
-      // NodeOptions
-      cursor: 'pointer',
-      tagName: 'div',
-      focusable: true,
-      phetioInputEnabledPropertyInstrumented: true
-    }, providedOptions );
-
-    const handleNode = new HandleNode( {
-      hasLeftAttachment: false,
-      gripBaseColor: options.gripColor,
-      attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
-      scale: 0.4
-    } );
-
-    // Wrap HandleNode so that the focus highlight is not affected by scaling.
-    options.children = [ handleNode ];
-
-    super( options );
   }
 }
 
