@@ -93,6 +93,7 @@ export default class EnergyAccordionBox extends AccordionBox {
     } );
 
     const content = new Node( {
+      excludeInvisibleChildrenFromBounds: true,
       children: [ histogramNode, zoomButtonGroup, checkboxGroup ]
     } );
 
