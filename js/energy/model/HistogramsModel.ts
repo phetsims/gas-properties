@@ -166,7 +166,7 @@ export default class HistogramsModel extends PhetioObject {
         phetioDocumentation: `Bin counts for the speed of light particles (time averaged). ${speedBinsDocumentation}`
       } ) );
 
-    // While this could be a DerivedProperty, it's more efficient to avoid intermediate states by setting it in update().
+    // While this could be a DerivedProperty, it's more efficient to avoid intermediate states by setting it in updateBinCounts().
     this.totalSpeedBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: speedTandem.createTandem( 'totalSpeedBinCountsProperty' ),
@@ -194,7 +194,7 @@ export default class HistogramsModel extends PhetioObject {
         phetioDocumentation: `Bin counts for the kinetic energy of light particles (time averaged). ${kineticEnergyBinsDocumentation}`
       } ) );
 
-    // While this could be a DerivedProperty, it's more efficient to avoid intermediate states by setting it in update().
+    // While this could be a DerivedProperty, it's more efficient to avoid intermediate states by setting it in updateBinCounts().
     this.totalKineticEnergyBinCountsProperty = new Property( emptyBins,
       combineOptions<PropertyOptions<number[]>>( {}, binCountsPropertyOptions, {
         tandem: kineticEnergyTandem.createTandem( 'totalKineticEnergyBinCountsProperty' ),
@@ -273,7 +273,7 @@ export default class HistogramsModel extends PhetioObject {
 
     // Update now if we've reached the end of the sample period, or if we're manually stepping
     if ( this.dtAccumulator >= this.samplePeriod || !this.isPlayingProperty.value ) {
-      this.update();
+      this.updateBinCounts();
     }
   }
 
@@ -302,9 +302,9 @@ export default class HistogramsModel extends PhetioObject {
   }
 
   /**
-   * Updates the histograms using the current bin counts.
+   * Updates the Properties for bin counts by averaging the samples that have been accumulated.
    */
-  private update(): void {
+  private updateBinCounts(): void {
     assert && assert( !( this.numberOfSamples !== 1 && !this.isPlayingProperty.value ),
       'numberOfSamples should be 1 if called while the sim is paused' );
 
