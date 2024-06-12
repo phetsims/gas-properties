@@ -21,12 +21,14 @@ type KineticEnergyAccordionBoxOptions = SelfOptions & EnergyAccordionBoxOptions;
 
 export default class KineticEnergyAccordionBox extends EnergyAccordionBox {
 
-  public constructor( histogramsModel: HistogramsModel, modelViewTransform: ModelViewTransform2,
+  public constructor( histogramsModel: HistogramsModel,
+                      modelViewTransform: ModelViewTransform2,
                       providedOptions: KineticEnergyAccordionBoxOptions ) {
 
-    const createHistogramNode = ( tandem: Tandem ) => new KineticEnergyHistogramNode( histogramsModel, {
-      tandem: tandem
-    } );
+    const createHistogramNode = ( tandem: Tandem ) =>
+      new KineticEnergyHistogramNode( histogramsModel, providedOptions.expandedProperty, {
+        tandem: tandem
+      } );
 
     super( GasPropertiesStrings.kineticEnergyStringProperty, modelViewTransform, histogramsModel.zoomLevelIndexProperty,
       createHistogramNode, providedOptions );

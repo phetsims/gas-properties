@@ -13,6 +13,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode, { HistogramNodeOptions } from './HistogramNode.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -20,7 +21,9 @@ type SpeedHistogramNodeOptions = SelfOptions & PickRequired<HistogramNodeOptions
 
 export default class SpeedHistogramNode extends HistogramNode {
 
-  public constructor( histogramsModel: HistogramsModel, providedOptions: SpeedHistogramNodeOptions ) {
+  public constructor( histogramsModel: HistogramsModel,
+                      accordionBoxExpandedProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: SpeedHistogramNodeOptions ) {
 
     const options = optionize<SpeedHistogramNodeOptions, SelfOptions, HistogramNodeOptions>()( {
 
@@ -31,13 +34,13 @@ export default class SpeedHistogramNode extends HistogramNode {
     super(
       histogramsModel.numberOfBins,
       histogramsModel.speedBinWidth,
-      histogramsModel.binCountsUpdatedEmitter,
       histogramsModel.heavySpeedBinCountsProperty,
       histogramsModel.lightSpeedBinCountsProperty,
       histogramsModel.totalSpeedBinCountsProperty,
       histogramsModel.zoomLevelIndexProperty,
       GasPropertiesStrings.speedStringProperty, // x-axis label
       GasPropertiesStrings.numberOfParticlesStringProperty, // y-axis label
+      accordionBoxExpandedProperty,
       options
     );
 

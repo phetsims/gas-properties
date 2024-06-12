@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -84,9 +83,6 @@ export default class HistogramsModel extends PhetioObject {
 
   // Index into ZOOM_LEVELS, shared by all histograms.
   public readonly zoomLevelIndexProperty: NumberProperty;
-
-  // emits when the averaged bin counts have been updated
-  public readonly binCountsUpdatedEmitter: Emitter;
 
   // The amount of time that has elapsed in the current sample period.
   private dtAccumulator: number;
@@ -211,8 +207,6 @@ export default class HistogramsModel extends PhetioObject {
       phetioDocumentation: 'Zoom level shared by the Speed and Kinetic Energy histograms. A larger value is more zoomed in.'
     } );
 
-    this.binCountsUpdatedEmitter = new Emitter();
-
     this.dtAccumulator = 0;
     this.numberOfSamples = 0;
 
@@ -317,9 +311,6 @@ export default class HistogramsModel extends PhetioObject {
     this.heavyKineticEnergyBinCountsProperty.value = this.heavyKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfSamples );
     this.lightKineticEnergyBinCountsProperty.value = this.lightKineticEnergyCumulativeBinCounts.map( count => count / this.numberOfSamples );
     this.totalKineticEnergyBinCountsProperty.value = sumBinCounts( this.heavyKineticEnergyBinCountsProperty.value, this.lightKineticEnergyBinCountsProperty.value );
-
-    // Notify listeners that the bin counts have been updated.
-    this.binCountsUpdatedEmitter.emit();
 
     // Clear sample data in preparation for the next sample period.
     this.clearSamples();

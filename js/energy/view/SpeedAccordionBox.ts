@@ -21,12 +21,14 @@ type SpeedAccordionBoxOptions = SelfOptions & EnergyAccordionBoxOptions;
 
 export default class SpeedAccordionBox extends EnergyAccordionBox {
 
-  public constructor( histogramsModel: HistogramsModel, modelViewTransform: ModelViewTransform2,
+  public constructor( histogramsModel: HistogramsModel,
+                      modelViewTransform: ModelViewTransform2,
                       providedOptions: SpeedAccordionBoxOptions ) {
 
-    const createHistogramNode = ( tandem: Tandem ) => new SpeedHistogramNode( histogramsModel, {
-      tandem: tandem
-    } );
+    const createHistogramNode = ( tandem: Tandem ) =>
+      new SpeedHistogramNode( histogramsModel, providedOptions.expandedProperty, {
+        tandem: tandem
+      } );
 
     super( GasPropertiesStrings.speedStringProperty, modelViewTransform, histogramsModel.zoomLevelIndexProperty,
       createHistogramNode, providedOptions );

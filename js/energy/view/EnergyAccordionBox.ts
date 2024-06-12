@@ -100,16 +100,11 @@ export default class EnergyAccordionBox extends AccordionBox {
     super( content, options );
 
     this.histogramNode = histogramNode;
-
-    // Disable updates of the histogram when the accordion box is collapsed.
-    this.expandedProperty.link( expanded => {
-      histogramNode.updateEnabledProperty.value = expanded;
-    } );
   }
 
   public override reset(): void {
-    this.histogramNode.reset();
     super.reset();
+    this.histogramNode.reset();
   }
 }
 

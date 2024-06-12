@@ -13,6 +13,7 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode, { HistogramNodeOptions } from './HistogramNode.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -20,7 +21,9 @@ type KineticEnergyHistogramNodeOptions = SelfOptions & PickRequired<HistogramNod
 
 export default class KineticEnergyHistogramNode extends HistogramNode {
 
-  public constructor( histogramsModel: HistogramsModel, providedOptions: KineticEnergyHistogramNodeOptions ) {
+  public constructor( histogramsModel: HistogramsModel,
+                      accordionBoxExpandedProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: KineticEnergyHistogramNodeOptions ) {
 
     const options = optionize<KineticEnergyHistogramNodeOptions, SelfOptions, HistogramNodeOptions>()( {
 
@@ -31,13 +34,13 @@ export default class KineticEnergyHistogramNode extends HistogramNode {
     super(
       histogramsModel.numberOfBins,
       histogramsModel.kineticEnergyBinWidth,
-      histogramsModel.binCountsUpdatedEmitter,
       histogramsModel.heavyKineticEnergyBinCountsProperty,
       histogramsModel.lightKineticEnergyBinCountsProperty,
       histogramsModel.totalKineticEnergyBinCountsProperty,
       histogramsModel.zoomLevelIndexProperty,
       GasPropertiesStrings.kineticEnergyStringProperty, // x-axis label
       GasPropertiesStrings.numberOfParticlesStringProperty, // y-axis label
+      accordionBoxExpandedProperty,
       options
     );
 

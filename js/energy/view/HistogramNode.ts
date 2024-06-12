@@ -8,8 +8,6 @@
 
 import Range from '../../../../dot/js/Range.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Emitter from '../../../../axon/js/Emitter.js';
-import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -28,6 +26,7 @@ import BinCountsPlot from './BinCountsPlot.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import Property from '../../../../axon/js/Property.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
 const TICK_LABEL_FONT = new PhetFont( 12 );
@@ -43,50 +42,31 @@ export type HistogramNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tand
 
 export default class HistogramNode extends Node {
 
-  // Plots
-  private readonly allPlotNode: BinCountsPlot;
-  private readonly heavyPlotNode: BinCountsPlot;
-  private readonly lightPlotNode: BinCountsPlot;
-
-  // Data for each plot.
-  private readonly heavyBinCountsProperty: Property<number[]>;
-  private readonly lightBinCountsProperty: Property<number[]>;
-  private readonly totalBinCountsProperty: Property<number[]>;
-
   // Visibility of species-specific plots.
   public readonly heavyPlotVisibleProperty: Property<boolean>;
   public readonly lightPlotVisibleProperty: Property<boolean>;
 
-  // Whether updates are enabled, false ignores binCountsUpdatedEmitter.
-  // This is used to prevent updates when the accordion box containing a histogram is collapsed.
-  public readonly updateEnabledProperty: Property<boolean>;
-
-  public reset(): void {
-    this.heavyPlotVisibleProperty.reset();
-    this.lightPlotVisibleProperty.reset();
-  }
-
   /**
    * @param numberOfBins
    * @param binWidth
-   * @param binCountsUpdatedEmitter - notifies when the bin counts have changed
    * @param heavyBinCountsProperty - bin counts for heavy particles
    * @param lightBinCountsProperty - bin counts for light particles
    * @param totalBinCountsProperty  - bin counts for total particles
    * @param zoomLevelIndexProperty - index into HistogramsModel.ZOOM_LEVELS
    * @param xAxisStringProperty - label on the x-axis
    * @param yAxisStringProperty - label on the y-axis
+   * @param accordionBoxExpandedProperty - whether the parent accordion box is expanded
    * @param providedOptions
    */
   protected constructor( numberOfBins: number,
                          binWidth: number,
-                         binCountsUpdatedEmitter: Emitter,
-                         heavyBinCountsProperty: Property<number[]>,
-                         lightBinCountsProperty: Property<number[]>,
-                         totalBinCountsProperty: Property<number[]>,
+                         heavyBinCountsProperty: TReadOnlyProperty<number[]>,
+                         lightBinCountsProperty: TReadOnlyProperty<number[]>,
+                         totalBinCountsProperty: TReadOnlyProperty<number[]>,
                          zoomLevelIndexProperty: NumberProperty,
                          xAxisStringProperty: TReadOnlyProperty<string>,
                          yAxisStringProperty: TReadOnlyProperty<string>,
+                         accordionBoxExpandedProperty: TReadOnlyProperty<boolean>,
                          providedOptions: HistogramNodeOptions ) {
     assert && assert( numberOfBins > 0, `invalid numberOfBins: ${numberOfBins}` );
     assert && assert( binWidth > 0, `invalid binWidth: ${binWidth}` );
@@ -185,73 +165,46 @@ export default class HistogramNode extends Node {
       yMaxTickLabel.centerY = yMaxTickMark.centerY;
     } );
 
-    // Plot for all particles.
-    const allPlotNode = new BinCountsPlot( chartTransform, totalBinCountsProperty.value, {
-      closeShape: true,
-      fill: options.barColor
+    const heavyPlotVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'heavyPlotVisibleProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: 'Whether the plot for heavy particles is visible on the histogram.'
     } );
 
-    // Plots for heavy and light particles.
-    const heavyPlotNode = new BinCountsPlot( chartTransform, heavyBinCountsProperty.value, {
-      stroke: GasPropertiesColors.heavyParticleColorProperty,
-      lineWidth: options.plotLineWidth
+    const lightPlotVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'lightPlotVisibleProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: 'Whether the plot for light particles is visible on the histogram.'
     } );
-    const lightPlotNode = new BinCountsPlot( chartTransform, lightBinCountsProperty.value, {
+
+    // Plots
+    const heavyPlotNode = new BinCountsPlot( chartTransform, heavyBinCountsProperty,
+      DerivedProperty.and( [ heavyPlotVisibleProperty, accordionBoxExpandedProperty ] ), {
+        stroke: GasPropertiesColors.heavyParticleColorProperty,
+        lineWidth: options.plotLineWidth
+      } );
+    const lightPlotNode = new BinCountsPlot( chartTransform, lightBinCountsProperty,
+      DerivedProperty.and( [ lightPlotVisibleProperty, accordionBoxExpandedProperty ] ), {
       stroke: GasPropertiesColors.lightParticleColorProperty,
       lineWidth: options.plotLineWidth
+    } );
+    const totalPlotNode = new BinCountsPlot( chartTransform, totalBinCountsProperty, accordionBoxExpandedProperty, {
+      closeShape: true,
+      fill: options.barColor
     } );
 
     // Parent for all chart elements that should be clipped to chartRectangle.
     const clippedNode = new Node( {
       clipArea: chartRectangle.getShape(),
-      children: [ yMinorGridLines, yMajorGridLines, allPlotNode, heavyPlotNode, lightPlotNode ]
+      children: [ yMinorGridLines, yMajorGridLines, totalPlotNode, heavyPlotNode, lightPlotNode ]
     } );
 
     options.children = [ yMaxTickMark, chartRectangle, clippedNode, xAxisLabelText, yAxisLabelText, yMaxTickLabel ];
 
     super( options );
 
-    this.allPlotNode = allPlotNode;
-    this.heavyPlotNode = heavyPlotNode;
-    this.lightPlotNode = lightPlotNode;
-    this.totalBinCountsProperty = totalBinCountsProperty;
-    this.heavyBinCountsProperty = heavyBinCountsProperty;
-    this.lightBinCountsProperty = lightBinCountsProperty;
-
-    this.heavyPlotVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'heavyPlotVisibleProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Whether the plot for heavy particles is visible on the histogram.'
-    } );
-
-    this.lightPlotVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'lightPlotVisibleProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Whether the plot for light particles is visible on the histogram.'
-    } );
-
-    this.updateEnabledProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'updateEnabledProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'For internal use only.'
-    } );
-    this.updateEnabledProperty.lazyLink( () => this.update() );
-
-    // Update the histogram when the bin counts have been updated. We do this instead of observing the
-    // individual bin count Properties to improve performance because the histogram should be updated atomically.
-    binCountsUpdatedEmitter.addListener( () => this.update() );
-
-    // Visibility of heavy plot, updated immediately when it's made visible.
-    this.heavyPlotVisibleProperty.link( visible => {
-      heavyPlotNode.visible = visible;
-      visible && heavyPlotNode.setBinCounts( heavyBinCountsProperty.value );
-    } );
-
-    // Visibility of light plot, updated immediately when it's made visible.
-    this.lightPlotVisibleProperty.link( visible => {
-      lightPlotNode.visible = visible;
-      visible && lightPlotNode.setBinCounts( lightBinCountsProperty.value );
-    } );
+    this.heavyPlotVisibleProperty = heavyPlotVisibleProperty;
+    this.lightPlotVisibleProperty = lightPlotVisibleProperty;
 
     zoomLevelIndexProperty.link( zoomLevelIndex => {
 
@@ -272,21 +225,9 @@ export default class HistogramNode extends Node {
     } );
   }
 
-  /**
-   * Updates plots to display the current bin counts. Update species-specific plots only if they are visible.
-   */
-  private update(): void {
-    if ( this.updateEnabledProperty.value ) {
-      this.allPlotNode.setBinCounts( this.totalBinCountsProperty.value );
-
-      if ( this.heavyPlotVisibleProperty.value ) {
-        this.heavyPlotNode.setBinCounts( this.heavyBinCountsProperty.value );
-      }
-
-      if ( this.lightPlotVisibleProperty.value ) {
-        this.lightPlotNode.setBinCounts( this.lightBinCountsProperty.value );
-      }
-    }
+  public reset(): void {
+    this.heavyPlotVisibleProperty.reset();
+    this.lightPlotVisibleProperty.reset();
   }
 }
 
