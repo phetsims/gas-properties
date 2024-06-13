@@ -178,19 +178,20 @@ export default class HistogramNode extends Node {
     } );
 
     // Plots
-    const heavyPlotNode = new BinCountsPlot( chartTransform, heavyBinCountsProperty,
-      DerivedProperty.and( [ heavyPlotVisibleProperty, accordionBoxExpandedProperty ] ), {
-        stroke: GasPropertiesColors.heavyParticleColorProperty,
-        lineWidth: options.plotLineWidth
-      } );
-    const lightPlotNode = new BinCountsPlot( chartTransform, lightBinCountsProperty,
-      DerivedProperty.and( [ lightPlotVisibleProperty, accordionBoxExpandedProperty ] ), {
+    const heavyPlotNode = new BinCountsPlot( chartTransform, heavyBinCountsProperty, {
+      visibleProperty: DerivedProperty.and( [ heavyPlotVisibleProperty, accordionBoxExpandedProperty ] ),
+      stroke: GasPropertiesColors.heavyParticleColorProperty,
+      lineWidth: options.plotLineWidth
+    } );
+    const lightPlotNode = new BinCountsPlot( chartTransform, lightBinCountsProperty, {
+      visibleProperty: DerivedProperty.and( [ lightPlotVisibleProperty, accordionBoxExpandedProperty ] ),
       stroke: GasPropertiesColors.lightParticleColorProperty,
       lineWidth: options.plotLineWidth
     } );
-    const totalPlotNode = new BinCountsPlot( chartTransform, totalBinCountsProperty, accordionBoxExpandedProperty, {
-      closeShape: true,
-      fill: options.barColor
+    const totalPlotNode = new BinCountsPlot( chartTransform, totalBinCountsProperty, {
+      visibleProperty: accordionBoxExpandedProperty,
+      fill: options.barColor,
+      closeShape: true
     } );
 
     // Parent for all chart elements that should be clipped to chartRectangle.

@@ -29,15 +29,11 @@ export default class BinCountsPlot extends Path {
   // Bin counts to be rendered, in order from left to right.
   private readonly binCountsProperty: TReadOnlyProperty<number[]>;
 
-  // Performance optimization, for disabling updates when the plot is not visible.
-  private readonly updateEnabledProperty: TReadOnlyProperty<boolean>;
-
   // Whether to close the Shape that describes the plot.
   private readonly closeShape: boolean;
 
   public constructor( chartTransform: ChartTransform,
                       binCountsProperty: TReadOnlyProperty<number[]>,
-                      updateEnabledProperty: TReadOnlyProperty<boolean>,
                       providedOptions?: HistogramPlotOptions ) {
 
     const options = optionize<HistogramPlotOptions, SelfOptions, PathOptions>()( {
@@ -51,24 +47,23 @@ export default class BinCountsPlot extends Path {
 
     this.chartTransform = chartTransform;
     this.binCountsProperty = binCountsProperty;
-    this.updateEnabledProperty = updateEnabledProperty;
     this.closeShape = options.closeShape;
 
     // Initialize
     this.update();
 
-    // Update when the bin counts change.
-    Multilink.multilink( [ binCountsProperty, updateEnabledProperty ], () => this.update() );
+    // Update when the bin counts change, or the plot is made visible.
+    Multilink.multilink( [ binCountsProperty, this.visibleProperty ], () => this.update() );
 
     // Update when the chart transform changes.
     chartTransform.changedEmitter.addListener( () => this.update() );
   }
 
   /**
-   * Recomputes the rendered shape.
+   * Recomputes the rendered shape. As a performance optimization, this is a no-op if the plot is not visible.
    */
   public update(): void {
-    if ( this.updateEnabledProperty.value ) {
+    if ( this.visibleProperty.value ) {
 
       const shape = new Shape();
 
