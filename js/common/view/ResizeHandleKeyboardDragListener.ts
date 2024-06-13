@@ -12,6 +12,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
+import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 
 export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragListener {
 
@@ -22,8 +23,8 @@ export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragLi
       // RichKeyboardDragListenerOptions
       isDisposable: false,
       transform: modelViewTransform,
-      dragSpeed: 300,
-      shiftDragSpeed: 75,
+      dragSpeed: GasPropertiesQueryParameters.resizeHandleDragSpeed,
+      shiftDragSpeed: GasPropertiesQueryParameters.resizeHandleShiftDragSpeed,
       tandem: tandem,
 
       start: event => dragDelegate.start(),
