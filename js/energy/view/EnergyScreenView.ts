@@ -81,10 +81,6 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       maxWidth: LEFT_PANEL_WIDTH
     } );
 
-    // Tools panel
-    const toolsPanel = new EnergyToolsPanel( viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
-      panelsTandem.createTandem( 'toolsPanel' ) );
-
     // Particles accordion box
     const particlesAccordionBox = new ParticlesAccordionBox(
       model.particleSystem.numberOfHeavyParticlesProperty,
@@ -104,12 +100,16 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
       }
     );
 
+    // Tools panel
+    const toolsPanel = new EnergyToolsPanel( viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
+      panelsTandem.createTandem( 'toolsPanel' ) );
+
     // Panels on the right side of the screen
     const rightPanels = new VBox( {
       children: [
-        toolsPanel,
         particlesAccordionBox,
-        injectionTemperatureAccordionBox
+        injectionTemperatureAccordionBox,
+        toolsPanel
       ],
       align: 'left',
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,

@@ -36,11 +36,6 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     // Group panels and accordion boxes in the Studio tree.
     const panelsTandem = tandem.createTandem( 'panels' );
 
-    // Panel at upper right
-    const toolsPanel = new ExploreToolsPanel( viewProperties.wallVelocityVisibleProperty,
-      viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
-      collisionCounter.visibleProperty, panelsTandem.createTandem( 'toolsPanel' ) );
-
     // Particles accordion box
     const particlesAccordionBox = new ParticlesAccordionBox(
       model.particleSystem.numberOfHeavyParticlesProperty,
@@ -50,11 +45,16 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
         tandem: panelsTandem.createTandem( 'particlesAccordionBox' )
       } );
 
+    // Panel at upper right
+    const toolsPanel = new ExploreToolsPanel( viewProperties.wallVelocityVisibleProperty,
+      viewProperties.widthVisibleProperty, model.stopwatch.isVisibleProperty,
+      collisionCounter.visibleProperty, panelsTandem.createTandem( 'toolsPanel' ) );
+
     // Rendering order. Everything we add should be behind what is created by super.
     const vBox = new VBox( {
       align: 'left',
       spacing: GasPropertiesConstants.PANELS_Y_SPACING,
-      children: [ toolsPanel, particlesAccordionBox ],
+      children: [ particlesAccordionBox, toolsPanel ],
       right: this.layoutBounds.right - GasPropertiesConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + GasPropertiesConstants.SCREEN_VIEW_Y_MARGIN,
 

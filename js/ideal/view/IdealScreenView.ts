@@ -57,6 +57,16 @@ export default class IdealScreenView extends IdealGasLawScreenView {
 
     const panels = [];
 
+    // Particles accordion box
+    const particlesAccordionBox = new ParticlesAccordionBox(
+      model.particleSystem.numberOfHeavyParticlesProperty,
+      model.particleSystem.numberOfLightParticlesProperty,
+      model.modelViewTransform, {
+        expandedProperty: viewProperties.particlesExpandedProperty,
+        tandem: panelsTandem.createTandem( 'particlesAccordionBox' )
+      } );
+    panels.push( particlesAccordionBox );
+
     let holdConstantPanel;
     if ( options.hasHoldConstantFeature ) {
       holdConstantPanel = new HoldConstantPanel(
@@ -74,16 +84,6 @@ export default class IdealScreenView extends IdealGasLawScreenView {
       collisionCounter.visibleProperty,
       panelsTandem.createTandem( 'toolsPanel' ) );
     panels.push( toolsPanel );
-
-    // Particles accordion box
-    const particlesAccordionBox = new ParticlesAccordionBox(
-      model.particleSystem.numberOfHeavyParticlesProperty,
-      model.particleSystem.numberOfLightParticlesProperty,
-      model.modelViewTransform, {
-        expandedProperty: viewProperties.particlesExpandedProperty,
-        tandem: panelsTandem.createTandem( 'particlesAccordionBox' )
-      } );
-    panels.push( particlesAccordionBox );
 
     const vBox = new VBox( {
       align: 'left',
