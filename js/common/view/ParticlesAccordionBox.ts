@@ -54,16 +54,6 @@ export default class ParticlesAccordionBox extends AccordionBox {
 
     const children: Node[] = [];
 
-    // optional Collisions checkbox
-    if ( options.collisionsEnabledProperty ) {
-      const collisionsCheckbox = new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
-        textStringProperty: GasPropertiesStrings.collisionsStringProperty,
-        textMaxWidth: 175, // determined empirically
-        tandem: options.tandem.createTandem( 'collisionsCheckbox' )
-      } );
-      children.push( collisionsCheckbox );
-    }
-
     // Heavy
     const numberOfHeavyParticlesControl = new NumberOfParticlesControl( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ),
       GasPropertiesStrings.heavyStringProperty, numberOfHeavyParticlesProperty, {
@@ -77,6 +67,16 @@ export default class ParticlesAccordionBox extends AccordionBox {
         tandem: options.tandem.createTandem( 'numberOfLightParticlesControl' )
       } );
     children.push( numberOfLightParticlesControl );
+
+    // optional Collisions checkbox
+    if ( options.collisionsEnabledProperty ) {
+      const collisionsCheckbox = new GasPropertiesCheckbox( options.collisionsEnabledProperty, {
+        textStringProperty: GasPropertiesStrings.collisionsStringProperty,
+        textMaxWidth: 175, // determined empirically
+        tandem: options.tandem.createTandem( 'collisionsCheckbox' )
+      } );
+      children.push( collisionsCheckbox );
+    }
 
     const content = new VBox( {
       align: 'left',
