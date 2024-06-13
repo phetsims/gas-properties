@@ -29,7 +29,7 @@ export default class IdealGasLawViewProperties {
       phetioDocumentation: 'Whether dimensional arrows are visible for the width of the container.'
     } );
 
-    this.particlesExpandedProperty = new BooleanProperty( false, {
+    this.particlesExpandedProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'particlesExpandedProperty' ),
       phetioFeatured: true,
       phetioDocumentation: 'Whether the Particles accordion box is expanded.'
