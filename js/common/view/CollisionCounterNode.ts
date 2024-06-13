@@ -160,8 +160,6 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
       ( bounds, visibleBounds ) =>
         visibleBounds.withMaxX( visibleBounds.maxX - bounds.width ).withMaxY( visibleBounds.maxY - bounds.height ),
       {
-        // because ScreenView visibleBoundsProperty has additional dependencies
-        strictAxonDependencies: false,
         valueComparisonStrategy: 'equalsFunction'
       } );
 
