@@ -49,9 +49,6 @@ export default class BinCountsPlot extends Path {
     this.binCountsProperty = binCountsProperty;
     this.closeShape = options.closeShape;
 
-    // Initialize
-    this.update();
-
     // Update when the bin counts change, or the plot is made visible.
     Multilink.multilink( [ binCountsProperty, this.visibleProperty ], () => this.update() );
 
