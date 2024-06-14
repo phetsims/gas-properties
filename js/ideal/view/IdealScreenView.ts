@@ -7,7 +7,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { Node, VBox } from '../../../../scenery/js/imports.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
@@ -138,27 +138,29 @@ export default class IdealScreenView extends IdealGasLawScreenView {
 
     // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
     assert && assert( this.collisionCounterNode );
-    this.pdomPlayAreaNode.pdomOrder = [
+    const pdomOrderPlayArea: Node[] = [
+      particlesAccordionBox
+    ];
+    holdConstantPanel && pdomOrderPlayArea.push( holdConstantPanel );
+    pdomOrderPlayArea.push(
       this.bicyclePumpControl,
-      particlesAccordionBox,
       this.eraseParticlesButton,
       this.heaterCoolerNode,
       this.containerNode,
       this.returnLidButton,
-      this.collisionCounterNode!,
-      this.stopwatchNode
-    ];
+      this.thermometerNode,
+      this.pressureGaugeNode,
+      this.stopwatchNode,
+      this.collisionCounterNode!
+    );
+    this.pdomPlayAreaNode.pdomOrder = pdomOrderPlayArea;
 
     // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
-    const pdomOrder = [
-      this.thermometerNode,
-      this.pressureGaugeNode
+    this.pdomControlAreaNode.pdomOrder = [
+      toolsPanel,
+      this.timeControlNode,
+      this.resetAllButton
     ];
-    holdConstantPanel && pdomOrder.push( holdConstantPanel );
-    pdomOrder.push( toolsPanel );
-    pdomOrder.push( this.timeControlNode );
-    pdomOrder.push( this.resetAllButton );
-    this.pdomControlAreaNode.pdomOrder = pdomOrder;
   }
 
   protected override reset(): void {
