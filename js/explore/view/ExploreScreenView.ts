@@ -69,6 +69,7 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     this.viewProperties = viewProperties;
 
     // Play Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
+    assert && assert( this.collisionCounterNode );
     this.pdomPlayAreaNode.pdomOrder = [
       particlesAccordionBox,
       this.bicyclePumpControl,
@@ -83,7 +84,6 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     ];
 
     // Control Area focus order, see https://github.com/phetsims/gas-properties/issues/213.
-    assert && assert( this.collisionCounterNode );
     this.pdomControlAreaNode.pdomOrder = [
       toolsPanel,
       this.timeControlNode,
