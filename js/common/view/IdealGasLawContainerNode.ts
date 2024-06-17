@@ -133,7 +133,7 @@ export default class IdealGasLawContainerNode extends Node {
 
     this.addLinkedElement( container );
 
-    // reposition the bottom-left corner of the lid's base, handle may extend past this to the left
+    // Reposition the bottom-left corner of the lid's base. The handle may extend past this to the left.
     const updateLidPosition = () => {
       lidNode.x = wallsNode.left;
       lidNode.y = wallsNode.top + viewWallThickness;
