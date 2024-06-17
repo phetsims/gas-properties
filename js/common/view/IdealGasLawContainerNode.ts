@@ -249,10 +249,9 @@ export default class IdealGasLawContainerNode extends Node {
 
         // Restore the lid to the fully-closed position.
         container.lidWidthProperty.value = container.getMaxLidWidth();
-        lidNode.visible = true;
         lidNode.setRotation( 0 );
         updateLidPosition();
-        lidNode.visible = true; //TODO https://github.com/phetsims/gas-properties/issues/263 duplicated
+        lidNode.visible = true;
       }
       else {
 
