@@ -72,6 +72,9 @@ type StringsType = {
   'oopsPressureLargeStringProperty': LocalizedStringProperty;
   'oopsPressureSmallStringProperty': LocalizedStringProperty;
   'oopsMaximumTemperatureStringProperty': LocalizedStringProperty;
+  'keyboardHelpDialog': {
+    'changeUnitesStringProperty': LocalizedStringProperty;
+  }
 };
 
 const GasPropertiesStrings = getStringModule( 'GAS_PROPERTIES' ) as StringsType;

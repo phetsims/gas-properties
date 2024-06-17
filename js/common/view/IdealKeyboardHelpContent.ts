@@ -14,6 +14,7 @@ import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keybo
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import SpinnerControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SpinnerControlsKeyboardHelpSection.js';
 import TimeControlKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlKeyboardHelpSection.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -25,6 +26,7 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
       // Move Draggable Items
       new MoveDraggableItemsKeyboardHelpSection(),
 
+      //TODO https://github.com/phetsims/gas-properties/issues/215 replace with HeaterCoolerKeyboardHelpContent
       // Slider Controls
       new SliderControlsKeyboardHelpSection(),
 
@@ -41,7 +43,9 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
       new TimeControlKeyboardHelpSection(),
 
       // Pop open menu
-      new ComboBoxKeyboardHelpSection(),
+      new ComboBoxKeyboardHelpSection( {
+        headingString: GasPropertiesStrings.keyboardHelpDialog.changeUnitesStringProperty
+      } ),
 
       // Basic Actions
       new BasicActionsKeyboardHelpSection( {
