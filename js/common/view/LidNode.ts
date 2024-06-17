@@ -7,11 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import LidHandleNode, { LidHandleNodeOptions } from './LidHandleNode.js';
+import LidHandleNode from './LidHandleNode.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 const HANDLE_RIGHT_INSET = 3;
@@ -19,14 +19,14 @@ const HANDLE_RIGHT_INSET = 3;
 type SelfOptions = {
   baseWidth: number;
   baseHeight: number;
-  lidHandleNodeOptions: LidHandleNodeOptions;
+  lidGripColor: TColor;
 };
 
 type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class LidNode extends Node {
 
-  public readonly handleNode: Node;
+  public readonly handleNode: LidHandleNode;
   private readonly baseNode: Rectangle;
 
   public constructor( providedOptions: LidNodeOptions ) {
@@ -47,10 +47,12 @@ export default class LidNode extends Node {
       bottom: 0
     } );
 
-    const lidHandleNode = new LidHandleNode( combineOptions<LidHandleNodeOptions>( {
+    const lidHandleNode = new LidHandleNode( {
+      gripColor: options.lidGripColor,
       right: baseNode.right - HANDLE_RIGHT_INSET,
-      bottom: baseNode.top + 1
-    }, options.lidHandleNodeOptions ) );
+      bottom: baseNode.top + 1,
+      tandem: providedOptions.tandem.createTandem( 'lidHandleNode' )
+    } );
     assert && assert( lidHandleNode.width <= baseNode.width,
       `handleNode.width ${lidHandleNode.width} is wider than baseNode.width ${baseNode.width}` );
     lidHandleNode.touchArea = lidHandleNode.localBounds.dilatedXY( 25, 20 );

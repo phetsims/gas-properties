@@ -12,6 +12,10 @@ import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, TCo
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import Property from '../../../../axon/js/Property.js';
 
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 
@@ -19,12 +23,26 @@ type SelfOptions = {
   gripColor?: TColor;
 };
 
-export type LidHandleNodeOptions = SelfOptions & NodeTranslationOptions &
-  PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+export type LidHandleNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class LidHandleNode extends InteractiveHighlighting( Node ) {
 
+  // The sim sets handleVisibleProperty, while the PhET-iO client can use hasHandleProperty to permanently hide the handle.
+  private readonly handleVisibleProperty: Property<boolean>;
+
   public constructor( providedOptions: LidHandleNodeOptions ) {
+
+    const handleVisibleProperty = new BooleanProperty( true, {
+      tandem: providedOptions.tandem.createTandem( 'handleVisibleProperty' ),
+      phetioReadOnly: true, // Sim controls this.
+      phetioDocumentation: 'This Property is used by the sim to control visibility of the container\'s lid handle.'
+    } );
+
+    const hasHandleProperty = new BooleanProperty( true, {
+      tandem: providedOptions.tandem.createTandem( 'hasHandleProperty' ),
+      phetioFeatured: true,
+      phetioDocumentation: 'Use this Property to permanently hide the container\'s lid handle.'
+    } );
 
     const options = optionize<LidHandleNodeOptions, SelfOptions, NodeOptions>()( {
 
@@ -35,6 +53,10 @@ export default class LidHandleNode extends InteractiveHighlighting( Node ) {
       cursor: 'pointer',
       tagName: 'div',
       focusable: true,
+      visibleProperty: DerivedProperty.and( [ handleVisibleProperty, hasHandleProperty ], {
+        tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
+        phetioValueType: BooleanIO
+      } ),
       phetioInputEnabledPropertyInstrumented: true
     }, providedOptions );
 
@@ -49,6 +71,15 @@ export default class LidHandleNode extends InteractiveHighlighting( Node ) {
     options.children = [ handleNode ];
 
     super( options );
+
+    this.handleVisibleProperty = handleVisibleProperty;
+  }
+
+  /**
+   * Sets the visibility of the handle. Note that PhET-iO clients can override this via hasHandleProperty.
+   */
+  public setHandleVisible( visible: boolean ): void {
+    this.handleVisibleProperty.value = visible;
   }
 }
 

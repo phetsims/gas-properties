@@ -27,13 +27,10 @@ import LidNode from './LidNode.js';
 import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
 import ResizeHandleKeyboardDragListener, { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import WallVelocityVectorNode from './WallVelocityVectorNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import ResizeHandleNode from './ResizeHandleNode.js';
 
 const LID_X_SPEED = -50; // pixels/second
@@ -100,51 +97,17 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Resize handle on the left wall. The sim sets resizeHandleVisibleProperty, while the PhET-iO client can use
     // hasResizeHandleProperty to permanently hide the handle.
-    const resizeHandleNodeTandem = options.phetioResizeHandleInstrumented ? options.tandem.createTandem( 'resizeHandleNode' ) : Tandem.OPT_OUT;
-    const resizeHandleVisibleProperty = new BooleanProperty( true, {
-      tandem: resizeHandleNodeTandem.createTandem( 'resizeHandleVisibleProperty' ),
-      phetioReadOnly: true, // Sim controls this.
-      phetioDocumentation: 'For internal use only.'
-    } );
-    const hasResizeHandleProperty = new BooleanProperty( true, {
-      tandem: resizeHandleNodeTandem.createTandem( 'hasResizeHandleProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Use this Property to permanently hide the container\'s resize handle.'
-    } );
     const resizeHandleNode = new ResizeHandleNode( {
       gripColor: options.resizeGripColor,
-      visibleProperty: DerivedProperty.and( [ resizeHandleVisibleProperty, hasResizeHandleProperty ], {
-        tandem: resizeHandleNodeTandem.createTandem( 'visibleProperty' ),
-        phetioValueType: BooleanIO
-      } ),
-      tandem: resizeHandleNodeTandem
+      tandem: options.phetioResizeHandleInstrumented ? options.tandem.createTandem( 'resizeHandleNode' ) : Tandem.OPT_OUT
     } );
 
     // Lid on the top of the container. The sim sets lidHandleVisibleProperty, while the PhET-iO client can use
     // hasLidHandleProperty to permanently hide the handle.
-    const lidNodeTandem = options.tandem.createTandem( 'lidNode' );
-    const lidHandleNodeTandem = lidNodeTandem.createTandem( 'lidHandleNode' );
-    const lidHandleVisibleProperty = new BooleanProperty( true, {
-      tandem: lidHandleNodeTandem.createTandem( 'lidHandleVisibleProperty' ),
-      phetioReadOnly: true, // Sim controls this.
-      phetioDocumentation: 'For internal use only.'
-    } );
-    const hasLidHandleProperty = new BooleanProperty( true, {
-      tandem: lidHandleNodeTandem.createTandem( 'hasLidHandleProperty' ),
-      phetioFeatured: true,
-      phetioDocumentation: 'Use this Property to permanently hide the container\'s lid handle.'
-    } );
     const lidNode = new LidNode( {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
-      lidHandleNodeOptions: {
-        gripColor: options.lidGripColor,
-        visibleProperty: DerivedProperty.and( [ lidHandleVisibleProperty, hasLidHandleProperty ], {
-          tandem: lidHandleNodeTandem.createTandem( 'visibleProperty' ),
-          phetioValueType: BooleanIO
-        } ),
-        tandem: lidHandleNodeTandem
-      },
+      lidGripColor: options.lidGripColor,
       tandem: options.tandem.createTandem( 'lidNode' )
     } );
     const lidHandleNode = lidNode.handleNode;
@@ -223,12 +186,12 @@ export default class IdealGasLawContainerNode extends Node {
     holdConstantProperty.link( holdConstant => {
       this.interruptSubtreeInput();
 
-      // Hide the resize handle when volume is held constant
-      resizeHandleVisibleProperty.value = ( holdConstant !== 'volume' && holdConstant !== 'pressureV' );
+      // Hide the resize handle when volume is held constant.
+      resizeHandleNode.setHandleVisible( holdConstant !== 'volume' && holdConstant !== 'pressureV' );
 
-      // Hide the lid handle when holding temperature constant.  We don't want to deal with counteracting evaporative
+      // Hide the lid handle when temperature constant is held constant.  We don't want to deal with counteracting evaporative
       // cooling, which will occur when the lid is open. See https://github.com/phetsims/gas-properties/issues/159
-      lidHandleVisibleProperty.value = ( holdConstant !== 'temperature' );
+      lidHandleNode.setHandleVisible( holdConstant !== 'temperature' );
     } );
 
     // Dragging the resize handle horizontally changes the container's width.
