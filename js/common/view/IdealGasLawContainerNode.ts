@@ -122,7 +122,8 @@ export default class IdealGasLawContainerNode extends Node {
 
     // Lid on the top of the container. The sim sets lidHandleVisibleProperty, while the PhET-iO client can use
     // hasLidHandleProperty to permanently hide the handle.
-    const lidHandleNodeTandem = options.tandem.createTandem( 'lidHandleNode' );
+    const lidNodeTandem = options.tandem.createTandem( 'lidNode' );
+    const lidHandleNodeTandem = lidNodeTandem.createTandem( 'lidHandleNode' );
     const lidHandleVisibleProperty = new BooleanProperty( true, {
       tandem: lidHandleNodeTandem.createTandem( 'lidHandleVisibleProperty' ),
       phetioReadOnly: true, // Sim controls this.
@@ -143,7 +144,8 @@ export default class IdealGasLawContainerNode extends Node {
           phetioValueType: BooleanIO
         } ),
         tandem: lidHandleNodeTandem
-      }
+      },
+      tandem: options.tandem.createTandem( 'lidNode' )
     } );
     const lidHandleNode = lidNode.handleNode;
 

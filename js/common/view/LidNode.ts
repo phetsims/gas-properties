@@ -12,6 +12,7 @@ import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js'
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import LidHandleNode, { LidHandleNodeOptions } from './LidHandleNode.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 const HANDLE_RIGHT_INSET = 3;
 
@@ -21,7 +22,7 @@ type SelfOptions = {
   lidHandleNodeOptions: LidHandleNodeOptions;
 };
 
-type LidNodeOptions = SelfOptions;
+type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class LidNode extends Node {
 
@@ -34,7 +35,10 @@ export default class LidNode extends Node {
 
       // NodeOptions
       isDisposable: false,
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: true,
+      visiblePropertyOptions: {
+        phetioReadOnly: true
+      }
     }, providedOptions );
 
     const baseNode = new Rectangle( 0, 0, options.baseWidth, options.baseHeight, {
