@@ -286,12 +286,9 @@ export default class IdealGasLawContainerNode extends Node {
       if ( this.visibleBoundsProperty.value.intersectsBounds( this.lidNode.bounds ) ) {
 
         // Lid is inside the visible bounds, animate it.
-        const dx = LID_X_SPEED * dt;
-        const dy = LID_Y_SPEED * dt;
-        this.lidNode.centerX += dx;
-        this.lidNode.centerY += dy;
-        const dr = Utils.toRadians( LID_ROTATION_SPEED ) * dt;
-        this.lidNode.rotateAround( this.lidNode.center, dr );
+        this.lidNode.centerX += LID_X_SPEED * dt;
+        this.lidNode.centerY += LID_Y_SPEED * dt;
+        this.lidNode.rotateAround( this.lidNode.center, Utils.toRadians( LID_ROTATION_SPEED ) * dt );
       }
       else {
 
