@@ -13,6 +13,7 @@ import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/he
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import SpinnerControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SpinnerControlsKeyboardHelpSection.js';
+import TimeControlKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlKeyboardHelpSection.js';
 
 export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -35,6 +36,9 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
 
     // Sections in the right column.
     const rightSections = [
+
+      // Timing Controls
+      new TimeControlKeyboardHelpSection(),
 
       // Pop open menu
       new ComboBoxKeyboardHelpSection(),
