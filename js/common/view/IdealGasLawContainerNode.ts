@@ -76,7 +76,7 @@ export default class IdealGasLawContainerNode extends Node {
       phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
-    // Constant aspects of the container, in view coordinates
+    // Constant aspects of the container, in view coordinates.
     const viewWallThickness = modelViewTransform.modelToViewDeltaX( container.wallThickness );
     const viewOpeningLeftInset = modelViewTransform.modelToViewDeltaX( container.openingLeftInset );
     const viewOpeningRightInset = modelViewTransform.modelToViewDeltaX( container.openingRightInset );
@@ -95,15 +95,13 @@ export default class IdealGasLawContainerNode extends Node {
       visible: false
     } );
 
-    // Resize handle on the left wall. The sim sets resizeHandleVisibleProperty, while the PhET-iO client can use
-    // hasResizeHandleProperty to permanently hide the handle.
+    // Resize handle on the left wall.
     const resizeHandleNode = new ResizeHandleNode( {
       gripColor: options.resizeGripColor,
       tandem: options.phetioResizeHandleInstrumented ? options.tandem.createTandem( 'resizeHandleNode' ) : Tandem.OPT_OUT
     } );
 
-    // Lid on the top of the container. The sim sets lidHandleVisibleProperty, while the PhET-iO client can use
-    // hasLidHandleProperty to permanently hide the handle.
+    // Lid on the top of the container.
     const lidNode = new LidNode( {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
@@ -173,13 +171,13 @@ export default class IdealGasLawContainerNode extends Node {
       }
     } );
 
-    // Update the lid width
+    // Update the lid width.
     container.lidWidthProperty.link( lidWidth => {
 
-      // resize the lid's base
+      // Resize the lid's base.
       lidNode.setBaseWidth( modelViewTransform.modelToViewDeltaX( lidWidth ) + 1 );  // +1 to cover seam
 
-      // reposition the lid
+      // Reposition the lid.
       updateLidPosition();
     } );
 
@@ -249,7 +247,7 @@ export default class IdealGasLawContainerNode extends Node {
     container.lidIsOnProperty.link( lidIsOn => {
       if ( lidIsOn ) {
 
-        // restore the lid to the fully-closed position
+        // Restore the lid to the fully-closed position.
         container.lidWidthProperty.value = container.getMaxLidWidth();
         lidNode.visible = true;
         lidNode.setRotation( 0 );
@@ -257,7 +255,9 @@ export default class IdealGasLawContainerNode extends Node {
         lidNode.visible = true;
       }
       else {
-        this.interruptSubtreeInput(); // cancel interactions with the container, because we're blowing the lid off
+
+        // Cancel interactions with the container, because we're blowing the lid off.
+        this.interruptSubtreeInput();
       }
 
       // Lid is only interactive when it's on the container.
@@ -281,7 +281,7 @@ export default class IdealGasLawContainerNode extends Node {
   public step( dt: number ): void {
     assert && assert( dt >= 0, `invalid dt: ${dt}` );
 
-    // Blow the lid off the container
+    // Blow the lid off the container.
     if ( !this.container.lidIsOnProperty.value && this.lidNode.visible ) {
       if ( this.visibleBoundsProperty.value.intersectsBounds( this.lidNode.bounds ) ) {
 
