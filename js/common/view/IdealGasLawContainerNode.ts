@@ -252,7 +252,7 @@ export default class IdealGasLawContainerNode extends Node {
         lidNode.visible = true;
         lidNode.setRotation( 0 );
         updateLidPosition();
-        lidNode.visible = true;
+        lidNode.visible = true; //TODO https://github.com/phetsims/gas-properties/issues/263 duplicated
       }
       else {
 
