@@ -8,24 +8,34 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
+import RichKeyboardDragListener, { RichKeyboardDragListenerOptions } from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
-import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+
+type SelfOptions = EmptySelfOptions;
+
+export type ResizeHandleKeyboardDragListenerOptions = SelfOptions &
+  PickOptional<RichKeyboardDragListenerOptions, 'dragSpeed' | 'shiftDragSpeed'> &
+  PickRequired<RichKeyboardDragListenerOptions, 'tandem'>;
 
 export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragListener {
 
-  public constructor( dragDelegate: ResizeHandleDragDelegate, modelViewTransform: ModelViewTransform2, tandem: Tandem ) {
+  public constructor( dragDelegate: ResizeHandleDragDelegate,
+                      modelViewTransform: ModelViewTransform2,
+                      providedOptions: ResizeHandleKeyboardDragListenerOptions ) {
 
-    super( {
+    super( optionize<ResizeHandleKeyboardDragListenerOptions, SelfOptions, RichKeyboardDragListenerOptions>()( {
 
       // RichKeyboardDragListenerOptions
       isDisposable: false,
       transform: modelViewTransform,
-      dragSpeed: GasPropertiesQueryParameters.resizeHandleDragSpeed,
-      shiftDragSpeed: GasPropertiesQueryParameters.resizeHandleShiftDragSpeed,
-      tandem: tandem,
+
+      // See https://github.com/phetsims/gas-properties/issues/197#issuecomment-2168845330 for drag speeds.
+      dragSpeed: 100,
+      shiftDragSpeed: 20,
 
       start: event => dragDelegate.start(),
 
@@ -38,7 +48,7 @@ export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragLi
       },
 
       end: () => dragDelegate.end()
-    } );
+    }, providedOptions ) );
   }
 }
 

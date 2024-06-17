@@ -73,22 +73,6 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
   // not centered on the particles, then positioning in ParticlesNode is incorrect.
   showParticlePositions: {
     type: 'flag'
-  },
-
-  // Drag speed for the container's resize handle. Applies to all screens whose container has a resize handle.
-  // See https://github.com/phetsims/gas-properties/issues/197
-  resizeHandleDragSpeed: {
-    type: 'number',
-    isValidValue: value => ( value > 0 ),
-    defaultValue: 300
-  },
-
-  // Shift-drag speed for the container's resize handle. Applies to all screens whose container has a resize handle.
-  // See https://github.com/phetsims/gas-properties/issues/197
-  resizeHandleShiftDragSpeed: {
-    type: 'number',
-    isValidValue: value => ( value > 0 ),
-    defaultValue: 5
   }
 } );
 

@@ -27,6 +27,12 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
 
     super( model, viewProperties.particleTypeProperty, viewProperties.widthVisibleProperty, {
       wallVelocityVisibleProperty: viewProperties.wallVelocityVisibleProperty,
+
+      // See https://github.com/phetsims/gas-properties/issues/197#issuecomment-2168845330 for drag speeds.
+      resizeHandleKeyboardDragListenerOptions: {
+        dragSpeed: 300,
+        shiftDragSpeed: 5
+      },
       tandem: tandem
     } );
 

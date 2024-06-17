@@ -25,8 +25,10 @@ export default class LidHandleKeyboardDragListener extends RichKeyboardDragListe
         container.lidWidthProperty.value = Utils.clamp( container.lidWidthProperty.value + listener.modelDelta.x,
           container.getMinLidWidth(), container.getMaxLidWidth() );
       },
-      dragSpeed: 300,
-      shiftDragSpeed: 75,
+
+      // See https://github.com/phetsims/gas-properties/issues/197#issuecomment-2168845330 for drag speeds.
+      dragSpeed: 100,
+      shiftDragSpeed: 20,
       tandem: tandem
     } );
   }

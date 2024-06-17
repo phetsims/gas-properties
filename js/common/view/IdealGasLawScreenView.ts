@@ -54,10 +54,12 @@ import ReturnLidButton from './ReturnLidButton.js';
 import BicyclePumpControl from './BicyclePumpControl.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
 
 type SelfOptions = {
   resizeGripColor?: TColor;
   wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
+  resizeHandleKeyboardDragListenerOptions?: StrictOmit<ResizeHandleKeyboardDragListenerOptions, 'tandem'>;
   phetioResizeHandleInstrumented?: boolean;
 };
 
@@ -87,7 +89,9 @@ export default class IdealGasLawScreenView extends BaseScreenView {
                          widthVisibleProperty: Property<boolean>,
                          providedOptions?: IdealGasLawScreenViewOptions ) {
 
-    const options = optionize<IdealGasLawScreenViewOptions, StrictOmit<SelfOptions, 'wallVelocityVisibleProperty'>, BaseScreenViewOptions>()( {
+    const options = optionize<IdealGasLawScreenViewOptions,
+      StrictOmit<SelfOptions, 'wallVelocityVisibleProperty' | 'resizeHandleKeyboardDragListenerOptions'>,
+      BaseScreenViewOptions>()( {
 
       // SelfOptions
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty,
@@ -161,8 +165,9 @@ export default class IdealGasLawScreenView extends BaseScreenView {
         resizeGripColor: options.resizeGripColor,
         resizeHandleIsPressedListener: resizeHandleIsPressedListener,
         wallVelocityVisibleProperty: options.wallVelocityVisibleProperty,
-        tandem: options.tandem.createTandem( 'containerNode' ),
-        phetioResizeHandleInstrumented: options.phetioResizeHandleInstrumented
+        resizeHandleKeyboardDragListenerOptions: options.resizeHandleKeyboardDragListenerOptions,
+        phetioResizeHandleInstrumented: options.phetioResizeHandleInstrumented,
+        tandem: options.tandem.createTandem( 'containerNode' )
       } );
 
     // Return Lid button

@@ -13,7 +13,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
@@ -25,7 +25,7 @@ import ResizeHandleDragListener from './ResizeHandleDragListener.js';
 import LidHandleDragListener from './LidHandleDragListener.js';
 import LidNode from './LidNode.js';
 import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
-import ResizeHandleKeyboardDragListener from './ResizeHandleKeyboardDragListener.js';
+import ResizeHandleKeyboardDragListener, { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
@@ -44,8 +44,9 @@ type SelfOptions = {
   resizeGripColor?: TColor; // color of resize handle's grip
   lidGripColor?: TColor; // color of the lid handle's grip
   resizeHandleIsPressedListener?: ( isPressed: boolean ) => void;
-  wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
+  resizeHandleKeyboardDragListenerOptions?: StrictOmit<ResizeHandleKeyboardDragListenerOptions, 'tandem'>;
   phetioResizeHandleInstrumented?: boolean;
+  wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
 };
 
 type IdealGasLawContainerNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
@@ -62,7 +63,9 @@ export default class IdealGasLawContainerNode extends Node {
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       providedOptions: IdealGasLawContainerNodeOptions ) {
 
-    const options = optionize<IdealGasLawContainerNodeOptions, StrictOmit<SelfOptions, 'wallVelocityVisibleProperty'>, NodeOptions>()( {
+    const options = optionize<IdealGasLawContainerNodeOptions,
+      StrictOmit<SelfOptions, 'wallVelocityVisibleProperty' | 'resizeHandleKeyboardDragListenerOptions'>,
+      NodeOptions>()( {
 
       // SelfOptions
       resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // color of resize handle's grip
@@ -233,8 +236,10 @@ export default class IdealGasLawContainerNode extends Node {
       modelViewTransform, this, resizeHandleNode.tandem.createTandem( 'dragListener' ) );
     resizeHandleNode.addInputListener( resizeHandleDragListener );
 
-    const resizeHandleKeyboardDragListener = new ResizeHandleKeyboardDragListener( resizeHandleDragDelegate,
-      modelViewTransform, resizeHandleNode.tandem.createTandem( 'keyboardDragListener' ) );
+    const resizeHandleKeyboardDragListener = new ResizeHandleKeyboardDragListener( resizeHandleDragDelegate, modelViewTransform,
+      combineOptions<ResizeHandleKeyboardDragListenerOptions>( {
+        tandem: resizeHandleNode.tandem.createTandem( 'keyboardDragListener' )
+      }, options.resizeHandleKeyboardDragListenerOptions ) );
     resizeHandleNode.addInputListener( resizeHandleKeyboardDragListener );
 
     // While interacting with the resize handle...
