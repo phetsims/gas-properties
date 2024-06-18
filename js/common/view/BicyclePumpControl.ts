@@ -63,7 +63,9 @@ export default class BicyclePumpControl extends Node {
     const toggleNode = new ToggleNode( particleTypeProperty, [
       { value: 'heavy', createNode: () => heavyBicyclePumpNode },
       { value: 'light', createNode: () => lightBicyclePumpNode }
-    ] );
+    ], {
+      alignChildren: ToggleNode.BOTTOM
+    } );
 
     // Radio buttons for selecting particle type
     const radioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty, modelViewTransform, {
