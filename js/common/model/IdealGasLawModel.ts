@@ -474,7 +474,7 @@ export default class IdealGasLawModel extends BaseModel {
       this.particleSystem.removeAllParticles();
 
       // Put the lid on the container
-      this.container.lidIsOnProperty.value = true;
+      this.container.returnLid();
 
       // Notify listeners that maximum temperature was exceeded.
       phet.log && phet.log( `Oops! Maximum temperature reached: ${this.temperatureModel.temperatureKelvinProperty.value}` );

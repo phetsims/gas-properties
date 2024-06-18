@@ -39,7 +39,10 @@ export default class IdealGasLawContainer extends BaseContainer {
   private readonly dxSamples: number[]; // changes in the left wall's x-coordinate
   private readonly dtSamples: number[]; // dt values for each sample in dxSamples
 
-  public readonly lidIsOnProperty: Property<boolean>; // whether the lid is on the container
+  // whether the lid is on the container
+  public readonly lidIsOnProperty: TReadOnlyProperty<boolean>;
+  private readonly _lidIsOnProperty: Property<boolean>;
+
   public readonly lidThickness: number; // lid thickness, in pm
 
   // insets of the opening in the top, from the inside edges of the container, in pm
@@ -89,12 +92,13 @@ export default class IdealGasLawContainer extends BaseContainer {
     this.dxSamples = [];
     this.dtSamples = [];
 
-    this.lidIsOnProperty = new BooleanProperty( true, {
+    this._lidIsOnProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'lidIsOnProperty' ),
       phetioReadOnly: true, // derived from state of the particle system
       phetioFeatured: true,
       phetioDocumentation: 'Indicates whether the lid is on the container, or has been blown off.'
     } );
+    this.lidIsOnProperty = this._lidIsOnProperty;
 
     this.lidThickness = 175;
 
@@ -153,7 +157,7 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   public override reset(): void {
     super.reset();
-    this.lidIsOnProperty.reset();
+    this._lidIsOnProperty.reset();
     this.lidWidthProperty.reset();
     this.desiredWidthProperty.reset();
     this.previousLeftProperty.reset();
@@ -337,9 +341,17 @@ export default class IdealGasLawContainer extends BaseContainer {
 
   /**
    * Blows the lid off of the container.
+   * This is a no-op if the lid is open, see https://github.com/phetsims/gas-properties/issues/271.
    */
   public blowLidOff(): void {
-    this.lidIsOnProperty.value = false;
+    this._lidIsOnProperty.value = false;
+  }
+
+  /**
+   * Returns the lid to the container.
+   */
+  public returnLid(): void {
+    this._lidIsOnProperty.value = true;
   }
 }
 

@@ -35,9 +35,7 @@ export default class ReturnLidButton extends RectangularPushButton {
       isDisposable: false,
       baseColor: PhetColorScheme.BUTTON_YELLOW,
       content: textNode,
-      listener: () => {
-        container.lidIsOnProperty.value = true;
-      }
+      listener: () => container.returnLid()
     }, providedOptions );
 
     super( options );
