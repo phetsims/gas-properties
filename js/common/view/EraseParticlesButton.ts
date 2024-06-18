@@ -30,9 +30,7 @@ export default class EraseParticlesButton extends EraserButton {
       baseColor: GasPropertiesColors.eraserButtonColorProperty,
 
       // Deletes all particles when the button fires.
-      listener: () => {
-        particleSystem.removeAllParticles();
-      },
+      listener: () => particleSystem.removeAllParticles(),
 
       // Disables the button when the container is empty.
       enabledProperty: new DerivedProperty( [ particleSystem.numberOfParticlesProperty ],
