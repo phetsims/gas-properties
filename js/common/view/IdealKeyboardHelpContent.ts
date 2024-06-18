@@ -10,11 +10,11 @@ import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboar
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 import gasProperties from '../../gasProperties.js';
 import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
-import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import SpinnerControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SpinnerControlsKeyboardHelpSection.js';
 import TimingControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimingControlsKeyboardHelpSection.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
+import HeatCoolControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/HeatCoolControlsKeyboardHelpSection.js';
 
 export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -26,9 +26,8 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
       // Move Draggable Items
       new MoveDraggableItemsKeyboardHelpSection(),
 
-      //TODO https://github.com/phetsims/gas-properties/issues/215 replace with HeaterCoolerKeyboardHelpContent
-      // Slider Controls
-      new SliderControlsKeyboardHelpSection(),
+      // Heat Cool
+      new HeatCoolControlsKeyboardHelpSection(),
 
       // Spinner Controls
       new SpinnerControlsKeyboardHelpSection( {
