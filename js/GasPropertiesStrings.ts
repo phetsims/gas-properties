@@ -73,7 +73,7 @@ type StringsType = {
   'oopsPressureSmallStringProperty': LocalizedStringProperty;
   'oopsMaximumTemperatureStringProperty': LocalizedStringProperty;
   'keyboardHelpDialog': {
-    'changeUnitesStringProperty': LocalizedStringProperty;
+    'changeUnitsStringProperty': LocalizedStringProperty;
   }
 };
 

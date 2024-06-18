@@ -42,9 +42,9 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
       // Timing Controls
       new TimingControlsKeyboardHelpSection(),
 
-      // Pop open menu
+      // Change Units
       new ComboBoxKeyboardHelpSection( {
-        headingString: GasPropertiesStrings.keyboardHelpDialog.changeUnitesStringProperty
+        headingString: GasPropertiesStrings.keyboardHelpDialog.changeUnitsStringProperty
       } ),
 
       // Basic Actions

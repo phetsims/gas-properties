@@ -170,7 +170,7 @@
   "oopsMaximumTemperature": {
     "value": "Oops!<br><br>Maximum temperature reached."
   },
-  "keyboardHelpDialog.changeUnites": {
+  "keyboardHelpDialog.changeUnits": {
     "value": "Change Units"
   }
 }
