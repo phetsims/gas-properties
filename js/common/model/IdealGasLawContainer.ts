@@ -24,6 +24,11 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 const NUMBER_OF_DX_SAMPLES = 50;
 
+// If the opening in the top of the container is less than this width, the lid will blow off when pressure in the
+// container reaches its maximum threshold. This value was set empirically.
+// See https://github.com/phetsims/gas-properties/issues/271
+const OPENING_WIDTH_THRESHOLD = 1500;
+
 type SelfOptions = {
   leftWallDoesWork?: boolean;  // true if the left wall does work on particles, as in the Explore screen
 };
@@ -340,11 +345,14 @@ export default class IdealGasLawContainer extends BaseContainer {
   }
 
   /**
-   * Blows the lid off of the container.
-   * This is a no-op if the lid is open, see https://github.com/phetsims/gas-properties/issues/271.
+   * Blows the lid off of the container if the container is closed, or the opening is small enough
+   * to compromise the structural integrity of the container.
+   * See https://github.com/phetsims/gas-properties/issues/271.
    */
   public blowLidOff(): void {
-    this._lidIsOnProperty.value = false;
+    if ( !this.lidIsOpenProperty.value || this.getOpeningWidth() < OPENING_WIDTH_THRESHOLD ) {
+      this._lidIsOnProperty.value = false;
+    }
   }
 
   /**
