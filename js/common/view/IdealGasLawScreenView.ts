@@ -148,8 +148,11 @@ export default class IdealGasLawScreenView extends BaseScreenView {
           // make particles opaque
           particleSystemNode.opacity = 1;
 
-          // redistribute the particle
+          // redistribute the particles
           model.particleSystem.redistributeParticles( model.container.widthProperty.value / startContainerWidth );
+          if ( !model.isPlayingProperty.value ) {
+            particleSystemNode.update();
+          }
         }
 
         // Interacting with the container's resize handle stops the collision counter.
