@@ -33,9 +33,9 @@ import WallVelocityVectorNode from './WallVelocityVectorNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ResizeHandleNode from './ResizeHandleNode.js';
 
-const LID_X_SPEED = -50; // pixels/second
-const LID_Y_SPEED = -150; // pixels/second
-const LID_ROTATION_SPEED = -50; // degrees/second
+const LID_X_SPEED = 50; // pixels/second
+const LID_Y_SPEED = 150; // pixels/second
+const LID_ROTATION_SPEED = 50; // degrees/second
 
 type SelfOptions = {
   resizeGripColor?: TColor; // color of resize handle's grip
@@ -132,9 +132,10 @@ export default class IdealGasLawContainerNode extends Node {
     this.addLinkedElement( container );
 
     // Reposition the bottom-left corner of the lid's base. The handle may extend past this to the left.
-    const updateLidPosition = () => {
-      lidNode.x = wallsNode.left;
-      lidNode.y = wallsNode.top + viewWallThickness;
+    const updateLidTransform = () => {
+      const x = wallsNode.left;
+      const y = wallsNode.top + viewWallThickness;
+      lidNode.setTranslationAndRotation( x, y, 0 );
     };
 
     // Half the wall thickness, in view coordinates.
@@ -167,7 +168,7 @@ export default class IdealGasLawContainerNode extends Node {
 
       // reposition the lid if it's on the container
       if ( container.lidIsOnProperty.value ) {
-        updateLidPosition();
+        updateLidTransform();
       }
     } );
 
@@ -178,7 +179,7 @@ export default class IdealGasLawContainerNode extends Node {
       lidNode.setBaseWidth( modelViewTransform.modelToViewDeltaX( lidWidth ) + 1 );  // +1 to cover seam
 
       // Reposition the lid.
-      updateLidPosition();
+      updateLidTransform();
     } );
 
     holdConstantProperty.link( holdConstant => {
@@ -249,8 +250,7 @@ export default class IdealGasLawContainerNode extends Node {
 
         // Restore the lid to the fully-closed position.
         container.lidWidthProperty.value = container.getMaxLidWidth();
-        lidNode.setRotation( 0 );
-        updateLidPosition();
+        updateLidTransform();
         lidNode.visible = true;
       }
       else {
@@ -266,7 +266,7 @@ export default class IdealGasLawContainerNode extends Node {
     // See https://github.com/phetsims/gas-properties/issues/213
     this.pdomOrder = [
       resizeHandleNode,
-      lidNode.handleNode
+      lidHandleNode
     ];
 
     this.container = container;
@@ -284,18 +284,20 @@ export default class IdealGasLawContainerNode extends Node {
     if ( !this.container.lidIsOnProperty.value && this.lidNode.visible ) {
       if ( this.visibleBoundsProperty.value.intersectsBounds( this.lidNode.bounds ) ) {
 
-        // Lid is inside the visible bounds, animate it.
-        this.lidNode.centerX += LID_X_SPEED * dt;
-        this.lidNode.centerY += LID_Y_SPEED * dt;
-        this.lidNode.rotateAround( this.lidNode.center, Utils.toRadians( LID_ROTATION_SPEED ) * dt );
+        // Lid is inside the visible bounds, so animate it.
+        const dx = -LID_X_SPEED * dt; // left
+        const dy = -LID_Y_SPEED * dt; // up
+        const dr = -Utils.toRadians( LID_ROTATION_SPEED ) * dt; // counterclockwise
+        this.lidNode.stepTranslationAndRotation( dx, dy, dr );
       }
       else {
 
-        // Lid has left the visible bounds, hide it.
+        // Lid has left the visible bounds, so hide it.
         this.lidNode.visible = false;
       }
     }
   }
 }
+
 
 gasProperties.register( 'IdealGasLawContainerNode', IdealGasLawContainerNode );

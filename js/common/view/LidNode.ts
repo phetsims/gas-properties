@@ -13,6 +13,9 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import LidHandleNode from './LidHandleNode.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import Property from '../../../../axon/js/Property.js';
 
 const HANDLE_RIGHT_INSET = 3;
 
@@ -28,6 +31,12 @@ export default class LidNode extends Node {
 
   public readonly handleNode: LidHandleNode;
   private readonly baseNode: Rectangle;
+
+  // Translation and rotation for the lid, in view coordinates. This must be a Property for PhET-iO.
+  // The value must be a single data structure so that we can control the order that translation and rotation are applied.
+  // With separate Properties, we would be at the mercy of the order in which state is restored, with unpredictable results.
+  // See https://github.com/phetsims/gas-properties/issues/263.
+  private readonly translationAndRotationProperty: Property<TranslationAndRotation>;
 
   public constructor( providedOptions: LidNodeOptions ) {
 
@@ -61,6 +70,19 @@ export default class LidNode extends Node {
 
     super( options );
 
+    this.translationAndRotationProperty = new Property<TranslationAndRotation>( new TranslationAndRotation( 0, 0, 0 ), {
+      tandem: options.tandem.createTandem( 'translationAndRotationProperty' ),
+      phetioValueType: TranslationAndRotation.TranslationAndRotationIO,
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
+    } );
+
+    this.translationAndRotationProperty.lazyLink( ( newTransform, oldTransform ) => {
+      this.rotateAround( this.center, newTransform.rotation - oldTransform.rotation );
+      this.x = newTransform.x;
+      this.y = newTransform.y;
+    } );
+
     this.handleNode = lidHandleNode;
     this.baseNode = baseNode;
   }
@@ -76,6 +98,80 @@ export default class LidNode extends Node {
     this.baseNode.bottom = 0;
     this.handleNode.right = this.baseNode.right - HANDLE_RIGHT_INSET;
   }
+
+  /**
+   * Sets the translation and rotation applied to this LidNode.
+   */
+  public setTranslationAndRotation( x: number, y: number, rotation: number ): void {
+    this.translationAndRotationProperty.value = new TranslationAndRotation( x, y, rotation );
+  }
+
+  /**
+   * Steps the translation and rotation by deltas. This is used to animate the lid blowing off.
+   */
+  public stepTranslationAndRotation( dx: number, dy: number, dr: number ): void {
+    const x = this.translationAndRotationProperty.value.x + dx;
+    const y = this.translationAndRotationProperty.value.y + dy;
+    const rotation = this.translationAndRotationProperty.value.rotation + dr;
+    this.setTranslationAndRotation( x, y, rotation );
+  }
+}
+
+/**
+ * TranslationAndRotation is the transform (translation and rotation) applied to the lid.
+ */
+
+type TranslationAndRotationStateObject = {
+  x: number;
+  y: number;
+  rotation: number;
+};
+
+export class TranslationAndRotation {
+
+  public readonly x: number;
+  public readonly y: number;
+  public readonly rotation: number;
+
+  public constructor( x: number, y: number, rotation: number ) {
+    this.x = x;
+    this.y = y;
+    this.rotation = rotation;
+  }
+
+  /**
+   * Serializes this TranslationAndRotation instance
+   */
+  public toStateObject(): TranslationAndRotationStateObject {
+    return {
+      x: this.x,
+      y: this.y,
+      rotation: this.rotation
+    };
+  }
+
+  /**
+   * Deserializes a TranslationAndRotation.
+   */
+  private static fromStateObject( stateObject: TranslationAndRotationStateObject ): TranslationAndRotation {
+    return new TranslationAndRotation( stateObject.x, stateObject.y, stateObject.rotation );
+  }
+
+  /**
+   * Handles serialization of TranslationAndRotation. It implements 'Data Type Serialization', as described in
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
+   */
+  public static readonly TranslationAndRotationIO = new IOType( 'TranslationAndRotationIO', {
+    valueType: TranslationAndRotation,
+    documentation: 'Translation and rotation use to animate the lid when it blows off the container.',
+    stateSchema: {
+      x: NumberIO,
+      y: NumberIO,
+      rotation: NumberIO
+    },
+    toStateObject: translationAndRotation => translationAndRotation.toStateObject(),
+    fromStateObject: stateObject => TranslationAndRotation.fromStateObject( stateObject )
+  } );
 }
 
 gasProperties.register( 'LidNode', LidNode );
