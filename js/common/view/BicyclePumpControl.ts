@@ -15,11 +15,11 @@ import { ParticleType } from '../model/ParticleType.js';
 import GasPropertiesBicyclePumpNode, { GasPropertiesBicyclePumpNodeOptions } from './GasPropertiesBicyclePumpNode.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
-import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -50,31 +50,25 @@ export default class BicyclePumpControl extends Node {
     // Bicycle pump for heavy particles
     const heavyBicyclePumpNode = new GasPropertiesBicyclePumpNode( numberOfHeavyParticlesProperty,
       combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColors.heavyParticleColorProperty
+        bodyFill: GasPropertiesColors.heavyParticleColorProperty,
+        visibleProperty: new DerivedProperty( [ particleTypeProperty ], particleType => particleType === 'heavy' )
       } ) );
 
     // Bicycle pump for light particles
     const lightBicyclePumpNode = new GasPropertiesBicyclePumpNode( numberOfLightParticlesProperty,
       combineOptions<GasPropertiesBicyclePumpNodeOptions>( {}, bicyclePumpOptions, {
-        bodyFill: GasPropertiesColors.lightParticleColorProperty
+        bodyFill: GasPropertiesColors.lightParticleColorProperty,
+        visibleProperty: new DerivedProperty( [ particleTypeProperty ], particleType => particleType === 'light' )
       } ) );
-
-    // Toggle button for switching between heavy and light bicycle pumps
-    const toggleNode = new ToggleNode( particleTypeProperty, [
-      { value: 'heavy', createNode: () => heavyBicyclePumpNode },
-      { value: 'light', createNode: () => lightBicyclePumpNode }
-    ], {
-      alignChildren: ToggleNode.BOTTOM
-    } );
 
     // Radio buttons for selecting particle type
     const radioButtonGroup = new ParticleTypeRadioButtonGroup( particleTypeProperty, modelViewTransform, {
-      centerX: toggleNode.x, // centered under the base of the pump
-      top: toggleNode.bottom + 15,
+      centerX: heavyBicyclePumpNode.x, // centered under the base of the pump
+      top: heavyBicyclePumpNode.bottom + 15,
       tandem: options.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    options.children = [ toggleNode, radioButtonGroup ];
+    options.children = [ heavyBicyclePumpNode, lightBicyclePumpNode, radioButtonGroup ];
 
     super( options );
 
