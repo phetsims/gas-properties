@@ -9,7 +9,7 @@
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import gasProperties from '../../gasProperties.js';
-import RichKeyboardDragListener, { RichKeyboardDragListenerOptions } from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
+import SoundKeyboardDragListener, { SoundKeyboardDragListenerOptions } from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -18,18 +18,18 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 type SelfOptions = EmptySelfOptions;
 
 export type ResizeHandleKeyboardDragListenerOptions = SelfOptions &
-  PickOptional<RichKeyboardDragListenerOptions, 'dragSpeed' | 'shiftDragSpeed'> &
-  PickRequired<RichKeyboardDragListenerOptions, 'tandem'>;
+  PickOptional<SoundKeyboardDragListenerOptions, 'dragSpeed' | 'shiftDragSpeed'> &
+  PickRequired<SoundKeyboardDragListenerOptions, 'tandem'>;
 
-export default class ResizeHandleKeyboardDragListener extends RichKeyboardDragListener {
+export default class ResizeHandleKeyboardDragListener extends SoundKeyboardDragListener {
 
   public constructor( dragDelegate: ResizeHandleDragDelegate,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions: ResizeHandleKeyboardDragListenerOptions ) {
 
-    super( optionize<ResizeHandleKeyboardDragListenerOptions, SelfOptions, RichKeyboardDragListenerOptions>()( {
+    super( optionize<ResizeHandleKeyboardDragListenerOptions, SelfOptions, SoundKeyboardDragListenerOptions>()( {
 
-      // RichKeyboardDragListenerOptions
+      // SoundKeyboardDragListenerOptions
       isDisposable: false,
       transform: modelViewTransform,
 

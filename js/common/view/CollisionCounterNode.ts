@@ -22,7 +22,7 @@ import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import CollisionCounter from '../model/CollisionCounter.js';
 import PlayResetButton from './PlayResetButton.js';
-import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import SamplePeriodComboBox from './SamplePeriodComboBox.js';
@@ -189,7 +189,7 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
       start: onPress,
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
-    this.addInputListener( new RichKeyboardDragListener( {
+    this.addInputListener( new SoundKeyboardDragListener( {
       positionProperty: collisionCounter.positionProperty,
       dragBoundsProperty: dragBoundsProperty,
       start: onPress,

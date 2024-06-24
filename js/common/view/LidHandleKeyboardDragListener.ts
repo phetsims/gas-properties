@@ -11,10 +11,10 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import Utils from '../../../../dot/js/Utils.js';
 
-export default class LidHandleKeyboardDragListener extends RichKeyboardDragListener {
+export default class LidHandleKeyboardDragListener extends SoundKeyboardDragListener {
 
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, tandem: Tandem ) {
 
