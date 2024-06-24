@@ -12,9 +12,9 @@ import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-import RichPointerDragListener from '../../../../scenery-phet/js/RichPointerDragListener.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 
-export default class LidHandleDragListener extends RichPointerDragListener {
+export default class LidHandleDragListener extends SoundDragListener {
 
   public constructor( container: IdealGasLawContainer, modelViewTransform: ModelViewTransform2, parentNode: Node, tandem: Tandem ) {
 
@@ -23,7 +23,7 @@ export default class LidHandleDragListener extends RichPointerDragListener {
 
     super( {
 
-      // RichPointerDragListenerOptions
+      // SoundDragListenerOptions
       isDisposable: false,
 
       start: ( event, listener ) => {

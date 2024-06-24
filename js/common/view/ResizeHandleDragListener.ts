@@ -11,10 +11,10 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import RichPointerDragListener from '../../../../scenery-phet/js/RichPointerDragListener.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 
-export default class ResizeHandleDragListener extends RichPointerDragListener {
+export default class ResizeHandleDragListener extends SoundDragListener {
 
   public constructor( dragDelegate: ResizeHandleDragDelegate, modelViewTransform: ModelViewTransform2, parentNode: Node, tandem: Tandem ) {
 
@@ -23,7 +23,7 @@ export default class ResizeHandleDragListener extends RichPointerDragListener {
 
     super( {
 
-      // RichPointerDragListenerOptions
+      // SoundDragListenerOptions
       isDisposable: false,
       tandem: tandem,
 
