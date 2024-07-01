@@ -117,7 +117,7 @@ export default class HistogramNode extends Node {
     } );
     yAxisLabelText.boundsProperty.link( () => {
       yAxisLabelText.right = chartRectangle.left - 8;
-      yAxisLabelText.bottom = chartRectangle.bottom - 10;
+      yAxisLabelText.centerY = chartRectangle.centerY;
     } );
 
     // Grid lines for the y-axis.
