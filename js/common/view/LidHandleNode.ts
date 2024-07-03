@@ -6,9 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize from '../../../../phet-core/js/optionize.js';
-import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import { InteractiveHighlighting, Node, NodeOptions, NodeTranslationOptions, TColor } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import HandleNode, { HandleNodeOptions } from '../../../../scenery-phet/js/HandleNode.js';
+import { InteractiveHighlighting, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -19,13 +19,11 @@ import Property from '../../../../axon/js/Property.js';
 
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 
-type SelfOptions = {
-  gripColor?: TColor;
-};
+type SelfOptions = EmptySelfOptions;
 
-export type LidHandleNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+export type LidHandleNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<HandleNodeOptions, 'tandem'>;
 
-export default class LidHandleNode extends InteractiveHighlighting( Node ) {
+export default class LidHandleNode extends InteractiveHighlighting( HandleNode ) {
 
   // The sim sets handleVisibleProperty, while the PhET-iO client can use hasHandleProperty to permanently hide the handle.
   private readonly handleVisibleProperty: Property<boolean>;
@@ -44,12 +42,13 @@ export default class LidHandleNode extends InteractiveHighlighting( Node ) {
       phetioDocumentation: 'Use this Property to permanently hide the container\'s lid handle.'
     } );
 
-    const options = optionize<LidHandleNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize<LidHandleNodeOptions, SelfOptions, HandleNodeOptions>()( {
 
-      // SelfOptions
-      gripColor: GasPropertiesColors.lidGripColorProperty,
-
-      // NodeOptions
+      // HandleNodeOptions
+      hasLeftAttachment: false,
+      gripBaseColor: GasPropertiesColors.lidHandleColorProperty,
+      attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
+      scale: 0.4,
       cursor: 'pointer',
       tagName: 'div',
       focusable: true,
@@ -59,16 +58,6 @@ export default class LidHandleNode extends InteractiveHighlighting( Node ) {
       } ),
       phetioInputEnabledPropertyInstrumented: true
     }, providedOptions );
-
-    const handleNode = new HandleNode( {
-      hasLeftAttachment: false,
-      gripBaseColor: options.gripColor,
-      attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
-      scale: 0.4
-    } );
-
-    // Wrap HandleNode so that the focus highlight is not affected by scaling.
-    options.children = [ handleNode ];
 
     super( options );
 

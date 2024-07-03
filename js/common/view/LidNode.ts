@@ -8,7 +8,7 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import LidHandleNode from './LidHandleNode.js';
@@ -22,7 +22,6 @@ const HANDLE_RIGHT_INSET = 3;
 type SelfOptions = {
   baseWidth: number;
   baseHeight: number;
-  lidGripColor: TColor;
 };
 
 type LidNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
@@ -57,7 +56,6 @@ export default class LidNode extends Node {
     } );
 
     const lidHandleNode = new LidHandleNode( {
-      gripColor: options.lidGripColor,
       right: baseNode.right - HANDLE_RIGHT_INSET,
       bottom: baseNode.top + 1,
       tandem: providedOptions.tandem.createTandem( 'lidHandleNode' )

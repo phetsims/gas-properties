@@ -120,7 +120,7 @@ const GasPropertiesIconFactory = {
 
     // Handle, attached to the left of the wall
     const handleNode = new HandleNode( {
-      gripBaseColor: GasPropertiesColors.resizeGripColorProperty,
+      gripBaseColor: GasPropertiesColors.resizeHandleColorProperty,
       rotation: -Math.PI / 2,
       right: wallNode.left + 3, // overlap
       centerY: wallNode.centerY

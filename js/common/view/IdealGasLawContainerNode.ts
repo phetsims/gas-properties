@@ -16,7 +16,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Node, NodeOptions, Path, Rectangle, TColor } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
@@ -38,8 +38,6 @@ const LID_Y_SPEED = 150; // pixels/second
 const LID_ROTATION_SPEED = 50; // degrees/second
 
 type SelfOptions = {
-  resizeGripColor?: TColor; // color of resize handle's grip
-  lidGripColor?: TColor; // color of the lid handle's grip
   resizeHandleIsPressedListener?: ( isPressed: boolean ) => void;
   resizeHandleKeyboardDragListenerOptions?: StrictOmit<ResizeHandleKeyboardDragListenerOptions, 'tandem'>;
   phetioResizeHandleInstrumented?: boolean;
@@ -65,8 +63,6 @@ export default class IdealGasLawContainerNode extends Node {
       NodeOptions>()( {
 
       // SelfOptions
-      resizeGripColor: GasPropertiesColors.resizeGripColorProperty, // color of resize handle's grip
-      lidGripColor: GasPropertiesColors.lidGripColorProperty, // color of the lid handle's grip
       resizeHandleIsPressedListener: _.noop,
       phetioResizeHandleInstrumented: true,
 
@@ -96,16 +92,12 @@ export default class IdealGasLawContainerNode extends Node {
     } );
 
     // Resize handle on the left wall.
-    const resizeHandleNode = new ResizeHandleNode( {
-      gripColor: options.resizeGripColor,
-      tandem: options.phetioResizeHandleInstrumented ? options.tandem.createTandem( 'resizeHandleNode' ) : Tandem.OPT_OUT
-    } );
+    const resizeHandleNode = new ResizeHandleNode( options.phetioResizeHandleInstrumented ? options.tandem.createTandem( 'resizeHandleNode' ) : Tandem.OPT_OUT );
 
     // Lid on the top of the container.
     const lidNode = new LidNode( {
       baseWidth: modelViewTransform.modelToViewDeltaX( container.lidWidthProperty.value ),
       baseHeight: modelViewTransform.modelToViewDeltaX( container.lidThickness ),
-      lidGripColor: options.lidGripColor,
       tandem: options.tandem.createTandem( 'lidNode' )
     } );
     const lidHandleNode = lidNode.handleNode;

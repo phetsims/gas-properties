@@ -179,13 +179,13 @@ const GasPropertiesColors = {
     default: 'rgb( 105, 195, 231 )' // blue
   } ),
 
-  // grip on the container's lid
-  lidGripColorProperty: new ProfileColorProperty( gasProperties, 'lidGripColor', {
+  // handle on the container's lid
+  lidHandleColorProperty: new ProfileColorProperty( gasProperties, 'lidHandleColor', {
     default: 'rgb( 160, 160, 160 )'
   } ),
 
-  // grip on the container's resize handle
-  resizeGripColorProperty: new ProfileColorProperty( gasProperties, 'resizeGripColor', {
+  // handle on the container's resize handle
+  resizeHandleColorProperty: new ProfileColorProperty( gasProperties, 'resizeHandleColor', {
     default: 'rgb( 160, 160, 160 )'
   } ),
 
