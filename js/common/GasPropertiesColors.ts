@@ -121,11 +121,6 @@ const GasPropertiesColors = {
     projector: 'rgba( 255, 255, 255, 0.5 )'
   } ),
 
-  //------------------------------------------------------------------------------------------------------------------
-  // These colors currently do NOT change in projector mode. They are included here for future-proofing,
-  // and to facilitate experimenting with colors in gas-properties-colors.html.
-  //------------------------------------------------------------------------------------------------------------------
-
   // primary color for heavy particles
   heavyParticleColorProperty: new ProfileColorProperty( gasProperties, 'heavyParticleColor', {
     default: 'rgb( 119, 114, 244 )' // purple
