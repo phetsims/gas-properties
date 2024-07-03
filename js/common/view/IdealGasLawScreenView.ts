@@ -28,7 +28,7 @@ import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PointerCoordinatesNode from '../../../../scenery-phet/js/PointerCoordinatesNode.js';
-import { Node, TColor } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
@@ -57,7 +57,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
 
 type SelfOptions = {
-  resizeGripColor?: TColor;
   wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
   resizeHandleKeyboardDragListenerOptions?: StrictOmit<ResizeHandleKeyboardDragListenerOptions, 'tandem'>;
   phetioResizeHandleInstrumented?: boolean;
@@ -94,7 +93,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       BaseScreenViewOptions>()( {
 
       // SelfOptions
-      resizeGripColor: GasPropertiesColors.resizeGripColorProperty,
       phetioResizeHandleInstrumented: true
     }, providedOptions );
 
@@ -165,7 +163,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // Container
     const containerNode = new IdealGasLawContainerNode( model.container, model.modelViewTransform,
       model.holdConstantProperty, this.visibleBoundsProperty, {
-        resizeGripColor: options.resizeGripColor,
         resizeHandleIsPressedListener: resizeHandleIsPressedListener,
         wallVelocityVisibleProperty: options.wallVelocityVisibleProperty,
         resizeHandleKeyboardDragListenerOptions: options.resizeHandleKeyboardDragListenerOptions,

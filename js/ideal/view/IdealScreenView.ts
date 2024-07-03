@@ -8,7 +8,6 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Node, VBox } from '../../../../scenery/js/imports.js';
-import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
 import IdealGasLawScreenView, { IdealGasLawScreenViewOptions } from '../../common/view/IdealGasLawScreenView.js';
@@ -38,10 +37,7 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     const options = optionize<IdealScreenViewOptions, SelfOptions, IdealGasLawScreenViewOptions>()( {
 
       // SelfOptions
-      hasHoldConstantFeature: false,
-
-      // IdealScreenViewOptions
-      resizeGripColor: GasPropertiesColors.idealResizeGripColorProperty
+      hasHoldConstantFeature: false
     }, providedOptions );
 
     // view-specific Properties

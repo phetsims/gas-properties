@@ -184,14 +184,9 @@ const GasPropertiesColors = {
     default: 'rgb( 160, 160, 160 )'
   } ),
 
-  // default grip on the container's resize handle
+  // grip on the container's resize handle
   resizeGripColorProperty: new ProfileColorProperty( gasProperties, 'resizeGripColor', {
     default: 'rgb( 160, 160, 160 )'
-  } ),
-
-  // grip on the container's resize handle in the Ideal screen
-  idealResizeGripColorProperty: new ProfileColorProperty( gasProperties, 'idealResizeGripColor', {
-    default: 'rgb( 187, 154, 86 )' // gold
   } ),
 
   // bars in the Speed histogram
