@@ -48,11 +48,6 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
         } )
       }, providedOptions );
 
-    // Icons for the particles, with same effective size.
-    const alignGroup = new AlignGroup();
-    const heavyParticleNode = alignGroup.createBox( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform ) );
-    const lightParticleNode = alignGroup.createBox( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform ) );
-
     // Used for both NumberDisplay instances
     const valuePatternStringProperty = new PatternStringProperty( GasPropertiesStrings.valueUnitsStringProperty, {
       units: GasPropertiesStrings.metersPerSecondStringProperty
@@ -77,12 +72,27 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     // since the conversion (1E-12) is the same for numerator and denominator.
     const heavyNumberDisplay = new NumberDisplay( heavyAverageSpeedProperty, numberDisplayRange,
       combineOptions<NumberDisplayOptions>( {}, numberDisplayOptions, {
-        tandem: options.tandem.createTandem( 'heavyNumberDisplay' )
+        tandem: options.tandem.createTandem( 'heavyNumberDisplay' ),
+        visiblePropertyOptions: {
+          phetioFeatured: true
+        }
       } ) );
     const lightNumberDisplay = new NumberDisplay( lightAverageSpeedProperty, numberDisplayRange,
       combineOptions<NumberDisplayOptions>( {}, numberDisplayOptions, {
-        tandem: options.tandem.createTandem( 'lightNumberDisplay' )
+        tandem: options.tandem.createTandem( 'lightNumberDisplay' ),
+        visiblePropertyOptions: {
+          phetioFeatured: true
+        }
       } ) );
+
+    // Icons for the particles, with same effective size. Visibility is linked to the visibility of their associated NumberDisplays.
+    const alignGroup = new AlignGroup();
+    const heavyParticleNode = alignGroup.createBox( GasPropertiesIconFactory.createHeavyParticleIcon( modelViewTransform, {
+      visibleProperty: heavyNumberDisplay.visibleProperty
+    } ) );
+    const lightParticleNode = alignGroup.createBox( GasPropertiesIconFactory.createLightParticleIcon( modelViewTransform, {
+      visibleProperty: lightNumberDisplay.visibleProperty
+    } ) );
 
     // layout icons and NumberDisplays in a grid
     const gridBox = new GridBox( {

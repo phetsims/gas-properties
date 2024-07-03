@@ -12,10 +12,11 @@ import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-p
 import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type ParticleNodeOptions = SelfOptions & NodeTranslationOptions;
+export type ParticleNodeOptions = SelfOptions & NodeTranslationOptions & PickOptional<ShadedSphereNodeOptions, 'visibleProperty'>;
 
 export default class ParticleNode extends ShadedSphereNode {
 
