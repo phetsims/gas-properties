@@ -9,7 +9,7 @@
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import NumberSpinner, { NumberSpinnerOptions } from '../../../../sun/js/NumberSpinner.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, KeyboardListener, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -20,6 +20,9 @@ import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import gasProperties from '../../gasProperties.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import Range from '../../../../dot/js/Range.js';
+import pushButtonSoundPlayer from '../../../../tambo/js/shared-sound-players/pushButtonSoundPlayer.js';
 
 const ICON_SPACING = 10; // space between particle icon and spinner
 
@@ -89,11 +92,11 @@ export default class DiffusionQuantityControls extends VBox {
       group: spinnersAlignGroup,
       xAlign: 'left'
     };
-    const particle1Spinner = new AlignBox( new NumberSpinner( leftProperty, leftProperty.rangeProperty,
+    const particle1Spinner = new AlignBox( new GasPropertiesNumberSpinner( leftProperty, leftProperty.rangeProperty,
       combineOptions<NumberSpinnerOptions>( {}, NUMBER_SPINNER_OPTIONS, {
         tandem: options.tandem.createTandem( `${spinnerTandemPrefix}1Spinner` )
       }, options.spinnerOptions ) ), alignBoxOptions );
-    const particle2Spinner = new AlignBox( new NumberSpinner( rightProperty, rightProperty.rangeProperty,
+    const particle2Spinner = new AlignBox( new GasPropertiesNumberSpinner( rightProperty, rightProperty.rangeProperty,
       combineOptions<NumberSpinnerOptions>( {}, NUMBER_SPINNER_OPTIONS, {
         tandem: options.tandem.createTandem( `${spinnerTandemPrefix}2Spinner` )
       }, options.spinnerOptions ) ), alignBoxOptions );
@@ -120,6 +123,19 @@ export default class DiffusionQuantityControls extends VBox {
     options.children = [ labelText, hBox ];
 
     super( options );
+  }
+}
+
+//TODO https://github.com/phetsims/sun/issues/886 Delete this class when Home/End sound has been added to NumberSpinner.
+class GasPropertiesNumberSpinner extends NumberSpinner {
+  public constructor( numberProperty: Property<number>, rangeProperty: TReadOnlyProperty<Range>, providedOptions?: NumberSpinnerOptions ) {
+    super( numberProperty, rangeProperty, providedOptions );
+
+    // Add sound for the Home and End keys.
+    this.addInputListener( new KeyboardListener( {
+      keys: [ 'home', 'end' ] as const,
+      fire: () => pushButtonSoundPlayer.play()
+    } ) );
   }
 }
 
