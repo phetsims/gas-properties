@@ -23,8 +23,7 @@ const PANEL_CORNER_RADIUS = 5;
 const PANEL_X_MARGIN = 15;
 const PANEL_Y_MARGIN = 8;
 
-// Shared by gas-properties-main.js and its derivatives (gases-intro.main.js, and diffusion-main.js)
-// See https://github.com/phetsims/gas-properties/issues/28
+// Credits are shared by all sims in the gas-properties suite. See https://github.com/phetsims/gas-properties/issues/28.
 const CREDITS: CreditsData = {
   leadDesign: 'Amy Rouinfar',
   softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
