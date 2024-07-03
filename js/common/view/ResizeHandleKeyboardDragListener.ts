@@ -31,6 +31,7 @@ export default class ResizeHandleKeyboardDragListener extends SoundKeyboardDragL
 
       // SoundKeyboardDragListenerOptions
       isDisposable: false,
+      keyboardDragDirection: 'leftRight',
       transform: modelViewTransform,
 
       // See https://github.com/phetsims/gas-properties/issues/197#issuecomment-2168845330 for drag speeds.

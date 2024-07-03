@@ -20,6 +20,7 @@ export default class LidHandleKeyboardDragListener extends SoundKeyboardDragList
 
     super( {
       isDisposable: false,
+      keyboardDragDirection: 'leftRight',
       transform: modelViewTransform,
       drag: ( event, listener ) => {
         container.lidWidthProperty.value = Utils.clamp( container.lidWidthProperty.value + listener.modelDelta.x,
