@@ -189,15 +189,13 @@ export default class IdealGasLawModel extends BaseModel {
       } );
     }
 
-    // If the container's width changes while the sim is paused, and it's not due to the user
-    // resizing the container, then update immediately. See #125.
+    // If the container's width changes while the sim is paused, and it's not due to the user resizing the container,
+    // then update immediately. See https://github.com/phetsims/gas-properties/issues/125.
     Multilink.multilink(
       [ this.container.widthProperty, this.container.userIsAdjustingWidthProperty ],
       ( width, userIsAdjustingWidth ) => {
-        if ( !isSettingPhetioStateProperty.value ) {
-          if ( !userIsAdjustingWidth && !this.isPlayingProperty.value ) {
-            this.updateWhenPaused();
-          }
+        if ( !userIsAdjustingWidth && !this.isPlayingProperty.value ) {
+          this.updateWhenPaused();
         }
       } );
 
