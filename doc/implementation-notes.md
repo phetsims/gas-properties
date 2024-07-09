@@ -176,4 +176,4 @@ the _Ideal_ screen with the "Hold Constant" radio buttons removed. The _Laws_ sc
 modifications. While _Gas Properties_ has noise turned on for the pressure gauge, the _Gases Intro_ sim has it turned
 off by default. See the "Pressure Noise" checkbox in the Preferences dialog, or the `pressureNoise` query parameter.
 
-**Diffusion**: This is sim consists of the _Diffusion_ screen with no modifications.
+**Diffusion**: This sim consists of the _Diffusion_ screen with no modifications.
