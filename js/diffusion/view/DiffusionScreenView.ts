@@ -132,7 +132,7 @@ export default class DiffusionScreenView extends BaseScreenView {
     // The complete system of particles
     const particleSystemNode = new DiffusionParticleSystemNode( model );
 
-    // If PhET-iO state is restored while the sim is paused, tell the particle system view to update.
+    // If PhET-iO state is set while the sim is paused, tell the particle system view to update.
     // See https://github.com/phetsims/gas-properties/issues/276
     if ( assert && Tandem.PHET_IO_ENABLED ) {
       phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {

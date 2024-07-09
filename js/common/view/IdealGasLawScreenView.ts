@@ -106,7 +106,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // The complete system of particles, inside and outside the container
     const particleSystemNode = new IdealGasLawParticleSystemNode( model );
 
-    // If PhET-iO state is restored while the sim is paused, tell the particle system view to update.
+    // If PhET-iO state is set while the sim is paused, tell the particle system view to update.
     // See https://github.com/phetsims/gas-properties/issues/276
     if ( assert && Tandem.PHET_IO_ENABLED ) {
       phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
