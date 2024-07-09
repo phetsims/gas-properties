@@ -249,6 +249,10 @@ export default class IdealGasLawContainerNode extends Node {
 
         // Cancel interactions with the container, because we're blowing the lid off.
         this.interruptSubtreeInput();
+
+        // Move the lid up enough so that it is clearly "off" of the container. Animation will begin from this position.
+        // See https://github.com/phetsims/gas-properties/issues/269.
+        this.lidNode.y -= 10;
       }
 
       // Lid is only interactive when it's on the container.
