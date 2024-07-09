@@ -31,7 +31,7 @@ const ParticleUtils = {
   /**
    * Removes a particle from an array and disposes it.
    */
-  removeParticle: function( particle: Particle, particles: Particle[] ): void {
+  removeParticle( particle: Particle, particles: Particle[] ): void {
 
     const index = particles.indexOf( particle );
     assert && assert( index !== -1, 'particle not found' );
@@ -43,7 +43,7 @@ const ParticleUtils = {
   /**
    * Removes the last n particles from an array and disposes them.
    */
-  removeLastParticles: function( n: number, particles: Particle[] ): void {
+  removeLastParticles( n: number, particles: Particle[] ): void {
     assert && assert( n <= particles.length,
       `attempted to remove ${n} particles, but we only have ${particles.length} particles` );
 
@@ -55,14 +55,14 @@ const ParticleUtils = {
   /**
    * Removes and disposes an entire collection of particles.
    */
-  removeAllParticles: function( particles: Particle[] ): void {
+  removeAllParticles( particles: Particle[] ): void {
     ParticleUtils.removeLastParticles( particles.length, particles );
   },
 
   /**
    * Removes particles that are out of bounds and disposes them.
    */
-  removeParticlesOutOfBounds: function( particles: Particle[], bounds: Bounds2 ): void {
+  removeParticlesOutOfBounds( particles: Particle[], bounds: Bounds2 ): void {
 
     // Iterate backwards, since we're modifying the array, so we don't skip any particles.
     for ( let i = particles.length - 1; i >= 0; i-- ) {
@@ -77,7 +77,7 @@ const ParticleUtils = {
    * @param particles
    * @param scaleX - amount to scale the position's x component
    */
-  redistributeParticles: function( particles: Particle[], scaleX: number ): void {
+  redistributeParticles( particles: Particle[], scaleX: number ): void {
     assert && assert( scaleX > 0, `invalid scaleX: ${scaleX}` );
 
     for ( let i = particles.length - 1; i >= 0; i-- ) {
@@ -90,7 +90,7 @@ const ParticleUtils = {
    * @param particles
    * @param heatCoolFactor - (-1,1), heat=[0,1), cool=(-1,0]
    */
-  heatCoolParticles: function( particles: Particle[], heatCoolFactor: number ): void {
+  heatCoolParticles( particles: Particle[], heatCoolFactor: number ): void {
     assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
 
     const velocityScale = 1 + heatCoolFactor / GasPropertiesQueryParameters.heatCool;
@@ -107,8 +107,8 @@ const ParticleUtils = {
    * @param insideParticles - particles inside the container
    * @param outsideParticles - particles outside the container
    */
-  escapeParticles: function( container: IdealGasLawContainer, numberOfParticlesProperty: Property<number>,
-                             insideParticles: Particle[], outsideParticles: Particle[] ): void {
+  escapeParticles( container: IdealGasLawContainer, numberOfParticlesProperty: Property<number>,
+                   insideParticles: Particle[], outsideParticles: Particle[] ): void {
 
     // Iterate backwards, since we're modifying the array, so we don't skip any particles.
     for ( let i = insideParticles.length - 1; i >= 0; i-- ) {
@@ -126,7 +126,7 @@ const ParticleUtils = {
   /**
    * Gets the total kinetic energy of a collection of particles, in AMU * pm^2 / ps^2
    */
-  getTotalKineticEnergy: function( particles: Particle[] ): number {
+  getTotalKineticEnergy( particles: Particle[] ): number {
 
     let totalKineticEnergy = 0;
     for ( let i = particles.length - 1; i >= 0; i-- ) {
@@ -139,7 +139,7 @@ const ParticleUtils = {
    * Gets the centerX of mass for a collection of particles.
    * null if there are no particles and therefore no center of mass
    */
-  getCenterXOfMass: function( particles: Particle[], xOffset = 0 ): number | null {
+  getCenterXOfMass( particles: Particle[], xOffset = 0 ): number | null {
 
     let centerXOfMass = null;
     if ( particles.length > 0 ) {
