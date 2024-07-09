@@ -82,7 +82,7 @@ See [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md
 `BaseScreenView` is the base `ScreenView` for all screens. As you can see, there are relatively few components that are
 shared by all screens.
 
-`ParticlesNode` renders a collection of particles using the `Canvas` API.
+`ParticlesNode` renders a collection of particles using scenery `Sprites`.
 
 ## _Ideal_, _Explore_, and _Energy_ screens
 
