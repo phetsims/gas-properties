@@ -103,6 +103,19 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // Whether the sim was playing before it was programmatically paused.
     let wasPlaying = model.isPlayingProperty.value;
 
+    // The complete system of particles, inside and outside the container
+    const particleSystemNode = new IdealGasLawParticleSystemNode( model );
+
+    // If PhET-iO state is restored while the sim is paused, tell the particle system view to update.
+    // See https://github.com/phetsims/gas-properties/issues/276
+    if ( assert && Tandem.PHET_IO_ENABLED ) {
+      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+        if ( !model.isPlayingProperty.value ) {
+          particleSystemNode.update();
+        }
+      } );
+    }
+
     // Width of the container when interaction with resize handle started, used to compute how to
     // redistribute particles in the new container width.
     let startContainerWidth = model.container.widthProperty.value;
@@ -218,9 +231,6 @@ export default class IdealGasLawScreenView extends BaseScreenView {
       pressureGaugeNode.left = containerNode.right - 2;
       pressureGaugeNode.centerY = model.modelViewTransform.modelToViewY( model.container.top ) + 30;
     } );
-
-    // The complete system of particles, inside and outside the container
-    const particleSystemNode = new IdealGasLawParticleSystemNode( model );
 
     // Device to heat/cool the contents of the container
     const heaterCoolerNodeXOffset = model.container.isFixedWidth ? GasPropertiesConstants.DEFAULT_CONTAINER_WIDTH.min : model.container.widthRange.min;
