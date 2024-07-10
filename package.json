@@ -18,8 +18,7 @@
     ],
     "supportedBrands": [
       "phet",
-      "phet-io",
-      "adapted-from-phet"
+      "phet-io"
     ],
     "simFeatures": {
       "supportsDynamicLocale": true,
