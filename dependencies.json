@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.0-dev.19 Tue Jul 09 2024 13:00:58 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.1.0-rc.0 Wed Jul 10 2024 17:57:30 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "main"
@@ -13,7 +13,7 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "0810d710295be32154eaa7bb9daff90fbb3a4326",
+    "sha": "facc2134c559512fa92b8fd827474fccd75b935a",
     "branch": "main"
   },
   "dot": {
@@ -21,11 +21,11 @@
     "branch": "main"
   },
   "gas-properties": {
-    "sha": "887326ed1e5741b19ec6eca50fbae5beb2109c82",
-    "branch": "main"
+    "sha": "e82b3e8d2df201985904f056cd10168da70d7f9d",
+    "branch": "1.1"
   },
   "joist": {
-    "sha": "b297e236860a3ce47a292b0babaecaadbcf30dc3",
+    "sha": "a6fe24d73cca6f04ff00a202202869de923c4fae",
     "branch": "main"
   },
   "kite": {
@@ -33,11 +33,11 @@
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "8ea8069c48246f0ba8a5724655d8a1df5961eb12",
+    "sha": "c6e4e67c88f96101dc96c96e01c1babae2231e8f",
     "branch": "main"
   },
   "phet-core": {
-    "sha": "61088067db9a12024a9cd8652bf11b222b9da6a6",
+    "sha": "923891320890a15e0f45b3fd328862684a2b5582",
     "branch": "main"
   },
   "phet-io": {
@@ -45,11 +45,11 @@
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "ec3269773a64c491a3ec5192493b8f08b3274232",
+    "sha": "c46b6595073446eed24403c783e4c33f96e33043",
     "branch": "main"
   },
   "phet-io-wrappers": {
-    "sha": "b38824944a92a8079c33b2d1297751986071209e",
+    "sha": "af7ae6d4b597fdb0c1f7bd267d4bd1b1fb6cd6b4",
     "branch": "main"
   },
   "phetcommon": {
@@ -65,11 +65,11 @@
     "branch": "main"
   },
   "scenery": {
-    "sha": "33d2656bbebec57dd59211229292f1e820de1514",
+    "sha": "89da157e06d9ac8f6c6eafd793578c348de6a77d",
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "74f11211b54233e4355a5694ad1a7c331035cf50",
+    "sha": "dd04998bea43bd2147ddfd3696ff0195a32095f5",
     "branch": "main"
   },
   "sherpa": {
