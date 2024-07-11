@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.0-rc.1 Wed Jul 10 2024 17:58:52 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.1.0-rc.1 Wed Jul 10 2024 18:15:24 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "HEAD"
@@ -7,6 +7,10 @@
   "axon": {
     "sha": "950a9a5da2d992d0834df8a984bcb8b5185b8448",
     "branch": "HEAD"
+  },
+  "bamboo": {
+    "sha": "2c5740011601cf178bd7a262af2e377eaaf32d32",
+    "branch": "main"
   },
   "brand": {
     "sha": "0e84d480a4e3e5ce0fc42537467d09e7d3ffb192",
@@ -21,7 +25,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "6e08e1fc41b7d92b5aba98d5d08cbb38e8a7ddb5",
+    "sha": "372e03ade0029dc176a8bf4160aa83799f6952a6",
     "branch": "1.1"
   },
   "joist": {
