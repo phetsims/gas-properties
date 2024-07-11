@@ -14,6 +14,7 @@
     "simulation": true,
     "runnable": true,
     "phetLibs": [
+      "bamboo",
       "twixt"
     ],
     "supportedBrands": [
