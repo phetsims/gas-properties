@@ -10,6 +10,7 @@
 import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -26,14 +27,17 @@ export default class DiffusionData {
   private readonly particleSystem: DiffusionParticleSystem;
 
   // number of DiffusionParticle1 in this half of the container
-  public readonly numberOfParticles1Property: Property<number>;
+  public readonly numberOfParticles1Property: TReadOnlyProperty<number>;
+  private readonly _numberOfParticles1Property: Property<number>;
 
   // number of DiffusionParticle2 in this half of the container
-  public readonly numberOfParticles2Property: Property<number>;
+  public readonly numberOfParticles2Property: TReadOnlyProperty<number>;
+  private readonly _numberOfParticles2Property: Property<number>;
 
   // average temperature in this half of the container, in K
   // null when there are no particles in this half of the container.
-  public readonly averageTemperatureProperty: Property<number | null>;
+  public readonly averageTemperatureProperty: TReadOnlyProperty<number | null>;
+  private readonly _averageTemperatureProperty: Property<number | null>;
 
   public constructor( bounds: Bounds2, particleSystem: DiffusionParticleSystem,
                       leftOrRightString: 'left' | 'right', tandem: Tandem ) {
@@ -41,7 +45,7 @@ export default class DiffusionData {
     this.bounds = bounds;
     this.particleSystem = particleSystem;
 
-    this.numberOfParticles1Property = new NumberProperty( 0, {
+    this._numberOfParticles1Property = new NumberProperty( 0, {
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
       tandem: tandem.createTandem( 'numberOfParticles1Property' ),
@@ -49,8 +53,9 @@ export default class DiffusionData {
       phetioFeatured: true,
       phetioDocumentation: `Number of particles of type 1 that are in the ${leftOrRightString} half of the container.`
     } );
+    this.numberOfParticles1Property = this._numberOfParticles1Property;
 
-    this.numberOfParticles2Property = new NumberProperty( 0, {
+    this._numberOfParticles2Property = new NumberProperty( 0, {
       numberType: 'Integer',
       isValidValue: value => ( value >= 0 ),
       tandem: tandem.createTandem( 'numberOfParticles2Property' ),
@@ -58,8 +63,9 @@ export default class DiffusionData {
       phetioFeatured: true,
       phetioDocumentation: `Number of particles of type 2 that are in the ${leftOrRightString} half of the container.`
     } );
+    this.numberOfParticles2Property = this._numberOfParticles2Property;
 
-    this.averageTemperatureProperty = new Property<number | null>( null, {
+    this._averageTemperatureProperty = new Property<number | null>( null, {
       units: 'K',
       isValidValue: value => ( value === null || value > 0 ),
       phetioValueType: NullableIO( NumberIO ),
@@ -68,6 +74,7 @@ export default class DiffusionData {
       phetioFeatured: true,
       phetioDocumentation: `Average temperature in the ${leftOrRightString} half of the container.`
     } );
+    this.averageTemperatureProperty = this._averageTemperatureProperty;
 
     this.update();
   }
@@ -105,20 +112,20 @@ export default class DiffusionData {
     }
 
     // Update number of particles
-    this.numberOfParticles1Property.value = numberOfParticles1;
-    this.numberOfParticles2Property.value = numberOfParticles2;
+    this._numberOfParticles1Property.value = numberOfParticles1;
+    this._numberOfParticles2Property.value = numberOfParticles2;
 
     // Update average temperature
     const totalNumberOfParticles = numberOfParticles1 + numberOfParticles2;
     if ( totalNumberOfParticles === 0 ) {
-      this.averageTemperatureProperty.value = null;
+      this._averageTemperatureProperty.value = null;
     }
     else {
       assert && assert( totalKE !== 0, 'totalKE should not be zero when the container is not empty' );
 
       // T = (2/3)KE/k
       const averageKE = totalKE / totalNumberOfParticles;
-      this.averageTemperatureProperty.value = ( 2 / 3 ) * averageKE / GasPropertiesConstants.BOLTZMANN; // K
+      this._averageTemperatureProperty.value = ( 2 / 3 ) * averageKE / GasPropertiesConstants.BOLTZMANN; // K
     }
   }
 }
