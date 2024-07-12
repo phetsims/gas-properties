@@ -22,7 +22,7 @@ import gasProperties from '../../gasProperties.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import pushButtonSoundPlayer from '../../../../tambo/js/shared-sound-players/pushButtonSoundPlayer.js';
+import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 
 const ICON_SPACING = 10; // space between particle icon and spinner
 
@@ -132,6 +132,7 @@ class GasPropertiesNumberSpinner extends NumberSpinner {
     super( numberProperty, rangeProperty, providedOptions );
 
     // Add sound for the Home and End keys.
+    const pushButtonSoundPlayer = sharedSoundPlayers.get( 'pushButton' );
     this.addInputListener( new KeyboardListener( {
       keys: [ 'home', 'end' ] as const,
       fire: () => pushButtonSoundPlayer.play()

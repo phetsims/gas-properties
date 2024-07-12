@@ -16,7 +16,7 @@ import { HBox, KeyboardListener, Node, Text, VBox, VBoxOptions } from '../../../
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import pushButtonSoundPlayer from '../../../../tambo/js/shared-sound-players/pushButtonSoundPlayer.js';
+import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 
 // const
 const X_SPACING = 8;
@@ -83,6 +83,7 @@ class GasPropertiesFineCoarseSpinner extends FineCoarseSpinner {
     super( numberProperty, providedOptions );
 
     // Add sound for the Home and End keys.
+    const pushButtonSoundPlayer = sharedSoundPlayers.get( 'pushButton' );
     this.addInputListener( new KeyboardListener( {
       keys: [ 'home', 'end' ] as const,
       fire: () => pushButtonSoundPlayer.play()
