@@ -102,8 +102,8 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
             const deltaT = temperature - previousTemperature;
             if ( Math.abs( deltaT ) > MIN_DELTA_T ) {
               const deltaTN = deltaT * numberOfParticlesProperty.value;
-              const heatCoolFactor = Math.sign( deltaT ) * toHeatFactor.evaluate( Math.abs( deltaTN ) );
-              this.startAnimation( heatCoolFactor );
+              const heatCoolAmount = Math.sign( deltaT ) * toHeatFactor.evaluate( Math.abs( deltaTN ) );
+              this.doAnimation( heatCoolAmount );
             }
           }
         }
@@ -140,46 +140,51 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
   }
 
   /**
-   * Starts the animation to a new heatCoolFactor value.
+   * Animates to a new heatCoolAmount value, followed by animation to zero.
    */
-  private startAnimation( heatCoolFactor: number ): void {
-    assert && assert( heatCoolFactor >= -1 && heatCoolFactor <= 1, `invalid heatCoolFactor: ${heatCoolFactor}` );
+  private doAnimation( heatCoolAmount: number ): void {
+    assert && assert( heatCoolAmount >= -1 && heatCoolAmount <= 1, `invalid heatCoolAmount: ${heatCoolAmount}` );
+
+    const currentHeatCoolAmount = this.heatCoolAmountProperty.value;
 
     this.stopAnimation();
 
-    // Animation that moves the flame/ice up
+    // Animate from currentHeatCoolAmount to heatCoolAmount.
     this.animation = new Animation( {
       property: this.heatCoolAmountProperty,
-      to: heatCoolFactor,
+      from: currentHeatCoolAmount,
+      to: heatCoolAmount,
       duration: HEAT_COOL_DURATION / 2,
       easing: Easing.CUBIC_OUT, // accelerates
       stepEmitter: STEP_EMITTER
     } );
 
-    // If the Animation is stopped prematurely, abruptly turn off heat/cool
+    // If the animation is stopped prematurely, go immediately to zero and clean up.
     this.animation.stopEmitter.addListener( () => {
-      this.animation = null;
       this.heatCoolAmountProperty.value = 0;
+      this.animation = null;
     } );
 
-    // When the 'up' Animation finishes...
+    // When animation to heatCoolAmount finishes, animate back to zero.
     this.animation.finishEmitter.addListener( () => {
 
-      // Animation that moves the flame/ice down
+      // Animate from heatCoolAmount to zero.
       this.animation = new Animation( {
         property: this.heatCoolAmountProperty,
+        from: heatCoolAmount,
         to: 0,
         duration: HEAT_COOL_DURATION / 2,
         easing: Easing.CUBIC_IN, // decelerates
         stepEmitter: STEP_EMITTER
       } );
 
-      // If the down animation is stopped, abruptly turn off heat/cool.
+      // If the animation is stopped prematurely, go immediately to zero and clean up.
       this.animation.stopEmitter.addListener( () => {
         this.heatCoolAmountProperty.value = 0;
+        this.animation = null;
       } );
 
-      // When the down Animation finishes, we're done.
+      // When the animation finishes, clean up.
       this.animation.finishEmitter.addListener( () => {
         this.animation = null;
       } );
