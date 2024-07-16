@@ -73,7 +73,10 @@ export default class DiffusionQuantityControls extends VBox {
 
       // VBoxOptions
       spacing: 12,
-      align: 'left'
+      align: 'left',
+      visiblePropertyOptions: {
+        phetioFeatured: true // see https://github.com/phetsims/gas-properties/issues/286
+      }
     }, providedOptions );
 
     // label
