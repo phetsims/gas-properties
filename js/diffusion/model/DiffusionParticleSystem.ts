@@ -302,7 +302,6 @@ function updateMassAndSpeed( mass: number, temperature: number, particles: Diffu
   assert && assert( mass > 0, `invalid mass: ${mass}` );
   assert && assert( temperature >= 0, `invalid temperature: ${temperature}` );
   assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-  assert && assert( !isSettingPhetioStateProperty.value, 'updateMassAndSpeed should not be called while setting state.' );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
     particles[ i ].setMass( mass );
@@ -317,7 +316,6 @@ function updateMassAndSpeed( mass: number, temperature: number, particles: Diffu
  */
 function updateRadius( radius: number, particles: DiffusionParticle[], bounds: Bounds2, isPlaying: boolean ): void {
   assert && assert( radius > 0, `invalid radius: ${radius}` );
-  assert && assert( !isSettingPhetioStateProperty.value, 'updateRadius should not be called while setting state.' );
 
   for ( let i = particles.length - 1; i >= 0; i-- ) {
 
