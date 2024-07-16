@@ -159,30 +159,16 @@ export default class DiffusionParticleSystem extends PhetioObject {
     // Update mass and temperature of existing particles. This adjusts speed of the particles.
     Multilink.multilink(
       [ this.particle1Settings.massProperty, this.particle1Settings.initialTemperatureProperty ],
-      ( mass, initialTemperature ) => {
-        if ( !isSettingPhetioStateProperty.value ) {
-          updateMassAndSpeed( mass, initialTemperature, this.particles1 );
-        }
-      } );
+      ( mass, initialTemperature ) => updateMassAndSpeed( mass, initialTemperature, this.particles1 ) );
     Multilink.multilink(
       [ this.particle2Settings.massProperty, this.particle2Settings.initialTemperatureProperty ],
-      ( mass, initialTemperature ) => {
-        if ( !isSettingPhetioStateProperty.value ) {
-          updateMassAndSpeed( mass, initialTemperature, this.particles2 );
-        }
-      } );
+      ( mass, initialTemperature ) => updateMassAndSpeed( mass, initialTemperature, this.particles2 ) );
 
     // Update radii of existing particles.
-    this.particle1Settings.radiusProperty.link( radius => {
-      if ( !isSettingPhetioStateProperty.value ) {
-        updateRadius( radius, this.particles1, container.leftBounds, isPlayingProperty.value );
-      }
-    } );
-    this.particle2Settings.radiusProperty.link( radius => {
-      if ( !isSettingPhetioStateProperty.value ) {
-        updateRadius( radius, this.particles2, container.rightBounds, isPlayingProperty.value );
-      }
-    } );
+    this.particle1Settings.radiusProperty.link( radius =>
+      updateRadius( radius, this.particles1, container.leftBounds, isPlayingProperty.value ) );
+    this.particle2Settings.radiusProperty.link( radius =>
+      updateRadius( radius, this.particles2, container.rightBounds, isPlayingProperty.value ) );
   }
 
   public reset(): void {
