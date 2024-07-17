@@ -245,6 +245,26 @@ export default class DiffusionParticleSystem extends PhetioObject {
   }
 
   /**
+   * Verifies that the particles system is in a consistent state.
+   */
+  public verify(): void {
+    this.verifyParticles( this.particles1, this.particle1Settings );
+    this.verifyParticles( this.particles2, this.particle2Settings );
+  }
+
+  /**
+   * Verifies that all particles of the same type have the same mass and radius.
+   */
+  private verifyParticles( particles: DiffusionParticle[], settings: DiffusionSettings ): void {
+    if ( particles.length > 0 ) {
+      assert && assert( _.every( particles, particle => ( particle.mass === settings.massProperty.value ) ),
+        'Particles do not have consistent mass.' );
+      assert && assert( _.every( particles, particle => ( particle.radius === settings.radiusProperty.value ) ),
+        'Particles do not have consistent radius.' );
+    }
+  }
+
+  /**
    * DiffusionParticleSystemIO handles serialization of the particle arrays. It implements reference-type serialization,
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
