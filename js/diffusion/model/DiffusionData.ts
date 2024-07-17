@@ -87,6 +87,7 @@ export default class DiffusionData {
    * Updates Properties based on the contents of the particle arrays.
    */
   public update(): void {
+    assert && this.particleSystem.verify();
 
     let numberOfParticles1 = 0;
     let numberOfParticles2 = 0;

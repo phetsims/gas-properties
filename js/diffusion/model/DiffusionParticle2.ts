@@ -15,6 +15,7 @@ import gasProperties from '../../gasProperties.js';
 import DiffusionParticle, { DiffusionParticleOptions } from './DiffusionParticle.js';
 import { ParticleStateObject } from '../../common/model/Particle.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -25,13 +26,23 @@ export type DiffusionParticle2StateObject = ParticleStateObject;
 
 export default class DiffusionParticle2 extends DiffusionParticle {
 
-  public constructor( providedOptions?: DiffusionParticle2Options ) {
+  public constructor( providedOptions: DiffusionParticle2Options ) {
     super( optionize<DiffusionParticle2Options, SelfOptions, DiffusionParticleOptions>()( {
 
       // ParticleOptions
       colorProperty: GasPropertiesColors.diffusionParticle2ColorProperty,
       highlightColorProperty: GasPropertiesColors.diffusionParticle2HighlightColorProperty
     }, providedOptions ) );
+  }
+
+  /**
+   * Creates a DiffusionParticle2 with default configuration. This is used for creating icons.
+   */
+  public static withDefaults(): DiffusionParticle2 {
+    return new DiffusionParticle2( {
+      mass: GasPropertiesConstants.DIFFUSION_MASS_RANGE.defaultValue,
+      radius: GasPropertiesConstants.DIFFUSION_RADIUS_RANGE.defaultValue
+    } );
   }
 
   /**
@@ -44,7 +55,9 @@ export default class DiffusionParticle2 extends DiffusionParticle {
       previousX: stateObject._previousX,
       previousY: stateObject._previousY,
       vx: stateObject.vx,
-      vy: stateObject.vy
+      vy: stateObject.vy,
+      mass: stateObject.mass,
+      radius: stateObject.radius
     } );
   }
 
