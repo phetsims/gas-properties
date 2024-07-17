@@ -214,7 +214,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
    * @param createParticle - creates a Particle instance
    */
   private updateNumberOfParticles( numberOfParticles: number,
-                                   particles: Particle[],
+                                   particles: DiffusionParticle[],
                                    settings: DiffusionSettings,
                                    positionBounds: Bounds2,
                                    createParticle: ( options: CreateParticleOptions ) => Particle ): void {
@@ -226,7 +226,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
         addParticles( delta, particles, settings, positionBounds, createParticle );
       }
       else {
-        ParticleUtils.removeLastParticles( -delta, particles );
+        removeParticles( -delta, particles, settings );
       }
 
       // If paused, update things that would normally be handled by step.
@@ -278,7 +278,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
 }
 
 /**
- * Adds n particles to the end of the specified array. Particles must be inside positionBounds.
+ * Adds n particles to the end of the specified array. Particles will be inside positionBounds.
  */
 function addParticles( n: number,
                        particles: Particle[],
@@ -316,19 +316,20 @@ function addParticles( n: number,
 }
 
 /**
+ * Removes n particles from the end of the specified array. After doing so, the speed of the remaining particles
+ * needs to be reset, so that average temperature does not change. See https://github.com/phetsims/gas-properties/issues/287.
+ */
+function removeParticles( n: number, particles: DiffusionParticle[], settings: DiffusionSettings ): void {
+  assert && assert( n > 0 && Number.isInteger( n ), `invalid n: ${n}` );
+  ParticleUtils.removeLastParticles( n, particles );
+  updateMassAndSpeed( settings.massProperty.value, settings.initialTemperatureProperty.value, particles );
+}
+
+/**
  * Update the mass and speed for a set of particles. Speed is based on temperature and mass.
  */
 function updateMassAndSpeed( mass: number, temperature: number, particles: DiffusionParticle[] ): void {
-  assert && assert( mass > 0, `invalid mass: ${mass}` );
-  assert && assert( temperature >= 0, `invalid temperature: ${temperature}` );
-  assert && assert( Array.isArray( particles ), `invalid particles: ${particles}` );
-
-  for ( let i = particles.length - 1; i >= 0; i-- ) {
-    particles[ i ].setMass( mass );
-
-    // |v| = sqrt( 3kT / m )
-    particles[ i ].setSpeed( Math.sqrt( 3 * GasPropertiesConstants.BOLTZMANN * temperature / mass ) );
-  }
+  particles.forEach( particle => particle.setMassAndTemperature( mass, temperature ) );
 }
 
 /**
