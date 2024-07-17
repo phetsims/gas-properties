@@ -246,7 +246,7 @@ export default class Particle {
    * Sets this particle's speed (velocity magnitude) in pm/ps.
    */
   public setSpeed( speed: number ): void {
-    assert && assert( speed >= 0, `invalid magnitude: ${speed}` );
+    assert && assert( speed >= 0, `invalid speed: ${speed}` );
     this.scaleVelocity( speed / this.getSpeed() );
   }
 
