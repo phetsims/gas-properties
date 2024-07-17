@@ -108,7 +108,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
 
     // If PhET-iO state is set while the sim is paused, tell the particle system view to update.
     // See https://github.com/phetsims/gas-properties/issues/276
-    if ( assert && Tandem.PHET_IO_ENABLED ) {
+    if ( Tandem.PHET_IO_ENABLED ) {
       phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
         if ( !model.isPlayingProperty.value ) {
           particleSystemNode.update();
