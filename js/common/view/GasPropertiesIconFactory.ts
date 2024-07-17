@@ -318,14 +318,14 @@ const GasPropertiesIconFactory = {
    * Creates an icon for particle type 1 in the Diffusion screen.
    */
   createDiffusionParticle1Icon( modelViewTransform: ModelViewTransform2, options?: ParticleNodeOptions ): Node {
-    return createParticleIcon( new DiffusionParticle1(), modelViewTransform, options );
+    return createParticleIcon( DiffusionParticle1.withDefaults(), modelViewTransform, options );
   },
 
   /**
    * Creates an icon for particle type 2 in the Diffusion screen.
    */
   createDiffusionParticle2Icon( modelViewTransform: ModelViewTransform2, options?: ParticleNodeOptions ): Node {
-    return createParticleIcon( new DiffusionParticle2(), modelViewTransform, options );
+    return createParticleIcon( DiffusionParticle2.withDefaults(), modelViewTransform, options );
   },
 
   /**
