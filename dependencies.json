@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.0-rc.1 Wed Jul 10 2024 18:15:24 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# gas-properties 1.1.0-rc.1 Mon Jul 22 2024 15:02:17 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "HEAD"
@@ -10,7 +10,7 @@
   },
   "bamboo": {
     "sha": "2c5740011601cf178bd7a262af2e377eaaf32d32",
-    "branch": "main"
+    "branch": "HEAD"
   },
   "brand": {
     "sha": "0e84d480a4e3e5ce0fc42537467d09e7d3ffb192",
@@ -25,7 +25,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "8027043bfe3eb1813bb0ea0ca15d06951769404c",
+    "sha": "f163280872cf7f309271ab0f31e127fa86e7b806",
     "branch": "1.1"
   },
   "joist": {
@@ -49,8 +49,8 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "bc160f49be25ccd90342504011e14c5ef9100832",
-    "branch": "HEAD"
+    "sha": "934df39d28fe6a7daa192b944760616a699efdcf",
+    "branch": "gas-properties-1.1"
   },
   "phet-io-wrappers": {
     "sha": "af7ae6d4b597fdb0c1f7bd267d4bd1b1fb6cd6b4",
