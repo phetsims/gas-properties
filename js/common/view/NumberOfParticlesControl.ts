@@ -10,13 +10,12 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import FineCoarseSpinner, { FineCoarseSpinnerOptions } from '../../../../scenery-phet/js/FineCoarseSpinner.js';
+import FineCoarseSpinner from '../../../../scenery-phet/js/FineCoarseSpinner.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, KeyboardListener, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 
 // const
 const X_SPACING = 8;
@@ -55,7 +54,7 @@ export default class NumberOfParticlesControl extends VBox {
       children: [ icon, labelText ]
     } );
 
-    const spinner = new GasPropertiesFineCoarseSpinner( numberOfParticlesProperty, {
+    const spinner = new FineCoarseSpinner( numberOfParticlesProperty, {
       deltaFine: 1,
       deltaCoarse: 50,
       numberDisplayOptions: {
@@ -74,20 +73,6 @@ export default class NumberOfParticlesControl extends VBox {
     options.children = [ labelBox, spinner ];
 
     super( options );
-  }
-}
-
-//TODO https://github.com/phetsims/sun/issues/886 Delete this class when Home/End sound has been added to FineCoarseSpinner.
-class GasPropertiesFineCoarseSpinner extends FineCoarseSpinner {
-  public constructor( numberProperty: NumberProperty, providedOptions?: FineCoarseSpinnerOptions ) {
-    super( numberProperty, providedOptions );
-
-    // Add sound for the Home and End keys.
-    const pushButtonSoundPlayer = sharedSoundPlayers.get( 'pushButton' );
-    this.addInputListener( new KeyboardListener( {
-      keys: [ 'home', 'end' ] as const,
-      fire: () => pushButtonSoundPlayer.play()
-    } ) );
   }
 }
 
