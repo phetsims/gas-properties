@@ -29,7 +29,7 @@ const CREDITS: CreditsData = {
   softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
   team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
         'Emily B. Moore, Ariel Paul, Dennis Perepelitsa, Kathy Perkins, Tom Perkins, Nancy Salpepi, Carl Wieman',
-  qualityAssurance: 'Jaspe Arias, Jaron Droder, Matthew Moore, Liam Mulhall, Jacob Romero, Kathryn Woessner'
+  qualityAssurance: 'Jaspe Arias, Jaron Droder, Clifford Hardin, Matthew Moore, Liam Mulhall, Jacob Romero, Nancy Salpepi, Luisa Vargas, Kathryn Woessner'
 };
 
 const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
