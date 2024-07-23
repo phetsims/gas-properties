@@ -17,6 +17,8 @@ import { PanelOptions } from '../../../sun/js/Panel.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesColors from './GasPropertiesColors.js';
 import { ScreenOptions } from '../../../joist/js/Screen.js';
+import { SimOptions } from '../../../joist/js/Sim.js';
+import platform from '../../../phet-core/js/platform.js';
 
 // for all panel-like containers
 const PANEL_CORNER_RADIUS = 5;
@@ -30,6 +32,18 @@ const CREDITS: CreditsData = {
   team: 'Jack Barbera, John Blanco, Michael Dubson, Amy Hanson, Linda Koch, Ron LeMaster, Trish Loeblein, ' +
         'Emily B. Moore, Ariel Paul, Dennis Perepelitsa, Kathy Perkins, Tom Perkins, Nancy Salpepi, Carl Wieman',
   qualityAssurance: 'Jaspe Arias, Jaron Droder, Clifford Hardin, Matthew Moore, Liam Mulhall, Jacob Romero, Nancy Salpepi, Luisa Vargas, Kathryn Woessner'
+};
+
+const SIM_OPTIONS: SimOptions = {
+  phetioDesigned: true,
+  credits: CREDITS,
+
+  // WebGL is typically enabled for high-performance scenery.Sprites, which are used heavily by this sim.
+  // On iPadOS, the sim consistently crashed when WebGL was enabled, and we were unable to determine why.
+  // Disabling WebGL uses Canvas as the fallback for Sprites. The problem was not present on iOS, but we
+  // have no way to differentiate between Safari on iPadOS vs iOS, so WebGL is disabled on both platforms.
+  // See https://github.com/phetsims/gas-properties/issues/289.
+  webgl: !platform.mobileSafari
 };
 
 const ACCORDION_BOX_OPTIONS: AccordionBoxOptions = {
@@ -94,7 +108,7 @@ const SCREEN_OPTIONS: Partial<ScreenOptions> = {
 
 const GasPropertiesConstants = {
 
-  CREDITS: CREDITS,
+  SIM_OPTIONS: SIM_OPTIONS,
 
   // margins for all ScreenView instances
   SCREEN_VIEW_X_MARGIN: 20,
