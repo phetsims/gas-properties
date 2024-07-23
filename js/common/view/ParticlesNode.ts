@@ -11,7 +11,7 @@ import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { Sprite, SpriteImage, SpriteInstance, Sprites } from '../../../../scenery/js/imports.js';
+import { Sprite, SpriteImage, SpriteInstance, SpriteInstanceTransformType, Sprites } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 import ParticleNode from './ParticleNode.js';
@@ -102,7 +102,8 @@ export default class ParticlesNode extends Sprites {
         if ( this.spriteInstances.length === spriteInstancesIndex ) {
           const newInstance = SpriteInstance.pool.fetch();
           newInstance.alpha = 1;
-          newInstance.matrix.setToAffine( PARTICLE_INVERSE_SCALE, 0, 0, 0, PARTICLE_INVERSE_SCALE, 0 );
+          newInstance.transformType = SpriteInstanceTransformType.AFFINE;
+          newInstance.matrix.setToScale( PARTICLE_INVERSE_SCALE );
           this.spriteInstances.push( newInstance );
         }
 
