@@ -142,7 +142,6 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
 
     // visibility
     this.visibleProperty.link( visible => {
-      this.interruptSubtreeInput(); // interrupt user interactions
       if ( visible ) {
         this.moveToFront();
         listboxParent.moveToFront();

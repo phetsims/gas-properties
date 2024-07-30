@@ -38,13 +38,6 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
 
     super( numberOfParticlesProperty, new Property( numberOfParticlesProperty.range ), options );
 
-    // Interrupt interaction when this pump becomes invisible.
-    this.visibleProperty.lazyLink( visible => {
-      if ( !visible ) {
-        this.interruptSubtreeInput();
-      }
-    } );
-
     this.addLinkedElement( numberOfParticlesProperty );
   }
 }
