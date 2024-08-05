@@ -52,7 +52,7 @@ export default class LightParticle extends Particle {
   }
 
   /**
-   * LightParticleIO handles serialization a LightParticle. It implements 'Data Type Serialization',
+   * LightParticleIO handles serialization of a LightParticle. It implements 'Data Type Serialization',
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   public static readonly LightParticleIO = new IOType<LightParticle, LightParticleStateObject>( 'LightParticleIO', {

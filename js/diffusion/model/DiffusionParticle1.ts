@@ -62,7 +62,7 @@ export default class DiffusionParticle1 extends DiffusionParticle {
   }
 
   /**
-   * DiffusionParticle1IO handles serialization a DiffusionParticle1. It implements 'Data Type Serialization',
+   * DiffusionParticle1IO handles serialization of a DiffusionParticle1. It implements 'Data Type Serialization',
    * as described in https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
   public static readonly DiffusionParticle1IO = new IOType<DiffusionParticle1, DiffusionParticle1StateObject>( 'DiffusionParticle1IO', {
