@@ -31,6 +31,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ParticleFlowRateModel from './ParticleFlowRateModel.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 const CENTER_OF_MASS_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm',
@@ -135,7 +136,7 @@ export default class DiffusionParticleSystem extends PhetioObject {
 
     // After PhET-iO state has been restored, verify the sanity of the particle system.
     if ( assert && Tandem.PHET_IO_ENABLED ) {
-      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+      phetioStateSetEmitter.addListener( () => {
         assert && assert( this.particles1.length === this.particle1Settings.numberOfParticlesProperty.value, 'incorrect number of particles1' );
         assert && assert( this.particles2.length === this.particle2Settings.numberOfParticlesProperty.value, 'incorrect number of particles2' );
       } );

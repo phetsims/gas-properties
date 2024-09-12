@@ -55,6 +55,7 @@ import BicyclePumpControl from './BicyclePumpControl.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 type SelfOptions = {
   wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;
@@ -109,7 +110,7 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     // If PhET-iO state is set while the sim is paused, tell the particle system view to update.
     // See https://github.com/phetsims/gas-properties/issues/276
     if ( Tandem.PHET_IO_ENABLED ) {
-      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+      phetioStateSetEmitter.addListener( () => {
         if ( !model.isPlayingProperty.value ) {
           particleSystemNode.update();
         }

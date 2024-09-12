@@ -18,6 +18,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
   isValidValue: value => ( value >= 0 ),
@@ -98,7 +99,7 @@ export default class ParticleFlowRateModel extends PhetioObject {
 
     // After PhET-iO state has been restored, verify the sanity of the model.
     if ( assert && Tandem.PHET_IO_ENABLED ) {
-      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+      phetioStateSetEmitter.addListener( () => {
         assert && assert( this.dts.length === this.leftCounts.length, 'incorrect number of leftCounts' );
         assert && assert( this.leftCounts.length === this.rightCounts.length, 'incorrect number of rightCounts' );
       } );

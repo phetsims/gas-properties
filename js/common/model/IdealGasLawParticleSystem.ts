@@ -31,6 +31,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 // used to compute the initial velocity angle for particles, in radians
 const PARTICLE_DISPERSION_ANGLE = Math.PI / 2;
@@ -186,7 +187,7 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
 
     // After PhET-iO state has been restored, verify the sanity of the particle system.
     if ( assert && Tandem.PHET_IO_ENABLED ) {
-      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+      phetioStateSetEmitter.addListener( () => {
         assert && assert( this.heavyParticles.length === this.numberOfHeavyParticlesProperty.value, 'incorrect number of heavyParticles' );
         assert && assert( this.lightParticles.length === this.numberOfLightParticlesProperty.value, 'incorrect number of lightParticles' );
       } );
