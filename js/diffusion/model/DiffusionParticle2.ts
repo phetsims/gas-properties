@@ -10,12 +10,12 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import { ParticleStateObject } from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionParticle, { DiffusionParticleOptions } from './DiffusionParticle.js';
-import { ParticleStateObject } from '../../common/model/Particle.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -73,7 +73,7 @@ export default class DiffusionParticle2 extends DiffusionParticle {
                    '<br>' +
                    DiffusionParticle2.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
-    fromStateObject: DiffusionParticle2.fromStateObject
+    fromStateObject: x => DiffusionParticle2.fromStateObject( x )
   } );
 }
 

@@ -6,13 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle, { ParticleOptions, ParticleStateObject } from './Particle.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -62,7 +62,7 @@ export default class LightParticle extends Particle {
                    '<br>' +
                    LightParticle.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
-    fromStateObject: LightParticle.fromStateObject
+    fromStateObject: x => LightParticle.fromStateObject( x )
   } );
 }
 
