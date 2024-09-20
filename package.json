@@ -66,7 +66,7 @@
         },
         "parserOptions": {
           "project": [
-            "../gas-properties/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
