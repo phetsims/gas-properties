@@ -63,6 +63,11 @@
               "ts-nocheck": true
             }
           ]
+        },
+        "parserOptions": {
+          "project": [
+            "../gas-properties/tsconfig.json"
+          ]
         }
       }
     ]
