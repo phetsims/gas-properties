@@ -11,7 +11,7 @@ import gasProperties from '../../gasProperties.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 import SpinnerControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SpinnerControlsKeyboardHelpSection.js';
-import TimingControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimingControlsKeyboardHelpSection.js';
+import TimeControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlsKeyboardHelpSection.js';
 
 export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -34,7 +34,7 @@ export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpC
     const rightSections = [
 
       // Timing Controls
-      new TimingControlsKeyboardHelpSection(),
+      new TimeControlsKeyboardHelpSection(),
 
       // Basic Actions
       new BasicActionsKeyboardHelpSection( {

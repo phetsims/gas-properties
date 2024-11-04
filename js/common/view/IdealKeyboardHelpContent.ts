@@ -12,7 +12,7 @@ import gasProperties from '../../gasProperties.js';
 import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
 import SpinnerControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SpinnerControlsKeyboardHelpSection.js';
-import TimingControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimingControlsKeyboardHelpSection.js';
+import TimeControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlsKeyboardHelpSection.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HeatCoolControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/HeatCoolControlsKeyboardHelpSection.js';
 
@@ -39,7 +39,7 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
     const rightSections = [
 
       // Timing Controls
-      new TimingControlsKeyboardHelpSection(),
+      new TimeControlsKeyboardHelpSection(),
 
       // Change Units
       new ComboBoxKeyboardHelpSection( {
