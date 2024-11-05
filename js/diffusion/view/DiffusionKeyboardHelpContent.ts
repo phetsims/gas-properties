@@ -33,7 +33,7 @@ export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpC
     // Sections in the right column.
     const rightSections = [
 
-      // Timing Controls
+      // Time Controls
       new TimeControlsKeyboardHelpSection(),
 
       // Basic Actions

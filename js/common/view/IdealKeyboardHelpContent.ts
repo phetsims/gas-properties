@@ -38,7 +38,7 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
     // Sections in the right column.
     const rightSections = [
 
-      // Timing Controls
+      // Time controls
       new TimeControlsKeyboardHelpSection(),
 
       // Change Units
