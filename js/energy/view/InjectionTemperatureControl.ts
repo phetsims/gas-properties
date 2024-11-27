@@ -8,21 +8,21 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
-import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import GasPropertiesStrings from '../../GasPropertiesStrings.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
-import gasProperties from '../../gasProperties.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
-import Slider from '../../../../sun/js/Slider.js';
+import { HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
+import Slider from '../../../../sun/js/Slider.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 

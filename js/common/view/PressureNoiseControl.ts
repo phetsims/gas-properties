@@ -7,15 +7,15 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';
+import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { RichText, Text } from '../../../../scenery/js/imports.js';
+import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwitch.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
-import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwitch.js';
-import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 export default class PressureNoiseControl extends PreferencesControl {
 

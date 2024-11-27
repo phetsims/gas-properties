@@ -6,20 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import gasProperties from '../../gasProperties.js';
-import { Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
-import ParticleTypeRadioButtonGroup from './ParticleTypeRadioButtonGroup.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 import { ParticleType } from '../model/ParticleType.js';
 import GasPropertiesBicyclePumpNode, { GasPropertiesBicyclePumpNodeOptions } from './GasPropertiesBicyclePumpNode.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import GasPropertiesColors from '../GasPropertiesColors.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import ParticleTypeRadioButtonGroup from './ParticleTypeRadioButtonGroup.js';
 
 type SelfOptions = EmptySelfOptions;
 

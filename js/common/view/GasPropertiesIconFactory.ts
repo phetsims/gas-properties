@@ -6,14 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenIcon from '../../../../joist/js/ScreenIcon.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
 import GaugeNode from '../../../../scenery-phet/js/GaugeNode.js';
@@ -26,16 +29,13 @@ import DiffusionParticle1 from '../../diffusion/model/DiffusionParticle1.js';
 import DiffusionParticle2 from '../../diffusion/model/DiffusionParticle2.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
+import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import HeavyParticle from '../model/HeavyParticle.js';
 import LightParticle from '../model/LightParticle.js';
 import Particle from '../model/Particle.js';
 import DimensionalArrowsNode from './DimensionalArrowsNode.js';
 import ParticleNode, { ParticleNodeOptions } from './ParticleNode.js';
 import PressureGaugeNode from './PressureGaugeNode.js';
-import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const SCREEN_ICONS_TRANSFORM = ModelViewTransform2.createIdentity();
 

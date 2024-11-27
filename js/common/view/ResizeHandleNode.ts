@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { InteractiveHighlighting } from '../../../../scenery/js/imports.js';
-import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
-import gasProperties from '../../gasProperties.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import Property from '../../../../axon/js/Property.js';
+import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
+import { InteractiveHighlighting } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 
 export default class ResizeHandleNode extends InteractiveHighlighting( HandleNode ) {

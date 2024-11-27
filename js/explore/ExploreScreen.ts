@@ -6,16 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Tandem from '../../../tandem/js/Tandem.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
+import { combineOptions } from '../../../phet-core/js/optionize.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
+import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import ExploreModel from './model/ExploreModel.js';
 import ExploreScreenView from './view/ExploreScreenView.js';
-import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
-import { combineOptions } from '../../../phet-core/js/optionize.js';
-import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 
 export default class ExploreScreen extends Screen<ExploreModel, ExploreScreenView> {
 

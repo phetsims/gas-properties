@@ -10,12 +10,12 @@ import Property from '../../../../axon/js/Property.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
 import gasProperties from '../../gasProperties.js';
-import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class IdealToolsPanel extends Panel {
 

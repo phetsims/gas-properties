@@ -11,11 +11,11 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import { ProfileColorProperty } from '../../../../scenery/js/imports.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesUtils from '../GasPropertiesUtils.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import optionize from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = {
   mass: number; // AMU

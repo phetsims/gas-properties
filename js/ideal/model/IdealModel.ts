@@ -7,9 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import IdealGasLawModel, { IdealGasLawModelOptions } from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = EmptySelfOptions;
 

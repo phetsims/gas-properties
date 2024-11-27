@@ -7,11 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesPreferences from '../model/GasPropertiesPreferences.js';
 import PressureNoiseControl from './PressureNoiseControl.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class GasPropertiesPreferencesNode extends VBox {
 

@@ -8,6 +8,7 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import { Node, VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
 import IdealGasLawScreenView, { IdealGasLawScreenViewOptions } from '../../common/view/IdealGasLawScreenView.js';
@@ -16,9 +17,8 @@ import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import IdealModel from '../model/IdealModel.js';
 import HoldConstantPanel from './HoldConstantPanel.js';
-import IdealViewProperties from './IdealViewProperties.js';
 import IdealToolsPanel from './IdealToolsPanel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import IdealViewProperties from './IdealViewProperties.js';
 
 type SelfOptions = {
 

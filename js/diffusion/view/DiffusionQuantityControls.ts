@@ -6,20 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import NumberSpinner, { NumberSpinnerOptions } from '../../../../sun/js/NumberSpinner.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import gasProperties from '../../gasProperties.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import NumberSpinner, { NumberSpinnerOptions } from '../../../../sun/js/NumberSpinner.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
+import gasProperties from '../../gasProperties.js';
 
 const ICON_SPACING = 10; // space between particle icon and spinner
 

@@ -19,11 +19,11 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import gasProperties from '../../gasProperties.js';
-import Particle from './Particle.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
+import Particle from './Particle.js';
 
 type SelfOptions = {
   position?: Vector2; // position of the container's bottom right corner, in pm

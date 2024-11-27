@@ -12,8 +12,8 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ThermometerNode from '../../../../scenery-phet/js/ThermometerNode.js';
 import { Node, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
-import TemperatureDisplay from './TemperatureDisplay.js';
 import TemperatureModel from '../model/TemperatureModel.js';
+import TemperatureDisplay from './TemperatureDisplay.js';
 
 type SelfOptions = EmptySelfOptions;
 

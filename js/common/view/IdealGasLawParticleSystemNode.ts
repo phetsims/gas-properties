@@ -10,16 +10,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
+import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import HeavyParticle from '../model/HeavyParticle.js';
+import IdealGasLawModel from '../model/IdealGasLawModel.js';
 import LightParticle from '../model/LightParticle.js';
 import ParticleCanvasProperty from './ParticleCanvasProperty.js';
-import ParticlesNode from './ParticlesNode.js';
-import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import ParticlePositionsNode from './ParticlePositionsNode.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import IdealGasLawModel from '../model/IdealGasLawModel.js';
+import ParticlesNode from './ParticlesNode.js';
 
 export default class IdealGasLawParticleSystemNode extends Node {
 

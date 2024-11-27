@@ -21,6 +21,9 @@ import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
@@ -33,9 +36,6 @@ import IdealGasLawContainer, { IdealGasLawContainerOptions } from './IdealGasLaw
 import IdealGasLawParticleSystem from './IdealGasLawParticleSystem.js';
 import PressureModel from './PressureModel.js';
 import TemperatureModel from './TemperatureModel.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = {
 

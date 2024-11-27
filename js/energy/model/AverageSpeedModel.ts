@@ -12,12 +12,12 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import Particle from '../../common/model/Particle.js';
 import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
+import Particle from '../../common/model/Particle.js';
 import gasProperties from '../../gasProperties.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
 
 const AVERAGE_SPEED_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm/ps',

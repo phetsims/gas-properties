@@ -7,13 +7,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import gasProperties from '../../gasProperties.js';
-import SoundKeyboardDragListener, { SoundKeyboardDragListenerOptions } from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import SoundKeyboardDragListener, { SoundKeyboardDragListenerOptions } from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
+import gasProperties from '../../gasProperties.js';
+import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 
 type SelfOptions = EmptySelfOptions;
 

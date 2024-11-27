@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -15,23 +16,22 @@ import Utils from '../../../../dot/js/Utils.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Node, NodeOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-import ResizeHandleDragListener from './ResizeHandleDragListener.js';
 import LidHandleDragListener from './LidHandleDragListener.js';
-import LidNode from './LidNode.js';
 import LidHandleKeyboardDragListener from './LidHandleKeyboardDragListener.js';
-import ResizeHandleKeyboardDragListener, { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
-import Multilink from '../../../../axon/js/Multilink.js';
+import LidNode from './LidNode.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import WallVelocityVectorNode from './WallVelocityVectorNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import ResizeHandleDragListener from './ResizeHandleDragListener.js';
+import ResizeHandleKeyboardDragListener, { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
 import ResizeHandleNode from './ResizeHandleNode.js';
+import WallVelocityVectorNode from './WallVelocityVectorNode.js';
 
 const LID_X_SPEED = 50; // pixels/second
 const LID_Y_SPEED = 150; // pixels/second

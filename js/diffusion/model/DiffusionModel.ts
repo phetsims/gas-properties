@@ -8,6 +8,7 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BaseModel from '../../common/model/BaseModel.js';
 import gasProperties from '../../gasProperties.js';
@@ -15,7 +16,6 @@ import DiffusionCollisionDetector from './DiffusionCollisionDetector.js';
 import DiffusionContainer from './DiffusionContainer.js';
 import DiffusionData from './DiffusionData.js';
 import DiffusionParticleSystem from './DiffusionParticleSystem.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 export default class DiffusionModel extends BaseModel {
 

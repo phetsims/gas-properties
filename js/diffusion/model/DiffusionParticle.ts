@@ -7,10 +7,10 @@
  */
 
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import Particle, { ParticleOptions } from '../../common/model/Particle.js';
-import gasProperties from '../../gasProperties.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import Particle, { ParticleOptions } from '../../common/model/Particle.js';
+import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 

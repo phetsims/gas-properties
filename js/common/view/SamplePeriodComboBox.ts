@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ComboBox, { ComboBoxItem } from '../../../../sun/js/ComboBox.js';
-import Property from '../../../../axon/js/Property.js';
-import { Node, Text } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import GasPropertiesStrings from '../../GasPropertiesStrings.js';
-import gasProperties from '../../gasProperties.js';
+import Property from '../../../../axon/js/Property.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { Node, Text } from '../../../../scenery/js/imports.js';
+import ComboBox, { ComboBoxItem } from '../../../../sun/js/ComboBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 export default class SamplePeriodComboBox extends ComboBox<number> {
 

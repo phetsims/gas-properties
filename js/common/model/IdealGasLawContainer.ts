@@ -15,12 +15,12 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import BaseContainer, { BaseContainerOptions } from './BaseContainer.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 const NUMBER_OF_DX_SAMPLES = 50;
 

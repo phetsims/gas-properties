@@ -8,10 +8,10 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
-import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import ResizeHandleDragDelegate from './ResizeHandleDragDelegate.js';
 
 export default class ResizeHandleDragListener extends SoundDragListener {

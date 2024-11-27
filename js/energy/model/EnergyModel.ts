@@ -6,12 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
 import gasProperties from '../../gasProperties.js';
 import AverageSpeedModel from './AverageSpeedModel.js';
 import HistogramsModel from './HistogramsModel.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 
 const SAMPLE_PERIOD = 1; // sample period for Average Speed and histograms, in ps
 const CONTAINER_WIDTH = 10000; // pm

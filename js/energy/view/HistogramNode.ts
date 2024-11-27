@@ -6,27 +6,27 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Range from '../../../../dot/js/Range.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
+import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
+import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Range from '../../../../dot/js/Range.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import Orientation from '../../../../phet-core/js/Orientation.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Line, Node, NodeOptions, TColor, Text } from '../../../../scenery/js/imports.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import gasProperties from '../../gasProperties.js';
-import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
-import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
-import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
-import Orientation from '../../../../phet-core/js/Orientation.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import BinCountsPlot from './BinCountsPlot.js';
-import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import Property from '../../../../axon/js/Property.js';
 
 const AXIS_LABEL_FONT = new PhetFont( 12 );
 const TICK_LABEL_FONT = new PhetFont( 12 );

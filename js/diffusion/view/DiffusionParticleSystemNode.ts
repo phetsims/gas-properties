@@ -10,13 +10,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import ParticlesNode from '../../common/view/ParticlesNode.js';
 import gasProperties from '../../gasProperties.js';
 import DiffusionModel from '../model/DiffusionModel.js';
 import DiffusionParticle1 from '../model/DiffusionParticle1.js';
 import DiffusionParticle2 from '../model/DiffusionParticle2.js';
 import DiffusionParticleCanvasProperty from './DiffusionParticleCanvasProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class DiffusionParticleSystemNode extends ParticlesNode {
 

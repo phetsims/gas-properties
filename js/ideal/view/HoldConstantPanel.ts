@@ -6,20 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
-import { HoldConstant } from '../../common/model/HoldConstant.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import GasPropertiesStrings from '../../GasPropertiesStrings.js';
-import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import { AquaRadioButtonOptions } from '../../../../sun/js/AquaRadioButton.js';
+import AquaRadioButtonGroup, { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import GasPropertiesColors from '../../common/GasPropertiesColors.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import { HoldConstant } from '../../common/model/HoldConstant.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 const SPACING = 12;
 const TEXT_OPTIONS: TextOptions = {

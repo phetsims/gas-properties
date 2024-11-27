@@ -6,17 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import { optionize4 } from '../../../phet-core/js/optionize.js';
 import PickOptional from '../../../phet-core/js/types/PickOptional.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
-import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
+import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
+import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import IdealModel from './model/IdealModel.js';
 import IdealScreenView from './view/IdealScreenView.js';
-import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 
 type SelfOptions = {
 

@@ -8,11 +8,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import gasProperties from '../../gasProperties.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import Particle from '../model/Particle.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { Path } from '../../../../scenery/js/imports.js';
+import gasProperties from '../../gasProperties.js';
+import Particle from '../model/Particle.js';
 
 export default class ParticlePositionsNode extends Path {
 

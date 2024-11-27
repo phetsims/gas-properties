@@ -11,8 +11,8 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BicyclePumpNode, { BicyclePumpNodeOptions } from '../../../../scenery-phet/js/BicyclePumpNode.js';
-import gasProperties from '../../gasProperties.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 

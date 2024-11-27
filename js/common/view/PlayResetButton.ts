@@ -13,8 +13,8 @@ import PlayIconShape from '../../../../scenery-phet/js/PlayIconShape.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import { Path, PathOptions } from '../../../../scenery/js/imports.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
-import gasProperties from '../../gasProperties.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import gasProperties from '../../gasProperties.js';
 
 export default class PlayResetButton extends BooleanRectangularToggleButton {
 

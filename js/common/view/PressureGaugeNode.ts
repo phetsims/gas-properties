@@ -14,8 +14,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
-import PressureDisplay from './PressureDisplay.js';
 import PressureModel from '../model/PressureModel.js';
+import PressureDisplay from './PressureDisplay.js';
 
 const DIAL_RADIUS = 50;
 const POST_HEIGHT = 0.6 * DIAL_RADIUS;

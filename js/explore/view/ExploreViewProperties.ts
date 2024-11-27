@@ -6,11 +6,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawViewProperties from '../../common/view/IdealGasLawViewProperties.js';
 import gasProperties from '../../gasProperties.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
 
 export default class ExploreViewProperties extends IdealGasLawViewProperties {
 

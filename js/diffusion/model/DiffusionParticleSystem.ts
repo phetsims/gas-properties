@@ -6,32 +6,32 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import gasProperties from '../../gasProperties.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
+import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
+import Particle, { ParticleOptions } from '../../common/model/Particle.js';
+import ParticleUtils from '../../common/model/ParticleUtils.js';
+import gasProperties from '../../gasProperties.js';
+import DiffusionContainer from './DiffusionContainer.js';
+import DiffusionParticle from './DiffusionParticle.js';
 import DiffusionParticle1, { DiffusionParticle1StateObject } from './DiffusionParticle1.js';
 import DiffusionParticle2, { DiffusionParticle2StateObject } from './DiffusionParticle2.js';
 import DiffusionSettings from './DiffusionSettings.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import ParticleUtils from '../../common/model/ParticleUtils.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import DiffusionParticle from './DiffusionParticle.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import DiffusionContainer from './DiffusionContainer.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import Particle, { ParticleOptions } from '../../common/model/Particle.js';
-import dotRandom from '../../../../dot/js/dotRandom.js';
-import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
 import ParticleFlowRateModel from './ParticleFlowRateModel.js';
-import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
-import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 const CENTER_OF_MASS_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm',

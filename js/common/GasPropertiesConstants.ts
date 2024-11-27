@@ -8,6 +8,9 @@
 
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import { CreditsData } from '../../../joist/js/CreditsNode.js';
+import { ScreenOptions } from '../../../joist/js/Screen.js';
+import { SimOptions } from '../../../joist/js/Sim.js';
+import platform from '../../../phet-core/js/platform.js';
 import { ComboBoxDisplayOptions } from '../../../scenery-phet/js/ComboBoxDisplay.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
@@ -16,9 +19,6 @@ import { CheckboxOptions } from '../../../sun/js/Checkbox.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import gasProperties from '../gasProperties.js';
 import GasPropertiesColors from './GasPropertiesColors.js';
-import { ScreenOptions } from '../../../joist/js/Screen.js';
-import { SimOptions } from '../../../joist/js/Sim.js';
-import platform from '../../../phet-core/js/platform.js';
 
 // for all panel-like containers
 const PANEL_CORNER_RADIUS = 5;

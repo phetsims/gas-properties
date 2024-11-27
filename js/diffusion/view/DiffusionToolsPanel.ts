@@ -7,9 +7,11 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import gasProperties from '../../gasProperties.js';
@@ -17,8 +19,6 @@ import CenterOfMassCheckbox from './CenterOfMassCheckbox.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateCheckbox from './ParticleFlowRateCheckbox.js';
 import ScaleCheckbox from './ScaleCheckbox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const TEXT_MAX_WIDTH = 175; // determined empirically
 

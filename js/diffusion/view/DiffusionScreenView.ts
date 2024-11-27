@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { VBox } from '../../../../scenery/js/imports.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
@@ -18,14 +20,12 @@ import DiffusionModel from '../model/DiffusionModel.js';
 import CenterOfMassNode from './CenterOfMassNode.js';
 import DataAccordionBox from './DataAccordionBox.js';
 import DiffusionContainerNode from './DiffusionContainerNode.js';
-import DiffusionToolsPanel from './DiffusionToolsPanel.js';
 import DiffusionParticleSystemNode from './DiffusionParticleSystemNode.js';
+import DiffusionSettingsPanel from './DiffusionSettingsPanel.js';
+import DiffusionToolsPanel from './DiffusionToolsPanel.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateNode from './ParticleFlowRateNode.js';
 import ScaleNode from './ScaleNode.js';
-import DiffusionSettingsPanel from './DiffusionSettingsPanel.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 const PANELS_WIDTH = 300;
 

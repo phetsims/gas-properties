@@ -26,10 +26,13 @@
 
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PointerCoordinatesNode from '../../../../scenery-phet/js/PointerCoordinatesNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
@@ -39,6 +42,7 @@ import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import IdealGasLawModel from '../model/IdealGasLawModel.js';
 import { ParticleType } from '../model/ParticleType.js';
 import BaseScreenView, { BaseScreenViewOptions } from './BaseScreenView.js';
+import BicyclePumpControl from './BicyclePumpControl.js';
 import CollisionCounterNode from './CollisionCounterNode.js';
 import ContainerWidthNode from './ContainerWidthNode.js';
 import EraseParticlesButton from './EraseParticlesButton.js';
@@ -50,12 +54,8 @@ import IdealGasLawContainerNode from './IdealGasLawContainerNode.js';
 import IdealGasLawParticleSystemNode from './IdealGasLawParticleSystemNode.js';
 import PressureGaugeNode from './PressureGaugeNode.js';
 import RegionsNode from './RegionsNode.js';
-import ReturnLidButton from './ReturnLidButton.js';
-import BicyclePumpControl from './BicyclePumpControl.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { ResizeHandleKeyboardDragListenerOptions } from './ResizeHandleKeyboardDragListener.js';
-import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
+import ReturnLidButton from './ReturnLidButton.js';
 
 type SelfOptions = {
   wallVelocityVisibleProperty?: TReadOnlyProperty<boolean>;

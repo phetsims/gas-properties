@@ -6,12 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import gasProperties from '../../gasProperties.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
-import Utils from '../../../../dot/js/Utils.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
 export default class WallVelocityVectorNode extends Node {

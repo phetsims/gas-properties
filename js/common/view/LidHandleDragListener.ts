@@ -8,11 +8,11 @@
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
-import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 
 export default class LidHandleDragListener extends SoundDragListener {
 

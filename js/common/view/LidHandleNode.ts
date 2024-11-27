@@ -6,16 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import HandleNode, { HandleNodeOptions } from '../../../../scenery-phet/js/HandleNode.js';
-import { InteractiveHighlighting, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
-import gasProperties from '../../gasProperties.js';
-import GasPropertiesColors from '../GasPropertiesColors.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import HandleNode, { HandleNodeOptions } from '../../../../scenery-phet/js/HandleNode.js';
+import { InteractiveHighlighting, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import gasProperties from '../../gasProperties.js';
+import GasPropertiesColors from '../GasPropertiesColors.js';
 
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
 
