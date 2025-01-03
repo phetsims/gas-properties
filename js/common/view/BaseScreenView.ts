@@ -60,7 +60,7 @@ export default abstract class BaseScreenView extends ScreenView {
 
       // optional Normal/Slow radio buttons
       timeSpeedProperty: options.hasTimeSpeedFeature ? model.timeSpeedProperty : null,
-      buttonGroupXSpacing: 25,
+      flowBoxSpacing: 25,
       speedRadioButtonGroupOptions: {
         labelOptions: {
           font: GasPropertiesConstants.CONTROL_FONT,
