@@ -10,7 +10,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EraserButton, { EraserButtonOptions } from '../../../../scenery-phet/js/buttons/EraserButton.js';
-import { NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import IdealGasLawParticleSystem from '../model/IdealGasLawParticleSystem.js';

@@ -11,7 +11,7 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import HeavyParticle from '../model/HeavyParticle.js';
