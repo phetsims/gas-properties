@@ -11,7 +11,7 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node, NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import gasProperties from '../../gasProperties.js';
 import ParticleFlowRateModel from '../model/ParticleFlowRateModel.js';
 
