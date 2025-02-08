@@ -1,4 +1,4 @@
-// Copyright 2019-2024, University of Colorado Boulder
+// Copyright 2019-2025, University of Colorado Boulder
 
 /**
  * ScaleNode displays the scale that appears along the bottom of the container in the Diffusion screen.

@@ -1,4 +1,4 @@
-// Copyright 2018-2024, University of Colorado Boulder
+// Copyright 2018-2025, University of Colorado Boulder
 
 /**
  * TemperatureDisplay displays the temperature value, with the ability to switch units via a combo box.

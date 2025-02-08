@@ -1,4 +1,4 @@
-// Copyright 2019-2024, University of Colorado Boulder
+// Copyright 2019-2025, University of Colorado Boulder
 
 /**
  * RegionsNode shows how the collision detection space is partitioned into a 2D grid of Regions.

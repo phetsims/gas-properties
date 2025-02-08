@@ -1,4 +1,4 @@
-// Copyright 2018-2024, University of Colorado Boulder
+// Copyright 2018-2025, University of Colorado Boulder
 
 /**
  * ExploreToolsPanel is the panel that appears in the upper-right corner of the 'Explore' screen.

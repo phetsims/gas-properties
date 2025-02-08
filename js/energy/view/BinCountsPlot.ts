@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * BinCountsPlot plots the counts for an ordered set of bins. The bins are positioned at integer x values, while

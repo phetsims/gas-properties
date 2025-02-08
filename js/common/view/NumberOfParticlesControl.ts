@@ -1,4 +1,4 @@
-// Copyright 2018-2024, University of Colorado Boulder
+// Copyright 2018-2025, University of Colorado Boulder
 
 /**
  * NumberOfParticlesControl is a control for changing the number of particles for a specific type of particle.

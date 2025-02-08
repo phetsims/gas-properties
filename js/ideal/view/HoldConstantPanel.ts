@@ -1,4 +1,4 @@
-// Copyright 2018-2024, University of Colorado Boulder
+// Copyright 2018-2025, University of Colorado Boulder
 
 /**
  * HoldConstantPanel is the panel titled 'Hold Constant' that appears in the 'Ideal' screen.

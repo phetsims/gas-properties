@@ -1,4 +1,4 @@
-// Copyright 2019-2024, University of Colorado Boulder
+// Copyright 2019-2025, University of Colorado Boulder
 
 /**
  * IdealGasLawParticleSystemNode renders the particle system for screens that are based on the Ideal Gas Law.

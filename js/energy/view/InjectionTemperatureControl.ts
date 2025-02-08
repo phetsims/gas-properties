@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2022-2025, University of Colorado Boulder
 
 /**
  * InjectionTemperatureControl is a NumberControl for setting the injection temperature of particles.
