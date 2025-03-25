@@ -240,7 +240,7 @@ function createRegions( container: BaseContainer, regionLength: number ): Region
  * Assigns each particle to the Regions that it intersects, accounting for particle radius.
  */
 function assignParticlesToRegions( particleArrays: Particle[][], regions: Region[] ): void {
-  assert && assert( regions.length > 0, `invalid regions: ${regions}` );
+  assert && assert( regions.length > 0, 'invalid regions:', regions );
 
   for ( let i = particleArrays.length - 1; i >= 0; i-- ) {
     const particles = particleArrays[ i ];
