@@ -9,6 +9,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -160,7 +161,7 @@ export class TranslationAndRotation {
    * Handles serialization of TranslationAndRotation. It implements 'Data Type Serialization', as described in
    * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization.
    */
-  public static readonly TranslationAndRotationIO = new IOType( 'TranslationAndRotationIO', {
+  public static readonly TranslationAndRotationIO = new IOType<IntentionalAny, IntentionalAny>( 'TranslationAndRotationIO', {
     valueType: TranslationAndRotation,
     documentation: 'Translation and rotation use to animate the lid when it blows off the container.',
     stateSchema: {
