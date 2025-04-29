@@ -109,7 +109,7 @@ When a particle is added to the container:
   is used. On the _Energy_ screen, the user may optionally set this temperature. When multiple particles are added to
   the container simultaneously, this temperature is treated as a mean temperature, and individual particle speeds are
   based on a Gaussian distribution of the mean temperature. Temperature is used to compute kinetic energy
-  via `KE = (3/2)Tk`, and speed is then computed via `|v| = Math.sqrt( 2KE/m )`.
+  via `KE = (3/2)Tk`, and speed is computed via `|v| = Math.sqrt( 2KE/m )`.
 
 ## Container
 
@@ -146,9 +146,9 @@ Two types of collisions are supported: particle-particle, and particle-container
 
 * Particle-particle collisions occur between 2 particles, and use
   an [impulse-based contact model](https://en.wikipedia.org/wiki/Collision_response#Impulse-based_contact_model).
-  Particle-particle collision are based solely whether they intersect at their current locations. Is is possible (and
+  Particle-particle collisions are based solely on whether they intersect at their current locations. It is possible (and
   acceptable)
-  for two particles to pass through the same point on the way to those location and not collide. Particle-particle may
+  for two particles to pass through the same point on the way to those locations and not collide. Particle-particle may
   be disabled in the _Energy_ screen.
 * Particle-container collisions occur between a particle and a wall of the container, and are counted for display by the
   Collision Counter. These collisions occur if a particle contacted a wall on its way to its current location.
