@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.2.0-dev.4 Tue Apr 29 2025 14:09:41 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# gas-properties 1.2.0-dev.5 Wed Apr 30 2025 14:25:54 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "f6d41b399ad32df2a00ab4b329981be0c574d77a",
     "branch": "main"
@@ -25,7 +25,7 @@
     "branch": "main"
   },
   "gas-properties": {
-    "sha": "9c65577a594eaeda42cba4ca517520c75a161370",
+    "sha": "453da2db49cb0dad7ad199f33aa1b257048d8737",
     "branch": "main"
   },
   "joist": {
@@ -37,7 +37,7 @@
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "0eb02f1cb423b24b2effadf2015cec35e35bfbfe",
+    "sha": "f6a63b12b2f8883ba2d68f96933049d0d50ec218",
     "branch": "main"
   },
   "phet-core": {
@@ -49,7 +49,7 @@
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "128dd3b1a82d324cecb7f5ca97df3c3bea4bb4b1",
+    "sha": "0e2377dffc40b361fecbd4c1390a3687c80d198a",
     "branch": "main"
   },
   "phet-io-wrappers": {
@@ -69,7 +69,7 @@
     "branch": "main"
   },
   "scenery": {
-    "sha": "a8818b4eacfe3c2de2f8248a28d500b3209b54fe",
+    "sha": "026cd34145566f4d934b151210c1b8e83201819a",
     "branch": "main"
   },
   "scenery-phet": {
