@@ -17,7 +17,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "d79d3d7488fbf586bd9187f9117c5742cb7a5292",
+    "sha": "99e6532f2c0d430f54012f67da0fe68f6476071b",
     "branch": "HEAD"
   },
   "dot": {
@@ -25,7 +25,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "d7247ea3fc0869e9889cff602b7aae2bd35e3e46",
+    "sha": "6756a382be9f4d86ff596681c9eb7073ed5f991c",
     "branch": "1.1"
   },
   "joist": {
