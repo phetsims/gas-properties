@@ -32,11 +32,12 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 ## 1.1 (2024-07-30)
 
 ### New Features
-* Alternative Input
-* Interactive Highlights
-* UI Sounds
 * Preferences
 * Dynamic locale: see _Preferences > Localization > Languages_
+* Alternative Input
+* Interactive Highlights
+* Projector Mode
+* UI Sounds
 * PhET-iO
 * TypeScript implementation
 
