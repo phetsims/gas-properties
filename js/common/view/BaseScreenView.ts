@@ -39,10 +39,7 @@ export default abstract class BaseScreenView extends ScreenView {
     const options = optionize<BaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
 
       // SelfOptions
-      hasTimeSpeedFeature: false,
-
-      // ScreenViewOptions
-      isDisposable: false
+      hasTimeSpeedFeature: false
     }, providedOptions );
 
     super( options );
