@@ -1,4 +1,4 @@
-// Copyright 2019-2024, University of Colorado Boulder
+// Copyright 2019-2025, University of Colorado Boulder
 
 /**
  * DiffusionParticleCanvasProperty derives the HTMLCanvasElement for a DiffusionParticle, used to render particles with
