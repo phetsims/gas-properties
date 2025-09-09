@@ -11,8 +11,9 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
@@ -53,14 +54,12 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
   public constructor( collisionCounter: CollisionCounter, listboxParent: Node,
                       visibleBoundsProperty: TReadOnlyProperty<Bounds2>, providedOptions: CollisionCounterNodeOptions ) {
 
-    const options = optionize<CollisionCounterNodeOptions, SelfOptions, ParentOptions>()( {
+    const options = optionize4<CollisionCounterNodeOptions, SelfOptions, ParentOptions>()( {}, AccessibleDraggableOptions, {
 
       // NodeOptions
       isDisposable: false,
       cursor: 'pointer',
       visibleProperty: collisionCounter.visibleProperty,
-      tagName: 'div', // for KeyboardDragListener
-      focusable: true, // for KeyboardDragListener
       groupFocusHighlight: true,
       phetioFeatured: true
     }, providedOptions );

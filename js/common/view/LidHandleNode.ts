@@ -9,8 +9,9 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import HandleNode, { HandleNodeOptions } from '../../../../scenery-phet/js/HandleNode.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
@@ -43,7 +44,7 @@ export default class LidHandleNode extends InteractiveHighlighting( HandleNode )
       phetioDocumentation: 'Use this Property to permanently hide the container\'s lid handle.'
     } );
 
-    const options = optionize<LidHandleNodeOptions, SelfOptions, HandleNodeOptions>()( {
+    const options = optionize4<LidHandleNodeOptions, SelfOptions, HandleNodeOptions>()( {}, {
 
       // HandleNodeOptions
       hasLeftAttachment: false,
@@ -51,14 +52,12 @@ export default class LidHandleNode extends InteractiveHighlighting( HandleNode )
       attachmentLineWidth: HANDLE_ATTACHMENT_LINE_WIDTH,
       scale: 0.4,
       cursor: 'pointer',
-      tagName: 'div',
-      focusable: true,
       visibleProperty: DerivedProperty.and( [ handleVisibleProperty, hasHandleProperty ], {
         tandem: providedOptions.tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
       phetioInputEnabledPropertyInstrumented: true
-    }, providedOptions );
+    }, AccessibleDraggableOptions, providedOptions );
 
     super( options );
 

@@ -9,7 +9,9 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import HandleNode from '../../../../scenery-phet/js/HandleNode.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
+import HandleNode, { HandleNodeOptions } from '../../../../scenery-phet/js/HandleNode.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -35,7 +37,7 @@ export default class ResizeHandleNode extends InteractiveHighlighting( HandleNod
       phetioDocumentation: 'Use this Property to permanently hide the container\'s resize handle.'
     } );
 
-    super( {
+    super( combineOptions<HandleNodeOptions>( {
 
       // HandleNodeOptions
       gripBaseColor: GasPropertiesColors.resizeHandleColorProperty,
@@ -43,15 +45,13 @@ export default class ResizeHandleNode extends InteractiveHighlighting( HandleNod
       rotation: -Math.PI / 2,
       scale: 0.4,
       cursor: 'pointer',
-      tagName: 'div',
-      focusable: true,
       visibleProperty: DerivedProperty.and( [ handleVisibleProperty, hasHandleProperty ], {
         tandem: tandem.createTandem( 'visibleProperty' ),
         phetioValueType: BooleanIO
       } ),
       tandem: tandem,
       phetioInputEnabledPropertyInstrumented: true
-    } );
+    }, AccessibleDraggableOptions ) );
 
     this.handleVisibleProperty = handleVisibleProperty;
   }
