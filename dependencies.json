@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "ba14142cbb316240753db625e5fca1697848f89e",
+    "sha": "0ea2ed7977ad54c4712c016c8a9e23f6ba2140c6",
     "branch": "gas-properties-1.1"
   },
   "phet-io-wrappers": {
