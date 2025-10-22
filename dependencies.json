@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.5-rc.3 Fri Sep 26 2025 15:13:31 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# gas-properties 1.1.5-rc.3 Wed Oct 22 2025 11:53:30 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "HEAD"
@@ -25,7 +25,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "eae3f360bd8619da39801f9bfaa50b88991c2029",
+    "sha": "4ab317a197d119a37e4d6b89337689873ded77b2",
     "branch": "1.1"
   },
   "joist": {
@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "0ea2ed7977ad54c4712c016c8a9e23f6ba2140c6",
+    "sha": "2596a2494611a74134ad3002f7c39dc6bdeab847",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
