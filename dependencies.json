@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.5-rc.5 Wed Oct 22 2025 12:06:52 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# gas-properties 1.1.5-rc.6 Wed Oct 22 2025 12:29:57 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "HEAD"
@@ -25,7 +25,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "ab00a599cf69adf11d67819bbdbf7350ff28cf1b",
+    "sha": "cd64414b19877a74740884ee9d4c66852414115a",
     "branch": "1.1"
   },
   "joist": {
