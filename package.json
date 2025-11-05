@@ -34,6 +34,9 @@
       "compareDesignedAPIChanges": true,
       "wrappers": [
         "phet-io-sim-specific/repos/gas-properties/wrappers/codap"
+      ],
+      "publicWrappers": [
+        "codap"
       ]
     },
     "supportsOutputJS": true,
