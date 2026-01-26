@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.5 Mon Jan 26 2026 11:57:39 GMT-0500 (Eastern Standard Time)",
+  "comment": "# gas-properties 1.1.6-rc.1 Mon Jan 26 2026 12:09:00 GMT-0500 (Eastern Standard Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "HEAD"
@@ -25,7 +25,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "ae098cd30ba38c3fdf88b6d4dc1893d752671cf2",
+    "sha": "9535a8510c9605eea149cef2d69a378ae9aafa6f",
     "branch": "1.1"
   },
   "joist": {
@@ -50,7 +50,7 @@
   },
   "phet-io-sim-specific": {
     "sha": "6898b903a2f5d232a4f4f8d79aef844ef81e5a25",
-    "branch": "gas-properties-1.1"
+    "branch": "HEAD"
   },
   "phet-io-wrappers": {
     "sha": "bcdaac375125a2cd996dd99abc153625c59aab4a",
