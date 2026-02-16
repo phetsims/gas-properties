@@ -1,5 +1,5 @@
 {
-  "comment": "# gas-properties 1.1.6-rc.6 Mon Feb 16 2026 12:37:09 GMT-0500 (Eastern Standard Time)",
+  "comment": "# gas-properties 1.1.6 Mon Feb 16 2026 12:55:52 GMT-0500 (Eastern Standard Time)",
   "assert": {
     "sha": "4eaabfefb0b88b213e98b9c7f32d6c570c3fc122",
     "branch": "HEAD"
@@ -25,7 +25,7 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "da5ffc659d88b5e3f008d2be59297ee2c37fdcb2",
+    "sha": "390d68a16e6f19d8156741f5e1e056c3d94ea8e5",
     "branch": "1.1"
   },
   "joist": {
