@@ -25,11 +25,11 @@
     "branch": "HEAD"
   },
   "gas-properties": {
-    "sha": "77688202c6adf3e615b8478afcba63c3b5ed10bb",
+    "sha": "94d6187aad014f906beab582018cb3e0618eb5d7",
     "branch": "1.1"
   },
   "joist": {
-    "sha": "b8a639e1dd6e7e95d5102a845c2fd909c0f2e432",
+    "sha": "7f6115164b0ed1350181cd24e16cff953737f092",
     "branch": "HEAD"
   },
   "kite": {
