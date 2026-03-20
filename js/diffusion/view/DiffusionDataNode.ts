@@ -17,7 +17,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 
@@ -78,5 +77,3 @@ export default class DiffusionDataNode extends VBox {
     } );
   }
 }
-
-gasProperties.register( 'DiffusionDataNode', DiffusionDataNode );

@@ -11,7 +11,6 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -34,5 +33,3 @@ export default class ParticleNode extends ShadedSphereNode {
     super( diameter, options );
   }
 }
-
-gasProperties.register( 'ParticleNode', ParticleNode );

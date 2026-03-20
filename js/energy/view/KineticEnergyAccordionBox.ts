@@ -9,7 +9,6 @@
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import EnergyAccordionBox, { EnergyAccordionBoxOptions } from './EnergyAccordionBox.js';
@@ -34,5 +33,3 @@ export default class KineticEnergyAccordionBox extends EnergyAccordionBox {
       createHistogramNode, providedOptions );
   }
 }
-
-gasProperties.register( 'KineticEnergyAccordionBox', KineticEnergyAccordionBox );

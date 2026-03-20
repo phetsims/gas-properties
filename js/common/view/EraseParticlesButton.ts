@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EraserButton, { EraserButtonOptions } from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import IdealGasLawParticleSystem from '../model/IdealGasLawParticleSystem.js';
 
@@ -40,5 +39,3 @@ export default class EraseParticlesButton extends EraserButton {
     super( options );
   }
 }
-
-gasProperties.register( 'EraseParticlesButton', EraseParticlesButton );

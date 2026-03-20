@@ -16,7 +16,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionSettings from '../model/DiffusionSettings.js';
 import DiffusionQuantityControls from './DiffusionQuantityControls.js';
@@ -121,5 +120,3 @@ export default class DiffusionSettingsPanel extends Panel {
     super( content, options );
   }
 }
-
-gasProperties.register( 'DiffusionSettingsPanel', DiffusionSettingsPanel );

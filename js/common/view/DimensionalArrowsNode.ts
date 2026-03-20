@@ -22,7 +22,6 @@ import Line from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import gasProperties from '../../gasProperties.js';
 
 const DEFAULT_ARROW_HEAD_DIMENSIONS = new Dimension2( 8, 8 );
 
@@ -111,5 +110,3 @@ export default class DimensionalArrowsNode extends Node {
     } );
   }
 }
-
-gasProperties.register( 'DimensionalArrowsNode', DimensionalArrowsNode );

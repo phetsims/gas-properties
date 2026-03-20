@@ -17,7 +17,6 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import Particle from '../../common/model/Particle.js';
-import gasProperties from '../../gasProperties.js';
 
 const AVERAGE_SPEED_PROPERTY_OPTIONS: PropertyOptions<number | null> = {
   units: 'pm/ps',
@@ -221,5 +220,3 @@ function getAverageSpeed( particles: Particle[] ): number {
   }
   return averageSpeed;
 }
-
-gasProperties.register( 'AverageSpeedModel', AverageSpeedModel );

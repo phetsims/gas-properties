@@ -14,7 +14,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class EnergyToolsPanel extends Panel {
 
@@ -46,5 +45,3 @@ export default class EnergyToolsPanel extends Panel {
     super( content, options );
   }
 }
-
-gasProperties.register( 'EnergyToolsPanel', EnergyToolsPanel );

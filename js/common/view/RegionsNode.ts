@@ -10,7 +10,6 @@
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import Region from '../model/Region.js';
 import RegionNode from './RegionNode.js';
 
@@ -44,5 +43,3 @@ export default class RegionsNode extends Node {
     }
   }
 }
-
-gasProperties.register( 'RegionsNode', RegionsNode );

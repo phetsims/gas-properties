@@ -16,7 +16,6 @@
 
 import Disposable from '../../../../axon/js/Disposable.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import gasProperties from '../../gasProperties.js';
 import Particle from './Particle.js';
 
 export default class Region {
@@ -52,5 +51,3 @@ export default class Region {
     this.particles.length = 0;
   }
 }
-
-gasProperties.register( 'Region', Region );

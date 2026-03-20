@@ -9,7 +9,6 @@
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
-import gasProperties from '../../gasProperties.js';
 import AverageSpeedModel from './AverageSpeedModel.js';
 import HistogramsModel from './HistogramsModel.js';
 
@@ -62,5 +61,3 @@ export default class EnergyModel extends IdealGasLawModel {
     this.histogramsModel.step( dt );
   }
 }
-
-gasProperties.register( 'EnergyModel', EnergyModel );

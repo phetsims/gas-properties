@@ -11,7 +11,6 @@ import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class DiffusionViewProperties {
 
@@ -71,5 +70,3 @@ export default class DiffusionViewProperties {
     // Do not reset numberOfParticleTypesProperty, because it is for PhET-iO only.
   }
 }
-
-gasProperties.register( 'DiffusionViewProperties', DiffusionViewProperties );

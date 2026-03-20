@@ -24,7 +24,6 @@ import Slider from '../../../../sun/js/Slider.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -113,5 +112,3 @@ function temperatureLayoutFunction( titleNode: Node, numberDisplay: NumberDispla
     ]
   } );
 }
-
-gasProperties.register( 'InjectionTemperatureControl', InjectionTemperatureControl );

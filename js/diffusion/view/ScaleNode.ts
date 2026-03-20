@@ -17,7 +17,6 @@ import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/j
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 const TICK_LENGTH = 16; // view coordinates
@@ -90,5 +89,3 @@ export default class ScaleNode extends Node {
     super( options );
   }
 }
-
-gasProperties.register( 'ScaleNode', ScaleNode );

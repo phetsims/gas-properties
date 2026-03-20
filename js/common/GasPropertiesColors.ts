@@ -215,5 +215,4 @@ const GasPropertiesColors = {
   } )
 };
 
-gasProperties.register( 'GasPropertiesColors', GasPropertiesColors );
 export default GasPropertiesColors;

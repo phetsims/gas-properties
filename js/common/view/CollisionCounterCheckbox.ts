@@ -9,7 +9,6 @@
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from './GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from './GasPropertiesIconFactory.js';
@@ -32,5 +31,3 @@ export default class CollisionCounterCheckbox extends GasPropertiesCheckbox {
     super( collisionCounterVisibleProperty, options );
   }
 }
-
-gasProperties.register( 'CollisionCounterCheckbox', CollisionCounterCheckbox );

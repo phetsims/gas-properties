@@ -13,7 +13,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ComboBox, { ComboBoxItem } from '../../../../sun/js/ComboBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 export default class SamplePeriodComboBox extends ComboBox<number> {
@@ -51,5 +50,3 @@ export default class SamplePeriodComboBox extends ComboBox<number> {
     } );
   }
 }
-
-gasProperties.register( 'SamplePeriodComboBox', SamplePeriodComboBox );

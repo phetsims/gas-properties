@@ -17,7 +17,6 @@ import { AccordionBoxOptions } from '../../../sun/js/AccordionBox.js';
 import { AquaRadioButtonOptions } from '../../../sun/js/AquaRadioButton.js';
 import { CheckboxOptions } from '../../../sun/js/Checkbox.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
-import gasProperties from '../gasProperties.js';
 import GasPropertiesColors from './GasPropertiesColors.js';
 
 // for all panel-like containers
@@ -194,5 +193,4 @@ const GasPropertiesConstants = {
   }
 };
 
-gasProperties.register( 'GasPropertiesConstants', GasPropertiesConstants );
 export default GasPropertiesConstants;

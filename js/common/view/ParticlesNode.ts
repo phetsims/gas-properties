@@ -15,7 +15,6 @@ import Sprites from '../../../../scenery/js/nodes/Sprites.js';
 import Sprite from '../../../../scenery/js/util/Sprite.js';
 import SpriteImage from '../../../../scenery/js/util/SpriteImage.js';
 import SpriteInstance, { SpriteInstanceTransformType } from '../../../../scenery/js/util/SpriteInstance.js';
-import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 import ParticleNode from './ParticleNode.js';
 
@@ -147,5 +146,3 @@ export default class ParticlesNode extends Sprites {
       canvasWidth / 2, canvasHeight / 2, canvasWidth, canvasHeight );
   }
 }
-
-gasProperties.register( 'ParticlesNode', ParticlesNode );

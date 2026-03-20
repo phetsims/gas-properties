@@ -12,7 +12,6 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BicyclePumpNode, { BicyclePumpNodeOptions } from '../../../../scenery-phet/js/BicyclePumpNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -41,5 +40,3 @@ export default class GasPropertiesBicyclePumpNode extends BicyclePumpNode {
     this.addLinkedElement( numberOfParticlesProperty );
   }
 }
-
-gasProperties.register( 'GasPropertiesBicyclePumpNode', GasPropertiesBicyclePumpNode );

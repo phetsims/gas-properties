@@ -27,7 +27,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import gasProperties from '../../gasProperties.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import BinCountsPlot from './BinCountsPlot.js';
 
@@ -234,5 +233,3 @@ export default class HistogramNode extends Node {
     this.lightPlotVisibleProperty.reset();
   }
 }
-
-gasProperties.register( 'HistogramNode', HistogramNode );

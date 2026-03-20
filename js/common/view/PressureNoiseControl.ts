@@ -15,7 +15,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ToggleSwitch, { ToggleSwitchOptions } from '../../../../sun/js/ToggleSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 export default class PressureNoiseControl extends PreferencesControl {
@@ -55,5 +54,3 @@ export default class PressureNoiseControl extends PreferencesControl {
     } );
   }
 }
-
-gasProperties.register( 'PressureNoiseControl', PressureNoiseControl );

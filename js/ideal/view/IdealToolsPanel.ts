@@ -15,7 +15,6 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class IdealToolsPanel extends Panel {
 
@@ -53,5 +52,3 @@ export default class IdealToolsPanel extends Panel {
     super( content, options );
   }
 }
-
-gasProperties.register( 'IdealToolsPanel', IdealToolsPanel );

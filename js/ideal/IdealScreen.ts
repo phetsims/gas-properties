@@ -13,7 +13,6 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
 import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
-import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import IdealModel from './model/IdealModel.js';
 import IdealScreenView from './view/IdealScreenView.js';
@@ -56,5 +55,3 @@ export default class IdealScreen extends Screen<IdealModel, IdealScreenView> {
     super( createModel, createView, options );
   }
 }
-
-gasProperties.register( 'IdealScreen', IdealScreen );

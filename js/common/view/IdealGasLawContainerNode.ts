@@ -22,7 +22,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { HoldConstant } from '../model/HoldConstant.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
@@ -296,6 +295,3 @@ export default class IdealGasLawContainerNode extends Node {
     }
   }
 }
-
-
-gasProperties.register( 'IdealGasLawContainerNode', IdealGasLawContainerNode );

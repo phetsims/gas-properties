@@ -20,7 +20,6 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import { TemperatureUnits, TemperatureUnitsValues } from './TemperatureUnits.js';
 
@@ -208,5 +207,3 @@ export default class TemperatureModel extends PhetioObject {
     return temperature;
   }
 }
-
-gasProperties.register( 'TemperatureModel', TemperatureModel );

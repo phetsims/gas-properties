@@ -25,7 +25,6 @@ import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import Particle, { ParticleOptions } from '../../common/model/Particle.js';
 import ParticleUtils from '../../common/model/ParticleUtils.js';
-import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from './DiffusionContainer.js';
 import DiffusionParticle from './DiffusionParticle.js';
 import DiffusionParticle1, { DiffusionParticle1StateObject } from './DiffusionParticle1.js';
@@ -366,5 +365,3 @@ function updateRadius( radius: number, particles: DiffusionParticle[], bounds: B
     }
   }
 }
-
-gasProperties.register( 'DiffusionParticleSystem', DiffusionParticleSystem );

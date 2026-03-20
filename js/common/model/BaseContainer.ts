@@ -21,7 +21,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle from './Particle.js';
 
@@ -199,5 +198,3 @@ export default class BaseContainer extends PhetioObject {
     return true;
   }
 }
-
-gasProperties.register( 'BaseContainer', BaseContainer );

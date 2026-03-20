@@ -13,7 +13,6 @@ import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
-import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = {
   closeShape?: boolean; // Whether to close the Shape that describes the plot.
@@ -94,5 +93,3 @@ export default class BinCountsPlot extends Path {
     }
   }
 }
-
-gasProperties.register( 'BinCountsPlot', BinCountsPlot );

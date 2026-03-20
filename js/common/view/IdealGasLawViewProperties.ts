@@ -12,7 +12,6 @@ import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import { ParticleType, ParticleTypeValues } from '../model/ParticleType.js';
 
 export default class IdealGasLawViewProperties {
@@ -53,5 +52,3 @@ export default class IdealGasLawViewProperties {
     this.particleTypeProperty.reset();
   }
 }
-
-gasProperties.register( 'IdealGasLawViewProperties', IdealGasLawViewProperties );

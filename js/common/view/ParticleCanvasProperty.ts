@@ -11,7 +11,6 @@ import { DerivedProperty1 } from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import gasProperties from '../../gasProperties.js';
 import Particle from '../model/Particle.js';
 import ParticlesNode from './ParticlesNode.js';
 
@@ -43,5 +42,3 @@ export default class ParticleCanvasProperty extends DerivedProperty1<HTMLCanvasE
     this.particleCanvasProperty = particleCanvasProperty;
   }
 }
-
-gasProperties.register( 'ParticleCanvasProperty', ParticleCanvasProperty );

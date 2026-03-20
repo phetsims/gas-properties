@@ -11,7 +11,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import IdealGasLawScreenView from '../../common/view/IdealGasLawScreenView.js';
 import ParticlesAccordionBox from '../../common/view/ParticlesAccordionBox.js';
-import gasProperties from '../../gasProperties.js';
 import EnergyModel from '../model/EnergyModel.js';
 import AverageSpeedAccordionBox from './AverageSpeedAccordionBox.js';
 import EnergyToolsPanel from './EnergyToolsPanel.js';
@@ -162,5 +161,3 @@ export default class EnergyScreenView extends IdealGasLawScreenView {
     super.reset();
   }
 }
-
-gasProperties.register( 'EnergyScreenView', EnergyScreenView );

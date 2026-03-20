@@ -16,7 +16,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import BooleanRectangularToggleButton, { BooleanRectangularToggleButtonOptions } from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -53,5 +52,3 @@ export default class DividerToggleButton extends BooleanRectangularToggleButton 
     super( isDividedProperty, trueNode, falseNode, options );
   }
 }
-
-gasProperties.register( 'DividerToggleButton', DividerToggleButton );

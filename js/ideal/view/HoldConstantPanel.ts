@@ -19,7 +19,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import { HoldConstant } from '../../common/model/HoldConstant.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 const SPACING = 12;
@@ -133,5 +132,3 @@ export default class HoldConstantPanel extends Panel {
     } );
   }
 }
-
-gasProperties.register( 'HoldConstantPanel', HoldConstantPanel );

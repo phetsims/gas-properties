@@ -26,7 +26,6 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
-import gasProperties from '../../gasProperties.js';
 import { HoldConstant } from '../model/HoldConstant.js';
 
 // Animation duration in seconds, split evenly between raising and lowering the flame/ice.
@@ -205,5 +204,3 @@ export default class GasPropertiesHeaterCoolerNode extends HeaterCoolerNode {
     }
   }
 }
-
-gasProperties.register( 'GasPropertiesHeaterCoolerNode', GasPropertiesHeaterCoolerNode );

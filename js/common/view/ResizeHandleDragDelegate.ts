@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
 export default class ResizeHandleDragDelegate {
@@ -52,5 +51,3 @@ export default class ResizeHandleDragDelegate {
     this.container.userIsAdjustingWidthProperty.value = false;
   }
 }
-
-gasProperties.register( 'ResizeHandleDragDelegate', ResizeHandleDragDelegate );

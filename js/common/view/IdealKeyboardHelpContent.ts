@@ -13,7 +13,6 @@ import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/k
 import SpinnerControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SpinnerControlsKeyboardHelpSection.js';
 import TimeControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
@@ -57,5 +56,3 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
     } );
   }
 }
-
-gasProperties.register( 'IdealKeyboardHelpContent', IdealKeyboardHelpContent );

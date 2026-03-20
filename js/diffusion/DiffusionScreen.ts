@@ -11,7 +11,6 @@ import { combineOptions } from '../../../phet-core/js/optionize.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
-import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import DiffusionModel from './model/DiffusionModel.js';
 import DiffusionKeyboardHelpContent from './view/DiffusionKeyboardHelpContent.js';
@@ -35,5 +34,3 @@ export default class DiffusionScreen extends Screen<DiffusionModel, DiffusionScr
     super( createModel, createView, options );
   }
 }
-
-gasProperties.register( 'DiffusionScreen', DiffusionScreen );

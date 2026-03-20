@@ -82,6 +82,4 @@ type StringsType = {
 
 const GasPropertiesStrings = getStringModule( 'GAS_PROPERTIES' ) as StringsType;
 
-gasProperties.register( 'GasPropertiesStrings', GasPropertiesStrings );
-
 export default GasPropertiesStrings;

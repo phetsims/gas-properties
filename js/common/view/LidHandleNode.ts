@@ -16,7 +16,6 @@ import HandleNode, { HandleNodeOptions } from '../../../../scenery-phet/js/Handl
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 
 const HANDLE_ATTACHMENT_LINE_WIDTH = 1;
@@ -71,5 +70,3 @@ export default class LidHandleNode extends InteractiveHighlighting( HandleNode )
     this.handleVisibleProperty.value = visible;
   }
 }
-
-gasProperties.register( 'LidHandleNode', LidHandleNode );

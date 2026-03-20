@@ -12,7 +12,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from '../model/DiffusionContainer.js';
 import DividerNode from './DividerNode.js';
 
@@ -46,5 +45,3 @@ export default class DiffusionContainerNode extends Node {
     } );
   }
 }
-
-gasProperties.register( 'DiffusionContainerNode', DiffusionContainerNode );

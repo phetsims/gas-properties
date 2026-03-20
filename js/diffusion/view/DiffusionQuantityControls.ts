@@ -24,7 +24,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasProperties from '../../gasProperties.js';
 
 const ICON_SPACING = 10; // space between particle icon and spinner
 
@@ -130,5 +129,3 @@ export default class DiffusionQuantityControls extends VBox {
     super( options );
   }
 }
-
-gasProperties.register( 'DiffusionQuantityControls', DiffusionQuantityControls );

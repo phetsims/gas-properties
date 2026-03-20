@@ -25,7 +25,6 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import BaseModel, { BaseModelOptions } from './BaseModel.js';
@@ -513,5 +512,3 @@ export default class IdealGasLawModel extends BaseModel {
     return ( P * V ) / ( N * k );
   }
 }
-
-gasProperties.register( 'IdealGasLawModel', IdealGasLawModel );

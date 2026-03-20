@@ -9,7 +9,6 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawViewProperties from '../../common/view/IdealGasLawViewProperties.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class IdealViewProperties extends IdealGasLawViewProperties {
 
@@ -17,5 +16,3 @@ export default class IdealViewProperties extends IdealGasLawViewProperties {
     super( tandem );
   }
 }
-
-gasProperties.register( 'IdealViewProperties', IdealViewProperties );

@@ -13,7 +13,6 @@ import OopsDialog, { OopsDialogOptions } from '../../../../scenery-phet/js/OopsD
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import phetGirlLabCoat_png from '../../../images/phetGirlLabCoat_png.js';
-import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -38,5 +37,3 @@ export default class GasPropertiesOopsDialog extends OopsDialog {
     super( messageStringProperty, options );
   }
 }
-
-gasProperties.register( 'GasPropertiesOopsDialog', GasPropertiesOopsDialog );

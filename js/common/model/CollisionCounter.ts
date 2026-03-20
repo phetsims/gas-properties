@@ -16,7 +16,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import gasProperties from '../../gasProperties.js';
 import CollisionDetector from './CollisionDetector.js';
 
 type SelfOptions = {
@@ -162,5 +161,3 @@ export default class CollisionCounter extends PhetioObject {
     }
   }
 }
-
-gasProperties.register( 'CollisionCounter', CollisionCounter );

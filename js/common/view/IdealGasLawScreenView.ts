@@ -34,7 +34,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
@@ -358,5 +357,3 @@ export default class IdealGasLawScreenView extends BaseScreenView {
     dialog.show();
   }
 }
-
-gasProperties.register( 'IdealGasLawScreenView', IdealGasLawScreenView );

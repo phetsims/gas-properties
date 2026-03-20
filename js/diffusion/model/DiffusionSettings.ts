@@ -10,7 +10,6 @@ import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class DiffusionSettings {
 
@@ -91,5 +90,3 @@ export default class DiffusionSettings {
     this.numberOfParticlesProperty.value = numberOfParticles;
   }
 }
-
-gasProperties.register( 'DiffusionSettings', DiffusionSettings );

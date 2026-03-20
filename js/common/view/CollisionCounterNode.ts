@@ -27,7 +27,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
@@ -209,5 +208,3 @@ export default class CollisionCounterNode extends InteractiveHighlighting( Node 
     } );
   }
 }
-
-gasProperties.register( 'CollisionCounterNode', CollisionCounterNode );

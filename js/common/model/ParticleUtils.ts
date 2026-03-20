@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import IdealGasLawContainer from './IdealGasLawContainer.js';
 import Particle from './Particle.js';
@@ -159,5 +158,4 @@ const ParticleUtils = {
   }
 };
 
-gasProperties.register( 'ParticleUtils', ParticleUtils );
 export default ParticleUtils;

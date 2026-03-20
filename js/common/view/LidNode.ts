@@ -15,7 +15,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import LidHandleNode from './LidHandleNode.js';
 
@@ -173,5 +172,3 @@ export class TranslationAndRotation {
     fromStateObject: stateObject => TranslationAndRotation.fromStateObject( stateObject )
   } );
 }
-
-gasProperties.register( 'LidNode', LidNode );

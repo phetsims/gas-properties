@@ -14,7 +14,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ProfileColorProperty from '../../../../scenery/js/util/ProfileColorProperty.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesUtils from '../GasPropertiesUtils.js';
 
 type SelfOptions = {
@@ -309,5 +308,3 @@ export default class Particle {
     return `Particle[x:${this._x} y:${this._y}) mass:${this._mass} radius:${this._radius}]`;
   }
 }
-
-gasProperties.register( 'Particle', Particle );

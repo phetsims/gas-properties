@@ -15,7 +15,6 @@ import GasPropertiesQueryParameters from '../../common/GasPropertiesQueryParamet
 import BaseScreenView from '../../common/view/BaseScreenView.js';
 import GasPropertiesStopwatchNode from '../../common/view/GasPropertiesStopwatchNode.js';
 import RegionsNode from '../../common/view/RegionsNode.js';
-import gasProperties from '../../gasProperties.js';
 import DiffusionModel from '../model/DiffusionModel.js';
 import CenterOfMassNode from './CenterOfMassNode.js';
 import DataAccordionBox from './DataAccordionBox.js';
@@ -208,5 +207,3 @@ export default class DiffusionScreenView extends BaseScreenView {
     this.regionsNode && this.regionsNode.update();
   }
 }
-
-gasProperties.register( 'DiffusionScreenView', DiffusionScreenView );

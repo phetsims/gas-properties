@@ -10,7 +10,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawViewProperties from '../../common/view/IdealGasLawViewProperties.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class EnergyViewProperties extends IdealGasLawViewProperties {
 
@@ -56,5 +55,3 @@ export default class EnergyViewProperties extends IdealGasLawViewProperties {
     this.injectionTemperatureExpandedProperty.reset();
   }
 }
-
-gasProperties.register( 'EnergyViewProperties', EnergyViewProperties );

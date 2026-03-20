@@ -9,7 +9,6 @@
 import dotRandom from '../../../dot/js/dotRandom.js';
 import Utils from '../../../dot/js/Utils.js';
 import Vector2 from '../../../dot/js/Vector2.js';
-import gasProperties from '../gasProperties.js';
 
 const GasPropertiesUtils = {
 
@@ -86,5 +85,4 @@ const GasPropertiesUtils = {
   }
 };
 
-gasProperties.register( 'GasPropertiesUtils', GasPropertiesUtils );
 export default GasPropertiesUtils;

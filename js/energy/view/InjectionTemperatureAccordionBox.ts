@@ -17,7 +17,6 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import InjectionTemperatureControl from './InjectionTemperatureControl.js';
 
@@ -86,5 +85,3 @@ export default class InjectionTemperatureAccordionBox extends AccordionBox {
     super( content, options );
   }
 }
-
-gasProperties.register( 'InjectionTemperatureAccordionBox', InjectionTemperatureAccordionBox );

@@ -16,7 +16,6 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
@@ -78,5 +77,3 @@ export default class NumberOfParticlesControl extends VBox {
     super( options );
   }
 }
-
-gasProperties.register( 'NumberOfParticlesControl', NumberOfParticlesControl );

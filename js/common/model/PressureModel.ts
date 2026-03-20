@@ -19,7 +19,6 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import GasPropertiesPreferences from './GasPropertiesPreferences.js';
@@ -266,5 +265,3 @@ export default class PressureModel extends PhetioObject {
     return P * GasPropertiesConstants.PRESSURE_CONVERSION_SCALE;
   }
 }
-
-gasProperties.register( 'PressureModel', PressureModel );

@@ -17,7 +17,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node, { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
@@ -89,5 +88,3 @@ export default class ParticlesAccordionBox extends AccordionBox {
     super( content, options );
   }
 }
-
-gasProperties.register( 'ParticlesAccordionBox', ParticlesAccordionBox );

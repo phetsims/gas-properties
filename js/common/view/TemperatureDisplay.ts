@@ -12,7 +12,6 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ComboBoxDisplay, { ComboBoxDisplayItem, ComboBoxDisplayOptions } from '../../../../scenery-phet/js/ComboBoxDisplay.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import TemperatureModel from '../model/TemperatureModel.js';
@@ -55,5 +54,3 @@ export default class TemperatureDisplay extends ComboBoxDisplay<TemperatureUnits
     super( temperatureModel.unitsProperty, items, listboxParent, options );
   }
 }
-
-gasProperties.register( 'TemperatureDisplay', TemperatureDisplay );

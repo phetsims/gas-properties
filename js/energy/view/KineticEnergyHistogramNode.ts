@@ -10,7 +10,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import HistogramsModel from '../model/HistogramsModel.js';
 import HistogramNode, { HistogramNodeOptions } from './HistogramNode.js';
@@ -48,5 +47,3 @@ export default class KineticEnergyHistogramNode extends HistogramNode {
     this.addLinkedElement( histogramsModel );
   }
 }
-
-gasProperties.register( 'KineticEnergyHistogramNode', KineticEnergyHistogramNode );

@@ -15,7 +15,6 @@ import LightParticle from '../../common/model/LightParticle.js';
 import Particle from '../../common/model/Particle.js';
 import GasPropertiesCheckbox, { GasPropertiesCheckboxOptions } from '../../common/view/GasPropertiesCheckbox.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -58,5 +57,3 @@ export default class SpeciesHistogramCheckbox extends GasPropertiesCheckbox {
       modelViewTransform, providedOptions );
   }
 }
-
-gasProperties.register( 'SpeciesHistogramCheckbox', SpeciesHistogramCheckbox );

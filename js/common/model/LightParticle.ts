@@ -9,7 +9,6 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import Particle, { ParticleOptions, ParticleStateObject } from './Particle.js';
@@ -65,5 +64,3 @@ export default class LightParticle extends Particle {
     fromStateObject: x => LightParticle.fromStateObject( x )
   } );
 }
-
-gasProperties.register( 'LightParticle', LightParticle );

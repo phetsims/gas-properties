@@ -12,7 +12,6 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import HeavyParticle from '../model/HeavyParticle.js';
 import IdealGasLawModel from '../model/IdealGasLawModel.js';
@@ -97,5 +96,3 @@ export default class IdealGasLawParticleSystemNode extends Node {
     this.particlePositionsNode && this.particlePositionsNode.update();
   }
 }
-
-gasProperties.register( 'IdealGasLawParticleSystemNode', IdealGasLawParticleSystemNode );

@@ -7,7 +7,6 @@
  */
 
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class TimeTransform extends LinearFunction {
 
@@ -23,5 +22,3 @@ export default class TimeTransform extends LinearFunction {
     super( 0, 1, 0, picosecondsPerSecond ); // s -> ps
   }
 }
-
-gasProperties.register( 'TimeTransform', TimeTransform );

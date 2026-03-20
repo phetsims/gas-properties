@@ -9,7 +9,6 @@
 
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import IdealGasLawModel, { IdealGasLawModelOptions } from '../../common/model/IdealGasLawModel.js';
-import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -21,5 +20,3 @@ export default class IdealModel extends IdealGasLawModel {
     super( providedOptions );
   }
 }
-
-gasProperties.register( 'IdealModel', IdealModel );

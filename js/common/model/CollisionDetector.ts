@@ -26,7 +26,6 @@ import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesUtils from '../GasPropertiesUtils.js';
 import BaseContainer from './BaseContainer.js';
 import Particle from './Particle.js';
@@ -355,5 +354,3 @@ function adjustParticleSpeed( particle: Particle, scale: number, normalVector: V
   const vyDelta = normalVector.y * scale;
   particle.setVelocityXY( particle.vx + vxDelta, particle.vy + vyDelta );
 }
-
-gasProperties.register( 'CollisionDetector', CollisionDetector );

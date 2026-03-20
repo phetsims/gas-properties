@@ -18,7 +18,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import BaseContainer, { BaseContainerOptions } from './BaseContainer.js';
 
@@ -362,5 +361,3 @@ export default class IdealGasLawContainer extends BaseContainer {
     this._lidIsOnProperty.value = true;
   }
 }
-
-gasProperties.register( 'IdealGasLawContainer', IdealGasLawContainer );

@@ -26,7 +26,6 @@ import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import TimeTransform from './TimeTransform.js';
 
@@ -168,5 +167,3 @@ export default class BaseModel implements TModel {
     this.stopwatch.step( dt );
   }
 }
-
-gasProperties.register( 'BaseModel', BaseModel );

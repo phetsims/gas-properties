@@ -16,7 +16,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 import DiffusionParticleSystem from './DiffusionParticleSystem.js';
 
 export default class DiffusionData {
@@ -130,5 +129,3 @@ export default class DiffusionData {
     }
   }
 }
-
-gasProperties.register( 'DiffusionData', DiffusionData );

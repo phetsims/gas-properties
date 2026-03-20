@@ -20,7 +20,6 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 import IdealGasLawParticleSystem from '../../common/model/IdealGasLawParticleSystem.js';
 import Particle from '../../common/model/Particle.js';
-import gasProperties from '../../gasProperties.js';
 
 // Describes the properties of the histograms at a specific zoom level.
 type ZoomLevel = {
@@ -381,5 +380,3 @@ function sumBinCounts( heavyBinCounts: number[], lightBinCounts: number[] ): num
 assert && assert( _.every( HistogramsModel.ZOOM_LEVELS, ( zoomLevel, index ) =>
     ( index === 0 || HistogramsModel.ZOOM_LEVELS[ index - 1 ].yMax > zoomLevel.yMax ) ),
   'ZOOM_LEVELS must be ordered by descending yMax' );
-
-gasProperties.register( 'HistogramsModel', HistogramsModel );

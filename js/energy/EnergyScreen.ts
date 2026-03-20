@@ -12,7 +12,6 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../common/view/GasPropertiesIconFactory.js';
 import IdealKeyboardHelpContent from '../common/view/IdealKeyboardHelpContent.js';
-import gasProperties from '../gasProperties.js';
 import GasPropertiesStrings from '../GasPropertiesStrings.js';
 import EnergyModel from './model/EnergyModel.js';
 import EnergyScreenView from './view/EnergyScreenView.js';
@@ -35,5 +34,3 @@ export default class EnergyScreen extends Screen<EnergyModel, EnergyScreenView> 
     super( createModel, createView, options );
   }
 }
-
-gasProperties.register( 'EnergyScreen', EnergyScreen );

@@ -14,7 +14,6 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesOopsDialog from '../../common/view/GasPropertiesOopsDialog.js';
 import IdealGasLawScreenView, { IdealGasLawScreenViewOptions } from '../../common/view/IdealGasLawScreenView.js';
 import ParticlesAccordionBox from '../../common/view/ParticlesAccordionBox.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import IdealModel from '../model/IdealModel.js';
 import HoldConstantPanel from './HoldConstantPanel.js';
@@ -165,5 +164,3 @@ export default class IdealScreenView extends IdealGasLawScreenView {
     this.viewProperties.reset();
   }
 }
-
-gasProperties.register( 'IdealScreenView', IdealScreenView );

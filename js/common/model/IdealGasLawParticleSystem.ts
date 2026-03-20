@@ -24,7 +24,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import GasPropertiesUtils from '../GasPropertiesUtils.js';
 import HeavyParticle, { HeavyParticleStateObject } from './HeavyParticle.js';
@@ -411,5 +410,3 @@ export default class IdealGasLawParticleSystem extends PhetioObject {
     // applyState: Use the default, which is derived from stateSchema.
   } );
 }
-
-gasProperties.register( 'IdealGasLawParticleSystem', IdealGasLawParticleSystem );

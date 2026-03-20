@@ -15,7 +15,6 @@ import HandleNode, { HandleNodeOptions } from '../../../../scenery-phet/js/Handl
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 
 export default class ResizeHandleNode extends InteractiveHighlighting( HandleNode ) {
@@ -63,5 +62,3 @@ export default class ResizeHandleNode extends InteractiveHighlighting( HandleNod
     this.handleVisibleProperty.value = visible;
   }
 }
-
-gasProperties.register( 'ResizeHandleNode', ResizeHandleNode );

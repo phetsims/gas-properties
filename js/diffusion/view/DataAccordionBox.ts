@@ -17,7 +17,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import DiffusionData from '../model/DiffusionData.js';
 import DiffusionDataNode from './DiffusionDataNode.js';
@@ -65,5 +64,3 @@ export default class DataAccordionBox extends AccordionBox {
     super( contentNode, options );
   }
 }
-
-gasProperties.register( 'DataAccordionBox', DataAccordionBox );

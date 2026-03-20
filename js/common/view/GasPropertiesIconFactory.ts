@@ -32,7 +32,6 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import DiffusionParticle1 from '../../diffusion/model/DiffusionParticle1.js';
 import DiffusionParticle2 from '../../diffusion/model/DiffusionParticle2.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import HeavyParticle from '../model/HeavyParticle.js';
@@ -504,5 +503,4 @@ function createHistogramIcon( stroke: TColor ): Node {
   } );
 }
 
-gasProperties.register( 'GasPropertiesIconFactory', GasPropertiesIconFactory );
 export default GasPropertiesIconFactory;

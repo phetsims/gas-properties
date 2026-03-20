@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 
 const GasPropertiesPreferences = {
@@ -21,5 +20,4 @@ const GasPropertiesPreferences = {
   } )
 };
 
-gasProperties.register( 'GasPropertiesPreferences', GasPropertiesPreferences );
 export default GasPropertiesPreferences;

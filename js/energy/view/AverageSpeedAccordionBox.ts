@@ -23,7 +23,6 @@ import SunConstants from '../../../../sun/js/SunConstants.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import GasPropertiesIconFactory from '../../common/view/GasPropertiesIconFactory.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -113,5 +112,3 @@ export default class AverageSpeedAccordionBox extends AccordionBox {
     super( content, options );
   }
 }
-
-gasProperties.register( 'AverageSpeedAccordionBox', AverageSpeedAccordionBox );

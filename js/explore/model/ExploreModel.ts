@@ -8,7 +8,6 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawModel from '../../common/model/IdealGasLawModel.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class ExploreModel extends IdealGasLawModel {
 
@@ -24,5 +23,3 @@ export default class ExploreModel extends IdealGasLawModel {
     } );
   }
 }
-
-gasProperties.register( 'ExploreModel', ExploreModel );

@@ -14,7 +14,6 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import { ParticleStateObject } from '../../common/model/Particle.js';
-import gasProperties from '../../gasProperties.js';
 import DiffusionParticle, { DiffusionParticleOptions } from './DiffusionParticle.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -76,5 +75,3 @@ export default class DiffusionParticle1 extends DiffusionParticle {
     fromStateObject: x => DiffusionParticle1.fromStateObject( x )
   } );
 }
-
-gasProperties.register( 'DiffusionParticle1', DiffusionParticle1 );

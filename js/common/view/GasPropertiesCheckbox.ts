@@ -18,7 +18,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Font from '../../../../scenery/js/util/Font.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 
@@ -87,5 +86,3 @@ export default class GasPropertiesCheckbox extends Checkbox {
     super( booleanProperty, content, options );
   }
 }
-
-gasProperties.register( 'GasPropertiesCheckbox', GasPropertiesCheckbox );

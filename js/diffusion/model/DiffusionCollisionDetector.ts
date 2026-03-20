@@ -10,7 +10,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import CollisionDetector from '../../common/model/CollisionDetector.js';
-import gasProperties from '../../gasProperties.js';
 import DiffusionContainer from './DiffusionContainer.js';
 import DiffusionParticleSystem from './DiffusionParticleSystem.js';
 
@@ -46,5 +45,3 @@ export default class DiffusionCollisionDetector extends CollisionDetector {
     return numberOfParticleContainerCollisions;
   }
 }
-
-gasProperties.register( 'DiffusionCollisionDetector', DiffusionCollisionDetector );

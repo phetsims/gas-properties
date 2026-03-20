@@ -18,7 +18,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
-import gasProperties from '../../gasProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -64,5 +63,3 @@ export default class CenterOfMassNode extends Node {
       } );
   }
 }
-
-gasProperties.register( 'CenterOfMassNode', CenterOfMassNode );

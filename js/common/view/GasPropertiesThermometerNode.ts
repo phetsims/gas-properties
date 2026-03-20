@@ -12,7 +12,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ThermometerNode from '../../../../scenery-phet/js/ThermometerNode.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import TemperatureModel from '../model/TemperatureModel.js';
 import TemperatureDisplay from './TemperatureDisplay.js';
 
@@ -70,5 +69,3 @@ export default class GasPropertiesThermometerNode extends VBox {
     this.addLinkedElement( temperatureModel );
   }
 }
-
-gasProperties.register( 'GasPropertiesThermometerNode', GasPropertiesThermometerNode );

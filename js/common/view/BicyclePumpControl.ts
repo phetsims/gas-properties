@@ -15,7 +15,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import { ParticleType } from '../model/ParticleType.js';
 import GasPropertiesBicyclePumpNode, { GasPropertiesBicyclePumpNodeOptions } from './GasPropertiesBicyclePumpNode.js';
@@ -92,5 +91,3 @@ export default class BicyclePumpControl extends Node {
     this.lightBicyclePumpNode.reset();
   }
 }
-
-gasProperties.register( 'BicyclePumpControl', BicyclePumpControl );

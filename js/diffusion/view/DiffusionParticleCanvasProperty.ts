@@ -12,7 +12,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ParticleCanvasProperty from '../../common/view/ParticleCanvasProperty.js';
 import ParticlesNode from '../../common/view/ParticlesNode.js';
-import gasProperties from '../../gasProperties.js';
 import DiffusionParticle from '../model/DiffusionParticle.js';
 
 export default class DiffusionParticleCanvasProperty extends ParticleCanvasProperty {
@@ -29,5 +28,3 @@ export default class DiffusionParticleCanvasProperty extends ParticleCanvasPrope
     } );
   }
 }
-
-gasProperties.register( 'DiffusionParticleCanvasProperty', DiffusionParticleCanvasProperty );

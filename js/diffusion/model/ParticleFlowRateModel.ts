@@ -18,7 +18,6 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceArrayIO from '../../../../tandem/js/types/ReferenceArrayIO.js';
 import Particle from '../../common/model/Particle.js';
-import gasProperties from '../../gasProperties.js';
 
 const FLOW_RATE_PROPERTY_OPTIONS: PropertyOptions<number> = {
   isValidValue: value => ( value >= 0 ),
@@ -167,5 +166,3 @@ export default class ParticleFlowRateModel extends PhetioObject {
     // applyState: Use the default, which is derived from stateSchema.
   } );
 }
-
-gasProperties.register( 'ParticleFlowRateModel', ParticleFlowRateModel );

@@ -15,7 +15,6 @@ import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import CollisionCounterCheckbox from '../../common/view/CollisionCounterCheckbox.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
 import WidthCheckbox from '../../common/view/WidthCheckbox.js';
-import gasProperties from '../../gasProperties.js';
 import WallVelocityCheckbox from './WallVelocityCheckbox.js';
 
 export default class ExploreToolsPanel extends Panel {
@@ -59,5 +58,3 @@ export default class ExploreToolsPanel extends Panel {
     super( content, options );
   }
 }
-
-gasProperties.register( 'ExploreToolsPanel', ExploreToolsPanel );

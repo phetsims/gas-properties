@@ -10,7 +10,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IdealGasLawViewProperties from '../../common/view/IdealGasLawViewProperties.js';
-import gasProperties from '../../gasProperties.js';
 
 export default class ExploreViewProperties extends IdealGasLawViewProperties {
 
@@ -31,5 +30,3 @@ export default class ExploreViewProperties extends IdealGasLawViewProperties {
     this.wallVelocityVisibleProperty.reset();
   }
 }
-
-gasProperties.register( 'ExploreViewProperties', ExploreViewProperties );

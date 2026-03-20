@@ -11,7 +11,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import IdealGasLawScreenView from '../../common/view/IdealGasLawScreenView.js';
 import ParticlesAccordionBox from '../../common/view/ParticlesAccordionBox.js';
-import gasProperties from '../../gasProperties.js';
 import ExploreModel from '../model/ExploreModel.js';
 import ExploreToolsPanel from './ExploreToolsPanel.js';
 import ExploreViewProperties from './ExploreViewProperties.js';
@@ -102,5 +101,3 @@ export default class ExploreScreenView extends IdealGasLawScreenView {
     this.viewProperties.reset();
   }
 }
-
-gasProperties.register( 'ExploreScreenView', ExploreScreenView );

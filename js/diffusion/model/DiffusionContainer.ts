@@ -13,7 +13,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BaseContainer from '../../common/model/BaseContainer.js';
-import gasProperties from '../../gasProperties.js';
 
 const CONTAINER_WIDTH = 16000; // pm
 
@@ -66,5 +65,3 @@ export default class DiffusionContainer extends BaseContainer {
     this.isDividedProperty.reset();
   }
 }
-
-gasProperties.register( 'DiffusionContainer', DiffusionContainer );

@@ -14,7 +14,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesStrings from '../../GasPropertiesStrings.js';
 import GasPropertiesQueryParameters from '../GasPropertiesQueryParameters.js';
 import PressureModel from '../model/PressureModel.js';
@@ -90,5 +89,3 @@ export default class PressureGaugeNode extends Node {
       .addColorStop( 1, 'rgb( 100, 100, 100 )' );
   }
 }
-
-gasProperties.register( 'PressureGaugeNode', PressureGaugeNode );

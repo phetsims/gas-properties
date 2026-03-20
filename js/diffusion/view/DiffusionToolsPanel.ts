@@ -14,7 +14,6 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
 import StopwatchCheckbox from '../../common/view/StopwatchCheckbox.js';
-import gasProperties from '../../gasProperties.js';
 import CenterOfMassCheckbox from './CenterOfMassCheckbox.js';
 import DiffusionViewProperties from './DiffusionViewProperties.js';
 import ParticleFlowRateCheckbox from './ParticleFlowRateCheckbox.js';
@@ -62,5 +61,3 @@ export default class DiffusionToolsPanel extends Panel {
     super( content, options );
   }
 }
-
-gasProperties.register( 'DiffusionToolsPanel', DiffusionToolsPanel );

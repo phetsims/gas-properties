@@ -9,7 +9,6 @@
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
-import gasProperties from '../gasProperties.js';
 
 const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 
@@ -76,8 +75,6 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
     type: 'flag'
   }
 } );
-
-gasProperties.register( 'GasPropertiesQueryParameters', GasPropertiesQueryParameters );
 
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );

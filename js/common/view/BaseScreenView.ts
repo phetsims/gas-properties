@@ -13,7 +13,6 @@ import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.j
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import gasProperties from '../../gasProperties.js';
 import GasPropertiesColors from '../GasPropertiesColors.js';
 import GasPropertiesConstants from '../GasPropertiesConstants.js';
 import BaseModel from '../model/BaseModel.js';
@@ -116,5 +115,3 @@ export default abstract class BaseScreenView extends ScreenView {
    */
   public abstract stepView( dt: number ): void;
 }
-
-gasProperties.register( 'BaseScreenView', BaseScreenView );

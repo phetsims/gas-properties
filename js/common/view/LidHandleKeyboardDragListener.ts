@@ -11,7 +11,6 @@ import Utils from '../../../../dot/js/Utils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import gasProperties from '../../gasProperties.js';
 import IdealGasLawContainer from '../model/IdealGasLawContainer.js';
 
 export default class LidHandleKeyboardDragListener extends SoundKeyboardDragListener {
@@ -34,5 +33,3 @@ export default class LidHandleKeyboardDragListener extends SoundKeyboardDragList
     } );
   }
 }
-
-gasProperties.register( 'LidHandleKeyboardDragListener', LidHandleKeyboardDragListener );

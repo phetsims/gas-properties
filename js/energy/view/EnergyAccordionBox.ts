@@ -21,7 +21,6 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GasPropertiesColors from '../../common/GasPropertiesColors.js';
 import GasPropertiesConstants from '../../common/GasPropertiesConstants.js';
-import gasProperties from '../../gasProperties.js';
 import HistogramNode from './HistogramNode.js';
 import SpeciesHistogramCheckbox from './SpeciesHistogramCheckbox.js';
 
@@ -109,5 +108,3 @@ export default class EnergyAccordionBox extends AccordionBox {
     this.histogramNode.reset();
   }
 }
-
-gasProperties.register( 'EnergyAccordionBox', EnergyAccordionBox );

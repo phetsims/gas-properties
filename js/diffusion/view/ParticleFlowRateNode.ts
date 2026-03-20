@@ -12,7 +12,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
 import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
-import gasProperties from '../../gasProperties.js';
 import ParticleFlowRateModel from '../model/ParticleFlowRateModel.js';
 
 const X_SPACING = 5; // space between the tails of the left and right arrows
@@ -70,5 +69,3 @@ export default class ParticleFlowRateNode extends Node {
     } );
   }
 }
-
-gasProperties.register( 'ParticleFlowRateNode', ParticleFlowRateNode );
