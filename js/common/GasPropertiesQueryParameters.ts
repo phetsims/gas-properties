@@ -79,6 +79,6 @@ const GasPropertiesQueryParameters = QueryStringMachine.getAll( {
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.gasProperties.GasPropertiesQueryParameters' );
+phet.log && phet.log( `GasPropertiesQueryParameters: ${JSON.stringify( GasPropertiesQueryParameters, null, 2 )}` );
 
 export default GasPropertiesQueryParameters;
