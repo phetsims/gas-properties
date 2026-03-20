@@ -1,4 +1,4 @@
-// Copyright 2019-2025, University of Colorado Boulder
+// Copyright 2019-2026, University of Colorado Boulder
 
 /**
  * DiffusionSettingsPanel is the panel for setting initial conditions in the 'Diffusion' screen.

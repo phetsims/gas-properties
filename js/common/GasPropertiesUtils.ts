@@ -1,4 +1,4 @@
-// Copyright 2019-2024, University of Colorado Boulder
+// Copyright 2019-2026, University of Colorado Boulder
 
 /**
  * GasPropertiesUtils is a collection of utility functions used in this sim.

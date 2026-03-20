@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * IdealKeyboardHelpContent is the keyboard help for the 'Ideal' screen, and its 2 variants 'Explore' and 'Energy'.

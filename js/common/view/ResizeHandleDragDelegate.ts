@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2026, University of Colorado Boulder
 
 /**
  * ResizeHandleDragDelegate handles drag processing that is common to ResizeHandleDragListener and ResizeHandleKeyboardDragListener.

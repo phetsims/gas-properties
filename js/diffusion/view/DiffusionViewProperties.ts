@@ -1,4 +1,4 @@
-// Copyright 2019-2024, University of Colorado Boulder
+// Copyright 2019-2026, University of Colorado Boulder
 
 /**
  * DiffusionViewProperties defines Properties that are specific to the view in the 'Diffusion' screen.
