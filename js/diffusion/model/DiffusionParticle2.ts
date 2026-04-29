@@ -72,6 +72,6 @@ export default class DiffusionParticle2 extends DiffusionParticle {
                    '<br>' +
                    DiffusionParticle2.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
-    fromStateObject: x => DiffusionParticle2.fromStateObject( x )
+    fromStateObject: stateObject => DiffusionParticle2.fromStateObject( stateObject )
   } );
 }
