@@ -61,6 +61,6 @@ export default class HeavyParticle extends Particle {
                    '<br>' +
                    HeavyParticle.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
-    fromStateObject: stateObject => HeavyParticle.fromStateObject( stateObject )
+    fromStateObject: x => HeavyParticle.fromStateObject( x )
   } );
 }
