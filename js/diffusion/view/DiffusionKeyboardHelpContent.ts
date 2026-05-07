@@ -24,8 +24,7 @@ export default class DiffusionKeyboardHelpContent extends TwoColumnKeyboardHelpC
 
       // Spinner Controls
       new SpinnerControlsKeyboardHelpSection( {
-        includeSmallerStepsRow: false,
-        includeLargerStepsRow: false
+        includeSmallerStepsRow: false
       } )
     ];
 

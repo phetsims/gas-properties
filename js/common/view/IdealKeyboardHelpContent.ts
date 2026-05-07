@@ -29,9 +29,7 @@ export default class IdealKeyboardHelpContent extends TwoColumnKeyboardHelpConte
       new HeatCoolControlsKeyboardHelpSection(),
 
       // Spinner Controls
-      new SpinnerControlsKeyboardHelpSection( {
-        includeLargerStepsRow: false
-      } )
+      new SpinnerControlsKeyboardHelpSection()
     ];
 
     // Sections in the right column.

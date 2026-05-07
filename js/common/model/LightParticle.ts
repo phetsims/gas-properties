@@ -61,6 +61,6 @@ export default class LightParticle extends Particle {
                    '<br>' +
                    LightParticle.STATE_SCHEMA_FIELDS_DOCUMENTATION,
     // toStateObject: Use the default, which is derived from stateSchema.
-    fromStateObject: x => LightParticle.fromStateObject( x )
+    fromStateObject: stateObject => LightParticle.fromStateObject( stateObject )
   } );
 }
