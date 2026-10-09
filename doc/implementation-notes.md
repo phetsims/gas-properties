@@ -14,7 +14,7 @@ In addition to this document, you are encouraged to read:
 * [PhET Development Overview](../../phet-info/doc/phet-development-overview.md)
 * [PhET Software Design Patterns](../../phet-info/doc/phet-software-design-patterns.md)
 * [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the
-  design document`
+  design document
 
 ## Terminology
 
