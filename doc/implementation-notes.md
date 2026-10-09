@@ -6,15 +6,15 @@ the implementation. The intention is to provide a high-level overview, and to su
 
 Before reading this document, you must read:
 
-* [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md), a high-level description of the
+* [model.md](model.md), a high-level description of the
   simulation model
 
 In addition to this document, you are encouraged to read:
 
-* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)
-* [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md)
+* [PhET Development Overview](../../phet-info/doc/phet-development-overview.md)
+* [PhET Software Design Patterns](../../phet-info/doc/phet-software-design-patterns.md)
 * [Gas Properties HTML5](https://docs.google.com/document/d/1HOCO6vXfqlHIf3MrdldaiZTPFKYWTzS9Jm8fw-b25EU/edit), the
-  design document
+  design document`
 
 ## Terminology
 
@@ -75,7 +75,7 @@ Ideal Gas Law.
 feature.
 
 `CollisionDetector` implements collision detection and response for all screens.
-See [model.md](https://github.com/phetsims/gas-properties/blob/main/doc/model.md) and code comments for more details.
+See [model.md](model.md) and code comments for more details.
 
 ### View
 
